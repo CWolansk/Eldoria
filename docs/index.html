@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eldoria Campaign - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .intro-section {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .intro-text {
+            padding-right: 1rem;
+        }
+
+        .intro-text h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 2em;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 0.5rem;
+        }
+
+        .intro-text h3 {
+            color: #764ba2;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.4em;
+        }
+
+        .intro-text p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .intro-text ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .intro-text li {
+            margin-bottom: 0.5rem;
+        }
+
+        .map-container {
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+        }
+
+        .map-container img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 3px solid #667eea;
+        }
+
+        .map-caption {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .kingdom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .kingdom-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid #667eea;
+        }
+
+        .kingdom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .kingdom-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.5em;
+        }
+
+        .kingdom-card .capital {
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+        }
+
+        .navigation {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            border: 2px solid transparent;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+
+        .nav-card .icon {
+            font-size: 3em;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-card p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .quest-alert {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .quest-alert h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.5em;
+        }
+
+        .quest-alert p {
+            opacity: 0.95;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 968px) {
+            .intro-section {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                position: relative;
+                top: 0;
+                order: -1;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>🏰 Welcome to Eldoria 🏰</h1>
+            <p>A High-Magic Fantasy Campaign in D&D 5th Edition</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Main Quest Alert -->
+        <div class="quest-alert">
+            <h3>⚔️ The Quest for Seven Artifacts</h3>
+            <p>Seven heroes must collect seven ancient artifacts before an evil wizard summons a demon army to conquer the three-kingdom alliance. Time is running short, and the fate of Eldoria hangs in the balance.</p>
+        </div>
+
+        <!-- Intro Section with Map -->
+        <section class="intro-section">
+            <div class="intro-text">
+                <h2>About Eldoria</h2>
+                <p>
+                    <strong>Eldoria</strong> is a high-magic fantasy world where magic flows through every aspect of life. From enchanted street lamps in bustling cities to merchants selling common magical trinkets, the arcane is as commonplace as steel and stone. This is a world where wonder meets danger at every turn.
+                </p>
+                
+                <h3>The Three-Kingdom Alliance</h3>
+                <p>
+                    Three great kingdoms have forged an alliance to maintain peace and prosperity across the land:
+                </p>
+                <ul>
+                    <li><strong>Crestfall Kingdom (Human):</strong> Noble and organized, known for diplomacy and military might</li>
+                    <li><strong>Silverleaf Lands (Elven):</strong> Ancient wisdom keepers living in harmony with nature</li>
+                    <li><strong>Ironpeak Mountain (Dwarven):</strong> Master crafters and keepers of tradition</li>
+                </ul>
+
+                <h3>The Threat</h3>
+                <p>
+                    Beyond the civilized lands lie the <strong>Orcish Wastes</strong>, where an evil wizard plots to summon a demon army using seven ancient artifacts. Only a brave party of adventurers stands between chaos and civilization.
+                </p>
+
+                <h3>Campaign Setting</h3>
+                <p>
+                    This campaign embraces a world saturated with magic, where every significant action creates ripples throughout the kingdoms. The party operates from <strong>Highreach</strong>, capital of Crestfall Kingdom and home to the Adventurers Guild headquarters.
+                </p>
+            </div>
+
+            <div class="map-container">
+                <img src="Images/Eldoira.jpg" alt="Map of Eldoria" />
+                <p class="map-caption">The Continent of Eldoria</p>
+            </div>
+        </section>
+
+        <!-- Kingdom Cards -->
+        <h2 style="margin-bottom: 1rem; color: #667eea; font-size: 2em;">🏛️ The Kingdoms of Eldoria</h2>
+        <div class="kingdom-grid">
+            <div class="kingdom-card">
+                <h3>👑 Crestfall Kingdom</h3>
+                <p class="capital">Capital: Highreach</p>
+                <p><strong>Race:</strong> Human</p>
+                <p><strong>Character:</strong> Noble, organized, and diplomatic. Known for their powerful military and fair governance. The current base of operations for our heroes.</p>
+                <p><strong>Notable Locations:</strong> Highreach (capital), Ardenville (port city), Highreach Mines</p>
+            </div>
+
+            <div class="kingdom-card">
+                <h3>🌲 Silverleaf Lands</h3>
+                <p class="capital">Capital: Frostglade (The Everwood)</p>
+                <p><strong>Race:</strong> Elven</p>
+                <p><strong>Character:</strong> Ancient wisdom and natural harmony. Their capital is built into a living forest, demonstrating the perfect blend of civilization and nature.</p>
+                <p><strong>Artifacts Here:</strong> Shadowstride Boots, Aetherstone Compass</p>
+            </div>
+
+            <div class="kingdom-card">
+                <h3>⚒️ Ironpeak Mountain</h3>
+                <p class="capital">Capital: Forgepeak</p>
+                <p><strong>Race:</strong> Dwarven</p>
+                <p><strong>Character:</strong> Master craftsmen and traditionalists. Their capital is carved from the mountain's heart, showcasing legendary stonework and metallurgy.</p>
+                <p><strong>Artifacts Here:</strong> Tempest Lantern, Obsidian Blade</p>
+            </div>
+
+            <div class="kingdom-card" style="border-top-color: #dc3545;">
+                <h3>☠️ Orcish Wastes</h3>
+                <p class="capital">No Organized Capital</p>
+                <p><strong>Race:</strong> Orcish Tribes</p>
+                <p><strong>Character:</strong> Hostile territory where the final artifacts await. Home to the evil wizard's stronghold and the most dangerous leg of the quest.</p>
+                <p><strong>Artifacts Here:</strong> Crystal of True Sight, Celestial Shield</p>
+            </div>
+        </div>
+
+        <!-- Navigation Cards -->
+        <h2 style="margin-bottom: 1rem; color: #667eea; font-size: 2em;">📚 Explore the Campaign</h2>
+        <div class="navigation">
+            <a href="Players/Index.md" class="nav-card">
+                <div class="icon">👥</div>
+                <h3>Party Roster</h3>
+                <p>Meet the seven heroes on their quest to save Eldoria</p>
+            </a>
+
+            <a href="FrontPage.md" class="nav-card">
+                <div class="icon">📖</div>
+                <h3>Campaign Wiki</h3>
+                <p>Detailed information about the world and campaign</p>
+            </a>
+
+            <a href="../DmNotes/02-ACTIVE-CONTENT/Sessions/" class="nav-card">
+                <div class="icon">📜</div>
+                <h3>Session Notes</h3>
+                <p>Chronicle of adventures and epic moments</p>
+            </a>
+
+            <a href="../DmNotes/02-ACTIVE-CONTENT/NPCs/" class="nav-card">
+                <div class="icon">🎭</div>
+                <h3>NPCs</h3>
+                <p>Friends, foes, and interesting characters</p>
+            </a>
+
+            <a href="../DmNotes/04-RESOURCES/Items/" class="nav-card">
+                <div class="icon">✨</div>
+                <h3>Magic Items</h3>
+                <p>Artifacts, weapons, and wondrous items</p>
+            </a>
+
+            <a href="../DmNotes/03-WORLD-REFERENCE/World/" class="nav-card">
+                <div class="icon">🗺️</div>
+                <h3>World Lore</h3>
+                <p>History, locations, and world-building</p>
+            </a>
+        </div>
+
+        <!-- Campaign Status -->
+        <section style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h2 style="color: #667eea; margin-bottom: 1rem; font-size: 2em;">📊 Current Campaign Status</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 5px;">
+                    <div style="font-size: 2em; color: #667eea;">5</div>
+                    <div style="color: #666;">Party Level</div>
+                </div>
+                <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 5px;">
+                    <div style="font-size: 2em; color: #764ba2;">1/7</div>
+                    <div style="color: #666;">Artifacts Collected</div>
+                </div>
+                <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 5px;">
+                    <div style="font-size: 2em; color: #43e97b;">E-Rank</div>
+                    <div style="color: #666;">Guild Ranking</div>
+                </div>
+                <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 5px;">
+                    <div style="font-size: 2em; color: #f5576c;">51</div>
+                    <div style="color: #666;">Guild Points</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Eldoria Campaign</strong> - A D&D 5e Adventure</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Where magic is commonplace and heroes are forged</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,192 @@
+{
+  "title": "The Rat Run: Package Delivery to Ardenville",
+  "type": "mixed",
+  "kingdom": "Crestfall",
+  "partyLevel": 4,
+  "partySize": 7,
+  "environment": "Road travel from Highreach to Ardenville port city",
+  "tags": ["guild-politics", "moral-choice", "criminal-activity", "travel", "social-intrigue"],
+  "readAloud": "Don Gnocianno adjusts his pinstripe vest and smooths his meticulously waxed rat-tail beard as he presents a sealed wooden crate, roughly the size of a wine case but noticeably heavier. 'My dear exterminators,' he says with theatrical flourish, 'we have an opportunity to expand our pest control services to the fine port city of Ardenville. This shipment contains our most advanced rat control supplies—quite revolutionary, really.' His golden tooth glints as he grins, but you notice his eyes don't quite match his jovial tone. The package bears an official-looking Exterminators Guild seal, yet something about the careful way he handles it suggests this is no ordinary pest control equipment.",
+  "hook": "Don Gnocianno offers the party 50 gold pieces for what he describes as a simple delivery to establish new guild services in Ardenville. The job seems straightforward, but careful observation reveals inconsistencies in his explanation.",
+  "approaches": [
+    {
+      "method": "social",
+      "description": "Accept the job at face value and deliver the package without question",
+      "primarySkill": "None required",
+      "success": "Package delivered successfully, Don Gnocianno's trust established, future criminal opportunities opened",
+      "failure": "N/A - automatic success if no investigation attempted"
+    },
+    {
+      "method": "skill",
+      "description": "Investigate the package and Don Gnocianno's true intentions before deciding",
+      "primarySkill": "Investigation or Insight",
+      "dc": 15,
+      "success": "Detect inconsistencies in story; realize package likely contains contraband",
+      "failure": "Don Gnocianno's deception convincing; no suspicions raised",
+      "heroPointOpportunity": true
+    },
+    {
+      "method": "magic",
+      "description": "Use divine or arcane abilities to examine the package contents",
+      "primarySkill": "Spellcasting ability",
+      "dc": 14,
+      "success": "Sense no evil intent but detect metallic contents (coins) and paper (documents)",
+      "failure": "Magical wards or mundane shielding prevent clear reading"
+    },
+    {
+      "method": "stealth",
+      "description": "Secretly examine or open the package during travel",
+      "primarySkill": "Sleight of Hand or Investigation",
+      "dc": 16,
+      "success": "Discover laundered money and coded criminal correspondence",
+      "failure": "Damage seals or contents; Don Gnocianno notices tampering upon delivery",
+      "heroPointOpportunity": true
+    },
+    {
+      "method": "social",
+      "description": "Refuse the job or demand full disclosure of contents",
+      "primarySkill": "Persuasion or Intimidation",
+      "dc": 18,
+      "success": "Don reveals partial truth; offers greater payment for discretion",
+      "failure": "Don becomes suspicious of party loyalty; relationship damaged"
+    },
+    {
+      "method": "creative",
+      "description": "Use party's reputation and connections to gather intelligence",
+      "primarySkill": "Various",
+      "dc": 12,
+      "success": "Learn about guild's true nature through alternative sources",
+      "failure": "Information remains unclear; must proceed with incomplete knowledge"
+    }
+  ],
+  "creatures": [
+    {
+      "name": "Road Bandits (if package discovered)",
+      "count": 4,
+      "source": "MM p. 343 (Bandits)",
+      "notes": "Only appear if party openly examines package on road; attracted by obvious valuable cargo",
+      "morale": "Flee when reduced to 1 member"
+    },
+    {
+      "name": "City Watch Patrol",
+      "count": 3,
+      "source": "MM p. 347 (Guards)",
+      "notes": "Routine checkpoint; reaction varies based on party's handling of situation",
+      "morale": "Professional law enforcement; will pursue if laws broken"
+    }
+  ],
+  "npcs": [
+    {
+      "name": "Don Gnocianno",
+      "role": "Guild Leader / Crime Boss",
+      "motivation": "Establish criminal network using party's reputation as cover",
+      "attitude": "friendly",
+      "guildAffiliation": "Exterminators Guild",
+      "racialBias": "Treats JP with calculated respect to ensure loyalty"
+    },
+    {
+      "name": "Ratcatcher Finn",
+      "role": "Criminal Contact in Ardenville",
+      "motivation": "Receive laundered funds and criminal intelligence",
+      "attitude": "neutral",
+      "guildAffiliation": "Independent criminal",
+      "racialBias": "Suspicious of all strangers, especially non-humans"
+    },
+    {
+      "name": "Captain Marcus Thorne",
+      "role": "Road Patrol Commander",
+      "motivation": "Maintain order and investigate suspicious activity",
+      "attitude": "neutral",
+      "guildAffiliation": "Crestfall Royal Guard",
+      "racialBias": "Professional but may show subtle prejudice toward JP"
+    },
+    {
+      "name": "Dockmaster Helena Saltwind",
+      "role": "Ardenville Port Authority",
+      "motivation": "Regulate port activities and collect proper fees",
+      "attitude": "neutral",
+      "guildAffiliation": "Port Authority",
+      "racialBias": "Treats all merchants equally but suspicious of unusual cargo"
+    }
+  ],
+  "playerSpotlights": [
+    {
+      "character": "JP",
+      "opportunity": "Face prejudice from road patrols or Ardenville locals, then prove worth through actions",
+      "mechanic": "Intimidation or Athletics checks to handle confrontations; opportunity to earn respect"
+    },
+    {
+      "character": "Justin",
+      "opportunity": "Use merchant connections to gather intelligence about package contents or Ardenville criminal activity",
+      "mechanic": "Investigation or Persuasion checks with merchant contacts; 'I Know a Guy' opportunity"
+    },
+    {
+      "character": "Claire",
+      "opportunity": "Divine senses detect moral ambiguity; tempest powers useful if combat erupts",
+      "mechanic": "Divine Sense to detect evil intentions; weather magic for dramatic effect or tactical advantage"
+    },
+    {
+      "character": "Julie",
+      "opportunity": "Archaeological knowledge helps assess package age, origin, or historical significance",
+      "mechanic": "History or Investigation checks to identify package construction, sealing methods, or contents"
+    },
+    {
+      "character": "Liz",
+      "opportunity": "Bardic abilities excel at gathering information and reading social cues",
+      "mechanic": "Performance or Persuasion to charm information from NPCs; Insight to detect deception"
+    },
+    {
+      "character": "Randi",
+      "opportunity": "Aerial reconnaissance provides safe travel routes and surveillance of suspicious activities",
+      "mechanic": "Perception checks from flight; magical analysis of package or criminal activities"
+    },
+    {
+      "character": "Any",
+      "opportunity": "Group decision on how to handle moral complexity of potential criminal complicity",
+      "mechanic": "Group discussion and roleplay; consequences based on party's collective choice"
+    }
+  ],
+  "customRules": [
+    {
+      "rule": "Hero Point",
+      "application": "Dramatic reroll when discovering package contents or facing moral choice consequences"
+    },
+    {
+      "rule": "I Know a Guy",
+      "application": "Justin's merchant contacts or JP's sailor connections in Ardenville provide crucial intelligence"
+    },
+    {
+      "rule": "Spell Scroll Use",
+      "application": "Package might contain spell scrolls disguised as documents; any party member can use them"
+    },
+    {
+      "rule": "Guild Obligation",
+      "application": "Party must consider their loyalty to Exterminators Guild vs. moral standing"
+    }
+  ],
+  "treasure": {
+    "coins": "50 gp payment (regardless of approach chosen)",
+    "items": ["Guild courier badge", "Map of Ardenville with criminal safe houses marked"],
+    "information": "Knowledge of Exterminators Guild's true criminal nature; contact information for Ardenville criminal network",
+    "connections": "Potential alliance with gnome crime family or moral distance from criminal activities"
+  },
+  "consequences": {
+    "immediate": "Payment received; Don Gnocianno's opinion of party established based on their choices; potential complications in Ardenville if package discovered",
+    "longTerm": "Exterminators Guild relationship trajectory set; future criminal opportunities or moral conflicts; JP's impounded ship situation may be addressed through criminal channels vs. legal means",
+    "guildStanding": "Adventurers Guild unaware of criminal implications; Merchants Guild might gain intelligence on competing criminal activities",
+    "kingdomRelations": "No immediate impact unless party reports criminal activity to authorities; potential future complications if guild activities exposed",
+    "artifactQuest": "Criminal network connections might provide useful intelligence for tracking artifacts, but at moral cost; establishes pattern of compromise vs. moral purity"
+  },
+  "scaling": {
+    "weaker": "Reduce Investigation/Insight DCs by 2; make Don Gnocianno's deception more obvious; provide additional clues about package contents",
+    "stronger": "Increase DCs by 2; add magical protections to package; include competing criminal organizations or royal investigators",
+    "alternative": "Package contains legitimate but valuable archaeological artifacts, creating moral gray area about reporting vs. guild loyalty"
+  },
+  "connections": {
+    "previousSessions": ["Session with Highreach rat infestation", "Exterminators Guild induction ceremony"],
+    "futureHooks": ["Guild expansion into more serious criminal activities", "JP's ship impoundment resolution", "Royal investigation into guild activities", "Artifact quest intersection with criminal networks"],
+    "npcRelationships": ["Don Gnocianno trust/suspicion levels", "Ratcatcher Finn as future contact or enemy", "Captain Thorne as recurring law enforcement figure"],
+    "locationDetails": "Establishes Ardenville as port city with criminal underground; creates travel route familiarity for future adventures",
+    "relatedFiles": ["Exterminators Guild.md", "Don Gnocianno character sheet", "JP character progression", "Justin merchant connections"]
+  }
+}
