@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Party Roster - Eldoria Campaign</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        .nav-bar {
+            background: #2c3e50;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-content a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-content a:hover {
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-card .value {
+            font-size: 2em;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .stat-card .label {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .content-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .content-box h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 2em;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 0.5rem;
+        }
+
+        .content-box h3 {
+            color: #764ba2;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .character-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid #667eea;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .character-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.5em;
+        }
+
+        .character-card .class {
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .quest-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .artifact-progress {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .artifact-item {
+            background: #f8f9fa;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            color: #2c3e50;
+        }
+
+        .artifact-item.collected {
+            background: #43e97b;
+            color: white;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🎭 The Heroes of Eldoria</h1>
+        <p>⚔️ Seven Heroes United Against Darkness ⚔️</p>
+    </header>
+
+    <nav class="nav-bar">
+        <div class="nav-content">
+            <a href="../index.html">🏠 Home</a>
+            <a href="Index.html">👥 Party Roster</a>
+            <a href="../sessions.html">📜 Sessions</a>
+            <a href="../npcs.html">🎭 NPCs</a>
+            <a href="../items.html">✨ Magic Items</a>
+            <a href="../world.html">🗺️ World Lore</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Party Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="value">5</div>
+                <div class="label">Party Level</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">6,500</div>
+                <div class="label">Experience Points</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">E-Rank</div>
+                <div class="label">Guild Rank</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">51</div>
+                <div class="label">Guild Points</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">1/7</div>
+                <div class="label">Artifacts Collected</div>
+            </div>
+        </div>
+
+        <!-- Main Quest -->
+        <div class="quest-box">
+            <h2 style="margin-bottom: 0.5rem; color: white;">⚔️ The Quest for Seven Artifacts</h2>
+            <p>Collect seven ancient artifacts before the evil wizard completes his demon summoning ritual.</p>
+            <div class="artifact-progress">
+                <span class="artifact-item collected">✅ Seeker's Eye</span>
+                <span class="artifact-item">⬜ Shadowstride Boots</span>
+                <span class="artifact-item">⬜ Aetherstone Compass</span>
+                <span class="artifact-item">⬜ Tempest Lantern</span>
+                <span class="artifact-item">⬜ Obsidian Blade</span>
+                <span class="artifact-item">⬜ Crystal of True Sight</span>
+                <span class="artifact-item">⬜ Celestial Shield</span>
+            </div>
+        </div>
+
+        <!-- Frontline Warriors -->
+        <div class="content-box">
+            <h2>⚔️ Frontline Warriors</h2>
+            <div class="character-grid">
+                <a href="Julie.html" class="character-card">
+                    <h3>⚔️ Julie</h3>
+                    <p class="class">Human Fighter - Great Weapon Master</p>
+                    <p><strong>Background:</strong> Archaeologist</p>
+                    <p>The scholar-warrior who combines ancient knowledge with devastating greatsword strikes</p>
+                </a>
+
+                <a href="Vanessa.html" class="character-card">
+                    <h3>🛡️ Vanessa</h3>
+                    <p class="class">Human Fighter</p>
+                    <p><strong>Background:</strong> Warrior</p>
+                    <p>Direct combat expert with adaptable fighting style and battlefield coordination</p>
+                </a>
+
+                <a href="JP-Grumm.html" class="character-card">
+                    <h3>🥊 JP "Grumm"</h3>
+                    <p class="class">Half-Orc Monk - Drunken Master</p>
+                    <p><strong>Background:</strong> Sailor</p>
+                    <p>Unpredictable striker seeking to prove his worth despite facing prejudice</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Ranged Specialists -->
+        <div class="content-box">
+            <h2>🎯 Ranged Specialists</h2>
+            <div class="character-grid">
+                <a href="Justin.html" class="character-card">
+                    <h3>🏹 Justin</h3>
+                    <p class="class">Human Ranger</p>
+                    <p><strong>Background:</strong> Guild Merchant</p>
+                    <p>Confident marksman with trade connections and a trusty mule named Dr. Brule</p>
+                </a>
+
+                <a href="Randi.html" class="character-card">
+                    <h3>🦅 Randi</h3>
+                    <p class="class">Aarakocra Wizard</p>
+                    <p><strong>Background:</strong> Scholar</p>
+                    <p>Flying spellcaster providing magical knowledge and unique aerial perspective</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Magic & Support -->
+        <div class="content-box">
+            <h2>✨ Magic & Support</h2>
+            <div class="character-grid">
+                <a href="Liz.html" class="character-card">
+                    <h3>🎵 Liz</h3>
+                    <p class="class">Elf Bard - College of Lore</p>
+                    <p><strong>Background:</strong> Widow & Performer</p>
+                    <p>Perfectionist performer bringing centuries of elven wisdom and versatile magic</p>
+                </a>
+
+                <a href="Claire.html" class="character-card">
+                    <h3>⚡ Claire</h3>
+                    <p class="class">Water Genasi Cleric - Tempest Domain</p>
+                    <p><strong>Background:</strong> Sailor</p>
+                    <p>Storm-calling divine warrior channeling thunder and lightning</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Party Composition Table -->
+        <div class="content-box">
+            <h2>🎲 Party Composition</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Characters</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Tanks/Frontline</strong></td>
+                        <td>Julie, Vanessa, JP, Claire</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Damage Dealers</strong></td>
+                        <td>Julie, Vanessa, JP, Justin, Claire</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Spellcasters</strong></td>
+                        <td>Liz, Claire, Randi</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Support</strong></td>
+                        <td>Liz, Claire</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scouts</strong></td>
+                        <td>Justin, Randi, JP</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Social/Face</strong></td>
+                        <td>Liz</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Knowledge</strong></td>
+                        <td>Julie (Archaeologist), Randi (Arcane)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Active Conditions -->
+        <div class="content-box">
+            <h2>⚠️ Active Conditions</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Character</th>
+                        <th>Status</th>
+                        <th>Effect</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Julie</td>
+                        <td><span style="color: #43e97b;">●</span> Healthy</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td>Liz</td>
+                        <td><span style="color: #43e97b;">●</span> Healthy</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td>Claire</td>
+                        <td><span style="color: #f5576c;">●</span> Cursed</td>
+                        <td>Cannot taste</td>
+                    </tr>
+                    <tr>
+                        <td>JP</td>
+                        <td><span style="color: #f5576c;">●</span> Cursed</td>
+                        <td>Cannot taste</td>
+                    </tr>
+                    <tr>
+                        <td>Justin</td>
+                        <td><span style="color: #f5576c;">●</span> Cursed</td>
+                        <td>Cannot taste</td>
+                    </tr>
+                    <tr>
+                        <td>Vanessa</td>
+                        <td><span style="color: #43e97b;">●</span> Healthy</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td>Randi</td>
+                        <td><span style="color: #43e97b;">●</span> Healthy</td>
+                        <td>None</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Campaign Rules -->
+        <div class="content-box">
+            <h2>🎭 Special Campaign Rules</h2>
+            <ul style="margin-left: 2rem;">
+                <li style="margin-bottom: 0.5rem;"><strong>Spell Scrolls:</strong> Anyone can use spell scrolls (not just spellcasters)</li>
+                <li style="margin-bottom: 0.5rem;"><strong>"I Know a Guy":</strong> Once per character for helpful NPC connections</li>
+                <li style="margin-bottom: 0.5rem;"><strong>Hero Points:</strong> One per session for dramatic rerolls of any dice</li>
+                <li style="margin-bottom: 0.5rem;"><strong>Guild System:</strong> Monthly dues for Merchant Guild members (5 gp)</li>
+                <li style="margin-bottom: 0.5rem;"><strong>Consequence-Driven:</strong> Every significant action has meaningful ripple effects</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Eldoria Campaign</strong> - A D&D 5e Adventure</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Party formed to prevent demonic invasion | Current base: Highreach</p>
+    </footer>
+</body>
+</html>

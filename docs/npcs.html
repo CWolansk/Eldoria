@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPCs - Eldoria Campaign</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-bar {
+            background: #2c3e50;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-content a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-content a:hover {
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .content-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .content-box h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 2em;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 0.5rem;
+        }
+
+        .npc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .npc-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .npc-card h3 {
+            color: #764ba2;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>🎭 Non-Player Characters</h1>
+            <p>Friends, foes, and interesting characters</p>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <div class="nav-content">
+            <a href="index.html">🏠 Home</a>
+            <a href="Players/Index.html">👥 Party Roster</a>
+            <a href="sessions.html">📜 Sessions</a>
+            <a href="npcs.html">🎭 NPCs</a>
+            <a href="items.html">✨ Magic Items</a>
+            <a href="world.html">🗺️ World Lore</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="content-box">
+            <h2>Notable NPCs</h2>
+            <p style="margin-bottom: 1.5rem;">The world of Eldoria is filled with memorable characters. This section will be populated with NPCs the party encounters throughout their journey.</p>
+
+            <div class="npc-grid">
+                <div class="npc-card">
+                    <h3>🎖️ Alaric Emberfell</h3>
+                    <p><strong>Role:</strong> Guild Contact</p>
+                    <p>Provided magical weapons to the party members as rewards for their achievements.</p>
+                </div>
+
+                <div class="npc-card">
+                    <h3>🧙 Esmerelda</h3>
+                    <p><strong>Role:</strong> Retired Adventurer</p>
+                    <p>Gave Daern's Instant Fortress to Liz as reward for completing the Lost Pet quest.</p>
+                </div>
+
+                <div class="npc-card">
+                    <h3>⚒️ Oren Hammerfist</h3>
+                    <p><strong>Role:</strong> Dwarf Warrior</p>
+                    <p>His equipment was found in the mines - acid-damaged bracers and breastplate, plus a Warhammer of Warning.</p>
+                </div>
+
+                <div class="npc-card">
+                    <h3>👺 Donk the Goblin</h3>
+                    <p><strong>Role:</strong> Quest Giver</p>
+                    <p>JP is helping him find his missing wife.</p>
+                </div>
+
+                <div class="npc-card">
+                    <h3>🏛️ Lord Frederick Goldman</h3>
+                    <p><strong>Role:</strong> Noble</p>
+                    <p>His estate had a rat infestation. JP acquired a valuable "Hillcrest 300 PMW" from the estate.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <h2>Add More NPCs</h2>
+            <p>As the campaign progresses, more NPCs will be added to this database including allies, enemies, merchants, and other important characters the party encounters.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Eldoria Campaign</strong> - A D&D 5e Adventure</p>
+    </footer>
+</body>
+</html>
