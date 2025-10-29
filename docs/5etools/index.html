@@ -59,32 +59,22 @@
 	
 	<style>
 		.back-to-eldoria {
-			position: fixed;
-			top: 20px;
-			right: 20px;
-			z-index: 10000;
 			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-			color: white;
-			padding: 12px 24px;
-			border-radius: 8px;
-			text-decoration: none;
+			color: white !important;
 			font-weight: bold;
-			box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+			box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 			transition: transform 0.2s ease, box-shadow 0.2s ease;
-			font-size: 14px;
 		}
 		.back-to-eldoria:hover {
 			transform: translateY(-2px);
-			box-shadow: 0 6px 12px rgba(0,0,0,0.4);
-			color: white;
+			box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+			color: white !important;
 			text-decoration: none;
 		}
 	</style>
 </head>
 
 <body>
-
-<a href="../index.html" class="back-to-eldoria">🏰 Back to Eldoria</a>
 
 <div class="overlay-noise no-print"></div>
 
@@ -96,7 +86,9 @@
 </header>
 
 <nav class="container page__nav" id="navigation">
-	<ul class="nav nav-pills page__nav-inner" id="navbar"></ul>
+	<ul class="nav nav-pills page__nav-inner" id="navbar">
+		<li role="presentation"><a href="../index.html" class="back-to-eldoria">🏰 Back to Eldoria</a></li>
+	</ul>
 </nav>
 
 <div class="container">
