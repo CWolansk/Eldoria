@@ -56,9 +56,35 @@
 	<script type="module" src="js/styleswitch.js"></script>
 	<script type="text/javascript" src="js/navigation.js"></script>
 	<script type="module" src="js/browsercheck.js"></script>
+	
+	<style>
+		.back-to-eldoria {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			z-index: 10000;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			padding: 12px 24px;
+			border-radius: 8px;
+			text-decoration: none;
+			font-weight: bold;
+			box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+			transition: transform 0.2s ease, box-shadow 0.2s ease;
+			font-size: 14px;
+		}
+		.back-to-eldoria:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+			color: white;
+			text-decoration: none;
+		}
+	</style>
 </head>
 
 <body>
+
+<a href="../index.html" class="back-to-eldoria">🏰 Back to Eldoria</a>
 
 <div class="overlay-noise no-print"></div>
 
