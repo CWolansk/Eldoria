@@ -6,6 +6,16 @@
 		"For example, add \"My Homebrew.json\" to the \"toImport\" array below, and have a valid JSON homebrew file in this (\"homebrew/\") directory."
 	],
 	"toImport": [
-		"https://raw.githubusercontent.com/TheGiddyLimit/homebrew/master/item/Foxfire94;%20Armour,%20Items,%20and%20Weapons%20Galore.json"
+		"https://raw.githubusercontent.com/TheGiddyLimit/homebrew/master/collection/Kobold%20Press;%20Book%20of%20Ebon%20Tides.json",
+		"https://raw.githubusercontent.com/TheGiddyLimit/homebrew/master/item/Foxfire94;%20Armour,%20Items,%20and%20Weapons%20Galore.json",
+		"https://raw.githubusercontent.com/TheGiddyLimit/homebrew/master/item/Aofhaocv;%20Common%20Magic%20Items.json",
+		"https://raw.githubusercontent.com/TheGiddyLimit/homebrew/master/creature/MCDM%20Productions;%20Flee,%20Mortals!.json",
+		"https://raw.githubusercontent.com/TheGiddyLimit/homebrew/master/collection/Ghostfire%20Gaming;%20Grim%20Hollow%20-%20Player%20Pack.json",
+		"https://raw.githubusercontent.com/TheGiddyLimit/homebrew/master/collection/Kobold%20Press;%20Tales%20from%20the%20Shadows.json",
+		"https://raw.githubusercontent.com/TheGiddyLimit/homebrew/master/book/Saidoro;%20Sane%20Magic%20Item%20Prices.json",
+		"https://raw.githubusercontent.com/TheGiddyLimit/homebrew/master/book/Giddy;%20Sane%20Magic%20Item%20Prices%20Expanded.json",
+		"https://raw.githubusercontent.com/TheGiddyLimit/homebrew/master/collection/SailorCat;%20GachaBox.json",
+		"https://raw.githubusercontent.com/TheGiddyLimit/homebrew/master/collection/Griffin%20Macaulay;%20The%20Griffon's%20Saddlebag,%20Book%202.json",
+		"https://raw.githubusercontent.com/TheGiddyLimit/homebrew/master/collection/MCDM%20Productions;%20Where%20Evil%20Lives.json"
 	]
 }
