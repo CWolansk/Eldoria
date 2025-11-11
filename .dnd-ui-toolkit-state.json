@@ -1,0 +1,17 @@
+{
+  "state": {
+    "my_character_hp": {
+      "current": 28,
+      "temporary": 0,
+      "hitdiceUsed": 0,
+      "deathSaveSuccesses": 0,
+      "deathSaveFailures": 0
+    },
+    "my_character_spells_1": {
+      "value": 0
+    },
+    "my_character_sneak_attack": {
+      "value": 0
+    }
+  }
+}

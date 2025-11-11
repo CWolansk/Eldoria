@@ -16,7 +16,7 @@ SORT file.name ASC
 - [[Frederick Goldman Estate Rat Infestation]] 
 	- Gang killed all of the doppelrats and damaged about 20% of the wine in the cellar
 		- Repurcussions?
-	- [[JP]] stole 200 dollar wine bottle - Hillcrest 300 PMW (Post Magic War)  vintage wine
+	- [[JP Player Sheet]] stole 200 dollar wine bottle - Hillcrest 300 PMW (Post Magic War)  vintage wine
 		- Nobody saw jp steal this wine bottle
 	- Jp got caught stealing 100 dollar wine bottl
 	- The party convinced the butler to send the bill to [[Jon Brightman]] at the wizards Guild

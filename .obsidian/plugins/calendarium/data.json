@@ -1,0 +1,384 @@
+{
+  "autoParse": true,
+  "calendars": [
+    {
+      "name": "Eldorian Calendar",
+      "description": "",
+      "id": "ID_4b1be88869cb",
+      "showIntercalarySeparately": true,
+      "static": {
+        "incrementDay": false,
+        "firstWeekDay": 0,
+        "overflow": true,
+        "weekdays": [
+          {
+            "type": "day",
+            "name": "Monday",
+            "id": "ID_8aa8f9398a28"
+          },
+          {
+            "type": "day",
+            "name": "Tuesday",
+            "id": "ID_8868baba39ea"
+          },
+          {
+            "type": "day",
+            "name": "Wednesday",
+            "id": "ID_384a98ba1ae8"
+          },
+          {
+            "type": "day",
+            "name": "Thursday",
+            "id": "ID_f809db190bd9"
+          },
+          {
+            "type": "day",
+            "name": "Friday",
+            "id": "ID_d90948d889e8"
+          },
+          {
+            "type": "day",
+            "name": "Saturday",
+            "id": "ID_e9bb9bbb7a99"
+          },
+          {
+            "type": "day",
+            "name": "Sunday",
+            "id": "ID_285acbb8583b"
+          }
+        ],
+        "months": [
+          {
+            "type": "month",
+            "name": "Spring",
+            "length": 50,
+            "id": "ID_f959ab283a1b",
+            "interval": 1,
+            "offset": 0
+          },
+          {
+            "type": "month",
+            "name": "Summer",
+            "length": 50,
+            "id": "ID_c84a3898f889",
+            "interval": 1,
+            "offset": 0
+          },
+          {
+            "type": "month",
+            "name": "Fall",
+            "length": 50,
+            "id": "ID_fa68593b4938",
+            "interval": 1,
+            "offset": 0
+          },
+          {
+            "type": "month",
+            "name": "Winter",
+            "length": 50,
+            "id": "ID_ba593b4aea1a",
+            "interval": 1,
+            "offset": 0
+          }
+        ],
+        "moons": [
+          {
+            "name": "Moon",
+            "cycle": 50,
+            "offset": 0,
+            "faceColor": "#fff",
+            "shadowColor": "#000",
+            "id": "ID_39c89aea7b59"
+          }
+        ],
+        "displayMoons": true,
+        "displayDayNumber": true,
+        "leapDays": [],
+        "eras": [],
+        "padMonths": 1,
+        "padDays": 2
+      },
+      "seasonal": {
+        "seasons": [
+          {
+            "id": "ID_590adb2af9a8",
+            "name": "Autumn",
+            "type": "Dated",
+            "color": "#91402b",
+            "month": 0,
+            "day": 2,
+            "weatherOffset": 20,
+            "weatherPeak": 2,
+            "kind": "Autumn"
+          },
+          {
+            "id": "ID_19284b2aba5a",
+            "name": "Spring",
+            "type": "Dated",
+            "color": "#d814db",
+            "month": 0,
+            "day": 4,
+            "weatherOffset": 20,
+            "weatherPeak": 2,
+            "kind": "Spring"
+          },
+          {
+            "id": "ID_f8fa4908b949",
+            "name": "Summer",
+            "type": "Dated",
+            "color": "#e60039",
+            "month": 1,
+            "day": 1,
+            "weatherOffset": 20,
+            "weatherPeak": 2,
+            "kind": "Summer"
+          },
+          {
+            "id": "ID_b998ab492bc9",
+            "name": "Winter",
+            "type": "Dated",
+            "color": "#9bb5f2",
+            "month": 3,
+            "day": 3,
+            "weatherOffset": 20,
+            "weatherPeak": 2,
+            "kind": "Winter"
+          }
+        ],
+        "offset": 0,
+        "type": "Dated",
+        "displayColors": true,
+        "interpolateColors": true,
+        "weather": {
+          "enabled": true,
+          "seed": 277631033,
+          "tempUnits": "Imperial",
+          "windUnits": "Imperial",
+          "primaryWindDirection": "E",
+          "freezingPoint": 0
+        }
+      },
+      "locations": {
+        "locations": [
+          {
+            "name": "Crestfall",
+            "id": "ID_0a2838d8c9cb",
+            "seasons": {
+              "ID_590adb2af9a8": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Autumn"
+              },
+              "ID_19284b2aba5a": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Spring"
+              },
+              "ID_f8fa4908b949": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Summer"
+              },
+              "ID_b998ab492bc9": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Winter"
+              }
+            }
+          },
+          {
+            "name": "Silverleaf",
+            "id": "ID_79ba282a0bf8",
+            "seasons": {
+              "ID_590adb2af9a8": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Winter"
+              },
+              "ID_19284b2aba5a": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Winter"
+              },
+              "ID_f8fa4908b949": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Autumn"
+              },
+              "ID_b998ab492bc9": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Winter"
+              }
+            }
+          },
+          {
+            "name": "Ironpeak Mountains",
+            "id": "ID_e869a8495b08",
+            "seasons": {
+              "ID_590adb2af9a8": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Winter"
+              },
+              "ID_19284b2aba5a": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Winter"
+              },
+              "ID_f8fa4908b949": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Winter"
+              },
+              "ID_b998ab492bc9": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Winter"
+              }
+            }
+          },
+          {
+            "name": "Ironpeak Plains",
+            "id": "ID_983b9b988bb8",
+            "seasons": {
+              "ID_590adb2af9a8": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Autumn"
+              },
+              "ID_19284b2aba5a": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Spring"
+              },
+              "ID_f8fa4908b949": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Summer"
+              },
+              "ID_b998ab492bc9": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Winter"
+              }
+            }
+          },
+          {
+            "name": "Orcish Wastes",
+            "id": "ID_896918b9f81b",
+            "seasons": {
+              "ID_590adb2af9a8": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Summer"
+              },
+              "ID_19284b2aba5a": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Summer"
+              },
+              "ID_f8fa4908b949": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Summer"
+              },
+              "ID_b998ab492bc9": {
+                "weatherOffset": 20,
+                "weatherPeak": 2,
+                "kind": "Summer"
+              }
+            }
+          }
+        ],
+        "defaultLocation": ""
+      },
+      "current": {
+        "day": 6,
+        "month": 2,
+        "year": 496
+      },
+      "events": [],
+      "categories": [
+        {
+          "id": "ID_394869fa4979",
+          "color": "#6e96cc",
+          "name": "Sessions"
+        },
+        {
+          "id": "ID_1bb8898808ba",
+          "color": "#7297d3",
+          "name": "Consequences"
+        },
+        {
+          "id": "ID_cadabbdb99d8",
+          "color": "#8cf226",
+          "name": "Events"
+        },
+        {
+          "id": "ID_a9d928baf829",
+          "color": "#d80a6e",
+          "name": "Holiday"
+        },
+        {
+          "id": "ID_6bfb09693909",
+          "color": "#95ff91",
+          "name": "Event"
+        },
+        {
+          "id": "ID_2939c839fafa",
+          "color": "#e21be5",
+          "name": "Failed Quests"
+        },
+        {
+          "id": "ID_6afa08198818",
+          "color": "#f79b96",
+          "name": "Quests"
+        },
+        {
+          "id": "ID_7bdbbb68ab89",
+          "color": "#e577d4",
+          "name": "Completed Quests"
+        },
+        {
+          "id": "ID_59aa4b0a4b4a",
+          "color": "#7ead06",
+          "name": "Not Available Quests"
+        }
+      ],
+      "path": [],
+      "supportInlineEvents": true,
+      "inlineEventTag": null
+    }
+  ],
+  "configDirectory": null,
+  "dailyNotes": false,
+  "dateFormat": "YYYY-MM-DD",
+  "defaultCalendar": "ID_4b1be88869cb",
+  "eventPreview": true,
+  "exit": {
+    "saving": true,
+    "event": false,
+    "calendar": false,
+    "savingEvent": false
+  },
+  "eventFrontmatter": false,
+  "parseDates": true,
+  "version": {
+    "major": 2,
+    "minor": 1,
+    "patch": 0,
+    "beta": null
+  },
+  "debug": false,
+  "askedToMoveFC": false,
+  "askedAboutSync": true,
+  "syncBehavior": "Always",
+  "inlineEventsTag": null,
+  "paths": [
+    [
+      "/",
+      "DEFAULT"
+    ]
+  ]
+}

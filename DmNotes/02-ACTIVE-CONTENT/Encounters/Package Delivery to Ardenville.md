@@ -68,7 +68,7 @@ Don Gnocianno offers the party 50 gold pieces for what he describes as a simple 
 - **Role**: Guild Leader / Crime Boss
 - **Motivation**: Establish criminal network using party's reputation as cover
 - **Attitude**: Friendly (calculated)
-- **Notes**: Treats [[JP]] with calculated respect to ensure loyalty
+- **Notes**: Treats [[JP Player Sheet]] with calculated respect to ensure loyalty
 
 ### Ratcatcher Finn
 - **Role**: Criminal Contact in Ardenville  
@@ -81,7 +81,7 @@ Don Gnocianno offers the party 50 gold pieces for what he describes as a simple 
 - **Role**: Road Patrol Commander
 - **Motivation**: Maintain order and investigate suspicious activity
 - **Attitude**: Neutral (professional)
-- **Notes**: May show subtle prejudice toward [[JP]]
+- **Notes**: May show subtle prejudice toward [[JP Player Sheet]]
 
 ### Dockmaster Helena Saltwind
 - **Role**: Ardenville Port Authority
@@ -91,7 +91,7 @@ Don Gnocianno offers the party 50 gold pieces for what he describes as a simple 
 
 ## Character Spotlights
 
-### [[JP]]
+### [[JP Player Sheet]]
 **Opportunity**: Face prejudice from road patrols or Ardenville locals, then prove worth through actions  
 **Mechanics**: Intimidation or Athletics checks to handle confrontations; opportunity to earn respect
 
@@ -99,7 +99,7 @@ Don Gnocianno offers the party 50 gold pieces for what he describes as a simple 
 **Opportunity**: Use merchant connections to gather intelligence about package contents or Ardenville criminal activity  
 **Mechanics**: Investigation or Persuasion checks with merchant contacts; "I Know a Guy" opportunity
 
-### [[Claire]]
+### [[Private Claire notes]]
 **Opportunity**: Divine senses detect moral ambiguity; tempest powers useful if combat erupts  
 **Mechanics**: Divine Sense to detect evil intentions; weather magic for dramatic effect
 
@@ -136,7 +136,7 @@ Don Gnocianno offers the party 50 gold pieces for what he describes as a simple 
 ## Custom Rules Applications
 
 - **Hero Points**: Available for dramatic rerolls when discovering package contents or facing moral choices
-- **"I Know a Guy"**: [[Justin]]'s merchant contacts or [[JP]]'s sailor connections provide crucial intelligence
+- **"I Know a Guy"**: [[Justin]]'s merchant contacts or [[JP Player Sheet]]'s sailor connections provide crucial intelligence
 - **Spell Scroll Use**: Package might contain spell scrolls disguised as documents
 - **Guild Obligations**: Party must balance loyalty to [[Exterminators Guild]] vs. moral standing
 
@@ -161,7 +161,7 @@ Don Gnocianno offers the party 50 gold pieces for what he describes as a simple 
 ### Long-Term
 - [[Exterminators Guild]] relationship trajectory set
 - Future criminal opportunities or moral conflicts
-- [[JP]]'s impounded ship situation may be addressed through criminal vs. legal channels
+- [[JP Player Sheet]]'s impounded ship situation may be addressed through criminal vs. legal channels
 
 ### Guild Standing
 - [[Adventurers Guild]] remains unaware of criminal implications
@@ -199,7 +199,7 @@ Don Gnocianno offers the party 50 gold pieces for what he describes as a simple 
 
 ### Future Hooks
 - Guild expansion into more serious criminal activities
-- [[JP]]'s ship impoundment resolution
+- [[JP Player Sheet]]'s ship impoundment resolution
 - Royal investigation into guild activities
 - Artifact quest intersection with criminal networks
 
@@ -232,4 +232,4 @@ This encounter deliberately avoids a clear "right" answer. The party must decide
 
 ---
 
-*Related Files*: [[Exterminators Guild]], [[Don Gnocianno]], [[JP]], [[Justin]], [[Claire]], [[Julie]], [[Liz]], [[Randi]]
+*Related Files*: [[Exterminators Guild]], [[Don Gnocianno]], [[JP Player Sheet]], [[Justin]], [[Private Claire notes]], [[Julie]], [[Liz]], [[Randi]]

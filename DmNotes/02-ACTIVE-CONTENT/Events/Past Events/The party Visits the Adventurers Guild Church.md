@@ -23,9 +23,9 @@ First time
 	* They donate 1 silver to the church 
 	* they do not buy any extreme teen bibles 
 	* [[Julie]] got her curse removed 
-	* [[JP]] did not get his curse removed
+	* [[JP Player Sheet]] did not get his curse removed
 	* [[Justin]] did not get his curse removed
-	* [[Claire]] did not get her curse removed
+	* [[Private Claire notes]] did not get her curse removed
 	* The party talks to [[Thoren Ironfist]] and get a map drawn of [[Level 3 Outline]] of the mines 
 
-[[Claire]]  
+[[Private Claire notes]]  

@@ -5,7 +5,7 @@ fc-category: Events
 ---
 - When the party meets Alaric he will notice the following items 
 	- Clairs Dwarving Mining Pick 
-		- [[Claire]] 
+		- [[Private Claire notes]] 
 The party can get +1 to their weapons or change the damage type 
 
 

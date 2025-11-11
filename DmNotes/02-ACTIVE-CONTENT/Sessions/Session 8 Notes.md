@@ -14,13 +14,13 @@ fc-category: Sessions
 - party Continued south and went into the lighttheif rooms
 	- [[Room 10 Level 3]] -> [[Room 9 Level 3]] -> [[Room 11 level 3]] 
 	- [[Julie]] immediately ran into the room upon seeing a body in the corner
-		- [[Julie]] gave [[Rolf Stonetooth]]s [[Mantle of the Lightbender]] to [[JP]]
+		- [[Julie]] gave [[Rolf Stonetooth]]s [[Mantle of the Lightbender]] to [[JP Player Sheet]]
 	- A light thief blew up in her face but she grabbed the mantle and his money and the party ran away again. 
 		- They are scared of light thief retribution
 - Party went into [[Room 12 Level 3]] and destroyed the gelatinous Cube 
-	- [[Claire]] takes [[Warhammer of Warning]] from [[Oren Hammerfist]] corpse 
+	- [[Private Claire notes]] takes [[Warhammer of Warning]] from [[Oren Hammerfist]] corpse 
 	- [[Liz]] takes [[Oren Hammerfist]]s acid eaten Bracers and Breastplate 
-	- [[JP]] took [[Oren Hammerfist]] Money
+	- [[JP Player Sheet]] took [[Oren Hammerfist]] Money
 - Party went back to mossy safe room [[Room 10 Level 3]] set up their fortress and long rested. 
 	- Leading to [[Session 9 Notes]]
 ```dataview

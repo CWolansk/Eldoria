@@ -1,7 +1,7 @@
 TODO 
-- Add bestiary searching 
-- Add monster creator button
-- Add Encounter Creator 
-- Add initiative tracker template
-- Add Item Creation Page
-- Add Spell Creation Page 
+- Create public player pages 
+    - add player stats
+    - add player items 
+        - take in a static list of items and search through csv/json files 
+    - add player spells 
+- Create public world pages

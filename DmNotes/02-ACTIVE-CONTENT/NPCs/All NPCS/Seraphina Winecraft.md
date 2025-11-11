@@ -33,7 +33,7 @@ Bridge between factions and potential key to the magical aspects of the blight c
 
 ## Attitude toward Party Members
 - **[[Liz]]**: Recognizes elven bloodline and appreciates perfectionist approach to craftsmanship
-- **[[JP]]**: One of the few villagers who judges purely on character rather than race
-- **[[Claire]]**: Interested in discussing magical wine-making techniques and divine blessing applications
+- **[[JP Player Sheet]]**: One of the few villagers who judges purely on character rather than race
+- **[[Private Claire notes]]**: Interested in discussing magical wine-making techniques and divine blessing applications
 
 **TODO**: Develop magical wine-making techniques, specific blight detection abilities, and crafting systems

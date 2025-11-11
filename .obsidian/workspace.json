@@ -1,0 +1,257 @@
+{
+  "main": {
+    "id": "bea53cee7df9ad00",
+    "type": "split",
+    "children": [
+      {
+        "id": "23c37ab7fa7792a8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "eb1a75af2c4933a8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "PlayerNotes/Players/Player Julie.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Player Julie"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "2fd27f01c4606df9",
+    "type": "split",
+    "children": [
+      {
+        "id": "30fda1ccf5ce805a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2625bc3e8d49b551",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "fcf48cdb56007322",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "6f9ff1e463aeb81c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b920f831214140f8",
+    "type": "split",
+    "children": [
+      {
+        "id": "e39c0241308e18ab",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a30f685553a5c18a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "docs/index.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for index"
+            }
+          },
+          {
+            "id": "a619f387fb77d4d4",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "docs/index.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from index"
+            }
+          },
+          {
+            "id": "57c32d65c6609b1c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "d326efac53e33e57",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "docs/index.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of index"
+            }
+          },
+          {
+            "id": "c6fd7016557065d0",
+            "type": "leaf",
+            "state": {
+              "type": "CALENDARIUM",
+              "state": {
+                "calendar": "ID_4b1be88869cb",
+                "ephemeral": {
+                  "viewing": null,
+                  "viewState": 1,
+                  "displaying": {
+                    "day": 6,
+                    "month": 2,
+                    "year": 496
+                  },
+                  "displayDayNumber": true,
+                  "displaySeasonColors": true,
+                  "interpolateColors": true,
+                  "displayMoons": true,
+                  "displayWeather": true,
+                  "location": ""
+                },
+                "id": "ID_ab08197979da"
+              },
+              "icon": "CALENDARIUM",
+              "title": "Calendarium"
+            }
+          },
+          {
+            "id": "86f493e723ee2421",
+            "type": "leaf",
+            "state": {
+              "type": "DICE_ROLLER_VIEW",
+              "state": {},
+              "icon": "dices",
+              "title": "Dice Tray"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 418.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "webpage-html-export:Export as HTML": false,
+      "obsidian-5e-statblocks:Open Creature pane": false,
+      "obsidian42-brat:BRAT": false,
+      "calendarium:Open Calendarium": false
+    }
+  },
+  "active": "eb1a75af2c4933a8",
+  "lastOpenFiles": [
+    "PlayerNotes/Players/JP Player Sheet.md",
+    "PlayerNotes/Players/Player Julie.md",
+    "Assets/Items.csv",
+    "DmNotes/05-TOOLS/spell-lookup-examples.md",
+    "Assets/spell-lookup.js",
+    "docs/site-lib/search-index.json",
+    "docs/site-lib/metadata.json",
+    "docs/site-lib/scripts/webpage.js",
+    "docs/site-lib/scripts/graph-wasm.wasm",
+    "docs/site-lib/scripts/graph-render-worker.js",
+    "docs/site-lib/scripts/graph-wasm.js",
+    "docs/site-lib/styles/obsidian.css",
+    "docs/site-lib/styles/main-styles.css",
+    "docs/site-lib/media/favicon.png",
+    "docs/site-lib/media/6155340132a851f6089e.svg",
+    "docs/site-lib/media/2308ab1944a6bfa5c5b8.svg",
+    "DmNotes/05-TOOLS/ITEM-LOOKUP-SETUP.md",
+    "DmNotes/05-TOOLS/item-lookup-examples.md",
+    "Untitled.md",
+    "DmNotes/03-WORLD-REFERENCE/World/Kingdoms/Crestfall/Highreach Mines/Level 1/Level 1 Outline.md",
+    "PlayerNotes/index.md",
+    "Characters/Character72373.md",
+    "DmNotes/02-ACTIVE-CONTENT/Players/Julie.md",
+    "DmNotes/02-ACTIVE-CONTENT/Players/Private Claire notes.md",
+    "DmNotes/02-ACTIVE-CONTENT/Players/Private JP Notes.md",
+    "DmNotes/03-WORLD-REFERENCE/World/Kingdoms/Ironpeak Mountains/Mountain Tribes.md",
+    "DmNotes/03-WORLD-REFERENCE/World/Kingdoms/Ironpeak Mountains/Stoneforge.md",
+    "DmNotes/03-WORLD-REFERENCE/World/Kingdoms/Ironpeak Mountains/Steamhammer.md",
+    "DmNotes/03-WORLD-REFERENCE/World/Kingdoms/Ironpeak Mountains/Ironroot.md",
+    "DmNotes/03-WORLD-REFERENCE/World/Kingdoms/Ironpeak Mountains/Gemstone Hollow.md",
+    "DmNotes/03-WORLD-REFERENCE/World/Kingdoms/Ironpeak Mountains/ForgePeak.md",
+    "PlayerNotes/Calendar.md",
+    "DmNotes/02-ACTIVE-CONTENT/Sessions/Session 11.md",
+    "DmNotes/02-ACTIVE-CONTENT/Sessions/Session 10 notes.md",
+    "DmNotes/02-ACTIVE-CONTENT/Sessions/Session 9 Notes.md",
+    "DmNotes/02-ACTIVE-CONTENT/Sessions/Session 12 Plan.md",
+    "DmNotes/99-ARCHIVE/ToDo-or-scratchpad.md",
+    "docs/index.md",
+    "docs/DmNotes/01-CAMPAIGN-CORE/Eldoira.jpg",
+    "docs/Images/Eldoira.jpg"
+  ]
+}

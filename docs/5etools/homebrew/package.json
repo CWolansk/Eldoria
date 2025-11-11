@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "scripts": {
+    "update-homebrew": "node download-homebrew.js",
+    "check-updates": "node check-updates.js"
+  }
+}

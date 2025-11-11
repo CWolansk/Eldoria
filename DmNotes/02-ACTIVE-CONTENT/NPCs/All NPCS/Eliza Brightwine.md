@@ -33,7 +33,7 @@ Represents external pressure for change and modernization. Her resources could s
 
 ## Attitude toward Party Members
 - **[[Justin]]**: Professional courtesy but competitive; sees potential guild recruitment opportunity
-- **[[JP]]**: Standard guild prejudice initially, focuses on proving usefulness over racial concerns
+- **[[JP Player Sheet]]**: Standard guild prejudice initially, focuses on proving usefulness over racial concerns
 - **[[Liz]]**: Appreciates her perfectionist approach to problem-solving and attention to detail
 
 **TODO**: Develop specific guild resources, modernization plans, and negotiation tactics

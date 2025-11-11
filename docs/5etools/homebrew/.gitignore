@@ -1,0 +1,11 @@
+# Homebrew JSON files
+# These are downloaded from external sources and can be regenerated
+# by running: node download-homebrew.js
+
+# Keep these patterns if you want to commit the downloaded files:
+# (Currently configured to commit all downloaded JSON files)
+
+# Uncomment these lines if you prefer to download fresh on each deployment:
+# *.json
+# !index.json
+# !package.json

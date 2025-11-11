@@ -32,9 +32,9 @@ Knows the current vineyard blight has a magical nature but fears admitting this 
 Central figure in the Hillcrest vineyard crisis. His decisions regarding the three competing factions (traditional vintners, Merchants Guild, political moderates) will determine the village's future and the party's potential allies in the region.
 
 ## Attitude toward Party Members
-- **[[JP]]**: Initially cautious due to racial prejudice but quickly recognizes competence and dedication
+- **[[JP Player Sheet]]**: Initially cautious due to racial prejudice but quickly recognizes competence and dedication
 - **[[Justin]]**: Views as potential ally due to merchant experience and trade connections
 - **[[Julie]]**: Eager for her archaeological expertise regarding historical blights and village defenses
-- **[[Claire]]**: Hopeful her divine magic might provide solutions to the supernatural aspects of the crisis
+- **[[Private Claire notes]]**: Hopeful her divine magic might provide solutions to the supernatural aspects of the crisis
 
 **TODO**: Develop specific dialogue options, personal quest hooks, and potential character development arcs

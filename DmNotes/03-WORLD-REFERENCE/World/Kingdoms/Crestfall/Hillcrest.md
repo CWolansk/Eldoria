@@ -37,10 +37,10 @@ Founded three centuries ago by refugees fleeing the Border Wars, Hillcrest has g
 - **Relationships**: Descendant of village founders; married to [[Seraphina Winecraft]]; politically pressured by all three factions
 - **Secrets/Leverage**: Knows the blight's magical nature but fears admitting it publicly would cause panic
 - **Attitude toward Party**: 
-  - **[[JP]]**: Initially cautious due to racial prejudice but quickly recognizes competence
+  - **[[JP Player Sheet]]**: Initially cautious due to racial prejudice but quickly recognizes competence
   - **[[Justin]]**: Views as potential ally due to merchant experience
   - **[[Julie]]**: Eager for her archaeological expertise on historical blights
-  - **[[Claire]]**: Hopeful her divine magic might provide solutions
+  - **[[Private Claire notes]]**: Hopeful her divine magic might provide solutions
 
 ### [[Eliza Brightwine]] - Merchants Guild Representative
 - **Personality**: Ambitious and efficiency-focused, genuinely believes modernization will save the village
@@ -50,7 +50,7 @@ Founded three centuries ago by refugees fleeing the Border Wars, Hillcrest has g
 - **Secrets/Leverage**: Has access to guild alchemical resources that could treat the blight, but won't share without concessions
 - **Attitude toward Party**:
   - **[[Justin]]**: Professional courtesy but competitive; sees potential guild recruitment opportunity
-  - **[[JP]]**: Standard guild prejudice initially, focuses on proving usefulness
+  - **[[JP Player Sheet]]**: Standard guild prejudice initially, focuses on proving usefulness
   - **[[Liz]]**: Appreciates her perfectionist approach to problem-solving
 
 ### [[Benedict Vineward]] - Traditional Vintners Leader
@@ -60,9 +60,9 @@ Founded three centuries ago by refugees fleeing the Border Wars, Hillcrest has g
 - **Relationships**: Childhood friend of [[Mayor Linden Hearthwood]]; philosophical opponent of [[Eliza Brightwine]]; mentor to younger vintners
 - **Secrets/Leverage**: Knows location of ancient druidic shrine that might hold blight cures, but fears magical "contamination"
 - **Attitude toward Party**:
-  - **[[JP]]**: Suspicious initially but respects honest labor and physical strength
+  - **[[JP Player Sheet]]**: Suspicious initially but respects honest labor and physical strength
   - **[[Julie]]**: Values her interest in preserving old knowledge
-  - **[[Claire]]**: Uncomfortable with divine magic but desperate enough to accept help
+  - **[[Private Claire notes]]**: Uncomfortable with divine magic but desperate enough to accept help
 
 ### [[Guard Captain Roderick Stone]]
 - **Personality**: Duty-bound and observant, caught between protecting village and investigating potential sabotage
@@ -71,7 +71,7 @@ Founded three centuries ago by refugees fleeing the Border Wars, Hillcrest has g
 - **Relationships**: Answers to [[Mayor Linden Hearthwood]] but pressured by [[Merchants Guild]]; coordinates with [[Highreach]] garrison
 - **Secrets/Leverage**: Has evidence suggesting the blight is artificially created but lacks resources to investigate properly
 - **Attitude toward Party**:
-  - **[[JP]]**: Standard law enforcement scrutiny of half-orcs, but professional respect for fellow fighters
+  - **[[JP Player Sheet]]**: Standard law enforcement scrutiny of half-orcs, but professional respect for fellow fighters
   - **[[Vanessa]]**: Military recognition and tactical discussions
   - **[[Randi]]**: Fascinated by aerial reconnaissance capabilities
 
@@ -83,8 +83,8 @@ Founded three centuries ago by refugees fleeing the Border Wars, Hillcrest has g
 - **Secrets/Leverage**: Her wines contain subtle magical enhancements; she can detect the blight's magical signature
 - **Attitude toward Party**:
   - **[[Liz]]**: Recognizes elven bloodline and appreciates perfectionist approach
-  - **[[JP]]**: One of the few villagers who judges purely on character
-  - **[[Claire]]**: Interested in magical wine-making techniques
+  - **[[JP Player Sheet]]**: One of the few villagers who judges purely on character
+  - **[[Private Claire notes]]**: Interested in magical wine-making techniques
 
 ### [[Lysander Thornfield]] - Mysterious Stranger
 - **Personality**: Charming and well-informed, claims to be a traveling wine merchant but asks too many questions about local history
@@ -140,8 +140,8 @@ A virulent magical blight has infected 40% of Hillcrest's vineyards since the 6t
 ### Party Character Integration
 - **[[Julie]]**: Historical research reveals previous blight occurred during Border Wars; ancient protective wards may still exist
 - **[[Liz]]**: Perfect pitch allows her to detect magical resonances in affected vines; elven longevity provides perspective on agricultural cycles
-- **[[Claire]]**: Divine magic can purify corrupted soil; weather control helps contain spread
-- **[[JP]]**: Physical prowess needed for vineyard work; faces initial suspicion but can prove worth through dedicated labor
+- **[[Private Claire notes]]**: Divine magic can purify corrupted soil; weather control helps contain spread
+- **[[JP Player Sheet]]**: Physical prowess needed for vineyard work; faces initial suspicion but can prove worth through dedicated labor
 - **[[Justin]]**: Merchant contacts reveal unusual alchemical purchases by suspected saboteurs; cart useful for transporting supplies
 - **[[Vanessa]]**: Military tactics applicable to protecting uninfected areas; direct action against threats
 - **[[Randi]]**: Aerial surveys reveal blight patterns invisible from ground level; magical analysis of corruption
@@ -338,7 +338,7 @@ The local guild chapter maintains carefully neutral ground while serving both lo
 - **[[Liliana Moonleaf]]**: Magic shop owner with mysterious knowledge of vineyard enchantments
 
 ### "I Know a Guy" Connections
-- Former sailors who became vineyard workers (for [[JP]] and [[Claire]])
+- Former sailors who became vineyard workers (for [[JP Player Sheet]] and [[Private Claire notes]])
 - Traveling merchants with regional knowledge (for [[Justin]])
 - Archaeological contacts studying Border War sites (for [[Julie]])
 - Elven cultural advisors on agricultural magic (for [[Liz]])

@@ -31,7 +31,7 @@ Has evidence suggesting the vineyard blight is artificially created but lacks re
 Law enforcement contact who can provide security support and investigation assistance. His evidence about the artificial nature of the blight could be a key plot hook.
 
 ## Attitude toward Party Members
-- **[[JP]]**: Standard law enforcement scrutiny of half-orcs, but professional respect for fellow fighters and combat experience
+- **[[JP Player Sheet]]**: Standard law enforcement scrutiny of half-orcs, but professional respect for fellow fighters and combat experience
 - **[[Vanessa]]**: Military recognition and tactical discussions about village defense
 - **[[Randi]]**: Fascinated by aerial reconnaissance capabilities for security purposes
 

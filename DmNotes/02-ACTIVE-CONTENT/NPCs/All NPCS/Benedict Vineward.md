@@ -32,8 +32,8 @@ Knows the location of an ancient druidic shrine that might hold the cure for the
 Guardian of old knowledge and traditional methods. His cooperation is essential for any solution that preserves village culture, and his druidic shrine knowledge could be crucial.
 
 ## Attitude toward Party Members
-- **[[JP]]**: Suspicious initially due to racial prejudice but respects honest labor and physical strength
+- **[[JP Player Sheet]]**: Suspicious initially due to racial prejudice but respects honest labor and physical strength
 - **[[Julie]]**: Values her interest in preserving old knowledge and archaeological expertise
-- **[[Claire]]**: Uncomfortable with divine magic but desperate enough to accept help if properly approached
+- **[[Private Claire notes]]**: Uncomfortable with divine magic but desperate enough to accept help if properly approached
 
 **TODO**: Detail the druidic shrine location, traditional wine-making secrets, and mentorship relationships
