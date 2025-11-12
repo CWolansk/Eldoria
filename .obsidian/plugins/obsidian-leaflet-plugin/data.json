@@ -2,7 +2,8 @@
   "mapMarkers": [
     {
       "id": "World-Map",
-      "lastAccessed": 1762969373471,
+      "locked": true,
+      "lastAccessed": 1762970038011,
       "markers": [
         {
           "id": "ID_9859aa5af95a",
@@ -359,7 +360,48 @@
         }
       ],
       "overlays": [],
-      "shapes": [],
+      "shapes": [
+        {
+          "type": "polyline",
+          "color": "#3388FF",
+          "vertices": [
+            {
+              "lat": -4.2685546875,
+              "lng": 3.962890625,
+              "id": "ID_7bba984969bb",
+              "targets": {
+                "vertexIds": []
+              }
+            },
+            {
+              "lat": -4.2666015625,
+              "lng": 3.794921875,
+              "id": "ID_dacbe8b9785b",
+              "targets": {
+                "vertexIds": []
+              }
+            },
+            {
+              "lat": -4.2333984375,
+              "lng": 3.7431640625,
+              "id": "ID_290b8bdafa28",
+              "targets": {
+                "vertexIds": []
+              }
+            },
+            {
+              "lat": -4.1806640625,
+              "lng": 3.75390625,
+              "id": "ID_fa086a2a5919",
+              "targets": {
+                "vertexIds": []
+              }
+            }
+          ],
+          "arrows": true,
+          "reversed": false
+        }
+      ],
       "files": [
         "Public/World Map.md"
       ]

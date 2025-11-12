@@ -132,9 +132,66 @@ await ItemLookup.display(dv, dv.current().equipment)
 
 ---
 
+## Spell Scrolls
+
+### Display Spell Scrolls with Specific Spells
+
+The Item Lookup Widget supports embedding spell details in spell scrolls using a pipe separator pattern:
+
+\`\`\`dataviewjs
+const {ItemLookup} = await cJS()
+
+// Pattern: 'Spell Scroll (Level)|SpellName'
+await ItemLookup.display(dv, [
+    'Spell Scroll (1st Level)|Magic Missile',
+    'Spell Scroll (2nd Level)|Invisibility',
+    'Spell Scroll (3rd Level)|Fireball'
+])
+\`\`\`
+
+**Important Notes:**
+- Generic spell scrolls still work: `'Spell Scroll (1st Level)'` displays the standard scroll
+- Add `|SpellName` to embed spell details: `'Spell Scroll (1st Level)|Magic Missile'`
+- The spell scroll level and spell must match (e.g., don't use a 1st level scroll with Fireball)
+
+The widget will automatically:
+1. Detect the pipe separator pattern
+2. Load the base spell scroll item (e.g., "Spell Scroll (3rd Level)")
+3. Load the spell details from `Spells.csv`
+4. Display the spell information embedded within the item card
+
+### Example: Treasure Hoard with Spell Scrolls
+
+\`\`\`markdown
+---
+treasure:
+  - Bag of Holding
+  - Spell Scroll (3rd Level)|Fireball
+  - Potion of Greater Healing
+  - Spell Scroll (3rd Level)|Counterspell
+  - Spell Scroll (1st Level)
+---
+
+# Dragon's Hoard
+
+\`\`\`dataviewjs
+const {ItemLookup} = await cJS()
+await ItemLookup.display(dv, dv.current().treasure)
+\`\`\`
+\`\`\`
+
+This will display:
+- Regular items normally
+- Generic spell scrolls without spell details
+- Specific spell scrolls with embedded spell details including level, school, components, casting time, and full description
+- A visual separator with a scroll emoji 📜 to distinguish the spell details
+
+---
+
 ## Features
 
 - **Exact Name Matching**: Item names must match exactly (case-insensitive)
+- **Spell Scroll Integration**: Use `'Spell Scroll (Level)|SpellName'` to embed spell details
 - **Expandable Cards**: Click item names to reveal full details
 - **Rarity Badges**: Color-coded badges for Common, Uncommon, Rare, Very Rare, and Legendary items
 - **Theme Integration**: Uses Obsidian CSS variables to match your theme
