@@ -1,0 +1,444 @@
+{
+  "mapMarkers": [
+    {
+      "id": "World-Map",
+      "lastAccessed": 1762969373471,
+      "markers": [
+        {
+          "id": "ID_9859aa5af95a",
+          "type": "default",
+          "loc": [
+            -2.15234375,
+            1.3828125
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": [
+            0.1728515625,
+            0.26904296875
+          ],
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_1b89389b4919",
+          "type": "default",
+          "loc": [
+            -1.671875,
+            0.9609375
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": [
+            0.1201171875,
+            0.208984375
+          ],
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_9b5bb91a98db",
+          "type": "default",
+          "loc": [
+            -3.0390625,
+            1.3046875
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": [
+            0.1630859375,
+            0.3798828125
+          ],
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_8bcb6a0a98e9",
+          "type": "default",
+          "loc": [
+            -3.203125,
+            2.58984375
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": [
+            0.32373046875,
+            0.400390625
+          ],
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_383ad8c968d8",
+          "type": "default",
+          "loc": [
+            -1.765625,
+            2.69921875
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": [
+            0.33740234375,
+            0.220703125
+          ],
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_c85a08bb8af9",
+          "type": "default",
+          "loc": [
+            -1.5078125,
+            3.12890625
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": [
+            0.39111328125,
+            0.1884765625
+          ],
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_8ae85b68ca89",
+          "type": "default",
+          "loc": [
+            -1.25,
+            3.71875
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": [
+            0.46484375,
+            0.15625
+          ],
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_ab3a78396b9b",
+          "type": "default",
+          "loc": [
+            -0.93359375,
+            3.125
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": [
+            0.390625,
+            0.11669921875
+          ],
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_795b3a19695a",
+          "type": "default",
+          "loc": [
+            -1.44140625,
+            4.2109375
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": [
+            0.5263671875,
+            0.18017578125
+          ],
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_fbd858eb08f9",
+          "type": "default",
+          "loc": [
+            -0.8359375,
+            4.53515625
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": [
+            0.56689453125,
+            0.1044921875
+          ],
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_fb4b5a78b9a8",
+          "type": "default",
+          "loc": [
+            -2.328125,
+            4.8828125
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": [
+            0.6103515625,
+            0.291015625
+          ],
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_b9e9b9d93b9b",
+          "type": "default",
+          "loc": [
+            -7.260772705078125,
+            5.02294921875
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": null,
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_5bf87bc9f9aa",
+          "type": "default",
+          "loc": [
+            -5.97467041015625,
+            4.5615234375
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": null,
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_78ab1b0aca6a",
+          "type": "default",
+          "loc": [
+            -5.71685791015625,
+            4.1474609375
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": null,
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_1aa9c8a8f808",
+          "type": "default",
+          "loc": [
+            -5.83013916015625,
+            2.0146484375
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": null,
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_a94898bb5838",
+          "type": "default",
+          "loc": [
+            -5.17779541015625,
+            2.4599609375
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": null,
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_79691aa83908",
+          "type": "default",
+          "loc": [
+            -4.62310791015625,
+            1.7490234375
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": null,
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_e98baae8b95b",
+          "type": "default",
+          "loc": [
+            -3.78326416015625,
+            3.7490234375
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": null,
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_f8eb4afbe959",
+          "type": "default",
+          "loc": [
+            -2.581085205078125,
+            1.36865234375
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": null,
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        },
+        {
+          "id": "ID_e959eb3bf82a",
+          "type": "default",
+          "loc": [
+            -1.90435791015625,
+            5.1826171875
+          ],
+          "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
+          "mutable": true,
+          "command": false,
+          "percent": null,
+          "description": null,
+          "minZoom": null,
+          "maxZoom": null,
+          "tooltip": "hover"
+        }
+      ],
+      "overlays": [],
+      "shapes": [],
+      "files": [
+        "Public/World Map.md"
+      ]
+    }
+  ],
+  "defaultMarker": {
+    "type": "default",
+    "iconName": "map-marker",
+    "color": "#dddddd",
+    "transform": {
+      "size": 6,
+      "x": 0,
+      "y": -2
+    }
+  },
+  "markerIcons": [],
+  "color": "#dddddd",
+  "lat": 39.983334,
+  "long": -82.98333,
+  "notePreview": false,
+  "layerMarkers": true,
+  "previousVersion": "6.0.5",
+  "version": {
+    "major": 6,
+    "minor": 0,
+    "patch": 5
+  },
+  "warnedAboutMapMarker": false,
+  "copyOnClick": false,
+  "displayMarkerTooltips": "hover",
+  "displayOverlayTooltips": true,
+  "configDirectory": null,
+  "mapViewEnabled": true,
+  "mapViewParameters": {
+    "darkMode": false,
+    "defaultZoom": 8,
+    "distanceMultiplier": 1,
+    "drawColor": "#3388ff",
+    "geojson": [],
+    "geojsonColor": "#3388ff",
+    "gpx": [],
+    "gpxColor": "#3388ff",
+    "height": "500px",
+    "image": "[[docs/DmNotes/01-CAMPAIGN-CORE/Eldoira.jpg]]",
+    "imageOverlay": [],
+    "isMapView": false,
+    "layers": [
+      "[[docs/DmNotes/01-CAMPAIGN-CORE/Eldoira.jpg]]"
+    ],
+    "linksFrom": [],
+    "linksTo": [],
+    "marker": [
+      "default, 39.983334, -82.983330, [[Note]]"
+    ],
+    "commandMarker": [],
+    "markerFile": [],
+    "markerFolder": [],
+    "markerTag": [],
+    "maxZoom": 10,
+    "minZoom": 6,
+    "osmLayer": true,
+    "overlay": [],
+    "overlayColor": "blue",
+    "scale": 1,
+    "showAllMarkers": false,
+    "tileServer": [],
+    "verbose": false,
+    "zoomDelta": 1,
+    "zoomFeatures": false,
+    "id": "World-Map",
+    "lat": 50,
+    "long": 50,
+    "unit": "meters",
+    "filterTag": []
+  },
+  "enableDraw": true,
+  "defaultUnitType": "imperial",
+  "defaultTile": "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
+  "defaultTileDark": "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
+  "defaultAttribution": "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors &copy; <a href=\"https://carto.com/attributions\">CARTO</a>",
+  "defaultTileSubdomains": "a,b,c,d"
+}

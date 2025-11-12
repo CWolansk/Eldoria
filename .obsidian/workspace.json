@@ -45,18 +45,28 @@
             "id": "f59fe641c1d89d16",
             "type": "leaf",
             "state": {
+              "type": "obsidian-leaflet-map-view",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Leaflet Map"
+            }
+          },
+          {
+            "id": "df7fa78981857870",
+            "type": "leaf",
+            "state": {
               "type": "markdown",
               "state": {
-                "file": "PlayerNotes/Players/JP Player Sheet.md",
+                "file": "Public/World Map.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "JP Player Sheet"
+              "title": "World Map"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -280,15 +290,20 @@
       "obsidian-5e-statblocks:Open Creature pane": false,
       "obsidian42-brat:BRAT": false,
       "initiative-tracker:Initiative Tracker Encounter Builder": false,
-      "calendarium:Open Calendarium": false
+      "calendarium:Open Calendarium": false,
+      "obsidian-leaflet-plugin:Open Leaflet Map": false
     }
   },
-  "active": "f59fe641c1d89d16",
+  "active": "df7fa78981857870",
   "lastOpenFiles": [
     "PlayerNotes/Players/Julie Player Sheet.md",
     "PlayerNotes/Fight.md",
     "PlayerNotes/index.md",
     "PlayerNotes/Players/JP Player Sheet.md",
+    "Public/World Map.md",
+    "docs/JP Player Sheet.html",
+    "Private",
+    "Public",
     "docs/index.html",
     "docs/DmNotes/01-CAMPAIGN-CORE/Eldoira.jpg",
     "docs/DmNotes/01-CAMPAIGN-CORE",
@@ -297,9 +312,6 @@
     "docs/PlayerNotes/Fight.html",
     "docs/PlayerNotes/index.html",
     "docs/PlayerNotes/Players/JP Player Sheet.html",
-    "docs/PlayerNotes/Players",
-    "docs/PlayerNotes",
-    "Assets/common-lookup-styles.js",
     "DmNotes/05-TOOLS/race-lookup-example.md",
     "Assets/test-race-lookup.md",
     "DmNotes/05-TOOLS/feat-lookup-example.md",
@@ -326,7 +338,6 @@
     "docs/5etools/node_modules/@jest/core/node_modules/ci-info/README.md",
     "docs/5etools/node_modules/@jest/core/node_modules/ci-info/CHANGELOG.md",
     "docs/5etools/node_modules/@eslint/eslintrc/node_modules/json-schema-traverse/README.md",
-    "docs/5etools/node_modules/@eslint/eslintrc/node_modules/ajv/README.md",
     "docs/5etools/node_modules/union/examples/simple/favicon.png",
     "docs/5etools/node_modules/@jest/reporters/assets/jest_logo.png",
     "docs/5etools/node_modules/union/union.png"
