@@ -17,7 +17,18 @@
 //     ac: 12,
 //     speed: 30,
 //     saves: ['int', 'wis'],
-//     skills: ['arcana', 'history', 'investigation', 'perception']
+//     skills: ['arcana', 'history', 'investigation', 'perception'],
+//     // Weapon proficiencies
+//     simpleWeapons: true,      // proficient with simple weapons?
+//     martialWeapons: false,    // proficient with martial weapons?
+//     // Optional: Spellcasting
+//     spellcasting: 'int'       // ability for spell attacks (always adds proficiency)
+//   })
+//   ```
+//       {name: 'Spell Slots (1st)', current: 4, max: 4},
+//       {name: 'Spell Slots (2nd)', current: 3, max: 3},
+//       {name: 'Spell Slots (3rd)', current: 2, max: 2}
+//     ]
 //   })
 //   ```
 
@@ -47,7 +58,28 @@ class CharacterSheetDisplay {
             '.dnd-combat-stat { background: #1a1a1a; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid #fff; }\n' +
             '.dnd-combat-stat label { display: block; font-size: 0.85em; color: #fff; margin-bottom: 8px; text-transform: uppercase; font-weight: bold; }\n' +
             '.dnd-combat-stat .value { font-size: 1.8em; font-weight: bold; color: #fff; }\n' +
-            '.dnd-saving-throws { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 30px; }\n' +
+            '.dnd-spellcasting { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px; }\n' +
+            '.dnd-spell-stat { background: #1a1a1a; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid #fff; }\n' +
+            '.dnd-spell-stat label { display: block; font-size: 0.85em; color: #fff; margin-bottom: 8px; text-transform: uppercase; font-weight: bold; }\n' +
+            '.dnd-spell-stat .value { font-size: 1.8em; font-weight: bold; color: #fff; }\n' +
+            '.dnd-weapon-attacks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px; }\n' +
+            '.dnd-weapon-stat { background: #1a1a1a; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid #fff; }\n' +
+            '.dnd-weapon-stat label { display: block; font-size: 0.85em; color: #fff; margin-bottom: 8px; text-transform: uppercase; font-weight: bold; }\n' +
+            '.dnd-weapon-stat .value { font-size: 1.8em; font-weight: bold; color: #fff; }\n' +
+            '.dnd-hit-points { background: #1a1a1a; padding: 15px; border-radius: 8px; border: 2px solid #fff; margin-bottom: 20px; }\n' +
+            '.dnd-hit-points .hp-header { text-align: center; font-size: 0.85em; color: #fff; margin-bottom: 10px; text-transform: uppercase; font-weight: bold; }\n' +
+            '.dnd-hp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }\n' +
+            '.dnd-hp-item { text-align: center; }\n' +
+            '.dnd-hp-item label { display: block; font-size: 0.75em; color: #fff; margin-bottom: 5px; text-transform: uppercase; }\n' +
+            '.dnd-hp-item .value { font-size: 1.5em; font-weight: bold; color: #fff; }\n' +
+            '.dnd-hit-dice { text-align: center; padding-top: 10px; border-top: 1px solid #fff; }\n' +
+            '.dnd-hit-dice label { display: block; font-size: 0.75em; color: #fff; margin-bottom: 5px; text-transform: uppercase; }\n' +
+            '.dnd-hit-dice .value { font-size: 1.2em; font-weight: bold; color: #fff; }\n' +
+            '.dnd-resources { margin-bottom: 20px; }\n' +
+            '.dnd-resource-item { display: flex; align-items: center; justify-content: space-between; padding: 10px; background: #1a1a1a; border: 2px solid #fff; border-radius: 5px; margin-bottom: 8px; }\n' +
+            '.dnd-resource-name { font-weight: 600; color: #fff; font-size: 0.95em; }\n' +
+            '.dnd-resource-value { font-weight: bold; color: #fff; min-width: 60px; text-align: right; font-size: 1.1em; }\n' +
+            '.dnd-saving-throws { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 30px; }\n' +
             '.dnd-save-item { display: flex; align-items: center; padding: 12px; background: #1a1a1a; border: 2px solid #fff; border-radius: 5px; }\n' +
             '.dnd-save-indicator { width: 20px; height: 20px; margin-right: 10px; flex-shrink: 0; border-radius: 3px; border: 2px solid #fff; }\n' +
             '.dnd-save-indicator.proficient { background: #fff; }\n' +
@@ -171,6 +203,16 @@ class CharacterSheetDisplay {
         var self = this;
         var skillAbilities = this.getSkillAbilities();
         
+        // Pre-calculate all values
+        var abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+        var modifiers = {};
+        for (var i = 0; i < abilities.length; i++) {
+            var ability = abilities[i];
+            modifiers[ability] = this.calculateModifier(characterData[ability] || 10);
+        }
+        var profBonus = this.calculateProficiencyBonus(characterData.level || 1);
+        var initiative = modifiers.dex;
+        
         var html = '<div class="dnd-char-sheet" id="' + instanceId + '">';
         html += '<h1>D&D 5e Character Stats</h1>';
         
@@ -198,7 +240,7 @@ class CharacterSheetDisplay {
             html += '<div class="dnd-stat-block">';
             html += '<label>' + ability.name + '</label>';
             html += '<div class="dnd-stat-value">' + (characterData[ability.id] || 10) + '</div>';
-            html += '<div class="dnd-modifier" id="' + instanceId + '-' + ability.id + 'Mod">+0</div>';
+            html += '<div class="dnd-modifier" id="' + instanceId + '-' + ability.id + 'Mod">' + this.formatBonus(modifiers[ability.id]) + '</div>';
             html += '</div>';
         }
         html += '</div>';
@@ -206,11 +248,99 @@ class CharacterSheetDisplay {
         // Combat Stats
         html += '<h2>Combat Stats</h2>';
         html += '<div class="dnd-combat-stats">';
-        html += '<div class="dnd-combat-stat"><label>Proficiency Bonus</label><div class="value" id="' + instanceId + '-profBonus">+2</div></div>';
-        html += '<div class="dnd-combat-stat"><label>Initiative</label><div class="value" id="' + instanceId + '-initiative">+0</div></div>';
+        html += '<div class="dnd-combat-stat"><label>Proficiency Bonus</label><div class="value" id="' + instanceId + '-profBonus">' + this.formatBonus(profBonus) + '</div></div>';
+        html += '<div class="dnd-combat-stat"><label>Initiative</label><div class="value" id="' + instanceId + '-initiative">' + this.formatBonus(initiative) + '</div></div>';
         html += '<div class="dnd-combat-stat"><label>Armor Class</label><div class="value">' + (characterData.ac || 10) + '</div></div>';
         html += '<div class="dnd-combat-stat"><label>Speed</label><div class="value">' + (characterData.speed || 30) + ' ft</div></div>';
+        
+        // Weapon Attack Bonuses
+        var simpleProf = characterData.simpleWeapons === true;
+        var martialProf = characterData.martialWeapons === true;
+        
+        if (simpleProf || martialProf) {
+            var strMod = modifiers.str || 0;
+            var dexMod = modifiers.dex || 0;
+            
+            if (simpleProf) {
+                var simpleMelee = strMod + profBonus;
+                var simpleRanged = dexMod + profBonus;
+                html += '<div class="dnd-combat-stat"><label>Simple Melee</label><div class="value">' + this.formatBonus(simpleMelee) + '</div></div>';
+                html += '<div class="dnd-combat-stat"><label>Simple Ranged</label><div class="value">' + this.formatBonus(simpleRanged) + '</div></div>';
+            }
+            
+            if (martialProf) {
+                var martialMelee = strMod + profBonus;
+                var martialRanged = dexMod + profBonus;
+                html += '<div class="dnd-combat-stat"><label>Martial Melee</label><div class="value">' + this.formatBonus(martialMelee) + '</div></div>';
+                html += '<div class="dnd-combat-stat"><label>Martial Ranged</label><div class="value">' + this.formatBonus(martialRanged) + '</div></div>';
+            }
+        }
+        
+        // Optional: Spell Attack Bonus
+        if (characterData.spellcasting && characterData.spellcasting !== false) {
+            var spellMod = modifiers[characterData.spellcasting] || 0;
+            var spellAttack = spellMod + profBonus;
+            var spellSaveDC = 8 + spellMod + profBonus;
+            html += '<div class="dnd-combat-stat"><label>Spell Attack</label><div class="value">' + this.formatBonus(spellAttack) + '</div></div>';
+            html += '<div class="dnd-combat-stat"><label>Spell Save DC</label><div class="value">' + spellSaveDC + '</div></div>';
+        }
+        
         html += '</div>';
+        
+        // Spellcasting (optional)
+        if (characterData.showSpellcasting) {
+            var spellAbility = characterData.spellcastingAbility || 'int';
+            var spellMod = modifiers[spellAbility];
+            var spellAttack = spellMod + profBonus;
+            var spellSaveDC = 8 + profBonus + spellMod;
+            
+            html += '<h2>Spellcasting</h2>';
+            html += '<div class="dnd-spellcasting">';
+            html += '<div class="dnd-spell-stat"><label>Spell Attack</label><div class="value">' + this.formatBonus(spellAttack) + '</div></div>';
+            html += '<div class="dnd-spell-stat"><label>Spell Save DC</label><div class="value">' + spellSaveDC + '</div></div>';
+            html += '</div>';
+        }
+        
+        // Weapon Attacks (optional)
+        if (characterData.showWeaponAttacks) {
+            var meleeAttack = Math.max(modifiers.str, modifiers.dex) + profBonus;
+            var rangedAttack = modifiers.dex + profBonus;
+            
+            html += '<h2>Weapon Attacks</h2>';
+            html += '<div class="dnd-weapon-attacks">';
+            html += '<div class="dnd-weapon-stat"><label>Melee Attack</label><div class="value">' + this.formatBonus(meleeAttack) + '</div></div>';
+            html += '<div class="dnd-weapon-stat"><label>Ranged Attack</label><div class="value">' + this.formatBonus(rangedAttack) + '</div></div>';
+            html += '</div>';
+        }
+        
+        // Hit Points (optional)
+        if (characterData.showHitPoints) {
+            html += '<h2>Hit Points</h2>';
+            html += '<div class="dnd-hit-points">';
+            html += '<div class="dnd-hp-grid">';
+            html += '<div class="dnd-hp-item"><label>Current HP</label><div class="value">' + (characterData.currentHp || characterData.maxHp || 0) + '</div></div>';
+            html += '<div class="dnd-hp-item"><label>Max HP</label><div class="value">' + (characterData.maxHp || 0) + '</div></div>';
+            html += '<div class="dnd-hp-item"><label>Temp HP</label><div class="value">' + (characterData.tempHp || 0) + '</div></div>';
+            html += '</div>';
+            if (characterData.hitDice) {
+                html += '<div class="dnd-hit-dice"><label>Hit Dice</label><div class="value">' + characterData.hitDice + '</div></div>';
+            }
+            html += '</div>';
+        }
+        
+        // Resources (optional)
+        if (characterData.showResources && characterData.resources && characterData.resources.length > 0) {
+            html += '<h2>Resources</h2>';
+            html += '<div class="dnd-resources">';
+            for (var r = 0; r < characterData.resources.length; r++) {
+                var resource = characterData.resources[r];
+                html += '<div class="dnd-resource-item">';
+                html += '<span class="dnd-resource-name">' + resource.name + '</span>';
+                html += '<span class="dnd-resource-value">' + (resource.current || 0) + ' / ' + (resource.max || 0) + '</span>';
+                html += '</div>';
+            }
+            html += '</div>';
+        }
         
         // Saving Throws
         html += '<h2>Saving Throws</h2>';
@@ -227,10 +357,11 @@ class CharacterSheetDisplay {
         for (var i = 0; i < saves.length; i++) {
             var save = saves[i];
             var isProficient = characterData.saves && characterData.saves.indexOf(save.ability) !== -1;
+            var saveBonus = modifiers[save.ability] + (isProficient ? profBonus : 0);
             html += '<div class="dnd-save-item">';
             html += '<div class="dnd-save-indicator' + (isProficient ? ' proficient' : '') + '"></div>';
             html += '<label>' + save.name + '</label>';
-            html += '<span class="dnd-save-bonus" id="' + instanceId + '-' + save.id + 'Bonus">+0</span>';
+            html += '<span class="dnd-save-bonus" id="' + instanceId + '-' + save.id + 'Bonus">' + this.formatBonus(saveBonus) + '</span>';
             html += '</div>';
         }
         html += '</div>';
@@ -262,10 +393,12 @@ class CharacterSheetDisplay {
         for (var i = 0; i < skills.length; i++) {
             var skill = skills[i];
             var isProficient = characterData.skills && characterData.skills.indexOf(skill.id) !== -1;
+            var skillAbility = skillAbilities[skill.id];
+            var skillBonus = modifiers[skillAbility] + (isProficient ? profBonus : 0);
             html += '<div class="dnd-skill-item">';
             html += '<div class="dnd-skill-indicator' + (isProficient ? ' proficient' : '') + '"></div>';
             html += '<label>' + skill.name + '</label>';
-            html += '<span class="dnd-skill-bonus" id="' + instanceId + '-' + skill.id + 'Bonus">+0</span>';
+            html += '<span class="dnd-skill-bonus" id="' + instanceId + '-' + skill.id + 'Bonus">' + this.formatBonus(skillBonus) + '</span>';
             html += '</div>';
         }
         html += '</div>';
@@ -273,11 +406,6 @@ class CharacterSheetDisplay {
         html += '</div>';
         
         dv.paragraph(html);
-        
-        // Initial calculation after DOM is ready
-        setTimeout(function() {
-            self.updateCalculations(instanceId, characterData);
-        }, 100);
     }
     
     // Create a simple inline stat block (compact version)

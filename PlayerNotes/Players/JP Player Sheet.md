@@ -17,7 +17,10 @@ await CharacterSheetDisplay.display(dv, {
   ac: 12,
   speed: 30,
   saves: ['int', 'wis'],
-  skills: ['arcana', 'history', 'investigation', 'perception']
+  skills: ['arcana', 'history', 'investigation', 'perception'],
+  spellcasting: 'int',
+  simpleWeapons: true,
+  martialWeapons: true
 })
 ```
 
