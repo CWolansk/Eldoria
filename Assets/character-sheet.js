@@ -18,11 +18,11 @@
 //     speed: 30,
 //     saves: ['int', 'wis'],
 //     skills: ['arcana', 'history', 'investigation', 'perception'],
-//     // Weapon proficiencies
-//     simpleWeapons: true,      // proficient with simple weapons?
-//     martialWeapons: false,    // proficient with martial weapons?
-//     // Optional: Spellcasting
-//     spellcasting: 'int'       // ability for spell attacks (always adds proficiency)
+//     // Weapon proficiencies (always shown, true adds proficiency bonus)
+//     simpleWeapons: true,      // add proficiency bonus to simple weapons?
+//     martialWeapons: false,    // add proficiency bonus to martial weapons?
+//     // Spellcasting (always shown, ability determines modifier, true/ability adds proficiency)
+//     spellcasting: 'int'       // ability for spell attacks ('int', 'wis', 'cha', etc.) or false for no proficiency
 //   })
 //   ```
 //       {name: 'Spell Slots (1st)', current: 4, max: 4},
@@ -54,10 +54,12 @@ class CharacterSheetDisplay {
             '.dnd-stat-block label { display: block; font-size: 0.9em; margin-bottom: 10px; text-transform: uppercase; font-weight: bold; color: #fff; }\n' +
             '.dnd-stat-value { font-size: 1.4em; font-weight: bold; color: #fff; margin-bottom: 10px; }\n' +
             '.dnd-modifier { font-size: 1.5em; font-weight: bold; background: #fff; color: #000; padding: 10px; border-radius: 5px; margin-top: 5px; border: 2px solid #fff; }\n' +
-            '.dnd-combat-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }\n' +
-            '.dnd-combat-stat { background: #1a1a1a; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid #fff; }\n' +
-            '.dnd-combat-stat label { display: block; font-size: 0.85em; color: #fff; margin-bottom: 8px; text-transform: uppercase; font-weight: bold; }\n' +
-            '.dnd-combat-stat .value { font-size: 1.8em; font-weight: bold; color: #fff; }\n' +
+            '.dnd-combat-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }\n' +
+            '.dnd-combat-stat { background: #1a1a1a; padding: 10px; border-radius: 6px; text-align: center; border: 2px solid #fff; }\n' +
+            '.dnd-combat-stat label { display: block; font-size: 0.7em; color: #fff; margin-bottom: 5px; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; }\n' +
+            '.dnd-combat-stat .value { font-size: 1.3em; font-weight: bold; color: #fff; }\n' +
+            '.dnd-combat-section { margin-bottom: 15px; }\n' +
+            '.dnd-combat-section-title { font-size: 0.85em; color: #fff; margin-bottom: 8px; padding-left: 5px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; opacity: 0.8; }\n' +
             '.dnd-spellcasting { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px; }\n' +
             '.dnd-spell-stat { background: #1a1a1a; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid #fff; }\n' +
             '.dnd-spell-stat label { display: block; font-size: 0.85em; color: #fff; margin-bottom: 8px; text-transform: uppercase; font-weight: bold; }\n' +
@@ -247,45 +249,59 @@ class CharacterSheetDisplay {
         
         // Combat Stats
         html += '<h2>Combat Stats</h2>';
+        
+        // Core Stats
+        html += '<div class="dnd-combat-section">';
         html += '<div class="dnd-combat-stats">';
-        html += '<div class="dnd-combat-stat"><label>Proficiency Bonus</label><div class="value" id="' + instanceId + '-profBonus">' + this.formatBonus(profBonus) + '</div></div>';
+        html += '<div class="dnd-combat-stat"><label>Prof Bonus</label><div class="value" id="' + instanceId + '-profBonus">' + this.formatBonus(profBonus) + '</div></div>';
         html += '<div class="dnd-combat-stat"><label>Initiative</label><div class="value" id="' + instanceId + '-initiative">' + this.formatBonus(initiative) + '</div></div>';
         html += '<div class="dnd-combat-stat"><label>Armor Class</label><div class="value">' + (characterData.ac || 10) + '</div></div>';
         html += '<div class="dnd-combat-stat"><label>Speed</label><div class="value">' + (characterData.speed || 30) + ' ft</div></div>';
+        html += '</div>';
+        html += '</div>';
         
-        // Weapon Attack Bonuses
+        // Weapon Attack Bonuses - Always shown, proficiency depends on flags
         var simpleProf = characterData.simpleWeapons === true;
         var martialProf = characterData.martialWeapons === true;
+        var strMod = modifiers.str || 0;
+        var dexMod = modifiers.dex || 0;
         
-        if (simpleProf || martialProf) {
-            var strMod = modifiers.str || 0;
-            var dexMod = modifiers.dex || 0;
-            
-            if (simpleProf) {
-                var simpleMelee = strMod + profBonus;
-                var simpleRanged = dexMod + profBonus;
-                html += '<div class="dnd-combat-stat"><label>Simple Melee</label><div class="value">' + this.formatBonus(simpleMelee) + '</div></div>';
-                html += '<div class="dnd-combat-stat"><label>Simple Ranged</label><div class="value">' + this.formatBonus(simpleRanged) + '</div></div>';
-            }
-            
-            if (martialProf) {
-                var martialMelee = strMod + profBonus;
-                var martialRanged = dexMod + profBonus;
-                html += '<div class="dnd-combat-stat"><label>Martial Melee</label><div class="value">' + this.formatBonus(martialMelee) + '</div></div>';
-                html += '<div class="dnd-combat-stat"><label>Martial Ranged</label><div class="value">' + this.formatBonus(martialRanged) + '</div></div>';
-            }
-        }
+        // Simple & Martial Weapons
+        html += '<div class="dnd-combat-section">';
+        html += '<div class="dnd-combat-section-title">Weapon Attacks</div>';
+        html += '<div class="dnd-combat-stats">';
         
-        // Optional: Spell Attack Bonus
-        if (characterData.spellcasting && characterData.spellcasting !== false) {
-            var spellMod = modifiers[characterData.spellcasting] || 0;
-            var spellAttack = spellMod + profBonus;
-            var spellSaveDC = 8 + spellMod + profBonus;
-            html += '<div class="dnd-combat-stat"><label>Spell Attack</label><div class="value">' + this.formatBonus(spellAttack) + '</div></div>';
-            html += '<div class="dnd-combat-stat"><label>Spell Save DC</label><div class="value">' + spellSaveDC + '</div></div>';
-        }
+        // Simple weapons
+        var simpleMelee = strMod + (simpleProf ? profBonus : 0);
+        var simpleRanged = dexMod + (simpleProf ? profBonus : 0);
+        html += '<div class="dnd-combat-stat"><label>Simple Melee</label><div class="value">' + this.formatBonus(simpleMelee) + '</div></div>';
+        html += '<div class="dnd-combat-stat"><label>Simple Ranged</label><div class="value">' + this.formatBonus(simpleRanged) + '</div></div>';
+        
+        // Martial weapons
+        var martialMelee = strMod + (martialProf ? profBonus : 0);
+        var martialRanged = dexMod + (martialProf ? profBonus : 0);
+        html += '<div class="dnd-combat-stat"><label>Martial Melee</label><div class="value">' + this.formatBonus(martialMelee) + '</div></div>';
+        html += '<div class="dnd-combat-stat"><label>Martial Ranged</label><div class="value">' + this.formatBonus(martialRanged) + '</div></div>';
         
         html += '</div>';
+        html += '</div>';
+        
+        // Spellcasting
+        html += '<div class="dnd-combat-section">';
+        html += '<div class="dnd-combat-section-title">Spellcasting</div>';
+        html += '<div class="dnd-combat-stats">';
+        
+        var spellAbility = characterData.spellcasting || 'int';
+        var spellProf = characterData.spellcasting !== false;
+        var spellMod = modifiers[spellAbility] || 0;
+        var spellAttack = spellMod + (spellProf ? profBonus : 0);
+        var spellSaveDC = 8 + spellMod + (spellProf ? profBonus : 0);
+        html += '<div class="dnd-combat-stat"><label>Spell Attack</label><div class="value">' + this.formatBonus(spellAttack) + '</div></div>';
+        html += '<div class="dnd-combat-stat"><label>Spell Save DC</label><div class="value">' + spellSaveDC + '</div></div>';
+        
+        html += '</div>';
+        html += '</div>';
+
         
         // Spellcasting (optional)
         if (characterData.showSpellcasting) {

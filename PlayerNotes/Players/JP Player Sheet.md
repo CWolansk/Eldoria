@@ -20,7 +20,7 @@ await CharacterSheetDisplay.display(dv, {
   skills: ['arcana', 'history', 'investigation', 'perception'],
   spellcasting: 'int',
   simpleWeapons: true,
-  martialWeapons: true
+  martialWeapons: false
 })
 ```
 
@@ -29,4 +29,38 @@ await CharacterSheetDisplay.display(dv, {
 ```dataviewjs
 const {ItemLookup} = await cJS()
 await ItemLookup.display(dv, ['Longsword', 'Bag of Holding', 'Ring of Protection'])
+```
+
+# Spells 
+```dataviewjs
+const {SpellLookup} = await cJS()
+await SpellLookup.display(dv, ['Fireball'])
+```
+
+
+# Class Information 
+
+## Background
+```dataviewjs
+const {BackgroundLookup} = await cJS()
+await BackgroundLookup.display(dv, ['Acolyte'])
+```
+
+## Feats
+```dataviewjs
+const {FeatLookup} = await cJS()
+await FeatLookup.display(dv, ['Alert', 'Lucky', 'War Caster'])
+```
+
+## Race 
+```dataviewjs
+const {RaceLookup} = await cJS()
+await RaceLookup.display(dv, ['Human', 'Elf', 'Dwarf'])
+```
+
+## Full Class Info
+```custom-frames
+frame: 5etoolsClass
+style: height: 1000px;
+urlSuffix: #wizard_phb,state:sub_abjuration_phb=b1
 ```

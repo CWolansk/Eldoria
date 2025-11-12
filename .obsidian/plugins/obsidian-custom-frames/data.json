@@ -1,10 +1,10 @@
 {
   "frames": [
     {
-      "url": "https://cwolansk.github.io/Eldoria/5etools/items.html#%2b1%20all-purpose%20tool_tce",
-      "displayName": "5etoolsItem",
+      "url": "https://cwolansk.github.io/Eldoria/5etools/classes.html",
+      "displayName": "5etoolsClass",
       "icon": "",
-      "hideOnMobile": true,
+      "hideOnMobile": false,
       "addRibbonIcon": false,
       "openInCenter": false,
       "zoomLevel": 1,
