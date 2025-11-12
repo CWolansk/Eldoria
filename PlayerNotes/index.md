@@ -1,6 +1,6 @@
 Players 
 - [[JP Player Sheet]]
-- [[Player Julie]] 
+- [[Julie Player Sheet]] 
 
 Za Warudo 
 ![[DmNotes/01-CAMPAIGN-CORE/Eldoira.jpg]]

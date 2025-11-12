@@ -55,7 +55,7 @@ await FeatLookup.display(dv, ['Alert', 'Lucky', 'War Caster'])
 ## Race 
 ```dataviewjs
 const {RaceLookup} = await cJS()
-await RaceLookup.display(dv, ['Human', 'Elf', 'Dwarf'])
+await RaceLookup.display(dv, ['Aasimar (MPMM)'])
 ```
 
 ## Full Class Info
