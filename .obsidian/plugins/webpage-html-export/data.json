@@ -102,7 +102,7 @@
     },
     "outlineOptions": {
       "featureId": "outline",
-      "enabled": true,
+      "enabled": false,
       "unavailable": false,
       "alwaysEnabled": false,
       "hideSettingsButton": false,
@@ -151,7 +151,7 @@
     },
     "sidebarOptions": {
       "featureId": "sidebar",
-      "enabled": true,
+      "enabled": false,
       "unavailable": false,
       "alwaysEnabled": false,
       "hideSettingsButton": false,
@@ -216,7 +216,7 @@
     "faviconPath": "",
     "siteName": "Eldoria",
     "iconEmojiStyle": "Native",
-    "exportRoot": "PlayerNotes/Players",
+    "exportRoot": "",
     "includePluginCss": [
       "statblock-stylesheet",
       "svelte-1unaafm",

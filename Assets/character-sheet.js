@@ -92,7 +92,38 @@ class CharacterSheetDisplay {
             '.dnd-skill-indicator { width: 20px; height: 20px; margin-right: 10px; flex-shrink: 0; border-radius: 3px; border: 2px solid #fff; }\n' +
             '.dnd-skill-indicator.proficient { background: #fff; }\n' +
             '.dnd-skill-item label { flex: 1; font-size: 0.95em; color: #fff; margin-right: 10px; }\n' +
-            '.dnd-skill-bonus { font-weight: bold; color: #fff; min-width: 45px; text-align: right; flex-shrink: 0; }\n';
+            '.dnd-skill-bonus { font-weight: bold; color: #fff; min-width: 45px; text-align: right; flex-shrink: 0; }\n' +
+            '@media (max-width: 768px) {\n' +
+            '  .dnd-char-sheet { padding: 15px; margin: 10px; border-width: 1px; }\n' +
+            '  .dnd-char-sheet h1 { font-size: 1.5em; margin-bottom: 20px; padding-bottom: 10px; letter-spacing: 1px; }\n' +
+            '  .dnd-char-sheet h2 { font-size: 1.2em; margin: 15px 0 10px 0; }\n' +
+            '  .dnd-char-info { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }\n' +
+            '  .dnd-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }\n' +
+            '  .dnd-stat-block { padding: 10px; }\n' +
+            '  .dnd-stat-block label { font-size: 0.8em; margin-bottom: 5px; }\n' +
+            '  .dnd-stat-value { font-size: 1.2em; margin-bottom: 5px; }\n' +
+            '  .dnd-modifier { font-size: 1.3em; padding: 8px; }\n' +
+            '  .dnd-combat-stats { grid-template-columns: repeat(2, 1fr); gap: 8px; }\n' +
+            '  .dnd-combat-stat { padding: 8px; }\n' +
+            '  .dnd-combat-stat label { font-size: 0.65em; }\n' +
+            '  .dnd-combat-stat .value { font-size: 1.1em; }\n' +
+            '  .dnd-saving-throws { grid-template-columns: 1fr; gap: 8px; }\n' +
+            '  .dnd-save-item { padding: 10px; }\n' +
+            '  .dnd-skills-grid { grid-template-columns: 1fr; gap: 8px; }\n' +
+            '  .dnd-skill-item { padding: 8px; }\n' +
+            '}\n' +
+            '@media (max-width: 480px) {\n' +
+            '  .dnd-char-sheet { padding: 10px; margin: 5px; }\n' +
+            '  .dnd-char-sheet h1 { font-size: 1.3em; margin-bottom: 15px; }\n' +
+            '  .dnd-char-info { grid-template-columns: 1fr; gap: 8px; }\n' +
+            '  .dnd-info-field label { font-size: 0.7em; }\n' +
+            '  .dnd-info-value { padding: 6px; font-size: 0.9em; }\n' +
+            '  .dnd-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }\n' +
+            '  .dnd-stat-block { padding: 8px; }\n' +
+            '  .dnd-combat-stats { grid-template-columns: repeat(2, 1fr); gap: 6px; }\n' +
+            '  .dnd-combat-stat { padding: 6px; }\n' +
+            '  .dnd-skill-item label { font-size: 0.85em; }\n' +
+            '}\n';
         
         const styleEl = document.createElement('style');
         styleEl.id = 'dnd-char-sheet-styles';
