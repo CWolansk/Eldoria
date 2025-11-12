@@ -1,59 +1,24 @@
----
-level: 1
-proficiency_bonus: 2
-dg-publish: true
----
 
-```event-btns
-items:
-  - name: Short Rest
-    value: short-rest
-  - name: Long Rest
-    value: long-rest
-```
+## Character Stats
 
-```healthpoints
-state_key: my_character_hp
-health: 28
-hitdice:
-  dice: d8
-  value: 3
-```
-
-```ability
-abilities:
-  strength: 14
-  dexterity: 16
-  constitution: 13
-  intelligence: 12
-  wisdom: 10
-  charisma: 8
-
-proficiencies:
-  - dexterity
-  - intelligence
-```
-
-```skills
-proficiencies:
-  - stealth
-  - investigation
-  - perception
-
-expertise:
-  - stealth
-```
-
-```consumable
-items:
-  - label: "Level 1 Spells"
-    state_key: my_character_spells_1
-    uses: 3
-    reset_on: "long-rest"
-  - label: "Sneak Attack"
-    state_key: my_character_sneak_attack
-    uses: 1
-    reset_on: ["short-rest", "long-rest"]
+```dataviewjs
+const {CharacterSheetDisplay} = await cJS()
+await CharacterSheetDisplay.display(dv, {
+  name: "JP's Character",
+  class: "Wizard",
+  level: 5,
+  race: "Elf",
+  str: 8,
+  dex: 14,
+  con: 12,
+  int: 18,
+  wis: 13,
+  cha: 10,
+  ac: 12,
+  speed: 30,
+  saves: ['int', 'wis'],
+  skills: ['arcana', 'history', 'investigation', 'perception']
+})
 ```
 
 ## Equipment
