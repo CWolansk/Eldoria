@@ -8,7 +8,7 @@
       "addRibbonIcon": false,
       "openInCenter": false,
       "zoomLevel": 1,
-      "forceIframe": false,
+      "forceIframe": true,
       "customCss": "",
       "customJs": ""
     }
