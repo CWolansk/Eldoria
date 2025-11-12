@@ -1,6 +1,7 @@
 ---
 level: 1
 proficiency_bonus: 2
+dg-publish: true
 ---
 
 ```event-btns

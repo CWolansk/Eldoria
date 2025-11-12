@@ -43,9 +43,8 @@ class SpellLookup {
             .spell-lookup-widget .spell-name::-webkit-details-marker {
                 display: none;
             }
-            
             .spell-lookup-widget .spell-name::marker {
-                display: none;
+                content: '';
             }
             
             .spell-lookup-widget .spell-name:hover {
@@ -61,8 +60,8 @@ class SpellLookup {
                 padding: 2px 8px;
                 border-radius: 3px;
                 font-size: 12px;
-                margin-left: 10px;
-            }
+            margin-left: 10px;
+        }
             .spell-lookup-widget .level-cantrip { background-color: #9e9e9e; color: white; }
             .spell-lookup-widget .level-1st { background-color: #8bc34a; color: white; }
             .spell-lookup-widget .level-2nd { background-color: #4caf50; color: white; }
@@ -292,8 +291,7 @@ class SpellLookup {
             const spells = this.findSpells(allSpells, spellNames);
             const html = this.createSpellsHTML(spells);
             
-            const fullHtml = `<div class="spell-lookup-widget">${html}</div>`;
-            dv.paragraph(fullHtml);
+            dv.paragraph(`<div class="spell-lookup-widget">${html}</div>`);
         } catch (error) {
             dv.paragraph(`<div class="spell-lookup-widget"><div class="error">Error loading spells: ${error.message}</div></div>`);
         }

@@ -4,7 +4,7 @@ Likes to hit things
 
 ```dataviewjs
 const {ItemLookup} = await cJS()
-await ItemLookup.display(dv, ['Corpse Slayer','Bastard Sword'])
+await ItemLookup.display(dv, ['Corpse Slayer Bastard Sword'])
 ```
 
 ```dataviewjs
