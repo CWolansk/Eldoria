@@ -3,7 +3,7 @@
     {
       "id": "World-Map",
       "locked": true,
-      "lastAccessed": 1762970038011,
+      "lastAccessed": 1763040417887,
       "markers": [
         {
           "id": "ID_9859aa5af95a",
@@ -444,18 +444,16 @@
     "geojsonColor": "#3388ff",
     "gpx": [],
     "gpxColor": "#3388ff",
-    "height": "500px",
-    "image": "[[docs/DmNotes/01-CAMPAIGN-CORE/Eldoira.jpg]]",
+    "height": "850px",
+    "image": "[[Eldoira.jpg]]",
     "imageOverlay": [],
     "isMapView": false,
     "layers": [
-      "[[docs/DmNotes/01-CAMPAIGN-CORE/Eldoira.jpg]]"
+      "[[Eldoira.jpg]]"
     ],
     "linksFrom": [],
     "linksTo": [],
-    "marker": [
-      "default, 39.983334, -82.983330, [[Note]]"
-    ],
+    "marker": [],
     "commandMarker": [],
     "markerFile": [],
     "markerFolder": [],
@@ -474,6 +472,7 @@
     "id": "World-Map",
     "lat": 50,
     "long": 50,
+    "width": "95%",
     "unit": "meters",
     "filterTag": []
   },
