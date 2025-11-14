@@ -20,7 +20,7 @@ class FeatLookup {
         // Load common styles if not already available
         if (typeof window.CommonLookupStyles === 'undefined') {
             try {
-                const commonStylesPath = 'Assets/common-lookup-styles.js';
+                const commonStylesPath = 'docs/Assets/common-lookup-styles.js';
                 const commonStylesCode = await dv.io.load(commonStylesPath);
                 eval(commonStylesCode);
             } catch (error) {
@@ -224,7 +224,7 @@ class FeatLookup {
         this.isLoading = true;
 
         try {
-            const csvPath = 'Assets/Feats/Feats.csv';
+            const csvPath = 'docs/Assets/Feats/Feats.csv';
             const csvText = await dv.io.load(csvPath);
             
             // Parse CSV handling multi-line fields

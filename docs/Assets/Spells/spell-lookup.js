@@ -21,7 +21,7 @@ class SpellLookup {
         if (typeof window.CommonLookupStyles === 'undefined') {
             // Load the common styles file using dataview
             try {
-                const commonStylesPath = 'Assets/common-lookup-styles.js';
+                const commonStylesPath = 'docs/Assets/common-lookup-styles.js';
                 const commonStylesCode = await dv.io.load(commonStylesPath);
                 // Execute the code to make CommonLookupStyles available
                 eval(commonStylesCode);
@@ -240,7 +240,7 @@ class SpellLookup {
 
         try {
             // Use Dataview's CSV loader
-            const csvPath = 'Assets/Spells/Spells.csv';
+            const csvPath = 'docs/Assets/Spells/Spells.csv';
             const data = await dv.io.csv(csvPath);
             
             // Convert DataArray to plain array of objects

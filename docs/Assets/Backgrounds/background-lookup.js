@@ -13,7 +13,7 @@ class BackgroundLookup {
         // Load common styles if not already available
         if (typeof window.CommonLookupStyles === 'undefined') {
             try {
-                const commonStylesPath = 'Assets/common-lookup-styles.js';
+                const commonStylesPath = 'docs/Assets/common-lookup-styles.js';
                 const commonStylesCode = await dv.io.load(commonStylesPath);
                 eval(commonStylesCode);
             } catch (error) {
@@ -157,7 +157,7 @@ class BackgroundLookup {
         this.isLoading = true;
 
         try {
-            const csvPath = 'Assets/Backgrounds/Backgrounds.csv';
+            const csvPath = 'docs/Assets/Backgrounds/Backgrounds.csv';
             const csvText = await dv.io.load(csvPath);
             
             // Parse CSV handling multi-line fields

@@ -22,7 +22,7 @@ class ItemLookup {
         // Load common styles if not already available
         if (typeof window.CommonLookupStyles === 'undefined') {
             try {
-                const commonStylesPath = 'Assets/common-lookup-styles.js';
+                const commonStylesPath = 'docs/Assets/common-lookup-styles.js';
                 const commonStylesCode = await dv.io.load(commonStylesPath);
                 eval(commonStylesCode);
             } catch (error) {
@@ -212,7 +212,7 @@ class ItemLookup {
 
         try {
             // Use Dataview's CSV loader
-            const csvPath = 'Assets/Items/Items.csv';
+            const csvPath = 'docs/Assets/Items/Items.csv';
             const data = await dv.io.csv(csvPath);
             
             // Convert DataArray to plain array of objects

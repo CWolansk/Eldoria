@@ -29,7 +29,7 @@ await CharacterSheetDisplay.display(dv, {
 
 ```dataviewjs
 const {ItemLookup} = await cJS()
-await ItemLookup.display(dv, ['Corpse Slayer Flamberge Bastard Sword', 'Sigil of Thunderous Might'])
+await ItemLookup.display(dv, ['Corpse Slayer Flamberge Bastard Sword', 'Greataxe', 'Sigil of Thunderous Might', 'Scourge Armblade','Chain Mail', 'Potion of healing', 'pipe of smoke monsters', 'Explorer\'s Pack', 'Grappling Hook', 'handaxe'])
 ```
 
 
@@ -38,13 +38,13 @@ await ItemLookup.display(dv, ['Corpse Slayer Flamberge Bastard Sword', 'Sigil of
 ## Background
 ```dataviewjs
 const {BackgroundLookup} = await cJS()
-await BackgroundLookup.display(dv, ['Acolyte'])
+await BackgroundLookup.display(dv, ['Archaeologist'])
 ```
 
 ## Feats
 ```dataviewjs
 const {FeatLookup} = await cJS()
-await FeatLookup.display(dv, ['Great Weapon Master'])
+await FeatLookup.display(dv, ['Great Weapon Master', 'Tough'])
 ```
 
 ## Race 
