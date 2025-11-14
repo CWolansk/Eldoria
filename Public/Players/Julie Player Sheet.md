@@ -8,20 +8,20 @@ await CharacterSheetDisplay.display(dv, {
   class: "Fighter",
   level: 5,
   race: "Human",
-  str: 8,
+  str: 18,
   dex: 14,
-  con: 12,
-  int: 18,
-  wis: 13,
-  cha: 10,
-  ac: 12,
+  con: 16,
+  int: 6,
+  wis: 11,
+  cha: 11,
+  ac: 17,
   speed: 30,
-  saves: ['int', 'wis'],
-  skills: ['arcana', 'history', 'investigation', 'perception'],
+  saves: ['str', 'con'],
+  skills: ['acrobatics', 'athletics', 'intimidation','perception', 'survival'],
   spellcasting: 'int',
   spellcasting: false,
   simpleWeapons: true,
-  martialWeapons: false
+  martialWeapons: true
 })
 ```
 
@@ -29,7 +29,7 @@ await CharacterSheetDisplay.display(dv, {
 
 ```dataviewjs
 const {ItemLookup} = await cJS()
-await ItemLookup.display(dv, ['Corpse Slayer Bastard Sword', 'Sigil of Thunderous Might'])
+await ItemLookup.display(dv, ['Corpse Slayer Flamberge Bastard Sword', 'Sigil of Thunderous Might'])
 ```
 
 

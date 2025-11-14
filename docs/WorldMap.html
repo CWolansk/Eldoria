@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eldoria World Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            width: 100vw;
+            height: 100vh;
+        }
+        #coordinate-display {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            z-index: 1000;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        #coordinate-display h4 {
+            margin: 0 0 5px 0;
+            font-size: 12px;
+            color: #666;
+        }
+        #coordinate-display .coords {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="coordinate-display">
+        <h4>Coordinates</h4>
+        <div class="coords" id="coords-output">Hover over map</div>
+    </div>
+    
+    <script>
+        // Initialize the map
+        const map = L.map('map', {
+            crs: L.CRS.Simple,
+            minZoom: -2,
+            maxZoom: 2
+        });
+
+        // Get image dimensions and set bounds
+        const img = new Image();
+        img.src = '../Assets/Eldoira.jpg';
+        
+        img.onload = function() {
+            const w = img.width;
+            const h = img.height;
+            
+            // Set bounds based on image dimensions
+            const bounds = [[0, 0], [h, w]];
+            
+            // Add the image overlay
+            L.imageOverlay('../Assets/Eldoira.jpg', bounds).addTo(map);
+            
+            // Set the view to the center of the image
+            map.fitBounds(bounds);
+            
+            // Add markers after the map is set up
+            addMarkers(h, w);
+            
+            // Add coordinate display on click
+            setupCoordinateDisplay(h, w);
+        };
+        
+        // Setup coordinate display when clicking on map
+        function setupCoordinateDisplay(height, width) {
+            map.on('mousemove', function(e) {
+                const y = e.latlng.lat;
+                const x = e.latlng.lng;
+                
+                // Convert to percentage coordinates
+                const yPercent = (y / height).toFixed(3);
+                const xPercent = (x / width).toFixed(3);
+                
+                // Display coordinates
+                document.getElementById('coords-output').innerHTML = 
+                    `[${yPercent}, ${xPercent}]`;
+            });
+        }
+        
+        // Define markers with locations and links to notes
+        function addMarkers(height, width) {
+            // Define your markers here
+            // Coordinates are [y, x] as percentages of image dimensions (0-1)
+            const markers = [
+                {
+                    name: "Highreach",
+                    position: [0.729, 0.171], 
+                    link: "DmNotes/03-WORLD-REFERENCE/World/example-city.md",
+                    description: "Highreach the Capital of the Human Kingdom"
+                },
+                {
+                    name: "Hillcrest",
+                    position: [0.623, 0.159],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                {
+                    name: "Ardenville",
+                    position: [0.790, 0.090],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                {
+                    name: "Fairfield",
+                    position: [0.780, 0.337],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                {
+                    name: "Stonehaven",
+                    position: [0.597, 0.288],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Lake Arden",
+                    position: [0.776, 0.165],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Blackwood Forest",
+                    position: [0.568, 0.382],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Starfall",
+                    position: [0.813, 0.420],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Stardew",
+                    position: [0.885, 0.391],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Frostglade",
+                    position: [0.845, 0.466],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Serenity Hollow",
+                    position: [0.824, 0.527],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Moonshade",
+                    position: [0.898, 0.566],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Ironroot",
+                    position: [0.708, 0.591],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Gemstone Hollow",
+                    position: [0.525, 0.466],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Forgepeak",
+                    position: [0.423, 0.226],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Steamhammer",
+                    position: [0.351, 0.320],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Stoneforge",
+                    position: [0.271, 0.242],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Ironpeak Mountain",
+                    position: [0.391, 0.188],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Cannibal Camp",
+                    position: [0.752, 0.633],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Witch's Bog",
+                    position: [0.439, 0.673],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Red Dune Desert",
+                    position: [0.235, 0.610],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                                {
+                    name: "Sand Dragon Valley",
+                    position: [0.430, 0.835],
+                    link: "DmNotes/02-ACTIVE-CONTENT/Encounters/example-dungeon.md",
+                    description: "An ancient dungeon"
+                },
+                // Add more markers here
+            ];
+            
+            // Create markers on the map
+            markers.forEach(marker => {
+                const y = marker.position[0] * height;
+                const x = marker.position[1] * width;
+                
+                const leafletMarker = L.marker([y, x]).addTo(map);
+                
+                // Create popup content with link
+                const popupContent = `
+                    <div>
+                        <h3>${marker.name}</h3>
+                        <p>${marker.description}</p>
+                        <a href="${marker.link}" target="_blank">View Notes</a>
+                    </div>
+                `;
+                
+                leafletMarker.bindPopup(popupContent);
+            });
+        }
+    </script>
+</body>
+</html>

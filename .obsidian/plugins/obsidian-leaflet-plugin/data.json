@@ -3,7 +3,7 @@
     {
       "id": "World-Map",
       "locked": true,
-      "lastAccessed": 1763040417887,
+      "lastAccessed": 1763117393004,
       "markers": [
         {
           "id": "ID_9859aa5af95a",
@@ -12,6 +12,7 @@
             -2.15234375,
             1.3828125
           ],
+          "link": "Highreach",
           "layer": "%5B%5Bdocs%2FDmNotes%2F01-CAMPAIGN-CORE%2FEldoira.jpg%5D%5D",
           "mutable": true,
           "command": false,
@@ -19,7 +20,7 @@
             0.1728515625,
             0.26904296875
           ],
-          "description": null,
+          "description": "Highreach Capital of the Human Kingdom",
           "minZoom": null,
           "maxZoom": null,
           "tooltip": "hover"
@@ -402,9 +403,7 @@
           "reversed": false
         }
       ],
-      "files": [
-        "Public/World Map.md"
-      ]
+      "files": []
     }
   ],
   "defaultMarker": {

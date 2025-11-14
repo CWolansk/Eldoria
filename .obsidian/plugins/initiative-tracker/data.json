@@ -2,7 +2,7 @@
   "players": [
     {
       "note": "JP Player Sheet",
-      "path": "PlayerNotes/Players/JP Player Sheet.md",
+      "path": "Public/Players/JP Player Sheet.md",
       "name": "JP",
       "player": true
     },
@@ -133,8 +133,8 @@
         "currentMaxHP": 50,
         "currentAC": 18,
         "note": "JP Player Sheet",
-        "path": "PlayerNotes/Players/JP Player Sheet.md",
-        "id": "ID_9bb9f83adbe8",
+        "path": "Public/Players/JP Player Sheet.md",
+        "id": "ID_785b0ab91bb8",
         "currentHP": 50,
         "tempHP": 0,
         "status": [],
@@ -155,7 +155,7 @@
         "currentAC": "20",
         "note": "Player Julie",
         "path": "PlayerNotes/Players/Player Julie.md",
-        "id": "ID_ca2a28a83b1b",
+        "id": "ID_ea3a194a388a",
         "currentHP": 75,
         "tempHP": 0,
         "status": [

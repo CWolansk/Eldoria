@@ -1,0 +1,38 @@
+<!-- Item Search Widget - Reusable Component -->
+<!-- Include this file in any page where you want an item search widget -->
+<!-- Usage: <link itemprop="include" href="Assets/item-search-widget.html"> -->
+
+<div class="item-search-widget-container">
+    <div class="item-search-widget" id="item-search-widget">
+        <div class="item-search-container">
+            <div class="item-search-input-wrapper">
+                <input 
+                    type="text" 
+                    class="item-search-input" 
+                    placeholder="Search for items (e.g., 'sword', 'potion', 'bag')..."
+                    id="item-search-widget-input"
+                />
+                <button 
+                    class="item-search-clear" 
+                    id="item-search-widget-clear"
+                    title="Clear search"
+                >×</button>
+                <button 
+                    class="item-search-button" 
+                    id="item-search-widget-button"
+                >Search</button>
+            </div>
+            <div class="item-search-info">
+                Loading item database...
+            </div>
+        </div>
+        <div class="item-search-results" id="item-search-widget-results"></div>
+    </div>
+</div>
+
+<!-- Load dependencies -->
+<script src="Assets/common-lookup-styles.js"></script>
+<script src="Assets/items/item-lookup.js"></script>
+<script src="Assets/items/item-search-widget.js"></script>
+<script src="Assets/item-search-loader.js"></script>
+

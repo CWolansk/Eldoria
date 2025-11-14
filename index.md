@@ -1,5 +1,3 @@
-[[World Map]] 
-
 Players
 - [[Claire Player Sheet]]
 - [[JP Player Sheet]]
@@ -16,4 +14,27 @@ Reference
 - [[Race Searcher]] 
 - [[Background Searcher]] 
 
-[5e Rules Compendium](./docs/5etools/5etools.html)
+<div id="local-links">
+<!-- Links will be injected here -->
+</div>
+
+<script>
+// Inject local links dynamically
+(function() {
+    const links = [
+        { name: "Compendium", href: "./5etools/5etools.html" },
+        { name: "World Map", href: "./WorldMap.html" },
+    ];
+
+    const container = document.getElementById('local-links');
+    if (container) {
+        const linkElements = links.map(link => 
+            `<a href="${link.href}" style="margin-right: 15px;">${link.name}</a>`
+        ).join(' | ');
+        
+        container.innerHTML = `<div style="padding: 10px 0;">${linkElements}</div>`;
+    }
+})();
+</script>
+
+
