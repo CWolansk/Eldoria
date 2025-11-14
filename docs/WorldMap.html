@@ -55,7 +55,7 @@
 
         // Get image dimensions and set bounds
         const img = new Image();
-        img.src = '../Assets/Eldoira.jpg';
+        img.src = './Assets/Eldoira.jpg';
         
         img.onload = function() {
             const w = img.width;
@@ -65,7 +65,7 @@
             const bounds = [[0, 0], [h, w]];
             
             // Add the image overlay
-            L.imageOverlay('../Assets/Eldoira.jpg', bounds).addTo(map);
+            L.imageOverlay('./Assets/Eldoira.jpg', bounds).addTo(map);
             
             // Set the view to the center of the image
             map.fitBounds(bounds);

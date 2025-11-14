@@ -10,7 +10,7 @@
     "postProcess": true,
     "displayProgress": true,
     "inlineHTML": true,
-    "exportPath": "C:\\Users\\caiwo\\source\\repos\\Eldoria\\docs",
+    "exportPath": "C:\\Users\\caiwo\\source\\repos\\Eldoria\\docs\\Public\\Players",
     "filesToExport": [
       "docs/Players",
       "docs/index.md"
@@ -216,7 +216,7 @@
     "faviconPath": "",
     "siteName": "Eldoria",
     "iconEmojiStyle": "Native",
-    "exportRoot": "",
+    "exportRoot": "Public/Players",
     "includePluginCss": [
       "statblock-stylesheet",
       "svelte-nmb05s",
