@@ -408,13 +408,16 @@
                 if (!this.csvData || !query) return [];
                 
                 const results = [];
+                const seen = new Set();
                 
                 for (const feat of this.csvData) {
                     if (!feat.Name) continue;
+                    if (seen.has(feat.Name)) continue;
                     
                     const score = this.fuzzyMatch(query, feat.Name);
                     if (score > 0) {
                         results.push({ feat, score });
+                        seen.add(feat.Name);
                     }
                 }
                 

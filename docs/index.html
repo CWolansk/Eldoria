@@ -36,7 +36,7 @@
         header h1 { font-size: 3rem; margin-bottom: 0.5rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); }
         header p { font-size: 1.2rem; opacity: 0.95; }
         .section-title { font-size: 2rem; margin: 2rem 0 1.5rem; color: var(--interactive-accent); border-bottom: 2px solid var(--background-modifier-border); padding-bottom: 0.5rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
         .card { background-color: var(--background-secondary); border: 1px solid var(--background-modifier-border); border-radius: 8px; padding: 1.5rem; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); }
         .card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); border-color: var(--interactive-accent); }
         .card h3 { font-size: 1.4rem; margin-bottom: 0.75rem; color: var(--text-normal); }
@@ -44,6 +44,11 @@
         .card a { display: inline-block; padding: 0.6rem 1.2rem; background-color: var(--interactive-accent); color: var(--text-on-accent); text-decoration: none; border-radius: 5px; font-weight: 500; transition: background-color 0.3s ease; }
         .card a:hover { background-color: var(--interactive-accent-hover); }
         .full-width-card { grid-column: 1 / -1; }
+        .player-list { background-color: var(--background-secondary); border: 1px solid var(--background-modifier-border); border-radius: 8px; padding: 1.5rem; list-style: none; }
+        .player-list li { padding: 0.5rem 1rem; margin-bottom: 0.25rem; background-color: var(--background-primary); border-radius: 5px; transition: all 0.3s ease; }
+        .player-list li:hover { transform: translateX(8px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .player-list a { color: var(--interactive-accent); text-decoration: none; font-size: 1rem; font-weight: 500; }
+        .player-list a:hover { color: var(--interactive-accent-hover); }
         footer { text-align: center; padding: 2rem; background-color: var(--background-secondary); border-top: 1px solid var(--background-modifier-border); color: var(--text-muted); margin-top: auto; }
         @media (max-width: 768px) { header h1 { font-size: 2rem; } header p { font-size: 1rem; } .section-title { font-size: 1.5rem; } .grid { grid-template-columns: 1fr; } }
     </style>
@@ -54,31 +59,34 @@
         <p>Your gateway to the world of Eldoria</p>
     </header>
     <div class="container">
-        <h2 class="section-title"> Character Creation Tools</h2>
+        <h2 class="section-title">Player Characters</h2>
+        <ul class="player-list">
+            <li><a href="Public/Players/Claire Player Sheet.html">Claire</a></li>
+            <li><a href="Public/Players/JP Player Sheet.html">JP</a></li>
+            <li><a href="Public/Players/Julie Player Sheet.html">Julie</a></li>
+            <li><a href="Public/Players/Justin Player Sheet.html">Justin</a></li>
+            <li><a href="Public/Players/Liz Player Sheet.html">Liz</a></li>
+            <li><a href="Public/Players/Randi Player Sheet.html">Randi</a></li>
+            <li><a href="Public/Players/Vanessa Player Sheet.html">Vanessa</a></li>
+        </ul>
+
+        <h2 class="section-title">World Information</h2>
         <div class="grid">
-            <div class="card"><h3> Backgrounds</h3><p>Search and explore character backgrounds to shape your hero's past.</p><a href="background-search.html">Search Backgrounds</a></div>
-            <div class="card"><h3> Races</h3><p>Discover the diverse races that inhabit the world of Eldoria.</p><a href="race-search.html">Search Races</a></div>
-            <div class="card"><h3> Feats</h3><p>Browse special abilities and feats to customize your character.</p><a href="feat-search.html">Search Feats</a></div>
+            <div class="card full-width-card"><h3>World Map</h3><p>Explore the interactive map of Eldoria and discover its locations, regions, and points of interest.</p><a href="WorldMap.html">View World Map</a></div>
         </div>
-        <h2 class="section-title"> Game Resources</h2>
+
+        <h2 class="section-title">Character Creation Tools</h2>
         <div class="grid">
-            <div class="card"><h3> Spells</h3><p>Comprehensive spell database with filters and detailed descriptions.</p><a href="spell-search.html">Search Spells</a></div>
-            <div class="card"><h3> Items</h3><p>Find weapons, armor, magical items, and adventuring gear.</p><a href="item-search.html">Search Items</a></div>
-            <div class="card"><h3> 5etools</h3><p>Access the complete 5etools reference library and tools.</p><a href="5etools/5etools.html">Open 5etools</a></div>
+            <div class="card"><h3>Backgrounds</h3><p>Search and explore character backgrounds to shape your hero's past.</p><a href="background-search.html">Search Backgrounds</a></div>
+            <div class="card"><h3>Races</h3><p>Discover the diverse races that inhabit the world of Eldoria.</p><a href="race-search.html">Search Races</a></div>
+            <div class="card"><h3>Feats</h3><p>Browse special abilities and feats to customize your character.</p><a href="feat-search.html">Search Feats</a></div>
         </div>
-        <h2 class="section-title"> Player Characters</h2>
+
+        <h2 class="section-title">Game Resources</h2>
         <div class="grid">
-            <div class="card"><h3>️ Claire</h3><p>View Claire's character sheet and details.</p><a href="Public/Players/Claire Player Sheet.html">View Sheet</a></div>
-            <div class="card"><h3>️ JP</h3><p>View JP's character sheet and details.</p><a href="Public/Players/JP Player Sheet.html">View Sheet</a></div>
-            <div class="card"><h3>️ Julie</h3><p>View Julie's character sheet and details.</p><a href="Public/Players/Julie Player Sheet.html">View Sheet</a></div>
-            <div class="card"><h3>️ Justin</h3><p>View Justin's character sheet and details.</p><a href="Public/Players/Justin Player Sheet.html">View Sheet</a></div>
-            <div class="card"><h3>️ Liz</h3><p>View Liz's character sheet and details.</p><a href="Public/Players/Liz Player Sheet.html">View Sheet</a></div>
-            <div class="card"><h3>️ Randi</h3><p>View Randi's character sheet and details.</p><a href="Public/Players/Randi Player Sheet.html">View Sheet</a></div>
-            <div class="card"><h3>️ Vanessa</h3><p>View Vanessa's character sheet and details.</p><a href="Public/Players/Vanessa Player Sheet.html">View Sheet</a></div>
-        </div>
-        <h2 class="section-title"> World Information</h2>
-        <div class="grid">
-            <div class="card full-width-card"><h3> World Map</h3><p>Explore the interactive map of Eldoria and discover its locations, regions, and points of interest.</p><a href="WorldMap.html">View World Map</a></div>
+            <div class="card"><h3>Spells</h3><p>Comprehensive spell database with filters and detailed descriptions.</p><a href="spell-search.html">Search Spells</a></div>
+            <div class="card"><h3>Items</h3><p>Find weapons, armor, magical items, and adventuring gear.</p><a href="item-search.html">Search Items</a></div>
+            <div class="card"><h3>5etools</h3><p>Access the complete 5etools reference library and tools.</p><a href="5etools/5etools.html">Open 5etools</a></div>
         </div>
     </div>
     <footer>
