@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Race Search - Eldoria</title>
+    <style>
+        :root {
+            --background-primary: #ffffff;
+            --background-secondary: #f5f5f5;
+            --background-modifier-border: #ddd;
+            --text-normal: #2e3338;
+            --text-muted: #6c757d;
+            --text-on-accent: #ffffff;
+            --interactive-accent: #7c3aed;
+            --font-text: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-primary: #1e1e1e;
+                --background-secondary: #2d2d30;
+                --background-modifier-border: #3e3e42;
+                --text-normal: #cccccc;
+                --text-muted: #999999;
+                --text-on-accent: #ffffff;
+                --interactive-accent: #8b5cf6;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-text);
+            background-color: var(--background-primary);
+            color: var(--text-normal);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--interactive-accent);
+            margin-bottom: 30px;
+        }
+
+        .race-search-widget {
+            font-family: var(--font-text);
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .race-search-container {
+            margin-bottom: 20px;
+        }
+
+        .race-search-input-wrapper {
+            position: relative;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .race-search-input {
+            flex: 1;
+            padding: 10px 40px 10px 15px;
+            font-size: 14px;
+            border: 1px solid var(--background-modifier-border);
+            border-radius: 4px;
+            background-color: var(--background-primary);
+            color: var(--text-normal);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .race-search-input:focus {
+            border-color: var(--interactive-accent);
+        }
+
+        .race-search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .race-search-clear {
+            position: absolute;
+            right: 130px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px 10px;
+            display: none;
+        }
+
+        .race-search-clear:hover {
+            color: var(--text-normal);
+        }
+
+        .race-search-clear.visible {
+            display: block;
+        }
+
+        .race-search-button {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: 1px solid var(--interactive-accent);
+            border-radius: 4px;
+            background-color: var(--interactive-accent);
+            color: var(--text-on-accent);
+            cursor: pointer;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+
+        .race-search-button:hover {
+            opacity: 0.8;
+        }
+
+        .race-search-button:active {
+            opacity: 0.6;
+        }
+
+        .race-search-info {
+            margin-top: 10px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .race-search-results {
+            margin-top: 20px;
+        }
+
+        .race-search-stats {
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            background-color: var(--background-secondary);
+            border-left: 3px solid var(--interactive-accent);
+            border-radius: 4px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .race-search-no-results {
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            background-color: var(--background-secondary);
+            border-radius: 4px;
+            border: 1px solid var(--background-modifier-border);
+        }
+
+        .race-search-loading {
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Race Card Styles */
+        .race-card {
+            background-color: var(--background-secondary);
+            border: 1px solid var(--background-modifier-border);
+            border-radius: 4px;
+            margin-bottom: 10px;
+            padding: 0;
+        }
+
+        .race-card summary {
+            cursor: pointer;
+            padding: 12px 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .race-card summary:hover {
+            background-color: var(--background-primary);
+        }
+
+        .race-name {
+            font-size: 16px;
+            color: var(--text-normal);
+        }
+
+        .race-size {
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-weight: 600;
+            background-color: var(--interactive-accent);
+            color: var(--text-on-accent);
+        }
+
+        .race-details {
+            padding: 15px;
+            border-top: 1px solid var(--background-modifier-border);
+        }
+
+        .detail-row {
+            margin-bottom: 8px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--interactive-accent);
+        }
+
+        .race-description {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--background-modifier-border);
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+        .error {
+            padding: 15px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>D&D Race Search</h1>
+        
+        <div class="race-search-widget" id="race-search">
+            <div class="race-search-container">
+                <div class="race-search-input-wrapper">
+                    <input 
+                        type="text" 
+                        class="race-search-input" 
+                        placeholder="Search for races (e.g., 'elf', 'dwarf', 'tiefling')..."
+                        id="search-input"
+                    />
+                    <button 
+                        class="race-search-clear" 
+                        id="clear-button"
+                        title="Clear search"
+                    >×</button>
+                    <button 
+                        class="race-search-button" 
+                        id="search-button"
+                    >Search</button>
+                </div>
+                <div class="race-search-info">
+                    <span id="race-count">Loading races...</span>
+                </div>
+            </div>
+            <div class="race-search-results" id="search-results"></div>
+        </div>
+    </div>
+
+    <script>
+        class RaceSearchWidget {
+            constructor() {
+                this.csvData = null;
+                this.isLoading = false;
+            }
+
+            parseCSVLine(line) {
+                const result = [];
+                let current = '';
+                let inQuotes = false;
+
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    if (char === '"') {
+                        if (inQuotes && line[i + 1] === '"') {
+                            current += '"';
+                            i++;
+                        } else {
+                            inQuotes = !inQuotes;
+                        }
+                    } else if (char === ',' && !inQuotes) {
+                        result.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                result.push(current.trim());
+                return result;
+            }
+
+            async loadCSVData() {
+                if (this.csvData) return this.csvData;
+                if (this.isLoading) return null;
+
+                this.isLoading = true;
+
+                try {
+                    const response = await fetch('../Assets/Races/Races.csv');
+                    const text = await response.text();
+                    const lines = text.split('\n').filter(line => line.trim());
+                    
+                    const headers = this.parseCSVLine(lines[0]);
+                    const data = [];
+
+                    for (let i = 1; i < lines.length; i++) {
+                        const values = this.parseCSVLine(lines[i]);
+                        const race = {};
+                        headers.forEach((header, index) => {
+                            race[header] = values[index] || '';
+                        });
+                        data.push(race);
+                    }
+
+                    this.csvData = data;
+                    this.isLoading = false;
+                    
+                    document.getElementById('race-count').textContent = 
+                        `Type to search through ${data.length} races. Supports fuzzy matching.`;
+                    
+                    return this.csvData;
+                } catch (error) {
+                    this.isLoading = false;
+                    console.error('Error loading Races.csv:', error);
+                    document.getElementById('race-count').textContent = 'Error loading races data.';
+                    throw error;
+                }
+            }
+
+            createRacesHTML(races) {
+                if (races.length === 0) {
+                    return '<div class="error">No races found. Check race names.</div>';
+                }
+
+                return races.map(race => {
+                    return `
+                        <details class="race-card">
+                            <summary class="race-name">
+                                ${race.Name}
+                                <span class="race-size">${race.Size || 'Medium'}</span>
+                            </summary>
+                            <div class="race-details">
+                                ${race.Source ? `<div class="detail-row"><span class="detail-label">Source:</span> ${race.Source} (pg. ${race.Page || 'N/A'})</div>` : ''}
+                                ${race['Ability Scores'] ? `<div class="detail-row"><span class="detail-label">Ability Scores:</span> ${race['Ability Scores']}</div>` : ''}
+                                ${race.Size ? `<div class="detail-row"><span class="detail-label">Size:</span> ${race.Size}</div>` : ''}
+                                ${race.Speed ? `<div class="detail-row"><span class="detail-label">Speed:</span> ${race.Speed}</div>` : ''}
+                                ${race.Description ? `<div class="race-description">${race.Description}</div>` : ''}
+                            </div>
+                        </details>
+                    `;
+                }).join('');
+            }
+
+            fuzzyMatch(searchTerm, raceName) {
+                const search = searchTerm.toLowerCase().trim();
+                const name = raceName.toLowerCase();
+                
+                if (name === search) return 1000;
+                if (name.startsWith(search)) return 500;
+                if (name.includes(search)) return 100;
+                
+                let searchIndex = 0;
+                let matchScore = 0;
+                let consecutiveMatches = 0;
+                
+                for (let i = 0; i < name.length && searchIndex < search.length; i++) {
+                    if (name[i] === search[searchIndex]) {
+                        searchIndex++;
+                        consecutiveMatches++;
+                        matchScore += consecutiveMatches * 2;
+                    } else {
+                        consecutiveMatches = 0;
+                    }
+                }
+                
+                if (searchIndex === search.length) {
+                    return matchScore;
+                }
+                
+                return 0;
+            }
+
+            searchRaces(query, maxResults = 50) {
+                if (!this.csvData || !query) return [];
+                
+                const results = [];
+                
+                for (const race of this.csvData) {
+                    if (!race.Name) continue;
+                    
+                    const score = this.fuzzyMatch(query, race.Name);
+                    if (score > 0) {
+                        results.push({ race, score });
+                    }
+                }
+                
+                results.sort((a, b) => {
+                    if (b.score !== a.score) {
+                        return b.score - a.score;
+                    }
+                    return a.race.Name.localeCompare(b.race.Name);
+                });
+                
+                return results.slice(0, maxResults).map(r => r.race);
+            }
+
+            async executeSearch(query) {
+                const resultsContainer = document.getElementById('search-results');
+                
+                if (!query || query.trim().length === 0) {
+                    resultsContainer.innerHTML = '';
+                    return;
+                }
+                
+                resultsContainer.innerHTML = '<div class="race-search-loading">Searching...</div>';
+                
+                await this.loadCSVData();
+                const results = this.searchRaces(query);
+                
+                if (results.length === 0) {
+                    resultsContainer.innerHTML = `
+                        <div class="race-search-no-results">
+                            No races found for "${query}". Try a different search term.
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const statsHTML = `
+                    <div class="race-search-stats">
+                        Found ${results.length} race${results.length === 1 ? '' : 's'} matching "${query}"
+                    </div>
+                `;
+                
+                const racesHTML = this.createRacesHTML(results);
+                resultsContainer.innerHTML = statsHTML + racesHTML;
+            }
+
+            setupEventListeners() {
+                const input = document.getElementById('search-input');
+                const button = document.getElementById('search-button');
+                const clear = document.getElementById('clear-button');
+                
+                button.addEventListener('click', () => {
+                    this.executeSearch(input.value);
+                });
+                
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.executeSearch(input.value);
+                    }
+                });
+                
+                input.addEventListener('input', () => {
+                    if (input.value.length > 0) {
+                        clear.classList.add('visible');
+                    } else {
+                        clear.classList.remove('visible');
+                    }
+                });
+                
+                clear.addEventListener('click', () => {
+                    input.value = '';
+                    clear.classList.remove('visible');
+                    document.getElementById('search-results').innerHTML = '';
+                    input.focus();
+                });
+                
+                input.focus();
+            }
+        }
+
+        // Initialize the widget when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const widget = new RaceSearchWidget();
+            widget.loadCSVData();
+            widget.setupEventListeners();
+        });
+    </script>
+</body>
+</html>

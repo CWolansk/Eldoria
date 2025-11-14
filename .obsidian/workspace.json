@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "bf60369b0fa683c2",
+        "id": "dd3339f5b2ea2829",
         "type": "tabs",
         "children": [
           {
-            "id": "5ceef876d1a94ca7",
+            "id": "788def0d44e1a14d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Public/Item Searcher.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Item Searcher"
+              "title": "New tab"
             }
           }
         ]
@@ -262,33 +258,33 @@
       "calendarium:Open Calendarium": false
     }
   },
-  "active": "5ceef876d1a94ca7",
+  "active": "788def0d44e1a14d",
   "lastOpenFiles": [
-    "docs/Assets/item-search-loader.js",
-    "docs/Assets/item-search-widget.html",
-    "docs/Public/item-searcher.html",
-    "docs/Assets/Spells/spell-lookup.js",
-    "docs/Assets/Spells/spell-search-widget.js",
-    "docs/Assets/Spells/Spells.csv",
-    "docs/Assets/Spells",
-    "docs/Assets/Races/race-search-widget.js",
-    "docs/Assets/Races/race-lookup.js",
-    "docs/Assets/Races/Races.csv",
-    "docs/Assets/Races",
+    "docs/index.html",
     "Public/Players/JP Player Sheet.md",
-    "docs/Assets/Eldoira.jpg",
+    "docs/Public/Players/JP Player Sheet.html",
     "Public/Players/Justin Player Sheet.md",
+    "docs/Public/Players/Justin Player Sheet.html",
     "Public/Players/Liz Player Sheet.md",
+    "docs/Public/Players/Liz Player Sheet.html",
     "Public/Players/Randi Player Sheet.md",
+    "docs/Public/Players/Randi Player Sheet.html",
     "Public/Players/Vanessa Player Sheet.md",
+    "docs/Public/Players/Vanessa Player Sheet.html",
     "Public/Players/Claire Player Sheet.md",
+    "docs/Public/Players/Claire Player Sheet.html",
     "Public/Feat Searcher.md",
+    "docs/Public/Feat Searcher.html",
     "Public/Race Searcher.md",
+    "docs/Public/Race Searcher.html",
     "Public/Spell Searcher.md",
-    "index.md",
+    "docs/Public/Spell Searcher.html",
     "Public/Players/Julie Player Sheet.md",
+    "docs/Public/Players/Julie Player Sheet.html",
     "Public/Background Searcher.md",
     "Public/Item Searcher.md",
+    "index.md",
+    "docs/Assets/Eldoira.jpg",
     "QUICK_REFERENCE.md",
     "ITEM_WIDGET_IMPLEMENTATION.md",
     "docs/site-lib/html/README.md",
