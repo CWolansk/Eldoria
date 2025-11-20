@@ -28,7 +28,7 @@ await CharacterSheetDisplay.display(dv, {
 
 ```dataviewjs
 const {ItemLookup} = await cJS()
-await ItemLookup.display(dv, ['Longsword', 'Bag of Holding', 'Ring of Protection'])
+await ItemLookup.display(dv, ['The Aegis Codex'])
 ```
 
 # Spells 
@@ -55,7 +55,7 @@ await FeatLookup.display(dv, ['Alert', 'Lucky', 'War Caster'])
 ## Race 
 ```dataviewjs
 const {RaceLookup} = await cJS()
-await RaceLookup.display(dv, ['Aasimar (MPMM)'])
+await RaceLookup.display(dv, ['Aarakocra'])
 ```
 
 ## Full Class Info

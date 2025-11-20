@@ -11,6 +11,18 @@
       "forceIframe": true,
       "customCss": "",
       "customJs": ""
+    },
+    {
+      "url": "https://docs.google.com/document/d/",
+      "displayName": "GoogleDocsPublicNote",
+      "icon": "",
+      "hideOnMobile": true,
+      "addRibbonIcon": false,
+      "openInCenter": false,
+      "zoomLevel": 1,
+      "forceIframe": false,
+      "customCss": "",
+      "customJs": ""
     }
   ],
   "padding": 5

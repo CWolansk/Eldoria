@@ -4,21 +4,25 @@
 ```dataviewjs
 const {CharacterSheetDisplay} = await cJS()
 await CharacterSheetDisplay.display(dv, {
-  name: "JP's Character",
-  class: "Wizard",
+  name: "Vanessa",
+  class: "Druid (Circle of the Land)",
   level: 5,
-  race: "Elf",
-  str: 8,
+  race: "Dragonborn",
+  background: "Hermit",
+  str: 13,
   dex: 14,
-  con: 12,
-  int: 18,
-  wis: 13,
-  cha: 10,
-  ac: 12,
+  con: 16,
+  int: 13,
+  wis: 17,
+  cha: 12,
+  ac: 15,
   speed: 30,
+  hp: 36,
+  hitDice: '5d8',
+  proficiencyBonus: 3,
   saves: ['int', 'wis'],
-  skills: ['arcana', 'history', 'investigation', 'perception'],
-  spellcasting: 'int',
+  skills: ['medicine', 'nature', 'religion', 'survival'],
+  spellcasting: 'wis',
   simpleWeapons: true,
   martialWeapons: false
 })
@@ -26,41 +30,55 @@ await CharacterSheetDisplay.display(dv, {
 
 ## Equipment
 
+
 ```dataviewjs
 const {ItemLookup} = await cJS()
-await ItemLookup.display(dv, ['Longsword', 'Bag of Holding', 'Ring of Protection'])
+await ItemLookup.display(dv, ['Talisman of Elemental Fury','Leather Armor', 'Wooden Shield', 'Scimitar', 'Shield',])
 ```
 
-# Spells 
+
+# Spells
+
+**Note** : Quick reference spells for druid go here. 
 ```dataviewjs
 const {SpellLookup} = await cJS()
-await SpellLookup.display(dv, ['Fireball'])
+await SpellLookup.display(dv, ['Poison Spray', 'Frostbite'])
 ```
 
 
 # Class Information 
 
 ## Background
+
 ```dataviewjs
 const {BackgroundLookup} = await cJS()
-await BackgroundLookup.display(dv, ['Acolyte'])
+await BackgroundLookup.display(dv, ['Hermit'])
 ```
 
 ## Feats
+**Note** : feats are optional but you have one available  
 ```dataviewjs
 const {FeatLookup} = await cJS()
-await FeatLookup.display(dv, ['Alert', 'Lucky', 'War Caster'])
+await FeatLookup.display(dv, [])
 ```
+## Race
 
-## Race 
 ```dataviewjs
 const {RaceLookup} = await cJS()
-await RaceLookup.display(dv, ['Aasimar (MPMM)'])
+await RaceLookup.display(dv, ['Dragonborn'])
+```
+
+## Notes
+
+```custom-frames
+frame: GoogleDocsPublicNote
+style: height: 1000px;
+urlSuffix: 1Xxsd_a2ZQH6FLifWIp1tSQ1UKWyRgIJ1LHtbdl6O-5c/edit?tab=t.0
 ```
 
 ## Full Class Info
 ```custom-frames
 frame: 5etoolsClass
 style: height: 1000px;
-urlSuffix: #wizard_phb,state:sub_abjuration_phb=b1
+urlSuffix: #druid_phb,state:sub_land_phb=b1
 ```
