@@ -69,12 +69,11 @@ await RaceLookup.display(dv, ['Dragonborn'])
 ```
 
 ## Notes
-
 ```custom-frames
-frame: GoogleDocsPublicNote
+frame: VanessaNotes
 style: height: 1000px;
-urlSuffix: 1Xxsd_a2ZQH6FLifWIp1tSQ1UKWyRgIJ1LHtbdl6O-5c/edit?tab=t.0
 ```
+
 
 ## Full Class Info
 ```custom-frames

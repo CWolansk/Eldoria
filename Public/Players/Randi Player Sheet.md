@@ -58,6 +58,12 @@ const {RaceLookup} = await cJS()
 await RaceLookup.display(dv, ['Aarakocra'])
 ```
 
+## Notes
+```custom-frames
+frame: RandiNotes
+style: height: 1000px;
+```
+
 ## Full Class Info
 ```custom-frames
 frame: 5etoolsClass

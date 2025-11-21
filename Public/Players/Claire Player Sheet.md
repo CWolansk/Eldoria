@@ -58,6 +58,12 @@ const {RaceLookup} = await cJS()
 await RaceLookup.display(dv, ['Genasi (Water)'])
 ```
 
+## Notes
+```custom-frames
+frame: ClaireNotes
+style: height: 1000px;
+```
+
 ## Full Class Info
 ```custom-frames
 frame: 5etoolsClass

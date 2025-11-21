@@ -67,6 +67,12 @@ const {RaceLookup} = await cJS()
 await RaceLookup.display(dv, ['Human'])
 ```
 
+## Notes
+```custom-frames
+frame: JustinNotes
+style: height: 1000px;
+```
+
 ## Full Class Info
 ```custom-frames
 frame: 5etoolsClass
