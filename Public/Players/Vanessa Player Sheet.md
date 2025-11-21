@@ -71,7 +71,7 @@ await RaceLookup.display(dv, ['Dragonborn'])
 ## Notes
 ```custom-frames
 frame: VanessaNotes
-style: height: 1000px;
+style: height: 1000px; -webkit-overflow-scrolling: touch;
 ```
 
 
