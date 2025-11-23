@@ -15,7 +15,7 @@ Guild Rank : `VIEW[{frontmatter^Player Controls#GuildRank}]`
 
 ## Magic Items
 - [[Amulet of Divine Retribution]] - E-Rank reward
-- [[+1 Warhammer]] - Gift from [[Alaric Emberfell]] 
+- [[+1 Warhammer]] - Gift from [[Private/2. Reference/NPCs/All NPCS/Alaric Emberfell]] 
 - [[Spell Scroll (1st Level)]] - [[Burning Hands]]  : Found in [[Room 3 Level 1]] 
 - Lightning Rod
 - [[Warhammer of Warning]] belonging to [[Oren Hammerfist]] 

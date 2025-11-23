@@ -1,5 +1,5 @@
 #HighReach #AdventuringShop
-Owned by [[Felix Tradewind]]
+Owned by [[Private/2. Reference/NPCs/All NPCS/Felix Tradewind]]
 General Items : [[Quick Links#^5f210f]]
 Adventuring Gear : [[Quick Links#^fc456a]]
 

@@ -1,6 +1,6 @@
 #Blacksmith #HighReach 
 
-[[Alaric Emberfell]]
+[[Private/2. Reference/NPCs/All NPCS/Alaric Emberfell]]
 
 [[Quick Links#^59cd85]]
 [[Quick Links#^4193a6]]

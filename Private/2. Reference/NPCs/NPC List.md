@@ -13,7 +13,7 @@
 | [[Professor Zephyr Windwhisper]]       | #HighReach #WizardsTower      | #Professor Conjuration                                                 | Yes                            |
 | [[Samantha Clerkson]]                  | #HighReach #WizardsTower      | #Receptionist                                                          | Yes                            |
 | [[Lady Elara Moonshadow]]              | #HighReach #TheArcaneEnclave  | #Shopkeep #HighMage #Merchant #KeeperOfArcaneKnowledge #Council_Member | Yes                            |
-| [[Felix Tradewind]]                    | #HighReach #TargetByTradewind | #Shopkeep #Merchant                                                    | Yes                            |
+| [[Private/2. Reference/NPCs/All NPCS/Felix Tradewind]]                    | #HighReach #TargetByTradewind | #Shopkeep #Merchant                                                    | Yes                            |
 | [[Rolf Stonetooth]]                    | #HighReach #SturdyMuggPatron  | #Adventurer - #Thenightstalkers #SturdyMuggPatron                      | No - Killed in highreach mines |
 | [[Aidan Reed]]                         | #HighReach #SturdyMugg        | #Barkeep                                                               | Yes                            |
 | [[Kara Stonefoot]]                     | #HighReach #SturdyMugg        | #Innkeeper                                                             | Yes                            |
@@ -31,14 +31,14 @@
 | [[Kara Nightshade]]                    | #HighReach #AdventurersGuild  | #Adventurer #Rogue                                                     | Yes                            |
 | [[Lyra Dawnbringer]]                   | #HighReach #AdventurersGuild  | #Adventurer #Cleric                                                    | Yes                            |
 | [[Nyla Windrider]]                     | #HighReach #AdventurersGuild  | #Adventurer #Ranger                                                    | Yes                            |
-| [[Thaldrin Stormblade]]                | #HighReach #AdventurersGuild  | #Adventurer #Fighter #Guildmaster                                      | Yes                            |
+| [[Private/2. Reference/NPCs/All NPCS/Thaldrin Stormblade]]                | #HighReach #AdventurersGuild  | #Adventurer #Fighter #Guildmaster                                      | Yes                            |
 | [[Dame Isolde Swiftwind]]              | #HighReach                    | #Council_Member #Ambassador #ChiefDiplomat                             | Yes                            |
 | [[Jarek IronFist]]                     | #HighReach                    | #Mercenary #Adventurer                                                 | Yes                            |
 | [[King Alaric Stormhelm]]              | #HighReach                    | #King #Council_Member                                                  | Yes                            |
 | [[Lord Cedric Brightblade]]            | #HighReach                    | #Council_Member #MasterOfArms #HighreachArmyCommander                  | Yes                            |
 | [[Sir Gareth Strongshield]]            | #HighReach                    | #Council_Member #ChiefTownGuard                                        | Yes                            |
 | [[Sir Tristan Oakheart]]               | #HighReach                    | #StewardOfFinances #Council_Member                                     | Yes                            |
-| [[Alaric Emberfell]]                   | #HighReach                    | #Blacksmith #Merchant                                                  | Yes                            |
+| [[Private/2. Reference/NPCs/All NPCS/Alaric Emberfell]]                   | #HighReach                    | #Blacksmith #Merchant                                                  | Yes                            |
 | [[Alma Ironfist nee Brightwater]]      | #HighReach #SturdyMugg        | #SturdyMuggPatron  #Thenightstalkers                                   | Yes                            |
 | [[Brenna Barkridge nee Ironfoot]]      | #HighReach #SturdyMugg        | #SturdyMuggPatron  #Thenightstalkers                                   | Yes                            |
 | [[Brom Goldfang]]                      | #HighReach #GoldfangWeapons   | #Merchant                                                              | Yes                            |

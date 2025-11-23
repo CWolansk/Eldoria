@@ -15,7 +15,7 @@ Guild Rank : `VIEW[{frontmatter^Player Controls#GuildRank}]`
 
 ## Magic Items
 - [[Gauntlets of Whirling Strikes]] - E-Rank reward
-- [[+1 Quarterstaff]] - Gift from [[Alaric Emberfell]]
+- [[+1 Quarterstaff]] - Gift from [[Private/2. Reference/NPCs/All NPCS/Alaric Emberfell]]
 - [[Mantle of the Lightbender]] belonging to [[Rolf Stonetooth]] 
 
 ## Other Items

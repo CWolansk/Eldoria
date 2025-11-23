@@ -16,7 +16,7 @@ Veteran warrior known for his tactical acumen and bravery in combat.
 
 ## Background
 
-A veteran warrior and brother to [[Thaldrin Stormblade]]. Aric is respected for his strategic mind and combat skills.
+A veteran warrior and brother to [[Private/2. Reference/NPCs/All NPCS/Thaldrin Stormblade]]. Aric is respected for his strategic mind and combat skills.
 
 Member of the [[Highreach Adventurers Guild]].
 
@@ -25,7 +25,7 @@ Member of the [[Highreach Adventurers Guild]].
 
 ## Relationships
 
-- **Brother**: [[Thaldrin Stormblade]]
+- **Brother**: [[Private/2. Reference/NPCs/All NPCS/Thaldrin Stormblade]]
 
 ---
 

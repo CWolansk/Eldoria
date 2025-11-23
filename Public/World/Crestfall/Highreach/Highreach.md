@@ -1,44 +1,62 @@
-# Highreach
 
-**Capital of the Kingdom of Crestfall**
 
----
+>[!Basic Information|info]
+>**Capital of the Kingdom of Crestfall**
+>- **Location:** Atop a natural plateau with steep cliffs on three sides  
+>- **Government:** Monarchy  
+>- **Population:** 10,000+ 
+>- **Defenses:** Stone walls, natural cliffs, regular guard patrols  
+>
+>Banner
+> - A deep burgundy background with a Raised silver fist and a gold crown hovering above
+As you pass through the massive, ornately decorated gates set into the thick stone walls, you are immediately greeted by the vibrant hustle and bustle of the city's main thoroughfare.
 
-## Basic Information
+```
+The street is lined with a variety of shops and stalls, each showcasing their wares with colorful banners and signs. Merchants call out to passersby, extolling the virtues of their goods, from fresh produce and fine fabrics to intricate jewelry and enchanted trinkets. The air is filled with a symphony of sounds: the clanging of a blacksmith's hammer, the chatter of townsfolk, and the occasional melody from a street musician.
 
-**Type:** Capital City  
-**Location:** Atop a natural plateau with steep cliffs on three sides  
-**Government:** Monarchy  
-**Population:** Several thousand (estimated)  
-**Defenses:** Stone walls, natural cliffs, regular guard patrols  
+To your left, you notice a large building with a Red Target symbol placed on a banner out front, with adventuring gear set outside and a large open double door On your right, the scent of freshly baked bread and pastries wafts from a bakery, tempting you to stop for a treat.
 
-### Kingdom Banner
+As you continue along the main road, you see the imposing figure of the castle in the distance, perched atop the central plateau and dominating the skyline.
 
-- Raised silver/steel gray fist with gold crown hovering above
-- Burgundy or deep navy background
-- Represents power resting in those who serve the crown
+Further down the road, you come across the bustling blacksmith district. The rhythmic pounding of hammers on anvils echoes through the streets. Intricate metalwork and beautifully crafted pieces on display. Nearby another smithy is abuzz with activity, and you can see apprentices hard at work under the watchful eye of a master blacksmith.
 
----
+The streets are alive with activity, and you notice the presence of diligent guards patrolling the area, ensuring the safety and order of the city. These guards are well-equipped and alert, a testament to the city's commitment to security.
+
+As you near the central plaza, a grandiose building comes into view. This impressive structure exudes an aura of authority and respect. A handful of adventurers seems to be coming in and out of the building at a steady pace.
+```
 
 ## Layout
 
 City built on plateau with three-sided natural cliff defenses. Main gates lead to central thoroughfare. Royal castle positioned at highest point, visible throughout city. Streets organized into distinct districts with regular guard presence.
 
 **Key Areas:**
-- Main gates (primary entry)
-- Merchant District (main thoroughfare)
-- Blacksmith District 
+* Castle 
+	* Towering above all else, the castle can be seen above the city walls as you approach the city. 
+		* [[Public/World/Crestfall/Highreach/NPCs/King Alaric Stormhelm|King Alaric Stormhelm]] 
+- Main Thoroughfare 
+	- Contains many merchant stalls and blacksmithing shops
+	- Leads into the central plaza 
+		- [[Public/World/Crestfall/Highreach/Sturdy Mugg|Sturdy Mugg]]
 - Central Plaza (location of Adventurers Guild)
+	- A large open area in the middle of the city where all of the major shops and guild head quarters are. The castle looms overhead to the north. 
+		- [[Public/World/Crestfall/Highreach/Highreach Adventurers Guild|Highreach Adventurers Guild]] 
+		- [[Public/World/Crestfall/Highreach/HighReach Merchants Guild|HighReach Merchants Guild]] 
+- Rich Area 
+	- Located directly west of the castle the cities wealthiest merchants and political party members reside here 
+	- Notable People 
+		- [[Public/World/Crestfall/Highreach/NPCs/Alistair Goldman|Alistair Goldman]] 
+- Wizards Tower and Campus 
+	- Located directly east of the castle. Magic users come from the entire continent to study at the feet of the most knowledgeable wizards.
+		- 
 
 ---
 
 ## Establishments & Services
 
-### The Sturdy Mugg
+### [[Public/World/Crestfall/Highreach/Sturdy Mugg|Sturdy Mugg]]
 **Type:** Inn & Tavern  
-**Location:** Edge of town  
-**Proprietor:** Kara Stonefoot (female, no-nonsense innkeeper)  
-**Staff:** Aidan Reed (barkeep - large man with bushy beard, jovial)
+**Owner:** [[Public/World/Crestfall/Highreach/NPCs/Kara Stonefoot|Kara Stonefoot]]
+**Staff:** [[Public/World/Crestfall/Highreach/NPCs/Aidan Reed|Aidan Reed]]
 
 **Structure:** Dark oak beams with stone reinforcement  
 **Features:** Common room with tables, hearth, small stage for entertainment, posted rule "Break a chair, buy a chair!"  
@@ -46,10 +64,9 @@ City built on plateau with three-sided natural cliff defenses. Main gates lead t
 
 ---
 
-### Target by Tradewind
+### [[Public/World/Crestfall/Highreach/Target by Tradewind|Target by Tradewind]]
 **Type:** Adventuring Supply Shop  
-**Location:** Main thoroughfare  
-**Identifier:** Red target symbol on banner
+**Owner** : [[Public/World/Crestfall/Highreach/NPCs/Felix Tradewind|Felix Tradewind]]
 
 **Goods Available:**
 - Basic camping gear (tents, rations, water flasks)
@@ -57,13 +74,11 @@ City built on plateau with three-sided natural cliff defenses. Main gates lead t
 - Supplies (lanterns, chalk, rope, signal whistles)
 - Various trinkets and specialty items
 
-**Note:** Each item labeled with handwritten descriptions
-
 ---
 
-### The Arcane Enclave
+### [[Public/World/Crestfall/Highreach/The Arcane Enclave|The Arcane Enclave]]
 **Type:** Magic Shop  
-**Location:** [District unspecified]
+**Owner** : ???
 
 **Inventory:**
 - Magical tomes and scrolls
@@ -75,19 +90,18 @@ City built on plateau with three-sided natural cliff defenses. Main gates lead t
 
 ---
 
-### The Dragon's Breath Forge
-**Type:** Blacksmith (Master-level)  
-**Location:** Blacksmith District
+### [[Public/World/Crestfall/Highreach/The Dragons Breath Forge|The Dragons Breath Forge]] 
+**Type:** Blacksmith   
+**Owner** : [[Public/World/Crestfall/Highreach/NPCs/Alaric Emberfell|Alaric Emberfell]] 
 
-**Specialty:** High-quality weapons and armor, occasional legendary items  
-**Features:** Intricate metalwork facade depicting battles, enchanted tools, continuously burning furnace  
-**Known For:** Superior craftsmanship
+**Inventory** : 
+- Rare and high level magical weapons and armor
 
 ---
 
-### Highreach Adventurers Guild
+### [[Public/World/Crestfall/Highreach/Highreach Adventurers Guild|Highreach Adventurers Guild]] 
 **Type:** Guild Headquarters  
-**Location:** Central Plaza
+**GuildMaster** : [[Public/World/Crestfall/Highreach/NPCs/Thaldrin Stormblade|Thaldrin Stormblade]]
 
 **Exterior:** Two warrior statues flanking entrance, iron-banded doors with Crestfall crest (shield with roaring lion and crossed swords), stained glass window of kingdom heroes
 
@@ -98,16 +112,16 @@ City built on plateau with three-sided natural cliff defenses. Main gates lead t
 - Non-denominational chapel with healing services
 
 **Guild Church Services:**
-- Priest: Father Eldon Lightbringer (male, late 50s, gray hair/beard, robes in brown/gold, Pelor worshipper)
+- Priest: [[Public/World/Crestfall/Highreach/NPCs/Father Eldon Lightbringer|Father Eldon Lightbringer]]
 - Healing chamber with restorations and medical care
 - Chapel features inscribed maxims on courage, compassion, fellowship
 
 ---
 
-### Highreach Merchants Guild
-**Type:** Guild Headquarters  
-**Location:** Merchant District (quiet street)  
-**Guildmaster:** Alistair Goldman (male, early 50s, graying hair, sharp blue eyes, formal demeanor)
+### [[Public/World/Crestfall/Highreach/HighReach Merchants Guild|HighReach Merchants Guild]]
+**Type:** Guild Headquarters 
+**Guildmaster:** [[Public/World/Crestfall/Highreach/NPCs/Alistair Goldman|Alistair Goldman]] 
+**Staff** : 
 
 **Building:** Two-story stone construction with dark wood trim, brass door handles  
 **Emblem:** Scales overlaid with crossed keys  
@@ -115,95 +129,11 @@ City built on plateau with three-sided natural cliff defenses. Main gates lead t
 
 ---
 
-## Notable NPCs
+## Reference
 
-| Name | Role | Description |
-|------|------|-------------|
-| Kara Stonefoot | Innkeeper (Sturdy Mugg) | Female, no-nonsense management style |
-| Aidan Reed | Barkeep (Sturdy Mugg) | Male, large build, bushy beard, friendly |
-| Father Eldon Lightbringer | Priest (Guild Chapel) | Male, late 50s, gray hair/beard, Pelor devotee |
-| Alistair Goldman | Guildmaster (Merchants) | Male, early 50s, wiry, graying hair, formal |
+### Known Establishments in Highreach
+```dataview
+LIST WHERE file.folder = this.file.folder
+```
 
----
-
-## Access & Security
-
-**Gates:** Main gates open during daylight; smaller gates for authorized night entry  
-**Guard Presence:** Regular patrols throughout all districts  
-**Guard Quality:** Well-trained and equipped
-
----
-
-## Complete Reference
-
-### Establishments
-- Highreach Adventurers Guild
-- Highreach Merchants Guild
-- Highreach Mines
-- Sturdy Mugg (Inn & Tavern)
-- Target by Tradewind (Adventuring Shop)
-- The Arcane Enclave (Magic Shop)
-- The Dragon's Breath Forge (Blacksmith)
-
-### Known Residents & NPCs
-
-**Guild & Religious Leadership:**
-- Alistair Goldman - Guildmaster, Merchants Guild
-- Father Eldon Lightbringer - Priest, Guild Chapel
-
-**Business Owners & Staff:**
-- Aidan Reed - Barkeep, Sturdy Mugg
-- Kara Stonefoot - Innkeeper, Sturdy Mugg
-
-**Nobility & Knights:**
-- King Alaric Stormhelm
-- Lord Cedric Brightblade
-- Lord Frederick Goldman
-- Lady Elara Moonshadow
-- Lady Millicent Goldleaf
-- Dame Isolde Swiftwind
-- Sir Gareth Strongshield
-- Sir Tristan Oakheart
-
-**Academics (Professors):**
-- Professor Astrid Starcaller
-- Professor Elara Nightveil
-- Professor Galen Thornbrew
-- Professor Mordecai Runeweaver
-- Professor Seraphine Duskwillow
-- Professor Thaldris Flamehand
-
-**Craftspeople & Artisans:**
-- Alma Ironfist (nee Brightwater)
-- Brenna Barkridge (nee Ironfoot)
-- Brix Ironwhistle
-- Celeste Stonetooth (nee Moonwhisper)
-- Fiona Hammerfist (nee Thistledown)
-- Gareth Ironbrow
-- Garrick Ironbrow
-- Oren Hammerfist
-- Rolf Stonetooth
-- Thoren Ironfist
-- Tomlin Barkridge
-
-**Other Notable Residents:**
-- Alistair Grimwood
-- Beatrix Goldleaf
-- Brom Goldfang
-- Don Gnocianno
-- Dr. Brule the Mule
-- Elder Rowan
-- Ingrid Hightower
-- Nimble Nackfinger
-- Pip Whiskerwind
-- Ratcatcher Vex
-- Salty Pete
-- Samantha Clerkson
-- Squeak Tinkerbottom
-
-### Locations of Interest
-- Highreach Mines (Multi-level mining operation)
-- Royal Castle (Central plateau, highest point)
-- Merchant District
-- Blacksmith District
-- Central Plaza
+### [[Highreach NPC Index]] 

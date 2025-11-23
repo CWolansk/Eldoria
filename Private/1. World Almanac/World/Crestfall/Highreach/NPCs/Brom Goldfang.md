@@ -19,7 +19,7 @@ A halfing wearing a smart blue jacket and brown trousers, with longish blonde cu
 
 ## Notes
 
-A small time weapons seller, you can get almost any weapon from GoldFang Weapons, but he is being edged out of competition by [[Felix Tradewind]], since he can't compete with the amount of inventory and prices that Felix seems to be able to be able to bring in. Brom is setting out for [[Fairfield]] the trade capital of the country to meet up with his cousin who owns a successful general store to help him out and expand the business.
+A small time weapons seller, you can get almost any weapon from GoldFang Weapons, but he is being edged out of competition by [[Private/2. Reference/NPCs/All NPCS/Felix Tradewind]], since he can't compete with the amount of inventory and prices that Felix seems to be able to be able to bring in. Brom is setting out for [[Fairfield]] the trade capital of the country to meet up with his cousin who owns a successful general store to help him out and expand the business.
 
 ## Relationships
 

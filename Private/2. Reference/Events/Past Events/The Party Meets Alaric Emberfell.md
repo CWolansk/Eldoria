@@ -10,7 +10,7 @@ The party can get +1 to their weapons or change the damage type
 
 
 - Session 7 Notes  ^0578e3
-	- The party meets [[Alaric Emberfell]] 
+	- The party meets [[Private/2. Reference/NPCs/All NPCS/Alaric Emberfell]] 
 	- As a trade the party gave away 
 		- Claires Dwarven Mining Pick 
 		- [[+1 Warhammer]] 
@@ -26,4 +26,4 @@ SORT file.name ASC
 ```
 
 
-[[Alaric Emberfell]] 
+[[Private/2. Reference/NPCs/All NPCS/Alaric Emberfell]] 

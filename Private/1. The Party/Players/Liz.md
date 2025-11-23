@@ -17,7 +17,7 @@ Guild Rank : `VIEW[{frontmatter^Player Controls#GuildRank}]`
 - [[Daern's Instant Fortress]] - Reward from [[Lost Pet]] quest, given by Esmerelda, a retired adventurer  
 - [[Boots of Striding and Springing]] -  Found in [[Room 2 Level 1]]
 - [[Longbow]]
-	- Radiant damage longbow - Gift from [[Alaric Emberfell]]
+	- Radiant damage longbow - Gift from [[Private/2. Reference/NPCs/All NPCS/Alaric Emberfell]]
 
 ## Other Items
 - Acid Eaten Bracers and breastplate from [[Oren Hammerfist]] 

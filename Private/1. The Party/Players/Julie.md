@@ -13,7 +13,7 @@ Guild Rank : `VIEW[{frontmatter^Player Controls#GuildRank}]`
 
 ## Magic Items
 - [[Sigil of Thunderous Might]] - E-Rank reward
-- [[+1 Greatsword]] - Gift from [[Alaric Emberfell]]
+- [[+1 Greatsword]] - Gift from [[Private/2. Reference/NPCs/All NPCS/Alaric Emberfell]]
 
 ## Other Items
 - _None listed_
