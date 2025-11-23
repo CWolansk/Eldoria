@@ -1,5 +1,7 @@
 {
   "enabledCssSnippets": [
-    "float-callouts"
-  ]
+    "float-callouts",
+    "lineWidthoverrides"
+  ],
+  "cssTheme": "Minimal"
 }
