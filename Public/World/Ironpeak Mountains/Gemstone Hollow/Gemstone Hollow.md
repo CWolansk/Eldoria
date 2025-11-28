@@ -1,51 +1,46 @@
 >[!Basic Information|info]
->**[City Title/Description]**
->- **Location:** [Location description]  
->- **Government:** [Government type]  
->- **Population:** [Population]  
->- **Defenses:** [Defense description]  
+>**Dwarven Town in Ironpeak Mountains**
+>- **Location:** [Location description]
+>- **Government:** Clan Council
+>- **Population:** ~[Number]
+>- **Defenses:** [Description]
 >
 >Banner
-> - [Banner description]
-
-[Opening description/flavor text]
-
-```
-[Detailed arrival/description text]
-```
-
-## Layout
-
-[General layout description]
-
-**Key Areas:**
-* [Area 1]
-	* [Description]
-		* [[Link to relevant page]]
-- [Area 2]
-	- [Description]
-		- [[Link to relevant page]]
-
----
-
-## Establishments & Services
-
-### [[Link|Display Name]]
-**Type:** [Type]  
-**Owner:** [[Link to NPC]]
-**Staff:** [[Link to NPC]]
-
-**[Category]:**
-- [Item/Feature 1]
-- [Item/Feature 2]
-
----
-
-## Reference
-
-### Known Establishments in [City Name]
-```dataview
-LIST WHERE file.folder = this.file.folder
-```
-
-### [[City Name NPC Index]]
+> - [Description]
+>
+>```
+>[2-6 sentence read-aloud description of the town, second-person present tense, focusing on what makes it unique and memorable. Include sensory details - what visitors see, hear, smell as they approach.]
+>```
+>
+>## Layout
+>
+>[Brief description of how the town is organized physically. For dwarven settlements, describe levels/chambers. Include 2-4 key areas.]
+>
+>**Key Areas:**
+>- [Area Name]
+>	- [Description]
+>		- [[Link to Establishment|Establishment Name]] (if applicable)
+>- [Area Name]
+>	- [Description]
+>- [Area Name]
+>	- [Description]
+>
+>---
+>
+>## Establishments & Services
+>
+>### [[Link to Establishment|Establishment Name]]
+>**Type:** [Type]
+>**Owner:** TBD
+>
+>**Building:** [Physical description]
+>**Services:** [What they offer]
+>
+>---
+>
+>## Reference
+>
+>### Known Establishments in [Town Name]
+>```dataview
+>LIST WHERE file.folder = this.file.folder
+>```

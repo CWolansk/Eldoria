@@ -1,51 +1,40 @@
 >[!Basic Information|info]
->**[City Title/Description]**
->- **Location:** [Location description]  
->- **Government:** [Government type]  
->- **Population:** [Population]  
->- **Defenses:** [Defense description]  
+>**Elven Village in the Silverleaf Lands**
+>- **Location:** [Location in peaceful forest glade]  
+>- **Government:** Village Elder & Druid Circle
+>- **Population:** ~[Number]
+>- **Defenses:** Natural wards, harmony with forest creatures
 >
 >Banner
-> - [Banner description]
-
-[Opening description/flavor text]
-
-```
-[Detailed arrival/description text]
-```
-
-## Layout
-
-[General layout description]
-
-**Key Areas:**
-* [Area 1]
-	* [Description]
-		* [[Link to relevant page]]
-- [Area 2]
-	- [Description]
-		- [[Link to relevant page]]
-
----
-
-## Establishments & Services
-
-### [[Link|Display Name]]
-**Type:** [Type]  
-**Owner:** [[Link to NPC]]
-**Staff:** [[Link to NPC]]
-
-**[Category]:**
-- [Item/Feature 1]
-- [Item/Feature 2]
-
----
-
-## Reference
-
-### Known Establishments in [City Name]
-```dataview
-LIST WHERE file.folder = this.file.folder
-```
-
-### [[City Name NPC Index]]
+> - [Description]
+>
+>```
+>[2-6 sentence read-aloud description of Serenity Hollow, second-person present tense. Focus on peaceful atmosphere, healing properties, meditation groves, tranquil springs. Include sensory details - gentle bird song, soft moss, crystal-clear water, flower scents.]
+>```
+>
+>## Layout
+>
+>[Brief description of how the village is organized. Emphasize peaceful clearings, healing gardens, meditation spaces, natural harmony.]
+>
+>**Key Areas:**
+>- [Area Name]
+>	- [Description]
+>- [Area Name]
+>	- [Description]
+>- [Area Name]
+>	- [Description]
+>
+>---
+>
+>## Establishments & Services
+>
+>(To be developed - might include healing sanctuaries, meditation retreats, herbalist groves)
+>
+>---
+>
+>## Reference
+>
+>### Known Establishments in Serenity Hollow
+>```dataview
+>LIST WHERE file.folder = this.file.folder
+>```

@@ -1,51 +1,38 @@
 >[!Basic Information|info]
->**[City Title/Description]**
->- **Location:** [Location description]  
->- **Government:** [Government type]  
->- **Population:** [Population]  
->- **Defenses:** [Defense description]  
+>**Hostile Territory - Orcish Settlement**
+>- **Location:** [Location in Orcish Wastes]  
+>- **Government:** War Band Leader  
+>- **Population:** Unknown  
+>- **Defenses:** Fortified camps, patrol war bands  
 >
 >Banner
-> - [Banner description]
-
-[Opening description/flavor text]
+> - [Description]
 
 ```
-[Detailed arrival/description text]
+[2-6 sentence read-aloud description of the orcish settlement, second-person present tense. Focus on military encampment feel, brutal efficiency, constant training. Include sensory details.]
 ```
 
 ## Layout
 
-[General layout description]
+[Brief description of the settlement's organization. Military camp structure with war band divisions.]
 
 **Key Areas:**
-* [Area 1]
-	* [Description]
-		* [[Link to relevant page]]
-- [Area 2]
+- [Area Name]
 	- [Description]
-		- [[Link to relevant page]]
+- [Area Name]
+	- [Description]
 
 ---
 
-## Establishments & Services
+## Note
 
-### [[Link|Display Name]]
-**Type:** [Type]  
-**Owner:** [[Link to NPC]]
-**Staff:** [[Link to NPC]]
-
-**[Category]:**
-- [Item/Feature 1]
-- [Item/Feature 2]
+This is hostile territory requiring stealth or combat to navigate.
 
 ---
 
 ## Reference
 
-### Known Establishments in [City Name]
+### Known Locations in Orc Town C
 ```dataview
 LIST WHERE file.folder = this.file.folder
 ```
-
-### [[City Name NPC Index]]

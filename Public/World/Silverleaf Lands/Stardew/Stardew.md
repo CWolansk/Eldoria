@@ -1,51 +1,40 @@
 >[!Basic Information|info]
->**[City Title/Description]**
+>**Elven Village in the Silverleaf Lands**
 >- **Location:** [Location description]  
->- **Government:** [Government type]  
->- **Population:** [Population]  
->- **Defenses:** [Defense description]  
+>- **Government:** Village Elder
+>- **Population:** ~[Number]
+>- **Defenses:** Ranger patrols, natural barriers
 >
 >Banner
-> - [Banner description]
-
-[Opening description/flavor text]
+> - [Description]
 
 ```
-[Detailed arrival/description text]
+[2-6 sentence read-aloud description of Stardew, second-person present tense. Focus on magical morning dew, starlight reflections, or celestial connections. Include sensory details - dewdrops sparkling like stars, morning mist, ethereal atmosphere.]
 ```
 
 ## Layout
 
-[General layout description]
+[Brief description of how the village is organized. Emphasize connection to sky/stars, open glades for stargazing, or water features reflecting celestial light.]
 
 **Key Areas:**
-* [Area 1]
-	* [Description]
-		* [[Link to relevant page]]
-- [Area 2]
+- [Area Name]
 	- [Description]
-		- [[Link to relevant page]]
+- [Area Name]
+	- [Description]
+- [Area Name]
+	- [Description]
 
 ---
 
 ## Establishments & Services
 
-### [[Link|Display Name]]
-**Type:** [Type]  
-**Owner:** [[Link to NPC]]
-**Staff:** [[Link to NPC]]
-
-**[Category]:**
-- [Item/Feature 1]
-- [Item/Feature 2]
+(To be developed)
 
 ---
 
 ## Reference
 
-### Known Establishments in [City Name]
+### Known Establishments in Stardew
 ```dataview
 LIST WHERE file.folder = this.file.folder
 ```
-
-### [[City Name NPC Index]]

@@ -1,51 +1,40 @@
 >[!Basic Information|info]
->**[City Title/Description]**
+>**Dwarven Town in Ironpeak Mountains**
 >- **Location:** [Location description]  
->- **Government:** [Government type]  
->- **Population:** [Population]  
->- **Defenses:** [Defense description]  
+>- **Government:** Forge Master Council
+>- **Population:** ~[Number]
+>- **Defenses:** [Description]
 >
 >Banner
-> - [Banner description]
-
-[Opening description/flavor text]
+> - [Description]
 
 ```
-[Detailed arrival/description text]
+[2-6 sentence read-aloud description of Stoneforge, second-person present tense. Focus on stone-working expertise, monumental architecture, or specialized forges. Include sensory details.]
 ```
 
 ## Layout
 
-[General layout description]
+[Brief description of how the town is organized. Focus on forges, stone-working facilities, and specialized crafting areas.]
 
 **Key Areas:**
-* [Area 1]
-	* [Description]
-		* [[Link to relevant page]]
-- [Area 2]
+- [Area Name]
 	- [Description]
-		- [[Link to relevant page]]
+- [Area Name]
+	- [Description]
+- [Area Name]
+	- [Description]
 
 ---
 
 ## Establishments & Services
 
-### [[Link|Display Name]]
-**Type:** [Type]  
-**Owner:** [[Link to NPC]]
-**Staff:** [[Link to NPC]]
-
-**[Category]:**
-- [Item/Feature 1]
-- [Item/Feature 2]
+(To be developed)
 
 ---
 
 ## Reference
 
-### Known Establishments in [City Name]
+### Known Establishments in Stoneforge
 ```dataview
 LIST WHERE file.folder = this.file.folder
 ```
-
-### [[City Name NPC Index]]

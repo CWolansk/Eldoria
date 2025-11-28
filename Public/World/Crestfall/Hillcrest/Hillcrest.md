@@ -1,51 +1,57 @@
->[!Basic Information|info]
->**[City Title/Description]**
->- **Location:** [Location description]  
->- **Government:** [Government type]  
->- **Population:** [Population]  
->- **Defenses:** [Defense description]  
->
->Banner
-> - [Banner description]
+**Village in the Kingdom of Crestfall**
+- **Location:** Rolling hills east of Highreach
+- **Government:** Village Elder
+- **Population:** ~500
+- **Defenses:** Volunteer militia
 
-[Opening description/flavor text]
+Banner
+- Three green hills beneath blue sky
 
 ```
-[Detailed arrival/description text]
+Hillcrest perches on a series of rolling hills overlooking fertile valleys, its name describing both location and character. The village serves as a rest stop for travelers heading east from Highreach, known for its excellent view of sunrise over the distant mountains and the warm hospitality of its residents.
 ```
 
 ## Layout
 
-[General layout description]
+Hillcrest spreads across three adjacent hilltops, connected by well-worn paths through the valleys. The central hill hosts most commercial activity, while residential homes dot the surrounding slopes. An ancient oak marks the village green at the heart of the settlement.
 
 **Key Areas:**
-* [Area 1]
-	* [Description]
-		* [[Link to relevant page]]
-- [Area 2]
-	- [Description]
-		- [[Link to relevant page]]
+- Village Green
+	- Central commons with ancient oak tree where seasonal festivals are held
+	- Village elder's cottage overlooks the green
+- Market Row
+	- Small collection of shops serving local needs
+		- [[Public/World/Crestfall/Hillcrest/Hammerstrikes Weapons|Hammerstrike's Weapons]]
+		- [[Public/World/Crestfall/Hillcrest/Nightwhispers Potions and Scrolls|Nightwhisper's Potions and Scrolls]]
+- Hill Farms
+	- Scattered homesteads on surrounding hillsides with sheep and cattle grazing
+	- Orchards producing renowned cider apples
 
 ---
 
 ## Establishments & Services
 
-### [[Link|Display Name]]
-**Type:** [Type]  
-**Owner:** [[Link to NPC]]
-**Staff:** [[Link to NPC]]
+### [[Public/World/Crestfall/Hillcrest/Hammerstrikes Weapons|Hammerstrike's Weapons]]
+**Type:** Weapon Shop & Smithy
+**Owner:** TBD
 
-**[Category]:**
-- [Item/Feature 1]
-- [Item/Feature 2]
+**Building:** Single-story stone structure with attached forge.
+**Services:** Basic weapons, tool repair, agricultural implements.
+
+---
+
+### [[Public/World/Crestfall/Hillcrest/Nightwhispers Potions and Scrolls|Nightwhisper's Potions and Scrolls]]
+**Type:** Alchemy Shop
+**Owner:** TBD
+
+**Building:** Timber cottage with herb gardens surrounding it, mysterious purple smoke often rises from the chimney.
+**Services:** Potions, scrolls, herbal remedies, fortune telling.
 
 ---
 
 ## Reference
 
-### Known Establishments in [City Name]
+### Known Establishments in Hillcrest
 ```dataview
 LIST WHERE file.folder = this.file.folder
 ```
-
-### [[City Name NPC Index]]

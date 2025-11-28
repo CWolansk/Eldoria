@@ -1,51 +1,58 @@
->[!Basic Information|info]
->**[City Title/Description]**
->- **Location:** [Location description]  
->- **Government:** [Government type]  
->- **Population:** [Population]  
->- **Defenses:** [Defense description]  
->
->Banner
-> - [Banner description]
+**Town in the Kingdom of Crestfall**
+- **Location:** Southwest of Highreach, along the main trade road
+- **Government:** Town Council
+- **Population:** ~2,000
+- **Defenses:** Town militia, wooden palisade
 
-[Opening description/flavor text]
+Banner
+- A golden wheat sheaf on green field
 
 ```
-[Detailed arrival/description text]
+Fairfield sits astride the main trade road between Highreach and the southern kingdoms, its prosperity evident in well-maintained stone buildings and bustling market square. The town earned its name from the broad agricultural plains that surround it, and much of the kingdom's grain passes through its warehouses before reaching the capital.
 ```
 
 ## Layout
 
-[General layout description]
+Fairfield stretches along both sides of the main trade road, its market square serving as the commercial heart. Well-maintained stone buildings line the central streets, with wooden structures in the residential areas. The town is surrounded by a wooden palisade with gates at cardinal directions.
 
 **Key Areas:**
-* [Area 1]
-	* [Description]
-		* [[Link to relevant page]]
-- [Area 2]
-	- [Description]
-		- [[Link to relevant page]]
+- Market Square
+	- Central hub with permanent merchant stalls and weekly market days
+	- Town hall overlooks the square
+- Crafters' Row
+	- Blacksmiths, carpenters, and other artisans line this street
+		- [[Public/World/Crestfall/Fairfield/Forgefires Armaments|Forgefire's Armaments]]
+- Merchant District
+	- Warehouses and shops catering to travelers
+		- [[Public/World/Crestfall/Fairfield/Starspells Wonders|Starspell's Wonders]]
+- Residential Quarter
+	- Comfortable homes for merchants and craftspeople with well-maintained gardens
 
 ---
 
 ## Establishments & Services
 
-### [[Link|Display Name]]
-**Type:** [Type]  
-**Owner:** [[Link to NPC]]
-**Staff:** [[Link to NPC]]
+### [[Public/World/Crestfall/Fairfield/Forgefires Armaments|Forgefire's Armaments]]
+**Type:** Smithy & Armory
+**Owner:** TBD
 
-**[Category]:**
-- [Item/Feature 1]
-- [Item/Feature 2]
+**Building:** Stone forge with distinctive red-brick chimney, always billowing smoke.
+**Services:** Weapons, armor, repairs, custom metalwork.
+
+---
+
+### [[Public/World/Crestfall/Fairfield/Starspells Wonders|Starspell's Wonders]]
+**Type:** Magic Shop
+**Owner:** TBD
+
+**Building:** Two-story timber building with glowing runes etched into the doorframe.
+**Services:** Magical items, spell components, enchantments, arcane consultation.
 
 ---
 
 ## Reference
 
-### Known Establishments in [City Name]
+### Known Establishments in Fairfield
 ```dataview
 LIST WHERE file.folder = this.file.folder
 ```
-
-### [[City Name NPC Index]]

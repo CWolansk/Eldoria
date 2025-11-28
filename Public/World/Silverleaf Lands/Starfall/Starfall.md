@@ -1,51 +1,40 @@
 >[!Basic Information|info]
->**[City Title/Description]**
+>**Elven Village in the Silverleaf Lands**
 >- **Location:** [Location description]  
->- **Government:** [Government type]  
->- **Population:** [Population]  
->- **Defenses:** [Defense description]  
+>- **Government:** Village Elder & Astronomer Council
+>- **Population:** ~[Number]
+>- **Defenses:** Ranger scouts, celestial wards
 >
 >Banner
-> - [Banner description]
-
-[Opening description/flavor text]
+> - [Description]
 
 ```
-[Detailed arrival/description text]
+[2-6 sentence read-aloud description of Starfall, second-person present tense. Focus on observatory towers, falling star phenomena, or sites where meteors have impacted. Include sensory details - glittering meteorite fragments, telescope lenses catching light, ancient star charts.]
 ```
 
 ## Layout
 
-[General layout description]
+[Brief description of how the village is organized. Emphasize astronomical observation points, study halls, meteorite impact sites, or celestial libraries.]
 
 **Key Areas:**
-* [Area 1]
-	* [Description]
-		* [[Link to relevant page]]
-- [Area 2]
+- [Area Name]
 	- [Description]
-		- [[Link to relevant page]]
+- [Area Name]
+	- [Description]
+- [Area Name]
+	- [Description]
 
 ---
 
 ## Establishments & Services
 
-### [[Link|Display Name]]
-**Type:** [Type]  
-**Owner:** [[Link to NPC]]
-**Staff:** [[Link to NPC]]
-
-**[Category]:**
-- [Item/Feature 1]
-- [Item/Feature 2]
+(To be developed - might include observatories, astronomer guilds, meteorite forges)
 
 ---
 
 ## Reference
 
-### Known Establishments in [City Name]
+### Known Establishments in Starfall
 ```dataview
 LIST WHERE file.folder = this.file.folder
 ```
-
-### [[City Name NPC Index]]
