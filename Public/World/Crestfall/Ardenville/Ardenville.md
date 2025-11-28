@@ -48,6 +48,14 @@ Ardenville stretches along Lake Arden's northern shore at sea level. The town ce
 **Type:** Inn & Tavern
 **Owner:** [[Public/World/Crestfall/Ardenville/NPCs/Mira Softstep|Mira Softstep]]
 
+---
+
+## Reference
+
+```dataview
+LIST WHERE file.folder = this.file.folder AND file.name != this.file.name
+```
+
 **Structure:** Cozy cottage style with low ceilings and warm hearths.
 **Features:** Center of local gossip, stew pot that never empties.
 **Services:** Lodging, food, drink, job postings.

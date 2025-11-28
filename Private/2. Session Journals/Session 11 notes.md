@@ -3,8 +3,10 @@ fc-date: 0496-03-06
 fc-end: 0496-03-06
 fc-category: Sessions
 ---
+[[Session 10 notes]] 
+[[Session 12 notes]] 
 
-Starting at city veing saved 
+Starting at city being saved 
 - JP and randi loot the looters 
 	- city guard notices jp and randi looting 
 - Party hears a town crier telling everyone to go the adventurers guild to collect rewards for helping with the Rat crisis

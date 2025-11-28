@@ -1,39 +1,39 @@
 ---
 Location :: #HighReach #Noble #Palace
 Profession :: #Noble #RoyalAdvocate
-Status :: #Ally
-Race :: Human
+Description :: Human noble woman with political acumen and progressive views; influential palace advocate for guild inclusivity policies.
+Alive? :: Yes
+Notes :: Pushes for royal contract with Exterminators Guild as part of broader inclusivity initiatives. Values diversity and competence in royal service providers.
 ---
 
-## Description
-A human noblewoman with refined bearing and thoughtful demeanor, known for her political acumen.
+## Personality
+Lady Millicent represents the progressive wing of Highreach nobility—politically savvy, forward-thinking, and genuinely committed to social advancement. She sees the Exterminators Guild's inclusivity as a model for broader kingdom policies and a practical demonstration of diverse competence.
 
-## What We Know
-Lady Millicent Goldleaf is an influential voice in the royal palace, known for her progressive views and practical approach to policy. She appears to represent a forward-thinking wing of Highreach nobility.
+## Political Position
+- **Royal Advisor**: Informal but influential voice in palace policy discussions
+- **Inclusivity Advocate**: Champions merit-based selection over traditional prejudices  
+- **Practical Progressive**: Supports change that demonstrably improves kingdom effectiveness
 
-She's been advocating for more inclusive hiring practices and merit-based selection across royal departments. Those who've interacted with her say she values demonstrable competence over traditional prejudices.
+## Relationships
+- **Don Gnocianno**: Professional ally in promoting inclusivity policies
+- **Royal Court**: Respected voice for progressive policies with practical benefits
+- **Party**: Views as living proof that diverse teams can achieve exceptional results
+- **Conservative Nobles**: Political opposition who prefer traditional approaches
 
-She seems to view the party favorably as an example of how diverse teams can achieve exceptional results.
+## Current Initiatives
+- **Royal Service Diversification**: Advocating for merit-based hiring across royal departments
+- **Guild Recognition Programs**: Establishing formal royal backing for effective inclusive organizations
+- **Demonstration Projects**: Using Exterminators Guild as proof-of-concept for broader policies
 
-## Interactions
-**First Met**: Through palace or guild business
+## Resources & Influence
+- **Palace Access**: Can arrange meetings with key royal decision-makers
+- **Political Intelligence**: Informed about court politics and policy discussions
+- **Noble Network**: Connections with other progressive nobles and potential allies
 
-**Relationship Status**: Ally - supportive of the party's work
-
-**Notes**:
-- Has influence in royal court policy discussions
-- Advocates for inclusivity and merit-based advancement
-- Supports the [[Exterminators Guild]]'s diverse membership model
-- Can potentially arrange meetings with royal decision-makers
-- Well-informed about court politics and noble factions
-
----
-
-```dataview
-TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
-SORT file.name ASC
-```
+## Plot Hooks
+- Needs reliable evidence of guild effectiveness for upcoming royal contract negotiations
+- Could provide political backing for party operations with royal implications
+- Potential source of information about court politics and noble faction dynamics
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

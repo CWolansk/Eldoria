@@ -3,6 +3,9 @@ fc-date: 0496-03-06
 fc-end: 0496-03-06
 fc-category: Sessions
 ---
+[[Session 9 Notes]]
+[[Session 11 notes]] 
+
 You begin your trek back towards the city of Highreach, slowly tending to your wounds as you walk, everyone feels slightly more energized and experienced. But as you get closer to Highreach you start to smell this rotten stench, kind of like sewage, and as you get even closer the sewage smell is joined by the smell of burning. As you crest a hill and higreach finall comes into view, you can see multiple thick plumes of black smoke coming from behind the walls of the city obscuring the sight of even the tallest of the castles towers.
 
 You all begin the start of your trek back towards the city of Highreach, slowly tending to your wounds as you walk, with everyone feeling slightly more experienced from the fight. You are also joined on your journey by **Randi and Vanessa**. 

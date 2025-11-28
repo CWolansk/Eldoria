@@ -53,34 +53,3 @@ Focus on:
 ```dataview
 LIST WHERE file.folder = this.file.folder AND file.name != this.file.name
 ```
-```
-
-## Guidelines
-
-### What to Include (Player-Facing):
-- Atmosphere and sensory details
-- General categories of goods/services
-- Reputation and public knowledge
-- Social customs (haggling policy, guild discounts, etc.)
-- The proprietor's personality as customers would experience it
-- Information the shopkeeper might share with customers
-
-### What to Exclude (DM-Only):
-- Exact prices for every item
-- Hidden inventory or secret services
-- The proprietor's stats or combat abilities
-- Plot-sensitive information
-- Personal secrets or motivations
-- Detailed business finances
-
-### Writing Style:
-- **Second-person present tense** for read-aloud sections ("You see..." "The air smells of...")
-- **Specific sensory details** (don't just say "nice"—describe the smell of leather, the sound of hammering, etc.)
-- **Show personality through actions** rather than stating traits
-- **Include local color** that ties to the city's culture and the campaign world
-
-## Examples
-
-See implemented examples:
-- [[Public/World/Crestfall/Stonehaven/Ironforge Smithy]] - Blacksmith shop
-- [[Public/World/Crestfall/Stonehaven/Marlas Gear]] - General goods outfitter

@@ -49,6 +49,14 @@ The largest building in Fairfield's market square is a converted barn that serve
 A stone forge occupies one corner, sending warmth throughout the building. The proprietor, a round-bellied Halfling with a magnificent mustache, can usually be found either at the counter tallying accounts or at the anvil fixing a plow blade.
 ```
 
+---
+
+## Reference
+
+```dataview
+LIST WHERE file.folder = this.file.folder AND file.name != this.file.name
+```
+
 **Reputation:**  
 Barnaby Bramblefoot served twenty years as a quartermaster for a mercenary company before retiring to "somewhere boring." He chose Fairfield for its peace and stayed for its people. He's seen the world, doesn't judge by race or appearance, and has stories that rival any bard's repertoire.
 

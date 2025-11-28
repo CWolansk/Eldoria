@@ -1,37 +1,40 @@
 ---
-Location :: #HighReach #ExterminatorsGuild
+Location :: #HighReach #ExterminatorsGuild #CriminalOrganization
 Profession :: #Enforcer #Quartermaster #ExterminatorsGuild #Artificer
-Status :: #Neutral
-Race :: Gnome
+Description :: Young gnome artificer with ink-stained fingers and wild hair; ambitious family enforcer who handles both equipment management and "enforcement" duties through magical innovation.
+Alive? :: Yes
+Notes :: Manages guild equipment while creating specialized tools for criminal operations. Enthusiastic about party members' abilities includes calculating their criminal applications. Rising star in family hierarchy through innovative approaches.
 ---
 
-## Description
-A young gnome with ink-stained fingers and wild hair, usually found tinkering with various tools and devices.
+## Personality
+Squeak represents the new generation of criminal innovation—combining traditional gnome craftsmanship with ambitious criminal vision. Her workshop produces both legitimate guild equipment and specialized criminal tools. She sees the party as walking arsenals of untapped criminal potential, enthusiastically planning how their abilities could enhance family operations.
 
-## What We Know
-Squeak Tinkerbottom manages equipment for the [[Exterminators Guild]] and appears to be quite skilled with magical artifice. Her workshop is filled with various guild tools and experimental devices.
+## Criminal Role
+- **Family Enforcer**: Handles intimidation and "enforcement" through magical innovation rather than brute force
+- **Criminal Equipment Specialist**: Creates tools for breaking and entering, evidence destruction, and covert operations  
+- **Magical Operations**: Uses artifice skills to enhance family criminal capabilities
+- **Asset Development**: Evaluates and enhances party members' potential criminal applications
 
-She seems enthusiastic about the party members' abilities and has mentioned wanting to create specialized equipment. Those who've worked with her say she's innovative but perhaps a bit too eager to test new inventions on willing (or unwilling) subjects.
+## Relationships
+- **Don Gnocianno**: Eager protégé seeking advancement through innovative criminal solutions
+- **Pip Whiskerwind**: Respects traditional knowledge while pushing for technological criminal advantages
+- **Claire**: Fascinated by storm magic's criminal potential—evidence destruction, access creation, intimidation
+- **Party**: Views as experimental subjects for testing enhanced criminal equipment and techniques
 
-## Interactions
-**First Met**: At the [[Exterminators Guild]] workshop
+## Criminal Expertise
+- **Criminal Item Creation**: Specializes in enhancing mundane tools with magical properties for illegal activities
+- **Enhanced Surveillance**: Creates and modifies magical surveillance and communication devices
+- **Security Bypass**: Develops tools and techniques for bypassing magical and mundane security systems
 
-**Relationship Status**: Neutral - guild quartermaster
+## Current Criminal Projects
+- **Enhanced Criminal Equipment**: Experimenting with party-specific gear modifications for specialized operations
+- **Magical Surveillance Networks**: Developing communication systems for coordinating criminal activities
+- **Security Exploitation**: Creating tools for accessing restricted areas and bypassing protective wards
 
-**Notes**:
-- Manages guild equipment and supplies
-- Skilled artificer creating magical tools and devices
-- Very enthusiastic about "enhancing" party equipment
-- Particularly interested in Claire's storm magic applications
-- Sometimes asks unusual questions about how abilities could be used
-
----
-
-```dataview
-TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
-SORT file.name ASC
-```
+## Plot Hooks
+- Might offer party "enhanced" equipment that's actually designed for criminal purposes
+- Could become suspicious if party refuses increasingly questionable "equipment testing"
+- Potential ally if party embraces criminal opportunities, or threat if they oppose family operations
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

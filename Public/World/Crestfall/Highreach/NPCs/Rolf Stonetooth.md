@@ -1,24 +1,6 @@
----
-Location :: #HighReach #SturdyMugg
-Profession :: #Adventurer #TheNightstalkers
-Status :: #Deceased
-Race :: Human
----
+[[The Nighstalkers]]
+Location :: #HighReach #SturdyMugg [[Sturdy Mugg]]
+Profession :: #Adventurer #Thenightstalkers #SturdyMuggPatron
+Description :: - a stock grizzled warrion with a rugged face and a prominent chipped tooth. Wearing patchwork leather and metal armor riveted together and a bear fur mantle over his shoulder. 
 
-## Description
-A stocky, grizzled warrior with a rugged face and a prominent chipped tooth. He wore patchwork leather and metal armor riveted together with a bear fur mantle.
-
-## What We Know
-Rolf Stonetooth was a member of [[The Nightstalkers]] adventuring party, married to [[Celeste Stonetooth nee Moonwhisper]]. He was known as a grizzled veteran warrior.
-
-He perished in the [[Highreach Mines]] before the party could reach [[The Nightstalkers]]. His loss was a tragedy for his wife Celeste and his companions.
-
-**In Memoriam**: Despite his rough exterior, Rolf was devoted to his wife and companions. He is remembered as a hardened warrior who stood by his team.
-
----
-
-```dataview
-TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
-SORT file.name ASC
-```
+Rolfs mantle is actually a mantle of the lightbender and can be found in the highreach mines [Mantle of the lightbender](https://5e.tools/items.html#mantle%20of%20the%20lightbender_fleemortals) 

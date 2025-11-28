@@ -1,24 +1,6 @@
----
-Location :: #HighReach #SturdyMugg
-Profession :: #Adventurer #TheNightstalkers
-Status :: #Deceased
-Race :: Dwarf
----
+[[The Nighstalkers]]
+Location :: #HighReach #SturdyMugg [[Sturdy Mugg]]
+Profession :: #Adventurer - #Thenightstalkers #SturdyMuggPatron
+Description :: - Tall and powerfully built, with black hair in a warriors knot and a silver streaked beard. Wearing a dark iron cuirass engraved with silver runes and reinforced bracers with hammer motifs. A large angular headed war hammer rests on his back. 
 
-## Description
-A tall, powerfully built dwarf with black hair worn in a warrior's knot and a distinguished silver-streaked beard. He wore dark iron armor engraved with silver runes and hammer motifs.
-
-## What We Know
-Oren Hammerfist was a member of [[The Nightstalkers]] adventuring party, married to [[Fiona Hammerfist nee Thistledown]]. He was known as a capable warrior and devoted husband.
-
-He perished in the [[Highreach Mines]] before the party could reach [[The Nightstalkers]]. His loss was a tragedy for his wife Fiona and his companions.
-
-**In Memoriam**: Oren stood firm in the face of danger to protect his companions. He is remembered as a devoted husband and brave warrior.
-
----
-
-```dataview
-TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
-SORT file.name ASC
-```
+Orens war hammer is actually an uncommon warhammer of warning and can be found within the mines being wielded by someone [Warhammer of warning](https://5e.tools/items.html#warhammer%20of%20warning_dmg) 

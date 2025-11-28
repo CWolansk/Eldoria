@@ -1,30 +1,18 @@
----
-Location :: [[Highreach]], [[The Dragons Breath Forge]]
-Profession :: Master Blacksmith
-Status :: Alive
-Race :: Dwarf
----
+#Blacksmith #HighReach #Merchant
 
-# Alaric Emberfell
-*A renowned dwarven blacksmith at [[The Dragons Breath Forge]].*
+[[The Dragons Breath Forge]]  
+Known for his exquisite craftsmanship in rare and very rare magical armor and weapons. Thorin has a deep understanding of metallurgy and enchantments, making him the go-to blacksmith for the elite.
 
-## Description
-Stocky and robust, Alaric has the powerful build of a lifelong smith. His beard is well-groomed and meticulously maintained. His arms bear the many scars and calluses of his trade, and his keen eyes seem to spot the slightest imperfection in anything he looks at.
+- has a lisp 
 
-## What We Know
-- **Reputation**: He is known throughout Highreach as the master smith for magical armor and weapons. His work is considered among the best in the three kingdoms, but it comes at a high price.
-- **Personality**: He comes across as meticulous and extremely proud of his work. He speaks with a noticeable lisp but commands authority and respect. He does not seem like a man who would tolerate being rushed.
-- **Services**: Crafts and repairs high-quality magical arms and armor (Rare and Very Rare). He has access to rare materials and enchanting techniques.
+- Personality: Meticulous and proud, with an unwavering dedication to his craft.
+- Physical Description: Stocky and robust, with a well-groomed beard, strong arms, and keen, piercing eyes.
 
-## Interactions
-- **First Met**: When the party inquired about master-level smithing services.
-- **Relationship**: Neutral. He is a potential vendor for the party.
-- **Notes**: He seems to be able to tell the quality of metal by touch alone. Very particular about his beard's appearance.
-
----
-
+[[NPC List]] 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
-``` 
+```
+
+[[The Party Meets Alaric Emberfell]] 

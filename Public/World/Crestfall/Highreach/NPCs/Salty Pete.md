@@ -1,40 +1,42 @@
 ---
 Location :: #HighReach #Underground #Sewers
 Profession :: #SewerWorker #FormerSailor
-Status :: #Friendly
-Race :: Half-Orc
+Description :: Half-orc male former sailor who transitioned to sewer maintenance work; understands both maritime and underground navigation challenges.
+Alive? :: Yes
+Notes :: Potential "I Know a Guy" connection for JP. Respects seamanship and practical approach to difficult environments. Works in areas adjacent to guild territory.
 ---
 
-## Description
-A half-orc male with the weathered look of someone who's spent years working in difficult environments.
+## Background
+Salty Pete sailed merchant vessels for two decades before age and injury forced him into land-based work. His maritime navigation skills translated surprisingly well to the underground waterways of Highreach's sewer system, where he now maintains drainage systems and water flow management.
 
-## What We Know
-Salty Pete works in Highreach's sewer system maintaining drainage and water flow. He's a former sailor who transitioned to land-based work, and his maritime navigation skills apparently translate well to underground waterways.
+## Personality
+Pete embodies the practical sailor's approach to life—straightforward, competent, and respectful of those who prove themselves through action rather than words. His half-orc heritage gives him natural empathy for others facing racial prejudice, though he keeps his opinions largely to himself.
 
-He comes across as straightforward and practical, with a sailor's no-nonsense approach to life. Those who've met him say he respects people who prove themselves through action rather than words.
+## Relationships
+- **JP**: Potential connection through shared maritime background and half-orc heritage
+- **Exterminators Guild**: Professional courtesy but independent working relationship
+- **City Maintenance**: Official employee with access to infrastructure information
+- **Other Half-Orcs**: Informal network of mutual support and information sharing
 
-JP might find a natural connection with him given their shared maritime background and half-orc heritage.
+## Professional Expertise
+- **Sewer Navigation**: Knows water flow patterns, drainage schedules, and maintenance access points
+- **Maritime Skills**: Understands tides, water pressure, and flow management from seafaring experience
+- **Infrastructure Knowledge**: Access to city planning information and maintenance schedules
 
-## Interactions
-**First Met**: In the underground areas of Highreach
+## Useful Information
+- **Underground Geography**: Alternative routes and access points not controlled by guild
+- **Water Hazards**: Knowledge of flooding patterns and dangerous drainage areas
+- **City Schedules**: Information about maintenance work that might affect underground operations
 
-**Relationship Status**: Friendly - potential "I Know a Guy" connection for JP
+## "I Know a Guy" Opportunities
+- **JP Connection**: Shared maritime experience and half-orc understanding creates natural bond
+- **Underground Access**: Can provide alternative routes when guild passages are compromised
+- **Information Source**: Has different perspective on underground activities from maintenance viewpoint
 
-**Notes**:
-- Former sailor with two decades of maritime experience
-- Now works in city sewer maintenance
-- Knows sewer navigation, water flow patterns, and drainage schedules
-- Has access to city infrastructure information
-- Potential source of underground geography knowledge
-- Shares half-orc heritage with JP
-
----
-
-```dataview
-TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
-SORT file.name ASC
-```
+## Plot Hooks
+- Could provide crucial assistance during underground emergencies or time-sensitive operations
+- Might know about unusual activity in sewer systems that guild hasn't detected
+- Potential ally for operations requiring city infrastructure knowledge
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

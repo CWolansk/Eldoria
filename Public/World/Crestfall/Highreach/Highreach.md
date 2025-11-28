@@ -51,6 +51,14 @@ City built on plateau with three-sided natural cliff defenses. Main gates lead t
 
 ---
 
+## Reference
+
+```dataview
+LIST WHERE file.folder = this.file.folder AND file.name != this.file.name
+``` 
+
+---
+
 ## Establishments & Services
 
 ### [[Public/World/Crestfall/Highreach/Sturdy Mugg|Sturdy Mugg]]

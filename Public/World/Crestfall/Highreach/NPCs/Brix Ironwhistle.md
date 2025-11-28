@@ -1,39 +1,34 @@
 ---
 Location :: #HighReach #CityGuard
 Profession :: #Captain #CityGuard
-Status :: #Ally
-Race :: Dwarf
+Description :: Dwarven female captain with practical attitude and genuine respect for competence over prejudice; appreciates effective cooperation and results.
+Alive? :: Yes
+Notes :: Works closely with Exterminators Guild for tunnel security and intelligence. Developing professional respect for JP based on effective action rather than racial bias.
 ---
 
-## Description
-A dwarven female captain who carries herself with military bearing and practical confidence.
+## Personality
+Captain Brix embodies military pragmatism—she cares about getting the job done efficiently and protecting the city. Her dwarf heritage gives her natural affinity for underground operations, and she judges people by their actions and reliability rather than their race or background.
 
-## What We Know
-Captain Brix Ironwhistle leads a division of the city guard. She seems to embody military pragmatism, caring about getting the job done efficiently and protecting the city.
+## Relationships
+- **Exterminators Guild**: Professional partnership built on mutual information sharing and operational support
+- **JP**: Growing respect for half-orc's direct action approach and military-style thinking
+- **City Guard**: Respected leader who sets example of competence-based evaluation
+- **Party**: Views as valuable allies if they prove reliable and effective
 
-She appears to judge people by their actions and reliability rather than their race or background - a refreshing change from some authority figures. Her dwarf heritage seems to give her a natural understanding of underground operations.
+## Military Background
+- **Tunnel Warfare Experience**: Served in underground campaigns during border conflicts
+- **Cross-Species Command**: Led mixed units, understands value of diverse capabilities
+- **Intelligence Operations**: Skilled at coordinating information gathering and rapid response
 
-Those who've worked with her say she's developing respect for the party based on their effective action and results.
+## Current Concerns
+- **Underground Security**: Monitoring increase in suspicious tunnel activity
+- **Guild Cooperation**: Maintaining productive relationship with Exterminators Guild
+- **Crime Prevention**: Using guild intelligence to prevent underground criminal operations
 
-## Interactions
-**First Met**: Through city guard or [[Exterminators Guild]] business
-
-**Relationship Status**: Ally - views the party as valuable and reliable
-
-**Notes**:
-- Works closely with the Exterminators Guild for tunnel security
-- Growing professional respect for JP despite his half-orc heritage
-- Seems experienced in tunnel warfare and underground campaigns
-- Could provide official backing for operations in exchange for intelligence
-- Respected leader within the city guard
-
----
-
-```dataview
-TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
-SORT file.name ASC
-```
+## Plot Hooks
+- Needs reliable operatives for sensitive underground investigations
+- Could provide official backing for party operations in exchange for intelligence
+- Potential source of information about city politics and royal security concerns
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "399bd101a608579f",
+        "id": "e7ba8153626983e9",
         "type": "tabs",
         "children": [
           {
-            "id": "5474d6fe9bb1f162",
+            "id": "f2b5e259ca1077c9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Public/World/Crestfall/Ardenville/Steelshapers Forge.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Steelshapers Forge"
+              "title": "New tab"
             }
           }
         ]
@@ -170,7 +166,11 @@
               "state": {
                 "calendar": "ID_4b1be88869cb",
                 "ephemeral": {
-                  "viewing": null,
+                  "viewing": {
+                    "day": 6,
+                    "month": 2,
+                    "year": 496
+                  },
                   "viewState": 1,
                   "displaying": {
                     "day": 6,
@@ -184,7 +184,8 @@
                   "displayWeather": true,
                   "location": ""
                 },
-                "id": "ID_ab08197979da"
+                "id": "ID_ab08197979da",
+                "child": "ID_3ac808fa89eb"
               },
               "icon": "CALENDARIUM",
               "title": "Calendarium"
@@ -224,17 +225,21 @@
         "currentTab": 4
       },
       {
-        "id": "a6fa0d9d166ea4da",
+        "id": "82a3236d268a3ea2",
         "type": "tabs",
         "children": [
           {
-            "id": "651c0b7db0e586b0",
+            "id": "765dbfc5ccf1867d",
             "type": "leaf",
             "state": {
-              "type": "initiative-tracker-creature-view",
-              "state": {},
-              "icon": "initiative-tracker-creature-view",
-              "title": "Combatant"
+              "type": "CALENDARIUM_AGENDA",
+              "state": {
+                "calendar": "ID_4b1be88869cb",
+                "id": "ID_3ac808fa89eb",
+                "parent": "ID_ab08197979da"
+              },
+              "icon": "CALENDARIUM_AGENDA",
+              "title": "Agenda"
             }
           }
         ]
@@ -262,44 +267,44 @@
       "calendarium:Open Calendarium": false
     }
   },
-  "active": "5474d6fe9bb1f162",
+  "active": "c449ead431ac9bb8",
   "lastOpenFiles": [
-    "Public/World/Crestfall/Fairfield/Forgefires Armaments.md",
-    "Public/World/Crestfall/Ardenville/Steelshapers Forge.md",
-    "Public/World/Crestfall/Ardenville/NPCs/Mira Softstep.md",
-    "Public/World/Crestfall/Ardenville/NPCs/Kellen Redshore.md",
-    "Public/World/Crestfall/Ardenville/NPCs/Isolde Fairweather.md",
-    "Public/World/Crestfall/Ardenville/NPCs/Gregor Woods.md",
-    "Public/World/Crestfall/Ardenville/NPCs/Edda Netsong.md",
-    "Public/World/Crestfall/Highreach/Highreach Mines.md",
-    "Public/World/Crestfall/Highreach/HighReach Merchants Guild.md",
-    "Public/World/Crestfall/Highreach/Highreach Adventurers Guild.md",
-    "Public/World/Crestfall/Fairfield/Starspells Wonders.md",
-    "Public/World/Crestfall/Highreach/NPCs/Highreach NPC Index.md",
-    "Public/World/Crestfall/Hillcrest/Nightwhispers Potions and Scrolls.md",
-    "Public/World/Crestfall/Hillcrest/Hammerstrikes Weapons.md",
-    "Public/World/Groups/Merchants Guild.md",
-    "Public/World/Groups/Foundation.md",
-    "Public/World/Groups/Exterminators Guild.md",
-    "Public/World/Groups/Adventurers Guild.md",
-    "Public/World/Orcish Wastes/Wizards Tower/Wizards Tower.md",
-    "Public/World/Orcish Wastes/Wizards Tower/NPCs/Summoner Jon AKA the wizard.md",
-    "Public/World/Crestfall/Stonehaven/Stonehaven.md",
-    "Public/World/Orcish Wastes/Orc Town B/Orc City B.md",
-    "Public/World/Orcish Wastes/Orc Town C/Orc City C.md",
-    "Public/World/Orcish Wastes/Orc Capitol/Orc Capitol.md",
-    "Public/World/Crestfall/Ardenville/Ardenville.md",
-    "Public/World/Silverleaf Lands/Frostglade/FrostGlade.md",
+    "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Vera Shadowpeak.md",
+    "Private/1. World Almanac/World/Crestfall/Fairfield/NPCs/Valeris Shadowmere.md",
+    "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Thom Willow.md",
+    "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Thaldrin Stormblade.md",
+    "Public/World/Crestfall/Highreach/NPCs/Nyla Windrider.md",
+    "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Nyla Windrider.md",
+    "Private/1. World Almanac/World/Crestfall/Fairfield/NPCs/Meredith Caravan-Friend.md",
+    "Public/World/Crestfall/Fairfield/NPCs/Meredith Caravan-Friend.md",
+    "Public/World/Crestfall/Fairfield/NPCs/Valeris Shadowmere.md",
+    "Public/World/Crestfall/Fairfield/NPCs",
+    "Public/World/Crestfall/Highreach/NPCs/Kara Nightshade.md",
+    "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Kara Nightshade.md",
+    "Public/World/Crestfall/Highreach/NPCs/Jon Brightman.md",
+    "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Jon Brightman.md",
+    "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Jasper Ironforge.md",
+    "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Ingrid Stoneheart.md",
+    "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Hilda Ravenshadow.md",
+    "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Gunnar Ironforge.md",
+    "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Guard Captain Roderick Stone.md",
+    "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Edwin Barleyman.md",
+    "Public/World/Crestfall/Highreach/NPCs/Borin Stonefist.md",
+    "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Borin Stonefist.md",
+    "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Benedict Vineward.md",
+    "Public/World/Crestfall/Hillcrest/NPCs/Thom Willow.md",
+    "Public/World/Crestfall/Hillcrest/NPCs/Seraphina Winecraft.md",
+    "Public/World/Crestfall/Hillcrest/NPCs/Rowan Grapeheart.md",
+    "Public/World/Crestfall/Hillcrest/NPCs/Mayor Linden Hearthwood.md",
+    "Public/World/Crestfall/Hillcrest/NPCs",
+    "Public/World/Crestfall/Stonehaven/NPCs",
+    "sync_npcs.py",
+    "Private/3. Templates",
     "docs/Public/World/SHOP-TEMPLATE.html",
+    "docs/Public/World/Ironpeak Mountains/Forgepeak/The Adamant Anvil.html",
     "docs/Public/World/Crestfall/Ardenville/The Netted Nymph.html",
     "docs/Public/World/Crestfall/Ardenville/Merchants Guild Warehouse.html",
-    "docs/Public/World/Crestfall/Ardenville/Fishermans Guild.html",
-    "docs/Public/World/Silverleaf Lands/Frostglade/The Whispering Weave.html",
-    "docs/Public/World/Ironpeak Mountains/Forgepeak/The Adamant Anvil.html",
-    "docs/location-index.json",
-    "docs/npc-index.json",
-    "docs/package.json",
-    "docs/generate-index.js",
+    "docs/Public/World/Crestfall/Highreach/NPCs/Felix Tradewind.html",
     "docs/Assets/Eldoira.jpg",
     "docs/site-lib/media/favicon.png",
     "docs/site-lib/media/6155340132a851f6089e.svg",
