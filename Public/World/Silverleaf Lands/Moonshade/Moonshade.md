@@ -1,16 +1,15 @@
->[!Basic Information|info]
->**Elven Village in the Silverleaf Lands**
->- **Location:** [Location in Everwood or surrounding forests]  
->- **Government:** Village Elder  
->- **Population:** ~[Number]  
->- **Defenses:** Natural barriers, ranger scouts
->
->Banner
-> - [Description]
->
->```
->[2-6 sentence read-aloud description of Moonshade, second-person present tense. Focus on moonlit beauty, nighttime activities, or shadowy forest setting. Include sensory details - silvery light through leaves, night-blooming flowers, owl calls.]
->```
+**Elven Village in the Silverleaf Lands**
+- **Location:** Southeastern Silverleaf Lands, southeast of Frostglade
+- **Government:** Village Elder  
+- **Population:** ~[Number]  
+- **Defenses:** Natural barriers, ranger scouts
+
+Banner
+- [Description]
+
+```
+[2-6 sentence read-aloud description of Moonshade, second-person present tense. Focus on moonlit beauty, nighttime activities, or shadowy forest setting. Include sensory details - silvery light through leaves, night-blooming flowers, owl calls.]
+```
 >
 >## Layout
 >

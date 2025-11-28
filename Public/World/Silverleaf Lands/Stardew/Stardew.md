@@ -1,12 +1,11 @@
->[!Basic Information|info]
->**Elven Village in the Silverleaf Lands**
->- **Location:** [Location description]  
->- **Government:** Village Elder
->- **Population:** ~[Number]
->- **Defenses:** Ranger patrols, natural barriers
->
->Banner
-> - [Description]
+**Elven Village in the Silverleaf Lands**
+- **Location:** Northwestern Silverleaf Lands, north of Frostglade
+- **Government:** Village Elder
+- **Population:** ~[Number]
+- **Defenses:** Ranger patrols, natural barriers
+
+Banner
+- [Description]
 
 ```
 [2-6 sentence read-aloud description of Stardew, second-person present tense. Focus on magical morning dew, starlight reflections, or celestial connections. Include sensory details - dewdrops sparkling like stars, morning mist, ethereal atmosphere.]

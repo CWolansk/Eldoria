@@ -1,12 +1,11 @@
->[!Basic Information|info]
->**Dwarven Town in Ironpeak Mountains**
->- **Location:** [Location description]  
->- **Government:** Forge Master Council
->- **Population:** ~[Number]
->- **Defenses:** [Description]
->
->Banner
-> - [Description]
+**Dwarven Town in Ironpeak Mountains**
+- **Location:** Far western section of the Ironpeak Mountain range
+- **Government:** Forge Master Council
+- **Population:** ~[Number]
+- **Defenses:** [Description]
+
+Banner
+- [Description]
 
 ```
 [2-6 sentence read-aloud description of Stoneforge, second-person present tense. Focus on stone-working expertise, monumental architecture, or specialized forges. Include sensory details.]

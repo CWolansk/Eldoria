@@ -1,16 +1,15 @@
->[!Basic Information|info]
->**Hostile Territory - Orcish Capital**
->- **Location:** Deep in the Orcish Wastes
->- **Government:** Warlord Council
->- **Population:** Unknown (large)
->- **Defenses:** Heavy fortifications, war bands, brutal warriors
->
->Banner
-> - [Description - likely featuring skulls, weapons, blood red colors]
->
->```
->[2-6 sentence read-aloud description for the orcish capital, second-person present tense. Focus on intimidating atmosphere, brutal architecture, war preparations. Include sensory details - war drums, smoke from forges, harsh commands, weapon sharpening, blood stains.]
->```
+**Hostile Territory - Orcish Capital**
+- **Location:** Deep in the Orcish Wastes
+- **Government:** Warlord Council
+- **Population:** Unknown (large)
+- **Defenses:** Heavy fortifications, war bands, brutal warriors
+
+Banner
+- [Description - likely featuring skulls, weapons, blood red colors]
+
+```
+[2-6 sentence read-aloud description for the orcish capital, second-person present tense. Focus on intimidating atmosphere, brutal architecture, war preparations. Include sensory details - war drums, smoke from forges, harsh commands, weapon sharpening, blood stains.]
+```
 >
 >## Layout
 >

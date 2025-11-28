@@ -1,16 +1,15 @@
->[!Basic Information|info]
->**Dwarven Town in Ironpeak Mountains**
->- **Location:** [Location description]
->- **Government:** Clan Council
->- **Population:** ~[Number]
->- **Defenses:** [Description]
->
->Banner
-> - [Description]
->
->```
->[2-6 sentence read-aloud description of the town, second-person present tense, focusing on what makes it unique and memorable. Include sensory details - what visitors see, hear, smell as they approach.]
->```
+**Dwarven Town in Ironpeak Mountains**
+- **Location:** Central Ironpeak Mountains, between Forgepeak and Ironroot
+- **Government:** Clan Council
+- **Population:** ~[Number]
+- **Defenses:** [Description]
+
+Banner
+- [Description]
+
+```
+[2-6 sentence read-aloud description of the town, second-person present tense, focusing on what makes it unique and memorable. Include sensory details - what visitors see, hear, smell as they approach.]
+```
 >
 >## Layout
 >

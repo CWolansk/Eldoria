@@ -2,9 +2,10 @@
 - **Location:** Northern shore of Lake Arden
 - **Government:** Mayor [[Public/World/Crestfall/Ardenville/NPCs/Isolde Fairweather|Isolde Fairweather]]
 - **Population:** Small fishing community with merchant presence
-- **Defenses:** Lake guard patrols, watchtowers, cliffside fortifications
+- **Defenses:** Lake guard patrols, watchtowers
+
 Banner
-- A fishing net overlaid on calm waters beneath a cliff
+- A fishing net overlaid on calm waters with a distant plateau
 
 ```
 As you step off the boat onto the sturdy, weathered docks, you are immediately enveloped by the cool mist of Lake Arden and the sharp, salty tang of the water.
@@ -13,9 +14,9 @@ The waterfront is alive with the daily rhythm of the trade. Fisherfolk in oil-st
 
 To your left, you see the leaning shell of an ancient warehouse, its salt-eaten beams jutting at odd angles like the ribs of a great beast. On your right, the warm, inviting glow of The Netted Nymph spills out onto the cobblestones, the scent of hearty fish stew wafting from its open door.
 
-As you continue along the pier, your gaze is drawn south across Lake Arden, where the sheer limestone cliffs of Highreach rise dramatically from the opposite shore. Looking back toward the town, you spot the massive chains of the Cliffside Port system that connects Ardenville to the plateau above via a winding cliff-side route.
+As you continue along the pier, your gaze is drawn south across Lake Arden, where the towering plateau of Highreach rises dramatically from the opposite shore, its limestone cliffs catching the afternoon sun. The capital city sits high above the lake, barely visible from this distance.
 
-Further inland, the town settles into a cozy collection of cottages and shops. The streets are narrow and winding, lined with buildings constructed from sturdy stone and driftwood. You spot the Fisherman's Guild hall, adorned with giant pike skulls, where seasoned sailors gather to discuss the weather and the waves.
+Further inland, the flat, sea-level town settles into a cozy collection of cottages and shops. The streets are narrow and winding, lined with buildings constructed from sturdy stone and driftwood. You spot the Fisherman's Guild hall, adorned with giant pike skulls, where seasoned sailors gather to discuss the weather and the waves.
 
 The locals move with a steady, practiced purpose, nodding as you pass. The town feels resilient and close-knit, a community forged by the temperamental waters of the lake.
 
@@ -24,7 +25,7 @@ As you reach the town center, the imposing stone structure of the Merchants Guil
 
 ## Layout
 
-Ardenville stretches along Lake Arden's northern shore, protected by limestone cliffs that rise toward Highreach's plateau. The town centers on sturdy piers built into a natural cove, with cottages and warehouses climbing the lower slopes.
+Ardenville stretches along Lake Arden's northern shore at sea level. The town centers on sturdy piers built into a natural cove, with cottages and warehouses spreading inland across flat ground. Across the lake to the south, the limestone cliffs of the Highreach plateau loom on the opposite shore.
 
 **Key Areas:**
 - Main Docks & Merchant Warehouses
@@ -35,9 +36,6 @@ Ardenville stretches along Lake Arden's northern shore, protected by limestone c
 	- Leaning shell of the town's first warehouse, destroyed by a freak storm a century ago
 - The Kelp Beds
 	- Golden strands of kelp swaying in protected shallows, now tangling rudders
-- Cliffside Port
-	- Winch-lift and dock system transferring goods up the sheer face to Highreach
-		- [[Public/World/Crestfall/Ardenville/Cliffside Port|Cliffside Port]]
 - Town Center
 	- The heart of the community where locals gather
 		- [[Public/World/Crestfall/Ardenville/The Netted Nymph|The Netted Nymph]]

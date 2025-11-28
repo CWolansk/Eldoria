@@ -1,16 +1,15 @@
->[!Basic Information|info]
->**Elven Village in the Silverleaf Lands**
->- **Location:** [Location in peaceful forest glade]  
->- **Government:** Village Elder & Druid Circle
->- **Population:** ~[Number]
->- **Defenses:** Natural wards, harmony with forest creatures
->
->Banner
-> - [Description]
->
->```
->[2-6 sentence read-aloud description of Serenity Hollow, second-person present tense. Focus on peaceful atmosphere, healing properties, meditation groves, tranquil springs. Include sensory details - gentle bird song, soft moss, crystal-clear water, flower scents.]
->```
+**Elven Village in the Silverleaf Lands**
+- **Location:** Southern Silverleaf Lands, south of Frostglade
+- **Government:** Village Elder & Druid Circle
+- **Population:** ~[Number]
+- **Defenses:** Natural wards, harmony with forest creatures
+
+Banner
+- [Description]
+
+```
+[2-6 sentence read-aloud description of Serenity Hollow, second-person present tense. Focus on peaceful atmosphere, healing properties, meditation groves, tranquil springs. Include sensory details - gentle bird song, soft moss, crystal-clear water, flower scents.]
+```
 >
 >## Layout
 >

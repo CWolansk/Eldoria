@@ -1,0 +1,12 @@
+{
+  "name": "eldoria-campaign-hub",
+  "version": "1.0.0",
+  "description": "Eldoria D&D Campaign Hub with automatic index generation",
+  "scripts": {
+    "generate-index": "node generate-index.js",
+    "build": "npm run generate-index"
+  },
+  "keywords": ["dnd", "campaign", "eldoria"],
+  "author": "",
+  "license": "ISC"
+}

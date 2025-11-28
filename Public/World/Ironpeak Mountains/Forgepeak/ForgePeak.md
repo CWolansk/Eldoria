@@ -1,16 +1,25 @@
->[!Basic Information|info]
->**Capital of Ironpeak Mountains (Dwarven Kingdom)**
->- **Location:** Carved into the heart of the highest mountain in the range
->- **Government:** Monarchy - High King TBD
->- **Population:** 50,000+
->- **Defenses:** Mountain fortress, multiple defensive layers, elite guard
->
->Banner
-> - Hammer and anvil crossed on mountain backdrop
->
->```
->ForgePeak is the beating heart of dwarven civilization, a masterwork of stone and metal carved from living rock over millennia. The city extends deep into the mountain on multiple levels, with the grandest halls and most sacred forges occupying the deepest chambers closest to the mountain's molten core. Visitors ascending the Great Stair are greeted by massive bronze doors etched with the history of the dwarven people, while the eternal glow of forge-light illuminates the darkness within.
->```
+**Capital of Ironpeak Mountains (Dwarven Kingdom)**
+- **Location:** Southwestern section of the Ironpeak Mountain range, directly south of Hillcrest
+- **Government:** Monarchy - High King TBD
+- **Population:** 50,000+
+- **Defenses:** Mountain fortress, multiple defensive layers, elite guard
+
+Banner
+- Hammer and anvil crossed on mountain backdrop
+
+```
+As you ascend the final switchback of the mountain path, the Great Stair of ForgePeak rises before you—massive stone steps carved into the living rock, worn smooth by countless generations of dwarven boots.
+
+At the summit, you stand before colossal bronze doors, easily fifty feet tall, their surface etched with intricate scenes depicting the history of the dwarven people. The doors stand open, and from within comes the distant, rhythmic clang of hammers on anvil—a sound as constant as the mountain's heartbeat.
+
+Stepping through the threshold, you enter the Great Hall, and the sheer scale takes your breath away. Pillars of carved stone rise like trees in a petrified forest, supporting a vaulted ceiling lost in shadow above. The eternal glow of forge-light emanates from deeper within the mountain, painting everything in warm orange and red hues.
+
+To your left, you see the Merchant Quarter bustling with activity. Dwarven traders display masterwork weapons, gleaming armor, and jewelry set with flawless gems. The air is warm and slightly smoky, carrying the scent of hot metal and stone dust. On your right, grand staircases descend deeper into the mountain, marked with runes indicating the residential levels and the sacred forges far below.
+
+The sound of running water echoes from somewhere in the depths—channels of molten rock, harnessed and controlled to power the legendary forges. Dwarven guards in ornate plate armor stand at attention throughout the hall, their beards braided with metal clasps bearing clan symbols.
+
+Further in, you glimpse the throne room through massive archways, where the High King holds court beneath a ceiling inlaid with veins of gold and silver that trace the mountain's ancient history in precious metal.
+```
 >
 >## Layout
 >

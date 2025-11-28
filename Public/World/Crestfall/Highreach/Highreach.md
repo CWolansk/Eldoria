@@ -1,6 +1,6 @@
 
 **Capital of the Kingdom of Crestfall**
-- **Location:** Atop a natural plateau with steep cliffs on three sides  
+- **Location:** Atop a natural plateau with steep cliffs, south of Lake Arden
 - **Government:** Monarchy  
 - **Population:** 10,000+ 
 - **Defenses:** Stone walls, natural cliffs, regular guard patrols  

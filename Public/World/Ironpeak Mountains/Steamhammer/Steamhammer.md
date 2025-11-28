@@ -1,12 +1,11 @@
->[!Basic Information|info]
->**Dwarven Industrial Town in Ironpeak Mountains**
->- **Location:** [Location description]  
->- **Government:** Guild Master & Engineers Council
->- **Population:** ~[Number]
->- **Defenses:** [Description]
->
->Banner
-> - [Description]
+**Dwarven Industrial Town in Ironpeak Mountains**
+- **Location:** Western Ironpeak Mountains, southwest of Forgepeak
+- **Government:** Guild Master & Engineers Council
+- **Population:** ~[Number]
+- **Defenses:** [Description]
+
+Banner
+- [Description]
 
 ```
 [2-6 sentence read-aloud description of Steamhammer, second-person present tense. Focus on industrial nature - steam engines, mechanical innovations, noise of machinery. Include sensory details like hissing steam, clanging metal, heat from furnaces.]

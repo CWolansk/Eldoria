@@ -1,0 +1,229 @@
+{
+  "Crestfall": {
+    "Ardenville": {
+      "basePath": "Public/World/Crestfall/Ardenville/NPCs/",
+      "npcs": [
+        {
+          "name": "Edda Netsong",
+          "file": "Edda Netsong.html"
+        },
+        {
+          "name": "Gregor Woods",
+          "file": "Gregor Woods.html"
+        },
+        {
+          "name": "Isolde Fairweather",
+          "file": "Isolde Fairweather.html"
+        },
+        {
+          "name": "Kellen Redshore",
+          "file": "Kellen Redshore.html"
+        },
+        {
+          "name": "Mira Softstep",
+          "file": "Mira Softstep.html"
+        }
+      ]
+    },
+    "Highreach": {
+      "basePath": "Public/World/Crestfall/Highreach/NPCs/",
+      "npcs": [
+        {
+          "name": "Aidan Reed",
+          "file": "Aidan Reed.html"
+        },
+        {
+          "name": "Alaric Emberfell",
+          "file": "Alaric Emberfell.html"
+        },
+        {
+          "name": "Alistair Goldman",
+          "file": "Alistair Goldman.html"
+        },
+        {
+          "name": "Alistair Grimwood",
+          "file": "Alistair Grimwood.html"
+        },
+        {
+          "name": "Alma Ironfist nee Brightwater",
+          "file": "Alma Ironfist nee Brightwater.html"
+        },
+        {
+          "name": "Beatrix Goldleaf",
+          "file": "Beatrix Goldleaf.html"
+        },
+        {
+          "name": "Brenna Barkridge nee Ironfoot",
+          "file": "Brenna Barkridge nee Ironfoot.html"
+        },
+        {
+          "name": "Brix Ironwhistle",
+          "file": "Brix Ironwhistle.html"
+        },
+        {
+          "name": "Brom Goldfang",
+          "file": "Brom Goldfang.html"
+        },
+        {
+          "name": "Celeste Stonetooth nee Moonwhisper",
+          "file": "Celeste Stonetooth nee Moonwhisper.html"
+        },
+        {
+          "name": "Dame Isolde Swiftwind",
+          "file": "Dame Isolde Swiftwind.html"
+        },
+        {
+          "name": "Don Gnocianno",
+          "file": "Don Gnocianno.html"
+        },
+        {
+          "name": "Dr. Brule the Mule",
+          "file": "Dr. Brule the Mule.html"
+        },
+        {
+          "name": "Elder Rowan",
+          "file": "Elder Rowan.html"
+        },
+        {
+          "name": "Father Eldon Lightbringer",
+          "file": "Father Eldon Lightbringer.html"
+        },
+        {
+          "name": "Felix Tradewind",
+          "file": "Felix Tradewind.html"
+        },
+        {
+          "name": "Fiona Hammerfist nee Thistledown",
+          "file": "Fiona Hammerfist nee Thistledown.html"
+        },
+        {
+          "name": "Gareth Ironbrow",
+          "file": "Gareth Ironbrow.html"
+        },
+        {
+          "name": "Garrick Ironbrow",
+          "file": "Garrick Ironbrow.html"
+        },
+        {
+          "name": "Highreach NPC Index",
+          "file": "Highreach NPC Index.html"
+        },
+        {
+          "name": "Ingrid Hightower",
+          "file": "Ingrid Hightower.html"
+        },
+        {
+          "name": "Kara Stonefoot",
+          "file": "Kara Stonefoot.html"
+        },
+        {
+          "name": "King Alaric Stormhelm",
+          "file": "King Alaric Stormhelm.html"
+        },
+        {
+          "name": "Lady Elara Moonshadow",
+          "file": "Lady Elara Moonshadow.html"
+        },
+        {
+          "name": "Lady Millicent Goldleaf",
+          "file": "Lady Millicent Goldleaf.html"
+        },
+        {
+          "name": "Lord Cedric Brightblade",
+          "file": "Lord Cedric Brightblade.html"
+        },
+        {
+          "name": "Lord Frederick Goldman",
+          "file": "Lord Frederick Goldman.html"
+        },
+        {
+          "name": "Nimble Nackfinger",
+          "file": "Nimble Nackfinger.html"
+        },
+        {
+          "name": "Oren Hammerfist",
+          "file": "Oren Hammerfist.html"
+        },
+        {
+          "name": "Pip Whiskerwind",
+          "file": "Pip Whiskerwind.html"
+        },
+        {
+          "name": "Professor Astrid Starcaller",
+          "file": "Professor Astrid Starcaller.html"
+        },
+        {
+          "name": "Professor Elara Nightveil",
+          "file": "Professor Elara Nightveil.html"
+        },
+        {
+          "name": "Professor Galen Thornbrew",
+          "file": "Professor Galen Thornbrew.html"
+        },
+        {
+          "name": "Professor Mordecai Runeweaver",
+          "file": "Professor Mordecai Runeweaver.html"
+        },
+        {
+          "name": "Professor Seraphine Duskwillow",
+          "file": "Professor Seraphine Duskwillow.html"
+        },
+        {
+          "name": "Professor Thaldris Flamehand",
+          "file": "Professor Thaldris Flamehand.html"
+        },
+        {
+          "name": "Ratcatcher Vex",
+          "file": "Ratcatcher Vex.html"
+        },
+        {
+          "name": "Rolf Stonetooth",
+          "file": "Rolf Stonetooth.html"
+        },
+        {
+          "name": "Salty Pete",
+          "file": "Salty Pete.html"
+        },
+        {
+          "name": "Samantha Clerkson",
+          "file": "Samantha Clerkson.html"
+        },
+        {
+          "name": "Sir Gareth Strongshield",
+          "file": "Sir Gareth Strongshield.html"
+        },
+        {
+          "name": "Sir Tristan Oakheart",
+          "file": "Sir Tristan Oakheart.html"
+        },
+        {
+          "name": "Squeak Tinkerbottom",
+          "file": "Squeak Tinkerbottom.html"
+        },
+        {
+          "name": "Thaldrin Stormblade",
+          "file": "Thaldrin Stormblade.html"
+        },
+        {
+          "name": "Thoren Ironfist",
+          "file": "Thoren Ironfist.html"
+        },
+        {
+          "name": "Tomlin Barkridge",
+          "file": "Tomlin Barkridge.html"
+        }
+      ]
+    }
+  },
+  "Orcish Wastes": {
+    "Wizards Tower": {
+      "basePath": "Public/World/Orcish Wastes/Wizards Tower/NPCs/",
+      "npcs": [
+        {
+          "name": "Summoner Jon AKA the wizard",
+          "file": "Summoner Jon AKA the wizard.html"
+        }
+      ]
+    }
+  }
+}

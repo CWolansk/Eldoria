@@ -1,12 +1,11 @@
->[!Basic Information|info]
->**Dwarven Settlement in Ironpeak Mountains**
->- **Location:** [Location description]  
->- **Government:** Mining Foreman
->- **Population:** ~[Number]
->- **Defenses:** [Description]
->
->Banner
-> - [Description]
+**Dwarven Settlement in Ironpeak Mountains**
+- **Location:** Eastern section of the Ironpeak Mountain range, near Silverleaf border
+- **Government:** Mining Foreman
+- **Population:** ~[Number]
+- **Defenses:** [Description]
+
+Banner
+- [Description]
 
 ```
 [2-6 sentence read-aloud description of the settlement, second-person present tense, focusing on what makes it unique and memorable. Ironroot might focus on deep mining operations, ancient roots, or foundational infrastructure. Include sensory details.]

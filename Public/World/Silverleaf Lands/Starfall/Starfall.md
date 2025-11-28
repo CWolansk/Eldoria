@@ -1,12 +1,11 @@
->[!Basic Information|info]
->**Elven Village in the Silverleaf Lands**
->- **Location:** [Location description]  
->- **Government:** Village Elder & Astronomer Council
->- **Population:** ~[Number]
->- **Defenses:** Ranger scouts, celestial wards
->
->Banner
-> - [Description]
+**Elven Village in the Silverleaf Lands**
+- **Location:** Western edge of Silverleaf Lands, near the border with Crestfall
+- **Government:** Village Elder & Astronomer Council
+- **Population:** ~[Number]
+- **Defenses:** Ranger scouts, celestial wards
+
+Banner
+- [Description]
 
 ```
 [2-6 sentence read-aloud description of Starfall, second-person present tense. Focus on observatory towers, falling star phenomena, or sites where meteors have impacted. Include sensory details - glittering meteorite fragments, telescope lenses catching light, ancient star charts.]
