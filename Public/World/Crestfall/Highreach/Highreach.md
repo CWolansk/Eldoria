@@ -1,17 +1,17 @@
 
+**Capital of the Kingdom of Crestfall**
+- **Location:** Atop a natural plateau with steep cliffs on three sides  
+- **Government:** Monarchy  
+- **Population:** 10,000+ 
+- **Defenses:** Stone walls, natural cliffs, regular guard patrols  
 
->[!Basic Information|info]
->**Capital of the Kingdom of Crestfall**
->- **Location:** Atop a natural plateau with steep cliffs on three sides  
->- **Government:** Monarchy  
->- **Population:** 10,000+ 
->- **Defenses:** Stone walls, natural cliffs, regular guard patrols  
->
->Banner
-> - A deep burgundy background with a Raised silver fist and a gold crown hovering above
-As you pass through the massive, ornately decorated gates set into the thick stone walls, you are immediately greeted by the vibrant hustle and bustle of the city's main thoroughfare.
+Banner
+ - A deep burgundy background with a Raised silver fist and a gold crown hovering above
+
 
 ```
+As you pass through the massive, ornately decorated gates set into the thick stone walls, you are immediately greeted by the vibrant hustle and bustle of the city's main thoroughfare.
+
 The street is lined with a variety of shops and stalls, each showcasing their wares with colorful banners and signs. Merchants call out to passersby, extolling the virtues of their goods, from fresh produce and fine fabrics to intricate jewelry and enchanted trinkets. The air is filled with a symphony of sounds: the clanging of a blacksmith's hammer, the chatter of townsfolk, and the occasional melody from a street musician.
 
 To your left, you notice a large building with a Red Target symbol placed on a banner out front, with adventuring gear set outside and a large open double door On your right, the scent of freshly baked bread and pastries wafts from a bakery, tempting you to stop for a treat.

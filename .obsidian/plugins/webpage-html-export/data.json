@@ -181,7 +181,7 @@
       "hideSettingsButton": false,
       "allowFoldingLists": true,
       "allowFoldingHeadings": true,
-      "documentWidth": "50em"
+      "documentWidth": "60em"
     },
     "rssOptions": {
       "featureId": "rss",

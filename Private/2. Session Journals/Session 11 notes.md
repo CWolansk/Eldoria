@@ -1,8 +1,14 @@
 ---
-fc-date: 0496-03-13
-fc-end: 0496-03-13
+fc-date: 0496-03-06
+fc-end: 0496-03-06
 fc-category: Sessions
 ---
+
+Starting at city veing saved 
+- JP and randi loot the looters 
+	- city guard notices jp and randi looting 
+- Party hears a town crier telling everyone to go the adventurers guild to collect rewards for helping with the Rat crisis
+- Party travels to adventurers guild to 
 
 ## Session Overview
 The immediate aftermath of saving [[Highreach]] from the fly demon. The party navigates city guard scrutiny, collects rewards, discovers critical information about the lich **Jon** and the legendary hero **Diego**, and prepares for their journey to the elven kingdom.

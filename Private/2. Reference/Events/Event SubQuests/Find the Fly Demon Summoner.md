@@ -20,7 +20,7 @@ The [[Adventurers Guild]] needs to identify who summoned the fly demon that atta
 
 **The Summoner**: **Jon the Lich**
 
-After consulting with [[Jon Brightman]] during [[Session 11]], the party learned that the fly demon was summoned by **Jon the Lich** as part of his coordinated attack on Highreach. The demon attack served as a distraction and created chaos to cover his theft of the [[Seekers Eye]] from the mines.
+After consulting with [[Jon Brightman]] during [[Session 11 notes]], the party learned that the fly demon was summoned by **Jon the Lich** as part of his coordinated attack on Highreach. The demon attack served as a distraction and created chaos to cover his theft of the [[Seekers Eye]] from the mines.
 
 **Next Step**: Party needs to return to [[Guild Master Thaldrin Stormblade]] at the [[Adventurers Guild]] to report their findings and collect the 50 gp reward.
 
@@ -146,7 +146,7 @@ After consulting with [[Jon Brightman]] during [[Session 11]], the party learned
 
 ## Related Events & Connections
 
-- [[Session 11]] - Quest assigned
+- [[Session 11 notes]] - Quest assigned
 - [[Randi Kills Looters Consequence]] - Looter connection to chaos
 - [[Vineyard Blight Investigation]] - Possible dark magic connection
 - Blackwood Forest rumors - Source of dark magic?

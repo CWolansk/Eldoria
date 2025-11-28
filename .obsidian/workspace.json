@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Public/World/Crestfall/Highreach/Highreach.md",
+                "file": "Private/2. Session Journals/Session 12 notes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Highreach"
+              "title": "Session 12 notes"
             }
           }
         ]
@@ -262,76 +262,14 @@
       "calendarium:Open Calendarium": false
     }
   },
-  "floating": {
-    "id": "23b5a4c069d7cbf3",
-    "type": "floating",
-    "children": [
-      {
-        "id": "783c1b69bdac65e3",
-        "type": "window",
-        "children": [
-          {
-            "id": "615b357283c64202",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "59ec44b278468469",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Public/World/Crestfall/Ardenville/Ardenville.md",
-                    "mode": "source",
-                    "source": true
-                  },
-                  "icon": "lucide-file",
-                  "title": "Ardenville"
-                }
-              },
-              {
-                "id": "59003c84c38a73d1",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Private/2. Reference/NPCs/All NPCS/Thaldrin Stormblade.md",
-                    "mode": "source",
-                    "source": false
-                  },
-                  "icon": "lucide-file",
-                  "title": "Thaldrin Stormblade"
-                }
-              },
-              {
-                "id": "c9f77a454911c09a",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Private/1. World Almanac/World/Crestfall/Highreach/HighReach Merchants Guild.md",
-                    "mode": "source",
-                    "source": false
-                  },
-                  "icon": "lucide-file",
-                  "title": "HighReach Merchants Guild"
-                }
-              }
-            ],
-            "currentTab": 2
-          }
-        ],
-        "direction": "vertical",
-        "x": 1921,
-        "y": 452,
-        "width": 1099,
-        "height": 992,
-        "maximize": false,
-        "zoom": 0
-      }
-    ]
-  },
   "active": "e68d3435c1b1ab60",
   "lastOpenFiles": [
+    "Private/2. Session Journals/Session 11 notes.md",
+    "Private/2. Session Journals/Session 10 notes.md",
+    "Private/2. Session Journals/Session 9 Notes.md",
+    "Private/2. Session Journals/Session 8 Notes.md",
+    "Private/2. Session Journals/Session 12 notes.md",
+    "Public/World/Crestfall/Highreach/Highreach.md",
     "Public/World/Groups/Adventurers Guild.md",
     "Public/World/Groups/Exterminators Guild.md",
     "Public/World/Groups/Foundation.md",
@@ -352,12 +290,6 @@
     "Public/World/Crestfall/Ardenville/NPCs/Mira Softstep.md",
     "Public/World/Crestfall/Fairfield/Forgefires Armaments.md",
     "Public/World/Crestfall/Fairfield/Starspells Wonders.md",
-    "Public/World/Crestfall/Hillcrest/Hammerstrikes Weapons.md",
-    "Public/World/Crestfall/Hillcrest/Nightwhispers Potions and Scrolls.md",
-    "Public/World/Crestfall/Stonehaven/Blackwood Forest.md",
-    "Public/World/Crestfall/Stonehaven/Ironforge Smithy.md",
-    "Public/World/Crestfall/Stonehaven/Marlas Gear.md",
-    "Public/World/Crestfall/Stonehaven/Mystic Wares.md",
     "docs/Public/World/Crestfall/Highreach/NPCs/Felix Tradewind.html",
     "docs/Public/World/Crestfall/Highreach/NPCs/Alaric Emberfell.html",
     "docs/Public/World/Crestfall/Highreach/NPCs/Thaldrin Stormblade.html",
