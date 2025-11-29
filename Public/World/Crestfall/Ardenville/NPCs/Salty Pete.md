@@ -1,7 +1,7 @@
 ---
 Location :: #Ardenville #Docks #LakeArden
 Profession :: #Captain #FormerSailor #BoatOwner
-Description :: Half-orc male veteran sailor and boat captain; owns a competition-worthy vessel but lacks a crew after his last one was intimidated away.
+Description :: Human male veteran sailor and boat captain; owns a competition-worthy vessel but lacks a crew after his last one was intimidated away.
 Alive? :: Yes
 Notes :: Potential "I Know a Guy" connection for JP. Respects seamanship and practical approach to difficult environments. Looking for a new crew for the boating competition.
 ---
@@ -13,10 +13,10 @@ Salty Pete sailed merchant vessels for two decades before settling in Ardenville
 Pete finds himself with a boat but no crew as the boating competition approaches. The intimidation tactics used against his former crew members have left him bitter but determined. He's looking for capable individuals who won't be scared off by threats—people with backbone and skill.
 
 ## Personality
-Pete embodies the practical sailor's approach to life—straightforward, competent, and respectful of those who prove themselves through action rather than words. His half-orc heritage gives him natural empathy for others facing racial prejudice, though he keeps his opinions largely to himself. Years of sailing have made him patient but also stubborn when he believes he's right.
+Pete embodies the practical sailor's approach to life—straightforward, competent, and respectful of those who prove themselves through action rather than words. Years of sailing have made him patient but also stubborn when he believes he's right. He judges people by their actions and seamanship, not by their background or appearance.
 
 ## Relationships
-- **JP**: Potential connection through shared maritime background and half-orc heritage
+- **JP**: Potential connection through shared maritime background
 - **Former Crew**: Disappointed but understanding of their fear; no hard feelings
 - **Rival Captains**: Suspects certain competitors of orchestrating the intimidation
 - **Fisherman's Guild**: Respected member with good standing

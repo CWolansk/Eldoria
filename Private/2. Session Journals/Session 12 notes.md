@@ -35,7 +35,7 @@ The party doesn't have a boat! They'll need to figure out how to acquire one:
   - He's an older captain with a boat but no crew
   - His last crew got intimidated by other crews and the danger of the competition
   - Could be an adversary OR a willing ally who takes the party on his boat
-  - Great connection opportunity for JP (shared maritime background and half-orc heritage)
+  - Great connection opportunity for JP (shared maritime background)
   - **Possible storylines:**
     - Party proves themselves worthy and he agrees to captain for them
     - Party has to help him deal with whoever intimidated his old crew
