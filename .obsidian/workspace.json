@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Private/2. Reference/Events/Quest Board.md",
+                "file": "Private/2. Reference/Events/04-Ideas-and-Drafts/Randi Kills Looters Consequence.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Quest Board"
+              "title": "Randi Kills Looters Consequence"
             }
           }
         ]
@@ -171,7 +171,7 @@
                 "calendar": "ID_4b1be88869cb",
                 "ephemeral": {
                   "viewing": {
-                    "day": 13,
+                    "day": 7,
                     "month": 2,
                     "year": 496
                   },
@@ -184,9 +184,10 @@
                   "displayDayNumber": true,
                   "displaySeasonColors": true,
                   "interpolateColors": true,
+                  "displayAbsoluteYear": true,
                   "displayMoons": true,
                   "displayWeather": true,
-                  "location": ""
+                  "location": "ID_0a2838d8c9cb"
                 },
                 "id": "ID_ab08197979da",
                 "child": "ID_3ac808fa89eb"
@@ -271,8 +272,23 @@
       "calendarium:Open Calendarium": false
     }
   },
-  "active": "e39e905e59c5e3f3",
+  "active": "c6fd7016557065d0",
   "lastOpenFiles": [
+    "Public/World/Crestfall/Highreach/NPCs/Alaric Emberfell.md",
+    "Private/1. World Almanac/World/Crestfall/Highreach/The Dragons Breath Forge.md",
+    "Private/1. World Almanac/World/Crestfall/Highreach/The Arcane Enclave.md",
+    "Private/1. World Almanac/World/Crestfall/Highreach/Target by Tradewind.md",
+    "Private/1. World Almanac/World/Crestfall/Highreach/Sturdy Mugg.md",
+    "Private/1. World Almanac/World/Crestfall/Highreach/HighReach Merchants Guild.md",
+    "Private/1. World Almanac/World/Crestfall/Highreach/Highreach Adventurers Guild.md",
+    "Private/1. World Almanac/World/Crestfall/Highreach/Highreach.md",
+    "Private/2. Reference/Events/02-World-Events/Timeline/Wizarding Wars.md",
+    "Private/2. Reference/Events/02-World-Events/Timeline/Diego Comes to Eldoria.md",
+    "Private/2. Reference/Events/02-World-Events/Timeline/Diego seals Jons powers.md",
+    "Private/2. Session Journals/Session 11 notes.md",
+    "The Tipsy Tankard.md",
+    "Private/2. Session Journals/Session 12 notes.md",
+    "Private/2. Reference/Events/Quest Board.md",
     "Private/2. Reference/Events/04-Ideas-and-Drafts/Flushed Heirloom Failed Quest Consequence.md",
     "Private/2. Reference/Events/03-Consequences/Resolved/Highreach Duplirat Invasion.md",
     "Private/2. Reference/Events/03-Consequences/Active/Highreach Duplirat Invasion_backup.md",
@@ -280,26 +296,11 @@
     "Private/2. Reference/Events/03-Consequences/Resolved/Party Ambushed by Merchant Guild Bandits.md",
     "Private/2. Reference/Events/04-Ideas-and-Drafts/Randi Kills Looters Consequence.md",
     "Private/2. Reference/Events/01-Quests/Side Quests/Exterminators Guild Induction.md",
-    "Private/2. Session Journals/Session 11 notes.md",
-    "Private/2. Session Journals/Session 12 notes.md",
-    "Private/2. Reference/Events/Quest Board.md",
     "Private/2. Reference/Events/02-World-Events/Holidays/Human Holidays/Winterlight Festival.md",
     "Private/2. Reference/Events/02-World-Events/Holidays/Human Holidays/Harvests End.md",
     "Private/2. Reference/Events/02-World-Events/Holidays/Human Holidays/Midsummers Blessing.md",
     "Private/2. Reference/Events/02-World-Events/Holidays/Human Holidays/Springtide Festival.md",
-    "Private/2. Reference/Events/02-World-Events/Holidays/Dwarven Holidays/Hammerfall Day.md",
-    "Private/2. Reference/Events/02-World-Events/Town/The Sealed Gates of Stonehaven.md",
-    "Private/2. Reference/Events/02-World-Events/Town/Vineyard Blight Investigation.md",
-    "Public/World/Crestfall/Ardenville/NPCs/Salty Pete.md",
-    "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Salty Pete.md",
     "Private/2. Reference/Events/02-World-Events/Town",
-    "Private/2. Reference/Events/01-Quests/Completed/Jewelry Rat Infestation.md",
-    "Private/2. Reference/Events/01-Quests/Side Quests/Road After Dr Brule.md",
-    "Private/2. Reference/Events/01-Quests/Side Quests/Nightstalkers Collection Quest.md",
-    "Private/2. Reference/Events/01-Quests/Side Quests/Find the Fly Demon Summoner.md",
-    "Private/2. Reference/Events/01-Quests/Completed/Rats Can't read Rat Infestation.md",
-    "Private/2. Reference/Events/01-Quests/Completed/Goblins in the Mine.md",
-    "Private/2. Reference/Events/01-Quests/Completed/Frederick Goldman Estate Rat Infestation.md",
     "Private/2. Reference/Events/01-Quests/Side Quests/Merchants Guild Quest Line",
     "Private/2. Reference/Events/02-World-Events/Holidays/Orc Holidays",
     "Private/2. Reference/Events/02-World-Events/Holidays/Human Holidays",

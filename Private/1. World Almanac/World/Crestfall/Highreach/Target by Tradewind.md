@@ -3,6 +3,9 @@ Owned by [[Private/2. Reference/NPCs/All NPCS/Felix Tradewind]]
 General Items : [[Quick Links#^5f210f]]
 Adventuring Gear : [[Quick Links#^fc456a]]
 
+# Public Notes 
+![[Public/World/Crestfall/Highreach/Target by Tradewind|Target by Tradewind]]
+
  A treasure trove of provisions and unique items. Wooden crates and barrels contain trail rations and water flasks, while shelves hold cooking utensils, small tents, and signal whistles. A glass cabinet showcases lockpicks, spyglasses, and other intriguing trinkets, each with a small handwritten label detailing its use.
 
 - Lantern - Hooded: Casts bright light in a 30-foot radius and dim light for an additional 30 feet.

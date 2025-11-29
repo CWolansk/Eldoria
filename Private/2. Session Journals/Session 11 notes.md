@@ -39,7 +39,7 @@ The immediate aftermath of saving [[Highreach]] from the fly demon. The party na
 
 **Circle of Truth Interrogation**
 - Party must stand in a magical circle that prevents lying
-- **Results**: Everyone fails except **Claire** (only she can tell full truth)
+- **Results**: Everyone fails except **Claire** (only she can Lie)
 - Party gives half-truthful answers about the mine incident
 - Successfully avoid revealing they were summoned from another world
 

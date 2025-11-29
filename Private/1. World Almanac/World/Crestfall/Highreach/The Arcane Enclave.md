@@ -4,6 +4,9 @@ Owned by [[Lady Elara Moonshadow]]
 [[Potential Magic Items]]
 [[Magic Potions]]
 
+# Public Notes 
+![[Public/World/Crestfall/Highreach/The Arcane Enclave|The Arcane Enclave]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

@@ -1,6 +1,9 @@
 #HighReach #AdventurersGuild
 
 Adventurers Guild
+# Public Notes 
+![[Public/World/Crestfall/Highreach/Highreach Adventurers Guild|Highreach Adventurers Guild]]
+
 ```dataview 
 table file.tags from #AdventurersGuild and !#NPCList
 ```

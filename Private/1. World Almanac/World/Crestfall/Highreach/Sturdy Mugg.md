@@ -2,6 +2,9 @@
 Owned by [[Kara Stonefoot]]
 Barkeep [[Aidan Reed]]
 
+# Public Notes 
+![[Public/World/Crestfall/Highreach/Sturdy Mugg|Sturdy Mugg]]
+
 Employees 
 ```dataview 
 LIST FROM #SturdyMugg AND #HighReach AND !#NPCList AND !#SturdyMuggPatron

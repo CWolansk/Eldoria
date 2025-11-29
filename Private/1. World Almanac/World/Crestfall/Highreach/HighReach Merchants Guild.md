@@ -2,6 +2,8 @@
 GuildMaster [[Alistair Goldman]]
 
 Guild Receptionist : [[Evelyn Marroway]]
+# Public Notes 
+![[Public/World/Crestfall/Highreach/HighReach Merchants Guild|HighReach Merchants Guild]]
 
 ```dataview 
 LIST FROM #Merchant AND #HighReach OR #MerchantsGuild AND !#NPCList
