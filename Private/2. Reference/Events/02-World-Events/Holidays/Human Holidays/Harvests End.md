@@ -1,6 +1,6 @@
 ---
 fc-date: 0496-03-50
-fc-end: 
+fc-end:
 fc-category: Holiday
 ---
 

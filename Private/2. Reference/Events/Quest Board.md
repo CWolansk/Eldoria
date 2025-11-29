@@ -33,7 +33,7 @@ SORT fc-date DESC
 ### 🏛️ Political Situation
 ```dataview
 TABLE status, threat_level
-FROM "Private/2. Reference/Events/02-World-Events/Political"
+FROM "Private/2. Reference/Events/02-World-Events/Town"
 WHERE status = "Ongoing" OR status = "Escalating"
 ```
 
@@ -41,8 +41,7 @@ WHERE status = "Ongoing" OR status = "Escalating"
 ```dataview
 TABLE dateformat(fc-date, "MM-dd-yyyy") AS "Date", location
 FROM "Private/2. Reference/Events/02-World-Events/Holidays"
-SORT date ASC
-LIMIT 5
+SORT fc-date asc
 ```
 
 ### ⏳ Timeline (Recent History)
@@ -65,5 +64,4 @@ SORT threat_level DESC
 ```dataview
 LIST
 FROM "Private/2. Reference/Events/04-Ideas-and-Drafts"
-LIMIT 10
 ```
