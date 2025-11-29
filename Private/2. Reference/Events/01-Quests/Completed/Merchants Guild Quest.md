@@ -3,6 +3,7 @@ fc-date: 0496-03-02
 fc-end: 0496-03-02
 fc-category: Quests
 level: F
+Status: Completed
 ---
 #FLevelQuest #Quest #HighReach 
 #Date_02_03_496 

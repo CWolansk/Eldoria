@@ -3,6 +3,7 @@ fc-date: 0496-03-01
 fc-end: 0496-03-01
 fc-category: Quests
 level: F
+status: Completed
 ---
 #FLevelQuest #CompletedQuest #HighReach #Date_01_03_496 
 COMPLETED : Lost Pet: Retrieve a lost kitten or puppy from a nearby forest.

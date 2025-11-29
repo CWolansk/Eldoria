@@ -1,5 +1,5 @@
 ---
-fc-date: 0496-03-13
+fc-date:
 fc-end:
 fc-category: Events
 ---

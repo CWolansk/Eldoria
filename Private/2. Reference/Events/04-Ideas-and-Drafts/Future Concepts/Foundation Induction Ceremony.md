@@ -1,6 +1,6 @@
 ---
-fc-date: 0496-03-13
-fc-end: 0496-03-13
+fc-date: 0496-03-06
+fc-end: 0496-03-06
 fc-category: Events
 ---
 #Date_13_03_496 #event #SecretSociety #SocialEncounter

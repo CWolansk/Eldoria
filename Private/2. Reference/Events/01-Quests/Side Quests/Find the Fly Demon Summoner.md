@@ -1,8 +1,8 @@
 ---
-fc-date: 0496-03-13
-fc-end:
+fc-date: 0496-03-06
+fc-end: 0496-03-06
 fc-category: Events
-status: Ready to Turn In
+status: Completed
 ---
 
 #Date_13_03_496 #Subquest #Investigation

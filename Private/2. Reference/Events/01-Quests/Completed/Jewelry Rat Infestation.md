@@ -1,8 +1,9 @@
 ---
 fc-date: 0496-03-06
-fc-end: 
+fc-end:
 fc-category: Failed Quests
 level: F
+Status: Failed
 ---
 #HighReach #Quest #FLevelQuest
 * Reward 1 guild point per rat 1 gold per rat 

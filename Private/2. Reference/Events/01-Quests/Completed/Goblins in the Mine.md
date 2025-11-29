@@ -3,6 +3,7 @@ fc-date: 0496-03-02
 fc-end: 0496-03-06
 fc-category: Completed Quests
 level: F
+status: Completed
 ---
 #HighReach #highreachMines #Quest #FLevelQuest #Date_02_03_496 #Date_03_03_496 #Date_04_03_496 #Date_05_03_496 
 * Reward : 1gp and 1 guild point for every goblin killed 
