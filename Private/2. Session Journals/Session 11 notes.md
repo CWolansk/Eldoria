@@ -160,6 +160,19 @@ The immediate aftermath of saving [[Highreach]] from the fly demon. The party na
 
 ---
 
+## Current Status (End of Session)
+
+**Exterminators Guild Induction**
+- Party has started the [[Exterminators Guild]] induction ceremony
+- Currently undergoing trials/tasks to prove their worth
+
+**Don Gnocianno's Package**
+- Party is currently transporting a package for [[Don Gnocianno]]
+- Details of package contents unknown (or dangerous to know?)
+- Must complete delivery as part of guild obligations
+
+---
+
 ## DM Notes
 
 - **Jon the Lich**: Centuries-old survivor of the Wizarding Wars, believes might makes right, seeks world conquest

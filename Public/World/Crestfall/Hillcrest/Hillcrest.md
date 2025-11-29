@@ -40,19 +40,19 @@ Hillcrest spreads across three adjacent hilltops, connected by well-worn paths t
 
 ### Gruk's Forge & General Goods
 **Type:** Smithy, Weapon Shop & General Store (Consolidated)  
-**Proprietor:** [[Gruk Ironhand]] (Half-Orc, Master Smith)  
+**Proprietor:** [[Gruk Ironhand]] (Human, Master Smith, Former Mercenary)  
 **Location:** Market Row, single-story stone building with attached forge
 
 ```
 The sound of hammer on anvil rings across Hillcrest from dawn to dusk. The forge is a sturdy stone structure with a chimney that belches smoke and sparks. Inside, the heat is intense, and the walls are lined with tools, weapons in various stages of completion, and surprisingly, everyday goods—nails, horseshoes, cooking pots, and farming implements.
 
-Behind the anvil stands Gruk, a powerfully built half-orc with burn scars on his arms and a leather apron stained with soot. His tusks are filed down slightly, and his demeanor is focused and professional. When he's not at the forge, he's behind the counter selling goods with the efficiency of a seasoned merchant.
+Behind the anvil stands Gruk, a powerfully built human with burn scars on his arms and a leather apron stained with soot. His face bears the weathered look of someone who's seen hard times, and his demeanor is focused and professional. When he's not at the forge, he's behind the counter selling goods with the efficiency of a seasoned merchant.
 ```
 
 **Reputation:**  
 Gruk has lived in Hillcrest for fifteen years and has *earned* his place through sheer skill and relentless work. He arrived as a wandering smith and proved his worth by re-shoeing every horse in town, repairing the village's plow blades for free, and forging a ceremonial sword for the Elder.
 
-He still faces occasional prejudice—suspicious glances, whispered comments—but his craftsmanship is undeniable. The people of Hillcrest respect him, though some do so grudgingly. He's a living example that half-orcs can "make it" in human society, though the cost is constant vigilance and twice the effort.
+He still faces occasional prejudice—suspicious glances, whispered comments about his mercenary past—but his craftsmanship is undeniable. The people of Hillcrest respect him, though some do so grudgingly. He's a living example that former soldiers can find peace and purpose, though the cost is constant vigilance and twice the effort to prove you've changed.
 
 **Services & Wares:**
 - **Smithing:**
@@ -68,8 +68,8 @@ He still faces occasional prejudice—suspicious glances, whispered comments—b
     - Gruk's weapons are exceptionally well-balanced. Any weapon purchased here gains a cosmetic +1 to hit (mechanically insignificant, but feels good).
 
 **Party Connections:**
-- **JP (Half-Orc Monk):** This is a CRITICAL encounter. Gruk represents a possible future—acceptance earned through skill, but never given freely. He might mentor JP, warn him about the challenges ahead, or become a bitter reminder of what JP is fighting against. Gruk's attitude depends on how JP presents himself:
-    - If JP is proud and defiant: "You'll learn the hard way, like I did."
+- **JP (Half-Orc Monk):** Gruk understands what it means to be judged by your past rather than your present. As a former mercenary, he knows the struggle of earning trust. He might offer JP advice on dealing with prejudice:
+    - If JP is proud and defiant: "Fighting their expectations only confirms them. Let your work speak."
     - If JP is uncertain: "Find your worth and make them see it. Every. Single. Day."
 - **Vanessa & Julie (Fighters):** Gruk can repair or improve their weapons and armor. He respects martial skill.
 - **Justin (Merchant):** Gruk sells quality goods at fair prices. Mutual professional respect.
@@ -82,9 +82,9 @@ He still faces occasional prejudice—suspicious glances, whispered comments—b
 - **The Elder's Blade:** The ceremonial sword he forged for Elder Thomlin is displayed in the village hall—a symbol of his acceptance and his skill.
 
 **Quest Hooks:**
-- **The Dwarven Challenge:** A traveling dwarf has challenged Gruk's reputation, claiming "no half-breed" can match true dwarven craft. A contest is brewing.
+- **The Dwarven Challenge:** A traveling dwarf has challenged Gruk's reputation, claiming no human can match true dwarven craft. A contest is brewing.
 - **Supply Run:** Gruk needs rare ore from the mountains near Forgepeak. He can't leave the forge, but he'll pay well and offer a masterwork weapon in return.
-- **Old Enemies:** Someone from Gruk's past (orcish tribe? former mercenary company?) might arrive in Hillcrest, forcing him to choose between his old life and his new one.
+- **Old Enemies:** Someone from Gruk's past mercenary company might arrive in Hillcrest, forcing him to choose between his old life and his new one.
 
 ---
 
@@ -105,7 +105,7 @@ A cozy inn built into the hillside, known for its apple cider (both regular and 
 ## Key NPCs
 
 - **Elder Thomlin Hillshaw:** Village elder, fair and practical, was the one who gave Gruk his first commission (the ceremonial sword).
-- **Gruk Ironhand:** Half-orc smith, represents earned acceptance and the challenges JP might face.
+- **Gruk Ironhand:** Human smith and former mercenary, represents earned acceptance and the challenges of overcoming a difficult past.
 - **Merry Applewood:** Gnome innkeeper, cheerful and welcoming to all travelers.
 - **Tilda the Shepherd:** Elderly human woman who tends the hillside sheep, knows every rumor and secret in the valley.
 
