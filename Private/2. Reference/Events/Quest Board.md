@@ -2,9 +2,9 @@
 tags: [dashboard, quests, events]
 ---
 
-# 🛡️ Campaign Quest Board
+# Campaign Quest Board
 
-## ⚔️ Active Quests
+## Active Quests
 ```dataview
 TABLE status, location, reward, difficulty
 FROM "Private/2. Reference/Events/01-Quests"
@@ -12,16 +12,16 @@ WHERE status != "Completed" AND status != "Failed"
 SORT date ASC
 ```
 
-## 📜 Quest Log (Completed)
+## Completed Quests
 ```dataview
-TABLE fc-date, fc-end, status
+TABLE dateformat(fc-date, "MM-dd-yyyy") AS "Start", dateformat(fc-end, "MM-dd-yyyy") AS "end", status
 FROM "Private/2. Reference/Events/01-Quests"
 WHERE status = "Completed"
 SORT fc-date DESC
 ```
-
+## Failed Quests
 ```dataview
-TABLE fc-date, fc-end, status
+TABLE dateformat(fc-date, "MM-dd-yyyy") AS "start", dateformat(fc-end, "MM-dd-yyyy") AS "end", status
 FROM "Private/2. Reference/Events/01-Quests"
 WHERE status = "Failed"
 SORT fc-date DESC
@@ -39,7 +39,7 @@ WHERE status = "Ongoing" OR status = "Escalating"
 
 ### 📅 Upcoming Holidays
 ```dataview
-TABLE fc-date, location
+TABLE dateformat(fc-date, "MM-dd-yyyy") AS "Date", location
 FROM "Private/2. Reference/Events/02-World-Events/Holidays"
 SORT date ASC
 LIMIT 5
@@ -47,7 +47,7 @@ LIMIT 5
 
 ### ⏳ Timeline (Recent History)
 ```dataview
-TABLE fc-date, summary
+TABLE dateformat(fc-date, "MM-dd-yyyy") AS "Date", summary
 FROM "Private/2. Reference/Events/02-World-Events/Timeline"
 SORT fc-date DESC
 ```
