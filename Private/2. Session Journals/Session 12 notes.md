@@ -58,3 +58,54 @@ The party doesn't have a boat! They'll need to figure out how to acquire one:
 - Who are the other competitors?
 - What kind of boat do they need for this competition?
 - Are there any rules about boat modifications or crew size?
+
+---
+
+## Ongoing Plotline: Exterminators Guild / Don Gnocianno's Package
+
+The party started the Exterminators Guild induction ceremony and is currently transporting a package for Don Gnocianno. Need to think about how this resolves (doesn't have to be Session 12, but should plan ahead).
+
+### Current Status
+- [ ] Party is mid-induction into the Exterminators Guild
+- [ ] Currently transporting Don Gnocianno's package
+- [ ] Destination/recipient unknown?
+
+### Resolution Ideas
+
+**Option A: Delivery in Ardenville**
+- The package recipient is in Ardenville - convenient timing!
+- Delivery completes one step of the induction
+- Could introduce new NPC contact for the guild in Ardenville
+
+**Option B: Delivery Detour**
+- Package needs to go somewhere else first before Ardenville
+- Creates a side quest / minor delay
+- Could reveal more about what the Exterminators Guild actually does
+
+**Option C: Package Complications**
+- Someone tries to intercept the package
+- Party must protect/defend it
+- Reveals enemies of the guild or Don Gnocianno
+
+**Option D: Moral Dilemma**
+- Party discovers what's in the package
+- Contents are morally questionable
+- Do they complete delivery or confront Don Gnocianno?
+- Could create tension with guild membership
+
+**Option E: Package Opens / Gets Damaged**
+- Accident or combat causes package to open
+- Party sees contents (good or bad revelation)
+- Must deal with consequences
+
+### Questions to Resolve
+- What's actually IN the package?
+- Who is the recipient?
+- Is Don Gnocianno trustworthy or using the party?
+- What does full Exterminators Guild membership grant?
+- Are there other induction tasks beyond the delivery?
+
+### Potential Tie-ins
+- Could the package recipient help with the boating competition?
+- Does the Exterminators Guild have connections in Ardenville?
+- Could completing this task earn favor that helps elsewhere?
