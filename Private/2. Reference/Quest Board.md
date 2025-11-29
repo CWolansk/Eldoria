@@ -60,6 +60,7 @@ Regional Encounters
 
 - The Lost Artifact
 - Recurring : Highreach Mines monster occupation
+- **[[Exterminators Guild Induction]]** - 🔄 IN PROGRESS (Party transporting package to Ardenville)
 
 - Fairfield
 
@@ -72,6 +73,7 @@ Regional Encounters
 - Ardenville
 
 - Pirates
+- Boating Competition (JP's ship The Tipsy Tankard is the prize)
 
 - Stonehaven
 
