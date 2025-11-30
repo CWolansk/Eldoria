@@ -1,5 +1,5 @@
 ---
-ExperiencePoints: 6500
+ExperiencePoints: 8000
 level: 5
 GuildPoints: 51
 GuildRank: E

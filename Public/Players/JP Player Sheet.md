@@ -5,8 +5,12 @@ const {CharacterSheetDisplay} = await cJS()
 await CharacterSheetDisplay.display(dv, {
   name: "Grum 'Grog Guzzler' Ironjaw (JP)",
   class: "Monk (Drunken Master)",
-  level: 5,
+  level: dv.page("Player Controls").level,
   race: "Half-Orc",
+  background: "Sailor",
+  experience: dv.page("Player Controls").ExperiencePoints,
+  guildPoints: dv.page("Player Controls").GuildPoints,
+  guildRank: dv.page("Player Controls").GuildRank,
   str: 12,
   dex: 14,
   con: 12,

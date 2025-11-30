@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Public/Players/JP Player Sheet.md",
+                "file": "Public/World/Unknown.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "JP Player Sheet"
+              "title": "Unknown"
             }
           }
         ]
@@ -40,7 +40,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "scroll",
+                "query": "player control",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -274,15 +274,18 @@
   },
   "active": "409b0a987e8c1dd3",
   "lastOpenFiles": [
+    "docs/Public/World/Unknown.html",
+    "Public/World/Unknown.md",
+    "Public/Players/Justin Player Sheet.md",
+    "Public/Players/Vanessa Player Sheet.md",
+    "Public/Players/Liz Player Sheet.md",
     "Public/Players/Claire Player Sheet.md",
+    "Public/Players/Randi Player Sheet.md",
+    "Public/Players/Julie Player Sheet.md",
     "Public/Players/JP Player Sheet.md",
+    "Private/1. The Party/Players/Player Controls.md",
     "Private/1. The Party/Players/Private Claire notes.md",
     "Private/2. Session Journals/Session 1 Notes.md",
-    "Public/Players/Julie Player Sheet.md",
-    "Public/Players/Justin Player Sheet.md",
-    "Public/Players/Liz Player Sheet.md",
-    "Public/Players/Randi Player Sheet.md",
-    "Public/Players/Vanessa Player Sheet.md",
     "Public/World/Crestfall/Fairfield/Forgefires Armaments.md",
     "Public/World/Crestfall/Ardenville/Steelshapers Forge.md",
     "Public/World/Crestfall/Highreach/Highreach Mines.md",
@@ -297,9 +300,6 @@
     "Public/World/Groups/Exterminators Guild.md",
     "Public/World/Groups/Adventurers Guild.md",
     "Public/World/Orcish Wastes/Wizards Tower/Wizards Tower.md",
-    "Public/World/Crestfall/Stonehaven/Stonehaven.md",
-    "Public/World/Orcish Wastes/Orc Town B/Orc City B.md",
-    "Public/World/Orcish Wastes/Orc Town C/Orc City C.md",
     "docs/Public/World/Crestfall/Fairfield/NPCs/Valeris Shadowmere.html",
     "docs/Public/World/Crestfall/Fairfield/NPCs/Meredith Caravan-Friend.html",
     "docs/Public/World/Crestfall/Fairfield/NPCs",

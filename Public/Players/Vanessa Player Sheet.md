@@ -6,8 +6,11 @@ const {CharacterSheetDisplay} = await cJS()
 await CharacterSheetDisplay.display(dv, {
   name: "Vanessa",
   class: "Druid (Circle of the Land)",
-  level: 5,
+  level: dv.page("Player Controls").level,
   race: "Dragonborn",
+  experience: dv.page("Player Controls").ExperiencePoints,
+  guildPoints: dv.page("Player Controls").GuildPoints,
+  guildRank: dv.page("Player Controls").GuildRank,
   background: "Hermit",
   str: 13,
   dex: 14,

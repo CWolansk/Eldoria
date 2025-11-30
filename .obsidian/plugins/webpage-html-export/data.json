@@ -10,7 +10,7 @@
     "postProcess": true,
     "displayProgress": true,
     "inlineHTML": true,
-    "exportPath": "/home/cal/Desktop/VsCodeProjects/Eldoria/docs",
+    "exportPath": "/home/cal/Desktop/VsCodeProjects/Eldoria/docs/Public/World",
     "filesToExport": [
       "docs/Players",
       "docs/index.md"
@@ -216,7 +216,7 @@
     "faviconPath": "",
     "siteName": "Eldoria",
     "iconEmojiStyle": "Native",
-    "exportRoot": "",
+    "exportRoot": "Public/Players",
     "includePluginCss": [
       "statblock-stylesheet",
       "svelte-srfyn6",

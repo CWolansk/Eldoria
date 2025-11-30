@@ -1,0 +1,1 @@
+You have not visited or learned about this place yet.

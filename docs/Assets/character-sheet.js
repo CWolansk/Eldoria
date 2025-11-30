@@ -47,8 +47,8 @@ class CharacterSheetDisplay {
             '.dnd-char-sheet h2 { color: #fff; margin: 20px 0 15px 0; padding-bottom: 10px; border-bottom: 2px solid #fff; }\n' +
             '.dnd-char-info { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #fff; }\n' +
             '.dnd-info-field { display: flex; flex-direction: column; text-align: center; }\n' +
-            '.dnd-info-field label { font-size: 0.75em; color: #fff; margin-bottom: 5px; text-transform: uppercase; font-weight: bold; }\n' +
-            '.dnd-info-value { padding: 8px; font-size: 1em; color: #fff; font-weight: 600; }\n' +
+            '.dnd-info-field label { font-size: 1.2em; color: #fff; margin-bottom: 5px; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px; }\n' +
+            '.dnd-info-value { padding: 5px; font-size: 1em; color: #eee; font-weight: 400; }\n' +
             '.dnd-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px; }\n' +
             '.dnd-stat-block { background: #1a1a1a; padding: 15px; border-radius: 10px; text-align: center; color: #fff; border: 2px solid #fff; }\n' +
             '.dnd-stat-block label { display: block; font-size: 0.9em; margin-bottom: 10px; text-transform: uppercase; font-weight: bold; color: #fff; }\n' +
@@ -115,9 +115,9 @@ class CharacterSheetDisplay {
             '@media (max-width: 480px) {\n' +
             '  .dnd-char-sheet { padding: 10px; margin: 5px; }\n' +
             '  .dnd-char-sheet h1 { font-size: 1.3em; margin-bottom: 15px; }\n' +
-            '  .dnd-char-info { grid-template-columns: 1fr; gap: 8px; }\n' +
-            '  .dnd-info-field label { font-size: 0.7em; }\n' +
-            '  .dnd-info-value { padding: 6px; font-size: 0.9em; }\n' +
+            '  .dnd-char-info { grid-template-columns: 1fr; gap: 15px; }\n' +
+            '  .dnd-info-field label { font-size: 1.1em; }\n' +
+            '  .dnd-info-value { padding: 4px; font-size: 0.95em; }\n' +
             '  .dnd-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }\n' +
             '  .dnd-stat-block { padding: 8px; }\n' +
             '  .dnd-combat-stats { grid-template-columns: repeat(2, 1fr); gap: 6px; }\n' +
@@ -255,6 +255,15 @@ class CharacterSheetDisplay {
         html += '<div class="dnd-info-field"><label>Class</label><div class="dnd-info-value" id="' + instanceId + '-class">' + (characterData.class || '-') + '</div></div>';
         html += '<div class="dnd-info-field"><label>Level</label><div class="dnd-info-value" id="' + instanceId + '-level">' + (characterData.level || 1) + '</div></div>';
         html += '<div class="dnd-info-field"><label>Race</label><div class="dnd-info-value" id="' + instanceId + '-race">' + (characterData.race || '-') + '</div></div>';
+        
+        // Row 2
+        if (characterData.experience || characterData.guildPoints || characterData.guildRank) {
+            html += '<div class="dnd-info-field"><label>Experience</label><div class="dnd-info-value">' + (characterData.experience || '-') + '</div></div>';
+            html += '<div class="dnd-info-field"><label>Guild Rank</label><div class="dnd-info-value">' + (characterData.guildRank || '-') + '</div></div>';
+            html += '<div class="dnd-info-field"><label>Guild Points</label><div class="dnd-info-value">' + (characterData.guildPoints || '-') + '</div></div>';
+            html += '<div class="dnd-info-field"><label>Background</label><div class="dnd-info-value">' + (characterData.background || '-') + '</div></div>';
+        }
+        
         html += '</div>';
         
         // Ability Scores

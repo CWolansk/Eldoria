@@ -6,8 +6,12 @@ const {CharacterSheetDisplay} = await cJS()
 await CharacterSheetDisplay.display(dv, {
   name: "Zazpoh the Matyr",
   class: "Wizard",
-  level: 5,
+  level: dv.page("Player Controls").level,
   race: "Aasimar",
+  background: "Cloistered Scholar",
+  experience: dv.page("Player Controls").ExperiencePoints,
+  guildPoints: dv.page("Player Controls").GuildPoints,
+  guildRank: dv.page("Player Controls").GuildRank,
   str: 10,
   dex: 13,
   con: 14,

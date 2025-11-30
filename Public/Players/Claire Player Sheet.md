@@ -6,8 +6,12 @@ const {CharacterSheetDisplay} = await cJS()
 await CharacterSheetDisplay.display(dv, {
   name: "Claire",
   class: "Cleric",
-  level: 5,
+  level: dv.page("Player Controls").level,
   race: "Water Genasi",
+  background: "Sailor",
+  experience: dv.page("Player Controls").ExperiencePoints,
+  guildPoints: dv.page("Player Controls").GuildPoints,
+  guildRank: dv.page("Player Controls").GuildRank,
   str: 16,
   dex: 8,
   con: 16,
@@ -36,7 +40,8 @@ await ItemLookup.display(dv, [
     "E-tier Adventurer's Guild Badge",
     "Spell Scroll (1st Level)|Burning Hands",
     'Amulet of Divine Retribution',
-    'Griffon Key Loop'
+    'Griffon Key Loop',
+    'Silverleaf Brooch',
 ])
 ```
 
