@@ -61,5 +61,5 @@ style: height: 1000px;
 ```custom-frames
 frame: 5etoolsClass
 style: height: 1000px;
-urlSuffix: #wizard_phb,state:sub_abjuration_phb=b1
+urlSuffix: #monk_phb,state:sub_drunken master_xge=b1
 ```

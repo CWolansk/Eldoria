@@ -39,12 +39,12 @@ await ItemLookup.display(dv, ['Talisman of Elemental Fury','Leather Armor', 'Woo
 
 # Spells
 
-**Note** : Quick reference spells for druid go here. 
 ```dataviewjs
 const {SpellLookup} = await cJS()
 await SpellLookup.display(dv, ['Poison Spray', 'Frostbite'])
 ```
-
+- [Full Spell List with Filters](https://cwolansk.github.io/Eldoria/5etools/spells.html#abi-dalzim's%20horrid%20wilting_xge)
+- [Quick Spell lookup](https://cwolansk.github.io/Eldoria/spell-search.html)
 
 # Class Information 
 

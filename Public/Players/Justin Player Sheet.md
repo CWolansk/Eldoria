@@ -45,6 +45,8 @@ await ItemLookup.display(dv, ['Shortsword', '+1 Longbow', 'Bracer of Piercing Ar
 const {SpellLookup} = await cJS()
 await SpellLookup.display(dv, ['Cure Wounds', 'Ensnaring Strike', 'Zephyr Strike'])
 ```
+- [Full Spell List with Filters](https://cwolansk.github.io/Eldoria/5etools/spells.html#abi-dalzim's%20horrid%20wilting_xge)
+- [Quick Spell lookup](https://cwolansk.github.io/Eldoria/spell-search.html)
 
 
 # Class Information 

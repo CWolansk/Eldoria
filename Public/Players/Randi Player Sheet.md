@@ -36,6 +36,8 @@ await ItemLookup.display(dv, [ 'The Aegis Codex', 'Quarterstaff', 'Dagger', 'Cal
 const {SpellLookup} = await cJS()
 await SpellLookup.display(dv, ['Light', 'Lesser Restoration', 'Daylight'])
 ```
+- [Full Spell List with Filters](https://cwolansk.github.io/Eldoria/5etools/spells.html#abi-dalzim's%20horrid%20wilting_xge)
+- [Quick Spell lookup](https://cwolansk.github.io/Eldoria/spell-search.html)
 
 
 # Class Information 

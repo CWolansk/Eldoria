@@ -4,8 +4,8 @@
 ```dataviewjs
 const {CharacterSheetDisplay} = await cJS()
 await CharacterSheetDisplay.display(dv, {
-  name: "JP's Character",
-  class: "Wizard",
+  name: "Liz",
+  class: "Bard",
   level: 5,
   race: "Elf",
   str: 8,
@@ -36,6 +36,8 @@ await ItemLookup.display(dv, ['Longsword', 'Bag of Holding', 'Ring of Protection
 const {SpellLookup} = await cJS()
 await SpellLookup.display(dv, ['Fireball'])
 ```
+- [Full Spell List with Filters](https://cwolansk.github.io/Eldoria/5etools/spells.html#abi-dalzim's%20horrid%20wilting_xge)
+- [Quick Spell lookup](https://cwolansk.github.io/Eldoria/spell-search.html)
 
 
 # Class Information 

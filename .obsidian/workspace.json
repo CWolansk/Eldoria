@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "8dee526523d01175",
+        "id": "b79c48bbed62eb83",
         "type": "tabs",
         "children": [
           {
-            "id": "a3f46df888b116fb",
+            "id": "409b0a987e8c1dd3",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -40,7 +40,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "scroll",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -272,14 +272,19 @@
       "calendarium:Open Calendarium": false
     }
   },
-  "active": "a3f46df888b116fb",
+  "active": "409b0a987e8c1dd3",
   "lastOpenFiles": [
-    "Public/Players/Liz Player Sheet.md",
-    "Public/Players/Justin Player Sheet.md",
+    "Public/Players/Claire Player Sheet.md",
+    "Public/Players/JP Player Sheet.md",
+    "Private/1. The Party/Players/Private Claire notes.md",
+    "Private/2. Session Journals/Session 1 Notes.md",
     "Public/Players/Julie Player Sheet.md",
+    "Public/Players/Justin Player Sheet.md",
+    "Public/Players/Liz Player Sheet.md",
+    "Public/Players/Randi Player Sheet.md",
+    "Public/Players/Vanessa Player Sheet.md",
     "Public/World/Crestfall/Fairfield/Forgefires Armaments.md",
     "Public/World/Crestfall/Ardenville/Steelshapers Forge.md",
-    "Public/Players/Vanessa Player Sheet.md",
     "Public/World/Crestfall/Highreach/Highreach Mines.md",
     "Public/World/Crestfall/Highreach/HighReach Merchants Guild.md",
     "Public/World/Crestfall/Highreach/Highreach Adventurers Guild.md",
@@ -295,11 +300,6 @@
     "Public/World/Crestfall/Stonehaven/Stonehaven.md",
     "Public/World/Orcish Wastes/Orc Town B/Orc City B.md",
     "Public/World/Orcish Wastes/Orc Town C/Orc City C.md",
-    "Public/World/Orcish Wastes/Orc Capitol/Orc Capitol.md",
-    "Public/World/Silverleaf Lands/Frostglade/FrostGlade.md",
-    "Public/World/Ironpeak Mountains/Forgepeak/ForgePeak.md",
-    "Public/World/Silverleaf Lands/Stardew/Stardew.md",
-    "Public/World/Silverleaf Lands/Moonshade/Moonshade.md",
     "docs/Public/World/Crestfall/Fairfield/NPCs/Valeris Shadowmere.html",
     "docs/Public/World/Crestfall/Fairfield/NPCs/Meredith Caravan-Friend.html",
     "docs/Public/World/Crestfall/Fairfield/NPCs",

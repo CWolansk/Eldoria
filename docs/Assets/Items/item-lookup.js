@@ -295,8 +295,15 @@ class ItemLookup {
         if (this.spellLookup) return this.spellLookup;
         
         try {
-            const spellLookupPath = 'Assets/Spells/spell-lookup.js';
+            const spellLookupPath = 'docs/Assets/Spells/spell-lookup.js';
             const spellLookupCode = await dv.io.load(spellLookupPath);
+            
+            if (!spellLookupCode) {
+                console.error('Could not find spell-lookup.js at:', spellLookupPath);
+                return null;
+            }
+
+            console.log('Successfully loaded spell-lookup.js from:', spellLookupPath);
             
             // Use Function constructor to evaluate in a scope that returns the class
             const spellLookupFunc = new Function(spellLookupCode + '\nreturn SpellLookup;');
@@ -334,7 +341,7 @@ class ItemLookup {
                             const spell = spells[0];
                             spellDetailsHTML = `
                                 <div class="spell-details-section" style="margin-top: 15px; padding: 10px; background-color: var(--background-primary); border-left: 3px solid var(--color-purple); border-radius: 4px;">
-                                    <div style="font-weight: bold; font-size: 14px; margin-bottom: 8px; color: var(--text-accent);">📜 Spell: ${spell.Name}</div>
+                                    <div style="font-weight: bold; font-size: 14px; margin-bottom: 8px; color: var(--text-accent);">Spell: ${spell.Name}</div>
                                     <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px;">
                                         ${spell.Level || 'Cantrip'} • ${spell.School || ''} • ${spell['Casting Time'] || ''} • ${spell.Range || ''}
                                     </div>

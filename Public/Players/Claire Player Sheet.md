@@ -29,17 +29,14 @@ await CharacterSheetDisplay.display(dv, {
 ```dataviewjs
 const {ItemLookup} = await cJS()
 await ItemLookup.display(dv, [
-    'Warhammer +1',
+    '+1 Warhammer',
     'Light Crossbow',
     'Lightning Rod',
     'Warhammer of Warning',
-    'Collapsible Rod',
     "E-tier Adventurer's Guild Badge",
-    'Spell Scroll',
+    "Spell Scroll (1st Level)|Burning Hands",
     'Amulet of Divine Retribution',
-    'Griffin Key Loop',
-    'Snare Kit',
-    'Formal Invite to Elven Lands'
+    'Griffon Key Loop'
 ])
 ```
 
@@ -48,6 +45,8 @@ await ItemLookup.display(dv, [
 const {SpellLookup} = await cJS()
 await SpellLookup.display(dv, [])
 ```
+- [Full Spell List with Filters](https://cwolansk.github.io/Eldoria/5etools/spells.html#abi-dalzim's%20horrid%20wilting_xge)
+- [Quick Spell lookup](https://cwolansk.github.io/Eldoria/spell-search.html)
 
 
 # Class Information 
@@ -80,5 +79,5 @@ style: height: 1000px;
 ```custom-frames
 frame: 5etoolsClass
 style: height: 1000px;
-urlSuffix: #cleric_phb,state:sub_abjuration_phb=b1
+urlSuffix: #cleric_phb,state:sub_tempest_phb=b1
 ```
