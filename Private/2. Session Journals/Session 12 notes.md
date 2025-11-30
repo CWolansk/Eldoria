@@ -1,111 +1,92 @@
-# Session 12 Notes
-
-## TODOs / Ideas / Thoughts
-
-### Ardenville Arrival
-- [ ] Players arrive in Ardenville
-- [ ] They need to prepare for the boating competition
-
-### Boating Competition Preparation
-The party doesn't have a boat! They'll need to figure out how to acquire one:
-
-- [ ] **Option 1: Buy a boat**
-  - Could be expensive - how much gold do they have?
-  - What types of boats are available for purchase?
-  - Any shipwrights or boat dealers in Ardenville?
-
-- [ ] **Option 2: Rent a boat**
-  - Cheaper short-term option
-  - Who rents boats in Ardenville?
-  - What conditions/deposits are required?
-
-- [ ] **Option 3: Find a sponsor**
-  - A wealthy merchant or noble could sponsor them
-  - What would they want in return?
-  - Side quest opportunity?
-  - Could tie into local politics or factions
-
-- [ ] **Option 4: Win/earn a boat**
-  - Perhaps a smaller preliminary competition?
-  - Help someone and receive a boat as reward?
-  - Gamble for one?
-
-- [ ] **Option 5: Salty Pete** ⭐ (PREFERRED)
-  - Move Salty Pete from Highreach to Ardenville
-  - He's an older captain with a boat but no crew
-  - His last crew got intimidated by other crews and the danger of the competition
-  - Could be an adversary OR a willing ally who takes the party on his boat
-  - Great connection opportunity for JP (shared maritime background)
-  - **Possible storylines:**
-    - Party proves themselves worthy and he agrees to captain for them
-    - Party has to help him deal with whoever intimidated his old crew
-    - Competition between Pete's boat and rivals creates drama
-
-- [ ] **Option 6: Merchants Guild** (FALLBACK / CONSEQUENCE)
-  - If Salty Pete doesn't work out, party can go to the Merchants Guild for a boat
-  - **CONSEQUENCE**: The boat they get should be BAD
-    - This is a consequence of not getting the Seeker's Eye to the guildmaster
-    - Guild is less willing to help / gives them a subpar vessel
-    - Could be leaky, slow, poorly maintained, or have other issues
-  - **Possible complications:**
-    - Boat needs repairs mid-competition
-    - Other crews mock their sad vessel
-    - They have to work harder to compensate for the boat's weaknesses
-    - Creates tension with the Merchants Guild storyline
-
-### Questions to Consider
-- What's at stake in this boating competition?
-- Who are the other competitors?
-- What kind of boat do they need for this competition?
-- Are there any rules about boat modifications or crew size?
-
 ---
 
-## Ongoing Plotline: Exterminators Guild / Don Gnocianno's Package
+fc-date: 0496-03-14
 
-The party started the Exterminators Guild induction ceremony and is currently transporting a package for Don Gnocianno. Need to think about how this resolves (doesn't have to be Session 12, but should plan ahead).
+fc-end: 0496-03-14
 
-### Current Status
-- [ ] Party is mid-induction into the Exterminators Guild
-- [ ] Currently transporting Don Gnocianno's package
-- [ ] Destination/recipient unknown?
+fc-category: Sessions
 
-### Resolution Ideas
+---
+# Session 12: Familiar Strangers
+*A harrowing tale of identity, hunger, and survival... or is it?*
 
-**Option A: Delivery in Ardenville**
-- The package recipient is in Ardenville - convenient timing!
-- Delivery completes one step of the induction
-- Could introduce new NPC contact for the guild in Ardenville
+## Session Overview
+The party, having departed Highreach, finds themselves in a nightmare scenario. They wake up in a strange lab, stripped of gear and power, with a growing, unnatural hunger. This session is a "one-shot" style break from the norm where the players unknowingly play as **Simulacrums** of themselves created by the antagonist Jon. The session culminates in a battle royale between the melting clones, followed by the *real* party fighting the horrific survivor.
 
-**Option B: Delivery Detour**
-- Package needs to go somewhere else first before Ardenville
-- Creates a side quest / minor delay
-- Could reveal more about what the Exterminators Guild actually does
+## Scene 1: Departure and Camp
+*   **Context**: The party has left Highreach, heading towards the Silverleaf Lands.
+*   **Travel**: Describe a day of travel. The mood is high after the awards ceremony.
+*   **Camp**: They set up camp for the night in the dense woods (perhaps near the border of the Silverleaf Lands).
+*   **The Sleep**: They take their watches. Describe a deep, unnatural fog rolling in during the night. The last person on watch feels heavy eyelids...
 
-**Option C: Package Complications**
-- Someone tries to intercept the package
-- Party must protect/defend it
-- Reveals enemies of the guild or Don Gnocianno
+## Scene 2: The Awakening (The Clones)
+*   **Read-Aloud**:
+    > You are trapped within a very deep slumber. Your minds flash with memories, new and old, as if they were yesterday. Then, a small yet sharp sound pushes through the mental fog. *Crack.* It happens again—glass cracking. You slowly open your eyes to see dirty, warped glass inches from your face. Before you can react, the glass erupts! You are swept away by a deluge of toxic green slime. You hit the cold stone floor, coughing up the thick liquid. You look around... and none of it looks familiar.
 
-**Option D: Moral Dilemma**
-- Party discovers what's in the package
-- Contents are morally questionable
-- Do they complete delivery or confront Don Gnocianno?
-- Could create tension with guild membership
+*   **The Situation**:
+    *   **Appearance**: They look like themselves, but covered in green slime.
+    *   **Gear**: No armor, weapons, or items.
+    *   **Stats**:
+        *   **HP**: 10 + CON Modifier.
+        *   **Abilities/Skills**: Normal.
+        *   **Class Features**: NONE. No spells, no racial traits (except appearance).
+        *   **Memory**: They remember everything *except* how they got here.
+    *   **Checks**:
+        *   **Arcana (DC 12)**: Slime is magical but inert.
+        *   **Medicine (DC 8)**: They feel "wrong", not as robust.
 
-**Option E: Package Opens / Gets Damaged**
-- Accident or combat causes package to open
-- Party sees contents (good or bad revelation)
-- Must deal with consequences
+## Scene 3: The Lab
+The room is an abandoned wizard's lab.
+*   **Investigation (DC 14)** reveals:
+    1.  **Alchemical Bottles**: Used for *Simulacrum*, *Modify Memory*, and magical slumber. (Arcana DC 15).
+    2.  **Notebook**: Written in Deep Speech (or a code). Details a "living autopsy" of a black pudding and harvesting ingredients. *Flavor*: Notes on "replicating the chaotic variables" (referring to the party) signed by "J".
+    3.  **Signed Letter**: An order for weapons/armor matching the party's exact loadout. Signed by a known associate of Jon.
 
-### Questions to Resolve
-- What's actually IN the package?
-- Who is the recipient?
-- Is Don Gnocianno trustworthy or using the party?
-- What does full Exterminators Guild membership grant?
-- Are there other induction tasks beyond the delivery?
+## Scene 4: The Hunger (Phase 1)
+*   **Trigger**: After some exploration or if they try to leave.
+*   **Save**: Wisdom Save DC 15.
+*   **Failure**: An undeniable urge to **eat** a fellow party member.
+    > Your body is wracked with pain. You fear starvation. Suddenly, you smell something delicious. You look at [Party Member Name]... and you know their flesh will sustain you.
+*   **Mechanic**:
+    *   Must kill and eat a party member to stop the pain.
+    *   **Death**: When a clone dies, they melt into green goo.
+    *   **Consumption**: Eating the goo grants:
+        *   +10 Max HP.
+        *   Immunities: Acid, Cold, Lightning, Slashing.
+        *   Condition Immunities: Blinded, Charmed, Deafened, Exhaustion, Frightened, Prone.
+        *   Blindsight 60 ft.
+        *   **Mutation**: Gain one trait (Amorphous, Spider Climb, or Pseudopod attack).
 
-### Potential Tie-ins
-- Could the package recipient help with the boating competition?
-- Does the Exterminators Guild have connections in Ardenville?
-- Could completing this task earn favor that helps elsewhere?
+## Scene 5: Escalation (Phase 2 & 3)
+*   **Phase 2**: Wisdom Save DC 15 every minute to resist the hunger.
+*   **Phase 3**: When only one is left.
+    *   The survivor becomes a **Failed Ooze Doppelganger**.
+    *   The hunger returns immediately. "FEED NOW!"
+    *   The survivor runs into the night.
+
+## Scene 6: The Real Party
+*   **Transition**: Cut back to the *real* party at their campsite.
+*   **Encounter**: They are woken up by a horrific, melting version of [The Survivor Character] attacking them.
+*   **Combat**: **Failed Ooze Doppelganger** (Stat block below).
+    *   *DM Note*: For a party of 7, consider maxing the HP (110) or giving it 2 turns per round.
+*   **Aftermath**:
+    *   The creature melts into boiling slime upon death.
+    *   **Arcana (DC 15)**: It's a magically altered ooze/simulacrum.
+    *   **Loot**: Maybe a fragment of the glass or a ring that didn't melt, hinting at Jon's involvement.
+
+## Stat Block: Failed Ooze Doppelganger
+*Medium Ooze, Unaligned*
+*   **AC**: 10
+*   **HP**: 80 (10d8 + 30)
+*   **Speed**: 30 ft., climb 30 ft.
+*   **STR**: 16 (+3) | **DEX**: 10 (+0) | **CON**: 16 (+3) | **INT**: 8 (-1) | **WIS**: 6 (-2) | **CHA**: 6 (-2)
+*   **Immunities**: Acid, Cold, Lightning, Slashing
+*   **Senses**: Blindsight 60 ft.
+*   **Traits**:
+    *   **Amorphous**: Move through 1-inch spaces.
+    *   **Corrosive Form**: 1d8 acid damage when touched/hit. Corrodes nonmagical weapons (-1 penalty, destroyed at -5).
+    *   **Spider Climb**.
+*   **Actions**:
+    *   **Multiattack**: One Pseudopod + One Grapple.
+    *   **Pseudopod**: +5 to hit, 1d6+3 bludgeoning + 4d8 acid. Corrodes armor (-1 AC).
+    *   **Grapple**: +5 to hit, target grappled (up to 2 targets).

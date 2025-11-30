@@ -8,19 +8,19 @@ await CharacterSheetDisplay.display(dv, {
   class: "Cleric",
   level: 5,
   race: "Water Genasi",
-  str: 8,
-  dex: 14,
-  con: 12,
-  int: 18,
-  wis: 13,
-  cha: 10,
-  ac: 12,
+  str: 16,
+  dex: 8,
+  con: 16,
+  int: 14,
+  wis: 18,
+  cha: 12,
+  ac: 18,
   speed: 30,
-  saves: ['int', 'wis'],
-  skills: ['arcana', 'history', 'investigation', 'perception'],
-  spellcasting: 'int',
+  saves: ['wis', 'cha'],
+  skills: ['insight', 'medicine', 'perception', 'persuasion', 'religion'],
+  spellcasting: 'wis',
   simpleWeapons: true,
-  martialWeapons: false
+  martialWeapons: true
 })
 ```
 
@@ -28,13 +28,25 @@ await CharacterSheetDisplay.display(dv, {
 
 ```dataviewjs
 const {ItemLookup} = await cJS()
-await ItemLookup.display(dv, ['Amulet of Divine Retribution', '+1 Warhammer', 'Spell Scroll (1st Level)|Burning Hands','Lightning Rod', 'Warhammer of Warning'])
+await ItemLookup.display(dv, [
+    'Warhammer +1',
+    'Light Crossbow',
+    'Lightning Rod',
+    'Warhammer of Warning',
+    'Collapsible Rod',
+    "E-tier Adventurer's Guild Badge",
+    'Spell Scroll',
+    'Amulet of Divine Retribution',
+    'Griffin Key Loop',
+    'Snare Kit',
+    'Formal Invite to Elven Lands'
+])
 ```
 
 # Spells 
 ```dataviewjs
 const {SpellLookup} = await cJS()
-await SpellLookup.display(dv, ['Fireball'])
+await SpellLookup.display(dv, [])
 ```
 
 
@@ -49,7 +61,7 @@ await BackgroundLookup.display(dv, ['Sailor'])
 ## Feats
 ```dataviewjs
 const {FeatLookup} = await cJS()
-await FeatLookup.display(dv, ['Alert', 'Lucky', 'War Caster'])
+await FeatLookup.display(dv, ['Elemental Adept'])
 ```
 
 ## Race 

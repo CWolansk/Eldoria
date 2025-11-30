@@ -1,24 +1,23 @@
-
 ## Character Stats
 
 ```dataviewjs
 const {CharacterSheetDisplay} = await cJS()
 await CharacterSheetDisplay.display(dv, {
-  name: "JP's Character",
-  class: "Wizard",
+  name: "Grum 'Grog Guzzler' Ironjaw (JP)",
+  class: "Monk (Drunken Master)",
   level: 5,
-  race: "Elf",
-  str: 8,
+  race: "Half-Orc",
+  str: 12,
   dex: 14,
   con: 12,
-  int: 18,
-  wis: 13,
-  cha: 10,
-  ac: 12,
-  speed: 30,
-  saves: ['int', 'wis'],
-  skills: ['arcana', 'history', 'investigation', 'perception'],
-  spellcasting: 'int',
+  int: 10,
+  wis: 14,
+  cha: 12,
+  ac: 14,
+  speed: 40,
+  saves: ['str', 'dex'],
+  skills: ['athletics', 'acrobatics', 'stealth', 'intimidation', 'performance'],
+  spellcasting: 'wis',
   simpleWeapons: true,
   martialWeapons: false
 })
@@ -28,13 +27,7 @@ await CharacterSheetDisplay.display(dv, {
 
 ```dataviewjs
 const {ItemLookup} = await cJS()
-await ItemLookup.display(dv, ['Longsword', 'Bag of Holding', 'Ring of Protection'])
-```
-
-# Spells 
-```dataviewjs
-const {SpellLookup} = await cJS()
-await SpellLookup.display(dv, ['Fireball'])
+await ItemLookup.display(dv, ['+1 Quarterstaff',  'Gauntlets of Whirling Strikes','Blowgun', 'Robe of Useful Items', 'Fabulist Gem','Pole of Angling', 'Commoners Veneer', 'Adamantium Ingot'])
 ```
 
 
@@ -43,19 +36,19 @@ await SpellLookup.display(dv, ['Fireball'])
 ## Background
 ```dataviewjs
 const {BackgroundLookup} = await cJS()
-await BackgroundLookup.display(dv, ['Acolyte'])
+await BackgroundLookup.display(dv, ['Sailor'])
 ```
 
 ## Feats
 ```dataviewjs
 const {FeatLookup} = await cJS()
-await FeatLookup.display(dv, ['Alert', 'Lucky', 'War Caster'])
+await FeatLookup.display(dv, ['Actor'])
 ```
 
-## Race 
+## Race
 ```dataviewjs
 const {RaceLookup} = await cJS()
-await RaceLookup.display(dv, ['Aasimar (MPMM)'])
+await RaceLookup.display(dv, ['Half-Orc'])
 ```
 
 ## Notes

@@ -4,20 +4,20 @@
 ```dataviewjs
 const {CharacterSheetDisplay} = await cJS()
 await CharacterSheetDisplay.display(dv, {
-  name: "JP's Character",
+  name: "Zazpoh the Matyr",
   class: "Wizard",
   level: 5,
-  race: "Elf",
-  str: 8,
-  dex: 14,
-  con: 12,
-  int: 18,
-  wis: 13,
-  cha: 10,
-  ac: 12,
+  race: "Aasimar",
+  str: 10,
+  dex: 13,
+  con: 14,
+  int: 19,
+  wis: 16,
+  cha: 12,
+  ac: 15,
   speed: 30,
   saves: ['int', 'wis'],
-  skills: ['arcana', 'history', 'investigation', 'perception'],
+  skills: ['arcana', 'history', 'investigation'],
   spellcasting: 'int',
   simpleWeapons: true,
   martialWeapons: false
@@ -28,13 +28,13 @@ await CharacterSheetDisplay.display(dv, {
 
 ```dataviewjs
 const {ItemLookup} = await cJS()
-await ItemLookup.display(dv, ['The Aegis Codex'])
+await ItemLookup.display(dv, [ 'The Aegis Codex', 'Quarterstaff', 'Dagger', 'Calligrapher\'s Supplies', 'Scholar\'s Pack', 'Arcane Focus (Staff)'])
 ```
 
 # Spells 
 ```dataviewjs
 const {SpellLookup} = await cJS()
-await SpellLookup.display(dv, ['Fireball'])
+await SpellLookup.display(dv, ['Light', 'Lesser Restoration', 'Daylight'])
 ```
 
 
@@ -43,19 +43,19 @@ await SpellLookup.display(dv, ['Fireball'])
 ## Background
 ```dataviewjs
 const {BackgroundLookup} = await cJS()
-await BackgroundLookup.display(dv, ['Acolyte'])
+await BackgroundLookup.display(dv, ['Cloistered Scholar'])
 ```
 
 ## Feats
 ```dataviewjs
 const {FeatLookup} = await cJS()
-await FeatLookup.display(dv, ['Alert', 'Lucky', 'War Caster'])
+await FeatLookup.display(dv, [])
 ```
 
 ## Race 
 ```dataviewjs
 const {RaceLookup} = await cJS()
-await RaceLookup.display(dv, ['Aarakocra'])
+await RaceLookup.display(dv, ['Aasimar'])
 ```
 
 ## Notes
@@ -68,5 +68,5 @@ style: height: 1000px;
 ```custom-frames
 frame: 5etoolsClass
 style: height: 1000px;
-urlSuffix: #wizard_phb,state:sub_abjuration_phb=b1
+urlSuffix: #wizard_phb,state:sub_divination_phb=b1
 ```
