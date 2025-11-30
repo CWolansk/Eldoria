@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Public/Players/Vanessa Player Sheet.md",
+                "file": "Public/Players/JP Player Sheet.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Vanessa Player Sheet"
+              "title": "JP Player Sheet"
             }
           }
         ]
@@ -274,13 +274,13 @@
   },
   "active": "a3f46df888b116fb",
   "lastOpenFiles": [
+    "Public/Players/Claire Player Sheet.md",
+    "Public/Players/Vanessa Player Sheet.md",
     "Public/Players/Liz Player Sheet.md",
     "Public/Players/Justin Player Sheet.md",
     "Public/Players/Julie Player Sheet.md",
-    "Public/Players/Vanessa Player Sheet.md",
     "Public/Players/JP Player Sheet.md",
     "Public/Players/Randi Player Sheet.md",
-    "Public/Players/Claire Player Sheet.md",
     "docs/Assets/Randi.txt",
     "docs/Assets/Randi.pdf",
     "Private/2. Session Journals/Session 12 notes.md",
