@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "b79c48bbed62eb83",
+        "id": "18a1b0e9c0d55867",
         "type": "tabs",
         "children": [
           {
-            "id": "409b0a987e8c1dd3",
+            "id": "365252df453c77eb",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -40,7 +40,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "player control",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -124,12 +124,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/index.md",
+                "file": "Private/2. Session Journals/Session 9 Notes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from index"
+              "title": "Outgoing links from Session 9 Notes"
             }
           },
           {
@@ -153,13 +153,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PlayerNotes/Fight.md",
+                "file": "Public/Players/Vanessa Player Sheet.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Fight"
+              "title": "Outline of Vanessa Player Sheet"
             }
           },
           {
@@ -171,7 +171,7 @@
                 "calendar": "ID_4b1be88869cb",
                 "ephemeral": {
                   "viewing": {
-                    "day": 7,
+                    "day": 6,
                     "month": 2,
                     "year": 496
                   },
@@ -184,10 +184,9 @@
                   "displayDayNumber": true,
                   "displaySeasonColors": true,
                   "interpolateColors": true,
-                  "displayAbsoluteYear": true,
                   "displayMoons": true,
                   "displayWeather": true,
-                  "location": "ID_0a2838d8c9cb"
+                  "location": ""
                 },
                 "id": "ID_ab08197979da",
                 "child": "ID_3ac808fa89eb"
@@ -207,16 +206,6 @@
             }
           },
           {
-            "id": "0fd178cc9cd4f586",
-            "type": "leaf",
-            "state": {
-              "type": "DICE_ROLLER_VIEW",
-              "state": {},
-              "icon": "dices",
-              "title": "Dice Tray"
-            }
-          },
-          {
             "id": "f0918c039160b809",
             "type": "leaf",
             "state": {
@@ -227,7 +216,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       },
       {
         "id": "82a3236d268a3ea2",
@@ -272,44 +261,44 @@
       "calendarium:Open Calendarium": false
     }
   },
-  "active": "409b0a987e8c1dd3",
+  "active": "365252df453c77eb",
   "lastOpenFiles": [
-    "Private/2. Session Journals/Session 12 notes.md",
-    "Public/Players/Liz Player Sheet.md",
-    "Public/World/Unknown.md",
-    "docs/Public/World/Unknown.html",
-    "Public/Players/Justin Player Sheet.md",
     "Public/Players/Vanessa Player Sheet.md",
-    "Public/Players/Claire Player Sheet.md",
-    "Public/Players/Randi Player Sheet.md",
-    "Public/Players/Julie Player Sheet.md",
-    "Public/Players/JP Player Sheet.md",
-    "Private/1. The Party/Players/Player Controls.md",
-    "Private/1. The Party/Players/Private Claire notes.md",
-    "Private/2. Session Journals/Session 1 Notes.md",
-    "Public/World/Crestfall/Fairfield/Forgefires Armaments.md",
-    "Public/World/Crestfall/Ardenville/Steelshapers Forge.md",
-    "Public/World/Crestfall/Highreach/Highreach Mines.md",
-    "Public/World/Crestfall/Highreach/HighReach Merchants Guild.md",
-    "Public/World/Crestfall/Highreach/Highreach Adventurers Guild.md",
-    "Public/World/Crestfall/Fairfield/Starspells Wonders.md",
-    "Public/World/Crestfall/Highreach/NPCs/Highreach NPC Index.md",
-    "Public/World/Crestfall/Hillcrest/Nightwhispers Potions and Scrolls.md",
-    "Public/World/Crestfall/Hillcrest/Hammerstrikes Weapons.md",
-    "Public/World/Groups/Merchants Guild.md",
-    "Public/World/Groups/Foundation.md",
-    "Public/World/Groups/Exterminators Guild.md",
-    "Public/World/Groups/Adventurers Guild.md",
-    "Public/World/Orcish Wastes/Wizards Tower/Wizards Tower.md",
-    "docs/Public/World/Crestfall/Fairfield/NPCs/Valeris Shadowmere.html",
-    "docs/Public/World/Crestfall/Fairfield/NPCs/Meredith Caravan-Friend.html",
-    "docs/Public/World/Crestfall/Fairfield/NPCs",
-    "docs/Public/World/Crestfall/Highreach/NPCs/Borin Stonefist.html",
-    "docs/Public/World/Crestfall/Highreach/NPCs/Aric Stormblade.html",
-    "docs/Public/World/Crestfall/Highreach/NPCs/Evelyn Marroway.html",
-    "docs/Public/World/Crestfall/Highreach/NPCs/Lyra Dawnbringer.html",
-    "docs/Public/World/Crestfall/Highreach/NPCs/Kara Nightshade.html",
-    "docs/Public/World/Crestfall/Highreach/NPCs/Jon Brightman.html",
+    "Private/2. Session Journals/Session 13 Notes.md",
+    "Private/2. Session Journals/Session 12 notes.md",
+    "Private/2. Session Journals/Session 9 Notes.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Future Concepts/Secure the Collapsing Warehouse.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Future Concepts/Sabotaged Sails Investigation.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Missed Opportunities/Rats in the Sewer.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Missed Opportunities/Party is saved by Alistair Goldman.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Missed Opportunities/Merchant Bodyguard to Arden and Highreach.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Missed Opportunities/Flushed Heirloom.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Future Concepts/Missing Netters on Lake Arden.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Future Concepts/Lake Arden Boat Race.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Future Concepts/Exterminators Guild Induction Ceremony.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Future Concepts/Foundation Induction Ceremony.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Future Concepts/Clear the Kelp Beds.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Future Concepts/Bandit Camp Highreach Ardenville route.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Randi Kills Looters Consequence.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Missed Opportunities",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Future Concepts",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts/Flushed Heirloom Failed Quest Consequence.md",
+    "Private/2. Reference/Events/04-Ideas-and-Drafts",
+    "Private/2. Reference/Events/03-Consequences/Resolved/Party Ambushed by Merchant Guild Bandits.md",
+    "Private/2. Reference/Events/03-Consequences/Resolved/Jarek Ironfist gets killed.md",
+    "Private/2. Reference/Events/03-Consequences/Resolved/Highreach Duplirat Invasion.md",
+    "Private/2. Reference/Events/03-Consequences/Active/Highreach Crisis Player Reference.html",
+    "Private/2. Reference/Events/03-Consequences/Resolved",
+    "Private/2. Reference/Events/03-Consequences/Active",
+    "Private/2. Reference/Events/03-Consequences",
+    "Private/2. Reference/Events/02-World-Events/Holidays/Orc Holidays/The Warchiefs Feast.md",
+    "Private/2. Reference/Events/02-World-Events/Holidays/Orc Holidays/The Hunt of the Black Claw.md",
+    "Private/2. Reference/Events/02-World-Events/Holidays/Dwarven Holidays/The Great Crafting Ceremony.md",
+    "Private/2. Reference/Events/02-World-Events/Holidays/Orc Holidays/Blood Moon Festival.md",
+    "Private/2. Reference/Events/02-World-Events/Holidays/Elven Holidays/The Sylvan Dance.md",
+    "Private/2. Reference/Events/02-World-Events/Holidays/Orc Holidays",
+    "Private/2. Reference/Events/02-World-Events/Holidays/Dwarven Holidays",
+    "Private/2. Reference/Events/02-World-Events/Holidays/Elven Holidays",
     "docs/Assets/Eldoira.jpg",
     "docs/site-lib/media/favicon.png",
     "docs/site-lib/media/6155340132a851f6089e.svg",

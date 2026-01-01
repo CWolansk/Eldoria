@@ -72,8 +72,7 @@ await RaceLookup.display(dv, ['Dragonborn'])
 ```
 
 ## Notes
-<iframe sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-storage-access-by-user-activation" allow="encrypted-media; fullscreen; oversized-images; picture-in-picture; sync-xhr; geolocation; storage-access *;" style="height: 1000px; width: 100%; border: none;" src="https://u.cave.su/p/EldoriaVanessaDnDNotes?showControls=true&showChat=true&showLineNumbers=true&useMonospaceFont=false"></iframe>
-
+<iframe sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-storage-access-by-user-activation" allow="encrypted-media; fullscreen; oversized-images; picture-in-picture; sync-xhr; geolocation; storage-access;" style="height: 1000px; width: 100%; border: none;" src="https://u.cave.su/p/EldoriaVanessaDnDNotes?showControls=true&showChat=true&showLineNumbers=true&useMonospaceFont=false"></iframe>
 
 ## Full Class Info
 ```custom-frames
