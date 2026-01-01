@@ -11,19 +11,19 @@ await CharacterSheetDisplay.display(dv, {
   experience: dv.page("Player Controls").ExperiencePoints,
   guildPoints: dv.page("Player Controls").GuildPoints,
   guildRank: dv.page("Player Controls").GuildRank,
-  str: 8,
-  dex: 14,
-  con: 12,
-  int: 18,
-  wis: 13,
-  cha: 10,
-  ac: 12,
-  speed: 30,
-  saves: ['int', 'wis'],
-  skills: ['arcana', 'history', 'investigation', 'perception'],
-  spellcasting: 'int',
+  str: 11,
+  dex: 16,
+  con: 14,
+  int: 13,
+  wis: 14,
+  cha: 17,
+  ac: 15,
+  speed: 35,
+  saves: ['dex', 'cha'],
+  skills: ['Acrobatics', 'Animal Handling', 'Arcana', 'Insight', 'Investigation', 'Perception', 'Performance', 'Persuasion', 'Sleight of hand'],
+  spellcasting: 'cha',
   simpleWeapons: true,
-  martialWeapons: false
+  martialWeapons: false,
 })
 ```
 
@@ -31,7 +31,7 @@ await CharacterSheetDisplay.display(dv, {
 
 ```dataviewjs
 const {ItemLookup} = await cJS()
-await ItemLookup.display(dv, ['Longsword', 'Bag of Holding', 'Ring of Protection'])
+await ItemLookup.display(dv, ['+1 repeating Crossbow', 'Bag of Holding', 'Ring of Protection'])
 ```
 
 # Spells 
@@ -54,13 +54,13 @@ await BackgroundLookup.display(dv, ['Acolyte'])
 ## Feats
 ```dataviewjs
 const {FeatLookup} = await cJS()
-await FeatLookup.display(dv, ['Alert', 'Lucky', 'War Caster'])
+await FeatLookup.display(dv, ['Jack of All Trades',])
 ```
 
 ## Race 
 ```dataviewjs
 const {RaceLookup} = await cJS()
-await RaceLookup.display(dv, ['Aasimar (MPMM)'])
+await RaceLookup.display(dv, ['Elf'])
 ```
 
 ## Notes
