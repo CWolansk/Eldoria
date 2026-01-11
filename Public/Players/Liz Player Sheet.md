@@ -64,6 +64,9 @@ await RaceLookup.display(dv, ['Elf'])
 ```
 
 ## Notes
+
+Direct link if Embed isn't working : https://u.cave.su/p/EldoriaLizDnDNotes
+
 ```custom-frames
 frame: LizNotes
 style: height: 1000px;

@@ -39,3 +39,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
 ```
+ ^457bd1
+
+# Public Notes 
+[[Public/World/Crestfall/Highreach/NPCs/Ratcatcher Vex|Ratcatcher Vex]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

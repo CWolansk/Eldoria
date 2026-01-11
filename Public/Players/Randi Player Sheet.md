@@ -65,6 +65,9 @@ await RaceLookup.display(dv, ['Aasimar'])
 ```
 
 ## Notes
+
+Direct link if Embed isn't working : https://u.cave.su/p/EldoriaRandiDnDNotes
+
 ```custom-frames
 frame: RandiNotes
 style: height: 1000px;

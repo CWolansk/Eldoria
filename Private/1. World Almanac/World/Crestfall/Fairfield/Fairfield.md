@@ -370,4 +370,12 @@ The main floor includes a comfortable lounge area with leather chairs arranged a
 - **Training Facilities**: Practice rooms for combat skills and magical studies  
 - **Information Services**: Maps, monster intelligence, and regional updates
 - **Equipment Rental**: Specialized gear for specific mission types
-- **Communication Network**: Magical message services to other guild halls
+- **Communication Network**: Magical message services to other guild halls ^36ceb0
+
+# Public Notes 
+[[Public/World/Crestfall/Fairfield/Fairfield|Fairfield]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

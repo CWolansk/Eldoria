@@ -28,3 +28,12 @@ Long-time owner of [[The Vintner's Heart Tavern]], serving as an unofficial medi
 Neutral ground provider and information source. Can facilitate meetings between party and faction representatives, and provides local intelligence about village politics.
 
 **TODO**: Develop specific tavern services, room rates, and information network details
+ ^20956c
+
+# Public Notes 
+[[Public/World/Crestfall/Hillcrest/NPCs/Edwin Barleyman|Edwin Barleyman]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

@@ -5,4 +5,12 @@ Description :: - the leader of the nightstalkers, he is a burly man with a broad
 Alive? :: Yes, still alive right now
 Notes :: Married to [[Alma Ironfist nee Brightwater]] Disappears in the mines with the rest of his party. Their gear may be scattered about the mine or taken by goblins if they don't get broken during the attack by the goblins. Rescued by the party during the events of [[Session 6 Notes]] 
 
-Thoren ironfists breastplate is actually a [mithral breastplate ](https://5e.tools/items.html#mithral%20breastplate_dmg) 
+Thoren ironfists breastplate is actually a [mithral breastplate ](https://5e.tools/items.html#mithral%20breastplate_dmg)  ^e8fa7d
+
+# Public Notes 
+[[Public/World/Crestfall/Highreach/NPCs/Thoren Ironfist|Thoren Ironfist]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

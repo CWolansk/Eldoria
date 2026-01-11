@@ -1,3 +1,7 @@
-Location :: #HighReach #GoldfangWeapons 
-Profession :: #Merchant #MerchantsGuild 
-Description :: A halfing wearing a smart blue jacket and brown trousers, with longish blonde curls peaking out from underneath a flat brown cap. 
+![[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Brom Goldfang#^48d691|Brom Goldfang]]
+
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

@@ -38,3 +38,12 @@ Central figure in the Hillcrest vineyard crisis. His decisions regarding the thr
 - **[[Claire]]**: Hopeful her divine magic might provide solutions to the supernatural aspects of the crisis
 
 **TODO**: Develop specific dialogue options, personal quest hooks, and potential character development arcs
+ ^54e9e3
+
+# Public Notes 
+[[Public/World/Crestfall/Hillcrest/NPCs/Mayor Linden Hearthwood|Mayor Linden Hearthwood]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

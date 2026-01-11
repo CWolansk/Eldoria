@@ -37,3 +37,12 @@ Guardian of old knowledge and traditional methods. His cooperation is essential 
 - **[[Claire]]**: Uncomfortable with divine magic but desperate enough to accept help if properly approached
 
 **TODO**: Detail the druidic shrine location, traditional wine-making secrets, and mentorship relationships
+ ^0e4f54
+
+# Public Notes 
+[[Public/World/Crestfall/Hillcrest/NPCs/Benedict Vineward|Benedict Vineward]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

@@ -1,3 +1,7 @@
-Location :: #Ardenville
-Profession :: #GuardCaptain
-Description :: Broad‑shouldered human veteran with a scarred cheek and calm authority. Gregor commands the lake guard that keeps monsters and smugglers in check.
+![[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Gregor Woods#^4df87e|Gregor Woods]]
+
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

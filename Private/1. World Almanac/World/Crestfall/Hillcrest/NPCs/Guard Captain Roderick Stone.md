@@ -36,3 +36,12 @@ Law enforcement contact who can provide security support and investigation assis
 - **[[Randi]]**: Fascinated by aerial reconnaissance capabilities for security purposes
 
 **TODO**: Develop specific evidence about blight sabotage, guard patrol schedules, and security protocols
+ ^5cee01
+
+# Public Notes 
+[[Public/World/Crestfall/Hillcrest/NPCs/Guard Captain Roderick Stone|Guard Captain Roderick Stone]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

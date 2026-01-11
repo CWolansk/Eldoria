@@ -12,4 +12,12 @@
 - Cloak of the Manta Ray
 - Ring of Warmth
 - Quiver of Ehlonna
-- Cloak of Protection
+- Cloak of Protection ^0b2e8c
+
+# Public Notes 
+[[Public/World/Crestfall/Hillcrest/Nightwhispers Potions and Scrolls|Nightwhispers Potions and Scrolls]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

@@ -9,3 +9,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
 ```
+ ^22c791
+
+# Public Notes 
+[[Public/World/Orcish Wastes/Wizards Tower/NPCs/Summoner Jon AKA the wizard|Summoner Jon AKA the wizard]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

@@ -41,3 +41,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
 ```
+ ^51289d
+
+# Public Notes 
+[[Public/World/Crestfall/Highreach/NPCs/Nimble Nackfinger|Nimble Nackfinger]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

@@ -5,3 +5,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
 ```
+ ^e2dd3c
+
+# Public Notes 
+[[Public/World/Ironpeak Mountains/Ironroot/Ironroot|Ironroot]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

@@ -75,3 +75,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[Mystic Wares]]
 SORT file.name ASC
 ```
+ ^d61c00
+
+# Public Notes 
+[[Public/World/Crestfall/Stonehaven/Mystic Wares|Mystic Wares]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

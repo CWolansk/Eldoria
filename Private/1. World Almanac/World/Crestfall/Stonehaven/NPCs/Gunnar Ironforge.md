@@ -112,3 +112,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[Gunnar Ironforge]]
 SORT file.name ASC
 ```
+ ^9eeca1
+
+# Public Notes 
+[[Public/World/Crestfall/Stonehaven/NPCs/Gunnar Ironforge|Gunnar Ironforge]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

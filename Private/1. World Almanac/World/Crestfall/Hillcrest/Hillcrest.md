@@ -347,4 +347,12 @@ The local guild chapter maintains carefully neutral ground while serving both lo
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[Hillcrest]]
 SORT file.name ASC
+``` ^ca03aa
+
+# Public Notes 
+[[Public/World/Crestfall/Hillcrest/Hillcrest|Hillcrest]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
 ```

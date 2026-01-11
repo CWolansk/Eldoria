@@ -289,3 +289,12 @@ She's torn between her desire for justice and her fear of retaliation. Part of h
 - **Information Overload**: Avoid making her exposition machine
 - **Protection Balance**: She needs help but shouldn't be helpless burden
 - **Future Planning**: Consider her role beyond immediate crisis resolution
+ ^225f0d
+
+# Public Notes 
+[[Public/World/Crestfall/Fairfield/NPCs/Meredith Caravan-Friend|Meredith Caravan-Friend]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

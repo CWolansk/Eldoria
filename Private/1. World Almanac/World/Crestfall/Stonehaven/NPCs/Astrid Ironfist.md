@@ -107,3 +107,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[Astrid Ironfist]]
 SORT file.name ASC
 ```
+ ^4b28db
+
+# Public Notes 
+[[Public/World/Crestfall/Stonehaven/NPCs/Astrid Ironfist|Astrid Ironfist]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

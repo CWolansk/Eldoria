@@ -40,3 +40,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
 ```
+ ^d733c8
+
+# Public Notes 
+[[Public/World/Crestfall/Highreach/NPCs/Lady Millicent Goldleaf|Lady Millicent Goldleaf]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

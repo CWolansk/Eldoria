@@ -1,4 +1,4 @@
-1. Steelshaper's Forge : Eldric Steelshaper: Specializes in common and uncommon magical armor. Eldric's shop is always bustling with adventurers looking for reliable gear.
+1. Steelshaper's Forge : Eddy Steelshaper: Specializes in common and uncommon magical armor. Eldric's shop is always bustling with adventurers looking for reliable gear.
 
 - Personality: Friendly and hardworking, always willing to offer advice to adventurers.
 - Physical Description: Medium build, with sandy hair, a constant smile, and soot-stained hands.
@@ -11,4 +11,12 @@
 - Armor of the Fallen
 - Plate of Knights Fellowship
 - Sentinel Shield
-- Serpent Scale Armor
+- Serpent Scale Armor ^616ca5
+
+# Public Notes 
+[[Public/World/Crestfall/Ardenville/Steelshapers Forge|Steelshapers Forge]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

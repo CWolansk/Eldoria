@@ -78,3 +78,12 @@ Lysander claims to be a traveling wine merchant evaluating Hillcrest's products 
 Lysander serves as a wild card who can become ally, rival, or enemy depending on party actions and DM needs. His presence adds intrigue to the Hillcrest situation while connecting to the broader artifact quest. He can provide information, red herrings, or direct opposition as the story develops.
 
 His ultimate revelation should depend on how the party handles the vineyard crisis and their own quest priorities—rewarding smart investigation while maintaining story flexibility.
+ ^0ede6f
+
+# Public Notes 
+[[Public/World/Crestfall/Hillcrest/NPCs/Lysander Thornfield|Lysander Thornfield]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

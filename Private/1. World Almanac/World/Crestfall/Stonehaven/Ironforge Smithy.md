@@ -53,3 +53,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[Ironforge Smithy]]
 SORT file.name ASC
 ```
+ ^063fb9
+
+# Public Notes 
+[[Public/World/Crestfall/Stonehaven/Ironforge Smithy|Ironforge Smithy]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

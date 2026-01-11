@@ -73,6 +73,9 @@ await RaceLookup.display(dv, ['Human'])
 ```
 
 ## Notes
+
+Direct link if Embed isn't working : https://u.cave.su/p/EldoriaJustinDnDNotes
+
 ```custom-frames
 frame: JustinNotes
 style: height: 1000px;

@@ -12,4 +12,12 @@
 - Bad of Holding
 - Driftglobe
 - Immovable Rod
-- Oil of Slipperiness
+- Oil of Slipperiness ^67d878
+
+# Public Notes 
+[[Public/World/Crestfall/Ardenville/The Enchanted Trinket|The Enchanted Trinket]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

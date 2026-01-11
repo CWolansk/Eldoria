@@ -28,3 +28,12 @@ Owner of The Enchanted Grapevine, specializing in magical components, potions, a
 Source for magical components and enchantments. Her knowledge of vineyard magic could be crucial for understanding and combating the blight.
 
 **TODO**: Develop magical inventory, enchantment services, and blight analysis capabilities
+ ^b0e99e
+
+# Public Notes 
+[[Public/World/Crestfall/Hillcrest/NPCs/Liliana Moonleaf|Liliana Moonleaf]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

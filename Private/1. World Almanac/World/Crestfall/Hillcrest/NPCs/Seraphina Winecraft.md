@@ -37,3 +37,12 @@ Bridge between factions and potential key to the magical aspects of the blight c
 - **[[Claire]]**: Interested in discussing magical wine-making techniques and divine blessing applications
 
 **TODO**: Develop magical wine-making techniques, specific blight detection abilities, and crafting systems
+ ^e7fd2c
+
+# Public Notes 
+[[Public/World/Crestfall/Hillcrest/NPCs/Seraphina Winecraft|Seraphina Winecraft]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

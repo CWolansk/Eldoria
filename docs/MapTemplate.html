@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Map Template</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            width: 100vw;
+            height: 100vh;
+        }
+        #coordinate-display {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            z-index: 1000;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        #coordinate-display h4 {
+            margin: 0 0 5px 0;
+            font-size: 12px;
+            color: #666;
+        }
+        #coordinate-display .coords {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="coordinate-display">
+        <h4>Coordinates</h4>
+        <div class="coords" id="coords-output">Hover over map</div>
+        <div style="font-size: 10px; color: #888; margin-top: 5px;">Shift+Click to add marker</div>
+    </div>
+    
+    <!-- Shared Map Logic -->
+    <script src="js/map-logic.js"></script>
+    
+    <script>
+        // Define markers with locations and links to notes
+        // Coordinates are [y, x] as percentages of image dimensions (0-1)
+        const markers = [
+            // Add more markers here
+        ];
+        
+        // Initialize map with config
+        // TODO: Replace 'path/to/your/image.jpg' with your actual map image path
+        initMap({
+            imagePath: './Assets/Eldoira.jpg', 
+            markers: markers
+        });
+    </script>
+</body>
+</html>

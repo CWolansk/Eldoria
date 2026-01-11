@@ -14,4 +14,12 @@
 - Tinderbox: A small box containing flint, steel, and tinder for starting fires.
 - Grappling Hook: A metal hook attached to a strong rope for climbing or securing to ledges.
 - Portable Ram: A heavy wooden and metal device for breaking down doors and barriers.
-- Torch: A simple wooden torch for lighting dark areas.
+- Torch: A simple wooden torch for lighting dark areas. ^be589d
+
+# Public Notes 
+[[Public/World/Crestfall/Stonehaven/Marlas Gear|Marlas Gear]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

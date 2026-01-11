@@ -1,39 +1,7 @@
-**Elven Village in the Silverleaf Lands**
-- **Location:** Western edge of Silverleaf Lands, near the border with Crestfall
-- **Government:** Village Elder & Astronomer Council
-- **Population:** ~[Number]
-- **Defenses:** Ranger scouts, celestial wards
+![[Private/1. World Almanac/World/Silverleaf Lands/Starfall/Starfall#^a34ee2|Starfall]]
 
-Banner
-- [Description]
-
-```
-[2-6 sentence read-aloud description of Starfall, second-person present tense. Focus on observatory towers, falling star phenomena, or sites where meteors have impacted. Include sensory details - glittering meteorite fragments, telescope lenses catching light, ancient star charts.]
-```
-
-## Layout
-
-[Brief description of how the village is organized. Emphasize astronomical observation points, study halls, meteorite impact sites, or celestial libraries.]
-
-**Key Areas:**
-- [Area Name]
-	- [Description]
-- [Area Name]
-	- [Description]
-- [Area Name]
-	- [Description]
-
----
-
-## Establishments & Services
-
-(To be developed - might include observatories, astronomer guilds, meteorite forges)
-
----
-
-## Reference
-
-### Known Establishments in Starfall
 ```dataview
-LIST WHERE file.folder = this.file.folder
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
 ```

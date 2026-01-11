@@ -35,3 +35,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
 ```
+ ^9b3744
+
+# Public Notes 
+[[Public/World/Crestfall/Highreach/NPCs/Pip Whiskerwind|Pip Whiskerwind]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

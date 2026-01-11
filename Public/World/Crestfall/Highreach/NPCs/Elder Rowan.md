@@ -1,6 +1,4 @@
-Location :: #HighReach #Foundation
-Profession :: #Recruiter #Foundation
-Description :: Kindly older gentleman with a warm shawl and twinkling eyes; tests heroes for a secret society that protects civilians.
+![[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Elder Rowan#^055acb|Elder Rowan]]
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

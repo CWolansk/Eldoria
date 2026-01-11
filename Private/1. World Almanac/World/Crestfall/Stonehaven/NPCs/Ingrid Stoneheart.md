@@ -83,3 +83,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[Ingrid Stoneheart]]
 SORT file.name ASC
 ```
+ ^fbb343
+
+# Public Notes 
+[[Public/World/Crestfall/Stonehaven/NPCs/Ingrid Stoneheart|Ingrid Stoneheart]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

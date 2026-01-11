@@ -4,3 +4,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
 ```
+ ^3b40f9
+
+# Public Notes 
+[[Public/World/Ironpeak Mountains/Steamhammer/Steamhammer|Steamhammer]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

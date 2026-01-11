@@ -1,5 +1,7 @@
-Location :: #HighReach #MerchantsGuild 
-Profession :: #Thug 
-Description :: A large muscle bound bald man with a large tribal tattoo covering his left arm
+![[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Gareth Ironbrow#^144d9a|Gareth Ironbrow]]
 
-[[NPC List]]
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

@@ -1,39 +1,7 @@
-**Elven Village in the Silverleaf Lands**
-- **Location:** Southeastern Silverleaf Lands, southeast of Frostglade
-- **Government:** Village Elder  
-- **Population:** ~[Number]  
-- **Defenses:** Natural barriers, ranger scouts
+![[Private/1. World Almanac/World/Silverleaf Lands/Moonshade/Moonshade#^55bf80|Moonshade]]
 
-Banner
-- [Description]
-
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
 ```
-[2-6 sentence read-aloud description of Moonshade, second-person present tense. Focus on moonlit beauty, nighttime activities, or shadowy forest setting. Include sensory details - silvery light through leaves, night-blooming flowers, owl calls.]
-```
->
->## Layout
->
->[Brief description of how the village is organized. For elven settlements, describe tree-platforms, natural clearings, woven-branch structures.]
->
->**Key Areas:**
->- [Area Name]
->	- [Description]
->- [Area Name]
->	- [Description]
->- [Area Name]
->	- [Description]
->
->---
->
->## Establishments & Services
->
->(To be developed)
->
->---
->
->## Reference
->
->### Known Establishments in Moonshade
->```dataview
->LIST WHERE file.folder = this.file.folder
->```

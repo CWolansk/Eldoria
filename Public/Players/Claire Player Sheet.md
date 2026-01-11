@@ -75,6 +75,8 @@ await RaceLookup.display(dv, ['Genasi (Water)'])
 ```
 
 ## Notes
+
+Direct link if Embed isn't working : https://u.cave.su/p/EldoriaClaireDnDNotes
 ```custom-frames
 frame: ClaireNotes
 style: height: 1000px;

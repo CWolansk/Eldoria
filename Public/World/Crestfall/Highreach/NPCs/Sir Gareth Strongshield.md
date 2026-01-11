@@ -1,17 +1,4 @@
----
-Location :: #HighReach #CityGuard
-Profession :: #ChiefOfficer #TownGuard
-Status :: #Neutral
-Race :: Human
----
-
-## Description
-Rugged and imposing, with a weathered face, gray hair, and a constant look of determination.
-
-## What We Know
-Sir Gareth Strongshield is the town guard's chief officer. He appears stoic and vigilant, committed to protecting Highreach and the kingdom's borders.
-
----
+![[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Sir Gareth Strongshield#^bb2f9d|Sir Gareth Strongshield]]
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

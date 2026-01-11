@@ -1,7 +1,4 @@
-Location :: #HighReach #SturdyMugg
-Profession :: #Innkeeper
-Description :: The owner of a cozy inn on the edge of town, Kara is a no-nonsense woman who keeps her patrons in line with a quick glare and a firm hand.
-
+![[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Kara Stonefoot#^d7a8e7|Kara Stonefoot]]
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

@@ -87,4 +87,12 @@ LIST FROM #Blacksmith AND #Stonehaven AND !#NPCList
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
+``` ^06d6fc
+
+# Public Notes 
+[[Public/World/Crestfall/Stonehaven/Stonehaven|Stonehaven]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
 ```

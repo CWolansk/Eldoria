@@ -96,3 +96,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[Elias Thorn]]
 SORT file.name ASC
 ```
+ ^de74a3
+
+# Public Notes 
+[[Public/World/Crestfall/Stonehaven/NPCs/Elias Thorn|Elias Thorn]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

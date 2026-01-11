@@ -1,9 +1,14 @@
-Location :: #HighReach #ExterminatorsGuild #CriminalOrganization
-Profession :: #Don #Guildmaster #ExterminatorsGuild #CrimeBoss
-Description :: Flamboyant gnome with a rat-tail beard and pinstripe vest; actual mafia Don who runs pest control business as perfect criminal front.
+Location :: #HighReach #ExterminatorsGuild 
+Profession :: #Guildmaster #ExterminatorsGuild 
+Description :: Flamboyant gnome with a rat-tail beard and pinstripe vest; 
 Alive? :: Yes
-Notes :: Real criminal mastermind disguised as eccentric guild leader. Recruited party specifically for legitimacy cover and expanded criminal capabilities. "Inclusivity" is calculated strategy for accessing new opportunities and royal protection.
+Notes ::  Guildmaster of the exterminators Guild. ^7a60fa
 
+- actual mafia Don who runs pest control business as criminal front.
+- Wants the party to deliver a package to his cohorts in Ardenville as a test of their loyalty 
+
+# Public Notes 
+[[Public/World/Crestfall/Highreach/NPCs/Don Gnocianno|Don Gnocianno]] 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

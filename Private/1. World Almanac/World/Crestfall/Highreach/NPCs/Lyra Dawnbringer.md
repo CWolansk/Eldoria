@@ -3,4 +3,12 @@
  A cleric known for her healing abilities and devotion to the guild. Lyra is a compassionate and reliable member.
 
 - Personality: Compassionate and devoted, with a strong sense of duty to the guild.
-- Physical Description: Slender and serene, with long, golden hair and kind, bright eyes.
+- Physical Description: Slender and serene, with long, golden hair and kind, bright eyes. ^b97b7c
+
+# Public Notes 
+[[Public/World/Crestfall/Highreach/NPCs/Lyra Dawnbringer|Lyra Dawnbringer]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

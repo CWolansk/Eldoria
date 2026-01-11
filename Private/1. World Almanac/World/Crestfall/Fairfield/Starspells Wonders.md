@@ -11,4 +11,12 @@
 - Wind Fan
 - Boots of the Winterlands
 - Amulet of Proof against detection and location
-- Brooch of Shielding
+- Brooch of Shielding ^2b8dda
+
+# Public Notes 
+[[Public/World/Crestfall/Fairfield/Starspells Wonders|Starspells Wonders]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

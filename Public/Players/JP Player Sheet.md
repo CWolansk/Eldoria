@@ -56,6 +56,9 @@ await RaceLookup.display(dv, ['Half-Orc'])
 ```
 
 ## Notes
+
+Direct link if Embed isn't working : https://u.cave.su/p/EldoriaJpPlayerNotes
+
 ```custom-frames
 frame: JPNotes
 style: height: 1000px;

@@ -220,3 +220,12 @@ His need to be perceived as sophisticated and respectable makes him vulnerable t
 - **Pure Combat**: Social resolution should be possible and rewarding
 - **Invulnerable**: He can be outsmarted and defeated despite his intelligence
 - **Isolated**: His actions should have consequences for other NPCs and storylines
+ ^1c6630
+
+# Public Notes 
+[[Public/World/Crestfall/Fairfield/NPCs/Valeris Shadowmere|Valeris Shadowmere]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

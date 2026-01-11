@@ -1,9 +1,7 @@
-#Adventurer #AdventurersGuild #Fighter 
-[[Highreach Adventurers Guild]]
+![[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Aric Stormblade#^8e33bb|Aric Stormblade]]
 
-A veteran warrior and brother to [[Thaldrin Stormblade]]. Aric is respected for his strategic mind and combat skills.
-
-- Personality: Veteran warrior known for his tactical acumen and bravery in combat.
-- Physical Description: Stocky and powerful, with a weathered face, graying hair, and numerous battle scars.
-
-[[NPC List]]
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

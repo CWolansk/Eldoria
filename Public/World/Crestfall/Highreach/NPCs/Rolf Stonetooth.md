@@ -1,6 +1,7 @@
-[[The Nighstalkers]]
-Location :: #HighReach #SturdyMugg [[Sturdy Mugg]]
-Profession :: #Adventurer #Thenightstalkers #SturdyMuggPatron
-Description :: - a stock grizzled warrion with a rugged face and a prominent chipped tooth. Wearing patchwork leather and metal armor riveted together and a bear fur mantle over his shoulder. 
+![[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Rolf Stonetooth#^52b50b|Rolf Stonetooth]]
 
-Rolfs mantle is actually a mantle of the lightbender and can be found in the highreach mines [Mantle of the lightbender](https://5e.tools/items.html#mantle%20of%20the%20lightbender_fleemortals) 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

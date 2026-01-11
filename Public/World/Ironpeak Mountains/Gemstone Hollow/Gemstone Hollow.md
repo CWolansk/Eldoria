@@ -1,45 +1,7 @@
-**Dwarven Town in Ironpeak Mountains**
-- **Location:** Central Ironpeak Mountains, between Forgepeak and Ironroot
-- **Government:** Clan Council
-- **Population:** ~[Number]
-- **Defenses:** [Description]
+![[Private/1. World Almanac/World/Ironpeak Mountains/Gemstone Hollow/Gemstone Hollow#^8a8494|Gemstone Hollow]]
 
-Banner
-- [Description]
-
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
 ```
-[2-6 sentence read-aloud description of the town, second-person present tense, focusing on what makes it unique and memorable. Include sensory details - what visitors see, hear, smell as they approach.]
-```
->
->## Layout
->
->[Brief description of how the town is organized physically. For dwarven settlements, describe levels/chambers. Include 2-4 key areas.]
->
->**Key Areas:**
->- [Area Name]
->	- [Description]
->		- [[Link to Establishment|Establishment Name]] (if applicable)
->- [Area Name]
->	- [Description]
->- [Area Name]
->	- [Description]
->
->---
->
->## Establishments & Services
->
->### [[Link to Establishment|Establishment Name]]
->**Type:** [Type]
->**Owner:** TBD
->
->**Building:** [Physical description]
->**Services:** [What they offer]
->
->---
->
->## Reference
->
->### Known Establishments in [Town Name]
->```dataview
->LIST WHERE file.folder = this.file.folder
->```

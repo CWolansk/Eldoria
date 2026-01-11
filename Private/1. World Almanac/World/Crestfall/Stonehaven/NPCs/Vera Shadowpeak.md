@@ -116,3 +116,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[Vera Shadowpeak]]
 SORT file.name ASC
 ```
+ ^3338c4
+
+# Public Notes 
+[[Public/World/Crestfall/Stonehaven/NPCs/Vera Shadowpeak|Vera Shadowpeak]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

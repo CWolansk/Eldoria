@@ -6,4 +6,12 @@ Capitol of the ironpeak mountains. Forgepeak, nestled deep within the heart of I
 	- **Symbol:** A crossed pickaxe, shovel, and hammer, all meeting at their centers, representing unity in the dwarves’ mining craft.
 	- **Background:** A deep earthy or charcoal-gray cloth to contrast with the metallic tones of the tools.
 	- **Styling:** Clean, bold lines, minimal ornamentation—practical and direct, mirroring dwarven sensibilities.
-	- **Placement:** Centered on the banner, with the tools overlapping in a tight, triangular formation.
+	- **Placement:** Centered on the banner, with the tools overlapping in a tight, triangular formation. ^910f36
+
+# Public Notes 
+[[Public/World/Ironpeak Mountains/Forgepeak/ForgePeak|ForgePeak]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

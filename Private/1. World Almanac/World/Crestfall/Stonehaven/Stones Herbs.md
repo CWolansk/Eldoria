@@ -14,4 +14,12 @@
 - Incense: Bundles of aromatic herbs and resins for ritualistic alchemy.
 - Herb Pouches: Small leather pouches filled with common and rare herbs for potion-making.
 - Potion Ingredients: Jars filled with dried roots, powdered minerals, and preserved animal parts.
-- Basic Poison: A vial of poison that can be applied to weapons or used in traps (available after gaining Darius's trust).
+- Basic Poison: A vial of poison that can be applied to weapons or used in traps (available after gaining Darius's trust). ^28c7b6
+
+# Public Notes 
+[[Public/World/Crestfall/Stonehaven/Stones Herbs|Stones Herbs]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

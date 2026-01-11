@@ -83,3 +83,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[Stonehaven Supplies]]
 SORT file.name ASC
 ```
+ ^c07368
+
+# Public Notes 
+[[Public/World/Crestfall/Stonehaven/Stonehaven Supplies|Stonehaven Supplies]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

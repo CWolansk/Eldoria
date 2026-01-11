@@ -1,5 +1,7 @@
-Location :: #HighReach #MerchantsGuild 
-Profession :: #Thug
-Description :: A large muscle bound bald man, usually seen not far behind [[Alistair Goldman]] as his personal guard. Hailing from the unforgiving settler town of Stonehaven he grew up understanding that you have to be tough and merciless to make it in this world.
+![[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Garrick Ironbrow#^95cf05|Garrick Ironbrow]]
 
-[[NPC List]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

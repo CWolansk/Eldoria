@@ -12,4 +12,12 @@
 - Shatterspike
 - Armor of Weightlessness
 - Mariners Armor
-- Mithral Armor
+- Mithral Armor ^c2028f
+
+# Public Notes 
+[[Public/World/Crestfall/Fairfield/Forgefires Armaments|Forgefires Armaments]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

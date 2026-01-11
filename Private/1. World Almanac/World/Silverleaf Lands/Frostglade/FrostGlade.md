@@ -192,3 +192,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
 ```
+ ^fa88cd
+
+# Public Notes 
+[[Public/World/Silverleaf Lands/Frostglade/FrostGlade|FrostGlade]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

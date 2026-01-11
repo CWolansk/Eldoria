@@ -1,8 +1,4 @@
-Location :: #HighReach #SturdyMugg 
-Profession :: #Barkeep 
-Description :: The barkeep is a towering, barrel-chested man with thick, muscular arms and a round face, perpetually rosy from years of tasting his own brews. His dark, bushy beard and lively, twinkling eyes give him a jovial, almost Santa-like appearance, and he’s quick to flash a wide grin at anyone who walks through the door.
-
-
+![[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Aidan Reed#^ee5257|Aidan Reed]]
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

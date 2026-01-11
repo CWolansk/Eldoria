@@ -5,4 +5,12 @@ Description :: - a stock grizzled warrion with a rugged face and a prominent chi
 Alive? :: No - Killed in highreach mines
 Notes :: Married to [[Celeste Stonetooth nee Moonwhisper]] 
 
-Rolfs mantle is actually a mantle of the lightbender and can be found in the highreach mines [Mantle of the lightbender](https://5e.tools/items.html#mantle%20of%20the%20lightbender_fleemortals) 
+Rolfs mantle is actually a mantle of the lightbender and can be found in the highreach mines [Mantle of the lightbender](https://5e.tools/items.html#mantle%20of%20the%20lightbender_fleemortals)  ^52b50b
+
+# Public Notes 
+[[Public/World/Crestfall/Highreach/NPCs/Rolf Stonetooth|Rolf Stonetooth]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

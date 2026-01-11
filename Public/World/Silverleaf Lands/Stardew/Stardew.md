@@ -1,39 +1,7 @@
-**Elven Village in the Silverleaf Lands**
-- **Location:** Northwestern Silverleaf Lands, north of Frostglade
-- **Government:** Village Elder
-- **Population:** ~[Number]
-- **Defenses:** Ranger patrols, natural barriers
+![[Private/1. World Almanac/World/Silverleaf Lands/Stardew/Stardew#^88f10c|Stardew]]
 
-Banner
-- [Description]
-
-```
-[2-6 sentence read-aloud description of Stardew, second-person present tense. Focus on magical morning dew, starlight reflections, or celestial connections. Include sensory details - dewdrops sparkling like stars, morning mist, ethereal atmosphere.]
-```
-
-## Layout
-
-[Brief description of how the village is organized. Emphasize connection to sky/stars, open glades for stargazing, or water features reflecting celestial light.]
-
-**Key Areas:**
-- [Area Name]
-	- [Description]
-- [Area Name]
-	- [Description]
-- [Area Name]
-	- [Description]
-
----
-
-## Establishments & Services
-
-(To be developed)
-
----
-
-## Reference
-
-### Known Establishments in Stardew
 ```dataview
-LIST WHERE file.folder = this.file.folder
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
 ```

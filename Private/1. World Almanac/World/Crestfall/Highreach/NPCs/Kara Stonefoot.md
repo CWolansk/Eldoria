@@ -10,3 +10,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
 ```
+ ^d7a8e7
+
+# Public Notes 
+[[Public/World/Crestfall/Highreach/NPCs/Kara Stonefoot|Kara Stonefoot]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

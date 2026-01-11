@@ -118,3 +118,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[Hilda Ravenshadow]]
 SORT file.name ASC
 ```
+ ^72c191
+
+# Public Notes 
+[[Public/World/Crestfall/Stonehaven/NPCs/Hilda Ravenshadow|Hilda Ravenshadow]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

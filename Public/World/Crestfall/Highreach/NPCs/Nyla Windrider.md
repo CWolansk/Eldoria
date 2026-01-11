@@ -1,6 +1,7 @@
-#Adventurer #HighReach #AdventurersGuild #Ranger 
-[[Highreach Adventurers Guild]]
-An elven ranger with unparalleled archery skills. Nyla's keen eyes and swift reflexes are crucial in scouting missions.
+![[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Nyla Windrider#^5234dc|Nyla Windrider]]
 
-- Personality: Keen-eyed and swift, excelling in archery and scouting.
-- Physical Description: Tall and lithe, with long, silver hair, sharp features, and an alert expression.
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

@@ -1,104 +1,53 @@
-**Port Town of the Kingdom of Crestfall**
-- **Location:** Northern shore of Lake Arden
-- **Government:** Mayor [[Public/World/Crestfall/Ardenville/NPCs/Isolde Fairweather|Isolde Fairweather]]
-- **Population:** Small fishing community with merchant presence
-- **Defenses:** Lake guard patrols, watchtowers
 
-Banner
-- A fishing net overlaid on calm waters with a distant plateau
-
-```
-As you step off the boat onto the sturdy, weathered docks, you are immediately enveloped by the cool mist of Lake Arden and the sharp, salty tang of the water.
-
-The waterfront is alive with the daily rhythm of the trade. Fisherfolk in oil-stained leathers haul in nets heavy with the day's catch, while merchants inspect crates of goods destined for the capital above. The air is filled with the cry of gulls circling overhead, the creaking of wood, and the slap of water against the pilings.
-
-To your left, you see the leaning shell of an ancient warehouse, its salt-eaten beams jutting at odd angles like the ribs of a great beast. On your right, the warm, inviting glow of The Netted Nymph spills out onto the cobblestones, the scent of hearty fish stew wafting from its open door.
-
-As you continue along the pier, your gaze is drawn south across Lake Arden, where the towering plateau of Highreach rises dramatically from the opposite shore, its limestone cliffs catching the afternoon sun. The capital city sits high above the lake, barely visible from this distance.
-
-Further inland, the flat, sea-level town settles into a cozy collection of cottages and shops. The streets are narrow and winding, lined with buildings constructed from sturdy stone and driftwood. You spot the Fisherman's Guild hall, adorned with giant pike skulls, where seasoned sailors gather to discuss the weather and the waves.
-
-The locals move with a steady, practiced purpose, nodding as you pass. The town feels resilient and close-knit, a community forged by the temperamental waters of the lake.
-
-As you reach the town center, the imposing stone structure of the Merchants Guild Warehouse comes into view. It stands as a hub of commerce, bustling with clerks and laborers ensuring the flow of goods between the lake and the kingdom above.
-```
-
-## Layout
-
-Ardenville stretches along Lake Arden's northern shore at sea level. The town centers on sturdy piers built into a natural cove, with cottages and warehouses spreading inland across flat ground. Across the lake to the south, the limestone cliffs of the Highreach plateau loom on the opposite shore.
-
-**Key Areas:**
-- Main Docks & Merchant Warehouses
-	- Stout piers jutting into the protected cove, dominated by Merchants Guild warehouses
-		- [[Public/World/Crestfall/Ardenville/Merchants Guild Warehouse|Merchants Guild Warehouse]]
-		- [[Public/World/Crestfall/Ardenville/Fishermans Guild|Fisherman's Guild]]
-- The Ruined Warehouse
-	- Leaning shell of the town's first warehouse, destroyed by a freak storm a century ago
-- The Kelp Beds
-	- Golden strands of kelp swaying in protected shallows, now tangling rudders
-- Town Center
-	- The heart of the community where locals gather
-		- [[Public/World/Crestfall/Ardenville/The Netted Nymph|The Netted Nymph]]
+**Ardenville** is a lakeside port town located along the northern shore of **Lake Arden** in the Crestfall region. It serves as a primary fishing and transport hub for the lake and acts as a secondary trade connection to the city of Highreach.
 
 ---
 
-## Establishments & Services
+## **Overview**
 
-### [[Public/World/Crestfall/Ardenville/The Netted Nymph|The Netted Nymph]]
-**Type:** Inn & Tavern
-**Owner:** [[Public/World/Crestfall/Ardenville/NPCs/Mira Softstep|Mira Softstep]]
+Ardenville was founded by fishers seeking safer waters than the open ocean. Sheltered by kelp-choked shallows that form a natural breakwater, the town developed into one of the most dependable ports in northern Crestfall. Its economy is centered on fishing, lake trade, and the transfer of goods destined for Highreach.
 
 ---
 
-## Reference
+## **Geography**
 
+- Situated entirely along the **northern shoreline of Lake Arden**
+- Shallow waters near the docks support fishing and moorage
+- Visibility over the lake is often reduced due to persistent mist
+- A steep cliff rises at the southern edge of the lake, separating Ardenville from the Highreach plateau above
+
+---
+
+## **Infrastructure**
+
+- **Docks and Piers:** Wooden piers line the shoreline and accommodate fishing vessels and cargo boats of varying sizes.
+- **Watchtowers:** Defensive watchtowers are positioned along the shore, extending toward areas of reduced lake visibility.
+- **Cliffside Port:** A small port and warehouse sit at the base of the southern cliff.
+- **Cargo Elevator:** A manually operated elevator transports select goods from the cliffside warehouse up to Highreach. Access to the elevator is regulated, and usage fees apply.
+
+---
+
+## **Economy**
+
+- **Fishing:** Primary industry, supplying both local needs and exports.
+- **Lake Trade:** Goods are transported across Lake Arden between nearby settlements.
+- **Goods Transfer:** Ardenville serves as a collection point for supplies routed to Highreach via the cliffside elevator.
+
+---
+
+## **Governance and Administration**
+
+- Trade infrastructure along the docks and the cliffside port is administered by the **Highreach Merchants Guild**.
+- Fishing operations are organized locally, with coordination among boat crews and dock workers.
+- Defensive oversight of the lake is maintained through patrols and watchtowers.
+
+---
+
+## **Strategic Importance**
+
+Ardenville is one of the few reliable ports on Lake Arden, making it essential for regional trade and supply lines. Its connection to Highreach allows goods to move between lake traffic and the plateau city despite difficult terrain.
 ```dataview
-LIST WHERE file.folder = this.file.folder AND file.name != this.file.name
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
 ```
-
-**Structure:** Cozy cottage style with low ceilings and warm hearths.
-**Features:** Center of local gossip, stew pot that never empties.
-**Services:** Lodging, food, drink, job postings.
-
----
-
-### [[Public/World/Crestfall/Ardenville/Merchants Guild Warehouse|Merchants Guild Warehouse]]
-**Type:** Guild Headquarters & Storage
-**Guildmaster:** [[Public/World/Crestfall/Highreach/NPCs/Alistair Goldman|Alistair Goldman]]
-**Harbormaster:** [[Public/World/Crestfall/Ardenville/NPCs/Kellen Redshore|Kellen Redshore]]
-
-**Building:** Large reinforced stone and wood structure dominating the main pier.
-**Services:** Storage, shipping logistics, cliffside lift administration.
-
----
-
-### [[Public/World/Crestfall/Ardenville/Fishermans Guild|Fisherman's Guild]]
-**Type:** Guild Headquarters
-**Guildmistress:** [[Public/World/Crestfall/Ardenville/NPCs/Edda Netsong|Edda Netsong]]
-
-**Building:** Weather-beaten hall near the smaller docks, adorned with giant pike skulls.
-**Services:** Net repair, boat maintenance, weather predictions.
-
----
-
-### [[Public/World/Crestfall/Ardenville/Cliffside Port|Cliffside Port]]
-**Type:** Transport Service
-**Admin:** Merchants Guild
-
-**Description:** A massive winch-lift system that hauls goods up the sheer limestone cliffs to the Highreach plateau.
-**Services:** Cargo transport to the capital.
-
----
-
-## Reference
-
-### Known Establishments in Ardenville
-```dataview
-LIST WHERE file.folder = this.file.folder
-```
-
-### [[Ardenville NPC Index]]
-
-
-
-

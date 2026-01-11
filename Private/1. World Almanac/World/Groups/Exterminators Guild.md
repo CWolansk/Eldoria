@@ -183,3 +183,12 @@ Following the party's heroic actions during the Highreach rat infestation, they'
 The party's reputation provides perfect legitimacy cover while their diverse capabilities open criminal opportunities previously impossible for gnome-only operations. Don Gnocianno plays the long game—gradually involving them in increasingly questionable "pest control" jobs while maintaining plausible deniability. Whether the party realizes the truth and how they respond will determine their relationship with Highreach's most sophisticated criminal organization.
 
 **DM Note**: The guild can function as legitimate ally, moral challenge, or eventual antagonist depending on party choices and how much they discover about the true operations.
+ ^7d543e
+
+# Public Notes 
+[[Public/World/Groups/Exterminators Guild|Exterminators Guild]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

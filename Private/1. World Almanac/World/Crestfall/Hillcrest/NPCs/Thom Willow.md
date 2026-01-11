@@ -28,3 +28,12 @@ Owner of Hillcrest Provisions, supplying general goods, tools, and daily necessi
 Source for basic supplies and regional trade information. Neutral party who can provide supplies needed for various approaches to the crisis.
 
 **TODO**: Develop inventory lists, supply sources, and regional trade connections
+ ^1429a9
+
+# Public Notes 
+[[Public/World/Crestfall/Hillcrest/NPCs/Thom Willow|Thom Willow]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

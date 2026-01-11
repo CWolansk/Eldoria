@@ -52,3 +52,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
 ```
+ ^742624
+
+# Public Notes 
+[[Public/World/Crestfall/Ardenville/NPCs/Salty Pete|Salty Pete]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

@@ -41,3 +41,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
 ```
+ ^3fd11f
+
+# Public Notes 
+[[Public/World/Crestfall/Highreach/NPCs/Squeak Tinkerbottom|Squeak Tinkerbottom]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

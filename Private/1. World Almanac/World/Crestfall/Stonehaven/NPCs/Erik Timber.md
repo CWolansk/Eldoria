@@ -124,3 +124,12 @@ TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[Erik Timber]]
 SORT file.name ASC
 ```
+ ^d10e7f
+
+# Public Notes 
+[[Public/World/Crestfall/Stonehaven/NPCs/Erik Timber|Erik Timber]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

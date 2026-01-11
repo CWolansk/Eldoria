@@ -11,4 +11,12 @@
 - Javelin of Lightning
 - Hellfire shortsword
 - Weapon of Warning
-- Sling of Giant Felling
+- Sling of Giant Felling ^80ca4a
+
+# Public Notes 
+[[Public/World/Crestfall/Hillcrest/Hammerstrikes Weapons|Hammerstrikes Weapons]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

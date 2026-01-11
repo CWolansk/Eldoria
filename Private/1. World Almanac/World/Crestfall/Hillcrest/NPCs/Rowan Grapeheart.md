@@ -28,3 +28,12 @@ Retired adventurer who took over the [[Hillcrest]] [[Adventurers Guild]] chapter
 Guild contact who can provide quests, information, and neutral meeting space. Potential ally for maintaining balance between competing factions.
 
 **TODO**: Develop specific guild services, quest offerings, and maritime connections
+ ^cff6f5
+
+# Public Notes 
+[[Public/World/Crestfall/Hillcrest/NPCs/Rowan Grapeheart|Rowan Grapeheart]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

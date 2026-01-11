@@ -28,3 +28,12 @@ Village blacksmith operating Ironforge Smithy, providing weapon and tool smithin
 Equipment provider and repair services. Can craft specialized tools or weapons needed for various approaches to the vineyard crisis.
 
 **TODO**: Develop smithing capabilities, equipment costs, and craft specializations
+ ^a21511
+
+# Public Notes 
+[[Public/World/Crestfall/Hillcrest/NPCs/Jasper Ironforge|Jasper Ironforge]] 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```
