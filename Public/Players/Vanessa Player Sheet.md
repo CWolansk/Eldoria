@@ -33,18 +33,15 @@ await CharacterSheetDisplay.display(dv, {
 
 ## Equipment
 
-
 ```dataviewjs
 const {ItemLookup} = await cJS()
 await ItemLookup.display(dv, ['Talisman of Elemental Fury','Leather Armor', 'Wooden Shield', 'Scimitar', 'Shield',])
 ```
 
-
 # Spells
-
 ```dataviewjs
 const {SpellLookup} = await cJS()
-await SpellLookup.display(dv, ['Poison Spray', 'Frostbite'])
+await SpellLookup.display(dv, ['Cure wounds','Ice knife','Barkskin','Flame Blade','Pass without trace','Call lightning','Plant growth','Water breathing'])
 ```
 - [Full Spell List with Filters](https://cwolansk.github.io/Eldoria/5etools/spells.html#abi-dalzim's%20horrid%20wilting_xge)
 - [Quick Spell lookup](https://cwolansk.github.io/Eldoria/spell-search.html)
@@ -52,20 +49,17 @@ await SpellLookup.display(dv, ['Poison Spray', 'Frostbite'])
 # Class Information 
 
 ## Background
-
 ```dataviewjs
 const {BackgroundLookup} = await cJS()
 await BackgroundLookup.display(dv, ['Hermit'])
 ```
 
 ## Feats
-**Note** : feats are optional but you have one available  
 ```dataviewjs
 const {FeatLookup} = await cJS()
-await FeatLookup.display(dv, [])
+await FeatLookup.display(dv, ['Lucky'])
 ```
 ## Race
-
 ```dataviewjs
 const {RaceLookup} = await cJS()
 await RaceLookup.display(dv, ['Dragonborn'])

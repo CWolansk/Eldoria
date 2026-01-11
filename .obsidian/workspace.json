@@ -8,17 +8,31 @@
         "type": "tabs",
         "children": [
           {
-            "id": "135f527a194cf7bd",
+            "id": "f541c9def51eb415",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville.md",
+                "file": "Private/2. Session Journals/Session 13 Notes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Ardenville"
+              "title": "Session 13 Notes"
+            }
+          },
+          {
+            "id": "f125aaf1557cc0e5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Public/Players/Claire Player Sheet.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Claire Player Sheet"
             }
           }
         ]
@@ -89,7 +103,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 317.5
+    "width": 339.5
   },
   "right": {
     "id": "b920f831214140f8",
@@ -98,6 +112,7 @@
       {
         "id": "e39c0241308e18ab",
         "type": "tabs",
+        "dimension": 29.394812680115272,
         "children": [
           {
             "id": "a30f685553a5c18a",
@@ -221,6 +236,7 @@
       {
         "id": "cf351be8a3db22d0",
         "type": "tabs",
+        "dimension": 19.21229586935639,
         "children": [
           {
             "id": "6c1415854ccff116",
@@ -237,10 +253,27 @@
             }
           }
         ]
+      },
+      {
+        "id": "cdee9621d1e009bb",
+        "type": "tabs",
+        "dimension": 51.39289145052833,
+        "children": [
+          {
+            "id": "32271178f96ad4d7",
+            "type": "leaf",
+            "state": {
+              "type": "fantasy-statblocks-creature-pane",
+              "state": {},
+              "icon": "skull",
+              "title": "Combatant"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 407.5
+    "width": 570.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -261,34 +294,34 @@
       "calendarium:Open Calendarium": false
     }
   },
-  "active": "f0918c039160b809",
+  "active": "f541c9def51eb415",
   "lastOpenFiles": [
-    "Public/World/Crestfall/Ardenville/Ardenville.md",
+    "Public/Players/Claire Player Sheet.md",
+    "Private/2. Session Journals/Session 13 Notes.md",
+    "Private/2. Session Journals/Session 12 notes.md",
+    "Private/1. World Almanac/World/Groups/Exterminators Guild.md",
+    "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Salty Pete.md",
+    "Public/World/Crestfall/Ardenville/NPCs/Salty Pete.md",
+    "Private/2. Session Journals/Session 11 notes.md",
+    "Public/Players/JP Player Sheet.md",
+    "Public/World/Groups/Exterminators Guild.md",
+    "Private/1. World Almanac/World/Crestfall/Ardenville/Fishermans Guild.md",
+    "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville Adventurers Guild.md",
+    "Private/1. World Almanac/World/Crestfall/Ardenville/Merchants Guild Warehouse.md",
+    "Private/1. World Almanac/World/Groups/Adventurers Guild.md",
+    "Public/Players/Randi Player Sheet.md",
+    "Public/Players/Vanessa Player Sheet.md",
     "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville.md",
+    "Public/World/Crestfall/Ardenville/Ardenville.md",
     "Private/1. World Almanac/World/Crestfall/Ardenville/The Netted Nymph.md",
     "Private/1. World Almanac/World/Crestfall/Ardenville/Lake Arden.md",
     "Public/World/Crestfall/Ardenville/Lake Arden.md",
     "Private/1. World Almanac/World/Crestfall/Highreach/Highreach.md",
     "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Edda Netsong.md",
-    "Private/1. World Almanac/World/Crestfall/Ardenville/Fishermans Guild.md",
-    "Private/1. World Almanac/World/Crestfall/Ardenville/Merchants Guild Warehouse.md",
     "Private/1. World Almanac/World/Crestfall/Ardenville/Steelshapers Forge.md",
     "Public/World/Crestfall/Highreach/Sturdy Mugg.md",
     "Private/1. World Almanac/World/Crestfall/Highreach/Sturdy Mugg.md",
     "Private/1. World Almanac/World/Crestfall/Highreach/Target by Tradewind.md",
-    "Private/1. World Almanac/World/Crestfall/Highreach/The Arcane Enclave.md",
-    "Public/World/Crestfall/Highreach/The Dragons Breath Forge.md",
-    "Private/1. World Almanac/World/Crestfall/Highreach/The Dragons Breath Forge.md",
-    "Private/2. Session Journals/Session 13 Notes.md",
-    "Private/2. Session Journals/Session 12 notes.md",
-    "Private/2. Session Journals/Session 11 notes.md",
-    "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Kellen Redshore.md",
-    "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Isolde Fairweather.md",
-    "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Jon Brightman.md",
-    "Public/World/Crestfall/Highreach/NPCs/Jon Brightman.md",
-    "Private/2. Reference/Overall.md",
-    "Private/2. Reference/Events/02-World-Events/Timeline/Party Visits Wizards Tower.md",
-    "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Ingrid Hightower.md",
     "normalize-npcs.js",
     "Private/1. World Almanac/World/Crestfall/Highreach/Highreach Mines/Level 1/Pasted image 20241106184929.png",
     "Private/2. Reference/Events/04-Ideas-and-Drafts/Missed Opportunities",

@@ -7,11 +7,9 @@ Notes :: Potential "I Know a Guy" connection for JP. Respects seamanship and pra
 ---
 
 ## Background
-Salty Pete sailed merchant vessels for two decades before settling in Ardenville to pursue his lifelong dream of competitive sailing on Lake Arden. He owns "The Barnacle's Revenge," a sturdy racing vessel he's maintained meticulously. However, his promising crew recently abandoned him after being intimidated by rival competitors who wanted to eliminate the competition before it even began.
-
+Salty Pete has captained  "The Barnacle's Revenge," a sturdy fishing vessel he's maintained meticulously. However, his promising crew recently abandoned him after being intimidated by rival competitors who wanted to eliminate the competition before it even began.
 ## Current Situation
 Pete finds himself with a boat but no crew as the boating competition approaches. The intimidation tactics used against his former crew members have left him bitter but determined. He's looking for capable individuals who won't be scared off by threats—people with backbone and skill.
-
 ## Personality
 Pete embodies the practical sailor's approach to life—straightforward, competent, and respectful of those who prove themselves through action rather than words. Years of sailing have made him patient but also stubborn when he believes he's right. He judges people by their actions and seamanship, not by their background or appearance.
 

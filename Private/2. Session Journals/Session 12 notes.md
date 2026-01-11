@@ -3,6 +3,8 @@ fc-date: 0496-03-07
 fc-end: 0496-03-07
 fc-category: Sessions
 ---
+[[Session 11 notes]] 
+[[Session 13 Notes]] 
 # Session 12: Familiar Strangers
 *A harrowing tale of identity, hunger, and survival... or is it?*
 

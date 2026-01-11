@@ -138,44 +138,6 @@ Guild's extensive criminal connections could provide crucial intelligence for tr
 - **Merchant Quarter Tunnels**: Contested territory with competing pest control services
 - **Old Gnome District**: Traditional guild support base, increasingly divided on inclusivity policies
 
-## Party Integration Opportunities
-
-### **JP (Half-Orc Fighter/Sailor)**
-- Don Gnocianno specifically recruited JP for muscle and intimidation factor disguised as "inclusivity"
-- Maritime experience perfect for smuggling operations and understanding criminal port networks
-- Initial gnome suspicion was strategic—making JP feel valued when "accepted" ensures deeper loyalty
-- Potential "I Know a Guy" connection: [[Salty Pete]] might be guild informant rather than innocent sewer worker
-
-### **Justin (Human Ranger/Merchant)**
-- Merchant guild connections provide intelligence on competing services *and* money laundering opportunities
-- Trade route knowledge essential for expanding criminal operations beyond Highreach
-- Don views Justin as key to penetrating legitimate merchant networks for larger criminal enterprises
-- Professional respect from Nimble includes recruitment into smuggling route planning
-
-### **Claire (Water Genasi Tempest Cleric/Sailor)**
-- Storm magic creates perfect cover for criminal activities: washing away evidence, creating diversions, accessing restricted waterways
-- Divine magic provides legitimacy shield—who suspects criminals of employing clerics?
-- Sailor background useful for maritime smuggling and understanding port security weaknesses
-
-### **Julie (Human Fighter/Archaeologist)**
-- Archaeological knowledge helps identify valuable targets for theft and provides cover for "research" break-ins
-- Academic credentials grant access to wealthy collector circles ripe for criminal exploitation
-- Historical expertise useful for authenticating stolen artifacts and identifying forgery opportunities
-
-### **Liz (Elf Bard/Widow)**
-- Bardic abilities excel at gathering intelligence from guild targets and potential victims
-- Elven connections provide access to Silverleaf Lands criminal opportunities previously beyond gnome reach
-- Social manipulation skills essential for maintaining guild's legitimate reputation while expanding criminal influence
-
-### **Randi (Aarakocra Wizard)**
-- Aerial reconnaissance provides perfect surveillance for criminal operations and escape route planning
-- Magical knowledge essential for bypassing magical security and enhancing criminal capabilities
-- Unique appearance makes Randi memorable—perfect distraction while other operations proceed unnoticed
-
-### **Vanessa (Human Fighter)**
-- Direct combat approach valuable for enforcement and intimidation when subtlety fails
-- Military background useful for planning criminal operations with precision and discipline
-- Leadership potential recognized by Don as future lieutenant for expanding territorial control
 
 ## Current Campaign Status
 Following the party's heroic actions during the Highreach rat infestation, they've been formally inducted as unwitting assets in the gnome mafia's expansion plans. The rat-themed headdresses serve dual purposes: symbols of their "honored" status and subtle marking for other criminal organizations that these adventurers are under Don Gnocianno's protection.
@@ -183,7 +145,6 @@ Following the party's heroic actions during the Highreach rat infestation, they'
 The party's reputation provides perfect legitimacy cover while their diverse capabilities open criminal opportunities previously impossible for gnome-only operations. Don Gnocianno plays the long game—gradually involving them in increasingly questionable "pest control" jobs while maintaining plausible deniability. Whether the party realizes the truth and how they respond will determine their relationship with Highreach's most sophisticated criminal organization.
 
 **DM Note**: The guild can function as legitimate ally, moral challenge, or eventual antagonist depending on party choices and how much they discover about the true operations.
- ^7d543e
 
 # Public Notes 
 [[Public/World/Groups/Exterminators Guild|Exterminators Guild]] 
