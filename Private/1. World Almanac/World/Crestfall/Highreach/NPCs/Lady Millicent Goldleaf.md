@@ -1,49 +1,54 @@
 ---
-Location :: #HighReach #Noble #Palace
-Profession :: #Noble #RoyalAdvocate
-Description :: Human noble woman with political acumen and progressive views; influential palace advocate for guild inclusivity policies.
-Alive? :: Yes
-Notes :: Pushes for royal contract with Exterminators Guild as part of broader inclusivity initiatives. Values diversity and competence in royal service providers.
+type: NPC
+name: "Lady Millicent Goldleaf"
+location: Highreach
+region: Crestfall
+profession: "Royal Advocate"
+race: "Human"
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Highreach
+  - Noble
+  - Palace
 ---
 
-## Personality
-Lady Millicent represents the progressive wing of Highreach nobility—politically savvy, forward-thinking, and genuinely committed to social advancement. She sees the Exterminators Guild's inclusivity as a model for broader kingdom policies and a practical demonstration of diverse competence.
+![[Public/World/Crestfall/Highreach/NPCs/Lady Millicent Goldleaf]]
 
-## Political Position
-- **Royal Advisor**: Informal but influential voice in palace policy discussions
-- **Inclusivity Advocate**: Champions merit-based selection over traditional prejudices  
-- **Practical Progressive**: Supports change that demonstrably improves kingdom effectiveness
+## Personality
+- **Ideal:** Progress
+- **Bond:** Merit-based governance and proving diverse teams succeed
+- **Flaw:** Impatient with traditionalists — dismisses opposition too quickly
+- **Quirk:** Frames every argument as a "practical demonstration" rather than ideology
+
+## Links
+[[Don Gnocianno]]
+
+## DM Notes
+- Informal but influential royal advisor
+- Champions inclusivity as a model for broader kingdom policies
+- Sees the Exterminators Guild's diversity as proof that merit-based selection works
+- Palace access — can arrange meetings with key royal decision-makers
+- Noble network — connections with other progressive nobles
+- Pushes for royal contract with Exterminators Guild as part of broader inclusivity initiatives
 
 ## Relationships
-- **Don Gnocianno**: Professional ally in promoting inclusivity policies
-- **Royal Court**: Respected voice for progressive policies with practical benefits
-- **Party**: Views as living proof that diverse teams can achieve exceptional results
-- **Conservative Nobles**: Political opposition who prefer traditional approaches
-
-## Current Initiatives
-- **Royal Service Diversification**: Advocating for merit-based hiring across royal departments
-- **Guild Recognition Programs**: Establishing formal royal backing for effective inclusive organizations
-- **Demonstration Projects**: Using Exterminators Guild as proof-of-concept for broader policies
-
-## Resources & Influence
-- **Palace Access**: Can arrange meetings with key royal decision-makers
-- **Political Intelligence**: Informed about court politics and policy discussions
-- **Noble Network**: Connections with other progressive nobles and potential allies
+- [[Don Gnocianno]] — professional ally in promoting inclusivity policies
+- Royal Court — respected voice for progressive policies with practical benefits
+- The Party — views as living proof that diverse teams achieve exceptional results
+- Conservative Nobles — political opposition who prefer traditional approaches
 
 ## Plot Hooks
 - Needs reliable evidence of guild effectiveness for upcoming royal contract negotiations
 - Could provide political backing for party operations with royal implications
 - Potential source of information about court politics and noble faction dynamics
 
-```dataview
-TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
-SORT file.name ASC
-```
- ^d733c8
+---
 
-# Public Notes 
-[[Public/World/Crestfall/Highreach/NPCs/Lady Millicent Goldleaf|Lady Millicent Goldleaf]] 
+# Public Notes
+[[Public/World/Crestfall/Highreach/NPCs/Lady Millicent Goldleaf|Lady Millicent Goldleaf]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

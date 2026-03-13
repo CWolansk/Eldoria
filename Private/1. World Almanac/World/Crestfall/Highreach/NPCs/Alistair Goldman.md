@@ -1,22 +1,50 @@
-Location :: #HighReach #MerchantsGuild
-Profession :: #Guildmaster
-Description :: Alistair is a wiry man in his early 50s, with graying hair slicked back meticulously and sharp, calculating blue eyes that seem to miss nothing. He wears finely tailored clothes in muted colors, preferring practicality over ostentation.<br>Alistair has a habit of tapping his fingers rhythmically on any surface when he’s thinking. He often adjusts his collar and cuffs, a sign of his anxiety when discussing anything that could tarnish his reputation. Alistair maintains a formal tone and rarely makes eye contact, preferring to appear detached and in control.
-Alive? :: Yes
-Notes ::  ^0c0ae0
+---
+type: NPC
+name: "Alistair Goldman"
+location: Highreach
+region: Crestfall
+profession: "Guildmaster"
+race: "Human"
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Highreach
+  - MerchantsGuild
+---
 
- [[Party due date for Alistair Goldman]] The party failed to secure the [[Seekers Eye]] due to this Alistair will most likely not want to work with them in the future but we shouldn't close the door right away.
- 
+![[Public/World/Crestfall/Highreach/NPCs/Alistair Goldman]]
+
+## Personality
+- **Ideal:** Control
+- **Bond:** The Merchants Guild's reputation and his standing within it
+- **Flaw:** Holds grudges — never forgets a slight
+- **Quirk:** Taps his fingers rhythmically on surfaces when thinking; adjusts collar and cuffs when anxious
+
+## Links
 [[HighReach Merchants Guild]]
-- The party screwed over Alistair and he will want revenge
-	- Jarek ironfist killed by the merchants guild after they hired the assasins guild 
-	- guildmaster lets the article get published in the newspaper 
-	- If the party somehow is able to either kill the guildmaster or depose of him as the guildmaster, the next guildmaster of the merchants guild will somehow help the orcs/hurt the humans in the war effort 
-		- This is all somehow orchestrated by [[Summoner Jon AKA the wizard]] 
-Other idea
-- Justin Mule gets decapitated and is waiting for him in his bed at the inn ^d6f996
+[[Party due date for Alistair Goldman]]
+[[Seekers Eye]]
 
-# Public Notes 
-[[Public/World/Crestfall/Highreach/NPCs/Alistair Goldman|Alistair Goldman]] 
+## DM Notes
+- Party failed to secure the [[Seekers Eye]]; Alistair unlikely to cooperate, but door shouldn't be fully closed
+- Formal tone, rarely makes eye contact — prefers to appear detached and in control
+
+## Secrets & Motivations
+- Wants revenge against the party for screwing him over
+- Had Jarek Ironfist killed via the assassins guild
+- Allowed a damaging article to be published in the newspaper
+- If deposed, the next guildmaster will aid the orcs / undermine humans in the war effort — orchestrated by [[Summoner Jon AKA the wizard]]
+
+## Plot Hooks
+- Justin Mule gets decapitated — head left waiting in his bed at the inn
+- Deposing the guildmaster triggers a worse replacement aligned with enemy forces
+
+---
+
+# Public Notes
+[[Public/World/Crestfall/Highreach/NPCs/Alistair Goldman|Alistair Goldman]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

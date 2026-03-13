@@ -2,12 +2,29 @@
 fc-date: 0496-03-27
 fc-end: 
 fc-category: Holiday
+type: Holiday
+name: Blood Moon Festival
+culture: Orc
+region:
+recurrence: Annual (on the Bloodmoon)
+tags:
+  - Holiday
+  - Orc
 ---
+
+## Overview
+
+Orcs celebrate the Bloodmoon as a time of renewal and power. The sky turns red, and fallen warriors' spirits are believed to watch over the fights.
+
+## Traditions
+
+- Ritual combat — warriors fight to prove strength and dominance
+- Tribes exchange weapons and stories
+- Night filled with chants and drums
+- Spirits of fallen warriors bless the strongest
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
 ```
-
-Orcs celebrate the Bloodmoon as a time of renewal and power. On this night, the tribes hold ritual combat, with warriors fighting to prove their strength and dominance. The sky turns red with the Bloodmoon, and it’s believed that the spirits of fallen warriors watch over the fights, blessing the strongest among them. Tribes exchange weapons and stories, and the night is filled with chants and drums.

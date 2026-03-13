@@ -1,9 +1,27 @@
-#SturdyMugg #HighReach #OtherShop #Inn 
-Owned by [[Kara Stonefoot]]
-Barkeep [[Aidan Reed]] ^362c49
+---
+type: Store
+name: Sturdy Mugg
+location: Highreach
+region: Crestfall
+store_type: Inn
+proprietor: Kara Stonefoot
+tags:
+  - Store
+  - Crestfall
+  - Highreach
+  - Inn
+---
 
-# Public Notes 
-[[Public/World/Crestfall/Highreach/Sturdy Mugg|Sturdy Mugg]] 
+![[Public/World/Crestfall/Highreach/Sturdy Mugg]]
+
+## DM Notes
+
+
+---
+
+# Public Notes
+[[Public/World/Crestfall/Highreach/Sturdy Mugg|Sturdy Mugg]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

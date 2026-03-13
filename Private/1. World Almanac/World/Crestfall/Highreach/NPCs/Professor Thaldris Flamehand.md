@@ -1,11 +1,36 @@
-Location :: #HighReach #WizardsTower
-Profession :: #Professor Evocation
-Description :: A powerfully built dwarf with a fiery red beard and a booming voice, Professor Flamehand embodies the raw power of the evocation school. Scars from past magical experiments mark his hands and forearms, a testament to his experience and bold approach to teaching. He believes in hands-on learning, often encouraging his students to push the limits of their abilities. His passion for the destructive forces of magic is matched only by his dedication to ensuring his students learn control and responsibility.
-Alive? :: Yes
-Notes ::  ^9b9b6a
+---
+type: NPC
+name: "Professor Thaldris Flamehand"
+location: Highreach
+region: Crestfall
+profession: "Professor of Evocation"
+race: "Dwarf"
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Highreach
+  - WizardsTower
+  - Evocation
+---
 
-# Public Notes 
-[[Public/World/Crestfall/Highreach/NPCs/Professor Thaldris Flamehand|Professor Thaldris Flamehand]] 
+![[Public/World/Crestfall/Highreach/NPCs/Professor Thaldris Flamehand]]
+
+## Personality
+- **Ideal:** Power
+- **Bond:** His students — pushes them hard because the world won't be gentle
+- **Flaw:** Reckless with demonstrations; singed eyebrows are common in his class
+- **Quirk:** Clenches and unclenches his scarred fists when thinking
+
+## Links
+
+## DM Notes
+
+---
+
+# Public Notes
+[[Public/World/Crestfall/Highreach/NPCs/Professor Thaldris Flamehand|Professor Thaldris Flamehand]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

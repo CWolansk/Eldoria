@@ -1,15 +1,22 @@
-# [Location Name] (DM Notes)
+---
+type: Location
+name: 
+region: 
+location_type: 
+travel_difficulty: 
+tags:
+  - Location
+---
 
-## Dungeon Master Info
-- **True History:** [The real lore players don't know yet]
-- **Hidden Hazards:** [Traps, environmental dangers]
+## Description
 
-## Encounters
-- [Encounter Table]
 
-## Loot & Treasure
-- [Key items to find]
+## Key Features
 
-## DCs
-- **Navigation:**
-- **Survival:**
+
+## Hazards & Inhabitants
+
+
+## DM Notes
+
+

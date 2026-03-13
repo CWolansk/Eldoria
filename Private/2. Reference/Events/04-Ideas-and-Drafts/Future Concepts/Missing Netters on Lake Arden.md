@@ -2,9 +2,27 @@
 fc-date:
 fc-end:
 fc-category: Available Quests
+type: Quest
+name: Missing Netters on Lake Arden
+status: Idea
 level: E
+location: Lake Arden / Ardenville
+region: Crestfall
+quest_giver: Captain Gregor Woods
+reward: 50 gp per rescued fisher + 25 gp identification bonus
+tags:
+  - Quest
+  - ELevelQuest
+  - Crestfall
+  - Ardenville
+  - Idea
 ---
-#ELevelQuest #Ardenville #Quest
+
+## Quest Overview
+
+**Quest Giver**: Captain [[Gregor Woods]]
+**Reward**: 50 gp per rescued fisher + 25 gp bonus
+**Difficulty**: E
 
 A skiff of young netters vanished near the mist line at dusk. Captain [[Gregor Woods]] seeks seven Level 5 E‑ranked trackers to find the crew and learn what dragged them from the lake.
 

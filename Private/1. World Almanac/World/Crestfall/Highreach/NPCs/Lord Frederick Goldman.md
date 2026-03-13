@@ -1,11 +1,40 @@
-Location :: #HighReach #RichArea
-Profession :: #Noble
-Description :: A large imposing human dressed in fine riding leathers that is very proud of his wine collection from Hillcrest. His money is mainly generational wealth with some smart investments into the assassins Guild.
-Alive? :: Yes
-Notes ::  ^375a16
+---
+type: NPC
+name: "Lord Frederick Goldman"
+location: Highreach
+region: Crestfall
+profession: "Noble"
+race: "Human"
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Highreach
+  - Noble
+---
 
-# Public Notes 
-[[Public/World/Crestfall/Highreach/NPCs/Lord Frederick Goldman|Lord Frederick Goldman]] 
+![[Public/World/Crestfall/Highreach/NPCs/Lord Frederick Goldman]]
+
+## Personality
+- **Ideal:** Legacy
+- **Bond:** His family name and generational wealth
+- **Flaw:** Arrogant — believes wealth equals wisdom
+- **Quirk:** Steers every conversation toward his wine collection within minutes
+
+## Links
+[[Alistair Grimwood]]
+
+## DM Notes
+- Wealth is mainly generational, supplemented by smart investments
+
+## Secrets & Motivations
+- Has investments in the assassins guild
+
+---
+
+# Public Notes
+[[Public/World/Crestfall/Highreach/NPCs/Lord Frederick Goldman|Lord Frederick Goldman]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

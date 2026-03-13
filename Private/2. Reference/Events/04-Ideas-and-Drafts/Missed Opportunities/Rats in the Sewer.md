@@ -2,13 +2,31 @@
 fc-date: 
 fc-end: 
 fc-category: Not Available Quests
+type: Quest
+name: Rats in the Sewer
+status: Missed
 level: F
+location: Highreach Sewers
+region: Crestfall
+quest_giver: Quest Board
+reward: 
+tags:
+  - Quest
+  - FLevelQuest
+  - Crestfall
+  - Highreach
+  - MissedQuest
 ---
-#FLevelQuest #Quest #HighReach 
-[[Quest Board]] 
 
-[[Raatma]]
-[[Highreach Sewers]]
+## Quest Overview
+
+**Quest Giver**: [[Quest Board]]
+**Status**: Missed
+**Difficulty**: F
+
+## Key NPCs / Entities
+- [[Raatma]]
+- [[Highreach Sewers]]
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

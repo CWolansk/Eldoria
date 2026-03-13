@@ -2,15 +2,35 @@
 fc-date: 0496-03-06
 fc-end:
 fc-category: Failed Quests
+type: Quest
+name: Jewelry Rat Infestation
+status: Failed
 level: F
-Status: Failed
+location: Highreach
+region: Crestfall
+quest_giver: Beatrix Goldleaf
+reward: 1gp + 1 guild point per rat; 50gp bonus for recovering all jewelry
+tags:
+  - Quest
+  - FLevelQuest
+  - Crestfall
+  - Highreach
 ---
-#HighReach #Quest #FLevelQuest
-* Reward 1 guild point per rat 1 gold per rat 
-* If they manage to catch all of the rats and stop them from escaping with the jewelry then Beatrix will reward them with an extra 50 gp 
-[[Quest Board]]
-[[Highreach Duplirat Invasion]] 
-[[Beatrix Goldleaf]] is desperate to have all of her gems returned and all of those nasty rats killed and disposed of. If these brave adventurers and kill all of those rats and collect all of her jewelry a handsome tip will be waiting for them
+
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```
+
+## Quest Overview
+
+**Quest Giver**: [[Beatrix Goldleaf]]
+**Reward**: 1gp + 1 guild point per rat; 50gp bonus for recovering all jewelry
+**Status**: Failed (during [[Highreach Duplirat Invasion]])
+**Difficulty**: F
+
+[[Beatrix Goldleaf]] is desperate to have all of her gems returned and all of those nasty rats killed and disposed of.
 
 - **Description**: The party is hired by a wealthy jeweler whose basement is infested with rats that have chewed through several storage chests. The rats have not only destroyed packaging materials but have also scattered small jewels and valuables around the basement, creating a chaotic mess and even stealing some pieces into their nests.
 - **Objective**: Clear out the rats, recover any scattered or stolen jewelry, and locate the rats’ nest to find any missing valuables. Some of the rats have been seen gnawing on a few gold and silver pieces, adding insult to injury.

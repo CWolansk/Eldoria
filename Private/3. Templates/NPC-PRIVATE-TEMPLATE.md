@@ -1,21 +1,43 @@
-# [NPC Name] (DM Notes)
+---
+type: NPC
+name: 
+location: 
+region: 
+profession: 
+race: 
+status: Alive
+tags:
+  - NPC
+---
 
-## Stat Block
-- **Class/Level:**
-- **AC:** | **HP:** | **Speed:**
-- **Stats:** [STR, DEX, CON, INT, WIS, CHA]
-- **Abilities:** [Key combat or social abilities]
+## Description
 
-## Roleplaying Guide
-- **Voice/Mannerisms:** [Detailed acting notes]
-- **Ideal:**
-- **Bond:**
-- **Flaw:**
+
+## Personality
+- **Ideal:** 
+- **Bond:** 
+- **Flaw:** 
+- **Quirk:** 
 
 ## Secrets & Motivations
-- **True Goal:**
-- **Fears:**
-- **Secrets:**
 
-## Loot
-- [Items carried]
+
+## Plot Hooks
+
+
+## Relationships
+
+
+## DM Notes
+
+
+---
+
+# Public Notes
+
+
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

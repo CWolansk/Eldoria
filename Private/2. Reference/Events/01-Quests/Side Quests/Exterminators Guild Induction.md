@@ -2,13 +2,24 @@
 fc-date: 0496-03-06
 fc-end: 
 fc-category: Events
+type: Quest
+name: Exterminators Guild Induction
 status: Active
+level: 
 location: Highreach → Ardenville
+region: Crestfall
+quest_giver: Don Gnocianno
 reward: Guild Membership, Rat-Themed Headdress (Darkvision 60ft)
 difficulty: Medium
+tags:
+  - Quest
+  - Subquest
+  - GuildQuest
+  - Exterminators
+  - Crestfall
+  - Highreach
+  - ActiveQuest
 ---
-
-#Subquest #GuildQuest #Exterminators #InProgress
 
 ## Quest Overview
 

@@ -1,12 +1,37 @@
-Location :: #Ardenville
-Profession :: #GuardCaptain
-Description :: Broad‑shouldered human veteran with a scarred cheek and calm authority. Gregor commands the lake guard that keeps monsters and smugglers in check.
-Alive? :: Yes
-Notes :: Responsible for security during the [[Lake Arden Boat Race]] and hires adventurers to patrol the kelp beds and the collapsing warehouse for smugglers or lurking beasts. He hasn't forgotten the party's clash with Merchants Guild bandits and quietly backs their efforts.
- ^4df87e
+---
+type: NPC
+name: Gregor Woods
+location: Ardenville
+region: Crestfall
+profession: Guard Captain
+race: Human
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Ardenville
+---
 
-# Public Notes 
-[[Public/World/Crestfall/Ardenville/NPCs/Gregor Woods|Gregor Woods]] 
+![[Public/World/Crestfall/Ardenville/NPCs/Gregor Woods]]
+
+## Read-Aloud
+> Broad-shouldered veteran with a scarred cheek and calm authority. Commands the lake guard — keeps monsters and smugglers in check with quiet efficiency.
+
+## Personality
+- **Ideal:** Duty
+- **Bond:** The safety of Ardenville's shores and the people who depend on them
+- **Flaw:** Slow to trust outsiders; needs to see proof before extending faith
+- **Quirk:** Rubs his scarred cheek when sizing someone up
+
+## Links
+[[Ardenville]]
+[[Lake Arden Boat Race]]
+
+## DM Notes
+Responsible for security during the boat race. Hires adventurers to patrol the kelp beds and the collapsing warehouse. Hasn't forgotten the party's clash with Merchants Guild bandits — quietly backs their efforts.
+
+---
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

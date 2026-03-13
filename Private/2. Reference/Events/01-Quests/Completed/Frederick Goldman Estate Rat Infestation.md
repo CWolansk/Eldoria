@@ -2,10 +2,21 @@
 fc-date: 0496-03-01
 fc-end: 0496-03-01
 fc-category: Quests
-level: F
+type: Quest
+name: Frederick Goldman Estate Rat Infestation
 status: Completed
+level: F
+location: Highreach
+region: Crestfall
+quest_giver: Lord Frederick Goldman
+reward: 1gp + 1 guild point per rat killed with proof
+tags:
+  - Quest
+  - FLevelQuest
+  - Crestfall
+  - Highreach
+  - CompletedQuest
 ---
-#FLevelQuest #Quest #HighReach #CompletedQuest #Date_01_03_496 
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
@@ -13,8 +24,14 @@ FROM [[#this.file.name]]
 SORT file.name ASC
 ```
 
+## Quest Overview
 
-COMPLETED : Rat Infestation: Clear out a cellar overrun with unusually large rats.
+**Quest Giver**: [[Lord Frederick Goldman]]
+**Reward**: 1gp + 1 guild point per rat killed with proof; 10gp and 10 guild points each for doppelrats
+**Status**: Completed
+**Difficulty**: F
+
+Clear out a cellar overrun with unusually large rats.
 	- Reward : 1gp + 1 guild point for every rat killed with proof
 	- Consequence : After a month of in game time the city will be afflicted by a plague caused by basement rats
 	- Taken by the party - Party will receive 10 gold and 10 guild points each for delivering the doppelrats

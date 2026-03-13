@@ -2,9 +2,27 @@
 fc-date:
 fc-end:
 fc-category: Available Quests
+type: Quest
+name: Secure the Collapsing Warehouse
+status: Idea
 level: E
+location: Ardenville
+region: Crestfall
+quest_giver: Mayor Isolde Fairweather
+reward: 80 gp + reduced docking fees
+tags:
+  - Quest
+  - ELevelQuest
+  - Crestfall
+  - Ardenville
+  - Idea
 ---
-#ELevelQuest #Ardenville #Quest
+
+## Quest Overview
+
+**Quest Giver**: Mayor [[Isolde Fairweather]]
+**Reward**: 80 gp and reduced docking fees for one vessel
+**Difficulty**: E
 
 The storm-racked warehouse on the outer pier leans dangerously after last season's squall. Mayor [[Isolde Fairweather]] seeks seven Level 5 E-rank adventurers to ensure the structure is empty and mark unstable beams before the town tears it down.
 

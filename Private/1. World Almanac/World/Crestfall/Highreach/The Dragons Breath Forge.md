@@ -1,13 +1,32 @@
-#Blacksmith #HighReach 
+---
+type: Store
+name: The Dragons Breath Forge
+location: Highreach
+region: Crestfall
+store_type: Smithy
+proprietor: Alaric Emberfell
+tags:
+  - Store
+  - Crestfall
+  - Highreach
+  - Smithy
+---
 
-[[Private/2. Reference/NPCs/All NPCS/Alaric Emberfell]]
+![[Public/World/Crestfall/Highreach/The Dragons Breath Forge]]
 
-[[Quick Links#^59cd85]]
-[[Quick Links#^4193a6]]
-[[Potential Magic Items]] ^d48ed0
+## Inventory
+- Weapons — [[Quick Links#^59cd85]]
+- Armor — [[Quick Links#^4193a6]]
+- [[Potential Magic Items]]
 
-# Public Notes 
-[[Public/World/Crestfall/Highreach/The Dragons Breath Forge|The Dragons Breath Forge]] 
+## DM Notes
+
+
+---
+
+# Public Notes
+[[Public/World/Crestfall/Highreach/The Dragons Breath Forge|The Dragons Breath Forge]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

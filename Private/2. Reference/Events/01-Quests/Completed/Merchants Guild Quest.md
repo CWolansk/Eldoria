@@ -2,12 +2,36 @@
 fc-date: 0496-03-02
 fc-end: 0496-03-02
 fc-category: Quests
+type: Quest
+name: Merchants Guild Quest
+status: Completed
 level: F
-Status: Completed
+location: Highreach
+region: Crestfall
+quest_giver: Alistair Goldman
+reward: 100 gold, 10 guild points
+tags:
+  - Quest
+  - FLevelQuest
+  - Crestfall
+  - Highreach
+  - CompletedQuest
 ---
-#FLevelQuest #Quest #HighReach 
-#Date_02_03_496 
-Continued... 
+
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```
+
+## Quest Overview
+
+**Quest Giver**: [[Alistair Goldman]]
+**Reward**: 100 gold, 10 guild points
+**Status**: Completed
+**Difficulty**: F
+
+## DM Notes
 * Party did not kill jarek and instead swindled the merchants guild out of 100 gold 
 * The merchants guild leader Alistair will use the assassins guild to kill jarek now 
 	* [[Jarek Ironfist gets killed]] 

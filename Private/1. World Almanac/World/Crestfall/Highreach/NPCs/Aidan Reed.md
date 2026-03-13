@@ -1,11 +1,37 @@
-Location :: #HighReach #SturdyMugg 
-Profession :: #Barkeep 
-Description :: The barkeep is a towering, barrel-chested man with thick, muscular arms and a round face, perpetually rosy from years of tasting his own brews. His dark, bushy beard and lively, twinkling eyes give him a jovial, almost Santa-like appearance, and he’s quick to flash a wide grin at anyone who walks through the door.
-Alive? :: Yes 
-Notes :: Barkeep at the [[Sturdy Mugg]] ^ee5257
+---
+type: NPC
+name: "Aidan Reed"
+location: Highreach
+region: Crestfall
+profession: "Barkeep"
+race: "Human"
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Highreach
+  - SturdyMugg
+---
 
-# Public Notes 
-[[Public/World/Crestfall/Highreach/NPCs/Aidan Reed|Aidan Reed]] 
+![[Public/World/Crestfall/Highreach/NPCs/Aidan Reed]]
+
+## Personality
+- **Ideal:** Hospitality — everyone deserves a warm meal and a cold drink
+- **Bond:** The Sturdy Mugg is his life's work
+- **Flaw:** Trusts regulars too easily
+- **Quirk:** Tastes every brew before serving it, even ones he's made a hundred times
+
+## Links
+- [[Sturdy Mugg]]
+
+## DM Notes
+Barkeep at the Sturdy Mugg.
+
+---
+
+# Public Notes
+[[Public/World/Crestfall/Highreach/NPCs/Aidan Reed|Aidan Reed]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

@@ -1,11 +1,44 @@
-Location :: #HighReach #MerchantsGuild 
-Profession :: #Thug 
-Description :: A large muscle bound bald man with a large tribal tattoo covering his left arm
-Alive? :: No
-Notes ::  Gareth is under employ of the merchants guild master [[Alistair Goldman]]. He is responsible for doing the dirty work of the merchants guild which usually includes shake downs and taking care of problem merchants. He is the twin brother to [[Garrick Ironbrow]] this is not common knowledge. Gareth is a natural fighter that carries around a +1 Greataxe on his back.  ^144d9a
+---
+type: NPC
+name: "Gareth Ironbrow"
+location: Highreach
+region: Crestfall
+profession: "Enforcer"
+race: "Human"
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Highreach
+  - MerchantsGuild
+---
 
-# Public Notes 
-[[Public/World/Crestfall/Highreach/NPCs/Gareth Ironbrow|Gareth Ironbrow]] 
+![[Public/World/Crestfall/Highreach/NPCs/Gareth Ironbrow]]
+
+## Personality
+- **Ideal:** Loyalty
+- **Bond:** His twin brother [[Garrick Ironbrow]] and the guild that pays him
+- **Flaw:** Enjoys intimidation a little too much
+- **Quirk:** Cracks his knuckles before delivering bad news
+
+## Links
+[[Alistair Goldman]]
+[[Garrick Ironbrow]]
+[[HighReach Merchants Guild]]
+
+## DM Notes
+- Under employ of guildmaster [[Alistair Goldman]]
+- Handles the guild's dirty work — shakedowns, dealing with problem merchants
+- Natural fighter, carries a +1 Greataxe
+
+## Secrets & Motivations
+- Twin brother to [[Garrick Ironbrow]] — not common knowledge
+
+---
+
+# Public Notes
+[[Public/World/Crestfall/Highreach/NPCs/Gareth Ironbrow|Gareth Ironbrow]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

@@ -1,13 +1,26 @@
-# [Settlement Name] (DM Notes)
+---
+type: Settlement
+name: 
+region: 
+settlement_type: 
+population: 
+government: 
+tags:
+  - Settlement
+---
 
-## Political Intrigue
-- **True Power Structure:** [Who really rules?]
-- **Factions:** [Secret agendas of local groups]
+## Overview
 
-## Encounters
-- **Urban Encounters:** [Table or list]
-- **Crime & Law:** [Guard stats, jail details, corruption level]
 
-## Secrets
-- [Hidden locations]
-- [Dark history]
+## History
+
+
+## Notable NPCs
+
+
+## Guilds & Politics
+
+
+## DM Notes
+
+

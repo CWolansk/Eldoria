@@ -1,11 +1,41 @@
-Location :: #HighReach #GoldfangWeapons 
-Profession :: #Merchant #MerchantsGuild 
-Description :: A halfing wearing a smart blue jacket and brown trousers, with longish blonde curls peaking out from underneath a flat brown cap. 
-Alive? :: Yes
-Notes :: A small time weapons seller, you can get almost any weapon from GoldFang Weapons, but he is being edged out of competition by [[Felix Tradewind]], since he can't compete with the amount of inventory and prices that Felix seems to be able to be able to bring in. Brom is setting out for [[Fairfield]] the trade capital of the country to meet up with his cousin who owns a successful general store to help him out and expand the business.  ^48d691
+---
+type: NPC
+name: "Brom Goldfang"
+location: Highreach
+region: Crestfall
+profession: "Weapons Merchant"
+race: "Halfling"
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Highreach
+  - GoldfangWeapons
+  - MerchantsGuild
+---
 
-# Public Notes 
-[[Public/World/Crestfall/Highreach/NPCs/Brom Goldfang|Brom Goldfang]] 
+![[Public/World/Crestfall/Highreach/NPCs/Brom Goldfang]]
+
+## Personality
+- **Ideal:** Enterprise
+- **Bond:** His family business and his cousin in [[Fairfield]]
+- **Flaw:** Stubbornly refuses to cut corners, even when it costs him sales
+- **Quirk:** Polishes weapon handles while talking, never looks down at them
+
+## Links
+[[Felix Tradewind]]
+[[Fairfield]]
+
+## DM Notes
+- Runs Goldfang Weapons — can get almost any weapon
+- Being edged out by [[Felix Tradewind]], who undercuts on inventory and prices
+- Setting out for [[Fairfield]] to meet his cousin who owns a successful general store — plans to expand the business
+
+---
+
+# Public Notes
+[[Public/World/Crestfall/Highreach/NPCs/Brom Goldfang|Brom Goldfang]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

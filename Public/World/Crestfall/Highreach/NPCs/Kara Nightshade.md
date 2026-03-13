@@ -1,4 +1,30 @@
-![[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Kara Nightshade#^ffc28e|Kara Nightshade]]
+---
+type: NPC
+name: "Kara Nightshade"
+location: Highreach
+region: Crestfall
+profession: "Rogue"
+race: "Human"
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Highreach
+---
+
+## Appearance
+Petite and agile, with short dark hair and quick, sharp eyes. Rarely stays still for long.
+
+## What We Know
+A rogue and member of the Highreach Adventurers Guild. Known for her stealth and knack for finding things others miss.
+
+## First Impressions
+Quiet and watchful — you get the feeling she noticed you before you noticed her.
+
+## Interactions
+
+
+---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

@@ -2,13 +2,27 @@
 fc-date:
 fc-end:
 fc-category: Available Quests
+type: Quest
+name: Clear the Kelp Beds
+status: Idea
 level: E
+location: Ardenville
+region: Crestfall
+quest_giver: Edda Netsong
+reward: 75 gp + Fisherman's Guild favor
+tags:
+  - Quest
+  - ELevelQuest
+  - Crestfall
+  - Ardenville
+  - Idea
 ---
-#ELevelQuest #Ardenville #Quest
 
-Edda Netsong seeks seven Level 5 E‑ranked adventurers to hack back the kelp beds choking the shallows and drive out the slime eels nesting there so the fishers can cast safely again.
+## Quest Overview
 
-**Briefing:** Meet Edda at the fishers' pier to receive kelp hooks and tide charts.
+**Quest Giver**: Edda Netsong
+**Reward**: 75 gp and a favor from the Fisherman's Guild
+**Difficulty**: E
 
 **Objectives**
 - Clear three 30‑foot patches of kelp without damaging pier pilings.

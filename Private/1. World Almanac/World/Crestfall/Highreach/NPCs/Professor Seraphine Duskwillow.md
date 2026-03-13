@@ -1,11 +1,36 @@
-Location :: #HighReach #WizardsTower
-Profession :: #Professor Necromancy
-Description :: Seraphine is a mysterious and pale human woman with long black hair that seems to absorb light. She dresses in dark, elegant robes trimmed with silver, and her eyes have a piercing, almost otherworldly quality. Though her specialty often inspires fear, she is a compassionate and misunderstood figure, teaching her students to respect life and death while exploring the ethical use of necromantic magic. Her soft-spoken nature hides a fierce intellect and a deep well of empathy for those who seek to understand the mysteries of life and death.
-Alive? :: Yes
-Notes ::  ^90b19e
+---
+type: NPC
+name: "Professor Seraphine Duskwillow"
+location: Highreach
+region: Crestfall
+profession: "Professor of Necromancy"
+race: "Human"
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Highreach
+  - WizardsTower
+  - Necromancy
+---
 
-# Public Notes 
-[[Public/World/Crestfall/Highreach/NPCs/Professor Seraphine Duskwillow|Professor Seraphine Duskwillow]] 
+![[Public/World/Crestfall/Highreach/NPCs/Professor Seraphine Duskwillow]]
+
+## Personality
+- **Ideal:** Balance
+- **Bond:** The boundary between life and death — it must be respected
+- **Flaw:** Withdrawn and secretive, making others assume the worst
+- **Quirk:** Speaks to empty chairs as if someone is sitting there
+
+## Links
+
+## DM Notes
+
+---
+
+# Public Notes
+[[Public/World/Crestfall/Highreach/NPCs/Professor Seraphine Duskwillow|Professor Seraphine Duskwillow]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

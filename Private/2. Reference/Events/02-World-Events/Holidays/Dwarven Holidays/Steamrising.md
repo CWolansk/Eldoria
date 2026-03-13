@@ -1,7 +1,30 @@
+---
+fc-date:
+fc-end:
+fc-category: Holiday
+type: Holiday
+name: Steamrising
+culture: Dwarven
+region:
+recurrence: Personal milestone (engineering innovation)
+tags:
+  - Holiday
+  - Dwarven
+---
+
+## Overview
+
+Celebrates when a dwarven engineer creates something new or innovates a traditional design.
+
+## Traditions
+
+- Unveiling of the invention to the clan
+- Fellow engineers and inventors gather to witness and critique
+- Fireworks, steam-powered contraptions on display
+- Friendly engineering contests
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
 ```
-
-This celebration occurs when a dwarven engineer creates something new or innovates a traditional design. The event is marked by the unveiling of the invention to the clan, with fellow engineers and inventors gathering to witness and critique the work. Steamrising includes fireworks, steam-powered contraptions on display, and friendly engineering contests.

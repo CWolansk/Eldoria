@@ -2,11 +2,28 @@
 fc-date: 
 fc-end: 
 fc-category: Available Quests
+type: Quest
+name: Bandit Camp on Highreach-Ardenville Route
+status: Idea
 level: E
+location: Highreach → Ardenville trade route
+region: Crestfall
+quest_giver: Adventurers Guild
+reward: 50 gp
+tags:
+  - Quest
+  - ELevelQuest
+  - Crestfall
+  - Highreach
+  - Ardenville
+  - Idea
 ---
-#ELevelQuest #HighReach #Quest 
 
-The party needs to clear out a small bandit camp that is harrassing travellers on the main trade route between Highreach and Arden 
+## Quest Overview
+
+**Quest Giver**: [[Adventurers Guild]]
+**Reward**: 50 gp for bringing bandits in
+**Difficulty**: E
 
 Sexy Wizard Gang has set up an outpost off the main road between Highreach and Ardenville. The guild is offering 50 gold for the adventuring party that can go and bring the bandits in to be tried.  
 

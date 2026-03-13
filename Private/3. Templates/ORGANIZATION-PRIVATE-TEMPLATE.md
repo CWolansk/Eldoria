@@ -1,12 +1,30 @@
-# [Organization Name] (DM Notes)
+---
+type: Organization
+name: 
+headquarters: 
+region: 
+org_type: 
+leader: 
+influence: 
+tags:
+  - Organization
+---
 
-## Inner Circle
-- **True Leader:** [If different from public leader]
-- **Secret Members:**
+## Overview
 
-## Agenda
-- **Secret Goals:**
-- **Resources:** [Funds, safehouses, spies]
 
-## Plot Hooks
-- [Mission ideas]
+## Goals
+
+
+## Structure
+
+
+## Notable Members
+
+
+## Relations
+
+
+## DM Notes
+
+

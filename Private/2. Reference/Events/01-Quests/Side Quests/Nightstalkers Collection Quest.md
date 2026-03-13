@@ -2,14 +2,35 @@
 fc-date: 0496-03-05
 fc-end: 0496-03-05
 fc-category: Events
-Status: Partially Completed
+type: Quest
+name: Nightstalkers Collection Quest
+status: Partially Completed
+level: 
+location: Highreach
+region: Crestfall
+quest_giver: Nightstalkers Widows
+reward: Silver Leaf Broach, Iron Bracelet, Continental Map, Hammerfist Merchant's Seal
+tags:
+  - Quest
+  - Subquest
+  - Crestfall
+  - Highreach
+  - PartiallyCompleted
 ---
 
-#Date_05_03_496 
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```
 
-#Subquest 
-Related to 
-- [[Party meets the Nighstalkers widows]] 
+## Quest Overview
+
+**Quest Giver**: [[Party meets the Nighstalkers widows|Nightstalkers Widows]]
+**Reward**: Various items per widow
+**Status**: Partially Completed
+
+## Objectives
 
 - [[Celeste Stonetooth nee Moonwhisper]] Requests the return of Rolfs bear fur Mantle in return she will give the party a silver leaf broach, which will provide unencumbered access into the elven kingdom 
 	- Party gave back the bear fur mantle in return for the silver leaf broach 
@@ -19,11 +40,4 @@ Related to
 	- Part returned Thoren back safely and got a map 
 - [[Fiona Hammerfist nee Thistledown]] requests the return of Orens Warhammer, in return she will give the party the **Hammerfist Merchant's Seal**, a signet ring that grants a 10% discount with most merchants and signifies the wearer is under the protection of the Hammerfist family.
 	- Party did not return the warhammer
-
-
-```dataview
-TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
-SORT file.name ASC
-```
 

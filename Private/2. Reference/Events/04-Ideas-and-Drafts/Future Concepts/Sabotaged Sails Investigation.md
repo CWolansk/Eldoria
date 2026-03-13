@@ -2,9 +2,28 @@
 fc-date:
 fc-end:
 fc-category: Available Quests
+type: Quest
+name: Sabotaged Sails Investigation
+status: Idea
 level: E
+location: Ardenville
+region: Crestfall
+quest_giver: Mayor Isolde Fairweather
+reward: 100 gp + public favor during the race
+tags:
+  - Quest
+  - ELevelQuest
+  - Crestfall
+  - Ardenville
+  - Investigation
+  - Idea
 ---
-#ELevelQuest #Ardenville #Quest
+
+## Quest Overview
+
+**Quest Giver**: Mayor [[Isolde Fairweather]]
+**Reward**: 100 gp and public favor during the race
+**Difficulty**: E
 
 With the boat race nearing, unknown hands are slicing contenders' rigging at night. Mayor [[Isolde Fairweather]] asks for seven Level 5 E‑ranked investigators to catch the saboteur before the starting horn.
 

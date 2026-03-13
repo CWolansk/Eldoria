@@ -2,10 +2,22 @@
 fc-date: 0496-03-06
 fc-end: 0496-03-06
 fc-category: Events
+type: Quest
+name: Find the Fly Demon Summoner
 status: Completed
+level: 
+location: Highreach
+region: Crestfall
+quest_giver: Guild Master Thaldrin Stormblade
+reward: 50 gp
+tags:
+  - Quest
+  - Subquest
+  - Investigation
+  - Crestfall
+  - Highreach
+  - CompletedQuest
 ---
-
-#Date_13_03_496 #Subquest #Investigation
 
 ## Quest Overview
 

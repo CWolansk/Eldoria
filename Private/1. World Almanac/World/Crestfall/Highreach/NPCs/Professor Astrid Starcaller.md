@@ -1,11 +1,36 @@
-Location :: #HighReach #WizardsTower
-Profession :: #Professor Divination
-Description :: Professor Starcaller is a serene, contemplative tiefling with violet skin and glowing, golden eyes. She dresses in ethereal robes that seem to shimmer like the night sky, and her soft voice is often accompanied by a faint, echoing whisper, as if she’s conversing with unseen forces. Astrid is revered for her uncanny insights and prophetic visions, guiding her students to see beyond the present and uncover hidden truths. She is both a mentor and a guide, helping others navigate the often murky waters of fate and destiny.
-Alive? :: Yes
-Notes ::  ^1ec6e3
+---
+type: NPC
+name: "Professor Astrid Starcaller"
+location: Highreach
+region: Crestfall
+profession: "Professor of Divination"
+race: "Tiefling"
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Highreach
+  - WizardsTower
+  - Divination
+---
 
-# Public Notes 
-[[Public/World/Crestfall/Highreach/NPCs/Professor Astrid Starcaller|Professor Astrid Starcaller]] 
+![[Public/World/Crestfall/Highreach/NPCs/Professor Astrid Starcaller]]
+
+## Personality
+- **Ideal:** Truth
+- **Bond:** Her visions — she feels responsible for every fate she glimpses
+- **Flaw:** Speaks in cryptic half-answers that frustrate everyone
+- **Quirk:** Pauses mid-sentence as if listening to something no one else can hear
+
+## Links
+
+## DM Notes
+
+---
+
+# Public Notes
+[[Public/World/Crestfall/Highreach/NPCs/Professor Astrid Starcaller|Professor Astrid Starcaller]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

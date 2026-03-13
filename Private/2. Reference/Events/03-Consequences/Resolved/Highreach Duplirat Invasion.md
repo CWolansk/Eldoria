@@ -2,10 +2,27 @@
 fc-date: 0496-03-06
 fc-end: 
 fc-category: Consequences
+type: Consequence
+name: Highreach Duplirat Invasion
+status: Resolved
+severity: Major
+trigger: Goblins in the Mine earthquake
+affected_entities:
+  - "[[Private/1. World Almanac/World/Crestfall/Highreach/Highreach|Highreach]]"
+tags:
+  - Consequence
+  - Crestfall
+  - Highreach
+  - Resolved
 ---
-The city of Highreach is being invaded by duplirats coming from the sewers that the party failed to take care of causing expensive damages. The party must choose where to help in the city.
 
-Consequences of the results of [[Goblins in the Mine]] earthquake caused by [[Session 9 Notes]] 
+## Trigger
+
+Consequences of the results of [[Goblins in the Mine]] earthquake caused by [[Session 9 Notes]]
+
+## Impact
+
+The city of Highreach is being invaded by duplirats coming from the sewers that the party failed to take care of causing expensive damages. The party must choose where to help in the city. 
 
 Each round is 10 in game minutes Scenario ends at round 10
 Each player gets 2 actions 

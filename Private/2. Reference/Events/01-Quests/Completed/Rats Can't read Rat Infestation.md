@@ -2,15 +2,42 @@
 fc-date: 0496-03-06
 fc-end:
 fc-category: Failed Quests
-level: F
+type: Quest
+name: Rats Can't Read Rat Infestation
 status: Failed
+level: F
+location: Highreach
+region: Crestfall
+quest_giver: Jon Brightman
+reward: 1gp + 1 guild point per rat; magic scroll tip for saving books
+tags:
+  - Quest
+  - FLevelQuest
+  - Crestfall
+  - Highreach
 ---
-#HighReach #Quest #FLevelQuest
-Reward 1 Guild Point and 1 Gold per rat 
-[[Jon Brightman]]
+
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```
+
+## Quest Overview
+
+**Quest Giver**: [[Jon Brightman]]
+**Reward**: 1gp + 1 guild point per rat; magic scroll tip for saving books
+**Status**: Failed (during [[Highreach Duplirat Invasion]])
+**Difficulty**: F
+
+## Key NPCs
+- [[Jon Brightman]] — quest giver, groans when he sees the party
+
+## Links
 [[Quest Board]]
 [[Rats in the Sewer]] 
-[[Highreach Duplirat Invasion]] 
+[[Highreach Duplirat Invasion]]
+
 Jon answers the door and groans when he sees the party. 
 If the party can kill all of the rats and save as many books as possible he will gift them a magic scroll as a tip 
 There are some magical rats in this batch that the party needs to kill while attempting to stop the rats from destroying the books 

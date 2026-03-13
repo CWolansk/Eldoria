@@ -1,12 +1,40 @@
-Location :: #HighReach #WizardsTower
-Profession :: #Wizard 
-Description :: Halfing wizard dressed in robe and hat, usually surrounded by many half open text books. 
-Alive? :: Yes
-Notes :: Evocation professor at Highreach wizards tower ^c860b6
+---
+type: NPC
+name: "Jon Brightman"
+location: Highreach
+region: Crestfall
+profession: "Evocation Wizard"
+race: "Halfling"
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Highreach
+  - WizardsTower
+---
 
-Next time the party goes to see him he mentions that not a single adventurer helped him out with his Rat problem and they could have avoided the entire city being invaded in [[Highreach Duplirat Invasion]] 
-# Public Notes 
-[[Public/World/Crestfall/Highreach/NPCs/Jon Brightman|Jon Brightman]] 
+![[Public/World/Crestfall/Highreach/NPCs/Jon Brightman]]
+
+## Personality
+- **Ideal:** Knowledge
+- **Bond:** His research at the Wizard's Tower
+- **Flaw:** Holds grudges — will never let you forget a slight
+- **Quirk:** Marks book pages by singeing the corners with tiny sparks
+
+## Links
+[[Highreach Duplirat Invasion]]
+
+## DM Notes
+Next visit: reminds the party that no adventurer helped with his rat problem, and they could have prevented the [[Highreach Duplirat Invasion]].
+
+## Plot Hooks
+- Still bitter about the Duplirat Invasion — could be leveraged for favors or information if someone finally acknowledges his warnings were right
+
+---
+
+# Public Notes
+[[Public/World/Crestfall/Highreach/NPCs/Jon Brightman|Jon Brightman]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

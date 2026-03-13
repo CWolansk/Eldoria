@@ -1,14 +1,45 @@
-[[The Nighstalkers]]
-Location :: #HighReach #SturdyMugg [[Sturdy Mugg]]
-Profession :: #Adventurer #Thenightstalkers #SturdyMuggPatron
-Description :: - the leader of the nightstalkers, he is a burly man with a broad chest and dark slicked back hair. Wearing a dark steel breastplate etched with an iron gauntlet emblem over his heart and a crimson half-cloak draped over one shoulder, wielding iron knuckled gauntlets.
-Alive? :: Yes, still alive right now
-Notes :: Married to [[Alma Ironfist nee Brightwater]] Disappears in the mines with the rest of his party. Their gear may be scattered about the mine or taken by goblins if they don't get broken during the attack by the goblins. Rescued by the party during the events of [[Session 6 Notes]] 
+---
+type: NPC
+name: "Thoren Ironfist"
+location: Highreach
+region: Crestfall
+profession: "Fighter"
+race: "Human"
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Highreach
+  - SturdyMugg
+  - TheNightstalkers
+  - Adventurer
+---
 
-Thoren ironfists breastplate is actually a [mithral breastplate ](https://5e.tools/items.html#mithral%20breastplate_dmg)  ^e8fa7d
+![[Public/World/Crestfall/Highreach/NPCs/Thoren Ironfist]]
 
-# Public Notes 
-[[Public/World/Crestfall/Highreach/NPCs/Thoren Ironfist|Thoren Ironfist]] 
+## Personality
+- **Ideal:** Leadership — the strong protect the weak
+- **Bond:** The Nightstalkers are his brothers
+- **Flaw:** Stubborn pride; refuses to back down from a challenge
+- **Quirk:** Cracks his knuckles before making a point
+
+## Links
+- [[The Nighstalkers]]
+- [[Sturdy Mugg]]
+- [[Alma Ironfist nee Brightwater]]
+- [[Session 6 Notes]]
+
+## DM Notes
+Leader of the Nightstalkers. Married to [[Alma Ironfist nee Brightwater]]. Disappeared in the mines with the rest of his party. Gear scattered or taken by goblins. Rescued by the party during [[Session 6 Notes]].
+
+## Secrets & Motivations
+Thoren's breastplate is actually a [mithral breastplate](https://5e.tools/items.html#mithral%20breastplate_dmg).
+
+---
+
+# Public Notes
+[[Public/World/Crestfall/Highreach/NPCs/Thoren Ironfist|Thoren Ironfist]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

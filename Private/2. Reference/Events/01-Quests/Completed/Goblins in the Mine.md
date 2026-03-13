@@ -2,14 +2,46 @@
 fc-date: 0496-03-02
 fc-end: 0496-03-06
 fc-category: Completed Quests
-level: F
+type: Quest
+name: Goblins in the Mine
 status: Completed
+level: F
+location: Highreach Mines
+region: Crestfall
+quest_giver: Adventurers Guild
+reward: 1gp + 1 guild point per goblin killed
+tags:
+  - Quest
+  - FLevelQuest
+  - Crestfall
+  - Highreach
+  - CompletedQuest
 ---
-#HighReach #highreachMines #Quest #FLevelQuest #Date_02_03_496 #Date_03_03_496 #Date_04_03_496 #Date_05_03_496 
-* Reward : 1gp and 1 guild point for every goblin killed 
-* Consequence : After a week of in game time there will be a full goblin infestation
-* Completed the Quest in [[Session 9 Notes]] when defeating the [[Chasme]] 
-[[Quest Board]]
+
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```
+
+## Quest Overview
+
+**Quest Giver**: [[Adventurers Guild]]
+**Reward**: 1gp + 1 guild point per goblin killed
+**Status**: Completed
+**Difficulty**: F
+
+Completed in [[Session 9 Notes]] when defeating the [[Chasme]].
+
+## Key NPCs
+- [[Quest Board]]
+
+## Potential Outcomes
+
+### Failure / Ignored
+- After a week of in game time there will be a full goblin infestation
+
+## Dungeon Levels
 
 Level 1: Goblin Territory with Traps, Treasure, and Basic Monsters
 [[Level 1 Outline]]

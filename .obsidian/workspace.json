@@ -73,16 +73,6 @@
               "icon": "lucide-folder-closed",
               "title": "Files"
             }
-          },
-          {
-            "id": "fd1fe314485060df",
-            "type": "leaf",
-            "state": {
-              "type": "file-tree-view",
-              "state": {},
-              "icon": "sheets-in-box",
-              "title": "File Tree"
-            }
           }
         ],
         "currentTab": 2
@@ -261,7 +251,7 @@
       "calendarium:Open Calendarium": false
     }
   },
-  "active": "f0918c039160b809",
+  "active": "c449ead431ac9bb8",
   "lastOpenFiles": [
     "Public/World/Crestfall/Ardenville/Ardenville.md",
     "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville.md",

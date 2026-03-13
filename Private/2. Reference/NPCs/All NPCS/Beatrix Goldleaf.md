@@ -1,20 +1,39 @@
-Location :: #HighReach #RichArea 
-Profession :: #JewelryConsoisseur
-Description :: a woman in her late 30 that has warm honey toned skin and a cascade of thick dark blonde curls, that she wears swept back and pinned with a jeweled hair comb. She is wearing a deep emerald green gown with intricate gold embroidery along the hem and neckline, complemented by tasteful but clearly expensive jewelry. A pair of gold leaf shaped earrings and a delicate bracelet full of small emeralds and diamonds that rest on her wrist. 
-Alive? :: Yes 
-Notes :: She desperately wanted the party to kill all of the rats and return her jewelry collection to its rightful owner. She can't stand to lost any of her precious gems! ^edd7c0
+---
+type: NPC
+name: Beatrix Goldleaf
+location: Highreach
+region: Crestfall
+profession: Jewelry Connoisseur
+race: Human
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Highreach
+---
 
+## Description
+> Late 30s, warm honey-toned skin, cascade of thick dark blonde curls swept back with a jeweled hair comb. Deep emerald gown with gold embroidery, gold leaf earrings, delicate bracelet of emeralds and diamonds.
+
+## Personality
+- **Ideal:** Beauty
+- **Bond:** Her jewelry collection — she'd do anything to protect it
+- **Flaw:** Materialistic to a fault
+- **Quirk:** Unconsciously touches her bracelet when anxious
+
+## Links
 [[NPC List]]
+[[Flushed Heirloom Failed Quest Consequence]]
+[[Flushed Heirloom]]
 
-```dataview
-TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
-SORT file.name ASC
-```
+## DM Notes
+She desperately wanted the party to kill all of the rats and return her jewelry collection. Can't stand to lose any of her precious gems. After the heirloom quest failed, she pulled funding from the [[Highreach Adventurers Guild]] and dislikes adventurers.
 
+---
 
-# Public Notes 
-[[Public/World/Crestfall/Highreach/NPCs/Beatrix Goldleaf|Beatrix Goldleaf]] 
+# Public Notes
+[[Public/World/Crestfall/Highreach/NPCs/Beatrix Goldleaf|Beatrix Goldleaf]]
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

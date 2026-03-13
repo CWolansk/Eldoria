@@ -1,12 +1,37 @@
-Location :: #Ardenville
-Profession :: #Mayor #Fisherfolk
-Description :: A weatherworn woman in her late forties with sun‑tanned skin and a voice like rolling surf. She rose from repairing nets to leading the town, balancing tradition with the demands of rival guilds.
-Alive? :: Yes
-Notes :: Oversees the [[Lake Arden Boat Race]], mediates feuding guilds, and seeks heroes to secure the storm‑wrecked warehouse; she keeps tabs on the adventurers whose impounded ship sits at her pier.
- ^58fcb6
+---
+type: NPC
+name: Isolde Fairweather
+location: Ardenville
+region: Crestfall
+profession: Mayor
+race: Human
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Ardenville
+---
 
-# Public Notes 
-[[Public/World/Crestfall/Ardenville/NPCs/Isolde Fairweather|Isolde Fairweather]] 
+![[Public/World/Crestfall/Ardenville/NPCs/Isolde Fairweather]]
+
+## Read-Aloud
+> Weatherworn woman in her late forties — sun-tanned skin, voice like rolling surf. Rose from repairing nets to leading the town.
+
+## Personality
+- **Ideal:** Balance
+- **Bond:** Ardenville itself — she'll bend tradition and twist arms to keep the town whole
+- **Flaw:** Spreads herself too thin mediating everyone else's problems
+- **Quirk:** Unconsciously ties and unties knots in a length of rope she always carries
+
+## Links
+[[Ardenville]]
+[[Lake Arden Boat Race]]
+
+## DM Notes
+Oversees the boat race, mediates feuding guilds. Seeks heroes to secure the storm-wrecked warehouse. Keeps tabs on the adventurers whose impounded ship sits at her pier.
+
+---
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
