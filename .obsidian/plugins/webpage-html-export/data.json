@@ -10,7 +10,7 @@
     "postProcess": true,
     "displayProgress": true,
     "inlineHTML": true,
-    "exportPath": "C:\\Users\\caiwo\\source\\repos\\Eldoria\\docs\\Public\\Players",
+    "exportPath": "C:\\Users\\caiwo\\source\\repos\\Eldoria\\docs",
     "filesToExport": [
       "docs/Players",
       "docs/index.md"
