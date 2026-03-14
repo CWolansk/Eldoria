@@ -40,7 +40,7 @@ This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that f
 ## Before You Create
 
 Always **search the vault first**:
-1. Search `Private/2. Reference/Events/02-World-Events/Holidays/` for existing holidays — don't duplicate
+1. Search `Private/2. Reference/Events/World Events/Holidays/` for existing holidays — don't duplicate
 2. Check if the race/culture folder exists (Dwarven Holidays, Elven Holidays, Human Holidays, Orc Holidays)
 3. Look at existing holiday files to match format conventions
 4. Check for related NPCs, locations, or groups to link to
@@ -50,10 +50,10 @@ Always **search the vault first**:
 Holidays are organized by race/culture:
 
 ```
-Private/2. Reference/Events/02-World-Events/Holidays/Dwarven Holidays/{Holiday Name}.md
-Private/2. Reference/Events/02-World-Events/Holidays/Elven Holidays/{Holiday Name}.md
-Private/2. Reference/Events/02-World-Events/Holidays/Human Holidays/{Holiday Name}.md
-Private/2. Reference/Events/02-World-Events/Holidays/Orc Holidays/{Holiday Name}.md
+Private/2. Reference/Events/World Events/Holidays/Dwarven Holidays/{Holiday Name}.md
+Private/2. Reference/Events/World Events/Holidays/Elven Holidays/{Holiday Name}.md
+Private/2. Reference/Events/World Events/Holidays/Human Holidays/{Holiday Name}.md
+Private/2. Reference/Events/World Events/Holidays/Orc Holidays/{Holiday Name}.md
 ```
 
 For multi-cultural holidays, place in the most relevant race folder or create a shared folder if needed.

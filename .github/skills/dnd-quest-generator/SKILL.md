@@ -40,24 +40,19 @@ This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that f
 ## Before You Create
 
 Always **search the vault first**:
-1. Search `Private/2. Reference/Events/01-Quests/` for existing quests — don't duplicate
-2. Search `Private/2. Reference/Events/04-Ideas-and-Drafts/` for draft quest ideas that may already cover this
-3. Check that the quest giver NPC and location have files to link to
-4. Look at existing quest files (completed and active) to match format conventions
+1. Search `Private/2. Reference/Events/Quests/` for existing quests — don't duplicate
+2. Check that the quest giver NPC and location have files to link to
+3. Look at existing quest files (completed and active) to match format conventions
 
 ## File Paths
 
 Quests are organized by status:
 
 ```
-Private/2. Reference/Events/01-Quests/Completed/{Quest Name}.md
-Private/2. Reference/Events/01-Quests/Side Quests/{Quest Name}.md
-```
-
-Draft or future quests go in:
-```
-Private/2. Reference/Events/04-Ideas-and-Drafts/Future Concepts/{Quest Name}.md
-Private/2. Reference/Events/04-Ideas-and-Drafts/Missed Opportunities/{Quest Name}.md
+Private/2. Reference/Events/Quests/Active/{Quest Name}.md
+Private/2. Reference/Events/Quests/Completed/{Quest Name}.md
+Private/2. Reference/Events/Quests/Missed/{Quest Name}.md
+Private/2. Reference/Events/Quests/Ideas/{Quest Name}.md
 ```
 
 ## Quest Template

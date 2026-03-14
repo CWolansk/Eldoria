@@ -22,7 +22,7 @@ Eldoria/
 │   │           ├── NPCs/             # NPC files for this settlement
 │   │           └── *.md              # Store/shop files (loose in settlement folder)
 │   │   └── Groups/                   # Faction/guild/organization files (world-level)
-│   ├── 2. Reference/                 # Rules reference, encounters, quests, consequences, holidays
+│   ├── 2. Reference/                 # Rules reference, encounters, quests, consequences, holidays, world events
 │   ├── 2. Session Journals/          # Session logs and event records
 │   └── 3. Templates/                 # Obsidian templates for each entity type
 ├── Public/                           # Player-visible content (shared with the table)
@@ -166,21 +166,21 @@ See `CONVENTIONS.md` for detailed syntax examples.
 
 ### "Create a quest"
 1. Read the `dnd-quest-generator` skill
-2. Search `Private/2. Reference/Events/01-Quests/` for existing quests
+2. Search `Private/2. Reference/Events/Quests/` for existing quests
 3. Create the quest file with YAML frontmatter, objectives, outcomes
 4. Link to quest giver NPC, location, and related events
 5. If the quest has failure consequences, offer to create a consequence file
 
 ### "Record a consequence"
 1. Read the `dnd-consequence-generator` skill
-2. Search `Private/2. Reference/Events/03-Consequences/` for existing consequences
+2. Search `Private/2. Reference/Events/Consequences/` for existing consequences
 3. Create the consequence file linking to the triggering event/quest
 4. List affected NPCs, factions, and locations with wiki-links
 5. If the consequence creates new quest opportunities, offer to create those
 
 ### "Create a holiday"
 1. Read the `dnd-holiday-generator` skill
-2. Search `Private/2. Reference/Events/02-World-Events/Holidays/` for existing holidays
+2. Search `Private/2. Reference/Events/World Events/Holidays/` for existing holidays
 3. Place in the correct race/culture subfolder
 4. Include calendarium `fc-date` for the next occurrence
 5. Keep it brief — traditions as bullet fragments, not prose

@@ -40,7 +40,7 @@ This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that f
 ## Before You Create
 
 Always **search the vault first**:
-1. Search `Private/2. Reference/Events/03-Consequences/` for existing consequence files — don't duplicate
+1. Search `Private/2. Reference/Events/Consequences/` for existing consequence files — don't duplicate
 2. Find the triggering event or quest file to link to
 3. Check that affected NPCs, factions, and locations have files
 4. Look at existing consequence files to match format conventions
@@ -50,8 +50,9 @@ Always **search the vault first**:
 Consequences are organized by resolution status:
 
 ```
-Private/2. Reference/Events/03-Consequences/Active/{Consequence Name}.md
-Private/2. Reference/Events/03-Consequences/Resolved/{Consequence Name}.md
+Private/2. Reference/Events/Consequences/Active/{Consequence Name}.md
+Private/2. Reference/Events/Consequences/Resolved/{Consequence Name}.md
+Private/2. Reference/Events/Consequences/Ideas/{Consequence Name}.md
 ```
 
 Consequences are **DM-only** — they do not get a public counterpart. If the players can see the effects, those go in the relevant NPC, location, or event public files instead.
