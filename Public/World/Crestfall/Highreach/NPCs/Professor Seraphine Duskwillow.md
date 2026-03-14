@@ -27,6 +27,6 @@ Quiet and intense — her gaze feels like it's looking through you, not at you.
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

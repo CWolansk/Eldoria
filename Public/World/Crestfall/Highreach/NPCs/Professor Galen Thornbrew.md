@@ -27,6 +27,6 @@ Warm and mischievous — the kind of professor who makes you forget you're in a 
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

@@ -28,6 +28,6 @@ Proud and meticulous. Speaks with a lisp but carries himself with total confiden
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

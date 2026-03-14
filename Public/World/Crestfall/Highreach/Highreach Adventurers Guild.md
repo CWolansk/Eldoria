@@ -38,6 +38,6 @@ An imposing landmark in Highreach. Trusted by the city guard and merchants alike
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

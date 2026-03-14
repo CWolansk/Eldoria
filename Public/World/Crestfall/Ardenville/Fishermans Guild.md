@@ -13,7 +13,6 @@ tags:
 
 ## Description
 Weather-beaten wooden building right on the waterfront. Giant pike skulls mounted along the roofline. Inside smells of fish, salt, tar, and old rope — nets hang from hooks, maritime superstitions carved into every surface.
-
 ## Proprietor
 [[Public/World/Crestfall/Ardenville/NPCs/Edda Netsong|Edda Netsong]] — dwarf guildmistress, sharp-eyed and tireless
 
@@ -32,6 +31,6 @@ The oldest institution in Ardenville. If Edda says a storm is coming, believe he
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

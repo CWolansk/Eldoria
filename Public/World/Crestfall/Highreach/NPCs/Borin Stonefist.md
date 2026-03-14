@@ -28,6 +28,6 @@ Sturdy and dependable — speaks little but his presence commands respect.
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

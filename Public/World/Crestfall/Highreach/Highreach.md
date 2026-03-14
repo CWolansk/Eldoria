@@ -45,6 +45,6 @@ As you pass through massive, ornately decorated gates set into thick stone walls
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

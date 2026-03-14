@@ -28,6 +28,6 @@ Meticulous and no-nonsense. If your manifest doesn't match your cargo, expect qu
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

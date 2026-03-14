@@ -28,6 +28,6 @@ Charming and confident, with an air of authority that seems outsized for his sta
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

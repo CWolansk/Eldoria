@@ -28,6 +28,6 @@ Looks like he's survived more bar fights than most people have had drinks.
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

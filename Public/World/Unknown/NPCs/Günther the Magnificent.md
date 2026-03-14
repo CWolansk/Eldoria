@@ -27,6 +27,6 @@ Absurdly confident. Flexes while talking. The accent is real but the showmanship
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

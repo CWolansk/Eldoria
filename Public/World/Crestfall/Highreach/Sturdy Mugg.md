@@ -31,6 +31,6 @@ The go-to inn in Highreach. Good food, strong drink, and a proprietor who doesn'
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

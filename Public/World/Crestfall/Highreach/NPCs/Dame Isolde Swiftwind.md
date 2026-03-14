@@ -28,6 +28,6 @@ Disarming smile and a voice that makes you feel like an old friend immediately.
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

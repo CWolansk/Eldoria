@@ -28,6 +28,6 @@ Reliable stock, but the owner drives a hard bargain. Don't expect charity.
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

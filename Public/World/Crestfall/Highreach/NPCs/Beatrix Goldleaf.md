@@ -28,6 +28,6 @@ Refined and particular — the kind of person who notices every detail and expec
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

@@ -29,6 +29,6 @@ The finest source of magical goods in Highreach. The proprietor is selective abo
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

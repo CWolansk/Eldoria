@@ -28,6 +28,6 @@ Calm, attentive, and quietly efficient — makes you feel like the only person i
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

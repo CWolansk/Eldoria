@@ -32,6 +32,6 @@ The heart and soul of Ardenville. Mira's stew is famous along the entire lakesho
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

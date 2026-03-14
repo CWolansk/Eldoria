@@ -28,6 +28,6 @@ Warm and reassuring — the kind of person you'd want at your side when things g
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

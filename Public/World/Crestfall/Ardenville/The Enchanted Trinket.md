@@ -30,6 +30,6 @@ A treasure trove for those seeking the unusual. Garrick always seems to have exa
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

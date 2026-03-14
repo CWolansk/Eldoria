@@ -36,6 +36,6 @@ Ardenville is a lakeside port town on the northern shore of Lake Arden in Crestf
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

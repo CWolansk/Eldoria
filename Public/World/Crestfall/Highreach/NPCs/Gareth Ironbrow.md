@@ -28,6 +28,6 @@ Intimidating and direct — the kind of person who doesn't need to raise his voi
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

@@ -27,6 +27,6 @@ An abandoned iron mine carved into the mountainside beneath Highreach. The entra
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

@@ -28,6 +28,6 @@ A mountain of a man who looks like he could split a table in half with one swing
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

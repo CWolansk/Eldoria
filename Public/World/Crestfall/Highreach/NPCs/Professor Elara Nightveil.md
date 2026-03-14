@@ -27,6 +27,6 @@ Serene and reassuring — you instinctively feel safer in her presence.
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

@@ -28,6 +28,6 @@ Graceful and composed — an elven noble who chose adventure over courtly life.
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

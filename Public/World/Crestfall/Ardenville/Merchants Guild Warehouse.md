@@ -30,6 +30,6 @@ The economic engine of Ardenville. Lost cargo is rare under Kellen's watch. Fair
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```

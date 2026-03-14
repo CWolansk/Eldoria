@@ -28,6 +28,6 @@ Quiet and watchful — seems to notice everything from the corner of the room.
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[#this.file.name]] AND "Public"
 SORT file.name ASC
 ```
