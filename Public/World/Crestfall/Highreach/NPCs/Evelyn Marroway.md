@@ -22,7 +22,7 @@ Receptionist at the Highreach Merchants Guild. Has an uncanny memory for names a
 Calm, attentive, and quietly efficient — makes you feel like the only person in the room.
 
 ## Interactions
-
+- [[Public/World/Events/Timeline/Merchants Guild Quest Completed|Looked up Austin's guild standing at the Merchants Guild reception]]
 
 ---
 

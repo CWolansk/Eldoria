@@ -22,7 +22,7 @@ Owner of [[Public/World/Crestfall/Highreach/The Dragons Breath Forge|The Dragon'
 Proud and meticulous. Speaks with a lisp but carries himself with total confidence.
 
 ## Interactions
-
+- [[Public/World/Events/Timeline/The Party Meets Alaric Emberfell|Traded weapon materials with the party — upgraded their equipment]]
 
 ---
 

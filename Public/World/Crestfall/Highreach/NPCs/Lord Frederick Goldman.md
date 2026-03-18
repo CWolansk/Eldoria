@@ -22,7 +22,8 @@ A Highreach nobleman of old money. Known for his extensive wine collection from 
 Commanding presence — expects to be the most important person in any room, and usually is.
 
 ## Interactions
-
+- [[Public/World/Events/Timeline/Party Visits Adventurers Guild For First Time|Party took the rat quest at his estate]]
+- [[Public/World/Events/Timeline/Frederick Goldman Rat Quest Completed|Rat quest completed — cellar cleared, some wine damaged]]
 
 ---
 

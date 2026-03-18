@@ -22,7 +22,7 @@ A regular at the [[Public/World/Crestfall/Highreach/Sturdy Mugg|Sturdy Mugg]]. M
 Graceful and composed — an elven noble who chose adventure over courtly life.
 
 ## Interactions
-
+- [[Public/World/Events/Timeline/Party Trades Mantle for Elven Travel Passes|Traded travel passes to the Silverleaf Lands for Rolf's bear fur mantle]]
 
 ---
 

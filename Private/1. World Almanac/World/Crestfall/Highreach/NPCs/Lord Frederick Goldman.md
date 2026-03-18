@@ -26,6 +26,7 @@ tags:
 
 ## DM Notes
 - Wealth is mainly generational, supplemented by smart investments
+- Has a low opinion of the party after they damaged ~20% of his wine collection and tried to dodge the bill — his butler feels the same
 
 ## Secrets & Motivations
 - Has investments in the assassins guild

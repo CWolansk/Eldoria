@@ -5,6 +5,13 @@ fc-category: Events
 ---
 #Date_01_03_496 
 
+![[Public/World/Events/Timeline/Party Visits Adventurers Guild For First Time]]
+
+## DM Notes
+
+
+---
+
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]

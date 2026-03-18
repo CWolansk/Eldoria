@@ -5,13 +5,9 @@ fc-category: Events
 ---
 #Date_01_03_496 #event
 
+![[Public/World/Events/Timeline/Party Summoned to world]]
 
-
-```dataview
-TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
-SORT file.name ASC
-```
+## DM Notes
 
 Opening Act: Accidental Summoning and Immediate Danger
 
@@ -35,3 +31,11 @@ Once the fiends are defeated, a ghostly illusion of a kindly old man appears bef
 "Excellent! Now I need you to retrieve an artifact called the Seekers Eye, unfortunately I am rather occupied in another plane at the time so I cannot obtain it myself. The eye is protected from dark forces by an ancient spell that repels all but the pure of heart, which I am sure you adventurers will have no problem getting past! The eye resides at the bottom of the highreach mines beneath the city of highreach, it is infested with goblins and other dark forces trying to find a way to obtain the eye for themselves.
 
 The city of highreach can serve you well as a base to rest, buy supplies and earn money through the local adventures guild. Good luck Adventurers I will contact you again when you have the Eye!"
+
+---
+
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

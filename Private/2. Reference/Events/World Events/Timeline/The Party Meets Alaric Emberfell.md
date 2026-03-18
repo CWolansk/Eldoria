@@ -1,26 +1,35 @@
 ---
 fc-date: 0496-03-05
-fc-end: 
+fc-end: 0496-03-05
 fc-category: Events
+type: Event
+name: The Party Meets Alaric Emberfell
+location: Highreach
+region: Crestfall
+tags:
+  - Event
+  - Crestfall
+  - Highreach
 ---
-- When the party meets [[Public/World/Crestfall/Highreach/NPCs/Alaric Emberfell|Alaric Emberfell]]  he will notice the following items 
-	- Clairs Dwarving Mining Pick 
-		- [[Private Claire notes]] 
-The party can get +1 to their weapons or change the damage type 
 
+![[Public/World/Events/Timeline/The Party Meets Alaric Emberfell]]
 
-- Session 7 Notes  ^0578e3
-	- The party meets [[Private/2. Reference/NPCs/All NPCS/Alaric Emberfell]] 
-	- As a trade the party gave away 
-		- Claires Dwarven Mining Pick 
-		- [[+1 Warhammer]] 
-		- and Compass 
-	- in return 
-		- Everyone got a +1 upgrade to their main weapon 
-		- Except for Liz who changed her damage to radiant damage. 
+## DM Notes
+- Alistair Goldman recommended Alaric to the party after the bandit fight
+- Party traded: Claire's Dwarven Mining Pick, +1 Warhammer, Compass
+- Party received: +1 upgrade to main weapons; Liz got radiant damage conversion
+
+## Links
+- [[Alaric Emberfell]]
+- [[The Dragons Breath Forge]]
+- [[Party Defeats Merchants Guild Bandits]]
+- [[Session 7 Notes]]
+
+---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
 FROM [[#this.file.name]]
 SORT file.name ASC
+```
 ```

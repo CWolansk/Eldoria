@@ -61,6 +61,7 @@ You have access to specialized skills for generating each type of world content.
 | `dnd-holiday-generator` | Creating cultural holidays, festivals, recurring celebrations |
 | `dnd-encounter-builder` | Building combat/social/mixed encounters with difficulty scaling |
 | `dnd-vault-auditor` | Checking for stale references, orphaned links, duplicates, and vault inconsistencies |
+| `dnd-session-digest` | Processing session journals into vault updates — events, consequences, NPC interactions, missing entities |
 
 **Always read the relevant skill before generating content.** The skills contain the exact YAML frontmatter fields, section structure, and formatting rules for each entity type.
 
@@ -184,6 +185,15 @@ See `CONVENTIONS.md` for detailed syntax examples.
 3. Place in the correct race/culture subfolder
 4. Include calendarium `fc-date` for the next occurrence
 5. Keep it brief — traditions as bullet fragments, not prose
+
+### "Digest a session"
+1. Read the `dnd-session-digest` skill
+2. Read the target session journal from `Private/2. Session Journals/`
+3. Search the vault for existing events, NPCs, and entities mentioned
+4. Extract significant beats and categorize them (events, consequences, interactions, missing entities)
+5. Present a numbered proposal — the DM approves before any files are created
+6. Create approved files using the appropriate generator skills
+7. Update NPC Interactions sections with links to new event files
 
 ### "What do we know about X?"
 1. Search the vault using file search, grep, and semantic search

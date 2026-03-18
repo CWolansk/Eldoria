@@ -35,6 +35,7 @@ Retrieve a lost kitten from a nearby forest.
 	- When the adventurers find the puppy a large creature will attack the group
 	- Party tracks the cat by julie turning into a rat and a chase
 	- Reward : Posted reward is 5 copper pieces and 1 guild point
+	- Actual reward: [[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Esmerelda Voss|Esmerelda Voss]] gave the party Daern's Instant Fortress (rare minor magic item) for returning her cat
 
 
 ```dataview

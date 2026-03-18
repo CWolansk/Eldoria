@@ -125,6 +125,24 @@ When the DM approves changes:
 - **DM scratch notes** — these are working documents, not canonical references
 - **Entity files themselves** — unless the DM explicitly says to delete them; the audit skill flags issues, the DM decides
 
+## Removing Content
+
+The vault is a living document — content gets removed just as often as it gets added. Removing outdated, incorrect, or superseded information is a core part of vault maintenance, not an exception. When the DM says something is no longer relevant, remove it cleanly:
+
+### What removal looks like
+- **Delete a bullet** from a settlement's NPC list, store list, or landmark list
+- **Remove an interaction entry** from an NPC's `## Interactions` section
+- **Clear a section** that's become irrelevant (e.g., a Plot Hook that was resolved)
+- **Remove a wiki-link** from a Links section when the connection no longer applies
+- **Update frontmatter** — change status fields, remove stale tags
+- **Delete entire files** — only with explicit DM confirmation, and always clean up references in other files afterward
+
+### Removal rules
+1. **Always update both private and public files** — if a bullet is removed from a public NPC file, the private file's embed will reflect it automatically, but check for any private-only references too
+2. **Clean up cross-references** — when removing an entity, search for every file that links to it and update or remove those links
+3. **Never silently remove** — when the DM asks for a removal, confirm what will be affected and execute. If removing something would break other files, list the cascade before proceeding
+4. **Session journals and event logs are exempt** — historical records describe what happened, not what currently exists. Never edit these even if they reference removed content
+
 ## Common Patterns
 
 These are the most frequent issues you'll find:

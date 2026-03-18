@@ -1,0 +1,23 @@
+{
+  "skill_name": "dnd-session-digest",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Digest Session 13 for me",
+      "expected_output": "Should read Session 13 Notes.md, identify beats like the ooze doppelganger fight, travel to Ardenville, Salty Pete encounter, boat race prep, Exterminators Guild package delivery, the gnome package swap attempt, and Pip Whiskerwind interaction. Should propose paired event files, flag conditional outcomes (package swap vs not), identify missing NPCs (Dancin' Pete, Salty Pete's crew members), and suggest NPC interaction updates.",
+      "files": ["Private/2. Session Journals/Session 13 Notes.md"]
+    },
+    {
+      "id": 2,
+      "prompt": "Can you go through Session 12 and tell me what vault files we should create from it?",
+      "expected_output": "Should read Session 12 notes.md, identify the simulacrum/clone lab scenario, the ooze doppelganger battle, Jon as antagonist, the real party waking up and fighting the Failed Ooze Doppelganger. Should propose timeline events, flag that some content is prep/encounter design vs actual session beats, and ask which branches the party actually took.",
+      "files": ["Private/2. Session Journals/Session 12 notes.md"]
+    },
+    {
+      "id": 3,
+      "prompt": "Process session 7 notes and just focus on NPC interactions - who did the party meet and what do we need to update?",
+      "expected_output": "Should read Session 7 Notes.md, focus specifically on NPC interactions, cross-reference with existing NPC files, propose interaction updates for NPCs already in the vault, and flag any NPCs mentioned that don't have files yet.",
+      "files": ["Private/2. Session Journals/Session 7 Notes.md"]
+    }
+  ]
+}

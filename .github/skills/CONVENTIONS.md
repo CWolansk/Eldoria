@@ -131,3 +131,13 @@ Many existing files use an older `::` metadata format or prose-heavy templates. 
 5. **Invent only what's missing** — fill gaps (e.g., missing Ideal/Bond/Flaw) without contradicting existing content
 6. **Rewrite public files** as standalone notes, pulling only public-safe content
 7. **For batch conversions** — list files first, confirm with the user, convert one at a time
+
+## Content Removal
+
+The vault is maintained by both adding and removing content. Outdated, incorrect, or irrelevant information should be cleaned up, not left to rot.
+
+- **Removing is normal** — cutting a bullet from a settlement file, clearing a stale interaction, deleting an NPC that was never used — these are routine maintenance, not destructive acts
+- **Always clean up cross-references** — removing an entity means searching for everything that links to it and updating those files too
+- **Session journals are sacred** — never edit historical records, even if they mention entities that were later removed. History describes what happened, not what currently exists
+- **Confirm before deleting files** — removing content *from* files is fine; deleting entire files requires DM confirmation
+- **Both sides of the pair** — when removing content, update both private and public files to stay in sync

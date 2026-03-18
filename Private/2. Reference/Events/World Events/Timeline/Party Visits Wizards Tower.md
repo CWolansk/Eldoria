@@ -4,11 +4,10 @@ fc-end: 0496-03-01
 fc-category: Events
 ---
 #Date_01_03_496 
-```dataview
-TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
-SORT file.name ASC
-```
+
+![[Public/World/Events/Timeline/Party Visits Wizards Tower]]
+
+## DM Notes
 
 Based on your notes from [[Session 1 Notes]], here's what happened when the party visited the wizard's tower:
 
@@ -18,3 +17,11 @@ Based on your notes from [[Session 1 Notes]], here's what happened when the part
 *   Jon gave them information about the seeker's eye and the wizard that created it.
 	* [[Seekers Eye]] 
 *   Legend tells that the seeker's eye is an ogre's eye that was poked out and turned into an artifact of great power that can be used to find other artifacts like a compass and was created by another wizard named Jon.
+
+---
+
+```dataview
+TABLE WITHOUT ID file.link AS "Mentioned In"
+FROM [[#this.file.name]]
+SORT file.name ASC
+```

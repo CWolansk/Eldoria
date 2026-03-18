@@ -5,7 +5,7 @@ location: Highreach
 region: Crestfall
 profession: "Warrior"
 race: "Human"
-status: Alive
+status: Dead
 tags:
   - NPC
   - Crestfall
@@ -24,7 +24,7 @@ tags:
 - **Quirk:** Rests his hand on his hammer's haft when talking
 
 ## Links
-- [[The Nighstalkers]]
+- [[The Nightstalkers]]
 - [[Sturdy Mugg]]
 - [[Fiona Hammerfist nee Thistledown]]
 

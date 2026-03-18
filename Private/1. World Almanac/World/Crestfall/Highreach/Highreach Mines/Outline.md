@@ -4,7 +4,7 @@ Overall story
 Levels 
 * 1 :: [[Level 1 Outline|Level 1 Outline]] First Level of the mines. Long since abandoned by both man and Dwarf, after the iron ore vein ran dry. It has since been taken over by low level goblins. The goblins have been attacking passing merchants and travelers who have complained to the local [[Highreach Adventurers Guild|Adventurers Guild]] in [[Highreach]]. 
 	* The first level does not pose much of a challenge but does contain some minor puzzles that the goblins have set up to try and protect themselves as well as some sentries 
-	* Notable Events :: The leader of [[The Nighstalkers]] [[Thoren Ironfist]] was killed in [[Room 10 Level 1]], the boss room. 
+	* Notable Events :: The leader of [[The Nightstalkers]] [[Thoren Ironfist]] was killed in [[Room 10 Level 1]], the boss room. 
 		* Thoren was killed while trying to escape the dungeon after losing his entire party. He was able to hide parts of his notes around the dungeon, usually at the entrance and exits of each of the floors as he was escaping to try and help future adventurers and to warn them of the danger that lurks within the mine. 
 		* Note locations 
 			* [[Room 10 Level 1]]

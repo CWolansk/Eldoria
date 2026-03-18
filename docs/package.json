@@ -4,7 +4,8 @@
   "description": "Eldoria D&D Campaign Hub with automatic index generation",
   "scripts": {
     "generate-index": "node generate-index.js",
-    "build": "npm run generate-index"
+    "generate-jarvis": "node generate-jarvis-index.js",
+    "build": "npm run generate-index && npm run generate-jarvis"
   },
   "keywords": ["dnd", "campaign", "eldoria"],
   "author": "",

@@ -22,7 +22,7 @@ High Priest of Pelor at the church near the Adventurers Guild. A warm, community
 Genuinely kind — the sort of priest who remembers your name and asks how you've been.
 
 ## Interactions
-
+- [[Public/World/Events/Timeline/The party Visits the Adventurers Guild Church|Healed the party at the Adventurers Guild Church]]
 
 ---
 

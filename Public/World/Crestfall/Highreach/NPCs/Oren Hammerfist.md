@@ -5,7 +5,7 @@ location: Highreach
 region: Crestfall
 profession: "Warrior"
 race: "Human"
-status: Alive
+status: Dead
 tags:
   - NPC
   - Crestfall
@@ -22,7 +22,8 @@ Member of the Nightstalkers adventuring party. Husband to Fiona Hammerfist. A pa
 A mountain of a man who looks like he could split a table in half with one swing.
 
 ## Interactions
-
+- [[Public/World/Events/Timeline/Party Overhears the Nightstalkers|Overheard at breakfast discussing the mines — rushed off to clear them first]]
+- [[Public/World/Events/Timeline/Party Explores Mine Level 3|Body found in the mines — suspended inside a Gelatinous Cube]]
 
 ---
 

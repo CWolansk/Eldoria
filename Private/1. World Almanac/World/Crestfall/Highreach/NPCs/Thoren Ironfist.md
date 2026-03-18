@@ -24,7 +24,7 @@ tags:
 - **Quirk:** Cracks his knuckles before making a point
 
 ## Links
-- [[The Nighstalkers]]
+- [[The Nightstalkers]]
 - [[Sturdy Mugg]]
 - [[Alma Ironfist nee Brightwater]]
 - [[Session 6 Notes]]

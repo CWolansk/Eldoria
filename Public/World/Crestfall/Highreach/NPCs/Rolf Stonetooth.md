@@ -5,7 +5,7 @@ location: Highreach
 region: Crestfall
 profession: "Fighter"
 race: "Human"
-status: Alive
+status: Dead
 tags:
   - NPC
   - Crestfall
@@ -22,7 +22,7 @@ Member of the Nightstalkers adventuring party. A patron at the Sturdy Mugg. Know
 Looks like he's survived more bar fights than most people have had drinks.
 
 ## Interactions
-
+- [[Public/World/Events/Timeline/Party Explores Mine Level 3|Body found in the mines — surrounded by strange torches]]
 
 ---
 

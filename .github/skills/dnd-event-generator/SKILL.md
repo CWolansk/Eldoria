@@ -53,6 +53,8 @@ Public/World/{Region}/Events/{Event Name}.md
 
 ## Private Note (DM Version)
 
+The private note **embeds** the public note rather than duplicating player-visible content. DM-only sections go below the embed.
+
 ```markdown
 ---
 type: Event
@@ -68,8 +70,7 @@ tags:
   - {Category}
 ---
 
-## Summary
-{3-5 bullet points. What happened, in order. Use wiki-links to NPCs, locations, groups involved.}
+![[Public/World/Events/{Event Name}]]
 
 ## Consequences
 {Bullet list. What changed because of this event? NPC reactions, political shifts, world changes.}
@@ -85,10 +86,10 @@ The following sections are **optional** — only include if the user specifies:
 ## Follow-Up Hooks
 {What threads does this event leave dangling?}
 
----
+## Links
+{Wiki-links to related NPCs, locations, quests, sessions. One per line.}
 
-# Public Notes
-[[Public/World/Events/{Event Name}|{Event Name}]]
+---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

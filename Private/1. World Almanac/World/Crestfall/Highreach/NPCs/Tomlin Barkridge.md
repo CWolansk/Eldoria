@@ -24,7 +24,7 @@ tags:
 - **Quirk:** Fidgets with his bowstring when idle
 
 ## Links
-- [[The Nighstalkers]]
+- [[The Nightstalkers]]
 - [[Sturdy Mugg]]
 - [[Brenna Barkridge nee Ironfoot]]
 

@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DM Jarvis — Live Dashboard</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg-primary:    #0d1117;
+            --bg-secondary:  #161b22;
+            --bg-tertiary:   #1c2333;
+            --bg-card:       #1c2333;
+            --bg-card-hover: #242d3d;
+            --border:        #30363d;
+            --border-focus:  #58a6ff;
+            --text-primary:  #e6edf3;
+            --text-secondary:#8b949e;
+            --text-muted:    #6e7681;
+            --accent-blue:   #58a6ff;
+            --accent-green:  #3fb950;
+            --accent-amber:  #d29922;
+            --accent-red:    #f85149;
+            --accent-purple: #bc8cff;
+            --accent-cyan:   #39d2c0;
+            --npc-color:     #58a6ff;
+            --store-color:   #d29922;
+            --settlement-color: #3fb950;
+            --quest-color:   #bc8cff;
+            --org-color:     #f0883e;
+            --location-color:#39d2c0;
+            --event-color:   #f85149;
+            --other-color:   #8b949e;
+            --font-main:     'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono:     'Cascadia Code', 'Fira Code', monospace;
+            --radius-sm:     4px;
+            --radius-md:     8px;
+            --radius-lg:     12px;
+            --shadow:        0 2px 8px rgba(0,0,0,.3);
+        }
+
+        html, body { height: 100%; overflow: hidden; }
+        body {
+            font-family: var(--font-main);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        /* ================================================================== */
+        /* LAYOUT                                                             */
+        /* ================================================================== */
+        .app {
+            display: grid;
+            grid-template-rows: 48px 1fr;
+            grid-template-columns: 300px 1fr 340px;
+            height: 100vh;
+        }
+        .header        { grid-column: 1 / -1; }
+        .sidebar-left  { border-right: 1px solid var(--border); overflow-y: auto; }
+        .main-area     { display: flex; flex-direction: column; overflow: hidden; }
+        .sidebar-right { border-left: 1px solid var(--border); overflow-y: auto; }
+
+        /* ================================================================== */
+        /* HEADER                                                             */
+        /* ================================================================== */
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .header h1 { font-size: 16px; font-weight: 700; color: var(--accent-cyan); letter-spacing: .8px; white-space: nowrap; }
+        .header h1 span { color: var(--text-muted); font-weight: 400; font-size: 13px; }
+
+        .waveform { display: flex; align-items: center; gap: 2px; height: 20px; }
+        .waveform .bar { width: 3px; background: var(--text-muted); border-radius: 2px; height: 3px; transition: height .1s; }
+
+        .btn {
+            padding: 5px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+            background: var(--bg-tertiary); color: var(--text-primary); font-size: 12px;
+            cursor: pointer; transition: all .15s; white-space: nowrap;
+        }
+        .btn:hover { background: var(--bg-card-hover); border-color: var(--border-focus); }
+        .btn.active { background: var(--accent-green); color: #000; border-color: var(--accent-green); font-weight: 600; }
+
+        .status-area { display: flex; align-items: center; gap: 6px; margin-left: auto; font-size: 12px; color: var(--text-secondary); }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); transition: background .3s; }
+        .status-dot.listening { background: var(--accent-green); box-shadow: 0 0 6px var(--accent-green); }
+        .status-dot.processing { background: var(--accent-amber); animation: pulse 1s infinite; }
+        @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+
+        .entity-count { font-size: 11px; color: var(--text-muted); }
+
+        /* ================================================================== */
+        /* LEFT SIDEBAR                                                       */
+        /* ================================================================== */
+        .sidebar-left { background: var(--bg-secondary); }
+        .panel { padding: 12px; }
+        .panel-title {
+            font-size: 10px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1.1px; color: var(--text-muted); margin-bottom: 8px;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .divider { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
+
+        .ctx-field { margin-bottom: 8px; }
+        .ctx-field label { display: block; font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px; }
+        .ctx-field select, .ctx-field input {
+            width: 100%; padding: 5px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+            background: var(--bg-tertiary); color: var(--text-primary); font-size: 12px; font-family: var(--font-main);
+        }
+        .ctx-field select:focus, .ctx-field input:focus { outline: none; border-color: var(--border-focus); }
+
+        .chip-list { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+        .chip {
+            font-size: 11px; padding: 2px 8px; border-radius: 10px;
+            background: var(--bg-tertiary); border: 1px solid var(--border);
+            display: flex; align-items: center; gap: 4px;
+        }
+        .chip .x { cursor: pointer; color: var(--text-muted); font-size: 13px; line-height: 1; }
+        .chip .x:hover { color: var(--accent-red); }
+        .chip.auto { border-color: var(--accent-cyan); border-style: dashed; }
+        .chip.auto::before { content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-cyan); }
+
+        .add-row { display: flex; gap: 3px; }
+        .add-row input { flex: 1; font-size: 11px; padding: 4px 6px; }
+        .add-row .btn { padding: 3px 8px; font-size: 11px; }
+
+        .auto-ctx-banner {
+            background: rgba(57,210,192,.08); border: 1px dashed var(--accent-cyan);
+            border-radius: var(--radius-sm); padding: 6px 8px; margin-bottom: 8px;
+            font-size: 11px; color: var(--accent-cyan);
+        }
+        .auto-ctx-banner strong { font-size: 10px; text-transform: uppercase; letter-spacing: .5px; }
+
+        /* ================================================================== */
+        /* MAIN AREA                                                          */
+        /* ================================================================== */
+
+        /* -- Search + Transcript bar -- */
+        .top-bar {
+            padding: 8px 14px;
+            border-bottom: 1px solid var(--border);
+            display: flex; flex-direction: column; gap: 6px;
+            flex-shrink: 0;
+            background: var(--bg-primary);
+        }
+        .search-row { display: flex; gap: 6px; }
+        .search-row input {
+            flex: 1; padding: 6px 10px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+            background: var(--bg-tertiary); color: var(--text-primary); font-size: 13px; font-family: var(--font-main);
+        }
+        .search-row input:focus { outline: none; border-color: var(--border-focus); }
+        .search-row input::placeholder { color: var(--text-muted); }
+
+        .transcript-box {
+            background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm);
+            padding: 8px 10px; max-height: 80px; overflow-y: auto; font-size: 13px; line-height: 1.5;
+            color: var(--text-secondary);
+        }
+        .transcript-box .interim { color: var(--text-muted); font-style: italic; }
+        .transcript-box .final { color: var(--text-primary); }
+
+        .intent-bar {
+            padding: 5px 10px; background: var(--bg-tertiary); border-radius: var(--radius-sm);
+            font-size: 12px; display: none; align-items: center; gap: 10px;
+        }
+        .intent-bar.visible { display: flex; }
+        .intent-label { color: var(--accent-amber); font-weight: 600; }
+        .intent-detail { color: var(--text-secondary); }
+        .intent-conf { margin-left: auto; font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); }
+
+        /* -- Results / Note viewer split -- */
+        .content-area {
+            flex: 1; display: flex; overflow: hidden;
+        }
+        .results-pane {
+            flex: 1; overflow-y: auto; padding: 14px;
+            transition: flex .2s;
+        }
+        .results-pane.narrow { flex: 0 0 340px; max-width: 340px; border-right: 1px solid var(--border); }
+
+        .note-pane {
+            flex: 1; overflow-y: auto; padding: 20px 24px; display: none;
+            background: var(--bg-primary);
+        }
+        .note-pane.visible { display: block; }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 10px;
+        }
+        .results-pane.narrow .results-grid {
+            grid-template-columns: 1fr;
+        }
+
+        /* -- Result cards -- */
+        .result-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
+            padding: 12px; cursor: pointer; transition: all .15s;
+        }
+        .result-card:hover { background: var(--bg-card-hover); border-color: var(--border-focus); }
+        .result-card.selected { border-color: var(--accent-cyan); background: rgba(57,210,192,.05); }
+
+        .card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+        .card-type-badge {
+            font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px;
+            padding: 1px 6px; border-radius: 3px; flex-shrink: 0;
+        }
+        .badge-NPC          { background: rgba(88,166,255,.15); color: var(--npc-color); }
+        .badge-Store         { background: rgba(210,153,34,.15); color: var(--store-color); }
+        .badge-Settlement    { background: rgba(63,185,80,.15); color: var(--settlement-color); }
+        .badge-Quest         { background: rgba(188,140,255,.15); color: var(--quest-color); }
+        .badge-Organization  { background: rgba(240,136,62,.15); color: var(--org-color); }
+        .badge-Location      { background: rgba(57,210,192,.15); color: var(--location-color); }
+        .badge-Event, .badge-Consequence { background: rgba(248,81,73,.15); color: var(--event-color); }
+        .badge-Holiday       { background: rgba(210,153,34,.15); color: var(--store-color); }
+        .badge-Encounter, .badge-Other { background: rgba(139,148,158,.15); color: var(--other-color); }
+
+        .card-name { font-size: 14px; font-weight: 600; flex: 1; }
+        .card-meta { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
+        .card-meta span { margin-right: 10px; }
+        .card-summary { font-size: 12px; color: var(--text-muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* -- Note viewer -- */
+        .note-header { margin-bottom: 16px; }
+        .note-header .note-type { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .note-header h2 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+        .note-header .note-meta { font-size: 12px; color: var(--text-secondary); }
+        .note-header .note-meta span { margin-right: 14px; }
+
+        .note-close {
+            float: right; background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
+            color: var(--text-secondary); padding: 4px 10px; font-size: 12px; cursor: pointer;
+        }
+        .note-close:hover { color: var(--text-primary); border-color: var(--border-focus); }
+
+        .note-body {
+            font-size: 14px; line-height: 1.75; color: var(--text-secondary);
+            white-space: pre-wrap; word-wrap: break-word;
+        }
+        .note-body h1, .note-body h2, .note-body h3, .note-body h4 {
+            color: var(--text-primary); margin: 18px 0 8px 0;
+        }
+        .note-body h1 { font-size: 20px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+        .note-body h2 { font-size: 17px; }
+        .note-body h3 { font-size: 15px; }
+        .note-body h4 { font-size: 14px; color: var(--text-secondary); }
+        .note-body blockquote {
+            border-left: 3px solid var(--accent-amber); padding: 8px 12px;
+            margin: 10px 0; background: rgba(210,153,34,.06); color: var(--text-primary);
+            font-style: italic;
+        }
+        .note-body ul, .note-body ol { padding-left: 20px; }
+        .note-body li { margin-bottom: 3px; }
+        .note-body strong { color: var(--text-primary); }
+        .note-body code { background: var(--bg-tertiary); padding: 1px 4px; border-radius: 3px; font-family: var(--font-mono); font-size: 13px; }
+        .note-body hr { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+        .note-body table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+        .note-body th, .note-body td { border: 1px solid var(--border); padding: 4px 8px; font-size: 12px; text-align: left; }
+        .note-body th { background: var(--bg-tertiary); color: var(--text-primary); }
+
+        /* ================================================================== */
+        /* RIGHT SIDEBAR — WHISPER + HISTORY                                  */
+        /* ================================================================== */
+        .sidebar-right { background: var(--bg-secondary); }
+
+        .whisper-card {
+            background: rgba(57,210,192,.06); border: 1px solid rgba(57,210,192,.2);
+            border-radius: var(--radius-sm); padding: 8px 10px; margin-bottom: 6px;
+            font-size: 12px; cursor: pointer; transition: background .15s;
+        }
+        .whisper-card:hover { background: rgba(57,210,192,.12); }
+        .whisper-card .whisper-type {
+            font-size: 9px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .5px; color: var(--accent-cyan); margin-bottom: 3px;
+        }
+        .whisper-card .whisper-title { font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+        .whisper-card .whisper-body { color: var(--text-secondary); line-height: 1.4; }
+
+        .quick-ref-list { list-style: none; }
+        .quick-ref-list li {
+            padding: 5px 10px; font-size: 12px; border-bottom: 1px solid var(--border);
+            cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background .1s;
+        }
+        .quick-ref-list li:hover { background: var(--bg-tertiary); }
+        .quick-ref-list li .qr-type { font-size: 9px; text-transform: uppercase; width: 40px; text-align: center; flex-shrink: 0; }
+
+        .history-list { list-style: none; font-size: 11px; }
+        .history-list li { padding: 4px 10px; color: var(--text-muted); border-bottom: 1px solid var(--border); cursor: pointer; }
+        .history-list li:hover { background: var(--bg-tertiary); }
+        .history-list .time { font-family: var(--font-mono); font-size: 10px; margin-right: 6px; }
+
+        /* ================================================================== */
+        /* EMPTY STATE                                                        */
+        /* ================================================================== */
+        .empty-state {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 100%; color: var(--text-muted); text-align: center; padding: 40px;
+        }
+        .empty-state svg { width: 48px; height: 48px; margin-bottom: 12px; opacity: .3; }
+        .empty-state p { font-size: 13px; max-width: 280px; line-height: 1.5; }
+
+        /* ================================================================== */
+        /* SCROLLBAR                                                          */
+        /* ================================================================== */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        @media (max-width: 1100px) { .app { grid-template-columns: 260px 1fr; } .sidebar-right { display: none; } }
+    </style>
+</head>
+<body>
+
+<div class="app">
+
+    <!-- ================================================================ -->
+    <!-- HEADER                                                           -->
+    <!-- ================================================================ -->
+    <header class="header">
+        <h1>DM JARVIS <span>/ Live Dashboard</span></h1>
+        <div class="waveform" id="waveform">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div>
+        </div>
+        <button class="btn" id="btnListen" onclick="toggleListening()">&#x1F399; Start Listening</button>
+        <div class="status-area">
+            <div class="status-dot" id="statusDot"></div>
+            <span id="statusText">Idle</span>
+        </div>
+        <span class="entity-count" id="entityCount">&mdash;</span>
+    </header>
+
+    <!-- ================================================================ -->
+    <!-- LEFT SIDEBAR — CONTEXT                                           -->
+    <!-- ================================================================ -->
+    <aside class="sidebar-left">
+        <div class="panel">
+            <div id="autoCtxBanner" class="auto-ctx-banner" style="display:none">
+                <strong>Auto-context from Session <span id="autoCtxSession"></span></strong><br>
+                <span id="autoCtxSummary"></span>
+            </div>
+
+            <div class="panel-title">Session Context</div>
+
+            <div class="ctx-field">
+                <label>Region</label>
+                <select id="ctxRegion" onchange="onContextChange()"><option value="">— Any —</option></select>
+            </div>
+            <div class="ctx-field">
+                <label>Location</label>
+                <select id="ctxSettlement" onchange="onContextChange()"><option value="">— Any —</option></select>
+            </div>
+            <div class="ctx-field">
+                <label>Scene</label>
+                <input type="text" id="ctxScene" placeholder="e.g. Arrived in town" onchange="onContextChange()">
+            </div>
+
+            <hr class="divider">
+            <div class="panel-title">Active NPCs</div>
+            <div class="chip-list" id="npcChips"></div>
+            <div class="add-row">
+                <input type="text" id="addNpcInput" placeholder="NPC name…" list="npcDL" onkeydown="if(event.key==='Enter')addNpc()">
+                <datalist id="npcDL"></datalist>
+                <button class="btn" onclick="addNpc()">+</button>
+            </div>
+
+            <hr class="divider">
+            <div class="panel-title">Party Goals</div>
+            <div class="chip-list" id="goalChips"></div>
+            <div class="add-row">
+                <input type="text" id="addGoalInput" placeholder="Goal…" onkeydown="if(event.key==='Enter')addGoal()">
+                <button class="btn" onclick="addGoal()">+</button>
+            </div>
+
+            <hr class="divider">
+            <div class="panel-title">Active Quests</div>
+            <div class="chip-list" id="questChips"></div>
+        </div>
+    </aside>
+
+    <!-- ================================================================ -->
+    <!-- MAIN AREA                                                        -->
+    <!-- ================================================================ -->
+    <main class="main-area">
+        <div class="top-bar">
+            <div class="search-row">
+                <input type="text" id="manualSearch" placeholder="Search vault… (or just talk)" autocomplete="off" oninput="onManualSearch(this.value)">
+                <button class="btn" onclick="clearResults()">Clear</button>
+            </div>
+            <div class="transcript-box" id="transcript">
+                <span class="interim">Transcript appears here when listening…</span>
+            </div>
+            <div class="intent-bar" id="intentBar">
+                <span class="intent-label" id="intentLabel"></span>
+                <span class="intent-detail" id="intentDetail"></span>
+                <span class="intent-conf" id="intentConf"></span>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <!-- Results list -->
+            <div class="results-pane" id="resultsPane">
+                <div class="results-grid" id="resultsGrid">
+                    <div class="empty-state" id="emptyState">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        <p>Start listening or search.<br>Click any result to read the full note.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Full note viewer -->
+            <div class="note-pane" id="notePane">
+                <button class="note-close" onclick="closeNote()">&#x2715; Close</button>
+                <div class="note-header" id="noteHeader"></div>
+                <div class="note-body" id="noteBody"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ================================================================ -->
+    <!-- RIGHT SIDEBAR — WHISPER + SERVICES + HISTORY                     -->
+    <!-- ================================================================ -->
+    <aside class="sidebar-right">
+        <div class="panel">
+            <div class="panel-title">&#x1F4AC; Whispers</div>
+            <div id="whisperList"></div>
+
+            <hr class="divider">
+            <div class="panel-title">Nearby Services</div>
+            <ul class="quick-ref-list" id="nearbyServices"></ul>
+
+            <hr class="divider">
+            <div class="panel-title">Intent History</div>
+            <ul class="history-list" id="intentHistory"></ul>
+        </div>
+    </aside>
+
+</div>
+
+<!-- ================================================================== -->
+<!-- APPLICATION LOGIC                                                  -->
+<!-- ================================================================== -->
+<script>
+// =======================================================================
+// STATE
+// =======================================================================
+let V = null;                    // vault index
+let isListening = false;
+let recognition = null;
+let debounceTimer = null;
+let selectedEntityId = null;
+
+const ctx = {                    // session context
+    region: '',
+    settlement: '',
+    scene: '',
+    npcs: [],                    // { name, auto }
+    goals: [],                   // { text, auto }
+    quests: [],                  // { name, auto }
+};
+
+const intentHist = [];
+const whispersSeen = new Set();  // avoid repeating whispers
+const conversationEntities = []; // entities detected in table talk
+
+// =======================================================================
+// INIT
+// =======================================================================
+async function init() {
+    try {
+        const r = await fetch('jarvis-index.json');
+        if (!r.ok) throw new Error('Index not found');
+        V = await r.json();
+        document.getElementById('entityCount').textContent = V.stats.totalEntities + ' entities';
+        populateDropdowns();
+        applyAutoContext();
+        updateNearbyServices();
+    } catch (e) {
+        document.getElementById('entityCount').textContent = '\u26A0 No index';
+        console.error(e);
+        alert('Could not load jarvis-index.json.\n\nRun:\n  cd docs && node generate-jarvis-index.js\n\nThen reload.');
+    }
+}
+
+// =======================================================================
+// AUTO-CONTEXT (from session journals)
+// =======================================================================
+function applyAutoContext() {
+    if (!V || !V.autoContext) return;
+    const ac = V.autoContext;
+
+    // Set region/settlement if detected
+    if (ac.detectedRegion) {
+        ctx.region = ac.detectedRegion;
+        document.getElementById('ctxRegion').value = ac.detectedRegion;
+        populateSettlements();
+    }
+    if (ac.detectedSettlement) {
+        ctx.settlement = ac.detectedSettlement;
+        document.getElementById('ctxSettlement').value = ac.detectedSettlement;
+    }
+
+    // Add detected NPCs
+    for (const npc of ac.detectedNpcs || []) {
+        if (!ctx.npcs.find(n => n.name === npc)) ctx.npcs.push({ name: npc, auto: true });
+    }
+    renderNpcChips();
+
+    // Add detected quests
+    for (const q of ac.detectedQuests || []) {
+        if (!ctx.quests.find(x => x.name === q)) ctx.quests.push({ name: q, auto: true });
+    }
+    renderQuestChips();
+
+    // Add detected goals
+    for (const g of ac.detectedGoals || []) {
+        if (!ctx.goals.find(x => x.text === g)) ctx.goals.push({ text: g, auto: true });
+    }
+    renderGoalChips();
+
+    // Show banner
+    if (ac.latestSession) {
+        const banner = document.getElementById('autoCtxBanner');
+        banner.style.display = 'block';
+        document.getElementById('autoCtxSession').textContent = ac.latestSession;
+        const parts = [];
+        if (ac.detectedSettlement) parts.push(ac.detectedSettlement);
+        if (ac.detectedNpcs.length) parts.push(ac.detectedNpcs.length + ' NPCs');
+        if (ac.detectedQuests.length) parts.push(ac.detectedQuests.length + ' quests');
+        document.getElementById('autoCtxSummary').textContent = parts.join(' \u2022 ') || 'Context loaded';
+    }
+
+    updateNearbyServices();
+    generateWhispers();
+}
+
+// =======================================================================
+// CONTEXT DROPDOWNS
+// =======================================================================
+function populateDropdowns() {
+    const sel = document.getElementById('ctxRegion');
+    for (const r of Object.keys(V.indexes.byRegion).sort()) {
+        const o = document.createElement('option'); o.value = r; o.textContent = r;
+        sel.appendChild(o);
+    }
+    populateSettlements();
+    // NPC datalist
+    const dl = document.getElementById('npcDL');
+    for (const e of V.entities) {
+        if (e.type === 'NPC') { const o = document.createElement('option'); o.value = e.name; dl.appendChild(o); }
+    }
+}
+
+function populateSettlements() {
+    const sel = document.getElementById('ctxSettlement');
+    sel.innerHTML = '<option value="">— Any —</option>';
+    const names = new Set();
+    for (const e of V.entities) {
+        if (e.type === 'Settlement' && (!ctx.region || e.region === ctx.region)) names.add(e.name);
+    }
+    for (const k of Object.keys(V.indexes.bySettlement)) {
+        if (!ctx.region) { names.add(k); continue; }
+        const ids = V.indexes.bySettlement[k];
+        if (ids.some(id => V.entities[id].region === ctx.region)) names.add(k);
+    }
+    for (const n of [...names].sort()) {
+        const o = document.createElement('option'); o.value = n;
+        o.textContent = n.replace(/\b\w/g, c => c.toUpperCase());
+        sel.appendChild(o);
+    }
+}
+
+function onContextChange() {
+    ctx.region = document.getElementById('ctxRegion').value;
+    ctx.settlement = document.getElementById('ctxSettlement').value;
+    ctx.scene = document.getElementById('ctxScene').value;
+    populateSettlements();
+    updateNearbyServices();
+    generateWhispers();
+    if (document.getElementById('manualSearch').value) onManualSearch(document.getElementById('manualSearch').value);
+}
+
+// =======================================================================
+// NPC / GOAL / QUEST CHIPS
+// =======================================================================
+function addNpc() {
+    const inp = document.getElementById('addNpcInput');
+    const name = inp.value.trim(); inp.value = '';
+    if (!name || ctx.npcs.find(n => n.name === name)) return;
+    ctx.npcs.push({ name, auto: false });
+    renderNpcChips(); generateWhispers();
+}
+function removeNpc(name) { ctx.npcs = ctx.npcs.filter(n => n.name !== name); renderNpcChips(); }
+function renderNpcChips() {
+    const el = document.getElementById('npcChips'); el.innerHTML = '';
+    for (const n of ctx.npcs) {
+        const c = document.createElement('span');
+        c.className = 'chip' + (n.auto ? ' auto' : '');
+        c.innerHTML = `${esc(n.name)} <span class="x" onclick="removeNpc('${esc(n.name)}')">&times;</span>`;
+        el.appendChild(c);
+    }
+}
+
+function addGoal() {
+    const inp = document.getElementById('addGoalInput');
+    const text = inp.value.trim(); inp.value = '';
+    if (!text) return;
+    ctx.goals.push({ text, auto: false });
+    renderGoalChips();
+}
+function removeGoal(i) { ctx.goals.splice(i, 1); renderGoalChips(); }
+function renderGoalChips() {
+    const el = document.getElementById('goalChips'); el.innerHTML = '';
+    ctx.goals.forEach((g, i) => {
+        const c = document.createElement('span');
+        c.className = 'chip' + (g.auto ? ' auto' : '');
+        c.innerHTML = `${esc(g.text)} <span class="x" onclick="removeGoal(${i})">&times;</span>`;
+        el.appendChild(c);
+    });
+}
+
+function renderQuestChips() {
+    const el = document.getElementById('questChips'); el.innerHTML = '';
+    for (const q of ctx.quests) {
+        const c = document.createElement('span');
+        c.className = 'chip auto';
+        c.style.cursor = 'pointer';
+        c.innerHTML = esc(q.name);
+        c.onclick = () => {
+            const e = findEntityByName(q.name.toLowerCase());
+            if (e) openNote(e);
+        };
+        el.appendChild(c);
+    }
+}
+
+// =======================================================================
+// NEARBY SERVICES
+// =======================================================================
+function updateNearbyServices() {
+    const ul = document.getElementById('nearbyServices'); ul.innerHTML = '';
+    if (!V) return;
+    const sett = ctx.settlement.toLowerCase();
+    if (!sett) { ul.innerHTML = '<li style="color:var(--text-muted);font-size:11px;padding:6px">Set a location to see nearby</li>'; return; }
+    const ids = V.indexes.bySettlement[sett] || [];
+    const stores = ids.map(id => V.entities[id]).filter(e => e.type === 'Store');
+    if (!stores.length) { ul.innerHTML = '<li style="color:var(--text-muted);font-size:11px;padding:6px">No stores found here</li>'; return; }
+    for (const s of stores) {
+        const li = document.createElement('li');
+        li.innerHTML = `<span class="qr-type" style="color:var(--store-color)">${esc(s.storeType||'Shop')}</span><span>${esc(s.name)}</span>`;
+        li.onclick = () => openNote(s);
+        ul.appendChild(li);
+    }
+}
+
+// =======================================================================
+// WHISPER ENGINE — proactive contextual reminders
+// =======================================================================
+function generateWhispers() {
+    if (!V) return;
+    const container = document.getElementById('whisperList');
+    container.innerHTML = '';
+
+    const whispers = [];
+
+    // 1. Active NPC reminders — surface their key info
+    for (const n of ctx.npcs) {
+        const e = findEntityByName(n.name.toLowerCase());
+        if (!e) continue;
+        const k = 'npc-' + e.id;
+        if (whispersSeen.has(k)) continue;
+        let detail = '';
+        if (e.profession) detail += e.profession;
+        if (e.settlement) detail += (detail ? ' \u2022 ' : '') + e.settlement;
+        // Grab first meaningful line from summary
+        const firstLine = (e.summary || '').split('\n')[0].substring(0, 120);
+        if (firstLine) detail += (detail ? '\n' : '') + firstLine;
+        whispers.push({ type: 'NPC Reminder', title: e.name, body: detail, entity: e, key: k });
+    }
+
+    // 2. Quest hooks for current location
+    if (ctx.settlement) {
+        const sett = ctx.settlement.toLowerCase();
+        for (const e of V.entities) {
+            if (e.type !== 'Quest' || e.status === 'Completed') continue;
+            const loc = (e.settlement || '').toLowerCase();
+            if (loc.includes(sett) || sett.includes(loc.split(/[^a-z]/)[0])) {
+                const k = 'quest-' + e.id;
+                if (whispersSeen.has(k)) continue;
+                let detail = '';
+                if (e.questGiver) detail += 'Quest giver: ' + e.questGiver;
+                if (e.reward) detail += (detail ? '\n' : '') + 'Reward: ' + e.reward;
+                whispers.push({ type: 'Active Quest', title: e.name, body: detail, entity: e, key: k });
+            }
+        }
+    }
+
+    // 3. Consequences at current location
+    if (ctx.settlement) {
+        const sett = ctx.settlement.toLowerCase();
+        for (const e of V.entities) {
+            if (e.type !== 'Consequence') continue;
+            const loc = (e.settlement || '').toLowerCase();
+            if (loc.includes(sett) || (e.summary || '').toLowerCase().includes(sett)) {
+                const k = 'consequence-' + e.id;
+                if (whispersSeen.has(k)) continue;
+                whispers.push({ type: 'Consequence', title: e.name, body: (e.summary || '').substring(0, 100), entity: e, key: k });
+            }
+        }
+    }
+
+    // 4. NPC relationships — if active NPCs mention other NPCs
+    for (const n of ctx.npcs) {
+        const e = findEntityByName(n.name.toLowerCase());
+        if (!e || !e.mentions) continue;
+        for (const mention of e.mentions) {
+            const related = findEntityByName(mention.toLowerCase());
+            if (!related || related.type !== 'NPC') continue;
+            if (ctx.npcs.find(x => x.name.toLowerCase() === related.name.toLowerCase())) continue;
+            const k = 'rel-' + e.id + '-' + related.id;
+            if (whispersSeen.has(k)) continue;
+            whispers.push({
+                type: 'Connection',
+                title: related.name,
+                body: `Mentioned in ${e.name}'s notes` + (related.profession ? ' \u2022 ' + related.profession : ''),
+                entity: related, key: k
+            });
+        }
+    }
+
+    // 5. Table-talk detected entities whispers
+    for (const e of conversationEntities.slice(-5)) {
+        const k = 'talk-' + e.id;
+        if (whispersSeen.has(k)) continue;
+        let detail = e.type;
+        if (e.profession) detail += ' \u2022 ' + e.profession;
+        if (e.settlement) detail += ' \u2022 ' + e.settlement;
+        whispers.push({ type: 'Heard at Table', title: e.name, body: detail, entity: e, key: k });
+    }
+
+    // Render (limit 12)
+    for (const w of whispers.slice(0, 12)) {
+        const card = document.createElement('div');
+        card.className = 'whisper-card';
+        card.innerHTML = `<div class="whisper-type">${esc(w.type)}</div>
+            <div class="whisper-title">${esc(w.title)}</div>
+            <div class="whisper-body">${esc(w.body)}</div>`;
+        card.onclick = () => { whispersSeen.add(w.key); if (w.entity) openNote(w.entity); };
+        container.appendChild(card);
+    }
+
+    if (whispers.length === 0) {
+        container.innerHTML = '<div style="font-size:11px;color:var(--text-muted);padding:6px">Contextual reminders will appear here as the session progresses.</div>';
+    }
+}
+
+// =======================================================================
+// SPEECH RECOGNITION
+// =======================================================================
+function initSpeech() {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) { alert('Speech recognition not supported. Use Chrome or Edge.'); return null; }
+    const rec = new SR();
+    rec.continuous = true;
+    rec.interimResults = true;
+    rec.lang = 'en-US';
+    rec.maxAlternatives = 1;
+
+    rec.onresult = (ev) => {
+        let interim = '', final = '';
+        for (let i = ev.resultIndex; i < ev.results.length; i++) {
+            const t = ev.results[i][0].transcript;
+            if (ev.results[i].isFinal) final += t; else interim += t;
+        }
+        updateTranscript(final, interim);
+        if (final) processTranscript(final);
+        if (interim) { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => processTranscript(interim), 800); }
+    };
+
+    rec.onerror = (ev) => {
+        if (ev.error === 'not-allowed') { setStatus('error','Mic blocked'); stopListening(); }
+        else if (ev.error !== 'no-speech') setStatus('error','Error: '+ev.error);
+    };
+
+    rec.onend = () => { if (isListening) try { rec.start(); } catch(e) {} };
+    return rec;
+}
+
+function toggleListening() { isListening ? stopListening() : startListening(); }
+function startListening() {
+    if (!recognition) { recognition = initSpeech(); if (!recognition) return; }
+    try { recognition.start(); } catch(e) {}
+    isListening = true;
+    setStatus('listening','Listening…');
+    document.getElementById('btnListen').classList.add('active');
+    document.getElementById('btnListen').innerHTML = '&#x1F399; Listening…';
+    startWaveform();
+}
+function stopListening() {
+    isListening = false;
+    try { recognition && recognition.stop(); } catch(e) {}
+    setStatus('idle','Idle');
+    document.getElementById('btnListen').classList.remove('active');
+    document.getElementById('btnListen').innerHTML = '&#x1F399; Start Listening';
+    stopWaveform();
+}
+
+function setStatus(state, text) {
+    document.getElementById('statusDot').className = 'status-dot' + (state==='idle'?'':' '+state);
+    document.getElementById('statusText').textContent = text;
+}
+
+let wfInt;
+function startWaveform() {
+    const bars = document.querySelectorAll('#waveform .bar');
+    wfInt = setInterval(() => bars.forEach(b => b.style.height = (3+Math.random()*14)+'px'), 120);
+}
+function stopWaveform() {
+    clearInterval(wfInt);
+    document.querySelectorAll('#waveform .bar').forEach(b => { b.style.height = '3px'; b.style.background = 'var(--text-muted)'; });
+}
+
+// =======================================================================
+// TRANSCRIPT
+// =======================================================================
+const lines = [];
+function updateTranscript(fin, interim) {
+    const box = document.getElementById('transcript');
+    if (fin) { lines.push(fin.trim()); if (lines.length > 12) lines.shift(); }
+    let html = lines.map(l => `<span class="final">${esc(l)}</span>`).join('<br>');
+    if (interim) html += `<br><span class="interim">${esc(interim)}</span>`;
+    box.innerHTML = html || '<span class="interim">Transcript appears here when listening…</span>';
+    box.scrollTop = box.scrollHeight;
+}
+
+// =======================================================================
+// INTENT RECOGNITION
+// =======================================================================
+const PATTERNS = [
+    { re: /(?:find|look(?:ing)? for|where(?:'s| is)|need|want|any)\s+(?:a\s+)?(?:nearby\s+)?(\w+(?:\s+\w+)?)/i, intent:'find_service', g:1 },
+    { re: /(?:is there|are there)\s+(?:an?\s+)?(\w+)(?:\s+(?:near|around|here|nearby))?/i, intent:'find_service', g:1 },
+    { re: /(?:place to|somewhere to)\s+(stay|sleep|eat|drink|rest|shop|buy|sell|trade|repair)/i, intent:'find_service', g:1 },
+    { re: /(?:talk to|speak (?:to|with)|find|visit|meet|see|ask|go (?:to|find|see))\s+([A-Z][\w']+(?:\s+[A-Z][\w']+)*)/, intent:'find_npc', g:1 },
+    { re: /(?:go to|head to|travel to|visit|explore|what(?:'s| is) (?:at|in))\s+(?:the\s+)?([A-Z][\w']+(?:\s+[A-Z][\w']+)*)/, intent:'find_location', g:1 },
+    { re: /(?:what (?:do we|did we) know about|tell me about|info on|information (?:on|about))\s+(?:the\s+)?(.+)/i, intent:'lookup', g:1 },
+    { re: /(?:break into|sneak into|rob|steal|heist|infiltrate|attack)\s+(?:the\s+)?(.+)/i, intent:'plan_action', g:1 },
+    { re: /(?:buy|purchase|sell|trade|get)\s+(?:some\s+)?(.+)/i, intent:'find_service', g:1 },
+];
+
+const SVC_SYN = {
+    blacksmith:['blacksmith','forge','smith','smithy','weapons','armor','sword'],
+    inn:['inn','stay','sleep','rest','room','lodging','bed'],
+    tavern:['tavern','bar','pub','drink','ale','beer'],
+    general_store:['general store','shop','supplies','store','buy','sell','trade','goods'],
+    apothecary:['apothecary','potions','healer','herbs','medicine','heal'],
+    magic:['magic','arcane','enchant','scrolls','wand','wizard','spell'],
+    food:['food','eat','bakery','butcher','market'],
+    temple:['temple','shrine','church','pray','healing','cleric'],
+    stable:['stable','horse','mount','ride'],
+    library:['library','book','scroll','scribe','knowledge'],
+    guild:['guild','guild hall','adventurer'],
+    weapons:['weapon','sword','blade','axe','bow','dagger'],
+    armor:['armor','armour','shield','plate','chain'],
+    repairs:['repair','fix','mend'],
+};
+
+function recognizeIntent(text) {
+    const lt = text.toLowerCase().trim();
+    if (lt.length < 3) return null;
+
+    // Track any entity names heard in conversation
+    detectConversationEntities(text);
+
+    for (const { re, intent, g } of PATTERNS) {
+        const m = text.match(re);
+        if (m && m[g]) {
+            const subj = m[g].trim();
+            const r = resolveSubject(intent, subj, lt);
+            return { intent: r.intent||intent, subject: r.subject||subj, serviceType: r.serviceType||null, confidence:.85, raw:text };
+        }
+    }
+
+    if (V) { const e = findEntityByName(lt); if (e) return { intent: e.type==='NPC'?'find_npc':e.type==='Store'?'find_service':'lookup', subject:e.name, confidence:.75, raw:text }; }
+
+    for (const [svc, kws] of Object.entries(SVC_SYN)) {
+        if (kws.some(kw => lt.includes(kw))) return { intent:'find_service', subject:svc.replace('_',' '), serviceType:svc, confidence:.6, raw:text };
+    }
+
+    const caps = text.match(/\b[A-Z][\w']+(?:\s+[A-Z][\w']+)+/g);
+    if (caps) return { intent:'lookup', subject:caps[0], confidence:.5, raw:text };
+
+    return null;
+}
+
+function resolveSubject(intent, subj, ft) {
+    if (intent === 'find_service') {
+        const ls = subj.toLowerCase();
+        for (const [svc, kws] of Object.entries(SVC_SYN)) {
+            if (kws.some(kw => ls.includes(kw))) return { serviceType:svc, subject:svc.replace('_',' ') };
+        }
+    }
+    return {};
+}
+
+// =======================================================================
+// CONVERSATION ENTITY DETECTION (auto-context from table talk)
+// =======================================================================
+function detectConversationEntities(text) {
+    if (!V) return;
+    const lt = text.toLowerCase();
+
+    // Check every entity name against the transcript
+    for (const e of V.entities) {
+        if (e.type === 'Other' || e.type === 'Encounter') continue;
+        const name = e.name.toLowerCase();
+        if (name.length < 4) continue;
+        if (lt.includes(name)) {
+            // Add to conversation entities (avoid duplicates)
+            if (!conversationEntities.find(x => x.id === e.id)) {
+                conversationEntities.push(e);
+
+                // Auto-update context based on what's mentioned
+                if (e.type === 'NPC' && !ctx.npcs.find(n => n.name === e.name)) {
+                    ctx.npcs.push({ name: e.name, auto: true });
+                    renderNpcChips();
+                }
+                if (e.type === 'Settlement') {
+                    ctx.settlement = e.name;
+                    ctx.region = e.region || ctx.region;
+                    document.getElementById('ctxRegion').value = ctx.region;
+                    populateSettlements();
+                    document.getElementById('ctxSettlement').value = e.name;
+                    updateNearbyServices();
+                }
+                // Refresh whispers when new entities detected
+                generateWhispers();
+            }
+        }
+    }
+}
+
+// =======================================================================
+// SEARCH / RETRIEVAL
+// =======================================================================
+function searchVault(intent) {
+    if (!V) return [];
+    const results = [];
+    const seen = new Set();
+    const add = (e, s) => { if (seen.has(e.id)) return; seen.add(e.id); results.push({entity:e, score:s}); };
+
+    const q = (intent.subject||'').toLowerCase();
+    const svc = intent.serviceType;
+
+    switch (intent.intent) {
+        case 'find_npc':
+            for (const e of V.entities) { if (e.type!=='NPC') continue; const s=scoreN(e,q); if (s>0) add(e,s+ctxBonus(e)); }
+            if (results.length) { const top=results[0].entity; for (const e of V.entities) { if (e.id===top.id) continue; if (mentions(e,top.name)||mentions(top,e.name)) add(e,30+ctxBonus(e)); } }
+            break;
+        case 'find_service':
+            if (svc && V.indexes.byService[svc]) for (const id of V.indexes.byService[svc]) add(V.entities[id], 80+ctxBonus(V.entities[id]));
+            for (const e of V.entities) { if (e.type!=='Store') continue; const s=scoreT(e,q); if (s>0) add(e,s+ctxBonus(e)); }
+            for (const r of [...results]) { const p=r.entity.proprietor||r.entity.owner; if (p) { const n=findEntityByName(p.toLowerCase()); if (n) add(n,50+ctxBonus(n)); } }
+            break;
+        case 'find_location':
+            for (const e of V.entities) { if (e.type!=='Settlement'&&e.type!=='Location') continue; const s=scoreN(e,q); if (s>0) add(e,s+ctxBonus(e)); }
+            if (results.length) { const loc=results[0].entity.name.toLowerCase(); const ids=V.indexes.bySettlement[loc]||[]; for (const id of ids) add(V.entities[id],40+ctxBonus(V.entities[id])); }
+            break;
+        default:
+            for (const e of V.entities) { const s=Math.max(scoreN(e,q),scoreT(e,q)); if (s>0) add(e,s+ctxBonus(e)); }
+    }
+    results.sort((a,b)=>b.score-a.score);
+    return results.slice(0, 25);
+}
+
+function scoreN(e, q) {
+    if (!q) return 0;
+    const n = e.name.toLowerCase();
+    if (n===q) return 100;
+    if (n.includes(q)) return 80;
+    if (e.aliases) { if (e.aliases.some(a=>a===q)) return 90; if (e.aliases.some(a=>a.includes(q)||q.includes(a))) return 60; }
+    const ws = q.split(/\s+/);
+    let hits = 0;
+    for (const w of ws) if (w.length>2 && e.aliases && e.aliases.some(a=>a.includes(w))) hits++;
+    return hits ? 20+hits*15 : 0;
+}
+
+function scoreT(e, q) {
+    if (!q) return 0;
+    const ws = q.split(/\s+/).filter(w=>w.length>2);
+    const hay = [e.name, e.profession, e.storeType, e.summary, ...(e.tags||[])].filter(Boolean).join(' ').toLowerCase();
+    let h = 0;
+    for (const w of ws) if (hay.includes(w)) h++;
+    return h ? 10+h*10 : 0;
+}
+
+function ctxBonus(e) {
+    let b = 0;
+    if (ctx.settlement && e.settlement && e.settlement.toLowerCase()===ctx.settlement.toLowerCase()) b+=25;
+    if (ctx.region && e.region && e.region.toLowerCase()===ctx.region.toLowerCase()) b+=10;
+    if (ctx.npcs.some(n => n.name.toLowerCase()===e.name.toLowerCase())) b+=15;
+    return b;
+}
+
+function mentions(src, name) {
+    if (!src.mentions) return false;
+    const l = name.toLowerCase();
+    return src.mentions.some(m => m.toLowerCase().includes(l)||l.includes(m.toLowerCase()));
+}
+
+function findEntityByName(q) {
+    if (!V) return null;
+    const idx = V.indexes.byName[q];
+    if (idx !== undefined) return V.entities[idx];
+    for (const [n,id] of Object.entries(V.indexes.byName)) if (n.includes(q)||q.includes(n)) return V.entities[id];
+    return null;
+}
+
+// =======================================================================
+// PROCESS TRANSCRIPT
+// =======================================================================
+function processTranscript(text) {
+    setStatus('processing','Processing…');
+    const intent = recognizeIntent(text);
+    if (!intent) { setStatus(isListening?'listening':'idle', isListening?'Listening…':'Idle'); return; }
+    displayIntent(intent);
+    addHistory(intent);
+    displayResults(searchVault(intent));
+    setStatus(isListening?'listening':'idle', isListening?'Listening…':'Idle');
+}
+
+function onManualSearch(q) {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => { if (!q.trim()) { clearResults(); return; } processTranscript(q); }, 300);
+}
+
+// =======================================================================
+// DISPLAY — INTENT
+// =======================================================================
+function displayIntent(intent) {
+    const bar = document.getElementById('intentBar');
+    bar.classList.add('visible');
+    document.getElementById('intentLabel').textContent = intent.intent.replace('_',' ').toUpperCase();
+    document.getElementById('intentDetail').textContent = intent.subject||'—';
+    document.getElementById('intentConf').textContent = Math.round(intent.confidence*100)+'%';
+}
+
+// =======================================================================
+// DISPLAY — RESULTS
+// =======================================================================
+function displayResults(results) {
+    const grid = document.getElementById('resultsGrid');
+    if (!results.length) { grid.innerHTML = ''; grid.appendChild(mkEmpty('No matching results.')); return; }
+    grid.innerHTML = '';
+    for (const {entity, score} of results) grid.appendChild(mkCard(entity, score));
+}
+
+function mkCard(e, score) {
+    const card = document.createElement('div');
+    card.className = 'result-card' + (selectedEntityId===e.id?' selected':'');
+    card.onclick = () => openNote(e);
+
+    let meta = '';
+    if (e.region) meta += `<span>\u{1F4CD}${esc(e.region)}</span>`;
+    if (e.settlement) meta += `<span>\u{1F3D8}${esc(e.settlement)}</span>`;
+    if (e.profession) meta += `<span>\u2692${esc(e.profession)}</span>`;
+    if (e.storeType) meta += `<span>\u{1F3EA}${esc(e.storeType)}</span>`;
+
+    card.innerHTML = `<div class="card-header">
+        <span class="card-type-badge badge-${e.type}">${esc(e.type)}</span>
+        <span class="card-name">${esc(e.name)}</span>
+    </div>
+    <div class="card-meta">${meta}</div>
+    <div class="card-summary">${esc(e.summary||'')}</div>`;
+    return card;
+}
+
+function mkEmpty(msg) {
+    const d = document.createElement('div'); d.className = 'empty-state';
+    d.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg><p>${msg}</p>`;
+    return d;
+}
+
+function clearResults() {
+    document.getElementById('resultsGrid').innerHTML = '';
+    document.getElementById('resultsGrid').appendChild(mkEmpty('Start listening or search. Click any result to read the full note.'));
+    document.getElementById('intentBar').classList.remove('visible');
+    document.getElementById('manualSearch').value = '';
+    closeNote();
+}
+
+// =======================================================================
+// FULL NOTE VIEWER
+// =======================================================================
+function openNote(entity) {
+    selectedEntityId = entity.id;
+
+    // Switch to split view
+    document.getElementById('resultsPane').classList.add('narrow');
+    const pane = document.getElementById('notePane');
+    pane.classList.add('visible');
+
+    // Highlight selected card
+    document.querySelectorAll('.result-card').forEach(c => c.classList.remove('selected'));
+    // Find the card for this entity
+    const cards = document.querySelectorAll('.result-card');
+    cards.forEach(c => { if (c.querySelector('.card-name')?.textContent === entity.name) c.classList.add('selected'); });
+
+    // Build header
+    const hdr = document.getElementById('noteHeader');
+    const typeColor = getTypeColor(entity.type);
+    let metaHtml = '';
+    if (entity.region) metaHtml += `<span>\u{1F4CD} ${esc(entity.region)}</span>`;
+    if (entity.settlement) metaHtml += `<span>\u{1F3D8} ${esc(entity.settlement)}</span>`;
+    if (entity.profession) metaHtml += `<span>\u2692 ${esc(entity.profession)}</span>`;
+    if (entity.race) metaHtml += `<span>\u{1F464} ${esc(entity.race)}</span>`;
+    if (entity.storeType) metaHtml += `<span>\u{1F3EA} ${esc(entity.storeType)}</span>`;
+    if (entity.status) metaHtml += `<span>\u25C9 ${esc(entity.status)}</span>`;
+    if (entity.proprietor||entity.owner) metaHtml += `<span>\u{1F464} Owner: ${esc(entity.proprietor||entity.owner)}</span>`;
+    if (entity.leader) metaHtml += `<span>\u{1F451} ${esc(entity.leader)}</span>`;
+    if (entity.questGiver) metaHtml += `<span>\u{1F4DC} Quest giver: ${esc(entity.questGiver)}</span>`;
+    if (entity.reward) metaHtml += `<span>\u{1F4B0} ${esc(entity.reward)}</span>`;
+    if (entity.difficulty) metaHtml += `<span>\u2694 ${esc(entity.difficulty)}</span>`;
+
+    hdr.innerHTML = `<div class="note-type" style="color:${typeColor}">${esc(entity.type)}</div>
+        <h2>${esc(entity.name)}</h2>
+        <div class="note-meta">${metaHtml}</div>`;
+
+    // Render full body as rich HTML
+    const body = document.getElementById('noteBody');
+    body.innerHTML = renderMarkdown(entity.fullBody || entity.summary || 'No content available.');
+
+    // Scroll to top
+    pane.scrollTop = 0;
+}
+
+function closeNote() {
+    selectedEntityId = null;
+    document.getElementById('notePane').classList.remove('visible');
+    document.getElementById('resultsPane').classList.remove('narrow');
+    document.querySelectorAll('.result-card').forEach(c => c.classList.remove('selected'));
+}
+
+function getTypeColor(type) {
+    const map = { NPC:'var(--npc-color)', Store:'var(--store-color)', Settlement:'var(--settlement-color)',
+        Quest:'var(--quest-color)', Organization:'var(--org-color)', Location:'var(--location-color)',
+        Event:'var(--event-color)', Consequence:'var(--event-color)', Holiday:'var(--store-color)' };
+    return map[type] || 'var(--other-color)';
+}
+
+// =======================================================================
+// MARKDOWN → HTML RENDERER (lightweight)
+// =======================================================================
+function renderMarkdown(md) {
+    if (!md) return '';
+    let html = esc(md);
+
+    // Headings
+    html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+    html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+    html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+    html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+    // Horizontal rules
+    html = html.replace(/^---+$/gm, '<hr>');
+
+    // Bold / italic
+    html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+    // Inline code
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+    // Blockquotes (multi-line)
+    html = html.replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>');
+    // Merge consecutive blockquotes
+    html = html.replace(/<\/blockquote>\n<blockquote>/g, '\n');
+
+    // Tables (basic)
+    html = html.replace(/^(\|.+\|)\n(\|[-| :]+\|)\n((?:\|.+\|\n?)+)/gm, (match, headerRow, sepRow, bodyRows) => {
+        const headers = headerRow.split('|').filter(c=>c.trim()).map(c=>`<th>${c.trim()}</th>`).join('');
+        const rows = bodyRows.trim().split('\n').map(row => {
+            const cells = row.split('|').filter(c=>c.trim()).map(c=>`<td>${c.trim()}</td>`).join('');
+            return `<tr>${cells}</tr>`;
+        }).join('');
+        return `<table><thead><tr>${headers}</tr></thead><tbody>${rows}</tbody></table>`;
+    });
+
+    // Unordered lists
+    html = html.replace(/^(\s*)- (.+)$/gm, '$1<li>$2</li>');
+    // Wrap consecutive <li> in <ul>
+    html = html.replace(/((?:<li>.+<\/li>\n?)+)/g, '<ul>$1</ul>');
+
+    // Line breaks — preserve blank-line paragraph breaks
+    html = html.replace(/\n\n/g, '</p><p>');
+    html = '<p>' + html + '</p>';
+    // Clean up empty paragraphs
+    html = html.replace(/<p>\s*<\/p>/g, '');
+    // Don't wrap block elements in <p>
+    html = html.replace(/<p>(<h[1-4]>)/g, '$1');
+    html = html.replace(/(<\/h[1-4]>)<\/p>/g, '$1');
+    html = html.replace(/<p>(<hr>)<\/p>/g, '$1');
+    html = html.replace(/<p>(<table>)/g, '$1');
+    html = html.replace(/(<\/table>)<\/p>/g, '$1');
+    html = html.replace(/<p>(<ul>)/g, '$1');
+    html = html.replace(/(<\/ul>)<\/p>/g, '$1');
+    html = html.replace(/<p>(<blockquote>)/g, '$1');
+    html = html.replace(/(<\/blockquote>)<\/p>/g, '$1');
+
+    return html;
+}
+
+// =======================================================================
+// INTENT HISTORY
+// =======================================================================
+function addHistory(intent) {
+    const t = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    intentHist.unshift({t, intent});
+    if (intentHist.length > 20) intentHist.pop();
+    const ul = document.getElementById('intentHistory'); ul.innerHTML = '';
+    for (const h of intentHist) {
+        const li = document.createElement('li');
+        li.innerHTML = `<span class="time">${esc(h.t)}</span>${esc(h.intent.intent.replace('_',' '))} — ${esc(h.intent.subject||'?')}`;
+        li.onclick = () => processTranscript(h.intent.raw||h.intent.subject);
+        ul.appendChild(li);
+    }
+}
+
+// =======================================================================
+// UTILITY
+// =======================================================================
+function esc(s) { if (!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+// =======================================================================
+// BOOT
+// =======================================================================
+init();
+</script>
+
+</body>
+</html>

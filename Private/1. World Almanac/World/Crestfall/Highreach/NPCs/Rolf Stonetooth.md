@@ -5,7 +5,7 @@ location: Highreach
 region: Crestfall
 profession: "Fighter"
 race: "Human"
-status: Alive
+status: Dead
 tags:
   - NPC
   - Crestfall
@@ -24,7 +24,7 @@ tags:
 - **Quirk:** Runs his tongue over his chipped tooth when thinking
 
 ## Links
-- [[The Nighstalkers]]
+- [[The Nightstalkers]]
 - [[Sturdy Mugg]]
 - [[Celeste Stonetooth nee Moonwhisper]]
 

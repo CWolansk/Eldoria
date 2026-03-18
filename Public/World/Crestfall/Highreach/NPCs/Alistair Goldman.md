@@ -22,7 +22,9 @@ Guildmaster of the Highreach Merchants Guild. Runs a tight operation and demands
 Cold, calculated, and never rattled — not someone who suffers fools.
 
 ## Interactions
-
+- [[Public/World/Events/Timeline/Merchants Guild Quest Completed|Hired the party for a private job — party took his gold and outplayed him]]
+- [[Public/World/Events/Timeline/Goldman Story Buried in Newspaper|Small story about him buried in the back of the newspaper]]
+- [[Public/World/Events/Timeline/Party Defeats Merchants Guild Bandits|Arrived after the bandit ambush — offered the party a new deal to clear the mines]]
 
 ---
 
