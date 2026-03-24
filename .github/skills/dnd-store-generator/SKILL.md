@@ -34,6 +34,7 @@ Always **search the vault first**:
 2. Search within the target settlement folder for existing stores — avoid duplicates (e.g., don't create a second blacksmith if one exists)
 3. Check if the proposed proprietor already has an NPC file
 4. Look at neighboring store files to match tone and detail level
+5. If the store already exists, **do not create a duplicate** — offer to review or update the existing files instead. If the user wants to see what you'd generate, show a preview in chat without creating files.
 
 ## File Paths
 
@@ -58,16 +59,16 @@ tags:
   - Store
   - {Region}
   - {City}
+  - {StoreType}
 ---
 
-## Description
-> {2-3 sentences. What the place looks like, sounds like, smells like. Use blockquote for read-aloud text — this is what the DM says when the party walks in.}
+![[Public/World/{Region}/{City}/{Shop Name}]]
 
 ## Proprietor
 [[{Owner NPC Name}]] — {one-line description}
 
 ## Inventory
-{Bullet list of notable items or services. Don't list every mundane item — focus on what's interesting or unique.}
+{Bullet list of notable items or services. Don't list every mundane item — focus on what's interesting or unique. Include DM-only items here (hidden stock, illegal goods, etc.).}
 
 ## DM Notes
 {Leave empty. DM fills this in during play.}
@@ -87,7 +88,7 @@ The following sections are **optional** — only include if the user specifies:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```
 ```
@@ -105,10 +106,11 @@ tags:
   - Store
   - {Region}
   - {City}
+  - {StoreType}
 ---
 
 ## Description
-{What you see when you walk in — sights, sounds, smells. 2-3 sentences.}
+> {2-3 sentences. What the place looks like, sounds like, smells like. Use blockquote for read-aloud text so the DM can spot it instantly when embedding this file.}
 
 ## Proprietor
 [[Public/World/{Region}/{City}/NPCs/{Owner Name}|{Owner Name}]] — {one-line public impression}
@@ -123,7 +125,7 @@ tags:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]] AND "Public"
 SORT file.name ASC
 ```
 ```
@@ -162,3 +164,5 @@ When creating a store, check if it needs supporting content:
 - Does the proprietor have an NPC file? If not, ask if you should create one.
 - Is the proprietor part of a guild or group? If that group doesn't exist, ask.
 - Does the settlement the store is in have a file? If not, ask.
+
+**Reminder:** After generating a store file, always check this section and ask the DM about any NPCs or groups mentioned that don't have their own files yet.

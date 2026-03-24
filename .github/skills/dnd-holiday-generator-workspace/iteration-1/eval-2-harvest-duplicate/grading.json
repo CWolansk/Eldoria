@@ -1,0 +1,12 @@
+{
+  "eval_id": 2,
+  "eval_name": "Harvest Festival — Duplicate detection",
+  "expectations": [
+    {"text": "Agent searched the vault and found existing Harvest's End holiday", "passed": true, "evidence": "Grep search for harvest|feast|produce|winter found Harvests End.md, full file read confirmed match"},
+    {"text": "Agent did NOT create a duplicate holiday file", "passed": true, "evidence": "Output states 'Files Created: None' — duplicate detection rules followed"},
+    {"text": "Agent presented the existing file content or referenced it", "passed": true, "evidence": "Detailed comparison table mapping request elements to existing file content"},
+    {"text": "Agent offered to update or expand the existing file", "passed": false, "evidence": "Agent explained why no update was needed ('the request did not ask for changes') but did NOT explicitly offer to update or expand. Same gap found in quest-generator eval 2."}
+  ],
+  "pass_rate": "3/4 (75%)",
+  "notes": "Thorough duplicate detection with excellent content comparison table. The missing 'offer to update' is a systemic gap — the skill tells agents not to duplicate but doesn't tell them to offer alternatives. Same issue found across quest-generator and holiday-generator."
+}

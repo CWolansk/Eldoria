@@ -1,12 +1,17 @@
 ---
+type: NPC
 name: "Elias Thorn"
 title: "Master Ranger"
 race: "Human"
 class: "Ranger"
 location: "Stonehaven"
+region: Crestfall
 guild_affiliations: ["Adventurers Guild"]
 status: "Active"
-tags: ["#NPC", "#Ranger", "#Stonehaven", "#Guide", "#Tracker", "#ForestExpert"]
+tags:
+  - NPC
+  - Crestfall
+  - Stonehaven
 ---
 
 # Master Ranger Elias Thorn

@@ -1,0 +1,46 @@
+{
+  "skill_name": "dnd-session-digest",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Digest Session 13. Present what you'd propose creating. Don't create any files yet — I'll tell you which ones to make.",
+      "expected_output": "A numbered proposal organized by category (timeline events, consequences, NPC interactions, quest updates, missing entities) based on the Session 13 journal content.",
+      "assertions": [
+        {"id": "1a", "text": "Read the full Session 13 journal from Private/2. Session Journals/", "type": "process_check"},
+        {"id": "1b", "text": "Searched vault for existing timeline events, consequences, and entities before proposing", "type": "process_check"},
+        {"id": "1c", "text": "Identified timeline event(s) — at minimum the ooze doppelganger fight or travel to Ardenville", "type": "content_check"},
+        {"id": "1d", "text": "Identified NPC interactions — Salty Pete, the package-swap gnome, Pip Whiskerwind, or guards", "type": "content_check"},
+        {"id": "1e", "text": "Identified missing entities — Dancin' Pete, Salty Pete's former crew (Mara Kells, etc.)", "type": "content_check"},
+        {"id": "1f", "text": "Identified conditional outcomes — the package swap decision", "type": "content_check"},
+        {"id": "1g", "text": "Proposal is numbered and organized by category per the skill template", "type": "format_check"},
+        {"id": "1h", "text": "Did NOT create any files — only proposed", "type": "process_check"},
+        {"id": "1i", "text": "Asked the DM which items to create", "type": "process_check"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Digest Session 9. Present your proposal — don't create files yet.",
+      "expected_output": "A digest proposal that checks for existing events and entities from Session 9, noting what already exists vs what's missing.",
+      "assertions": [
+        {"id": "2a", "text": "Read Session 9 journal", "type": "process_check"},
+        {"id": "2b", "text": "Searched for existing events/entities from Session 9 content", "type": "process_check"},
+        {"id": "2c", "text": "Correctly identified what already has vault files vs what's missing", "type": "content_check"},
+        {"id": "2d", "text": "Did NOT create any files — only proposed", "type": "process_check"},
+        {"id": "2e", "text": "Proposal follows the numbered category format", "type": "format_check"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Digest Session 13, but just the NPC stuff — skip events and encounters. Who did the party interact with, who needs files, who needs interaction updates?",
+      "expected_output": "A focused digest covering only NPC interactions and missing NPC entities from Session 13, respecting the user's 'just NPC stuff' focus.",
+      "assertions": [
+        {"id": "3a", "text": "Focused on NPCs only — no timeline events or encounters proposed", "type": "content_check"},
+        {"id": "3b", "text": "Identified Salty Pete interaction and any update needed", "type": "content_check"},
+        {"id": "3c", "text": "Identified Dancin' Pete as a missing entity", "type": "content_check"},
+        {"id": "3d", "text": "Identified former crew members as potential missing entities", "type": "content_check"},
+        {"id": "3e", "text": "Searched vault for which NPCs already have files", "type": "process_check"},
+        {"id": "3f", "text": "Did NOT create any files — only proposed", "type": "process_check"}
+      ]
+    }
+  ]
+}

@@ -1,9 +1,14 @@
 ---
+type: Store
 name: "Stonehaven Supplies"
 owner: "Erik Timber"
-type: "General Store"
+store_type: General Store
 location: "Stonehaven"
-tags: ["#GeneralStore", "#Stonehaven", "#Supplies", "#Food", "#Equipment"]
+region: Crestfall
+tags:
+  - Store
+  - Crestfall
+  - Stonehaven
 ---
 
 # Stonehaven Supplies

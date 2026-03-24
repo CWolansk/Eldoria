@@ -45,6 +45,8 @@ Always **search the vault first**:
 3. Look at existing holiday files to match format conventions
 4. Check for related NPCs, locations, or groups to link to
 
+If the user asks about an **existing holiday**, search and present what the vault already has rather than generating new content. After presenting the existing file, offer to update, expand, or add sections the user might want.
+
 ## File Paths
 
 Holidays are organized by race/culture:
@@ -76,12 +78,6 @@ tags:
   - {Region}
 ---
 
-```dataview
-TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
-SORT file.name ASC
-```
-
 ## Overview
 {2-4 sentences. What this holiday is, who celebrates it, and why it matters to that culture. Use wiki-links to locations, groups, or deities when relevant.}
 
@@ -101,10 +97,12 @@ SORT file.name ASC
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```
 ```
+
+> **Dataview placement:** One dataview block at the end after the `---` separator. Do not add a second after YAML frontmatter.
 
 ## Writing Guidelines
 
@@ -151,3 +149,5 @@ When creating a holiday, check if it references supporting content:
 - Does the holiday name-drop a deity or cultural figure that could be an NPC? Ask if you should create them using the **dnd-npc-generator** skill.
 - Could the holiday serve as the backdrop for an encounter? Ask if you should prep one using the **dnd-encounter-builder** skill.
 - Does the holiday tie into a faction or guild's activities? Note the **dnd-group-generator** skill.
+
+**Always check for mentioned entities and ask the DM before creating them.**

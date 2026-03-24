@@ -1,14 +1,18 @@
-# Jasper Ironforge
-*Village blacksmith serving all factions*
-
 ---
 type: NPC
+name: Jasper Ironforge
 location: Hillcrest
+region: Crestfall
 profession: Blacksmith
 faction: Neutral
 status: Alive
-tags: [#JasperIronforge, #Hillcrest, #Blacksmith, #Ironforge]
+tags:
+  - NPC
+  - Crestfall
+  - Hillcrest
 ---
+
+![[Public/World/Crestfall/Hillcrest/NPCs/Jasper Ironforge|Jasper Ironforge]]
 
 ## Appearance
 Stocky and muscular with the build of a working blacksmith. Soot-stained leather apron and strong hands marked by his trade.

@@ -22,9 +22,9 @@ Evocation wizard at the Highreach Wizard's Tower. Seems perpetually busy with re
 Bookish and a bit prickly — has opinions and isn't shy about sharing them.
 
 ## Interactions
-- [[Public/World/Events/Timeline/Party Visits Wizards Tower|Met at the Wizard's Tower — shared info on the Seeker's Eye]]
-- [[Public/World/Events/Timeline/Frederick Goldman Rat Quest Completed|Party sent Goldman's repair bill to Jon — he sent it right back]]
-- [[Public/World/Events/Timeline/Party Learns the Legend of Diego|Told the party the legend of Diego and the lich's sealed artifacts]]
+- [[Public/World/Events/Timeline/0496-03-01 Party Visits Wizards Tower|Met at the Wizard's Tower — shared info on the Seeker's Eye]]
+- [[Public/World/Events/Timeline/0496-03-01 Frederick Goldman Rat Quest Completed|Party sent Goldman's repair bill to Jon — he sent it right back]]
+- [[Public/World/Events/Timeline/0496-03-06 Party Learns the Legend of Diego|Told the party the legend of Diego and the lich's sealed artifacts]]
 
 ---
 

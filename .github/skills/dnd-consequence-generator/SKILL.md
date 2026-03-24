@@ -45,6 +45,8 @@ Always **search the vault first**:
 3. Check that affected NPCs, factions, and locations have files
 4. Look at existing consequence files to match format conventions
 
+If the user asks about an **existing consequence**, search and present what the vault already has rather than generating new content.
+
 ## File Paths
 
 Consequences are organized by resolution status:
@@ -54,6 +56,8 @@ Private/2. Reference/Events/Consequences/Active/{Consequence Name}.md
 Private/2. Reference/Events/Consequences/Resolved/{Consequence Name}.md
 Private/2. Reference/Events/Consequences/Ideas/{Consequence Name}.md
 ```
+
+When changing a consequence's status (e.g., Idea → Active), move the file to the matching subfolder so the folder structure stays in sync with YAML status.
 
 Consequences are **DM-only** — they do not get a public counterpart. If the players can see the effects, those go in the relevant NPC, location, or event public files instead.
 
@@ -79,7 +83,7 @@ tags:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```
 
@@ -114,7 +118,7 @@ The following sections are **optional** — only include if the user specifies:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```
 ```
@@ -165,3 +169,5 @@ When creating a consequence, check if it needs supporting content:
 - Does the consequence involve a faction or group without a file? Ask if you should create one using the **dnd-group-generator** skill.
 - Does the consequence escalate into a specific encounter? Ask if you should prep it using the **dnd-encounter-builder** skill.
 - Does the consequence affect a location that should be updated? Note the location file that needs editing.
+
+**Always check for mentioned entities and ask the DM before creating them.**

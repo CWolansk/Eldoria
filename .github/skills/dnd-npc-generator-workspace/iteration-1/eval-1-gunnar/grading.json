@@ -1,0 +1,21 @@
+{
+  "eval_id": "eval-1-new-npc",
+  "results": [
+    { "id": "A1", "pass": true, "note": "Has type, name, location, region, profession, race, status in YAML" },
+    { "id": "A2", "pass": true, "note": "Tags: NPC, IronpeakMountains, Stoneforge" },
+    { "id": "A3", "pass": false, "note": "Embed placed under '# Public Notes' at bottom, not at top of file. AGENTS.md says embed goes at top. Template doesn't include embed — uses ## Description instead." },
+    { "id": "A4", "pass": true, "note": "Personality with Ideal, Bond, Flaw, Quirk present" },
+    { "id": "A5", "pass": true, "note": "Links section present" },
+    { "id": "A6", "pass": true, "note": "DM Notes section present" },
+    { "id": "A7", "pass": false, "note": "Private has ## Description blockquote ('Soot-streaked leather apron...') AND public has ## Appearance ('Stocky dwarf with soot-streaked forearms...'). Content is duplicated across both files. AGENTS.md says private should embed public, not duplicate." },
+    { "id": "A8", "pass": false, "note": "Uses FROM [[#this.file.name]] — template has old syntax" },
+    { "id": "A9", "pass": true, "note": "Public has Appearance, What We Know, First Impressions, Interactions" },
+    { "id": "A10", "pass": false, "note": "Public uses FROM [[#this.file.name]] without AND 'Public' filter" },
+    { "id": "A11", "pass": true, "note": "Short fragments, scannable, 10-second rule met" },
+    { "id": "A12", "pass": true, "note": "No secrets in public file" }
+  ],
+  "pass_count": 8,
+  "fail_count": 4,
+  "total": 12,
+  "notes": "Template-level issues cause most failures: no embed pattern, old dataview syntax, missing public filter, Description duplicates Appearance."
+}

@@ -30,9 +30,9 @@ SORT file.name ASC
 	- Party wins fight 
 		- If the party wins the fight they can loot Gareth Ironbrow and the bandits. 
 			- While the party is looting the bodies Alistair rolls up on his way out of the city and tries to hide his surprise and then thanks the party immensely for stopping the bandits that surely would have ravaged his travelling party. 
-			- [[Party Defeats Merchants Guild Bandits]] 
+			- [[0496-03-05 Party Defeats Merchants Guild Bandits]] 
 				- Alistair is on his way to [[Ardenville]] early to set up for watching the boat race since he is a sponsor of the event and needs to make sure that everything gets set up correctly. 
-	- Party loses fight : [[Party is saved by Alistair Goldman]]
+	- Party loses fight : [[0496-03-05 Party is saved by Alistair Goldman]]
 		- This is the most likely outcome unless something crazy happens. The party should wake up in a church within the adventurers guild being tended to by clerics. 
 			- The party is informed by the head priest [[Private/2. Reference/NPCs/All NPCS/Father Eldon Lightbringer]] of where they are 
 				- Non denominational church within the adventurers guild

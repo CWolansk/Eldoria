@@ -1,4 +1,18 @@
-![[Private/1. World Almanac/World/Silverleaf Lands/Serenity Hollow/Serenity Hollow#^30311d|Serenity Hollow]]
+---
+type: Settlement
+name: Serenity Hollow
+region: SilverleafLands
+settlement_type: Village
+tags:
+  - Settlement
+  - SilverleafLands
+  - Elven
+---
+
+## Overview
+A village built around a sacred grove, where elves come for spiritual retreats and meditation.
+
+---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

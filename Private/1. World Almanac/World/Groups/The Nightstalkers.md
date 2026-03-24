@@ -32,8 +32,8 @@ Informal adventuring party — Oren leads by force of personality, not rank.
 - **[[Sturdy Mugg]]** — Regular drinking spot
 
 ## DM Notes
-- Disappeared on 0496-03-02 after heading to the mines — [[Nightstalkers disappeared]]
-- Their widows come looking for answers later — [[Party meets the Nighstalkers widows]]
+- Disappeared on 0496-03-02 after heading to the mines — [[0496-03-02 Nightstalkers disappeared]]
+- Their widows come looking for answers later — [[0496-03-05 Party meets the Nighstalkers widows]]
 - [[Nightstalkers Collection Quest]] — active quest tied to their disappearance
 
 ---

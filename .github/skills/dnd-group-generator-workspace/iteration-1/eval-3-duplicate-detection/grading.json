@@ -1,0 +1,11 @@
+{
+  "eval_id": "eval-3-duplicate-detection",
+  "results": [
+    { "id": "C1", "pass": true, "note": "Detected Adventurers Guild exists in both private and public paths" },
+    { "id": "C2", "pass": true, "note": "Did not create duplicate files" },
+    { "id": "C3", "pass": true, "note": "Offered to review, expand, or update to current template" }
+  ],
+  "pass_count": 3,
+  "fail_count": 0,
+  "total": 3
+}

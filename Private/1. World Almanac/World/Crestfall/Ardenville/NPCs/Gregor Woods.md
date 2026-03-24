@@ -25,7 +25,7 @@ tags:
 
 ## Links
 [[Ardenville]]
-[[Lake Arden Boat Race]]
+[[0496-03-15 Lake Arden Boat Race]]
 
 ## DM Notes
 Responsible for security during the boat race. Hires adventurers to patrol the kelp beds and the collapsing warehouse. Hasn't forgotten the party's clash with Merchants Guild bandits — quietly backs their efforts.

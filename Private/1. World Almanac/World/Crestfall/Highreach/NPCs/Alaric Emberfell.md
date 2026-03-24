@@ -23,7 +23,7 @@ tags:
 
 ## Links
 [[The Dragons Breath Forge]]
-[[The Party Meets Alaric Emberfell]]
+[[0496-03-05 The Party Meets Alaric Emberfell]]
 
 ## DM Notes
 

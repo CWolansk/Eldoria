@@ -1,14 +1,18 @@
-# Benedict Vineward
-*Traditional vintners leader protecting ancestral knowledge*
-
 ---
 type: NPC
+name: Benedict Vineward
 location: Hillcrest
+region: Crestfall
 profession: Master Vintner
 faction: Traditional Vintners Coalition
 status: Alive
-tags: [#BenedictVineward, #Hillcrest, #TraditionalVintners, #Crestfall]
+tags:
+  - NPC
+  - Crestfall
+  - Hillcrest
 ---
+
+![[Public/World/Crestfall/Hillcrest/NPCs/Benedict Vineward|Benedict Vineward]]
 
 ## Appearance
 Tall and sturdy, sun-kissed skin from decades in vineyards, short curly brown hair, calloused hands that are surprisingly gentle with plants. Wears traditional vintner clothing with practical modifications.

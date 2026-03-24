@@ -21,7 +21,7 @@ tags:
 - **Quirk:** Absently checks exits and sightlines whenever she enters a room
 
 ## Links
-[[Lost Pet Quest Completed]]
+[[0496-03-01 Lost Pet Quest Completed]]
 [[Lost Pet]]
 
 ## DM Notes

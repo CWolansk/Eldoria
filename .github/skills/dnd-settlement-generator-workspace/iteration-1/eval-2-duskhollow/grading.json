@@ -1,0 +1,19 @@
+{
+  "eval_id": "eval-2-settlement-with-entities",
+  "results": [
+    { "id": "B1", "pass": true, "note": "region: Ironpeak Mountains in YAML" },
+    { "id": "B2", "pass": true, "note": "Tags include IronpeakMountains (PascalCase)" },
+    { "id": "B3", "pass": true, "note": "Excellent cascading creation — listed blacksmith NPC, tavern store, region update, and orc group as proposals with confirmation prompts" },
+    { "id": "B4", "pass": true, "note": "## Current Events section details orc raids, militia strain, supply issues" },
+    { "id": "B5", "pass": true, "note": "Did not create NPC/store files — listed as proposals with 'Want me to generate?' prompts" },
+    { "id": "B6", "pass": true, "note": "NPC link uses full private path: [[Private/.../Durik Ironhand|Durik Ironhand]]" }
+  ],
+  "pass_count": 6,
+  "fail_count": 0,
+  "total": 6,
+  "additional_findings": [
+    "Tags missing settlement name (Duskhollow) — real vault files include it but template doesn't require it",
+    "Dataview still uses FROM [[#this.file.name]] — same template issue as eval 1",
+    "Agent correctly included ## Current Events as the user mentioned orc tension (opt-in section with user input)"
+  ]
+}

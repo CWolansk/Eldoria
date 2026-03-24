@@ -22,7 +22,7 @@ A large, intimidating enforcer seen around Highreach. Led a group of bandits tha
 Intimidating and direct — the kind of person who doesn't need to raise his voice to make a point.
 
 ## Interactions
-- [[Public/World/Events/Timeline/Party Defeats Merchants Guild Bandits|Led a bandit ambush outside the mines — party dropped the Instant Fortress on him]]
+- [[Public/World/Events/Timeline/0496-03-05 Party Defeats Merchants Guild Bandits|Led a bandit ambush outside the mines — party dropped the Instant Fortress on him]]
 
 ---
 

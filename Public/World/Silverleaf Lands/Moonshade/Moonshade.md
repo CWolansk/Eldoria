@@ -1,4 +1,18 @@
-![[Private/1. World Almanac/World/Silverleaf Lands/Moonshade/Moonshade#^55bf80|Moonshade]]
+---
+type: Settlement
+name: Moonshade
+region: SilverleafLands
+settlement_type: Village
+tags:
+  - Settlement
+  - SilverleafLands
+  - Elven
+---
+
+## Overview
+A hidden village deep within the Everwood, where elven elders study ancient lore and magic. Secluded and difficult to find without a guide.
+
+---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

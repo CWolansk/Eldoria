@@ -1,12 +1,17 @@
 ---
+type: NPC
 name: "Vera Shadowpeak"
 title: "Guildmaster of Stonehaven Adventurers Guild"
 race: "Half-Elf"
 class: "Ranger/Rogue"
 location: "Stonehaven"
+region: Crestfall
 guild_affiliations: ["Adventurers Guild"]
 status: "Active"
-tags: ["#NPC", "#Guildmaster", "#Stonehaven", "#AdventurersGuild", "#Leader", "#Experienced"]
+tags:
+  - NPC
+  - Crestfall
+  - Stonehaven
 ---
 
 # Guildmaster Vera Shadowpeak

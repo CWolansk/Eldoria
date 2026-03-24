@@ -1,0 +1,18 @@
+{
+  "eval_id": 3,
+  "eval_name": "Starfall Vigil — Multi-day Elven holiday with hooks",
+  "expectations": [
+    {"text": "File placed in Private/2. Reference/Events/World Events/Holidays/Elven Holidays/", "passed": true, "evidence": "File at Elven Holidays/Starfall Vigil.md"},
+    {"text": "fc-date populated (0496-06-15 or similar)", "passed": true, "evidence": "fc-date: 0496-06-15"},
+    {"text": "fc-end populated for 3-day duration (0496-06-17 or similar)", "passed": true, "evidence": "fc-end: 0496-06-17"},
+    {"text": "culture is 'Elven'", "passed": true, "evidence": "culture: Elven"},
+    {"text": "region references Silverleaf Lands", "passed": true, "evidence": "region: Silverleaf Lands"},
+    {"text": "Adventure Hooks section is present (user requested it)", "passed": true, "evidence": "Two adventure hooks present — fallen star retrieval and sealed evil warning"},
+    {"text": "Dataview uses FROM [[]] (not FROM [[#this.file.name]])", "passed": true, "evidence": "FROM [[]] in dataview block"},
+    {"text": "Cultural tone matches elven themes (nature, ancestry, arcane, long cycles)", "passed": true, "evidence": "Ancestral spirits, druids, trance-circles, sacred groves, Everwood, floating lanterns, fasting"},
+    {"text": "Traditions section with 3-5 items", "passed": true, "evidence": "5 traditions with Night of Opening/Communion/Sending structure"},
+    {"text": "Wiki-links to Silverleaf Lands or other existing vault entities if they exist", "passed": true, "evidence": "Wiki-links to Silverleaf Lands region file and Everwood"}
+  ],
+  "pass_rate": "10/10 (100%)",
+  "notes": "Outstanding multi-day festival. The 3-night structure (Opening, Communion, Sending) gives each day distinct identity. Adventure hooks are well-crafted and tied to the vigil's themes. Dataview at bottom only, consistent with vault pattern."
+}

@@ -119,13 +119,24 @@ Encounters are **DM-only** — they do not get a public counterpart.
 ## Encounter Template
 
 ```markdown
-# {Encounter Name}
+---
+type: Encounter
+encounter_type: {Combat / Social / Mixed}
+location: {Where it takes place}
+difficulty: {Easy / Medium / Hard / Deadly}
+party_level: {N}
+tags:
+  - Encounter
+  - {Type}
+  - {Region}
+  - Level{N}
+---
 
-#Encounter #{Type} #{Region} #Level{N} {additional tags}
+# {Encounter Name}
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Related"
-FROM [[{Encounter Name}]]
+FROM [[]]
 WHERE file.name != this.file.name
 SORT file.name ASC
 ```
@@ -276,10 +287,12 @@ action:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```
 ```
+
+> **Dataview placement:** Encounters use TWO dataview blocks: (1) "Related" after the title (with `WHERE file.name != this.file.name`), (2) "Mentioned In" at the very end. Both are standard for encounters.
 
 ## Optional Sections
 
@@ -393,3 +406,5 @@ When building an encounter, check if supporting content is needed:
 - Are there named NPCs in the encounter? Check if they have files (use `dnd-npc-generator`)
 - Is a faction involved? Check for an organization file (use `dnd-group-generator`)
 - Don't create supporting files without asking — the DM may want a lightweight encounter without full world-building
+
+**Always check for mentioned entities and ask the DM before creating them.**

@@ -1,12 +1,17 @@
 ---
+type: NPC
 name: "Erik Timber"
 title: "General Store Owner"
 race: "Human"
 class: "Commoner"
 location: "Stonehaven"
+region: Crestfall
 guild_affiliations: ["Merchants Guild"]
 status: "Active"
-tags: ["#NPC", "#GeneralStore", "#Stonehaven", "#Merchant", "#Friendly", "#Supplies"]
+tags:
+  - NPC
+  - Crestfall
+  - Stonehaven
 ---
 
 # Erik Timber

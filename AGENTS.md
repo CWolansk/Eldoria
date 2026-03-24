@@ -22,11 +22,12 @@ Eldoria/
 │   │           ├── NPCs/             # NPC files for this settlement
 │   │           └── *.md              # Store/shop files (loose in settlement folder)
 │   │   └── Groups/                   # Faction/guild/organization files (world-level)
-│   ├── 2. Reference/                 # Rules reference, encounters, quests, consequences, holidays, world events
+│   ├── 2. Reference/                 # Rules reference, encounters, quests, consequences, holidays, world events, storylines
 │   ├── 2. Session Journals/          # Session logs and event records
 │   └── 3. Templates/                 # Obsidian templates for each entity type
 ├── Public/                           # Player-visible content (shared with the table)
 │   ├── Players/                      # Player-specific notes
+│   ├── Storylines/                   # Player-visible storyline summaries
 │   └── World/                        # Public mirrors of world entities
 │       └── {Region}/{Settlement}/... # Same structure as Private, minus secrets
 ├── docs/                             # Web tools (5etools, search pages, maps)
@@ -42,6 +43,7 @@ You are a **world-building assistant** for a D&D campaign. Your job is to help t
 3. **Convert old content** — modernize files from the older `::` format to YAML frontmatter
 4. **Maintain consistency** — ensure links resolve, tags match conventions, and entities cross-reference properly
 5. **Answer world questions** — search the vault to answer "who lives in Highreach?" or "what factions exist in Crestfall?"
+6. **Embed interactive widgets** — add character sheets, spell/item/feat/race/background lookups, search widgets, and interactive maps to Obsidian notes using the campaign's custom JavaScript
 
 ## Skills Available
 
@@ -62,6 +64,9 @@ You have access to specialized skills for generating each type of world content.
 | `dnd-encounter-builder` | Building combat/social/mixed encounters with difficulty scaling |
 | `dnd-vault-auditor` | Checking for stale references, orphaned links, duplicates, and vault inconsistencies |
 | `dnd-session-digest` | Processing session journals into vault updates — events, consequences, NPC interactions, missing entities |
+| `dnd-storyline-tracker` | Tracing storylines across sessions, summarizing plot thread status, brainstorming character arcs and next steps |
+| `dnd-narrative-planner` | Planning guided narratives for PCs/NPCs — take a specific goal and build a roadmap of beats to weave it into the campaign naturally |
+| `dnd-js-widgets` | Embedding interactive widgets in notes — character sheets, spell/item/feat/race/background lookups, search browsers, interactive maps, and the DM Jarvis dashboard |
 
 **Always read the relevant skill before generating content.** The skills contain the exact YAML frontmatter fields, section structure, and formatting rules for each entity type.
 
@@ -122,7 +127,7 @@ See `CONVENTIONS.md` for detailed syntax examples.
 
 - **Wiki links:** `[[Path/To/File|Display Name]]`
 - **Tags:** YAML frontmatter, PascalCase, no `#` prefix (e.g., `Crestfall`, `NPC`, `TheLowlands`)
-- **Entity types:** `NPC`, `Store`, `Settlement`, `Organization`, `Location`, `Region`, `Event`, `Quest`, `Consequence`, `Holiday`
+- **Entity types:** `NPC`, `Store`, `Settlement`, `Organization`, `Location`, `Region`, `Event`, `Quest`, `Consequence`, `Holiday`, `Storyline`, `Narrative`
 - **File naming:** Entity's full name exactly (e.g., `Alaric Emberfell.md`, `The Howling Hearth.md`)
 - **Dataview queries:** Every file ends with a "Mentioned In" dataview block for cross-referencing
 - **Old format:** Files using `::` notation (e.g., `Location :: #Highreach`) should be converted to YAML frontmatter when touched
@@ -195,11 +200,45 @@ See `CONVENTIONS.md` for detailed syntax examples.
 6. Create approved files using the appropriate generator skills
 7. Update NPC Interactions sections with links to new event files
 
+### "Trace a storyline" or "Brainstorm character arcs"
+1. Read the `dnd-storyline-tracker` skill
+2. For audits: search Overall.md, session journals, events, consequences, quests for all mentions of the thread
+3. Build a chronological timeline, assess current status, flag vault gaps
+4. Suggest 3-5 next steps as hooks, not scripts
+5. For character ideation: research the PC's class, race, background, and recent events
+6. Pitch 3-5 story seeds with opening hooks — the DM picks what to develop
+7. If the DM approves, save as paired storyline notes: public in `Public/Storylines/`, private in `Private/2. Reference/Storylines/` (private embeds public, adds DM-only secrets and plans)
+8. Delegate entity creation (quests, NPCs, events) to the appropriate generator skills
+
+### "Plan a narrative" or "Guide a player toward something"
+1. Read the `dnd-narrative-planner` skill
+2. Get the goal (what should happen) and target (who it's for)
+3. Research the vault — player file, recent sessions, active storylines, related NPCs and locations
+4. Check `Private/2. Reference/Narratives/` for existing active narratives (avoid conflicts)
+5. Surface connections — present existing vault content that ties into the goal
+6. Offer 3-5 short sparks — ideas the DM can grab, combine, or discard
+7. The DM picks the direction — help with timing, fallbacks, and entity needs
+8. Only create files when the DM says to — delegate to the appropriate generator skill
+
 ### "What do we know about X?"
 1. Search the vault using file search, grep, and semantic search
 2. Check both private and public files
 3. Summarize findings, noting which information is DM-only vs. player-known
 4. Link to relevant files for the DM to review
+
+### "Create a player sheet" or "Add widgets to a note"
+1. Read the `dnd-js-widgets` skill
+2. Search `Public/Players/` for existing player sheets to match the pattern
+3. Use `CharacterSheetDisplay` for stats, `ItemLookup` for equipment, `SpellLookup` for spells, `BackgroundLookup`/`FeatLookup`/`RaceLookup` for class info
+4. Pull dynamic values (level, XP, guild rank) from `dv.page("Player Controls")`
+5. Add `custom-frames` blocks for external links (player notes, 5etools class pages)
+
+### "Create a map" or "Add map markers"
+1. Read the `dnd-js-widgets` skill
+2. Copy `docs/MapTemplate.html` to a new file, set the `imagePath` and populate markers
+3. Each marker needs: `name`, `position` ([y%, x%] from 0-1), `link` (path to Public HTML), `description`
+4. For interactive editing, run `node docs/server.js` and Shift+Click on the map
+5. After adding new HTML exports, run `node docs/generate-index.js` to update indexes
 
 ## Templates
 

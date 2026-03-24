@@ -1,4 +1,18 @@
-![[Private/1. World Almanac/World/Ironpeak Mountains/Stoneforge/Stoneforge#^936303|Stoneforge]]
+---
+type: Settlement
+name: Stoneforge
+region: IronpeakMountains
+settlement_type: Village
+tags:
+  - Settlement
+  - IronpeakMountains
+  - Dwarven
+---
+
+## Overview
+A bustling mining village where dwarves extract precious metals and gems from the heart of Ironpeak.
+
+---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

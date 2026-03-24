@@ -15,6 +15,8 @@ tags:
   - SecretSociety
 ---
 
+![[Public/World/Groups/Foundation|The Foundation]]
+
 ## Overview
 A secretive society of protectors dedicated to safeguarding the common people who form the bedrock of civilization. Operates across kingdom lines — Crestfall, Silverleaf, and Ironpeak.
 

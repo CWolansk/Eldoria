@@ -1,0 +1,12 @@
+{
+  "eval_id": 2,
+  "eval_name": "Goblins Duplicate Detection",
+  "expectations": [
+    {"text": "Agent searched the vault and found existing 'Goblins in the Mine' quest file", "passed": true, "evidence": "Extensive vault search found Goblins in the Mine.md in Completed/ plus 3 other related files"},
+    {"text": "Agent did NOT create a duplicate quest file", "passed": true, "evidence": "Output states 'DUPLICATE DETECTED — No files created' and 'Files Created: None'"},
+    {"text": "Agent presented the existing file content or referenced it", "passed": true, "evidence": "Full YAML frontmatter, key details, quest giver, reward, status, difficulty, and dungeon structure summary presented"},
+    {"text": "Agent offered to update/expand the existing file rather than creating new", "passed": false, "evidence": "Agent stated the quest exists and explained why no duplicate was created, but did NOT offer to update, expand, or modify the existing file. Output ends with 'Files Created: None' and hypothetical section."}
+  ],
+  "pass_rate": "3/4 (75%)",
+  "notes": "Duplicate detection was thorough and correct. The only gap is not offering to update/expand the existing quest — the agent concluded with 'present existing content' but didn't suggest next steps like 'Would you like me to update this quest?' The skill should add guidance for how to handle found duplicates beyond just 'don't create new.'"
+}

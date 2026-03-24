@@ -17,7 +17,7 @@
 **Political Structure:**
 - **[[Crestfall Kingdom]]** (Human) - Capital: [[Highreach]] - Currently at war with orc tribes
 - **[[Silverleaf Lands]]** (Elven) - Capital: [[FrostGlade]] - Ancient wisdom, natural harmony
-- **[[Ironpeak Mountain]]** (Dwarven) - Capital: [[ForgePeak]] - Master craftsmanship, traditional values
+- **[[Ironpeak Mountains]]** (Dwarven) - Capital: [[ForgePeak]] - Master craftsmanship, traditional values
 - **[[Orcish Wastes]]** (Orcish Territory) - Hostile environment, tribal conflicts
 
 ## Table Rules & Campaign Themes
@@ -37,7 +37,7 @@
 ## The Story So Far### Opening Act: Accidental Summoning (Sessions 1-2)
 **Date: 0496-02-50 to 0496-03-01**
 
-**[[Party Summoned to world]]**
+**[[0496-02-50 Party Summoned to world]]**
 - Party accidentally transported to Eldoria by [[Jon]]'s summoning spell gone awry
 - Immediately attacked by lesser demons (Spined Devil and Imps)
 - One imp escaped into the forest, later encountered during kitten rescue
@@ -46,10 +46,10 @@
 - Party travels to [[Highreach]], encounters guards who misread JP's name as "Drumm Ironjaw"
 - Liz steals money back from guards, establishing her practical approach to injustice
 
-**[[Party Visits Wizards Tower]]**
+**[[0496-03-01 Party Visits Wizards Tower]]**
 - Party meets [[Jon Brightman]], learns about [[Seekers Eye]] legend
 - Discovers it's an ogre's eye transformed into artifact compass for finding other artifacts
-- **[[Party Visits Adventurers Guild For First Time]]** - Takes on first quest
+- **[[0496-03-01 Party Visits Adventurers Guild For First Time]]** - Takes on first quest
 
 **[[Frederick Goldman Estate Rat Infestation]]**
 - Party's first official quest, dealing with doppelrats in wine cellar
@@ -61,9 +61,9 @@
 **Date: 0496-03-01 to 0496-03-06**
 
 **The Mine Exploration**
-- **[[Party becomes E Rank Adventurers]]** after turning in quest rewards
+- **[[0496-03-03 Party becomes E Rank Adventurers]]** after turning in quest rewards
 - Party discovers the missing **[[Nightstalkers]]** team in the mines
-- **[[Party meets the Nighstalkers widows]]** - establishes emotional stakes
+- **[[0496-03-05 Party meets the Nighstalkers widows]]** - establishes emotional stakes
 - **[[Merchants Guild Quest Line]]** begins with [[Jarek Ironfist gets killed]] consequence
 - [[Party Ambushed by Merchant Guild Bandits]] due to merchant guild corruption
 
@@ -74,7 +74,7 @@
 - Collects powerful magic items from fallen adventurers:
   - [[Mantle of the Lightbender]] (JP)
   - [[Warhammer of Warning]] (Claire)
-  - Various other equipment from [[Private/2. Reference/NPCs/All NPCS/Oren Hammerfist]] and [[Private/2. Reference/NPCs/All NPCS/Rolf Stonetooth]]
+  - Various other equipment from [[Oren Hammerfist]] and [[Rolf Stonetooth]]
 
 **The Betrayal (Session 9)**
 - Party reaches deepest chamber, retrieves [[Seekers Eye]]
@@ -96,15 +96,15 @@
   - [[Randi Kills Looters Consequence]]: Randi and JP dealt with looters
   - Julie: Closed sewer grates to prevent more rat incursions
 
-**[[Exterminators Guild Induction Ceremony]]**
+**[[0496-03-06 Exterminators Guild Induction Ceremony]]**
 - Party inducted into [[Exterminators Guild]] for heroic rat-fighting
 - Receives rat headdresses granting darkvision
-- **[[Foundation Induction Ceremony]]**: Secret society recognizes those who protected civilians
-- [[Private/2. Reference/NPCs/All NPCS/Elder Rowan]] provides plain rock badges marking initiation into the Foundation
+- **[[0496-03-06 Foundation Induction Ceremony]]**: Secret society recognizes those who protected civilians
+- [[Elder Rowan]] provides plain rock badges marking initiation into the Foundation
 
 **Current Loose Threads (Session 11 End)**
 - **[[Road After Dr Brule]]**: Justin's mule fled during chaos, hoofprints lead toward [[Ardenville]]
-- **[[Vineyard Blight Investigation]]**: Rumors of grape blight in [[Eastvale]]
+- **[[0496-03-06 Vineyard Blight Investigation]]**: Rumors of grape blight in [[Eastvale]]
 - **Blackwood Forest whispers**: Unsettling reports from nearby forest
 - Local legends about **Diego** revealed: Legendary swordsman who helped found kingdom
 
@@ -209,8 +209,8 @@ Beyond its economic significance, Forgepeak is the spiritual and cultural heart 
 - **[[Guild Master Thaldrin Stormblade]]**: [[Adventurers Guild]] leader, party's main quest giver
 - **[[Lady Elara Moonshadow]]**: High Mage and magic shop owner, valuable magical resources
 - **[[Jon Brightman]]**: Wizard ally with knowledge of artifacts and [[Jon]]'s history
-- **[[Private/2. Reference/NPCs/All NPCS/Elder Rowan]]**: [[Foundation]] contact, provides civilian protection network access
-- **[[Private/2. Reference/NPCs/All NPCS/Don Gnocianno]]**: [[Exterminators Guild]] leader who inducted the party
+- **[[Elder Rowan]]**: [[Foundation]] contact, provides civilian protection network access
+- **[[Don Gnocianno]]**: [[Exterminators Guild]] leader who inducted the party
 
 ### Current Political Leaders
 - **[[Crestfall Kingdom]]**: 
@@ -224,7 +224,7 @@ Beyond its economic significance, Forgepeak is the spiritual and cultural heart 
 - **[[Silverleaf Lands]]**: 
   - **[[Queen Elara Starbreeze]]**: Revered for wisdom and connection to ancient spirits
 
-- **[[Ironpeak Mountain]]**: 
+- **[[Ironpeak Mountains]]**: 
   - **[[Lord Thane Thronin Stonefist]]**: Respected for leadership and dwarven craftsmanship expertise
 
 ### Ongoing Plot Threads & Consequences
@@ -240,13 +240,13 @@ Beyond its economic significance, Forgepeak is the spiritual and cultural heart 
 
 ### Immediate Opportunities (Post-Session 11)
 - **[[Road After Dr Brule]]**: Chase missing mule toward [[Ardenville]] crossroads
-- **[[Vineyard Blight Investigation]]**: Mysterious magical corruption threatening [[Eastvale]]
+- **[[0496-03-06 Vineyard Blight Investigation]]**: Mysterious magical corruption threatening [[Eastvale]]
 - **[[Blackwood Forest]]**: Investigate unsettling whispers and ancient magic activation
 - **Guild Advancement**: Rank progression in [[Exterminators Guild]] and [[Foundation]]
 - **Diego Mystery**: Local legends about legendary swordsman who helped found kingdom
 
 ### Planned Future Events
-- **[[Lake Arden Boat Race]]**: Social event opportunity for relationship building
+- **[[0496-03-15 Lake Arden Boat Race]]**: Social event opportunity for relationship building
 - **Festival Celebrations**: Various kingdom holidays providing cultural immersion
 - **Inter-Kingdom Diplomacy**: As party reputation grows, diplomatic missions become available
 - **[[Jon]]** Escalation**: Lich's response to party's growing success and interference

@@ -1,0 +1,22 @@
+{
+  "eval_id": "eval-1-new-settlement",
+  "results": [
+    { "id": "A1", "pass": true, "note": "YAML frontmatter has type: Settlement" },
+    { "id": "A2", "pass": true, "note": "Tags: Settlement, Crestfall, Tidecrest — all present" },
+    { "id": "A3", "pass": true, "note": "Has name, region, settlement_type, population, status" },
+    { "id": "A4", "pass": true, "note": "Embeds ![[Public/World/Crestfall/Tidecrest/Tidecrest]]" },
+    { "id": "A5", "pass": true, "note": "## Notable NPCs present (says 'None yet')" },
+    { "id": "A6", "pass": true, "note": "## Guilds & Politics present" },
+    { "id": "A7", "pass": true, "note": "## DM Notes present" },
+    { "id": "A8", "pass": false, "note": "Uses FROM [[#this.file.name]] — skill template has this old syntax, needs FROM [[]]" },
+    { "id": "A9", "pass": true, "note": "Public has Overview, Geography, Infrastructure, Economy" },
+    { "id": "A10", "pass": true, "note": "Public dataview has AND 'Public' filter (agent added it from vault examples, but the skill template itself is MISSING this filter)" },
+    { "id": "A11", "pass": true, "note": "Public tags: Settlement, Crestfall, Tidecrest" },
+    { "id": "A12", "pass": true, "note": "Short bullets, fragments, concise — passes 10-second scan" },
+    { "id": "A13", "pass": true, "note": "No secrets or DM-only content in public file" }
+  ],
+  "pass_count": 12,
+  "fail_count": 1,
+  "total": 13,
+  "notes": "Template dataview query syntax needs updating. Agent compensated for missing AND Public filter by learning from vault examples, but this should be explicit in the skill template."
+}

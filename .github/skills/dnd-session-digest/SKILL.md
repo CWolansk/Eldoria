@@ -30,6 +30,8 @@ At minimum: which **session journal** to process. The user might say:
 
 They may also specify focus areas ("just the NPC stuff") or exclude categories ("skip combat encounters, those were trivial").
 
+If the user specifies a focus area, **only propose items in that category**. Don't include timeline events in an NPC-only digest, and don't propose NPC files in an events-only digest. Respect the scope.
+
 ## Shared Conventions
 
 This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that file for tag formatting, linking rules, brevity standards, and batch creation order.
@@ -88,6 +90,7 @@ Categorize each beat as one of:
 | **NPC Interaction** | The party had a meaningful exchange with an existing NPC | Update to NPC's Interactions section |
 | **Quest Update** | A quest was picked up, progressed, completed, or failed | New quest file or update to existing |
 | **Missing Entity** | An NPC, location, or group mentioned in the session that has no vault file | Flag for creation |
+| **Vault Maintenance** | An existing file that needs updating — old format, missing public counterpart, empty sections | Update to existing file |
 
 ### Step 4: Present the Proposal
 
@@ -132,6 +135,9 @@ Format the proposal like this:
 
 8. **Mara Kells, Brother Aiden Brinesong, Barefoot Kesh...** — Salty Pete's former crew members (6 NPCs)
    - Create? Batch NPC creation if they'll appear in the campaign
+
+### Vault Maintenance (existing files needing updates)
+9. **Lake Arden Boat Race** — Existing event file in old `::` format with no public counterpart. Now that the party is preparing for it, modernize and create public file.
 ```
 
 ### Step 5: Wait for Approval
@@ -212,7 +218,7 @@ tags:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```
 ```
@@ -244,7 +250,7 @@ tags:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]] AND "Public"
+FROM [[]] AND "Public"
 SORT file.name ASC
 ```
 ```

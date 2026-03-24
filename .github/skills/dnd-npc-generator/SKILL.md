@@ -39,6 +39,7 @@ Always **search the vault first**:
 2. Search within the target region folder for existing settlements
 3. Search `*/NPCs/` within the settlement to check if the NPC already exists
 4. Look at neighboring NPC files to match tone and detail level
+5. If the NPC already exists, **do not create a duplicate** — offer to review or update the existing files instead. If the user wants to see what you’d generate, show a preview in chat without creating files.
 
 This prevents duplicates and catches opportunities to link to existing content.
 
@@ -75,8 +76,7 @@ tags:
   - {Other relevant tags}
 ---
 
-## Description
-> {1-2 sentences max. Fragments are fine. Physical snapshot, one standout sensory detail (a smell, a sound, a habit). A DM glancing at this mid-session should instantly know how to describe this person. Use blockquote for read-aloud text.}
+![[Public/World/{Region}/{City}/NPCs/{NPC Name}]]
 
 ## Personality
 - **Ideal:** {One or two words, e.g. "Truth" or "Freedom"}
@@ -108,7 +108,7 @@ The following sections are **optional** — only include them if the user explic
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```
 ```
@@ -150,7 +150,7 @@ tags:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]] AND "Public"
 SORT file.name ASC
 ```
 ```
@@ -241,3 +241,5 @@ When creating an NPC, check if they need supporting content that doesn't exist y
 - Is the NPC part of a guild, faction, or organization? If that group doesn't have a file, ask if you should create one using the **dnd-group-generator** skill.
 - Is the NPC's settlement documented? If not, ask if you should create it using the **dnd-settlement-generator** skill.
 - Is the NPC's region documented? If not, ask if you should create it using the **dnd-region-generator** skill.
+
+**Reminder:** After generating an NPC file, always check this section and ask the DM about any stores, groups, or locations mentioned that don’t have their own files yet.

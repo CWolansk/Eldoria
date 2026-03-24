@@ -1,14 +1,18 @@
-# Liliana Moonleaf
-*Magic shop owner specializing in vineyard enchantments*
-
 ---
 type: NPC
+name: Liliana Moonleaf
 location: Hillcrest
+region: Crestfall
 profession: Magic Shop Owner
 faction: Neutral
 status: Alive
-tags: [#LilianaMoonleaf, #Hillcrest, #MagicShop, #Enchantments]
+tags:
+  - NPC
+  - Crestfall
+  - Hillcrest
 ---
+
+![[Public/World/Crestfall/Hillcrest/NPCs/Liliana Moonleaf|Liliana Moonleaf]]
 
 ## Appearance
 Graceful with features suggesting elven heritage. Often has traces of magical components on her clothing and carries herself with the confidence of someone skilled in the arcane arts.

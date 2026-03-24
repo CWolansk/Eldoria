@@ -1,0 +1,17 @@
+{
+  "eval_id": 1,
+  "eval_name": "Exterminators Guild Storyline Audit",
+  "expectations": [
+    {"text": "Searched Overall.md for Exterminator references", "passed": true, "evidence": "Search #2: read full Overall.md, found Exterminators Guild induction in Sessions 10-11, Don Gnocianno as ally"},
+    {"text": "Searched session journals for Exterminator mentions", "passed": true, "evidence": "Searched Sessions 10-13, confirmed mentions in 10, 11, 13 (12 had none). Read Session 13 for delivery prep details."},
+    {"text": "Found and referenced the Exterminators Guild group files", "passed": true, "evidence": "Searches #3 (public guild file) and #8 (private guild file with full criminal operation details)"},
+    {"text": "Found and referenced the Exterminators Guild Induction quest", "passed": true, "evidence": "Search #9: read full quest file with package contents, investigation DCs, branching outcomes, NPC list"},
+    {"text": "Identified key NPCs (Don Gnocianno, Pip Whiskerwind) with links", "passed": true, "evidence": "Found all 7 NPCs (Don Gnocianno, Pip Whiskerwind, Nimble Nackfinger, Squeak Tinkerbottom, Brix Ironwhistle, Ratcatcher Vex, Lady Millicent Goldleaf) with accurate secret roles and status"},
+    {"text": "Built a chronological timeline of events", "passed": true, "evidence": "4-entry timeline table: Session 10 (duplirat invasion) → Session 11 (induction) → Session 12 (transit) → Session 13 (delivery prep). Correct dates and key file links."},
+    {"text": "Assessed current status of the storyline", "passed": true, "evidence": "Detailed status section: pivotal decision point, active quest, secret they don't know, 5 unresolved threads plus internal guild tensions"},
+    {"text": "Suggested 3-5 next steps as hooks, not scripts", "passed": true, "evidence": "5 hooks: Package Decision fork, Ratcatcher Vex emerges, Royal Contract play, Pip vs Don succession, Squeak's upgrades. All 1-2 sentences with specific vault connections."},
+    {"text": "Did NOT create files without asking", "passed": true, "evidence": "Confirmed: 'No files were created. This audit was presented in chat only.'"}
+  ],
+  "pass_rate": "9/9 (100%)",
+  "notes": "Exceptionally thorough. Bonus observations: caught the Ratcatcher Finn/Pip Whiskerwind inconsistency in the quest file, mapped internal guild tensions (Old School vs New Opportunities), identified 6 vault gaps."
+}

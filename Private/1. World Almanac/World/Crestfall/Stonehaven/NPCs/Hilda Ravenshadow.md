@@ -1,12 +1,17 @@
 ---
+type: NPC
 name: "Hilda Ravenshadow"
 title: "Magic Shop Owner"
 race: "Human"
 class: "Wizard"
 location: "Stonehaven"
+region: Crestfall
 guild_affiliations: []
 status: "Active"
-tags: ["#NPC", "#MagicShop", "#Stonehaven", "#Wizard", "#Mysterious", "#Herbalist"]
+tags:
+  - NPC
+  - Crestfall
+  - Stonehaven
 ---
 
 # Hilda Ravenshadow

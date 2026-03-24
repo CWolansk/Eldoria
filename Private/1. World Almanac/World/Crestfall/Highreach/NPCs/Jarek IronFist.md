@@ -25,7 +25,7 @@ tags:
 - [[HighReach Merchants Guild]]
 - [[Alistair Goldman]]
 - [[Merchants Guild Quest]]
-- [[Merchants Guild Quest Completed]]
+- [[0496-03-02 Merchants Guild Quest Completed]]
 - [[Jarek Ironfist gets killed]]
 
 ## DM Notes

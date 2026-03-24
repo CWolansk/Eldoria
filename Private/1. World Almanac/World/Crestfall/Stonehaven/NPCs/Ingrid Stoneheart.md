@@ -1,12 +1,17 @@
 ---
+type: NPC
 name: "Ingrid Stoneheart"
 title: "Mayor of Stonehaven"
 race: "Human"
 class: "Noble (Warlock pact, hidden)"
 location: "Stonehaven"
+region: Crestfall
 guild_affiliations: []
 status: "Corrupted by Dark Pact"
-tags: ["#NPC", "#Mayor", "#Stonehaven", "#Corrupted", "#Warlock", "#Authority"]
+tags:
+  - NPC
+  - Crestfall
+  - Stonehaven
 ---
 
 # Mayor Ingrid Stoneheart

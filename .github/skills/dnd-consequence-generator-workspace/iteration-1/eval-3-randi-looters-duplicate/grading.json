@@ -1,0 +1,28 @@
+{
+  "eval_id": 3,
+  "eval_name": "randi-looters-duplicate-detection",
+  "expectations": [
+    {
+      "text": "Agent searched the vault and found the existing 'Randi Kills Looters Consequence' file",
+      "passed": true,
+      "evidence": "Agent searched Private/2. Reference/Events/Consequences/ and vault-wide for 'looter' and 'Randi kill looter' references. Found exact match at Ideas/Randi Kills Looters Consequence.md"
+    },
+    {
+      "text": "Agent did NOT create a new duplicate consequence file",
+      "passed": true,
+      "evidence": "Output explicitly states: 'No new file created — this would be a duplicate.' No files were created or modified."
+    },
+    {
+      "text": "Agent presented the existing file content or referenced it",
+      "passed": true,
+      "evidence": "Full YAML frontmatter and all sections of the existing file were displayed inline in the output"
+    },
+    {
+      "text": "Agent offered to update/expand the existing file rather than creating new",
+      "passed": true,
+      "evidence": "Offered 3 specific options: (1) Promote to Active and move to Active/ folder, (2) Flesh out with fc-date, add JP to affected_entities, add sections, (3) Add links to Session 10 and Duplirat Invasion event"
+    }
+  ],
+  "pass_rate": "4/4 (100%)",
+  "notes": "Perfect duplicate detection. Agent not only found the existing file but also searched session journals and Overall.md for additional context about the event. Offered concrete, useful update options. No vault modifications made."
+}

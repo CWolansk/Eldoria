@@ -22,7 +22,7 @@ A retired adventurer living quietly in Highreach with her cat. Whatever she did 
 Warm but guarded. Generous in a way that suggests she has plenty more where that came from.
 
 ## Interactions
-- [[Public/World/Events/Timeline/Lost Pet Quest Completed|Party rescued her cat — rewarded them with Daern's Instant Fortress]]
+- [[Public/World/Events/Timeline/0496-03-01 Lost Pet Quest Completed|Party rescued her cat — rewarded them with Daern's Instant Fortress]]
 
 ---
 

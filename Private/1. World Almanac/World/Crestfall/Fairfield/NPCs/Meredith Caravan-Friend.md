@@ -1,19 +1,20 @@
 ---
-type: npc
+type: NPC
+name: Meredith Caravan-Friend
 role: witness_survivor
 location: Fairfield
+region: Crestfall
 faction: Independent Trader
 threat_level: none
 tags:
-  - "#NPC"
-  - "#Witness"
-  - "#Fairfield"
-  - "#Survivor"
-  - "#Merchant"
-  - "#Traumatized"
+  - NPC
+  - Crestfall
+  - Fairfield
 created: 2025-01-15
 updated: 2025-01-15
 ---
+
+![[Public/World/Crestfall/Fairfield/NPCs/Meredith Caravan-Friend|Meredith Caravan-Friend]]
 
 # Meredith Caravan-Friend
 *Traumatized Caravan Attack Survivor*

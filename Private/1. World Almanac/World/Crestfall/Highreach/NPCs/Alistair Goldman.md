@@ -23,7 +23,7 @@ tags:
 
 ## Links
 [[HighReach Merchants Guild]]
-[[Party due date for Alistair Goldman]]
+[[0496-03-15 Party due date for Alistair Goldman]]
 [[Seekers Eye]]
 
 ## DM Notes

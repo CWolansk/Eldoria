@@ -1,14 +1,18 @@
-# Mayor Linden Hearthwood
-*Diplomatic leader of Hillcrest, descendant of village founders*
-
 ---
 type: NPC
+name: Mayor Linden Hearthwood
 location: Hillcrest
+region: Crestfall
 profession: Mayor
 faction: Political Moderates
 status: Alive
-tags: [#MayorLindenHearthwood, #Hillcrest, #Crestfall, #Mayor, #PoliticalModerates]
+tags:
+  - NPC
+  - Crestfall
+  - Hillcrest
 ---
+
+![[Public/World/Crestfall/Hillcrest/NPCs/Mayor Linden Hearthwood|Mayor Linden Hearthwood]]
 
 ## Appearance
 Middle-aged with a robust build, short brown hair showing early grey, perpetually welcoming smile that doesn't quite hide the stress lines around his eyes.

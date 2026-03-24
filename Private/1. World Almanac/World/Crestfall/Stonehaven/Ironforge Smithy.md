@@ -1,9 +1,14 @@
 ---
+type: Store
 name: "Ironforge Smithy"
 owner: "Gunnar Ironforge"
-type: "Blacksmith"
+store_type: Blacksmith
 location: "Stonehaven"
-tags: ["#Blacksmith", "#Stonehaven", "#Weapons", "#Armor", "#Traps"]
+region: Crestfall
+tags:
+  - Store
+  - Crestfall
+  - Stonehaven
 ---
 
 # Ironforge Smithy

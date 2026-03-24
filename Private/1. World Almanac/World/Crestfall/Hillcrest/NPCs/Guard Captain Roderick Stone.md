@@ -1,14 +1,18 @@
-# Guard Captain Roderick Stone
-*Duty-bound village security chief navigating political tensions*
-
 ---
 type: NPC
+name: Guard Captain Roderick Stone
 location: Hillcrest
+region: Crestfall
 profession: Guard Captain
-faction: Village Guard (Neutral)
+faction: Village Guard
 status: Alive
-tags: [#GuardCaptainRoderickStone, #Hillcrest, #VillageGuard, #Crestfall]
+tags:
+  - NPC
+  - Crestfall
+  - Hillcrest
 ---
+
+![[Public/World/Crestfall/Hillcrest/NPCs/Guard Captain Roderick Stone|Guard Captain Roderick Stone]]
 
 ## Appearance
 Broad-shouldered and imposing, neatly trimmed beard, sharp blue eyes that miss nothing. Wears practical guard armor maintained in excellent condition.

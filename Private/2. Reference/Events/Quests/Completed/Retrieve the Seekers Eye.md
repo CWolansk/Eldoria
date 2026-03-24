@@ -7,7 +7,7 @@ name: Retrieve the Seekers Eye
 status: Completed
 location: Highreach Mines
 region: Crestfall
-quest_giver: The Wizard (Jon the Unbroken)
+quest_giver: The Wizard (Jon the Summoner)
 tags:
   - Quest
   - Crestfall
@@ -24,7 +24,7 @@ SORT file.name ASC
 
 ## Quest Overview
 
-**Quest Giver**: The Wizard ([[Private/1. World Almanac/World/Orcish Wastes/Wizards Tower/NPCs/Summoner Jon AKA the wizard|Jon the Unbroken]])
+**Quest Giver**: The Wizard ([[Summoner Jon AKA the wizard|Jon the Summoner]])
 **Reward**: None given — the wizard stole the artifact
 **Status**: Completed (artifact retrieved but stolen)
 
@@ -41,6 +41,6 @@ Retrieve the [[Seekers Eye]] from the bottom of the Highreach Mines. The wizard 
 - Quest technically completed but the party lost the artifact
 
 ## Related
-- [[Party Summoned to world]] — quest given during summoning
-- [[Party Visits Wizards Tower]] — Jon Brightman provided lore on the artifact
+- [[0496-02-50 Party Summoned to world]] — quest given during summoning
+- [[0496-03-01 Party Visits Wizards Tower]] — Jon Brightman provided lore on the artifact
 - [[Seekers Eye]]

@@ -1,14 +1,18 @@
-# Thom Willow
-*General store owner with regional supply connections*
-
 ---
 type: NPC
+name: Thom Willow
 location: Hillcrest
+region: Crestfall
 profession: General Store Owner
 faction: Neutral
 status: Alive
-tags: [#ThomWillow, #Hillcrest, #GeneralStore, #Merchant]
+tags:
+  - NPC
+  - Crestfall
+  - Hillcrest
 ---
+
+![[Public/World/Crestfall/Hillcrest/NPCs/Thom Willow|Thom Willow]]
 
 ## Appearance
 Practical merchant with a friendly demeanor. Well-organized and efficient in his dealings.

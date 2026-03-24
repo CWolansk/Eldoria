@@ -1,0 +1,14 @@
+{
+  "eval_id": 3,
+  "eval_name": "NPC-Focused Digest of Session 13",
+  "expectations": [
+    {"text": "Focused on NPCs only — no timeline events or encounters proposed", "passed": true, "evidence": "All 13 items are NPC-related: 3 existing NPCs with status, 3 interaction updates, 8 missing NPCs, 2 unnamed NPCs. No timeline events, consequences, or encounters proposed."},
+    {"text": "Identified Salty Pete interaction and any update needed", "passed": true, "evidence": "Item 1: Salty Pete needs interaction entry for meeting the party, pitching the boat race, introducing Dancin' Pete. Checked existing Interactions section (empty)."},
+    {"text": "Identified Dancin' Pete as a missing entity", "passed": true, "evidence": "Item 4: Dancin' Pete identified with physical description and comedic character note. Paired private + public files proposed."},
+    {"text": "Identified former crew members as potential missing entities", "passed": true, "evidence": "Items 5-11: All 7 crew members listed by name with roles (Mara Kells/first mate, Brother Aiden Brinesong/healer, Barefoot Kesh/fist fighter, Edris Gullwatch/harpoon fighter, Tavrix Lume/map reader, Nessa Tidewillow/navigator, Pippa Vale/singer)."},
+    {"text": "Searched vault for which NPCs already have files", "passed": true, "evidence": "16+ file searches for every named NPC. Found 3 existing (Salty Pete, Pip, Don Gnocianno). Confirmed all 8 missing NPCs have no vault files."},
+    {"text": "Did NOT create any files — only proposed", "passed": true, "evidence": "Agent confirmed: 'No files were created. This is a proposal only, awaiting DM approval.'"}
+  ],
+  "pass_rate": "6/6 (100%)",
+  "notes": "Excellent focus-area handling. The agent respected the 'just NPC stuff' constraint completely. Good additions: checked existing Interactions sections were empty, identified 2 unnamed NPCs needing DM clarification (package-swap gnome, gate guard), asked targeted follow-up questions about package swap outcome and which crew members need files."
+}

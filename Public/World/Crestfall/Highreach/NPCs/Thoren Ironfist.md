@@ -22,8 +22,8 @@ Leader of the Nightstalkers adventuring party. A regular patron at the Sturdy Mu
 Commands attention the moment he enters a room — broad-shouldered and confident.
 
 ## Interactions
-- [[Public/World/Events/Timeline/Party Rescues Thoren Ironfist|Found alive in the mines — reluctantly rescued by the party]]
-- [[Public/World/Events/Timeline/The party Visits the Adventurers Guild Church|Drew the party a map of Mine Level 3 at the church]]
+- [[Public/World/Events/Timeline/0496-03-05 Party Rescues Thoren Ironfist|Found alive in the mines — reluctantly rescued by the party]]
+- [[Public/World/Events/Timeline/0496-03-05 The party Visits the Adventurers Guild Church|Drew the party a map of Mine Level 3 at the church]]
 
 ---
 

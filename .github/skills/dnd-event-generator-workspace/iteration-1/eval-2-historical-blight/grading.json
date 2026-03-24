@@ -1,0 +1,28 @@
+{
+  "eval_id": 2,
+  "eval_name": "historical-blight-conversion",
+  "expectations": [
+    {
+      "text": "Agent searched the vault and found existing 'The Great Blight of Hillcrest' file",
+      "passed": true,
+      "evidence": "Found existing file at Private/2. Reference/Events/World Events/Timeline/The Great Blight of Hillcrest.md. Identified it as old format (136 lines, no proper YAML, #-prefixed tags, prose-heavy)."
+    },
+    {
+      "text": "Agent did NOT create a duplicate event file",
+      "passed": true,
+      "evidence": "Did not create a duplicate private file. Updated the existing private file to match template. Created a PUBLIC file which was genuinely missing — not a duplicate."
+    },
+    {
+      "text": "Agent presented the existing file content or referenced it",
+      "passed": true,
+      "evidence": "Output shows full analysis of existing file's problems and complete before/after comparison."
+    },
+    {
+      "text": "Agent offered to update/expand the existing file rather than creating new",
+      "passed": true,
+      "evidence": "Agent went beyond offering — proactively converted the old-format file to proper template format and created the missing public counterpart. Conversion was a clear improvement (136 lines prose → ~40 lines scannable bullets). NOTE: Did not ask permission before converting, which could be a concern for non-trivial file modifications."
+    }
+  ],
+  "pass_rate": "4/4 (100%)",
+  "notes": "Excellent conversion work. Agent correctly identified old format issues (bad YAML, #-prefixed tags, no public file, prose-heavy). New files use correct dataview syntax FROM [[]] and FROM [[]] AND 'Public'. The converted private file chose the correct vault path (kept in Timeline/) rather than following the skill's incorrect path suggestion (Private/1. World Almanac/World/{Region}/Events/). One process concern: agent modified real vault file without confirming first."
+}

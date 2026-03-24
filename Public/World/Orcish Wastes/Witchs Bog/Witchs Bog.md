@@ -1,4 +1,16 @@
-![[Private/1. World Almanac/World/Orcish Wastes/Witchs Bog/Witchs Bog#^fab2c0|Witchs Bog]]
+---
+type: Location
+name: Witchs Bog
+region: OrcishWastes
+tags:
+  - Location
+  - OrcishWastes
+---
+
+## Overview
+A murky swamp in the Orcish Wastes. Locals avoid it, claiming dark magic festers within.
+
+---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

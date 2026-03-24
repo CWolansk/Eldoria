@@ -1,4 +1,18 @@
-![[Private/1. World Almanac/World/Orcish Wastes/Orc Capitol/Orc Capitol#^d845c2|Orc Capitol]]
+---
+type: Settlement
+name: Orc Capitol
+region: OrcishWastes
+settlement_type: City
+tags:
+  - Settlement
+  - OrcishWastes
+  - Orcish
+---
+
+## Overview
+The capital city of the orcish territories. Little is known by outsiders.
+
+---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

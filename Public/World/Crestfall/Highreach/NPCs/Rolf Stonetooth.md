@@ -22,7 +22,7 @@ Member of the Nightstalkers adventuring party. A patron at the Sturdy Mugg. Know
 Looks like he's survived more bar fights than most people have had drinks.
 
 ## Interactions
-- [[Public/World/Events/Timeline/Party Explores Mine Level 3|Body found in the mines — surrounded by strange torches]]
+- [[Public/World/Events/Timeline/0496-03-05 Party Explores Mine Level 3|Body found in the mines — surrounded by strange torches]]
 
 ---
 

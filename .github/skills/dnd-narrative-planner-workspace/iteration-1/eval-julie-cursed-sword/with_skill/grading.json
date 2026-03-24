@@ -1,0 +1,39 @@
+{
+  "expectations": [
+    {
+      "text": "Searches the vault for Julie's player file and recent session context",
+      "passed": true,
+      "evidence": "Transcript shows: read Julie.md, Julie Player Sheet.md, grepped session journals 1-13 for Julie mentions. Found 16 matches across sessions."
+    },
+    {
+      "text": "Checks active storylines and existing narratives for integration points",
+      "passed": true,
+      "evidence": "Transcript mentions checking for storylines/narratives folders (none exist yet). Output has explicit 'Integration Points' section with 6 connection points: Diego Legends, Ardenville, Alaric Emberfell, Silverleaf road, Jon/Wizarding Wars, Session 6 precedent."
+    },
+    {
+      "text": "Produces a plan with distinct named beats following the seed/echo/hook/encounter/payoff pattern",
+      "passed": true,
+      "evidence": "5 named beats: 'The Swordsman's Relic' (Seed), 'War-Forged Steel' (Echo), 'The Collapsed Watchtower' (Hook), 'The Sealed Chamber' (Encounter), 'The Price of Power' (Payoff). All labeled with beat types matching the skill's taxonomy."
+    },
+    {
+      "text": "Each beat has a When, What happens, and If ignored section",
+      "passed": true,
+      "evidence": "All 5 beats have 'When:', 'What happens:', and 'If ignored:' sections with substantive content."
+    },
+    {
+      "text": "The plan includes an Entities Needed section listing what files to create",
+      "passed": true,
+      "evidence": "Entities Needed section lists: Collapsed Watchtower (delegate to dnd-location-generator), Guardian creature (delegate to dnd-encounter-builder), Cursed Flamberge (no item generator), existing file updates for Enchanted Trinket and Steelshapers Forge."
+    },
+    {
+      "text": "The cursed sword has a concrete mechanical twist beyond just being +2",
+      "passed": true,
+      "evidence": "Three curse options provided: (1) can't unattune/compelled to use, (2) WIS DC 13 save to not attack nearest creature after a kill, (3) whispers in Diego's language with escalating effects. All mechanically specific."
+    },
+    {
+      "text": "Does not railroad — every beat has a fallback if Julie doesn't engage",
+      "passed": true,
+      "evidence": "Every beat has 'If ignored' with meaningful alternatives: Beat 1 info sits/returns via Beat 2, Beat 2 stands alone, Beat 3 can be returned to or sword finds merchant, Beat 4 someone else grabs it, Beat 5 curse manifests during combat naturally."
+    }
+  ]
+}

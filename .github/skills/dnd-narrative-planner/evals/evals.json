@@ -1,0 +1,48 @@
+{
+  "skill_name": "dnd-narrative-planner",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "i want a narrative for julie where we guide her toward finding a cursed sword — she keeps talking about wanting a +2 sword so lets give her one with a twist",
+      "expected_output": "Vault connections related to Julie and swords, followed by 3-5 short spark ideas for how the cursed sword could enter the campaign — not a full plan",
+      "files": [],
+      "expectations": [
+        "Searches the vault for Julie's player file and recent session context",
+        "Surfaces connections from existing vault content (NPCs, locations, storylines) that relate to the goal",
+        "Offers 3-5 short spark ideas (1-3 sentences each) rather than a full beat-by-beat plan",
+        "Sparks reference specific vault content, not generic fantasy tropes",
+        "The cursed sword has a concrete mechanical twist beyond just being +2",
+        "Does not prescribe a rigid sequence — presents options for the DM to pick from",
+        "Mentions what entities would need to be created if the DM picks a direction"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "i want to give randi an encounter with a soothsayer npc who hints at something about her past with the looters",
+      "expected_output": "Vault connections about Randi and the looters, followed by short sparks for how a soothsayer encounter could work — not a scripted plan",
+      "files": [],
+      "expectations": [
+        "Searches the vault for Randi's player file and the looter incident history",
+        "Surfaces connections between existing vault events/consequences and the soothsayer idea",
+        "Offers short spark ideas rather than a prescriptive multi-beat plan",
+        "Proposes or sketches a soothsayer NPC concept with enough flavor to be useful",
+        "The soothsayer's hints reference specific vault events, not generic prophecy",
+        "Delegates entity creation to other skills rather than building NPCs/encounters inline"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "i want to plan a narrative for the whole party where they discover that the foundation has been watching them since session 1 — tie it into the current storylines",
+      "expected_output": "Vault connections showing Foundation activity across sessions, followed by sparks for how the reveal could play out — not a rigid multi-session script",
+      "files": [],
+      "expectations": [
+        "Searches the vault for Foundation faction files and all mentions across sessions",
+        "References Overall.md and active storylines to surface integration points",
+        "Connects Foundation surveillance to specific past events from session journals",
+        "Offers spark ideas for the reveal rather than scripting exact session-by-session beats",
+        "Considers the whole party rather than focusing on one PC",
+        "Checks for conflicts with other active narratives or storylines"
+      ]
+    }
+  ]
+}

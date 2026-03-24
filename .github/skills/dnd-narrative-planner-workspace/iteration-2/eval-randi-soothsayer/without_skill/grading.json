@@ -1,0 +1,34 @@
+{
+  "expectations": [
+    {
+      "text": "Searches the vault for Randi's player file and the looter incident history",
+      "passed": true,
+      "evidence": "Output includes full Randi character details, Sessions 10-11 looter incident, Randi Kills Looters Consequence (status: Idea), all Ardenville NPCs."
+    },
+    {
+      "text": "Surfaces connections between existing vault events/consequences and the soothsayer idea",
+      "passed": true,
+      "evidence": "Lists Randi Kills Looters Consequence, Aasimar heritage, Divination subclass irony, Boat Race Festival cover, Mira Softstep as gossip vehicle. All vault-grounded connections."
+    },
+    {
+      "text": "Offers short spark ideas rather than a prescriptive multi-beat plan",
+      "passed": false,
+      "evidence": "Provides 3 fully detailed encounter approaches (Passive Lure, Direct Approach, Group Fortune Telling) with read-aloud text, a 5-row beats table, a full NPC proposal with race/appearance/personality/motivation/mechanics, a Risks section, and Next Steps. This is a complete prescriptive plan, not short sparks."
+    },
+    {
+      "text": "Proposes or sketches a soothsayer NPC concept with enough flavor to be useful",
+      "passed": true,
+      "evidence": "Full NPC section: 'Veshka' or 'Ashara', human or half-elf, hooded with brazier, calm and unsettling, social/narrative only. More than enough flavor."
+    },
+    {
+      "text": "The soothsayer's hints reference specific vault events, not generic prophecy",
+      "passed": true,
+      "evidence": "Read-aloud text references: 'cobblestone dust', 'wings in the ashes' (Aasimar), 'Three fell in the ash and stone. You felled two', 'the third carried something someone wants back', 'feathered one'. All specific to vault events."
+    },
+    {
+      "text": "Delegates entity creation to other skills rather than building NPCs/encounters inline",
+      "passed": false,
+      "evidence": "Builds a full NPC proposal inline with race, appearance, personality, motivation, and mechanics. While it says 'paired private/public files in Ardenville NPCs' it doesn't reference dnd-npc-generator or any other skill. Creates the encounter structure itself rather than delegating."
+    }
+  ]
+}

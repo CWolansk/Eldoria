@@ -1,0 +1,52 @@
+{
+  "skill_name": "dnd-quest-generator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a quest for the Ardenville quest board. The Fishermans Guild needs someone to investigate why fish in Lake Arden are dying in the eastern shallows. E-rank, reward is 75gp and guild standing with the Fishermans Guild. Quest giver is Captain Gregor Woods.",
+      "expected_output": "A properly formatted DM-only quest file in Private/2. Reference/Events/Quests/Ideas/ with full YAML frontmatter, all required sections, and correct dataview queries.",
+      "assertions": [
+        {"id": "1a", "text": "File placed in Private/2. Reference/Events/Quests/Ideas/ (or Active/ depending on status)", "type": "path_check"},
+        {"id": "1b", "text": "YAML frontmatter includes all required fields: fc-date, fc-category, type, name, status, level, location, region, quest_giver, reward, tags", "type": "frontmatter_check"},
+        {"id": "1c", "text": "type is 'Quest'", "type": "field_value"},
+        {"id": "1d", "text": "level is 'E'", "type": "field_value"},
+        {"id": "1e", "text": "tags include Quest, ELevelQuest, Crestfall, Ardenville", "type": "field_value"},
+        {"id": "1f", "text": "Quest Overview section with quest giver wiki-link, reward, status, difficulty", "type": "content_check"},
+        {"id": "1g", "text": "Objectives section with 2-5 bullet items", "type": "content_check"},
+        {"id": "1h", "text": "Potential Outcomes section with Success and Failure/Ignored subsections", "type": "content_check"},
+        {"id": "1i", "text": "Dataview query uses FROM [[]] (not FROM [[#this.file.name]])", "type": "dataview_check"},
+        {"id": "1j", "text": "No public file created — quests are DM-only", "type": "no_public_file"},
+        {"id": "1k", "text": "Brevity: scannable in 10 seconds — fragments and bullets", "type": "brevity_check"},
+        {"id": "1l", "text": "Wiki-links to existing vault files (Gregor Woods, Fishermans Guild, Ardenville)", "type": "link_check"},
+        {"id": "1m", "text": "No unrequested optional sections (Multiple Approaches, Complications, Connections)", "type": "no_unrequested_sections"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a quest for clearing goblins out of the Highreach mines.",
+      "expected_output": "Agent should find the existing 'Goblins in the Mine' quest and present it rather than creating a duplicate.",
+      "assertions": [
+        {"id": "2a", "text": "Agent searched the vault and found existing 'Goblins in the Mine' quest file", "type": "process_check"},
+        {"id": "2b", "text": "Agent did NOT create a duplicate quest file", "type": "no_duplicate"},
+        {"id": "2c", "text": "Agent presented the existing file content or referenced it", "type": "content_check"},
+        {"id": "2d", "text": "Agent offered to update/expand the existing file rather than creating new", "type": "process_check"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Create a D-rank investigation quest in Ardenville. Someone is sabotaging the boat race preparations — cutting sails, loosening moorings, and scaring off crew. The party needs to figure out who's behind it. Captain Gregor Woods suspects it might be connected to the Merchants Guild trying to rig the race. Include investigation DCs and clue mechanics.",
+      "expected_output": "A quest file with Investigation/Mechanics section containing DCs, skill checks, and clue structure since the user explicitly asked for it.",
+      "assertions": [
+        {"id": "3a", "text": "File placed in correct Quests directory", "type": "path_check"},
+        {"id": "3b", "text": "YAML has level: D", "type": "field_value"},
+        {"id": "3c", "text": "Investigation / Mechanics section is present with specific DCs and skill checks", "type": "content_check"},
+        {"id": "3d", "text": "Objectives section with 2-5 investigation tasks", "type": "content_check"},
+        {"id": "3e", "text": "Links to existing vault entities (Gregor Woods, Merchants Guild, Ardenville)", "type": "link_check"},
+        {"id": "3f", "text": "Potential Outcomes with branching based on investigation findings", "type": "content_check"},
+        {"id": "3g", "text": "Dataview uses FROM [[]]", "type": "dataview_check"},
+        {"id": "3h", "text": "Brevity: investigation DCs are bullet format, not paragraph descriptions", "type": "brevity_check"},
+        {"id": "3i", "text": "Searched vault first for existing sabotage-related quests", "type": "process_check"}
+      ]
+    }
+  ]
+}

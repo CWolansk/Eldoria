@@ -1,16 +1,19 @@
-# Lysander Thornfield
-*Mysterious traveling merchant with hidden agenda*
-
 ---
 type: NPC
+name: Lysander Thornfield
 location: Hillcrest
+region: Crestfall
 race: Human
 class: Rogue/Warlock (suspected)
 faction: Unknown
-attitude_jp: Calculating but friendly
-attitude_justin: Professional competition
-tags: [#NPC, #Hillcrest, #Mysterious, #ArtifactSeeker]
+status: Alive
+tags:
+  - NPC
+  - Crestfall
+  - Hillcrest
 ---
+
+![[Public/World/Crestfall/Hillcrest/NPCs/Lysander Thornfield|Lysander Thornfield]]
 
 ## Basic Information
 **Race**: Human  

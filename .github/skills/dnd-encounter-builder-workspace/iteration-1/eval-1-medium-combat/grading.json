@@ -1,0 +1,20 @@
+{
+  "eval_id": 1,
+  "eval_name": "Bandit Ambush — Medium difficulty combat",
+  "expectations": [
+    {"text": "File placed in Private/2. Reference/Encounters/", "passed": true, "evidence": "File at Private/2. Reference/Encounters/Bandit Ambush - Ardenville Road.md"},
+    {"text": "Looked up the current party (6 members) and their levels to calculate XP budget", "passed": true, "evidence": "6 players × level 5 × 500 XP = 3,000 Medium budget"},
+    {"text": "XP budget matches Medium difficulty for party size and level", "passed": true, "evidence": "1,550 base × 2 multiplier = 3,100 adjusted XP vs 3,000 Medium budget — correct"},
+    {"text": "Monsters table has columns: Monster, Qty, AC, HP, Speed, CR, XP Each, Total XP", "passed": true, "evidence": "All 8 columns present with Bandit Captain, Veteran, 4 Thugs"},
+    {"text": "Initiative tracker includes ALL 6 party members (Claire, JP, Julie, Justin, Liz, Randi) with meta-bind INPUT fields", "passed": true, "evidence": "All 6 PCs present with INPUT[number()] for initiative and INPUT[text()] for notes"},
+    {"text": "Initiative tracker includes all monsters with meta-bind HP tracking", "passed": true, "evidence": "All 6 monsters with INPUT[number(defaultValue())] for HP tracking"},
+    {"text": "Hook section with read-aloud blockquote text", "passed": true, "evidence": "Hook section with > blockquote — 'A toppled oak blocks the road...'"},
+    {"text": "Combat Notes section with tactics", "passed": true, "evidence": "Environmental Factors (4 bullets) + Tactics (4 bullets) + Special Mechanics + Turn Tracking"},
+    {"text": "Treasure section present", "passed": true, "evidence": "Treasure section with dice roller syntax, suggested items, and distribution checkboxes"},
+    {"text": "Monster Details in collapsible <details> blocks", "passed": true, "evidence": "All 3 creature types have <details> collapsible stat blocks"},
+    {"text": "Dataview query uses FROM [[]]", "passed": true, "evidence": "FROM [[]] WHERE file.name != this.file.name — valid variant"},
+    {"text": "Brevity: scannable, no prose paragraphs in combat sections", "passed": true, "evidence": "All combat sections use bullet format, scannable at a glance"}
+  ],
+  "pass_rate": "12/12 (100%)",
+  "notes": "File uses inline tags (#Encounter #Combat) matching the skill template but NOT YAML frontmatter — differs from existing vault pattern (Goblin Ambush uses YAML). This is a template/vault mismatch."
+}

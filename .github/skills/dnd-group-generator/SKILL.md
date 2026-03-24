@@ -33,8 +33,7 @@ Always **search the vault first**:
 1. Search `Private/1. World Almanac/World/Groups/` and `Public/World/Groups/` for existing groups — avoid duplicates
 2. Check if the proposed leader and members already have NPC files
 3. Check if the headquarters settlement/location exists
-4. Look at existing group files (Foundation, Fisherman's Guild, Adventurers Guild) to match tone
-
+4. Look at existing group files (Foundation, Fisherman's Guild, Adventurers Guild) to match tone5. If the group already exists, **do not create a duplicate** — offer to review or update the existing files instead. If the user wants to see what you’d generate, show a preview in chat without creating files.
 ## File Paths
 
 All groups go in the world-level Groups folder, regardless of where they're headquartered:
@@ -51,7 +50,7 @@ Public/World/Groups/{Group Name}.md
 type: Organization
 name: {Group Name}
 headquarters: {City or Location}
-region: {Region}
+region: {Region}  # readable name with spaces, not PascalCase tag
 org_type: {Guild/Faction/Cult/Order/Gang/Alliance/etc.}
 leader: {Leader Name}
 influence: {Local/Regional/Continental}
@@ -59,6 +58,7 @@ tags:
   - Organization
   - {Region}
   - {OrgType}
+  - {GroupName}
 ---
 
 ![[Public/World/Groups/{Group Name}]]
@@ -91,7 +91,7 @@ The following sections are **optional** — only include if the user specifies:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```
 ```
@@ -103,12 +103,13 @@ SORT file.name ASC
 type: Organization
 name: {Group Name}
 headquarters: {City or Location}
-region: {Region}
+region: {Region}  # readable name with spaces, not PascalCase tag
 org_type: {Guild/Faction/Cult/Order/Gang/Alliance/etc.}
 tags:
   - Organization
   - {Region}
   - {OrgType}
+  - {GroupName}
 ---
 
 ## Overview
@@ -128,7 +129,7 @@ tags:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]] AND "Public"
 SORT file.name ASC
 ```
 ```
@@ -165,3 +166,5 @@ When creating a group, check if it needs supporting content:
 - Do the leaders and notable members have NPC files? If not, ask.
 - Does the headquarters location have a file? If not, ask.
 - Is the group based in a settlement? Does that settlement have a file? If not, ask.
+
+**Reminder:** After generating a group file, always check this section and ask the DM about any NPCs or locations mentioned that don’t have their own files yet.

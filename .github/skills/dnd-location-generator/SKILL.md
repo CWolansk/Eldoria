@@ -32,6 +32,7 @@ Always **search the vault first**:
 1. Search `Private/1. World Almanac/World/{Region}/` for existing locations — avoid duplicates
 2. Check if the region and nearby settlement exist
 3. Look at existing location files (Blackwood Forest, Lake Arden) to match tone and structure
+4. If the location already exists, **do not create a duplicate** — offer to review or update the existing files instead. If the user wants to see what you'd generate, show a preview in chat without creating files.
 
 ## File Paths
 
@@ -63,8 +64,7 @@ tags:
   - {LocationType}
 ---
 
-## Description
-> {2-3 sentences. What it looks like, feels like. Use blockquote for read-aloud text — this is what the DM says when the party arrives.}
+![[Public/World/{Region}/{Location Name}]]
 
 ## Key Features
 {Bullet list. What's notable? Landmarks, structures, natural features. 3-5 items.}
@@ -93,7 +93,7 @@ The following sections are **optional** — only include if the user specifies:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```
 ```
@@ -113,7 +113,7 @@ tags:
 ---
 
 ## Description
-{What the party sees or has heard about this place. 2-3 sentences.}
+> {What the party sees or has heard about this place. 2-3 sentences. Use blockquote for read-aloud text so the DM can spot it instantly when embedding this file.}
 
 ## Known Features
 {What's visible or commonly known. Bullet list.}
@@ -125,7 +125,7 @@ tags:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]] AND "Public"
 SORT file.name ASC
 ```
 ```
@@ -164,3 +164,5 @@ When creating a location, check if it needs supporting content:
 - Are there creatures or NPCs living here? Ask if you should create NPC files.
 - Is there a faction or group that controls this place? Ask if the group needs a file.
 - Is the region it's in documented? If not, ask.
+
+**Reminder:** After generating a location file, always check this section and ask the DM about any NPCs, creatures, or groups mentioned that don't have their own files yet.

@@ -33,7 +33,7 @@ Journal entries left by [[Thoren Ironfist]] of [[The Nightstalkers]] as he escap
 - [[Thoren Ironfist]]
 - [[The Nightstalkers]]
 - [[Highreach Mines]]
-- [[Nightstalkers disappeared]]
+- [[0496-03-02 Nightstalkers disappeared]]
 - [[Room 10 Level 1]]
 
 ---

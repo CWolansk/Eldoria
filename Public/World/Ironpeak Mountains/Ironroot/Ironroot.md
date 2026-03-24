@@ -1,4 +1,18 @@
-![[Private/1. World Almanac/World/Ironpeak Mountains/Ironroot/Ironroot#^e2dd3c|Ironroot]]
+---
+type: Settlement
+name: Ironroot
+region: IronpeakMountains
+settlement_type: Village
+tags:
+  - Settlement
+  - IronpeakMountains
+  - Dwarven
+---
+
+## Overview
+A village built around ancient dwarven shrines, where religious ceremonies and rituals are performed. Home to dwarf monks who spend their days in meditation.
+
+---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

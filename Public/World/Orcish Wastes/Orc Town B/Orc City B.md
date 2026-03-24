@@ -1,4 +1,18 @@
-![[Private/1. World Almanac/World/Orcish Wastes/Orc Town B/Orc City B#^7363c8|Orc City B]]
+---
+type: Settlement
+name: Orc City B
+region: OrcishWastes
+settlement_type: City
+tags:
+  - Settlement
+  - OrcishWastes
+  - Orcish
+---
+
+## Overview
+An orcish settlement in the Wastes. Little is known by outsiders.
+
+---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

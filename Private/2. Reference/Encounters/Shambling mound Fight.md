@@ -1,3 +1,12 @@
+---
+type: Encounter
+encounter_type: Combat
+tags:
+  - Encounter
+  - Combat
+---
+
+# Shambling Mound Fight
 
 Monsters
 - Shambling Mound 

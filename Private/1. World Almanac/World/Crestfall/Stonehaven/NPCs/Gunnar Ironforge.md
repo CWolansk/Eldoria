@@ -1,12 +1,17 @@
 ---
+type: NPC
 name: "Gunnar Ironforge"
 title: "Blacksmith"
 race: "Dwarf"
 class: "Artisan"
 location: "Stonehaven"
+region: Crestfall
 guild_affiliations: []
 status: "Active"
-tags: ["#NPC", "#Blacksmith", "#Stonehaven", "#Dwarf", "#Craftsman", "#Weapons"]
+tags:
+  - NPC
+  - Crestfall
+  - Stonehaven
 ---
 
 # Gunnar Ironforge

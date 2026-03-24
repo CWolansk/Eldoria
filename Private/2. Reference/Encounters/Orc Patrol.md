@@ -1,3 +1,15 @@
+---
+type: Encounter
+encounter_type: Combat
+location: Orc Territory
+difficulty: Deadly
+party_level: 3
+tags:
+  - Encounter
+  - Combat
+  - OrcishWastes
+---
+
 # Orc Patrol
 
 **Location:** Orc Territory

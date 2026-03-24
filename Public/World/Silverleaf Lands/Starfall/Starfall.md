@@ -1,4 +1,18 @@
-![[Private/1. World Almanac/World/Silverleaf Lands/Starfall/Starfall#^a34ee2|Starfall]]
+---
+type: Settlement
+name: Starfall
+region: SilverleafLands
+settlement_type: Village
+tags:
+  - Settlement
+  - SilverleafLands
+  - Elven
+---
+
+## Overview
+A village in the Silverleaf Lands where artisans craft exquisite jewelry and magical artifacts.
+
+---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

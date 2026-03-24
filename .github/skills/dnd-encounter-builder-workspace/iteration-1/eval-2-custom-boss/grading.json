@@ -1,0 +1,17 @@
+{
+  "eval_id": 2,
+  "eval_name": "Corrupted Dryad — Custom boss with legendary actions",
+  "expectations": [
+    {"text": "File placed in Private/2. Reference/Encounters/", "passed": true, "evidence": "File at Private/2. Reference/Encounters/Cursed Grove of the Corrupted Dryad.md"},
+    {"text": "Custom stat block with STR/DEX/CON/INT/WIS/CHA scores", "passed": true, "evidence": "14/14/18/14/16/18 with modifiers"},
+    {"text": "Legendary Actions section with 2 per round as specified", "passed": true, "evidence": "'The Corrupted Dryad can take 2 legendary actions' — Thorn Burst (1), Vine Snare (1), Cursed Step (2)"},
+    {"text": "Actions include vine entanglement and thorn spells as requested", "passed": true, "evidence": "Grasping Vines (restrain), Thorn Lash (15ft reach + pull), spike growth, entangle, thorn whip, blight spellcasting"},
+    {"text": "CR is around 4-5 as requested", "passed": true, "evidence": "CR 5 (1,800 XP)"},
+    {"text": "Stat block is in a collapsible <details> section", "passed": true, "evidence": "All 3 creature types in <details> with 📖 Full Stats summary"},
+    {"text": "Initiative tracker with all 6 party members and the creature", "passed": true, "evidence": "All 6 PCs + 1 Dryad + 2 Vine Blights + 4 Needle Blights = 13 rows"},
+    {"text": "XP budget matches Hard difficulty for the party", "passed": true, "evidence": "2,200 base × 2.5 = 5,500 adjusted. Hard threshold: 4,500. Deadly: 6,600. Within Hard range."},
+    {"text": "Wiki-link to Hillcrest or The Lowlands if they exist in vault", "passed": true, "evidence": "Wiki-link: [[Private/1. World Almanac/World/Crestfall/Hillcrest/Hillcrest|Hillcrest]]"}
+  ],
+  "pass_rate": "9/9 (100%)",
+  "notes": "Outstanding custom creature. Stat block is well-balanced with thematic abilities. This file uses YAML frontmatter (unlike eval 1 which used inline tags) — shows the template/vault inconsistency: agents choose different formats because the template doesn't match existing files."
+}

@@ -26,7 +26,7 @@ tags:
 ## Links
 [[Merchants Guild Warehouse]]
 [[Ardenville]]
-[[Lake Arden Boat Race]]
+[[0496-03-15 Lake Arden Boat Race]]
 
 ## DM Notes
 Collects docking fees for the Merchants Guild at the cliffside port. Judges starting positions for the boat race. Warns sailors away from kelp beds crawling with slime eels. Keeps Grumm Grog Guzzler's impounded ship under watch. Stations guards near the collapsing warehouse.

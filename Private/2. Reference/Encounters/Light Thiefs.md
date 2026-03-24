@@ -1,6 +1,16 @@
+---
+type: Encounter
+encounter_type: Combat
+location: Room 11 Level 3
+tags:
+  - Encounter
+  - Combat
+---
 
-Monsters 
-- 4x Light thiefs already hidden inside of torches inside of [[Room 11 level 3]] within the 4 torches closest to rolfs body 
+# Light Thiefs
+
+Monsters
+- 4x Light thiefs already hidden inside of torches inside of [[Room 11 level 3]] within the 4 torches closest to rolfs body
 	- Light thiefs look like small bats with rather than a head they have one giant purplish eyeball 
 - rewards 
 	- Exp : 200 

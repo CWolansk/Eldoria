@@ -1,4 +1,16 @@
-#Stonehaven
+---
+type: Settlement
+name: Stonehaven
+region: Crestfall
+settlement_type: Village
+status: Active
+tags:
+  - Settlement
+  - Crestfall
+  - Stonehaven
+---
+
+![[Public/World/Crestfall/Stonehaven/Stonehaven]]
 
 Stonehaven clings to the southeastern edge of the vast [[Blackwood Forest]], a fortress-settlement where civilization makes its stand against the wild. Founded three generations ago by rangers and trappers seeking rich hunting grounds, the village has evolved into Crestfall's premier frontier outpost - a place where skilled woodsmen, determined guards, and wary merchants create an uneasy but functional community on the edge of the unknown.
 

@@ -44,6 +44,8 @@ Always **search the vault first**:
 2. Check that the quest giver NPC and location have files to link to
 3. Look at existing quest files (completed and active) to match format conventions
 
+If the user asks about an **existing quest**, search and present what the vault already has rather than generating new content. After presenting the existing file, offer to update, expand, re-level, or link it to new content — don't just stop at "it already exists."
+
 ## File Paths
 
 Quests are organized by status:
@@ -64,7 +66,7 @@ fc-end: {YYYY-MM-DD in-game end date, if completed}
 fc-category: {Quests / Available Quests / Not Available Quests}
 type: Quest
 name: {Quest Name}
-status: {Available / Active / Completed / Failed}
+status: {Idea / Available / Active / Completed / Failed}
 level: {F / E / D / C / B / A}
 location: {Where it takes place}
 region: {Region}
@@ -80,7 +82,7 @@ tags:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```
 
@@ -127,15 +129,9 @@ The following sections are **optional** — only include if the user specifies:
 
 ## Connections
 {Links to other quests, events, or plot threads this quest ties into.}
-
----
-
-```dataview
-TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
-SORT file.name ASC
 ```
-```
+
+> **Dataview placement:** One dataview block, immediately after the YAML `---` closing. Do not add a second dataview at the bottom.
 
 ## Writing Guidelines
 
@@ -149,10 +145,22 @@ SORT file.name ASC
 Write objectives and outcomes, not step-by-step scripts. "Rescue the missing netters" is a quest objective. "The party follows the trail to the lake and finds the boat" is a railroad. Leave room for the party to approach the quest however they want.
 
 ### Status Tracking
+
+| Status | Folder | fc-category |
+|--------|--------|-------------|
+| Idea | Ideas/ | Available Quests |
+| Available | Active/ | Available Quests |
+| Active | Active/ | Quests |
+| Completed | Completed/ | Completed Quests |
+| Failed | Missed/ | Not Available Quests |
+
+- `Idea` — DM brainstorm, not yet posted or offered to players
 - `Available` — on the quest board, no one has taken it yet
 - `Active` — the party has accepted it and is working on it
 - `Completed` — done, rewards distributed
 - `Failed` — the party failed or the quest expired
+
+When changing a quest's status, move the file to the matching subfolder.
 
 ### Level Ranks
 Match the vault's existing rank system:
@@ -189,3 +197,5 @@ When creating a quest, check if it needs supporting content:
 - Is the quest tied to a guild or faction? Does that group have a file? If not, ask if you should create one using the **dnd-group-generator** skill.
 - Does the quest have consequences if failed? Ask if you should create a consequence file using the **dnd-consequence-generator** skill.
 - Does the quest involve a specific encounter? Ask if you should prep it using the **dnd-encounter-builder** skill.
+
+**Always check for mentioned entities and ask the DM before creating them.**

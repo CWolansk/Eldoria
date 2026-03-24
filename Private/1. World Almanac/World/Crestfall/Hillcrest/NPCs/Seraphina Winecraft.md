@@ -1,14 +1,18 @@
-# Seraphina Winecraft
-*Master vintner bridging tradition and innovation*
-
 ---
 type: NPC
+name: Seraphina Winecraft
 location: Hillcrest
+region: Crestfall
 profession: Master Vintner
-faction: Neutral (Political Moderates)
+faction: Political Moderates
 status: Alive
-tags: [#SeraphinaWinecraft, #Hillcrest, #Crestfall, #Vintner]
+tags:
+  - NPC
+  - Crestfall
+  - Hillcrest
 ---
+
+![[Public/World/Crestfall/Hillcrest/NPCs/Seraphina Winecraft|Seraphina Winecraft]]
 
 ## Appearance
 Slender with long wavy auburn hair, bright green eyes, graceful movements that suggest elven ancestry. Often has stained hands from wine-making work but carries herself with quiet confidence.

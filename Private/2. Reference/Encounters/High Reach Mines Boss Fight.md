@@ -1,3 +1,16 @@
+---
+type: Encounter
+encounter_type: Combat
+location: High Reach Mines
+tags:
+  - Encounter
+  - Combat
+  - BossFight
+  - IronpeakMountains
+---
+
+# High Reach Mines Boss Fight
+
 - Monsters 
 	- Boss Chasme
 		- Bloated insectoid somewhere between a fly and a human

@@ -20,11 +20,11 @@ Stuff from last session
 - Julie cannot naturally heal 
 	- she does not regain hit points by long resting
 	- She will need to visit the church within the Adventurers guild ran by [[Father Eldon Lightbringer]] to get the curse removed 
-		- [[The party Visits the Adventurers Guild Church]] 
+		- [[0496-03-05 The party Visits the Adventurers Guild Church]] 
 
 * Party is starting adventure in [[Room 6 Level 2]] 
 * Potential Continuations [[Party Ambushed by Merchant Guild Bandits]]
-	* [[Party is saved by Alistair Goldman]] 
+	* [[0496-03-05 Party is saved by Alistair Goldman]] 
 * Otherwise [[Room 1 Level 3]] 
 
 

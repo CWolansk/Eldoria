@@ -1,0 +1,19 @@
+{
+  "eval_id": "eval-2-secret-society",
+  "results": [
+    { "id": "B1", "pass": true, "note": "Public headquarters: Unknown, no location revealed" },
+    { "id": "B2", "pass": true, "note": "Public Known Members: 'None known.'" },
+    { "id": "B3", "pass": true, "note": "Private has Goldman connections, cell structure, assassination contracts — rich detail" },
+    { "id": "B4", "pass": true, "note": "No NPC files created — linked existing Goldman NPCs only" },
+    { "id": "B5", "pass": true, "note": "Tags include Guild, SilentVeil. Agent added group name tag here." }
+  ],
+  "pass_count": 5,
+  "fail_count": 0,
+  "total": 5,
+  "additional_findings": [
+    "Excellent vault integration — found existing Goldman assassin guild references and connected them",
+    "Secrets section included appropriately — user described it as secret organization",
+    "Added SilentVeil tag but eval 1 did NOT add IronCartel tag — inconsistent. Template needs explicit guidance",
+    "Dataview still uses FROM [[#this.file.name]] syntax in both files"
+  ]
+}

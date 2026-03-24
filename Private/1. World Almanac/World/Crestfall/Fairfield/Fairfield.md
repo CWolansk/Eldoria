@@ -1,19 +1,17 @@
 ---
-type: settlement
-kingdom: Crestfall
-size: town
+type: Settlement
+name: Fairfield
+region: Crestfall
+settlement_type: Town
 population: 3500
-primary_industry: trade_hub
+status: Active
 tags:
-  - "#Location"
-  - "#Town"
-  - "#Crestfall"
-  - "#TradeHub"
-  - "#BorderTown"
-  - "#Marketplace"
-created: 2025-01-15
-updated: 2025-01-15
+  - Settlement
+  - Crestfall
+  - Fairfield
 ---
+
+![[Public/World/Crestfall/Fairfield/Fairfield]]
 
 # Fairfield
 *Gateway to the Silverleaf Lands*

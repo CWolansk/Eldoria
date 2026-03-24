@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "5627546846dedcd1",
+        "id": "e7a6238046ee1eba",
         "type": "tabs",
         "children": [
           {
-            "id": "268c48dc226947a2",
+            "id": "8acf6dfd5dde5a25",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Public/World/Events/Timeline/Wizarding Wars.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Wizarding Wars"
             }
           }
         ]
@@ -84,7 +88,6 @@
       {
         "id": "e39c0241308e18ab",
         "type": "tabs",
-        "dimension": 29.388942774005823,
         "children": [
           {
             "id": "a30f685553a5c18a",
@@ -158,7 +161,7 @@
                 "calendar": "ID_4b1be88869cb",
                 "ephemeral": {
                   "viewing": {
-                    "day": 7,
+                    "day": 6,
                     "month": 2,
                     "year": 496
                   },
@@ -176,7 +179,7 @@
                   "location": ""
                 },
                 "id": "ID_ab08197979da",
-                "child": "ID_893ac9ab9a18"
+                "child": "ID_6a8aba386b8a"
               },
               "icon": "CALENDARIUM",
               "title": "Calendarium"
@@ -203,42 +206,24 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 4
       },
       {
-        "id": "cf351be8a3db22d0",
+        "id": "e4be62d814208da6",
         "type": "tabs",
-        "dimension": 40.252182347235696,
         "children": [
           {
-            "id": "6c1415854ccff116",
+            "id": "cd53f177f57a10b7",
             "type": "leaf",
             "state": {
               "type": "CALENDARIUM_AGENDA",
               "state": {
                 "calendar": "ID_4b1be88869cb",
-                "id": "ID_893ac9ab9a18",
+                "id": "ID_6a8aba386b8a",
                 "parent": "ID_ab08197979da"
               },
               "icon": "CALENDARIUM_AGENDA",
               "title": "Agenda"
-            }
-          }
-        ]
-      },
-      {
-        "id": "cdee9621d1e009bb",
-        "type": "tabs",
-        "dimension": 30.358874878758485,
-        "children": [
-          {
-            "id": "32271178f96ad4d7",
-            "type": "leaf",
-            "state": {
-              "type": "fantasy-statblocks-creature-pane",
-              "state": {},
-              "icon": "skull",
-              "title": "Combatant"
             }
           }
         ]
@@ -261,42 +246,41 @@
       "obsidian42-brat:BRAT": false,
       "initiative-tracker:Initiative Tracker Encounter Builder": false,
       "obsidian-excalidraw-plugin:New drawing": false,
-      "file-tree-alternative:File Tree Alternative Plugin": false,
       "obisidian-note-linker:Note Linker": false,
-      "calendarium:Open Calendarium": false,
-      "scribe:Scribe": false
+      "calendarium:Open Calendarium": false
     }
   },
   "active": "c449ead431ac9bb8",
   "lastOpenFiles": [
+    "Private/2. Reference/Encounters/Cursed Grove of the Corrupted Dryad.md",
+    "Private/2. Reference/Encounters/Bandit Ambush - Ardenville Road.md",
+    "Private/2. Reference/Events/World Events/Holidays/Elven Holidays/Starfall Vigil.md",
+    "Private/2. Reference/Events/World Events/Holidays/Dwarven Holidays/The Anvil's Rest.md",
+    "Private/2. Reference/Events/Quests/Ideas/Boat Race Sabotage.md",
+    "Private/2. Reference/Events/Quests/Active/Dead Fish in the Eastern Shallows.md",
+    "Public/World/Events/Timeline/The Great Blight of Hillcrest.md",
+    "Private/2. Reference/Events/World Events/Timeline/0496-03-15 Harvest Festival in Ardenville.md",
+    "Public/World/Events/Timeline/0496-03-15 Harvest Festival in Ardenville.md",
+    "Private/2. Reference/Events/Consequences/Active/Ember River Bridge Destroyed.md",
+    "Private/2. Reference/Events/World Events/Timeline/0496-03-15 Merchants Guild Warehouse Robbery.md",
+    "Public/World/Events/Timeline/0496-03-15 Merchants Guild Warehouse Robbery.md",
+    "Public/World/Events/Timeline/Diego seals Jons powers.md",
+    "Public/World/Events/Timeline/Diego Comes to Eldoria.md",
+    "Public/World/Events/Timeline/0496-03-01 Frederick Goldman Rat Quest Completed.md",
+    "Public/World/Events/Timeline/0496-02-50 Party Summoned to world.md",
+    "Private/2. Reference/Encounters/Encounter Dashboard.md",
+    "Private/2. Reference/Encounters/Encounter System Guide.md",
+    "Private/2. Reference/Encounters/Diluted Health Potions - Fairfield.md",
+    "Private/2. Reference/Encounters/Create Encounter.md",
+    "Private/2. Reference/Encounters/Cacklers.md",
+    "Private/2. Reference/Events/Quests/Active/The Artifact Wars.md",
+    "Private/2. Reference/Events/Quests/Active/Nightstalkers Collection Quest.md",
+    "Private/2. Reference/Events/Quests/Active/Exterminators Guild Induction.md",
+    "Private/2. Reference/Events/Quest Board.md",
+    "Public/World/Events/Timeline/0496-03-04 Party Enters Mine Level 2.md",
     "docs/dm-jarvis.html",
-    "Private/2. Reference/Events/World Events/Timeline/Party Departs Highreach for Silverleaf Lands.md",
-    "Public/World/Events/Timeline/Party Departs Highreach for Silverleaf Lands.md",
-    "Private/2. Reference/Events/World Events/Timeline/Party Trades Mantle for Elven Travel Passes.md",
-    "Public/World/Events/Timeline/Party Trades Mantle for Elven Travel Passes.md",
-    "Private/2. Reference/Events/World Events/Timeline/Party Learns the Legend of Diego.md",
-    "Public/World/Events/Timeline/Party Learns the Legend of Diego.md",
-    "Private/2. Reference/Events/World Events/Timeline/Party Returns to Adventurers Guild After Crisis.md",
-    "Public/World/Events/Timeline/Party Returns to Adventurers Guild After Crisis.md",
-    "Private/2. Reference/Events/World Events/Timeline/Party Saves Highreach from Duplirat Crisis.md",
-    "Public/World/Events/Timeline/Party Saves Highreach from Duplirat Crisis.md",
-    "Private/2. Reference/Events/World Events/Timeline/Highreach Mine Collapses.md",
-    "Public/World/Events/Timeline/Highreach Mine Collapses.md",
-    "Private/2. Reference/Events/World Events/Timeline/Party Defeats Mine Boss.md",
-    "Public/World/Events/Timeline/Party Defeats Mine Boss.md",
-    "Private/2. Reference/Events/World Events/Timeline/Party Explores Mine Level 3.md",
-    "Public/World/Events/Timeline/Party Explores Mine Level 3.md",
-    "Private/2. Reference/Events/World Events/Timeline/Party Enters Mine Level 3.md",
-    "Public/World/Events/Timeline/Party Enters Mine Level 3.md",
-    "Public/World/Events/Timeline/The Party Meets Alaric Emberfell.md",
-    "Public/World/Events/Timeline/Party meets the Nighstalkers widows.md",
-    "Public/World/Events/Timeline/The party Visits the Adventurers Guild Church.md",
     "docs/jarvis-index.json",
     "docs/generate-jarvis-index.js",
-    "Public/World/Crestfall/Highreach/NPCs/Gareth Ironbrow.md",
-    "Public/World/Events/Timeline/Party Overhears the Nightstalkers.md",
-    "Public/World/Events/Timeline/Party Defeats Merchants Guild Bandits.md",
-    "Private/2. Reference/Events/World Events/Timeline/Party Rescues Thoren Ironfist.md",
     "Public/World/Events/Timeline",
     "Public/World/Events",
     "docs/Private/1. World Almanac/World/Orcish Wastes/Wizards Tower/NPCs",

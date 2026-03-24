@@ -1,3 +1,20 @@
+---
+type: Store
+name: Marlas Gear
+owner: Marla Greenthumb
+store_type: Adventuring Supplies
+location: Stonehaven
+region: Crestfall
+tags:
+  - Store
+  - Crestfall
+  - Stonehaven
+---
+
+![[Public/World/Crestfall/Stonehaven/Marlas Gear|Marlas Gear]]
+
+## DM Notes
+
 1. Adventuring Gear Manager : Marla Greenthumb: Known for her vast selection of adventuring gear and general supplies. Marla's store is a favorite among travelers.
 
 - Personality: Friendly and resourceful, always ready to help adventurers find what they need.

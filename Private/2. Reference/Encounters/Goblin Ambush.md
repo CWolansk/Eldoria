@@ -1,3 +1,15 @@
+---
+type: Encounter
+encounter_type: Combat
+location: Forest Road
+difficulty: Deadly
+party_level: 2
+tags:
+  - Encounter
+  - Combat
+  - Crestfall
+---
+
 # Goblin Ambush
 
 **Location:** Forest Road

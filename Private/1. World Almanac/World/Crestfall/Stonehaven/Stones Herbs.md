@@ -1,3 +1,20 @@
+---
+type: Store
+name: Stones Herbs
+owner: Darius Stone
+store_type: Herbalist
+location: Stonehaven
+region: Crestfall
+tags:
+  - Store
+  - Crestfall
+  - Stonehaven
+---
+
+![[Public/World/Crestfall/Stonehaven/Stones Herbs|Stones Herbs]]
+
+## DM Notes
+
 1. Herbalism and Alchemical Section : Darius Stone: Specializes in rare herbs and alchemical ingredients. Darius's store is the go-to place for potion makers. If asked nicely Darius will sell you poisons after you have gained his trust by shopping at his store for a while.
 
 - Personality: Quiet and knowledgeable, with a deep love for herbs and alchemy.

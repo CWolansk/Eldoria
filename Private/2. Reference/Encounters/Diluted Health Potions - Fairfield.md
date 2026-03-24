@@ -6,12 +6,12 @@ party_level: 3-5
 duration: 1-2 sessions
 difficulty: moderate
 tags:
-  - "#Encounter"
-  - "#Investigation"
-  - "#CrimeFamily"
-  - "#Fairfield"
-  - "#Social"
-  - "#Corruption"
+  - Encounter
+  - Investigation
+  - CrimeFamily
+  - Fairfield
+  - Social
+  - Corruption
 created: 2025-01-15
 updated: 2025-01-15
 ---

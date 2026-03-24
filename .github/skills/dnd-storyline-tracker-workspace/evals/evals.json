@@ -1,0 +1,50 @@
+{
+  "skill_name": "dnd-storyline-tracker",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Trace the Exterminators Guild storyline. Where are we with that thread? What's happened so far and what could happen next?",
+      "expected_output": "A storyline audit tracing the Exterminators Guild thread across session journals, events, quests, NPCs, and consequences — with a chronological timeline, current status, and 3-5 suggested next steps.",
+      "assertions": [
+        {"id": "1a", "text": "Searched Overall.md for Exterminator references", "type": "process_check"},
+        {"id": "1b", "text": "Searched session journals for Exterminator mentions", "type": "process_check"},
+        {"id": "1c", "text": "Found and referenced the Exterminators Guild group files", "type": "content_check"},
+        {"id": "1d", "text": "Found and referenced the Exterminators Guild Induction quest", "type": "content_check"},
+        {"id": "1e", "text": "Identified key NPCs (Don Gnocianno, Pip Whiskerwind) with links", "type": "content_check"},
+        {"id": "1f", "text": "Built a chronological timeline of events", "type": "format_check"},
+        {"id": "1g", "text": "Assessed current status of the storyline", "type": "content_check"},
+        {"id": "1h", "text": "Suggested 3-5 next steps as hooks, not scripts", "type": "content_check"},
+        {"id": "1i", "text": "Did NOT create files without asking", "type": "process_check"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Brainstorm storyline ideas for JP. Give me some personal story seeds based on what we know about the character.",
+      "expected_output": "Research JP's character file, class, race, background, recent events, and existing relationships. Pitch 3-5 story seeds with opening hooks.",
+      "assertions": [
+        {"id": "2a", "text": "Read JP's player/character file from Private/1. The Party/", "type": "process_check"},
+        {"id": "2b", "text": "Searched session journals for JP mentions", "type": "process_check"},
+        {"id": "2c", "text": "Identified JP's class, race, or background", "type": "content_check"},
+        {"id": "2d", "text": "Connected pitches to existing vault content (NPCs, locations, factions)", "type": "content_check"},
+        {"id": "2e", "text": "Presented 3-5 pitches with opening hooks", "type": "format_check"},
+        {"id": "2f", "text": "Pitches are 2-3 sentences each, not full outlines", "type": "format_check"},
+        {"id": "2g", "text": "Did NOT create files without asking", "type": "process_check"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "What storylines do we have going right now? Give me the big picture.",
+      "expected_output": "A broad audit scanning Overall.md, recent sessions, active consequences, and open quests — presenting a menu of active storylines organized by category (main arc, faction threads, character threads, loose threads).",
+      "assertions": [
+        {"id": "3a", "text": "Read Overall.md for campaign summary", "type": "process_check"},
+        {"id": "3b", "text": "Checked recent session journals (last 3-4)", "type": "process_check"},
+        {"id": "3c", "text": "Checked active consequences", "type": "process_check"},
+        {"id": "3d", "text": "Checked active quests", "type": "process_check"},
+        {"id": "3e", "text": "Organized by category (main arc, faction, character, loose threads)", "type": "format_check"},
+        {"id": "3f", "text": "Identified at least 3 distinct active storylines", "type": "content_check"},
+        {"id": "3g", "text": "Asked DM which thread to dive into", "type": "process_check"},
+        {"id": "3h", "text": "Did NOT create files without asking", "type": "process_check"}
+      ]
+    }
+  ]
+}

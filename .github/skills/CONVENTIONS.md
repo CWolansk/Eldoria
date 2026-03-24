@@ -25,6 +25,8 @@ Every entity gets **two files**: a private DM note and a public player note.
 |---|---|
 | Private | `Private/1. World Almanac/World/` |
 | Public | `Public/World/` |
+| Storylines (Private) | `Private/2. Reference/Storylines/` |
+| Storylines (Public) | `Public/Storylines/` |
 | Session Journals | `Private/2. Session Journals/` |
 
 ## Linking Rules
@@ -41,7 +43,7 @@ Tags live in YAML frontmatter (no `#` prefix in YAML).
 | Convention | Example |
 |---|---|
 | Style | PascalCase |
-| Entity type | `NPC`, `Store`, `Settlement`, `Organization`, `Location`, `Region`, `Event` |
+| Entity type | `NPC`, `Store`, `Settlement`, `Organization`, `Location`, `Region`, `Event`, `Storyline` |
 | Region names | `Crestfall`, `IronpeakMountains`, `OrcishWastes`, `SilverleafLands`, `TheLowlands` |
 | City names | `Highreach`, `Ardenville`, `Stonehaven`, `Greymoor` |
 | Subtypes | `Guild`, `Faction`, `Cult`, `Smithy`, `Tavern`, etc. |

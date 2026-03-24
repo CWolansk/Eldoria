@@ -23,8 +23,8 @@ A merchant in the [[Public/World/Groups/Merchants Guild|Merchants Guild]] who ha
 Guarded and suspicious — took a lot of convincing before he'd trust strangers.
 
 ## Interactions
-- [[Public/World/Events/Timeline/Merchants Guild Quest Completed|Party investigated him for Goldman — ended up siding with him instead]]
-- [[Public/World/Events/Timeline/Jarek IronFist Found Dead|Found dead after falling from a window — reported in the newspaper]]
+- [[Public/World/Events/Timeline/0496-03-02 Merchants Guild Quest Completed|Party investigated him for Goldman — ended up siding with him instead]]
+- [[Public/World/Events/Timeline/0496-03-04 Jarek IronFist Found Dead|Found dead after falling from a window — reported in the newspaper]]
 
 ---
 

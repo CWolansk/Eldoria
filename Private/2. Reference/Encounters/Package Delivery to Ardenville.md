@@ -1,6 +1,21 @@
-# The Rat Run: Package Delivery to Ardenville
+---
+type: Encounter
+encounter_type: Mixed
+location: Highreach to Ardenville
+party_level: 4
+tags:
+  - Encounter
+  - Mixed
+  - Crestfall
+  - Level4
+  - GuildPolitics
+  - MoralChoice
+  - CriminalActivity
+  - Travel
+  - SocialIntrigue
+---
 
-#Encounter #Mixed #Crestfall #Level4 #GuildPolitics #MoralChoice #CriminalActivity #Travel #SocialIntrigue
+# The Rat Run: Package Delivery to Ardenville
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Related"

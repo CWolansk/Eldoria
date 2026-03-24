@@ -13,16 +13,16 @@ SORT file.name ASC
 
 - Party has all goblin ears from level 2 minus the ones from the last room
 - #Date_05_03_496 
-- Starting with [[Party Defeats Merchants Guild Bandits]] 
+- Starting with [[0496-03-05 Party Defeats Merchants Guild Bandits]] 
 	- No matter the outcome of the party agreeing to another contract with Alistair or they refuse. Before he leaves he recomends upgrading their items, he recomends [[Private/2. Reference/NPCs/All NPCS/Alaric Emberfell]] 
 	- ![[Party Defeats Merchants Guild Bandits#^4b792a]]
-	- [[The party Visits the Adventurers Guild Church]] 
+	- [[0496-03-05 The party Visits the Adventurers Guild Church]] 
 		- ![[The party Visits the Adventurers Guild Church#^0ad25b]]
-- Leading into [[Party meets the Nighstalkers widows]]
+- Leading into [[0496-03-05 Party meets the Nighstalkers widows]]
 	- ![[Party meets the Nighstalkers widows#^834514]]
 - Depending on the conversations with [[Alistair Goldman]] 
 	- The Party seeks out [[Private/2. Reference/NPCs/All NPCS/Alaric Emberfell]] or he seeks out the party 
-		- [[The Party Meets Alaric Emberfell]]
+		- [[0496-03-05 The Party Meets Alaric Emberfell]]
 		- ![[The Party Meets Alaric Emberfell#^0578e3]]
 - Party turned in more goblins ears 
 	- Got 26 guild points and 26 gp 

@@ -35,6 +35,7 @@ Always **search the vault first**:
 2. Search within the target region for existing settlements — avoid duplicates
 3. Look at neighboring settlement files to match tone and detail level
 4. Check if related NPCs, shops, or groups already exist
+5. If the settlement already exists, **do not create a duplicate** — offer to review or update the existing files instead. If the user wants to see what you'd generate, show a preview in chat without creating files.
 
 ## File Paths
 
@@ -62,13 +63,10 @@ status: Active
 tags:
   - Settlement
   - {Region}
+  - {SettlementName}
 ---
 
-## Overview
-> {2-3 sentences. What is this place and why does it matter? What's the first thing a DM needs to know? Use blockquote for read-aloud text.}
-
-## History
-{3-4 bullet points. Key founding moments and events that shaped the settlement. Format: **Bold label.** One sentence.}
+![[Public/World/{Region}/{Settlement Name}/{Settlement Name}]]
 
 ## Notable NPCs
 {Bullet list of [[NPC Name]] — one-line role description. Link to private NPC files.}
@@ -92,12 +90,9 @@ The following sections are **optional** — only include if the user specifies:
 
 ---
 
-# Public Notes
-[[Public/World/{Region}/{Settlement Name}/{Settlement Name}|{Settlement Name}]]
-
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```
 ```
@@ -115,6 +110,7 @@ settlement_type: {Village/Town/City/Outpost}
 tags:
   - Settlement
   - {Region}
+  - {SettlementName}
 ---
 
 ## Overview
@@ -133,7 +129,7 @@ tags:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]] AND "Public"
 SORT file.name ASC
 ```
 ```
@@ -175,3 +171,5 @@ When creating a settlement, check if it needs supporting content:
 - Does it have guilds or organizations? Ask if you should create those.
 
 Don't silently create supporting content — always confirm with the user first.
+
+**Reminder:** After generating a settlement file, always check this section and ask the DM about any NPCs, shops, or groups mentioned in the file that don't have their own files yet.

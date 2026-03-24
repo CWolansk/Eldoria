@@ -1,14 +1,18 @@
-# Edwin Barleyman
-*Neutral tavern owner maintaining peace between factions*
-
 ---
 type: NPC
+name: Edwin Barleyman
 location: Hillcrest
+region: Crestfall
 profession: Tavern Owner
 faction: Neutral
 status: Alive
-tags: [#EdwinBarleyman, #Hillcrest, #Vintner'sHeartTavern, #Neutral]
+tags:
+  - NPC
+  - Crestfall
+  - Hillcrest
 ---
+
+![[Public/World/Crestfall/Hillcrest/NPCs/Edwin Barleyman|Edwin Barleyman]]
 
 ## Appearance
 Friendly tavern keeper with a welcoming demeanor. Well-built from years of handling barrels and serving customers, with graying hair and laugh lines around his eyes.

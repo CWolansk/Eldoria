@@ -1,12 +1,17 @@
 ---
+type: NPC
 name: "Astrid Ironfist"
 title: "Guard Captain"
 race: "Human"
 class: "Fighter"
 location: "Stonehaven"
+region: Crestfall
 guild_affiliations: []
 status: "Active"
-tags: ["#NPC", "#GuardCaptain", "#Stonehaven", "#Military", "#Loyal", "#Disciplined"]
+tags:
+  - NPC
+  - Crestfall
+  - Stonehaven
 ---
 
 # Guard Captain Astrid Ironfist

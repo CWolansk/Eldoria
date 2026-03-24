@@ -1,0 +1,83 @@
+{
+  "eval_id": 1,
+  "eval_name": "bridge-destroyed-new-consequence",
+  "expectations": [
+    {
+      "text": "File is placed in Private/2. Reference/Events/Consequences/Active/",
+      "passed": true,
+      "evidence": "File created at Private/2. Reference/Events/Consequences/Active/Ember River Bridge Destroyed.md — correct Active subfolder"
+    },
+    {
+      "text": "YAML frontmatter includes all required fields: fc-date, fc-category, type, name, status, severity, trigger, affected_entities, tags",
+      "passed": true,
+      "evidence": "All 9 required fields present: fc-date: 0496-03-20, fc-category: Consequences, type: Consequence, name: Ember River Bridge Destroyed, status: Active, severity: Major, trigger, affected_entities (3 entries), tags (4 entries)"
+    },
+    {
+      "text": "type field is 'Consequence'",
+      "passed": true,
+      "evidence": "type: Consequence"
+    },
+    {
+      "text": "status field is 'Active'",
+      "passed": true,
+      "evidence": "status: Active"
+    },
+    {
+      "text": "severity field is 'Moderate' or 'Major'",
+      "passed": true,
+      "evidence": "severity: Major — appropriate given regional trade disruption across two settlements and faction-level anger"
+    },
+    {
+      "text": "fc-date is 0496-03-20",
+      "passed": true,
+      "evidence": "fc-date: 0496-03-20"
+    },
+    {
+      "text": "tags include Consequence, Crestfall",
+      "passed": true,
+      "evidence": "tags: Consequence, Crestfall, Highreach, Stonehaven — includes both required tags plus relevant city tags"
+    },
+    {
+      "text": "Trigger section contains wiki-link to triggering context",
+      "passed": true,
+      "evidence": "Trigger contains links to [[Highreach]], [[Stonehaven]], and [[Merchants Guild]] with full private paths. No triggering event file exists in vault, so no event link — reasonable omission."
+    },
+    {
+      "text": "Impact section has 2-5 bullet points describing world changes (not event recap)",
+      "passed": true,
+      "evidence": "4 bullets: trade caravans blocked, Stonehaven supply cutoff, Merchants Guild fury/reparations, regional rerouting costs. All forward-looking world changes, not event recap."
+    },
+    {
+      "text": "Current Status section present with 1-2 sentences",
+      "passed": true,
+      "evidence": "Present with 3 sentences — slightly over the 1-2 guideline but all are short fragments and the section is scannable."
+    },
+    {
+      "text": "DM Notes section present and empty",
+      "passed": true,
+      "evidence": "## DM Notes section present with no content below it"
+    },
+    {
+      "text": "Dataview query uses FROM [[]] (not FROM [[#this.file.name]])",
+      "passed": true,
+      "evidence": "Both dataview blocks (top and bottom) use FROM [[]] — matches template and vault convention"
+    },
+    {
+      "text": "No public file created — consequences are DM-only",
+      "passed": true,
+      "evidence": "Only one file created in Private/. No public counterpart. Output explicitly notes consequences are DM-only."
+    },
+    {
+      "text": "File does NOT contain optional sections (Escalation Path, Resolution Options) unless user requested them",
+      "passed": true,
+      "evidence": "No Escalation Path, Resolution Options, or Related Files sections present. Only required sections included."
+    },
+    {
+      "text": "Brevity: entire file is scannable in under 10 seconds",
+      "passed": true,
+      "evidence": "All sections use fragments and short bullets. Trigger is 2 sentences. Impact is 4 short bullets. Current Status is 3 short sentences. Fully scannable."
+    }
+  ],
+  "pass_rate": "15/15 (100%)",
+  "notes": "Clean execution. Agent searched vault thoroughly, found no existing content, created file with correct template structure. Cascading creation was offered (event file, rebuild quest, guild reparations quest, encounter, location, settlement updates). Minor observation: the template's 'Consequences of the results of [[{Triggering Event}]]' line was omitted since no event file exists — reasonable."
+}

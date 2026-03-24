@@ -1,0 +1,21 @@
+{
+  "eval_id": 1,
+  "eval_name": "Dead Fish in the Eastern Shallows — New E-rank quest",
+  "expectations": [
+    {"text": "File placed in Private/2. Reference/Events/Quests/Ideas/ (or Active/ depending on status)", "passed": true, "evidence": "File at Private/2. Reference/Events/Quests/Active/Dead Fish in the Eastern Shallows.md — status Available, Active/ folder is reasonable"},
+    {"text": "YAML frontmatter includes all required fields: fc-date, fc-category, type, name, status, level, location, region, quest_giver, reward, tags", "passed": true, "evidence": "All 11 listed fields present in YAML frontmatter"},
+    {"text": "type is 'Quest'", "passed": true, "evidence": "type: Quest"},
+    {"text": "level is 'E'", "passed": true, "evidence": "level: E"},
+    {"text": "tags include Quest, ELevelQuest, Crestfall, Ardenville", "passed": true, "evidence": "tags: Quest, ELevelQuest, Crestfall, Ardenville — all four present"},
+    {"text": "Quest Overview section with quest giver wiki-link, reward, status, difficulty", "passed": true, "evidence": "## Quest Overview present with Quest Giver wiki-link, Reward, Status, Difficulty fields"},
+    {"text": "Objectives section with 2-5 bullet items", "passed": true, "evidence": "3 bullet objectives"},
+    {"text": "Potential Outcomes section with Success and Failure/Ignored subsections", "passed": true, "evidence": "### Success and ### Failure / Ignored both present"},
+    {"text": "Dataview query uses FROM [[]] (not FROM [[#this.file.name]])", "passed": true, "evidence": "FROM [[]] used in dataview block"},
+    {"text": "No public file created — quests are DM-only", "passed": true, "evidence": "No files found in Public/ matching Dead Fish"},
+    {"text": "Brevity: scannable in 10 seconds — fragments and bullets", "passed": true, "evidence": "~65 lines total, all content in bullet format, scannable"},
+    {"text": "Wiki-links to existing vault files (Gregor Woods, Fishermans Guild, Ardenville)", "passed": true, "evidence": "Full private paths for Gregor Woods, Fishermans Guild, Lake Arden, Ardenville, Edda Netsong"},
+    {"text": "No unrequested optional sections (Multiple Approaches, Complications, Connections)", "passed": true, "evidence": "None of the three optional sections present. Investigation/Mechanics included but reasonable for investigation quest."}
+  ],
+  "pass_rate": "13/13 (100%)",
+  "notes": "Solid quest file. Investigation/Mechanics section included despite not being explicitly requested — justified since the quest is investigative. Dataview placed at bottom only; template shows it at top AND bottom which is inconsistent guidance."
+}

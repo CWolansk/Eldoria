@@ -1,0 +1,78 @@
+{
+  "eval_id": 1,
+  "eval_name": "harvest-festival-new-event",
+  "expectations": [
+    {
+      "text": "Private file placed in Private/2. Reference/Events/World Events/Timeline/ (matching existing vault events, NOT in Private/2. Session Journals/ or Private/1. World Almanac/)",
+      "passed": true,
+      "evidence": "File created at Private/2. Reference/Events/World Events/Timeline/0496-03-15 Harvest Festival in Ardenville.md — correct path matching vault pattern. NOTE: The skill template says Private/2. Session Journals/ but the agent correctly followed the vault's actual pattern instead."
+    },
+    {
+      "text": "Public file placed in Public/World/Events/Timeline/",
+      "passed": true,
+      "evidence": "File created at Public/World/Events/Timeline/0496-03-15 Harvest Festival in Ardenville.md"
+    },
+    {
+      "text": "Both filenames prefixed with fc-date: 0496-03-15 {Event Name}.md",
+      "passed": true,
+      "evidence": "Both files named '0496-03-15 Harvest Festival in Ardenville.md'"
+    },
+    {
+      "text": "Private YAML has all required fields: type, name, fc-date, fc-category, location, region, tags",
+      "passed": true,
+      "evidence": "All present: type: Event, name: Harvest Festival in Ardenville, fc-date: 0496-03-15, fc-end: 0496-03-15, fc-category: Events, location: Ardenville, region: Crestfall, tags: [Event, Crestfall, Ardenville]"
+    },
+    {
+      "text": "Public YAML has required fields: type, name, fc-date, location, region, tags",
+      "passed": true,
+      "evidence": "All present: type: Event, name: Harvest Festival in Ardenville, fc-date: 0496-03-15, fc-end: 0496-03-15, fc-category: Events, location: Ardenville, region: Crestfall, tags: [Event, Crestfall, Ardenville]"
+    },
+    {
+      "text": "Private file embeds public file with ![[Public/World/Events/Timeline/...]]",
+      "passed": true,
+      "evidence": "Contains: ![[Public/World/Events/Timeline/0496-03-15 Harvest Festival in Ardenville]]"
+    },
+    {
+      "text": "Private dataview uses FROM [[]] (not FROM [[#this.file.name]])",
+      "passed": false,
+      "evidence": "FAIL: Private file uses FROM [[#this.file.name]] — the old syntax, despite the skill template showing FROM [[]]. Agent was influenced by reading existing vault files that still use the old syntax."
+    },
+    {
+      "text": "Public dataview uses FROM [[]] AND \"Public\"",
+      "passed": false,
+      "evidence": "FAIL: Public file uses FROM [[#this.file.name]] AND \"Public\" — the old syntax. Same influence from existing vault files."
+    },
+    {
+      "text": "Public note uses only public wiki-links (Public/World/...)",
+      "passed": true,
+      "evidence": "Only link is [[Public/World/Crestfall/Ardenville/Ardenville|Ardenville]] — correct public path"
+    },
+    {
+      "text": "Public What Happened section has 3-5 bullet points",
+      "passed": true,
+      "evidence": "4 bullets: festival attendance, pie contest win, bard meeting, festival atmosphere"
+    },
+    {
+      "text": "Brevity: both files scannable in 10 seconds",
+      "passed": true,
+      "evidence": "All sections use fragments and bullets. No prose. Fully scannable."
+    },
+    {
+      "text": "Private file has Consequences section (even if brief)",
+      "passed": true,
+      "evidence": "Consequences section with 2 bullets: Claire's recognition, southern ruins seed"
+    },
+    {
+      "text": "tags include Event, Crestfall",
+      "passed": true,
+      "evidence": "tags: [Event, Crestfall, Ardenville]"
+    },
+    {
+      "text": "No unrequested optional sections (Secrets, Follow-Up Hooks) unless user asked",
+      "passed": true,
+      "evidence": "No Secrets or Follow-Up Hooks sections. Only Consequences, DM Notes, and Links."
+    }
+  ],
+  "pass_rate": "12/14 (86%)",
+  "notes": "Good template compliance except for dataview syntax. The agent used the vault path correctly (Private/2. Reference/Events/World Events/Timeline/) even though the skill template says a different path — this reveals a MAJOR skill bug in the File Paths section. The dataview failure is because the agent copied syntax from existing vault files rather than the skill template."
+}

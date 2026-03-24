@@ -25,7 +25,7 @@ tags:
 
 ## Links
 [[Ardenville]]
-[[Lake Arden Boat Race]]
+[[0496-03-15 Lake Arden Boat Race]]
 
 ## DM Notes
 Oversees the boat race, mediates feuding guilds. Seeks heroes to secure the storm-wrecked warehouse. Keeps tabs on the adventurers whose impounded ship sits at her pier.

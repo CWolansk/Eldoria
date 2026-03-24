@@ -1,18 +1,20 @@
 ---
-type: npc
+type: NPC
+name: Valeris Shadowmere
 role: crime_boss
 location: Fairfield
+region: Crestfall
 faction: Shadowmere Crime Family
 threat_level: moderate
 tags:
-  - "#NPC"
-  - "#CrimeBoss"
-  - "#Fairfield"
-  - "#Antagonist"
-  - "#Social"
+  - NPC
+  - Crestfall
+  - Fairfield
 created: 2025-01-15
 updated: 2025-01-15
 ---
+
+![[Public/World/Crestfall/Fairfield/NPCs/Valeris Shadowmere|Valeris Shadowmere]]
 
 # Valeris "Silk" Shadowmere
 *Sophisticated Crime Boss*

@@ -1,0 +1,62 @@
+{
+  "eval_id": 1,
+  "eval_name": "shattered-coast-new-region",
+  "expectations": [
+    {
+      "text": "private_file_path_correct",
+      "passed": true,
+      "evidence": "Output generated for Private/1. World Almanac/World/The Shattered Coast/The Shattered Coast.md — correct path per skill template"
+    },
+    {
+      "text": "public_file_path_correct",
+      "passed": true,
+      "evidence": "Output generated for Public/World/The Shattered Coast/The Shattered Coast.md — correct path per skill template"
+    },
+    {
+      "text": "private_embeds_public",
+      "passed": true,
+      "evidence": "Private file contains: ![[Public/World/The Shattered Coast/The Shattered Coast]]"
+    },
+    {
+      "text": "yaml_frontmatter_correct",
+      "passed": true,
+      "evidence": "Both files have type: Region, name: The Shattered Coast, and tags array with Region and TheShatteredCoast"
+    },
+    {
+      "text": "public_uses_blockquote",
+      "passed": true,
+      "evidence": "Overview section uses > blockquote formatting for read-aloud text"
+    },
+    {
+      "text": "brevity_followed",
+      "passed": true,
+      "evidence": "History has exactly 4 bullets with Bold label + one sentence format. Fragments used throughout."
+    },
+    {
+      "text": "no_unwanted_sections",
+      "passed": true,
+      "evidence": "No Secrets or Plot Hooks sections present — user didn't request them"
+    },
+    {
+      "text": "dataview_query_present",
+      "passed": true,
+      "evidence": "Both files end with ```dataview TABLE WITHOUT ID file.link AS 'Mentioned In' FROM [[]] SORT file.name ASC```"
+    },
+    {
+      "text": "cascading_creation_offered",
+      "passed": false,
+      "evidence": "ISSUE: The skill says to ask about creating settlements, groups, and locations mentioned. Output includes 3 settlements and 3 factions but no prompt to create them. The skill requires asking the DM before creating supporting content."
+    },
+    {
+      "text": "public_links_public_only",
+      "passed": true,
+      "evidence": "Public file contains no wiki-links at all for settlements (just plain text names). This is technically safe but a MINOR ISSUE — the skill template shows public settlement links should use [[Public/World/...]] format. Existing Crestfall public file links to public settlement pages."
+    }
+  ],
+  "issues_found": [
+    "SKILL GAP: The skill template for settlements in the private file shows [[Settlement Name]] format but doesn't specify full paths. The existing Crestfall file uses full private paths for the private file. The skill should clarify this more explicitly.",
+    "SKILL GAP: The public template shows 'Bullet list linking to public settlement pages' but doesn't give an explicit link format example. Compare to the existing Crestfall public file which uses [[Public/World/Crestfall/Settlement/Settlement|Name]] format.",
+    "SKILL GAP: The skill doesn't mention that cascading creation prompt is critical — it's easy to forget when generating. The template should embed a reminder.",
+    "MINOR: The dataview query in the skill template uses FROM [[#this.file.name]] but the actual existing files use FROM [[]]. The skill template doesn't match existing vault conventions."
+  ]
+}

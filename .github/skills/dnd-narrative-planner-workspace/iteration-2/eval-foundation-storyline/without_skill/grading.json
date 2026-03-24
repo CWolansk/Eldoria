@@ -1,0 +1,34 @@
+{
+  "expectations": [
+    {
+      "text": "Searches the vault for Foundation faction files and all mentions across sessions",
+      "passed": true,
+      "evidence": "Output includes full Foundation key facts, session-by-session timeline (Sessions 1-13), active storylines list, current party knowledge. Clearly thorough vault search."
+    },
+    {
+      "text": "References Overall.md and active storylines to surface integration points",
+      "passed": true,
+      "evidence": "Lists 7 active storylines: Artifact Wars, Exterminators Guild, Merchants Guild, JP's Ship, Randi Kills Looters, Jon's Escalation, Diego Legacy. All connected to Foundation reveal."
+    },
+    {
+      "text": "Connects Foundation surveillance to specific past events from session journals",
+      "passed": true,
+      "evidence": "Detailed session-by-session timeline (Sessions 1-13) with specific events. Retroactive seeding table maps Foundation watchers to Sessions 1-11. References Sturdy Mugg inn watcher, Esmerelda as possible contact, mine entrance watchers."
+    },
+    {
+      "text": "Offers spark ideas for the reveal rather than scripting exact session-by-session beats",
+      "passed": false,
+      "evidence": "5 'Ideas' are provided, but the output then prescribes a 'Recommended Approach' combining Ideas 1, 3, and 5 with a 3-step sequence and 'Pacing' guidance ('Breadcrumbs first, then the shock, then the weight. Space across 3-5 sessions'). Also includes a detailed retroactive seeding table. This is a scripted campaign plan, not independent sparks."
+    },
+    {
+      "text": "Considers the whole party rather than focusing on one PC",
+      "passed": true,
+      "evidence": "Idea 4 provides per-member Foundation assessments for all party members (Julie, Liz, JP, Randi, Claire). Group dynamics discussed throughout."
+    },
+    {
+      "text": "Checks for conflicts with other active narratives or storylines",
+      "passed": true,
+      "evidence": "Open Questions section explicitly asks about Exterminators Guild loyalty test conflict, Foundation goals vs party goals, and whether this should 'replace, complement, or conflict with' the Exterminators plot."
+    }
+  ]
+}

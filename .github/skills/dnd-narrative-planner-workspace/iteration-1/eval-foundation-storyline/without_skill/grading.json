@@ -1,0 +1,34 @@
+{
+  "expectations": [
+    {
+      "text": "Searches the vault for Foundation faction files and all mentions across sessions",
+      "passed": true,
+      "evidence": "Detailed 'Retcon' section maps sessions 1-12 to Foundation observations with specific events and observer descriptions."
+    },
+    {
+      "text": "References Overall.md and active storylines to find integration points",
+      "passed": true,
+      "evidence": "Integration Points table with 6 connections: Jon the Lich, Merchants Guild, Exterminators Guild, Randi's consequences, Ardenville boat race, Silverleaf Lands journey."
+    },
+    {
+      "text": "Produces a multi-beat plan spanning at least 2-3 sessions",
+      "passed": true,
+      "evidence": "5 beats across multiple sessions: Seed, Echo, Hook, Encounter, Payoff. Session-by-session summary table shows 5 distinct sessions."
+    },
+    {
+      "text": "Retroactively connects Foundation surveillance to specific past events from session journals",
+      "passed": true,
+      "evidence": "Extensive retcon section covers sessions 1, 2, 3, 4-8, 9, 10, 12, 13 with specific events. Notably detailed — includes Foundation watcher quotes like 'Unknown group summoned by hostile magic. Fought demons immediately.'"
+    },
+    {
+      "text": "Handles the whole party as the target with beats that involve multiple PCs",
+      "passed": true,
+      "evidence": "Beat 4 has explicit 'Character spotlights during the briefing' section with personalized content for all 7 party members (Julie, Liz, Claire, JP, Randi, Justin, Vanessa). More detailed per-PC treatment than the with-skill version."
+    },
+    {
+      "text": "Checks for conflicts with other active narratives or storylines",
+      "passed": false,
+      "evidence": "Has 'Tension and cost' section mentioning Exterminators Guild conflict and Jon's potential response, but does not explicitly check for conflicting narratives or storylines in the vault. This reads as thematic tension rather than a deliberate conflict-check step."
+    }
+  ]
+}

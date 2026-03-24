@@ -20,7 +20,7 @@ SORT file.name ASC
 ```
 
 ## Trigger
-One imp escaped into the forest during the summoning encounter in [[Party Summoned to world]].
+One imp escaped into the forest during the summoning encounter in [[0496-02-50 Party Summoned to world]].
 
 ## Impact
 - An imp is loose in the forest near the summoning clearing

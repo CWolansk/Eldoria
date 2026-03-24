@@ -1,4 +1,18 @@
-![[Private/1. World Almanac/World/Ironpeak Mountains/Steamhammer/Steamhammer#^3b40f9|Steamhammer]]
+---
+type: Settlement
+name: Steamhammer
+region: IronpeakMountains
+settlement_type: Village
+tags:
+  - Settlement
+  - IronpeakMountains
+  - Dwarven
+---
+
+## Overview
+A village near natural hot springs, where dwarves relax and indulge in steam baths after a hard day's work.
+
+---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

@@ -36,20 +36,41 @@ Always **search the vault first**:
 3. Check that NPCs, locations, and groups mentioned in the event have files to link to
 4. Look at existing session journals (Session 1, Session 2) to match format conventions
 
+If the user asks about an **existing event**, search and present what the vault already has rather than generating new content.
+
+## File Naming
+
+Event files are **prefixed with their `fc-date`** so they sort chronologically in the file explorer. Use the format `{fc-date} {Event Name}.md`:
+
+```
+0496-03-01 Party Visits Wizards Tower.md
+0496-03-06 Highreach Mine Collapses.md
+```
+
+- The date prefix is the `fc-date` value from the YAML frontmatter (e.g., `0496-03-01`)
+- One space between the date and the event name
+- **Historical events without a specific date** — omit the prefix (e.g., `Wizarding Wars.md`)
+
 ## File Paths
 
-Events go in a dedicated Events directory within the region or campaign:
+All timeline events (session-related and historical) go in:
 
 ```
-Private/2. Session Journals/{Event Name}.md
-Public/World/Events/{Event Name}.md
+Private/2. Reference/Events/World Events/Timeline/{fc-date} {Event Name}.md
+Public/World/Events/Timeline/{fc-date} {Event Name}.md
 ```
 
-For historical events not tied to a session:
+Town-level events (local, ongoing, or location-specific) go in:
 ```
-Private/1. World Almanac/World/{Region}/Events/{Event Name}.md
-Public/World/{Region}/Events/{Event Name}.md
+Private/2. Reference/Events/World Events/Town/{Event Name}.md
 ```
+
+Session journals (raw DM prep notes, not structured events) stay in:
+```
+Private/2. Session Journals/Session {N} Notes.md
+```
+
+Historical events without a specific date omit the `{fc-date}` prefix from the filename.
 
 ## Private Note (DM Version)
 
@@ -70,7 +91,7 @@ tags:
   - {Category}
 ---
 
-![[Public/World/Events/{Event Name}]]
+![[Public/World/Events/Timeline/{fc-date} {Event Name}]]
 
 ## Consequences
 {Bullet list. What changed because of this event? NPC reactions, political shifts, world changes.}
@@ -93,10 +114,12 @@ The following sections are **optional** — only include if the user specifies:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```
 ```
+
+Use `FROM [[]]` exactly as shown — existing vault files may still show `FROM [[#this.file.name]]` which is outdated. Do not copy from old files.
 
 ## Public Note (Player Version)
 
@@ -122,7 +145,7 @@ tags:
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]] AND "Public"
 SORT file.name ASC
 ```
 ```
@@ -175,3 +198,5 @@ When creating an event, check if it needs supporting content:
 - Are there NPCs mentioned that don't have files? Ask if you should create them.
 - Are there locations mentioned that don't have files? Ask if you should create them.
 - Did the event involve a group or faction? Does that group have a file? If not, ask.
+
+**Always check for mentioned entities and ask the DM before creating them.**

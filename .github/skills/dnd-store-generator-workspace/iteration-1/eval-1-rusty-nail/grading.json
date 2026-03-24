@@ -1,0 +1,18 @@
+{
+  "eval_id": "eval-1-new-store",
+  "results": [
+    { "id": "A1", "pass": true, "note": "Has type, name, location, region, store_type, proprietor in YAML" },
+    { "id": "A2", "pass": true, "note": "Tags: Store, Crestfall, Ardenville, Tavern" },
+    { "id": "A3", "pass": true, "note": "Agent used ![[embed]] at top — learned from vault pattern despite template using Description" },
+    { "id": "A4", "pass": false, "note": "DM Notes present but ## Inventory missing from private file (template requires it). ## Proprietor also missing — both lost when agent adopted embed pattern" },
+    { "id": "A5", "pass": false, "note": "Uses FROM [[#this.file.name]] — old syntax" },
+    { "id": "A6", "pass": true, "note": "Public has Description, Proprietor, Services & Wares, Reputation" },
+    { "id": "A7", "pass": false, "note": "Public uses FROM [[#this.file.name]] AND 'Public' — has filter but base syntax old" },
+    { "id": "A8", "pass": false, "note": "Public Description not blockquoted. Private has separate ## Read-Aloud with blockquote that duplicates public content. Guidance unclear." },
+    { "id": "A9", "pass": true, "note": "Short, scannable, fragments" }
+  ],
+  "pass_count": 5,
+  "fail_count": 4,
+  "total": 9,
+  "notes": "Template creates confusion: it has Description+Proprietor+Inventory as private sections, but vault convention says embed public. Agent chose embed but lost the private-specific sections."
+}

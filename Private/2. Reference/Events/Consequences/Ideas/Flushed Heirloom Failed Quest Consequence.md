@@ -4,7 +4,7 @@ fc-end:
 fc-category: Consequences
 type: Consequence
 name: Flushed Heirloom Failed Quest Consequence
-status: Idea
+status: Active
 severity: Moderate
 trigger: Flushed Heirloom quest failure
 affected_entities:
@@ -14,19 +14,32 @@ tags:
   - Consequence
   - Crestfall
   - Highreach
-  - Idea
 ---
 
 ## Trigger
 
-Consequences of the results of [[Flushed Heirloom]] with [[Private/2. Reference/NPCs/All NPCS/Beatrix Goldleaf]]
+The party never pursued the [[Flushed Heirloom]] quest — the heirloom remains lost in the Highreach sewers.
+
+Consequences of the results of [[Flushed Heirloom]]
 
 ## Impact
 
-No adventurers were able to help [[Private/2. Reference/NPCs/All NPCS/Beatrix Goldleaf]] to recover her family heirloom. As a result she does not like adventurers and will be pulling some of her funding from the [[Highreach Adventurers Guild]]. Potential future where the party needs to appease her and retrieve the Heirloom from the sewers.
+- [[Private/2. Reference/NPCs/All NPCS/Beatrix Goldleaf|Beatrix Goldleaf]] is devastated — now openly hostile toward adventurers
+- Beatrix pulled funding from the [[Highreach Adventurers Guild]]
+- Word spread through [[Private/1. World Almanac/World/Crestfall/Highreach/Highreach|Highreach]] that the party can't be trusted with personal favors
+- Future personal-favor quests in Highreach may be harder to come by
+
+## Current Status
+
+Active. Beatrix remains hostile and the funding cut stands. Reputation damage spreading through Highreach — locals hesitate to ask adventurers for personal help.
+
+## DM Notes
+
+
+---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```

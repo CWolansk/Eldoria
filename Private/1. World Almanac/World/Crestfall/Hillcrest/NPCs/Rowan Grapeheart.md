@@ -1,14 +1,18 @@
-# Rowan Grapeheart
-*Former adventurer turned diplomatic Guildmaster*
-
 ---
 type: NPC
+name: Rowan Grapeheart
 location: Hillcrest
+region: Crestfall
 profession: Guildmaster
-faction: Adventurers Guild (Neutral)
+faction: Adventurers Guild
 status: Alive
-tags: [#RowanGrapeheart, #Hillcrest, #AdventurersGuild, #Guildmaster]
+tags:
+  - NPC
+  - Crestfall
+  - Hillcrest
 ---
+
+![[Public/World/Crestfall/Hillcrest/NPCs/Rowan Grapeheart|Rowan Grapeheart]]
 
 ## Appearance
 Middle-aged former adventurer with the bearing of someone who has seen action. Practical clothing with subtle indicators of rank, weathered hands that still show calluses from weapon use.

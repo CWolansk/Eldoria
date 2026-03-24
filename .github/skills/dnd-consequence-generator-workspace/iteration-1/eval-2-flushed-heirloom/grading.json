@@ -1,0 +1,58 @@
+{
+  "eval_id": 2,
+  "eval_name": "flushed-heirloom-failed-quest",
+  "expectations": [
+    {
+      "text": "File placed in correct Consequences directory",
+      "passed": true,
+      "evidence": "File at Private/2. Reference/Events/Consequences/Ideas/Flushed Heirloom Failed Quest Consequence.md — within Consequences directory. Note: file remains in Ideas/ subfolder despite status change to Active; ideally should be moved to Active/ but the skill doesn't explicitly instruct file relocation."
+    },
+    {
+      "text": "YAML frontmatter has all required fields",
+      "passed": true,
+      "evidence": "All required fields present: fc-date: 0496-03-04, fc-end (empty), fc-category: Consequences, type: Consequence, name, status: Active, severity: Moderate, trigger, affected_entities (2 entries), tags (3 entries)"
+    },
+    {
+      "text": "trigger field references the Flushed Heirloom quest",
+      "passed": true,
+      "evidence": "trigger: Flushed Heirloom quest failure"
+    },
+    {
+      "text": "Trigger section contains wiki-link to the existing Flushed Heirloom quest file",
+      "passed": true,
+      "evidence": "Trigger contains [[Flushed Heirloom]] link and the template line 'Consequences of the results of [[Flushed Heirloom]]'"
+    },
+    {
+      "text": "Impact bullets focus on world changes (reputation, NPC attitudes) not event recap",
+      "passed": true,
+      "evidence": "4 bullets: Beatrix hostile toward adventurers, pulled guild funding, word spread party can't be trusted, future quests harder. All world-state changes."
+    },
+    {
+      "text": "affected_entities list includes relevant NPCs/locations",
+      "passed": true,
+      "evidence": "affected_entities includes Beatrix Goldleaf (with full path) and Highreach Adventurers Guild"
+    },
+    {
+      "text": "Searched vault for existing related consequence files before creating",
+      "passed": true,
+      "evidence": "Output shows systematic search of Private/2. Reference/Events/Consequences/ — found all 6 existing files, identified the exact match"
+    },
+    {
+      "text": "Searched vault for the Flushed Heirloom quest file to link to",
+      "passed": true,
+      "evidence": "Found quest at Private/2. Reference/Events/Quests/Missed/Flushed Heirloom.md, read its contents, extracted quest giver and context"
+    },
+    {
+      "text": "Dataview query uses FROM [[]] (not FROM [[#this.file.name]])",
+      "passed": true,
+      "evidence": "Dataview uses FROM [[]] — fixed from the old FROM [[#this.file.name]] that was in the original file"
+    },
+    {
+      "text": "Brevity: scannable in 10 seconds",
+      "passed": true,
+      "evidence": "All sections use short bullets and fragments. Trigger is 2 sentences. Impact is 4 bullets. Current Status is 2 sentences. Fully scannable."
+    }
+  ],
+  "pass_rate": "10/10 (100%)",
+  "notes": "Agent correctly found and updated the existing file rather than creating a duplicate. Thorough vault research — found quest file, NPC file, guild file. Restructured content to match template. One minor gap: file remains in Ideas/ despite status change to Active (skill doesn't instruct on file relocation). Side effect: agent modified real vault file."
+}

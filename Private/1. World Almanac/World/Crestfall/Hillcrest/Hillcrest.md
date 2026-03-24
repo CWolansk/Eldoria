@@ -1,14 +1,17 @@
-# Hillcrest
-*A wine-making village caught between tradition and progress*
-
 ---
-type: Village
-kingdom: Crestfall
+type: Settlement
+name: Hillcrest
+region: Crestfall
+settlement_type: Village
 population: 400
-primary_industry: Viticulture and Wine Production
-political_complexity: High
-tags: [#Hillcrest, #Crestfall, #Village, #Viticulture, #PoliticalTension]
+status: Active
+tags:
+  - Settlement
+  - Crestfall
+  - Hillcrest
 ---
+
+![[Public/World/Crestfall/Hillcrest/Hillcrest]]
 
 ## Town Overview
 
@@ -26,7 +29,7 @@ Founded three centuries ago by refugees fleeing the Border Wars, Hillcrest has g
 
 **The Guild Expansion (12 years ago)**: The [[Merchants Guild]] established a local chapter, bringing outside capital but also external control and pressure to modernize production methods.
 
-**The Current Crisis (6th day of Fall)**: A new blight appeared suddenly, more virulent and magically resistant than any previous outbreak, coinciding with reports of increased chaotic magical activity throughout the region following the evil wizard's acquisition of the [[Seeker's Eye]] artifact.
+**The Current Crisis (6th day of Fall)**: A new blight appeared suddenly, more virulent and magically resistant than any previous outbreak, coinciding with reports of increased chaotic magical activity throughout the region following the evil wizard's acquisition of the [[Seekers Eye]] artifact.
 
 ## Notable NPCs
 
@@ -109,7 +112,7 @@ Founded three centuries ago by refugees fleeing the Border Wars, Hillcrest has g
 ## Central Event: The Blighted Vineyards Crisis
 
 ### The Situation
-A virulent magical blight has infected 40% of Hillcrest's vineyards since the 6th day of Fall. Unlike natural plant diseases, this blight resists traditional treatments and appears to be spreading in deliberate patterns. The infection began the same day the evil wizard obtained the [[Seeker's Eye]] artifact, suggesting this is part of his campaign to destabilize the region and hinder artifact collection efforts.
+A virulent magical blight has infected 40% of Hillcrest's vineyards since the 6th day of Fall. Unlike natural plant diseases, this blight resists traditional treatments and appears to be spreading in deliberate patterns. The infection began the same day the evil wizard obtained the [[Seekers Eye]] artifact, suggesting this is part of his campaign to destabilize the region and hinder artifact collection efforts.
 
 ### Stakes
 - **If Unresolved**: Village faces economic collapse within two months; Merchants Guild threatens foreclosure; traditional vintner families lose ancestral lands; strategic location becomes vulnerable to external control

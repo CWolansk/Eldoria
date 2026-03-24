@@ -1,4 +1,23 @@
-![[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Highreach NPC Index#^389d1c|Highreach NPC Index]]
+---
+type: Reference
+name: Highreach NPC Index
+location: Highreach
+region: Crestfall
+tags:
+  - Reference
+  - Crestfall
+  - Highreach
+---
+
+## NPCs of Highreach
+
+```dataview
+LIST
+WHERE type = "NPC" AND location = "Highreach"
+SORT file.name ASC
+```
+
+---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

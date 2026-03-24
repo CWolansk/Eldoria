@@ -1,14 +1,18 @@
-# Eliza Brightwine
-*Ambitious Merchants Guild representative advocating modernization*
-
 ---
 type: NPC
+name: Eliza Brightwine
 location: Hillcrest
+region: Crestfall
 profession: Merchants Guild Representative
 faction: Merchants Guild
 status: Alive
-tags: [#ElizaBrightwine, #Hillcrest, #MerchantsGuild, #Crestfall]
+tags:
+  - NPC
+  - Crestfall
+  - Hillcrest
 ---
+
+![[Public/World/Crestfall/Hillcrest/NPCs/Eliza Brightwine|Eliza Brightwine]]
 
 ## Appearance
 Tall and slender, auburn hair tied in practical bun, green eyes that spark with enthusiasm but harden during business negotiations. Dresses in well-made but practical clothing befitting a guild representative.

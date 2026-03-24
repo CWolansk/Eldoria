@@ -6,12 +6,12 @@ party_level: 3-5
 duration: 2-4 sessions
 difficulty: moderate_hard
 tags:
-  - "#Encounter"
-  - "#Investigation"
-  - "#Bandits"
-  - "#Fairfield"
-  - "#MultiSession"
-  - "#Rescue"
+  - Encounter
+  - Investigation
+  - Bandits
+  - Fairfield
+  - MultiSession
+  - Rescue
 created: 2025-01-15
 updated: 2025-01-15
 ---

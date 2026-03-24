@@ -24,8 +24,8 @@ Guild Rank : `VIEW[{frontmatter^Player Controls#GuildRank}]`
 - Cursed: Cannot taste anything
 
 ## Recurring Events
-- [[Merchants Guild Fees Reminder]]
-- [[Merchants Guild Fees are Due]]
+- [[0496-03-25 Merchants Guild Fees Reminder]]
+- [[0496-03-50 Merchants Guild Fees are Due]]
 
 
 

@@ -32,7 +32,7 @@ SORT file.name ASC
 
 Recap 
 - Party ended last session turning in all of their monster rewards and ended up advancing to adventurer Rank E
-	- [[Party becomes E Rank Adventurers]] 
+	- [[0496-03-03 Party becomes E Rank Adventurers]] 
 #Date_04_03_496
 - Party went back to their inn to sleep and level up for the night 
 - We will be starting the next session with the party waking up at the inn 

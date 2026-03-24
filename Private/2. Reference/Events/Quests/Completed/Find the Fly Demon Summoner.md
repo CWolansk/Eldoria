@@ -160,7 +160,7 @@ After consulting with [[Jon Brightman]] during [[Session 11 notes]], the party l
 
 - [[Session 11 notes]] - Quest assigned
 - [[Randi Kills Looters Consequence]] - Looter connection to chaos
-- [[Vineyard Blight Investigation]] - Possible dark magic connection
+- [[0496-03-06 Vineyard Blight Investigation]] - Possible dark magic connection
 - Blackwood Forest rumors - Source of dark magic?
 - [[Seekers Eye]] theft - Timing coordination with demon attack
 

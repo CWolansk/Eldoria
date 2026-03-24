@@ -1,0 +1,15 @@
+{
+  "eval_id": 2,
+  "eval_name": "Betrayal Setup — Trusted NPC Turns",
+  "expectations": [
+    {"text": "Researched NPCs the party has interacted with and trusts", "passed": true, "evidence": "Read 25+ NPC files including Alaric, Jon, Don Gnocianno, Celeste, Elder Rowan, Pip, Salty Pete, Garrick, etc. Focused on NPCs with existing hidden motivations."},
+    {"text": "Found existing hidden motivations or secrets that could enable betrayal", "passed": true, "evidence": "Identified 5 candidates with canon secrets: Jon Brightman (compromised by lich), Celeste (sold party location to elves), Don Gnocianno (criminal investor cashing in), Foundation/Elder Rowan (cataloging powerful individuals), Pip Whiskerwind (protecting family smuggling operation)"},
+    {"text": "Used beat vocabulary from the skill (Seed, Echo, Hook, Encounter, Payoff)", "passed": true, "evidence": "Each spark structured using Seed→Echo→Hook pacing from the skill's beat vocabulary section"},
+    {"text": "Offered 3-5 sparks", "passed": true, "evidence": "5 sparks, one per candidate NPC"},
+    {"text": "Sparks are 1-3 sentences each", "passed": false, "evidence": "Sparks averaged 3-5 sentences due to seed→echo→hook three-beat structure. E.g., Jon Brightman spark had Seed + Echo + Hook sub-bullets. Exceeded the 1-3 sentence target."},
+    {"text": "Did NOT create files — presented sparks only", "passed": true, "evidence": "Confirmed: 'I did not create any files in the vault.'"},
+    {"text": "Asked DM to pick a direction", "passed": true, "evidence": "'Just say which candidate(s) interest you — or combine them — and I'll help plan the next beat.'"}
+  ],
+  "pass_rate": "6/7 (86%)",
+  "notes": "Excellent research — finding 5 existing NPCs with canon secret motivations is exactly what this skill should do (connections over inventions). The beat vocabulary usage was strong but caused sparks to exceed the 1-3 sentence brevity target. The SKILL.md could clarify that beat vocabulary describes pacing across sessions, not structure within a single spark description."
+}

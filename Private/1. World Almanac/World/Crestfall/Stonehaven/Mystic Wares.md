@@ -1,9 +1,14 @@
 ---
+type: Store
 name: "Mystic Wares"
 owner: "Hilda Ravenshadow"
-type: "Magic Shop"
+store_type: Magic Shop
 location: "Stonehaven"
-tags: ["#MagicShop", "#Stonehaven", "#Potions", "#Charms", "#Supernatural"]
+region: Crestfall
+tags:
+  - Store
+  - Crestfall
+  - Stonehaven
 ---
 
 # Mystic Wares

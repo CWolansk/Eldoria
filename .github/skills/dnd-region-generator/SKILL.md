@@ -33,6 +33,7 @@ Always **search the vault first**:
 1. List `Private/1. World Almanac/World/` to see all existing regions — avoid duplicates
 2. Check if the proposed region name conflicts with or overlaps an existing one
 3. Look at existing region files to match tone and structure
+4. If the region already exists, **do not create a duplicate** — offer to review or update the existing files instead. If the user wants to see what you'd generate, show a preview in chat without creating files.
 
 ## File Paths
 
@@ -51,16 +52,17 @@ type: Region
 name: {Region Name}
 tags:
   - Region
+  - {RegionName}
 ---
 
-## Overview
-> {2-3 sentences. What defines this region — geography, culture, and strategic importance. Use blockquote for read-aloud text.}
+![[Public/World/{Region Name}/{Region Name}]]
 
 ## History
 {3-4 bullet points. Key events that shaped the region. Format: **Bold label.** One sentence.}
 
 ## Settlements
-{Bullet list of [[Settlement Name]] — one-line description. Link to private settlement files.}
+{Bullet list with full private paths. Example:}
+- [[Private/1. World Almanac/World/{Region}/{Settlement}/{Settlement}|{Settlement}]] — one-line description
 
 ## Factions & Powers
 {Bullet list. Who holds power here, who's rising, who's falling.}
@@ -78,12 +80,9 @@ The following sections are **optional** — only include if the user specifies:
 
 ---
 
-# Public Notes
-[[Public/World/{Region Name}/{Region Name}|{Region Name}]]
-
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```
 ```
@@ -96,6 +95,7 @@ type: Region
 name: {Region Name}
 tags:
   - Region
+  - {RegionName}
 ---
 
 ## Overview
@@ -105,13 +105,14 @@ tags:
 {Short paragraph or bullets. Terrain, climate, notable landmarks.}
 
 ## Known Settlements
-{Bullet list linking to public settlement pages.}
+{Bullet list with full public paths. Example:}
+- [[Public/World/{Region}/{Settlement}/{Settlement}|{Settlement}]] — one-line description
 
 ---
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
-FROM [[#this.file.name]]
+FROM [[]]
 SORT file.name ASC
 ```
 ```
@@ -142,3 +143,14 @@ Some existing regions may use older formats or lack YAML frontmatter. When conve
 4. **Condense prose descriptions** into scannable bullets
 5. **Rewrite public file** as standalone cartographer's reference
 6. **For batch conversions** — list files first, confirm with user, convert one at a time
+
+## Cascading Creation
+
+When creating a region, check if it needs supporting content:
+- Does it have settlements that need files? Ask if you should create them using the **dnd-settlement-generator** skill.
+- Does it have factions or organizations? Ask if you should create them using the **dnd-group-generator** skill.
+- Does it have notable locations (ruins, forests, landmarks)? Ask if you should create them using the **dnd-location-generator** skill.
+
+Don't silently create supporting content — always confirm with the user first.
+
+**Reminder:** After generating a region file, always check this section and ask the DM about any settlements, factions, or locations mentioned in the file that don't have their own files yet.
