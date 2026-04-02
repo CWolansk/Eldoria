@@ -4,21 +4,63 @@
     "type": "split",
     "children": [
       {
-        "id": "e7a6238046ee1eba",
+        "id": "fbb146a9c44c9922",
         "type": "tabs",
         "children": [
           {
-            "id": "8acf6dfd5dde5a25",
+            "id": "8af2962752543ab3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Public/World/Events/Timeline/Wizarding Wars.md",
+                "file": "Public/World/Orcish Wastes/Orcish Wastes.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Orcish Wastes"
+            }
+          },
+          {
+            "id": "921382e349848b74",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Public/World/Crestfall/Stonehaven/Stonehaven.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Wizarding Wars"
+              "title": "Stonehaven"
+            }
+          },
+          {
+            "id": "18fad759852e6ebb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Public/World/Crestfall/Fairfield/Fairfield.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Fairfield"
+            }
+          },
+          {
+            "id": "7d12271794e32e24",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Public/World/Crestfall/Ardenville/Ardenville.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Ardenville"
             }
           }
         ]
@@ -250,34 +292,46 @@
       "calendarium:Open Calendarium": false
     }
   },
-  "active": "c449ead431ac9bb8",
+  "active": "8af2962752543ab3",
   "lastOpenFiles": [
-    "Private/2. Reference/Encounters/Cursed Grove of the Corrupted Dryad.md",
-    "Private/2. Reference/Encounters/Bandit Ambush - Ardenville Road.md",
-    "Private/2. Reference/Events/World Events/Holidays/Elven Holidays/Starfall Vigil.md",
-    "Private/2. Reference/Events/World Events/Holidays/Dwarven Holidays/The Anvil's Rest.md",
-    "Private/2. Reference/Events/Quests/Ideas/Boat Race Sabotage.md",
-    "Private/2. Reference/Events/Quests/Active/Dead Fish in the Eastern Shallows.md",
-    "Public/World/Events/Timeline/The Great Blight of Hillcrest.md",
-    "Private/2. Reference/Events/World Events/Timeline/0496-03-15 Harvest Festival in Ardenville.md",
-    "Public/World/Events/Timeline/0496-03-15 Harvest Festival in Ardenville.md",
-    "Private/2. Reference/Events/Consequences/Active/Ember River Bridge Destroyed.md",
-    "Private/2. Reference/Events/World Events/Timeline/0496-03-15 Merchants Guild Warehouse Robbery.md",
-    "Public/World/Events/Timeline/0496-03-15 Merchants Guild Warehouse Robbery.md",
-    "Public/World/Events/Timeline/Diego seals Jons powers.md",
-    "Public/World/Events/Timeline/Diego Comes to Eldoria.md",
-    "Public/World/Events/Timeline/0496-03-01 Frederick Goldman Rat Quest Completed.md",
-    "Public/World/Events/Timeline/0496-02-50 Party Summoned to world.md",
-    "Private/2. Reference/Encounters/Encounter Dashboard.md",
-    "Private/2. Reference/Encounters/Encounter System Guide.md",
-    "Private/2. Reference/Encounters/Diluted Health Potions - Fairfield.md",
-    "Private/2. Reference/Encounters/Create Encounter.md",
-    "Private/2. Reference/Encounters/Cacklers.md",
-    "Private/2. Reference/Events/Quests/Active/The Artifact Wars.md",
-    "Private/2. Reference/Events/Quests/Active/Nightstalkers Collection Quest.md",
-    "Private/2. Reference/Events/Quests/Active/Exterminators Guild Induction.md",
-    "Private/2. Reference/Events/Quest Board.md",
-    "Public/World/Events/Timeline/0496-03-04 Party Enters Mine Level 2.md",
+    "Public/World/Silverleaf Lands/Silverleaf Lands.md",
+    "Public/World/Ironpeak Mountains/Ironpeak Mountains.md",
+    "Public/World/Crestfall/Crestfall.md",
+    "Public/World/Crestfall/Stonehaven/Stonehaven.md",
+    "Public/World/Crestfall/Fairfield/Fairfield.md",
+    "Public/World/Crestfall/Ardenville/Ardenville.md",
+    "Public/World/Crestfall/Highreach/The Warren.md",
+    "Public/World/Crestfall/Highreach/Highreach.md",
+    "Public/World/Images/Frostglade.png",
+    "Public/World/Images/Gemini_Generated_Image_vlsawkvlsawkvlsa.png",
+    "Public/World/Images/Fairfield.png",
+    "Public/World/Images/Gemini_Generated_Image_mwkilsmwkilsmwki.png",
+    "Public/World/Images/Forgepeak.png",
+    "Public/World/Images/Gemini_Generated_Image_iy1lruiy1lruiy1l.png",
+    "Public/World/Images/GemStoneHollow.png",
+    "Public/World/Images/Gemini_Generated_Image_5hiyrg5hiyrg5hiy.png",
+    "Public/World/Images/Highreach.png",
+    "Public/World/Images/Ardenville.png",
+    "Public/World/Images/FairfieldImageprompt.md",
+    "Public/World/Images/ForgePeakImageprompt.md",
+    "update_image_prompts.js",
+    "Public/World/Images/OrcCityCImageprompt.md",
+    "Public/World/Images/OrcCityBImageprompt.md",
+    "Public/World/Images/StoneforgeImageprompt.md",
+    "Public/World/Images/SteamhammerImageprompt.md",
+    "Public/World/Images/IronrootImageprompt.md",
+    "Public/World/Images/GemstoneHollowImageprompt.md",
+    "Public/World/Images/StardewImageprompt.md",
+    "Public/World/Images/SerenityHollowImageprompt.md",
+    "Public/World/Images/MoonshadeImageprompt.md",
+    "Public/World/Images/HillcrestImageprompt.md",
+    "Public/World/Images/HighreachImageprompt.md",
+    "Public/World/Images/ArdenvilleImageprompt.md",
+    "Public/World/Images/FrostGladeImageprompt.md",
+    "Public/World/Images/OrcCapitolImageprompt.md",
+    "Public/World/Images/StonehavenImageprompt.md",
+    "Public/World/Images/StarfallImageprompt.md",
+    "Public/World/Images",
     "docs/dm-jarvis.html",
     "docs/jarvis-index.json",
     "docs/generate-jarvis-index.js",
@@ -285,18 +339,6 @@
     "Public/World/Events",
     "docs/Private/1. World Almanac/World/Orcish Wastes/Wizards Tower/NPCs",
     "docs/Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs",
-    "docs/Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs",
-    "docs/Private/1. World Almanac/World/Crestfall/Fairfield/NPCs",
-    "docs/Private/1. World Almanac/World/Crestfall/Highreach/NPCs",
-    "Private/1. World Almanac/World/Crestfall/Highreach/Highreach Mines/Level 1/Pasted image 20241106184929.png",
-    "docs/Assets/Eldoira.jpg",
-    "docs/site-lib/media/favicon.png",
-    "docs/site-lib/media/6155340132a851f6089e.svg",
-    "docs/site-lib/media/2308ab1944a6bfa5c5b8.svg",
-    "docs/assets/eldoira.jpg",
-    "Assets/Eldoira.jpg",
-    "docs/Eldoira.jpg",
-    "docs/DmNotes/01-CAMPAIGN-CORE/Eldoira.jpg",
-    "docs/dmnotes/01-campaign-core/eldoira.jpg"
+    "docs/Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs"
   ]
 }

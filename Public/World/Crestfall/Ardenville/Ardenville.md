@@ -8,7 +8,7 @@ tags:
   - Crestfall
   - Ardenville
 ---
-
+![[Ardenville.png]]
 ## Overview
 Ardenville is a lakeside port town on the northern shore of Lake Arden in Crestfall. A primary fishing and transport hub for the lake, and a secondary trade connection to Highreach.
 

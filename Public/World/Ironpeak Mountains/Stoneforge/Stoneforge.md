@@ -8,7 +8,7 @@ tags:
   - IronpeakMountains
   - Dwarven
 ---
-
+![[Stoneforge.png]]
 ## Overview
 A bustling mining village where dwarves extract precious metals and gems from the heart of Ironpeak.
 

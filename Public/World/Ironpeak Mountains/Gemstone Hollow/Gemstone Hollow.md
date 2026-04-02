@@ -8,7 +8,7 @@ tags:
   - IronpeakMountains
   - Dwarven
 ---
-
+![[GemStoneHollow.png]]
 ## Overview
 A village specializing in gemcutting and jewelry-making, utilizing the rare gems mined from Ironpeak.
 

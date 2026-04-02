@@ -8,7 +8,7 @@ tags:
   - Crestfall
   - Fairfield
 ---
-
+![[Fairfield.png]]
 ## Overview
 > Fairfield stands at the junction of the Great Western Road and the Silverleaf Trade Route — a thriving trade town of 3,500 souls serving as the primary gateway between Crestfall and the elven Silverleaf Lands. The elven sister city of Starfall is visible in the distance across the border.
 

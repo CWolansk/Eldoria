@@ -10,7 +10,7 @@ tags:
   - IronpeakMountains
   - Dwarven
 ---
-
+![[Forgepeak.png]]
 > Nestled deep within the heart of Ironpeak Mountain, ForgePeak's halls echo with the clang of hammers and the roar of molten metal. The city is carved from living rock — tunnels, grand chambers, and forges stretching deep into the mountain.
 
 ## Overview

@@ -8,7 +8,7 @@ tags:
   - SilverleafLands
   - Elven
 ---
-
+![[Stardew.png]]
 > Expansive fields and well-tended gardens greet you, painting a picture of peace and prosperity. The village is nestled among gentle hills and dense forests, with snow-covered trees adding winter magic to the landscape.
 
 ## Overview

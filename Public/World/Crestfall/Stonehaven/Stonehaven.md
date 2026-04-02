@@ -8,7 +8,7 @@ tags:
   - Crestfall
   - Stonehaven
 ---
-
+![[Stonehaven.png]]
 ## Overview
 > Stonehaven clings to the southeastern edge of the Blackwood Forest — a frontier outpost where civilization meets wilderness. A tall stone watchtower dominates the skyline against the dark wall of ancient trees beyond the palisade walls. The gates are currently sealed under mysterious circumstances.
 

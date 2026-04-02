@@ -1,0 +1,17 @@
+# === API Keys & Secrets ===
+.env
+.env.*
+!.env.example
+
+# === Node ===
+node_modules/
+npm-debug.log*
+
+# === OS ===
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# === Obsidian (optional — uncomment if you don't want plugin state tracked) ===
+# .obsidian/workspace.json
+# .obsidian/cache

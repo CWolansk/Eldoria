@@ -8,7 +8,7 @@ tags:
   - IronpeakMountains
   - Dwarven
 ---
-
+![[SteamHammer.png]]
 ## Overview
 A village near natural hot springs, where dwarves relax and indulge in steam baths after a hard day's work.
 

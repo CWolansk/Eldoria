@@ -10,7 +10,7 @@ tags:
   - SilverleafLands
   - Elven
 ---
-
+![[Frostglade.png]]
 > Snow-covered trees and shimmering ice sculptures greet you as you approach. The city’s gates, adorned with intricate elven designs, open to reveal a landscape where nature and architecture blend seamlessly. Pathways lined with luminescent crystals guide you through the twilight hours.
 
 ## Overview

@@ -5,7 +5,11 @@
   "scripts": {
     "generate-index": "node generate-index.js",
     "generate-jarvis": "node generate-jarvis-index.js",
+    "start-jarvis": "node jarvis-server.js",
     "build": "npm run generate-index && npm run generate-jarvis"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
   },
   "keywords": ["dnd", "campaign", "eldoria"],
   "author": "",

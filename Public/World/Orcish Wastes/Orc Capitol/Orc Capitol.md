@@ -8,7 +8,7 @@ tags:
   - OrcishWastes
   - Orcish
 ---
-
+![[OrcCapitol.png]]
 ## Overview
 The capital city of the orcish territories. Little is known by outsiders.
 

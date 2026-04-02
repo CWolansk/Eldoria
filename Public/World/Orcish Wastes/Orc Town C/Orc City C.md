@@ -8,7 +8,7 @@ tags:
   - OrcishWastes
   - Orcish
 ---
-
+![[OrcCityC.png]]
 ## Overview
 An orcish settlement in the Wastes. Little is known by outsiders.
 

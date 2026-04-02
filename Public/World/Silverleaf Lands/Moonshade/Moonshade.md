@@ -8,7 +8,7 @@ tags:
   - SilverleafLands
   - Elven
 ---
-
+![[Moonshade.png]]
 ## Overview
 A hidden village deep within the Everwood, where elven elders study ancient lore and magic. Secluded and difficult to find without a guide.
 

@@ -1,0 +1,23 @@
+# Stonehaven Image Prompt
+
+## Prompt
+
+```text
+Create a medieval fantasy frontier settlement for a DND campaign in the style of a clean hand-painted fantasy illustration, high oblique bird's-eye view, readable settlement layout, watercolor-and-ink concept art, detailed but not photorealistic.
+
+This is Stonehaven, a tense frontier outpost at the southeastern edge of Blackwood Forest where civilization meets deep wilderness. Show the viewer looking down from above and slightly to one side so the palisade settlement fills the foreground and center, while the enormous dark wall of ancient forest rises directly behind it. Beyond the cleared perimeter, the forest should feel like it goes on forever. The settlement should take up at least half the image.
+
+Most important: Stonehaven must clearly read as a complete inhabited frontier village, not just a watchtower with a few huts. Show a full palisade settlement with 40-70 Tudor-style wood and stone buildings inside the walls, a visible central square, 2 or 3 main lanes, clustered homes, supply sheds, stables, storehouses, workshops, and enough secondary streets that the whole place feels lived in and defensible.
+
+Stonehaven should look compact, fortified, and practical. Build the village between natural stone outcroppings and strong palisade walls, with sealed gates, watch platforms, and disciplined guards on the ramparts. The centerpiece landmark is a meticulously crafted, highly fortified Tudor keep acting as a steadfast fortress of law against the encroaching wilderness, rising above the other timber and stone buildings.
+
+Inside the palisade, show a practical central square with a large stone fire pit, sturdy streets, hunting lodges, supply buildings, the Adventurers Guild hall near the edge of town, a dwarven smithy glowing with forge light, timber yards, drying pelts, and stacks of frontier supplies. Outside the gates, place a few stranded merchant wagons and travelers camped uneasily under guard, because the settlement is under isolation and the gates are closed.
+
+Mood: a feeling of justice and order holding back the wild. Clear sunny day hitting the bright Tudor stone and blue & gold banners, contrasting sharply with the deep dark shadow of the Blackwood Forest outside the walls. No readable text, no signs, no labels, no lettering anywhere in the image.
+```
+
+## Negative Prompt
+
+```text
+No castle city, no harbor, no open sunny farmland town, no tropical forest, no modern fortifications, no futuristic elements, no cartoon style, no photorealism, no isolated tower with only a few huts, no tiny hamlet with almost no buildings, no readable text, no written signs.
+```

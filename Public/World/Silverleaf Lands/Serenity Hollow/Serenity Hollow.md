@@ -8,7 +8,7 @@ tags:
   - SilverleafLands
   - Elven
 ---
-
+![[SerenityHollow.png]]
 ## Overview
 A village built around a sacred grove, where elves come for spiritual retreats and meditation.
 

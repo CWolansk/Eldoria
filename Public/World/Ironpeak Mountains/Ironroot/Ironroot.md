@@ -8,7 +8,7 @@ tags:
   - IronpeakMountains
   - Dwarven
 ---
-
+![[Ironroot.png]]
 ## Overview
 A village built around ancient dwarven shrines, where religious ceremonies and rituals are performed. Home to dwarf monks who spend their days in meditation.
 
