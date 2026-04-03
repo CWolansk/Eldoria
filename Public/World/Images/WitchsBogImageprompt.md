@@ -1,21 +1,68 @@
 # Witch's Bog Image Prompt
 
-## Prompt
+## Prompt — Primary (High Oblique Aerial View)
 
 ```text
-Create a dark and sinister swamp for a DND campaign in the style of a clean hand-painted fantasy illustration, high oblique bird's-eye view, readable landscape layout, watercolor-and-ink concept art, detailed but not photorealistic.
+Create a dark and sinister swamp for a DND campaign in the style of a clean hand-painted fantasy illustration. Loose, aggressive ink linework with heavily textured watercolor washes — wet-on-wet technique for the water and mist areas, deliberately murky and difficult to read in places. High oblique bird's-eye view, camera pitched about 45 degrees. The bog fills the entire frame — no sky visible, no dry land except at the very edges. Perpetual overcast twilight — no clear light source, flat directionless gray-green illumination that makes everything look slightly wrong. Detailed but not photorealistic.
 
-This is the Witch's Bog, a murky swamp in the west-central Orcish Wastes where dark magic is said to fester. Show the viewer looking down from above at a vast expanse of stagnant water, dead trees, and tangled vegetation stretching across the landscape. The water should be dark and opaque — a sickly greenish-black surface covered in patches of thick algae and pale floating scum visible from above. Dead trees rise from the water like skeletal hands, their bare branches draped in hanging moss and cobwebs, creating an eerie forest of bone-white silhouettes visible from the air.
+This is the Witch's Bog — a vast, magically corrupted swamp in the west-central Orcish Wastes where dark magic festers. The bog is not a normal wetland. Something is wrong with it in a way that is immediately visible even from the air.
 
-Most important: the Witch's Bog must feel deeply wrong and unnatural from above — not just a normal swamp. Subtle magical corruption should be visible: a faint green-purple miasma or mist clinging to the water's surface in patches, bioluminescent fungi growing in unnatural spiraling patterns on dead wood, pools that seem to glow faintly from below, and strange circular patterns in the algae as if something stirs beneath. A barely visible path of half-submerged stepping stones should trace a winding line deeper into the bog. A crude hut on stilts should be visible in the middle distance, barely above the waterline, with a thin column of greenish smoke — the witch's dwelling.
+WATER SURFACE: The primary material of this image. The water is between 2 and 10 inches deep over a thick black anoxic mud base. Its color is not brown (normal swamp) — it is a dark gray-black with a surface film of thick pale-green algae covering 40–60% of the visible water surface in irregular patches. The algae patches are NOT uniform — they form amorphous shapes, some with surprisingly straight edges, some with perfect circular patches, some in spiral arrangements (subtle, not obvious). Where the algae is absent, the water surface is near-opaque dark gray-black and reflects nothing — no sky reflection, no tree reflection. In three or four locations, the water has a faint iridescent oil-slick sheen — thin rainbow patterns on the dark surface. In two places visible from above: a faint glow from BELOW the water surface — a dim green-purple bioluminescence pushing through the shallow water from something below the mud. NOT dramatic, just a faint pale discoloration that shouldn't be there.
 
-The western edge should show the transition from dry wasteland to increasingly waterlogged ground, where the Crestfall border lies to the far west. To the east, the bog fades into the broader Orcish Wastes. The bog should feel vast from above — filling most of the frame. The very center should be darkest and most obscured by fog, suggesting greater danger within.
+DEAD TREES: The dominant vertical elements. Cypress-like dead trees with smooth pale gray-white bark stripped entirely below the waterline — their bases bleached bone-white where they emerge from the black water. Above the waterline, the bark is rough and gray. The trees have no leaves — only bare skeletal branches, widely horizontal, that spread 15–30 feet in each direction. Each branch is draped in hanging strands of a gray-white moss-like substance (2–4 feet long, perfectly still in the windless bog air). Some trees have collapsed, lying half-submerged and becoming platforms for the algae. From above: the skeletal tree crowns create a lace-like pattern of pale gray branches across the dark water surface.
 
-Mood: dread, corruption, and supernatural wrongness. Perpetual overcast twilight with no clear light source. Use a palette of sickly greens, murky blacks, putrid yellows, faint purple magical glow, and the bone-gray of dead wood. No readable text, no signs, no labels, no lettering anywhere in the image.
+CORRUPTION PATTERNS (visible from above in the algae and water surface):
+- One large circular zone (100 feet in diameter) near the center of the bog where the algae has been CLEARED in a perfect circle. Within this clear-circle, the water glows faintly from below (green-purple). This is the most obviously supernatural element.
+- Around this circle, the algae forms a roughly concentric ring pattern — not quite perfect, but clearly not random.
+- Bioluminescent fungi growing on submerged dead logs — visible as clusters of pale blue-white dots just below the water surface, like embers at the bottom of the water.
+
+STEPPING STONES PATH: A winding line of half-submerged flat stones threading from the bog's west edge toward its center. Each stone is 2–4 feet across, placed 2–3 feet apart — close enough to step between but requiring careful attention. The path is not straight — it curves and winds, as if deliberately confusing. It disappears into the mist in the central portion before re-emerging near the witch's hut.
+
+THE WITCH'S HUT (visible in the center-right area): A single-room structure on three crooked wooden stilts. The stilts are irregular timber posts approximately 8 feet tall, raising the hut floor 5 feet above the waterline. The hut itself: gray weathered plank walls (roughly 12 feet × 10 feet floor plan), a steeply pitched roof of woven reeds and dry grass (now dark gray and rotting), one tiny window visible as a single pane of murky greenish glass glowing from inside — the only light source in the image. A warped wooden dock extends from the doorway (which has no door, just a dark interior void) down to a small floating platform at waterline, with a flat-bottomed boat tied to it (a simple wooden punt, waterlogged and half-full of dark water). One thin column of greenish smoke rises from a crude clay chimney on the roof peak.
+
+THE CENTRAL AREA (deeper fog zone): The exact center of the bog should be the MOST obscured area — a dense low mist (not beautiful mist, murky gray-green mist) sitting at water level and extending 3–4 feet above the surface, completely obscuring the water beneath it and the bases of trees within it. Only the skeletal tree crowns emerge above this fog layer in the center. The mist is clearly not natural — it doesn't drift, it just sits.
+
+WESTERN EDGE (left side): Where the bog transitions to dry wasteland. An abrupt, ugly transition: the black water becomes increasingly shallow, the mud becomes exposed cracked gray-black earth, then transitions into the dry pale brown cracked earth of the wasteland. Dead grass and dry scrub appear at the edge.
+
+Mood: supernatural dread, festering corruption, and deep wrongness. Not dramatic horror-movie scary — subtle and deeply unsettling. The kind of place where you can't identify what exactly is wrong, but everything is. Palette: near-black water, pale green algae, bone-white skeletal trees with gray branches, gray-white hanging moss, single murky green hut window glow, pale greenish smoke column, green-purple subsurface bioluminescence, gray-green central mist layer, dark gray-black wasteland transition. No readable text, no signs, no labels, no lettering anywhere in the image.
 ```
 
 ## Negative Prompt
 
 ```text
-No beautiful bayou, no sunny wetland, no mangrove paradise, no clear blue water, no living green trees, no friendly swamp creatures, no witch's hut prominently displayed, no futuristic elements, no photorealism, no anime style, no readable text, no written signs.
+No beautiful bayou, no sunny wetland, no mangrove paradise, no clear blue water, no living green trees, no friendly swamp creatures, no witch's hut as a cozy cottage, no photorealism, no anime style, no readable text, no written signs, no bright warm light, no dramatic obvious magic effects (keep the corruption subtle), no normal swamp-brown water.
+```
+
+---
+
+## Alternative POV — Standing at the Bog's Edge (Ground Level)
+
+*Use this for a more immediate, atmospheric single image. The ground-level view at the bog's edge conveys the dread more viscerally than the aerial view.*
+
+### Prompt
+
+```text
+Create a dread-inducing fantasy swamp scene for a DND campaign in the style of a clean hand-painted fantasy illustration. Precise ink linework with aggressive wet-on-wet watercolor for the mist and water. Ground-level perspective standing on the last solid ground at the edge of the Witch's Bog, looking north into the bog interior. Eye level, camera horizontal, slight 3-degree downward tilt (the viewer is looking slightly down onto the water surface). Horizontal wide format. Perpetual overcast twilight — no sun, no warmth, flat directionless gray-green light. Detailed but not photorealistic.
+
+THE GROUND AT THE VIEWER'S FEET: The last three feet of dry land — cracked, pale gray-brown wasteland soil with a single dry twisted scrub root to the right. The soil transitions abruptly to black mud (2 feet of exposed mud bank, 6 inches tall) and then immediately to open black water. The transition is ugly and immediate.
+
+THE WATER SURFACE: Begins at the viewer's feet and extends to the horizon. Near the viewer (5–30 feet): the water is 2–4 inches deep over black mud, partially covered in thick pale-green algae patches in irregular shapes. The gaps between algae patches show the near-opaque dark gray-black water surface. A faint iridescent oil-slick sheen in two places near the viewer. The stepping-stone path begins here: a line of flat dark stones (2–3 feet across) begins from the mud bank directly center-frame and extends into the bog, disappearing into the mist approximately 80 feet ahead.
+
+THE FOREGROUND DEAD TREES: Two cypress-like dead trees with smooth bone-white bleached lower trunks rise from the water — one at the LEFT edge of the frame (10 feet from viewer), one at the RIGHT edge (15 feet from viewer). Their horizontal branches fill the upper-left and upper-right corners of the frame, their gray-white bare branches and hanging gray-white moss fronds creating a natural arch over the view. Their scale makes the viewer feel enclosed.
+
+THE MIDDLE DISTANCE (30–100 feet out): More dead trees visible at varying depths — each progressively more obscured by the growing fog layer. The stepping-stone path continues through this zone, each stone visible but requiring careful placement to use safely. Bioluminescent fungi clusters are visible below the water surface at tree bases — pale blue-white dots in the dark water, not at the surface.
+
+THE FOG: Starting at about 60 feet from the viewer, a gray-green mist layer sits on the water at a height of 3 feet above the surface. It does not drift. The tree trunks disappear into it at the waterline, the skeletal upper branches emerging above it as pale gray shapes. The mist thickens rapidly — by 100 feet, the view is completely obscured. Within the mist, two things are barely visible:
+1. The faint smear of murky green-yellow light — the single lit window of the witch's hut, visible as a pale glow within the fog, impossible to tell how far away
+2. One skeletal tree crown silhouette, visible as a dark branching shape against the slightly lighter fog
+
+OVERHEAD: The sky is not visible — the dead tree branches and hanging moss create a canopy above. The ambient light from above is the flat overcast gray-green glow of perpetual twilight. No color warmth anywhere in the scene.
+
+Mood: a very specific fear — the feeling of standing at the threshold of somewhere you absolutely should not go, and knowing it. The stepping-stone path leads directly forward into something that has obscured itself. Palette: bone-white bleached tree trunks, dark gray-black water, pale green algae patches, gray-white hanging moss, blue-white fungal glow under water, murky gray-green fog, single warm yellow-green window glow as the only warm note. No readable text, no signs, no labels, no lettering anywhere in the image.
+```
+
+### Negative Prompt
+
+```text
+No clear water, no sunlight, no friendly atmosphere, no visible witch, no dramatic spell-casting, no beautiful nature, no photorealism, no anime style, no readable text, no written signs, no dry comfortable ground in the middle of the frame.
 ```
