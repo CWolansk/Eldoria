@@ -5,7 +5,7 @@
 ```text
 Create a medieval fantasy frontier settlement for a DND campaign in the style of a clean hand-painted fantasy illustration, high oblique bird's-eye view, readable settlement layout, watercolor-and-ink concept art, detailed but not photorealistic.
 
-This is Stonehaven, a tense frontier outpost at the southeastern edge of Blackwood Forest where civilization meets deep wilderness. Show the viewer looking down from above and slightly to one side so the palisade settlement fills the foreground and center, while the enormous dark wall of ancient forest rises directly behind it. Beyond the cleared perimeter, the forest should feel like it goes on forever. The settlement should take up at least half the image.
+This is Stonehaven, a tense frontier outpost at the southwestern edge of Blackwood Forest where civilization meets deep wilderness. Show the viewer looking down from above and slightly to one side so the palisade settlement fills the foreground and center, while the enormous dark wall of ancient forest rises to the northeast behind it. Beyond the cleared perimeter, the forest should feel like it goes on forever. The settlement should take up at least half the image.
 
 Most important: Stonehaven must clearly read as a complete inhabited frontier village, not just a watchtower with a few huts. Show a full palisade settlement with 40-70 Tudor-style wood and stone buildings inside the walls, a visible central square, 2 or 3 main lanes, clustered homes, supply sheds, stables, storehouses, workshops, and enough secondary streets that the whole place feels lived in and defensible.
 

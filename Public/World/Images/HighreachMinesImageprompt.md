@@ -3,15 +3,15 @@
 ## Prompt
 
 ```text
-Create an abandoned mine dungeon entrance for a DND campaign in the style of a clean hand-painted fantasy illustration, ground-level perspective looking into the mine, watercolor-and-ink concept art, detailed but not photorealistic.
+Create an abandoned mine complex on a mountainside for a DND campaign in the style of a clean hand-painted fantasy illustration, high oblique bird's-eye view, readable landscape layout, watercolor-and-ink concept art, detailed but not photorealistic.
 
-This is the Highreach Mines, an abandoned iron mine carved into the mountainside beneath the capital city of Highreach. Show the viewer standing at the mine entrance on a rocky hillside, looking into a dark tunnel that descends at a steep angle into the earth. Old iron rail tracks run along the tunnel floor, disappearing into blackness. The entrance is framed by heavy timber supports, many cracked or bowed under the weight of stone above.
+This is the Highreach Mines, an abandoned iron mine carved into the mountainside beneath the capital city of Highreach. Show the viewer looking down from above at a rocky hillside scarred with mine openings, collapsed tunnels, and the remnants of a once-busy mining operation. The main entrance — a large dark opening framed by cracked timber supports — should be clearly visible, with old iron rail tracks emerging from the darkness and running along overgrown paths between ruined outbuildings.
 
-Most important: the mine must feel abandoned, dangerous, and deep — not a working operation. The entrance should be partially overgrown with weeds and creeping vines, with rubble from a partial collapse narrowing the opening. Rusted tools, overturned ore carts, and scattered debris litter the area around the entrance. Inside, the tunnel should be visible for several meters before absolute darkness swallows it, with the faintest suggestion of branching passages and descending levels beyond.
+Most important: the mine complex must feel abandoned, dangerous, and extensive from above — not a single hole in a hillside. Show multiple mine entrances of varying sizes scattered across the mountainside, connected by weathered paths and old rail lines. Rusted ore carts sit overturned on their tracks. Collapsed sections are visible as sunken ground and splintered timber. Rubble piles, overgrown equipment yards, and the foundations of demolished structures mark where the operation once thrived. A few entrances are partially sealed by rockfalls, but the main shaft gapes wide and dark.
 
-The mountainside setting should show rocky terrain with sparse grass, the mine entrance cut into a cliff face. A few warning signs (weathered and fallen, illegible) and an old chain barrier (broken) suggest the mine was sealed at some point. Cobwebs stretch across the upper timbers. A cold draft visibly stirs dust at the entrance, hinting at the vast empty spaces below.
+The hillside should show rocky terrain with sparse grass, the mine complex carved into a cliff face below the Highreach plateau visible above. Old chain barriers (broken) and weathered structures suggest the mine was sealed at some point. Cobwebs and creeping vines are visible on the closer structures. The dark mine openings should contrast starkly with the gray rock around them.
 
-Mood: ominous, derelict, and foreboding. Overcast day with flat gray light outside contrasting the absolute darkness within. Use a palette of cold grays, rust browns, dark iron blacks, and the sickly yellow of old timber against dark stone. No readable text, no signs, no labels, no lettering anywhere in the image.
+Mood: ominous, derelict, and foreboding. Overcast day with flat gray light. Use a palette of cold grays, rust browns, dark iron blacks, and the sickly yellow of old timber against dark stone. No readable text, no signs, no labels, no lettering anywhere in the image.
 ```
 
 ## Negative Prompt

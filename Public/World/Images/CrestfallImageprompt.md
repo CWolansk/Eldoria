@@ -3,19 +3,23 @@
 ## Prompt
 
 ```text
-Create a sweeping fantasy kingdom landscape for a DND campaign in the style of a clean hand-painted fantasy illustration, wide panoramic bird's-eye view, watercolor-and-ink concept art, detailed but not photorealistic.
+Create a sweeping regional landscape for a DND campaign in the style of a clean hand-painted fantasy illustration, very high oblique bird's-eye view, atlas-like composition, camera pitched steeply downward about 55 degrees, extremely wide framing, north at the top of the image, west on the left, east on the right, south at the bottom, watercolor-and-ink concept art, detailed but not photorealistic.
 
-This is Crestfall, a prosperous human kingdom of fertile plains and forested hills. Show the viewer looking across a vast temperate landscape from a high vantage point, as if surveying the entire realm from the sky. The terrain should roll from golden farmland and green pastures in the foreground through wooded hills and river valleys toward distant mountains on the southern horizon.
+This is Crestfall, a prosperous human kingdom of fertile plains, trade roads, lake country, vineyards, and frontier woods. The image must read like a coherent regional overview rather than a close-up postcard. The camera should be high enough that the viewer understands the geography immediately in one glance. Do not center the image on a single city. Show the northern half of Crestfall and its main landmarks in a clear spatial relationship, with readable distances between settlements, visible roads, and terrain transitions that make sense.
 
-Most important: Crestfall must read as a living, inhabited kingdom — not empty wilderness. Scatter five distinct settlement clusters across the landscape at realistic distances: a grand plateau city (Highreach) crowning a dramatic flat-topped mesa near the center, a misty lakeside port (Ardenville) on a large briny lake to the north, a busy crossroads town (Fairfield) to the west near a forested border, rolling vineyard hills with a small village (Hillcrest) in the midground, and a frontier palisade outpost (Stonehaven) at the edge of a dark ancient forest to the south. Connect them with visible trade roads winding through the countryside.
+Most important: lock the composition to these exact geographic relationships. In the upper-left (northwest), Ardenville must sit on the coast as a port town, with Lake Arden stretching eastward from it. Highreach must sit directly south of Lake Arden, NEVER inside the lake, built atop a massive natural plateau with sheer cliffs rising from the lake's southern shore. At the base of the plateau on the lakeside, show a small cliffside warehouse district and cargo elevator. To the far northeast (upper-right), place Fairfield as a busy crossroads trade town on gently elevated ground. 
 
-The landscape should feel temperate and rich: golden wheat fields, green rolling hills, clusters of deciduous trees, a vast misty lake in the north, and the dark treeline of an ancient forest forming the southern boundary. Major roads should be visible as pale lines across the terrain. The Highreach plateau should be the visual anchor — elevated, walled, and prominent.
+Highreach should be the largest and most important settlement in the image, anchoring the left-center. The plateau city should be ringed by strong walls and crowned by the royal castle. Directly south of Highreach (lower-left), the land should soften into cultivated countryside where Hillcrest sits as a smaller village nestled among terraced vineyards, orchards, and wine roads.
 
-Mood: prosperous, civilized, and warm but with a hint of frontier danger at the edges. Clear sunny weather with a few drifting clouds casting shadows on the plains. Use a palette of warm golds, greens, and earth tones for the farmland, cool blues for the lake, and deep shadowy greens for the southern forest. No readable text, no signs, no labels, no lettering anywhere in the image.
+To the southeast of Highreach (lower-middle/right), place Stonehaven as a small fortified frontier outpost with a tall central watchtower and palisade walls. Stonehaven sits at the immediate northwest edge of the Blackwood Forest. The Blackwood itself must form a heavy, ominous dark-green mass anchoring the entire bottom-right (southeast) corner of the scene, clearly contrasting with Crestfall's open golden fields.
+
+The road network must connect these locations logically: a road from Ardenville east along the lake, a road from Highreach south to Hillcrest, a road southeast to Stonehaven, and the Great Western Road leading northeast toward Fairfield. The rest of Crestfall should feel inhabited and prosperous: patchwork wheat fields, pastureland, hedgerows, creeks, small bridges, and scattered farmsteads. Keep the sea limited to the far western edge near Ardenville.
+
+Mood: prosperous, civilized, and organized, with gentle frontier tension at the forest edge. Bright clear daytime with soft atmospheric haze over Lake Arden and crisp visibility across the farmlands. Use a palette of warm golds, spring greens, soft earth browns, cool gray-blue water, and deep shadowy greens for the Blackwood. No readable text, no signs, no labels, no lettering anywhere in the image.
 ```
 
 ## Negative Prompt
 
 ```text
-No desert wasteland, no frozen tundra, no tropical jungle, no single city filling the frame, no futuristic elements, no photorealism, no anime style, no readable text, no written signs, no empty wilderness with no settlements visible.
+No city built in the middle of Lake Arden, no lake south of Highreach, no Ardenville on the southern shore, no giant foreground mountain range framing the scene, no huge open ocean dominating the composition, no desert wasteland, no frozen tundra, no tropical jungle, no futuristic elements, no photorealism, no anime style, no readable text, no written signs, no empty wilderness with no settlements visible.
 ```

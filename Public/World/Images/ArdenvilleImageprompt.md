@@ -5,7 +5,7 @@
 ```text
 Create a medieval fantasy lakeside port town for a DND campaign in the style of a clean hand-painted fantasy illustration, high oblique bird's-eye view, readable town layout, watercolor-and-ink concept art, detailed but not photorealistic.
 
-This is Ardenville, a working port town on the northern shore of Lake Arden. Show the viewer looking down over a shoreline settlement built in a dense crescent of Tudor-style wood and stone houses along the water, with the misty lake occupying a large part of the image and a sheer southern cliff far across the lake, where a tiny cargo warehouse and elevator rise toward Highreach above. The settlement should fill most of the land area shown in the image.
+This is Ardenville, a working port town on the western shore of Lake Arden. Show the viewer looking down over a shoreline settlement built in a dense crescent of Tudor-style wood and stone houses along the water, with the misty lake occupying a large part of the image and a sheer northeastern cliff far across the lake, where a tiny cargo warehouse and elevator rise toward Highreach above. The settlement should fill most of the land area shown in the image.
 
 Most important: Ardenville must clearly read as a fully inhabited port town, not just a couple of docks. Show 30-50 structures: long wooden piers, warehouses, a large Merchants Guild building. The centerpiece is a grand Tudor-style dockmaster's tower heavily timbered with bright stone and draped in blue & gold banners. Include a Fisherman's Guild, an inn, a glowing smithy, and compact streets of Tudor homes behind the shore so the settlement feels dense and real.
 

@@ -3,15 +3,15 @@
 ## Prompt
 
 ```text
-Create a dangerous mountain pass scene for a DND campaign in the style of a clean hand-painted fantasy illustration, ground-level perspective looking along a treacherous mountain road, watercolor-and-ink concept art, detailed but not photorealistic.
+Create a dangerous mountain territory for a DND campaign in the style of a clean hand-painted fantasy illustration, high oblique bird's-eye view, readable landscape layout, watercolor-and-ink concept art, detailed but not photorealistic.
 
-This is the territory of the Mountain Tribes — cannibalistic humans that roam the treacherous eastern slopes of the Ironpeak Mountains, preying on travelers. Show a narrow mountain road winding along a sheer cliff face, with jagged rock walls rising on one side and a dizzying drop on the other. The road should feel exposed and vulnerable — the perfect ambush corridor.
+This is the territory of the Mountain Tribes — cannibalistic humans that roam the treacherous southeastern slopes of the Ironpeak Mountains where the range trails off toward the borderlands between the Silverleaf Lands and the Orcish Wastes, preying on travelers. Show the viewer looking down from above at a chaotic landscape of broken mountain slopes, narrow passes, sheer cliff faces, and winding roads cutting through the terrain. The entire area should feel exposed, unstable, and hostile.
 
-Most important: the scene must communicate danger without showing explicit violence. Subtle signs of the tribes' presence should be scattered throughout: crude warning totems made of animal bones and stacked stones at the roadside, claw-like scratch marks gouged into rock faces, a partially hidden cave entrance in the cliff above the road, the remains of an overturned merchant cart with scattered goods (no bodies), and thin smoke rising from somewhere above in the rocks suggesting a hidden camp. The feeling should be that you are being watched.
+Most important: the scene must communicate danger without showing explicit violence. From above, subtle signs of the tribes' presence should be scattered throughout the terrain: crude warning totems made of animal bones and stacked stones visible at key trail junctions, a partially hidden cave entrance in a cliff face, the remains of an overturned merchant cart on a switchback road with scattered goods (no bodies), thin smoke rising from a concealed camp in a rocky overhang, and a narrow mountain road winding along a sheer cliff face — the perfect ambush corridor.
 
-The mountain terrain should be harsh and inhospitable: loose scree slopes, sparse twisted scrub clinging to cracks, wind-carved rock formations, and narrow ledges. The eastern slopes should look wilder and more broken than the main Ironpeak range — less grand, more chaotic and unstable. A few mountain goats or ravens should be the only visible living creatures.
+The mountain terrain should be harsh and inhospitable: loose scree slopes, sparse twisted scrub clinging to cracks, wind-carved rock formations, and narrow ledges. The southeastern slopes should look wilder and more broken than the main Ironpeak range — less grand, more chaotic and unstable. To the south, the distant snow-dusted canopy of the Silverleaf Lands should be faintly visible. To the east, the terrain dries out toward the Orcish Wastes.
 
-Mood: tense, exposed, and predatory. Cold overcast weather with a biting wind tearing at scrub brush. Use a palette of harsh granite grays, dusty tans, bone whites for the totems, and cold blue-gray for the sky. No readable text, no signs, no labels, no lettering anywhere in the image.
+Mood: tense, exposed, and predatory. Cold overcast weather with a biting wind visible in bent scrub. Use a palette of harsh granite grays, dusty tans, bone whites for the totems, and cold blue-gray for the sky. No readable text, no signs, no labels, no lettering anywhere in the image.
 ```
 
 ## Negative Prompt
