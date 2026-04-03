@@ -1,21 +1,67 @@
 # Sand Dragon Valley Image Prompt
 
-## Prompt
+## Prompt — Primary (High Oblique Aerial View)
 
 ```text
-Create a mysterious desert valley for a DND campaign in the style of a clean hand-painted fantasy illustration, high oblique bird's-eye view, readable landscape layout, watercolor-and-ink concept art, detailed but not photorealistic.
+Create a mysterious desert canyon for a DND campaign in the style of a clean hand-painted fantasy illustration. Strong ink linework for the canyon walls and bone structures, with broad atmospheric watercolor washes. High oblique bird's-eye view, camera pitched at about 50 degrees, looking down and slightly northwest along the canyon's length. The canyon runs roughly north-south through the frame. Wide horizontal format. Harsh midday sun from almost directly overhead, slightly southwest — casting maximum shadow into the canyon and across the slip faces. Detailed but not photorealistic.
 
-This is Sand Dragon Valley, a deep valley in the far eastern Orcish Wastes rumored to be the domain of sand dragons. Show the viewer looking down from above at a long, winding canyon carved between jagged red-rock canyon walls. The valley floor should be clearly visible below — a mix of loose sand, exposed bedrock, and strange geological formations: wind-carved stone pillars, natural arches, and hoodoos that vaguely resemble the shapes of sleeping dragons. From above, enormous bones should be visible scattered along the canyon floor — ribcages the size of longships, skulls with horn crowns wider than houses, and wing-bone arches spanning between canyon walls.
+This is Sand Dragon Valley — a deep, narrow canyon in the far eastern Orcish Wastes. The canyon does not look natural. It looks like something made it, and that something is still here.
 
-Most important: the valley must feel ancient, mysterious, and like something enormous lives here — visible from above through environmental clues: deep furrows in the sand as if something massive dragged itself across the valley floor, claw marks scored into canyon walls at impossible heights, enormous shed scales half-buried in sand (each the size of a shield), a massive cavern mouth in the far canyon wall partially obscured by a sand drift, and bleached ribcages of very large creatures. The rock formations should have a natural-but-uncanny quality, as if shaped by something other than wind. No dragon should be visible — only the overwhelming evidence that something is here.
+CANYON STRUCTURE: The canyon runs from upper-left (north) to lower-right (south) through the frame, curving gently once in the center of the image. The canyon walls are 400 feet tall — sheer to near-sheer faces of striated red and ochre sandstone. The strata bands are clearly visible: alternating layers of deep red, pale cream, burnt orange, and dusty gold, each band 10–30 feet thick, perfectly horizontal. The wall surfaces have been SCORED in places — long parallel grooves running vertically down the cliff faces from about 200 feet elevation down to 30 feet, as if something clinging to the wall dragged its claws downward. The grooves are 3 feet wide and 6 inches deep, clearly mechanical and intentional, not erosional. The highest visible gouge marks are at heights no animal of normal scale could reach. The canyon is 200 feet wide at the floor.
 
-The canyon walls should be striated red and ochre stone in bands of red, gold, and pale cream, weathered and ancient. Wind-blown sand should stream from the canyon rims, and the floor should be rippled with small dunes forming around and between the bones. The far eastern end of the valley should open into deeper wasteland.
+CANYON FLOOR: A mix of pale cream sand (wind-blown, forming small dunes and ripples in the wind-shadow behind every obstacle) and exposed bedrock (flat pale gray stone slabs). The floor is NOT flat — massive objects partially buried in drifted sand create a chaotic topography. The floor texture is DOMINATED by evidence of enormous creatures.
 
-Mood: awe-inspiring, predatory, and primal. Harsh midday light casting sharp shadows from the canyon walls across the valley floor. Use a palette of deep red canyon stone, pale sand, bone white, and intense shadow blacks in the cavern mouth. No readable text, no signs, no labels, no lettering anywhere in the image.
+BONE STRUCTURES ON THE CANYON FLOOR (primary visual content, the main reason to look at this image):
+
+CENTERPIECE (dead center of the image): A complete ribcage from an adult sand dragon — the creature was 90 feet long. The ribcage arch alone is 50 feet tall at its apex. Individual ribs are 40 feet long, roughly 2 feet in diameter, pale cream-white bleached bone. The creature died lying on its side — the bottom half of the ribcage is buried in drifted sand, the top half arches overhead like a bone cathedral. Wind-blown sand has formed small crescent dunes against each exposed rib base. The scale relative to the canyon floor is the most important detail — show a clear sense that these ribs are enormous.
+
+LEFT WALL (western canyon face): Where the canyon wall meets the floor, a complete dragon skull is resting face-up against the cliff — the skull is 25 feet long, the jaw hanging open, revealing teeth the size of broadswords (each tooth roughly 3 feet long, triangular, visible from this angle). The eye socket on the visible side is 5 feet across and empty. A sand dune has formed against the back of the skull.
+
+NEAR THE NORTHERN CURVE (upper portion of image): Two shed scales the size of wagon-wheel shields (each 4–5 feet in diameter, hexagonal, slightly curved) rest on the canyon floor, partially buried by sand. They are rust-red with faint iridescent sheen — the only color in the canyon floor besides bone-white and sand-pale. Their color implies the living dragon's scales are red and iridescent.
+
+DRAG MARKS: Running along the canyon floor from south to north — deep parallel furrows scored into the exposed bedrock sections, 6 feet wide each, 10 feet apart (two parallel furrows suggesting two legs being dragged), continuous for 300 feet before disappearing under a sand drift. The scale implies the creature making them weighs tens of thousands of pounds.
+
+CAVERN MOUTH (far end of canyon, north): At the north end of the canyon where it curves, partially obscured by a large sand drift that has built up against the north wall — a massive cavern entrance cut into the cliff base. The opening is 40 feet wide and 30 feet tall (an almost perfect arch of natural erosion). The interior is pure black — the darkness is total, absolute, and visually striking against the bright canyon. The top of the cavern arch has claw-gouge marks running from outside to inside. Three fresh drag mark furrows lead from the canyon floor directly into the cavern.
+
+Mood: awe-inspiring, ancient, primal, and deeply unsettling. The environment screams SOMETHING LIVES HERE. But no dragon is visible. Harsh midday light bleaches the canyon floor white-tan in the open sections and cuts sharp angular shadows from the canyon walls. Palette: deep red and ochre for canyon walls with cream strata bands, pure bleached white for bones, pale tan for sand, rust-red iridescent for the shed scales, absolute black for the cavern mouth, pale gray for exposed bedrock. No readable text, no signs, no labels, no lettering anywhere in the image.
 ```
 
 ## Negative Prompt
 
 ```text
-No visible dragons, no dragon flying overhead, no green valley, no water features, no lush vegetation, no snow, no futuristic elements, no photorealism, no anime style, no readable text, no written signs, no cartoon dragons.
+No visible dragons, no dragon flying overhead, no green valley, no water features, no lush vegetation, no snow, no futuristic elements, no photorealism, no anime style, no readable text, no written signs, no cartoon dragons, no small or human-scale bones (all bones must be enormous).
+```
+
+---
+
+## Alternative POV — Ground Level Looking West Down the Canyon (RECOMMENDED)
+
+*This ground-level view is more emotionally immediate and easier to generate with the right atmosphere. Standing inside the canyon with the evidence towering around you.*
+
+### Prompt
+
+```text
+Create a vast and unsettling fantasy canyon scene for a DND campaign in the style of a clean hand-painted fantasy illustration. Confident ink linework with dramatic atmospheric watercolor washes — strong value contrast, deep shadows. Ground-level perspective standing on the canyon floor, looking west (into the canyon interior). Eye level, camera horizontal with a slight 5-degree upward tilt to emphasize the towering walls. Horizontal wide format. Harsh midday sun — the canyon rim far overhead is brightly lit, the canyon floor is in angular shadow from the east wall. Detailed but not photorealistic.
+
+The viewer stands in the center of Sand Dragon Valley's floor, looking west. The canyon stretches away ahead, bending slightly to the left about 400 feet distant. The canyon walls are 400 feet tall on both sides — they fill the LEFT and RIGHT edges of the frame from ground to sky, the tops of the walls visible but distant overhead. The strata are clearly visible: horizontal banding in deep red, pale cream, burnt orange, and dusty gold layers. The walls have been gouged vertically — 3-foot-wide claw marks running from 200-foot elevation down to 30 feet on the RIGHT WALL (east face), visible to the viewer's right. The marks are clearly not erosional — they are too regular, too parallel, too deliberate.
+
+IMMEDIATE FOREGROUND (the floor the viewer stands on):
+- Two deep parallel furrow grooves in the exposed bedrock at the viewer's feet, continuing ahead toward the bend — 6 feet wide each, 10 feet apart, 6 inches deep, running continuously toward the canyon's interior
+- A rust-red iridescent shed scale (roughly 5 feet across, hexagonal, slightly curved like a bowl) lying half-buried in windblown sand 10 feet to the viewer's right
+
+LEFT SIDE (western canyon wall): A complete ribcage arch. The creature died lying on its left side against the western wall — the ribcage fills the LEFT THIRD of the frame. The bottom ribs are buried in sand, but the top ribs arch OVERHEAD and slightly OVER the viewer, the rib apex at roughly 45 feet of height. Individual ribs are 2 feet in diameter, pale cream-white. The spaces between ribs frame the canyon interior beyond. Wind has deposited sand dunes against the base of each rib.
+
+CENTER DISTANCE: The canyon floor stretches ahead, the drag furrows continuing toward the bend. At the bend (400 feet away, clearly in the middle distance) — the cavern mouth is visible as an absolute-black arch cut into the north canyon wall, 40 feet wide, in deep shadow. Three fresh drag mark furrows lead directly from the canyon floor into that darkness. The cavern mouth is the natural focal point of the composition — the viewer's eye is inevitably drawn to it.
+
+THE SKULL: On the canyon floor 150 feet ahead, partially blocking the drag marks — a complete skull lying on its side, eye socket facing the viewer. The skull is 25 feet long. The open jaw reveals triangular teeth 3 feet long. The scale relative to the canyon width makes it clear: this skull would not fit inside most buildings.
+
+THE SKY: A narrow strip at the very top of the image, between the two canyon rim edges — a slit of harsh orange-gold sky, the sun not visible but the harsh light direction clear. The contrast between the bright sky slit and the shadowed canyon floor is dramatic.
+
+Mood: profound, primal, and the specific dread of standing somewhere you are absolutely not the apex predator. The silence is complete. The drag marks are fresh. Palette: deep red and cream strata canyon walls, bleached white bones, pale tan sand, rust-red iridescent scales, absolute black cavern mouth, harsh orange-gold sky slit. No readable text, no signs, no labels, no lettering anywhere in the image.
+```
+
+### Negative Prompt
+
+```text
+No visible dragon, no dragon silhouette, no green or tropical vegetation, no water, no snow, no small human-scale bones, no friendly atmosphere, no photorealism, no anime style, no readable text, no written signs, no wide gentle valley (must be a narrow deep canyon with 400-foot walls).
 ```

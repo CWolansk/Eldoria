@@ -1,21 +1,69 @@
 # Red Dune Desert Image Prompt
 
-## Prompt
+## Prompt — Primary (High Aerial View)
 
 ```text
-Create a vast red sand desert for a DND campaign in the style of a clean hand-painted fantasy illustration, high oblique bird's-eye view, readable landscape layout, watercolor-and-ink concept art, detailed but not photorealistic.
+Create a vast red sand desert for a DND campaign in the style of a clean hand-painted fantasy illustration. Bold ink linework (used sparingly, primarily for the dune ridgelines and rock formations) with broad, confident watercolor washes for the dune faces. High oblique bird's-eye view, camera pitched about 50 degrees. Wide format — the desert fills every edge of the frame with no sky visible except at the very top. Harsh blazing midday sun from the upper-left. Detailed but not photorealistic.
 
-This is the Red Dune Desert, a vast expanse of crimson sand in the northeastern Orcish Wastes. Show the viewer looking down from above at an enormous undulating sea of towering red sand dunes stretching to every horizon. The dunes should be massive — cathedral-sized ridges of deep red and burnt orange sand sculpted by relentless wind into sharp crescent shapes and long sinuous ridgelines, their repeating wave-like patterns clearly visible from the aerial perspective.
+This is the Red Dune Desert — a vast expanse of blood-crimson sand in the northeastern Orcish Wastes where nothing lives and nothing grows. The entire frame is dominated by sand dunes. No plains, no flat ground, no settlement. Just dunes.
 
-Most important: the desert must feel immense, treacherous, and utterly inhospitable from above — a place where water doesn't exist and travelers die. The sand should be distinctly red, not yellow or white. Show wind whipping sand off the dune crests in long streamers and a general haze of airborne dust. Scattered across the landscape, include subtle signs of danger and history visible from above: bleached bones of large creatures half-buried in sand, the tip of an ancient pre-orc stone monolith protruding from a dune, a dried-out oasis bed (cracked earth, dead palms), and distant dust devils spiraling across the dunes. Occasional exposed rock formations — dark volcanic stone jutting through the sand — should break the dune pattern.
+DUNE SHAPES AND ARRANGEMENT:
 
-The western edge should show the transition zone where rocky wasteland gives way to sand, with the border of the greater Orcish Wastes visible as darker terrain. The sky should be harsh — a washed-out pale orange near the horizon deepening to a heavy brass color overhead, with no clouds and a blazing white sun.
+FOREGROUND (lower third of image): BARCHAN dunes — crescent-shaped individual dunes with the horns pointing in the same direction (northeast, as if pushed by a southwest wind). Each barchan is 100–200 feet from horn-tip to horn-tip and 40–80 feet tall. Their slip faces (the steep concave inner face) face northeast and are in deep shadow — nearly black-red. Their windward faces (the long gentle convex outer face) face southwest and are brightly lit — a saturated deep crimson under full sun. The sharp-crested ridgeline of each barchan casts a hard clean shadow line across the slip face. Sand is being blown continuously off each crest in thin horizontal streamers — depicted as fine pale red horizontal lines trailing northeast off each ridgeline.
 
-Mood: merciless, vast, and ancient. Extreme heat and wind. Use a palette of deep crimson reds, burnt oranges, pale bone whites, dark volcanic blacks for exposed rock, and harsh brass-yellow for the sky. No readable text, no signs, no labels, no lettering anywhere in the image.
+MIDDLE DISTANCE (center of image): SEIF (linear) dunes — long, sinuous ridgelines of sand extending northeast-to-southwest across the frame, creating a parallel-striped pattern in the middle distance. These are 150–400 feet tall, their ridgelines less sharp than the barchans, slightly rounded. The alternating lit faces and shadow faces create a bold red-and-dark-red striped visual rhythm. In two places, a barchan field is merging into seif dunes, creating a visually complex transition.
+
+FAR DISTANCE (upper half of image): At the distant mid-horizon, STAR dunes are implied — massive mound shapes with multiple radiating ridgelines. They appear as blurred, enormous shapes in the atmospheric red haze, detail not required at this distance.
+
+SURFACE DETAILS (scattered throughout, visible from above):
+
+1. BONES: In the middle of the foreground barchan field — a ribcage of enormous proportions (the animal was the size of a horse, but not a horse) half-buried at the base of a dune slip face, the ribs curving upward out of the red sand. The bone is bleached white, stark against the crimson. Nearby, a partial skull the size of a boulder, half-submerged, horn crown visible.
+
+2. BURIED MONOLITH: Protruding from the crest of one seif dune in the middle distance — the top 6 feet of a pre-orc stone monolith, cut flat on top, with angular geometric carvings barely visible. The rest is buried under 30 feet of sand. The scale is shocking — its exposed tip is the same size as the nearby barchan horns.
+
+3. DEAD OASIS: In the left-center foreground, a natural depression that was once an oasis: now cracked black-gray mud (desiccation polygons), four dead palm trees with no fronds, just the rough-textured trunk stumps, leaning at angles from the dried mud. No water. The depression is 40 feet across.
+
+4. DARK ROCK OUTCROPPINGS: Three or four formations of dark volcanic basalt (near-black) jutting at angles through the sand surface — jagged, not rounded, with sharp angular faces. The contrast of black rock against deep red sand is stark. The largest is 30 feet tall.
+
+5. DUST DEVILS: Two thin dust spirals rising from the dune field — narrow at the base (6 feet wide), widening gradually to 20 feet wide at the top, 100 feet tall. They appear as translucent pale red-brown columns drifting slowly northeast.
+
+THE SKY (visible only at the very top 10% of the image): Washed-out pale orange near the horizon deepening to heavy brass-yellow higher up. No clouds. No blue. The sun itself is not visible but its harsh direction is clear from the shadows.
+
+Mood: merciless, vast, geologically ancient, and profoundly indifferent to life. The silence and heat are palpable. Palette: the sand must be clearly RED — deep crimson-red on lit faces, dark blood-red on shadowed faces. NO YELLOW SAND. The bone whites are stark. The basalt is near-black. The sky is brass-yellow. The dead oasis mud is dark gray. No readable text, no signs, no labels, no lettering anywhere in the image.
 ```
 
 ## Negative Prompt
 
 ```text
-No green oasis with water, no snow or ice, no lush vegetation, no coastal dunes, no Sahara-yellow sand (must be red), no futuristic elements, no photorealism, no anime style, no readable text, no written signs, no people prominently displayed.
+No green oasis with water, no snow or ice, no lush vegetation, no coastal dunes, no yellow or tan sand (the sand MUST be deep crimson-red), no blue sky, no futuristic elements, no photorealism, no anime style, no readable text, no written signs, no people prominently displayed, no living animals, no flat sandy plain (must be dramatic dunes).
+```
+
+---
+
+## Alternative POV — Standing on a Dune Crest (Ground Level)
+
+*Use this for a more visceral ground-level view that puts the viewer in the desert and makes the scale of the dunes unmistakable.*
+
+### Prompt
+
+```text
+Create a vast red sand desert scene for a DND campaign in the style of a clean hand-painted fantasy illustration. Precise ink linework with bold watercolor washes. Ground-level perspective — the viewer is standing at the very crest of a massive barchan sand dune. Eye level at 5.5 feet, looking south (away from the dune's windward slope). Horizontal wide format. Blazing midday. Detailed but not photorealistic.
+
+THE CREST: The viewer stands on the knife-edge crest of the dune. The crest runs horizontally across the lower-center of the image — a sharp clean ridge of deep crimson sand, wind constantly stripping grains off it in fine horizontal streamers moving right-to-left across the frame (shown as semi-transparent red-tinged lines). The crest is not a flat surface — standing on it requires balance. Each step forward would begin the descent of the slip face.
+
+THE SLIP FACE (center and lower half of image): From the crest, the dune drops sharply away into the slip face below — a concave surface at 33 degrees, deep red-orange sand in shadow, the face descending 150 feet to the dune base far below. At the BASE of the slip face, the angle levels out and becomes the flat interdune corridor. The interdune corridor shows hard cracked wind-packed sand (pale, almost tan — different from the dune sand, wind-compressed and bare). Visible on the interdune floor: the partially buried horns of a dead animal's ribcage protruding from the windward side of the next dune.
+
+THE HORIZON: From this 150-foot elevation, looking south, the viewer sees an endless repeating ocean of dune crests and slip-face shadows stretching to the horizon — dozens of identical barchan crests receding into the red atmospheric haze. The horizon itself is lost in crimson. The furthest visible features are just blurred dune shapes in an increasingly red haze.
+
+THE SKY: Heavy brass-gold overhead deepening to burnt amber-orange near the horizon. No clouds. No blue. The direct sun from the upper-right casts harsh directional light — the left side of the image is warmer, the right slightly cooler in the shadow of the dune crest.
+
+THE WIND: Constant, hot, abrasive. Fine red sand streams off the crest at knee height in thin horizontal lines. A thin vertical gust plume rises 20 feet above the crest-center, spiraling slightly — a micro-dust-devil at the crest.
+
+Mood: disorienting, merciless, humbling. The scale is impossible. Everything is red. There is no water, no shelter, no shade, no landmark. Just dunes repeating forever. Palette: deep crimson and blood-red for the dune faces (lit side) and dark red-brown (shadow side), pale tan for the wind-packed interdune floor, brilliant white for exposed bone fragments, deep brass-gold sky. No readable text, no signs, no labels, no lettering anywhere in the image.
+```
+
+### Negative Prompt
+
+```text
+No yellow sand, no blue sky, no oasis, no water, no green plants, no people prominently displayed, no living animals, no cool comfortable temperature suggested, no photorealism, no anime style, no readable text, no written signs.
 ```
