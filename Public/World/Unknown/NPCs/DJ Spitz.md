@@ -3,7 +3,7 @@ type: NPC
 name: DJ Spitz
 location: Unknown
 region: Unknown
-profession: Beggar
+profession: Street Bard
 race: Human
 status: Alive
 tags:
@@ -12,13 +12,13 @@ tags:
 ---
 
 ## Appearance
-Gaunt, hollow-eyed human man in his 40s. Matted hair, patchy beard, filthy layered clothing held together with twine. One eye twitches constantly. Carries a ratty cloak that he clutches like a security blanket. Smells of sour ale and unwashed skin.
+Wiry, twitchy human man. Wild unkempt hair, patchy beard, oversized coat stuffed with unknown objects. Gestures constantly while talking — to you, to himself, to no one. Eyes dart around like he's watching for threats that aren't there. Smells of street grime and cheap pipe smoke.
 
 ## What We Know
-A homeless man seen muttering to himself on city streets. Goes by "DJ Spitz" — whether that's his real name or something he invented is unclear. Locals generally avoid him. Seems harmless at first glance, but there's something deeply wrong — his ramblings are too specific to be pure madness.
+A homeless self-proclaimed bard who performs terrible spoken-word pieces on street corners. Goes by "DJ Spitz." Deeply paranoid — convinced various people are out to steal his ideas or mess with his head. Known to pull a crossbow on people who upset him, though he's never actually shot anyone. Occasionally shouts warnings about local figures that sound insane but are oddly specific.
 
 ## First Impressions
-Unsettling. He talks to someone who isn't there, and sometimes that someone seems to talk back.
+Loud, paranoid, and impossible to follow. Stumbles over his own words, restarts sentences, then blames you for it. Seems harmless — until the crossbow comes out.
 
 ## Interactions
 

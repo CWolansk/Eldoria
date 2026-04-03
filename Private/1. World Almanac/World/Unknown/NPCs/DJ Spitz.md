@@ -3,7 +3,7 @@ type: NPC
 name: DJ Spitz
 location: Unknown
 region: Unknown
-profession: Beggar
+profession: Street Bard
 race: Human
 status: Alive
 tags:
@@ -14,47 +14,53 @@ tags:
 ![[Public/World/Unknown/NPCs/DJ Spitz]]
 
 ## Personality
-- **Ideal:** Peace — just wants the voice to stop
-- **Bond:** His own sanity — he'd do anything to get it back
-- **Flaw:** Paranoid and erratic; trusts no one for long before the voice twists it
-- **Quirk:** Mutters half-conversations with someone who isn't there, occasionally pausing to listen and nodding
+- **Ideal:** Fame — everyone needs to hear his music, they just don't know it yet
+- **Bond:** His "art" — a collection of terrible spoken-word performances he insists are revolutionary
+- **Flaw:** Cripplingly paranoid; assumes everyone is out to steal his ideas or mess with his head
+- **Quirk:** Stumbles over his own words mid-rant, restarts sentences 2-3 times, then gets angry about it
 
 ## Links
 
 ## DM Notes
-Location-agnostic — drop into any city street, alley, or market square. Works best as an unexpected encounter that starts social and can turn dangerous fast.
+Location-agnostic — drop into any city street, alley, or market square. Comedic encounter that can escalate into chaos but is fundamentally harmless. Play him fast, loud, and paranoid.
 
 **How He Acts:**
-- Sits hunched against a wall or in a doorway, rocking slightly, whispering to himself
-- If approached, initially flinches — then talks in short, scattered bursts that almost make sense
-- Alternates between lucid moments ("I wasn't always like this") and fractured rambling ("They put it in… the frequency… can you hear it?")
-- After 2-3 exchanges, grabs his head — shouts **"GET OUT OF MY HEAD!"** — scrambles back and draws a light crossbow from under his ratty cloak
-- Doesn't necessarily shoot immediately; he's terrified, not aggressive — the crossbow shakes in his hands
+- Sitting on the ground muttering to himself, practicing rhymes under his breath, occasionally beatboxing badly
+- If approached, immediately suspicious — "What do you want? You with the Guild? You tryin' to get in my head, man?"
+- Launches into unprompted rants about his music career — he's a bard (no magical talent whatsoever) who performs spoken-word pieces on street corners and is furious that nobody stops to listen
+- Stumbles over words constantly, restarts his own sentences, then blames the listener — "You made me lose my place, man!"
+- If the party asks about anything specific (a location, a person, local events), he gives a paranoid conspiratorial answer that is **wildly specific and might actually be true** — "The baker on Elm Street? That guy's a devil, man. I'm serious. A DEVIL."
+- After 2-3 exchanges — especially if anyone questions his music, laughs, or seems dismissive — grabs his head, shouts **"GET OUT OF MI HEAD, MAN!"** and pulls a hand crossbow from inside his coat
+- **Never actually shoots anyone.** Waves the crossbow around, makes threats, backs away, then bolts — stealing something random and worthless on his way out (a belt buckle, a quill, someone's hat)
 
 **Encounter Escalation:**
-- **DC 13 Persuasion/Calm Emotions** — can talk him down, he drops the crossbow and weeps
-- **DC 15 Insight** — notice the muttering follows a pattern, like he's answering questions he hasn't been asked
-- **If attacked** — fires once (`dice: 1d8+2` piercing, +4 to hit) then tries to flee; only fights cornered
-- **Combat stats:** Commoner stat block with a light crossbow and 1 extra HP (`dice: 1d8+1`, AC 10)
+- **DC 10 Persuasion** — compliment his music and he calms down immediately, maybe even performs a piece (it's awful)
+- **DC 13 Insight** — his paranoid ramblings contain a grain of truth; the specific thing he warned about is worth investigating
+- **If attacked** — shrieks, fires the crossbow wildly into the air (`dice: 1d6+2` piercing, +3 to hit, almost certainly misses), then flees at full sprint while shouting accusations
+- **Combat stats:** Commoner stat block, hand crossbow, AC 10, will not stand and fight under any circumstances
+
+**Recurring Chaos:**
+- DJ Spitz can show up again in later sessions — on a cart he's somehow hijacked, on a rooftop shouting at birds, on a ferry warning everyone the captain is a fiend
+- His paranoid warnings occasionally turn out to be **completely correct** — use this to foreshadow real threats through comedy
+- He never remembers meeting the party, or if he does, he accuses them of being different people wearing their faces
 
 ---
 
 ## Secrets & Motivations
-- A low-level **Intellect Devourer** larva has burrowed into his brain — too weak to fully take over, strong enough to whisper, probe, and cause agony
-- The larva was planted by a Mind Flayer agent operating somewhere in the region; DJ Spitz was an early test subject, deemed a failure and discarded on the streets
-- He has fragmented memories of being taken underground, strapped to a table, and something cold crawling into his ear — but can't tell what's real anymore
-- The voice tells him to do things — follow people, watch certain buildings, report back to no one — residual commands from the implantation
+- Not actually insane — just profoundly paranoid and conspiratorial with zero social skills
+- Genuinely believes he's the greatest unrecognized bard of his generation; the lack of recognition has made him bitter and suspicious
+- His "music" is objectively terrible spoken-word rambling over arrhythmic clapping — but he practices constantly and takes it dead seriously
+- Some of his paranoid theories are accidentally true — he's observant in a scattered, unfocused way and picks up on things others miss, then wraps them in conspiracy nonsense
 
 ## Plot Hooks
-- **Remove the parasite** — a skilled healer (DC 18 Medicine), cleric (Lesser/Greater Restoration), or wizard (carefully targeted psychic magic) could extract or kill the larva; doing so restores DJ Spitz's lucidity and earns a grateful, surprisingly sharp ally
-- **Follow the thread** — if the party investigates where he was taken, it leads to signs of Mind Flayer activity in the region's underbelly — abandoned tunnels, other missing homeless people, strange symbols
-- **He remembers a face** — in his lucid moments, he can describe one of the agents who grabbed him; this NPC could be hiding in plain sight in whatever city the party is in
+- **The broken clock** — one of his paranoid warnings is 100% correct (the baker IS a devil, the merchant IS poisoning the well, the guard captain IS a shapeshifter); the party has to figure out which ravings are real
+- **Street-level intel** — if the party needs information about the underside of a city, DJ Spitz has been sleeping in alleys long enough to have seen things; getting useful info out of him requires patience and flattery about his music
 
 ## What the Players Can Do
-- **Help him:** Remove the parasite through magic or medicine — he becomes coherent and grateful
-- **Calm him:** Talk him down from the crossbow moment — he won't trust them fully but might share fragments
-- **Ignore him:** He's just another raving street person — but the party might hear later that "the crazy beggar" attacked someone, or went missing entirely
-- **Investigate:** His rambling contains real clues if the party pays attention — names, places, a description of tunnels
+- **Humor him:** Compliment his art, sit through a performance, treat him like the genius he thinks he is — he becomes a chaotic but loyal informant
+- **Ignore him:** He steals something petty from them and shows up later wearing it proudly
+- **Provoke him:** Crossbow comes out, threats fly, he bolts — classic DJ Spitz
+- **Listen carefully:** His conspiracy rants contain real intel buried under layers of nonsense — a patient party can extract genuine leads
 
 ---
 
