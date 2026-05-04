@@ -9,7 +9,7 @@ This is the Orcish Wastes — a vast and violent territory stretching across the
 
 TERRAIN LAYOUT (must show clear transitions between zones):
 
-WESTERN EDGE (left side) — TRANSITION ZONE: The left edge of the image shows the abrupt border where the Ironpeak Mountains' dark gray foothills and Crestfall's distant green plain give way to barren wasteland. This transition should be a hard, visible line — living terrain ending, cracked dead earth beginning. No gradual fade.
+WESTERN EDGE (left side) — TRANSITION ZONE: The left edge of the image shows the abrupt border where the Ironpeak Mountains' dark gray foothills and Crestfall's distant green plain give way to barren wasteland. This transition should be a hard, visible line — living terrain ending, cracked dead earth beginning. No gradual fade.2
 
 WEST-CENTER — THE MAIN WASTELAND INTERIOR: Cracked red-brown earth with visible desiccation polygons (cracked mud patterns where water once pooled), dust devils visible as small spinning funnels crossing the plain, scattered clusters of jagged reddish-brown rock outcroppings, sparse dead scrub. The OROG CAPITOL is here: a canyon city built into a rocky valley in the center-west of the wasteland. Show the canyon as a deep gash in the terrain, with buildings of packed clay and large stacked boulders (no mortar) filling the canyon floor in dense rows. A bone-and-skull-adorned timber gate straddles the canyon's entrance, flanked by two 30-foot watchtower poles with red-and-black orcish banners. Smaller war camps — clusters of 10–15 hide-and-pole tents arranged in rough circles — are scattered across the terrain between here and the mountain border, each with a central fire pit.
 

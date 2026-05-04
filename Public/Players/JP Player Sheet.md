@@ -4,6 +4,7 @@
 const {CharacterSheetDisplay} = await cJS()
 await CharacterSheetDisplay.display(dv, {
   name: "Grum 'Grog Guzzler' Ironjaw (JP)",
+  portrait: "Public/Players/JPDnd.png",
   class: "Monk (Drunken Master)",
   level: dv.page("Player Controls").level,
   race: "Half-Orc",

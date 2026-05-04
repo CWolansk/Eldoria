@@ -5,6 +5,7 @@
 const {CharacterSheetDisplay} = await cJS()
 await CharacterSheetDisplay.display(dv, {
   name: "Zazpoh the Matyr",
+  portrait: "Public/Players/RandiDnD.png",
   class: "Wizard",
   level: dv.page("Player Controls").level,
   race: "Aasimar",

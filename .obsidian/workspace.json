@@ -4,63 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "fbb146a9c44c9922",
+        "id": "49a66f1491a560a0",
         "type": "tabs",
         "children": [
           {
-            "id": "8af2962752543ab3",
+            "id": "deaaadac720c90a2",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Public/World/Orcish Wastes/Orcish Wastes.md",
-                "mode": "preview",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Orcish Wastes"
-            }
-          },
-          {
-            "id": "921382e349848b74",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Public/World/Crestfall/Stonehaven/Stonehaven.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Stonehaven"
-            }
-          },
-          {
-            "id": "18fad759852e6ebb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Public/World/Crestfall/Fairfield/Fairfield.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Fairfield"
-            }
-          },
-          {
-            "id": "7d12271794e32e24",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Public/World/Crestfall/Ardenville/Ardenville.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Ardenville"
+              "title": "New tab"
             }
           }
         ]
@@ -292,53 +246,53 @@
       "calendarium:Open Calendarium": false
     }
   },
-  "active": "8af2962752543ab3",
+  "active": "deaaadac720c90a2",
   "lastOpenFiles": [
-    "Public/World/Silverleaf Lands/Silverleaf Lands.md",
-    "Public/World/Ironpeak Mountains/Ironpeak Mountains.md",
-    "Public/World/Crestfall/Crestfall.md",
-    "Public/World/Crestfall/Stonehaven/Stonehaven.md",
-    "Public/World/Crestfall/Fairfield/Fairfield.md",
     "Public/World/Crestfall/Ardenville/Ardenville.md",
-    "Public/World/Crestfall/Highreach/The Warren.md",
-    "Public/World/Crestfall/Highreach/Highreach.md",
+    "Public/World/Crestfall/Fairfield/Fairfield.md",
+    "Public/World/Crestfall/Stonehaven/Stonehaven.md",
+    "Public/World/Silverleaf Lands/Serenity Hollow/Serenity Hollow.md",
+    "Public/World/Silverleaf Lands/Moonshade/Moonshade.md",
+    "Public/World/Silverleaf Lands/Frostglade/FrostGlade.md",
+    "Public/World/Orcish Wastes/Orc Town C/Orc City C.md",
+    "Public/World/Orcish Wastes/Orc Town B/Orc City B.md",
+    "Public/World/Orcish Wastes/Orc Capitol/Orc Capitol.md",
+    "Public/World/Ironpeak Mountains/Stoneforge/Stoneforge.md",
+    "Public/World/Ironpeak Mountains/Steamhammer/Steamhammer.md",
+    "Public/World/Ironpeak Mountains/Ironroot/Ironroot.md",
+    "Public/World/Ironpeak Mountains/Gemstone Hollow/Gemstone Hollow.md",
+    "Public/World/Ironpeak Mountains/Forgepeak/ForgePeak.md",
+    "Public/World/Silverleaf Lands/Stardew/Stardew.md",
+    "Public/World/Images/FairfieldImageprompt.md",
+    "docs/Public/World/Images/FairfieldImageprompt.html",
+    "Public/World/Images/ArdenvilleImageprompt.md",
+    "docs/Public/World/Images/ArdenvilleImageprompt.html",
+    "Public/World/Images/StonehavenImageprompt.md",
+    "docs/Public/World/Images/StonehavenImageprompt.html",
+    "Public/World/Images/StarfallImageprompt.md",
+    "docs/Public/World/Images/StarfallImageprompt.html",
+    "Public/World/Images/HighreachMinesImageprompt.md",
+    "docs/Public/World/Images/HighreachMinesImageprompt.html",
+    "Public/World/Images/BlackwoodForestImageprompt.md",
+    "docs/Public/World/Images/BlackwoodForestImageprompt.html",
+    "Public/World/Images/LakeArdenImageprompt.md",
+    "docs/Public/World/Images/HighreachMines.html",
+    "docs/Public/World/Images/BlackwoodForests.html",
+    "docs/Public/World/Images/LakeArdenImageprompt.html",
+    "Public/World/Images/MountainTribesImageprompt.md",
+    "docs/Public/World/Images/LakeArden.html",
+    "Public/World/Images/IronpeakMountainsImageprompt.md",
+    "Public/World/Images/CrestfallImageprompt.md",
+    "Public/World/Images/WizardsTowerImageprompt.md",
+    "Public/Players/RandiDnD.png",
+    "Public/Players/VanessaDnD.png",
+    "Public/Players/JustinDnD.png",
+    "Public/Players/LizDnD.png",
+    "Public/Players/JulieDnd.png",
+    "Public/Players/JPDnd.png",
+    "Public/Players/ClaireDnD.png",
     "Public/World/Images/Frostglade.png",
     "Public/World/Images/Gemini_Generated_Image_vlsawkvlsawkvlsa.png",
-    "Public/World/Images/Fairfield.png",
-    "Public/World/Images/Gemini_Generated_Image_mwkilsmwkilsmwki.png",
-    "Public/World/Images/Forgepeak.png",
-    "Public/World/Images/Gemini_Generated_Image_iy1lruiy1lruiy1l.png",
-    "Public/World/Images/GemStoneHollow.png",
-    "Public/World/Images/Gemini_Generated_Image_5hiyrg5hiyrg5hiy.png",
-    "Public/World/Images/Highreach.png",
-    "Public/World/Images/Ardenville.png",
-    "Public/World/Images/FairfieldImageprompt.md",
-    "Public/World/Images/ForgePeakImageprompt.md",
-    "update_image_prompts.js",
-    "Public/World/Images/OrcCityCImageprompt.md",
-    "Public/World/Images/OrcCityBImageprompt.md",
-    "Public/World/Images/StoneforgeImageprompt.md",
-    "Public/World/Images/SteamhammerImageprompt.md",
-    "Public/World/Images/IronrootImageprompt.md",
-    "Public/World/Images/GemstoneHollowImageprompt.md",
-    "Public/World/Images/StardewImageprompt.md",
-    "Public/World/Images/SerenityHollowImageprompt.md",
-    "Public/World/Images/MoonshadeImageprompt.md",
-    "Public/World/Images/HillcrestImageprompt.md",
-    "Public/World/Images/HighreachImageprompt.md",
-    "Public/World/Images/ArdenvilleImageprompt.md",
-    "Public/World/Images/FrostGladeImageprompt.md",
-    "Public/World/Images/OrcCapitolImageprompt.md",
-    "Public/World/Images/StonehavenImageprompt.md",
-    "Public/World/Images/StarfallImageprompt.md",
-    "Public/World/Images",
-    "docs/dm-jarvis.html",
-    "docs/jarvis-index.json",
-    "docs/generate-jarvis-index.js",
-    "Public/World/Events/Timeline",
-    "Public/World/Events",
-    "docs/Private/1. World Almanac/World/Orcish Wastes/Wizards Tower/NPCs",
-    "docs/Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs",
-    "docs/Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs"
+    "Public/World/Images/Fairfield.png"
   ]
 }

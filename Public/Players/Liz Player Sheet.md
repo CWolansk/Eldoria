@@ -5,6 +5,7 @@
 const {CharacterSheetDisplay} = await cJS()
 await CharacterSheetDisplay.display(dv, {
   name: "Liz",
+  portrait: "Public/Players/LizDnD.png",
   class: "Bard",
   level: dv.page("Player Controls").level,
   race: "Elf",

@@ -8,6 +8,8 @@
 //     class: "Wizard",
 //     level: 5,
 //     race: "Human",
+//     portrait: "https://example.com/gandalf.jpg",  // optional: image URL or vault-relative path
+//                                                   // falls back to the first letter of the name
 //     str: 10,
 //     dex: 14,
 //     con: 12,
@@ -45,6 +47,14 @@ class CharacterSheetDisplay {
             '.dnd-char-sheet { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: #000; border: 2px solid #fff; padding: 30px; border-radius: 10px; max-width: 900px; margin: 20px auto; color: #fff; }\n' +
             '.dnd-char-sheet h1 { text-align: center; color: #fff; margin-bottom: 30px; font-size: 2em; text-transform: uppercase; letter-spacing: 2px; border-bottom: 3px solid #fff; padding-bottom: 15px; }\n' +
             '.dnd-char-sheet h2 { color: #fff; margin: 20px 0 15px 0; padding-bottom: 10px; border-bottom: 2px solid #fff; }\n' +
+            '.dnd-char-header { display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: center; margin-bottom: 25px; padding-bottom: 25px; border-bottom: 3px solid #fff; }\n' +
+            '.dnd-char-portrait { width: 140px; height: 200px; border-radius: 8px; border: 2px solid #fff; background: #1a1a1a; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }\n' +
+            '.dnd-char-portrait img { width: 100%; height: 100%; object-fit: contain; display: block; }\n' +
+            '.dnd-char-portrait .dnd-portrait-placeholder { font-size: 3em; font-weight: bold; color: #fff; text-transform: uppercase; letter-spacing: 2px; opacity: 0.6; }\n' +
+            '.dnd-char-header-info { display: flex; flex-direction: column; gap: 8px; min-width: 0; }\n' +
+            '.dnd-char-header-name { font-size: 2.4em; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; line-height: 1.1; word-break: break-word; }\n' +
+            '.dnd-char-header-subtitle { font-size: 1.1em; color: #ccc; letter-spacing: 1px; }\n' +
+            '.dnd-char-header-subtitle .sep { opacity: 0.5; margin: 0 8px; }\n' +
             '.dnd-char-info { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #fff; }\n' +
             '.dnd-info-field { display: flex; flex-direction: column; text-align: center; }\n' +
             '.dnd-info-field label { font-size: 1.2em; color: #fff; margin-bottom: 5px; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px; }\n' +
@@ -97,6 +107,10 @@ class CharacterSheetDisplay {
             '  .dnd-char-sheet { padding: 15px; margin: 10px; border-width: 1px; }\n' +
             '  .dnd-char-sheet h1 { font-size: 1.5em; margin-bottom: 20px; padding-bottom: 10px; letter-spacing: 1px; }\n' +
             '  .dnd-char-sheet h2 { font-size: 1.2em; margin: 15px 0 10px 0; }\n' +
+            '  .dnd-char-header { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; }\n' +
+            '  .dnd-char-portrait { width: 110px; height: 157px; }\n' +
+            '  .dnd-char-header-name { font-size: 1.8em; letter-spacing: 1px; }\n' +
+            '  .dnd-char-header-subtitle { font-size: 1em; }\n' +
             '  .dnd-char-info { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }\n' +
             '  .dnd-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }\n' +
             '  .dnd-stat-block { padding: 10px; }\n' +
@@ -247,24 +261,49 @@ class CharacterSheetDisplay {
         var initiative = modifiers.dex;
         
         var html = '<div class="dnd-char-sheet" id="' + instanceId + '">';
-        html += '<h1>D&D 5e Character Stats</h1>';
-        
-        // Character Info
-        html += '<div class="dnd-char-info">';
-        html += '<div class="dnd-info-field"><label>Character Name</label><div class="dnd-info-value" id="' + instanceId + '-name">' + (characterData.name || '-') + '</div></div>';
-        html += '<div class="dnd-info-field"><label>Class</label><div class="dnd-info-value" id="' + instanceId + '-class">' + (characterData.class || '-') + '</div></div>';
-        html += '<div class="dnd-info-field"><label>Level</label><div class="dnd-info-value" id="' + instanceId + '-level">' + (characterData.level || 1) + '</div></div>';
-        html += '<div class="dnd-info-field"><label>Race</label><div class="dnd-info-value" id="' + instanceId + '-race">' + (characterData.race || '-') + '</div></div>';
-        
-        // Row 2
-        if (characterData.experience || characterData.guildPoints || characterData.guildRank) {
+
+        // Character Header (portrait + name)
+        var charName = characterData.name || '-';
+        var portraitInner;
+        if (characterData.portrait) {
+            // Resolve vault-local paths via Obsidian's resource API; leave URLs untouched
+            var rawPortrait = String(characterData.portrait);
+            var portraitSrc = rawPortrait;
+            if (!rawPortrait.startsWith('http') && dv && dv.app && dv.app.vault && dv.app.vault.adapter) {
+                try { portraitSrc = dv.app.vault.adapter.getResourcePath(rawPortrait); } catch(e) {}
+            }
+            portraitSrc = portraitSrc.replace(/"/g, '&quot;');
+            portraitInner = '<img src="' + portraitSrc + '" alt="' + charName + '" onerror="this.outerHTML=\'<div class=&quot;dnd-portrait-placeholder&quot;>' + (charName.charAt(0) || '?') + '</div>\'" />';
+        } else {
+            portraitInner = '<div class="dnd-portrait-placeholder">' + (charName.charAt(0) || '?') + '</div>';
+        }
+
+        var subtitleParts = [];
+        if (characterData.race) subtitleParts.push(characterData.race);
+        if (characterData.class) subtitleParts.push(characterData.class);
+        if (characterData.level) subtitleParts.push('Level ' + characterData.level);
+        var subtitle = subtitleParts.join('<span class="sep">\u2022</span>');
+
+        html += '<div class="dnd-char-header">';
+        html += '<div class="dnd-char-portrait">' + portraitInner + '</div>';
+        html += '<div class="dnd-char-header-info">';
+        html += '<div class="dnd-char-header-name" id="' + instanceId + '-name">' + charName + '</div>';
+        if (subtitle) {
+            html += '<div class="dnd-char-header-subtitle">' + subtitle + '</div>';
+        }
+        html += '</div>';
+        html += '</div>';
+
+        // Character Info (secondary details)
+        var hasSecondary = characterData.experience || characterData.guildPoints || characterData.guildRank || characterData.background;
+        if (hasSecondary) {
+            html += '<div class="dnd-char-info">';
+            html += '<div class="dnd-info-field"><label>Background</label><div class="dnd-info-value">' + (characterData.background || '-') + '</div></div>';
             html += '<div class="dnd-info-field"><label>Experience</label><div class="dnd-info-value">' + (characterData.experience || '-') + '</div></div>';
             html += '<div class="dnd-info-field"><label>Guild Rank</label><div class="dnd-info-value">' + (characterData.guildRank || '-') + '</div></div>';
             html += '<div class="dnd-info-field"><label>Guild Points</label><div class="dnd-info-value">' + (characterData.guildPoints || '-') + '</div></div>';
-            html += '<div class="dnd-info-field"><label>Background</label><div class="dnd-info-value">' + (characterData.background || '-') + '</div></div>';
+            html += '</div>';
         }
-        
-        html += '</div>';
         
         // Ability Scores
         html += '<div class="dnd-stats-grid">';
