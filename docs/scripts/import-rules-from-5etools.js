@@ -303,7 +303,7 @@ function collectActions(features, items, spells, feats) {
       group: feature.timing === 'Passive' ? 'Free / Utility' : feature.timing,
       type: feature.kind === 'subclass' ? `${feature.subclassShortName || feature.subclassName || feature.className}` : feature.className,
       title: feature.name,
-      detail: firstSentence(feature.text, 260),
+      detail: actionSummary(feature.text, 520),
       tags: [feature.className, feature.subclassShortName, feature.level ? `Level ${feature.level}` : '', feature.resourceHint].filter(Boolean),
     });
   }
@@ -383,6 +383,7 @@ function collectResources(features, items) {
 
 function inferWeapon(item) {
   const type = normalizeName(item.type);
+  if (type.includes('armor') || type.includes('shield')) return null;
   const damage = parseDamage(item.damage);
   if (!type.includes('weapon') && !damage) return null;
   const propertiesText = item.properties.map(normalizeName).join(' ');
@@ -459,7 +460,6 @@ function inferItemEffects(item) {
 
 function inferFeatureResource(feature) {
   const hint = inferFeatureResourceHint(feature.name, feature.text);
-  if (!hint) return null;
   const common = {
     sourceType: feature.kind,
     sourceId: feature.id,
@@ -467,6 +467,18 @@ function inferFeatureResource(feature) {
     subclassName: feature.subclassShortName || feature.subclassName,
     text: firstSentence(feature.text, 240),
   };
+  if (!hint) {
+    const abilityUses = feature.text.match(/number of times equal to your (Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma) modifier \(a minimum of once\).*?regain all expended uses when you finish a (short|long) rest/i);
+    if (!abilityUses) return null;
+    const ability = abilityUses[1].slice(0, 3).toLowerCase();
+    return {
+      id: feature.id,
+      name: feature.name,
+      maxFormula: `${ability}Mod`,
+      reset: `${abilityUses[2].toLowerCase()}Rest`,
+      ...common,
+    };
+  }
   if (hint === 'Channel Divinity') return { id: 'cleric-channel-divinity', name: 'Channel Divinity', maxFormula: 'clericChannelDivinityUses(level)', reset: 'shortRest', ...common };
   if (hint === 'Bardic Inspiration') return { id: 'bardic-inspiration', name: 'Bardic Inspiration', maxFormula: 'max(1, chaMod)', reset: 'longRestUntilFontOfInspirationThenShortRest', ...common };
   if (hint === 'Ki') return { id: 'monk-ki', name: 'Ki', maxFormula: 'level', reset: 'shortRest', ...common };
@@ -486,7 +498,7 @@ function inferFeatureResourceHint(name, text) {
   if (haystack.includes('bardic inspiration')) return 'Bardic Inspiration';
   if (haystack === 'ki' || haystack.includes(' ki point')) return 'Ki';
   if (haystack.includes('wild shape')) return 'Wild Shape';
-  if (haystack.includes('rage')) return 'Rage';
+  if (/\brages?\b|\braging\b/.test(haystack)) return 'Rage';
   if (haystack.includes('sorcery points')) return 'Sorcery Points';
   if (haystack.includes('lay on hands')) return 'Lay on Hands';
   if (haystack.includes('action surge')) return 'Action Surge';
@@ -714,6 +726,22 @@ function firstSentence(text, maxLength) {
   const sentence = (clean.match(/[^.!?]+[.!?]+/) || [clean])[0] || '';
   if (sentence.length <= maxLength) return sentence;
   return `${sentence.slice(0, maxLength - 1).trim()}...`;
+}
+
+function actionSummary(text, maxLength) {
+  const clean = cleanRulesText(text);
+  const sentences = clean.match(/[^.!?]+[.!?]+/g) || [clean];
+  let out = '';
+  let count = 0;
+  for (const sentence of sentences) {
+    const next = `${out} ${sentence}`.trim();
+    if (next.length > maxLength) break;
+    out = next;
+    count += 1;
+    if (count >= 3 && /\b(action|bonus action|reaction|when|whenever|save|saving throw|damage|roll|use)\b/i.test(out)) break;
+  }
+  if (!out) out = clean.slice(0, maxLength - 1).trim();
+  return out.length <= maxLength ? out : `${out.slice(0, maxLength - 1).trim()}...`;
 }
 
 function uniqueBy(items, getKey) {

@@ -6000,16 +6000,6 @@
     "itemName": "+1 Brass Knuckles"
   },
   {
-    "id": "1-breastplate-1-breastplate-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-breastplate",
-    "itemName": "+1 Breastplate"
-  },
-  {
     "id": "1-broadsword-1-broadsword-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -6020,16 +6010,6 @@
     "itemName": "+1 Broadsword"
   },
   {
-    "id": "1-buckler-1-buckler-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-buckler",
-    "itemName": "+1 Buckler"
-  },
-  {
     "id": "1-cestus-1-cestus-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -6038,26 +6018,6 @@
     "sourceType": "item",
     "sourceId": "1-cestus",
     "itemName": "+1 Cestus"
-  },
-  {
-    "id": "1-chain-mail-1-chain-mail-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-chain-mail",
-    "itemName": "+1 Chain Mail"
-  },
-  {
-    "id": "1-chain-shirt-1-chain-shirt-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-chain-shirt",
-    "itemName": "+1 Chain Shirt"
   },
   {
     "id": "1-chain-sickle-1-chain-sickle-magic-weapon-bonus",
@@ -6310,16 +6270,6 @@
     "itemName": "+1 Halberd"
   },
   {
-    "id": "1-half-plate-armor-1-half-plate-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-half-plate-armor",
-    "itemName": "+1 Half Plate Armor"
-  },
-  {
     "id": "1-hand-crossbow-1-hand-crossbow-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -6368,16 +6318,6 @@
     "sourceType": "item",
     "sourceId": "1-heavy-scimitar",
     "itemName": "+1 Heavy Scimitar"
-  },
-  {
-    "id": "1-hide-armor-1-hide-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-hide-armor",
-    "itemName": "+1 Hide Armor"
   },
   {
     "id": "1-hooked-shortspear-1-hooked-shortspear-magic-weapon-bonus",
@@ -6490,16 +6430,6 @@
     "itemName": "+1 Lance"
   },
   {
-    "id": "1-leather-armor-1-leather-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-leather-armor",
-    "itemName": "+1 Leather Armor"
-  },
-  {
     "id": "1-light-crossbow-1-light-crossbow-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -6600,16 +6530,6 @@
     "itemName": "+1 Maul"
   },
   {
-    "id": "1-metal-cuirass-1-metal-cuirass-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-metal-cuirass",
-    "itemName": "+1 Metal Cuirass"
-  },
-  {
     "id": "1-meteor-hammer-1-meteor-hammer-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -6680,16 +6600,6 @@
     "itemName": "+1 Nunchaku"
   },
   {
-    "id": "1-padded-armor-1-padded-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-padded-armor",
-    "itemName": "+1 Padded Armor"
-  },
-  {
     "id": "1-pike-1-pike-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -6698,26 +6608,6 @@
     "sourceType": "item",
     "sourceId": "1-pike",
     "itemName": "+1 Pike"
-  },
-  {
-    "id": "1-plate-armor-1-plate-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-plate-armor",
-    "itemName": "+1 Plate Armor"
-  },
-  {
-    "id": "1-plated-chainmail-1-plated-chainmail-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-plated-chainmail",
-    "itemName": "+1 Plated Chainmail"
   },
   {
     "id": "1-quarterstaff-1-quarterstaff-magic-weapon-bonus",
@@ -6760,16 +6650,6 @@
     "itemName": "+1 Repeating Hand Crossbow"
   },
   {
-    "id": "1-ring-mail-1-ring-mail-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-ring-mail",
-    "itemName": "+1 Ring Mail"
-  },
-  {
     "id": "1-sai-1-sai-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -6778,16 +6658,6 @@
     "sourceType": "item",
     "sourceId": "1-sai",
     "itemName": "+1 Sai"
-  },
-  {
-    "id": "1-scale-mail-1-scale-mail-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-scale-mail",
-    "itemName": "+1 Scale Mail"
   },
   {
     "id": "1-scimitar-1-scimitar-magic-weapon-bonus",
@@ -6818,26 +6688,6 @@
     "sourceType": "item",
     "sourceId": "1-scythe",
     "itemName": "+1 Scythe"
-  },
-  {
-    "id": "1-segmented-plate-1-segmented-plate-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-segmented-plate",
-    "itemName": "+1 Segmented Plate"
-  },
-  {
-    "id": "1-shield-1-shield-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-shield",
-    "itemName": "+1 Shield"
   },
   {
     "id": "1-shikomizue-1-shikomizue-magic-weapon-bonus",
@@ -6910,16 +6760,6 @@
     "itemName": "+1 Spear"
   },
   {
-    "id": "1-spiked-armor-1-spiked-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-spiked-armor",
-    "itemName": "+1 Spiked Armor"
-  },
-  {
     "id": "1-spiked-chain-1-spiked-chain-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -6930,26 +6770,6 @@
     "itemName": "+1 Spiked Chain"
   },
   {
-    "id": "1-spiked-shield-1-spiked-shield-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-spiked-shield",
-    "itemName": "+1 Spiked Shield"
-  },
-  {
-    "id": "1-splint-armor-1-splint-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-splint-armor",
-    "itemName": "+1 Splint Armor"
-  },
-  {
     "id": "1-steel-capped-staff-1-steel-capped-staff-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -6958,16 +6778,6 @@
     "sourceType": "item",
     "sourceId": "1-steel-capped-staff",
     "itemName": "+1 Steel-capped Staff"
-  },
-  {
-    "id": "1-studded-leather-armor-1-studded-leather-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-studded-leather-armor",
-    "itemName": "+1 Studded Leather Armor"
   },
   {
     "id": "1-tekko-kagi-1-tekko-kagi-magic-weapon-bonus",
@@ -6998,16 +6808,6 @@
     "sourceType": "item",
     "sourceId": "1-tonfa",
     "itemName": "+1 Tonfa"
-  },
-  {
-    "id": "1-tower-shield-1-tower-shield-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-tower-shield",
-    "itemName": "+1 Tower Shield"
   },
   {
     "id": "1-trident-1-trident-magic-weapon-bonus",
@@ -7068,16 +6868,6 @@
     "sourceType": "item",
     "sourceId": "1-whip",
     "itemName": "+1 Whip"
-  },
-  {
-    "id": "1-wooden-cuirass-1-wooden-cuirass-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "1-wooden-cuirass",
-    "itemName": "+1 Wooden Cuirass"
   },
   {
     "id": "1-yklwa-1-yklwa-magic-weapon-bonus",
@@ -7160,16 +6950,6 @@
     "itemName": "+2 Brass Knuckles"
   },
   {
-    "id": "2-breastplate-2-breastplate-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-breastplate",
-    "itemName": "+2 Breastplate"
-  },
-  {
     "id": "2-broadsword-2-broadsword-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -7180,16 +6960,6 @@
     "itemName": "+2 Broadsword"
   },
   {
-    "id": "2-buckler-2-buckler-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-buckler",
-    "itemName": "+2 Buckler"
-  },
-  {
     "id": "2-cestus-2-cestus-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -7198,26 +6968,6 @@
     "sourceType": "item",
     "sourceId": "2-cestus",
     "itemName": "+2 Cestus"
-  },
-  {
-    "id": "2-chain-mail-2-chain-mail-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-chain-mail",
-    "itemName": "+2 Chain Mail"
-  },
-  {
-    "id": "2-chain-shirt-2-chain-shirt-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-chain-shirt",
-    "itemName": "+2 Chain Shirt"
   },
   {
     "id": "2-chain-sickle-2-chain-sickle-magic-weapon-bonus",
@@ -7470,16 +7220,6 @@
     "itemName": "+2 Halberd"
   },
   {
-    "id": "2-half-plate-armor-2-half-plate-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-half-plate-armor",
-    "itemName": "+2 Half Plate Armor"
-  },
-  {
     "id": "2-hand-crossbow-2-hand-crossbow-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -7528,16 +7268,6 @@
     "sourceType": "item",
     "sourceId": "2-heavy-scimitar",
     "itemName": "+2 Heavy Scimitar"
-  },
-  {
-    "id": "2-hide-armor-2-hide-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-hide-armor",
-    "itemName": "+2 Hide Armor"
   },
   {
     "id": "2-hooked-shortspear-2-hooked-shortspear-magic-weapon-bonus",
@@ -7650,16 +7380,6 @@
     "itemName": "+2 Lance"
   },
   {
-    "id": "2-leather-armor-2-leather-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-leather-armor",
-    "itemName": "+2 Leather Armor"
-  },
-  {
     "id": "2-light-crossbow-2-light-crossbow-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -7760,16 +7480,6 @@
     "itemName": "+2 Maul"
   },
   {
-    "id": "2-metal-cuirass-2-metal-cuirass-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-metal-cuirass",
-    "itemName": "+2 Metal Cuirass"
-  },
-  {
     "id": "2-meteor-hammer-2-meteor-hammer-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -7840,16 +7550,6 @@
     "itemName": "+2 Nunchaku"
   },
   {
-    "id": "2-padded-armor-2-padded-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-padded-armor",
-    "itemName": "+2 Padded Armor"
-  },
-  {
     "id": "2-pike-2-pike-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -7858,26 +7558,6 @@
     "sourceType": "item",
     "sourceId": "2-pike",
     "itemName": "+2 Pike"
-  },
-  {
-    "id": "2-plate-armor-2-plate-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-plate-armor",
-    "itemName": "+2 Plate Armor"
-  },
-  {
-    "id": "2-plated-chainmail-2-plated-chainmail-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-plated-chainmail",
-    "itemName": "+2 Plated Chainmail"
   },
   {
     "id": "2-quarterstaff-2-quarterstaff-magic-weapon-bonus",
@@ -7920,16 +7600,6 @@
     "itemName": "+2 Repeating Hand Crossbow"
   },
   {
-    "id": "2-ring-mail-2-ring-mail-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-ring-mail",
-    "itemName": "+2 Ring Mail"
-  },
-  {
     "id": "2-sai-2-sai-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -7938,16 +7608,6 @@
     "sourceType": "item",
     "sourceId": "2-sai",
     "itemName": "+2 Sai"
-  },
-  {
-    "id": "2-scale-mail-2-scale-mail-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-scale-mail",
-    "itemName": "+2 Scale Mail"
   },
   {
     "id": "2-scimitar-2-scimitar-magic-weapon-bonus",
@@ -7978,26 +7638,6 @@
     "sourceType": "item",
     "sourceId": "2-scythe",
     "itemName": "+2 Scythe"
-  },
-  {
-    "id": "2-segmented-plate-2-segmented-plate-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-segmented-plate",
-    "itemName": "+2 Segmented Plate"
-  },
-  {
-    "id": "2-shield-2-shield-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-shield",
-    "itemName": "+2 Shield"
   },
   {
     "id": "2-shikomizue-2-shikomizue-magic-weapon-bonus",
@@ -8070,16 +7710,6 @@
     "itemName": "+2 Spear"
   },
   {
-    "id": "2-spiked-armor-2-spiked-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-spiked-armor",
-    "itemName": "+2 Spiked Armor"
-  },
-  {
     "id": "2-spiked-chain-2-spiked-chain-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -8090,26 +7720,6 @@
     "itemName": "+2 Spiked Chain"
   },
   {
-    "id": "2-spiked-shield-2-spiked-shield-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-spiked-shield",
-    "itemName": "+2 Spiked Shield"
-  },
-  {
-    "id": "2-splint-armor-2-splint-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-splint-armor",
-    "itemName": "+2 Splint Armor"
-  },
-  {
     "id": "2-steel-capped-staff-2-steel-capped-staff-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -8118,16 +7728,6 @@
     "sourceType": "item",
     "sourceId": "2-steel-capped-staff",
     "itemName": "+2 Steel-capped Staff"
-  },
-  {
-    "id": "2-studded-leather-armor-2-studded-leather-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-studded-leather-armor",
-    "itemName": "+2 Studded Leather Armor"
   },
   {
     "id": "2-tekko-kagi-2-tekko-kagi-magic-weapon-bonus",
@@ -8158,16 +7758,6 @@
     "sourceType": "item",
     "sourceId": "2-tonfa",
     "itemName": "+2 Tonfa"
-  },
-  {
-    "id": "2-tower-shield-2-tower-shield-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-tower-shield",
-    "itemName": "+2 Tower Shield"
   },
   {
     "id": "2-trident-2-trident-magic-weapon-bonus",
@@ -8228,16 +7818,6 @@
     "sourceType": "item",
     "sourceId": "2-whip",
     "itemName": "+2 Whip"
-  },
-  {
-    "id": "2-wooden-cuirass-2-wooden-cuirass-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 2,
-    "text": "+2 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "2-wooden-cuirass",
-    "itemName": "+2 Wooden Cuirass"
   },
   {
     "id": "2-yklwa-2-yklwa-magic-weapon-bonus",
@@ -8320,16 +7900,6 @@
     "itemName": "+3 Brass Knuckles"
   },
   {
-    "id": "3-breastplate-3-breastplate-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-breastplate",
-    "itemName": "+3 Breastplate"
-  },
-  {
     "id": "3-broadsword-3-broadsword-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -8340,16 +7910,6 @@
     "itemName": "+3 Broadsword"
   },
   {
-    "id": "3-buckler-3-buckler-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-buckler",
-    "itemName": "+3 Buckler"
-  },
-  {
     "id": "3-cestus-3-cestus-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -8358,26 +7918,6 @@
     "sourceType": "item",
     "sourceId": "3-cestus",
     "itemName": "+3 Cestus"
-  },
-  {
-    "id": "3-chain-mail-3-chain-mail-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-chain-mail",
-    "itemName": "+3 Chain Mail"
-  },
-  {
-    "id": "3-chain-shirt-3-chain-shirt-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-chain-shirt",
-    "itemName": "+3 Chain Shirt"
   },
   {
     "id": "3-chain-sickle-3-chain-sickle-magic-weapon-bonus",
@@ -8630,16 +8170,6 @@
     "itemName": "+3 Halberd"
   },
   {
-    "id": "3-half-plate-armor-3-half-plate-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-half-plate-armor",
-    "itemName": "+3 Half Plate Armor"
-  },
-  {
     "id": "3-hand-crossbow-3-hand-crossbow-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -8688,16 +8218,6 @@
     "sourceType": "item",
     "sourceId": "3-heavy-scimitar",
     "itemName": "+3 Heavy Scimitar"
-  },
-  {
-    "id": "3-hide-armor-3-hide-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-hide-armor",
-    "itemName": "+3 Hide Armor"
   },
   {
     "id": "3-hooked-shortspear-3-hooked-shortspear-magic-weapon-bonus",
@@ -8810,16 +8330,6 @@
     "itemName": "+3 Lance"
   },
   {
-    "id": "3-leather-armor-3-leather-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-leather-armor",
-    "itemName": "+3 Leather Armor"
-  },
-  {
     "id": "3-light-crossbow-3-light-crossbow-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -8920,16 +8430,6 @@
     "itemName": "+3 Maul"
   },
   {
-    "id": "3-metal-cuirass-3-metal-cuirass-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-metal-cuirass",
-    "itemName": "+3 Metal Cuirass"
-  },
-  {
     "id": "3-meteor-hammer-3-meteor-hammer-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -9000,16 +8500,6 @@
     "itemName": "+3 Nunchaku"
   },
   {
-    "id": "3-padded-armor-3-padded-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-padded-armor",
-    "itemName": "+3 Padded Armor"
-  },
-  {
     "id": "3-pike-3-pike-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -9018,26 +8508,6 @@
     "sourceType": "item",
     "sourceId": "3-pike",
     "itemName": "+3 Pike"
-  },
-  {
-    "id": "3-plate-armor-3-plate-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-plate-armor",
-    "itemName": "+3 Plate Armor"
-  },
-  {
-    "id": "3-plated-chainmail-3-plated-chainmail-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-plated-chainmail",
-    "itemName": "+3 Plated Chainmail"
   },
   {
     "id": "3-quarterstaff-3-quarterstaff-magic-weapon-bonus",
@@ -9080,16 +8550,6 @@
     "itemName": "+3 Repeating Hand Crossbow"
   },
   {
-    "id": "3-ring-mail-3-ring-mail-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-ring-mail",
-    "itemName": "+3 Ring Mail"
-  },
-  {
     "id": "3-sai-3-sai-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -9098,16 +8558,6 @@
     "sourceType": "item",
     "sourceId": "3-sai",
     "itemName": "+3 Sai"
-  },
-  {
-    "id": "3-scale-mail-3-scale-mail-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-scale-mail",
-    "itemName": "+3 Scale Mail"
   },
   {
     "id": "3-scimitar-3-scimitar-magic-weapon-bonus",
@@ -9138,26 +8588,6 @@
     "sourceType": "item",
     "sourceId": "3-scythe",
     "itemName": "+3 Scythe"
-  },
-  {
-    "id": "3-segmented-plate-3-segmented-plate-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-segmented-plate",
-    "itemName": "+3 Segmented Plate"
-  },
-  {
-    "id": "3-shield-3-shield-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-shield",
-    "itemName": "+3 Shield"
   },
   {
     "id": "3-shikomizue-3-shikomizue-magic-weapon-bonus",
@@ -9230,16 +8660,6 @@
     "itemName": "+3 Spear"
   },
   {
-    "id": "3-spiked-armor-3-spiked-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-spiked-armor",
-    "itemName": "+3 Spiked Armor"
-  },
-  {
     "id": "3-spiked-chain-3-spiked-chain-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -9250,26 +8670,6 @@
     "itemName": "+3 Spiked Chain"
   },
   {
-    "id": "3-spiked-shield-3-spiked-shield-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-spiked-shield",
-    "itemName": "+3 Spiked Shield"
-  },
-  {
-    "id": "3-splint-armor-3-splint-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-splint-armor",
-    "itemName": "+3 Splint Armor"
-  },
-  {
     "id": "3-steel-capped-staff-3-steel-capped-staff-magic-weapon-bonus",
     "kind": "weapon-bonus",
     "name": "Magic weapon bonus",
@@ -9278,16 +8678,6 @@
     "sourceType": "item",
     "sourceId": "3-steel-capped-staff",
     "itemName": "+3 Steel-capped Staff"
-  },
-  {
-    "id": "3-studded-leather-armor-3-studded-leather-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-studded-leather-armor",
-    "itemName": "+3 Studded Leather Armor"
   },
   {
     "id": "3-tekko-kagi-3-tekko-kagi-magic-weapon-bonus",
@@ -9318,16 +8708,6 @@
     "sourceType": "item",
     "sourceId": "3-tonfa",
     "itemName": "+3 Tonfa"
-  },
-  {
-    "id": "3-tower-shield-3-tower-shield-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-tower-shield",
-    "itemName": "+3 Tower Shield"
   },
   {
     "id": "3-trident-3-trident-magic-weapon-bonus",
@@ -9388,16 +8768,6 @@
     "sourceType": "item",
     "sourceId": "3-whip",
     "itemName": "+3 Whip"
-  },
-  {
-    "id": "3-wooden-cuirass-3-wooden-cuirass-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 3,
-    "text": "+3 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "3-wooden-cuirass",
-    "itemName": "+3 Wooden Cuirass"
   },
   {
     "id": "3-yklwa-3-yklwa-magic-weapon-bonus",
@@ -12088,16 +11458,6 @@
     "sourceType": "item",
     "sourceId": "delerium-forged-blade-ulfberht-sword",
     "itemName": "Delerium-Forged Blade Ulfberht Sword"
-  },
-  {
-    "id": "demon-armor-demon-armor-magic-weapon-bonus",
-    "kind": "weapon-bonus",
-    "name": "Magic weapon bonus",
-    "value": 1,
-    "text": "+1 to attack and damage rolls with this weapon.",
-    "sourceType": "item",
-    "sourceId": "demon-armor",
-    "itemName": "Demon Armor"
   },
   {
     "id": "devlin-s-staff-of-striking-devlin-s-staff-of-striking-magic-weapon-bonus",

@@ -1531,6 +1531,37 @@ th {
   margin-top: 1.25rem;
 }
 
+.class-feature-list {
+  display: grid;
+  gap: .55rem;
+}
+
+.class-feature-row {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-strong);
+}
+
+.class-feature-row summary {
+  display: flex;
+  cursor: pointer;
+  padding: .7rem .8rem;
+}
+
+.class-feature-row summary span,
+.class-feature-row summary small {
+  display: block;
+}
+
+.class-feature-row summary small {
+  color: var(--muted);
+}
+
+.class-feature-row p {
+  margin: 0;
+  padding: 0 .8rem .8rem;
+}
+
 .empty-note {
   color: var(--muted);
 }

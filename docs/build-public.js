@@ -372,6 +372,7 @@ function buildPlayer(page, controls, fileIndex, rules, itemCatalog, spellCatalog
     resources: buildPlayerResources(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog),
     ruleActions: buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, feats, spells),
     ruleEffects: buildPlayerRuleEffects(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, feats),
+    ruleFeatures: buildPlayerRuleFeatures(rules, matchedClass, matchedSubclass, level),
     notes: data.notes || '',
     backgrounds,
     feats,
@@ -506,6 +507,26 @@ function buildPlayerRuleEffects(rules, matchedClass, matchedSubclass, level, equ
     if (effect.sourceType === 'feat') return featIds.has(effect.sourceId);
     return false;
   }).slice(0, 160);
+}
+
+function buildPlayerRuleFeatures(rules, matchedClass, matchedSubclass, level) {
+  const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level);
+  return (rules.features || [])
+    .filter(feature => featureIds.has(feature.id))
+    .map(feature => ({
+      id: feature.id,
+      kind: feature.kind,
+      name: feature.name,
+      className: feature.className || '',
+      subclassName: feature.subclassShortName || feature.subclassName || '',
+      level: feature.level,
+      source: feature.source || '',
+      text: cleanRulesText(feature.text || ''),
+      timing: feature.timing || '',
+      resourceHint: feature.resourceHint || '',
+    }))
+    .sort((a, b) => a.level - b.level || `${a.kind} ${a.name}`.localeCompare(`${b.kind} ${b.name}`))
+    .slice(0, 120);
 }
 
 function getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level) {
@@ -830,6 +851,7 @@ function renderPlayerPage(player, page) {
   }).join('\n');
 
   const featuresHtml = player.features ? renderMarkdown(player.features, page, { byVaultPath: new Map(), byBasename: new Map() }) : '<p>No extra class features recorded.</p>';
+  const canonicalFeaturesHtml = renderClassFeatureList(p.ruleFeatures || []);
   const portrait = player.portraitUrl
     ? `<img src="${escapeAttr(player.portraitUrl)}" alt="${title} portrait">`
     : `<span>${escapeHtml(title.slice(0, 1))}</span>`;
@@ -983,7 +1005,14 @@ function renderPlayerPage(player, page) {
         ${infoCard('Feats', p.feats.join(', ') || '-', 'feats')}
         ${infoCard('Race', p.races.join(', ') || p.race || '-', 'races')}
       </div>
-      <section class="feature-notes">${featuresHtml}</section>
+      <section class="feature-notes">
+        <h2>Class Features</h2>
+        ${canonicalFeaturesHtml}
+      </section>
+      <section class="feature-notes">
+        <h2>Sheet Feature Notes</h2>
+        ${featuresHtml}
+      </section>
     `)}
     ${tabPanel('notes', false, `
       <form class="notes-form" data-player-notes-form>
@@ -1021,6 +1050,21 @@ function inlineEditPanel(title, body, includeReset = false) {
       </div>
     </form>
   </details>`;
+}
+
+function renderClassFeatureList(features) {
+  if (!features.length) return '<p>No class features found in canonical rules.</p>';
+  return `<div class="class-feature-list">
+    ${features.map(feature => `<details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>${escapeHtml(feature.name)}</strong>
+          <small>${escapeHtml([feature.kind === 'subclass' ? feature.subclassName : feature.className, feature.level ? `Level ${feature.level}` : '', feature.timing, feature.resourceHint].filter(Boolean).join(' / '))}</small>
+        </span>
+      </summary>
+      <p>${escapeHtml(feature.text || 'No feature text recorded.')}</p>
+    </details>`).join('')}
+  </div>`;
 }
 
 function editNumberField(name, label, attrs = '') {

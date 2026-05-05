@@ -712,7 +712,7 @@
     "source": "TCE",
     "text": "Starting at 3rd level, you always have certain spells prepared after you reach particular levels in this class, as shown in the Battle Smith Spells table. These spells count as artificer spells for you, but they don't count against the number of artificer spells you prepare. Battle Smith Spells 3rd heroism, shield 5th branding smite, warding bond 9th aura of vitality, conjure barrage 13th aura of purity, fire shield 17th banishing smite, mass cure wounds",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-artificer-battle-smith-3-steel-defender-tce",
@@ -1154,7 +1154,7 @@
     "source": "XGE",
     "text": "Beginning at 6th level, the guardian spirits that aid you can provide supernatural protection to those you defend. If you are raging and another creature you can see within 30 feet of you takes damage, you can use your reaction to reduce that damage by 2d6. When you reach certain levels in this class, you can reduce the damage by more: by 3d6 at 10th level and by 4d6 at 14th level.",
     "timing": "Reaction",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-battlerager-10-battlerager-charge-scag",
@@ -1180,7 +1180,7 @@
     "source": "SCAG",
     "text": "Starting at 14th level, when a creature within 5 feet of you hits you with a melee attack, the attacker takes 3 piercing damage if you are raging, aren't incapacitated, and are wearing spiked armor.",
     "timing": "Passive",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-battlerager-3-battlerager-armor-scag",
@@ -1206,7 +1206,7 @@
     "source": "SCAG",
     "text": "Known as Kuldjargh (literally \"axe idiot\") in Dwarvish, battleragers are dwarf followers of the gods of war and take the Path of the Battlerager. They specialize in wearing bulky, spiked armor and throwing themselves into combat, striking with their body itself and giving themselves over to the fury of battle.",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-barbarian-battlerager-3-restriction-dwarves-only-scag",
@@ -1219,7 +1219,7 @@
     "source": "SCAG",
     "text": "Only dwarves can follow the Path of the Battlerager. The battlerager fills a particular niche in dwarven society and culture. Your DM can lift this restriction to better suit the campaign. The restriction exists for the Forgotten Realms. It might not apply to your DM's setting or your DM's version of the Realms.",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-barbarian-battlerager-6-reckless-abandon-scag",
@@ -1245,7 +1245,7 @@
     "source": "TCE",
     "text": "10th-level Path of the Beast feature When you hit a creature with your natural weapons while you are raging, the beast within you can curse your target with rabid fury. The target must succeed on a Wisdom saving throw (DC equal to 8 + your Constitution modifier + your proficiency bonus) or suffer one of the following effects (your choice): The target must use its reaction to make a melee attack against another creature of your choice that you can see. The target takes 2d12 psychic damage. You can use this feature a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
     "timing": "Reaction",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-beast-14-call-the-hunt-tce",
@@ -1375,7 +1375,7 @@
     "source": "BGG",
     "text": "10th-Level Path of the Giant Feature Your connection to giant strength allows you to hurl both allies and enemies on the battlefield. As a bonus action while raging, you can choose one Medium or smaller creature within your reach and move it to an unoccupied space you can see within 30 feet of yourself. An unwilling creature must succeed on a Strength saving throw (DC equals 8 + your proficiency bonus + your Strength modifier) to avoid the effect. If, at the end of this movement, the thrown creature isn't on a surface or liquid that can support it, the creature falls, taking damage as normal and landing prone.",
     "timing": "Bonus Action",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-giant-14-demiurgic-colossus-bgg",
@@ -1466,7 +1466,7 @@
     "source": "TDCSR",
     "text": "Starting at 10th level, you can push a creature up to 10 feet when you hit it with a melee attack while you're raging.",
     "timing": "Triggered",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-juggernaut-14-unstoppable-tdcsr",
@@ -1505,7 +1505,7 @@
     "source": "TDCSR",
     "text": "At 3rd level, you harness your fury to anchor your feet to the ground, becoming a bulwark of strength. While you are raging, you can't be knocked prone or moved along the ground against your will.",
     "timing": "Passive",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-juggernaut-3-thunderous-blows-tdcsr",
@@ -1583,7 +1583,7 @@
     "source": "XGE",
     "text": "At 14th level, the power of the storm you channel grows mightier, lashing out at your foes. The effect is based on the environment you chose for your Storm Aura.",
     "timing": "Passive",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-storm-herald-14-sea-xge",
@@ -1752,7 +1752,7 @@
     "source": "PHB",
     "text": "While you're raging, any creature within 5 feet of you that's hostile to you has disadvantage on attack rolls against targets other than you or another character with this feature. An enemy is immune to this effect if it can't see or hear you or if it can't be frightened.",
     "timing": "Passive",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-totem-warrior-14-eagle-phb",
@@ -1765,7 +1765,7 @@
     "source": "PHB",
     "text": "While raging, you have a flying speed equal to your current walking speed. This benefit works only in short bursts; you fall if you end your turn in the air and nothing else is holding you aloft.",
     "timing": "Passive",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-totem-warrior-14-elk-scag",
@@ -1778,7 +1778,7 @@
     "source": "SCAG",
     "text": "While raging, you can use a bonus action during your move to pass through the space of a Large or smaller creature. That creature must succeed on a Strength saving throw (DC 8 + your Strength bonus + your proficiency bonus) or be knocked prone and take bludgeoning damage equal to 1d12 + your Strength modifier.",
     "timing": "Bonus Action",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-totem-warrior-14-tiger-scag",
@@ -1791,7 +1791,7 @@
     "source": "SCAG",
     "text": "While you're raging, if you move at least 20 feet in a straight line toward a Large or smaller target right before making a melee weapon attack against it, you can use a bonus action to make an additional melee weapon attack against it.",
     "timing": "Bonus Action",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-totem-warrior-14-totemic-attunement-phb",
@@ -1817,7 +1817,7 @@
     "source": "PHB",
     "text": "While you're raging, you can use a bonus action on your turn to knock a Large or smaller creature prone when you hit it with melee weapon attack.",
     "timing": "Bonus Action",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-totem-warrior-3-bear-phb",
@@ -1830,7 +1830,7 @@
     "source": "PHB",
     "text": "While raging, you have resistance to all damage except psychic damage. The spirit of the bear makes you tough enough to stand up to any punishment.",
     "timing": "Passive",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-totem-warrior-3-eagle-phb",
@@ -1843,7 +1843,7 @@
     "source": "PHB",
     "text": "While you're raging and aren't wearing heavy armor, other creatures have disadvantage on opportunity attack rolls against you, and you can use the Dash action as a bonus action on your turn. The spirit of the eagle makes you into a predator who can weave through the fray with ease.",
     "timing": "Bonus Action",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-totem-warrior-3-elk-scag",
@@ -1856,7 +1856,7 @@
     "source": "SCAG",
     "text": "While you're raging and aren't wearing heavy armor, your walking speed increases by 15 feet. The spirit of the elk makes you extraordinarily swift.",
     "timing": "Passive",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-totem-warrior-3-path-of-the-totem-warrior-phb",
@@ -1895,7 +1895,7 @@
     "source": "SCAG",
     "text": "While raging, you can add 10 feet to your long jump distance and 3 feet to your high jump distance. The spirit of the tiger empowers your leaps.",
     "timing": "Passive",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-totem-warrior-3-totem-spirit-phb",
@@ -1921,7 +1921,7 @@
     "source": "PHB",
     "text": "While you're raging, your friends have advantage on melee attack rolls against any creature within 5 feet of you that is hostile to you. The spirit of the wolf makes you a leader of hunters.",
     "timing": "Passive",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-totem-warrior-6-aspect-of-the-beast-phb",
@@ -2116,7 +2116,7 @@
     "source": "XGE",
     "text": "Starting when you choose this path at 3rd level, you can channel divine fury into your weapon strikes. While you're raging, the first creature you hit on each of your turns with a weapon attack takes extra damage equal to 1d6 + half your barbarian level. The extra damage is necrotic or radiant; you choose the type of damage when you gain this feature.",
     "timing": "Triggered",
-    "resourceHint": ""
+    "resourceHint": "Rage"
   },
   {
     "id": "subclass-barbarian-zealot-3-path-of-the-zealot-xge",
@@ -2545,7 +2545,7 @@
     "source": "TCE",
     "text": "Bards believe the cosmos is a work of art-the creation of the first dragons and gods. That creative work included harmonies that continue to resound through existence today, a power known as the Song of Creation. The bards of the College of Creation draw on that primeval song through dance, music, and poetry, and their teachers share this lesson: \"Before the sun and the moon, there was the Song, and its music awoke the first dawn. Its melodies so delighted the stones and trees that some of them gained a voice of their own. And now they sing too. Learn the Song, students, and you too can teach the mountains to sing and dance.\" Dwarves and gnomes often encourage their bards to become students of the Song of Creation. And among dragonborn, the Song of Creation is revered, for legends portray Bahamut and Tiamat-the greatest of dragons-as two of the song's first singers.",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-bard-creation-3-mote-of-potential-tce",
@@ -3026,7 +3026,7 @@
     "source": "TDCSR",
     "text": "Not all grand stories conclude in triumphant victory. Many tales end with death and despair, and bards of the College of Tragedy know that sorrow and pathos are emotions just as potent as joy and delight. These bards specialize in the power of tragic storytelling, weaving words and spells together to dramatic and devastating effect.",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-bard-tragedy-3-poetry-in-misery-tdcsr",
@@ -5015,7 +5015,7 @@
     "source": "PSA",
     "text": "The worthy shall hone a strong body that can withstand the boundless energies of the afterlife. It falls to Rhonas to instill this teaching in those who would enter the afterlife—but to his mind, the words themselves don't matter. Strength can't be taught. It must be built through practice and training. Rhonas demonstrates his teachings by his example, rather than by giving his students any kind of academic instruction. He welcomes the people of Naktamun to stand by the Hekma and watch him as he storms into the desert to battle the greatest horrors. He encourages them to observe his indomitable strength, for though they will never equal it, they can aspire to mimicry. He invites them to scrutinize every move and practice what they see. At each indicated cleric level, add the listed spells to your spells prepared. Strength Domain Spells 1st divine favor, shield of faith 3rd enhance ability, protection from poison 5th haste, protection from energy 7th dominate beast, stoneskin 9th destructive wave, insect plague",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-cleric-strength-psa-17-avatar-of-battle-psa",
@@ -5106,7 +5106,7 @@
     "source": "PHB",
     "text": "Gods whose portfolios include the Tempest domain—including Talos, Umberlee, Kord, Zeboim, the Devourer, Zeus, and Thor—govern storms, sea, and sky. They include gods of lightning and thunder, gods of earthquakes, some fire gods, and certain gods of violence, physical strength, and courage. In some pantheons, a god of this domain rules over other deities and is known for swift justice delivered by thunderbolts. In the pantheons of seafaring people, gods of this domain are ocean deities and the patrons of sailors. Tempest gods send their clerics to inspire fear in the common folk, either to keep those folk on the path of righteousness or to encourage them to offer sacrifices of propitiation to ward off divine wrath. At each indicated cleric level, you add the listed spells to your spells prepared. Tempest Domain Spells 1st fog cloud, thunderwave 3rd gust of wind, shatter 5th call lightning, sleet storm 7th control water, ice storm 9th destructive wave, insect plague",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-cleric-tempest-1-wrath-of-the-storm-phb",
@@ -5418,7 +5418,7 @@
     "source": "PHB",
     "text": "War has many manifestations. It can make heroes of ordinary people. It can be desperate and horrific, with acts of cruelty and cowardice eclipsing instances of excellence and courage. In either case, the gods of war watch over warriors and reward them for their great deeds. The clerics of such gods excel in battle, inspiring others to fight the good fight or offering acts of violence as prayers. Gods of war include champions of honor and chivalry (such as Torm, Heironeous, and Kiri-Jolith) as well as gods of destruction and pillage (such as Erythnul, the Fury, Gruumsh, and Ares) and gods of conquest and domination (such as Bane, Hextor, and Maglubiyet). Other war gods (such as Tempus, Nike, and Nuada) take a more neutral stance, promoting war in all its manifestations and supporting warriors in any circumstance. At each indicated cleric level, add the listed spells to your spells prepared. War Domain Spells 1st divine favor, shield of faith 3rd magic weapon, spiritual weapon 5th crusader's mantle, spirit guardians 7th freedom of movement, stoneskin 9th flame strike, hold monster",
     "timing": "Out of Combat",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-cleric-war-1-war-priest-phb",
@@ -7966,7 +7966,7 @@
     "source": "SCAG",
     "text": "Purple Dragon Knights are warriors who hail from the kingdom of Cormyr. Pledged to protect the crown, they take the fight against evil beyond the kingdom's borders. They are tasked with wandering the land as knights errant, relying on their judgment, bravery, and fidelity to guide them in defeating evildoers. A Purple Dragon Knight inspires greatness in others by committing brave deeds in battle. The mere presence of a knight in a hamlet is enough to cause some orcs and bandits to seek easier prey. A lone knight is a skilled warrior, but a knight leading a band of allies can transform even the most poorly equipped militia into a ferocious war band. A knight prefers to lead through deeds, not words. As a knight spearheads an attack, the knight's actions can awaken reserves of courage and conviction in allies that they never suspected they had.",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-fighter-purple-dragon-knight-banneret-3-rallying-cry-scag",
@@ -9903,7 +9903,7 @@
     "source": "UATheMysticClass",
     "text": "Mystics of the Order of the Avatar delve into the world of emotion, mastering their inner life to such an extent that they can manipulate and amplify the emotions of others with the same ease that an artist shapes clay. Known as Avatars, these mystics vary from tyrants to inspiring leaders who are loved by their followers. Avatars can bring out extreme emotions in the people around them. For their allies, they can lend hope, ferocity, and courage, transforming a fighting band into a deadly, unified force. For their enemies, they bring fear, disgust, and trepidation that can make even the most hardened veteran act like a shaky rookie.",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-mystic-avatar-14-avatar-of-speed-uathemysticclass",
@@ -10371,7 +10371,7 @@
     "source": "PHB",
     "text": "Starting at 10th level, you and friendly creatures within 10 feet of you can't be frightened while you are conscious. At 18th level, the range of this aura increases to 30 feet.",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "class-paladin-11-improved-divine-smite-phb",
@@ -10709,7 +10709,7 @@
     "source": "PHB",
     "text": "The Oath of the Ancients is as old as the race of elves and the rituals of the druids. Sometimes called fey knights, green knights, or horned knights, paladins who swear this oath cast their lot with the side of the light in the cosmic struggle against darkness because they love the beautiful and life-giving things of the world, not necessarily because they believe in principles of honor, courage, and justice. They adorn their armor and clothing with images of growing things—leaves, antlers, or flowers—to reflect their commitment to preserving life and light in the world.",
     "timing": "Out of Combat",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-paladin-ancients-3-oath-spells-phb",
@@ -10735,7 +10735,7 @@
     "source": "PHB",
     "text": "The tenets of the Oath of the Ancients have been preserved for uncounted centuries. This oath emphasizes the principles of good above any concerns of law or chaos. Its four central principles are simple. Kindle the Light: Through your acts of mercy, kindness, and forgiveness, kindle the light of hope in the world, beating back despair. Shelter the Light: Where there is good, beauty, love, and laughter in the world, stand against the wickedness that would swallow it. Where life flourishes, stand against the forces that would render it barren. Preserve Your Own Light: Delight in song and laughter, in beauty and art. If you allow the light to die in your own heart, you can't preserve it in the world. Be the Light: Be a glorious beacon for all who live in despair. Let the light of your joy and courage shine forth in all your deeds.",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-paladin-ancients-3-turn-the-faithless-phb",
@@ -10969,7 +10969,7 @@
     "source": "SCAG",
     "text": "The tenets of the Oath of the Crown are often set by the sovereign to which their oath is sworn, but generally emphasize the following tenets. Law: The law is paramount. It is the mortar that holds the stones of civilization together, and it must be respected. Loyalty: Your word is your bond. Without loyalty, oaths and laws are meaningless. Courage: You must be willing to do what needs to be done for the sake of order, even in the face of overwhelming odds. If you don't act, then who will? Responsibility: You must deal with the consequences of your actions, and you are responsible for fulfilling your duties and obligations.",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-paladin-crown-3-turn-the-tide-scag",
@@ -11086,7 +11086,7 @@
     "source": "PHB",
     "text": "Though the exact words and strictures of the Oath of Devotion vary, paladins of this oath share these tenets. Honesty: Don't lie or cheat. Let your word be your promise. Courage: Never fear to act, though caution is wise. Compassion: Aid others, protect the weak, and punish those who threaten them. Show mercy to your foes, but temper it with wisdom. Honor: Treat others with fairness, and let your honorable deeds be an example to them. Do as much good as possible while causing the least amount of harm. Duty: Be responsible for your actions and their consequences, protect those entrusted to your care, and obey those who have just authority over you.",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-paladin-devotion-3-turn-the-unholy-phb",
@@ -11177,7 +11177,7 @@
     "source": "TCE",
     "text": "Paladins who take the Oath of Glory believe they and their companions are destined to achieve glory through deeds of heroism. They train diligently and encourage their companions so they're all ready when destiny calls.",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-paladin-glory-3-oath-spells-tce",
@@ -11216,7 +11216,7 @@
     "source": "TCE",
     "text": "The tenets of the Oath of Glory drive a paladin to attempt heroics that might one day shine in legend. Actions over Words: Strive to be known by glorious deeds, not words. Challenges Are but Tests: Face hardships with courage, and encourage your allies to face them with you. Hone the Body: Like raw stone, your body must be worked so its potential can be realized. Discipline the Soul: You must marshal the discipline to overcome failings within yourself that threaten to dim the glory of you and your friends.",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-paladin-glory-7-aura-of-alacrity-tce",
@@ -11866,7 +11866,7 @@
     "source": "PHB",
     "text": "You are particularly familiar with one type of natural environment and are adept at traveling and surviving in such regions. Choose one type of favored terrain: arctic, coast, desert, forest, grassland, mountain, swamp, or the Underdark. When you make an Intelligence or Wisdom check related to your favored terrain, your proficiency bonus is doubled if you are using a skill that you're proficient in. While traveling for an hour or more in your favored terrain, you gain the following benefits: Difficult terrain doesn't slow your group's travel. Your group can't become lost except by magical means. Even when you are engaged in another activity while traveling (such as foraging, navigating, or tracking), you remain alert to danger. If you are traveling alone, you can move stealthily at a normal pace. When you forage, you find twice as much food as you normally would. While tracking other creatures, you also learn their exact number, their sizes, and how long ago they passed through the area. You choose additional favored terrain types at 6th and 10th level.",
     "timing": "Triggered",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "class-ranger-10-deft-explorer-improvement-tce",
@@ -13894,7 +13894,7 @@
     "source": "TCE",
     "text": "Most assassins strike with physical weapons, and many burglars and spies use thieves' tools to infiltrate secure locations. In contrast, a Soulknife strikes and infiltrates with the mind, cutting through barriers both physical and psychic. These rogues discover psionic power within themselves and channel it to do their roguish work. They find easy employment as members of thieves' guilds, though they are often mistrusted by rogues who are leery of anyone using strange mind powers to conduct their business. Most governments would also be happy to employ a Soulknife as a spy. Amid the trees of ancient forests on the Material Plane and in the Feywild, some wood elves walk the path of the Soulknife, serving as silent, lethal guardians of their woods. In the endless war among the gith, a githzerai is encouraged to become a Soulknife when stealth is required against the githyanki foe. As a Soulknife, your psionic abilities might have haunted you since you were a child, only revealing their full potential as you experienced the stress of adventure. Or you might have sought out a reclusive order of psychic adepts and spent years learning how to manifest your power.",
     "timing": "Passive",
-    "resourceHint": "Rage"
+    "resourceHint": ""
   },
   {
     "id": "subclass-rogue-soulknife-9-homing-strikes-tce",

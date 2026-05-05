@@ -2794,6 +2794,17 @@
     "itemName": "Mizzium Mortar"
   },
   {
+    "id": "subclass-wizard-chronurgy-6-momentary-stasis-egw",
+    "name": "Momentary Stasis",
+    "maxFormula": "intMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-wizard-chronurgy-6-momentary-stasis-egw",
+    "className": "Wizard",
+    "subclassName": "Chronurgy",
+    "text": "6th-level Chronurgy Magic feature As an action, you can magically force a Large or smaller creature you can see within 60 feet of you to make a Constitution saving throw against your spell save DC."
+  },
+  {
     "id": "monarch-mantle-monarch-mantle-charges",
     "name": "Monarch Mantle Charges",
     "max": 3,
@@ -3343,6 +3354,17 @@
     "itemName": "Bracer of Piercing Arrows"
   },
   {
+    "id": "subclass-cleric-zeal-psa-1-priest-of-zeal-psa",
+    "name": "Priest of Zeal",
+    "maxFormula": "wisMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-zeal-psa-1-priest-of-zeal-psa",
+    "className": "Cleric",
+    "subclassName": "Zeal (PSA)",
+    "text": "From 1st level, Hazoret delivers bolts of inspiration to you while you are engaged in battle."
+  },
+  {
     "id": "prismari-primer-prismari-primer-charges",
     "name": "Prismari Primer Charges",
     "max": 3,
@@ -3387,11 +3409,11 @@
     "name": "Rage",
     "maxFormula": "barbarianRages(level)",
     "reset": "longRest",
-    "sourceType": "subclass",
-    "sourceId": "subclass-artificer-battle-smith-3-battle-smith-spells-tce",
-    "className": "Artificer",
-    "subclassName": "Battle Smith",
-    "text": "Starting at 3rd level, you always have certain spells prepared after you reach particular levels in this class, as shown in the Battle Smith Spells table."
+    "sourceType": "class",
+    "sourceId": "class-barbarian-1-rage-phb",
+    "className": "Barbarian",
+    "subclassName": "",
+    "text": "In battle, you fight with primal ferocity."
   },
   {
     "id": "rakdos-guild-signet-rakdos-guild-signet-charges",
@@ -3402,6 +3424,17 @@
     "sourceType": "item",
     "sourceId": "rakdos-guild-signet",
     "itemName": "Rakdos Guild Signet"
+  },
+  {
+    "id": "subclass-fighter-echo-knight-15-reclaim-potential-egw",
+    "name": "Reclaim Potential",
+    "maxFormula": "conMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-fighter-echo-knight-15-reclaim-potential-egw",
+    "className": "Fighter",
+    "subclassName": "Echo Knight",
+    "text": "15th-level Echo Knight feature You've learned to absorb the fleeting magic of your echo."
   },
   {
     "id": "red-queen-s-burden-red-queen-s-burden-charges",
@@ -4783,6 +4816,28 @@
     "itemName": "Ulfberht Sword of Verdict"
   },
   {
+    "id": "subclass-fighter-echo-knight-3-unleash-incarnation-egw",
+    "name": "Unleash Incarnation",
+    "maxFormula": "conMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-fighter-echo-knight-3-unleash-incarnation-egw",
+    "className": "Fighter",
+    "subclassName": "Echo Knight",
+    "text": "3rd-level Echo Knight feature You can heighten your echo's fury."
+  },
+  {
+    "id": "subclass-wizard-graviturgy-10-violent-attraction-egw",
+    "name": "Violent Attraction",
+    "maxFormula": "intMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-wizard-graviturgy-10-violent-attraction-egw",
+    "className": "Wizard",
+    "subclassName": "Graviturgy",
+    "text": "10th-level Graviturgy Magic feature When another creature that you can see within 60 feet of you hits with a weapon attack, you can use your reaction to increase the attack's velocity, causing the attack's target to take an extra 1d10 dama..."
+  },
+  {
     "id": "violet-king-s-promise-violet-king-s-promise-charges",
     "name": "Violet King's Promise Charges",
     "max": 7,
@@ -5113,6 +5168,39 @@
     "itemName": "Wand of Wonder"
   },
   {
+    "id": "subclass-cleric-war-1-war-priest-phb",
+    "name": "War Priest",
+    "maxFormula": "wisMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-war-1-war-priest-phb",
+    "className": "Cleric",
+    "subclassName": "War",
+    "text": "From 1st level, your god delivers bolts of inspiration to you while you are engaged in battle."
+  },
+  {
+    "id": "subclass-cleric-ambition-psa-1-warding-flare-psa",
+    "name": "Warding Flare",
+    "maxFormula": "wisMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-ambition-psa-1-warding-flare-psa",
+    "className": "Cleric",
+    "subclassName": "Ambition (PSA)",
+    "text": "When you choose this domain at 1st level, you can interpose divine light between yourself and an attacking enemy."
+  },
+  {
+    "id": "subclass-cleric-light-1-warding-flare-phb",
+    "name": "Warding Flare",
+    "maxFormula": "wisMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-light-1-warding-flare-phb",
+    "className": "Cleric",
+    "subclassName": "Light",
+    "text": "Also at 1st level, you can interpose divine light between yourself and an attacking enemy."
+  },
+  {
     "id": "weapon-of-throne-s-command-weapon-of-throne-s-command-charges",
     "name": "Weapon of Throne's Command Charges",
     "max": 5,
@@ -5211,6 +5299,17 @@
     "sourceType": "item",
     "sourceId": "wooden-cuirass-of-weightlessness",
     "itemName": "Wooden Cuirass of Weightlessness"
+  },
+  {
+    "id": "subclass-cleric-tempest-1-wrath-of-the-storm-phb",
+    "name": "Wrath of the Storm",
+    "maxFormula": "wisMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-tempest-1-wrath-of-the-storm-phb",
+    "className": "Cleric",
+    "subclassName": "Tempest",
+    "text": "Also at 1st level, you can thunderously rebuke attackers."
   },
   {
     "id": "wrought-iron-tower-wrought-iron-tower-charges",

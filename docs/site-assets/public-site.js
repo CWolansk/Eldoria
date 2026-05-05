@@ -891,6 +891,8 @@
 
   function buildWeaponProfile(name, id, player, details = null) {
     const normalized = normalizeName(name);
+    const detailType = normalizeName(details && details.type);
+    if (detailType.includes('armor') || detailType.includes('shield')) return null;
     const ruleWeapon = details && details.weapon;
     const base = ruleWeapon || WEAPON_BASES.find(candidate => normalized.includes(candidate.key));
     if (!base) return null;
@@ -963,7 +965,7 @@
     const state = getWeaponCombatState(player, weaponContext.id, weaponContext.properties);
     const properties = weaponContext.properties || [];
     const heavyMelee = weaponContext.style === 'melee' && properties.some(property => normalizeName(property).includes('heavy'));
-    const weaponEquipped = Array.isArray(player.equipped) && player.equipped.includes(weaponContext.id);
+    const weaponEquipped = isItemEquipped(player, { id: weaponContext.id, name: weaponContext.name, details: weaponContext.details });
     const sigilEquipped = hasEquippedNamed(player, 'sigil of thunderous might');
     const effects = {
       attackParts: [],
@@ -1131,10 +1133,10 @@
   }
 
   function inferItemKind(name, weapon, hint, details) {
-    if (weapon) return 'weapon';
     const type = normalizeName(details && details.type);
     if (type.includes('shield')) return 'shield';
     if (type.includes('armor')) return 'armor';
+    if (weapon) return 'weapon';
     if (type.includes('ring')) return 'ring';
     if (type.includes('wondrous')) return 'wondrous';
     if (hint && hint.kind) return hint.kind;
@@ -1365,14 +1367,15 @@
   function renderWeaponAttacks(root, player) {
     const target = root.querySelector('[data-weapon-attacks]');
     if (!target) return;
-    if (!player.weapons.length) {
-      target.innerHTML = '<p class="empty-note">No recognized weapons.</p>';
+    const equippedWeapons = getEquippedItems(player).filter(item => item.weapon);
+    if (!equippedWeapons.length) {
+      target.innerHTML = '<p class="empty-note">No equipped weapons.</p>';
       return;
     }
 
-    target.innerHTML = player.weapons.map(item => {
+    target.innerHTML = equippedWeapons.map(item => {
       const weapon = item.weapon;
-      const equipped = player.equipped.includes(item.id);
+      const equipped = true;
       return `<article class="weapon-card ${equipped ? 'equipped' : ''}">
         <div>
           <h3>${escapeHtml(weapon.name)}</h3>
@@ -1409,7 +1412,7 @@
 
   function renderWeaponControls(item, player) {
     const weapon = item.weapon;
-    const equipped = player.equipped.includes(item.id);
+    const equipped = isItemEquipped(player, item);
     const state = getWeaponCombatState(player, item.id, weapon.properties);
     const controls = [];
 
@@ -1427,7 +1430,7 @@
 
     for (const toggle of getApplicableWeaponRuleToggles(player, { id: item.id, name: item.name, details: item.details, properties: weapon.properties, style: weapon.style, damageType: weapon.damageType })) {
       const sourceItem = findToggleSourceItem(player, toggle);
-      const sourceEquipped = !sourceItem || player.equipped.includes(sourceItem.id);
+      const sourceEquipped = !sourceItem || isItemEquipped(player, sourceItem);
       const enabled = equipped && sourceEquipped;
       controls.push(renderWeaponCheckbox(item.id, toggle.id, toggle.label || toggle.title || toggle.id, toggle.text || formatToggleEffects(toggle), state[toggle.id], enabled));
     }
@@ -1574,11 +1577,10 @@
   }
 
   function buildWeaponActionCards(player) {
-    return (player.weapons || []).map(item => {
+    return getEquippedItems(player).filter(item => item.weapon).map(item => {
       const weapon = item.weapon;
-      const equipped = player.equipped.includes(item.id);
       const tags = [
-        equipped ? 'Equipped' : 'Not equipped',
+        'Equipped',
         `${formatBonus(weapon.attackBonus)} hit`,
         `${weapon.damageFormula} ${weapon.damageType}`,
         weapon.handMode === 'two' && weapon.versatileDamage ? 'Two hands' : '',
@@ -1593,8 +1595,8 @@
         detail: `${ABILITY_NAMES[weapon.ability] || weapon.abilityLabel} attack with ${formatBonus(weapon.attackBonus)} to hit; ${weapon.damageFormula} ${weapon.damageType} on hit.`,
         tags,
         controls: `<div class="action-controls">
-          <button class="roll-button" type="button" data-roll-type="attack" data-weapon-id="${escapeAttr(item.id)}" ${equipped ? '' : 'disabled'}>Attack</button>
-          <button class="roll-button" type="button" data-roll-type="damage" data-weapon-id="${escapeAttr(item.id)}" ${equipped ? '' : 'disabled'}>Damage</button>
+          <button class="roll-button" type="button" data-roll-type="attack" data-weapon-id="${escapeAttr(item.id)}">Attack</button>
+          <button class="roll-button" type="button" data-roll-type="damage" data-weapon-id="${escapeAttr(item.id)}">Damage</button>
         </div>`,
         math: [
           ...weapon.attackParts.map(part => ({ label: `Hit: ${part.label}`, value: part.value, display: part.display })),
@@ -1712,6 +1714,9 @@
   function getRuleActionResourceId(player, action) {
     if (!action) return '';
     if (findPlayerResource(player, action.id)) return action.id;
+    if (findPlayerResource(player, action.sourceId)) return action.sourceId;
+    const titleId = slugify(action.title || action.name || '');
+    if (findPlayerResource(player, titleId)) return titleId;
     const text = normalizeName(`${action.title || ''} ${action.detail || ''} ${Array.isArray(action.tags) ? action.tags.join(' ') : ''}`);
     if (text.includes('channel divinity') && findPlayerResource(player, 'cleric-channel-divinity')) return 'cleric-channel-divinity';
     return '';
@@ -1796,11 +1801,10 @@
   }
 
   function buildItemActionCards(player) {
-    const equipped = new Set(player.equipped || []);
     return (player.inventory || []).flatMap(item => {
       if (item.details && item.details.actions.length) {
         return item.details.actions.map(action => {
-          const isEquipped = equipped.has(item.id);
+          const isEquipped = isItemEquipped(player, item);
           return {
             group: normalizeActionGroup(action.group),
             sourceType: 'item',
@@ -2664,7 +2668,7 @@
   }
 
   function renderEquipmentRow(item, player) {
-    const equipped = player.equipped.includes(item.id);
+    const equipped = isItemEquipped(player, item);
     return `<article class="equipment-row ${equipped ? 'active' : ''}" role="listitem">
       <label class="equipment-check">
         <input type="checkbox" data-equip-id="${escapeAttr(item.id)}" ${equipped ? 'checked' : ''}>
@@ -2854,7 +2858,14 @@
       const id = checkbox.dataset.equipId;
       const next = new Set(player.equipped || []);
       if (checkbox.checked) next.add(id);
-      else next.delete(id);
+      else {
+        const item = (player.inventory || []).find(candidate => candidate.id === id) || { id };
+        const aliases = new Set(getItemEquipKeys(item).map(normalizeName));
+        next.delete(id);
+        for (const value of Array.from(next)) {
+          if (aliases.has(normalizeName(value))) next.delete(value);
+        }
+      }
       const edits = { ...loadPlayerEdits(player.id), equipped: Array.from(next) };
       saveAndHydratePlayer(root, player, edits);
     });
@@ -3259,8 +3270,25 @@
   }
 
   function getEquippedItems(player) {
-    const selected = new Set(player.equipped || []);
-    return (Array.isArray(player.inventory) ? player.inventory : []).filter(item => selected.has(item.id));
+    return (Array.isArray(player.inventory) ? player.inventory : []).filter(item => isItemEquipped(player, item));
+  }
+
+  function isItemEquipped(player, item) {
+    if (!player || !item) return false;
+    const selected = Array.isArray(player.equipped) ? player.equipped.map(String) : [];
+    if (!selected.length) return false;
+    const selectedRaw = new Set(selected);
+    const selectedNames = new Set(selected.map(normalizeName));
+    return getItemEquipKeys(item).some(key => selectedRaw.has(key) || selectedNames.has(normalizeName(key)));
+  }
+
+  function getItemEquipKeys(item) {
+    return [
+      item && item.id,
+      item && item.name,
+      item && item.details && item.details.id,
+      item && item.details && item.details.name,
+    ].filter(Boolean).map(String);
   }
 
   function renderRoll(root, weapon, type) {
