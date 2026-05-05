@@ -2843,8 +2843,8 @@
       const next = new Set(player.equipped || []);
       if (checkbox.checked) next.add(id);
       else next.delete(id);
-      savePlayerEdits(player.id, { ...loadPlayerEdits(player.id), equipped: Array.from(next) });
-      hydratePlayerSheet(root, { ...player, equipped: Array.from(next) });
+      const edits = { ...loadPlayerEdits(player.id), equipped: Array.from(next) };
+      saveAndHydratePlayer(root, player, edits);
     });
 
     root.addEventListener('click', event => {
