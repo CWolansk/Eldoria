@@ -341,6 +341,7 @@
       spellSlots: player.spellSlots && typeof player.spellSlots === 'object' ? player.spellSlots : {},
       spellSlotUses: player.spellSlotUses && typeof player.spellSlotUses === 'object' ? player.spellSlotUses : {},
       itemCharges: player.itemCharges && typeof player.itemCharges === 'object' ? player.itemCharges : {},
+      actionUses: player.actionUses && typeof player.actionUses === 'object' ? player.actionUses : {},
       conditions: Array.isArray(player.conditions) ? player.conditions.map(String).filter(Boolean) : [],
       concentration: cleanDetailValue(player.concentration),
       tempHp: Number(player.tempHp) || 0,
@@ -907,7 +908,8 @@
     const target = root.querySelector('[data-actions-panel]');
     if (!target) return;
     const groups = buildActionGroups(player, root);
-    target.innerHTML = `<div class="actions-panel">
+    target.innerHTML = `<div class="actions-panel" data-action-filter="all">
+      ${renderActionFilterControls(groups)}
       ${groups.map(group => renderActionGroup(group)).join('')}
       <div class="roll-log" data-roll-log></div>
     </div>`;
@@ -936,13 +938,33 @@
       .filter(group => group.cards.length);
   }
 
+  function renderActionFilterControls(groups) {
+    const cards = groups.flatMap(group => group.cards);
+    const filters = [
+      ['all', 'All'],
+      ['attack', 'Attacks'],
+      ['spell', 'Spells'],
+      ['item', 'Items'],
+      ['class', 'Class'],
+      ['core', 'Core'],
+      ['equipped', 'Equipped'],
+    ].filter(([key]) => key === 'all' || cards.some(card => getActionCategories(card).includes(key)));
+
+    return `<div class="action-filter-bar">
+      <div class="action-filter-buttons" role="group" aria-label="Action filters">
+        ${filters.map(([key, label]) => `<button class="text-button ${key === 'all' ? 'active' : ''}" type="button" data-action-filter="${escapeAttr(key)}">${escapeHtml(label)}</button>`).join('')}
+      </div>
+      <input data-action-search type="search" placeholder="Filter actions..." aria-label="Filter actions">
+    </div>`;
+  }
+
   function addActionCard(groups, card) {
     const group = groups.has(card.group) ? card.group : 'Free / Utility';
     groups.get(group).push(card);
   }
 
   function renderActionGroup(group) {
-    return `<section class="action-group">
+    return `<section class="action-group" data-action-group-section="${escapeAttr(group.name)}">
       <h2>${escapeHtml(group.name)}</h2>
       <div class="action-row">
         ${group.cards.map(renderActionCard).join('')}
@@ -951,7 +973,16 @@
   }
 
   function renderActionCard(card) {
-    return `<article class="action-card">
+    const categories = getActionCategories(card);
+    const search = [
+      card.group,
+      card.type,
+      card.title,
+      card.meta,
+      card.detail,
+      ...(card.tags || []),
+    ].filter(Boolean).join(' ');
+    return `<article class="action-card" data-action-card data-action-group="${escapeAttr(card.group || '')}" data-action-kind="${escapeAttr(categories.join(' '))}" data-action-search="${escapeAttr(search)}">
       <div class="action-card-head">
         <span>${escapeHtml(card.type || card.group)}</span>
         <strong>${escapeHtml(card.title)}</strong>
@@ -966,6 +997,25 @@
       </div>
       ${card.math && card.math.length ? `<details class="action-math"><summary>Math</summary>${renderActionMath(card.math)}</details>` : ''}
     </article>`;
+  }
+
+  function getActionCategories(card) {
+    const categories = new Set();
+    const sourceType = normalizeName(card && card.sourceType);
+    const type = normalizeName(card && card.type);
+    const title = normalizeName(card && card.title);
+    const meta = normalizeName(card && card.meta);
+    const tags = normalizeName(((card && card.tags) || []).join(' '));
+    const haystack = `${sourceType} ${type} ${title} ${meta} ${tags}`;
+
+    if (haystack.includes('attack')) categories.add('attack');
+    if (sourceType === 'spell' || type === 'spell' || type === 'scroll' || title.startsWith('cast ')) categories.add('spell');
+    if (sourceType === 'item' || type === 'item' || meta.includes('wondrous item')) categories.add('item');
+    if (sourceType === 'class' || sourceType === 'subclass' || sourceType === 'feat' || sourceType === 'race' || sourceType === 'background') categories.add('class');
+    if (type === 'core' || type === 'contest' || type === 'travel' || type === 'rest') categories.add('core');
+    if (tags.includes('equipped')) categories.add('equipped');
+    if (!categories.size) categories.add('other');
+    return Array.from(categories);
   }
 
   function renderActionMath(parts) {
@@ -985,6 +1035,7 @@
       ].filter(Boolean);
       return {
         group: 'Action',
+        sourceType: 'weapon',
         type: weapon.style === 'ranged' ? 'Ranged Attack' : 'Melee Attack',
         title: `Attack: ${weapon.name}`,
         meta: [weapon.baseName, weapon.properties.join(', ')].filter(Boolean).join(' / '),
@@ -1008,15 +1059,33 @@
       const math = getSpellMathParts(player, spell);
       return {
         group: classifySpellTiming(spell && spell.castingTime),
+        sourceType: 'spell',
         type: 'Spell',
         title: `Cast ${name}`,
         meta: formatSpellMeta(spell),
         detail: summarizeSpellAction(player, spell),
         tags: buildSpellTags(player, spell),
-        controls: spell && spell.damage ? `<div class="action-controls"><button class="roll-button" type="button" data-roll-spell="${escapeAttr(name)}">Damage</button></div>` : '',
+        controls: renderSpellActionControls(player, spell, name),
         math,
       };
     });
+  }
+
+  function renderSpellActionControls(player, spell, spellName) {
+    if (!spell) {
+      return `<div class="action-controls">
+        <button class="roll-button" type="button" data-cast-spell="${escapeAttr(spellName)}" disabled>Cast</button>
+        <span class="use-status">Rules missing</span>
+      </div>`;
+    }
+    const slot = getSpellSlotState(player, spell);
+    const disabled = slot && slot.level > 0 && slot.available <= 0;
+    const controls = [
+      `<button class="roll-button" type="button" data-cast-spell="${escapeAttr(spellName)}" ${disabled ? 'disabled' : ''}>Cast</button>`,
+    ];
+    if (spell && spell.damage) controls.push(`<button class="roll-button" type="button" data-roll-spell="${escapeAttr(spellName)}">Damage</button>`);
+    if (slot) controls.push(`<span class="use-status">${escapeHtml(formatSpellSlotStatus(slot))}</span>`);
+    return `<div class="action-controls">${controls.join('')}</div>`;
   }
 
   function buildSpellScrollActionCards(player, root) {
@@ -1025,27 +1094,45 @@
       const group = classifySpellTiming(scroll.castingTime || (spell && spell.castingTime));
       return {
         group,
+        sourceType: 'spell',
         type: 'Scroll',
         title: `Use Scroll: ${scroll.spellName}`,
         meta: [scroll.source || scroll.scrollName || 'Spell Scroll', formatSpellMeta(spell)].filter(Boolean).join(' / '),
         detail: summarizeScrollAction(scroll, spell),
         tags: buildSpellScrollTags(scroll, spell),
+        controls: renderSpellScrollActionControls(player, scroll, spell),
         math: getScrollMathParts(scroll, spell),
       };
     });
   }
 
+  function renderSpellScrollActionControls(player, scroll, spell) {
+    const id = scroll && scroll.id ? scroll.id : slugify(`${scroll && scroll.scrollName || 'spell-scroll'}-${scroll && scroll.spellName || ''}`);
+    const used = clampNumber(Number(player.actionUses && player.actionUses[id]) || 0, 0, 1);
+    const controls = [
+      `<button class="roll-button" type="button" data-use-scroll="${escapeAttr(id)}" ${used >= 1 ? 'disabled' : ''}>${used >= 1 ? 'Used' : 'Use Scroll'}</button>`,
+    ];
+    if (spell && spell.damage) controls.push(`<button class="roll-button" type="button" data-roll-spell="${escapeAttr(scroll.spellName)}">Damage</button>`);
+    controls.push(`<span class="use-status">${used >= 1 ? 'Used' : 'Ready'}</span>`);
+    return `<div class="action-controls">${controls.join('')}</div>`;
+  }
+
   function buildRuleActionCards(player) {
     return (player.ruleActions || [])
       .filter(action => action.sourceType !== 'spell' && action.sourceType !== 'item')
-      .map(action => ({
-        group: normalizeActionGroup(action.group),
-        type: action.type || action.sourceType || 'Rule',
-        title: action.title || action.name || 'Action',
-        meta: [action.sourceType, action.className, action.itemName].filter(Boolean).join(' / '),
-        detail: action.detail || action.text || '',
-        tags: Array.isArray(action.tags) ? action.tags.filter(Boolean).slice(0, 5) : [],
-      }));
+      .map(action => {
+        const resourceId = getRuleActionResourceId(player, action);
+        return {
+          group: normalizeRuleActionGroup(action),
+          sourceType: action.sourceType || 'rule',
+          type: action.type || action.sourceType || 'Rule',
+          title: action.title || action.name || 'Action',
+          meta: [action.sourceType, action.className, action.itemName].filter(Boolean).join(' / '),
+          detail: action.detail || action.text || '',
+          tags: Array.isArray(action.tags) ? action.tags.filter(Boolean).slice(0, 5) : [],
+          controls: resourceId ? renderActionResourceControls(player, resourceId) : '',
+        };
+      });
   }
 
   function hasCanonicalClassActions(player) {
@@ -1056,6 +1143,23 @@
     const text = cleanDetailValue(group);
     const allowed = new Set(['Action', 'Bonus Action', 'Reaction', 'Triggered', 'Free / Utility', 'Out of Combat']);
     return allowed.has(text) ? text : 'Free / Utility';
+  }
+
+  function normalizeRuleActionGroup(action) {
+    const current = normalizeActionGroup(action && action.group);
+    const detail = normalizeName(action && action.detail);
+    if (detail.startsWith('as an action') || detail.includes('you can use your action')) return 'Action';
+    if (detail.startsWith('as a bonus action')) return 'Bonus Action';
+    if (detail.startsWith('as a reaction')) return 'Reaction';
+    return current;
+  }
+
+  function getRuleActionResourceId(player, action) {
+    if (!action) return '';
+    if (findPlayerResource(player, action.id)) return action.id;
+    const text = normalizeName(`${action.title || ''} ${action.detail || ''} ${Array.isArray(action.tags) ? action.tags.join(' ') : ''}`);
+    if (text.includes('channel divinity') && findPlayerResource(player, 'cleric-channel-divinity')) return 'cleric-channel-divinity';
+    return '';
   }
 
   function buildClassActionCards(player) {
@@ -1070,6 +1174,7 @@
     if (level >= 2) {
       cards.push({
         group: 'Action',
+        sourceType: 'class',
         type: 'Channel Divinity',
         title: 'Turn Undead',
         meta: `30 ft / WIS save DC ${spellDc}`,
@@ -1077,6 +1182,7 @@
           ? `Undead that fail are turned for up to 1 minute. CR 1/2 or lower undead are destroyed by Claire at level ${level}.`
           : 'Undead that fail are turned for up to 1 minute.',
         tags: [channelTag, 'Undead', level >= 5 ? 'Destroy CR 1/2' : ''],
+        controls: findPlayerResource(player, 'cleric-channel-divinity') ? renderActionResourceControls(player, 'cleric-channel-divinity') : '',
         math: getSpellDcMathParts(player, spellDc),
       });
     }
@@ -1084,6 +1190,7 @@
     if (level >= 5) {
       cards.push({
         group: 'Triggered',
+        sourceType: 'class',
         type: 'Cleric',
         title: 'Destroy Undead',
         meta: 'Turn Undead rider',
@@ -1095,6 +1202,7 @@
     if (isTempestCleric(player)) {
       cards.push({
         group: 'Reaction',
+        sourceType: 'subclass',
         type: 'Tempest Cleric',
         title: 'Wrath of the Storm',
         meta: `5 ft / DEX save DC ${spellDc}`,
@@ -1106,17 +1214,20 @@
       if (level >= 2) {
         cards.push({
           group: 'Triggered',
+          sourceType: 'subclass',
           type: 'Channel Divinity',
           title: 'Destructive Wrath',
           meta: 'Lightning or thunder damage',
           detail: 'When Claire rolls lightning or thunder damage, she can spend Channel Divinity to deal maximum damage instead of rolling.',
           tags: [channelTag, 'Max damage'],
+          controls: findPlayerResource(player, 'cleric-channel-divinity') ? renderActionResourceControls(player, 'cleric-channel-divinity') : '',
         });
       }
 
       if (level >= 6) {
         cards.push({
           group: 'Triggered',
+          sourceType: 'subclass',
           type: 'Tempest Cleric',
           title: 'Thunderbolt Strike',
           meta: 'Large or smaller creature',
@@ -1137,11 +1248,13 @@
           const isEquipped = equipped.has(item.id);
           return {
             group: normalizeActionGroup(action.group),
+            sourceType: 'item',
             type: action.type || 'Item',
             title: action.title || action.name || item.name,
             meta: [item.name, formatItemSubtitle(item)].filter(Boolean).join(' / '),
             detail: truncateText(action.detail || action.text || '', 280),
             tags: [isEquipped ? 'Equipped' : 'Inventory', item.details && item.details.attunement ? 'Attunement' : '', ...(action.tags || [])].filter(Boolean),
+            controls: renderActionResourceControls(player, action.id),
           };
         });
       }
@@ -1152,6 +1265,7 @@
         const isEquipped = equipped.has(item.id);
         return {
           group: classifyRulesTiming(text),
+          sourceType: 'item',
           type: 'Item',
           title: ability.name || item.name,
           meta: [item.name, formatItemSubtitle(item)].filter(Boolean).join(' / '),
@@ -1240,7 +1354,7 @@
   }
 
   function coreAction(group, type, title, detail) {
-    return { group, type, title, detail, tags: [] };
+    return { group, sourceType: 'core', type, title, detail, tags: [] };
   }
 
   function classifySpellTiming(castingTime) {
@@ -1351,6 +1465,76 @@
     return `<div class="math-list">${rows}<div class="math-total"><span>Total</span><strong>${escapeHtml(totalDisplay || (baseLabel ? formatDamageFormula(baseLabel, total) : formatBonus(total)))}</strong></div></div>`;
   }
 
+  function getSpellSlotState(player, spell) {
+    const level = getSpellLevelNumber(spell && spell.level);
+    if (!level) return { level: 0, slotKey: '', label: 'Cantrip', max: null, used: 0, available: null };
+    return getAvailableSpellSlot(player, level) || { level, slotKey: String(level), label: `Level ${level}`, max: 0, used: 0, available: 0 };
+  }
+
+  function getAvailableSpellSlot(player, minLevel) {
+    const slots = player.spellSlots || {};
+    const uses = player.spellSlotUses || {};
+    const options = Object.entries(slots)
+      .filter(([level, max]) => level !== 'pact' && Number(level) >= minLevel && Number(max) > 0)
+      .map(([level, max]) => {
+        const total = Number(max);
+        const used = clampNumber(Number(uses[level]) || 0, 0, total);
+        return { level: Number(level), slotKey: String(level), label: `Level ${level}`, max: total, used, available: total - used };
+      })
+      .sort((a, b) => a.level - b.level);
+
+    const pact = slots.pact && typeof slots.pact === 'object' ? slots.pact : null;
+    if (pact && Number(pact.slots) > 0 && Number(pact.level) >= minLevel) {
+      const total = Number(pact.slots);
+      const used = clampNumber(Number(uses.pact) || 0, 0, total);
+      options.push({ level: Number(pact.level), slotKey: 'pact', label: `Pact L${pact.level}`, max: total, used, available: total - used });
+      options.sort((a, b) => a.level - b.level || (a.slotKey === 'pact' ? 1 : -1));
+    }
+
+    return options.find(option => option.available > 0) || options[0] || null;
+  }
+
+  function getSpellLevelNumber(level) {
+    const text = normalizeName(level);
+    if (!text || text.includes('cantrip')) return 0;
+    const match = text.match(/\d+/);
+    return match ? Number(match[0]) || 0 : 0;
+  }
+
+  function formatSpellSlotStatus(slot) {
+    if (!slot) return '';
+    if (slot.level === 0) return 'Cantrip';
+    if (!slot.max) return 'No slots';
+    return `${slot.available} / ${slot.max} ${slot.label}`;
+  }
+
+  function findPlayerResource(player, resourceId) {
+    if (!resourceId) return null;
+    return uniqueRuleRecords(player && player.resources || []).find(resource => resource.id === resourceId) || null;
+  }
+
+  function getResourceUseState(player, resourceId) {
+    const resource = findPlayerResource(player, resourceId);
+    if (!resource) return null;
+    const max = evaluateResourceMax(resource, player);
+    if (max === null) return { resource, max, used: null, available: null };
+    const used = clampNumber(Number(player.resourceUses && player.resourceUses[resource.id]) || 0, 0, max);
+    return { resource, max, used, available: max - used };
+  }
+
+  function renderActionResourceControls(player, resourceId, label = 'Use') {
+    const state = getResourceUseState(player, resourceId);
+    if (!state || state.max === null) return '';
+    return `<div class="action-controls">
+      ${renderResourceSpendButton(resourceId, label, state.available <= 0)}
+      <span class="use-status">${escapeHtml(`${state.available} / ${state.max} left`)}</span>
+    </div>`;
+  }
+
+  function renderResourceSpendButton(resourceId, label, disabled = false) {
+    return `<button class="roll-button" type="button" data-resource-spend="${escapeAttr(resourceId)}" ${disabled ? 'disabled' : ''}>${escapeHtml(label || 'Use')}</button>`;
+  }
+
   function renderResourcesPanel(root, player) {
     const target = root.querySelector('[data-resources-panel]');
     if (!target) return;
@@ -1388,6 +1572,7 @@
         <div class="chip-list">${player.conditions.length ? player.conditions.map(condition => `<span>${escapeHtml(condition)}</span>`).join('') : '<span>No conditions tracked.</span>'}</div>
         <p class="empty-note">Concentration: ${escapeHtml(player.concentration || 'None')}</p>
       </section>
+      <div class="roll-log" data-roll-log></div>
     </div>`;
   }
 
@@ -1409,10 +1594,13 @@
 
   function renderSlotRow(label, slotKey, max, usedValue) {
     const used = clampNumber(Number(usedValue) || 0, 0, max);
-    return `<label class="resource-row">
+    return `<div class="resource-row">
       <span><strong>${escapeHtml(label)}</strong><small>${max - used} / ${max} available</small></span>
-      <input type="number" min="0" max="${max}" value="${used}" data-spell-slot-use="${escapeAttr(slotKey)}" aria-label="${escapeAttr(label)} used">
-    </label>`;
+      <span class="resource-controls">
+        <input type="number" min="0" max="${max}" value="${used}" data-spell-slot-use="${escapeAttr(slotKey)}" aria-label="${escapeAttr(label)} used">
+        <button class="roll-button" type="button" data-spell-slot-spend="${escapeAttr(slotKey)}" ${used >= max ? 'disabled' : ''}>Use</button>
+      </span>
+    </div>`;
   }
 
   function renderResourceTracker(player) {
@@ -1423,13 +1611,16 @@
     return `<div class="resource-list">${resources.map(resource => {
       const max = evaluateResourceMax(resource, player);
       const used = max === null ? null : clampNumber(Number(player.resourceUses && player.resourceUses[resource.id]) || 0, 0, max);
-      return `<label class="resource-row">
+      return `<div class="resource-row">
         <span>
           <strong>${escapeHtml(resource.name || resource.id)}</strong>
           <small>${escapeHtml(formatResourceLine(resource, max, used))}</small>
         </span>
-        ${max === null ? '<span class="empty-note">Manual</span>' : `<input type="number" min="0" max="${max}" value="${used}" data-resource-use="${escapeAttr(resource.id)}" aria-label="${escapeAttr(resource.name || resource.id)} used">`}
-      </label>`;
+        ${max === null ? '<span class="empty-note">Manual</span>' : `<span class="resource-controls">
+          <input type="number" min="0" max="${max}" value="${used}" data-resource-use="${escapeAttr(resource.id)}" aria-label="${escapeAttr(resource.name || resource.id)} used">
+          ${renderResourceSpendButton(resource.id, 'Use', used >= max)}
+        </span>`}
+      </div>`;
     }).join('')}</div>`;
   }
 
@@ -1480,7 +1671,6 @@
     const target = root.querySelector('[data-equipment-panel]');
     if (!target) return;
     target.innerHTML = `<div class="equipment-manager">
-      ${renderEquippedAbilities(player)}
       <div class="equipment-list" role="list">
         ${player.inventory.map(item => renderEquipmentRow(item, player)).join('')}
       </div>
@@ -1508,6 +1698,7 @@
         <input data-spell-search-input type="search" placeholder="Search spells by name, school, class, or text..." aria-label="Search spells">
         <div class="spell-search-results" data-spell-search-results></div>
       </section>
+      <div class="roll-log" data-roll-log></div>
     </div>`;
 
     ensureSpellCatalog(root);
@@ -1521,7 +1712,10 @@
           <strong>${escapeHtml(name)}</strong>
           <small>${escapeHtml(formatSpellMeta(spell))}</small>
         </span>
-        <button class="text-button" type="button" data-remove-spell="${escapeAttr(name)}">Remove</button>
+        <div class="spell-row-actions">
+          ${renderSpellActionControls(player, spell, name)}
+          <button class="text-button" type="button" data-remove-spell="${escapeAttr(name)}">Remove</button>
+        </div>
       </summary>
       ${renderSpellDetails(spell)}
     </details>`;
@@ -1535,7 +1729,10 @@
           <strong>${escapeHtml(scroll.spellName)}</strong>
           <small>${escapeHtml([scroll.source || scroll.scrollName || 'Spell Scroll', formatSpellMeta(spell), scroll.saveDc ? `DC ${scroll.saveDc}` : '', scroll.attackBonus ? `Attack +${scroll.attackBonus}` : ''].filter(Boolean).join(' / '))}</small>
         </span>
-        <span class="spell-source-pill">Scroll</span>
+        <div class="spell-row-actions">
+          ${renderSpellScrollActionControls(player, scroll, spell)}
+          <span class="spell-source-pill">Scroll</span>
+        </div>
       </summary>
       ${renderSpellDetails(spell)}
       ${scroll.text ? `<p class="item-rules"><strong>Scroll:</strong> ${escapeHtml(truncateText(scroll.text, 500))}</p>` : ''}
@@ -1892,6 +2089,46 @@
     });
 
     root.addEventListener('click', event => {
+      const actionFilter = event.target.closest('[data-action-filter]');
+      if (actionFilter) {
+        const panel = actionFilter.closest('.actions-panel');
+        if (panel) panel.dataset.actionFilter = actionFilter.dataset.actionFilter || 'all';
+        applyActionFilters(root);
+        return;
+      }
+
+      const resourceSpend = event.target.closest('[data-resource-spend]');
+      if (resourceSpend) {
+        event.preventDefault();
+        const player = root._playerState;
+        if (player) spendResource(root, player, resourceSpend.dataset.resourceSpend);
+        return;
+      }
+
+      const spellSlotSpend = event.target.closest('[data-spell-slot-spend]');
+      if (spellSlotSpend) {
+        event.preventDefault();
+        const player = root._playerState;
+        if (player) spendSpellSlot(root, player, spellSlotSpend.dataset.spellSlotSpend);
+        return;
+      }
+
+      const castSpellButton = event.target.closest('[data-cast-spell]');
+      if (castSpellButton) {
+        event.preventDefault();
+        const player = root._playerState;
+        if (player) castSpell(root, player, castSpellButton.dataset.castSpell);
+        return;
+      }
+
+      const useScroll = event.target.closest('[data-use-scroll]');
+      if (useScroll) {
+        event.preventDefault();
+        const player = root._playerState;
+        if (player) markSpellScrollUsed(root, player, useScroll.dataset.useScroll);
+        return;
+      }
+
       const rollButton = event.target.closest('[data-roll-type][data-weapon-id]');
       if (rollButton) {
         const player = root._playerState;
@@ -1902,6 +2139,7 @@
 
       const spellRoll = event.target.closest('[data-roll-spell]');
       if (spellRoll) {
+        event.preventDefault();
         const player = root._playerState;
         const spell = player && findSpellDetails(spellRoll.dataset.rollSpell, player, root);
         if (spell) renderSpellRoll(root, spell);
@@ -1928,6 +2166,7 @@
 
       const addSpell = event.target.closest('[data-add-spell]');
       if (addSpell) {
+        event.preventDefault();
         const player = root._playerState;
         if (!player) return;
         const spellName = addSpell.dataset.addSpell;
@@ -1939,16 +2178,24 @@
 
       const removeSpell = event.target.closest('[data-remove-spell]');
       if (removeSpell) {
+        event.preventDefault();
         const player = root._playerState;
         if (!player) return;
         const target = normalizeName(removeSpell.dataset.removeSpell);
         const nextSpells = (player.spells || []).filter(name => normalizeName(name) !== target);
         const edits = { ...loadPlayerEdits(player.id), spells: nextSpells };
         saveAndHydratePlayer(root, player, edits);
+        return;
       }
     });
 
     root.addEventListener('input', event => {
+      const actionSearch = event.target.closest('[data-action-search]');
+      if (actionSearch) {
+        applyActionFilters(root);
+        return;
+      }
+
       const input = event.target.closest('[data-spell-search-input]');
       if (!input) return;
       window.clearTimeout(root._spellSearchTimer);
@@ -2023,6 +2270,106 @@
     hydratePlayerSheet(root, { ...player, ...edits, abilities: { ...(player.abilities || {}), ...((edits && edits.abilities) || {}) } });
   }
 
+  function applyActionFilters(root) {
+    const panel = root.querySelector('.actions-panel');
+    if (!panel) return;
+    const active = panel.dataset.actionFilter || 'all';
+    const searchInput = panel.querySelector('[data-action-search]');
+    const query = normalizeName(searchInput ? searchInput.value : '');
+
+    panel.querySelectorAll('[data-action-filter]').forEach(button => {
+      button.classList.toggle('active', (button.dataset.actionFilter || 'all') === active);
+    });
+
+    panel.querySelectorAll('[data-action-card]').forEach(card => {
+      const kinds = String(card.dataset.actionKind || '').split(/\s+/).filter(Boolean);
+      const matchesKind = active === 'all' || kinds.includes(active);
+      const matchesSearch = !query || normalizeName(card.dataset.actionSearch).includes(query);
+      card.hidden = !(matchesKind && matchesSearch);
+    });
+
+    panel.querySelectorAll('[data-action-group-section]').forEach(section => {
+      section.hidden = !section.querySelector('[data-action-card]:not([hidden])');
+    });
+  }
+
+  async function spendResource(root, player, resourceId) {
+    const state = getResourceUseState(player, resourceId);
+    if (!state || state.max === null) {
+      renderSheetLog(root, 'Resource not tracked', 'This resource does not have a spendable limit yet.');
+      return;
+    }
+    if (state.available <= 0) {
+      renderSheetLog(root, `${state.resource.name || state.resource.id}: empty`, `Resets on ${formatReset(state.resource.reset)}.`);
+      return;
+    }
+
+    const resourceUses = { ...(player.resourceUses || {}), [state.resource.id]: state.used + 1 };
+    const edits = { ...loadPlayerEdits(player.id), resourceUses };
+    await saveAndHydratePlayer(root, player, edits);
+    renderSheetLog(root, `${state.resource.name || state.resource.id} used`, `${state.available - 1} / ${state.max} left; resets on ${formatReset(state.resource.reset)}.`);
+  }
+
+  async function spendSpellSlot(root, player, slotKey) {
+    const slot = getSpellSlotByKey(player, slotKey);
+    if (!slot || slot.available <= 0) {
+      renderSheetLog(root, 'No spell slot available', 'Choose a slot with uses remaining.');
+      return;
+    }
+    await saveSpellSlotSpend(root, player, slot, `${slot.label} used`);
+  }
+
+  async function castSpell(root, player, spellName) {
+    const spell = findSpellDetails(spellName, player, root);
+    if (!spell) {
+      renderSheetLog(root, 'Spell rules missing', `${spellName || 'That spell'} is on the sheet but rules are not loaded yet.`);
+      return;
+    }
+
+    const slot = getSpellSlotState(player, spell);
+    if (slot.level === 0) {
+      renderSheetLog(root, `${spell.name} cast`, 'Cantrip; no spell slot spent.');
+      return;
+    }
+    if (!slot.max || slot.available <= 0) {
+      renderSheetLog(root, `${spell.name} not cast`, `No level ${getSpellLevelNumber(spell.level)}+ spell slots available.`);
+      return;
+    }
+
+    await saveSpellSlotSpend(root, player, slot, `${spell.name} cast`);
+  }
+
+  async function saveSpellSlotSpend(root, player, slot, label) {
+    const spellSlotUses = { ...(player.spellSlotUses || {}), [slot.slotKey]: slot.used + 1 };
+    const edits = { ...loadPlayerEdits(player.id), spellSlotUses };
+    await saveAndHydratePlayer(root, player, edits);
+    renderSheetLog(root, label, `${slot.available - 1} / ${slot.max} ${slot.label} slots left.`);
+  }
+
+  function getSpellSlotByKey(player, slotKey) {
+    const slots = player.spellSlots || {};
+    const uses = player.spellSlotUses || {};
+    if (slotKey === 'pact') {
+      const pact = slots.pact && typeof slots.pact === 'object' ? slots.pact : null;
+      if (!pact || !Number(pact.slots)) return null;
+      const max = Number(pact.slots);
+      const used = clampNumber(Number(uses.pact) || 0, 0, max);
+      return { slotKey: 'pact', label: `Pact L${pact.level}`, max, used, available: max - used };
+    }
+    const max = Number(slots[slotKey]);
+    if (!max) return null;
+    const used = clampNumber(Number(uses[slotKey]) || 0, 0, max);
+    return { slotKey: String(slotKey), label: `Level ${slotKey}`, max, used, available: max - used };
+  }
+
+  async function markSpellScrollUsed(root, player, scrollId) {
+    const scroll = (player.spellScrolls || []).find(candidate => candidate.id === scrollId);
+    const actionUses = { ...(player.actionUses || {}), [scrollId]: 1 };
+    const edits = { ...loadPlayerEdits(player.id), actionUses };
+    await saveAndHydratePlayer(root, player, edits);
+    renderSheetLog(root, `${scroll ? scroll.spellName : 'Spell scroll'} used`, 'Scroll marked consumed on this sheet.');
+  }
+
   async function applyRest(root, player, restType) {
     const edits = { ...loadPlayerEdits(player.id) };
     const resourceUses = { ...(player.resourceUses || {}) };
@@ -2059,22 +2406,23 @@
   }
 
   function renderRoll(root, weapon, type) {
-    const targets = Array.from(root.querySelectorAll('[data-roll-log]'));
-    if (!targets.length) return;
     const result = type === 'attack'
       ? rollAttack(weapon)
       : rollDamage(weapon);
-    targets.forEach(target => {
-      target.innerHTML = `<strong>${escapeHtml(result.label)}</strong><span>${escapeHtml(result.detail)}</span>`;
-    });
+    renderSheetLog(root, result.label, result.detail);
   }
 
   function renderSpellRoll(root, spell) {
-    const targets = Array.from(root.querySelectorAll('[data-roll-log]'));
-    if (!targets.length || !spell || !spell.damage) return;
+    if (!spell || !spell.damage) return;
     const roll = rollDice(spell.damage.dice);
+    renderSheetLog(root, `${spell.name} damage: ${roll.total}`, `${roll.detail} ${spell.damage.damageType}`);
+  }
+
+  function renderSheetLog(root, label, detail) {
+    const targets = Array.from(root.querySelectorAll('[data-roll-log]'));
+    if (!targets.length) return;
     targets.forEach(target => {
-      target.innerHTML = `<strong>${escapeHtml(spell.name)} damage: ${roll.total}</strong><span>${escapeHtml(`${roll.detail} ${spell.damage.damageType}`)}</span>`;
+      target.innerHTML = `<strong>${escapeHtml(label)}</strong><span>${escapeHtml(detail)}</span>`;
     });
   }
 
