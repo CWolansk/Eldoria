@@ -1835,9 +1835,9 @@
   function normalizeRuleActionGroup(action) {
     const current = normalizeActionGroup(action && action.group);
     const detail = normalizeName(action && action.detail);
-    if (detail.startsWith('as an action') || detail.includes('you can use your action')) return 'Action';
-    if (detail.startsWith('as a bonus action')) return 'Bonus Action';
-    if (detail.startsWith('as a reaction')) return 'Reaction';
+    if (hasBonusActionTiming(detail)) return 'Bonus Action';
+    if (hasActionTiming(detail)) return 'Action';
+    if (hasReactionTiming(detail)) return 'Reaction';
     return current;
   }
 
@@ -2056,11 +2056,29 @@
 
   function classifyRulesTiming(text) {
     const normalized = normalizeName(text);
-    if (normalized.includes('bonus action')) return 'Bonus Action';
-    if (normalized.includes('reaction')) return 'Reaction';
-    if (normalized.includes('action')) return 'Action';
+    if (hasBonusActionTiming(normalized)) return 'Bonus Action';
+    if (hasActionTiming(normalized)) return 'Action';
+    if (hasReactionTiming(normalized)) return 'Reaction';
     if (normalized.includes('short rest') || normalized.includes('long rest') || normalized.includes('minute') || normalized.includes('hour')) return 'Out of Combat';
     return 'Free / Utility';
+  }
+
+  function hasBonusActionTiming(clean) {
+    return /\b(as a bonus action|use a bonus action|use your bonus action|uses a bonus action|bonus action to|take a bonus action)\b/.test(clean)
+      || clean === 'bonus action'
+      || clean === '1 bonus action';
+  }
+
+  function hasActionTiming(clean) {
+    return /\b(as an action|use an action|use your action|uses an action|spend an action|take an action|you can take the action|action to|requires an action|requires your action)\b/.test(clean)
+      || clean === 'action'
+      || clean === '1 action';
+  }
+
+  function hasReactionTiming(clean) {
+    return /\b(as a reaction|use a reaction|use your reaction|uses its reaction|using your reaction|spend your reaction|take a reaction|reaction to)\b/.test(clean)
+      || clean === 'reaction'
+      || clean === '1 reaction';
   }
 
   function summarizeSpellAction(player, spell) {

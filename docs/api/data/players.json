@@ -150,7 +150,7 @@
         "actions": [
           {
             "id": "bracer-of-piercing-arrows-piercing-shot",
-            "group": "Reaction",
+            "group": "Triggered",
             "type": "Item",
             "title": "Piercing Shot",
             "detail": "Piercing Shot (3/day): Before making an attack roll with a ranged weapon, you can activate Piercing Shot and choose a specific body part to target. On a hit, the target suffers a special effect based on the location struck: - Eyes – Target has disadvantage on Wisdom (Perception) checks relying on sight and on ranged attack rolls until the end of its next turn. - Arm/Hand – Target cannot wield two-handed weapons and may only hold a single object at a time until the end of its next turn. - Foot/Leg – Target’s movement speed is halved until the end of its next turn. - Torso – Target must make a Constitution saving throw (DC = 10 + your proficiency bonus + your Dexterity modifier) the next time it attempts an action. On a failed save, the target loses its action and reactions until the start of its next turn.",
@@ -270,7 +270,7 @@
         "subclasses": "Wildfire (TCE) Druid, Divine Soul (XGE) Sorcerer, Life (PHB) Cleric, Celestial (XGE) Warlock",
         "text": "A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.",
         "higherLevels": "At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.",
-        "timing": "Passive",
+        "timing": "Action",
         "attackType": "",
         "saveAbility": "",
         "damage": null
@@ -392,7 +392,7 @@
         "id": "spell-cure-wounds",
         "sourceType": "spell",
         "sourceId": "cure-wounds",
-        "group": "Passive",
+        "group": "Action",
         "type": "Spell",
         "title": "Cast Cure Wounds",
         "detail": "A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier.",
@@ -575,7 +575,7 @@
       },
       {
         "id": "bracer-of-piercing-arrows-piercing-shot",
-        "group": "Reaction",
+        "group": "Triggered",
         "type": "Item",
         "title": "Piercing Shot",
         "detail": "Piercing Shot (3/day): Before making an attack roll with a ranged weapon, you can activate Piercing Shot and choose a specific body part to target. On a hit, the target suffers a special effect based on the location struck: - Eyes – Target has disadvantage on Wisdom (Perception) checks relying on sight and on ranged attack rolls until the end of its next turn. - Arm/Hand – Target cannot wield two-handed weapons and may only hold a single object at a time until the end of its next turn. - Foot/Leg – Target’s movement speed is halved until the end of its next turn. - Torso – Target must make a Constitution saving throw (DC = 10 + your proficiency bonus + your Dexterity modifier) the next time it attempts an action. On a failed save, the target loses its action and reactions until the start of its next turn.",
@@ -618,7 +618,7 @@
         "id": "feature-class-ranger-3-primeval-awareness-phb",
         "sourceType": "class",
         "sourceId": "class-ranger-3-primeval-awareness-phb",
-        "group": "Out of Combat",
+        "group": "Action",
         "type": "Ranger",
         "title": "Primeval Awareness",
         "detail": "Beginning at 3rd level, you can use your action and expend one ranger spell slot to focus your awareness on the region around you.  For 1 minute per level of the spell slot you expend, you can sense whether the following types of creatures are present within 1 mile of you (or within up to 6 miles if you are in your favored terrain): aberrations, celestials, dragons, elementals, fey, fiends, and undead.  This feature doesn't reveal the creatures' location or number.",
@@ -823,7 +823,7 @@
         "level": 3,
         "source": "PHB",
         "text": "Beginning at 3rd level, you can use your action and expend one ranger spell slot to focus your awareness on the region around you. For 1 minute per level of the spell slot you expend, you can sense whether the following types of creatures are present within 1 mile of you (or within up to 6 miles if you are in your favored terrain): aberrations, celestials, dragons, elementals, fey, fiends, and undead. This feature doesn't reveal the creatures' location or number.",
-        "timing": "Out of Combat",
+        "timing": "Action",
         "resourceHint": ""
       },
       {
@@ -950,7 +950,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T21:54:03.826Z"
+      "generatedAtUtc": "2026-05-05T23:04:34.952Z"
     },
     "url": "Public/Players/Justin Player Sheet.html",
     "searchText": "Character Stats Equipment Spells 1st Level Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJustinDnDNotes Full Class Info Class Features & Abilities Hunter's Prey (Colossus Slayer) Once per turn when hitting a creature below max HP, deal an extra 1d8 damage. Archery Fighting Style +2 bonus on attack rolls with ranged weapons. Zephyr Strike Move like the wind. For the duration, movement doesn't provoke opportunity attacks. Once before the spell ends, can give yourself advantage on one weapon attack roll on your turn. That attack deals an extra 1d8 force damage on a hit. Whether you hit or miss, walking speed increases by 30 feet until end of that turn. Ensnaring Strike The next time you hit a creature with a weapon attack before this spell ends, a writhing mass of thorny vines appears at the point of impact, and the target must succeed on a Strength saving throw or be restrained by the magical vines until the spell ends. A Large or larger creature has advantage on this saving throw. If the target succeeds on the save, the vines shrivel away. While restrained by this spell, the target takes 1d6 piercing damage at the start of each of its turns. A creature restrained by the vines or one that can touch the creature can use its action to make a Strength check against your spell save DC. On a success, the target is freed. Cure Wounds 1 creature is healed for 1d8+1d8/SL+spellcasting ability modifier hp. Piercing Shot 3/day. Before making an attack roll, you can activate Piercing Shot and target a specific body part. If the attack hits, the target suffers a debilitating injury. The creature suffers disadvantage on Wisdom (Perception) checks relying on sight and on attack/damage rolls. The creature can no longer hold two handed weapons and can only hold a single object at a time. Arm/Hand Movement speed is halved. Foot/Leg The creature must make a Constitution saving throw when attempting the next action in combat (DC = 10 + attacker's proficiency + Dexterity modifier). On a failed save, they lose their action and reactions until the start of your next turn. Precise Aim 1/day. At the start of your turn, activate Precise Aim to focus your attacks. Until the end of your next turn, whenever you hit a creature, allies gain advantage on attack rolls against that target. Primeval Awareness Ensnaring strike, Zephyr strike, Cure wounds Limited Features Piercing Shot 3 uses Precise Aim 1 use Proficiencies Common language from Human Common language from Ranger Beasts Common language from Human Common language from Guild Merchant Goblin"
@@ -1344,7 +1344,7 @@
         "subclasses": "Arcane Trickster (PHB) Rogue, Architect of Ruin (IllR) Illrigger, Wildfire (TCE) Druid, Eldritch Knight (PHB) Fighter, Light (PHB) Cleric, Fiend (PHB) Warlock, Genie (Efreeti) (TCE) Warlock, Sun Soul (XGE) Monk",
         "text": "As you hold your hands with thumbs touching and fingers spread, a thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone must make a Dexterity saving throw. A creature takes 3d6 fire damage on a failed save, or half as much damage on a successful one. The fire ignites any flammable objects in the area that aren't being worn or carried.",
         "higherLevels": "At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.",
-        "timing": "Passive",
+        "timing": "Action",
         "attackType": "",
         "saveAbility": "dex",
         "damage": {
@@ -1499,7 +1499,7 @@
         "id": "feature-class-cleric-2-channel-divinity-turn-undead-phb",
         "sourceType": "class",
         "sourceId": "class-cleric-2-channel-divinity-turn-undead-phb",
-        "group": "Reaction",
+        "group": "Action",
         "type": "Cleric",
         "title": "Channel Divinity: Turn Undead",
         "detail": "As an action, you present your holy symbol and speak a prayer censuring the undead.  Each undead that can see or hear you within 30 feet of you must make a Wisdom saving throw.  If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage.",
@@ -1776,7 +1776,7 @@
         "level": 2,
         "source": "PHB",
         "text": "As an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage. A turned creature must spend its turns trying to move as far away from you as it can, and it can't willingly move to a space within 30 feet of you. It also can't take reactions. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there's nowhere to move, the creature can use the Dodge action.",
-        "timing": "Reaction",
+        "timing": "Action",
         "resourceHint": "Channel Divinity"
       },
       {
@@ -1855,7 +1855,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T21:54:03.826Z"
+      "generatedAtUtc": "2026-05-05T23:04:34.952Z"
     },
     "url": "Public/Players/Claire Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaClaireDnDNotes Full Class Info"
@@ -2863,7 +2863,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T21:54:03.826Z"
+      "generatedAtUtc": "2026-05-05T23:04:34.952Z"
     },
     "url": "Public/Players/JP Player Sheet.html",
     "searchText": "Character Stats Equipment Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJpPlayerNotes Full Class Info"
@@ -3699,7 +3699,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T21:54:03.826Z"
+      "generatedAtUtc": "2026-05-05T23:04:34.952Z"
     },
     "url": "Public/Players/Julie Player Sheet.html",
     "searchText": "Character Stats Equipment Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJulieDnDNotes Full Class Info"
@@ -3878,7 +3878,7 @@
         "subclasses": "Arcane Trickster (PHB) Rogue, Artillerist (TCE) Artificer, Eldritch Knight (PHB) Fighter, Light (PHB) Cleric, Fiend (PHB) Warlock, Genie (Efreeti) (TCE) Warlock, Zeal (PSA) (PSA) Cleric",
         "text": "A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a Dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one. The fire spreads around corners. It ignites flammable objects in the area that aren't being worn or carried.",
         "higherLevels": "At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.",
-        "timing": "Passive",
+        "timing": "Action",
         "attackType": "",
         "saveAbility": "dex",
         "damage": {
@@ -4005,7 +4005,7 @@
         "id": "spell-fireball",
         "sourceType": "spell",
         "sourceId": "fireball",
-        "group": "Passive",
+        "group": "Action",
         "type": "Spell",
         "title": "Cast Fireball",
         "detail": "A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame.",
@@ -4338,7 +4338,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T21:54:03.826Z"
+      "generatedAtUtc": "2026-05-05T23:04:34.952Z"
     },
     "url": "Public/Players/Liz Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaLizDnDNotes Full Class Info"
@@ -4417,7 +4417,7 @@
         "actions": [
           {
             "id": "talisman-of-elemental-fury-elemental-surge",
-            "group": "Reaction",
+            "group": "Passive",
             "type": "Item",
             "title": "Elemental Surge",
             "detail": "Elemental Surge (Action, 1/day): Choose an element (fire, cold, lightning, acid, or poison). Creatures within a 10-foot radius of a point you choose within 30 feet must make a Dexterity saving throw (DC = 8 + your Wisdom modifier + proficiency bonus). On a failed save, they take 2d8 damage of the chosen type and suffer one of the following effects: - Fire: Target ignites, taking 1d6 fire damage at the start of their next turn. - Cold: Movement speed is reduced by 10 feet. - Lightning: Cannot take reactions until the end of their next turn. - Acid: Armor/shields take -1 penalty to AC. - Poison: Target is poisoned until end of next turn. Damage increases to 3d8 at 5th level, 4d8 at 11th, 5d8 at 17th.",
@@ -4575,7 +4575,7 @@
         "subclasses": "Wildfire (TCE) Druid, Divine Soul (XGE) Sorcerer, Life (PHB) Cleric, Celestial (XGE) Warlock",
         "text": "A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.",
         "higherLevels": "At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.",
-        "timing": "Passive",
+        "timing": "Action",
         "attackType": "",
         "saveAbility": "",
         "damage": null
@@ -4596,7 +4596,7 @@
         "subclasses": "Arcane Trickster (PHB) Rogue, Eldritch Knight (PHB) Fighter",
         "text": "You create a shard of ice and fling it at one creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 piercing damage. Hit or miss, the shard then explodes. The target and each creature within 5 feet of it must succeed on a Dexterity saving throw or take 2d6 cold damage.",
         "higherLevels": "At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the cold damage increases by 1d6 for each slot level above 1st.",
-        "timing": "Passive",
+        "timing": "Action",
         "attackType": "spellAttack",
         "saveAbility": "dex",
         "damage": {
@@ -4620,7 +4620,7 @@
         "subclasses": "Land (Forest) (PHB) Druid, Leyline (Forest) (HWT) Wizard, Nature (PHB) Cleric",
         "text": "You touch a willing creature. Until the spell ends, the target's skin has a rough, bark-like appearance, and the target's AC can't be less than 16, regardless of what kind of armor it is wearing.",
         "higherLevels": "",
-        "timing": "Passive",
+        "timing": "Action",
         "attackType": "",
         "saveAbility": "",
         "damage": null
@@ -4665,7 +4665,7 @@
         "subclasses": "Land (Grassland) (PHB) Druid, Trickery (PHB) Cleric, Shadow (PHB) Monk",
         "text": "A veil of shadows and silence radiates from you, masking you and your companions from detection. For the duration, each creature you choose within 30 feet of you (including you) has a +10 bonus to Dexterity (Stealth) checks and can't be tracked except by magical means. A creature that receives this bonus leaves behind no tracks or other traces of its passage.",
         "higherLevels": "",
-        "timing": "Passive",
+        "timing": "Action",
         "attackType": "",
         "saveAbility": "",
         "damage": null
@@ -4686,7 +4686,7 @@
         "subclasses": "Land (Forest) (PHB) Druid, Leyline (Coast) (HWT) Wizard, Open Sea (TDCSR) Paladin, Tempest (PHB) Cleric",
         "text": "A storm cloud appears in the shape of a cylinder that is 10 feet tall with a 60-foot radius, centered on a point you can see within range directly above you. The spell fails if you can't see a point in the air where the storm cloud could appear (for example, if you are in a room that can't accommodate the cloud). When you cast the spell, choose a point you can see under the cloud. A bolt of lightning flashes down from the cloud to that point. Each creature within 5 feet of that point must make a Dexterity saving throw. A creature takes 3d10 lightning damage on a failed save, or half as much damage on a successful one. On each of your turns until the spell ends, you can use your action to call down lightning in this way again, targeting the same point or a different one. If you are outdoors in stormy conditions when you cast this spell, the spell gives you control over the existing storm instead of creating a new one. Under such conditions, the spell's damage increases by 1d10.",
         "higherLevels": "At Higher Levels. When you cast this spell using a spell slot of 4th or higher level, the damage increases by 1d10 for each slot level above 3rd.",
-        "timing": "Passive",
+        "timing": "Action",
         "attackType": "",
         "saveAbility": "dex",
         "damage": {
@@ -4710,7 +4710,7 @@
         "subclasses": "Wildfire (TCE) Druid, Land (Forest) (PHB) Druid, Nature (PHB) Cleric, Ancients (PHB) Paladin, Archfey (PHB) Warlock",
         "text": "This spell channels vitality into plants within a specific area. There are two possible uses for the spell, granting either immediate or long-term benefits. If you cast this spell using 1 action, choose a point within range. All normal plants in a 100-foot radius centered on that point become thick and overgrown. A creature moving through the area must spend 4 feet of movement for every 1 foot it moves. You can exclude one or more areas of any size within the spell's area from being affected. If you cast this spell over 8 hours, you enrich the land. All plants in a half-mile radius centered on a point within range become enriched for 1 year. The plants yield twice the normal amount of food when harvested.",
         "higherLevels": "",
-        "timing": "Passive",
+        "timing": "Action",
         "attackType": "",
         "saveAbility": "",
         "damage": null
@@ -4731,7 +4731,7 @@
         "subclasses": "Arcane Trickster (PHB) Rogue, Land (Coast) (PHB) Druid, Eldritch Knight (PHB) Fighter, River (O:TTG) Paladin",
         "text": "This spell grants up to ten willing creatures you can see within range the ability to breathe underwater until the spell ends. Affected creatures also retain their normal mode of respiration.",
         "higherLevels": "",
-        "timing": "Passive",
+        "timing": "Action",
         "attackType": "",
         "saveAbility": "",
         "damage": null
@@ -4809,7 +4809,7 @@
         "id": "spell-barkskin",
         "sourceType": "spell",
         "sourceId": "barkskin",
-        "group": "Passive",
+        "group": "Action",
         "type": "Spell",
         "title": "Cast Barkskin",
         "detail": "You touch a willing creature.",
@@ -4822,7 +4822,7 @@
         "id": "spell-call-lightning",
         "sourceType": "spell",
         "sourceId": "call-lightning",
-        "group": "Passive",
+        "group": "Action",
         "type": "Spell",
         "title": "Cast Call Lightning",
         "detail": "A storm cloud appears in the shape of a cylinder that is 10 feet tall with a 60-foot radius, centered on a point you can see within range directly above you.",
@@ -4836,7 +4836,7 @@
         "id": "spell-cure-wounds",
         "sourceType": "spell",
         "sourceId": "cure-wounds",
-        "group": "Passive",
+        "group": "Action",
         "type": "Spell",
         "title": "Cast Cure Wounds",
         "detail": "A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier.",
@@ -4863,7 +4863,7 @@
         "id": "spell-ice-knife",
         "sourceType": "spell",
         "sourceId": "ice-knife",
-        "group": "Passive",
+        "group": "Action",
         "type": "Spell",
         "title": "Cast Ice Knife",
         "detail": "You create a shard of ice and fling it at one creature within range.",
@@ -4878,7 +4878,7 @@
         "id": "spell-pass-without-trace",
         "sourceType": "spell",
         "sourceId": "pass-without-trace",
-        "group": "Passive",
+        "group": "Action",
         "type": "Spell",
         "title": "Cast Pass without Trace",
         "detail": "A veil of shadows and silence radiates from you, masking you and your companions from detection.",
@@ -4891,7 +4891,7 @@
         "id": "spell-plant-growth",
         "sourceType": "spell",
         "sourceId": "plant-growth",
-        "group": "Passive",
+        "group": "Action",
         "type": "Spell",
         "title": "Cast Plant Growth",
         "detail": "This spell channels vitality into plants within a specific area.",
@@ -4904,7 +4904,7 @@
         "id": "spell-water-breathing",
         "sourceType": "spell",
         "sourceId": "water-breathing",
-        "group": "Passive",
+        "group": "Action",
         "type": "Spell",
         "title": "Cast Water Breathing",
         "detail": "This spell grants up to ten willing creatures you can see within range the ability to breathe underwater until the spell ends.",
@@ -4915,7 +4915,7 @@
       },
       {
         "id": "talisman-of-elemental-fury-elemental-surge",
-        "group": "Reaction",
+        "group": "Passive",
         "type": "Item",
         "title": "Elemental Surge",
         "detail": "Elemental Surge (Action, 1/day): Choose an element (fire, cold, lightning, acid, or poison). Creatures within a 10-foot radius of a point you choose within 30 feet must make a Dexterity saving throw (DC = 8 + your Wisdom modifier + proficiency bonus). On a failed save, they take 2d8 damage of the chosen type and suffer one of the following effects: - Fire: Target ignites, taking 1d6 fire damage at the start of their next turn. - Cold: Movement speed is reduced by 10 feet. - Lightning: Cannot take reactions until the end of their next turn. - Acid: Armor/shields take -1 penalty to AC. - Poison: Target is poisoned until end of next turn. Damage increases to 3d8 at 5th level, 4d8 at 11th, 5d8 at 17th.",
@@ -4986,7 +4986,7 @@
         "id": "feature-class-druid-2-wild-shape-phb",
         "sourceType": "class",
         "sourceId": "class-druid-2-wild-shape-phb",
-        "group": "Bonus Action",
+        "group": "Action",
         "type": "Druid",
         "title": "Wild Shape",
         "detail": "Starting at 2nd level, you can use your action to magically assume the shape of a beast that you have seen before.  You can use this feature twice.  You regain expended uses when you finish a short or long rest.",
@@ -5087,7 +5087,7 @@
         "level": 2,
         "source": "PHB",
         "text": "Starting at 2nd level, you can use your action to magically assume the shape of a beast that you have seen before. You can use this feature twice. You regain expended uses when you finish a short or long rest. Your druid level determines the beasts you can transform into, as shown in the Beast Shapes table. At 2nd level, for example, you can transform into any beast that has a challenge rating of 1/4 or lower that doesn't have a flying or swimming speed. Beast Shapes 2nd 1/4 No flying or swimming speed Wolf 4th 1/2 No flying speed Crocodile 8th 1 — Giant eagle You can stay in a beast shape for a number of hours equal to half your druid level (rounded down). You then revert to your normal form unless you expend another use of this feature. You can revert to your normal form earlier by using a bonus action on your turn. You automatically revert if you fall unconscious, drop to 0 hit points, or die. While you are transformed, the following rules apply: Your game statistics are replaced by the statistics of the beast, but you retain your alignment, personality, and Intelligence, Wisdom, and Charisma scores. You also retain all of your skill and saving throw proficiencies, in addition to gaining those of the creature. If the creature has the same proficiency as you and the bonus in its stat block is higher than yours, use the creature's bonus instead of yours. If the creature has any legendary or lair actions, you can't use them. When you transform, you assume the beast's hit points and Hit Dice. When you revert to your normal form, you return to the number of hit points you had before you transformed. However, if you revert as a result of dropping to 0 hit points, any excess damage carries over to your normal form. For example, if you take 10 damage in animal form and have only 1 hit point left, you revert and take 9 damage. As long as the excess damage doesn't reduce your normal form to 0 hit points, you aren't knocked unconscious. You can't cast spells, and your ability to speak or take any action that requires hands is limited to the capabilities of your beast form. Transforming doesn't break your concentration on a spell you've already cast, however, or prevent you from taking actions that are part of a spell, such as call lightning, that you've already cast. You retain the benefit of any features from your class, race, or other source and can use them if the new form is physically capable of doing so. However, you can't use any of your special senses, such as darkvision, unless your new form also has that sense. You choose whether your equipment falls to the ground in your space, merges into your new form, or is worn by it. Worn equipment functions as normal, but the DM decides whether it is practical for the new form to wear a piece of equipment, based on the creature's shape and size. Your equipment doesn't change size or shape to match the new form, and any equipment that the new form can't wear must either fall to the ground or merge with it. Equipment that merges with the form has no effect until you leave the form.",
-        "timing": "Bonus Action",
+        "timing": "Action",
         "resourceHint": "Wild Shape"
       },
       {
@@ -5190,7 +5190,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T21:54:03.826Z"
+      "generatedAtUtc": "2026-05-05T23:04:34.952Z"
     },
     "url": "Public/Players/Vanessa Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaVanessaDnDNotes Full Class Info"
@@ -5269,7 +5269,7 @@
         "actions": [
           {
             "id": "the-aegis-codex-arcane-distraction",
-            "group": "Reaction",
+            "group": "Passive",
             "type": "Item",
             "title": "Arcane Distraction",
             "detail": "Arcane Distraction (Reaction, 1/day): When a creature you can see makes an ability check or saving throw, you may force them to reroll with a -2 penalty. They must use the lower result.",
@@ -5280,7 +5280,7 @@
           },
           {
             "id": "the-aegis-codex-arcane-barrier",
-            "group": "Bonus Action",
+            "group": "Out of Combat",
             "type": "Item",
             "title": "Arcane Barrier",
             "detail": "Arcane Barrier (Bonus Action, 1/day): You create a protective field around allies within 30 feet. While you maintain concentration (up to 1 minute), affected allies gain a +2 bonus to AC.",
@@ -5436,7 +5436,7 @@
         "subclasses": "Arcana (SCAG) Cleric, Arcane Trickster (PHB) Rogue, Divine Soul (XGE) Sorcerer, Eldritch Knight (PHB) Fighter, Light (PHB) Cleric, Celestial (XGE) Warlock",
         "text": "You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action. If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.",
         "higherLevels": "",
-        "timing": "Passive",
+        "timing": "Action",
         "attackType": "",
         "saveAbility": "dex",
         "damage": null
@@ -5457,7 +5457,7 @@
         "subclasses": "Architect of Ruin (IllR) Illrigger, Clockwork Soul (TCE) Sorcerer, Divine Soul (XGE) Sorcerer, Life (PHB) Cleric, Lunar (DSotDQ) Sorcerer, Devotion (PHB) Paladin, River (O:TTG) Paladin, Runechild (TDCSR) Sorcerer, Celestial (XGE) Warlock",
         "text": "You touch a creature and can end either one disease or one condition afflicting it. The condition can be blinded, deafened, paralyzed, or poisoned.",
         "higherLevels": "",
-        "timing": "Passive",
+        "timing": "Action",
         "attackType": "",
         "saveAbility": "",
         "damage": null
@@ -5478,7 +5478,7 @@
         "subclasses": "Land (Grassland) (PHB) Druid, Divine Soul (XGE) Sorcerer, Leyline (Desert) (HWT) Wizard, Light (PHB) Cleric, Celestial (XGE) Warlock, Lantern (O:TTG) Warlock",
         "text": "A 60-foot-radius sphere of light spreads out from a point you choose within range. The sphere is bright light and sheds dim light for an additional 60 feet. If you chose a point on an object you are holding or one that isn't being worn or carried, the light shines from the object and moves with it. Completely covering the affected object with an opaque object, such as a bowl or a helm, blocks the light. If any of this spell's area overlaps with an area of darkness created by a spell of 3rd level or lower, the spell that created the darkness is dispelled.",
         "higherLevels": "",
-        "timing": "Passive",
+        "timing": "Action",
         "attackType": "",
         "saveAbility": "",
         "damage": null
@@ -5541,7 +5541,7 @@
       },
       {
         "id": "the-aegis-codex-arcane-barrier",
-        "group": "Bonus Action",
+        "group": "Out of Combat",
         "type": "Item",
         "title": "Arcane Barrier",
         "detail": "Arcane Barrier (Bonus Action, 1/day): You create a protective field around allies within 30 feet. While you maintain concentration (up to 1 minute), affected allies gain a +2 bonus to AC.",
@@ -5555,7 +5555,7 @@
       },
       {
         "id": "the-aegis-codex-arcane-distraction",
-        "group": "Reaction",
+        "group": "Passive",
         "type": "Item",
         "title": "Arcane Distraction",
         "detail": "Arcane Distraction (Reaction, 1/day): When a creature you can see makes an ability check or saving throw, you may force them to reroll with a -2 penalty. They must use the lower result.",
@@ -5610,7 +5610,7 @@
         "id": "spell-daylight",
         "sourceType": "spell",
         "sourceId": "daylight",
-        "group": "Passive",
+        "group": "Action",
         "type": "Spell",
         "title": "Cast Daylight",
         "detail": "A 60-foot-radius sphere of light spreads out from a point you choose within range.",
@@ -5623,7 +5623,7 @@
         "id": "spell-lesser-restoration",
         "sourceType": "spell",
         "sourceId": "lesser-restoration",
-        "group": "Passive",
+        "group": "Action",
         "type": "Spell",
         "title": "Cast Lesser Restoration",
         "detail": "You touch a creature and can end either one disease or one condition afflicting it.",
@@ -5636,7 +5636,7 @@
         "id": "spell-light",
         "sourceType": "spell",
         "sourceId": "light",
-        "group": "Passive",
+        "group": "Action",
         "type": "Spell",
         "title": "Cast Light",
         "detail": "You touch one object that is no larger than 10 feet in any dimension.",
@@ -5801,7 +5801,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T21:54:03.826Z"
+      "generatedAtUtc": "2026-05-05T23:04:34.952Z"
     },
     "url": "Public/Players/Randi Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaRandiDnDNotes Full Class Info"

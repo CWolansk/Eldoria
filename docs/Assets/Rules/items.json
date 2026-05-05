@@ -16195,7 +16195,7 @@
     "actions": [
       {
         "id": "abjurer-s-bangle-rare-abjurer-s-bangle-rare",
-        "group": "Reaction",
+        "group": "Passive",
         "type": "Item",
         "title": "Abjurer's Bangle (Rare)",
         "detail": "A creature wearing the bangle can use its reaction when it takes damage to speak the bangle's command word, causing the magical ward to take the damage instead.  Any excess damage carries over to the creature when the bangle's ward is reduced to 0 hit points, at which point the bangle becomes a nonmagical bracelet.",
@@ -16224,7 +16224,7 @@
     "actions": [
       {
         "id": "abjurer-s-bangle-uncommon-abjurer-s-bangle-uncommon",
-        "group": "Reaction",
+        "group": "Passive",
         "type": "Item",
         "title": "Abjurer's Bangle (Uncommon)",
         "detail": "A creature wearing the bangle can use its reaction when it takes damage to speak the bangle's command word, causing the magical ward to take the damage instead.  Any excess damage carries over to the creature when the bangle's ward is reduced to 0 hit points, at which point the bangle becomes a nonmagical bracelet.",
@@ -16253,7 +16253,7 @@
     "actions": [
       {
         "id": "abjurer-s-bangle-very-rare-abjurer-s-bangle-very-rare",
-        "group": "Reaction",
+        "group": "Passive",
         "type": "Item",
         "title": "Abjurer's Bangle (Very Rare)",
         "detail": "A creature wearing the bangle can use its reaction when it takes damage to speak the bangle's command word, causing the magical ward to take the damage instead.  Any excess damage carries over to the creature when the bangle's ward is reduced to 0 hit points, at which point the bangle becomes a nonmagical bracelet.",
@@ -25239,7 +25239,7 @@
     "actions": [
       {
         "id": "astronomer-s-boon-astronomer-s-boon",
-        "group": "Reaction",
+        "group": "Action",
         "type": "Item",
         "title": "Astronomer's Boon",
         "detail": "When you do, the astrolabe begins to glow, and you can use an action to speak the item's command word to gain the constellation's respective benefit: The Drum.  3 stars appear on your back in the shape of a drum.  When you roll for initiative, you can expend 1 of the stars as a reaction to grant you and any other friendly creature within 10 feet of you a +1 bonus to the roll.",
@@ -26427,7 +26427,7 @@
     "actions": [
       {
         "id": "balloon-pack-balloon-pack",
-        "group": "Reaction",
+        "group": "Action",
         "type": "Item",
         "title": "Balloon Pack",
         "detail": "While you're wearing the backpack, you can deploy the balloon as an action and gain the effect of the levitate spell for 10 minutes, targeting yourself and requiring no concentration.  Alternatively, you can use a reaction to deploy the balloon when you're falling and gain the effect of the feather fall spell for yourself.",
@@ -31444,7 +31444,7 @@
     "actions": [
       {
         "id": "bloody-marilith-very-rare-bloody-marilith-very-rare",
-        "group": "Reaction",
+        "group": "Triggered",
         "type": "Item",
         "title": "Bloody Marilith (Very Rare)",
         "detail": "When you drink this potion, you can take one reaction on every turn in a combat for 1 minute.  Unlike its common variant, this potion's effect does not end when you use an additional reaction.  Drinking additional bloody mariliths before you finish a long rest leaves your body feeling worn.",
@@ -31751,7 +31751,7 @@
     "actions": [
       {
         "id": "bone-painted-stone-bone-painted-stone",
-        "group": "Bonus Action",
+        "group": "Out of Combat",
         "type": "Item",
         "title": "Bone Painted Stone",
         "detail": "The stones has one charge.  With a bonus action, a creature holding a stone can expend its single charge, activating following effect:For 1 minute, each time you damage a creature with a weapon or spell attack, you regain an amount of hit points equal to your proficiency bonus.",
@@ -32925,7 +32925,7 @@
     "actions": [
       {
         "id": "bracer-of-piercing-arrows-piercing-shot",
-        "group": "Reaction",
+        "group": "Triggered",
         "type": "Item",
         "title": "Piercing Shot",
         "detail": "Piercing Shot (3/day): Before making an attack roll with a ranged weapon, you can activate Piercing Shot and choose a specific body part to target. On a hit, the target suffers a special effect based on the location struck: - Eyes – Target has disadvantage on Wisdom (Perception) checks relying on sight and on ranged attack rolls until the end of its next turn. - Arm/Hand – Target cannot wield two-handed weapons and may only hold a single object at a time until the end of its next turn. - Foot/Leg – Target’s movement speed is halved until the end of its next turn. - Torso – Target must make a Constitution saving throw (DC = 10 + your proficiency bonus + your Dexterity modifier) the next time it attempts an action. On a failed save, the target loses its action and reactions until the start of its next turn.",
@@ -39211,7 +39211,7 @@
     "actions": [
       {
         "id": "chronolometer-chronolometer",
-        "group": "Reaction",
+        "group": "Action",
         "type": "Item",
         "title": "Chronolometer",
         "detail": "As a reaction when a creature you can see within 30 feet of you takes damage, that creature gains an additional action if it is the creature's turn, or can take an action immediately even though it isn't the creature's turn.",
@@ -45838,7 +45838,7 @@
     "actions": [
       {
         "id": "covolt-dagger-covolt-dagger",
-        "group": "Reaction",
+        "group": "Triggered",
         "type": "Item",
         "title": "Covolt Dagger",
         "detail": "This angular dagger is forged with covolt, an elemental blue metal that carries storm-like properties.  When you score a critical hit against a target with an attack made with this magic weapon, the target takes an extra 1d8 lightning damage and can't take reactions until the start of its next turn.",
@@ -53854,7 +53854,7 @@
     "actions": [
       {
         "id": "disguise-kit-disguise-kit",
-        "group": "Reaction",
+        "group": "Passive",
         "type": "Item",
         "title": "Disguise Kit",
         "detail": "A cunning disguise can enhance an audience's enjoyment of a performance, provided the disguise is properly designed to evoke the desired reaction.  Persuasion.  Folk tend to trust a person in uniform.  If you disguise yourself as an authority figure, your efforts to persuade others are often more effective.",
@@ -53923,7 +53923,7 @@
     "actions": [
       {
         "id": "diviner-s-dice-diviner-s-dice",
-        "group": "Reaction",
+        "group": "Action",
         "type": "Item",
         "title": "Diviner's Dice",
         "detail": "You can roll these dice as an action and record the numbers rolled.  Once rolled, you can't record any other numbers in this way until the next dawn.  While you have the dice on your person, you can use a reaction when you or a creature you can see within 60 feet of you makes an attack roll or ability check to add or subtract one of the recorded numbers from the attack roll or ability check's total.",
@@ -66384,7 +66384,7 @@
     "actions": [
       {
         "id": "flamberge-bastard-sword-of-wounding-flamberge-bastard-sword-of-wounding",
-        "group": "Reaction",
+        "group": "Action",
         "type": "Item",
         "title": "Flamberge Bastard Sword of Wounding",
         "detail": "Alternatively, the wounded creature, or a creature within 5 feet of it, can use an action to make a DC 15 Wisdom (Medicine) check, ending the effect of such wounds on it on a success.  Special.  Whilst wielding this weapon you can use your reaction to add your proficiency bonus to your AC against one melee attack that would hit you; to do so, you must see the attacker and be wielding the weapon.",
@@ -76250,7 +76250,7 @@
     "actions": [
       {
         "id": "gi-of-shifting-seasons-gi-of-shifting-seasons",
-        "group": "Bonus Action",
+        "group": "Action",
         "type": "Item",
         "title": "Gi of Shifting Seasons",
         "detail": "Alternatively, whenever you use an action, bonus action, or reaction to spend 1 or more ki points, you can choose to shift the gi's season by one, moving in chronological order.  When you do, you choose whether to gain the season's benefits before or after the action.",
@@ -81860,7 +81860,7 @@
     "actions": [
       {
         "id": "guardian-emblem-guardian-emblem",
-        "group": "Reaction",
+        "group": "Action",
         "type": "Item",
         "title": "Guardian Emblem",
         "detail": "As an action, you can attach the emblem to a suit of armor or a shield or remove it.  The emblem has 3 charges.  When you or a creature you can see within 30 feet of you suffers a critical hit while you're wearing the armor or wielding the shield that bears the emblem, you can use your reaction to expend 1 charge to turn the critical hit into a normal hit instead.",
@@ -92703,7 +92703,7 @@
     "actions": [
       {
         "id": "indigo-painted-stone-indigo-painted-stone",
-        "group": "Bonus Action",
+        "group": "Out of Combat",
         "type": "Item",
         "title": "Indigo Painted Stone",
         "detail": "The stones has one charge.  With a bonus action, a creature holding a stone can expend its single charge, activating following effect:For 1 minute, you become invisible (no concentration required); the effect ends if you attack or cast a spell.",
@@ -95354,7 +95354,7 @@
     "actions": [
       {
         "id": "juniper-painted-stone-juniper-painted-stone",
-        "group": "Bonus Action",
+        "group": "Passive",
         "type": "Item",
         "title": "Juniper Painted Stone",
         "detail": "The stones has one charge.  With a bonus action, a creature holding a stone can expend its single charge, activating following effect:A magical shield that has a number of hit points equal to five times your proficiency bonus surrounds you.",
@@ -106087,7 +106087,7 @@
     "actions": [
       {
         "id": "lyre-of-building-lyre-of-building",
-        "group": "Reaction",
+        "group": "Action",
         "type": "Item",
         "title": "Lyre of Building",
         "detail": "While holding this lyre, you can cast mending as an action.  You can also play the lyre as a reaction when an object or a structure you can see within 300 feet of you takes damage, causing it to be immune to that damage and any further damage of the same type until the start of your next turn.",
@@ -113476,7 +113476,7 @@
     "actions": [
       {
         "id": "mind-crystal-quickened-mind-crystal-quickened",
-        "group": "Bonus Action",
+        "group": "Passive",
         "type": "Item",
         "title": "Mind Crystal (Quickened)",
         "detail": "You change the spell's casting time to 1 bonus action for this casting.",
@@ -117304,7 +117304,7 @@
     "actions": [
       {
         "id": "mourningsteel-war-banner-mourningsteel-war-banner",
-        "group": "Bonus Action",
+        "group": "Passive",
         "type": "Item",
         "title": "Mourningsteel War Banner",
         "detail": "The standard is 6 feet tall and weighs 7 pounds, but can be collapsed down to 3 feet tall or extended up to its full length by using a bonus action.  While the banner is on your person, you have advantage on saving throws against being frightened.",
@@ -117542,7 +117542,7 @@
     "actions": [
       {
         "id": "mustard-painted-stone-mustard-painted-stone",
-        "group": "Bonus Action",
+        "group": "Out of Combat",
         "type": "Item",
         "title": "Mustard Painted Stone",
         "detail": "The stones has one charge.  With a bonus action, a creature holding a stone can expend its single charge, activating following effect:For 1 hour, you gain the benefits of the enhance ability spell, choosing two of the spell's effects instead of one (no concentration required).",
@@ -118454,7 +118454,7 @@
     "actions": [
       {
         "id": "net-net",
-        "group": "Bonus Action",
+        "group": "Action",
         "type": "Item",
         "title": "Net",
         "detail": "When you use an action, bonus action, or reaction to attack with a net, you can make only one attack regardless of the number of attacks you can normally make.  Range.  A weapon that can be used to make a ranged attack has a range shown in parentheses after the ammunition or thrown property.",
@@ -118500,7 +118500,7 @@
     "actions": [
       {
         "id": "net-of-warning-net-of-warning",
-        "group": "Bonus Action",
+        "group": "Action",
         "type": "Item",
         "title": "Net of Warning",
         "detail": "When you use an action, bonus action, or reaction to attack with a net, you can make only one attack regardless of the number of attacks you can normally make.  Range.  A weapon that can be used to make a ranged attack has a range shown in parentheses after the ammunition or thrown property.",
@@ -124644,7 +124644,7 @@
     "actions": [
       {
         "id": "pennant-of-the-vind-rune-pennant-of-the-vind-rune",
-        "group": "Reaction",
+        "group": "Action",
         "type": "Item",
         "title": "Pennant of the Vind Rune",
         "detail": "As an action, you fly up to 20 feet.  If you don't land at the end of this flight, you fall unless you have another means of staying aloft.  Comforting Wind.  You can't suffocate.  Winds Grasp.  As a reaction when you fall, you can cause yourself to take no damage from the fall.",
@@ -125187,7 +125187,7 @@
     "actions": [
       {
         "id": "philter-of-deep-despair-philter-of-deep-despair",
-        "group": "Bonus Action",
+        "group": "Out of Combat",
         "type": "Item",
         "title": "Philter of Deep Despair",
         "detail": "As you imbibe this potion, you remember a time of heart-rending sorrow, grief, and despair related to death, loss, or failure—the specific memories depend on the philter's creator.  You have advantage on Wisdom saving throws for 1 hour but cannot take bonus actions of any kind during that time.  The effects of this philter cancel the effects of a philter of boundless joy.  Memory Philters.",
@@ -130022,7 +130022,7 @@
     "actions": [
       {
         "id": "puce-painted-stone-puce-painted-stone",
-        "group": "Bonus Action",
+        "group": "Out of Combat",
         "type": "Item",
         "title": "Puce Painted Stone",
         "detail": "The stones has one charge.  With a bonus action, a creature holding a stone can expend its single charge, activating following effect:For 1 minute, your weapon attacks deal additional fire damage equal to twice your proficiency bonus.",
@@ -132714,7 +132714,7 @@
     "actions": [
       {
         "id": "requiping-ring-requiping-ring",
-        "group": "Bonus Action",
+        "group": "Passive",
         "type": "Item",
         "title": "Requiping Ring",
         "detail": "Retrieving an item requires a bonus action.",
@@ -140781,7 +140781,7 @@
     "actions": [
       {
         "id": "sanctum-amulet-sanctum-amulet",
-        "group": "Bonus Action",
+        "group": "Reaction",
         "type": "Item",
         "title": "Sanctum Amulet",
         "detail": "Additionally, you can cast the spare the dying cantrip using either an action or a bonus action.  Invoking the Rune.  When a creature you can see within 60 feet of you is reduced to 0 hit points as a result of taking damage, you can use your reaction to invoke the item's rune, causing the pendant to flash with pale light.",
@@ -140851,7 +140851,7 @@
     "actions": [
       {
         "id": "sapphire-buckler-sapphire-buckler",
-        "group": "Reaction",
+        "group": "Action",
         "type": "Item",
         "title": "Sapphire Buckler",
         "detail": "Also, when you take damage from a creature that is within 5 feet of you, you can use your reaction to deal 2d6 thunder damage to that creature.  As an action, you can use the shield to help you locate Aberrations until the end of your next turn.",
@@ -143067,7 +143067,7 @@
     "actions": [
       {
         "id": "seal-of-holy-vengeance-judgment",
-        "group": "Bonus Action",
+        "group": "Triggered",
         "type": "Item",
         "title": "Judgment",
         "detail": "Judgment (Bonus Action, 1/day): Imbue your next melee weapon attack with radiant energy. On a hit, deal an extra 2d6 radiant damage. If the target is a fiend or undead, a 10-foot aura of radiant light appears centered on it for one round. Creatures of your choice in the area gain temporary hit points equal to your Charisma modifier, while enemies take 1d6 radiant damage at the start of their turns.",
@@ -147903,7 +147903,7 @@
     "actions": [
       {
         "id": "skymetal-staff-skymetal-staff",
-        "group": "Bonus Action",
+        "group": "Action",
         "type": "Item",
         "title": "Skymetal Staff",
         "detail": "In addition, on its next turn, the creature must choose to take an action, bonus action, or move: it may only do one of the three.  Versatile.  This weapon can be used with one or two hands.  A damage value in parentheses appears with the property—the damage when the weapon is used with two hands to make a melee attack.",
@@ -148042,7 +148042,7 @@
     "actions": [
       {
         "id": "slate-painted-stone-slate-painted-stone",
-        "group": "Bonus Action",
+        "group": "Out of Combat",
         "type": "Item",
         "title": "Slate Painted Stone",
         "detail": "The stones has one charge.  With a bonus action, a creature holding a stone can expend its single charge, activating following effect:For 1 minute, all attacks against you are made with disadvantage.",
@@ -162562,7 +162562,7 @@
     "actions": [
       {
         "id": "sword-of-the-paruns-sword-of-the-paruns",
-        "group": "Reaction",
+        "group": "Action",
         "type": "Item",
         "title": "Sword of the Paruns",
         "detail": "Additionally, once on each of your turns, you can use one of the following properties if you're holding the sword:Immediately after you use the Attack action to attack with the sword, you can enable one creature within 60 feet of you to use its reaction to make one weapon attack.",
@@ -162794,7 +162794,7 @@
     "actions": [
       {
         "id": "talisman-of-elemental-fury-elemental-surge",
-        "group": "Reaction",
+        "group": "Passive",
         "type": "Item",
         "title": "Elemental Surge",
         "detail": "Elemental Surge (Action, 1/day): Choose an element (fire, cold, lightning, acid, or poison). Creatures within a 10-foot radius of a point you choose within 30 feet must make a Dexterity saving throw (DC = 8 + your Wisdom modifier + proficiency bonus). On a failed save, they take 2d8 damage of the chosen type and suffer one of the following effects: - Fire: Target ignites, taking 1d6 fire damage at the start of their next turn. - Cold: Movement speed is reduced by 10 feet. - Lightning: Cannot take reactions until the end of their next turn. - Acid: Armor/shields take -1 penalty to AC. - Poison: Target is poisoned until end of next turn. Damage increases to 3d8 at 5th level, 4d8 at 11th, 5d8 at 17th.",
@@ -163820,7 +163820,7 @@
     "actions": [
       {
         "id": "the-aegis-codex-arcane-distraction",
-        "group": "Reaction",
+        "group": "Passive",
         "type": "Item",
         "title": "Arcane Distraction",
         "detail": "Arcane Distraction (Reaction, 1/day): When a creature you can see makes an ability check or saving throw, you may force them to reroll with a -2 penalty. They must use the lower result.",
@@ -163831,7 +163831,7 @@
       },
       {
         "id": "the-aegis-codex-arcane-barrier",
-        "group": "Bonus Action",
+        "group": "Out of Combat",
         "type": "Item",
         "title": "Arcane Barrier",
         "detail": "Arcane Barrier (Bonus Action, 1/day): You create a protective field around allies within 30 feet. While you maintain concentration (up to 1 minute), affected allies gain a +2 bonus to AC.",
@@ -167737,7 +167737,7 @@
     "actions": [
       {
         "id": "umber-painted-stone-umber-painted-stone",
-        "group": "Bonus Action",
+        "group": "Reaction",
         "type": "Item",
         "title": "Umber Painted Stone",
         "detail": "The stones has one charge.  With a bonus action, a creature holding a stone can expend its single charge, activating following effect:For 1 minute, you can use your reaction to fling a magical spike at a target you can see within 60 feet.",
@@ -168185,7 +168185,7 @@
     "actions": [
       {
         "id": "veil-of-shadows-shadow-stab",
-        "group": "Bonus Action",
+        "group": "Passive",
         "type": "Item",
         "title": "Shadow Stab",
         "detail": "Shadow Stab (Bonus Action, 1/day): Your next melee weapon attack deals an additional 2d6 necrotic damage. If made while hidden, the target must succeed on a Wisdom saving throw (DC = 8 + your Dexterity modifier + proficiency bonus) or become frightened of you until the end of its next turn.",
@@ -168196,7 +168196,7 @@
       },
       {
         "id": "veil-of-shadows-concealed-escape",
-        "group": "Reaction",
+        "group": "Triggered",
         "type": "Item",
         "title": "Concealed Escape",
         "detail": "Concealed Escape (Reaction, 1/day): When you take damage or are targeted by an attack, you may become invisible until the start of your next turn and move up to half your speed without provoking opportunity attacks.",
@@ -174625,7 +174625,7 @@
     "actions": [
       {
         "id": "violet-painted-stone-violet-painted-stone",
-        "group": "Bonus Action",
+        "group": "Out of Combat",
         "type": "Item",
         "title": "Violet Painted Stone",
         "detail": "The stones has one charge.  With a bonus action, a creature holding a stone can expend its single charge, activating following effect:For 1 minute, you and one willing creature you can see within 30 feet become immune to the frightened and charmed conditions.",
@@ -182418,7 +182418,7 @@
     "actions": [
       {
         "id": "wheel-of-stars-wheel-of-stars",
-        "group": "Reaction",
+        "group": "Action",
         "type": "Item",
         "title": "Wheel of Stars",
         "detail": "While attuned to this device, you have a +1 bonus to Wisdom saving throws, and you can use an action to cast the dancing lights, guidance, or message cantrips.  Portent of the Stars.  As a reaction when a creature you can see within 60 feet of you makes an attack roll, saving throw, or ability check, you make that creature roll a d10 and add or subtract the number rolled (your choice) from the roll.",

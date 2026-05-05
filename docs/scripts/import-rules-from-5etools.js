@@ -510,12 +510,30 @@ function inferFeatureResourceHint(name, text) {
 
 function classifyTiming(text) {
   const clean = normalizeName(text);
-  if (clean.includes('bonus action')) return 'Bonus Action';
-  if (clean.includes('reaction')) return 'Reaction';
-  if (clean.includes('as an action') || clean.includes('use an action') || clean.includes('you can take the action') || clean.includes('action to')) return 'Action';
+  if (hasBonusActionTiming(clean)) return 'Bonus Action';
+  if (hasActionTiming(clean)) return 'Action';
+  if (hasReactionTiming(clean)) return 'Reaction';
   if (clean.includes('when you') || clean.includes('whenever you') || clean.includes('before determining') || clean.includes('on a hit')) return 'Triggered';
   if (clean.includes('minute') || clean.includes('hour') || clean.includes('ritual')) return 'Out of Combat';
   return 'Passive';
+}
+
+function hasBonusActionTiming(clean) {
+  return /\b(as a bonus action|use a bonus action|use your bonus action|uses a bonus action|bonus action to|take a bonus action)\b/.test(clean)
+    || clean === 'bonus action'
+    || clean === '1 bonus action';
+}
+
+function hasActionTiming(clean) {
+  return /\b(as an action|use an action|use your action|uses an action|spend an action|take an action|you can take the action|action to|requires an action|requires your action)\b/.test(clean)
+    || clean === 'action'
+    || clean === '1 action';
+}
+
+function hasReactionTiming(clean) {
+  return /\b(as a reaction|use a reaction|use your reaction|uses its reaction|using your reaction|spend your reaction|take a reaction|reaction to)\b/.test(clean)
+    || clean === 'reaction'
+    || clean === '1 reaction';
 }
 
 function extractNamedAbilities(text) {
