@@ -1263,6 +1263,78 @@ th {
   color: var(--text);
 }
 
+.roll-dock {
+  position: fixed;
+  z-index: 30;
+  top: 5.5rem;
+  right: max(1rem, calc((100vw - 1120px) / 2 - 17rem));
+  width: min(18rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 7rem);
+  overflow: auto;
+  padding: .8rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--line));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--panel-strong) 92%, #000);
+  box-shadow: var(--shadow);
+}
+
+.roll-dock-head {
+  display: flex;
+  justify-content: space-between;
+  gap: .75rem;
+  align-items: center;
+  padding-bottom: .55rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.roll-dock-head span {
+  color: var(--gold);
+  font-size: .75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.roll-dock-head .text-button {
+  min-height: 1.8rem;
+  padding: 0 .55rem;
+  font-size: .78rem;
+}
+
+.roll-dock-latest {
+  display: grid;
+  gap: .25rem;
+  padding: .75rem 0;
+}
+
+.roll-dock-latest strong {
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+
+.roll-dock-latest span,
+.roll-dock-history span {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.roll-dock small {
+  color: var(--accent-strong);
+  font-size: .72rem;
+  font-weight: 800;
+}
+
+.roll-dock-history {
+  display: grid;
+  gap: .45rem;
+}
+
+.roll-dock-history div {
+  display: grid;
+  gap: .2rem;
+  padding-top: .45rem;
+  border-top: 1px solid var(--line);
+}
+
 @media (max-width: 760px) {
   .spell-row summary,
   .spell-result {
@@ -1272,6 +1344,15 @@ th {
   .spell-row-actions,
   .spell-row-actions .action-controls {
     justify-content: flex-start;
+  }
+
+  .roll-dock {
+    top: auto;
+    right: .75rem;
+    bottom: .75rem;
+    left: .75rem;
+    width: auto;
+    max-height: 42vh;
   }
 }
 

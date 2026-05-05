@@ -2261,6 +2261,13 @@
     });
 
     root.addEventListener('click', event => {
+      const rollDockClear = event.target.closest('[data-roll-dock-clear]');
+      if (rollDockClear) {
+        root._rollHistory = [];
+        renderRollDock(root);
+        return;
+      }
+
       const actionFilter = event.target.closest('[data-action-filter]');
       if (actionFilter) {
         const panel = actionFilter.closest('.actions-panel');
@@ -2614,11 +2621,62 @@
   }
 
   function renderSheetLog(root, label, detail) {
+    root._rollHistory = [
+      {
+        label: String(label || ''),
+        detail: String(detail || ''),
+        time: new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
+      },
+      ...(root._rollHistory || []),
+    ].slice(0, 5);
+    renderRollDock(root);
+
     const targets = Array.from(root.querySelectorAll('[data-roll-log]'));
     if (!targets.length) return;
     targets.forEach(target => {
       target.innerHTML = `<strong>${escapeHtml(label)}</strong><span>${escapeHtml(detail)}</span>`;
     });
+  }
+
+  function ensureRollDock(root) {
+    let dock = root.querySelector('[data-roll-dock]');
+    if (dock) return dock;
+
+    dock = root.ownerDocument.createElement('aside');
+    dock.className = 'roll-dock';
+    dock.dataset.rollDock = 'true';
+    dock.setAttribute('aria-live', 'polite');
+    dock.hidden = true;
+    dock.innerHTML = `<div class="roll-dock-head">
+      <span>Rolls</span>
+      <button class="text-button" type="button" data-roll-dock-clear aria-label="Clear rolls">Clear</button>
+    </div>
+    <div class="roll-dock-latest" data-roll-dock-latest></div>
+    <div class="roll-dock-history" data-roll-dock-history></div>`;
+    root.appendChild(dock);
+    return dock;
+  }
+
+  function renderRollDock(root) {
+    const dock = ensureRollDock(root);
+    const history = root._rollHistory || [];
+    dock.hidden = !history.length;
+    if (!history.length) return;
+
+    const [latest, ...previous] = history;
+    const latestTarget = dock.querySelector('[data-roll-dock-latest]');
+    if (latestTarget) {
+      latestTarget.innerHTML = `<strong>${escapeHtml(latest.label)}</strong><span>${escapeHtml(latest.detail)}</span><small>${escapeHtml(latest.time)}</small>`;
+    }
+
+    const historyTarget = dock.querySelector('[data-roll-dock-history]');
+    if (historyTarget) {
+      historyTarget.innerHTML = previous.map(entry => `<div>
+        <strong>${escapeHtml(entry.label)}</strong>
+        <span>${escapeHtml(entry.detail)}</span>
+        <small>${escapeHtml(entry.time)}</small>
+      </div>`).join('');
+    }
   }
 
   function rollAttack(weapon) {
