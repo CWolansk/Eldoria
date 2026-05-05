@@ -237,11 +237,12 @@ function mergePlayerOverride(player, patch) {
 
 function mergePlayerPatch(base, patch) {
   if (!patch) return base;
-  const merged = { ...base, ...patch };
-  if (base.abilities || patch.abilities) {
+  const cleanPatch = sanitizePlayerPatch(patch);
+  const merged = { ...base, ...cleanPatch };
+  if (base.abilities || cleanPatch.abilities) {
     merged.abilities = {
       ...(base.abilities || {}),
-      ...(patch.abilities || {}),
+      ...(cleanPatch.abilities || {}),
     };
   }
   return merged;

@@ -55,6 +55,28 @@
     { key: 'leather armor', kind: 'armor' },
     { key: 'ring of protection', kind: 'wondrous' },
   ];
+  const ARMOR_BASES = [
+    { key: 'studded leather armor', base: 12, dexMode: 'full' },
+    { key: 'studded leather', base: 12, dexMode: 'full' },
+    { key: 'leather armor', base: 11, dexMode: 'full' },
+    { key: 'leather', base: 11, dexMode: 'full' },
+    { key: 'padded armor', base: 11, dexMode: 'full' },
+    { key: 'padded', base: 11, dexMode: 'full' },
+    { key: 'half plate armor', base: 15, dexMode: 'max', dexMax: 2 },
+    { key: 'half plate', base: 15, dexMode: 'max', dexMax: 2 },
+    { key: 'breastplate armor', base: 14, dexMode: 'max', dexMax: 2 },
+    { key: 'breastplate', base: 14, dexMode: 'max', dexMax: 2 },
+    { key: 'scale mail', base: 14, dexMode: 'max', dexMax: 2 },
+    { key: 'chain shirt', base: 13, dexMode: 'max', dexMax: 2 },
+    { key: 'hide armor', base: 12, dexMode: 'max', dexMax: 2 },
+    { key: 'hide', base: 12, dexMode: 'max', dexMax: 2 },
+    { key: 'plate armor', base: 18, dexMode: 'none' },
+    { key: 'plate', base: 18, dexMode: 'none' },
+    { key: 'splint armor', base: 17, dexMode: 'none' },
+    { key: 'splint', base: 17, dexMode: 'none' },
+    { key: 'chain mail', base: 16, dexMode: 'none' },
+    { key: 'ring mail', base: 14, dexMode: 'none' },
+  ];
   const TEMPORARY_EFFECT_DEFINITIONS = [
     { id: 'haste', label: 'Haste', detail: '+2 AC, speed doubled, extra action while active.', acBonus: 2, speedMultiplier: 2 },
     { id: 'mageArmor', label: 'Mage Armor', detail: 'Base AC becomes 13 + Dexterity while not wearing armor.', mageArmor: true },
@@ -640,10 +662,11 @@
   }
 
   function parseArmorAcRule(item) {
-    if (!item || !item.details) return null;
-    const type = normalizeName(`${item.kind || ''} ${item.details.type || ''} ${item.name || ''}`);
-    const damage = String(item.details.damage || '');
-    const text = String(item.details.text || '');
+    if (!item) return null;
+    const details = item.details || {};
+    const type = normalizeName(`${item.kind || ''} ${details.type || ''} ${item.name || ''}`);
+    const damage = String(details.damage || '');
+    const text = String(details.text || '');
     if (type.includes('shield')) {
       const enhancement = parseShieldEnhancementBonus(item, damage, text);
       const regularShieldBonus = 2;
@@ -653,15 +676,21 @@
     }
     if (!type.includes('armor') && !type.includes('mail') && !type.includes('plate') && !type.includes('leather')) return null;
     const match = damage.match(/AC\s*(\d+)(?:\s*\+\s*Dex(?:terity)?(?:\s*\(max\s*(\d+)\))?)?/i);
-    if (!match) return null;
-    const dexMode = /\+\s*Dex/i.test(damage) ? (match[2] ? 'max' : 'full') : 'none';
+    const fallback = findArmorBaseRule(item.name);
+    if (!match && !fallback) return null;
+    const dexMode = match ? (/\+\s*Dex/i.test(damage) ? (match[2] ? 'max' : 'full') : 'none') : fallback.dexMode;
     return {
       kind: 'armor',
-      base: Number(match[1]) || 10,
+      base: match ? Number(match[1]) || 10 : fallback.base,
       dexMode,
-      dexMax: match[2] ? Number(match[2]) || 0 : null,
+      dexMax: match && match[2] ? Number(match[2]) || 0 : fallback && fallback.dexMax || null,
       bonus: parseArmorEnhancementBonus(item, text),
     };
+  }
+
+  function findArmorBaseRule(name) {
+    const normalized = normalizeName(name);
+    return ARMOR_BASES.find(rule => normalized.includes(rule.key)) || null;
   }
 
   function applyArmorDexBonus(dexMod, rule) {
@@ -1679,17 +1708,47 @@
       .filter(action => action.sourceType !== 'spell' && action.sourceType !== 'item')
       .map(action => {
         const resourceId = getRuleActionResourceId(player, action);
+        const detail = getRuleActionDetail(player, action);
         return {
           group: normalizeRuleActionGroup(action),
           sourceType: action.sourceType || 'rule',
           type: action.type || action.sourceType || 'Rule',
           title: action.title || action.name || 'Action',
           meta: [action.sourceType, action.className, action.itemName].filter(Boolean).join(' / '),
-          detail: action.detail || action.text || '',
+          detail,
           tags: Array.isArray(action.tags) ? action.tags.filter(Boolean).slice(0, 5) : [],
           controls: resourceId ? renderActionResourceControls(player, resourceId) : '',
         };
       });
+  }
+
+  function getRuleActionDetail(player, action) {
+    const detail = cleanRulesText(action && (action.detail || action.text));
+    const feature = findRuleFeatureForAction(player, action);
+    const featureText = cleanRulesText(feature && feature.text);
+    if (featureText && featureText.length > detail.length) return summarizeActionText(featureText, 620);
+    return detail;
+  }
+
+  function findRuleFeatureForAction(player, action) {
+    if (!player || !action) return null;
+    const features = player.ruleFeatures || [];
+    return features.find(feature => feature.id && feature.id === action.sourceId)
+      || features.find(feature => normalizeName(feature.name) === normalizeName(action.title));
+  }
+
+  function summarizeActionText(text, maxLength) {
+    const sentences = splitSentences(text);
+    let out = '';
+    let count = 0;
+    for (const sentence of sentences) {
+      const next = `${out} ${sentence}`.trim();
+      if (next.length > maxLength) break;
+      out = next;
+      count += 1;
+      if (count >= 5) break;
+    }
+    return out || truncateText(text, maxLength);
   }
 
   function hasCanonicalClassActions(player) {
@@ -2856,10 +2915,10 @@
       const player = root._playerState;
       if (!player) return;
       const id = checkbox.dataset.equipId;
+      const item = (player.inventory || []).find(candidate => candidate.id === id) || { id };
       const next = new Set(player.equipped || []);
       if (checkbox.checked) next.add(id);
       else {
-        const item = (player.inventory || []).find(candidate => candidate.id === id) || { id };
         const aliases = new Set(getItemEquipKeys(item).map(normalizeName));
         next.delete(id);
         for (const value of Array.from(next)) {
@@ -2867,6 +2926,10 @@
         }
       }
       const edits = { ...loadPlayerEdits(player.id), equipped: Array.from(next) };
+      if (isArmorOrShieldItem(item)) {
+        edits.acMode = 'official';
+        edits.ac = null;
+      }
       saveAndHydratePlayer(root, player, edits);
     });
 
@@ -3060,8 +3123,14 @@
     if (hasFormField(form, 'currentHp')) edits.currentHp = nullableNumber(formData.get('currentHp'));
     if (hasFormField(form, 'tempHp')) edits.tempHp = nullableNumber(formData.get('tempHp')) || 0;
     if (hasFormField(form, 'maxHp')) edits.maxHp = nullableNumber(formData.get('maxHp'));
-    if (hasFormField(form, 'ac')) {
-      edits.ac = nullableNumber(formData.get('ac')) || player.baseAc || player.ac;
+    const hasAcField = hasFormField(form, 'ac');
+    const submittedAc = hasAcField ? nullableNumber(formData.get('ac')) : undefined;
+    const displayedAc = Number(player.baseAc || player.ac);
+    if (hasAcField && submittedAc === null) {
+      edits.ac = null;
+      edits.acMode = 'official';
+    } else if (hasAcField && submittedAc !== undefined && submittedAc !== displayedAc) {
+      edits.ac = submittedAc;
       edits.acMode = 'custom';
     }
     if (hasFormField(form, 'speed')) edits.speed = nullableNumber(formData.get('speed')) || player.baseSpeed || player.speed;
@@ -3076,7 +3145,13 @@
       edits.abilities = abilities;
     }
     if (hasFormField(form, 'equipment')) {
-      edits.equipment = String(formData.get('equipment') || '').split(/\r?\n/).map(item => item.trim()).filter(Boolean);
+      const nextEquipment = String(formData.get('equipment') || '').split(/\r?\n/).map(item => item.trim()).filter(Boolean);
+      const equipmentChanged = nextEquipment.join('\n') !== (player.equipment || []).join('\n');
+      edits.equipment = nextEquipment;
+      if (equipmentChanged && (!hasAcField || submittedAc === displayedAc)) {
+        edits.acMode = 'official';
+        edits.ac = null;
+      }
     }
     savePlayerEdits(player.id, edits);
     const status = form.querySelector('[data-player-edit-status]') || root.querySelector('[data-player-edit-status]');
@@ -3291,6 +3366,12 @@
     ].filter(Boolean).map(String);
   }
 
+  function isArmorOrShieldItem(item) {
+    if (!item) return false;
+    const haystack = normalizeName(`${item.kind || ''} ${item.name || ''} ${item.details && item.details.type || ''}`);
+    return haystack.includes('armor') || haystack.includes('shield') || Boolean(findArmorBaseRule(item.name));
+  }
+
   function renderRoll(root, weapon, type) {
     const result = type === 'attack'
       ? rollAttack(weapon)
@@ -3435,7 +3516,7 @@
   function loadPlayerEdits(playerId) {
     if (!playerId) return {};
     try {
-      return JSON.parse(localStorage.getItem(playerStorageKey(playerId)) || '{}');
+      return sanitizePlayerEdits(JSON.parse(localStorage.getItem(playerStorageKey(playerId)) || '{}'));
     } catch (error) {
       return {};
     }
@@ -3443,7 +3524,67 @@
 
   function savePlayerEdits(playerId, edits) {
     if (!playerId) return;
-    localStorage.setItem(playerStorageKey(playerId), JSON.stringify({ ...edits, updatedAt: new Date().toISOString() }));
+    localStorage.setItem(playerStorageKey(playerId), JSON.stringify({ ...sanitizePlayerEdits(edits), updatedAt: new Date().toISOString() }));
+  }
+
+  function sanitizePlayerEdits(edits) {
+    if (!edits || typeof edits !== 'object') return {};
+    const out = {};
+    copyNullableNumberEdit(out, edits, 'currentHp');
+    copyNullableNumberEdit(out, edits, 'tempHp');
+    copyNullableNumberEdit(out, edits, 'maxHp');
+    copyNullableNumberEdit(out, edits, 'ac');
+    copyNullableNumberEdit(out, edits, 'speed');
+    copyNullableNumberEdit(out, edits, 'gold');
+    copyNullableNumberEdit(out, edits, 'heroPoints');
+    if (edits.acMode === 'official' || edits.acMode === 'custom') out.acMode = edits.acMode;
+    copyStringEdit(out, edits, 'concentration');
+    copyStringEdit(out, edits, 'notes');
+    copyStringArrayEdit(out, edits, 'equipment');
+    copyStringArrayEdit(out, edits, 'equipped');
+    copyStringArrayEdit(out, edits, 'spells');
+    copyStringArrayEdit(out, edits, 'preparedSpells');
+    copyStringArrayEdit(out, edits, 'conditions');
+    if (edits.abilities && typeof edits.abilities === 'object') {
+      out.abilities = {};
+      Object.keys(ABILITY_NAMES).forEach(ability => {
+        const value = nullableNumber(edits.abilities[ability]);
+        if (value !== undefined && value !== null) out.abilities[ability] = clampNumber(value, 1, 30);
+      });
+      if (!Object.keys(out.abilities).length) delete out.abilities;
+    }
+    copyNumberMapEdit(out, edits, 'resourceUses');
+    copyNumberMapEdit(out, edits, 'spellSlotUses');
+    copyNumberMapEdit(out, edits, 'itemCharges');
+    copyNumberMapEdit(out, edits, 'actionUses');
+    if (edits.temporaryEffects && typeof edits.temporaryEffects === 'object') out.temporaryEffects = normalizeTemporaryEffects(edits.temporaryEffects);
+    if (edits.combatToggles && typeof edits.combatToggles === 'object') out.combatToggles = edits.combatToggles;
+    if (edits.spellDetails && typeof edits.spellDetails === 'object') out.spellDetails = edits.spellDetails;
+    if (Array.isArray(edits.spellScrolls)) out.spellScrolls = edits.spellScrolls.map(normalizeSpellScroll).filter(Boolean);
+    return out;
+  }
+
+  function copyNullableNumberEdit(out, edits, field) {
+    if (!Object.prototype.hasOwnProperty.call(edits, field)) return;
+    const value = nullableNumber(edits[field]);
+    if (value !== undefined) out[field] = value;
+  }
+
+  function copyStringEdit(out, edits, field) {
+    if (Object.prototype.hasOwnProperty.call(edits, field)) out[field] = String(edits[field] || '');
+  }
+
+  function copyStringArrayEdit(out, edits, field) {
+    if (Array.isArray(edits[field])) out[field] = edits[field].map(String).filter(Boolean);
+  }
+
+  function copyNumberMapEdit(out, edits, field) {
+    if (!edits[field] || typeof edits[field] !== 'object') return;
+    out[field] = {};
+    for (const [key, value] of Object.entries(edits[field])) {
+      const number = nullableNumber(value);
+      if (number !== undefined && number !== null) out[field][key] = number;
+    }
   }
 
   async function trySavePlayerToApi(playerId, edits) {
