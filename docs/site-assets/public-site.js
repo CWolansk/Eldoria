@@ -218,7 +218,12 @@
     if (!player || !player.name) return;
     root.dataset.apiState = 'loaded';
     const localEdits = loadPlayerEdits(player.id || root.dataset.playerId);
-    const hydrated = preparePlayer({ ...player, ...localEdits, abilities: { ...(player.abilities || {}), ...((localEdits && localEdits.abilities) || {}) } });
+    const hydrated = preparePlayer({
+      ...player,
+      ...localEdits,
+      abilities: { ...(player.abilities || {}), ...((localEdits && localEdits.abilities) || {}) },
+      spellDetails: { ...(player.spellDetails || {}), ...((localEdits && localEdits.spellDetails) || {}) },
+    });
     root._playerState = hydrated;
 
     setText(root, '[data-player-field="name"]', hydrated.name);
@@ -1948,6 +1953,10 @@
       const response = await fetch(target.dataset.spellsUrl || '../../data/spells.json');
       if (!response.ok) throw new Error(`Spell catalog ${response.status}`);
       root._spellCatalog = await response.json();
+      if (root._playerState) {
+        renderActionsPanel(root, root._playerState);
+        renderSpellPanel(root, root._playerState);
+      }
     } catch (error) {
       root._spellCatalog = [];
     } finally {
@@ -2361,6 +2370,8 @@
         const spellName = addSpell.dataset.addSpell;
         const nextSpells = [...new Set([...(player.spells || []), spellName])].sort((a, b) => a.localeCompare(b));
         const edits = { ...loadPlayerEdits(player.id), spells: nextSpells };
+        const spell = findSpellDetails(spellName, player, root);
+        if (spell) edits.spellDetails = { ...(edits.spellDetails || {}), [spell.name || spellName]: spell };
         saveAndHydratePlayer(root, player, edits);
         return;
       }
@@ -2373,6 +2384,10 @@
         const target = normalizeName(removeSpell.dataset.removeSpell);
         const nextSpells = (player.spells || []).filter(name => normalizeName(name) !== target);
         const edits = { ...loadPlayerEdits(player.id), spells: nextSpells };
+        if (edits.spellDetails) {
+          edits.spellDetails = Object.fromEntries(Object.entries(edits.spellDetails)
+            .filter(([key, spell]) => nextSpells.some(name => normalizeName(name) === normalizeName(key) || normalizeName(name) === normalizeName(spell && spell.name))));
+        }
         saveAndHydratePlayer(root, player, edits);
         return;
       }
@@ -2456,7 +2471,12 @@
   async function saveAndHydratePlayer(root, player, edits) {
     savePlayerEdits(player.id, edits);
     if (getApiBaseUrl()) await trySavePlayerToApi(player.id, edits);
-    hydratePlayerSheet(root, { ...player, ...edits, abilities: { ...(player.abilities || {}), ...((edits && edits.abilities) || {}) } });
+    hydratePlayerSheet(root, {
+      ...player,
+      ...edits,
+      abilities: { ...(player.abilities || {}), ...((edits && edits.abilities) || {}) },
+      spellDetails: { ...(player.spellDetails || {}), ...((edits && edits.spellDetails) || {}) },
+    });
   }
 
   function updateSpellControlStatus(controls, choice) {
@@ -2755,13 +2775,15 @@
 
   async function trySavePlayerToApi(playerId, edits) {
     try {
+      const { spellDetails, updatedAt, ...apiEdits } = edits || {};
+      if (!Object.keys(apiEdits).length) return true;
       const url = buildApiUrl(`players/${encodeURIComponent(playerId)}`);
       const response = await fetch(url, {
         method: 'PATCH',
         headers: {
           'content-type': 'application/json',
         },
-        body: JSON.stringify(edits),
+        body: JSON.stringify(apiEdits),
       });
       return response.ok;
     } catch (error) {
