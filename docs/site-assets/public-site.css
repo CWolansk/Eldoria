@@ -1072,6 +1072,10 @@ th {
   gap: .85rem;
 }
 
+.equipment-manager h2 {
+  margin-top: 0;
+}
+
 .equipped-abilities {
   display: grid;
   gap: .55rem;
@@ -1112,7 +1116,7 @@ th {
 
 .equipment-row {
   display: grid;
-  grid-template-columns: minmax(7.5rem, auto) minmax(0, 1fr);
+  grid-template-columns: minmax(7.5rem, auto) minmax(0, 1fr) auto;
   align-items: center;
   gap: .65rem;
   padding: .55rem .65rem;
@@ -1137,6 +1141,11 @@ th {
 
 .equipment-details-toggle {
   min-width: 0;
+}
+
+.equipment-row-actions {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .equipment-details-toggle summary {
@@ -1246,13 +1255,15 @@ th {
 }
 
 .spell-list,
-.spell-search-results {
+.spell-search-results,
+.equipment-search-results {
   display: grid;
   gap: .55rem;
 }
 
 .spell-row,
-.spell-result {
+.spell-result,
+.equipment-result {
   padding: .65rem .75rem;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -1260,7 +1271,8 @@ th {
 }
 
 .spell-row summary,
-.spell-result {
+.spell-result,
+.equipment-result {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: .75rem;
@@ -1279,7 +1291,8 @@ th {
   align-items: center;
 }
 
-.spell-result-actions {
+.spell-result-actions,
+.equipment-result-actions {
   display: flex;
   flex-wrap: wrap;
   gap: .45rem;
@@ -1303,7 +1316,8 @@ th {
 }
 
 .spell-row small,
-.spell-result small {
+.spell-result small,
+.equipment-result small {
   display: block;
   color: var(--muted);
 }
@@ -1325,7 +1339,8 @@ th {
   color: var(--accent-strong);
 }
 
-.spell-search-box input {
+.spell-search-box input,
+.equipment-search-box input {
   width: 100%;
   min-height: 2.7rem;
   margin-bottom: .75rem;
@@ -1643,5 +1658,9 @@ th {
 
   .equipment-statline {
     text-align: left;
+  }
+
+  .equipment-row-actions {
+    justify-content: flex-start;
   }
 }

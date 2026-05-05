@@ -910,6 +910,7 @@
       const item = {
         id,
         name,
+        sourceIndex: index,
         kind,
         weapon,
         details,
@@ -2480,6 +2481,11 @@
       <div class="equipment-list" role="list">
         ${player.inventory.map(item => renderEquipmentRow(item, player)).join('')}
       </div>
+      <section class="equipment-search-box">
+        <h2>Add Equipment</h2>
+        <input data-equipment-search-input type="search" placeholder="Search items by name, type, rarity, or rules text..." aria-label="Search equipment">
+        <div class="equipment-search-results" data-equipment-search-results></div>
+      </section>
     </div>`;
     ensureItemCatalog(root);
   }
@@ -2499,6 +2505,62 @@
     } finally {
       root._itemCatalogLoading = false;
     }
+  }
+
+  function renderEquipmentSearchResults(root, query) {
+    const target = root.querySelector('[data-equipment-search-results]');
+    if (!target) return;
+    const clean = normalizeName(query);
+    const catalog = Array.isArray(root._itemCatalog) ? root._itemCatalog : [];
+    if (!clean) {
+      target.innerHTML = '<p class="empty-note">Start typing to search the item catalog.</p>';
+      return;
+    }
+    if (!catalog.length) {
+      target.innerHTML = '<p class="empty-note">Item catalog is still loading or unavailable.</p>';
+      ensureItemCatalog(root);
+      return;
+    }
+
+    const carried = new Set((root._playerState && root._playerState.equipment || []).map(normalizeName));
+    const results = catalog
+      .map(item => ({ item, score: scoreItemSearchResult(item, clean) }))
+      .filter(result => result.score > 0)
+      .sort((a, b) => b.score - a.score || String(a.item.name || '').localeCompare(String(b.item.name || '')))
+      .slice(0, 16);
+
+    target.innerHTML = results.length ? results.map(({ item }) => {
+      const details = normalizeItemDetails(item);
+      const isCarried = carried.has(normalizeName(details.name));
+      return `<article class="equipment-result">
+        <span>
+          <strong>${escapeHtml(details.name || item.name || 'Unnamed item')}</strong>
+          <small>${escapeHtml([details.type, details.rarity, formatSource(details)].filter(Boolean).join(' / '))}</small>
+          ${details.text ? `<small>${escapeHtml(truncateText(details.text, 180))}</small>` : ''}
+        </span>
+        <div class="equipment-result-actions">
+          <button class="text-button" type="button" data-add-equipment="${escapeAttr(details.name || item.name || '')}">${isCarried ? 'Add Another' : 'Add'}</button>
+        </div>
+      </article>`;
+    }).join('') : '<p class="empty-note">No matching items found.</p>';
+  }
+
+  function scoreItemSearchResult(item, query) {
+    const name = normalizeName(item && item.name);
+    const type = normalizeName(item && item.type);
+    const rarity = normalizeName(item && item.rarity);
+    const source = normalizeName(item && item.source);
+    const text = normalizeName(`${item && item.properties || ''} ${item && item.text || ''}`);
+    const haystack = `${name} ${type} ${rarity} ${source} ${text}`;
+    const terms = query.split(/\s+/).filter(Boolean);
+    if (name === query) return 120;
+    if (name.startsWith(query)) return 100;
+    if (name.includes(query)) return 80;
+    if (terms.length > 1 && name.startsWith(terms[0]) && terms.every(term => haystack.includes(term))) return 75;
+    if (`${type} ${rarity} ${source}`.includes(query)) return 45;
+    if (haystack.includes(query)) return 20;
+    if (terms.length > 1 && terms.every(term => haystack.includes(term))) return 15;
+    return 0;
   }
 
   function renderSpellPanel(root, player) {
@@ -2806,6 +2868,9 @@
         </summary>
         ${renderEquipmentDetails(item)}
       </details>
+      <div class="equipment-row-actions">
+        <button class="text-button" type="button" data-remove-equipment="${escapeAttr(item.id)}">Remove</button>
+      </div>
     </article>`;
   }
 
@@ -3101,6 +3166,45 @@
         return;
       }
 
+      const addEquipment = event.target.closest('[data-add-equipment]');
+      if (addEquipment) {
+        event.preventDefault();
+        const player = root._playerState;
+        if (!player) return;
+        const itemName = addEquipment.dataset.addEquipment;
+        if (!itemName) return;
+        const nextEquipment = [...(player.equipment || []), itemName];
+        const edits = { ...loadPlayerEdits(player.id), equipment: nextEquipment };
+        if (isArmorName(itemName)) {
+          edits.acMode = 'official';
+          edits.ac = null;
+        }
+        saveAndHydratePlayer(root, player, edits);
+        renderSheetLog(root, `${itemName} added`, 'Equipment updated.');
+        return;
+      }
+
+      const removeEquipment = event.target.closest('[data-remove-equipment]');
+      if (removeEquipment) {
+        event.preventDefault();
+        const player = root._playerState;
+        if (!player) return;
+        const item = (player.inventory || []).find(candidate => candidate.id === removeEquipment.dataset.removeEquipment);
+        if (!item) return;
+        const nextEquipment = removeEquipmentBySourceIndex(player.equipment || [], item.sourceIndex);
+        const remainingItems = buildInventory({ ...player, equipment: nextEquipment });
+        const remainingKeys = new Set(remainingItems.flatMap(getItemEquipKeys).map(normalizeName));
+        const equipped = (player.equipped || []).filter(id => remainingKeys.has(normalizeName(id)));
+        const edits = { ...loadPlayerEdits(player.id), equipment: nextEquipment, equipped };
+        if (isArmorOrShieldItem(item)) {
+          edits.acMode = 'official';
+          edits.ac = null;
+        }
+        saveAndHydratePlayer(root, player, edits);
+        renderSheetLog(root, `${item.name} removed`, 'Equipment updated.');
+        return;
+      }
+
       const addSpellScroll = event.target.closest('[data-add-spell-scroll]');
       if (addSpellScroll) {
         event.preventDefault();
@@ -3152,6 +3256,13 @@
       const actionSearch = event.target.closest('[data-action-search]');
       if (actionSearch) {
         applyActionFilters(root, actionSearch.closest('.actions-panel'));
+        return;
+      }
+
+      const equipmentSearch = event.target.closest('[data-equipment-search-input]');
+      if (equipmentSearch) {
+        window.clearTimeout(root._equipmentSearchTimer);
+        root._equipmentSearchTimer = window.setTimeout(() => renderEquipmentSearchResults(root, equipmentSearch.value), 160);
         return;
       }
 
@@ -3432,6 +3543,17 @@
     if (!item) return false;
     const haystack = normalizeName(`${item.kind || ''} ${item.name || ''} ${item.details && item.details.type || ''}`);
     return haystack.includes('armor') || haystack.includes('shield') || Boolean(findArmorBaseRule(item.name));
+  }
+
+  function isArmorName(name) {
+    const normalized = normalizeName(name);
+    return normalized.includes('shield') || normalized.includes('armor') || Boolean(findArmorBaseRule(name));
+  }
+
+  function removeEquipmentBySourceIndex(equipment, sourceIndex) {
+    const index = Number(sourceIndex);
+    if (!Number.isInteger(index) || index < 0 || index >= equipment.length) return [...equipment];
+    return equipment.filter((_, itemIndex) => itemIndex !== index);
   }
 
   function renderRoll(root, weapon, type) {

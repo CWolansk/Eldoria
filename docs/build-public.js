@@ -992,9 +992,6 @@ function renderPlayerPage(player, page) {
     `)}
 
     ${tabPanel('equipment', false, `
-      ${inlineEditPanel('Edit Equipment', `
-        <label class="wide-field"><span>Equipment</span><textarea name="equipment" rows="8"></textarea></label>
-      `)}
       <div data-equipment-panel data-items-url="${escapeAttr(relativeUrl(page.url, 'Assets/Rules/items.json'))}"></div>
     `)}
     ${tabPanel('spells', false, `<div data-spell-panel data-spells-url="${escapeAttr(relativeUrl(page.url, 'data/spells.json'))}"></div>`)}
