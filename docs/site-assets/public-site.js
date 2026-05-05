@@ -908,7 +908,7 @@
     const target = root.querySelector('[data-actions-panel]');
     if (!target) return;
     const groups = buildActionGroups(player, root);
-    target.innerHTML = `<div class="actions-panel" data-action-filter="all">
+    target.innerHTML = `<div class="actions-panel" data-active-action-filter="all">
       ${renderActionFilterControls(groups)}
       ${groups.map(group => renderActionGroup(group)).join('')}
       <div class="roll-log" data-roll-log></div>
@@ -952,7 +952,7 @@
 
     return `<div class="action-filter-bar">
       <div class="action-filter-buttons" role="group" aria-label="Action filters">
-        ${filters.map(([key, label]) => `<button class="text-button ${key === 'all' ? 'active' : ''}" type="button" data-action-filter="${escapeAttr(key)}">${escapeHtml(label)}</button>`).join('')}
+        ${filters.map(([key, label]) => `<button class="text-button ${key === 'all' ? 'active' : ''}" type="button" data-action-filter-button data-action-filter="${escapeAttr(key)}">${escapeHtml(label)}</button>`).join('')}
       </div>
       <input data-action-search type="search" placeholder="Filter actions..." aria-label="Filter actions">
     </div>`;
@@ -2268,10 +2268,10 @@
         return;
       }
 
-      const actionFilter = event.target.closest('[data-action-filter]');
+      const actionFilter = event.target.closest('[data-action-filter-button]');
       if (actionFilter) {
         const panel = actionFilter.closest('.actions-panel');
-        if (panel) panel.dataset.actionFilter = actionFilter.dataset.actionFilter || 'all';
+        if (panel) panel.dataset.activeActionFilter = actionFilter.dataset.actionFilter || 'all';
         applyActionFilters(root);
         return;
       }
@@ -2470,11 +2470,11 @@
   function applyActionFilters(root) {
     const panel = root.querySelector('.actions-panel');
     if (!panel) return;
-    const active = panel.dataset.actionFilter || 'all';
+    const active = panel.dataset.activeActionFilter || 'all';
     const searchInput = panel.querySelector('[data-action-search]');
     const query = normalizeName(searchInput ? searchInput.value : '');
 
-    panel.querySelectorAll('[data-action-filter]').forEach(button => {
+    panel.querySelectorAll('[data-action-filter-button]').forEach(button => {
       button.classList.toggle('active', (button.dataset.actionFilter || 'all') === active);
     });
 

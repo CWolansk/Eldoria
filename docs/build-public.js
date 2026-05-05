@@ -867,7 +867,7 @@ function renderPlayerPage(player, page) {
 
     <nav class="tabs" role="tablist" aria-label="Character sheet sections">
       ${tabButton('overview', 'Overview', true)}
-      ${tabButton('abilities', 'Abilities')}
+      ${tabButton('abilities', 'Ability Scores')}
       ${tabButton('combat', 'Combat')}
       ${tabButton('actions', 'Actions')}
       ${tabButton('resources', 'Resources')}
