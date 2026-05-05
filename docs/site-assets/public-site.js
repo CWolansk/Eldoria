@@ -73,6 +73,7 @@
     { key: 'plate armor', base: 18, dexMode: 'none' },
     { key: 'plate', base: 18, dexMode: 'none' },
     { key: 'splint armor', base: 17, dexMode: 'none' },
+    { key: 'splint mail', base: 17, dexMode: 'none' },
     { key: 'splint', base: 17, dexMode: 'none' },
     { key: 'chain mail', base: 16, dexMode: 'none' },
     { key: 'ring mail', base: 14, dexMode: 'none' },
@@ -252,6 +253,7 @@
     const hydrated = preparePlayer({
       ...player,
       ...localEdits,
+      itemCatalog: root._itemCatalog,
       abilities: { ...(player.abilities || {}), ...((localEdits && localEdits.abilities) || {}) },
       spellDetails: { ...(player.spellDetails || {}), ...((localEdits && localEdits.spellDetails) || {}) },
     });
@@ -1117,8 +1119,51 @@
       if (normalizeName(detail && detail.name) === normalized) return normalizeItemDetails(detail);
     }
 
+    const catalog = Array.isArray(player.itemCatalog) ? player.itemCatalog : [];
+    const lookupNames = getItemLookupNames(name);
+    const found = catalog.find(item => lookupNames.includes(normalizeName(item && item.name)) || lookupNames.includes(normalizeName(item && item.id)));
+    if (found) return normalizeItemDetails(found);
+
     const custom = CUSTOM_ITEM_DETAILS.find(detail => normalized.includes(detail.key));
-    return custom ? normalizeItemDetails(custom) : null;
+    if (custom) return normalizeItemDetails(custom);
+
+    const armor = buildFallbackArmorDetails(name);
+    return armor ? normalizeItemDetails(armor) : null;
+  }
+
+  function getItemLookupNames(name) {
+    const raw = String(name || '').trim();
+    const pieces = [raw];
+    if (raw.includes('|')) pieces.push(...raw.split('|').map(part => part.trim()));
+    return [...new Set(pieces.map(normalizeName).filter(Boolean))];
+  }
+
+  function buildFallbackArmorDetails(name) {
+    const normalized = normalizeName(name);
+    if (normalized.includes('shield')) {
+      return {
+        id: slugify(name),
+        name,
+        type: 'armor (shield)',
+        damage: 'AC +2',
+        text: 'A shield increases Armor Class by 2 while equipped.',
+      };
+    }
+
+    const rule = findArmorBaseRule(name);
+    if (!rule) return null;
+    const dexText = rule.dexMode === 'full'
+      ? ' + Dexterity modifier'
+      : rule.dexMode === 'max'
+        ? ` + Dexterity modifier (max ${rule.dexMax || 2})`
+        : '';
+    return {
+      id: slugify(name),
+      name,
+      type: 'armor',
+      damage: `AC ${rule.base}${dexText}`,
+      text: `${name} sets base Armor Class to ${rule.base}${dexText}.`,
+    };
   }
 
   function normalizeItemDetails(details) {
@@ -1165,7 +1210,7 @@
     if (type.includes('shield')) return 'shield';
     if (type.includes('armor')) return 'armor';
     if (weapon) return 'weapon';
-    if (type.includes('ring')) return 'ring';
+    if (/\bring\b/.test(type)) return 'ring';
     if (type.includes('wondrous')) return 'wondrous';
     if (hint && hint.kind) return hint.kind;
     return 'item';
@@ -2436,6 +2481,24 @@
         ${player.inventory.map(item => renderEquipmentRow(item, player)).join('')}
       </div>
     </div>`;
+    ensureItemCatalog(root);
+  }
+
+  async function ensureItemCatalog(root) {
+    if (root._itemCatalog || root._itemCatalogLoading) return;
+    const target = root.querySelector('[data-equipment-panel]');
+    if (!target) return;
+    root._itemCatalogLoading = true;
+    try {
+      const response = await fetch(target.dataset.itemsUrl || '../../Assets/Rules/items.json');
+      if (!response.ok) throw new Error(`Item catalog ${response.status}`);
+      root._itemCatalog = await response.json();
+      if (root._playerState) hydratePlayerSheet(root, root._playerState);
+    } catch (error) {
+      root._itemCatalog = [];
+    } finally {
+      root._itemCatalogLoading = false;
+    }
   }
 
   function renderSpellPanel(root, player) {
