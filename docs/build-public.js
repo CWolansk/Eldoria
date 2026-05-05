@@ -916,6 +916,8 @@ function renderPlayerPage(player, page) {
           ${editNumberField('speed', 'Speed')}
         </div>
       `)}
+      <div data-temporary-effects-panel></div>
+      <div data-ac-panel></div>
       <div class="sheet-grid">
         ${infoCard('Armor Class', p.ac, 'ac')}
         ${infoCard('Initiative', formatBonus(p.initiative), 'initiative')}

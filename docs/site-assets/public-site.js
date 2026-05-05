@@ -55,6 +55,11 @@
     { key: 'leather armor', kind: 'armor' },
     { key: 'ring of protection', kind: 'wondrous' },
   ];
+  const TEMPORARY_EFFECT_DEFINITIONS = [
+    { id: 'haste', label: 'Haste', detail: '+2 AC, speed doubled, extra action while active.', acBonus: 2, speedMultiplier: 2 },
+    { id: 'mageArmor', label: 'Mage Armor', detail: 'Base AC becomes 13 + Dexterity while not wearing armor.', mageArmor: true },
+    { id: 'shieldOfFaith', label: 'Shield of Faith', detail: '+2 AC while concentration is maintained.', acBonus: 2 },
+  ];
   const CUSTOM_ITEM_DETAILS = [
     customItem('bracer of piercing arrows', 'Bracer of Piercing Arrows', 'Custom wondrous item', [
       'Custom E-rank reward. Exact arrow-piercing mechanics are not recorded in the public item catalog yet.',
@@ -256,6 +261,8 @@
     hydrateSkills(root, hydrated);
     hydrateLists(root, hydrated);
     renderEquippedSummary(root, hydrated);
+    renderTemporaryEffectsPanel(root, hydrated);
+    renderArmorClassPanel(root, hydrated);
     renderWeaponAttacks(root, hydrated);
     renderActionsPanel(root, hydrated);
     renderResourcesPanel(root, hydrated);
@@ -328,6 +335,8 @@
   function preparePlayer(player) {
     const abilities = Object.fromEntries(Object.keys(ABILITY_NAMES).map(ability => [ability, Number(player.abilities && player.abilities[ability]) || 10]));
     const providedScrolls = Array.isArray(player.spellScrolls) ? player.spellScrolls.map(normalizeSpellScroll).filter(Boolean) : [];
+    const baseAc = getBaseSheetValue(player.ac, player.baseAc, player.acProfile && player.acProfile.total, 10);
+    const baseSpeed = getBaseSheetValue(player.speed, player.baseSpeed, player.speedProfile && player.speedProfile.total, 30);
     const prepared = {
       ...player,
       abilities,
@@ -347,6 +356,7 @@
       spellSlotUses: player.spellSlotUses && typeof player.spellSlotUses === 'object' ? player.spellSlotUses : {},
       itemCharges: player.itemCharges && typeof player.itemCharges === 'object' ? player.itemCharges : {},
       actionUses: player.actionUses && typeof player.actionUses === 'object' ? player.actionUses : {},
+      temporaryEffects: normalizeTemporaryEffects(player.temporaryEffects),
       conditions: Array.isArray(player.conditions) ? player.conditions.map(String).filter(Boolean) : [],
       concentration: cleanDetailValue(player.concentration),
       tempHp: Number(player.tempHp) || 0,
@@ -354,8 +364,10 @@
       heroPoints: Number(player.heroPoints) || 0,
       notes: String(player.notes || ''),
       proficiencyBonus: Number(player.proficiencyBonus) || calculateProficiencyBonus(Number(player.level) || 1),
-      ac: Number(player.ac) || 10,
-      speed: Number(player.speed) || 30,
+      baseAc,
+      ac: baseAc,
+      baseSpeed,
+      speed: baseSpeed,
       currentHp: player.currentHp === null || player.currentHp === undefined ? null : Number(player.currentHp),
       maxHp: player.maxHp === null || player.maxHp === undefined ? null : Number(player.maxHp),
     };
@@ -365,7 +377,175 @@
     prepared.equippedNames = getEquippedItems(prepared).map(item => normalizeName(item.name));
     prepared.inventory = buildInventory(prepared);
     prepared.weapons = prepared.inventory.filter(item => item.weapon);
+    prepared.acProfile = buildArmorClassProfile(prepared);
+    prepared.ac = prepared.acProfile.total;
+    prepared.speedProfile = buildSpeedProfile(prepared);
+    prepared.speed = prepared.speedProfile.total;
     return prepared;
+  }
+
+  function getBaseSheetValue(currentValue, baseValue, previousTotal, fallback) {
+    const current = Number(currentValue);
+    const base = Number(baseValue);
+    const previous = Number(previousTotal);
+    const hasBase = Number.isFinite(base) && base > 0;
+    const hasCurrent = Number.isFinite(current) && current > 0;
+    if (hasBase && hasCurrent && Number.isFinite(previous) && current === previous) return base;
+    if (hasCurrent) return current;
+    if (hasBase) return base;
+    return fallback;
+  }
+
+  function normalizeTemporaryEffects(value) {
+    const raw = value && typeof value === 'object' ? value : {};
+    const rawEffects = raw.effects && typeof raw.effects === 'object' ? raw.effects : raw;
+    const effects = {};
+    for (const definition of TEMPORARY_EFFECT_DEFINITIONS) {
+      effects[definition.id] = Boolean(rawEffects[definition.id]);
+    }
+    return {
+      effects,
+      customName: cleanDetailValue(raw.customName).slice(0, 80),
+      customAcBonus: clampNumber(Number(raw.customAcBonus) || 0, -20, 20),
+    };
+  }
+
+  function buildArmorClassProfile(player) {
+    const dexMod = calculateModifier(Number(player.abilities && player.abilities.dex) || 10);
+    const equipped = getEquippedItems(player);
+    const armor = equipped.map(item => ({ item, rule: parseArmorAcRule(item) })).filter(entry => entry.rule && entry.rule.kind === 'armor')[0] || null;
+    const shieldEntries = equipped.map(item => ({ item, rule: parseArmorAcRule(item) })).filter(entry => entry.rule && entry.rule.kind === 'shield');
+    const shield = shieldEntries.sort((a, b) => b.rule.bonus - a.rule.bonus)[0] || null;
+    const passiveBonuses = equipped
+      .filter(item => !armor || item.id !== armor.item.id)
+      .filter(item => !shield || item.id !== shield.item.id)
+      .map(item => ({ item, bonus: getPassiveAcBonus(item) }))
+      .filter(entry => entry.bonus);
+
+    let parts = [];
+    let total = 0;
+    if (armor) {
+      total += armor.rule.base;
+      parts.push({ label: armor.item.name, display: String(armor.rule.base) });
+      const dexApplied = applyArmorDexBonus(dexMod, armor.rule);
+      if (armor.rule.dexMode !== 'none') {
+        parts.push({ label: `Dexterity modifier${armor.rule.dexMode === 'max' ? ` (max ${armor.rule.dexMax})` : ''}`, value: dexApplied });
+        total += dexApplied;
+      }
+    } else {
+      total = 10 + dexMod;
+      parts.push({ label: 'Base AC', display: '10' });
+      parts.push({ label: 'Dexterity modifier', value: dexMod });
+    }
+
+    if (shield) {
+      total += shield.rule.bonus;
+      parts.push({ label: shield.item.name, value: shield.rule.bonus });
+    }
+    for (const entry of passiveBonuses) {
+      total += entry.bonus;
+      parts.push({ label: entry.item.name, value: entry.bonus });
+    }
+
+    const explicit = Number(player.baseAc) || Number(player.ac) || total || 10;
+    const hasAcEvidence = Boolean(armor || shield || passiveBonuses.length);
+    if (!hasAcEvidence && Math.abs(explicit - total) > 5) {
+      parts = [{ label: 'Sheet AC / class feature', display: String(explicit) }];
+      total = explicit;
+    } else if (explicit !== total) {
+      parts.push({ label: 'Manual adjustment / class feature', value: explicit - total });
+      total = explicit;
+    }
+
+    const tempParts = getTemporaryAcParts(player, total, Boolean(armor), dexMod);
+    for (const part of tempParts) {
+      total += part.value || 0;
+      parts.push(part);
+    }
+
+    return {
+      total,
+      parts,
+      activeLabels: getActiveTemporaryEffectLabels(player),
+    };
+  }
+
+  function parseArmorAcRule(item) {
+    if (!item || !item.details) return null;
+    const type = normalizeName(`${item.kind || ''} ${item.details.type || ''} ${item.name || ''}`);
+    const damage = String(item.details.damage || '');
+    const text = String(item.details.text || '');
+    if (type.includes('shield')) {
+      const bonus = parseAcBonus(damage) || parseAcBonus(text) || 2;
+      return { kind: 'shield', bonus };
+    }
+    if (!type.includes('armor') && !type.includes('mail') && !type.includes('plate') && !type.includes('leather')) return null;
+    const match = damage.match(/AC\s*(\d+)(?:\s*\+\s*Dex(?:terity)?(?:\s*\(max\s*(\d+)\))?)?/i);
+    if (!match) return null;
+    const dexMode = /\+\s*Dex/i.test(damage) ? (match[2] ? 'max' : 'full') : 'none';
+    return {
+      kind: 'armor',
+      base: Number(match[1]) || 10,
+      dexMode,
+      dexMax: match[2] ? Number(match[2]) || 0 : null,
+    };
+  }
+
+  function applyArmorDexBonus(dexMod, rule) {
+    if (!rule || rule.dexMode === 'none') return 0;
+    if (rule.dexMode === 'max') return Math.min(dexMod, rule.dexMax || 0);
+    return dexMod;
+  }
+
+  function getPassiveAcBonus(item) {
+    const text = `${item && item.name || ''} ${item && item.details && item.details.text || ''}`;
+    if (normalizeName(item && item.name).includes('ring of protection')) return 1;
+    return parseAcBonus(text);
+  }
+
+  function parseAcBonus(text) {
+    const match = String(text || '').match(/\+(\d+)\s+(?:bonus to AC|AC|bonus to Armor Class)|AC\s*\+(\d+)|Armor Class(?:\s+is)?\s+increases by\s+(\d+)|increases your Armor Class by\s+(\d+)/i);
+    return match ? Number(match[1] || match[2] || match[3] || match[4]) || 0 : 0;
+  }
+
+  function getTemporaryAcParts(player, currentTotal, hasArmor, dexMod) {
+    const state = normalizeTemporaryEffects(player && player.temporaryEffects);
+    const parts = [];
+    if (state.effects.mageArmor) {
+      const mageArmorTotal = 13 + dexMod;
+      if (hasArmor) parts.push({ label: 'Mage Armor (armor equipped)', value: 0, display: 'not applied' });
+      else parts.push({ label: 'Mage Armor base', value: Math.max(0, mageArmorTotal - currentTotal) });
+    }
+    for (const definition of TEMPORARY_EFFECT_DEFINITIONS) {
+      if (!state.effects[definition.id] || !definition.acBonus) continue;
+      parts.push({ label: definition.label, value: definition.acBonus });
+    }
+    if (state.customAcBonus) {
+      parts.push({ label: state.customName || 'Custom temporary AC', value: state.customAcBonus });
+    }
+    return parts;
+  }
+
+  function getActiveTemporaryEffectLabels(player) {
+    const state = normalizeTemporaryEffects(player && player.temporaryEffects);
+    const labels = TEMPORARY_EFFECT_DEFINITIONS
+      .filter(definition => state.effects[definition.id])
+      .map(definition => definition.label);
+    if (state.customAcBonus) labels.push(`${state.customName || 'Custom AC'} ${formatBonus(state.customAcBonus)}`);
+    return labels;
+  }
+
+  function buildSpeedProfile(player) {
+    const base = Number(player.baseSpeed) || Number(player.speed) || 30;
+    const state = normalizeTemporaryEffects(player && player.temporaryEffects);
+    const haste = state.effects.haste;
+    return {
+      total: haste ? base * 2 : base,
+      parts: [
+        { label: 'Base speed', display: `${base} ft` },
+        haste ? { label: 'Haste', display: 'x2' } : null,
+      ].filter(Boolean),
+    };
   }
 
   function buildInventory(player) {
@@ -788,6 +968,45 @@
       <button class="roll-button" type="button" data-roll-type="attack" data-weapon-id="${escapeAttr(weapon.id)}">Hit ${formatBonus(weapon.attackBonus)}</button>
       <button class="roll-button" type="button" data-roll-type="damage" data-weapon-id="${escapeAttr(weapon.id)}">Dmg ${escapeHtml(weapon.damageFormula)}</button>
     </span>`;
+  }
+
+  function renderTemporaryEffectsPanel(root, player) {
+    root.querySelectorAll('[data-temporary-effects-panel]').forEach(target => {
+      const state = normalizeTemporaryEffects(player.temporaryEffects);
+      target.innerHTML = `<section class="combat-toggles temporary-effects">
+        <h3>Temporary Effects</h3>
+        <div class="combat-toggle-list">
+          ${TEMPORARY_EFFECT_DEFINITIONS.map(definition => `<label class="combat-toggle">
+            <input type="checkbox" data-temporary-effect="${escapeAttr(definition.id)}" ${state.effects[definition.id] ? 'checked' : ''}>
+            <span>
+              <strong>${escapeHtml(definition.label)}</strong>
+              <small>${escapeHtml(definition.detail)}</small>
+            </span>
+          </label>`).join('')}
+        </div>
+        <div class="temporary-custom">
+          <label><span>Custom Label</span><input type="text" data-temporary-effect-name value="${escapeAttr(state.customName)}" placeholder="Blessing, cover, potion..."></label>
+          <label><span>AC Bonus</span><input type="number" data-temporary-ac-bonus value="${state.customAcBonus || ''}" inputmode="numeric" min="-20" max="20"></label>
+        </div>
+      </section>`;
+    });
+  }
+
+  function renderArmorClassPanel(root, player) {
+    root.querySelectorAll('[data-ac-panel]').forEach(target => {
+      const profile = player.acProfile || buildArmorClassProfile(player);
+      target.innerHTML = `<section class="ac-breakdown-panel">
+        <div>
+          <h2>Armor Class</h2>
+        </div>
+        <strong class="ac-total">${profile.total}</strong>
+        <details class="math-breakdown" open>
+          <summary>AC math</summary>
+          ${renderMathParts(profile.parts, profile.total, '', String(profile.total))}
+        </details>
+        ${profile.activeLabels.length ? `<div class="active-effect-tags">${profile.activeLabels.map(label => `<span>${escapeHtml(label)}</span>`).join('')}</div>` : ''}
+      </section>`;
+    });
   }
 
   function renderCombatToggles(root, player) {
@@ -1980,6 +2199,7 @@
     }
 
     const known = new Set((root._playerState.spells || []).map(name => normalizeName(name)));
+    const equipment = new Set((root._playerState.equipment || []).map(name => normalizeName(name)));
     const matches = catalog
       .map(spell => ({ spell, score: scoreSpell(spell, clean) }))
       .filter(match => match.score > 0)
@@ -1989,14 +2209,33 @@
 
     target.innerHTML = matches.length ? matches.map(spell => {
       const isKnown = known.has(normalizeName(spell.name));
+      const scrollItemName = formatSpellScrollEquipmentName(spell);
+      const hasScroll = equipment.has(normalizeName(scrollItemName));
       return `<article class="spell-result">
         <div>
           <strong>${escapeHtml(spell.name)}</strong>
           <small>${escapeHtml(formatSpellMeta(spell))}</small>
         </div>
-        <button class="text-button" type="button" data-add-spell="${escapeAttr(spell.name)}" ${isKnown ? 'disabled' : ''}>${isKnown ? 'Known' : 'Add'}</button>
+        <div class="spell-result-actions">
+          <button class="text-button" type="button" data-add-spell="${escapeAttr(spell.name)}" ${isKnown ? 'disabled' : ''}>${isKnown ? 'Known' : 'Add'}</button>
+          <button class="text-button" type="button" data-add-spell-scroll="${escapeAttr(spell.name)}" ${hasScroll ? 'disabled' : ''}>${hasScroll ? 'Scroll Added' : 'Add Scroll'}</button>
+        </div>
       </article>`;
     }).join('') : '<p class="empty-note">No spells found.</p>';
+  }
+
+  function formatSpellScrollEquipmentName(spell) {
+    const level = getSpellLevelNumber(spell && spell.level);
+    const label = level ? `${formatOrdinal(level)} Level` : 'Cantrip';
+    return `Spell Scroll (${label})|${spell && spell.name || 'Unknown Spell'}`;
+  }
+
+  function formatOrdinal(number) {
+    const value = Number(number) || 0;
+    if (value === 1) return '1st';
+    if (value === 2) return '2nd';
+    if (value === 3) return '3rd';
+    return `${value}th`;
   }
 
   function scoreSpell(spell, query) {
@@ -2179,8 +2418,8 @@
       setFormValue(form, 'currentHp', player.currentHp);
       setFormValue(form, 'tempHp', player.tempHp);
       setFormValue(form, 'maxHp', player.maxHp);
-      setFormValue(form, 'ac', player.ac);
-      setFormValue(form, 'speed', player.speed);
+      setFormValue(form, 'ac', player.baseAc || player.ac);
+      setFormValue(form, 'speed', player.baseSpeed || player.speed);
       setFormValue(form, 'gold', player.gold);
       setFormValue(form, 'heroPoints', player.heroPoints);
       Object.keys(ABILITY_NAMES).forEach(ability => setFormValue(form, ability, player.abilities[ability]));
@@ -2225,6 +2464,30 @@
         const edits = { ...loadPlayerEdits(player.id), combatToggles };
         savePlayerEdits(player.id, edits);
         hydratePlayerSheet(root, { ...player, combatToggles });
+        return;
+      }
+
+      const temporaryEffect = event.target.closest('[data-temporary-effect]');
+      if (temporaryEffect) {
+        const player = root._playerState;
+        if (!player) return;
+        const temporaryEffects = normalizeTemporaryEffects(player.temporaryEffects);
+        temporaryEffects.effects[temporaryEffect.dataset.temporaryEffect] = temporaryEffect.checked;
+        saveTemporaryEffects(root, player, temporaryEffects);
+        return;
+      }
+
+      const temporaryCustom = event.target.closest('[data-temporary-effect-name], [data-temporary-ac-bonus]');
+      if (temporaryCustom) {
+        const player = root._playerState;
+        if (!player) return;
+        const panel = temporaryCustom.closest('.temporary-effects');
+        const temporaryEffects = normalizeTemporaryEffects(player.temporaryEffects);
+        const label = panel && panel.querySelector('[data-temporary-effect-name]');
+        const bonus = panel && panel.querySelector('[data-temporary-ac-bonus]');
+        temporaryEffects.customName = cleanDetailValue(label && label.value).slice(0, 80);
+        temporaryEffects.customAcBonus = clampNumber(Number(bonus && bonus.value) || 0, -20, 20);
+        saveTemporaryEffects(root, player, temporaryEffects);
         return;
       }
 
@@ -2362,6 +2625,22 @@
         return;
       }
 
+      const addSpellScroll = event.target.closest('[data-add-spell-scroll]');
+      if (addSpellScroll) {
+        event.preventDefault();
+        const player = root._playerState;
+        if (!player) return;
+        const spell = findSpellDetails(addSpellScroll.dataset.addSpellScroll, player, root);
+        if (!spell) return;
+        const itemName = formatSpellScrollEquipmentName(spell);
+        const nextEquipment = [...new Set([...(player.equipment || []), itemName])];
+        const edits = { ...loadPlayerEdits(player.id), equipment: nextEquipment };
+        edits.spellDetails = { ...(edits.spellDetails || {}), [spell.name || addSpellScroll.dataset.addSpellScroll]: spell };
+        saveAndHydratePlayer(root, player, edits);
+        renderSheetLog(root, `${spell.name} scroll added`, `${itemName} added to equipment.`);
+        return;
+      }
+
       const addSpell = event.target.closest('[data-add-spell]');
       if (addSpell) {
         event.preventDefault();
@@ -2430,8 +2709,8 @@
     if (hasFormField(form, 'currentHp')) edits.currentHp = nullableNumber(formData.get('currentHp'));
     if (hasFormField(form, 'tempHp')) edits.tempHp = nullableNumber(formData.get('tempHp')) || 0;
     if (hasFormField(form, 'maxHp')) edits.maxHp = nullableNumber(formData.get('maxHp'));
-    if (hasFormField(form, 'ac')) edits.ac = nullableNumber(formData.get('ac')) || player.ac;
-    if (hasFormField(form, 'speed')) edits.speed = nullableNumber(formData.get('speed')) || player.speed;
+    if (hasFormField(form, 'ac')) edits.ac = nullableNumber(formData.get('ac')) || player.baseAc || player.ac;
+    if (hasFormField(form, 'speed')) edits.speed = nullableNumber(formData.get('speed')) || player.baseSpeed || player.speed;
     if (hasFormField(form, 'gold')) edits.gold = nullableNumber(formData.get('gold')) || 0;
     if (hasFormField(form, 'heroPoints')) edits.heroPoints = nullableNumber(formData.get('heroPoints')) || 0;
     const abilityFields = Object.keys(ABILITY_NAMES).filter(ability => hasFormField(form, ability));
@@ -2625,6 +2904,11 @@
     const edits = { ...loadPlayerEdits(player.id), combatToggles };
     savePlayerEdits(player.id, edits);
     hydratePlayerSheet(root, { ...player, combatToggles });
+  }
+
+  function saveTemporaryEffects(root, player, temporaryEffects) {
+    const edits = { ...loadPlayerEdits(player.id), temporaryEffects: normalizeTemporaryEffects(temporaryEffects) };
+    saveAndHydratePlayer(root, player, edits);
   }
 
   function getEquippedItems(player) {

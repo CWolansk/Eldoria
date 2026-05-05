@@ -162,6 +162,26 @@ function sanitizePlayerPatch(body) {
     patch.conditions = body.conditions.map(condition => sanitizeText(condition, 80)).filter(Boolean).slice(0, 30);
   }
 
+  if (body.temporaryEffects && typeof body.temporaryEffects === 'object') {
+    const allowedEffects = new Set(['haste', 'mageArmor', 'shieldOfFaith']);
+    const effects = {};
+    const sourceEffects = body.temporaryEffects.effects && typeof body.temporaryEffects.effects === 'object'
+      ? body.temporaryEffects.effects
+      : body.temporaryEffects;
+    for (const [key, value] of Object.entries(sourceEffects || {})) {
+      if (allowedEffects.has(key)) effects[key] = Boolean(value);
+    }
+    const temporaryEffects = { effects };
+    if (Object.prototype.hasOwnProperty.call(body.temporaryEffects, 'customName')) {
+      temporaryEffects.customName = sanitizeText(body.temporaryEffects.customName, 80);
+    }
+    if (Object.prototype.hasOwnProperty.call(body.temporaryEffects, 'customAcBonus')) {
+      const value = nullableNumber(body.temporaryEffects.customAcBonus);
+      if (value !== undefined && value !== null) temporaryEffects.customAcBonus = clamp(value, -20, 20);
+    }
+    patch.temporaryEffects = temporaryEffects;
+  }
+
   if (Object.prototype.hasOwnProperty.call(body, 'concentration')) {
     patch.concentration = sanitizeText(body.concentration, 120);
   }
