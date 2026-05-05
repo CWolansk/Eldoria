@@ -1159,6 +1159,18 @@ th {
   justify-content: flex-end;
 }
 
+.spell-slot-select {
+  min-height: 2.1rem;
+  max-width: 9rem;
+  padding: 0 .55rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  font-weight: 800;
+}
+
 .spell-row small,
 .spell-result small {
   display: block;
@@ -1171,6 +1183,15 @@ th {
   margin-top: .75rem;
   padding-top: .75rem;
   border-top: 1px solid var(--line);
+}
+
+.spell-roll-preview {
+  display: grid;
+  gap: .45rem;
+}
+
+.spell-roll-preview > strong {
+  color: var(--accent-strong);
 }
 
 .spell-search-box input {

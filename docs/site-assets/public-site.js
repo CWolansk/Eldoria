@@ -1080,10 +1080,12 @@
     }
     const slot = getSpellSlotState(player, spell);
     const disabled = slot && slot.level > 0 && slot.available <= 0;
+    const rollProfile = getSpellRollProfile(player, spell, slot && slot.level);
     const controls = [
+      renderSpellSlotChoiceSelect(player, spell, spellName),
       `<button class="roll-button" type="button" data-cast-spell="${escapeAttr(spellName)}" ${disabled ? 'disabled' : ''}>Cast</button>`,
-    ];
-    if (spell && spell.damage) controls.push(`<button class="roll-button" type="button" data-roll-spell="${escapeAttr(spellName)}">Damage</button>`);
+      rollProfile ? `<button class="roll-button" type="button" data-roll-spell="${escapeAttr(spellName)}">${escapeHtml(formatSpellRollButtonLabel(rollProfile))}</button>` : '',
+    ].filter(Boolean);
     if (slot) controls.push(`<span class="use-status">${escapeHtml(formatSpellSlotStatus(slot))}</span>`);
     return `<div class="action-controls">${controls.join('')}</div>`;
   }
@@ -1109,10 +1111,12 @@
   function renderSpellScrollActionControls(player, scroll, spell) {
     const id = scroll && scroll.id ? scroll.id : slugify(`${scroll && scroll.scrollName || 'spell-scroll'}-${scroll && scroll.spellName || ''}`);
     const used = clampNumber(Number(player.actionUses && player.actionUses[id]) || 0, 0, 1);
+    const castLevel = getSpellLevelNumber(scroll && scroll.level) || getSpellLevelNumber(spell && spell.level);
+    const rollProfile = getSpellRollProfile(player, spell, castLevel);
     const controls = [
       `<button class="roll-button" type="button" data-use-scroll="${escapeAttr(id)}" ${used >= 1 ? 'disabled' : ''}>${used >= 1 ? 'Used' : 'Use Scroll'}</button>`,
     ];
-    if (spell && spell.damage) controls.push(`<button class="roll-button" type="button" data-roll-spell="${escapeAttr(scroll.spellName)}">Damage</button>`);
+    if (rollProfile) controls.push(`<button class="roll-button" type="button" data-roll-scroll="${escapeAttr(id)}">${escapeHtml(formatSpellRollButtonLabel(rollProfile))}</button>`);
     controls.push(`<span class="use-status">${used >= 1 ? 'Used' : 'Ready'}</span>`);
     return `<div class="action-controls">${controls.join('')}</div>`;
   }
@@ -1421,7 +1425,13 @@
     if (!spell) return [];
     const ability = player.spellcasting;
     const abilityMod = ability ? calculateModifier(Number(player.abilities && player.abilities[ability]) || 10) : null;
+    const rollProfile = getSpellRollProfile(player, spell, getSpellLevelNumber(spell.level));
     const parts = [];
+    if (rollProfile) {
+      parts.push({ label: `${capitalize(rollProfile.kind)} roll`, display: `${rollProfile.formula}${rollProfile.damageType ? ` ${rollProfile.damageType}` : ''}` });
+      if (rollProfile.bonusLabel) parts.push({ label: rollProfile.bonusLabel, value: rollProfile.bonus });
+      if (rollProfile.upcast) parts.push({ label: 'At higher levels', display: `+${rollProfile.upcast.dice} per slot above level ${rollProfile.upcast.aboveLevel}` });
+    }
     if (spellNeedsAttack(spell) && player.spellAttack !== null && ability) {
       parts.push({ label: `${ABILITY_NAMES[ability]} modifier`, value: abilityMod });
       parts.push({ label: 'Proficiency', value: Number(player.proficiencyBonus) || 0 });
@@ -1442,6 +1452,162 @@
     if (scroll.saveDc) parts.push({ label: `${getSpellSaveAbility(spell) ? `${getSpellSaveAbility(spell).toUpperCase()} save ` : ''}DC`, display: String(scroll.saveDc) });
     if (scroll.source) parts.push({ label: 'Source', display: scroll.source });
     return parts;
+  }
+
+  function renderSpellSlotChoiceSelect(player, spell, spellName) {
+    const choices = getSpellSlotChoices(player, spell);
+    if (!choices.length) return '';
+    const selected = getDefaultSpellSlotChoice(player, spell);
+    return `<select class="spell-slot-select" data-spell-slot-choice="${escapeAttr(spellName)}" aria-label="${escapeAttr(`${spellName} slot level`)}">
+      ${choices.map(choice => {
+        const value = formatSpellSlotChoiceValue(choice);
+        const label = `${choice.label} (${choice.available}/${choice.max})`;
+        return `<option value="${escapeAttr(value)}" ${selected && value === formatSpellSlotChoiceValue(selected) ? 'selected' : ''}>${escapeHtml(label)}</option>`;
+      }).join('')}
+    </select>`;
+  }
+
+  function getSpellSlotChoices(player, spell) {
+    const baseLevel = getSpellLevelNumber(spell && spell.level);
+    if (!baseLevel) return [];
+    return getSpellSlotChoicesForLevel(player, baseLevel);
+  }
+
+  function getSpellSlotChoicesForLevel(player, minLevel) {
+    const slots = player.spellSlots || {};
+    const uses = player.spellSlotUses || {};
+    const choices = Object.entries(slots)
+      .filter(([level, max]) => level !== 'pact' && Number(level) >= minLevel && Number(max) > 0)
+      .map(([level, max]) => {
+        const total = Number(max);
+        const used = clampNumber(Number(uses[level]) || 0, 0, total);
+        return { level: Number(level), slotKey: String(level), label: `Level ${level}`, max: total, used, available: total - used };
+      });
+
+    const pact = slots.pact && typeof slots.pact === 'object' ? slots.pact : null;
+    if (pact && Number(pact.slots) > 0 && Number(pact.level) >= minLevel) {
+      const total = Number(pact.slots);
+      const used = clampNumber(Number(uses.pact) || 0, 0, total);
+      choices.push({ level: Number(pact.level), slotKey: 'pact', label: `Pact L${pact.level}`, max: total, used, available: total - used });
+    }
+
+    return choices.sort((a, b) => a.level - b.level || (a.slotKey === 'pact' ? 1 : -1));
+  }
+
+  function getDefaultSpellSlotChoice(player, spell) {
+    const choices = getSpellSlotChoices(player, spell);
+    return choices.find(choice => choice.available > 0) || choices[0] || null;
+  }
+
+  function getSelectedSpellSlotChoice(trigger, player, spell) {
+    const controls = trigger && trigger.closest && trigger.closest('.action-controls');
+    const select = controls && controls.querySelector('[data-spell-slot-choice]');
+    if (!select) return getDefaultSpellSlotChoice(player, spell);
+    return parseSpellSlotChoice(select.value, player, spell) || getDefaultSpellSlotChoice(player, spell);
+  }
+
+  function parseSpellSlotChoice(value, player, spell) {
+    const target = String(value || '');
+    return getSpellSlotChoices(player, spell).find(choice => formatSpellSlotChoiceValue(choice) === target) || null;
+  }
+
+  function formatSpellSlotChoiceValue(choice) {
+    return `${choice.slotKey}|${choice.level}`;
+  }
+
+  function getSpellRollProfile(player, spell, castLevel = null) {
+    if (!spell) return null;
+    const baseLevel = getSpellLevelNumber(spell.level);
+    const level = Math.max(baseLevel, Number(castLevel) || baseLevel || 0);
+    const healing = parseSpellHealing(spell);
+    const baseDice = spell.damage && spell.damage.dice ? spell.damage.dice : healing && healing.dice;
+    if (!baseDice) return null;
+
+    const kind = spell.damage && spell.damage.dice ? 'damage' : 'healing';
+    const damageType = kind === 'damage' ? spell.damage.damageType : '';
+    const terms = parseDiceTerms(baseDice);
+    if (!terms.length) return null;
+
+    const upcast = getSpellUpcastRule(spell, kind);
+    const steps = upcast && level > upcast.aboveLevel ? level - upcast.aboveLevel : 0;
+    if (upcast && steps > 0) {
+      parseDiceTerms(upcast.dice).forEach(term => addDiceTerm(terms, { ...term, count: term.count * steps }));
+    }
+
+    const ability = healing && healing.abilityModifier ? player.spellcasting : '';
+    const bonus = ability ? calculateModifier(Number(player.abilities && player.abilities[ability]) || 10) : 0;
+    const bonusLabel = ability ? `${ABILITY_NAMES[ability]} modifier` : '';
+
+    return {
+      kind,
+      spellName: spell.name,
+      castLevel: level,
+      baseLevel,
+      diceTerms: terms,
+      bonus,
+      bonusLabel,
+      damageType,
+      upcast,
+      upcastSteps: steps,
+      formula: formatDiceFormula(terms, bonus),
+    };
+  }
+
+  function parseSpellHealing(spell) {
+    const text = cleanRulesText(`${spell && spell.text || ''} ${spell && spell.higherLevels || ''}`);
+    const match = text.match(/regain(?:s)?(?: a number of)? hit points equal to (\d+d\d+)(?:\s*\+\s*your spellcasting ability modifier)?/i);
+    if (!match) return null;
+    return {
+      dice: match[1],
+      abilityModifier: /regain(?:s)?(?: a number of)? hit points equal to \d+d\d+\s*\+\s*your spellcasting ability modifier/i.test(text),
+    };
+  }
+
+  function getSpellUpcastRule(spell, kind) {
+    const text = cleanRulesText(spell && spell.higherLevels);
+    if (!text) return null;
+    const kindPattern = kind === 'healing' ? 'healing' : 'damage';
+    let match = text.match(new RegExp(`${kindPattern} increases by (\\d+d\\d+) for each slot level above (\\d+)(?:st|nd|rd|th)`, 'i'));
+    if (!match) match = text.match(/increases by (\d+d\d+) for each slot level above (\d+)(?:st|nd|rd|th)/i);
+    if (!match) return null;
+    return { dice: match[1], aboveLevel: Number(match[2]) || getSpellLevelNumber(spell.level) };
+  }
+
+  function parseDiceTerms(expression) {
+    const matches = String(expression || '').match(/\d+d\d+/gi) || [];
+    const terms = [];
+    matches.forEach(match => {
+      const [, count, sides] = match.match(/(\d+)d(\d+)/i) || [];
+      if (!count || !sides) return;
+      addDiceTerm(terms, { count: Number(count), sides: Number(sides) });
+    });
+    return terms;
+  }
+
+  function addDiceTerm(terms, term) {
+    if (!term || !term.count || !term.sides) return;
+    const existing = terms.find(candidate => candidate.sides === term.sides);
+    if (existing) existing.count += term.count;
+    else terms.push({ count: term.count, sides: term.sides });
+  }
+
+  function formatDiceFormula(terms, bonus = 0) {
+    const pieces = terms.map(formatDiceTerm);
+    if (bonus) pieces.push(String(bonus));
+    return pieces.join(' + ').replace(/\+ -/g, '- ');
+  }
+
+  function formatDiceTerm(term) {
+    return `${term.count}d${term.sides}`;
+  }
+
+  function formatSpellRollButtonLabel(profile) {
+    return profile && profile.kind === 'healing' ? 'Healing' : 'Damage';
+  }
+
+  function capitalize(value) {
+    const text = String(value || '');
+    return text ? `${text.charAt(0).toUpperCase()}${text.slice(1)}` : '';
   }
 
   function spellNeedsAttack(spell) {
@@ -1472,25 +1638,7 @@
   }
 
   function getAvailableSpellSlot(player, minLevel) {
-    const slots = player.spellSlots || {};
-    const uses = player.spellSlotUses || {};
-    const options = Object.entries(slots)
-      .filter(([level, max]) => level !== 'pact' && Number(level) >= minLevel && Number(max) > 0)
-      .map(([level, max]) => {
-        const total = Number(max);
-        const used = clampNumber(Number(uses[level]) || 0, 0, total);
-        return { level: Number(level), slotKey: String(level), label: `Level ${level}`, max: total, used, available: total - used };
-      })
-      .sort((a, b) => a.level - b.level);
-
-    const pact = slots.pact && typeof slots.pact === 'object' ? slots.pact : null;
-    if (pact && Number(pact.slots) > 0 && Number(pact.level) >= minLevel) {
-      const total = Number(pact.slots);
-      const used = clampNumber(Number(uses.pact) || 0, 0, total);
-      options.push({ level: Number(pact.level), slotKey: 'pact', label: `Pact L${pact.level}`, max: total, used, available: total - used });
-      options.sort((a, b) => a.level - b.level || (a.slotKey === 'pact' ? 1 : -1));
-    }
-
+    const options = getSpellSlotChoicesForLevel(player, minLevel);
     return options.find(option => option.available > 0) || options[0] || null;
   }
 
@@ -1717,7 +1865,7 @@
           <button class="text-button" type="button" data-remove-spell="${escapeAttr(name)}">Remove</button>
         </div>
       </summary>
-      ${renderSpellDetails(spell)}
+      ${renderSpellDetails(spell, player)}
     </details>`;
   }
 
@@ -1734,12 +1882,12 @@
           <span class="spell-source-pill">Scroll</span>
         </div>
       </summary>
-      ${renderSpellDetails(spell)}
+      ${renderSpellDetails(spell, player, getSpellLevelNumber(scroll.level) || null)}
       ${scroll.text ? `<p class="item-rules"><strong>Scroll:</strong> ${escapeHtml(truncateText(scroll.text, 500))}</p>` : ''}
     </details>`;
   }
 
-  function renderSpellDetails(spell) {
+  function renderSpellDetails(spell, player = null, castLevel = null) {
     if (!spell) return '<p class="empty-note">No spell rules found yet.</p>';
     const rows = [
       ['Level', spell.level],
@@ -1753,8 +1901,23 @@
     ].filter(([, value]) => value);
     return `<div class="spell-details-panel">
       <dl class="equipment-detail-grid">${rows.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>
+      ${renderSpellRollPreview(player, spell, castLevel)}
       ${spell.text ? `<p class="item-rules">${escapeHtml(spell.text)}</p>` : ''}
       ${spell.higherLevels ? `<p class="item-rules"><strong>At Higher Levels:</strong> ${escapeHtml(spell.higherLevels)}</p>` : ''}
+    </div>`;
+  }
+
+  function renderSpellRollPreview(player, spell, castLevel = null) {
+    const profile = getSpellRollProfile(player || {}, spell, castLevel || getSpellLevelNumber(spell && spell.level));
+    if (!profile) return '';
+    const rows = [
+      ['Base roll', `${profile.formula}${profile.damageType ? ` ${profile.damageType}` : ''}`],
+      profile.upcast ? ['Upcast', `+${profile.upcast.dice} per slot above level ${profile.upcast.aboveLevel}`] : null,
+      profile.bonusLabel ? ['Modifier', `${profile.bonusLabel} ${formatBonus(profile.bonus)}`] : null,
+    ].filter(Boolean);
+    return `<div class="spell-roll-preview">
+      <strong>${escapeHtml(`${capitalize(profile.kind)} Math`)}</strong>
+      <div class="math-list">${rows.map(([label, value]) => `<div><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`).join('')}</div>
     </div>`;
   }
 
@@ -2076,6 +2239,15 @@
         return;
       }
 
+      const spellSlotChoice = event.target.closest('[data-spell-slot-choice]');
+      if (spellSlotChoice) {
+        const player = root._playerState;
+        const spell = player && findSpellDetails(spellSlotChoice.dataset.spellSlotChoice, player, root);
+        const choice = spell && parseSpellSlotChoice(spellSlotChoice.value, player, spell);
+        updateSpellControlStatus(spellSlotChoice.closest('.action-controls'), choice);
+        return;
+      }
+
       const checkbox = event.target.closest('[data-equip-id]');
       if (!checkbox) return;
       const player = root._playerState;
@@ -2117,7 +2289,7 @@
       if (castSpellButton) {
         event.preventDefault();
         const player = root._playerState;
-        if (player) castSpell(root, player, castSpellButton.dataset.castSpell);
+        if (player) castSpell(root, player, castSpellButton.dataset.castSpell, castSpellButton);
         return;
       }
 
@@ -2137,12 +2309,22 @@
         return;
       }
 
+      const scrollRoll = event.target.closest('[data-roll-scroll]');
+      if (scrollRoll) {
+        event.preventDefault();
+        const player = root._playerState;
+        const scroll = player && (player.spellScrolls || []).find(candidate => candidate.id === scrollRoll.dataset.rollScroll);
+        const spell = scroll && findSpellDetails(scroll.spellName, player, root);
+        if (spell) renderSpellRoll(root, player, spell, scrollRoll, getSpellLevelNumber(scroll.level) || getSpellLevelNumber(spell.level));
+        return;
+      }
+
       const spellRoll = event.target.closest('[data-roll-spell]');
       if (spellRoll) {
         event.preventDefault();
         const player = root._playerState;
         const spell = player && findSpellDetails(spellRoll.dataset.rollSpell, player, root);
-        if (spell) renderSpellRoll(root, spell);
+        if (spell) renderSpellRoll(root, player, spell, spellRoll);
         return;
       }
 
@@ -2270,6 +2452,14 @@
     hydratePlayerSheet(root, { ...player, ...edits, abilities: { ...(player.abilities || {}), ...((edits && edits.abilities) || {}) } });
   }
 
+  function updateSpellControlStatus(controls, choice) {
+    if (!controls || !choice) return;
+    const castButton = controls.querySelector('[data-cast-spell]');
+    if (castButton) castButton.disabled = choice.available <= 0;
+    const status = controls.querySelector('.use-status');
+    if (status) status.textContent = formatSpellSlotStatus(choice);
+  }
+
   function applyActionFilters(root) {
     const panel = root.querySelector('.actions-panel');
     if (!panel) return;
@@ -2319,14 +2509,14 @@
     await saveSpellSlotSpend(root, player, slot, `${slot.label} used`);
   }
 
-  async function castSpell(root, player, spellName) {
+  async function castSpell(root, player, spellName, trigger = null) {
     const spell = findSpellDetails(spellName, player, root);
     if (!spell) {
       renderSheetLog(root, 'Spell rules missing', `${spellName || 'That spell'} is on the sheet but rules are not loaded yet.`);
       return;
     }
 
-    const slot = getSpellSlotState(player, spell);
+    const slot = getSelectedSpellSlotChoice(trigger, player, spell) || getSpellSlotState(player, spell);
     if (slot.level === 0) {
       renderSheetLog(root, `${spell.name} cast`, 'Cantrip; no spell slot spent.');
       return;
@@ -2412,10 +2602,15 @@
     renderSheetLog(root, result.label, result.detail);
   }
 
-  function renderSpellRoll(root, spell) {
-    if (!spell || !spell.damage) return;
-    const roll = rollDice(spell.damage.dice);
-    renderSheetLog(root, `${spell.name} damage: ${roll.total}`, `${roll.detail} ${spell.damage.damageType}`);
+  function renderSpellRoll(root, player, spell, trigger = null, fixedCastLevel = null) {
+    const choice = fixedCastLevel ? { level: fixedCastLevel } : getSelectedSpellSlotChoice(trigger, player, spell);
+    const profile = getSpellRollProfile(player, spell, choice && choice.level);
+    if (!profile) {
+      renderSheetLog(root, `${spell && spell.name || 'Spell'} roll unavailable`, 'No damage or healing dice were detected for this spell yet.');
+      return;
+    }
+    const roll = rollSpellProfile(profile);
+    renderSheetLog(root, `${spell.name} ${profile.kind}: ${roll.total}`, roll.detail);
   }
 
   function renderSheetLog(root, label, detail) {
@@ -2448,6 +2643,22 @@
       label: `${weapon.name} damage: ${total}`,
       detail: [ `${dice.detail}${weapon.damageBonus ? ` ${formatBonus(weapon.damageBonus)}` : ''} ${weapon.damageType}`, extraDetail, onHitDetail ].filter(Boolean).join('; '),
     };
+  }
+
+  function rollSpellProfile(profile) {
+    const rolls = profile.diceTerms.map(term => {
+      const values = Array.from({ length: term.count }, () => rollDie(term.sides));
+      return { term, values, total: values.reduce((sum, value) => sum + value, 0) };
+    });
+    const diceTotal = rolls.reduce((sum, entry) => sum + entry.total, 0);
+    const total = diceTotal + profile.bonus;
+    const detail = [
+      `${profile.formula} = ${rolls.map(entry => `${formatDiceTerm(entry.term)} [${entry.values.join(', ')}]`).join(' + ')}`,
+      profile.bonus ? `${profile.bonusLabel} ${formatBonus(profile.bonus)}` : '',
+      profile.upcastSteps ? `cast at level ${profile.castLevel}; upcast +${profile.upcast.dice} x ${profile.upcastSteps}` : `cast at level ${profile.castLevel || 'cantrip'}`,
+      profile.damageType,
+    ].filter(Boolean).join('; ');
+    return { total, detail };
   }
 
   function rollDice(expression) {
