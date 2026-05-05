@@ -515,10 +515,12 @@
   }
 
   function getApplicableWeaponRuleToggles(player, weaponContext) {
-    const weaponItem = player.inventory.find(item => item.id === weaponContext.id);
+    const inventory = Array.isArray(player && player.inventory) ? player.inventory : [];
+    const weaponItem = inventory.find(item => item.id === weaponContext.id);
     const toggles = [];
+    if (weaponContext && weaponContext.details && Array.isArray(weaponContext.details.toggles)) toggles.push(...weaponContext.details.toggles);
     if (weaponItem && weaponItem.details && Array.isArray(weaponItem.details.toggles)) toggles.push(...weaponItem.details.toggles);
-    for (const item of player.inventory || []) {
+    for (const item of inventory) {
       if (!item.details || !Array.isArray(item.details.toggles)) continue;
       for (const toggle of item.details.toggles) {
         if (toggle.appliesTo === 'equipped-weapon') toggles.push(toggle);
@@ -1893,7 +1895,7 @@
       const rollButton = event.target.closest('[data-roll-type][data-weapon-id]');
       if (rollButton) {
         const player = root._playerState;
-        const item = player && player.inventory.find(candidate => candidate.id === rollButton.dataset.weaponId);
+        const item = player && Array.isArray(player.inventory) && player.inventory.find(candidate => candidate.id === rollButton.dataset.weaponId);
         if (item && item.weapon) renderRoll(root, item.weapon, rollButton.dataset.rollType);
         return;
       }
@@ -2053,7 +2055,7 @@
 
   function getEquippedItems(player) {
     const selected = new Set(player.equipped || []);
-    return player.inventory.filter(item => selected.has(item.id));
+    return (Array.isArray(player.inventory) ? player.inventory : []).filter(item => selected.has(item.id));
   }
 
   function renderRoll(root, weapon, type) {
