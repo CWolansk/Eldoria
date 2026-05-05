@@ -417,7 +417,7 @@ function inferItemActions(item) {
       tags: [item.attunement ? 'Attunement' : '', inferUsesTag(ability.text)].filter(Boolean),
     });
   }
-  if (!actions.length && /(use an action|as an action|bonus action|reaction)/i.test(item.text)) {
+  if (!actions.length && shouldInferFallbackItemAction(item)) {
     const detail = actionTextSummary(item.text, 420);
     actions.push({
       id: slugify(item.name),
@@ -429,6 +429,33 @@ function inferItemActions(item) {
     });
   }
   return actions;
+}
+
+function shouldInferFallbackItemAction(item) {
+  const text = cleanRulesText(item.text || '');
+  if (!hasDirectItemActivationTiming(text)) return false;
+
+  // Weapon property text can mention actions without granting a unique item power.
+  // Example: Loading says "when you use an action, bonus action, or reaction to fire it".
+  if (item.weapon && !hasSpecificWeaponActivation(text)) return false;
+
+  return true;
+}
+
+function hasSpecificWeaponActivation(text) {
+  const cleaned = cleanRulesText(text)
+    .replace(/\bBecause of the time required to load this weapon, you can fire only one piece of ammunition from it when you use an action, bonus action, or reaction to fire it, regardless of the number of attacks you can normally make\.\s*/ig, '')
+    .replace(/\bAt the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield\.\s*/ig, '');
+  return hasDirectItemActivationTiming(cleaned);
+}
+
+function hasDirectItemActivationTiming(text) {
+  const clean = cleanRulesText(text || '');
+  return /\bas (?:an?|your|its|their) (?:action|bonus action|reaction)\b/i.test(clean)
+    || /\b(?:can|may)\s+use\s+(?:an?|your|its|their)\s+(?:action|bonus action|reaction)\b/i.test(clean)
+    || /\buse\s+(?:an?|your|its|their)\s+(?:action|bonus action|reaction)\s+to\b/i.test(clean)
+    || /\b(?:can|may)\s+take\s+(?:an?|your|its|their)\s+(?:action|bonus action|reaction)\b/i.test(clean)
+    || /\brequires (?:an?|your|its|their) action\b/i.test(clean);
 }
 
 function inferItemResources(item) {
@@ -544,7 +571,61 @@ function extractNamedAbilities(text) {
   while ((match = pattern.exec(cleaned))) {
     out.push({ name: match[1].trim(), text: `${match[1].trim()} (${match[2].trim()}): ${match[3].trim()}` });
   }
+  out.push(...extractHeadingAbilities(cleaned));
+  return uniqueBy(out, ability => `${normalizeName(ability.name)}:${normalizeName(ability.text)}`);
+}
+
+function extractHeadingAbilities(text) {
+  const out = [];
+  const candidates = [];
+  const pattern = /(?:^|\s)([A-Z][A-Za-z0-9 '&'\-]+?)\.\s+/g;
+  let match;
+  while ((match = pattern.exec(text))) {
+    const name = match[1].trim();
+    if (!isLikelyItemAbilityHeadingName(name)) continue;
+    const leadingWhitespace = (match[0].match(/^\s*/) || [''])[0].length;
+    candidates.push({
+      name,
+      headingStart: match.index + leadingWhitespace,
+      bodyStart: match.index + match[0].length,
+    });
+  }
+  for (let index = 0; index < candidates.length; index += 1) {
+    const candidate = candidates[index];
+    const next = candidates[index + 1];
+    const body = trimGenericWeaponPropertyTail(text.slice(candidate.bodyStart, next ? next.headingStart : text.length).trim());
+    if (!isActionableAbilityBody(body)) continue;
+    out.push({ name: candidate.name, text: `${candidate.name}: ${body}` });
+  }
   return out;
+}
+
+function isLikelyItemAbilityHeadingName(name) {
+  if (!name) return false;
+  if (name.length > 48 || name.split(/\s+/).length > 6) return false;
+  if (/^(AC|Armor Class|Awakened|Curse|Dormant|Exalted|Personality|Sentience|Weapons Galore|After\b.*|At\b.*|If\b.*|In\b.*|Once\b.*|When\b.*|While\b.*)$/i.test(name)) return false;
+  if (isGenericWeaponPropertySentence(`${name}.`)) return false;
+  return /^[A-Z][A-Za-z0-9&'\-]*(?:\s+(?:[A-Z][A-Za-z0-9&'\-]*|of|the|and|to|with|in|from))*$/.test(name);
+}
+
+function isActionableAbilityBody(body) {
+  if (!body || !/[a-z]/.test(body)) return false;
+  const opening = body.slice(0, 320);
+  return /^(?:You (?:can|may)|As (?:an?|your|its|their) (?:action|bonus action|reaction)|When you|Whenever you|If you|A creature (?:can|may)|Creatures (?:can|may)|At [^.]{1,80}\byou (?:can|may)|While (?:wearing|holding|wielding|attuned)[^.]{0,180}\byou (?:can|may)|(?:The|This) [^.]{1,80}\bhas \d+ charges?)\b/i.test(opening);
+}
+
+function trimGenericWeaponPropertyTail(text) {
+  const sentences = cleanRulesText(text).match(/[^.!?]+[.!?]+/g) || [cleanRulesText(text)];
+  const out = [];
+  for (const sentence of sentences) {
+    if (out.length && isGenericWeaponPropertySentence(sentence)) break;
+    out.push(sentence);
+  }
+  return stripInlineGenericWeaponPropertyTail(out.join(' ').trim());
+}
+
+function stripInlineGenericWeaponPropertyTail(text) {
+  return String(text || '').replace(/\s+(?:Ammunition Type|Capacity):\s.*$/i, '').trim();
 }
 
 function normalizeItemRecords(records, itemId) {
@@ -760,23 +841,36 @@ function actionSummary(text, maxLength) {
     if (count >= 3 && /\b(action|bonus action|reaction|when|whenever|save|saving throw|damage|roll|use)\b/i.test(out)) break;
   }
   if (!out) out = clean.slice(0, maxLength - 1).trim();
+  out = stripInlineGenericWeaponPropertyTail(out);
   return out.length <= maxLength ? out : `${out.slice(0, maxLength - 1).trim()}...`;
 }
 
 function actionTextSummary(text, maxLength) {
   const clean = cleanRulesText(text);
   const sentences = clean.match(/[^.!?]+[.!?]+/g) || [clean];
-  const start = sentences.findIndex(sentence => /\b(use an action|as an action|bonus action|reaction|command word|expend|charges?)\b/i.test(sentence));
+  const start = sentences.findIndex(isItemActionSummaryStart);
   const source = start >= 0 ? sentences.slice(start) : sentences;
   let out = '';
   for (const sentence of source) {
+    if (out && isGenericWeaponPropertySentence(sentence)) break;
     const next = `${out} ${sentence}`.trim();
     if (next.length > maxLength) break;
     out = next;
     if (out.length >= 220 && /\b(action|bonus action|reaction|charge|command word|save|damage|use)\b/i.test(out)) break;
   }
   if (!out) out = clean.slice(0, maxLength - 1).trim();
+  out = stripInlineGenericWeaponPropertyTail(out);
   return out.length <= maxLength ? out : `${out.slice(0, maxLength - 1).trim()}...`;
+}
+
+function isItemActionSummaryStart(sentence) {
+  if (hasDirectItemActivationTiming(sentence)) return true;
+  if (/\b(command word|charges?)\b/i.test(sentence)) return true;
+  return /\bexpend\b/i.test(sentence) && !/\bammunition\b/i.test(sentence);
+}
+
+function isGenericWeaponPropertySentence(sentence) {
+  return /^(Ammunition|Capacity|Finesse|Heavy|Hidden|Light|Loading|Monk Weapon|Range|Reach|Reload|Special|Thrown|Two-Handed|Versatile)\.$/i.test(String(sentence || '').trim());
 }
 
 function uniqueBy(items, getKey) {

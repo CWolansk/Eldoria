@@ -950,7 +950,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T23:04:34.952Z"
+      "generatedAtUtc": "2026-05-05T23:37:10.086Z"
     },
     "url": "Public/Players/Justin Player Sheet.html",
     "searchText": "Character Stats Equipment Spells 1st Level Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJustinDnDNotes Full Class Info Class Features & Abilities Hunter's Prey (Colossus Slayer) Once per turn when hitting a creature below max HP, deal an extra 1d8 damage. Archery Fighting Style +2 bonus on attack rolls with ranged weapons. Zephyr Strike Move like the wind. For the duration, movement doesn't provoke opportunity attacks. Once before the spell ends, can give yourself advantage on one weapon attack roll on your turn. That attack deals an extra 1d8 force damage on a hit. Whether you hit or miss, walking speed increases by 30 feet until end of that turn. Ensnaring Strike The next time you hit a creature with a weapon attack before this spell ends, a writhing mass of thorny vines appears at the point of impact, and the target must succeed on a Strength saving throw or be restrained by the magical vines until the spell ends. A Large or larger creature has advantage on this saving throw. If the target succeeds on the save, the vines shrivel away. While restrained by this spell, the target takes 1d6 piercing damage at the start of each of its turns. A creature restrained by the vines or one that can touch the creature can use its action to make a Strength check against your spell save DC. On a success, the target is freed. Cure Wounds 1 creature is healed for 1d8+1d8/SL+spellcasting ability modifier hp. Piercing Shot 3/day. Before making an attack roll, you can activate Piercing Shot and target a specific body part. If the attack hits, the target suffers a debilitating injury. The creature suffers disadvantage on Wisdom (Perception) checks relying on sight and on attack/damage rolls. The creature can no longer hold two handed weapons and can only hold a single object at a time. Arm/Hand Movement speed is halved. Foot/Leg The creature must make a Constitution saving throw when attempting the next action in combat (DC = 10 + attacker's proficiency + Dexterity modifier). On a failed save, they lose their action and reactions until the start of your next turn. Precise Aim 1/day. At the start of your turn, activate Precise Aim to focus your attacks. Until the end of your next turn, whenever you hit a creature, allies gain advantage on attack rolls against that target. Primeval Awareness Ensnaring strike, Zephyr strike, Cure wounds Limited Features Piercing Shot 3 uses Precise Aim 1 use Proficiencies Common language from Human Common language from Ranger Beasts Common language from Human Common language from Guild Merchant Goblin"
@@ -1086,16 +1086,7 @@
           "versatileDamage": "",
           "magicBonus": 0
         },
-        "actions": [
-          {
-            "id": "light-crossbow-light-crossbow",
-            "group": "Out of Combat",
-            "type": "Item",
-            "title": "Light Crossbow",
-            "detail": "Each time you attack with the weapon, you expend one piece of ammunition.  Drawing the ammunition from a quiver, case, or other container is part of the attack.  Loading a one-handed weapon requires a free hand.  At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.",
-            "tags": []
-          }
-        ],
+        "actions": [],
         "effects": [],
         "resources": [],
         "toggles": []
@@ -1588,17 +1579,6 @@
         "itemName": "Griffon Key Loop"
       },
       {
-        "id": "light-crossbow-light-crossbow",
-        "group": "Out of Combat",
-        "type": "Item",
-        "title": "Light Crossbow",
-        "detail": "Each time you attack with the weapon, you expend one piece of ammunition.  Drawing the ammunition from a quiver, case, or other container is part of the attack.  Loading a one-handed weapon requires a free hand.  At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.",
-        "tags": [],
-        "sourceType": "item",
-        "sourceId": "light-crossbow",
-        "itemName": "Light Crossbow"
-      },
-      {
         "id": "feature-class-cleric-1-spellcasting-phb",
         "sourceType": "class",
         "sourceId": "class-cleric-1-spellcasting-phb",
@@ -1855,7 +1835,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T23:04:34.952Z"
+      "generatedAtUtc": "2026-05-05T23:37:10.086Z"
     },
     "url": "Public/Players/Claire Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaClaireDnDNotes Full Class Info"
@@ -2044,16 +2024,7 @@
           "versatileDamage": "",
           "magicBonus": 0
         },
-        "actions": [
-          {
-            "id": "blowgun-blowgun",
-            "group": "Out of Combat",
-            "type": "Item",
-            "title": "Blowgun",
-            "detail": "Each time you attack with the weapon, you expend one piece of ammunition.  Drawing the ammunition from a quiver, case, or other container is part of the attack.  Loading a one-handed weapon requires a free hand.  At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.",
-            "tags": []
-          }
-        ],
+        "actions": [],
         "effects": [],
         "resources": [],
         "toggles": []
@@ -2102,11 +2073,21 @@
         "weapon": null,
         "actions": [
           {
-            "id": "fabulist-gem-fabulist-gem",
+            "id": "fabulist-gem-counterfeit-coins",
+            "group": "Action",
+            "type": "Item",
+            "title": "Counterfeit Coins",
+            "detail": "Counterfeit Coins: You can use your action to magically create a pile of coins, worth no more than 100 gp total, in an unoccupied space within 10 feet of yourself.  The pile must appear on a surface that can support it.  After 1 hour, the coins vanish, regardless of where they are.  Once this action is used, it can't be used again until the next dawn.",
+            "tags": [
+              "Attunement"
+            ]
+          },
+          {
+            "id": "fabulist-gem-illusory-fashion",
             "group": "Bonus Action",
             "type": "Item",
-            "title": "Fabulist Gem",
-            "detail": "As a bonus action, you can magically change the appearance of your clothing and armor.  You can change the style, color, and apparent quality of what you're wearing, or you can make it appear as if you were wearing different garments entirely.",
+            "title": "Illusory Fashion",
+            "detail": "Illusory Fashion: As a bonus action, you can magically change the appearance of your clothing and armor.  You can change the style, color, and apparent quality of what you're wearing, or you can make it appear as if you were wearing different garments entirely.  In either case, the changes wrought by this magic fail to pass physical inspection.",
             "tags": [
               "Attunement"
             ]
@@ -2211,17 +2192,6 @@
         ]
       },
       {
-        "id": "blowgun-blowgun",
-        "group": "Out of Combat",
-        "type": "Item",
-        "title": "Blowgun",
-        "detail": "Each time you attack with the weapon, you expend one piece of ammunition.  Drawing the ammunition from a quiver, case, or other container is part of the attack.  Loading a one-handed weapon requires a free hand.  At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.",
-        "tags": [],
-        "sourceType": "item",
-        "sourceId": "blowgun",
-        "itemName": "Blowgun"
-      },
-      {
         "id": "feature-subclass-monk-drunken-master-3-bonus-proficiencies-xge",
         "sourceType": "subclass",
         "sourceId": "subclass-monk-drunken-master-3-bonus-proficiencies-xge",
@@ -2234,6 +2204,19 @@
           "Drunken Master",
           "Level 3"
         ]
+      },
+      {
+        "id": "fabulist-gem-counterfeit-coins",
+        "group": "Action",
+        "type": "Item",
+        "title": "Counterfeit Coins",
+        "detail": "Counterfeit Coins: You can use your action to magically create a pile of coins, worth no more than 100 gp total, in an unoccupied space within 10 feet of yourself.  The pile must appear on a surface that can support it.  After 1 hour, the coins vanish, regardless of where they are.  Once this action is used, it can't be used again until the next dawn.",
+        "tags": [
+          "Attunement"
+        ],
+        "sourceType": "item",
+        "sourceId": "fabulist-gem",
+        "itemName": "Fabulist Gem"
       },
       {
         "id": "feature-class-monk-2-dedicated-weapon-tce",
@@ -2304,19 +2287,6 @@
         ]
       },
       {
-        "id": "fabulist-gem-fabulist-gem",
-        "group": "Bonus Action",
-        "type": "Item",
-        "title": "Fabulist Gem",
-        "detail": "As a bonus action, you can magically change the appearance of your clothing and armor.  You can change the style, color, and apparent quality of what you're wearing, or you can make it appear as if you were wearing different garments entirely.",
-        "tags": [
-          "Attunement"
-        ],
-        "sourceType": "item",
-        "sourceId": "fabulist-gem",
-        "itemName": "Fabulist Gem"
-      },
-      {
         "id": "feature-class-monk-2-flurry-of-blows-phb",
         "sourceType": "class",
         "sourceId": "class-monk-2-flurry-of-blows-phb",
@@ -2343,6 +2313,19 @@
           "Level 5",
           "Ki"
         ]
+      },
+      {
+        "id": "fabulist-gem-illusory-fashion",
+        "group": "Bonus Action",
+        "type": "Item",
+        "title": "Illusory Fashion",
+        "detail": "Illusory Fashion: As a bonus action, you can magically change the appearance of your clothing and armor.  You can change the style, color, and apparent quality of what you're wearing, or you can make it appear as if you were wearing different garments entirely.  In either case, the changes wrought by this magic fail to pass physical inspection.",
+        "tags": [
+          "Attunement"
+        ],
+        "sourceType": "item",
+        "sourceId": "fabulist-gem",
+        "itemName": "Fabulist Gem"
       },
       {
         "id": "feature-class-monk-2-ki-phb",
@@ -2863,7 +2846,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T23:04:34.952Z"
+      "generatedAtUtc": "2026-05-05T23:37:10.086Z"
     },
     "url": "Public/Players/JP Player Sheet.html",
     "searchText": "Character Stats Equipment Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJpPlayerNotes Full Class Info"
@@ -3699,7 +3682,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T23:04:34.952Z"
+      "generatedAtUtc": "2026-05-05T23:37:10.086Z"
     },
     "url": "Public/Players/Julie Player Sheet.html",
     "searchText": "Character Stats Equipment Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJulieDnDNotes Full Class Info"
@@ -3798,10 +3781,10 @@
         "actions": [
           {
             "id": "1-repeating-crossbow-1-repeating-crossbow",
-            "group": "Out of Combat",
+            "group": "Action",
             "type": "Item",
             "title": "+1 Repeating Crossbow",
-            "detail": "Each time you attack with the weapon, you expend one piece of ammunition.  Drawing the ammunition from a quiver, case, or other container is part of the attack.  Loading a one-handed weapon requires a free hand.  At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.",
+            "detail": "If you prefer, you may instead use an action to reload your weapon.",
             "tags": []
           }
         ],
@@ -3831,7 +3814,16 @@
         "value": "100 gp",
         "text": "This bag has an interior space considerably larger than its outside dimensions, roughly 2 feet in diameter at the mouth and 4 feet deep. The bag can hold up to 500 pounds, not exceeding a volume of 64 cubic feet. The bag weighs 15 pounds, regardless of its contents. Retrieving an item from the bag requires an action. If the bag is overloaded, pierced, or torn, it ruptures and is destroyed, and its contents are scattered in the Astral Plane. If the bag is turned inside out, its contents spill forth, unharmed, but the bag must be put right before it can be used again. Breathing creatures inside the bag can survive up to a number of minutes equal to 10 divided by the number of creatures (minimum 1 minute), after which time they begin to suffocate. Placing a bag of holding inside an extradimensional space created by a Heward's handy haversack, portable hole, or similar item instantly destroys both items and opens a gate to the Astral Plane. The gate originates where the one item was placed inside the other. Any creature within 10 feet of the gate is sucked through it to a random location on the Astral Plane. The gate then closes. The gate is one-way only and can't be reopened.",
         "weapon": null,
-        "actions": [],
+        "actions": [
+          {
+            "id": "bag-of-holding-bag-of-holding",
+            "group": "Action",
+            "type": "Item",
+            "title": "Bag of Holding",
+            "detail": "Retrieving an item from the bag requires an action.  If the bag is overloaded, pierced, or torn, it ruptures and is destroyed, and its contents are scattered in the Astral Plane.  If the bag is turned inside out, its contents spill forth, unharmed, but the bag must be put right before it can be used again.",
+            "tags": []
+          }
+        ],
         "effects": [],
         "resources": [],
         "toggles": []
@@ -3924,10 +3916,10 @@
     "ruleActions": [
       {
         "id": "1-repeating-crossbow-1-repeating-crossbow",
-        "group": "Out of Combat",
+        "group": "Action",
         "type": "Item",
         "title": "+1 Repeating Crossbow",
-        "detail": "Each time you attack with the weapon, you expend one piece of ammunition.  Drawing the ammunition from a quiver, case, or other container is part of the attack.  Loading a one-handed weapon requires a free hand.  At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.",
+        "detail": "If you prefer, you may instead use an action to reload your weapon.",
         "tags": [],
         "sourceType": "item",
         "sourceId": "1-repeating-crossbow",
@@ -3945,6 +3937,17 @@
           "Bard",
           "Level 4"
         ]
+      },
+      {
+        "id": "bag-of-holding-bag-of-holding",
+        "group": "Action",
+        "type": "Item",
+        "title": "Bag of Holding",
+        "detail": "Retrieving an item from the bag requires an action.  If the bag is overloaded, pierced, or torn, it ruptures and is destroyed, and its contents are scattered in the Astral Plane.  If the bag is turned inside out, its contents spill forth, unharmed, but the bag must be put right before it can be used again.",
+        "tags": [],
+        "sourceType": "item",
+        "sourceId": "bag-of-holding",
+        "itemName": "Bag of Holding"
       },
       {
         "id": "feature-class-bard-1-bardic-inspiration-phb",
@@ -4338,7 +4341,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T23:04:34.952Z"
+      "generatedAtUtc": "2026-05-05T23:37:10.086Z"
     },
     "url": "Public/Players/Liz Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaLizDnDNotes Full Class Info"
@@ -5190,7 +5193,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T23:04:34.952Z"
+      "generatedAtUtc": "2026-05-05T23:37:10.086Z"
     },
     "url": "Public/Players/Vanessa Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaVanessaDnDNotes Full Class Info"
@@ -5801,7 +5804,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T23:04:34.952Z"
+      "generatedAtUtc": "2026-05-05T23:37:10.086Z"
     },
     "url": "Public/Players/Randi Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaRandiDnDNotes Full Class Info"

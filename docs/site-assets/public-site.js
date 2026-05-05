@@ -1950,18 +1950,18 @@
       return (item.abilities || [])
         .filter(text => isActionableItemAbility(text))
         .map(text => {
-        const ability = parseItemAbilityText(text);
-        const isEquipped = equipped.has(item.id);
-        return {
-          group: classifyRulesTiming(text),
-          sourceType: 'item',
-          type: 'Item',
-          title: ability.name || item.name,
-          meta: [item.name, formatItemSubtitle(item)].filter(Boolean).join(' / '),
-          detail: truncateText(ability.detail || text, 280),
-          tags: [isEquipped ? 'Equipped' : 'Inventory', item.details && item.details.attunement ? 'Attunement' : ''].filter(Boolean),
-        };
-      });
+          const ability = parseItemAbilityText(text);
+          const isEquipped = isItemEquipped(player, item);
+          return {
+            group: classifyRulesTiming(text),
+            sourceType: 'item',
+            type: 'Item',
+            title: ability.name || item.name,
+            meta: [item.name, formatItemSubtitle(item)].filter(Boolean).join(' / '),
+            detail: truncateText(ability.detail || text, 280),
+            tags: [isEquipped ? 'Equipped' : 'Inventory', item.details && item.details.attunement ? 'Attunement' : ''].filter(Boolean),
+          };
+        });
     });
   }
 
