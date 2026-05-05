@@ -2134,7 +2134,7 @@
     return `<div class="equipment-details">
       ${rows.length ? `<dl class="equipment-detail-grid">${rows.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>` : ''}
       ${item.abilities && item.abilities.length ? `<section class="equipment-detail-section">
-        <h3>Abilities</h3>
+        <h3>Item Abilities</h3>
         <ul>${item.abilities.map(text => `<li>${escapeHtml(text)}</li>`).join('')}</ul>
       </section>` : ''}
       ${details.text ? `<p class="item-rules">${escapeHtml(truncateText(details.text, 1100))}</p>` : '<p class="empty-note">No item rules text is recorded yet.</p>'}
@@ -2157,7 +2157,7 @@
   function formatItemStatline(item) {
     if (item.weapon) return `${formatBonus(item.weapon.attackBonus)} hit / ${item.weapon.damageFormula} ${item.weapon.damageType}`;
     if (item.details && item.details.attunement) return 'Attunement';
-    if (item.abilities && item.abilities.length) return `${item.abilities.length} ability${item.abilities.length === 1 ? '' : 'ies'}`;
+    if (item.abilities && item.abilities.length) return `${item.abilities.length} item abilit${item.abilities.length === 1 ? 'y' : 'ies'}`;
     return item.kind;
   }
 
@@ -2175,17 +2175,17 @@
   }
 
   function renderEditForm(root, player) {
-    const form = root.querySelector('[data-player-edit-form]');
-    if (!form) return;
-    setFormValue(form, 'currentHp', player.currentHp);
-    setFormValue(form, 'tempHp', player.tempHp);
-    setFormValue(form, 'maxHp', player.maxHp);
-    setFormValue(form, 'ac', player.ac);
-    setFormValue(form, 'speed', player.speed);
-    setFormValue(form, 'gold', player.gold);
-    setFormValue(form, 'heroPoints', player.heroPoints);
-    Object.keys(ABILITY_NAMES).forEach(ability => setFormValue(form, ability, player.abilities[ability]));
-    setFormValue(form, 'equipment', player.equipment.join('\n'));
+    root.querySelectorAll('[data-player-edit-form]').forEach(form => {
+      setFormValue(form, 'currentHp', player.currentHp);
+      setFormValue(form, 'tempHp', player.tempHp);
+      setFormValue(form, 'maxHp', player.maxHp);
+      setFormValue(form, 'ac', player.ac);
+      setFormValue(form, 'speed', player.speed);
+      setFormValue(form, 'gold', player.gold);
+      setFormValue(form, 'heroPoints', player.heroPoints);
+      Object.keys(ABILITY_NAMES).forEach(ability => setFormValue(form, ability, player.abilities[ability]));
+      setFormValue(form, 'equipment', player.equipment.join('\n'));
+    });
   }
 
   function renderNotesForm(root, player) {
@@ -2406,13 +2406,12 @@
       root._spellSearchTimer = window.setTimeout(() => renderSpellSearchResults(root, input.value), 160);
     });
 
-    const form = root.querySelector('[data-player-edit-form]');
-    if (form) {
+    root.querySelectorAll('[data-player-edit-form]').forEach(form => {
       form.addEventListener('submit', event => {
         event.preventDefault();
         handleEditSubmit(root, form);
       });
-    }
+    });
 
     const notesForm = root.querySelector('[data-player-notes-form]');
     if (notesForm) {
@@ -2424,30 +2423,41 @@
   }
 
   async function handleEditSubmit(root, form) {
-        const player = root._playerState;
-        if (!player) return;
-        const formData = new FormData(form);
-        const equipment = String(formData.get('equipment') || '').split(/\r?\n/).map(item => item.trim()).filter(Boolean);
-        const edits = {
-          ...loadPlayerEdits(player.id),
-          currentHp: nullableNumber(formData.get('currentHp')),
-          tempHp: nullableNumber(formData.get('tempHp')) || 0,
-          maxHp: nullableNumber(formData.get('maxHp')),
-          ac: nullableNumber(formData.get('ac')) || player.ac,
-          speed: nullableNumber(formData.get('speed')) || player.speed,
-          gold: nullableNumber(formData.get('gold')) || 0,
-          heroPoints: nullableNumber(formData.get('heroPoints')) || 0,
-          abilities: Object.fromEntries(Object.keys(ABILITY_NAMES).map(ability => [ability, nullableNumber(formData.get(ability)) || player.abilities[ability]])),
-          equipment,
-        };
-        savePlayerEdits(player.id, edits);
-        const status = root.querySelector('[data-player-edit-status]');
-        if (status) status.textContent = 'Saved on this device';
-        if (getApiBaseUrl()) {
-          const savedToApi = await trySavePlayerToApi(player.id, edits);
-          if (status) status.textContent = savedToApi ? 'Saved to cloud' : 'Saved on this device';
-        }
-        hydratePlayerSheet(root, { ...player, ...edits, abilities: { ...player.abilities, ...edits.abilities } });
+    const player = root._playerState;
+    if (!player) return;
+    const formData = new FormData(form);
+    const edits = { ...loadPlayerEdits(player.id) };
+    if (hasFormField(form, 'currentHp')) edits.currentHp = nullableNumber(formData.get('currentHp'));
+    if (hasFormField(form, 'tempHp')) edits.tempHp = nullableNumber(formData.get('tempHp')) || 0;
+    if (hasFormField(form, 'maxHp')) edits.maxHp = nullableNumber(formData.get('maxHp'));
+    if (hasFormField(form, 'ac')) edits.ac = nullableNumber(formData.get('ac')) || player.ac;
+    if (hasFormField(form, 'speed')) edits.speed = nullableNumber(formData.get('speed')) || player.speed;
+    if (hasFormField(form, 'gold')) edits.gold = nullableNumber(formData.get('gold')) || 0;
+    if (hasFormField(form, 'heroPoints')) edits.heroPoints = nullableNumber(formData.get('heroPoints')) || 0;
+    const abilityFields = Object.keys(ABILITY_NAMES).filter(ability => hasFormField(form, ability));
+    if (abilityFields.length) {
+      const abilities = { ...(player.abilities || {}), ...((edits && edits.abilities) || {}) };
+      abilityFields.forEach(ability => {
+        abilities[ability] = nullableNumber(formData.get(ability)) || player.abilities[ability];
+      });
+      edits.abilities = abilities;
+    }
+    if (hasFormField(form, 'equipment')) {
+      edits.equipment = String(formData.get('equipment') || '').split(/\r?\n/).map(item => item.trim()).filter(Boolean);
+    }
+    savePlayerEdits(player.id, edits);
+    const status = form.querySelector('[data-player-edit-status]') || root.querySelector('[data-player-edit-status]');
+    if (status) status.textContent = 'Saved on this device';
+    if (getApiBaseUrl()) {
+      const savedToApi = await trySavePlayerToApi(player.id, edits);
+      if (status) status.textContent = savedToApi ? 'Saved to cloud' : 'Saved on this device';
+    }
+    hydratePlayerSheet(root, {
+      ...player,
+      ...edits,
+      abilities: { ...(player.abilities || {}), ...((edits && edits.abilities) || {}) },
+      spellDetails: { ...(player.spellDetails || {}), ...((edits && edits.spellDetails) || {}) },
+    });
   }
 
   async function handleNotesSubmit(root, form) {
@@ -2757,6 +2767,10 @@
   function setFormValue(form, name, value) {
     const field = form.elements[name];
     if (field) field.value = value === null || value === undefined ? '' : value;
+  }
+
+  function hasFormField(form, name) {
+    return Boolean(form && form.elements && form.elements[name]);
   }
 
   function loadPlayerEdits(playerId) {

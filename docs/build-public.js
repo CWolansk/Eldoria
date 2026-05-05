@@ -867,7 +867,7 @@ function renderPlayerPage(player, page) {
 
     <nav class="tabs" role="tablist" aria-label="Character sheet sections">
       ${tabButton('overview', 'Overview', true)}
-      ${tabButton('abilities', 'Ability Scores')}
+      ${tabButton('abilities', 'Abilities')}
       ${tabButton('combat', 'Combat')}
       ${tabButton('actions', 'Actions')}
       ${tabButton('resources', 'Resources')}
@@ -875,11 +875,19 @@ function renderPlayerPage(player, page) {
       ${tabButton('equipment', 'Equipment')}
       ${tabButton('spells', 'Spells')}
       ${tabButton('class-info', 'Class Info')}
-      ${tabButton('edit', 'Edit')}
       ${tabButton('notes', 'Notes')}
     </nav>
 
     ${tabPanel('overview', true, `
+      ${inlineEditPanel('Edit Overview', `
+        <div class="form-grid">
+          ${editNumberField('currentHp', 'Current HP')}
+          ${editNumberField('tempHp', 'Temp HP', 'min="0"')}
+          ${editNumberField('maxHp', 'Max HP')}
+          ${editNumberField('gold', 'Gold', 'min="0"')}
+          ${editNumberField('heroPoints', 'Hero Points', 'min="0"')}
+        </div>
+      `, true)}
       <div class="sheet-grid">
         ${infoCard('Class', p.class, 'class')}
         ${infoCard('Subclass', p.subclassShortName || p.subclass || '-', 'subclass')}
@@ -893,9 +901,21 @@ function renderPlayerPage(player, page) {
       </div>
     `)}
 
-    ${tabPanel('abilities', false, `<div class="abilities-grid">${abilities}</div>`)}
+    ${tabPanel('abilities', false, `
+      ${inlineEditPanel('Edit Abilities', `<div class="form-grid">${abilityEditFields()}</div>`)}
+      <div class="abilities-grid">${abilities}</div>
+    `)}
 
     ${tabPanel('combat', false, `
+      ${inlineEditPanel('Edit Combat', `
+        <div class="form-grid">
+          ${editNumberField('currentHp', 'Current HP')}
+          ${editNumberField('tempHp', 'Temp HP', 'min="0"')}
+          ${editNumberField('maxHp', 'Max HP')}
+          ${editNumberField('ac', 'Armor Class')}
+          ${editNumberField('speed', 'Speed')}
+        </div>
+      `)}
       <div class="sheet-grid">
         ${infoCard('Armor Class', p.ac, 'ac')}
         ${infoCard('Initiative', formatBonus(p.initiative), 'initiative')}
@@ -915,18 +935,44 @@ function renderPlayerPage(player, page) {
       </section>
     `)}
 
-    ${tabPanel('actions', false, '<div data-actions-panel></div>')}
+    ${tabPanel('actions', false, `
+      ${inlineEditPanel('Edit Combat Stats', `
+        <div class="form-grid">
+          ${editNumberField('currentHp', 'Current HP')}
+          ${editNumberField('tempHp', 'Temp HP', 'min="0"')}
+          ${editNumberField('maxHp', 'Max HP')}
+          ${editNumberField('ac', 'Armor Class')}
+          ${editNumberField('speed', 'Speed')}
+        </div>
+      `)}
+      <div data-actions-panel></div>
+    `)}
 
-    ${tabPanel('resources', false, '<div data-resources-panel></div>')}
+    ${tabPanel('resources', false, `
+      ${inlineEditPanel('Edit Health', `
+        <div class="form-grid">
+          ${editNumberField('currentHp', 'Current HP')}
+          ${editNumberField('tempHp', 'Temp HP', 'min="0"')}
+          ${editNumberField('maxHp', 'Max HP')}
+        </div>
+      `)}
+      <div data-resources-panel></div>
+    `)}
 
     ${tabPanel('skills', false, `
+      ${inlineEditPanel('Edit Abilities', `<div class="form-grid">${abilityEditFields()}</div>`)}
       <div class="two-column">
         <section><h2>Saving Throws</h2><div class="line-list">${saves}</div></section>
         <section><h2>Skills</h2><div class="line-list">${skills}</div></section>
       </div>
     `)}
 
-    ${tabPanel('equipment', false, '<div data-equipment-panel></div>')}
+    ${tabPanel('equipment', false, `
+      ${inlineEditPanel('Edit Equipment', `
+        <label class="wide-field"><span>Equipment</span><textarea name="equipment" rows="8"></textarea></label>
+      `)}
+      <div data-equipment-panel></div>
+    `)}
     ${tabPanel('spells', false, `<div data-spell-panel data-spells-url="${escapeAttr(relativeUrl(page.url, 'data/spells.json'))}"></div>`)}
     ${tabPanel('class-info', false, `
       <div class="sheet-grid">
@@ -936,26 +982,6 @@ function renderPlayerPage(player, page) {
         ${infoCard('Race', p.races.join(', ') || p.race || '-', 'races')}
       </div>
       <section class="feature-notes">${featuresHtml}</section>
-    `)}
-    ${tabPanel('edit', false, `
-      <form class="edit-form" data-player-edit-form>
-        <div class="form-grid">
-          <label><span>Current HP</span><input name="currentHp" type="number" inputmode="numeric"></label>
-          <label><span>Temp HP</span><input name="tempHp" type="number" inputmode="numeric" min="0"></label>
-          <label><span>Max HP</span><input name="maxHp" type="number" inputmode="numeric"></label>
-          <label><span>Armor Class</span><input name="ac" type="number" inputmode="numeric"></label>
-          <label><span>Speed</span><input name="speed" type="number" inputmode="numeric"></label>
-          <label><span>Gold</span><input name="gold" type="number" inputmode="numeric" min="0"></label>
-          <label><span>Hero Points</span><input name="heroPoints" type="number" inputmode="numeric" min="0"></label>
-          ${ABILITIES.map(ability => `<label><span>${ABILITY_NAMES[ability]}</span><input name="${ability}" type="number" inputmode="numeric"></label>`).join('')}
-        </div>
-        <label class="wide-field"><span>Equipment</span><textarea name="equipment" rows="8"></textarea></label>
-        <div class="form-actions">
-          <button type="submit">Save</button>
-          <button type="button" data-player-reset>Reset</button>
-          <span data-player-edit-status></span>
-        </div>
-      </form>
     `)}
     ${tabPanel('notes', false, `
       <form class="notes-form" data-player-notes-form>
@@ -979,6 +1005,28 @@ function renderPlayerPage(player, page) {
 
 function tabButton(id, label, active = false) {
   return `<button class="tab-button ${active ? 'active' : ''}" data-tab-target="${id}" type="button" role="tab" aria-selected="${active ? 'true' : 'false'}">${label}</button>`;
+}
+
+function inlineEditPanel(title, body, includeReset = false) {
+  return `<details class="inline-edit-panel">
+    <summary><span>${escapeHtml(title)}</span><strong>Edit</strong></summary>
+    <form class="edit-form" data-player-edit-form>
+      ${body}
+      <div class="form-actions">
+        <button type="submit">Save</button>
+        ${includeReset ? '<button type="button" data-player-reset>Reset</button>' : ''}
+        <span data-player-edit-status></span>
+      </div>
+    </form>
+  </details>`;
+}
+
+function editNumberField(name, label, attrs = '') {
+  return `<label><span>${escapeHtml(label)}</span><input name="${escapeAttr(name)}" type="number" inputmode="numeric" ${attrs}></label>`;
+}
+
+function abilityEditFields() {
+  return ABILITIES.map(ability => editNumberField(ability, ABILITY_NAMES[ability])).join('');
 }
 
 function renderPlayerBootstrap(player) {

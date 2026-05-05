@@ -38,7 +38,7 @@
 
     <nav class="tabs" role="tablist" aria-label="Character sheet sections">
       <button class="tab-button active" data-tab-target="overview" type="button" role="tab" aria-selected="true">Overview</button>
-      <button class="tab-button " data-tab-target="abilities" type="button" role="tab" aria-selected="false">Ability Scores</button>
+      <button class="tab-button " data-tab-target="abilities" type="button" role="tab" aria-selected="false">Abilities</button>
       <button class="tab-button " data-tab-target="combat" type="button" role="tab" aria-selected="false">Combat</button>
       <button class="tab-button " data-tab-target="actions" type="button" role="tab" aria-selected="false">Actions</button>
       <button class="tab-button " data-tab-target="resources" type="button" role="tab" aria-selected="false">Resources</button>
@@ -46,11 +46,29 @@
       <button class="tab-button " data-tab-target="equipment" type="button" role="tab" aria-selected="false">Equipment</button>
       <button class="tab-button " data-tab-target="spells" type="button" role="tab" aria-selected="false">Spells</button>
       <button class="tab-button " data-tab-target="class-info" type="button" role="tab" aria-selected="false">Class Info</button>
-      <button class="tab-button " data-tab-target="edit" type="button" role="tab" aria-selected="false">Edit</button>
       <button class="tab-button " data-tab-target="notes" type="button" role="tab" aria-selected="false">Notes</button>
     </nav>
 
     <section class="tab-panel active" data-tab-panel="overview" role="tabpanel">
+      <details class="inline-edit-panel">
+    <summary><span>Edit Overview</span><strong>Edit</strong></summary>
+    <form class="edit-form" data-player-edit-form>
+
+        <div class="form-grid">
+          <label><span>Current HP</span><input name="currentHp" type="number" inputmode="numeric" ></label>
+          <label><span>Temp HP</span><input name="tempHp" type="number" inputmode="numeric" min="0"></label>
+          <label><span>Max HP</span><input name="maxHp" type="number" inputmode="numeric" ></label>
+          <label><span>Gold</span><input name="gold" type="number" inputmode="numeric" min="0"></label>
+          <label><span>Hero Points</span><input name="heroPoints" type="number" inputmode="numeric" min="0"></label>
+        </div>
+
+      <div class="form-actions">
+        <button type="submit">Save</button>
+        <button type="button" data-player-reset>Reset</button>
+        <span data-player-edit-status></span>
+      </div>
+    </form>
+  </details>
       <div class="sheet-grid">
         <div class="info-card"><span>Class</span><strong data-player-field="class">Ranger</strong></div>
         <div class="info-card"><span>Subclass</span><strong data-player-field="subclass">Hunter</strong></div>
@@ -64,14 +82,46 @@
       </div>
     </section>
 
-    <section class="tab-panel " data-tab-panel="abilities" role="tabpanel"><div class="abilities-grid"><div class="ability-card" data-player-ability="str"><span>Strength</span><strong>17</strong><em>+3</em></div>
+    <section class="tab-panel " data-tab-panel="abilities" role="tabpanel">
+      <details class="inline-edit-panel">
+    <summary><span>Edit Abilities</span><strong>Edit</strong></summary>
+    <form class="edit-form" data-player-edit-form>
+      <div class="form-grid"><label><span>Strength</span><input name="str" type="number" inputmode="numeric" ></label><label><span>Dexterity</span><input name="dex" type="number" inputmode="numeric" ></label><label><span>Constitution</span><input name="con" type="number" inputmode="numeric" ></label><label><span>Intelligence</span><input name="int" type="number" inputmode="numeric" ></label><label><span>Wisdom</span><input name="wis" type="number" inputmode="numeric" ></label><label><span>Charisma</span><input name="cha" type="number" inputmode="numeric" ></label></div>
+      <div class="form-actions">
+        <button type="submit">Save</button>
+
+        <span data-player-edit-status></span>
+      </div>
+    </form>
+  </details>
+      <div class="abilities-grid"><div class="ability-card" data-player-ability="str"><span>Strength</span><strong>17</strong><em>+3</em></div>
 <div class="ability-card" data-player-ability="dex"><span>Dexterity</span><strong>18</strong><em>+4</em></div>
 <div class="ability-card" data-player-ability="con"><span>Constitution</span><strong>16</strong><em>+3</em></div>
 <div class="ability-card" data-player-ability="int"><span>Intelligence</span><strong>13</strong><em>+1</em></div>
 <div class="ability-card" data-player-ability="wis"><span>Wisdom</span><strong>15</strong><em>+2</em></div>
-<div class="ability-card" data-player-ability="cha"><span>Charisma</span><strong>13</strong><em>+1</em></div></div></section>
+<div class="ability-card" data-player-ability="cha"><span>Charisma</span><strong>13</strong><em>+1</em></div></div>
+    </section>
 
     <section class="tab-panel " data-tab-panel="combat" role="tabpanel">
+      <details class="inline-edit-panel">
+    <summary><span>Edit Combat</span><strong>Edit</strong></summary>
+    <form class="edit-form" data-player-edit-form>
+
+        <div class="form-grid">
+          <label><span>Current HP</span><input name="currentHp" type="number" inputmode="numeric" ></label>
+          <label><span>Temp HP</span><input name="tempHp" type="number" inputmode="numeric" min="0"></label>
+          <label><span>Max HP</span><input name="maxHp" type="number" inputmode="numeric" ></label>
+          <label><span>Armor Class</span><input name="ac" type="number" inputmode="numeric" ></label>
+          <label><span>Speed</span><input name="speed" type="number" inputmode="numeric" ></label>
+        </div>
+
+      <div class="form-actions">
+        <button type="submit">Save</button>
+
+        <span data-player-edit-status></span>
+      </div>
+    </form>
+  </details>
       <div class="sheet-grid">
         <div class="info-card"><span>Armor Class</span><strong data-player-field="ac">15</strong></div>
         <div class="info-card"><span>Initiative</span><strong data-player-field="initiative">+4</strong></div>
@@ -91,11 +141,62 @@
       </section>
     </section>
 
-    <section class="tab-panel " data-tab-panel="actions" role="tabpanel"><div data-actions-panel></div></section>
+    <section class="tab-panel " data-tab-panel="actions" role="tabpanel">
+      <details class="inline-edit-panel">
+    <summary><span>Edit Combat Stats</span><strong>Edit</strong></summary>
+    <form class="edit-form" data-player-edit-form>
 
-    <section class="tab-panel " data-tab-panel="resources" role="tabpanel"><div data-resources-panel></div></section>
+        <div class="form-grid">
+          <label><span>Current HP</span><input name="currentHp" type="number" inputmode="numeric" ></label>
+          <label><span>Temp HP</span><input name="tempHp" type="number" inputmode="numeric" min="0"></label>
+          <label><span>Max HP</span><input name="maxHp" type="number" inputmode="numeric" ></label>
+          <label><span>Armor Class</span><input name="ac" type="number" inputmode="numeric" ></label>
+          <label><span>Speed</span><input name="speed" type="number" inputmode="numeric" ></label>
+        </div>
+
+      <div class="form-actions">
+        <button type="submit">Save</button>
+
+        <span data-player-edit-status></span>
+      </div>
+    </form>
+  </details>
+      <div data-actions-panel></div>
+    </section>
+
+    <section class="tab-panel " data-tab-panel="resources" role="tabpanel">
+      <details class="inline-edit-panel">
+    <summary><span>Edit Health</span><strong>Edit</strong></summary>
+    <form class="edit-form" data-player-edit-form>
+
+        <div class="form-grid">
+          <label><span>Current HP</span><input name="currentHp" type="number" inputmode="numeric" ></label>
+          <label><span>Temp HP</span><input name="tempHp" type="number" inputmode="numeric" min="0"></label>
+          <label><span>Max HP</span><input name="maxHp" type="number" inputmode="numeric" ></label>
+        </div>
+
+      <div class="form-actions">
+        <button type="submit">Save</button>
+
+        <span data-player-edit-status></span>
+      </div>
+    </form>
+  </details>
+      <div data-resources-panel></div>
+    </section>
 
     <section class="tab-panel " data-tab-panel="skills" role="tabpanel">
+      <details class="inline-edit-panel">
+    <summary><span>Edit Abilities</span><strong>Edit</strong></summary>
+    <form class="edit-form" data-player-edit-form>
+      <div class="form-grid"><label><span>Strength</span><input name="str" type="number" inputmode="numeric" ></label><label><span>Dexterity</span><input name="dex" type="number" inputmode="numeric" ></label><label><span>Constitution</span><input name="con" type="number" inputmode="numeric" ></label><label><span>Intelligence</span><input name="int" type="number" inputmode="numeric" ></label><label><span>Wisdom</span><input name="wis" type="number" inputmode="numeric" ></label><label><span>Charisma</span><input name="cha" type="number" inputmode="numeric" ></label></div>
+      <div class="form-actions">
+        <button type="submit">Save</button>
+
+        <span data-player-edit-status></span>
+      </div>
+    </form>
+  </details>
       <div class="two-column">
         <section><h2>Saving Throws</h2><div class="line-list"><div class="line-stat proficient" data-player-save="str"><span>Strength</span><strong>+6</strong></div>
 <div class="line-stat proficient" data-player-save="dex"><span>Dexterity</span><strong>+7</strong></div>
@@ -124,7 +225,22 @@
       </div>
     </section>
 
-    <section class="tab-panel " data-tab-panel="equipment" role="tabpanel"><div data-equipment-panel></div></section>
+    <section class="tab-panel " data-tab-panel="equipment" role="tabpanel">
+      <details class="inline-edit-panel">
+    <summary><span>Edit Equipment</span><strong>Edit</strong></summary>
+    <form class="edit-form" data-player-edit-form>
+
+        <label class="wide-field"><span>Equipment</span><textarea name="equipment" rows="8"></textarea></label>
+
+      <div class="form-actions">
+        <button type="submit">Save</button>
+
+        <span data-player-edit-status></span>
+      </div>
+    </form>
+  </details>
+      <div data-equipment-panel></div>
+    </section>
     <section class="tab-panel " data-tab-panel="spells" role="tabpanel"><div data-spell-panel data-spells-url="../../data/spells.json"></div></section>
     <section class="tab-panel " data-tab-panel="class-info" role="tabpanel">
       <div class="sheet-grid">
@@ -153,26 +269,6 @@
 <ul><li>Piercing Shot: 3 uses</li><li>Precise Aim: 1 use</li></ul>
 <h3 id="proficiencies">Proficiencies</h3>
 <ul><li>Common language from Human</li><li>Common language from Ranger: Beasts</li><li>Common language from Human</li><li>Common language from Guild Merchant: Goblin</li></ul></section>
-    </section>
-    <section class="tab-panel " data-tab-panel="edit" role="tabpanel">
-      <form class="edit-form" data-player-edit-form>
-        <div class="form-grid">
-          <label><span>Current HP</span><input name="currentHp" type="number" inputmode="numeric"></label>
-          <label><span>Temp HP</span><input name="tempHp" type="number" inputmode="numeric" min="0"></label>
-          <label><span>Max HP</span><input name="maxHp" type="number" inputmode="numeric"></label>
-          <label><span>Armor Class</span><input name="ac" type="number" inputmode="numeric"></label>
-          <label><span>Speed</span><input name="speed" type="number" inputmode="numeric"></label>
-          <label><span>Gold</span><input name="gold" type="number" inputmode="numeric" min="0"></label>
-          <label><span>Hero Points</span><input name="heroPoints" type="number" inputmode="numeric" min="0"></label>
-          <label><span>Strength</span><input name="str" type="number" inputmode="numeric"></label><label><span>Dexterity</span><input name="dex" type="number" inputmode="numeric"></label><label><span>Constitution</span><input name="con" type="number" inputmode="numeric"></label><label><span>Intelligence</span><input name="int" type="number" inputmode="numeric"></label><label><span>Wisdom</span><input name="wis" type="number" inputmode="numeric"></label><label><span>Charisma</span><input name="cha" type="number" inputmode="numeric"></label>
-        </div>
-        <label class="wide-field"><span>Equipment</span><textarea name="equipment" rows="8"></textarea></label>
-        <div class="form-actions">
-          <button type="submit">Save</button>
-          <button type="button" data-player-reset>Reset</button>
-          <span data-player-edit-status></span>
-        </div>
-      </form>
     </section>
     <section class="tab-panel " data-tab-panel="notes" role="tabpanel">
       <form class="notes-form" data-player-notes-form>
