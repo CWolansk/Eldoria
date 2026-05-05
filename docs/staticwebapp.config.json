@@ -1,0 +1,14 @@
+{
+  "routes": [
+    {
+      "route": "/api/*",
+      "allowedRoles": ["anonymous"]
+    }
+  ],
+  "globalHeaders": {
+    "x-content-type-options": "nosniff"
+  },
+  "mimeTypes": {
+    ".json": "application/json"
+  }
+}

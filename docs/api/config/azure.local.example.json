@@ -1,0 +1,19 @@
+{
+  "subscriptionId": "",
+  "tenantId": "",
+  "loginUseDeviceCode": true,
+  "resourceGroup": "",
+  "location": "eastus",
+  "functionAppName": "",
+  "githubPagesOrigin": "https://YOUR_GITHUB_USER_OR_ORG.github.io",
+  "sql": {
+    "serverName": "",
+    "serverFqdn": "YOUR_SQL_SERVER.database.windows.net",
+    "database": "",
+    "runtimeAuthMode": "managed_identity",
+    "migrationAuthMode": "entra",
+    "sqlcmdPath": "",
+    "migrationUser": "",
+    "migrationPassword": ""
+  }
+}

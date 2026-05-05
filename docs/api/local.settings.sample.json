@@ -1,0 +1,11 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "SQL_SERVER": "YOUR_SQL_SERVER.database.windows.net",
+    "SQL_DATABASE": "YOUR_DATABASE",
+    "SQL_AUTH_MODE": "managed_identity",
+    "GITHUB_PAGES_ORIGIN": "https://YOUR_GITHUB_USER_OR_ORG.github.io"
+  }
+}

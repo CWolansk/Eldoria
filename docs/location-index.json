@@ -6,75 +6,28 @@
         "file": "Ardenville.html",
         "subLocations": [
           {
+            "name": "Fisherman's Guild",
+            "file": "Fishermans Guild.html"
+          },
+          {
             "name": "Lake Arden",
             "file": "Lake Arden.html"
           },
           {
-            "name": "Steelshapers Forge",
+            "name": "Merchants Guild Warehouse",
+            "file": "Merchants Guild Warehouse.html"
+          },
+          {
+            "name": "Steelshaper's Forge",
             "file": "Steelshapers Forge.html"
           },
           {
             "name": "The Enchanted Trinket",
             "file": "The Enchanted Trinket.html"
-          }
-        ]
-      },
-      "Fairfield": {
-        "file": "Fairfield.html",
-        "subLocations": [
-          {
-            "name": "Forgefires Armaments",
-            "file": "Forgefires Armaments.html"
           },
           {
-            "name": "Starspells Wonders",
-            "file": "Starspells Wonders.html"
-          }
-        ]
-      },
-      "Highreach": {
-        "file": "Highreach.html",
-        "subLocations": [
-          {
-            "name": "HighReach Merchants Guild",
-            "file": "HighReach Merchants Guild.html"
-          },
-          {
-            "name": "Highreach Adventurers Guild",
-            "file": "Highreach Adventurers Guild.html"
-          },
-          {
-            "name": "Highreach Mines",
-            "file": "Highreach Mines.html"
-          },
-          {
-            "name": "Sturdy Mugg",
-            "file": "Sturdy Mugg.html"
-          },
-          {
-            "name": "Target by Tradewind",
-            "file": "Target by Tradewind.html"
-          },
-          {
-            "name": "The Arcane Enclave",
-            "file": "The Arcane Enclave.html"
-          },
-          {
-            "name": "The Dragons Breath Forge",
-            "file": "The Dragons Breath Forge.html"
-          }
-        ]
-      },
-      "Hillcrest": {
-        "file": "Hillcrest.html",
-        "subLocations": [
-          {
-            "name": "Hammerstrikes Weapons",
-            "file": "Hammerstrikes Weapons.html"
-          },
-          {
-            "name": "Nightwhispers Potions and Scrolls",
-            "file": "Nightwhispers Potions and Scrolls.html"
+            "name": "The Netted Nymph",
+            "file": "The Netted Nymph.html"
           }
         ]
       },
@@ -106,6 +59,69 @@
             "file": "Stones Herbs.html"
           }
         ]
+      },
+      "Fairfield": {
+        "file": "Fairfield.html",
+        "subLocations": [
+          {
+            "name": "Forgefires Armaments",
+            "file": "Forgefires Armaments.html"
+          },
+          {
+            "name": "Starspells Wonders",
+            "file": "Starspells Wonders.html"
+          }
+        ]
+      },
+      "Hillcrest": {
+        "file": "Hillcrest.html",
+        "subLocations": [
+          {
+            "name": "Hammerstrikes Weapons",
+            "file": "Hammerstrikes Weapons.html"
+          },
+          {
+            "name": "Nightwhispers Potions and Scrolls",
+            "file": "Nightwhispers Potions and Scrolls.html"
+          }
+        ]
+      },
+      "Highreach": {
+        "file": "Highreach.html",
+        "subLocations": [
+          {
+            "name": "Highreach Adventurers Guild",
+            "file": "Highreach Adventurers Guild.html"
+          },
+          {
+            "name": "HighReach Merchants Guild",
+            "file": "HighReach Merchants Guild.html"
+          },
+          {
+            "name": "Highreach Mines",
+            "file": "Highreach Mines.html"
+          },
+          {
+            "name": "Sturdy Mugg",
+            "file": "Sturdy Mugg.html"
+          },
+          {
+            "name": "Target by Tradewind",
+            "file": "Target by Tradewind.html"
+          },
+          {
+            "name": "The Arcane Enclave",
+            "file": "The Arcane Enclave.html"
+          },
+          {
+            "name": "The Dragons Breath Forge",
+            "file": "The Dragons Breath Forge.html"
+          },
+          {
+            "name": "The Warren",
+            "file": "The Warren.html"
+          }
+        ]
       }
     }
   },
@@ -114,7 +130,12 @@
     "locations": {
       "Forgepeak": {
         "file": "ForgePeak.html",
-        "subLocations": []
+        "subLocations": [
+          {
+            "name": "The Adamant Anvil",
+            "file": "The Adamant Anvil.html"
+          }
+        ]
       },
       "Gemstone Hollow": {
         "file": "Gemstone Hollow.html",
@@ -122,6 +143,10 @@
       },
       "Ironroot": {
         "file": "Ironroot.html",
+        "subLocations": []
+      },
+      "Cannibal Camp": {
+        "file": "Mountain Tribes.html",
         "subLocations": []
       },
       "Steamhammer": {
@@ -134,11 +159,49 @@
       }
     }
   },
+  "Silverleaf Lands": {
+    "basePath": "Public/World/Silverleaf Lands/",
+    "locations": {
+      "Frostglade": {
+        "file": "FrostGlade.html",
+        "subLocations": [
+          {
+            "name": "The Whispering Weave",
+            "file": "The Whispering Weave.html"
+          }
+        ]
+      },
+      "Moonshade": {
+        "file": "Moonshade.html",
+        "subLocations": []
+      },
+      "Serenity Hollow": {
+        "file": "Serenity Hollow.html",
+        "subLocations": []
+      },
+      "Stardew": {
+        "file": "Stardew.html",
+        "subLocations": []
+      },
+      "Starfall": {
+        "file": "Starfall.html",
+        "subLocations": []
+      }
+    }
+  },
   "Orcish Wastes": {
     "basePath": "Public/World/Orcish Wastes/",
     "locations": {
       "Orc Capitol": {
         "file": "Orc Capitol.html",
+        "subLocations": []
+      },
+      "Orc Town B": {
+        "file": "Orc City B.html",
+        "subLocations": []
+      },
+      "Orc Town C": {
+        "file": "Orc City C.html",
         "subLocations": []
       },
       "Red Dune Desert": {
@@ -155,31 +218,6 @@
       },
       "Wizards Tower": {
         "file": "Wizards Tower.html",
-        "subLocations": []
-      }
-    }
-  },
-  "Silverleaf Lands": {
-    "basePath": "Public/World/Silverleaf Lands/",
-    "locations": {
-      "Frostglade": {
-        "file": "FrostGlade.html",
-        "subLocations": []
-      },
-      "Moonshade": {
-        "file": "Moonshade.html",
-        "subLocations": []
-      },
-      "Serenity Hollow": {
-        "file": "Serenity Hollow.html",
-        "subLocations": []
-      },
-      "Stardew": {
-        "file": "Stardew.html",
-        "subLocations": []
-      },
-      "Starfall": {
-        "file": "Starfall.html",
         "subLocations": []
       }
     }

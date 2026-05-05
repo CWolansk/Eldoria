@@ -1,10 +1,15 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { handleLocalPublicApi } = require('./api/shared/local-router');
 
 const PORT = 8086;
 
 const server = http.createServer((req, res) => {
+    if (handleLocalPublicApi(req, res)) {
+        return;
+    }
+
     // Helper to get map file path safely
     const getMapFilePath = (filename) => {
         if (!filename) return null;

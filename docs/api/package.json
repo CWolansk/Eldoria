@@ -1,0 +1,21 @@
+{
+  "name": "eldoria-public-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Azure Functions API for generated Eldoria public data and player sheet edits",
+  "main": "shared/public-data.js",
+  "dependencies": {
+    "mssql": "^11.0.1"
+  },
+  "scripts": {
+    "smoke": "node smoke-test.js",
+    "login": "powershell -ExecutionPolicy Bypass -File scripts/Login-Azure.ps1",
+    "init-config": "powershell -ExecutionPolicy Bypass -File scripts/Initialize-LocalConfig.ps1",
+    "install-sqlcmd": "powershell -ExecutionPolicy Bypass -File scripts/Install-SqlcmdTools.ps1",
+    "check-config": "powershell -ExecutionPolicy Bypass -File scripts/Test-AzureOpsConfig.ps1",
+    "check-tools": "powershell -ExecutionPolicy Bypass -File scripts/Test-AzureOpsTools.ps1",
+    "settings": "powershell -ExecutionPolicy Bypass -File scripts/Set-FunctionAppSettings.ps1",
+    "deploy": "powershell -ExecutionPolicy Bypass -File scripts/Deploy-FunctionApp.ps1",
+    "migrate": "powershell -ExecutionPolicy Bypass -File scripts/Run-SqlMigrations.ps1"
+  }
+}

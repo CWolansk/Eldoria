@@ -1,0 +1,3196 @@
+[
+  {
+    "id": "public-world-groups-adventurers-guild-md",
+    "name": "Adventurers Guild",
+    "type": "Organization",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Organization",
+      "Crestfall",
+      "AdventurersGuild"
+    ],
+    "path": "Public/World/Groups/Adventurers Guild.md",
+    "url": "Public/World/Groups/Adventurers Guild.html",
+    "summary": "Overview Highreach's premier guild for adventurers, mercenaries, and bounty hunters. Provides contract work, training, and a network of contacts across Crestfall. Reputation Well respected in Highreach. Known for fielding capable teams and handling threats the city"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-aidan-reed-md",
+    "name": "Aidan Reed",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Aidan Reed.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Aidan Reed.html",
+    "summary": "Appearance Towering, barrel chested man with thick arms and a perpetually rosy face. Dark bushy beard and lively, twinkling eyes. What We Know Barkeep at the Sturdy Mugg. Quick with a grin and always happy to"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-alaric-emberfell-md",
+    "name": "Alaric Emberfell",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Alaric Emberfell.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Alaric Emberfell.html",
+    "summary": "Appearance Stocky, robust build with a well groomed beard and strong arms. Piercing eyes that size up materials — and customers — with equal scrutiny. What We Know Owner of The Dragon's Breath Forge in Highreach."
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-alistair-goldman-md",
+    "name": "Alistair Goldman",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Alistair Goldman.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Alistair Goldman.html",
+    "summary": "Appearance Wiry man in his early 50s, graying hair slicked back, sharp blue eyes. Wears finely tailored clothes in muted, practical colors. What We Know Guildmaster of the Highreach Merchants Guild. Runs a tight operation and"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-alistair-grimwood-md",
+    "name": "Alistair Grimwood",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Alistair Grimwood.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Alistair Grimwood.html",
+    "summary": "Appearance Impeccably dressed, middle aged man with graying neatly combed hair. Carries himself with refined dignity and quiet efficiency. What We Know Butler to one of Highreach's noble families. Has served the household for decades and"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-alma-ironfist-nee-brightwater-md",
+    "name": "Alma Ironfist nee Brightwater",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Alma Ironfist nee Brightwater.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Alma Ironfist nee Brightwater.html",
+    "summary": "Appearance Petite woman with dark hair in a ponytail, wearing a faded crimson tunic and a small amulet with an iron gauntlet insignia. What We Know A regular at the Sturdy Mugg. Married to Thoren Ironfist."
+  },
+  {
+    "id": "public-world-crestfall-ardenville-ardenville-md",
+    "name": "Ardenville",
+    "type": "Settlement",
+    "region": "Crestfall",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "Crestfall",
+      "Ardenville"
+    ],
+    "path": "Public/World/Crestfall/Ardenville/Ardenville.md",
+    "url": "Public/World/Crestfall/Ardenville/Ardenville.html",
+    "summary": "Ardenville.png Overview Ardenville is a lakeside port town on the northern shore of Lake Arden in Crestfall. A primary fishing and transport hub for the lake, and a secondary trade connection to Highreach. Geography Situated entirely"
+  },
+  {
+    "id": "public-storylines-ardenville-convergence-md",
+    "name": "Ardenville Convergence",
+    "type": "Storyline",
+    "region": "",
+    "location": "",
+    "tags": [
+      "Storyline",
+      "Crestfall",
+      "Ardenville"
+    ],
+    "path": "Public/Storylines/Ardenville Convergence.md",
+    "url": "Public/Storylines/Ardenville Convergence.html",
+    "summary": "Ardenville Convergence Summary Ardenville has become the next crossroads for the campaign. Personal problems, guild politics, suspicious deliveries, and the boat race are all tightening around the same lake town. What the Party Knows The party"
+  },
+  {
+    "id": "public-world-images-ardenvilleimageprompt-md",
+    "name": "ArdenvilleImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/ArdenvilleImageprompt.md",
+    "url": "Public/World/Images/ArdenvilleImageprompt.html",
+    "summary": "Ardenville Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-aric-stormblade-md",
+    "name": "Aric Stormblade",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Aric Stormblade.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Aric Stormblade.html",
+    "summary": "Appearance Stocky and powerful, with a weathered face, graying hair, and numerous battle scars. What We Know Veteran fighter and member of the Highreach Adventurers Guild. Brother to Thaldrin Stormblade. Known for his tactical acumen and"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-npcs-astrid-ironfist-md",
+    "name": "Astrid Ironfist",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Stonehaven",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/NPCs/Astrid Ironfist.md",
+    "url": "Public/World/Crestfall/Stonehaven/NPCs/Astrid Ironfist.html",
+    "summary": "Appearance Muscular and sturdy with a square jaw, short blonde military cut hair, and steel gray eyes. Always in polished town guard mail with the Stonehaven wolf emblem. What We Know Captain of the Stonehaven Town"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-beatrix-goldleaf-md",
+    "name": "Beatrix Goldleaf",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Beatrix Goldleaf.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Beatrix Goldleaf.html",
+    "summary": "Appearance Late 30s, warm honey toned skin, thick dark blonde curls pinned with a jeweled hair comb. Always impeccably dressed in fine gowns with tasteful, expensive jewelry. What We Know A wealthy jewelry connoisseur in the"
+  },
+  {
+    "id": "public-world-crestfall-hillcrest-npcs-benedict-vineward-md",
+    "name": "Benedict Vineward",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Hillcrest",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Hillcrest"
+    ],
+    "path": "Public/World/Crestfall/Hillcrest/NPCs/Benedict Vineward.md",
+    "url": "Public/World/Crestfall/Hillcrest/NPCs/Benedict Vineward.html",
+    "summary": "Appearance Tall and sturdy, sun kissed skin from years in the vineyards. Short curly brown hair, calloused but gentle hands. Wears traditional vintner clothing. What We Know Stubbornly traditional master vintner and protector of ancestral wine"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-blackwood-forest-md",
+    "name": "Blackwood Forest",
+    "type": "Location",
+    "region": "Crestfall",
+    "location": "Stonehaven",
+    "tags": [
+      "Location",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/Blackwood Forest.md",
+    "url": "Public/World/Crestfall/Stonehaven/Blackwood Forest.html",
+    "summary": "Description A dark, ancient forest stretching south from Stonehaven into the highlands. Massive tree trunks and interwoven canopy create perpetual twilight beyond the village's cleared perimeter. Recently there have been unsettling reports from travelers. What We"
+  },
+  {
+    "id": "public-world-images-blackwoodforestimageprompt-md",
+    "name": "BlackwoodForestImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/BlackwoodForestImageprompt.md",
+    "url": "Public/World/Images/BlackwoodForestImageprompt.html",
+    "summary": "Blackwood Forest Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-borin-stonefist-md",
+    "name": "Borin Stonefist",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Borin Stonefist.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Borin Stonefist.html",
+    "summary": "Appearance Stocky and broad dwarf with a thick beard, muscular build, and stern visage. What We Know A dwarven fighter at the Highreach Adventurers Guild. Known as the backbone of the guild's frontline defense. First Impressions"
+  },
+  {
+    "id": "public-world-crestfall-fairfield-npcs-bram-copperkettle-md",
+    "name": "Bram Copperkettle",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Fairfield",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Fairfield"
+    ],
+    "path": "Public/World/Crestfall/Fairfield/NPCs/Bram Copperkettle.md",
+    "url": "Public/World/Crestfall/Fairfield/NPCs/Bram Copperkettle.html",
+    "summary": "Appearance Stocky, weathered human with a patchy beard and ink stained fingers. Wears a coat with too many pockets. His cart is a chaos of crates, bundled tools, and canvas wrapped weapons with hand scrawled price"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-brenna-barkridge-nee-ironfoot-md",
+    "name": "Brenna Barkridge nee Ironfoot",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Brenna Barkridge nee Ironfoot.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Brenna Barkridge nee Ironfoot.html",
+    "summary": "Appearance A stout dwarven woman with a deep red, closely shaven beard. Healthy complexion and steady hands. What We Know A regular at the Sturdy Mugg. Married to Tomlin Barkridge. Originally from the dwarven kingdom. First"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-brix-ironwhistle-md",
+    "name": "Brix Ironwhistle",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Brix Ironwhistle.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Brix Ironwhistle.html",
+    "summary": "Appearance Stout dwarven woman with a no nonsense bearing. Wears practical work gear and carries herself like someone who's seen plenty of tunnel work. What We Know Captain of Security and Tunnel Maintenance for the Exterminators"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-brom-goldfang-md",
+    "name": "Brom Goldfang",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Brom Goldfang.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Brom Goldfang.html",
+    "summary": "Appearance Halfling in a smart blue jacket and brown trousers. Longish blonde curls peek out from under a flat brown cap. What We Know Runs Goldfang Weapons in Highreach. Sells a wide variety of weaponry. A"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-npcs-caelum-versewood-md",
+    "name": "Caelum Versewood",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Stonehaven",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/NPCs/Caelum Versewood.md",
+    "url": "Public/World/Crestfall/Stonehaven/NPCs/Caelum Versewood.html",
+    "summary": "Appearance Wiry half elf, sharp cheekbones, grey green eyes. Worn leather coat, longsword at his hip, battered journal always in hand. Ink stained fingers, soldier's posture. What We Know Traveling poet and sometime sellsword. Arrived in"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-celeste-stonetooth-nee-moonwhisper-md",
+    "name": "Celeste Stonetooth nee Moonwhisper",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Celeste Stonetooth nee Moonwhisper.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Celeste Stonetooth nee Moonwhisper.html",
+    "summary": "Appearance Tall elven woman with long blond hair and an emerald green dress. Wears tasteful jewelry — more than expected, but nothing gaudy. What We Know A regular at the Sturdy Mugg. Married to Rolf Stonetooth."
+  },
+  {
+    "id": "public-players-claire-player-sheet-md",
+    "name": "Claire Player Sheet",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/Players/Claire Player Sheet.md",
+    "url": "Public/Players/Claire Player Sheet.html",
+    "summary": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaClaireDnDNotes Full Class Info"
+  },
+  {
+    "id": "public-world-crestfall-ardenville-npcs-corin-tidehammer-md",
+    "name": "Corin Tidehammer",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Ardenville",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Ardenville"
+    ],
+    "path": "Public/World/Crestfall/Ardenville/NPCs/Corin Tidehammer.md",
+    "url": "Public/World/Crestfall/Ardenville/NPCs/Corin Tidehammer.html",
+    "summary": "Appearance Broad shouldered, salt crusted boots, brine stained leather apron. Thick cracked hands that never stop moving. Always smells faintly of hot metal and seawater. What We Know Ardenville's weapons smith, working out of a forge"
+  },
+  {
+    "id": "public-world-crestfall-crestfall-md",
+    "name": "Crestfall",
+    "type": "Region",
+    "region": "",
+    "location": "",
+    "tags": [
+      "Region",
+      "Crestfall"
+    ],
+    "path": "Public/World/Crestfall/Crestfall.md",
+    "url": "Public/World/Crestfall/Crestfall.html",
+    "summary": "Overview The human kingdom of Crestfall stretches across fertile plains and forested hills, anchored by the capital city of Highreach. A prosperous realm known for its strong military and bustling trade, though war with the orc"
+  },
+  {
+    "id": "public-world-images-crestfallimageprompt-md",
+    "name": "CrestfallImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/CrestfallImageprompt.md",
+    "url": "Public/World/Images/CrestfallImageprompt.html",
+    "summary": "Crestfall Image Prompt Prompt — Primary (High Aerial Atlas View) Negative Prompt Alternative POV A — Lakeside View of Highreach from the Shore Use this if the full regional overview produces an unsatisfying composition. This POV"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-dame-isolde-swiftwind-md",
+    "name": "Dame Isolde Swiftwind",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Dame Isolde Swiftwind.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Dame Isolde Swiftwind.html",
+    "summary": "Appearance Squat older woman in simple dresses with a head scarf. Radiates warmth despite her high standing. What We Know Senior member of Highreach's city council. Handles diplomacy and trade agreements with neighboring cities and countries."
+  },
+  {
+    "id": "public-world-events-timeline-diego-comes-to-eldoria-md",
+    "name": "Diego Comes to Eldoria",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Eldoria",
+    "tags": [
+      "Event",
+      "Historical"
+    ],
+    "path": "Public/World/Events/Timeline/Diego Comes to Eldoria.md",
+    "url": "Public/World/Events/Timeline/Diego Comes to Eldoria.html",
+    "summary": "What Happened During the ancient Wizarding Wars, a hero named Diego was summoned from another world Diego was the world's most talented swordsman He ended the wars by defeating the lich Jon the Summoner Diego became"
+  },
+  {
+    "id": "public-world-events-timeline-diego-seals-jons-powers-md",
+    "name": "Diego Seals Jons Powers",
+    "type": "Event",
+    "region": "Orcish Wastes",
+    "location": "Orcish Wastes",
+    "tags": [
+      "Event",
+      "OrcishWastes",
+      "Historical"
+    ],
+    "path": "Public/World/Events/Timeline/Diego seals Jons powers.md",
+    "url": "Public/World/Events/Timeline/Diego seals Jons powers.html",
+    "summary": "What Happened During the Wizarding Wars, the hero Diego defeated the lich Jon the Summoner Diego sealed Jon's power into artifacts and scattered them across Eldoria The artifacts were protected so only someone from Diego's world"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-don-gnocianno-md",
+    "name": "Don Gnocianno",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Don Gnocianno.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Don Gnocianno.html",
+    "summary": "Appearance Flamboyant gnome with a rat tail beard and pinstripe vest. Always impeccably dressed. What We Know Guildmaster of the Exterminators Guild in Highreach. Runs the city's premier pest control operation. Known for his business acumen"
+  },
+  {
+    "id": "public-world-crestfall-ardenville-npcs-edda-netsong-md",
+    "name": "Edda Netsong",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Ardenville",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Ardenville"
+    ],
+    "path": "Public/World/Crestfall/Ardenville/NPCs/Edda Netsong.md",
+    "url": "Public/World/Crestfall/Ardenville/NPCs/Edda Netsong.html",
+    "summary": "Appearance Stocky dwarf woman with rope calloused hands. Seventy winters have weathered her face, but her eyes miss nothing. Fingers that never stop mending nets. What We Know Guildmistress of the Fisherman's Guild for forty years."
+  },
+  {
+    "id": "public-world-crestfall-hillcrest-npcs-edwin-barleyman-md",
+    "name": "Edwin Barleyman",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Hillcrest",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Hillcrest"
+    ],
+    "path": "Public/World/Crestfall/Hillcrest/NPCs/Edwin Barleyman.md",
+    "url": "Public/World/Crestfall/Hillcrest/NPCs/Edwin Barleyman.html",
+    "summary": "Appearance Well built, graying hair, laugh lines around his eyes. Always behind the bar or greeting guests. What We Know Beloved tavern owner and neutral mediator in village disputes. His tavern serves as common ground where"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-elder-rowan-md",
+    "name": "Elder Rowan",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Elder Rowan.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Elder Rowan.html",
+    "summary": "Appearance Kindly older gentleman with a warm shawl, weathered hands, and twinkling eyes. Always carries a pouch of smooth stones. What We Know A well liked community elder in Highreach. Known for offering guidance and small"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-npcs-elias-thorn-md",
+    "name": "Elias Thorn",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Stonehaven",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/NPCs/Elias Thorn.md",
+    "url": "Public/World/Crestfall/Stonehaven/NPCs/Elias Thorn.html",
+    "summary": "Appearance Lean and weathered, short brown hair streaked with gray, rugged beard, keen green eyes. Wears practical leather armor in forest colors with a longbow always at hand. Accompanied by Shadowpaw, a large black wolf. What"
+  },
+  {
+    "id": "public-world-crestfall-hillcrest-npcs-eliza-brightwine-md",
+    "name": "Eliza Brightwine",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Hillcrest",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Hillcrest"
+    ],
+    "path": "Public/World/Crestfall/Hillcrest/NPCs/Eliza Brightwine.md",
+    "url": "Public/World/Crestfall/Hillcrest/NPCs/Eliza Brightwine.html",
+    "summary": "Appearance Tall and slender with auburn hair in a practical bun. Green eyes, dressed well but practically. What We Know The Merchants Guild's representative in Hillcrest. Ambitious modernizer focused on efficiency and growth. Professional and somewhat"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-npcs-erik-timber-md",
+    "name": "Erik Timber",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Stonehaven",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/NPCs/Erik Timber.md",
+    "url": "Public/World/Crestfall/Stonehaven/NPCs/Erik Timber.html",
+    "summary": "Appearance Medium build, jovial expression, short neatly combed brown hair, warm brown eyes. Practical but well maintained clothing. Calloused hands. What We Know Owns and operates Stonehaven Supplies on the main street. Took over the family"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-esmerelda-voss-md",
+    "name": "Esmerelda Voss",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Esmerelda Voss.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Esmerelda Voss.html",
+    "summary": "Appearance Silver haired woman in her late 50s, still sharp eyed and steady handed. Wears simple clothes but carries herself like someone who's seen the worst the world has to offer and walked away from it."
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-evelyn-marroway-md",
+    "name": "Evelyn Marroway",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Evelyn Marroway.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Evelyn Marroway.html",
+    "summary": "Appearance Average height woman with blonde hair usually worn in a neat bun. Soft, measured voice. What We Know Receptionist at the Highreach Merchants Guild. Has an uncanny memory for names and faces. Keeps meticulous notes"
+  },
+  {
+    "id": "public-storylines-exterminators-guild-md",
+    "name": "Exterminators Guild",
+    "type": "Storyline",
+    "region": "",
+    "location": "",
+    "tags": [
+      "Storyline",
+      "Crestfall",
+      "Highreach",
+      "Ardenville",
+      "ExterminatorsGuild"
+    ],
+    "path": "Public/Storylines/Exterminators Guild.md",
+    "url": "Public/Storylines/Exterminators Guild.html",
+    "summary": "Exterminators Guild Summary After the duplirat crisis in Highreach, the Exterminators Guild moved quickly to pull the party into its orbit. What looks like a reward may also be a test, and it now points straight"
+  },
+  {
+    "id": "public-world-groups-exterminators-guild-md",
+    "name": "Exterminators Guild",
+    "type": "Organization",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Organization",
+      "Crestfall",
+      "ExterminatorsGuild"
+    ],
+    "path": "Public/World/Groups/Exterminators Guild.md",
+    "url": "Public/World/Groups/Exterminators Guild.html",
+    "summary": "Overview A gnome operated pest control guild based in Highreach. Founded by gnome refugees, the guild has grown into the city's primary solution for infestations, tunnel maintenance, and urban wildlife management. Reputation Efficient and professional. Recently"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-06-exterminators-guild-induction-ceremony-md",
+    "name": "Exterminators Guild Induction Ceremony",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach",
+      "ExterminatorsGuild"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-06 Exterminators Guild Induction Ceremony.md",
+    "url": "Public/World/Events/Timeline/0496-03-06 Exterminators Guild Induction Ceremony.html",
+    "summary": "What Happened Don Gnocianno formally inducted the party into the Exterminators Guild. The ceremony took place amid Highreach's rebuilding after the Duplirat Crisis. Details Rat themed headdresses presented to each party member — grant darkvision Ceremony"
+  },
+  {
+    "id": "public-world-crestfall-fairfield-fairfield-md",
+    "name": "Fairfield",
+    "type": "Settlement",
+    "region": "Crestfall",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "Crestfall",
+      "Fairfield"
+    ],
+    "path": "Public/World/Crestfall/Fairfield/Fairfield.md",
+    "url": "Public/World/Crestfall/Fairfield/Fairfield.html",
+    "summary": "Fairfield.png Overview Fairfield stands at the junction of the Great Western Road and the Silverleaf Trade Route — a thriving trade town of 3,500 souls serving as the primary gateway between Crestfall and the elven Silverleaf"
+  },
+  {
+    "id": "public-world-images-fairfieldimageprompt-md",
+    "name": "FairfieldImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/FairfieldImageprompt.md",
+    "url": "Public/World/Images/FairfieldImageprompt.html",
+    "summary": "Fairfield Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-father-eldon-lightbringer-md",
+    "name": "Father Eldon Lightbringer",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Father Eldon Lightbringer.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Father Eldon Lightbringer.html",
+    "summary": "Appearance Robust man in his late 50s, silvery gray hair, short well groomed beard. Wears simple robes in earthy browns and golden hues with a golden sunburst pendant. What We Know High Priest of Pelor at"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-felix-tradewind-md",
+    "name": "Felix Tradewind",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Felix Tradewind.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Felix Tradewind.html",
+    "summary": "Appearance Medium build, short blond hair, quick smile, and sharp calculating eyes. What We Know Runs Target by Tradewind, a well stocked general goods store in Highreach. Shrewd haggler with a reputation for competitive prices. First"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-fiona-hammerfist-nee-thistledown-md",
+    "name": "Fiona Hammerfist nee Thistledown",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Fiona Hammerfist nee Thistledown.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Fiona Hammerfist nee Thistledown.html",
+    "summary": "Appearance An aging woman with silvery hair. Wears quality clothing with hammer motifs on the sleeves. What We Know Wife of Oren Hammerfist. A regular patron at the Sturdy Mugg. Associated with the Nightstalkers adventuring party."
+  },
+  {
+    "id": "public-world-crestfall-ardenville-fishermans-guild-md",
+    "name": "Fisherman's Guild",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Ardenville",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Ardenville",
+      "Guild"
+    ],
+    "path": "Public/World/Crestfall/Ardenville/Fishermans Guild.md",
+    "url": "Public/World/Crestfall/Ardenville/Fishermans Guild.html",
+    "summary": "Description Weather beaten wooden building right on the waterfront. Giant pike skulls mounted along the roofline. Inside smells of fish, salt, tar, and old rope — nets hang from hooks, maritime superstitions carved into every surface."
+  },
+  {
+    "id": "public-world-groups-fishermans-guild-md",
+    "name": "Fisherman's Guild",
+    "type": "Organization",
+    "region": "Crestfall",
+    "location": "Ardenville",
+    "tags": [
+      "Organization",
+      "Crestfall",
+      "Ardenville",
+      "Guild"
+    ],
+    "path": "Public/World/Groups/Fishermans Guild.md",
+    "url": "Public/World/Groups/Fishermans Guild.html",
+    "summary": "Overview The oldest organization in Ardenville. Helps fishermen survive the dangerous work of harvesting Lake Arden, providing equipment, weather forecasts, and mutual aid when the catch is poor. Reputation Respected by locals as the backbone of"
+  },
+  {
+    "id": "public-world-crestfall-fairfield-forgefires-armaments-md",
+    "name": "Forgefires Armaments",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Fairfield",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Fairfield"
+    ],
+    "path": "Public/World/Crestfall/Fairfield/Forgefires Armaments.md",
+    "url": "Public/World/Crestfall/Fairfield/Forgefires Armaments.html",
+    "summary": "Description A well organized forge producing sturdy armor. The sound of efficient hammering fills the space as Joren works with quick, precise movements. Proprietor Joren Forgefire — efficient and practical, known for speed and reliability Services"
+  },
+  {
+    "id": "public-world-ironpeak-mountains-forgepeak-forgepeak-md",
+    "name": "ForgePeak",
+    "type": "Settlement",
+    "region": "IronpeakMountains",
+    "location": "Ironpeak Mountains",
+    "tags": [
+      "Settlement",
+      "IronpeakMountains",
+      "Dwarven"
+    ],
+    "path": "Public/World/Ironpeak Mountains/Forgepeak/ForgePeak.md",
+    "url": "Public/World/Ironpeak Mountains/Forgepeak/ForgePeak.html",
+    "summary": "Forgepeak.png Nestled deep within the heart of Ironpeak Mountain, ForgePeak's halls echo with the clang of hammers and the roar of molten metal. The city is carved from living rock — tunnels, grand chambers, and forges"
+  },
+  {
+    "id": "public-world-images-forgepeakimageprompt-md",
+    "name": "ForgePeakImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/ForgePeakImageprompt.md",
+    "url": "Public/World/Images/ForgePeakImageprompt.html",
+    "summary": "ForgePeak Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-06-foundation-induction-ceremony-md",
+    "name": "Foundation Induction Ceremony",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach",
+      "Foundation"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-06 Foundation Induction Ceremony.md",
+    "url": "Public/World/Events/Timeline/0496-03-06 Foundation Induction Ceremony.html",
+    "summary": "What Happened During the post crisis recovery in Highreach, an elderly soup vendor named Elder Rowan approached Justin and Vanessa at his \"Foundation Soup Kitchen\" cart. Details Each received a bowl of soup with a small,"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-01-frederick-goldman-rat-quest-completed-md",
+    "name": "Frederick Goldman Rat Quest Completed",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-01 Frederick Goldman Rat Quest Completed.md",
+    "url": "Public/World/Events/Timeline/0496-03-01 Frederick Goldman Rat Quest Completed.html",
+    "summary": "What Happened The party cleared Lord Frederick Goldman's cellar of rats, killing all doppelrats but damaging about 20% of the wine collection The guild refused to pay for mutated rat tails but paid out for the"
+  },
+  {
+    "id": "public-world-silverleaf-lands-frostglade-frostglade-md",
+    "name": "FrostGlade",
+    "type": "Settlement",
+    "region": "SilverleafLands",
+    "location": "Silverleaf Lands",
+    "tags": [
+      "Settlement",
+      "SilverleafLands",
+      "Elven"
+    ],
+    "path": "Public/World/Silverleaf Lands/Frostglade/FrostGlade.md",
+    "url": "Public/World/Silverleaf Lands/Frostglade/FrostGlade.html",
+    "summary": "Frostglade.png Snow covered trees and shimmering ice sculptures greet you as you approach. The city’s gates, adorned with intricate elven designs, open to reveal a landscape where nature and architecture blend seamlessly. Pathways lined with luminescent"
+  },
+  {
+    "id": "public-world-images-frostgladeimageprompt-md",
+    "name": "FrostGladeImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/FrostGladeImageprompt.md",
+    "url": "Public/World/Images/FrostGladeImageprompt.html",
+    "summary": "FrostGlade Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-gareth-ironbrow-md",
+    "name": "Gareth Ironbrow",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Gareth Ironbrow.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Gareth Ironbrow.html",
+    "summary": "Appearance Large, muscle bound bald man with a prominent tribal tattoo covering his left arm. Carries a greataxe on his back. What We Know A large, intimidating enforcer seen around Highreach. Led a group of bandits"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-garrick-ironbrow-md",
+    "name": "Garrick Ironbrow",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Garrick Ironbrow.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Garrick Ironbrow.html",
+    "summary": "Appearance Large, muscle bound bald man, usually seen close behind the Merchants Guild Guildmaster. Carries a greatsword on his back. What We Know Personal bodyguard to the Guildmaster of the Highreach Merchants Guild. Hails from Stonehaven,"
+  },
+  {
+    "id": "public-world-ironpeak-mountains-gemstone-hollow-gemstone-hollow-md",
+    "name": "Gemstone Hollow",
+    "type": "Settlement",
+    "region": "IronpeakMountains",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "IronpeakMountains",
+      "Dwarven"
+    ],
+    "path": "Public/World/Ironpeak Mountains/Gemstone Hollow/Gemstone Hollow.md",
+    "url": "Public/World/Ironpeak Mountains/Gemstone Hollow/Gemstone Hollow.html",
+    "summary": "GemStoneHollow.png Overview A village specializing in gemcutting and jewelry making, utilizing the rare gems mined from Ironpeak."
+  },
+  {
+    "id": "public-world-images-gemstonehollowimageprompt-md",
+    "name": "GemstoneHollowImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/GemstoneHollowImageprompt.md",
+    "url": "Public/World/Images/GemstoneHollowImageprompt.html",
+    "summary": "Gemstone Hollow Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-02-goblins-in-the-mine-first-room-md",
+    "name": "Goblins in the Mine - First Room",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-02 Goblins in the Mine - First Room.md",
+    "url": "Public/World/Events/Timeline/0496-03-02 Goblins in the Mine - First Room.html",
+    "summary": "What Happened The party took the Goblins in the Mine quest from the Adventurers Guild They entered the mines and cleared the first room — 5 goblins defeated Earned 5 gold and 5 guild points for"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-03-goldman-story-buried-in-newspaper-md",
+    "name": "Goldman Story Buried in Newspaper",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-03 Goldman Story Buried in Newspaper.md",
+    "url": "Public/World/Events/Timeline/0496-03-03 Goldman Story Buried in Newspaper.html",
+    "summary": "What Happened Day 3 The party read the newspaper at the Adventurers Guild Alistair Goldman appeared in a small story buried in the back pages Despite Jarek going to the authorities, Goldman managed to suppress the"
+  },
+  {
+    "id": "public-world-crestfall-ardenville-npcs-gregor-woods-md",
+    "name": "Gregor Woods",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Ardenville",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Ardenville"
+    ],
+    "path": "Public/World/Crestfall/Ardenville/NPCs/Gregor Woods.md",
+    "url": "Public/World/Crestfall/Ardenville/NPCs/Gregor Woods.html",
+    "summary": "Appearance Broad shouldered veteran with a scarred cheek and calm, steady bearing. Always watching the shoreline. What We Know Captain of Ardenville's lake guard. Commands patrols that keep monsters and smugglers in check across Lake Arden."
+  },
+  {
+    "id": "public-world-crestfall-hillcrest-npcs-guard-captain-roderick-stone-md",
+    "name": "Guard Captain Roderick Stone",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Hillcrest",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Hillcrest"
+    ],
+    "path": "Public/World/Crestfall/Hillcrest/NPCs/Guard Captain Roderick Stone.md",
+    "url": "Public/World/Crestfall/Hillcrest/NPCs/Guard Captain Roderick Stone.html",
+    "summary": "Appearance Broad shouldered and imposing, with a trimmed beard and sharp blue eyes. Keeps his armor well maintained. What We Know Hillcrest's Guard Captain. Duty bound and fair, known as a keen observer. Under pressure from"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-npcs-gunnar-ironforge-md",
+    "name": "Gunnar Ironforge",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Stonehaven",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/NPCs/Gunnar Ironforge.md",
+    "url": "Public/World/Crestfall/Stonehaven/NPCs/Gunnar Ironforge.html",
+    "summary": "Appearance Broad shouldered even for a dwarf. Thick brown beard streaked with gray, often singed. Soot stained leather apron, powerful arms covered in small burns and scars. Sharp blue eyes. What We Know Runs Ironforge Smithy"
+  },
+  {
+    "id": "public-world-unknown-npcs-gunther-the-magnificent-md",
+    "name": "Günther the Magnificent",
+    "type": "NPC",
+    "region": "Unknown",
+    "location": "Unknown",
+    "tags": [
+      "NPC",
+      "SexyWizardGang"
+    ],
+    "path": "Public/World/Unknown/NPCs/Günther the Magnificent.md",
+    "url": "Public/World/Unknown/NPCs/Günther the Magnificent.html",
+    "summary": "Appearance Tall, shirtless wizard with an oiled chest and gold rings on every finger. Wears a fur lined cloak draped over one shoulder and low slung trousers. Speaks with a thick Germanic accent. What We Know"
+  },
+  {
+    "id": "public-world-crestfall-hillcrest-hammerstrikes-weapons-md",
+    "name": "Hammerstrikes Weapons",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Hillcrest",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Hillcrest"
+    ],
+    "path": "Public/World/Crestfall/Hillcrest/Hammerstrikes Weapons.md",
+    "url": "Public/World/Crestfall/Hillcrest/Hammerstrikes Weapons.html",
+    "summary": "Description A lively forge where the ring of hammer on steel never stops. Weapons of all kinds line the walls — some mundane, some faintly glowing with enchantment. Proprietor Bruna Hammerstrike — boisterous and jovial, passionate"
+  },
+  {
+    "id": "public-world-crestfall-highreach-highreach-md",
+    "name": "Highreach",
+    "type": "Settlement",
+    "region": "Crestfall",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/Highreach.md",
+    "url": "Public/World/Crestfall/Highreach/Highreach.html",
+    "summary": "Highreach.png Overview Capital of the Crestfall Kingdom. An awe inspiring city perched atop a natural plateau, with steep cliffs on three sides and breathtaking views. Ancient fortifications blend with modern structures across a thriving cityscape. Arrival"
+  },
+  {
+    "id": "public-world-crestfall-highreach-highreach-adventurers-guild-md",
+    "name": "Highreach Adventurers Guild",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Highreach",
+      "AdventurersGuild",
+      "Guildhall"
+    ],
+    "path": "Public/World/Crestfall/Highreach/Highreach Adventurers Guild.md",
+    "url": "Public/World/Crestfall/Highreach/Highreach Adventurers Guild.html",
+    "summary": "Description Two formidable statues of armored warriors flank the entrance, gleaming swords pointed skyward. Large wooden doors reinforced with iron bands, carved with the crest of Crestfall — a shield with a roaring lion and crossed"
+  },
+  {
+    "id": "public-world-crestfall-highreach-highreach-merchants-guild-md",
+    "name": "HighReach Merchants Guild",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Highreach",
+      "MerchantsGuild",
+      "Guildhall"
+    ],
+    "path": "Public/World/Crestfall/Highreach/HighReach Merchants Guild.md",
+    "url": "Public/World/Crestfall/Highreach/HighReach Merchants Guild.html",
+    "summary": "Description Modest two story stone building on a quiet street in the Merchant District. Clean lines, quality stonework, dark wooden trim. Sturdy oak door with polished brass handles. A small plaque bears the guild emblem a"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-06-highreach-mine-collapses-md",
+    "name": "Highreach Mine Collapses",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-06 Highreach Mine Collapses.md",
+    "url": "Public/World/Events/Timeline/0496-03-06 Highreach Mine Collapses.html",
+    "summary": "The Highreach Mines collapsed after the party defeated the creature at the bottom. The mine structure gave way floor by floor The party narrowly escaped as tunnels caved in behind them The mines are now sealed"
+  },
+  {
+    "id": "public-world-crestfall-highreach-highreach-mines-md",
+    "name": "Highreach Mines",
+    "type": "Location",
+    "region": "Crestfall",
+    "location": "",
+    "tags": [
+      "Location",
+      "Crestfall",
+      "Highreach",
+      "Dungeon"
+    ],
+    "path": "Public/World/Crestfall/Highreach/Highreach Mines.md",
+    "url": "Public/World/Crestfall/Highreach/Highreach Mines.html",
+    "summary": "Description An abandoned iron mine carved into the mountainside beneath Highreach. The entrance is dark and cold, with old rail tracks disappearing into the blackness. Known Features Multi level mine, descending deep into the mountain Iron"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-highreach-npc-index-md",
+    "name": "Highreach NPC Index",
+    "type": "Reference",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Reference",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Highreach NPC Index.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Highreach NPC Index.html",
+    "summary": "NPCs of Highreach"
+  },
+  {
+    "id": "public-world-images-highreachimageprompt-md",
+    "name": "HighreachImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/HighreachImageprompt.md",
+    "url": "Public/World/Images/HighreachImageprompt.html",
+    "summary": "Highreach Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-images-highreachminesimageprompt-md",
+    "name": "HighreachMinesImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/HighreachMinesImageprompt.md",
+    "url": "Public/World/Images/HighreachMinesImageprompt.html",
+    "summary": "Highreach Mines Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-npcs-hilda-ravenshadow-md",
+    "name": "Hilda Ravenshadow",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Stonehaven",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/NPCs/Hilda Ravenshadow.md",
+    "url": "Public/World/Crestfall/Stonehaven/NPCs/Hilda Ravenshadow.html",
+    "summary": "Appearance Slender and enigmatic, long black hair streaked with silver. Pale blue eyes that seem to see beyond the physical. Deep purple and midnight blue robes with silver trinkets that chime softly. What We Know Owns"
+  },
+  {
+    "id": "public-world-crestfall-hillcrest-hillcrest-md",
+    "name": "Hillcrest",
+    "type": "Settlement",
+    "region": "Crestfall",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "Crestfall",
+      "Hillcrest"
+    ],
+    "path": "Public/World/Crestfall/Hillcrest/Hillcrest.md",
+    "url": "Public/World/Crestfall/Hillcrest/Hillcrest.html",
+    "summary": "Hillcrest.png Overview A picturesque wine making village of about 400 souls nestled in the Crestfall countryside. Rolling vineyards stretch across gentle hillsides, and the scent of fermenting grapes hangs in the air. Lately, a mysterious blight"
+  },
+  {
+    "id": "public-world-images-hillcrestimageprompt-md",
+    "name": "HillcrestImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/HillcrestImageprompt.md",
+    "url": "Public/World/Images/HillcrestImageprompt.html",
+    "summary": "Hillcrest Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-ingrid-hightower-md",
+    "name": "Ingrid Hightower",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Ingrid Hightower.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Ingrid Hightower.html",
+    "summary": "Appearance A younger woman with a short blonde pixie cut. Usually found behind the front desk of the Adventurers Guild. What We Know Receptionist at the Highreach Adventurers Guild. Friendly and organized, she keeps the guild"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-npcs-ingrid-stoneheart-md",
+    "name": "Ingrid Stoneheart",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Stonehaven",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/NPCs/Ingrid Stoneheart.md",
+    "url": "Public/World/Crestfall/Stonehaven/NPCs/Ingrid Stoneheart.html",
+    "summary": "Appearance Tall and imposing, long dark hair in a severe style. Sharp angular features and piercing gray eyes. Dresses in practical but fine dark clothing. Silver pendant at her throat. What We Know Mayor of Stonehaven,"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-ironforge-smithy-md",
+    "name": "Ironforge Smithy",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Stonehaven",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/Ironforge Smithy.md",
+    "url": "Public/World/Crestfall/Stonehaven/Ironforge Smithy.html",
+    "summary": "Description A robust stone and timber workshop on Stonehaven's eastern edge. The constant ring of hammer on anvil echoes all day, and the glow of multiple forges can be seen through reinforced windows. Proprietor Gunnar Ironforge"
+  },
+  {
+    "id": "public-world-ironpeak-mountains-ironpeak-mountains-md",
+    "name": "Ironpeak Mountains",
+    "type": "Region",
+    "region": "",
+    "location": "",
+    "tags": [
+      "Region",
+      "IronpeakMountains"
+    ],
+    "path": "Public/World/Ironpeak Mountains/Ironpeak Mountains.md",
+    "url": "Public/World/Ironpeak Mountains/Ironpeak Mountains.html",
+    "summary": "Overview The dwarven homeland of the Ironpeak Mountains rises in jagged granite peaks veined with precious metals and rare gems. Master craftsmen forge legendary weapons and armor in halls carved from living rock, while the clang"
+  },
+  {
+    "id": "public-world-images-ironpeakmountainsimageprompt-md",
+    "name": "IronpeakMountainsImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/IronpeakMountainsImageprompt.md",
+    "url": "Public/World/Images/IronpeakMountainsImageprompt.html",
+    "summary": "Ironpeak Mountains Image Prompt Prompt — Primary (High Aerial Atlas View) Negative Prompt Alternative POV A — Ground Level Approach to ForgePeak's Gate Use this if the full regional overview is too complex. This POV is"
+  },
+  {
+    "id": "public-world-ironpeak-mountains-ironroot-ironroot-md",
+    "name": "Ironroot",
+    "type": "Settlement",
+    "region": "IronpeakMountains",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "IronpeakMountains",
+      "Dwarven"
+    ],
+    "path": "Public/World/Ironpeak Mountains/Ironroot/Ironroot.md",
+    "url": "Public/World/Ironpeak Mountains/Ironroot/Ironroot.html",
+    "summary": "Ironroot.png Overview A village built around ancient dwarven shrines, where religious ceremonies and rituals are performed. Home to dwarf monks who spend their days in meditation."
+  },
+  {
+    "id": "public-world-images-ironrootimageprompt-md",
+    "name": "IronrootImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/IronrootImageprompt.md",
+    "url": "Public/World/Images/IronrootImageprompt.html",
+    "summary": "Ironroot Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-crestfall-ardenville-npcs-isolde-fairweather-md",
+    "name": "Isolde Fairweather",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Ardenville",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Ardenville"
+    ],
+    "path": "Public/World/Crestfall/Ardenville/NPCs/Isolde Fairweather.md",
+    "url": "Public/World/Crestfall/Ardenville/NPCs/Isolde Fairweather.html",
+    "summary": "Appearance Weatherworn woman in her late forties, sun tanned skin, voice like rolling surf. Carries herself with the easy confidence of someone who's earned her authority. What We Know Mayor of Ardenville. Rose from repairing nets"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-jarek-ironfist-md",
+    "name": "Jarek IronFist",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach",
+      "MerchantsGuild"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Jarek IronFist.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Jarek IronFist.html",
+    "summary": "Appearance Stocky, weathered man with calloused hands and a perpetual scowl. Looked like someone who built his way up from nothing. What We Know A merchant in the Merchants Guild who had a dispute with Guildmaster"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-04-jarek-ironfist-found-dead-md",
+    "name": "Jarek IronFist Found Dead",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-04 Jarek IronFist Found Dead.md",
+    "url": "Public/World/Events/Timeline/0496-03-04 Jarek IronFist Found Dead.html",
+    "summary": "What Happened The morning newspaper reported Jarek IronFist was found dead after falling from a window at his home The party suspects Alistair Goldman was behind it Key Takeaways Goldman's retaliation is real — going to"
+  },
+  {
+    "id": "public-world-crestfall-hillcrest-npcs-jasper-ironforge-md",
+    "name": "Jasper Ironforge",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Hillcrest",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Hillcrest"
+    ],
+    "path": "Public/World/Crestfall/Hillcrest/NPCs/Jasper Ironforge.md",
+    "url": "Public/World/Crestfall/Hillcrest/NPCs/Jasper Ironforge.html",
+    "summary": "Appearance Stocky and muscular, soot stained apron, hands marked by years at the forge. What We Know Hillcrest's blacksmith. Straightforward craftsman focused on quality work. Serves all customers fairly regardless of village politics. First Impressions A"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-jon-brightman-md",
+    "name": "Jon Brightman",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Jon Brightman.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Jon Brightman.html",
+    "summary": "Appearance Small halfling in oversized robes and a floppy hat, usually buried in half open textbooks. What We Know Evocation wizard at the Highreach Wizard's Tower. Seems perpetually busy with research. Known to be vocal about"
+  },
+  {
+    "id": "public-players-jp-player-sheet-md",
+    "name": "JP Player Sheet",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/Players/JP Player Sheet.md",
+    "url": "Public/Players/JP Player Sheet.html",
+    "summary": "Character Stats Equipment Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJpPlayerNotes Full Class Info"
+  },
+  {
+    "id": "public-players-julie-player-sheet-md",
+    "name": "Julie Player Sheet",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/Players/Julie Player Sheet.md",
+    "url": "Public/Players/Julie Player Sheet.html",
+    "summary": "Character Stats Equipment Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJulieDnDNotes Full Class Info"
+  },
+  {
+    "id": "public-players-justin-player-sheet-md",
+    "name": "Justin Player Sheet",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/Players/Justin Player Sheet.md",
+    "url": "Public/Players/Justin Player Sheet.html",
+    "summary": "Character Stats Equipment Spells 1st Level Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJustinDnDNotes Full Class Info Class Features & Abilities"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-kara-nightshade-md",
+    "name": "Kara Nightshade",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Kara Nightshade.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Kara Nightshade.html",
+    "summary": "Appearance Petite and agile, with short dark hair and quick, sharp eyes. Rarely stays still for long. What We Know A rogue and member of the Highreach Adventurers Guild. Known for her stealth and knack for"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-kara-stonefoot-md",
+    "name": "Kara Stonefoot",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Kara Stonefoot.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Kara Stonefoot.html",
+    "summary": "Appearance A sturdy dwarven woman with a stern expression and calloused hands. Carries herself with quiet authority. What We Know Owner of the Sturdy Mugg Inn. Keeps her patrons in line with a quick glare. The"
+  },
+  {
+    "id": "public-world-crestfall-ardenville-npcs-kellen-redshore-md",
+    "name": "Kellen Redshore",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Ardenville",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Ardenville"
+    ],
+    "path": "Public/World/Crestfall/Ardenville/NPCs/Kellen Redshore.md",
+    "url": "Public/World/Crestfall/Ardenville/NPCs/Kellen Redshore.html",
+    "summary": "Appearance Tall half elf with salt streaked hair, permanent squint, and a ledger always in hand. Weather beaten from years on the water. What We Know Harbormaster of Ardenville. Oversees the Merchants Guild Warehouse and all"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-king-alaric-stormhelm-md",
+    "name": "King Alaric Stormhelm",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/King Alaric Stormhelm.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/King Alaric Stormhelm.html",
+    "summary": "Appearance Broad shouldered man in his late fifties with a silver streaked beard. Wears a crown of iron and sapphire. Carries an old campaign sword at his hip. What We Know King of Highreach. Rose through"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-lady-elara-moonshadow-md",
+    "name": "Lady Elara Moonshadow",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Lady Elara Moonshadow.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Lady Elara Moonshadow.html",
+    "summary": "Appearance Willowy half elf with silver streaked dark hair and violet eyes. Wears deep blue robes trimmed with lunar motifs. Moves with deliberate grace. What We Know Long serving advisor to King Alaric. Respected for her"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-lady-millicent-goldleaf-md",
+    "name": "Lady Millicent Goldleaf",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Lady Millicent Goldleaf.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Lady Millicent Goldleaf.html",
+    "summary": "Appearance Human noblewoman with a sharp, confident bearing. Dresses in palace appropriate attire that balances elegance with practicality. What We Know An influential voice in Highreach's palace circles. Advocates for merit based policies and guild inclusivity."
+  },
+  {
+    "id": "public-world-crestfall-ardenville-lake-arden-md",
+    "name": "Lake Arden",
+    "type": "Location",
+    "region": "Crestfall",
+    "location": "",
+    "tags": [
+      "Location",
+      "Crestfall",
+      "Lake"
+    ],
+    "path": "Public/World/Crestfall/Ardenville/Lake Arden.md",
+    "url": "Public/World/Crestfall/Ardenville/Lake Arden.html",
+    "summary": "Description A vast briny lake in northern Crestfall, shrouded in persistent mist. Kelp choked shallows along the northern shore form a natural breakwater near Ardenville. Visibility drops sharply past the shallows. Known Features Rich fishing grounds"
+  },
+  {
+    "id": "public-world-images-lakeardenimageprompt-md",
+    "name": "LakeArdenImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/LakeArdenImageprompt.md",
+    "url": "Public/World/Images/LakeArdenImageprompt.html",
+    "summary": "Lake Arden Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-crestfall-hillcrest-npcs-liliana-moonleaf-md",
+    "name": "Liliana Moonleaf",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Hillcrest",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Hillcrest"
+    ],
+    "path": "Public/World/Crestfall/Hillcrest/NPCs/Liliana Moonleaf.md",
+    "url": "Public/World/Crestfall/Hillcrest/NPCs/Liliana Moonleaf.html",
+    "summary": "Appearance Graceful features suggesting elven heritage. Often has traces of magical ingredients on her clothing. What We Know Owns the local magic shop in Hillcrest. Knowledgeable about magical remedies and supplies. Valuable to both traditional and"
+  },
+  {
+    "id": "public-players-liz-player-sheet-md",
+    "name": "Liz Player Sheet",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/Players/Liz Player Sheet.md",
+    "url": "Public/Players/Liz Player Sheet.html",
+    "summary": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaLizDnDNotes Full Class Info"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-lord-cedric-brightblade-md",
+    "name": "Lord Cedric Brightblade",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Lord Cedric Brightblade.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Lord Cedric Brightblade.html",
+    "summary": "Appearance Tall and lean, clean shaven, with cropped iron gray hair and a scar from left temple to jaw. Wears polished half plate even at court. What We Know Commands Highreach's City Watch. A strict disciplinarian"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-lord-frederick-goldman-md",
+    "name": "Lord Frederick Goldman",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Lord Frederick Goldman.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Lord Frederick Goldman.html",
+    "summary": "Appearance Large, imposing man dressed in fine riding leathers. Wears his wealth with casual confidence. What We Know A Highreach nobleman of old money. Known for his extensive wine collection from Hillcrest and his love of"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-01-lost-pet-quest-completed-md",
+    "name": "Lost Pet Quest Completed",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-01 Lost Pet Quest Completed.md",
+    "url": "Public/World/Events/Timeline/0496-03-01 Lost Pet Quest Completed.html",
+    "summary": "What Happened The party took on the Lost Pet quest from the Adventurers Guild to find a missing housecat in the forest Julie turned into a rat to lure predators, Claire killed the forest animals that"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-lyra-dawnbringer-md",
+    "name": "Lyra Dawnbringer",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Lyra Dawnbringer.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Lyra Dawnbringer.html",
+    "summary": "Appearance Slender and serene, with long golden hair and kind, bright eyes. Carries herself with a gentle calm. What We Know A cleric and healer with the Highreach Adventurers Guild. Devoted to her guildmates and always"
+  },
+  {
+    "id": "public-world-crestfall-hillcrest-npcs-lysander-thornfield-md",
+    "name": "Lysander Thornfield",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Hillcrest",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Hillcrest"
+    ],
+    "path": "Public/World/Crestfall/Hillcrest/NPCs/Lysander Thornfield.md",
+    "url": "Public/World/Crestfall/Hillcrest/NPCs/Lysander Thornfield.html",
+    "summary": "Appearance Early 30s, well tailored traveling clothes. Dark hair styled fashionably, penetrating green eyes. A subtle tattoo on his wrist. What We Know A charming traveling merchant who deals in fine wines. Smooth social operator with"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-marlas-gear-md",
+    "name": "Marlas Gear",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Stonehaven",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/Marlas Gear.md",
+    "url": "Public/World/Crestfall/Stonehaven/Marlas Gear.html",
+    "summary": "Description Shelves and racks stocked with essential adventuring equipment. Backpacks, bedrolls, ropes, torches, and waterskins are neatly arranged. A display case features healing potions and other valuable items. Proprietor Marla Greenthumb — friendly and resourceful, plump"
+  },
+  {
+    "id": "public-world-crestfall-hillcrest-npcs-mayor-linden-hearthwood-md",
+    "name": "Mayor Linden Hearthwood",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Hillcrest",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Hillcrest"
+    ],
+    "path": "Public/World/Crestfall/Hillcrest/NPCs/Mayor Linden Hearthwood.md",
+    "url": "Public/World/Crestfall/Hillcrest/NPCs/Mayor Linden Hearthwood.html",
+    "summary": "Appearance Middle aged, robust build, short brown hair with early grey. A welcoming smile lined with stress around the eyes. What We Know Diplomatic leader of Hillcrest. Known for finding compromise between competing interests in the"
+  },
+  {
+    "id": "public-world-groups-merchants-guild-md",
+    "name": "Merchants Guild",
+    "type": "Organization",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Organization",
+      "Crestfall",
+      "MerchantsGuild"
+    ],
+    "path": "Public/World/Groups/Merchants Guild.md",
+    "url": "Public/World/Groups/Merchants Guild.html",
+    "summary": "Overview The primary trade organization in Highreach, overseeing merchant licensing, market regulations, and trade route coordination across Crestfall. Reputation Powerful and well connected. Membership is practically required for serious commerce in the region. Some grumble about"
+  },
+  {
+    "id": "public-storylines-merchants-guild-corruption-md",
+    "name": "Merchants Guild Corruption",
+    "type": "Storyline",
+    "region": "",
+    "location": "",
+    "tags": [
+      "Storyline",
+      "Crestfall",
+      "Highreach",
+      "Ardenville",
+      "MerchantsGuild"
+    ],
+    "path": "Public/Storylines/Merchants Guild Corruption.md",
+    "url": "Public/Storylines/Merchants Guild Corruption.html",
+    "summary": "Merchants Guild Corruption Summary What started as a simple guild job in Highreach turned into murder, intimidation, and open hostility. The party now has every reason to believe the Merchants Guild's leadership is hiding rot behind"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-02-merchants-guild-quest-completed-md",
+    "name": "Merchants Guild Quest Completed",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-02 Merchants Guild Quest Completed.md",
+    "url": "Public/World/Events/Timeline/0496-03-02 Merchants Guild Quest Completed.html",
+    "summary": "What Happened The party took a private job from Alistair Goldman, guildmaster of the Merchants Guild They signed a magical contract forbidding them from discussing the quest They investigated Jarek IronFist and spoke with other small"
+  },
+  {
+    "id": "public-world-crestfall-ardenville-merchants-guild-warehouse-md",
+    "name": "Merchants Guild Warehouse",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Ardenville",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Ardenville"
+    ],
+    "path": "Public/World/Crestfall/Ardenville/Merchants Guild Warehouse.md",
+    "url": "Public/World/Crestfall/Ardenville/Merchants Guild Warehouse.html",
+    "summary": "Description Largest building in Ardenville — reinforced stone and heavy timber dominating the main pier. Constant activity carts rolling, dock workers hauling crates, merchants arguing over manifests. Proprietor Kellen Redshore — harbormaster, runs a tight operation"
+  },
+  {
+    "id": "public-world-crestfall-fairfield-npcs-meredith-caravan-friend-md",
+    "name": "Meredith Caravan-Friend",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Fairfield",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Fairfield"
+    ],
+    "path": "Public/World/Crestfall/Fairfield/NPCs/Meredith Caravan-Friend.md",
+    "url": "Public/World/Crestfall/Fairfield/NPCs/Meredith Caravan-Friend.html",
+    "summary": "Appearance A woman in her early thirties with the weathered look of someone used to life on the road. What We Know A former caravan trader currently in Fairfield. Survivor of a caravan attack that left"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-03-mine-history-discovered-at-library-md",
+    "name": "Mine History Discovered at Library",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-03 Mine History Discovered at Library.md",
+    "url": "Public/World/Events/Timeline/0496-03-03 Mine History Discovered at Library.html",
+    "summary": "What Happened The party researched the Highreach Mines at the Adventurers Guild library Learned the mines were a joint dwarf human operation that was abandoned ~10 years ago when the iron vein ran dry The mines"
+  },
+  {
+    "id": "public-world-crestfall-ardenville-npcs-mira-softstep-md",
+    "name": "Mira Softstep",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Ardenville",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Ardenville"
+    ],
+    "path": "Public/World/Crestfall/Ardenville/NPCs/Mira Softstep.md",
+    "url": "Public/World/Crestfall/Ardenville/NPCs/Mira Softstep.html",
+    "summary": "Appearance Cheerful halfling with salt and pepper curls, flour dusted apron, and an infectious laugh. Smells faintly of fish stew and driftwood smoke. What We Know Innkeeper of The Netted Nymph for twenty years. Knows everyone"
+  },
+  {
+    "id": "public-world-silverleaf-lands-moonshade-moonshade-md",
+    "name": "Moonshade",
+    "type": "Settlement",
+    "region": "SilverleafLands",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "SilverleafLands",
+      "Elven"
+    ],
+    "path": "Public/World/Silverleaf Lands/Moonshade/Moonshade.md",
+    "url": "Public/World/Silverleaf Lands/Moonshade/Moonshade.html",
+    "summary": "Moonshade.png Overview A hidden village deep within the Everwood, where elven elders study ancient lore and magic. Secluded and difficult to find without a guide."
+  },
+  {
+    "id": "public-world-images-moonshadeimageprompt-md",
+    "name": "MoonshadeImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/MoonshadeImageprompt.md",
+    "url": "Public/World/Images/MoonshadeImageprompt.html",
+    "summary": "Moonshade Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-ironpeak-mountains-cannibal-camp-mountain-tribes-md",
+    "name": "Mountain Tribes",
+    "type": "Location",
+    "region": "IronpeakMountains",
+    "location": "",
+    "tags": [
+      "Location",
+      "IronpeakMountains",
+      "Danger"
+    ],
+    "path": "Public/World/Ironpeak Mountains/Cannibal Camp/Mountain Tribes.md",
+    "url": "Public/World/Ironpeak Mountains/Cannibal Camp/Mountain Tribes.html",
+    "summary": "Overview A tribe of cannibalistic humans that roam the Ironpeak Mountains, attacking unsuspecting travelers and consuming their provisions, horses, or the travelers themselves. Known Information Nomadic — no fixed camp known to outsiders Travelers on mountain"
+  },
+  {
+    "id": "public-world-images-mountaintribesimageprompt-md",
+    "name": "MountainTribesImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/MountainTribesImageprompt.md",
+    "url": "Public/World/Images/MountainTribesImageprompt.html",
+    "summary": "Mountain Tribes Image Prompt Prompt — Primary (High Oblique Aerial View) Negative Prompt Alternative POV A — Traveler's Perspective on the Narrow Road (RECOMMENDED) This ground level POV is the strongest single image for conveying the"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-mystic-wares-md",
+    "name": "Mystic Wares",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Stonehaven",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/Mystic Wares.md",
+    "url": "Public/World/Crestfall/Stonehaven/Mystic Wares.html",
+    "summary": "Description A two story building marked by crystal wind chimes. Dark wood with mystical symbols around the doorframe. Soft lights glow within at all hours, and herbal scents drift from the door. Proprietor Hilda Ravenshadow —"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-02-nightstalkers-disappeared-md",
+    "name": "Nightstalkers Disappeared",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-02 Nightstalkers disappeared.md",
+    "url": "Public/World/Events/Timeline/0496-03-02 Nightstalkers disappeared.html",
+    "summary": "What Happened The Nightstalkers, an experienced adventuring party, were last seen heading toward the mines They did not return to the Sturdy Mugg that evening Their fate is unknown Key Takeaways An entire adventuring party vanished"
+  },
+  {
+    "id": "public-world-crestfall-hillcrest-nightwhispers-potions-and-scrolls-md",
+    "name": "Nightwhispers Potions and Scrolls",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Hillcrest",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Hillcrest"
+    ],
+    "path": "Public/World/Crestfall/Hillcrest/Nightwhispers Potions and Scrolls.md",
+    "url": "Public/World/Crestfall/Hillcrest/Nightwhispers Potions and Scrolls.html",
+    "summary": "Description A dimly lit apothecary where shelves of glass vials catch the faint candlelight. The air is thick with the scent of dried herbs and alchemical reagents. Proprietor Selene Nightwhisper — calm and knowledgeable, deep expertise"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-nimble-nackfinger-md",
+    "name": "Nimble Nackfinger",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Nimble Nackfinger.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Nimble Nackfinger.html",
+    "summary": "Appearance Middle aged gnome with weathered hands and practical clothing. Looks like someone who spends more time in tunnels than in taverns. What We Know Chief Scout for the Exterminators Guild. Works closely with the city"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-nyla-windrider-md",
+    "name": "Nyla Windrider",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Nyla Windrider.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Nyla Windrider.html",
+    "summary": "Appearance Tall and lithe, with long silver hair, sharp elven features, and an ever alert expression. What We Know An elven ranger with the Highreach Adventurers Guild. Renowned for her archery skills and keen scouting instincts."
+  },
+  {
+    "id": "public-world-orcish-wastes-orc-capitol-orc-capitol-md",
+    "name": "Orc Capitol",
+    "type": "Settlement",
+    "region": "OrcishWastes",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "OrcishWastes",
+      "Orcish"
+    ],
+    "path": "Public/World/Orcish Wastes/Orc Capitol/Orc Capitol.md",
+    "url": "Public/World/Orcish Wastes/Orc Capitol/Orc Capitol.html",
+    "summary": "OrcCapitol.png Overview The capital city of the orcish territories. Little is known by outsiders."
+  },
+  {
+    "id": "public-world-orcish-wastes-orc-town-b-orc-city-b-md",
+    "name": "Orc City B",
+    "type": "Settlement",
+    "region": "OrcishWastes",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "OrcishWastes",
+      "Orcish"
+    ],
+    "path": "Public/World/Orcish Wastes/Orc Town B/Orc City B.md",
+    "url": "Public/World/Orcish Wastes/Orc Town B/Orc City B.html",
+    "summary": "OrcCityB.png Overview An orcish settlement in the Wastes. Little is known by outsiders."
+  },
+  {
+    "id": "public-world-orcish-wastes-orc-town-c-orc-city-c-md",
+    "name": "Orc City C",
+    "type": "Settlement",
+    "region": "OrcishWastes",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "OrcishWastes",
+      "Orcish"
+    ],
+    "path": "Public/World/Orcish Wastes/Orc Town C/Orc City C.md",
+    "url": "Public/World/Orcish Wastes/Orc Town C/Orc City C.html",
+    "summary": "OrcCityC.png Overview An orcish settlement in the Wastes. Little is known by outsiders."
+  },
+  {
+    "id": "public-world-images-orccapitolimageprompt-md",
+    "name": "OrcCapitolImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/OrcCapitolImageprompt.md",
+    "url": "Public/World/Images/OrcCapitolImageprompt.html",
+    "summary": "Orc Capitol Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-images-orccitybimageprompt-md",
+    "name": "OrcCityBImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/OrcCityBImageprompt.md",
+    "url": "Public/World/Images/OrcCityBImageprompt.html",
+    "summary": "Orc City B Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-images-orccitycimageprompt-md",
+    "name": "OrcCityCImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/OrcCityCImageprompt.md",
+    "url": "Public/World/Images/OrcCityCImageprompt.html",
+    "summary": "Orc City C Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-orcish-wastes-orcish-wastes-md",
+    "name": "Orcish Wastes",
+    "type": "Region",
+    "region": "",
+    "location": "",
+    "tags": [
+      "Region",
+      "OrcishWastes"
+    ],
+    "path": "Public/World/Orcish Wastes/Orcish Wastes.md",
+    "url": "Public/World/Orcish Wastes/Orcish Wastes.html",
+    "summary": "Overview A harsh and hostile territory east of Crestfall, dominated by warring orc tribes. Arid deserts, treacherous bogs, and windswept valleys make travel dangerous even without the ever present threat of orcish raiders. Geography Arid deserts"
+  },
+  {
+    "id": "public-world-images-orcishwastesimageprompt-md",
+    "name": "OrcishWastesImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/OrcishWastesImageprompt.md",
+    "url": "Public/World/Images/OrcishWastesImageprompt.html",
+    "summary": "Orcish Wastes Image Prompt Prompt — Primary (Wide Aerial Regional Overview) Negative Prompt Alternative POV A — Ground Level Vista from a Wasteland Ridge Use this if the full regional overview produces an unsatisfying result. This"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-oren-hammerfist-md",
+    "name": "Oren Hammerfist",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Oren Hammerfist.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Oren Hammerfist.html",
+    "summary": "Appearance Tall and powerfully built, with black hair in a warrior's knot and a silver streaked beard. Wears dark iron armor engraved with silver runes and carries a large war hammer. What We Know Member of"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-03-party-becomes-e-rank-adventurers-md",
+    "name": "Party Becomes E Rank Adventurers",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-03 Party becomes E Rank Adventurers.md",
+    "url": "Public/World/Events/Timeline/0496-03-03 Party becomes E Rank Adventurers.html",
+    "summary": "What Happened After clearing the first level of the mine dungeon, the party leveled up The Adventurers Guild promoted them to E Rank Each party member received a special class specific item as a gift from"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-03-party-clears-mine-level-1-md",
+    "name": "Party Clears Mine Level 1",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-03 Party Clears Mine Level 1.md",
+    "url": "Public/World/Events/Timeline/0496-03-03 Party Clears Mine Level 1.html",
+    "summary": "What Happened The party entered the Highreach Mines and cleared all of Level 1 Fought goblin archers, an ogre with casters, solved a pressure plate trap and a cryptographic puzzle Defeated hobgoblins in the boss room"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-04-party-clears-mine-level-2-md",
+    "name": "Party Clears Mine Level 2",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-04 Party Clears Mine Level 2.md",
+    "url": "Public/World/Events/Timeline/0496-03-04 Party Clears Mine Level 2.html",
+    "summary": "What Happened The party continued through Level 2 of the Highreach Mines Julie scouted ahead and solved a puzzle door Fought through a goblin held room, then used Daern's Instant Fortress to long rest inside the"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-05-party-defeats-merchants-guild-bandits-md",
+    "name": "Party Defeats Merchants Guild Bandits",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-05 Party Defeats Merchants Guild Bandits.md",
+    "url": "Public/World/Events/Timeline/0496-03-05 Party Defeats Merchants Guild Bandits.html",
+    "summary": "What Happened As the party exited the mines, a group of bandits ambushed them The lead bandit demanded their valuables, then attacked regardless The party suddenly felt sick mid fight — some kind of delayed poison"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-06-party-defeats-mine-boss-md",
+    "name": "Party Defeats Mine Boss",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-06 Party Defeats Mine Boss.md",
+    "url": "Public/World/Events/Timeline/0496-03-06 Party Defeats Mine Boss.html",
+    "summary": "The party reached the deepest chamber of Highreach Mines and faced something far worse than goblins. Solved the barrier riddle to reach the inner chamber Found a pulsating orb on a stone pedestal The wizard appeared"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-07-party-departs-highreach-for-silverleaf-lands-md",
+    "name": "Party Departs Highreach for Ardenville",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Crestfall",
+    "tags": [
+      "Event",
+      "Crestfall"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-07 Party Departs Highreach for Silverleaf Lands.md",
+    "url": "Public/World/Events/Timeline/0496-03-07 Party Departs Highreach for Silverleaf Lands.html",
+    "summary": "The party left Highreach and headed toward Ardenville for the upcoming boat race. Camped for the night in dense woods along the road During the night, a horrific melting creature attacked the camp The creature resembled"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-04-party-enters-mine-level-2-md",
+    "name": "Party Enters Mine Level 2",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-04 Party Enters Mine Level 2.md",
+    "url": "Public/World/Events/Timeline/0496-03-04 Party Enters Mine Level 2.html",
+    "summary": "What Happened The party descended into Level 2 of the Highreach Mines Made significant progress through the second floor before the session ended Key Takeaways The mines get harder the deeper the party goes Level 2"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-05-party-enters-mine-level-3-md",
+    "name": "Party Enters Mine Level 3",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-05 Party Enters Mine Level 3.md",
+    "url": "Public/World/Events/Timeline/0496-03-05 Party Enters Mine Level 3.html",
+    "summary": "The party descended to Level 3 of Highreach Mines. Red fog filled the tunnels — fiendish creatures instead of goblins Bodies of previous adventurers found throughout Session ended mid fight against a Shambling Mound"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-05-party-explores-mine-level-3-md",
+    "name": "Party Explores Mine Level 3",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-05 Party Explores Mine Level 3.md",
+    "url": "Public/World/Events/Timeline/0496-03-05 Party Explores Mine Level 3.html",
+    "summary": "The party continued exploring Level 3 of Highreach Mines. Killed the Shambling Mound Fled from a terrifying room deeper in the mines Found Rolf Stonetooth's body — recovered his bear fur mantle Found Oren Hammerfist's body"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-06-party-learns-the-legend-of-diego-md",
+    "name": "Party Learns the Legend of Diego",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-06 Party Learns the Legend of Diego.md",
+    "url": "Public/World/Events/Timeline/0496-03-06 Party Learns the Legend of Diego.html",
+    "summary": "The party visited Jon Brightman to learn about the fly demon and the lich. Jon revealed the legend of Diego — a hero summoned from another world during the Wizarding Wars Diego defeated the lich Jon"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-05-party-meets-the-nighstalkers-widows-md",
+    "name": "Party meets the Nighstalkers widows",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-05 Party meets the Nighstalkers widows.md",
+    "url": "Public/World/Events/Timeline/0496-03-05 Party meets the Nighstalkers widows.html",
+    "summary": "The Nightstalkers widows approached the party to thank them for rescuing Thoren Ironfist. Alma Ironfist gave the party a high quality map of the continent The widows asked for help recovering their fallen husbands' prized possessions"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-02-party-overhears-the-nightstalkers-md",
+    "name": "Party Overhears the Nightstalkers",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-02 Party Overhears the Nightstalkers.md",
+    "url": "Public/World/Events/Timeline/0496-03-02 Party Overhears the Nightstalkers.html",
+    "summary": "What Happened The party woke up at the Sturdy Mugg on Day 2 Over breakfast, they overheard another adventuring group — the Nightstalkers — loudly discussing plans to clear goblins from the mines Oren Hammerfist noticed"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-05-party-rescues-thoren-ironfist-md",
+    "name": "Party Rescues Thoren Ironfist",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-05 Party Rescues Thoren Ironfist.md",
+    "url": "Public/World/Events/Timeline/0496-03-05 Party Rescues Thoren Ironfist.html",
+    "summary": "What Happened The party descended to Level 3 of the Highreach Mines Found a note left by a previous adventurer in the first room Solved a dwarven door puzzle to continue deeper Discovered Thoren Ironfist, leader"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-06-party-returns-to-adventurers-guild-after-crisis-md",
+    "name": "Party Returns to Adventurers Guild After Crisis",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-06 Party Returns to Adventurers Guild After Crisis.md",
+    "url": "Public/World/Events/Timeline/0496-03-06 Party Returns to Adventurers Guild After Crisis.html",
+    "summary": "After helping save the city, the party headed to the Adventurers Guild to collect rewards. Turned in rat tails and goblin ears — received 120gp total Underwent a Circle of Truth interrogation about the mine incident"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-06-party-saves-highreach-from-duplirat-crisis-md",
+    "name": "Party Saves Highreach from Duplirat Crisis",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-06 Party Saves Highreach from Duplirat Crisis.md",
+    "url": "Public/World/Events/Timeline/0496-03-06 Party Saves Highreach from Duplirat Crisis.html",
+    "summary": "The party returned from the mines to find Highreach in chaos — fires, sewer rats, and looters overrunning the city. Helped put out fires across multiple districts Closed broken sewer grates to stop the rat swarms"
+  },
+  {
+    "id": "public-world-events-timeline-0496-02-50-party-summoned-to-world-md",
+    "name": "Party Summoned to world",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Unknown Forest / Highreach",
+    "tags": [
+      "Event",
+      "Crestfall"
+    ],
+    "path": "Public/World/Events/Timeline/0496-02-50 Party Summoned to world.md",
+    "url": "Public/World/Events/Timeline/0496-02-50 Party Summoned to world.html",
+    "summary": "What Happened A flash of white light transported the party to a forest clearing in Eldoria, surrounded by glowing red symbols Immediately attacked by spined devils and imps — the party fought them off, though one"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-06-party-trades-mantle-for-elven-travel-passes-md",
+    "name": "Party Trades Mantle for Elven Travel Passes",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-06 Party Trades Mantle for Elven Travel Passes.md",
+    "url": "Public/World/Events/Timeline/0496-03-06 Party Trades Mantle for Elven Travel Passes.html",
+    "summary": "JP gave Celeste Stonetooth's husband's bear fur mantle back to her. In exchange, Celeste provided travel passes for the entire party to enter the Silverleaf Lands (Elven Kingdom) The party now has access to pursue the"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-01-party-visits-adventurers-guild-for-first-time-md",
+    "name": "Party Visits Adventurers Guild For First Time",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-01 Party Visits Adventurers Guild For First Time.md",
+    "url": "Public/World/Events/Timeline/0496-03-01 Party Visits Adventurers Guild For First Time.html",
+    "summary": "What Happened The party visited the Highreach Adventurers Guild for the first time Picked up a quest to clear rats from Lord Frederick Goldman's estate basement Met the butler at the Goldman estate and were sent"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-01-party-visits-wizards-tower-md",
+    "name": "Party Visits Wizards Tower",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-01 Party Visits Wizards Tower.md",
+    "url": "Public/World/Events/Timeline/0496-03-01 Party Visits Wizards Tower.html",
+    "summary": "What Happened After resting at the Sturdy Mugg, the party visited the Highreach Wizard's Tower for information The tower glows during the day, has ornate marble flooring and a receptionist — the inside is larger than"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-pip-whiskerwind-md",
+    "name": "Pip Whiskerwind",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Pip Whiskerwind.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Pip Whiskerwind.html",
+    "summary": "Appearance Elderly gnome female with an intricate braided beard and traditional leather apron. Always smells faintly of bitter herbs and alchemical reagents. What We Know Pip is a senior member of the Exterminators Guild and one"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-professor-astrid-starcaller-md",
+    "name": "Professor Astrid Starcaller",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Professor Astrid Starcaller.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Professor Astrid Starcaller.html",
+    "summary": "Appearance Serene tiefling with violet skin and glowing golden eyes. Wears ethereal robes that shimmer like the night sky. What We Know Professor of Divination at the Highreach Wizard's Tower. Revered for uncanny insights and prophetic"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-professor-elara-nightveil-md",
+    "name": "Professor Elara Nightveil",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Professor Elara Nightveil.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Professor Elara Nightveil.html",
+    "summary": "Appearance Tall, slender elf with deep blue eyes and impeccably braided silver hair. Flowing robes adorned with faintly glowing runes. What We Know Professor of Abjuration at the Highreach Wizard's Tower. Known for patience, wisdom, and"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-professor-galen-thornbrew-md",
+    "name": "Professor Galen Thornbrew",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Professor Galen Thornbrew.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Professor Galen Thornbrew.html",
+    "summary": "Appearance Portly, jovial halfling with a mischievous twinkle in his eye. Classroom full of curious items that shift and change form. What We Know Professor of Transmutation at the Highreach Wizard's Tower. Hands on teacher who"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-professor-mordecai-runeweaver-md",
+    "name": "Professor Mordecai Runeweaver",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Professor Mordecai Runeweaver.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Professor Mordecai Runeweaver.html",
+    "summary": "Appearance Well groomed half elf in finely tailored robes with delicate shimmering patterns. Dark hair, effortlessly polished. What We Know Professor of Enchantment at the Highreach Wizard's Tower. Known for his silver tongue and captivating lectures."
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-professor-seraphine-duskwillow-md",
+    "name": "Professor Seraphine Duskwillow",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Professor Seraphine Duskwillow.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Professor Seraphine Duskwillow.html",
+    "summary": "Appearance Pale woman with long black hair that seems to absorb light. Dark elegant robes trimmed with silver, piercing eyes. What We Know Professor of Necromancy at the Highreach Wizard's Tower. Despite her unsettling specialty, she"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-professor-thaldris-flamehand-md",
+    "name": "Professor Thaldris Flamehand",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Professor Thaldris Flamehand.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Professor Thaldris Flamehand.html",
+    "summary": "Appearance Powerfully built dwarf with a fiery red beard and booming voice. Scarred hands and forearms from years of magical experiments. What We Know Professor of Evocation at the Highreach Wizard's Tower. Believes in hands on"
+  },
+  {
+    "id": "public-players-randi-player-sheet-md",
+    "name": "Randi Player Sheet",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/Players/Randi Player Sheet.md",
+    "url": "Public/Players/Randi Player Sheet.html",
+    "summary": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaRandiDnDNotes Full Class Info"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-ratcatcher-vex-md",
+    "name": "Ratcatcher Vex",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Ratcatcher Vex.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Ratcatcher Vex.html",
+    "summary": "Appearance Wiry human male in a ratty leather coat hung with traps and snares. Smells faintly of sewer water. What We Know Vex is an independent pest controller who operates outside the Exterminators Guild. He's cheaper"
+  },
+  {
+    "id": "public-world-orcish-wastes-red-dune-desert-red-dune-desert-md",
+    "name": "Red Dune Desert",
+    "type": "Location",
+    "region": "OrcishWastes",
+    "location": "",
+    "tags": [
+      "Location",
+      "OrcishWastes"
+    ],
+    "path": "Public/World/Orcish Wastes/Red Dune Desert/Red Dune Desert.md",
+    "url": "Public/World/Orcish Wastes/Red Dune Desert/Red Dune Desert.html",
+    "summary": "Overview A vast desert of red sand within the Orcish Wastes. Treacherous terrain with little water."
+  },
+  {
+    "id": "public-world-images-reddunedesertimageprompt-md",
+    "name": "RedDuneDesertImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/RedDuneDesertImageprompt.md",
+    "url": "Public/World/Images/RedDuneDesertImageprompt.html",
+    "summary": "Red Dune Desert Image Prompt Prompt — Primary (High Aerial View) Negative Prompt Alternative POV — Standing on a Dune Crest (Ground Level) Use this for a more visceral ground level view that puts the viewer"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-rolf-stonetooth-md",
+    "name": "Rolf Stonetooth",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Rolf Stonetooth.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Rolf Stonetooth.html",
+    "summary": "Appearance Stocky, grizzled man with a rugged face and a prominent chipped tooth. Wears patchwork leather and metal armor with a bear fur mantle. What We Know Member of the Nightstalkers adventuring party. A patron at"
+  },
+  {
+    "id": "public-world-crestfall-hillcrest-npcs-rowan-grapeheart-md",
+    "name": "Rowan Grapeheart",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Hillcrest",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Hillcrest"
+    ],
+    "path": "Public/World/Crestfall/Hillcrest/NPCs/Rowan Grapeheart.md",
+    "url": "Public/World/Crestfall/Hillcrest/NPCs/Rowan Grapeheart.html",
+    "summary": "Appearance Middle aged former adventurer. Practical clothing, weathered hands with weapon calluses. What We Know Guildmaster of the Hillcrest Adventurers Guild chapter. A pragmatic ex adventurer who values guild neutrality and fair dealing. First Impressions Calm,"
+  },
+  {
+    "id": "public-world-crestfall-ardenville-npcs-salty-pete-md",
+    "name": "Salty Pete",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Ardenville",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Ardenville"
+    ],
+    "path": "Public/World/Crestfall/Ardenville/NPCs/Salty Pete.md",
+    "url": "Public/World/Crestfall/Ardenville/NPCs/Salty Pete.html",
+    "summary": "Appearance Weathered human with a sailor's permanent squint and salt stiff clothing. Deep lines from twenty years on merchant vessels. Sea steady balance. What We Know Veteran sailor and boat captain in Ardenville. Owns The Barnacle's"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-samantha-clerkson-md",
+    "name": "Samantha Clerkson",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Samantha Clerkson.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Samantha Clerkson.html",
+    "summary": "Appearance Cheery half elf behind a cluttered reception desk, usually with an ink smudge somewhere on her face. What We Know Receptionist at the Highreach Wizard's Tower. A bit scatterbrained but well meaning. First Impressions Friendly"
+  },
+  {
+    "id": "public-world-orcish-wastes-sand-dragon-valley-sand-dragon-valley-md",
+    "name": "Sand Dragon Valley",
+    "type": "Location",
+    "region": "OrcishWastes",
+    "location": "",
+    "tags": [
+      "Location",
+      "OrcishWastes"
+    ],
+    "path": "Public/World/Orcish Wastes/Sand Dragon Valley/Sand Dragon Valley.md",
+    "url": "Public/World/Orcish Wastes/Sand Dragon Valley/Sand Dragon Valley.html",
+    "summary": "Overview A valley deep in the Orcish Wastes, rumored to be the domain of sand dragons."
+  },
+  {
+    "id": "public-world-images-sanddragonvalleyimageprompt-md",
+    "name": "SandDragonValleyImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/SandDragonValleyImageprompt.md",
+    "url": "Public/World/Images/SandDragonValleyImageprompt.html",
+    "summary": "Sand Dragon Valley Image Prompt Prompt — Primary (High Oblique Aerial View) Negative Prompt Alternative POV — Ground Level Looking West Down the Canyon (RECOMMENDED) This ground level view is more emotionally immediate and easier to"
+  },
+  {
+    "id": "public-world-items-seekers-eye-md",
+    "name": "Seekers Eye",
+    "type": "Item",
+    "region": "",
+    "location": "",
+    "tags": [
+      "Item",
+      "Artifact",
+      "Crestfall"
+    ],
+    "path": "Public/World/Items/Seekers Eye.md",
+    "url": "Public/World/Items/Seekers Eye.html",
+    "summary": "What We Know An ogre's eye transformed into an artifact of great power — acts as a compass to find other artifacts Was hidden at the bottom of the Highreach Mines, protected by a magical barrier"
+  },
+  {
+    "id": "public-world-crestfall-hillcrest-npcs-seraphina-winecraft-md",
+    "name": "Seraphina Winecraft",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Hillcrest",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Hillcrest"
+    ],
+    "path": "Public/World/Crestfall/Hillcrest/NPCs/Seraphina Winecraft.md",
+    "url": "Public/World/Crestfall/Hillcrest/NPCs/Seraphina Winecraft.html",
+    "summary": "Appearance Slender with long wavy auburn hair and bright green eyes. Graceful movements suggest elven ancestry. Wine stained hands of a working vintner. What We Know A creative master vintner respected as a voice of reason"
+  },
+  {
+    "id": "public-world-silverleaf-lands-serenity-hollow-serenity-hollow-md",
+    "name": "Serenity Hollow",
+    "type": "Settlement",
+    "region": "SilverleafLands",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "SilverleafLands",
+      "Elven"
+    ],
+    "path": "Public/World/Silverleaf Lands/Serenity Hollow/Serenity Hollow.md",
+    "url": "Public/World/Silverleaf Lands/Serenity Hollow/Serenity Hollow.html",
+    "summary": "SerenityHollow.png Overview A village built around a sacred grove, where elves come for spiritual retreats and meditation."
+  },
+  {
+    "id": "public-world-images-serenityhollowimageprompt-md",
+    "name": "SerenityHollowImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/SerenityHollowImageprompt.md",
+    "url": "Public/World/Images/SerenityHollowImageprompt.html",
+    "summary": "Serenity Hollow Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-silverleaf-lands-silverleaf-lands-md",
+    "name": "Silverleaf Lands",
+    "type": "Region",
+    "region": "",
+    "location": "",
+    "tags": [
+      "Region",
+      "SilverleafLands"
+    ],
+    "path": "Public/World/Silverleaf Lands/Silverleaf Lands.md",
+    "url": "Public/World/Silverleaf Lands/Silverleaf Lands.html",
+    "summary": "Overview The ancient elven kingdom of the Silverleaf Lands is a realm of natural beauty and arcane mastery. Snow dusted forests, crystal springs, and luminescent pathways wind through settlements that blend seamlessly with the living landscape."
+  },
+  {
+    "id": "public-world-images-silverleaflandsimageprompt-md",
+    "name": "SilverleafLandsImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/SilverleafLandsImageprompt.md",
+    "url": "Public/World/Images/SilverleafLandsImageprompt.html",
+    "summary": "Silverleaf Lands Image Prompt Prompt — Primary (Wide Aerial Atlas View) Negative Prompt Alternative POV A — Ground Level in the Everwood Looking Toward Frostglade Use this if the aerial overview is too complex. This ground"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-sir-gareth-strongshield-md",
+    "name": "Sir Gareth Strongshield",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Sir Gareth Strongshield.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Sir Gareth Strongshield.html",
+    "summary": "Appearance Stocky, barrel chested man with a shaved head and thick red beard braided with iron rings. Tower shield on his back at all times. What We Know Captain of the King's Guard. Has served since"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-sir-tristan-oakheart-md",
+    "name": "Sir Tristan Oakheart",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Sir Tristan Oakheart.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Sir Tristan Oakheart.html",
+    "summary": "Appearance Young knight in his late twenties, sun browned skin, shoulder length brown hair tied back. Weathered chainmail over a green tabard with an oak leaf crest. What We Know A knight of the Order of"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-squeak-tinkerbottom-md",
+    "name": "Squeak Tinkerbottom",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Squeak Tinkerbottom.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Squeak Tinkerbottom.html",
+    "summary": "Appearance Young gnome with ink stained fingers and wild, unkempt hair. Always tinkering with some gadget or scribbling diagrams. What We Know Squeak manages equipment and supplies for the Exterminators Guild. She's a talented artificer who"
+  },
+  {
+    "id": "public-world-silverleaf-lands-stardew-stardew-md",
+    "name": "Stardew",
+    "type": "Settlement",
+    "region": "SilverleafLands",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "SilverleafLands",
+      "Elven"
+    ],
+    "path": "Public/World/Silverleaf Lands/Stardew/Stardew.md",
+    "url": "Public/World/Silverleaf Lands/Stardew/Stardew.html",
+    "summary": "Stardew.png Expansive fields and well tended gardens greet you, painting a picture of peace and prosperity. The village is nestled among gentle hills and dense forests, with snow covered trees adding winter magic to the landscape."
+  },
+  {
+    "id": "public-world-images-stardewimageprompt-md",
+    "name": "StardewImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/StardewImageprompt.md",
+    "url": "Public/World/Images/StardewImageprompt.html",
+    "summary": "Stardew Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-silverleaf-lands-starfall-starfall-md",
+    "name": "Starfall",
+    "type": "Settlement",
+    "region": "SilverleafLands",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "SilverleafLands",
+      "Elven"
+    ],
+    "path": "Public/World/Silverleaf Lands/Starfall/Starfall.md",
+    "url": "Public/World/Silverleaf Lands/Starfall/Starfall.html",
+    "summary": "Starfall.png Overview A village in the Silverleaf Lands where artisans craft exquisite jewelry and magical artifacts."
+  },
+  {
+    "id": "public-world-images-starfallimageprompt-md",
+    "name": "StarfallImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/StarfallImageprompt.md",
+    "url": "Public/World/Images/StarfallImageprompt.html",
+    "summary": "Starfall Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-crestfall-fairfield-starspells-wonders-md",
+    "name": "Starspells Wonders",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Fairfield",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Fairfield"
+    ],
+    "path": "Public/World/Crestfall/Fairfield/Starspells Wonders.md",
+    "url": "Public/World/Crestfall/Fairfield/Starspells Wonders.html",
+    "summary": "Description A bright and inviting shop draped in colorful tapestries. Magical curiosities line every shelf, and the air shimmers faintly with residual enchantment. Proprietor Lydia Starspell — graceful and charming, known for fair prices and a"
+  },
+  {
+    "id": "public-world-ironpeak-mountains-steamhammer-steamhammer-md",
+    "name": "Steamhammer",
+    "type": "Settlement",
+    "region": "IronpeakMountains",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "IronpeakMountains",
+      "Dwarven"
+    ],
+    "path": "Public/World/Ironpeak Mountains/Steamhammer/Steamhammer.md",
+    "url": "Public/World/Ironpeak Mountains/Steamhammer/Steamhammer.html",
+    "summary": "SteamHammer.png Overview A village near natural hot springs, where dwarves relax and indulge in steam baths after a hard day's work."
+  },
+  {
+    "id": "public-world-images-steamhammerimageprompt-md",
+    "name": "SteamhammerImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/SteamhammerImageprompt.md",
+    "url": "Public/World/Images/SteamhammerImageprompt.html",
+    "summary": "Steamhammer Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-crestfall-ardenville-steelshapers-forge-md",
+    "name": "Steelshaper's Forge",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Ardenville",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Ardenville",
+      "Smithy"
+    ],
+    "path": "Public/World/Crestfall/Ardenville/Steelshapers Forge.md",
+    "url": "Public/World/Crestfall/Ardenville/Steelshapers Forge.html",
+    "summary": "Description Bustling workshop of clanging metal and forge fire glow. Walls lined with polished armor and shields. A welcoming hearth in the corner, workbenches cluttered with tools. Proprietor Eldric Steelshaper — friendly, hardworking, always happy to"
+  },
+  {
+    "id": "public-world-ironpeak-mountains-stoneforge-stoneforge-md",
+    "name": "Stoneforge",
+    "type": "Settlement",
+    "region": "IronpeakMountains",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "IronpeakMountains",
+      "Dwarven"
+    ],
+    "path": "Public/World/Ironpeak Mountains/Stoneforge/Stoneforge.md",
+    "url": "Public/World/Ironpeak Mountains/Stoneforge/Stoneforge.html",
+    "summary": "Stoneforge.png Overview A bustling mining village where dwarves extract precious metals and gems from the heart of Ironpeak."
+  },
+  {
+    "id": "public-world-images-stoneforgeimageprompt-md",
+    "name": "StoneforgeImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/StoneforgeImageprompt.md",
+    "url": "Public/World/Images/StoneforgeImageprompt.html",
+    "summary": "Stoneforge Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-stonehaven-md",
+    "name": "Stonehaven",
+    "type": "Settlement",
+    "region": "Crestfall",
+    "location": "",
+    "tags": [
+      "Settlement",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/Stonehaven.md",
+    "url": "Public/World/Crestfall/Stonehaven/Stonehaven.html",
+    "summary": "Stonehaven.png Overview Stonehaven clings to the southeastern edge of the Blackwood Forest — a frontier outpost where civilization meets wilderness. A tall stone watchtower dominates the skyline against the dark wall of ancient trees beyond the"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-stonehaven-supplies-md",
+    "name": "Stonehaven Supplies",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Stonehaven",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/Stonehaven Supplies.md",
+    "url": "Public/World/Crestfall/Stonehaven/Stonehaven Supplies.html",
+    "summary": "Description A well maintained wooden building on the main street with large windows displaying goods. Organized aisles with clearly marked sections make shopping efficient. A polished counter with ledger books and a merchant's scale. Proprietor Erik"
+  },
+  {
+    "id": "public-world-images-stonehavenimageprompt-md",
+    "name": "StonehavenImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/StonehavenImageprompt.md",
+    "url": "Public/World/Images/StonehavenImageprompt.html",
+    "summary": "Stonehaven Image Prompt Prompt Negative Prompt"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-stones-herbs-md",
+    "name": "Stones Herbs",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Stonehaven",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/Stones Herbs.md",
+    "url": "Public/World/Crestfall/Stonehaven/Stones Herbs.html",
+    "summary": "Description The fragrant aroma of dried herbs fills this section. Shelves lined with jars of alchemical ingredients, healing herbs, and colorful potion bottles. A large counter displays mortar and pestle sets and alchemical recipes. Proprietor Darius"
+  },
+  {
+    "id": "public-world-crestfall-highreach-sturdy-mugg-md",
+    "name": "Sturdy Mugg",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Highreach",
+      "Inn"
+    ],
+    "path": "Public/World/Crestfall/Highreach/Sturdy Mugg.md",
+    "url": "Public/World/Crestfall/Highreach/Sturdy Mugg.html",
+    "summary": "Description A warm, low ceilinged dwarven inn with stone walls and heavy oak tables. Smells of roasting meat and fresh ale. A popular gathering spot for locals and travelers alike. Proprietor Kara Stonefoot — dwarven innkeeper,"
+  },
+  {
+    "id": "public-world-orcish-wastes-wizards-tower-npcs-summoner-jon-aka-the-wizard-md",
+    "name": "Summoner Jon AKA the wizard",
+    "type": "NPC",
+    "region": "OrcishWastes",
+    "location": "Wizards Tower",
+    "tags": [
+      "NPC",
+      "OrcishWastes"
+    ],
+    "path": "Public/World/Orcish Wastes/Wizards Tower/NPCs/Summoner Jon AKA the wizard.md",
+    "url": "Public/World/Orcish Wastes/Wizards Tower/NPCs/Summoner Jon AKA the wizard.html",
+    "summary": "Appearance A kindly bald old man in red and gold robes. Soft spoken and grandfatherly. What We Know Resides in the Wizards Tower in the Orcish Wastes. Claims to be a scholar and summoner. Seems friendly"
+  },
+  {
+    "id": "public-world-crestfall-highreach-target-by-tradewind-md",
+    "name": "Target by Tradewind",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Highreach",
+      "GeneralStore"
+    ],
+    "path": "Public/World/Crestfall/Highreach/Target by Tradewind.md",
+    "url": "Public/World/Crestfall/Highreach/Target by Tradewind.html",
+    "summary": "Description A well stocked general store catering to adventurers and travelers. Ropes, rations, bedrolls, lanterns — if you need it for the road, it's here. Proprietor Felix Tradewind — human merchant with a sharp eye for"
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-thaldrin-stormblade-md",
+    "name": "Thaldrin Stormblade",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Thaldrin Stormblade.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Thaldrin Stormblade.html",
+    "summary": "Appearance Tall and muscular, with a scarred face, dark hair, and a commanding presence. What We Know Guildmaster of the Highreach Adventurers Guild. A skilled fighter and natural leader. Brother to Aric Stormblade. First Impressions Intimidating"
+  },
+  {
+    "id": "public-world-ironpeak-mountains-forgepeak-the-adamant-anvil-md",
+    "name": "The Adamant Anvil",
+    "type": "Store",
+    "region": "IronpeakMountains",
+    "location": "ForgePeak",
+    "tags": [
+      "Store",
+      "IronpeakMountains",
+      "ForgePeak"
+    ],
+    "path": "Public/World/Ironpeak Mountains/Forgepeak/The Adamant Anvil.md",
+    "url": "Public/World/Ironpeak Mountains/Forgepeak/The Adamant Anvil.html",
+    "summary": "Descending into the fifth level of ForgePeak, a wave of heat rolls up. The Adamant Anvil sits at the heart of the Forges district — a massive stone building carved from the mountain itself, with rivers"
+  },
+  {
+    "id": "public-world-crestfall-highreach-the-arcane-enclave-md",
+    "name": "The Arcane Enclave",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Highreach",
+      "MagicShop"
+    ],
+    "path": "Public/World/Crestfall/Highreach/The Arcane Enclave.md",
+    "url": "Public/World/Crestfall/Highreach/The Arcane Enclave.html",
+    "summary": "Description A dimly lit shop lined with glass vials, scrolls, and softly glowing crystals. The air hums with faint arcane energy. Proprietor Lady Elara Moonshadow — half elf enchantress Services & Wares Magical items and enchanted"
+  },
+  {
+    "id": "public-storylines-the-artifact-wars-md",
+    "name": "The Artifact Wars",
+    "type": "Storyline",
+    "region": "",
+    "location": "",
+    "tags": [
+      "Storyline",
+      "Crestfall",
+      "SilverleafLands",
+      "IronpeakMountains",
+      "OrcishWastes"
+    ],
+    "path": "Public/Storylines/The Artifact Wars.md",
+    "url": "Public/Storylines/The Artifact Wars.html",
+    "summary": "The Artifact Wars Summary The party was pulled into Eldoria, tricked into recovering the Seekers Eye, and learned too late that Jon meant to use the artifacts for his own ends. Now the race is on"
+  },
+  {
+    "id": "public-world-crestfall-highreach-the-dragons-breath-forge-md",
+    "name": "The Dragons Breath Forge",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Highreach",
+      "Smithy"
+    ],
+    "path": "Public/World/Crestfall/Highreach/The Dragons Breath Forge.md",
+    "url": "Public/World/Crestfall/Highreach/The Dragons Breath Forge.html",
+    "summary": "Description A roaring forge with coals glowing orange. Weapons and armor line the walls — some shimmer faintly. The heat hits you the moment you step inside. Proprietor Alaric Emberfell — master blacksmith Services & Wares"
+  },
+  {
+    "id": "public-world-crestfall-ardenville-the-enchanted-trinket-md",
+    "name": "The Enchanted Trinket",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Ardenville",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Ardenville",
+      "MagicShop"
+    ],
+    "path": "Public/World/Crestfall/Ardenville/The Enchanted Trinket.md",
+    "url": "Public/World/Crestfall/Ardenville/The Enchanted Trinket.html",
+    "summary": "Description Small, cozy space packed with shelves and display cases overflowing with magical trinkets. Maps and star charts on the walls, scent of old parchment and herbs in the air. Proprietor Garrick Lightfinger — small, wiry,"
+  },
+  {
+    "id": "public-world-groups-foundation-md",
+    "name": "The Foundation",
+    "type": "Organization",
+    "region": "Unknown",
+    "location": "Unknown",
+    "tags": [
+      "Organization",
+      "Foundation"
+    ],
+    "path": "Public/World/Groups/Foundation.md",
+    "url": "Public/World/Groups/Foundation.html",
+    "summary": "Overview A shadowy network of protectors. Little is known about this group — they seem to identify and recruit those who demonstrate a commitment to protecting common folk. Reputation Most people have never heard of the"
+  },
+  {
+    "id": "public-world-events-timeline-the-great-blight-of-hillcrest-md",
+    "name": "The Great Blight of Hillcrest",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Hillcrest",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Hillcrest",
+      "Historical"
+    ],
+    "path": "Public/World/Events/Timeline/The Great Blight of Hillcrest.md",
+    "url": "Public/World/Events/Timeline/The Great Blight of Hillcrest.html",
+    "summary": "What Happened A mysterious fungal plague struck Hillcrest's vineyards generations ago Strange fungal growth appeared overnight across multiple vineyard sections Traditional remedies failed — the blight spread to over half the village's crops within weeks Local"
+  },
+  {
+    "id": "public-world-crestfall-ardenville-the-netted-nymph-md",
+    "name": "The Netted Nymph",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Ardenville",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Ardenville",
+      "Tavern",
+      "Inn"
+    ],
+    "path": "Public/World/Crestfall/Ardenville/The Netted Nymph.md",
+    "url": "Public/World/Crestfall/Ardenville/The Netted Nymph.html",
+    "summary": "Description Low beamed ceilings, thick stone walls, three driftwood hearths. Fishing nets and glass floats hang from the ceiling. The legendary fish stew — simmering for thirty seven years straight — fills the air. Proprietor Mira"
+  },
+  {
+    "id": "public-world-groups-the-nightstalkers-md",
+    "name": "The Nightstalkers",
+    "type": "Organization",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Organization",
+      "Crestfall",
+      "TheNightstalkers"
+    ],
+    "path": "Public/World/Groups/The Nightstalkers.md",
+    "url": "Public/World/Groups/The Nightstalkers.html",
+    "summary": "Overview An experienced adventuring party based out of Highreach. Regulars at the Sturdy Mugg. Overheard discussing a goblin mine clearance quest before they disappeared. Reputation Known as a capable, boisterous group. Respected at the Adventurers Guild."
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-05-the-party-meets-alaric-emberfell-md",
+    "name": "The Party Meets Alaric Emberfell",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-05 The Party Meets Alaric Emberfell.md",
+    "url": "Public/World/Events/Timeline/0496-03-05 The Party Meets Alaric Emberfell.html",
+    "summary": "The party met Alaric Emberfell at The Dragon's Breath Forge. Traded materials for weapon upgrades Everyone received a +1 upgrade to their main weapon Liz received radiant damage conversion instead"
+  },
+  {
+    "id": "public-world-events-timeline-0496-03-05-the-party-visits-the-adventurers-guild-church-md",
+    "name": "The party Visits the Adventurers Guild Church",
+    "type": "Event",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Event",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Events/Timeline/0496-03-05 The party Visits the Adventurers Guild Church.md",
+    "url": "Public/World/Events/Timeline/0496-03-05 The party Visits the Adventurers Guild Church.html",
+    "summary": "The party visited the church near the Adventurers Guild and met Father Eldon Lightbringer. Party received healing from Father Eldon Donated 1 silver to the church Spoke with Thoren Ironfist, who drew them a map of"
+  },
+  {
+    "id": "public-world-crestfall-highreach-the-warren-md",
+    "name": "The Warren",
+    "type": "Store",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "Store",
+      "Crestfall",
+      "Highreach",
+      "ExterminatorsGuild",
+      "Guildhall"
+    ],
+    "path": "Public/World/Crestfall/Highreach/The Warren.md",
+    "url": "Public/World/Crestfall/Highreach/The Warren.html",
+    "summary": "Description The headquarters of the Exterminators Guild, located beneath Highreach's Noble District. Accessed through a grate near the Royal Gardens. Surprisingly clean for an underground pest control operation — smells of cheese and soap. Interior A"
+  },
+  {
+    "id": "public-world-silverleaf-lands-frostglade-the-whispering-weave-md",
+    "name": "The Whispering Weave",
+    "type": "Store",
+    "region": "SilverleafLands",
+    "location": "FrostGlade",
+    "tags": [
+      "Store",
+      "SilverleafLands",
+      "FrostGlade"
+    ],
+    "path": "Public/World/Silverleaf Lands/Frostglade/The Whispering Weave.md",
+    "url": "Public/World/Silverleaf Lands/Frostglade/The Whispering Weave.html",
+    "summary": "The shop occupies a graceful platform suspended between three massive silver bark trees. Translucent curtains of enchanted silk hang from branches, shifting colors from silver to blue to deep purple and whispering when the wind passes."
+  },
+  {
+    "id": "public-world-crestfall-hillcrest-npcs-thom-willow-md",
+    "name": "Thom Willow",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Hillcrest",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Hillcrest"
+    ],
+    "path": "Public/World/Crestfall/Hillcrest/NPCs/Thom Willow.md",
+    "url": "Public/World/Crestfall/Hillcrest/NPCs/Thom Willow.html",
+    "summary": "Appearance Practical merchant with a friendly demeanor. Well organized and efficient in his movements. What We Know Owns the general store in Hillcrest. A fair business owner who maintains good relationships with everyone in the village."
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-thoren-ironfist-md",
+    "name": "Thoren Ironfist",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Thoren Ironfist.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Thoren Ironfist.html",
+    "summary": "Appearance Burly man with a broad chest and dark slicked back hair. Wears a dark steel breastplate with an iron gauntlet emblem and a crimson half cloak. What We Know Leader of the Nightstalkers adventuring party."
+  },
+  {
+    "id": "public-world-crestfall-highreach-npcs-tomlin-barkridge-md",
+    "name": "Tomlin Barkridge",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Highreach",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Highreach"
+    ],
+    "path": "Public/World/Crestfall/Highreach/NPCs/Tomlin Barkridge.md",
+    "url": "Public/World/Crestfall/Highreach/NPCs/Tomlin Barkridge.html",
+    "summary": "Appearance Lean, wiry man with sandy blond hair and a patchy beard. Wears deep forest green armor with thorn like engravings and carries a bow. What We Know Member of the Nightstalkers adventuring party. A patron"
+  },
+  {
+    "id": "public-world-unknown-md",
+    "name": "Unknown",
+    "type": "Region",
+    "region": "",
+    "location": "",
+    "tags": [
+      "Region"
+    ],
+    "path": "Public/World/Unknown.md",
+    "url": "Public/World/Unknown.html",
+    "summary": "You have not visited or learned about this place yet."
+  },
+  {
+    "id": "public-world-crestfall-fairfield-npcs-valeris-shadowmere-md",
+    "name": "Valeris Shadowmere",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Fairfield",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Fairfield"
+    ],
+    "path": "Public/World/Crestfall/Fairfield/NPCs/Valeris Shadowmere.md",
+    "url": "Public/World/Crestfall/Fairfield/NPCs/Valeris Shadowmere.html",
+    "summary": "Appearance A sophisticated half elf in his mid forties. Well dressed with an air of quiet authority. What We Know Owns and operates The Silk Road Tavern in Fairfield. Known as \"Silk\" by regulars. Runs a"
+  },
+  {
+    "id": "public-players-vanessa-player-sheet-md",
+    "name": "Vanessa Player Sheet",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/Players/Vanessa Player Sheet.md",
+    "url": "Public/Players/Vanessa Player Sheet.html",
+    "summary": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaVanessaDnDNotes Full Class Info"
+  },
+  {
+    "id": "public-world-crestfall-stonehaven-npcs-vera-shadowpeak-md",
+    "name": "Vera Shadowpeak",
+    "type": "NPC",
+    "region": "Crestfall",
+    "location": "Stonehaven",
+    "tags": [
+      "NPC",
+      "Crestfall",
+      "Stonehaven"
+    ],
+    "path": "Public/World/Crestfall/Stonehaven/NPCs/Vera Shadowpeak.md",
+    "url": "Public/World/Crestfall/Stonehaven/NPCs/Vera Shadowpeak.html",
+    "summary": "Appearance Wiry and athletic, silver streaked brown hair in a practical braid. Weathered face with small scars from decades of adventuring. Keen hazel eyes. Well maintained leather armor with guild insignia. What We Know Guildmaster of"
+  },
+  {
+    "id": "public-world-orcish-wastes-witchs-bog-witchs-bog-md",
+    "name": "Witchs Bog",
+    "type": "Location",
+    "region": "OrcishWastes",
+    "location": "",
+    "tags": [
+      "Location",
+      "OrcishWastes"
+    ],
+    "path": "Public/World/Orcish Wastes/Witchs Bog/Witchs Bog.md",
+    "url": "Public/World/Orcish Wastes/Witchs Bog/Witchs Bog.html",
+    "summary": "Overview A murky swamp in the Orcish Wastes. Locals avoid it, claiming dark magic festers within."
+  },
+  {
+    "id": "public-world-images-witchsbogimageprompt-md",
+    "name": "WitchsBogImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/WitchsBogImageprompt.md",
+    "url": "Public/World/Images/WitchsBogImageprompt.html",
+    "summary": "Witch's Bog Image Prompt Prompt — Primary (High Oblique Aerial View) Negative Prompt Alternative POV — Standing at the Bog's Edge (Ground Level) Use this for a more immediate, atmospheric single image. The ground level view"
+  },
+  {
+    "id": "public-world-events-timeline-wizarding-wars-md",
+    "name": "Wizarding Wars",
+    "type": "Event",
+    "region": "OrcishWastes",
+    "location": "",
+    "tags": [
+      "Event",
+      "OrcishWastes",
+      "Historical",
+      "MainQuest"
+    ],
+    "path": "Public/World/Events/Timeline/Wizarding Wars.md",
+    "url": "Public/World/Events/Timeline/Wizarding Wars.html",
+    "summary": "What We Know An ancient conflict among powerful wizards that devastated parts of Eldoria. The wars ended when Diego sealed the powers of the last surviving wizard — Summoner Jon. Key Facts Multiple wizards fought for"
+  },
+  {
+    "id": "public-world-orcish-wastes-wizards-tower-wizards-tower-md",
+    "name": "Wizards Tower",
+    "type": "Location",
+    "region": "OrcishWastes",
+    "location": "",
+    "tags": [
+      "Location",
+      "OrcishWastes"
+    ],
+    "path": "Public/World/Orcish Wastes/Wizards Tower/Wizards Tower.md",
+    "url": "Public/World/Orcish Wastes/Wizards Tower/Wizards Tower.html",
+    "summary": "Overview A mysterious tower rising from the Orcish Wastes. Said to belong to an ancient wizard."
+  },
+  {
+    "id": "public-world-images-wizardstowerimageprompt-md",
+    "name": "WizardsTowerImageprompt",
+    "type": "Page",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/World/Images/WizardsTowerImageprompt.md",
+    "url": "Public/World/Images/WizardsTowerImageprompt.html",
+    "summary": "Wizard's Tower Image Prompt ⚠️ NOTE The original aerial/overhead POV fundamentally undermines this location's most powerful quality — the tower's impossible height. A tower that is \"impossibly slender and tall\" is completely INVISIBLE from directly overhead."
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "generatedAtUtc": "2026-05-05T17:45:50.680Z",
+  "warnings": [],
+  "canonicalRuntimeFiles": [
+    "classes.json",
+    "subclasses.json",
+    "features.json",
+    "items.json",
+    "spells.json",
+    "feats.json",
+    "actions.json",
+    "effects.json",
+    "resources.json"
+  ],
+  "note": "5etools and CSV files were import inputs only. The website should consume the canonical JSON files in this directory."
+}

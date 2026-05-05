@@ -6,7 +6,8 @@ const {CharacterSheetDisplay} = await cJS()
 await CharacterSheetDisplay.display(dv, {
   name: "Austin",
   portrait: "Public/Players/JustinDnD.png",
-  class: "Hunter",
+  class: "Ranger",
+  subclass: "Hunter",
   level: dv.page("Player Controls").level,
   race: "Human",
   experience: dv.page("Player Controls").ExperiencePoints,

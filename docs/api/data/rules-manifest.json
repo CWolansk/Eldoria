@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-05-05T17:45:50.680Z",
+  "upstream": {
+    "classRoot": "5etools/data/class",
+    "itemsCsv": "Assets/Items/Items.csv",
+    "spellsCsv": "Assets/Spells/Spells.csv",
+    "featsCsv": "Assets/Feats/Feats.csv"
+  },
+  "counts": {
+    "classes": 17,
+    "subclasses": 139,
+    "features": 1367,
+    "items": 5013,
+    "spells": 692,
+    "feats": 785,
+    "actions": 3695,
+    "effects": 2505,
+    "resources": 531
+  }
+}

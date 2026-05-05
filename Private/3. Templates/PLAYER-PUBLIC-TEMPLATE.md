@@ -5,6 +5,7 @@ const {CharacterSheetDisplay} = await cJS()
 await CharacterSheetDisplay.display(dv, {
   name: "Character Name",
   class: "Class",
+  subclass: "Subclass",
   level: 1,
   race: "Race",
   str: 10,

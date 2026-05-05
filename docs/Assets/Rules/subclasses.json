@@ -1,0 +1,1883 @@
+[
+  {
+    "id": "artificer-alchemist",
+    "name": "Alchemist",
+    "shortName": "Alchemist",
+    "className": "Artificer",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Alchemist|Artificer|TCE|Alchemist|TCE|3",
+      "Alchemical Savant|Artificer|TCE|Alchemist|TCE|5",
+      "Restorative Reagents|Artificer|TCE|Alchemist|TCE|9",
+      "Chemical Mastery|Artificer|TCE|Alchemist|TCE|15"
+    ]
+  },
+  {
+    "id": "artificer-armorer",
+    "name": "Armorer",
+    "shortName": "Armorer",
+    "className": "Artificer",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Armorer|Artificer|TCE|Armorer|TCE|3",
+      "Extra Attack|Artificer|TCE|Armorer|TCE|5",
+      "Armor Modifications|Artificer|TCE|Armorer|TCE|9",
+      "Perfected Armor|Artificer|TCE|Armorer|TCE|15"
+    ]
+  },
+  {
+    "id": "artificer-artillerist",
+    "name": "Artillerist",
+    "shortName": "Artillerist",
+    "className": "Artificer",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Artillerist|Artificer|TCE|Artillerist|TCE|3",
+      "Arcane Firearm|Artificer|TCE|Artillerist|TCE|5",
+      "Explosive Cannon|Artificer|TCE|Artillerist|TCE|9",
+      "Fortified Position|Artificer|TCE|Artillerist|TCE|15"
+    ]
+  },
+  {
+    "id": "artificer-battle-smith",
+    "name": "Battle Smith",
+    "shortName": "Battle Smith",
+    "className": "Artificer",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Battle Smith|Artificer|TCE|Battle Smith|TCE|3",
+      "Extra Attack|Artificer|TCE|Battle Smith|TCE|5",
+      "Arcane Jolt|Artificer|TCE|Battle Smith|TCE|9",
+      "Improved Defender|Artificer|TCE|Battle Smith|TCE|15"
+    ]
+  },
+  {
+    "id": "barbarian-ancestral-guardian",
+    "name": "Path of the Ancestral Guardian",
+    "shortName": "Ancestral Guardian",
+    "className": "Barbarian",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Path of the Ancestral Guardian|Barbarian||Ancestral Guardian|XGE|3",
+      "Spirit Shield|Barbarian||Ancestral Guardian|XGE|6",
+      "Consult the Spirits|Barbarian||Ancestral Guardian|XGE|10",
+      "Vengeful Ancestors|Barbarian||Ancestral Guardian|XGE|14"
+    ]
+  },
+  {
+    "id": "barbarian-battlerager",
+    "name": "Path of the Battlerager",
+    "shortName": "Battlerager",
+    "className": "Barbarian",
+    "source": "SCAG",
+    "subclassFeatures": [
+      "Path of the Battlerager|Barbarian||Battlerager|SCAG|3",
+      "Reckless Abandon|Barbarian||Battlerager|SCAG|6",
+      "Battlerager Charge|Barbarian||Battlerager|SCAG|10",
+      "Spiked Retribution|Barbarian||Battlerager|SCAG|14"
+    ]
+  },
+  {
+    "id": "barbarian-beast",
+    "name": "Path of the Beast",
+    "shortName": "Beast",
+    "className": "Barbarian",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Path of the Beast|Barbarian||Beast|TCE|3",
+      "Bestial Soul|Barbarian||Beast|TCE|6",
+      "Infectious Fury|Barbarian||Beast|TCE|10",
+      "Call the Hunt|Barbarian||Beast|TCE|14"
+    ]
+  },
+  {
+    "id": "barbarian-berserker",
+    "name": "Path of the Berserker",
+    "shortName": "Berserker",
+    "className": "Barbarian",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Path of the Berserker|Barbarian||Berserker||3",
+      "Mindless Rage|Barbarian||Berserker||6",
+      "Intimidating Presence|Barbarian||Berserker||10",
+      "Retaliation|Barbarian||Berserker||14"
+    ]
+  },
+  {
+    "id": "barbarian-giant",
+    "name": "Path of the Giant",
+    "shortName": "Giant",
+    "className": "Barbarian",
+    "source": "BGG",
+    "subclassFeatures": [
+      "Path of the Giant|Barbarian||Giant|BGG|3",
+      "Elemental Cleaver|Barbarian||Giant|BGG|6",
+      "Mighty Impel|Barbarian||Giant|BGG|10",
+      "Demiurgic Colossus|Barbarian||Giant|BGG|14"
+    ]
+  },
+  {
+    "id": "barbarian-juggernaut",
+    "name": "Path of the Juggernaut",
+    "shortName": "Juggernaut",
+    "className": "Barbarian",
+    "source": "TDCSR",
+    "subclassFeatures": [
+      "Path of the Juggernaut|Barbarian|PHB|Juggernaut|TDCSR|3",
+      "Demolishing Might|Barbarian|PHB|Juggernaut|TDCSR|6",
+      "Resolute Stance|Barbarian|PHB|Juggernaut|TDCSR|6",
+      "Thunderous Blows (10th Level)|Barbarian|PHB|Juggernaut|TDCSR|10",
+      "Hurricane Strike|Barbarian|PHB|Juggernaut|TDCSR|10",
+      "Unstoppable|Barbarian|PHB|Juggernaut|TDCSR|14"
+    ]
+  },
+  {
+    "id": "barbarian-storm-herald",
+    "name": "Path of the Storm Herald",
+    "shortName": "Storm Herald",
+    "className": "Barbarian",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Path of the Storm Herald|Barbarian||Storm Herald|XGE|3",
+      "Storm Soul|Barbarian||Storm Herald|XGE|6",
+      "Shielding Storm|Barbarian||Storm Herald|XGE|10",
+      "Raging Storm|Barbarian||Storm Herald|XGE|14"
+    ]
+  },
+  {
+    "id": "barbarian-totem-warrior",
+    "name": "Path of the Totem Warrior",
+    "shortName": "Totem Warrior",
+    "className": "Barbarian",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Path of the Totem Warrior|Barbarian||Totem Warrior||3",
+      "Aspect of the Beast|Barbarian||Totem Warrior||6",
+      "Spirit Walker|Barbarian||Totem Warrior||10",
+      "Totemic Attunement|Barbarian||Totem Warrior||14"
+    ]
+  },
+  {
+    "id": "barbarian-zealot",
+    "name": "Path of the Zealot",
+    "shortName": "Zealot",
+    "className": "Barbarian",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Path of the Zealot|Barbarian||Zealot|XGE|3",
+      "Fanatical Focus|Barbarian||Zealot|XGE|6",
+      "Zealous Presence|Barbarian||Zealot|XGE|10",
+      "Rage beyond Death|Barbarian||Zealot|XGE|14"
+    ]
+  },
+  {
+    "id": "barbarian-wild-magic",
+    "name": "Path of Wild Magic",
+    "shortName": "Wild Magic",
+    "className": "Barbarian",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Path of Wild Magic|Barbarian||Wild Magic|TCE|3",
+      "Bolstering Magic|Barbarian||Wild Magic|TCE|6",
+      "Unstable Backlash|Barbarian||Wild Magic|TCE|10",
+      "Controlled Surge|Barbarian||Wild Magic|TCE|14"
+    ]
+  },
+  {
+    "id": "bard-creation",
+    "name": "College of Creation",
+    "shortName": "Creation",
+    "className": "Bard",
+    "source": "TCE",
+    "subclassFeatures": [
+      "College of Creation|Bard||Creation|TCE|3",
+      "Animating Performance|Bard||Creation|TCE|6",
+      "Creative Crescendo|Bard||Creation|TCE|14"
+    ]
+  },
+  {
+    "id": "bard-eloquence",
+    "name": "College of Eloquence",
+    "shortName": "Eloquence",
+    "className": "Bard",
+    "source": "TCE",
+    "subclassFeatures": [
+      "College of Eloquence|Bard||Eloquence|TCE|3",
+      "Unfailing Inspiration|Bard||Eloquence|TCE|6",
+      "Universal Speech|Bard||Eloquence|TCE|6",
+      "Infectious Inspiration|Bard||Eloquence|TCE|14"
+    ]
+  },
+  {
+    "id": "bard-glamour",
+    "name": "College of Glamour",
+    "shortName": "Glamour",
+    "className": "Bard",
+    "source": "XGE",
+    "subclassFeatures": [
+      "College of Glamour|Bard||Glamour|XGE|3",
+      "Mantle of Majesty|Bard||Glamour|XGE|6",
+      "Unbreakable Majesty|Bard||Glamour|XGE|14"
+    ]
+  },
+  {
+    "id": "bard-lore",
+    "name": "College of Lore",
+    "shortName": "Lore",
+    "className": "Bard",
+    "source": "PHB",
+    "subclassFeatures": [
+      "College of Lore|Bard||Lore||3",
+      "Additional Magical Secrets|Bard||Lore||6",
+      "Peerless Skill|Bard||Lore||14"
+    ]
+  },
+  {
+    "id": "bard-spirits",
+    "name": "College of Spirits",
+    "shortName": "Spirits",
+    "className": "Bard",
+    "source": "VRGR",
+    "subclassFeatures": [
+      "College of Spirits|Bard||Spirits|VRGR|3",
+      "Spirit Session|Bard||Spirits|VRGR|6",
+      "Mystical Connection|Bard||Spirits|VRGR|14"
+    ]
+  },
+  {
+    "id": "bard-swords",
+    "name": "College of Swords",
+    "shortName": "Swords",
+    "className": "Bard",
+    "source": "XGE",
+    "subclassFeatures": [
+      "College of Swords|Bard||Swords|XGE|3",
+      "Extra Attack|Bard||Swords|XGE|6",
+      "Master's Flourish|Bard||Swords|XGE|14"
+    ]
+  },
+  {
+    "id": "bard-tragedy",
+    "name": "College of Tragedy",
+    "shortName": "Tragedy",
+    "className": "Bard",
+    "source": "TDCSR",
+    "subclassFeatures": [
+      "College of Tragedy|Bard|PHB|Tragedy|TDCSR|3",
+      "Tale of Hubris|Bard|PHB|Tragedy|TDCSR|6",
+      "Impending Misfortune|Bard|PHB|Tragedy|TDCSR|6",
+      "Tale of Hubris (14th Level)|Bard|PHB|Tragedy|TDCSR|14",
+      "Nimbus of Pathos|Bard|PHB|Tragedy|TDCSR|14"
+    ]
+  },
+  {
+    "id": "bard-valor",
+    "name": "College of Valor",
+    "shortName": "Valor",
+    "className": "Bard",
+    "source": "PHB",
+    "subclassFeatures": [
+      "College of Valor|Bard||Valor||3",
+      "Extra Attack|Bard||Valor||6",
+      "Battle Magic|Bard||Valor||14"
+    ]
+  },
+  {
+    "id": "bard-whispers",
+    "name": "College of Whispers",
+    "shortName": "Whispers",
+    "className": "Bard",
+    "source": "XGE",
+    "subclassFeatures": [
+      "College of Whispers|Bard||Whispers|XGE|3",
+      "Mantle of Whispers|Bard||Whispers|XGE|6",
+      "Shadow Lore|Bard||Whispers|XGE|14"
+    ]
+  },
+  {
+    "id": "cleric-ambition-psa",
+    "name": "Ambition Domain (PSA)",
+    "shortName": "Ambition (PSA)",
+    "className": "Cleric",
+    "source": "PSA",
+    "subclassFeatures": [
+      "Ambition Domain (PSA)|Cleric||Ambition (PSA)|PSA|1",
+      "Channel Divinity: Invoke Duplicity|Cleric||Ambition (PSA)|PSA|2",
+      "Channel Divinity: Cloak of Shadows|Cleric||Ambition (PSA)|PSA|6",
+      "Potent Spellcasting|Cleric||Ambition (PSA)|PSA|8",
+      "Blessed Strikes|Cleric||Ambition (PSA)|PSA|8|TCE",
+      "Improved Duplicity|Cleric||Ambition (PSA)|PSA|17"
+    ]
+  },
+  {
+    "id": "cleric-arcana",
+    "name": "Arcana Domain",
+    "shortName": "Arcana",
+    "className": "Cleric",
+    "source": "SCAG",
+    "subclassFeatures": [
+      "Arcana Domain|Cleric||Arcana|SCAG|1",
+      "Channel Divinity: Arcane Abjuration|Cleric||Arcana|SCAG|2",
+      "Spell Breaker|Cleric||Arcana|SCAG|6",
+      "Potent Spellcasting|Cleric||Arcana|SCAG|8",
+      "Blessed Strikes|Cleric||Arcana|SCAG|8|TCE",
+      "Arcane Mastery|Cleric||Arcana|SCAG|17"
+    ]
+  },
+  {
+    "id": "cleric-blood",
+    "name": "Blood Domain",
+    "shortName": "Blood",
+    "className": "Cleric",
+    "source": "TDCSR",
+    "subclassFeatures": [
+      "Blood Domain|Cleric|PHB|Blood|TDCSR|1",
+      "Channel Divinity: Crimson Bond|Cleric|PHB|Blood|TDCSR|2",
+      "Channel Divinity: Blood Puppet|Cleric|PHB|Blood|TDCSR|6",
+      "Sanguine Recall|Cleric|PHB|Blood|TDCSR|6",
+      "Divine Strike|Cleric|PHB|Blood|TDCSR|8",
+      "Divine Strike (14th Level)|Cleric|PHB|Blood|TDCSR|14",
+      "Channel Divinity: Blood Puppet (17th Level)|Cleric|PHB|Blood|TDCSR|17",
+      "Vascular Corruption Aura|Cleric|PHB|Blood|TDCSR|17"
+    ]
+  },
+  {
+    "id": "cleric-death",
+    "name": "Death Domain",
+    "shortName": "Death",
+    "className": "Cleric",
+    "source": "DMG",
+    "subclassFeatures": [
+      "Death Domain|Cleric||Death|DMG|1",
+      "Channel Divinity: Touch of Death|Cleric||Death|DMG|2",
+      "Inescapable Destruction|Cleric||Death|DMG|6",
+      "Divine Strike|Cleric||Death|DMG|8",
+      "Blessed Strikes|Cleric||Death|DMG|8|TCE",
+      "Improved Reaper|Cleric||Death|DMG|17"
+    ]
+  },
+  {
+    "id": "cleric-forge",
+    "name": "Forge Domain",
+    "shortName": "Forge",
+    "className": "Cleric",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Forge Domain|Cleric||Forge|XGE|1",
+      "Channel Divinity: Artisan's Blessing|Cleric||Forge|XGE|2",
+      "Soul of the Forge|Cleric||Forge|XGE|6",
+      "Divine Strike|Cleric||Forge|XGE|8",
+      "Blessed Strikes|Cleric||Forge|XGE|8|TCE",
+      "Saint of Forge and Fire|Cleric||Forge|XGE|17"
+    ]
+  },
+  {
+    "id": "cleric-grave",
+    "name": "Grave Domain",
+    "shortName": "Grave",
+    "className": "Cleric",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Grave Domain|Cleric||Grave|XGE|1",
+      "Channel Divinity: Path to the Grave|Cleric||Grave|XGE|2",
+      "Sentinel at Death's Door|Cleric||Grave|XGE|6",
+      "Potent Spellcasting|Cleric||Grave|XGE|8",
+      "Blessed Strikes|Cleric||Grave|XGE|8|TCE",
+      "Keeper of Souls|Cleric||Grave|XGE|17"
+    ]
+  },
+  {
+    "id": "cleric-knowledge",
+    "name": "Knowledge Domain",
+    "shortName": "Knowledge",
+    "className": "Cleric",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Knowledge Domain|Cleric||Knowledge||1",
+      "Channel Divinity: Knowledge of the Ages|Cleric||Knowledge||2",
+      "Channel Divinity: Read Thoughts|Cleric||Knowledge||6",
+      "Potent Spellcasting|Cleric||Knowledge||8",
+      "Blessed Strikes|Cleric||Knowledge||8|TCE",
+      "Visions of the Past|Cleric||Knowledge||17"
+    ]
+  },
+  {
+    "id": "cleric-knowledge-psa",
+    "name": "Knowledge Domain (PSA)",
+    "shortName": "Knowledge (PSA)",
+    "className": "Cleric",
+    "source": "PSA",
+    "subclassFeatures": [
+      "Knowledge Domain (PSA)|Cleric||Knowledge (PSA)|PSA|1",
+      "Channel Divinity: Knowledge of the Ages|Cleric||Knowledge||2",
+      "Channel Divinity: Read Thoughts|Cleric||Knowledge||6",
+      "Potent Spellcasting|Cleric||Knowledge||8",
+      "Blessed Strikes|Cleric||Knowledge||8|TCE",
+      "Visions of the Past|Cleric||Knowledge||17"
+    ]
+  },
+  {
+    "id": "cleric-life",
+    "name": "Life Domain",
+    "shortName": "Life",
+    "className": "Cleric",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Life Domain|Cleric||Life||1",
+      "Channel Divinity: Preserve Life|Cleric||Life||2",
+      "Blessed Healer|Cleric||Life||6",
+      "Divine Strike|Cleric||Life||8",
+      "Blessed Strikes|Cleric||Life||8|TCE",
+      "Supreme Healing|Cleric||Life||17"
+    ]
+  },
+  {
+    "id": "cleric-light",
+    "name": "Light Domain",
+    "shortName": "Light",
+    "className": "Cleric",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Light Domain|Cleric||Light||1",
+      "Channel Divinity: Radiance of the Dawn|Cleric||Light||2",
+      "Improved Flare|Cleric||Light||6",
+      "Potent Spellcasting|Cleric||Light||8",
+      "Blessed Strikes|Cleric||Light||8|TCE",
+      "Corona of Light|Cleric||Light||17"
+    ]
+  },
+  {
+    "id": "cleric-moon",
+    "name": "Moon Domain",
+    "shortName": "Moon",
+    "className": "Cleric",
+    "source": "TDCSR",
+    "subclassFeatures": [
+      "Moon Domain|Cleric|PHB|Moon|TDCSR|1",
+      "Channel Divinity: Blessing of the Full Moon|Cleric|PHB|Moon|TDCSR|2",
+      "Channel Divinity: Mind of Two Moons|Cleric|PHB|Moon|TDCSR|6",
+      "Empowered Cantrips|Cleric|PHB|Moon|TDCSR|8",
+      "Eclipse of Ill Omen|Cleric|PHB|Moon|TDCSR|17"
+    ]
+  },
+  {
+    "id": "cleric-nature",
+    "name": "Nature Domain",
+    "shortName": "Nature",
+    "className": "Cleric",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Nature Domain|Cleric||Nature||1",
+      "Channel Divinity: Charm Animals and Plants|Cleric||Nature||2",
+      "Dampen Elements|Cleric||Nature||6",
+      "Divine Strike|Cleric||Nature||8",
+      "Blessed Strikes|Cleric||Nature||8|TCE",
+      "Master of Nature|Cleric||Nature||17"
+    ]
+  },
+  {
+    "id": "cleric-order",
+    "name": "Order Domain",
+    "shortName": "Order",
+    "className": "Cleric",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Order Domain|Cleric||Order|TCE|1",
+      "Channel Divinity: Order's Demand|Cleric||Order|TCE|2",
+      "Embodiment of the Law|Cleric||Order|TCE|6",
+      "Divine Strike|Cleric||Order|TCE|8",
+      "Blessed Strikes|Cleric||Order|TCE|8|TCE",
+      "Order's Wrath|Cleric||Order|TCE|17"
+    ]
+  },
+  {
+    "id": "cleric-peace",
+    "name": "Peace Domain",
+    "shortName": "Peace",
+    "className": "Cleric",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Peace Domain|Cleric||Peace|TCE|1",
+      "Channel Divinity: Balm of Peace|Cleric||Peace|TCE|2",
+      "Protective Bond|Cleric||Peace|TCE|6",
+      "Potent Spellcasting|Cleric||Peace|TCE|8",
+      "Blessed Strikes|Cleric||Peace|TCE|8|TCE",
+      "Expansive Bond|Cleric||Peace|TCE|17"
+    ]
+  },
+  {
+    "id": "cleric-solidarity-psa",
+    "name": "Solidarity Domain (PSA)",
+    "shortName": "Solidarity (PSA)",
+    "className": "Cleric",
+    "source": "PSA",
+    "subclassFeatures": [
+      "Solidarity Domain (PSA)|Cleric||Solidarity (PSA)|PSA|1",
+      "Channel Divinity: Preserve Life|Cleric||Solidarity (PSA)|PSA|2",
+      "Oketra's Blessing|Cleric||Solidarity (PSA)|PSA|6",
+      "Divine Strike|Cleric||Solidarity (PSA)|PSA|8",
+      "Blessed Strikes|Cleric||Solidarity (PSA)|PSA|8|TCE",
+      "Supreme Healing|Cleric||Solidarity (PSA)|PSA|17"
+    ]
+  },
+  {
+    "id": "cleric-strength-psa",
+    "name": "Strength Domain (PSA)",
+    "shortName": "Strength (PSA)",
+    "className": "Cleric",
+    "source": "PSA",
+    "subclassFeatures": [
+      "Strength Domain (PSA)|Cleric||Strength (PSA)|PSA|1",
+      "Channel Divinity: Feat of Strength|Cleric||Strength (PSA)|PSA|2",
+      "Rhonas's Blessing|Cleric||Strength (PSA)|PSA|6",
+      "Divine Strike|Cleric||Strength (PSA)|PSA|8",
+      "Blessed Strikes|Cleric||Strength (PSA)|PSA|8|TCE",
+      "Avatar of Battle|Cleric||Strength (PSA)|PSA|17"
+    ]
+  },
+  {
+    "id": "cleric-tempest",
+    "name": "Tempest Domain",
+    "shortName": "Tempest",
+    "className": "Cleric",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Tempest Domain|Cleric||Tempest||1",
+      "Channel Divinity: Destructive Wrath|Cleric||Tempest||2",
+      "Thunderbolt Strike|Cleric||Tempest||6",
+      "Divine Strike|Cleric||Tempest||8",
+      "Blessed Strikes|Cleric||Tempest||8|TCE",
+      "Stormborn|Cleric||Tempest||17"
+    ]
+  },
+  {
+    "id": "cleric-trickery",
+    "name": "Trickery Domain",
+    "shortName": "Trickery",
+    "className": "Cleric",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Trickery Domain|Cleric||Trickery||1",
+      "Channel Divinity: Invoke Duplicity|Cleric||Trickery||2",
+      "Channel Divinity: Cloak of Shadows|Cleric||Trickery||6",
+      "Divine Strike|Cleric||Trickery||8",
+      "Blessed Strikes|Cleric||Trickery||8|TCE",
+      "Improved Duplicity|Cleric||Trickery||17"
+    ]
+  },
+  {
+    "id": "cleric-twilight",
+    "name": "Twilight Domain",
+    "shortName": "Twilight",
+    "className": "Cleric",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Twilight Domain|Cleric||Twilight|TCE|1",
+      "Channel Divinity: Twilight Sanctuary|Cleric||Twilight|TCE|2",
+      "Steps of Night|Cleric||Twilight|TCE|6",
+      "Divine Strike|Cleric||Twilight|TCE|8",
+      "Blessed Strikes|Cleric||Twilight|TCE|8|TCE",
+      "Twilight Shroud|Cleric||Twilight|TCE|17"
+    ]
+  },
+  {
+    "id": "cleric-war",
+    "name": "War Domain",
+    "shortName": "War",
+    "className": "Cleric",
+    "source": "PHB",
+    "subclassFeatures": [
+      "War Domain|Cleric||War||1",
+      "Channel Divinity: Guided Strike|Cleric||War||2",
+      "Channel Divinity: War God's Blessing|Cleric||War||6",
+      "Divine Strike|Cleric||War||8",
+      "Blessed Strikes|Cleric||War||8|TCE",
+      "Avatar of Battle|Cleric||War||17"
+    ]
+  },
+  {
+    "id": "cleric-zeal-psa",
+    "name": "Zeal Domain (PSA)",
+    "shortName": "Zeal (PSA)",
+    "className": "Cleric",
+    "source": "PSA",
+    "subclassFeatures": [
+      "Zeal Domain (PSA)|Cleric||Zeal (PSA)|PSA|1",
+      "Channel Divinity: Consuming Fervor|Cleric||Zeal (PSA)|PSA|2",
+      "Resounding Strike|Cleric||Zeal (PSA)|PSA|6",
+      "Divine Strike|Cleric||Zeal (PSA)|PSA|8",
+      "Blessed Strikes|Cleric||Zeal (PSA)|PSA|8|TCE",
+      "Blaze of Glory|Cleric||Zeal (PSA)|PSA|17"
+    ]
+  },
+  {
+    "id": "druid-dreams",
+    "name": "Circle of Dreams",
+    "shortName": "Dreams",
+    "className": "Druid",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Circle of Dreams|Druid||Dreams|XGE|2",
+      "Hearth of Moonlight and Shadow|Druid||Dreams|XGE|6",
+      "Hidden Paths|Druid||Dreams|XGE|10",
+      "Walker in Dreams|Druid||Dreams|XGE|14"
+    ]
+  },
+  {
+    "id": "druid-spores",
+    "name": "Circle of Spores",
+    "shortName": "Spores",
+    "className": "Druid",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Circle of Spores|Druid||Spores|TCE|2",
+      "Fungal Infestation|Druid||Spores|TCE|6",
+      "Spreading Spores|Druid||Spores|TCE|10",
+      "Fungal Body|Druid||Spores|TCE|14"
+    ]
+  },
+  {
+    "id": "druid-stars",
+    "name": "Circle of Stars",
+    "shortName": "Stars",
+    "className": "Druid",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Circle of Stars|Druid||Stars|TCE|2",
+      "Cosmic Omen|Druid||Stars|TCE|6",
+      "Twinkling Constellations|Druid||Stars|TCE|10",
+      "Full of Stars|Druid||Stars|TCE|14"
+    ]
+  },
+  {
+    "id": "druid-blighted",
+    "name": "Circle of the Blighted",
+    "shortName": "Blighted",
+    "className": "Druid",
+    "source": "TDCSR",
+    "subclassFeatures": [
+      "Circle of the Blighted|Druid|PHB|Blighted|TDCSR|2",
+      "Call of the Shadowseeds|Druid|PHB|Blighted|TDCSR|6",
+      "Defile Ground (10th Level)|Druid|PHB|Blighted|TDCSR|10",
+      "Defile Ground (14th Level)|Druid|PHB|Blighted|TDCSR|14",
+      "Foul Conjuration|Druid|PHB|Blighted|TDCSR|10",
+      "Incarnation of Corruption|Druid|PHB|Blighted|TDCSR|14"
+    ]
+  },
+  {
+    "id": "druid-land",
+    "name": "Circle of the Land",
+    "shortName": "Land",
+    "className": "Druid",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Circle of the Land|Druid||Land||2",
+      "Land's Stride|Druid||Land||6",
+      "Nature's Ward|Druid||Land||10",
+      "Nature's Sanctuary|Druid||Land||14"
+    ]
+  },
+  {
+    "id": "druid-moon",
+    "name": "Circle of the Moon",
+    "shortName": "Moon",
+    "className": "Druid",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Circle of the Moon|Druid||Moon||2",
+      "Primal Strike|Druid||Moon||6",
+      "Elemental Wild Shape|Druid||Moon||10",
+      "Thousand Forms|Druid||Moon||14"
+    ]
+  },
+  {
+    "id": "druid-shepherd",
+    "name": "Circle of the Shepherd",
+    "shortName": "Shepherd",
+    "className": "Druid",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Circle of the Shepherd|Druid||Shepherd|XGE|2",
+      "Mighty Summoner|Druid||Shepherd|XGE|6",
+      "Guardian Spirit|Druid||Shepherd|XGE|10",
+      "Faithful Summons|Druid||Shepherd|XGE|14"
+    ]
+  },
+  {
+    "id": "druid-wildfire",
+    "name": "Circle of Wildfire",
+    "shortName": "Wildfire",
+    "className": "Druid",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Circle of Wildfire|Druid||Wildfire|TCE|2",
+      "Enhanced Bond|Druid||Wildfire|TCE|6",
+      "Cauterizing Flames|Druid||Wildfire|TCE|10",
+      "Blazing Revival|Druid||Wildfire|TCE|14"
+    ]
+  },
+  {
+    "id": "fighter-arcane-archer",
+    "name": "Arcane Archer",
+    "shortName": "Arcane Archer",
+    "className": "Fighter",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Arcane Archer|Fighter||Arcane Archer|XGE|3",
+      "Magic Arrow|Fighter||Arcane Archer|XGE|7",
+      "Curving Shot|Fighter||Arcane Archer|XGE|7",
+      "Additional Arcane Shot Option|Fighter||Arcane Archer|XGE|7",
+      "Additional Arcane Shot Option|Fighter||Arcane Archer|XGE|10",
+      "Ever-Ready Shot|Fighter||Arcane Archer|XGE|15",
+      "Additional Arcane Shot Option|Fighter||Arcane Archer|XGE|15",
+      "Additional Arcane Shot Option|Fighter||Arcane Archer|XGE|18"
+    ]
+  },
+  {
+    "id": "fighter-battle-master",
+    "name": "Battle Master",
+    "shortName": "Battle Master",
+    "className": "Fighter",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Battle Master|Fighter||Battle Master||3",
+      "Additional Maneuvers|Fighter||Battle Master||7",
+      "Additional Superiority Die|Fighter||Battle Master||7",
+      "Know Your Enemy|Fighter||Battle Master||7",
+      "Additional Maneuvers|Fighter||Battle Master||10",
+      "Improved Combat Superiority (d10)|Fighter||Battle Master||10",
+      "Additional Maneuvers|Fighter||Battle Master||15",
+      "Additional Superiority Die|Fighter||Battle Master||15",
+      "Relentless|Fighter||Battle Master||15",
+      "Improved Combat Superiority (d12)|Fighter||Battle Master||18"
+    ]
+  },
+  {
+    "id": "fighter-cavalier",
+    "name": "Cavalier",
+    "shortName": "Cavalier",
+    "className": "Fighter",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Cavalier|Fighter||Cavalier|XGE|3",
+      "Warding Maneuver|Fighter||Cavalier|XGE|7",
+      "Hold the Line|Fighter||Cavalier|XGE|10",
+      "Ferocious Charger|Fighter||Cavalier|XGE|15",
+      "Vigilant Defender|Fighter||Cavalier|XGE|18"
+    ]
+  },
+  {
+    "id": "fighter-champion",
+    "name": "Champion",
+    "shortName": "Champion",
+    "className": "Fighter",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Champion|Fighter||Champion||3",
+      "Remarkable Athlete|Fighter||Champion||7",
+      "Additional Fighting Style|Fighter||Champion||10",
+      "Superior Critical|Fighter||Champion||15",
+      "Survivor|Fighter||Champion||18"
+    ]
+  },
+  {
+    "id": "fighter-echo-knight",
+    "name": "Echo Knight",
+    "shortName": "Echo Knight",
+    "className": "Fighter",
+    "source": "EGW",
+    "subclassFeatures": [
+      "Echo Knight|Fighter||Echo Knight|EGW|3",
+      "Echo Avatar|Fighter||Echo Knight|EGW|7",
+      "Shadow Martyr|Fighter||Echo Knight|EGW|10",
+      "Reclaim Potential|Fighter||Echo Knight|EGW|15",
+      "Legion of One|Fighter||Echo Knight|EGW|18"
+    ]
+  },
+  {
+    "id": "fighter-eldritch-knight",
+    "name": "Eldritch Knight",
+    "shortName": "Eldritch Knight",
+    "className": "Fighter",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Eldritch Knight|Fighter||Eldritch Knight||3",
+      "War Magic|Fighter||Eldritch Knight||7",
+      "Eldritch Strike|Fighter||Eldritch Knight||10",
+      "Arcane Charge|Fighter||Eldritch Knight||15",
+      "Improved War Magic|Fighter||Eldritch Knight||18"
+    ]
+  },
+  {
+    "id": "fighter-psi-warrior",
+    "name": "Psi Warrior",
+    "shortName": "Psi Warrior",
+    "className": "Fighter",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Psi Warrior|Fighter||Psi Warrior|TCE|3",
+      "Telekinetic Adept|Fighter||Psi Warrior|TCE|7",
+      "Guarded Mind|Fighter||Psi Warrior|TCE|10",
+      "Bulwark of Force|Fighter||Psi Warrior|TCE|15",
+      "Telekinetic Master|Fighter||Psi Warrior|TCE|18"
+    ]
+  },
+  {
+    "id": "fighter-purple-dragon-knight-banneret",
+    "name": "Purple Dragon Knight (Banneret)",
+    "shortName": "Purple Dragon Knight (Banneret)",
+    "className": "Fighter",
+    "source": "SCAG",
+    "subclassFeatures": [
+      "Purple Dragon Knight (Banneret)|Fighter||Purple Dragon Knight (Banneret)|SCAG|3",
+      "Royal Envoy|Fighter||Purple Dragon Knight (Banneret)|SCAG|7",
+      "Inspiring Surge|Fighter||Purple Dragon Knight (Banneret)|SCAG|10",
+      "Bulwark|Fighter||Purple Dragon Knight (Banneret)|SCAG|15",
+      "Inspiring Surge|Fighter||Purple Dragon Knight (Banneret)|SCAG|18"
+    ]
+  },
+  {
+    "id": "fighter-rune-knight",
+    "name": "Rune Knight",
+    "shortName": "Rune Knight",
+    "className": "Fighter",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Rune Knight|Fighter||Rune Knight|TCE|3",
+      "Runic Shield|Fighter||Rune Knight|TCE|7",
+      "Additional Rune Known|Fighter||Rune Knight|TCE|7",
+      "Great Stature|Fighter||Rune Knight|TCE|10",
+      "Additional Rune Known|Fighter||Rune Knight|TCE|10",
+      "Master of Runes|Fighter||Rune Knight|TCE|15",
+      "Additional Rune Known|Fighter||Rune Knight|TCE|15",
+      "Runic Juggernaut|Fighter||Rune Knight|TCE|18"
+    ]
+  },
+  {
+    "id": "fighter-samurai",
+    "name": "Samurai",
+    "shortName": "Samurai",
+    "className": "Fighter",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Samurai|Fighter||Samurai|XGE|3",
+      "Elegant Courtier|Fighter||Samurai|XGE|7",
+      "Tireless Spirit|Fighter||Samurai|XGE|10",
+      "Rapid Strike|Fighter||Samurai|XGE|15",
+      "Strength before Death|Fighter||Samurai|XGE|18"
+    ]
+  },
+  {
+    "id": "monk-mercy",
+    "name": "Way of Mercy",
+    "shortName": "Mercy",
+    "className": "Monk",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Way of Mercy|Monk||Mercy|TCE|3",
+      "Physician's Touch|Monk||Mercy|TCE|6",
+      "Flurry of Healing and Harm|Monk||Mercy|TCE|11",
+      "Hand of Ultimate Mercy|Monk||Mercy|TCE|17"
+    ]
+  },
+  {
+    "id": "monk-shadow",
+    "name": "Way of Shadow",
+    "shortName": "Shadow",
+    "className": "Monk",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Way of Shadow|Monk||Shadow||3",
+      "Shadow Step|Monk||Shadow||6",
+      "Cloak of Shadows|Monk||Shadow||11",
+      "Opportunist|Monk||Shadow||17"
+    ]
+  },
+  {
+    "id": "monk-ascendant-dragon",
+    "name": "Way of the Ascendant Dragon",
+    "shortName": "Ascendant Dragon",
+    "className": "Monk",
+    "source": "FTD",
+    "subclassFeatures": [
+      "Way of the Ascendant Dragon|Monk||Ascendant Dragon|FTD|3",
+      "Wings Unfurled|Monk||Ascendant Dragon|FTD|6",
+      "Aspect of the Wyrm|Monk||Ascendant Dragon|FTD|11",
+      "Ascendant Aspect|Monk||Ascendant Dragon|FTD|17"
+    ]
+  },
+  {
+    "id": "monk-astral-self",
+    "name": "Way of the Astral Self",
+    "shortName": "Astral Self",
+    "className": "Monk",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Way of the Astral Self|Monk||Astral Self|TCE|3",
+      "Visage of the Astral Self|Monk||Astral Self|TCE|6",
+      "Body of the Astral Self|Monk||Astral Self|TCE|11",
+      "Awakened Astral Self|Monk||Astral Self|TCE|17"
+    ]
+  },
+  {
+    "id": "monk-cobalt-soul",
+    "name": "Way of the Cobalt Soul",
+    "shortName": "Cobalt Soul",
+    "className": "Monk",
+    "source": "TDCSR",
+    "subclassFeatures": [
+      "Way of the Cobalt Soul|Monk|PHB|Cobalt Soul|TDCSR|3",
+      "Extort Truth|Monk|PHB|Cobalt Soul|TDCSR|6",
+      "Mystical Erudition|Monk|PHB|Cobalt Soul|TDCSR|6",
+      "Mystical Erudition (11th Level)|Monk|PHB|Cobalt Soul|TDCSR|11",
+      "Mystical Erudition (17th Level)|Monk|PHB|Cobalt Soul|TDCSR|17",
+      "Mind of Mercury|Monk|PHB|Cobalt Soul|TDCSR|11",
+      "Debilitating Barrage|Monk|PHB|Cobalt Soul|TDCSR|17"
+    ]
+  },
+  {
+    "id": "monk-drunken-master",
+    "name": "Way of the Drunken Master",
+    "shortName": "Drunken Master",
+    "className": "Monk",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Way of the Drunken Master|Monk||Drunken Master|XGE|3",
+      "Tipsy Sway|Monk||Drunken Master|XGE|6",
+      "Drunkard's Luck|Monk||Drunken Master|XGE|11",
+      "Intoxicated Frenzy|Monk||Drunken Master|XGE|17"
+    ]
+  },
+  {
+    "id": "monk-four-elements",
+    "name": "Way of the Four Elements",
+    "shortName": "Four Elements",
+    "className": "Monk",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Way of the Four Elements|Monk||Four Elements||3",
+      "Extra Elemental Discipline|Monk||Four Elements||6",
+      "Extra Elemental Discipline|Monk||Four Elements||11",
+      "Extra Elemental Discipline|Monk||Four Elements||17"
+    ]
+  },
+  {
+    "id": "monk-kensei",
+    "name": "Way of the Kensei",
+    "shortName": "Kensei",
+    "className": "Monk",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Way of the Kensei|Monk||Kensei|XGE|3",
+      "One with the Blade|Monk||Kensei|XGE|6",
+      "Sharpen the Blade|Monk||Kensei|XGE|11",
+      "Unerring Accuracy|Monk||Kensei|XGE|17"
+    ]
+  },
+  {
+    "id": "monk-long-death",
+    "name": "Way of the Long Death",
+    "shortName": "Long Death",
+    "className": "Monk",
+    "source": "SCAG",
+    "subclassFeatures": [
+      "Way of the Long Death|Monk||Long Death|SCAG|3",
+      "Hour of Reaping|Monk||Long Death|SCAG|6",
+      "Mastery of Death|Monk||Long Death|SCAG|11",
+      "Touch of the Long Death|Monk||Long Death|SCAG|17"
+    ]
+  },
+  {
+    "id": "monk-open-hand",
+    "name": "Way of the Open Hand",
+    "shortName": "Open Hand",
+    "className": "Monk",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Way of the Open Hand|Monk||Open Hand||3",
+      "Wholeness of Body|Monk||Open Hand||6",
+      "Tranquility|Monk||Open Hand||11",
+      "Quivering Palm|Monk||Open Hand||17"
+    ]
+  },
+  {
+    "id": "monk-sun-soul",
+    "name": "Way of the Sun Soul",
+    "shortName": "Sun Soul",
+    "className": "Monk",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Way of the Sun Soul|Monk||Sun Soul|XGE|3",
+      "Searing Arc Strike|Monk||Sun Soul|XGE|6",
+      "Searing Sunburst|Monk||Sun Soul|XGE|11",
+      "Sun Shield|Monk||Sun Soul|XGE|17"
+    ]
+  },
+  {
+    "id": "mystic-avatar",
+    "name": "Order of the Avatar",
+    "shortName": "Avatar",
+    "className": "Mystic",
+    "source": "UATheMysticClass",
+    "subclassFeatures": [
+      "Order of the Avatar|Mystic|UATheMysticClass|Avatar|UATheMysticClass|1",
+      "Avatar of Battle|Mystic|UATheMysticClass|Avatar|UATheMysticClass|3",
+      "Avatar of Healing|Mystic|UATheMysticClass|Avatar|UATheMysticClass|6",
+      "Avatar of Speed|Mystic|UATheMysticClass|Avatar|UATheMysticClass|14"
+    ]
+  },
+  {
+    "id": "mystic-awakened",
+    "name": "Order of the Awakened",
+    "shortName": "Awakened",
+    "className": "Mystic",
+    "source": "UATheMysticClass",
+    "subclassFeatures": [
+      "Order of the Awakened|Mystic|UATheMysticClass|Awakened|UATheMysticClass|1",
+      "Psionic Investigation|Mystic|UATheMysticClass|Awakened|UATheMysticClass|3",
+      "Psionic Surge|Mystic|UATheMysticClass|Awakened|UATheMysticClass|6",
+      "Spectral Form|Mystic|UATheMysticClass|Awakened|UATheMysticClass|14"
+    ]
+  },
+  {
+    "id": "mystic-immortal",
+    "name": "Order of the Immortal",
+    "shortName": "Immortal",
+    "className": "Mystic",
+    "source": "UATheMysticClass",
+    "subclassFeatures": [
+      "Order of the Immortal|Mystic|UATheMysticClass|Immortal|UATheMysticClass|1",
+      "Psionic Resilience|Mystic|UATheMysticClass|Immortal|UATheMysticClass|3",
+      "Surge of Health|Mystic|UATheMysticClass|Immortal|UATheMysticClass|6",
+      "Immortal Will|Mystic|UATheMysticClass|Immortal|UATheMysticClass|14"
+    ]
+  },
+  {
+    "id": "mystic-nomad",
+    "name": "Order of the Nomad",
+    "shortName": "Nomad",
+    "className": "Mystic",
+    "source": "UATheMysticClass",
+    "subclassFeatures": [
+      "Order of the Nomad|Mystic|UATheMysticClass|Nomad|UATheMysticClass|1",
+      "Memory of One Thousand Steps|Mystic|UATheMysticClass|Nomad|UATheMysticClass|3",
+      "Superior Teleportation|Mystic|UATheMysticClass|Nomad|UATheMysticClass|6",
+      "Effortless Journey|Mystic|UATheMysticClass|Nomad|UATheMysticClass|14"
+    ]
+  },
+  {
+    "id": "mystic-soul-knife",
+    "name": "Order of the Soul Knife",
+    "shortName": "Soul Knife",
+    "className": "Mystic",
+    "source": "UATheMysticClass",
+    "subclassFeatures": [
+      "Order of the Soul Knife|Mystic|UATheMysticClass|Soul Knife|UATheMysticClass|1",
+      "Hone the Blade|Mystic|UATheMysticClass|Soul Knife|UATheMysticClass|3",
+      "Consumptive Knife|Mystic|UATheMysticClass|Soul Knife|UATheMysticClass|6",
+      "Phantom Knife|Mystic|UATheMysticClass|Soul Knife|UATheMysticClass|14"
+    ]
+  },
+  {
+    "id": "mystic-wu-jen",
+    "name": "Order of the Wu Jen",
+    "shortName": "Wu Jen",
+    "className": "Mystic",
+    "source": "UATheMysticClass",
+    "subclassFeatures": [
+      "Order of the Wu Jen|Mystic|UATheMysticClass|Wu Jen|UATheMysticClass|1",
+      "Elemental Attunement|Mystic|UATheMysticClass|Wu Jen|UATheMysticClass|3",
+      "Arcane Dabbler|Mystic|UATheMysticClass|Wu Jen|UATheMysticClass|6",
+      "Elemental Mastery|Mystic|UATheMysticClass|Wu Jen|UATheMysticClass|14"
+    ]
+  },
+  {
+    "id": "paladin-conquest",
+    "name": "Oath of Conquest",
+    "shortName": "Conquest",
+    "className": "Paladin",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Oath of Conquest|Paladin||Conquest|XGE|3",
+      "Aura of Conquest|Paladin||Conquest|XGE|7",
+      "Scornful Rebuke|Paladin||Conquest|XGE|15",
+      "Invincible Conqueror|Paladin||Conquest|XGE|20"
+    ]
+  },
+  {
+    "id": "paladin-devotion",
+    "name": "Oath of Devotion",
+    "shortName": "Devotion",
+    "className": "Paladin",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Oath of Devotion|Paladin||Devotion||3",
+      "Aura of Devotion|Paladin||Devotion||7",
+      "Purity of Spirit|Paladin||Devotion||15",
+      "Holy Nimbus|Paladin||Devotion||20"
+    ]
+  },
+  {
+    "id": "paladin-glory",
+    "name": "Oath of Glory",
+    "shortName": "Glory",
+    "className": "Paladin",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Oath of Glory|Paladin||Glory|TCE|3",
+      "Aura of Alacrity|Paladin||Glory|TCE|7",
+      "Glorious Defense|Paladin||Glory|TCE|15",
+      "Living Legend|Paladin||Glory|TCE|20"
+    ]
+  },
+  {
+    "id": "paladin-redemption",
+    "name": "Oath of Redemption",
+    "shortName": "Redemption",
+    "className": "Paladin",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Oath of Redemption|Paladin||Redemption|XGE|3",
+      "Aura of the Guardian|Paladin||Redemption|XGE|7",
+      "Protective Spirit|Paladin||Redemption|XGE|15",
+      "Emissary of Redemption|Paladin||Redemption|XGE|20"
+    ]
+  },
+  {
+    "id": "paladin-ancients",
+    "name": "Oath of the Ancients",
+    "shortName": "Ancients",
+    "className": "Paladin",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Oath of the Ancients|Paladin||Ancients||3",
+      "Aura of Warding|Paladin||Ancients||7",
+      "Undying Sentinel|Paladin||Ancients||15",
+      "Elder Champion|Paladin||Ancients||20"
+    ]
+  },
+  {
+    "id": "paladin-crown",
+    "name": "Oath of the Crown",
+    "shortName": "Crown",
+    "className": "Paladin",
+    "source": "SCAG",
+    "subclassFeatures": [
+      "Oath of the Crown|Paladin||Crown|SCAG|3",
+      "Divine Allegiance|Paladin||Crown|SCAG|7",
+      "Unyielding Spirit|Paladin||Crown|SCAG|15",
+      "Exalted Champion|Paladin||Crown|SCAG|20"
+    ]
+  },
+  {
+    "id": "paladin-open-sea",
+    "name": "Oath of the Open Sea",
+    "shortName": "Open Sea",
+    "className": "Paladin",
+    "source": "TDCSR",
+    "subclassFeatures": [
+      "Oath of the Open Sea|Paladin|PHB|Open Sea|TDCSR|3",
+      "Aura of Liberation|Paladin|PHB|Open Sea|TDCSR|7",
+      "Stormy Waters|Paladin|PHB|Open Sea|TDCSR|15",
+      "Aura of Liberation (18th Level)|Paladin|PHB|Open Sea|TDCSR|18",
+      "Mythic Swashbuckler|Paladin|PHB|Open Sea|TDCSR|20"
+    ]
+  },
+  {
+    "id": "paladin-watchers",
+    "name": "Oath of the Watchers",
+    "shortName": "Watchers",
+    "className": "Paladin",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Oath of the Watchers|Paladin||Watchers|TCE|3",
+      "Aura of the Sentinel|Paladin||Watchers|TCE|7",
+      "Vigilant Rebuke|Paladin||Watchers|TCE|15",
+      "Mortal Bulwark|Paladin||Watchers|TCE|20"
+    ]
+  },
+  {
+    "id": "paladin-vengeance",
+    "name": "Oath of Vengeance",
+    "shortName": "Vengeance",
+    "className": "Paladin",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Oath of Vengeance|Paladin||Vengeance||3",
+      "Relentless Avenger|Paladin||Vengeance||7",
+      "Soul of Vengeance|Paladin||Vengeance||15",
+      "Avenging Angel|Paladin||Vengeance||20"
+    ]
+  },
+  {
+    "id": "paladin-oathbreaker",
+    "name": "Oathbreaker",
+    "shortName": "Oathbreaker",
+    "className": "Paladin",
+    "source": "DMG",
+    "subclassFeatures": [
+      "Oathbreaker|Paladin||Oathbreaker|DMG|3",
+      "Aura of Hate|Paladin||Oathbreaker|DMG|7",
+      "Supernatural Resistance|Paladin||Oathbreaker|DMG|15",
+      "Dread Lord|Paladin||Oathbreaker|DMG|20"
+    ]
+  },
+  {
+    "id": "ranger-beast-master",
+    "name": "Beast Master",
+    "shortName": "Beast Master",
+    "className": "Ranger",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Beast Master|Ranger||Beast Master||3",
+      "Exceptional Training|Ranger||Beast Master||7",
+      "Bestial Fury|Ranger||Beast Master||11",
+      "Share Spells|Ranger||Beast Master||15"
+    ]
+  },
+  {
+    "id": "ranger-drakewarden",
+    "name": "Drakewarden",
+    "shortName": "Drakewarden",
+    "className": "Ranger",
+    "source": "FTD",
+    "subclassFeatures": [
+      "Drakewarden|Ranger||Drakewarden|FTD|3",
+      "Bond of Fang and Scale|Ranger||Drakewarden|FTD|7",
+      "Drake's Breath|Ranger||Drakewarden|FTD|11",
+      "Perfected Bond|Ranger||Drakewarden|FTD|15"
+    ]
+  },
+  {
+    "id": "ranger-fey-wanderer",
+    "name": "Fey Wanderer",
+    "shortName": "Fey Wanderer",
+    "className": "Ranger",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Fey Wanderer|Ranger||Fey Wanderer|TCE|3",
+      "Beguiling Twist|Ranger||Fey Wanderer|TCE|7",
+      "Fey Reinforcements|Ranger||Fey Wanderer|TCE|11",
+      "Misty Wanderer|Ranger||Fey Wanderer|TCE|15"
+    ]
+  },
+  {
+    "id": "ranger-gloom-stalker",
+    "name": "Gloom Stalker",
+    "shortName": "Gloom Stalker",
+    "className": "Ranger",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Gloom Stalker|Ranger||Gloom Stalker|XGE|3",
+      "Iron Mind|Ranger||Gloom Stalker|XGE|7",
+      "Stalker's Flurry|Ranger||Gloom Stalker|XGE|11",
+      "Shadowy Dodge|Ranger||Gloom Stalker|XGE|15"
+    ]
+  },
+  {
+    "id": "ranger-horizon-walker",
+    "name": "Horizon Walker",
+    "shortName": "Horizon Walker",
+    "className": "Ranger",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Horizon Walker|Ranger||Horizon Walker|XGE|3",
+      "Ethereal Step|Ranger||Horizon Walker|XGE|7",
+      "Distant Strike|Ranger||Horizon Walker|XGE|11",
+      "Spectral Defense|Ranger||Horizon Walker|XGE|15"
+    ]
+  },
+  {
+    "id": "ranger-hunter",
+    "name": "Hunter",
+    "shortName": "Hunter",
+    "className": "Ranger",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Hunter|Ranger||Hunter||3",
+      "Defensive Tactics|Ranger||Hunter||7",
+      "Multiattack|Ranger||Hunter||11",
+      "Superior Hunter's Defense|Ranger||Hunter||15"
+    ]
+  },
+  {
+    "id": "ranger-monster-slayer",
+    "name": "Monster Slayer",
+    "shortName": "Monster Slayer",
+    "className": "Ranger",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Monster Slayer|Ranger||Monster Slayer|XGE|3",
+      "Supernatural Defense|Ranger||Monster Slayer|XGE|7",
+      "Magic-User's Nemesis|Ranger||Monster Slayer|XGE|11",
+      "Slayer's Counter|Ranger||Monster Slayer|XGE|15"
+    ]
+  },
+  {
+    "id": "ranger-swarmkeeper",
+    "name": "Swarmkeeper",
+    "shortName": "Swarmkeeper",
+    "className": "Ranger",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Swarmkeeper|Ranger||Swarmkeeper|TCE|3",
+      "Writhing Tide|Ranger||Swarmkeeper|TCE|7",
+      "Mighty Swarm|Ranger||Swarmkeeper|TCE|11",
+      "Swarming Dispersal|Ranger||Swarmkeeper|TCE|15"
+    ]
+  },
+  {
+    "id": "rogue-arcane-trickster",
+    "name": "Arcane Trickster",
+    "shortName": "Arcane Trickster",
+    "className": "Rogue",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Arcane Trickster|Rogue||Arcane Trickster||3",
+      "Magical Ambush|Rogue||Arcane Trickster||9",
+      "Versatile Trickster|Rogue||Arcane Trickster||13",
+      "Spell Thief|Rogue||Arcane Trickster||17"
+    ]
+  },
+  {
+    "id": "rogue-assassin",
+    "name": "Assassin",
+    "shortName": "Assassin",
+    "className": "Rogue",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Assassin|Rogue||Assassin||3",
+      "Infiltration Expertise|Rogue||Assassin||9",
+      "Impostor|Rogue||Assassin||13",
+      "Death Strike|Rogue||Assassin||17"
+    ]
+  },
+  {
+    "id": "rogue-inquisitive",
+    "name": "Inquisitive",
+    "shortName": "Inquisitive",
+    "className": "Rogue",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Inquisitive|Rogue||Inquisitive|XGE|3",
+      "Steady Eye|Rogue||Inquisitive|XGE|9",
+      "Unerring Eye|Rogue||Inquisitive|XGE|13",
+      "Eye for Weakness|Rogue||Inquisitive|XGE|17"
+    ]
+  },
+  {
+    "id": "rogue-mastermind",
+    "name": "Mastermind",
+    "shortName": "Mastermind",
+    "className": "Rogue",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Mastermind|Rogue||Mastermind|XGE|3",
+      "Insightful Manipulator|Rogue||Mastermind|XGE|9",
+      "Misdirection|Rogue||Mastermind|XGE|13",
+      "Soul of Deceit|Rogue||Mastermind|XGE|17"
+    ]
+  },
+  {
+    "id": "rogue-phantom",
+    "name": "Phantom",
+    "shortName": "Phantom",
+    "className": "Rogue",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Phantom|Rogue||Phantom|TCE|3",
+      "Tokens of the Departed|Rogue||Phantom|TCE|9",
+      "Ghost Walk|Rogue||Phantom|TCE|13",
+      "Death's Friend|Rogue||Phantom|TCE|17"
+    ]
+  },
+  {
+    "id": "rogue-scout",
+    "name": "Scout",
+    "shortName": "Scout",
+    "className": "Rogue",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Scout|Rogue||Scout|XGE|3",
+      "Superior Mobility|Rogue||Scout|XGE|9",
+      "Ambush Master|Rogue||Scout|XGE|13",
+      "Sudden Strike|Rogue||Scout|XGE|17"
+    ]
+  },
+  {
+    "id": "rogue-soulknife",
+    "name": "Soulknife",
+    "shortName": "Soulknife",
+    "className": "Rogue",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Soulknife|Rogue||Soulknife|TCE|3",
+      "Soul Blades|Rogue||Soulknife|TCE|9",
+      "Psychic Veil|Rogue||Soulknife|TCE|13",
+      "Rend Mind|Rogue||Soulknife|TCE|17"
+    ]
+  },
+  {
+    "id": "rogue-swashbuckler",
+    "name": "Swashbuckler",
+    "shortName": "Swashbuckler",
+    "className": "Rogue",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Swashbuckler|Rogue||Swashbuckler|XGE|3",
+      "Panache|Rogue||Swashbuckler|XGE|9",
+      "Elegant Maneuver|Rogue||Swashbuckler|XGE|13",
+      "Master Duelist|Rogue||Swashbuckler|XGE|17"
+    ]
+  },
+  {
+    "id": "rogue-thief",
+    "name": "Thief",
+    "shortName": "Thief",
+    "className": "Rogue",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Thief|Rogue||Thief||3",
+      "Supreme Sneak|Rogue||Thief||9",
+      "Use Magic Device|Rogue||Thief||13",
+      "Thief's Reflexes|Rogue||Thief||17"
+    ]
+  },
+  {
+    "id": "sorcerer-aberrant-mind",
+    "name": "Aberrant Mind",
+    "shortName": "Aberrant Mind",
+    "className": "Sorcerer",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Aberrant Mind|Sorcerer||Aberrant Mind|TCE|1",
+      "Psionic Sorcery|Sorcerer||Aberrant Mind|TCE|6",
+      "Psychic Defenses|Sorcerer||Aberrant Mind|TCE|6",
+      "Revelation in Flesh|Sorcerer||Aberrant Mind|TCE|14",
+      "Warping Implosion|Sorcerer||Aberrant Mind|TCE|18"
+    ]
+  },
+  {
+    "id": "sorcerer-clockwork-soul",
+    "name": "Clockwork Soul",
+    "shortName": "Clockwork Soul",
+    "className": "Sorcerer",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Clockwork Soul|Sorcerer||Clockwork Soul|TCE|1",
+      "Bastion of Law|Sorcerer||Clockwork Soul|TCE|6",
+      "Trance of Order|Sorcerer||Clockwork Soul|TCE|14",
+      "Clockwork Cavalcade|Sorcerer||Clockwork Soul|TCE|18"
+    ]
+  },
+  {
+    "id": "sorcerer-divine-soul",
+    "name": "Divine Soul",
+    "shortName": "Divine Soul",
+    "className": "Sorcerer",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Divine Soul|Sorcerer||Divine Soul|XGE|1",
+      "Empowered Healing|Sorcerer||Divine Soul|XGE|6",
+      "Otherworldly Wings|Sorcerer||Divine Soul|XGE|14",
+      "Unearthly Recovery|Sorcerer||Divine Soul|XGE|18"
+    ]
+  },
+  {
+    "id": "sorcerer-draconic",
+    "name": "Draconic Bloodline",
+    "shortName": "Draconic",
+    "className": "Sorcerer",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Draconic Bloodline|Sorcerer||Draconic||1",
+      "Elemental Affinity|Sorcerer||Draconic||6",
+      "Dragon Wings|Sorcerer||Draconic||14",
+      "Draconic Presence|Sorcerer||Draconic||18"
+    ]
+  },
+  {
+    "id": "sorcerer-lunar",
+    "name": "Lunar Sorcery",
+    "shortName": "Lunar",
+    "className": "Sorcerer",
+    "source": "DSotDQ",
+    "subclassFeatures": [
+      "Lunar Sorcery|Sorcerer||Lunar|DSotDQ|1",
+      "Lunar Boons|Sorcerer||Lunar|DSotDQ|6",
+      "Waxing and Waning|Sorcerer||Lunar|DSotDQ|6",
+      "Lunar Empowerment|Sorcerer||Lunar|DSotDQ|14",
+      "Lunar Phenomenon|Sorcerer||Lunar|DSotDQ|18"
+    ]
+  },
+  {
+    "id": "sorcerer-pyromancer-psk",
+    "name": "Pyromancer (PSK)",
+    "shortName": "Pyromancer (PSK)",
+    "className": "Sorcerer",
+    "source": "PSK",
+    "subclassFeatures": [
+      "Pyromancer (PSK)|Sorcerer||Pyromancer (PSK)|PSK|1",
+      "Fire in the Veins|Sorcerer||Pyromancer (PSK)|PSK|6",
+      "Pyromancer's Fury|Sorcerer||Pyromancer (PSK)|PSK|14",
+      "Fiery Soul|Sorcerer||Pyromancer (PSK)|PSK|18"
+    ]
+  },
+  {
+    "id": "sorcerer-runechild",
+    "name": "Runechild",
+    "shortName": "Runechild",
+    "className": "Sorcerer",
+    "source": "TDCSR",
+    "subclassFeatures": [
+      "Runechild|Sorcerer|PHB|Runechild|TDCSR|1",
+      "Glyph of Aegis (6th Level)|Sorcerer|PHB|Runechild|TDCSR|6",
+      "Sigilic Augmentation|Sorcerer|PHB|Runechild|TDCSR|6",
+      "Manifest Inscriptions|Sorcerer|PHB|Runechild|TDCSR|6",
+      "Glyph of Aegis (14th Level)|Sorcerer|PHB|Runechild|TDCSR|14",
+      "Runic Torrent|Sorcerer|PHB|Runechild|TDCSR|14",
+      "Arcane Exemplar|Sorcerer|PHB|Runechild|TDCSR|18"
+    ]
+  },
+  {
+    "id": "sorcerer-shadow",
+    "name": "Shadow Magic",
+    "shortName": "Shadow",
+    "className": "Sorcerer",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Shadow Magic|Sorcerer||Shadow|XGE|1",
+      "Hound of Ill Omen|Sorcerer||Shadow|XGE|6",
+      "Shadow Walk|Sorcerer||Shadow|XGE|14",
+      "Umbral Form|Sorcerer||Shadow|XGE|18"
+    ]
+  },
+  {
+    "id": "sorcerer-storm",
+    "name": "Storm Sorcery",
+    "shortName": "Storm",
+    "className": "Sorcerer",
+    "source": "XGE",
+    "subclassFeatures": [
+      "Storm Sorcery|Sorcerer||Storm|XGE|1",
+      "Heart of the Storm|Sorcerer||Storm|XGE|6",
+      "Storm Guide|Sorcerer||Storm|XGE|6",
+      "Storm's Fury|Sorcerer||Storm|XGE|14",
+      "Wind Soul|Sorcerer||Storm|XGE|18"
+    ]
+  },
+  {
+    "id": "sorcerer-wild",
+    "name": "Wild Magic",
+    "shortName": "Wild",
+    "className": "Sorcerer",
+    "source": "PHB",
+    "subclassFeatures": [
+      "Wild Magic|Sorcerer||Wild||1",
+      "Bend Luck|Sorcerer||Wild||6",
+      "Controlled Chaos|Sorcerer||Wild||14",
+      "Spell Bombardment|Sorcerer||Wild||18"
+    ]
+  },
+  {
+    "id": "warlock-archfey",
+    "name": "The Archfey",
+    "shortName": "Archfey",
+    "className": "Warlock",
+    "source": "PHB",
+    "subclassFeatures": [
+      "The Archfey|Warlock||Archfey||1",
+      "Misty Escape|Warlock||Archfey||6",
+      "Beguiling Defenses|Warlock||Archfey||10",
+      "Dark Delirium|Warlock||Archfey||14"
+    ]
+  },
+  {
+    "id": "warlock-celestial",
+    "name": "The Celestial",
+    "shortName": "Celestial",
+    "className": "Warlock",
+    "source": "XGE",
+    "subclassFeatures": [
+      "The Celestial|Warlock||Celestial|XGE|1",
+      "Radiant Soul|Warlock||Celestial|XGE|6",
+      "Celestial Resilience|Warlock||Celestial|XGE|10",
+      "Searing Vengeance|Warlock||Celestial|XGE|14"
+    ]
+  },
+  {
+    "id": "warlock-fathomless",
+    "name": "The Fathomless",
+    "shortName": "Fathomless",
+    "className": "Warlock",
+    "source": "TCE",
+    "subclassFeatures": [
+      "The Fathomless|Warlock||Fathomless|TCE|1",
+      "Oceanic Soul|Warlock||Fathomless|TCE|6",
+      "Guardian Coil|Warlock||Fathomless|TCE|6",
+      "Grasping Tentacles|Warlock||Fathomless|TCE|10",
+      "Fathomless Plunge|Warlock||Fathomless|TCE|14"
+    ]
+  },
+  {
+    "id": "warlock-fiend",
+    "name": "The Fiend",
+    "shortName": "Fiend",
+    "className": "Warlock",
+    "source": "PHB",
+    "subclassFeatures": [
+      "The Fiend|Warlock||Fiend||1",
+      "Dark One's Own Luck|Warlock||Fiend||6",
+      "Fiendish Resilience|Warlock||Fiend||10",
+      "Hurl Through Hell|Warlock||Fiend||14"
+    ]
+  },
+  {
+    "id": "warlock-genie",
+    "name": "The Genie",
+    "shortName": "Genie",
+    "className": "Warlock",
+    "source": "TCE",
+    "subclassFeatures": [
+      "The Genie|Warlock||Genie|TCE|1",
+      "Elemental Gift|Warlock||Genie|TCE|6",
+      "Sanctuary Vessel|Warlock||Genie|TCE|10",
+      "Limited Wish|Warlock||Genie|TCE|14"
+    ]
+  },
+  {
+    "id": "warlock-great-old-one",
+    "name": "The Great Old One",
+    "shortName": "Great Old One",
+    "className": "Warlock",
+    "source": "PHB",
+    "subclassFeatures": [
+      "The Great Old One|Warlock||Great Old One||1",
+      "Entropic Ward|Warlock||Great Old One||6",
+      "Thought Shield|Warlock||Great Old One||10",
+      "Create Thrall|Warlock||Great Old One||14"
+    ]
+  },
+  {
+    "id": "warlock-hexblade",
+    "name": "The Hexblade",
+    "shortName": "Hexblade",
+    "className": "Warlock",
+    "source": "XGE",
+    "subclassFeatures": [
+      "The Hexblade|Warlock||Hexblade|XGE|1",
+      "Accursed Specter|Warlock||Hexblade|XGE|6",
+      "Armor of Hexes|Warlock||Hexblade|XGE|10",
+      "Master of Hexes|Warlock||Hexblade|XGE|14"
+    ]
+  },
+  {
+    "id": "warlock-undead",
+    "name": "The Undead",
+    "shortName": "Undead",
+    "className": "Warlock",
+    "source": "VRGR",
+    "subclassFeatures": [
+      "The Undead|Warlock||Undead|VRGR|1",
+      "Grave Touched|Warlock||Undead|VRGR|6",
+      "Necrotic Husk|Warlock||Undead|VRGR|10",
+      "Spirit Projection|Warlock||Undead|VRGR|14"
+    ]
+  },
+  {
+    "id": "warlock-undying",
+    "name": "The Undying",
+    "shortName": "Undying",
+    "className": "Warlock",
+    "source": "SCAG",
+    "subclassFeatures": [
+      "The Undying|Warlock||Undying|SCAG|1",
+      "Defy Death|Warlock||Undying|SCAG|6",
+      "Undying Nature|Warlock||Undying|SCAG|10",
+      "Indestructible Life|Warlock||Undying|SCAG|14"
+    ]
+  },
+  {
+    "id": "wizard-bladesinging",
+    "name": "Bladesinging",
+    "shortName": "Bladesinging",
+    "className": "Wizard",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Bladesinging|Wizard||Bladesinging|TCE|2",
+      "Extra Attack|Wizard||Bladesinging|TCE|6",
+      "Song of Defense|Wizard||Bladesinging|TCE|10",
+      "Song of Victory|Wizard||Bladesinging|TCE|14"
+    ]
+  },
+  {
+    "id": "wizard-blood-magic",
+    "name": "Blood Magic",
+    "shortName": "Blood Magic",
+    "className": "Wizard",
+    "source": "TDCSR",
+    "subclassFeatures": [
+      "Blood Magic|Wizard|PHB|Blood Magic|TDCSR|2",
+      "Bond of Mutual Suffering|Wizard|PHB|Blood Magic|TDCSR|6",
+      "Glyph of Hemorrhaging|Wizard|PHB|Blood Magic|TDCSR|10",
+      "Bond of Mutual Suffering (14th Level)|Wizard|PHB|Blood Magic|TDCSR|14",
+      "Thicker than Water|Wizard|PHB|Blood Magic|TDCSR|14"
+    ]
+  },
+  {
+    "id": "wizard-chronurgy",
+    "name": "Chronurgy Magic",
+    "shortName": "Chronurgy",
+    "className": "Wizard",
+    "source": "EGW",
+    "subclassFeatures": [
+      "Chronurgy Magic|Wizard||Chronurgy|EGW|2",
+      "Momentary Stasis|Wizard||Chronurgy|EGW|6",
+      "Arcane Abeyance|Wizard||Chronurgy|EGW|10",
+      "Convergent Future|Wizard||Chronurgy|EGW|14"
+    ]
+  },
+  {
+    "id": "wizard-graviturgy",
+    "name": "Graviturgy Magic",
+    "shortName": "Graviturgy",
+    "className": "Wizard",
+    "source": "EGW",
+    "subclassFeatures": [
+      "Graviturgy Magic|Wizard||Graviturgy|EGW|2",
+      "Gravity Well|Wizard||Graviturgy|EGW|6",
+      "Violent Attraction|Wizard||Graviturgy|EGW|10",
+      "Event Horizon|Wizard||Graviturgy|EGW|14"
+    ]
+  },
+  {
+    "id": "wizard-scribes",
+    "name": "Order of Scribes",
+    "shortName": "Scribes",
+    "className": "Wizard",
+    "source": "TCE",
+    "subclassFeatures": [
+      "Order of Scribes|Wizard||Scribes|TCE|2",
+      "Manifest Mind|Wizard||Scribes|TCE|6",
+      "Master Scrivener|Wizard||Scribes|TCE|10",
+      "One with the Word|Wizard||Scribes|TCE|14"
+    ]
+  },
+  {
+    "id": "wizard-abjuration",
+    "name": "School of Abjuration",
+    "shortName": "Abjuration",
+    "className": "Wizard",
+    "source": "PHB",
+    "subclassFeatures": [
+      "School of Abjuration|Wizard||Abjuration||2",
+      "Projected Ward|Wizard||Abjuration||6",
+      "Improved Abjuration|Wizard||Abjuration||10",
+      "Spell Resistance|Wizard||Abjuration||14"
+    ]
+  },
+  {
+    "id": "wizard-conjuration",
+    "name": "School of Conjuration",
+    "shortName": "Conjuration",
+    "className": "Wizard",
+    "source": "PHB",
+    "subclassFeatures": [
+      "School of Conjuration|Wizard||Conjuration||2",
+      "Benign Transposition|Wizard||Conjuration||6",
+      "Focused Conjuration|Wizard||Conjuration||10",
+      "Durable Summons|Wizard||Conjuration||14"
+    ]
+  },
+  {
+    "id": "wizard-divination",
+    "name": "School of Divination",
+    "shortName": "Divination",
+    "className": "Wizard",
+    "source": "PHB",
+    "subclassFeatures": [
+      "School of Divination|Wizard||Divination||2",
+      "Expert Divination|Wizard||Divination||6",
+      "The Third Eye|Wizard||Divination||10",
+      "Greater Portent|Wizard||Divination||14"
+    ]
+  },
+  {
+    "id": "wizard-enchantment",
+    "name": "School of Enchantment",
+    "shortName": "Enchantment",
+    "className": "Wizard",
+    "source": "PHB",
+    "subclassFeatures": [
+      "School of Enchantment|Wizard||Enchantment||2",
+      "Instinctive Charm|Wizard||Enchantment||6",
+      "Split Enchantment|Wizard||Enchantment||10",
+      "Alter Memories|Wizard||Enchantment||14"
+    ]
+  },
+  {
+    "id": "wizard-evocation",
+    "name": "School of Evocation",
+    "shortName": "Evocation",
+    "className": "Wizard",
+    "source": "PHB",
+    "subclassFeatures": [
+      "School of Evocation|Wizard||Evocation||2",
+      "Potent Cantrip|Wizard||Evocation||6",
+      "Empowered Evocation|Wizard||Evocation||10",
+      "Overchannel|Wizard||Evocation||14"
+    ]
+  },
+  {
+    "id": "wizard-illusion",
+    "name": "School of Illusion",
+    "shortName": "Illusion",
+    "className": "Wizard",
+    "source": "PHB",
+    "subclassFeatures": [
+      "School of Illusion|Wizard||Illusion||2",
+      "Malleable Illusions|Wizard||Illusion||6",
+      "Illusory Self|Wizard||Illusion||10",
+      "Illusory Reality|Wizard||Illusion||14"
+    ]
+  },
+  {
+    "id": "wizard-necromancy",
+    "name": "School of Necromancy",
+    "shortName": "Necromancy",
+    "className": "Wizard",
+    "source": "PHB",
+    "subclassFeatures": [
+      "School of Necromancy|Wizard||Necromancy||2",
+      "Undead Thralls|Wizard||Necromancy||6",
+      "Inured to Undeath|Wizard||Necromancy||10",
+      "Command Undead|Wizard||Necromancy||14"
+    ]
+  },
+  {
+    "id": "wizard-transmutation",
+    "name": "School of Transmutation",
+    "shortName": "Transmutation",
+    "className": "Wizard",
+    "source": "PHB",
+    "subclassFeatures": [
+      "School of Transmutation|Wizard||Transmutation||2",
+      "Transmuter's Stone|Wizard||Transmutation||6",
+      "Shapechanger|Wizard||Transmutation||10",
+      "Master Transmuter|Wizard||Transmutation||14"
+    ]
+  },
+  {
+    "id": "wizard-war",
+    "name": "War Magic",
+    "shortName": "War",
+    "className": "Wizard",
+    "source": "XGE",
+    "subclassFeatures": [
+      "War Magic|Wizard||War|XGE|2",
+      "Power Surge|Wizard||War|XGE|6",
+      "Durable Magic|Wizard||War|XGE|10",
+      "Deflecting Shroud|Wizard||War|XGE|14"
+    ]
+  }
+]

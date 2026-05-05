@@ -7,6 +7,7 @@ await CharacterSheetDisplay.display(dv, {
   name: "Claire",
   portrait: "Public/Players/ClaireDnD.png",
   class: "Cleric",
+  subclass: "Tempest Domain",
   level: dv.page("Player Controls").level,
   race: "Water Genasi",
   background: "Sailor",

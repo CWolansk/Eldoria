@@ -1,0 +1,2318 @@
+(() => {
+  const ABILITY_NAMES = {
+    str: 'Strength',
+    dex: 'Dexterity',
+    con: 'Constitution',
+    int: 'Intelligence',
+    wis: 'Wisdom',
+    cha: 'Charisma',
+  };
+  const SKILLS = [
+    ['acrobatics', 'dex'],
+    ['animalHandling', 'wis'],
+    ['arcana', 'int'],
+    ['athletics', 'str'],
+    ['deception', 'cha'],
+    ['history', 'int'],
+    ['insight', 'wis'],
+    ['intimidation', 'cha'],
+    ['investigation', 'int'],
+    ['medicine', 'wis'],
+    ['nature', 'int'],
+    ['perception', 'wis'],
+    ['performance', 'cha'],
+    ['persuasion', 'cha'],
+    ['religion', 'int'],
+    ['sleightOfHand', 'dex'],
+    ['stealth', 'dex'],
+    ['survival', 'wis'],
+  ];
+  const WEAPON_BASES = [
+    { key: 'corpse slayer flamberge bastard sword', baseName: 'Bastard Sword', type: 'martial', style: 'melee', ability: 'str', damage: '1d10', damageType: 'slashing', properties: ['versatile'] },
+    { key: 'bastard sword', baseName: 'Bastard Sword', type: 'martial', style: 'melee', ability: 'str', damage: '1d10', damageType: 'slashing', properties: ['versatile'] },
+    { key: 'greatsword', baseName: 'Greatsword', type: 'martial', style: 'melee', ability: 'str', damage: '2d6', damageType: 'slashing', properties: ['heavy', 'two-handed'] },
+    { key: 'longsword', baseName: 'Longsword', type: 'martial', style: 'melee', ability: 'str', damage: '1d8', damageType: 'slashing', properties: ['versatile (1d10)'] },
+    { key: 'shortsword', baseName: 'Shortsword', type: 'martial', style: 'melee', ability: 'finesse', damage: '1d6', damageType: 'piercing', properties: ['finesse', 'light'] },
+    { key: 'scimitar', baseName: 'Scimitar', type: 'martial', style: 'melee', ability: 'finesse', damage: '1d6', damageType: 'slashing', properties: ['finesse', 'light'] },
+    { key: 'greataxe', baseName: 'Greataxe', type: 'martial', style: 'melee', ability: 'str', damage: '1d12', damageType: 'slashing', properties: ['heavy', 'two-handed'] },
+    { key: 'warhammer', baseName: 'Warhammer', type: 'martial', style: 'melee', ability: 'str', damage: '1d8', damageType: 'bludgeoning', properties: ['versatile (1d10)'] },
+    { key: 'handaxe', baseName: 'Handaxe', type: 'simple', style: 'melee', ability: 'str', damage: '1d6', damageType: 'slashing', properties: ['light', 'thrown (20/60)'] },
+    { key: 'quarterstaff', baseName: 'Quarterstaff', type: 'simple', style: 'melee', ability: 'str', damage: '1d6', damageType: 'bludgeoning', properties: ['versatile (1d8)'] },
+    { key: 'dagger', baseName: 'Dagger', type: 'simple', style: 'melee', ability: 'finesse', damage: '1d4', damageType: 'piercing', properties: ['finesse', 'light', 'thrown (20/60)'] },
+    { key: 'longbow', baseName: 'Longbow', type: 'martial', style: 'ranged', ability: 'dex', damage: '1d8', damageType: 'piercing', properties: ['ammunition', 'heavy', 'two-handed'] },
+    { key: 'light crossbow', baseName: 'Light Crossbow', type: 'simple', style: 'ranged', ability: 'dex', damage: '1d8', damageType: 'piercing', properties: ['ammunition', 'loading', 'two-handed'] },
+    { key: 'repeating crossbow', baseName: 'Repeating Crossbow', type: 'simple', style: 'ranged', ability: 'dex', damage: '1d8', damageType: 'piercing', properties: ['ammunition'] },
+    { key: 'crossbow', baseName: 'Crossbow', type: 'simple', style: 'ranged', ability: 'dex', damage: '1d8', damageType: 'piercing', properties: ['ammunition', 'loading'] },
+    { key: 'blowgun', baseName: 'Blowgun', type: 'martial', style: 'ranged', ability: 'dex', damage: '1', damageType: 'piercing', properties: ['ammunition', 'loading'] },
+    { key: 'armblade', baseName: 'Armblade', type: 'martial', style: 'melee', ability: 'str', damage: '1d8', damageType: 'slashing', properties: ['custom'] },
+    { key: 'sword', baseName: 'Sword', type: 'martial', style: 'melee', ability: 'str', damage: '1d8', damageType: 'slashing', properties: ['custom'] },
+    { key: 'staff', baseName: 'Staff', type: 'simple', style: 'melee', ability: 'str', damage: '1d6', damageType: 'bludgeoning', properties: ['versatile (1d8)'] },
+  ];
+  const EQUIPMENT_HINTS = [
+    { key: 'shield', kind: 'shield' },
+    { key: 'armor', kind: 'armor' },
+    { key: 'chain mail', kind: 'armor' },
+    { key: 'leather armor', kind: 'armor' },
+    { key: 'ring of protection', kind: 'wondrous' },
+  ];
+  const CUSTOM_ITEM_DETAILS = [
+    customItem('bracer of piercing arrows', 'Bracer of Piercing Arrows', 'Custom wondrous item', [
+      'Custom E-rank reward. Exact arrow-piercing mechanics are not recorded in the public item catalog yet.',
+    ]),
+    customItem('prospecting compass', 'Prospecting Compass', 'Custom wondrous item', [
+      'Custom utility item. Exact prospecting rules are not recorded in the public item catalog yet.',
+    ]),
+    customItem('lightning rod', 'Lightning Rod', 'Custom wondrous item', [
+      'Custom item. Exact lightning rules are not recorded in the public item catalog yet.',
+    ]),
+    customItem('amulet of divine retribution', 'Amulet of Divine Retribution', 'Custom wondrous item', [
+      'Custom E-rank reward. Exact divine retribution mechanics are not recorded in the public item catalog yet.',
+    ]),
+    customItem('gauntlets of whirling strikes', 'Gauntlets of Whirling Strikes', 'Custom wondrous item', [
+      'Custom E-rank reward. Exact extra strike mechanics are not recorded in the public item catalog yet.',
+    ]),
+    customItem('fabulist gem', 'Fabulist Gem', 'Custom wondrous item', [
+      'Custom item. Exact fabulist gem rules are not recorded in the public item catalog yet.',
+    ]),
+    customItem('commoners veneer', 'Commoners Veneer', 'Custom wondrous item', [
+      'Custom item. Exact disguise or social rules are not recorded in the public item catalog yet.',
+    ]),
+    customItem('sigil of thunderous might', 'Sigil of Thunderous Might', 'Custom wondrous item', [
+      'Custom E-rank reward. Exact thunderous might mechanics are not recorded in the public item catalog yet.',
+    ]),
+    customItem('talisman of elemental fury', 'Talisman of Elemental Fury', 'Custom wondrous item', [
+      'Custom item. Exact elemental fury mechanics are not recorded in the public item catalog yet.',
+    ]),
+    customItem('the aegis codex', 'The Aegis Codex', 'Custom wondrous item', [
+      'Custom item. Exact aegis codex rules are not recorded in the public item catalog yet.',
+    ]),
+  ];
+
+  function initTabs(root) {
+    const buttons = Array.from(root.querySelectorAll('[data-tab-target]'));
+    const panels = Array.from(root.querySelectorAll('[data-tab-panel]'));
+    if (!buttons.length || !panels.length) return;
+
+    function activate(id) {
+      buttons.forEach(button => {
+        const active = button.dataset.tabTarget === id;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      panels.forEach(panel => panel.classList.toggle('active', panel.dataset.tabPanel === id));
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => activate(button.dataset.tabTarget));
+    });
+  }
+
+  async function initSearch(root) {
+    const input = root.querySelector('.public-search-input');
+    const results = root.querySelector('.search-results');
+    if (!input || !results) return;
+
+    let localIndexPromise = null;
+    let requestId = 0;
+
+    async function getLocalIndex() {
+      if (!localIndexPromise) {
+        localIndexPromise = fetch('./data/search-index.json').then(response => response.json());
+      }
+      return localIndexPromise;
+    }
+
+    async function render(query) {
+      const currentRequest = ++requestId;
+      try {
+        const matches = await searchDocuments(query, getLocalIndex);
+        if (currentRequest === requestId) renderSearchResults(results, matches);
+      } catch (error) {
+        if (currentRequest === requestId) {
+          results.innerHTML = '<p class="empty-note">Search index could not be loaded.</p>';
+        }
+      }
+    }
+
+    input.addEventListener('input', debounce(() => render(input.value), 180));
+    render('');
+  }
+
+  async function searchDocuments(query, getLocalIndex) {
+    const clean = query.trim();
+    const apiBase = getApiBaseUrl();
+
+    if (apiBase) {
+      try {
+        const data = await fetchApi('search', { q: clean, limit: clean ? 40 : 30 });
+        return Array.isArray(data.results) ? data.results : [];
+      } catch (error) {
+        // Static JSON keeps GitHub Pages useful if Azure is offline or not configured yet.
+      }
+    }
+
+    const index = await getLocalIndex();
+    const normalized = clean.toLowerCase();
+    if (!normalized) return index.slice(0, 30);
+    return index
+      .map(item => ({ item, score: scoreLocalSearch(item, normalized) }))
+      .filter(match => match.score > 0)
+      .sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title))
+      .slice(0, 40)
+      .map(match => match.item);
+  }
+
+  function renderSearchResults(results, matches) {
+    if (!matches.length) {
+      results.innerHTML = '<p class="empty-note">No public notes match that search.</p>';
+      return;
+    }
+
+    results.innerHTML = matches.map(item => {
+      const title = item.title || item.name || 'Untitled';
+      const href = item.url ? `./${encodeURI(item.url)}` : './search.html';
+      return `
+        <a class="result-card" href="${escapeAttr(href)}">
+          <span>${escapeHtml(item.type || 'Page')}${item.region ? ` / ${escapeHtml(item.region)}` : ''}</span>
+          <strong>${escapeHtml(title)}</strong>
+          <p>${escapeHtml(item.summary || '')}</p>
+        </a>
+      `;
+    }).join('');
+  }
+
+  function scoreLocalSearch(item, query) {
+    const haystack = `${item.title} ${item.type} ${item.region} ${item.location} ${item.summary} ${item.text}`.toLowerCase();
+    const title = String(item.title || '').toLowerCase();
+    if (title === query) return 100;
+    if (title.startsWith(query)) return 80;
+    if (title.includes(query)) return 60;
+    if (haystack.includes(query)) return 30;
+
+    let cursor = 0;
+    for (const char of haystack) {
+      if (char === query[cursor]) cursor++;
+      if (cursor === query.length) return 10;
+    }
+    return 0;
+  }
+
+  async function initPlayerSheet(root) {
+    const id = root.dataset.playerId;
+    if (!id) return;
+
+    let player = getBootstrapPlayer(root);
+
+    if (getApiBaseUrl()) {
+      try {
+        player = await fetchApi(`players/${encodeURIComponent(id)}`);
+      } catch (error) {
+        root.dataset.apiState = 'fallback';
+      }
+    }
+
+    if (player) hydratePlayerSheet(root, player);
+  }
+
+  function hydratePlayerSheet(root, player) {
+    if (!player || !player.name) return;
+    root.dataset.apiState = 'loaded';
+    const localEdits = loadPlayerEdits(player.id || root.dataset.playerId);
+    const hydrated = preparePlayer({ ...player, ...localEdits, abilities: { ...(player.abilities || {}), ...((localEdits && localEdits.abilities) || {}) } });
+    root._playerState = hydrated;
+
+    setText(root, '[data-player-field="name"]', hydrated.name);
+    setText(root, '[data-player-summary]', [hydrated.race, formatClassSummary(hydrated), `Level ${hydrated.level}`].filter(Boolean).join(' / '));
+
+    setText(root, '[data-player-stat="ac"]', hydrated.ac);
+    setText(root, '[data-player-stat="initiative"]', formatBonus(hydrated.initiative));
+    setText(root, '[data-player-stat="proficiencyBonus"]', formatBonus(hydrated.proficiencyBonus));
+    setText(root, '[data-player-stat="speed"]', hydrated.speed ? `${hydrated.speed} ft` : '-');
+
+    root.querySelectorAll('[data-player-field]').forEach(node => {
+      const field = node.dataset.playerField;
+      const value = fieldValue(hydrated, field);
+      if (value !== undefined) node.textContent = value;
+    });
+
+    root.querySelectorAll('[data-player-ability]').forEach(card => {
+      const ability = card.dataset.playerAbility;
+      const score = Number(hydrated.abilities && hydrated.abilities[ability]);
+      if (!Number.isFinite(score)) return;
+      const label = card.querySelector('span');
+      const strong = card.querySelector('strong');
+      const mod = card.querySelector('em');
+      if (label) label.textContent = ABILITY_NAMES[ability] || ability.toUpperCase();
+      if (strong) strong.textContent = score;
+      if (mod) mod.textContent = formatBonus(calculateModifier(score));
+    });
+
+    hydrateSaves(root, hydrated);
+    hydrateSkills(root, hydrated);
+    hydrateLists(root, hydrated);
+    renderEquippedSummary(root, hydrated);
+    renderWeaponAttacks(root, hydrated);
+    renderActionsPanel(root, hydrated);
+    renderResourcesPanel(root, hydrated);
+    renderEquipmentPanel(root, hydrated);
+    renderSpellPanel(root, hydrated);
+    renderEditForm(root, hydrated);
+    renderNotesForm(root, hydrated);
+    bindPlayerSheetEvents(root);
+  }
+
+  function hydrateSaves(root, player) {
+    const prof = Number(player.proficiencyBonus) || 0;
+    const saves = new Set((player.saves || []).map(String));
+    root.querySelectorAll('[data-player-save]').forEach(row => {
+      const ability = row.dataset.playerSave;
+      const score = Number(player.abilities && player.abilities[ability]);
+      if (!Number.isFinite(score)) return;
+      const proficient = saves.has(ability);
+      row.classList.toggle('proficient', proficient);
+      const value = row.querySelector('strong');
+      if (value) value.textContent = formatBonus(calculateModifier(score) + (proficient ? prof : 0));
+    });
+  }
+
+  function hydrateSkills(root, player) {
+    const prof = Number(player.proficiencyBonus) || 0;
+    const skills = new Set((player.skills || []).map(String));
+    const abilityBySkill = Object.fromEntries(SKILLS);
+    root.querySelectorAll('[data-player-skill]').forEach(row => {
+      const skill = row.dataset.playerSkill;
+      const ability = row.dataset.ability || abilityBySkill[skill];
+      const score = Number(player.abilities && player.abilities[ability]);
+      if (!Number.isFinite(score)) return;
+      const proficient = skills.has(skill);
+      row.classList.toggle('proficient', proficient);
+      const value = row.querySelector('strong');
+      if (value) value.textContent = formatBonus(calculateModifier(score) + (proficient ? prof : 0));
+    });
+  }
+
+  function getSkillBonus(player, skill) {
+    const abilityBySkill = Object.fromEntries(SKILLS);
+    const ability = abilityBySkill[skill];
+    const score = Number(player.abilities && player.abilities[ability]);
+    const proficient = new Set((player.skills || []).map(String)).has(skill);
+    return calculateModifier(Number.isFinite(score) ? score : 10) + (proficient ? Number(player.proficiencyBonus) || 0 : 0);
+  }
+
+  function hydrateLists(root, player) {
+    root.querySelectorAll('[data-player-list]').forEach(list => {
+      const field = list.dataset.playerList;
+      const items = Array.isArray(player[field]) ? player[field] : [];
+      const empty = list.dataset.empty || 'Nothing recorded.';
+      list.innerHTML = items.length
+        ? items.map(item => `<span>${escapeHtml(item)}</span>`).join('')
+        : `<span>${escapeHtml(empty)}</span>`;
+    });
+  }
+
+  function getBootstrapPlayer(root) {
+    const script = root.ownerDocument.querySelector('script[data-player-bootstrap]');
+    if (!script) return null;
+    try {
+      return JSON.parse(script.textContent || '{}');
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function preparePlayer(player) {
+    const abilities = Object.fromEntries(Object.keys(ABILITY_NAMES).map(ability => [ability, Number(player.abilities && player.abilities[ability]) || 10]));
+    const providedScrolls = Array.isArray(player.spellScrolls) ? player.spellScrolls.map(normalizeSpellScroll).filter(Boolean) : [];
+    const prepared = {
+      ...player,
+      abilities,
+      subclass: cleanDetailValue(player.subclass),
+      subclassShortName: cleanDetailValue(player.subclassShortName),
+      equipment: Array.isArray(player.equipment) ? player.equipment.filter(Boolean).map(String) : [],
+      equipped: Array.isArray(player.equipped) ? player.equipped.map(String) : [],
+      combatToggles: player.combatToggles && typeof player.combatToggles === 'object' ? player.combatToggles : {},
+      spells: Array.isArray(player.spells) ? player.spells.filter(Boolean).map(String) : [],
+      itemDetails: player.itemDetails && typeof player.itemDetails === 'object' ? player.itemDetails : {},
+      spellDetails: player.spellDetails && typeof player.spellDetails === 'object' ? player.spellDetails : {},
+      ruleActions: Array.isArray(player.ruleActions) ? player.ruleActions : [],
+      ruleEffects: Array.isArray(player.ruleEffects) ? player.ruleEffects : [],
+      resources: Array.isArray(player.resources) ? player.resources : [],
+      resourceUses: player.resourceUses && typeof player.resourceUses === 'object' ? player.resourceUses : {},
+      spellSlots: player.spellSlots && typeof player.spellSlots === 'object' ? player.spellSlots : {},
+      spellSlotUses: player.spellSlotUses && typeof player.spellSlotUses === 'object' ? player.spellSlotUses : {},
+      itemCharges: player.itemCharges && typeof player.itemCharges === 'object' ? player.itemCharges : {},
+      conditions: Array.isArray(player.conditions) ? player.conditions.map(String).filter(Boolean) : [],
+      concentration: cleanDetailValue(player.concentration),
+      tempHp: Number(player.tempHp) || 0,
+      gold: Number(player.gold) || 0,
+      heroPoints: Number(player.heroPoints) || 0,
+      notes: String(player.notes || ''),
+      proficiencyBonus: Number(player.proficiencyBonus) || calculateProficiencyBonus(Number(player.level) || 1),
+      ac: Number(player.ac) || 10,
+      speed: Number(player.speed) || 30,
+      currentHp: player.currentHp === null || player.currentHp === undefined ? null : Number(player.currentHp),
+      maxHp: player.maxHp === null || player.maxHp === undefined ? null : Number(player.maxHp),
+    };
+    prepared.spellScrolls = buildCurrentSpellScrolls(prepared.equipment, providedScrolls);
+    prepared.inventory = buildInventory(prepared);
+    if (!prepared.equipped.length) prepared.equipped = inferDefaultEquipped(prepared.inventory);
+    prepared.equippedNames = getEquippedItems(prepared).map(item => normalizeName(item.name));
+    prepared.inventory = buildInventory(prepared);
+    prepared.weapons = prepared.inventory.filter(item => item.weapon);
+    return prepared;
+  }
+
+  function buildInventory(player) {
+    const seen = new Map();
+    return player.equipment.map((name, index) => {
+      const baseId = slugify(name) || `item-${index + 1}`;
+      const count = seen.get(baseId) || 0;
+      seen.set(baseId, count + 1);
+      const id = count ? `${baseId}-${count + 1}` : baseId;
+      const details = findItemDetails(name, player);
+      const weapon = buildWeaponProfile(name, id, player, details);
+      const hint = EQUIPMENT_HINTS.find(item => normalizeName(name).includes(item.key));
+      const kind = inferItemKind(name, weapon, hint, details);
+      const item = {
+        id,
+        name,
+        kind,
+        weapon,
+        details,
+      };
+      item.abilities = buildItemAbilities(item);
+      return item;
+    });
+  }
+
+  function buildWeaponProfile(name, id, player, details = null) {
+    const normalized = normalizeName(name);
+    const ruleWeapon = details && details.weapon;
+    const base = ruleWeapon || WEAPON_BASES.find(candidate => normalized.includes(candidate.key));
+    if (!base) return null;
+
+    const magicBonus = ruleWeapon ? Number(ruleWeapon.magicBonus) || parseMagicBonus(name, details) : parseMagicBonus(name, details);
+    const ability = resolveWeaponAbility(base, player);
+    const abilityMod = calculateModifier(Number(player.abilities && player.abilities[ability]) || 10);
+    const proficient = base.type === 'simple' ? Boolean(player.simpleWeapons) : Boolean(player.martialWeapons);
+    const proficiencyBonus = proficient ? Number(player.proficiencyBonus) || 0 : 0;
+    const styleBonus = getStyleBonus(player, base);
+    const catalogDamage = parseCatalogDamage(details && details.damage);
+    const properties = ruleWeapon && ruleWeapon.properties && ruleWeapon.properties.length ? ruleWeapon.properties : (details && details.properties ? splitProperties(details.properties) : base.properties || []);
+    const baseDamage = (ruleWeapon && ruleWeapon.damage) || catalogDamage.damage || base.damage;
+    const versatileDamage = (ruleWeapon && ruleWeapon.versatileDamage) || parseVersatileDamage(properties);
+    const handMode = getWeaponHandMode(player, id, properties);
+    const damage = handMode === 'two' && versatileDamage ? versatileDamage : baseDamage;
+    const damageType = (ruleWeapon && ruleWeapon.damageType) || catalogDamage.damageType || base.damageType;
+    const toggleEffects = getWeaponToggleEffects(player, { base, details, id, name, properties, style: base.style, damageType });
+    const attackToggleBonus = toggleEffects.attackParts.reduce((sum, part) => sum + part.value, 0);
+    const damageToggleBonus = toggleEffects.damageParts.reduce((sum, part) => sum + part.value, 0);
+    const attackBonus = abilityMod + proficiencyBonus + magicBonus + styleBonus + attackToggleBonus;
+    const damageBonus = abilityMod + magicBonus + damageToggleBonus;
+
+    return {
+      id,
+      name,
+      baseName: base.baseName,
+      type: base.type,
+      style: base.style,
+      ability,
+      abilityLabel: ability.toUpperCase(),
+      damage,
+      baseDamage,
+      versatileDamage,
+      handMode,
+      damageType,
+      damageBonus,
+      damageFormula: formatFullDamageFormula(damage, damageBonus, toggleEffects.extraDamage),
+      attackBonus,
+      attackParts: buildWeaponAttackParts(ability, abilityMod, proficiencyBonus, magicBonus, styleBonus, proficient).concat(toggleEffects.attackParts),
+      damageParts: buildWeaponDamageParts(ability, abilityMod, magicBonus).concat(toggleEffects.damageParts, toggleEffects.extraDamage.map(effect => ({ label: effect.label, display: `${effect.dice} ${effect.damageType}` }))),
+      extraDamage: toggleEffects.extraDamage,
+      onHitEffects: toggleEffects.onHitEffects,
+      activeToggleLabels: toggleEffects.labels,
+      magicBonus,
+      proficient,
+      properties,
+      styleBonus,
+    };
+  }
+
+  function buildWeaponAttackParts(ability, abilityMod, proficiencyBonus, magicBonus, styleBonus, proficient) {
+    return [
+      { label: `${ABILITY_NAMES[ability] || ability.toUpperCase()} modifier`, value: abilityMod },
+      { label: proficient ? 'Proficiency' : 'Proficiency (not applied)', value: proficiencyBonus },
+      { label: 'Magic weapon bonus', value: magicBonus },
+      { label: 'Archery Fighting Style', value: styleBonus },
+    ].filter(part => part.value || part.label.includes('modifier') || part.label.includes('not applied'));
+  }
+
+  function buildWeaponDamageParts(ability, abilityMod, magicBonus) {
+    return [
+      { label: 'Damage die', value: null },
+      { label: `${ABILITY_NAMES[ability] || ability.toUpperCase()} modifier`, value: abilityMod },
+      { label: 'Magic weapon bonus', value: magicBonus },
+    ].filter(part => part.value || part.value === null || part.label.includes('modifier'));
+  }
+
+  function getWeaponToggleEffects(player, weaponContext) {
+    const state = getWeaponCombatState(player, weaponContext.id, weaponContext.properties);
+    const properties = weaponContext.properties || [];
+    const heavyMelee = weaponContext.style === 'melee' && properties.some(property => normalizeName(property).includes('heavy'));
+    const weaponEquipped = Array.isArray(player.equipped) && player.equipped.includes(weaponContext.id);
+    const sigilEquipped = hasEquippedNamed(player, 'sigil of thunderous might');
+    const effects = {
+      attackParts: [],
+      damageParts: [],
+      extraDamage: [],
+      onHitEffects: [],
+      labels: [],
+    };
+
+    if (state.greatWeaponMaster && weaponEquipped && hasPlayerFeat(player, 'great weapon master') && heavyMelee) {
+      effects.attackParts.push({ label: 'Great Weapon Master', value: -5 });
+      effects.damageParts.push({ label: 'Great Weapon Master', value: 10 });
+      effects.labels.push('Great Weapon Master');
+    }
+
+    if (state.sigilCrushingStrike && weaponEquipped && sigilEquipped) {
+      effects.extraDamage.push({ label: 'Crushing Strike', dice: '2d6', damageType: 'thunder' });
+      effects.labels.push('Crushing Strike');
+    }
+
+    if (state.sigilShieldingImpact && weaponEquipped && sigilEquipped) {
+      effects.onHitEffects.push({ label: 'Shielding Impact', text: 'Temp HP equals half damage dealt.' });
+      effects.labels.push('Shielding Impact');
+    }
+
+    if (state.corpseSlayerUndeadTarget && weaponEquipped && normalizeName(weaponContext.name).includes('corpse slayer')) {
+      effects.extraDamage.push({ label: 'Corpse Slayer vs undead', dice: '1d8', damageType: weaponContext.damageType || 'weapon' });
+      effects.onHitEffects.push({ label: 'Corpse Slayer vs undead', text: 'Undead target has disadvantage on saves against effects that turn undead until your next turn.' });
+      effects.labels.push('Undead Target');
+    }
+
+    for (const toggle of getApplicableWeaponRuleToggles(player, weaponContext)) {
+      if (!state[toggle.id]) continue;
+      for (const effect of toggle.effects || []) {
+        if (effect.kind === 'extra-damage') {
+          effects.extraDamage.push({
+            label: effect.label || toggle.label,
+            dice: effect.dice,
+            damageType: effect.damageType === 'weapon' ? (weaponContext.damageType || 'weapon') : effect.damageType,
+          });
+        } else if (effect.kind === 'weapon-attack-bonus') {
+          effects.attackParts.push({ label: effect.label || toggle.label, value: Number(effect.value) || 0 });
+        } else if (effect.kind === 'weapon-damage-bonus') {
+          effects.damageParts.push({ label: effect.label || toggle.label, value: Number(effect.value) || 0 });
+        } else if (effect.kind === 'on-hit') {
+          effects.onHitEffects.push({ label: effect.label || toggle.label, text: effect.text || toggle.text || '' });
+        }
+      }
+      effects.labels.push(toggle.label || toggle.id);
+    }
+
+    return effects;
+  }
+
+  function getApplicableWeaponRuleToggles(player, weaponContext) {
+    const weaponItem = player.inventory.find(item => item.id === weaponContext.id);
+    const toggles = [];
+    if (weaponItem && weaponItem.details && Array.isArray(weaponItem.details.toggles)) toggles.push(...weaponItem.details.toggles);
+    for (const item of player.inventory || []) {
+      if (!item.details || !Array.isArray(item.details.toggles)) continue;
+      for (const toggle of item.details.toggles) {
+        if (toggle.appliesTo === 'equipped-weapon') toggles.push(toggle);
+      }
+    }
+    return uniqueRuleRecords(toggles).filter(toggle => {
+      if (!toggle || !toggle.id) return false;
+      if (toggle.appliesTo === 'equipped-weapon') return true;
+      return !toggle.appliesTo || toggle.appliesTo === 'this-weapon';
+    });
+  }
+
+  function uniqueRuleRecords(records) {
+    const seen = new Set();
+    return (records || []).filter(record => {
+      const key = record && record.id;
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  function getWeaponCombatState(player, weaponId, properties = []) {
+    const weapons = player.combatToggles && player.combatToggles.weapons;
+    const saved = weapons && weapons[weaponId] ? weapons[weaponId] : {};
+    return {
+      ...saved,
+      handMode: saved.handMode || getDefaultHandMode(properties),
+    };
+  }
+
+  function getWeaponHandMode(player, weaponId, properties = []) {
+    return getWeaponCombatState(player, weaponId, properties).handMode;
+  }
+
+  function getDefaultHandMode(properties = []) {
+    const versatile = Boolean(parseVersatileDamage(properties));
+    if (!versatile) return 'one';
+    const heavy = properties.some(property => normalizeName(property).includes('heavy'));
+    return heavy ? 'two' : 'one';
+  }
+
+  function hasPlayerFeat(player, featName) {
+    const target = normalizeName(featName);
+    return Array.isArray(player.feats) && player.feats.some(feat => normalizeName(feat).includes(target));
+  }
+
+  function hasEquippedNamed(player, itemName) {
+    const target = normalizeName(itemName);
+    return (player.equippedNames || []).some(name => name.includes(target));
+  }
+
+  function findItemDetails(name, player) {
+    const detailsByName = player.itemDetails || {};
+    const direct = detailsByName[name];
+    if (direct) return normalizeItemDetails(direct);
+
+    const normalized = normalizeName(name);
+    for (const detail of Object.values(detailsByName)) {
+      if (normalizeName(detail && detail.name) === normalized) return normalizeItemDetails(detail);
+    }
+
+    const custom = CUSTOM_ITEM_DETAILS.find(detail => normalized.includes(detail.key));
+    return custom ? normalizeItemDetails(custom) : null;
+  }
+
+  function normalizeItemDetails(details) {
+    if (!details) return null;
+    return {
+      name: cleanDetailValue(details.name),
+      source: cleanDetailValue(details.source),
+      page: cleanDetailValue(details.page),
+      rarity: cleanDetailValue(details.rarity),
+      type: cleanDetailValue(details.type),
+      attunement: cleanDetailValue(details.attunement),
+      damage: cleanDetailValue(details.damage),
+      properties: cleanDetailValue(details.properties),
+      weight: cleanDetailValue(details.weight),
+      value: cleanDetailValue(details.value),
+      text: cleanRulesText(details.text),
+      abilities: Array.isArray(details.abilities) ? details.abilities.map(cleanRulesText).filter(Boolean) : [],
+      weapon: details.weapon && typeof details.weapon === 'object' ? normalizeWeaponRule(details.weapon) : null,
+      actions: Array.isArray(details.actions) ? details.actions : [],
+      effects: Array.isArray(details.effects) ? details.effects : [],
+      resources: Array.isArray(details.resources) ? details.resources : [],
+      toggles: Array.isArray(details.toggles) ? details.toggles : [],
+      key: details.key || '',
+    };
+  }
+
+  function normalizeWeaponRule(rule) {
+    return {
+      baseName: cleanDetailValue(rule.baseName),
+      type: cleanDetailValue(rule.type),
+      style: cleanDetailValue(rule.style),
+      ability: cleanDetailValue(rule.ability),
+      damage: cleanDetailValue(rule.damage),
+      damageType: cleanDetailValue(rule.damageType),
+      properties: Array.isArray(rule.properties) ? rule.properties.map(cleanDetailValue).filter(Boolean) : splitProperties(rule.properties || ''),
+      range: cleanDetailValue(rule.range),
+      versatileDamage: cleanDetailValue(rule.versatileDamage),
+      magicBonus: Number(rule.magicBonus) || 0,
+    };
+  }
+
+  function inferItemKind(name, weapon, hint, details) {
+    if (weapon) return 'weapon';
+    const type = normalizeName(details && details.type);
+    if (type.includes('shield')) return 'shield';
+    if (type.includes('armor')) return 'armor';
+    if (type.includes('ring')) return 'ring';
+    if (type.includes('wondrous')) return 'wondrous';
+    if (hint && hint.kind) return hint.kind;
+    return 'item';
+  }
+
+  function buildItemAbilities(item) {
+    const abilities = [];
+    if (item.details && item.details.abilities.length) abilities.push(...item.details.abilities);
+    if (item.details && item.details.actions.length) abilities.push(...item.details.actions.map(action => `${action.title || action.name || item.name}: ${action.detail || action.text || ''}`));
+    if (item.details && item.details.effects.length) abilities.push(...item.details.effects.map(effect => `${effect.name || effect.label || 'Effect'}: ${effect.text || formatEffectSummary(effect)}`));
+    if (item.details && item.details.resources.length) abilities.push(...item.details.resources.map(resource => `${resource.name}: ${formatResourceMax(resource, null)}; resets ${formatReset(resource.reset)}.`));
+    if (!item.weapon && item.details && item.details.properties && hasActiveRulesText(item)) {
+      const properties = splitProperties(item.details.properties);
+      const extracted = extractItemPropertyAbilities(item.details.text, properties);
+      abilities.push(...(extracted.length ? extracted : properties));
+    }
+    if (item.weapon && item.weapon.magicBonus) {
+      abilities.push(`${formatBonus(item.weapon.magicBonus)} to attack and damage rolls with this weapon.`);
+    }
+    if (item.weapon && item.weapon.styleBonus) {
+      abilities.push(`Archery style included: ${formatBonus(item.weapon.styleBonus)} to ranged attack rolls.`);
+    }
+
+    const summary = summarizeItemRules(item);
+    if (summary && !abilities.some(text => normalizeName(text) === normalizeName(summary))) abilities.push(summary);
+    return [...new Set(abilities)];
+  }
+
+  function extractItemPropertyAbilities(text, properties) {
+    const rules = cleanRulesText(text);
+    if (!rules || !properties.length) return [];
+    return properties.map(property => {
+      const name = String(property || '').split('(')[0].trim();
+      if (!name || /^none$/i.test(name)) return '';
+      const pattern = new RegExp(`(?:^|\\s-\\s*)${escapeRegExp(name)}(?:\\s*\\([^)]+\\))?\\s*:\\s*([\\s\\S]*?)(?=\\s-\\s*[A-Z][^:]{1,80}:|$)`, 'i');
+      const match = rules.match(pattern);
+      return match ? `${property}: ${match[1].trim()}` : '';
+    }).filter(Boolean);
+  }
+
+  function summarizeItemRules(item) {
+    const details = item.details;
+    if (!details || !details.text || !hasActiveRulesText(item)) return '';
+    const sentences = splitSentences(details.text).slice(0, 2).join(' ');
+    return truncateText(sentences || details.text, 260);
+  }
+
+  function hasActiveRulesText(item) {
+    const details = item.details || {};
+    if (details.abilities && details.abilities.length) return true;
+    if (details.attunement || details.rarity) return true;
+    if (item.weapon && (item.weapon.magicBonus || normalizeName(item.name).includes('warning'))) return true;
+    return ['wondrous', 'ring'].includes(item.kind);
+  }
+
+  function parseCatalogDamage(value) {
+    const match = String(value || '').match(/(\d+d\d+|\d+)\s+([a-z]+)/i);
+    return match ? { damage: match[1], damageType: match[2].toLowerCase() } : {};
+  }
+
+  function chooseWeaponDamage(baseDamage, properties) {
+    const versatile = parseVersatileDamage(properties);
+    const heavy = (properties || []).some(property => normalizeName(property).includes('heavy'));
+    return heavy && versatile ? versatile : baseDamage;
+  }
+
+  function parseVersatileDamage(properties) {
+    const property = (properties || []).find(item => normalizeName(item).includes('versatile'));
+    const match = String(property || '').match(/\((\d+d\d+)\)/i);
+    return match ? match[1] : '';
+  }
+
+  function splitProperties(value) {
+    return String(value || '')
+      .split(',')
+      .map(item => item.trim())
+      .filter(Boolean);
+  }
+
+  function resolveWeaponAbility(base, player) {
+    if (base.ability !== 'finesse') return base.ability;
+    const str = calculateModifier(Number(player.abilities && player.abilities.str) || 10);
+    const dex = calculateModifier(Number(player.abilities && player.abilities.dex) || 10);
+    return dex > str ? 'dex' : 'str';
+  }
+
+  function getStyleBonus(player, base) {
+    if (base.style !== 'ranged') return 0;
+    if (player.attackBonuses && Number(player.attackBonuses.ranged)) return Number(player.attackBonuses.ranged);
+    const haystack = `${player.class || ''} ${player.searchText || ''}`.toLowerCase();
+    return haystack.includes('archery fighting style') ? 2 : 0;
+  }
+
+  function parseMagicBonus(name, details = null) {
+    const match = String(name || '').match(/\+(\d+)/);
+    if (match) return Number(match[1]) || 0;
+    const textMatch = String(details && details.text || '').match(/\+(\d+)\s+bonus to attack and damage rolls/i);
+    return textMatch ? Number(textMatch[1]) || 0 : 0;
+  }
+
+  function formatDamageFormula(dice, bonus) {
+    if (dice === '1') return String(1 + bonus);
+    if (!bonus) return dice;
+    return `${dice}${bonus > 0 ? '+' : ''}${bonus}`;
+  }
+
+  function formatFullDamageFormula(dice, bonus, extraDamage = []) {
+    const base = formatDamageFormula(dice, bonus);
+    const extra = extraDamage.map(effect => `${effect.dice} ${effect.damageType}`).join(' + ');
+    return extra ? `${base} + ${extra}` : base;
+  }
+
+  function inferDefaultEquipped(inventory) {
+    const equipped = [];
+    const firstMelee = inventory.find(item => item.weapon && item.weapon.style === 'melee');
+    const firstRanged = inventory.find(item => item.weapon && item.weapon.style === 'ranged');
+    inventory
+      .filter(item => item.kind === 'armor' || item.kind === 'shield')
+      .forEach(item => equipped.push(item.id));
+    if (firstMelee) equipped.push(firstMelee.id);
+    if (firstRanged && firstRanged.id !== (firstMelee && firstMelee.id)) equipped.push(firstRanged.id);
+    return [...new Set(equipped)];
+  }
+
+  function renderEquippedSummary(root, player) {
+    const target = root.querySelector('[data-equipped-summary]');
+    if (!target) return;
+    const equipped = getEquippedItems(player);
+    const weaponItems = equipped.filter(item => item.weapon);
+
+    target.innerHTML = `
+      <div class="equipped-title">Equipped</div>
+      <div class="equipped-items">
+        ${equipped.length ? equipped.map(item => renderEquippedItem(item)).join('') : '<span class="empty-note">None selected.</span>'}
+      </div>
+      ${weaponItems.length ? `<div class="quick-rolls">${weaponItems.map(item => renderQuickRoll(item.weapon)).join('')}</div>` : ''}
+    `;
+  }
+
+  function renderEquippedItem(item) {
+    if (!item.weapon) return `<span class="equipped-item">${escapeHtml(item.name)}</span>`;
+    return `<span class="equipped-item">${escapeHtml(item.name)} <strong>${formatBonus(item.weapon.attackBonus)}</strong></span>`;
+  }
+
+  function renderQuickRoll(weapon) {
+    return `<span class="quick-roll-group">
+      <span>${escapeHtml(weapon.name)}</span>
+      <button class="roll-button" type="button" data-roll-type="attack" data-weapon-id="${escapeAttr(weapon.id)}">Hit ${formatBonus(weapon.attackBonus)}</button>
+      <button class="roll-button" type="button" data-roll-type="damage" data-weapon-id="${escapeAttr(weapon.id)}">Dmg ${escapeHtml(weapon.damageFormula)}</button>
+    </span>`;
+  }
+
+  function renderCombatToggles(root, player) {
+    const target = root.querySelector('[data-combat-toggles]');
+    if (!target) return;
+    const definitions = player.combatToggleDefinitions || [];
+    if (!definitions.length) {
+      target.innerHTML = '';
+      return;
+    }
+
+    target.innerHTML = `<section class="combat-toggles">
+      <h3>Combat Toggles</h3>
+      <div class="combat-toggle-list">
+        ${definitions.map(definition => {
+          const checked = Boolean(player.combatToggles && player.combatToggles[definition.id]) && definition.available;
+          return `<label class="combat-toggle ${definition.available ? '' : 'disabled'}">
+            <input type="checkbox" data-combat-toggle="${escapeAttr(definition.id)}" ${checked ? 'checked' : ''} ${definition.available ? '' : 'disabled'}>
+            <span>
+              <strong>${escapeHtml(definition.label)}</strong>
+              <small>${escapeHtml(definition.source)} / ${escapeHtml(definition.available ? definition.description : definition.unavailableReason || definition.description)}</small>
+            </span>
+          </label>`;
+        }).join('')}
+      </div>
+    </section>`;
+  }
+
+  function renderWeaponAttacks(root, player) {
+    const target = root.querySelector('[data-weapon-attacks]');
+    if (!target) return;
+    if (!player.weapons.length) {
+      target.innerHTML = '<p class="empty-note">No recognized weapons.</p>';
+      return;
+    }
+
+    target.innerHTML = player.weapons.map(item => {
+      const weapon = item.weapon;
+      const equipped = player.equipped.includes(item.id);
+      return `<article class="weapon-card ${equipped ? 'equipped' : ''}">
+        <div>
+          <h3>${escapeHtml(weapon.name)}</h3>
+          <p>${escapeHtml([weapon.baseName, weapon.type, weapon.style, weapon.properties.join(', ')].filter(Boolean).join(' / '))}</p>
+          ${weapon.activeToggleLabels.length ? `<div class="active-effect-tags">${weapon.activeToggleLabels.map(label => `<span>${escapeHtml(label)}</span>`).join('')}</div>` : ''}
+        </div>
+        <div class="weapon-stats">
+          <div><span>To Hit</span><strong>${formatBonus(weapon.attackBonus)}</strong></div>
+          <div><span>Damage</span><strong>${escapeHtml(weapon.damageFormula)}</strong></div>
+          <div><span>Type</span><strong>${escapeHtml(weapon.damageType)}</strong></div>
+          <div><span>Ability</span><strong>${weapon.abilityLabel}</strong></div>
+        </div>
+        ${renderWeaponControls(item, player)}
+        <details class="math-breakdown">
+          <summary>Show math</summary>
+          <div class="math-columns">
+            <section>
+              <h4>Attack Bonus</h4>
+              ${renderMathParts(weapon.attackParts, weapon.attackBonus)}
+            </section>
+            <section>
+              <h4>Damage Bonus</h4>
+              ${renderMathParts(weapon.damageParts, weapon.damageBonus, weapon.damage, weapon.damageFormula)}
+            </section>
+          </div>
+        </details>
+        <div class="weapon-actions">
+          <button class="roll-button" type="button" data-roll-type="attack" data-weapon-id="${escapeAttr(item.id)}">Attack</button>
+          <button class="roll-button" type="button" data-roll-type="damage" data-weapon-id="${escapeAttr(item.id)}">Damage</button>
+        </div>
+      </article>`;
+    }).join('');
+  }
+
+  function renderWeaponControls(item, player) {
+    const weapon = item.weapon;
+    const equipped = player.equipped.includes(item.id);
+    const state = getWeaponCombatState(player, item.id, weapon.properties);
+    const controls = [];
+
+    if (weapon.versatileDamage) {
+      controls.push(`<fieldset class="weapon-control">
+        <legend>Hands</legend>
+        <label><input type="radio" name="hands-${escapeAttr(item.id)}" data-weapon-mode="${escapeAttr(item.id)}" value="one" ${state.handMode !== 'two' ? 'checked' : ''}> <span>1H ${escapeHtml(weapon.baseDamage)}</span></label>
+        <label><input type="radio" name="hands-${escapeAttr(item.id)}" data-weapon-mode="${escapeAttr(item.id)}" value="two" ${state.handMode === 'two' ? 'checked' : ''}> <span>2H ${escapeHtml(weapon.versatileDamage)}</span></label>
+      </fieldset>`);
+    }
+
+    if (hasPlayerFeat(player, 'great weapon master') && weapon.style === 'melee' && weapon.properties.some(property => normalizeName(property).includes('heavy'))) {
+      controls.push(renderWeaponCheckbox(item.id, 'greatWeaponMaster', 'Great Weapon Master', '-5 hit / +10 damage', state.greatWeaponMaster, equipped));
+    }
+
+    for (const toggle of getApplicableWeaponRuleToggles(player, { id: item.id, name: item.name, details: item.details, properties: weapon.properties, style: weapon.style, damageType: weapon.damageType })) {
+      const sourceItem = findToggleSourceItem(player, toggle);
+      const sourceEquipped = !sourceItem || player.equipped.includes(sourceItem.id);
+      const enabled = equipped && sourceEquipped;
+      controls.push(renderWeaponCheckbox(item.id, toggle.id, toggle.label || toggle.title || toggle.id, toggle.text || formatToggleEffects(toggle), state[toggle.id], enabled));
+    }
+
+    if (!controls.length) return '';
+    return `<div class="weapon-controls">${controls.join('')}</div>`;
+  }
+
+  function findToggleSourceItem(player, toggle) {
+    return (player.inventory || []).find(item => item.details && Array.isArray(item.details.toggles) && item.details.toggles.some(candidate => candidate.id === toggle.id));
+  }
+
+  function formatToggleEffects(toggle) {
+    return (toggle.effects || []).map(effect => {
+      if (effect.kind === 'extra-damage') return `${effect.dice} ${effect.damageType} on hit`;
+      if (effect.kind === 'on-hit') return effect.text || effect.label;
+      return effect.label || effect.kind;
+    }).filter(Boolean).join('; ');
+  }
+
+  function renderWeaponCheckbox(weaponId, option, label, detail, checked, enabled) {
+    return `<label class="weapon-control ${enabled ? '' : 'disabled'}">
+      <input type="checkbox" data-weapon-toggle="${escapeAttr(weaponId)}" data-weapon-option="${escapeAttr(option)}" ${checked && enabled ? 'checked' : ''} ${enabled ? '' : 'disabled'}>
+      <span><strong>${escapeHtml(label)}</strong><small>${escapeHtml(enabled ? detail : `${detail} (equip required)`)}</small></span>
+    </label>`;
+  }
+
+  function renderActionsPanel(root, player) {
+    const target = root.querySelector('[data-actions-panel]');
+    if (!target) return;
+    const groups = buildActionGroups(player, root);
+    target.innerHTML = `<div class="actions-panel">
+      ${groups.map(group => renderActionGroup(group)).join('')}
+      <div class="roll-log" data-roll-log></div>
+    </div>`;
+  }
+
+  function buildActionGroups(player, root) {
+    const groups = new Map([
+      ['Action', []],
+      ['Bonus Action', []],
+      ['Reaction', []],
+      ['Triggered', []],
+      ['Free / Utility', []],
+      ['Out of Combat', []],
+    ]);
+
+    buildWeaponActionCards(player).forEach(card => addActionCard(groups, card));
+    buildSpellActionCards(player, root).forEach(card => addActionCard(groups, card));
+    buildSpellScrollActionCards(player, root).forEach(card => addActionCard(groups, card));
+    buildRuleActionCards(player).forEach(card => addActionCard(groups, card));
+    if (!hasCanonicalClassActions(player)) buildClassActionCards(player).forEach(card => addActionCard(groups, card));
+    buildItemActionCards(player).forEach(card => addActionCard(groups, card));
+    buildCoreActionCards(player).forEach(card => addActionCard(groups, card));
+
+    return Array.from(groups.entries())
+      .map(([name, cards]) => ({ name, cards }))
+      .filter(group => group.cards.length);
+  }
+
+  function addActionCard(groups, card) {
+    const group = groups.has(card.group) ? card.group : 'Free / Utility';
+    groups.get(group).push(card);
+  }
+
+  function renderActionGroup(group) {
+    return `<section class="action-group">
+      <h2>${escapeHtml(group.name)}</h2>
+      <div class="action-row">
+        ${group.cards.map(renderActionCard).join('')}
+      </div>
+    </section>`;
+  }
+
+  function renderActionCard(card) {
+    return `<article class="action-card">
+      <div class="action-card-head">
+        <span>${escapeHtml(card.type || card.group)}</span>
+        <strong>${escapeHtml(card.title)}</strong>
+      </div>
+      <div class="action-main">
+        ${card.meta ? `<p class="action-meta">${escapeHtml(card.meta)}</p>` : ''}
+        ${card.detail ? `<p>${escapeHtml(card.detail)}</p>` : ''}
+      </div>
+      <div class="action-side">
+        ${card.tags && card.tags.length ? `<div class="action-tags">${card.tags.map(tag => `<span>${escapeHtml(tag)}</span>`).join('')}</div>` : ''}
+        ${card.controls || ''}
+      </div>
+      ${card.math && card.math.length ? `<details class="action-math"><summary>Math</summary>${renderActionMath(card.math)}</details>` : ''}
+    </article>`;
+  }
+
+  function renderActionMath(parts) {
+    return `<div class="math-list">${parts.map(part => `<div><span>${escapeHtml(part.label)}</span><strong>${escapeHtml(part.display || formatBonus(part.value))}</strong></div>`).join('')}</div>`;
+  }
+
+  function buildWeaponActionCards(player) {
+    return (player.weapons || []).map(item => {
+      const weapon = item.weapon;
+      const equipped = player.equipped.includes(item.id);
+      const tags = [
+        equipped ? 'Equipped' : 'Not equipped',
+        `${formatBonus(weapon.attackBonus)} hit`,
+        `${weapon.damageFormula} ${weapon.damageType}`,
+        weapon.handMode === 'two' && weapon.versatileDamage ? 'Two hands' : '',
+        ...weapon.activeToggleLabels,
+      ].filter(Boolean);
+      return {
+        group: 'Action',
+        type: weapon.style === 'ranged' ? 'Ranged Attack' : 'Melee Attack',
+        title: `Attack: ${weapon.name}`,
+        meta: [weapon.baseName, weapon.properties.join(', ')].filter(Boolean).join(' / '),
+        detail: `${ABILITY_NAMES[weapon.ability] || weapon.abilityLabel} attack with ${formatBonus(weapon.attackBonus)} to hit; ${weapon.damageFormula} ${weapon.damageType} on hit.`,
+        tags,
+        controls: `<div class="action-controls">
+          <button class="roll-button" type="button" data-roll-type="attack" data-weapon-id="${escapeAttr(item.id)}" ${equipped ? '' : 'disabled'}>Attack</button>
+          <button class="roll-button" type="button" data-roll-type="damage" data-weapon-id="${escapeAttr(item.id)}" ${equipped ? '' : 'disabled'}>Damage</button>
+        </div>`,
+        math: [
+          ...weapon.attackParts.map(part => ({ label: `Hit: ${part.label}`, value: part.value, display: part.display })),
+          ...weapon.damageParts.map(part => ({ label: `Damage: ${part.label}`, value: part.value, display: part.display || (part.value === null ? weapon.damage : '') })),
+        ].filter(part => part.display || part.value !== null && part.value !== undefined || part.label.includes('Damage: Damage die')),
+      };
+    });
+  }
+
+  function buildSpellActionCards(player, root) {
+    return (player.spells || []).map(name => {
+      const spell = findSpellDetails(name, player, root);
+      const math = getSpellMathParts(player, spell);
+      return {
+        group: classifySpellTiming(spell && spell.castingTime),
+        type: 'Spell',
+        title: `Cast ${name}`,
+        meta: formatSpellMeta(spell),
+        detail: summarizeSpellAction(player, spell),
+        tags: buildSpellTags(player, spell),
+        controls: spell && spell.damage ? `<div class="action-controls"><button class="roll-button" type="button" data-roll-spell="${escapeAttr(name)}">Damage</button></div>` : '',
+        math,
+      };
+    });
+  }
+
+  function buildSpellScrollActionCards(player, root) {
+    return (player.spellScrolls || []).map(scroll => {
+      const spell = findSpellDetails(scroll.spellName, player, root);
+      const group = classifySpellTiming(scroll.castingTime || (spell && spell.castingTime));
+      return {
+        group,
+        type: 'Scroll',
+        title: `Use Scroll: ${scroll.spellName}`,
+        meta: [scroll.source || scroll.scrollName || 'Spell Scroll', formatSpellMeta(spell)].filter(Boolean).join(' / '),
+        detail: summarizeScrollAction(scroll, spell),
+        tags: buildSpellScrollTags(scroll, spell),
+        math: getScrollMathParts(scroll, spell),
+      };
+    });
+  }
+
+  function buildRuleActionCards(player) {
+    return (player.ruleActions || [])
+      .filter(action => action.sourceType !== 'spell' && action.sourceType !== 'item')
+      .map(action => ({
+        group: normalizeActionGroup(action.group),
+        type: action.type || action.sourceType || 'Rule',
+        title: action.title || action.name || 'Action',
+        meta: [action.sourceType, action.className, action.itemName].filter(Boolean).join(' / '),
+        detail: action.detail || action.text || '',
+        tags: Array.isArray(action.tags) ? action.tags.filter(Boolean).slice(0, 5) : [],
+      }));
+  }
+
+  function hasCanonicalClassActions(player) {
+    return (player.ruleActions || []).some(action => action.sourceType === 'class' || action.sourceType === 'subclass');
+  }
+
+  function normalizeActionGroup(group) {
+    const text = cleanDetailValue(group);
+    const allowed = new Set(['Action', 'Bonus Action', 'Reaction', 'Triggered', 'Free / Utility', 'Out of Combat']);
+    return allowed.has(text) ? text : 'Free / Utility';
+  }
+
+  function buildClassActionCards(player) {
+    const cards = [];
+    if (!isCleric(player)) return cards;
+
+    const level = Number(player.level) || 1;
+    const spellDc = Number(player.spellSaveDc) || calculateSpellSaveDc(player);
+    const channelUses = getClericChannelUses(level);
+    const channelTag = channelUses ? `${channelUses}/rest` : 'Channel Divinity';
+
+    if (level >= 2) {
+      cards.push({
+        group: 'Action',
+        type: 'Channel Divinity',
+        title: 'Turn Undead',
+        meta: `30 ft / WIS save DC ${spellDc}`,
+        detail: level >= 5
+          ? `Undead that fail are turned for up to 1 minute. CR 1/2 or lower undead are destroyed by Claire at level ${level}.`
+          : 'Undead that fail are turned for up to 1 minute.',
+        tags: [channelTag, 'Undead', level >= 5 ? 'Destroy CR 1/2' : ''],
+        math: getSpellDcMathParts(player, spellDc),
+      });
+    }
+
+    if (level >= 5) {
+      cards.push({
+        group: 'Triggered',
+        type: 'Cleric',
+        title: 'Destroy Undead',
+        meta: 'Turn Undead rider',
+        detail: 'When an undead of CR 1/2 or lower fails Claire\'s Turn Undead save, it is destroyed instead of only turned.',
+        tags: ['Level 5', 'CR 1/2 or lower'],
+      });
+    }
+
+    if (isTempestCleric(player)) {
+      cards.push({
+        group: 'Reaction',
+        type: 'Tempest Cleric',
+        title: 'Wrath of the Storm',
+        meta: `5 ft / DEX save DC ${spellDc}`,
+        detail: 'When a creature within 5 ft hits Claire, she can force a Dexterity save; failed save takes 2d8 lightning or thunder, success takes half.',
+        tags: [`${Math.max(calculateModifier(Number(player.abilities && player.abilities.wis) || 10), 1)}/long rest`, 'Lightning/Thunder'],
+        math: getSpellDcMathParts(player, spellDc),
+      });
+
+      if (level >= 2) {
+        cards.push({
+          group: 'Triggered',
+          type: 'Channel Divinity',
+          title: 'Destructive Wrath',
+          meta: 'Lightning or thunder damage',
+          detail: 'When Claire rolls lightning or thunder damage, she can spend Channel Divinity to deal maximum damage instead of rolling.',
+          tags: [channelTag, 'Max damage'],
+        });
+      }
+
+      if (level >= 6) {
+        cards.push({
+          group: 'Triggered',
+          type: 'Tempest Cleric',
+          title: 'Thunderbolt Strike',
+          meta: 'Large or smaller creature',
+          detail: 'When Claire deals lightning damage to a Large or smaller creature, she can push it up to 10 ft away.',
+          tags: ['Lightning', 'Push 10 ft'],
+        });
+      }
+    }
+
+    return cards;
+  }
+
+  function buildItemActionCards(player) {
+    const equipped = new Set(player.equipped || []);
+    return (player.inventory || []).flatMap(item => {
+      if (item.details && item.details.actions.length) {
+        return item.details.actions.map(action => {
+          const isEquipped = equipped.has(item.id);
+          return {
+            group: normalizeActionGroup(action.group),
+            type: action.type || 'Item',
+            title: action.title || action.name || item.name,
+            meta: [item.name, formatItemSubtitle(item)].filter(Boolean).join(' / '),
+            detail: truncateText(action.detail || action.text || '', 280),
+            tags: [isEquipped ? 'Equipped' : 'Inventory', item.details && item.details.attunement ? 'Attunement' : '', ...(action.tags || [])].filter(Boolean),
+          };
+        });
+      }
+      return (item.abilities || [])
+        .filter(text => isActionableItemAbility(text))
+        .map(text => {
+        const ability = parseItemAbilityText(text);
+        const isEquipped = equipped.has(item.id);
+        return {
+          group: classifyRulesTiming(text),
+          type: 'Item',
+          title: ability.name || item.name,
+          meta: [item.name, formatItemSubtitle(item)].filter(Boolean).join(' / '),
+          detail: truncateText(ability.detail || text, 280),
+          tags: [isEquipped ? 'Equipped' : 'Inventory', item.details && item.details.attunement ? 'Attunement' : ''].filter(Boolean),
+        };
+      });
+    });
+  }
+
+  function isActionableItemAbility(text) {
+    const normalized = normalizeName(text);
+    return normalized.includes('as an action')
+      || normalized.includes('use an action')
+      || normalized.includes('bonus action')
+      || normalized.includes('reaction')
+      || normalized.includes('before determining')
+      || normalized.includes('on a hit')
+      || normalized.includes('when you are')
+      || normalized.includes('whenever you')
+      || normalized.includes('1 day');
+  }
+
+  function parseItemAbilityText(text) {
+    const match = String(text || '').match(/^([^:]{2,80}):\s*(.+)$/);
+    return match
+      ? { name: match[1].trim(), detail: match[2].trim() }
+      : { name: '', detail: String(text || '').trim() };
+  }
+
+  function isCleric(player) {
+    return normalizeName(player.class).includes('cleric') || normalizeName(player.classUrl).includes('cleric');
+  }
+
+  function isTempestCleric(player) {
+    const haystack = normalizeName(`${player.class || ''} ${player.classUrl || ''} ${player.searchText || ''}`);
+    return haystack.includes('tempest');
+  }
+
+  function getClericChannelUses(level) {
+    if (level >= 18) return 3;
+    if (level >= 6) return 2;
+    if (level >= 2) return 1;
+    return 0;
+  }
+
+  function calculateSpellSaveDc(player) {
+    const ability = player.spellcasting;
+    if (!ability) return null;
+    return 8 + calculateModifier(Number(player.abilities && player.abilities[ability]) || 10) + (Number(player.proficiencyBonus) || 0);
+  }
+
+  function getSpellDcMathParts(player, spellDc) {
+    const ability = player.spellcasting;
+    if (!ability || !spellDc) return [];
+    return [
+      { label: 'Base save DC', display: '8' },
+      { label: `${ABILITY_NAMES[ability]} modifier`, value: calculateModifier(Number(player.abilities && player.abilities[ability]) || 10) },
+      { label: 'Proficiency', value: Number(player.proficiencyBonus) || 0 },
+      { label: 'Save DC', display: String(spellDc) },
+    ];
+  }
+
+  function buildCoreActionCards(player) {
+    const athletics = getSkillBonus(player, 'athletics');
+    const stealth = getSkillBonus(player, 'stealth');
+    const investigation = getSkillBonus(player, 'investigation');
+    const perception = getSkillBonus(player, 'perception');
+    return [
+      coreAction('Action', 'Core', 'Attack', 'Make one weapon attack, or more if a class feature grants extra attacks.'),
+      coreAction('Action', 'Core', 'Cast a Spell', 'Cast a spell or use a spell scroll with a casting time of 1 action.'),
+      coreAction('Action', 'Core', 'Dash', 'Gain extra movement equal to your speed.'),
+      coreAction('Action', 'Core', 'Disengage', 'Your movement does not provoke opportunity attacks this turn.'),
+      coreAction('Action', 'Core', 'Dodge', 'Attackers you can see have disadvantage; Dexterity saves have advantage.'),
+      coreAction('Action', 'Core', 'Help', 'Give an ally advantage on a check or attack against a nearby target.'),
+      coreAction('Action', 'Core', 'Hide', `Dexterity (Stealth) ${formatBonus(stealth)}.`),
+      coreAction('Action', 'Core', 'Ready', 'Prepare a reaction for a trigger you choose.'),
+      coreAction('Action', 'Core', 'Search', `Investigation ${formatBonus(investigation)} or Perception ${formatBonus(perception)}.`),
+      coreAction('Action', 'Core', 'Use an Object', 'Use an object that needs your action.'),
+      coreAction('Action', 'Contest', 'Grapple / Shove', `Strength (Athletics) ${formatBonus(athletics)} contested by the target.`),
+      coreAction('Reaction', 'Core', 'Opportunity Attack', 'Make one melee attack when a creature leaves your reach.'),
+      coreAction('Free / Utility', 'Core', 'Interact with Object', 'Draw, stow, open, pick up, or otherwise handle one simple object.'),
+      coreAction('Out of Combat', 'Travel', 'Investigate / Scout', `Investigation ${formatBonus(investigation)}, Perception ${formatBonus(perception)}, or Stealth ${formatBonus(stealth)}.`),
+      coreAction('Out of Combat', 'Rest', 'Short Rest', 'Spend hit dice and recover short-rest resources.'),
+    ];
+  }
+
+  function coreAction(group, type, title, detail) {
+    return { group, type, title, detail, tags: [] };
+  }
+
+  function classifySpellTiming(castingTime) {
+    const text = normalizeName(castingTime);
+    if (text.includes('bonus action')) return 'Bonus Action';
+    if (text.includes('reaction')) return 'Reaction';
+    if (text.includes('minute') || text.includes('hour')) return 'Out of Combat';
+    return 'Action';
+  }
+
+  function classifyRulesTiming(text) {
+    const normalized = normalizeName(text);
+    if (normalized.includes('bonus action')) return 'Bonus Action';
+    if (normalized.includes('reaction')) return 'Reaction';
+    if (normalized.includes('action')) return 'Action';
+    if (normalized.includes('short rest') || normalized.includes('long rest') || normalized.includes('minute') || normalized.includes('hour')) return 'Out of Combat';
+    return 'Free / Utility';
+  }
+
+  function summarizeSpellAction(player, spell) {
+    if (!spell) return 'Spell rules are not loaded yet.';
+    const save = getSpellSaveAbility(spell);
+    const needsAttack = spellNeedsAttack(spell);
+    const parts = [];
+    if (needsAttack && player.spellAttack !== null && player.spellAttack !== undefined) parts.push(`spell attack ${formatBonus(player.spellAttack)}`);
+    if (save && player.spellSaveDc !== null && player.spellSaveDc !== undefined) parts.push(`${save.toUpperCase()} save DC ${player.spellSaveDc}`);
+    if (spell.range) parts.push(`range ${spell.range}`);
+    return parts.length ? parts.join('; ') : truncateText(spell.text || '', 220);
+  }
+
+  function summarizeScrollAction(scroll, spell) {
+    const save = getSpellSaveAbility(spell);
+    const parts = [];
+    if (scroll.attackBonus) parts.push(`scroll attack +${scroll.attackBonus}`);
+    if (scroll.saveDc) parts.push(`${save ? `${save.toUpperCase()} save ` : ''}DC ${scroll.saveDc}`);
+    if (spell && spell.range) parts.push(`range ${spell.range}`);
+    if (parts.length) return parts.join('; ');
+    return spell ? truncateText(spell.text || '', 220) : 'Spell scroll rules are not loaded yet.';
+  }
+
+  function buildSpellTags(player, spell) {
+    if (!spell) return [];
+    return [
+      spell.level || 'Cantrip',
+      spell.school,
+      spell.castingTime,
+      spellNeedsAttack(spell) && player.spellAttack !== null ? `Hit ${formatBonus(player.spellAttack)}` : '',
+      getSpellSaveAbility(spell) && player.spellSaveDc !== null ? `DC ${player.spellSaveDc}` : '',
+    ].filter(Boolean);
+  }
+
+  function buildSpellScrollTags(scroll, spell) {
+    return [
+      'Consumable',
+      scroll.level || (spell && spell.level),
+      scroll.school || (spell && spell.school),
+      scroll.castingTime || (spell && spell.castingTime),
+      scroll.attackBonus ? `Hit +${scroll.attackBonus}` : '',
+      scroll.saveDc ? `DC ${scroll.saveDc}` : '',
+    ].filter(Boolean);
+  }
+
+  function getSpellMathParts(player, spell) {
+    if (!spell) return [];
+    const ability = player.spellcasting;
+    const abilityMod = ability ? calculateModifier(Number(player.abilities && player.abilities[ability]) || 10) : null;
+    const parts = [];
+    if (spellNeedsAttack(spell) && player.spellAttack !== null && ability) {
+      parts.push({ label: `${ABILITY_NAMES[ability]} modifier`, value: abilityMod });
+      parts.push({ label: 'Proficiency', value: Number(player.proficiencyBonus) || 0 });
+      parts.push({ label: 'Spell attack', display: formatBonus(player.spellAttack) });
+    }
+    if (getSpellSaveAbility(spell) && player.spellSaveDc !== null && ability) {
+      parts.push({ label: 'Base save DC', display: '8' });
+      parts.push({ label: `${ABILITY_NAMES[ability]} modifier`, value: abilityMod });
+      parts.push({ label: 'Proficiency', value: Number(player.proficiencyBonus) || 0 });
+      parts.push({ label: 'Spell save DC', display: String(player.spellSaveDc) });
+    }
+    return parts;
+  }
+
+  function getScrollMathParts(scroll, spell) {
+    const parts = [];
+    if (scroll.attackBonus) parts.push({ label: 'Scroll attack bonus', display: `+${scroll.attackBonus}` });
+    if (scroll.saveDc) parts.push({ label: `${getSpellSaveAbility(spell) ? `${getSpellSaveAbility(spell).toUpperCase()} save ` : ''}DC`, display: String(scroll.saveDc) });
+    if (scroll.source) parts.push({ label: 'Source', display: scroll.source });
+    return parts;
+  }
+
+  function spellNeedsAttack(spell) {
+    if (spell && spell.attackType) return true;
+    const text = normalizeName(`${spell && spell.text} ${spell && spell.higherLevels}`);
+    return text.includes('spell attack');
+  }
+
+  function getSpellSaveAbility(spell) {
+    if (spell && spell.saveAbility) return spell.saveAbility;
+    const text = String(`${spell && spell.text || ''} ${spell && spell.higherLevels || ''}`);
+    const match = text.match(/(Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma)\s+saving throw/i);
+    return match ? match[1].slice(0, 3).toLowerCase() : '';
+  }
+
+  function renderMathParts(parts, total, baseLabel = '', totalDisplay = '') {
+    const rows = (parts || []).map(part => {
+      const value = part.display || (part.value === null || part.value === undefined ? baseLabel : formatBonus(part.value));
+      return `<div><span>${escapeHtml(part.label)}</span><strong>${escapeHtml(value)}</strong></div>`;
+    }).join('');
+    return `<div class="math-list">${rows}<div class="math-total"><span>Total</span><strong>${escapeHtml(totalDisplay || (baseLabel ? formatDamageFormula(baseLabel, total) : formatBonus(total)))}</strong></div></div>`;
+  }
+
+  function renderResourcesPanel(root, player) {
+    const target = root.querySelector('[data-resources-panel]');
+    if (!target) return;
+    target.innerHTML = `<div class="resources-panel">
+      <section class="resource-toolbar">
+        <div>
+          <h2>Rest</h2>
+          <p class="empty-note">Rest buttons reset tracked uses on this sheet and save the change.</p>
+        </div>
+        <div class="form-actions">
+          <button type="button" data-rest-type="short">Short Rest</button>
+          <button type="button" data-rest-type="long">Long Rest</button>
+          <span data-resource-status></span>
+        </div>
+      </section>
+      <section>
+        <h2>Health</h2>
+        <div class="resource-grid">
+          ${renderResourceStat('Current HP', player.currentHp === null ? '-' : player.currentHp)}
+          ${renderResourceStat('Temp HP', player.tempHp || 0)}
+          ${renderResourceStat('Max HP', player.maxHp === null ? '-' : player.maxHp)}
+          ${renderResourceStat('Hit Dice', player.hitDice || '-')}
+        </div>
+      </section>
+      <section>
+        <h2>Spell Slots</h2>
+        ${renderSpellSlotTracker(player)}
+      </section>
+      <section>
+        <h2>Resources</h2>
+        ${renderResourceTracker(player)}
+      </section>
+      <section>
+        <h2>Conditions</h2>
+        <div class="chip-list">${player.conditions.length ? player.conditions.map(condition => `<span>${escapeHtml(condition)}</span>`).join('') : '<span>No conditions tracked.</span>'}</div>
+        <p class="empty-note">Concentration: ${escapeHtml(player.concentration || 'None')}</p>
+      </section>
+    </div>`;
+  }
+
+  function renderResourceStat(label, value) {
+    return `<div class="info-card"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
+  }
+
+  function renderSpellSlotTracker(player) {
+    const slots = player.spellSlots || {};
+    const entries = Object.entries(slots)
+      .filter(([level, max]) => level !== 'pact' && Number(max) > 0)
+      .sort((a, b) => Number(a[0]) - Number(b[0]));
+    const pact = slots.pact && typeof slots.pact === 'object' ? slots.pact : null;
+    if (!entries.length && !pact) return '<p class="empty-note">No spell slots tracked.</p>';
+    const rows = entries.map(([level, max]) => renderSlotRow(`Level ${level}`, level, Number(max), player.spellSlotUses && player.spellSlotUses[level]));
+    if (pact) rows.push(renderSlotRow(`Pact slots (L${pact.level})`, 'pact', Number(pact.slots), player.spellSlotUses && player.spellSlotUses.pact));
+    return `<div class="resource-list">${rows.join('')}</div>`;
+  }
+
+  function renderSlotRow(label, slotKey, max, usedValue) {
+    const used = clampNumber(Number(usedValue) || 0, 0, max);
+    return `<label class="resource-row">
+      <span><strong>${escapeHtml(label)}</strong><small>${max - used} / ${max} available</small></span>
+      <input type="number" min="0" max="${max}" value="${used}" data-spell-slot-use="${escapeAttr(slotKey)}" aria-label="${escapeAttr(label)} used">
+    </label>`;
+  }
+
+  function renderResourceTracker(player) {
+    const resources = uniqueRuleRecords(player.resources || [])
+      .filter(resource => resource.id !== 'spell-slots')
+      .slice(0, 40);
+    if (!resources.length) return '<p class="empty-note">No limited resources tracked.</p>';
+    return `<div class="resource-list">${resources.map(resource => {
+      const max = evaluateResourceMax(resource, player);
+      const used = max === null ? null : clampNumber(Number(player.resourceUses && player.resourceUses[resource.id]) || 0, 0, max);
+      return `<label class="resource-row">
+        <span>
+          <strong>${escapeHtml(resource.name || resource.id)}</strong>
+          <small>${escapeHtml(formatResourceLine(resource, max, used))}</small>
+        </span>
+        ${max === null ? '<span class="empty-note">Manual</span>' : `<input type="number" min="0" max="${max}" value="${used}" data-resource-use="${escapeAttr(resource.id)}" aria-label="${escapeAttr(resource.name || resource.id)} used">`}
+      </label>`;
+    }).join('')}</div>`;
+  }
+
+  function formatResourceLine(resource, max, used) {
+    const reset = formatReset(resource.reset);
+    if (max === null) return `${formatResourceMax(resource, null)}; resets ${reset}`;
+    return `${max - used} / ${max} available; resets ${reset}`;
+  }
+
+  function evaluateResourceMax(resource, player) {
+    if (Number.isFinite(Number(resource.max))) return Number(resource.max);
+    const formula = String(resource.maxFormula || '');
+    if (!player || !formula) return null;
+    const level = Number(player.level) || 1;
+    const wisMod = calculateModifier(Number(player.abilities && player.abilities.wis) || 10);
+    const chaMod = calculateModifier(Number(player.abilities && player.abilities.cha) || 10);
+    if (formula === 'level') return level;
+    if (formula === 'level * 5') return level * 5;
+    if (formula.includes('clericChannelDivinityUses')) return level >= 18 ? 3 : level >= 6 ? 2 : level >= 2 ? 1 : 0;
+    if (formula.includes('barbarianRages')) return level >= 20 ? 999 : level >= 17 ? 6 : level >= 12 ? 5 : level >= 6 ? 4 : level >= 3 ? 3 : 2;
+    if (formula.includes('chaMod')) return Math.max(1, chaMod);
+    if (formula.includes('level >= 17')) return level >= 17 ? 2 : 1;
+    if (formula.includes('level >= 14')) return level >= 14 ? 3 : 2;
+    if (formula.includes('wisMod')) return Math.max(1, wisMod);
+    return null;
+  }
+
+  function formatResourceMax(resource, player) {
+    const max = evaluateResourceMax(resource, player);
+    if (max !== null) return `${max} use${max === 1 ? '' : 's'}`;
+    return resource.maxFormula || 'manual tracking';
+  }
+
+  function formatReset(reset) {
+    const map = {
+      shortRest: 'short rest',
+      longRest: 'long rest',
+      longRestHalf: 'long rest',
+      dawn: 'dawn',
+      dawnLose1d6: 'dawn, loses 1d6 charges',
+      longRestUntilFontOfInspirationThenShortRest: 'long rest, then short rest at Bard 5',
+      manual: 'manual',
+    };
+    return map[reset] || reset || 'manual';
+  }
+
+  function renderEquipmentPanel(root, player) {
+    const target = root.querySelector('[data-equipment-panel]');
+    if (!target) return;
+    target.innerHTML = `<div class="equipment-manager">
+      ${renderEquippedAbilities(player)}
+      <div class="equipment-list" role="list">
+        ${player.inventory.map(item => renderEquipmentRow(item, player)).join('')}
+      </div>
+    </div>`;
+  }
+
+  function renderSpellPanel(root, player) {
+    const target = root.querySelector('[data-spell-panel]');
+    if (!target) return;
+    target.innerHTML = `<div class="spell-manager">
+      <section>
+        <h2>Known Spells</h2>
+        <div class="spell-list">
+          ${player.spells.length ? player.spells.map(name => renderKnownSpell(name, player, root)).join('') : '<p class="empty-note">No spells recorded.</p>'}
+        </div>
+      </section>
+      <section>
+        <h2>Spell Scrolls</h2>
+        <div class="spell-list">
+          ${player.spellScrolls.length ? player.spellScrolls.map(scroll => renderSpellScroll(scroll, player, root)).join('') : '<p class="empty-note">No spell scrolls recorded.</p>'}
+        </div>
+      </section>
+      <section class="spell-search-box">
+        <h2>Add Spell</h2>
+        <input data-spell-search-input type="search" placeholder="Search spells by name, school, class, or text..." aria-label="Search spells">
+        <div class="spell-search-results" data-spell-search-results></div>
+      </section>
+    </div>`;
+
+    ensureSpellCatalog(root);
+  }
+
+  function renderKnownSpell(name, player, root) {
+    const spell = findSpellDetails(name, player, root);
+    return `<details class="spell-row">
+      <summary>
+        <span>
+          <strong>${escapeHtml(name)}</strong>
+          <small>${escapeHtml(formatSpellMeta(spell))}</small>
+        </span>
+        <button class="text-button" type="button" data-remove-spell="${escapeAttr(name)}">Remove</button>
+      </summary>
+      ${renderSpellDetails(spell)}
+    </details>`;
+  }
+
+  function renderSpellScroll(scroll, player, root) {
+    const spell = findSpellDetails(scroll.spellName, player, root);
+    return `<details class="spell-row spell-scroll-row">
+      <summary>
+        <span>
+          <strong>${escapeHtml(scroll.spellName)}</strong>
+          <small>${escapeHtml([scroll.source || scroll.scrollName || 'Spell Scroll', formatSpellMeta(spell), scroll.saveDc ? `DC ${scroll.saveDc}` : '', scroll.attackBonus ? `Attack +${scroll.attackBonus}` : ''].filter(Boolean).join(' / '))}</small>
+        </span>
+        <span class="spell-source-pill">Scroll</span>
+      </summary>
+      ${renderSpellDetails(spell)}
+      ${scroll.text ? `<p class="item-rules"><strong>Scroll:</strong> ${escapeHtml(truncateText(scroll.text, 500))}</p>` : ''}
+    </details>`;
+  }
+
+  function renderSpellDetails(spell) {
+    if (!spell) return '<p class="empty-note">No spell rules found yet.</p>';
+    const rows = [
+      ['Level', spell.level],
+      ['School', spell.school],
+      ['Casting Time', spell.castingTime],
+      ['Range', spell.range],
+      ['Duration', spell.duration],
+      ['Components', spell.components],
+      ['Classes', spell.classes || spell.optionalClasses],
+      ['Source', spell.page ? `${spell.source} p. ${spell.page}` : spell.source],
+    ].filter(([, value]) => value);
+    return `<div class="spell-details-panel">
+      <dl class="equipment-detail-grid">${rows.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>
+      ${spell.text ? `<p class="item-rules">${escapeHtml(spell.text)}</p>` : ''}
+      ${spell.higherLevels ? `<p class="item-rules"><strong>At Higher Levels:</strong> ${escapeHtml(spell.higherLevels)}</p>` : ''}
+    </div>`;
+  }
+
+  function formatSpellMeta(spell) {
+    if (!spell) return 'Details unavailable';
+    return [spell.level || 'Cantrip', spell.school, spell.castingTime, spell.range].filter(Boolean).join(' / ');
+  }
+
+  function findSpellDetails(name, player, root) {
+    const details = player.spellDetails || {};
+    const direct = details[name];
+    if (direct) return normalizeSpellDetails(direct);
+    const normalized = normalizeName(name);
+    for (const spell of Object.values(details)) {
+      if (normalizeName(spell && spell.name) === normalized) return normalizeSpellDetails(spell);
+    }
+    const catalog = root && Array.isArray(root._spellCatalog) ? root._spellCatalog : [];
+    const found = catalog.find(spell => normalizeName(spell.name) === normalized);
+    return found ? normalizeSpellDetails(found) : null;
+  }
+
+  async function ensureSpellCatalog(root) {
+    if (root._spellCatalog || root._spellCatalogLoading) return;
+    const target = root.querySelector('[data-spell-panel]');
+    if (!target) return;
+    root._spellCatalogLoading = true;
+    try {
+      const response = await fetch(target.dataset.spellsUrl || '../../data/spells.json');
+      if (!response.ok) throw new Error(`Spell catalog ${response.status}`);
+      root._spellCatalog = await response.json();
+    } catch (error) {
+      root._spellCatalog = [];
+    } finally {
+      root._spellCatalogLoading = false;
+    }
+  }
+
+  function renderSpellSearchResults(root, query) {
+    const target = root.querySelector('[data-spell-search-results]');
+    if (!target) return;
+    const clean = String(query || '').trim().toLowerCase();
+    const catalog = Array.isArray(root._spellCatalog) ? root._spellCatalog : [];
+    if (!clean) {
+      target.innerHTML = '<p class="empty-note">Start typing to search the spell catalog.</p>';
+      return;
+    }
+    if (!catalog.length) {
+      target.innerHTML = '<p class="empty-note">Spell catalog is still loading or unavailable.</p>';
+      ensureSpellCatalog(root);
+      return;
+    }
+
+    const known = new Set((root._playerState.spells || []).map(name => normalizeName(name)));
+    const matches = catalog
+      .map(spell => ({ spell, score: scoreSpell(spell, clean) }))
+      .filter(match => match.score > 0)
+      .sort((a, b) => b.score - a.score || a.spell.name.localeCompare(b.spell.name))
+      .slice(0, 8)
+      .map(match => match.spell);
+
+    target.innerHTML = matches.length ? matches.map(spell => {
+      const isKnown = known.has(normalizeName(spell.name));
+      return `<article class="spell-result">
+        <div>
+          <strong>${escapeHtml(spell.name)}</strong>
+          <small>${escapeHtml(formatSpellMeta(spell))}</small>
+        </div>
+        <button class="text-button" type="button" data-add-spell="${escapeAttr(spell.name)}" ${isKnown ? 'disabled' : ''}>${isKnown ? 'Known' : 'Add'}</button>
+      </article>`;
+    }).join('') : '<p class="empty-note">No spells found.</p>';
+  }
+
+  function scoreSpell(spell, query) {
+    const name = String(spell.name || '').toLowerCase();
+    const haystack = `${spell.name} ${spell.level} ${spell.school} ${spell.classes} ${spell.text}`.toLowerCase();
+    if (name === query) return 100;
+    if (name.startsWith(query)) return 80;
+    if (name.includes(query)) return 60;
+    return haystack.includes(query) ? 20 : 0;
+  }
+
+  function buildCurrentSpellScrolls(equipment, providedScrolls) {
+    const providedByItem = new Map((providedScrolls || []).map(scroll => [normalizeName(scroll.itemName || `${scroll.scrollName}|${scroll.spellName}`), scroll]));
+    const parsed = (equipment || []).map(parseSpellScrollItem).filter(Boolean);
+    if (!parsed.length) return providedScrolls || [];
+    return parsed.map(scroll => ({
+      ...(providedByItem.get(normalizeName(scroll.itemName)) || {}),
+      ...scroll,
+    }));
+  }
+
+  function parseSpellScrollItem(itemName) {
+    const match = String(itemName || '').match(/^(Spell Scroll \([^)]+\))\s*\|\s*(.+)$/i);
+    if (!match) return null;
+    const scrollName = match[1].trim();
+    const spellName = match[2].trim();
+    return {
+      id: slugify(itemName),
+      itemName,
+      scrollName,
+      spellName,
+      source: scrollName,
+    };
+  }
+
+  function normalizeSpellScroll(scroll) {
+    if (!scroll || !scroll.spellName) return null;
+    return {
+      id: cleanDetailValue(scroll.id) || slugify(`${scroll.scrollName || 'spell-scroll'}-${scroll.spellName}`),
+      itemName: cleanDetailValue(scroll.itemName),
+      scrollName: cleanDetailValue(scroll.scrollName),
+      spellName: cleanDetailValue(scroll.spellName),
+      source: cleanDetailValue(scroll.source),
+      castingTime: cleanDetailValue(scroll.castingTime),
+      level: cleanDetailValue(scroll.level),
+      school: cleanDetailValue(scroll.school),
+      range: cleanDetailValue(scroll.range),
+      saveDc: Number(scroll.saveDc) || null,
+      attackBonus: Number(scroll.attackBonus) || null,
+      text: cleanRulesText(scroll.text),
+    };
+  }
+
+  function normalizeSpellDetails(spell) {
+    return {
+      name: cleanDetailValue(spell.name),
+      source: cleanDetailValue(spell.source),
+      page: cleanDetailValue(spell.page),
+      level: cleanDetailValue(spell.level),
+      castingTime: cleanDetailValue(spell.castingTime),
+      duration: cleanDetailValue(spell.duration),
+      school: cleanDetailValue(spell.school),
+      range: cleanDetailValue(spell.range),
+      components: cleanDetailValue(spell.components),
+      classes: cleanDetailValue(spell.classes),
+      optionalClasses: cleanDetailValue(spell.optionalClasses),
+      subclasses: cleanDetailValue(spell.subclasses),
+      text: cleanRulesText(spell.text),
+      higherLevels: cleanRulesText(spell.higherLevels),
+      timing: cleanDetailValue(spell.timing),
+      attackType: cleanDetailValue(spell.attackType),
+      saveAbility: cleanDetailValue(spell.saveAbility),
+      damage: spell.damage && typeof spell.damage === 'object' ? {
+        dice: cleanDetailValue(spell.damage.dice),
+        damageType: cleanDetailValue(spell.damage.damageType),
+      } : null,
+    };
+  }
+
+  function renderEquippedAbilities(player) {
+    const abilities = getEquippedItems(player)
+      .flatMap(item => (item.abilities || []).map(text => ({ item, text })));
+    if (!abilities.length) {
+      return `<section class="equipped-abilities">
+        <h2>Equipped Item Abilities</h2>
+        <p class="empty-note">No equipped item abilities detected.</p>
+      </section>`;
+    }
+
+    return `<section class="equipped-abilities">
+      <h2>Equipped Item Abilities</h2>
+      <div class="equipment-ability-list">
+        ${abilities.map(({ item, text }) => `<div class="equipment-ability">
+          <strong>${escapeHtml(item.name)}</strong>
+          <span>${escapeHtml(text)}</span>
+        </div>`).join('')}
+      </div>
+    </section>`;
+  }
+
+  function renderEquipmentRow(item, player) {
+    const equipped = player.equipped.includes(item.id);
+    return `<article class="equipment-row ${equipped ? 'active' : ''}" role="listitem">
+      <label class="equipment-check">
+        <input type="checkbox" data-equip-id="${escapeAttr(item.id)}" ${equipped ? 'checked' : ''}>
+        <span>${equipped ? 'Equipped' : 'Equip'}</span>
+      </label>
+      <details class="equipment-details-toggle">
+        <summary>
+          <span class="equipment-title">
+            <strong>${escapeHtml(item.name)}</strong>
+            <small>${escapeHtml(formatItemSubtitle(item))}</small>
+          </span>
+          <span class="equipment-meta">${renderItemBadges(item)}</span>
+          <span class="equipment-statline">${escapeHtml(formatItemStatline(item))}</span>
+        </summary>
+        ${renderEquipmentDetails(item)}
+      </details>
+    </article>`;
+  }
+
+  function renderEquipmentDetails(item) {
+    const details = item.details || {};
+    const rows = [
+      ['Type', details.type || item.kind],
+      ['Rarity', details.rarity],
+      ['Attunement', details.attunement],
+      ['Damage', formatItemDamageDetail(item)],
+      ['Properties', details.properties || (item.weapon && item.weapon.properties.join(', '))],
+      ['Weight', details.weight],
+      ['Value', details.value],
+      ['Source', formatSource(details)],
+    ].filter(([, value]) => value);
+
+    return `<div class="equipment-details">
+      ${rows.length ? `<dl class="equipment-detail-grid">${rows.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>` : ''}
+      ${item.abilities && item.abilities.length ? `<section class="equipment-detail-section">
+        <h3>Abilities</h3>
+        <ul>${item.abilities.map(text => `<li>${escapeHtml(text)}</li>`).join('')}</ul>
+      </section>` : ''}
+      ${details.text ? `<p class="item-rules">${escapeHtml(truncateText(details.text, 1100))}</p>` : '<p class="empty-note">No item rules text is recorded yet.</p>'}
+    </div>`;
+  }
+
+  function formatItemDamageDetail(item) {
+    if (!item.weapon) return item.details && item.details.damage;
+    const active = `${item.weapon.damage} ${item.weapon.damageType}`;
+    const recorded = item.details && item.details.damage;
+    if (recorded && normalizeName(recorded) !== normalizeName(active)) return `${active} (catalog base: ${recorded})`;
+    return active;
+  }
+
+  function formatItemSubtitle(item) {
+    const details = item.details || {};
+    return [details.type || item.kind, details.rarity].filter(Boolean).join(' / ') || item.kind;
+  }
+
+  function formatItemStatline(item) {
+    if (item.weapon) return `${formatBonus(item.weapon.attackBonus)} hit / ${item.weapon.damageFormula} ${item.weapon.damageType}`;
+    if (item.details && item.details.attunement) return 'Attunement';
+    if (item.abilities && item.abilities.length) return `${item.abilities.length} ability${item.abilities.length === 1 ? '' : 'ies'}`;
+    return item.kind;
+  }
+
+  function renderItemBadges(item) {
+    const details = item.details || {};
+    const badges = [item.kind, details.rarity, details.attunement ? 'attunement' : '']
+      .filter(Boolean)
+      .slice(0, 3);
+    return badges.map(badge => `<span>${escapeHtml(badge)}</span>`).join('');
+  }
+
+  function formatSource(details) {
+    if (!details || !details.source) return '';
+    return details.page ? `${details.source} p. ${details.page}` : details.source;
+  }
+
+  function renderEditForm(root, player) {
+    const form = root.querySelector('[data-player-edit-form]');
+    if (!form) return;
+    setFormValue(form, 'currentHp', player.currentHp);
+    setFormValue(form, 'tempHp', player.tempHp);
+    setFormValue(form, 'maxHp', player.maxHp);
+    setFormValue(form, 'ac', player.ac);
+    setFormValue(form, 'speed', player.speed);
+    setFormValue(form, 'gold', player.gold);
+    setFormValue(form, 'heroPoints', player.heroPoints);
+    Object.keys(ABILITY_NAMES).forEach(ability => setFormValue(form, ability, player.abilities[ability]));
+    setFormValue(form, 'equipment', player.equipment.join('\n'));
+  }
+
+  function renderNotesForm(root, player) {
+    const form = root.querySelector('[data-player-notes-form]');
+    if (!form) return;
+    setFormValue(form, 'notes', player.notes || '');
+  }
+
+  function bindPlayerSheetEvents(root) {
+    if (root.dataset.playerEventsBound === 'true') return;
+    root.dataset.playerEventsBound = 'true';
+
+    root.addEventListener('change', event => {
+      const weaponMode = event.target.closest('[data-weapon-mode]');
+      if (weaponMode) {
+        const player = root._playerState;
+        if (!player) return;
+        saveWeaponCombatState(root, player, weaponMode.dataset.weaponMode, { handMode: weaponMode.value === 'two' ? 'two' : 'one' });
+        return;
+      }
+
+      const weaponToggle = event.target.closest('[data-weapon-toggle]');
+      if (weaponToggle) {
+        const player = root._playerState;
+        if (!player) return;
+        const option = weaponToggle.dataset.weaponOption;
+        if (!option) return;
+        saveWeaponCombatState(root, player, weaponToggle.dataset.weaponToggle, { [option]: weaponToggle.checked });
+        return;
+      }
+
+      const combatToggle = event.target.closest('[data-combat-toggle]');
+      if (combatToggle) {
+        const player = root._playerState;
+        if (!player) return;
+        const combatToggles = { ...(player.combatToggles || {}), [combatToggle.dataset.combatToggle]: combatToggle.checked };
+        const edits = { ...loadPlayerEdits(player.id), combatToggles };
+        savePlayerEdits(player.id, edits);
+        hydratePlayerSheet(root, { ...player, combatToggles });
+        return;
+      }
+
+      const resourceUse = event.target.closest('[data-resource-use]');
+      if (resourceUse) {
+        const player = root._playerState;
+        if (!player) return;
+        const resourceUses = { ...(player.resourceUses || {}), [resourceUse.dataset.resourceUse]: nullableNumber(resourceUse.value) || 0 };
+        const edits = { ...loadPlayerEdits(player.id), resourceUses };
+        saveAndHydratePlayer(root, player, edits);
+        return;
+      }
+
+      const spellSlotUse = event.target.closest('[data-spell-slot-use]');
+      if (spellSlotUse) {
+        const player = root._playerState;
+        if (!player) return;
+        const spellSlotUses = { ...(player.spellSlotUses || {}), [spellSlotUse.dataset.spellSlotUse]: nullableNumber(spellSlotUse.value) || 0 };
+        const edits = { ...loadPlayerEdits(player.id), spellSlotUses };
+        saveAndHydratePlayer(root, player, edits);
+        return;
+      }
+
+      const checkbox = event.target.closest('[data-equip-id]');
+      if (!checkbox) return;
+      const player = root._playerState;
+      if (!player) return;
+      const id = checkbox.dataset.equipId;
+      const next = new Set(player.equipped || []);
+      if (checkbox.checked) next.add(id);
+      else next.delete(id);
+      savePlayerEdits(player.id, { ...loadPlayerEdits(player.id), equipped: Array.from(next) });
+      hydratePlayerSheet(root, { ...player, equipped: Array.from(next) });
+    });
+
+    root.addEventListener('click', event => {
+      const rollButton = event.target.closest('[data-roll-type][data-weapon-id]');
+      if (rollButton) {
+        const player = root._playerState;
+        const item = player && player.inventory.find(candidate => candidate.id === rollButton.dataset.weaponId);
+        if (item && item.weapon) renderRoll(root, item.weapon, rollButton.dataset.rollType);
+        return;
+      }
+
+      const spellRoll = event.target.closest('[data-roll-spell]');
+      if (spellRoll) {
+        const player = root._playerState;
+        const spell = player && findSpellDetails(spellRoll.dataset.rollSpell, player, root);
+        if (spell) renderSpellRoll(root, spell);
+        return;
+      }
+
+      const reset = event.target.closest('[data-player-reset]');
+      if (reset) {
+        const player = root._playerState;
+        if (!player) return;
+        localStorage.removeItem(playerStorageKey(player.id));
+        const bootstrap = getBootstrapPlayer(root);
+        hydratePlayerSheet(root, bootstrap || player);
+        return;
+      }
+
+      const rest = event.target.closest('[data-rest-type]');
+      if (rest) {
+        const player = root._playerState;
+        if (!player) return;
+        applyRest(root, player, rest.dataset.restType);
+        return;
+      }
+
+      const addSpell = event.target.closest('[data-add-spell]');
+      if (addSpell) {
+        const player = root._playerState;
+        if (!player) return;
+        const spellName = addSpell.dataset.addSpell;
+        const nextSpells = [...new Set([...(player.spells || []), spellName])].sort((a, b) => a.localeCompare(b));
+        const edits = { ...loadPlayerEdits(player.id), spells: nextSpells };
+        saveAndHydratePlayer(root, player, edits);
+        return;
+      }
+
+      const removeSpell = event.target.closest('[data-remove-spell]');
+      if (removeSpell) {
+        const player = root._playerState;
+        if (!player) return;
+        const target = normalizeName(removeSpell.dataset.removeSpell);
+        const nextSpells = (player.spells || []).filter(name => normalizeName(name) !== target);
+        const edits = { ...loadPlayerEdits(player.id), spells: nextSpells };
+        saveAndHydratePlayer(root, player, edits);
+      }
+    });
+
+    root.addEventListener('input', event => {
+      const input = event.target.closest('[data-spell-search-input]');
+      if (!input) return;
+      window.clearTimeout(root._spellSearchTimer);
+      root._spellSearchTimer = window.setTimeout(() => renderSpellSearchResults(root, input.value), 160);
+    });
+
+    const form = root.querySelector('[data-player-edit-form]');
+    if (form) {
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        handleEditSubmit(root, form);
+      });
+    }
+
+    const notesForm = root.querySelector('[data-player-notes-form]');
+    if (notesForm) {
+      notesForm.addEventListener('submit', event => {
+        event.preventDefault();
+        handleNotesSubmit(root, notesForm);
+      });
+    }
+  }
+
+  async function handleEditSubmit(root, form) {
+        const player = root._playerState;
+        if (!player) return;
+        const formData = new FormData(form);
+        const equipment = String(formData.get('equipment') || '').split(/\r?\n/).map(item => item.trim()).filter(Boolean);
+        const edits = {
+          ...loadPlayerEdits(player.id),
+          currentHp: nullableNumber(formData.get('currentHp')),
+          tempHp: nullableNumber(formData.get('tempHp')) || 0,
+          maxHp: nullableNumber(formData.get('maxHp')),
+          ac: nullableNumber(formData.get('ac')) || player.ac,
+          speed: nullableNumber(formData.get('speed')) || player.speed,
+          gold: nullableNumber(formData.get('gold')) || 0,
+          heroPoints: nullableNumber(formData.get('heroPoints')) || 0,
+          abilities: Object.fromEntries(Object.keys(ABILITY_NAMES).map(ability => [ability, nullableNumber(formData.get(ability)) || player.abilities[ability]])),
+          equipment,
+        };
+        savePlayerEdits(player.id, edits);
+        const status = root.querySelector('[data-player-edit-status]');
+        if (status) status.textContent = 'Saved on this device';
+        if (getApiBaseUrl()) {
+          const savedToApi = await trySavePlayerToApi(player.id, edits);
+          if (status) status.textContent = savedToApi ? 'Saved to cloud' : 'Saved on this device';
+        }
+        hydratePlayerSheet(root, { ...player, ...edits, abilities: { ...player.abilities, ...edits.abilities } });
+  }
+
+  async function handleNotesSubmit(root, form) {
+    const player = root._playerState;
+    if (!player) return;
+    const formData = new FormData(form);
+    const edits = {
+      ...loadPlayerEdits(player.id),
+      notes: String(formData.get('notes') || ''),
+    };
+    savePlayerEdits(player.id, edits);
+    const status = root.querySelector('[data-player-notes-status]');
+    if (status) status.textContent = 'Saved on this device';
+    if (getApiBaseUrl()) {
+      const savedToApi = await trySavePlayerToApi(player.id, edits);
+      if (status) status.textContent = savedToApi ? 'Saved to cloud' : 'Saved on this device';
+    }
+    hydratePlayerSheet(root, { ...player, ...edits });
+  }
+
+  async function saveAndHydratePlayer(root, player, edits) {
+    savePlayerEdits(player.id, edits);
+    if (getApiBaseUrl()) await trySavePlayerToApi(player.id, edits);
+    hydratePlayerSheet(root, { ...player, ...edits, abilities: { ...(player.abilities || {}), ...((edits && edits.abilities) || {}) } });
+  }
+
+  async function applyRest(root, player, restType) {
+    const edits = { ...loadPlayerEdits(player.id) };
+    const resourceUses = { ...(player.resourceUses || {}) };
+    for (const resource of player.resources || []) {
+      if (restType === 'long' || resource.reset === 'shortRest' || resource.reset === 'longRestUntilFontOfInspirationThenShortRest') {
+        delete resourceUses[resource.id];
+      }
+    }
+    edits.resourceUses = resourceUses;
+    if (restType === 'long') {
+      edits.spellSlotUses = {};
+      edits.tempHp = 0;
+      if (player.maxHp !== null && player.maxHp !== undefined) edits.currentHp = player.maxHp;
+    }
+    const status = root.querySelector('[data-resource-status]');
+    if (status) status.textContent = restType === 'long' ? 'Long rest applied' : 'Short rest applied';
+    await saveAndHydratePlayer(root, player, edits);
+  }
+
+  function saveWeaponCombatState(root, player, weaponId, patch) {
+    if (!weaponId) return;
+    const combatToggles = { ...(player.combatToggles || {}) };
+    const weapons = { ...(combatToggles.weapons || {}) };
+    weapons[weaponId] = { ...(weapons[weaponId] || {}), ...patch };
+    combatToggles.weapons = weapons;
+    const edits = { ...loadPlayerEdits(player.id), combatToggles };
+    savePlayerEdits(player.id, edits);
+    hydratePlayerSheet(root, { ...player, combatToggles });
+  }
+
+  function getEquippedItems(player) {
+    const selected = new Set(player.equipped || []);
+    return player.inventory.filter(item => selected.has(item.id));
+  }
+
+  function renderRoll(root, weapon, type) {
+    const targets = Array.from(root.querySelectorAll('[data-roll-log]'));
+    if (!targets.length) return;
+    const result = type === 'attack'
+      ? rollAttack(weapon)
+      : rollDamage(weapon);
+    targets.forEach(target => {
+      target.innerHTML = `<strong>${escapeHtml(result.label)}</strong><span>${escapeHtml(result.detail)}</span>`;
+    });
+  }
+
+  function renderSpellRoll(root, spell) {
+    const targets = Array.from(root.querySelectorAll('[data-roll-log]'));
+    if (!targets.length || !spell || !spell.damage) return;
+    const roll = rollDice(spell.damage.dice);
+    targets.forEach(target => {
+      target.innerHTML = `<strong>${escapeHtml(spell.name)} damage: ${roll.total}</strong><span>${escapeHtml(`${roll.detail} ${spell.damage.damageType}`)}</span>`;
+    });
+  }
+
+  function rollAttack(weapon) {
+    const die = rollDie(20);
+    return {
+      label: `${weapon.name} attack: ${die + weapon.attackBonus}`,
+      detail: `d20 ${die} ${formatBonus(weapon.attackBonus)}`,
+    };
+  }
+
+  function rollDamage(weapon) {
+    const dice = rollDice(weapon.damage);
+    const extraRolls = (weapon.extraDamage || []).map(effect => ({ effect, roll: rollDice(effect.dice) }));
+    const extraTotal = extraRolls.reduce((sum, entry) => sum + entry.roll.total, 0);
+    const total = dice.total + weapon.damageBonus + extraTotal;
+    const extraDetail = extraRolls.map(entry => `${entry.effect.label}: ${entry.roll.detail} ${entry.effect.damageType}`).join('; ');
+    const onHitDetail = (weapon.onHitEffects || []).map(effect => {
+      if (effect.label === 'Shielding Impact') return `${effect.label}: ${Math.floor(total / 2)} temp HP`;
+      return `${effect.label}: ${effect.text}`;
+    }).join('; ');
+    return {
+      label: `${weapon.name} damage: ${total}`,
+      detail: [ `${dice.detail}${weapon.damageBonus ? ` ${formatBonus(weapon.damageBonus)}` : ''} ${weapon.damageType}`, extraDetail, onHitDetail ].filter(Boolean).join('; '),
+    };
+  }
+
+  function rollDice(expression) {
+    const fixed = Number(expression);
+    if (Number.isFinite(fixed)) return { total: fixed, detail: String(fixed) };
+    const match = String(expression || '').match(/^(\d+)d(\d+)$/i);
+    if (!match) return { total: 0, detail: expression || '0' };
+    const count = Number(match[1]);
+    const sides = Number(match[2]);
+    const rolls = Array.from({ length: count }, () => rollDie(sides));
+    return { total: rolls.reduce((sum, value) => sum + value, 0), detail: `${expression} [${rolls.join(', ')}]` };
+  }
+
+  function rollDie(sides) {
+    return Math.floor(Math.random() * sides) + 1;
+  }
+
+  function setFormValue(form, name, value) {
+    const field = form.elements[name];
+    if (field) field.value = value === null || value === undefined ? '' : value;
+  }
+
+  function loadPlayerEdits(playerId) {
+    if (!playerId) return {};
+    try {
+      return JSON.parse(localStorage.getItem(playerStorageKey(playerId)) || '{}');
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function savePlayerEdits(playerId, edits) {
+    if (!playerId) return;
+    localStorage.setItem(playerStorageKey(playerId), JSON.stringify({ ...edits, updatedAt: new Date().toISOString() }));
+  }
+
+  async function trySavePlayerToApi(playerId, edits) {
+    try {
+      const url = buildApiUrl(`players/${encodeURIComponent(playerId)}`);
+      const response = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(edits),
+      });
+      return response.ok;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function playerStorageKey(playerId) {
+    return `eldoria.player.${playerId}`;
+  }
+
+  function nullableNumber(value) {
+    if (value === null || value === undefined || value === '') return null;
+    const num = Number(value);
+    return Number.isFinite(num) ? num : null;
+  }
+
+  function clampNumber(value, min, max) {
+    const num = Number(value);
+    if (!Number.isFinite(num)) return min;
+    return Math.max(min, Math.min(max, num));
+  }
+
+  function fieldValue(player, field) {
+    const value = player[field];
+    if (field === 'classSummary') return formatClassSummary(player) || '-';
+    if (field === 'subclass') return player.subclassShortName || player.subclass || '-';
+    if (field === 'initiative' || field === 'proficiencyBonus' || field === 'spellAttack') return value === null ? '-' : formatBonus(value);
+    if (field === 'speed') return value ? `${value} ft` : '-';
+    if (field === 'spellSaveDc') return value === null ? '-' : value;
+    if (Array.isArray(value)) return value.join(', ') || '-';
+    if (value === null || value === undefined || value === '') return '-';
+    return value;
+  }
+
+  function formatClassSummary(player) {
+    if (!player) return '';
+    const subclass = player.subclassShortName || player.subclass;
+    return [player.class, subclass ? `(${subclass})` : ''].filter(Boolean).join(' ');
+  }
+
+  function setText(root, selector, value) {
+    const node = root.querySelector(selector);
+    if (node) node.textContent = value === null || value === undefined || value === '' ? '-' : value;
+  }
+
+  async function fetchApi(route, params = {}) {
+    const url = buildApiUrl(route, params);
+    const timeout = getConfig().apiTimeoutMs || 4000;
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), timeout);
+    try {
+      const response = await fetch(url, { signal: controller.signal });
+      if (!response.ok) throw new Error(`API ${response.status}`);
+      return await response.json();
+    } finally {
+      window.clearTimeout(timer);
+    }
+  }
+
+  function buildApiUrl(route, params = {}) {
+    const base = getApiBaseUrl();
+    const url = new URL(`${base.replace(/\/+$/, '')}/${route.replace(/^\/+/, '')}`, window.location.href);
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== '') url.searchParams.set(key, value);
+    });
+    return url.toString();
+  }
+
+  function getApiBaseUrl() {
+    const config = getConfig();
+    const configured = String(config.apiBaseUrl || '').trim();
+    if (configured) return configured.replace(/\/+$/, '');
+    if (window.location.protocol.startsWith('http') && ['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+      return `${window.location.origin}/api`;
+    }
+    return '';
+  }
+
+  function getConfig() {
+    return window.ELDORIA_PUBLIC_CONFIG || {};
+  }
+
+  function calculateModifier(score) {
+    return Math.floor((score - 10) / 2);
+  }
+
+  function formatBonus(value) {
+    const num = Number(value);
+    if (!Number.isFinite(num)) return '-';
+    return num >= 0 ? `+${num}` : String(num);
+  }
+
+  function calculateProficiencyBonus(level) {
+    return Math.ceil(Number(level || 1) / 4) + 1;
+  }
+
+  function normalizeName(value) {
+    return String(value || '').toLowerCase().replace(/[^a-z0-9+]+/g, ' ').trim();
+  }
+
+  function customItem(key, name, type, abilities) {
+    return {
+      key,
+      name,
+      type,
+      rarity: 'Custom',
+      text: abilities.join(' '),
+      abilities,
+    };
+  }
+
+  function cleanDetailValue(value) {
+    const text = String(value || '').trim();
+    return /^none$/i.test(text) ? '' : text;
+  }
+
+  function cleanRulesText(value) {
+    return String(value || '')
+      .replace(/<br\s*\/?>/gi, ' ')
+      .replace(/&nbsp;/gi, ' ')
+      .replace(/&amp;/gi, '&')
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .replace(/([a-z0-9.)])([A-Z])/g, '$1 $2')
+      .trim();
+  }
+
+  function splitSentences(value) {
+    return cleanRulesText(value).match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
+  }
+
+  function truncateText(value, maxLength) {
+    const text = cleanRulesText(value);
+    if (text.length <= maxLength) return text;
+    return `${text.slice(0, maxLength - 1).trim()}...`;
+  }
+
+  function slugify(value) {
+    return normalizeName(value).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  }
+
+  function debounce(fn, delay) {
+    let timer;
+    return (...args) => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => fn(...args), delay);
+    };
+  }
+
+  function escapeHtml(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function escapeAttr(value) {
+    return escapeHtml(value);
+  }
+
+  function escapeRegExp(value) {
+    return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-tabs]').forEach(initTabs);
+    document.querySelectorAll('[data-public-search]').forEach(initSearch);
+    document.querySelectorAll('[data-player-sheet]').forEach(initPlayerSheet);
+  });
+})();

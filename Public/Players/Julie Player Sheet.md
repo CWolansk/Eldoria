@@ -7,6 +7,7 @@ await CharacterSheetDisplay.display(dv, {
   name: "Julie",
   portrait: "Public/Players/JulieDnd.png",
   class: "Fighter",
+  subclass: "Champion",
   level: dv.page("Player Controls").level,
   race: "Human",
   background: "Archeologist",

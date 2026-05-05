@@ -7,6 +7,7 @@ await CharacterSheetDisplay.display(dv, {
   name: "Liz",
   portrait: "Public/Players/LizDnD.png",
   class: "Bard",
+  subclass: "College of Lore",
   level: dv.page("Player Controls").level,
   race: "Elf",
   experience: dv.page("Player Controls").ExperiencePoints,
@@ -77,5 +78,5 @@ style: height: 1000px;
 ```custom-frames
 frame: 5etoolsClass
 style: height: 1000px;
-urlSuffix: #wizard_phb,state:sub_abjuration_phb=b1
+urlSuffix: #bard_phb,state:sub_lore_phb=b1
 ```

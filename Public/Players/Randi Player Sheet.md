@@ -7,6 +7,7 @@ await CharacterSheetDisplay.display(dv, {
   name: "Zazpoh the Matyr",
   portrait: "Public/Players/RandiDnD.png",
   class: "Wizard",
+  subclass: "School of Divination",
   level: dv.page("Player Controls").level,
   race: "Aasimar",
   background: "Cloistered Scholar",
