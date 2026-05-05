@@ -59,6 +59,10 @@
     { id: 'haste', label: 'Haste', detail: '+2 AC, speed doubled, extra action while active.', acBonus: 2, speedMultiplier: 2 },
     { id: 'mageArmor', label: 'Mage Armor', detail: 'Base AC becomes 13 + Dexterity while not wearing armor.', mageArmor: true },
     { id: 'shieldOfFaith', label: 'Shield of Faith', detail: '+2 AC while concentration is maintained.', acBonus: 2 },
+    { id: 'barkskin', label: 'Barkskin', detail: 'AC cannot be less than 16 while the spell lasts.', acFloor: 16 },
+    { id: 'shieldSpell', label: 'Shield Spell', detail: '+5 AC until the start of your next turn.', acBonus: 5 },
+    { id: 'halfCover', label: 'Half Cover', detail: '+2 AC and Dexterity saving throws.', acBonus: 2 },
+    { id: 'threeQuartersCover', label: 'Three-quarters Cover', detail: '+5 AC and Dexterity saving throws.', acBonus: 5 },
   ];
   const CUSTOM_ITEM_DETAILS = [
     customItem('bracer of piercing arrows', 'Bracer of Piercing Arrows', 'Custom wondrous item', [
@@ -396,6 +400,11 @@
     return fallback;
   }
 
+  function getPositiveNumber(value) {
+    const number = Number(value);
+    return Number.isFinite(number) && number > 0 ? number : 0;
+  }
+
   function normalizeTemporaryEffects(value) {
     const raw = value && typeof value === 'object' ? value : {};
     const rawEffects = raw.effects && typeof raw.effects === 'object' ? raw.effects : raw;
@@ -411,62 +420,218 @@
   }
 
   function buildArmorClassProfile(player) {
-    const dexMod = calculateModifier(Number(player.abilities && player.abilities.dex) || 10);
-    const equipped = getEquippedItems(player);
-    const armor = equipped.map(item => ({ item, rule: parseArmorAcRule(item) })).filter(entry => entry.rule && entry.rule.kind === 'armor')[0] || null;
-    const shieldEntries = equipped.map(item => ({ item, rule: parseArmorAcRule(item) })).filter(entry => entry.rule && entry.rule.kind === 'shield');
-    const shield = shieldEntries.sort((a, b) => b.rule.bonus - a.rule.bonus)[0] || null;
-    const passiveBonuses = equipped
-      .filter(item => !armor || item.id !== armor.item.id)
-      .filter(item => !shield || item.id !== shield.item.id)
-      .map(item => ({ item, bonus: getPassiveAcBonus(item) }))
-      .filter(entry => entry.bonus);
+    const context = buildArmorClassContext(player);
+    const candidates = buildOfficialBaseAcCandidates(player, context);
+    const selected = chooseOfficialBaseAcCandidate(candidates);
+    const parts = [...selected.parts];
+    const warnings = candidates.filter(candidate => candidate.reason).map(candidate => candidate.reason);
+    let rulesTotal = selected.total;
 
-    let parts = [];
-    let total = 0;
-    if (armor) {
-      total += armor.rule.base;
-      parts.push({ label: armor.item.name, display: String(armor.rule.base) });
-      const dexApplied = applyArmorDexBonus(dexMod, armor.rule);
-      if (armor.rule.dexMode !== 'none') {
-        parts.push({ label: `Dexterity modifier${armor.rule.dexMode === 'max' ? ` (max ${armor.rule.dexMax})` : ''}`, value: dexApplied });
-        total += dexApplied;
-      }
-    } else {
-      total = 10 + dexMod;
-      parts.push({ label: 'Base AC', display: '10' });
-      parts.push({ label: 'Dexterity modifier', value: dexMod });
+    if (context.armorEntries.length > 1) {
+      warnings.push(`Multiple armor suits are equipped; official rules use one suit at a time. Using ${selected.itemName || 'the best legal armor formula'}.`);
     }
 
-    if (shield) {
-      total += shield.rule.bonus;
-      parts.push({ label: shield.item.name, value: shield.rule.bonus });
+    if (context.shield) {
+      rulesTotal += context.shield.rule.bonus;
+      parts.push(...buildShieldAcParts(context.shield));
     }
-    for (const entry of passiveBonuses) {
-      total += entry.bonus;
-      parts.push({ label: entry.item.name, value: entry.bonus });
-    }
-
-    const explicit = Number(player.baseAc) || Number(player.ac) || total || 10;
-    const hasAcEvidence = Boolean(armor || shield || passiveBonuses.length);
-    if (!hasAcEvidence && Math.abs(explicit - total) > 5) {
-      parts = [{ label: 'Sheet AC / class feature', display: String(explicit) }];
-      total = explicit;
-    } else if (explicit !== total) {
-      parts.push({ label: 'Manual adjustment / class feature', value: explicit - total });
-      total = explicit;
+    if (context.shieldEntries.length > 1) {
+      warnings.push('Multiple shields are equipped; official rules let you benefit from only one shield.');
     }
 
-    const tempParts = getTemporaryAcParts(player, total, Boolean(armor), dexMod);
+    const passiveParts = getPassiveAcBonusParts(player, context);
+    for (const part of passiveParts.applied) {
+      rulesTotal += part.value || 0;
+      parts.push(part);
+    }
+    warnings.push(...passiveParts.warnings);
+
+    const staticRulesTotal = rulesTotal;
+    const sheetBaseAc = getPositiveNumber(player.baseAc) || getPositiveNumber(player.ac);
+    let total = rulesTotal;
+    if (sheetBaseAc && sheetBaseAc !== staticRulesTotal) {
+      const difference = sheetBaseAc - staticRulesTotal;
+      parts.push({ label: 'Sheet AC override (unexplained by official rules data)', value: difference });
+      warnings.push(`Official rules currently explain AC ${staticRulesTotal}; the saved sheet AC is ${sheetBaseAc}. Add/equip the missing armor, shield, feature, or item to remove this override.`);
+      total = sheetBaseAc;
+    }
+
+    const tempParts = getTemporaryAcParts(player, total, context, selected);
     for (const part of tempParts) {
-      total += part.value || 0;
+      if (part.floor) {
+        if (total < part.floor) {
+          part.value = part.floor - total;
+          part.display = `minimum ${part.floor}`;
+          total = part.floor;
+        } else {
+          part.value = 0;
+          part.display = 'already higher';
+        }
+      } else {
+        total += part.value || 0;
+      }
       parts.push(part);
     }
 
     return {
       total,
+      officialTotal: staticRulesTotal,
       parts,
+      warnings: [...new Set(warnings.filter(Boolean))],
+      alternatives: candidates
+        .filter(candidate => candidate.valid && candidate.id !== selected.id)
+        .map(candidate => ({ label: candidate.label, total: candidate.total })),
       activeLabels: getActiveTemporaryEffectLabels(player),
+    };
+  }
+
+  function buildArmorClassContext(player) {
+    const equipped = getEquippedItems(player);
+    const parsed = equipped.map(item => ({ item, rule: parseArmorAcRule(item) })).filter(entry => entry.rule);
+    const armorEntries = parsed
+      .filter(entry => entry.rule.kind === 'armor')
+      .sort((a, b) => calculateArmorRuleTotal(b.rule, player) - calculateArmorRuleTotal(a.rule, player));
+    const shieldEntries = parsed
+      .filter(entry => entry.rule.kind === 'shield')
+      .sort((a, b) => b.rule.bonus - a.rule.bonus);
+    return {
+      equipped,
+      armorEntries,
+      shieldEntries,
+      armor: armorEntries[0] || null,
+      shield: shieldEntries[0] || null,
+      dexMod: calculateModifier(Number(player.abilities && player.abilities.dex) || 10),
+      conMod: calculateModifier(Number(player.abilities && player.abilities.con) || 10),
+      wisMod: calculateModifier(Number(player.abilities && player.abilities.wis) || 10),
+    };
+  }
+
+  function buildOfficialBaseAcCandidates(player, context) {
+    const candidates = [];
+    const hasArmor = Boolean(context.armor);
+    const hasShield = Boolean(context.shield);
+    if (hasArmor) {
+      for (const entry of context.armorEntries) candidates.push(buildArmorCandidate(entry, context));
+      const state = normalizeTemporaryEffects(player && player.temporaryEffects);
+      if (state.effects.mageArmor) {
+        candidates.push({
+          id: 'mage-armor-blocked',
+          label: 'Mage Armor',
+          total: 0,
+          parts: [],
+          valid: false,
+          reason: 'Mage Armor is not applied while wearing armor.',
+        });
+      }
+    } else {
+      candidates.push({
+        id: 'core-unarmored',
+        label: 'Unarmored',
+        total: 10 + context.dexMod,
+        parts: [
+          { label: 'Unarmored base', display: '10' },
+          { label: 'Dexterity modifier', value: context.dexMod },
+        ],
+        valid: true,
+      });
+
+      if (normalizeName(player.class) === 'barbarian') {
+        candidates.push({
+          id: 'barbarian-unarmored-defense',
+          label: 'Barbarian Unarmored Defense',
+          total: 10 + context.dexMod + context.conMod,
+          parts: [
+            { label: 'Barbarian Unarmored Defense', display: '10' },
+            { label: 'Dexterity modifier', value: context.dexMod },
+            { label: 'Constitution modifier', value: context.conMod },
+          ],
+          valid: true,
+        });
+      }
+
+      if (normalizeName(player.class) === 'monk') {
+        candidates.push({
+          id: 'monk-unarmored-defense',
+          label: 'Monk Unarmored Defense',
+          total: 10 + context.dexMod + context.wisMod,
+          parts: [
+            { label: 'Monk Unarmored Defense', display: '10' },
+            { label: 'Dexterity modifier', value: context.dexMod },
+            { label: 'Wisdom modifier', value: context.wisMod },
+          ],
+          valid: !hasShield,
+          reason: hasShield ? 'Monk Unarmored Defense is not applied while wielding a shield.' : '',
+        });
+      }
+
+      if (hasDraconicResilience(player)) {
+        candidates.push({
+          id: 'draconic-resilience',
+          label: 'Draconic Resilience',
+          total: 13 + context.dexMod,
+          parts: [
+            { label: 'Draconic Resilience', display: '13' },
+            { label: 'Dexterity modifier', value: context.dexMod },
+          ],
+          valid: true,
+        });
+      }
+
+      const naturalArmor = getNaturalArmorCandidate(player, context);
+      if (naturalArmor) candidates.push(naturalArmor);
+
+      const state = normalizeTemporaryEffects(player && player.temporaryEffects);
+      if (state.effects.mageArmor) {
+        candidates.push({
+          id: 'mage-armor',
+          label: 'Mage Armor',
+          total: 13 + context.dexMod,
+          parts: [
+            { label: 'Mage Armor base', display: '13' },
+            { label: 'Dexterity modifier', value: context.dexMod },
+          ],
+          valid: true,
+        });
+      }
+    }
+
+    if (!candidates.length) {
+      candidates.push({
+        id: 'fallback-unarmored',
+        label: 'Unarmored',
+        total: 10 + context.dexMod,
+        parts: [
+          { label: 'Unarmored base', display: '10' },
+          { label: 'Dexterity modifier', value: context.dexMod },
+        ],
+        valid: true,
+      });
+    }
+    return candidates;
+  }
+
+  function chooseOfficialBaseAcCandidate(candidates) {
+    const legal = candidates.filter(candidate => candidate.valid);
+    return (legal.length ? legal : candidates)
+      .slice()
+      .sort((a, b) => b.total - a.total || a.label.localeCompare(b.label))[0];
+  }
+
+  function buildArmorCandidate(entry, context) {
+    const rule = entry.rule;
+    const dexApplied = applyArmorDexBonus(context.dexMod, rule);
+    const parts = [{ label: entry.item.name, display: String(rule.base) }];
+    if (rule.dexMode !== 'none') {
+      parts.push({ label: `Dexterity modifier${rule.dexMode === 'max' ? ` (max ${rule.dexMax})` : ''}`, value: dexApplied });
+    }
+    if (rule.bonus) parts.push({ label: `${entry.item.name} magic bonus`, value: rule.bonus });
+    return {
+      id: `armor-${entry.item.id}`,
+      label: entry.item.name,
+      itemName: entry.item.name,
+      total: rule.base + dexApplied + (rule.bonus || 0),
+      parts,
+      valid: true,
     };
   }
 
@@ -476,8 +641,11 @@
     const damage = String(item.details.damage || '');
     const text = String(item.details.text || '');
     if (type.includes('shield')) {
-      const bonus = parseAcBonus(damage) || parseAcBonus(text) || 2;
-      return { kind: 'shield', bonus };
+      const enhancement = parseShieldEnhancementBonus(item, damage, text);
+      const regularShieldBonus = 2;
+      const printedBonus = parseAcBonus(damage) || parseAcBonus(text);
+      const bonus = enhancement ? regularShieldBonus + enhancement : (printedBonus || regularShieldBonus);
+      return { kind: 'shield', bonus, regularShieldBonus, enhancement };
     }
     if (!type.includes('armor') && !type.includes('mail') && !type.includes('plate') && !type.includes('leather')) return null;
     const match = damage.match(/AC\s*(\d+)(?:\s*\+\s*Dex(?:terity)?(?:\s*\(max\s*(\d+)\))?)?/i);
@@ -488,6 +656,7 @@
       base: Number(match[1]) || 10,
       dexMode,
       dexMax: match[2] ? Number(match[2]) || 0 : null,
+      bonus: parseArmorEnhancementBonus(item, text),
     };
   }
 
@@ -497,10 +666,86 @@
     return dexMod;
   }
 
-  function getPassiveAcBonus(item) {
-    const text = `${item && item.name || ''} ${item && item.details && item.details.text || ''}`;
-    if (normalizeName(item && item.name).includes('ring of protection')) return 1;
-    return parseAcBonus(text);
+  function calculateArmorRuleTotal(rule, player) {
+    const dexMod = calculateModifier(Number(player.abilities && player.abilities.dex) || 10);
+    return (rule && rule.base || 10) + applyArmorDexBonus(dexMod, rule) + (rule && rule.bonus || 0);
+  }
+
+  function parseArmorEnhancementBonus(item, text) {
+    const named = parseMagicItemPlus(item && item.name);
+    if (named) return named;
+    const match = String(text || '').match(/\+(\d+)\s+bonus to AC while (?:wearing|you wear) this armor/i);
+    return match ? Number(match[1]) || 0 : 0;
+  }
+
+  function parseShieldEnhancementBonus(item, damage, text) {
+    const named = parseMagicItemPlus(item && item.name);
+    if (named) return named;
+    const bonus = parseAcBonus(text);
+    if (bonus && /in addition to the shield's normal bonus|while holding this shield/i.test(text)) return bonus;
+    const printed = parseAcBonus(damage);
+    if (printed && printed !== 2 && /shield/i.test(item && item.name || '')) return printed;
+    return 0;
+  }
+
+  function parseMagicItemPlus(name) {
+    const text = String(name || '');
+    const match = text.match(/(?:^|\s|\()\+(\d+)\b|,\s*\+(\d+)\b/i);
+    return match ? Number(match[1] || match[2]) || 0 : 0;
+  }
+
+  function buildShieldAcParts(entry) {
+    if (!entry || !entry.rule) return [];
+    if (entry.rule.enhancement) {
+      return [
+        { label: `${entry.item.name} shield bonus`, value: entry.rule.regularShieldBonus || 2 },
+        { label: `${entry.item.name} magic bonus`, value: entry.rule.enhancement },
+      ];
+    }
+    return [{ label: entry.item.name, value: entry.rule.bonus }];
+  }
+
+  function getPassiveAcBonusParts(player, context) {
+    const armorId = context.armor && context.armor.item.id;
+    const shieldId = context.shield && context.shield.item.id;
+    const applied = [];
+    const warnings = [];
+    for (const item of context.equipped) {
+      if (item.id === armorId || item.id === shieldId) continue;
+      const part = getPassiveAcBonusPart(item, context);
+      if (!part) continue;
+      if (part.applies) applied.push({ label: part.label, value: part.value });
+      else warnings.push(part.reason);
+    }
+    applied.push(...getFeatureAcBonusParts(player, context));
+    return { applied, warnings };
+  }
+
+  function getPassiveAcBonusPart(item, context) {
+    const name = normalizeName(item && item.name);
+    const text = cleanRulesText(`${item && item.name || ''} ${item && item.details && item.details.text || ''}`);
+    if (!text) return null;
+
+    if (name.includes('bracers of defense')) {
+      const blocked = Boolean(context.armor || context.shield);
+      return {
+        label: item.name,
+        value: 2,
+        applies: !blocked,
+        reason: blocked ? 'Bracers of Defense are not applied while wearing armor or wielding a shield.' : '',
+      };
+    }
+
+    if (name.includes('ring of protection') || name.includes('cloak of protection') || name.includes('ioun stone protection')) {
+      return { label: item.name, value: 1, applies: true };
+    }
+
+    if (!/\+(\d+)\s+(?:bonus to AC|bonus to Armor Class)/i.test(text)) return null;
+    if (/\b(reaction|bonus action|action|until the start|until the end|against one|when you are hit|whenever|choose|concentration|1\/day|charge)\b/i.test(text)) return null;
+    if (!/\bwhile (?:wearing|holding|wielding|carrying)|orbits your head\b/i.test(text)) return null;
+
+    const value = parseAcBonus(text);
+    return value ? { label: item.name, value, applies: true } : null;
   }
 
   function parseAcBonus(text) {
@@ -508,17 +753,82 @@
     return match ? Number(match[1] || match[2] || match[3] || match[4]) || 0 : 0;
   }
 
-  function getTemporaryAcParts(player, currentTotal, hasArmor, dexMod) {
+  function getFeatureAcBonusParts(player, context) {
+    const text = normalizeName(`${player.searchText || ''} ${(player.ruleEffects || []).map(effect => `${effect.name} ${effect.text}`).join(' ')}`);
+    const parts = [];
+    if (context.armor && /\bdefense fighting style\b|\bfighting style defense\b/.test(text)) {
+      parts.push({ label: 'Defense Fighting Style', value: 1 });
+    }
+    if (/\bdual wielder\b/.test(text) && hasTwoMeleeWeaponsEquipped(player)) {
+      parts.push({ label: 'Dual Wielder', value: 1 });
+    }
+    if (/\bwarforged\b/.test(normalizeName(player.race)) || /\bintegrated protection\b/.test(text)) {
+      parts.push({ label: 'Integrated Protection', value: 1 });
+    }
+    return parts;
+  }
+
+  function hasTwoMeleeWeaponsEquipped(player) {
+    return getEquippedItems(player).filter(item => item.weapon && item.weapon.style === 'melee').length >= 2;
+  }
+
+  function hasDraconicResilience(player) {
+    const text = normalizeName(`${player.class || ''} ${player.subclass || ''} ${player.searchText || ''}`);
+    return text.includes('sorcerer') && (text.includes('draconic resilience') || text.includes('draconic bloodline'));
+  }
+
+  function getNaturalArmorCandidate(player, context) {
+    const race = normalizeName(player.race);
+    if (race.includes('lizardfolk')) {
+      return {
+        id: 'lizardfolk-natural-armor',
+        label: 'Lizardfolk Natural Armor',
+        total: 13 + context.dexMod,
+        parts: [
+          { label: 'Lizardfolk Natural Armor', display: '13' },
+          { label: 'Dexterity modifier', value: context.dexMod },
+        ],
+        valid: true,
+      };
+    }
+    if (race.includes('loxodon')) {
+      return {
+        id: 'loxodon-natural-armor',
+        label: 'Loxodon Natural Armor',
+        total: 12 + context.conMod,
+        parts: [
+          { label: 'Loxodon Natural Armor', display: '12' },
+          { label: 'Constitution modifier', value: context.conMod },
+        ],
+        valid: true,
+      };
+    }
+    if (race.includes('tortle')) {
+      return {
+        id: 'tortle-natural-armor',
+        label: 'Tortle Natural Armor',
+        total: 17,
+        parts: [{ label: 'Tortle Natural Armor', display: '17' }],
+        valid: true,
+      };
+    }
+    return null;
+  }
+
+  function getTemporaryAcParts(player, currentTotal) {
     const state = normalizeTemporaryEffects(player && player.temporaryEffects);
     const parts = [];
-    if (state.effects.mageArmor) {
-      const mageArmorTotal = 13 + dexMod;
-      if (hasArmor) parts.push({ label: 'Mage Armor (armor equipped)', value: 0, display: 'not applied' });
-      else parts.push({ label: 'Mage Armor base', value: Math.max(0, mageArmorTotal - currentTotal) });
-    }
     for (const definition of TEMPORARY_EFFECT_DEFINITIONS) {
       if (!state.effects[definition.id] || !definition.acBonus) continue;
       parts.push({ label: definition.label, value: definition.acBonus });
+    }
+    for (const definition of TEMPORARY_EFFECT_DEFINITIONS) {
+      if (!state.effects[definition.id] || !definition.acFloor) continue;
+      parts.push({
+        label: definition.label,
+        floor: definition.acFloor,
+        value: currentTotal < definition.acFloor ? definition.acFloor - currentTotal : 0,
+      });
     }
     if (state.customAcBonus) {
       parts.push({ label: state.customName || 'Custom temporary AC', value: state.customAcBonus });
@@ -1004,6 +1314,11 @@
           <summary>AC math</summary>
           ${renderMathParts(profile.parts, profile.total, '', String(profile.total))}
         </details>
+        ${profile.alternatives && profile.alternatives.length ? `<details class="math-breakdown ac-alternatives">
+          <summary>Other legal base formulas</summary>
+          <div class="math-list">${profile.alternatives.map(item => `<div><span>${escapeHtml(item.label)}</span><strong>${escapeHtml(String(item.total))}</strong></div>`).join('')}</div>
+        </details>` : ''}
+        ${profile.warnings && profile.warnings.length ? `<div class="ac-warning-list">${profile.warnings.map(warning => `<p>${escapeHtml(warning)}</p>`).join('')}</div>` : ''}
         ${profile.activeLabels.length ? `<div class="active-effect-tags">${profile.activeLabels.map(label => `<span>${escapeHtml(label)}</span>`).join('')}</div>` : ''}
       </section>`;
     });
