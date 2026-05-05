@@ -168,7 +168,7 @@ function sanitizePlayerPatch(body) {
   }
 
   if (body.temporaryEffects && typeof body.temporaryEffects === 'object') {
-    const allowedEffects = new Set(['haste', 'mageArmor', 'shieldOfFaith', 'barkskin', 'shieldSpell', 'raisedShield', 'halfCover', 'threeQuartersCover']);
+    const allowedEffects = new Set(['haste', 'mageArmor', 'shieldOfFaith', 'barkskin', 'shieldSpell', 'halfCover', 'threeQuartersCover']);
     const effects = {};
     const sourceEffects = body.temporaryEffects.effects && typeof body.temporaryEffects.effects === 'object'
       ? body.temporaryEffects.effects

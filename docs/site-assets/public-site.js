@@ -83,7 +83,6 @@
     { id: 'shieldOfFaith', label: 'Shield of Faith', detail: '+2 AC while concentration is maintained.', acBonus: 2 },
     { id: 'barkskin', label: 'Barkskin', detail: 'AC cannot be less than 16 while the spell lasts.', acFloor: 16 },
     { id: 'shieldSpell', label: 'Shield Spell', detail: '+5 AC until the start of your next turn.', acBonus: 5 },
-    { id: 'raisedShield', label: 'Raise Shield', detail: '+2 AC until your next turn when using the table raise-shield rule.', acBonus: 2, requiresShield: true },
     { id: 'halfCover', label: 'Half Cover', detail: '+2 AC and Dexterity saving throws.', acBonus: 2 },
     { id: 'threeQuartersCover', label: 'Three-quarters Cover', detail: '+5 AC and Dexterity saving throws.', acBonus: 5 },
   ];
