@@ -1235,7 +1235,7 @@
       abilities.push(`Archery style included: ${formatBonus(item.weapon.styleBonus)} to ranged attack rolls.`);
     }
 
-    const summary = summarizeItemRules(item);
+    const summary = abilities.length ? '' : summarizeItemRules(item);
     if (summary && !abilities.some(text => normalizeName(text) === normalizeName(summary))) abilities.push(summary);
     return [...new Set(abilities)];
   }
@@ -1255,16 +1255,42 @@
   function summarizeItemRules(item) {
     const details = item.details;
     if (!details || !details.text || !hasActiveRulesText(item)) return '';
-    const sentences = splitSentences(details.text).slice(0, 2).join(' ');
-    return truncateText(sentences || details.text, 260);
+    return findRulesSentence(details.text, 260);
   }
 
   function hasActiveRulesText(item) {
     const details = item.details || {};
     if (details.abilities && details.abilities.length) return true;
-    if (details.attunement || details.rarity) return true;
+    if (details.actions && details.actions.length) return true;
+    if (details.effects && details.effects.length) return true;
+    if (details.resources && details.resources.length) return true;
     if (item.weapon && (item.weapon.magicBonus || normalizeName(item.name).includes('warning'))) return true;
-    return ['wondrous', 'ring'].includes(item.kind);
+    return Boolean(findRulesSentence(details.text, 260));
+  }
+
+  function findRulesSentence(text, maxLength) {
+    const sentences = splitSentences(text);
+    const index = sentences.findIndex(isRulesSentence);
+    if (index < 0) return '';
+    const chosen = [sentences[index]];
+    const next = sentences[index + 1];
+    if (next && chosen.join(' ').length + next.length < maxLength && isRulesContinuationSentence(next)) chosen.push(next);
+    return truncateText(chosen.join(' '), maxLength);
+  }
+
+  function isRulesSentence(sentence) {
+    const text = normalizeName(sentence);
+    if (!text) return false;
+    return /^(as|when|whenever|while|if|once|after|before|provided)\b/.test(text)
+      || /\byou (can|may|gain|have|regain|recover|are|become|must|can't|cannot|use|expend|cast|ignore|know|learn)\b/.test(text)
+      || /\b(creature|target|wearer|wielder|allies|companions?)\b.*\b(must|can|gains?|has|takes?|regains?|becomes?|is|are)\b/.test(text)
+      || /\b(advantage|disadvantage|resistance|immune|immunity|bonus|armor class| ac |dc |charges?|hit points?|temporary hit points?|saving throw|attack roll|ability check|damage|spell|condition|concentration|attunement)\b/.test(` ${text} `);
+  }
+
+  function isRulesContinuationSentence(sentence) {
+    const text = normalizeName(sentence);
+    return /\b(must|causes?|can't|cannot|takes?|gains?|regains?|loses?|becomes?|disappears?|ends?|lasts?|charges?|uses?|saving throw|damage|hit points?|minute|round|action|bonus action|reaction|command word)\b/.test(text)
+      || isRulesSentence(sentence);
   }
 
   function parseCatalogDamage(value) {

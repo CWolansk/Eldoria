@@ -418,12 +418,13 @@ function inferItemActions(item) {
     });
   }
   if (!actions.length && /(use an action|as an action|bonus action|reaction)/i.test(item.text)) {
+    const detail = actionTextSummary(item.text, 420);
     actions.push({
       id: slugify(item.name),
-      group: classifyTiming(item.text),
+      group: classifyTiming(detail || item.text),
       type: 'Item',
       title: item.name,
-      detail: firstSentence(item.text, 300),
+      detail,
       tags: [item.attunement ? 'Attunement' : '', inferUsesTag(item.text)].filter(Boolean),
     });
   }
@@ -739,6 +740,22 @@ function actionSummary(text, maxLength) {
     out = next;
     count += 1;
     if (count >= 3 && /\b(action|bonus action|reaction|when|whenever|save|saving throw|damage|roll|use)\b/i.test(out)) break;
+  }
+  if (!out) out = clean.slice(0, maxLength - 1).trim();
+  return out.length <= maxLength ? out : `${out.slice(0, maxLength - 1).trim()}...`;
+}
+
+function actionTextSummary(text, maxLength) {
+  const clean = cleanRulesText(text);
+  const sentences = clean.match(/[^.!?]+[.!?]+/g) || [clean];
+  const start = sentences.findIndex(sentence => /\b(use an action|as an action|bonus action|reaction|command word|expend|charges?)\b/i.test(sentence));
+  const source = start >= 0 ? sentences.slice(start) : sentences;
+  let out = '';
+  for (const sentence of source) {
+    const next = `${out} ${sentence}`.trim();
+    if (next.length > maxLength) break;
+    out = next;
+    if (out.length >= 220 && /\b(action|bonus action|reaction|charge|command word|save|damage|use)\b/i.test(out)) break;
   }
   if (!out) out = clean.slice(0, maxLength - 1).trim();
   return out.length <= maxLength ? out : `${out.slice(0, maxLength - 1).trim()}...`;

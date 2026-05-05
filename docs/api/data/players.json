@@ -208,7 +208,7 @@
             "group": "Action",
             "type": "Item",
             "title": "Hat of Vermin",
-            "detail": "This hat has 3 charges.",
+            "detail": "This hat has 3 charges.  While holding the hat, you can use an action to expend 1 of its charges and speak a command word that summons your choice of a bat, a frog, or a rat.  The summoned creature magically appears in the hat and tries to get away from you as quickly as possible.",
             "tags": [
               "3 uses"
             ]
@@ -525,7 +525,7 @@
         "group": "Action",
         "type": "Item",
         "title": "Hat of Vermin",
-        "detail": "This hat has 3 charges.",
+        "detail": "This hat has 3 charges.  While holding the hat, you can use an action to expend 1 of its charges and speak a command word that summons your choice of a bat, a frog, or a rat.  The summoned creature magically appears in the hat and tries to get away from you as quickly as possible.",
         "tags": [
           "3 uses"
         ],
@@ -950,7 +950,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T21:06:44.357Z"
+      "generatedAtUtc": "2026-05-05T21:54:03.826Z"
     },
     "url": "Public/Players/Justin Player Sheet.html",
     "searchText": "Character Stats Equipment Spells 1st Level Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJustinDnDNotes Full Class Info Class Features & Abilities Hunter's Prey (Colossus Slayer) Once per turn when hitting a creature below max HP, deal an extra 1d8 damage. Archery Fighting Style +2 bonus on attack rolls with ranged weapons. Zephyr Strike Move like the wind. For the duration, movement doesn't provoke opportunity attacks. Once before the spell ends, can give yourself advantage on one weapon attack roll on your turn. That attack deals an extra 1d8 force damage on a hit. Whether you hit or miss, walking speed increases by 30 feet until end of that turn. Ensnaring Strike The next time you hit a creature with a weapon attack before this spell ends, a writhing mass of thorny vines appears at the point of impact, and the target must succeed on a Strength saving throw or be restrained by the magical vines until the spell ends. A Large or larger creature has advantage on this saving throw. If the target succeeds on the save, the vines shrivel away. While restrained by this spell, the target takes 1d6 piercing damage at the start of each of its turns. A creature restrained by the vines or one that can touch the creature can use its action to make a Strength check against your spell save DC. On a success, the target is freed. Cure Wounds 1 creature is healed for 1d8+1d8/SL+spellcasting ability modifier hp. Piercing Shot 3/day. Before making an attack roll, you can activate Piercing Shot and target a specific body part. If the attack hits, the target suffers a debilitating injury. The creature suffers disadvantage on Wisdom (Perception) checks relying on sight and on attack/damage rolls. The creature can no longer hold two handed weapons and can only hold a single object at a time. Arm/Hand Movement speed is halved. Foot/Leg The creature must make a Constitution saving throw when attempting the next action in combat (DC = 10 + attacker's proficiency + Dexterity modifier). On a failed save, they lose their action and reactions until the start of your next turn. Precise Aim 1/day. At the start of your turn, activate Precise Aim to focus your attacks. Until the end of your next turn, whenever you hit a creature, allies gain advantage on attack rolls against that target. Primeval Awareness Ensnaring strike, Zephyr strike, Cure wounds Limited Features Piercing Shot 3 uses Precise Aim 1 use Proficiencies Common language from Human Common language from Ranger Beasts Common language from Human Common language from Guild Merchant Goblin"
@@ -1089,10 +1089,10 @@
         "actions": [
           {
             "id": "light-crossbow-light-crossbow",
-            "group": "Bonus Action",
+            "group": "Out of Combat",
             "type": "Item",
             "title": "Light Crossbow",
-            "detail": "Range.",
+            "detail": "Each time you attack with the weapon, you expend one piece of ammunition.  Drawing the ammunition from a quiver, case, or other container is part of the attack.  Loading a one-handed weapon requires a free hand.  At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.",
             "tags": []
           }
         ],
@@ -1281,7 +1281,7 @@
             "group": "Action",
             "type": "Item",
             "title": "Griffon Key Loop",
-            "detail": "This leather key loop is stylized in the fashion of the legendary griffon's saddlebag, a classic motif in children's fiction.",
+            "detail": "You can use an action to speak the key loop's command word, causing one or more of the attached keys to reappear on the loop (your choice).  Speaking the command word again causes them to disappear once more.  You can have up to 10 keys attached to the key loop in this way at a time, and can remove one by gently pulling on it for 1 minute.",
             "tags": []
           }
         ],
@@ -1581,7 +1581,7 @@
         "group": "Action",
         "type": "Item",
         "title": "Griffon Key Loop",
-        "detail": "This leather key loop is stylized in the fashion of the legendary griffon's saddlebag, a classic motif in children's fiction.",
+        "detail": "You can use an action to speak the key loop's command word, causing one or more of the attached keys to reappear on the loop (your choice).  Speaking the command word again causes them to disappear once more.  You can have up to 10 keys attached to the key loop in this way at a time, and can remove one by gently pulling on it for 1 minute.",
         "tags": [],
         "sourceType": "item",
         "sourceId": "griffon-key-loop",
@@ -1589,10 +1589,10 @@
       },
       {
         "id": "light-crossbow-light-crossbow",
-        "group": "Bonus Action",
+        "group": "Out of Combat",
         "type": "Item",
         "title": "Light Crossbow",
-        "detail": "Range.",
+        "detail": "Each time you attack with the weapon, you expend one piece of ammunition.  Drawing the ammunition from a quiver, case, or other container is part of the attack.  Loading a one-handed weapon requires a free hand.  At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.",
         "tags": [],
         "sourceType": "item",
         "sourceId": "light-crossbow",
@@ -1855,7 +1855,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T21:06:44.357Z"
+      "generatedAtUtc": "2026-05-05T21:54:03.826Z"
     },
     "url": "Public/Players/Claire Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaClaireDnDNotes Full Class Info"
@@ -2047,10 +2047,10 @@
         "actions": [
           {
             "id": "blowgun-blowgun",
-            "group": "Bonus Action",
+            "group": "Out of Combat",
             "type": "Item",
             "title": "Blowgun",
-            "detail": "Range.",
+            "detail": "Each time you attack with the weapon, you expend one piece of ammunition.  Drawing the ammunition from a quiver, case, or other container is part of the attack.  Loading a one-handed weapon requires a free hand.  At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.",
             "tags": []
           }
         ],
@@ -2078,7 +2078,7 @@
             "group": "Action",
             "type": "Item",
             "title": "Robe of Useful Items",
-            "detail": "This robe has cloth patches of various shapes and colors covering it.",
+            "detail": "While wearing the robe, you can use an action to detach one of the patches, causing it to become the object or creature it represents.  Once the last patch is removed, the robe becomes an ordinary garment.  The robe has two of each of the following patches:Dagger Bullseye lantern (filled and lit) Steel mirror10-foot pole Hempen rope (50 feet, coiled) Sack In addition, the robe has 4d4 other patches.",
             "tags": []
           }
         ],
@@ -2106,7 +2106,7 @@
             "group": "Bonus Action",
             "type": "Item",
             "title": "Fabulist Gem",
-            "detail": "This glittering red gem is commonly found embedded in a ring or brooch.",
+            "detail": "As a bonus action, you can magically change the appearance of your clothing and armor.  You can change the style, color, and apparent quality of what you're wearing, or you can make it appear as if you were wearing different garments entirely.",
             "tags": [
               "Attunement"
             ]
@@ -2212,10 +2212,10 @@
       },
       {
         "id": "blowgun-blowgun",
-        "group": "Bonus Action",
+        "group": "Out of Combat",
         "type": "Item",
         "title": "Blowgun",
-        "detail": "Range.",
+        "detail": "Each time you attack with the weapon, you expend one piece of ammunition.  Drawing the ammunition from a quiver, case, or other container is part of the attack.  Loading a one-handed weapon requires a free hand.  At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.",
         "tags": [],
         "sourceType": "item",
         "sourceId": "blowgun",
@@ -2308,7 +2308,7 @@
         "group": "Bonus Action",
         "type": "Item",
         "title": "Fabulist Gem",
-        "detail": "This glittering red gem is commonly found embedded in a ring or brooch.",
+        "detail": "As a bonus action, you can magically change the appearance of your clothing and armor.  You can change the style, color, and apparent quality of what you're wearing, or you can make it appear as if you were wearing different garments entirely.",
         "tags": [
           "Attunement"
         ],
@@ -2431,7 +2431,7 @@
         "group": "Action",
         "type": "Item",
         "title": "Robe of Useful Items",
-        "detail": "This robe has cloth patches of various shapes and colors covering it.",
+        "detail": "While wearing the robe, you can use an action to detach one of the patches, causing it to become the object or creature it represents.  Once the last patch is removed, the robe becomes an ordinary garment.  The robe has two of each of the following patches:Dagger Bullseye lantern (filled and lit) Steel mirror10-foot pole Hempen rope (50 feet, coiled) Sack In addition, the robe has 4d4 other patches.",
         "tags": [],
         "sourceType": "item",
         "sourceId": "robe-of-useful-items",
@@ -2863,7 +2863,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T21:06:44.357Z"
+      "generatedAtUtc": "2026-05-05T21:54:03.826Z"
     },
     "url": "Public/Players/JP Player Sheet.html",
     "searchText": "Character Stats Equipment Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJpPlayerNotes Full Class Info"
@@ -3151,7 +3151,7 @@
             "group": "Bonus Action",
             "type": "Item",
             "title": "Scourge Armblade",
-            "detail": "The base item can be found in Armour, Items, and Weapons Galore.",
+            "detail": "As a bonus action, you can retract the armblade into your forearm or extend it from there.  While it is extended, you can use the weapon as if you were holding it, and you can't use that hand for other purposes.",
             "tags": [
               "Attunement"
             ]
@@ -3219,7 +3219,7 @@
             "group": "Action",
             "type": "Item",
             "title": "Pipe of Smoke Monsters",
-            "detail": "While smoking this pipe, you can use an action to exhale a puff of smoke that takes the form of a single creature, such as a dragon, a flumph, or a froghemoth.",
+            "detail": "While smoking this pipe, you can use an action to exhale a puff of smoke that takes the form of a single creature, such as a dragon, a flumph, or a froghemoth.  The form must be small enough to fit in a 1-foot cube and loses its shape after a few seconds, becoming an ordinary puff of smoke.",
             "tags": []
           }
         ],
@@ -3453,7 +3453,7 @@
         "group": "Action",
         "type": "Item",
         "title": "Pipe of Smoke Monsters",
-        "detail": "While smoking this pipe, you can use an action to exhale a puff of smoke that takes the form of a single creature, such as a dragon, a flumph, or a froghemoth.",
+        "detail": "While smoking this pipe, you can use an action to exhale a puff of smoke that takes the form of a single creature, such as a dragon, a flumph, or a froghemoth.  The form must be small enough to fit in a 1-foot cube and loses its shape after a few seconds, becoming an ordinary puff of smoke.",
         "tags": [],
         "sourceType": "item",
         "sourceId": "pipe-of-smoke-monsters",
@@ -3464,7 +3464,7 @@
         "group": "Bonus Action",
         "type": "Item",
         "title": "Scourge Armblade",
-        "detail": "The base item can be found in Armour, Items, and Weapons Galore.",
+        "detail": "As a bonus action, you can retract the armblade into your forearm or extend it from there.  While it is extended, you can use the weapon as if you were holding it, and you can't use that hand for other purposes.",
         "tags": [
           "Attunement"
         ],
@@ -3699,7 +3699,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T21:06:44.357Z"
+      "generatedAtUtc": "2026-05-05T21:54:03.826Z"
     },
     "url": "Public/Players/Julie Player Sheet.html",
     "searchText": "Character Stats Equipment Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJulieDnDNotes Full Class Info"
@@ -3798,10 +3798,10 @@
         "actions": [
           {
             "id": "1-repeating-crossbow-1-repeating-crossbow",
-            "group": "Action",
+            "group": "Out of Combat",
             "type": "Item",
             "title": "+1 Repeating Crossbow",
-            "detail": "The base item can be found in Armour, Items, and Weapons Galore.",
+            "detail": "Each time you attack with the weapon, you expend one piece of ammunition.  Drawing the ammunition from a quiver, case, or other container is part of the attack.  Loading a one-handed weapon requires a free hand.  At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.",
             "tags": []
           }
         ],
@@ -3924,10 +3924,10 @@
     "ruleActions": [
       {
         "id": "1-repeating-crossbow-1-repeating-crossbow",
-        "group": "Action",
+        "group": "Out of Combat",
         "type": "Item",
         "title": "+1 Repeating Crossbow",
-        "detail": "The base item can be found in Armour, Items, and Weapons Galore.",
+        "detail": "Each time you attack with the weapon, you expend one piece of ammunition.  Drawing the ammunition from a quiver, case, or other container is part of the attack.  Loading a one-handed weapon requires a free hand.  At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.",
         "tags": [],
         "sourceType": "item",
         "sourceId": "1-repeating-crossbow",
@@ -4338,7 +4338,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T21:06:44.357Z"
+      "generatedAtUtc": "2026-05-05T21:54:03.826Z"
     },
     "url": "Public/Players/Liz Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaLizDnDNotes Full Class Info"
@@ -5190,7 +5190,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T21:06:44.357Z"
+      "generatedAtUtc": "2026-05-05T21:54:03.826Z"
     },
     "url": "Public/Players/Vanessa Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaVanessaDnDNotes Full Class Info"
@@ -5801,7 +5801,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-05T21:06:44.357Z"
+      "generatedAtUtc": "2026-05-05T21:54:03.826Z"
     },
     "url": "Public/Players/Randi Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaRandiDnDNotes Full Class Info"
