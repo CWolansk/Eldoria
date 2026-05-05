@@ -113,6 +113,11 @@ function sanitizePlayerPatch(body) {
     }
   }
 
+  if (Object.prototype.hasOwnProperty.call(body, 'acMode')) {
+    const acMode = sanitizeText(body.acMode, 20);
+    if (acMode === 'official' || acMode === 'custom') patch.acMode = acMode;
+  }
+
   if (body.abilities && typeof body.abilities === 'object') {
     const abilities = {};
     for (const ability of ['str', 'dex', 'con', 'int', 'wis', 'cha']) {
@@ -163,7 +168,7 @@ function sanitizePlayerPatch(body) {
   }
 
   if (body.temporaryEffects && typeof body.temporaryEffects === 'object') {
-    const allowedEffects = new Set(['haste', 'mageArmor', 'shieldOfFaith', 'barkskin', 'shieldSpell', 'halfCover', 'threeQuartersCover']);
+    const allowedEffects = new Set(['haste', 'mageArmor', 'shieldOfFaith', 'barkskin', 'shieldSpell', 'raisedShield', 'halfCover', 'threeQuartersCover']);
     const effects = {};
     const sourceEffects = body.temporaryEffects.effects && typeof body.temporaryEffects.effects === 'object'
       ? body.temporaryEffects.effects

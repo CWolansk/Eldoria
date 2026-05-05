@@ -916,7 +916,6 @@ function renderPlayerPage(player, page) {
           ${editNumberField('speed', 'Speed')}
         </div>
       `)}
-      <div data-temporary-effects-panel></div>
       <div data-ac-panel></div>
       <div class="sheet-grid">
         ${infoCard('Armor Class', p.ac, 'ac')}
@@ -935,6 +934,7 @@ function renderPlayerPage(player, page) {
         <div class="weapon-grid" data-weapon-attacks></div>
         <div class="roll-log" data-roll-log></div>
       </section>
+      <div data-temporary-effects-panel></div>
     `)}
 
     ${tabPanel('actions', false, `

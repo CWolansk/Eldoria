@@ -36,6 +36,11 @@
   box-sizing: border-box;
 }
 
+[hidden],
+.filtered-out {
+  display: none !important;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -596,9 +601,16 @@ th {
 }
 
 .ac-breakdown-panel .math-breakdown,
+.ac-breakdown-panel .ac-controls,
 .ac-breakdown-panel .ac-warning-list,
 .ac-breakdown-panel .active-effect-tags {
   grid-column: 1 / -1;
+}
+
+.ac-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
 }
 
 .ac-warning-list {

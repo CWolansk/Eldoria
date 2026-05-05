@@ -61,6 +61,7 @@
     { id: 'shieldOfFaith', label: 'Shield of Faith', detail: '+2 AC while concentration is maintained.', acBonus: 2 },
     { id: 'barkskin', label: 'Barkskin', detail: 'AC cannot be less than 16 while the spell lasts.', acFloor: 16 },
     { id: 'shieldSpell', label: 'Shield Spell', detail: '+5 AC until the start of your next turn.', acBonus: 5 },
+    { id: 'raisedShield', label: 'Raise Shield', detail: '+2 AC until your next turn when using the table raise-shield rule.', acBonus: 2, requiresShield: true },
     { id: 'halfCover', label: 'Half Cover', detail: '+2 AC and Dexterity saving throws.', acBonus: 2 },
     { id: 'threeQuartersCover', label: 'Three-quarters Cover', detail: '+5 AC and Dexterity saving throws.', acBonus: 5 },
   ];
@@ -360,6 +361,7 @@
       spellSlotUses: player.spellSlotUses && typeof player.spellSlotUses === 'object' ? player.spellSlotUses : {},
       itemCharges: player.itemCharges && typeof player.itemCharges === 'object' ? player.itemCharges : {},
       actionUses: player.actionUses && typeof player.actionUses === 'object' ? player.actionUses : {},
+      acMode: cleanDetailValue(player.acMode) === 'official' ? 'official' : 'custom',
       temporaryEffects: normalizeTemporaryEffects(player.temporaryEffects),
       conditions: Array.isArray(player.conditions) ? player.conditions.map(String).filter(Boolean) : [],
       concentration: cleanDetailValue(player.concentration),
@@ -449,7 +451,7 @@
     const staticRulesTotal = rulesTotal;
     const sheetBaseAc = getPositiveNumber(player.baseAc) || getPositiveNumber(player.ac);
     let total = rulesTotal;
-    if (sheetBaseAc && sheetBaseAc !== staticRulesTotal) {
+    if (player.acMode !== 'official' && sheetBaseAc && sheetBaseAc !== staticRulesTotal) {
       const difference = sheetBaseAc - staticRulesTotal;
       parts.push({ label: 'Sheet AC override (unexplained by official rules data)', value: difference });
       warnings.push(`Official rules currently explain AC ${staticRulesTotal}; the saved sheet AC is ${sheetBaseAc}. Add/equip the missing armor, shield, feature, or item to remove this override.`);
@@ -476,6 +478,8 @@
     return {
       total,
       officialTotal: staticRulesTotal,
+      mode: player.acMode,
+      hasOverride: player.acMode !== 'official' && Boolean(sheetBaseAc && sheetBaseAc !== staticRulesTotal),
       parts,
       warnings: [...new Set(warnings.filter(Boolean))],
       alternatives: candidates
@@ -815,11 +819,15 @@
     return null;
   }
 
-  function getTemporaryAcParts(player, currentTotal) {
+  function getTemporaryAcParts(player, currentTotal, context = null) {
     const state = normalizeTemporaryEffects(player && player.temporaryEffects);
     const parts = [];
     for (const definition of TEMPORARY_EFFECT_DEFINITIONS) {
       if (!state.effects[definition.id] || !definition.acBonus) continue;
+      if (definition.requiresShield && !(context && context.shield)) {
+        parts.push({ label: definition.label, value: 0, display: 'equip shield first' });
+        continue;
+      }
       parts.push({ label: definition.label, value: definition.acBonus });
     }
     for (const definition of TEMPORARY_EFFECT_DEFINITIONS) {
@@ -1308,8 +1316,12 @@
       target.innerHTML = `<section class="ac-breakdown-panel">
         <div>
           <h2>Armor Class</h2>
+          <p>${profile.mode === 'official' ? 'Using official equipment and rules math.' : 'Using saved sheet AC when it differs from official rules math.'}</p>
         </div>
         <strong class="ac-total">${profile.total}</strong>
+        <div class="ac-controls">
+          <button class="text-button" type="button" data-ac-mode="official" ${profile.mode === 'official' ? 'disabled' : ''}>${profile.mode === 'official' ? 'Official AC Active' : 'Use Official AC'}</button>
+        </div>
         <details class="math-breakdown" open>
           <summary>AC math</summary>
           ${renderMathParts(profile.parts, profile.total, '', String(profile.total))}
@@ -2859,7 +2871,20 @@
       if (actionFilter) {
         const panel = actionFilter.closest('.actions-panel');
         if (panel) panel.dataset.activeActionFilter = actionFilter.dataset.actionFilter || 'all';
-        applyActionFilters(root);
+        applyActionFilters(root, panel);
+        return;
+      }
+
+      const acMode = event.target.closest('[data-ac-mode]');
+      if (acMode) {
+        event.preventDefault();
+        const player = root._playerState;
+        if (!player) return;
+        const mode = acMode.dataset.acMode === 'official' ? 'official' : 'custom';
+        const edits = { ...loadPlayerEdits(player.id), acMode: mode };
+        if (mode === 'official') edits.ac = null;
+        else edits.ac = player.baseAc || player.ac;
+        saveAndHydratePlayer(root, player, edits);
         return;
       }
 
@@ -2990,7 +3015,7 @@
     root.addEventListener('input', event => {
       const actionSearch = event.target.closest('[data-action-search]');
       if (actionSearch) {
-        applyActionFilters(root);
+        applyActionFilters(root, actionSearch.closest('.actions-panel'));
         return;
       }
 
@@ -3024,7 +3049,10 @@
     if (hasFormField(form, 'currentHp')) edits.currentHp = nullableNumber(formData.get('currentHp'));
     if (hasFormField(form, 'tempHp')) edits.tempHp = nullableNumber(formData.get('tempHp')) || 0;
     if (hasFormField(form, 'maxHp')) edits.maxHp = nullableNumber(formData.get('maxHp'));
-    if (hasFormField(form, 'ac')) edits.ac = nullableNumber(formData.get('ac')) || player.baseAc || player.ac;
+    if (hasFormField(form, 'ac')) {
+      edits.ac = nullableNumber(formData.get('ac')) || player.baseAc || player.ac;
+      edits.acMode = 'custom';
+    }
     if (hasFormField(form, 'speed')) edits.speed = nullableNumber(formData.get('speed')) || player.baseSpeed || player.speed;
     if (hasFormField(form, 'gold')) edits.gold = nullableNumber(formData.get('gold')) || 0;
     if (hasFormField(form, 'heroPoints')) edits.heroPoints = nullableNumber(formData.get('heroPoints')) || 0;
@@ -3091,8 +3119,8 @@
     if (status) status.textContent = formatSpellSlotStatus(choice);
   }
 
-  function applyActionFilters(root) {
-    const panel = root.querySelector('.actions-panel');
+  function applyActionFilters(root, panel = null) {
+    panel = panel || root.querySelector('[data-tab-panel].active .actions-panel') || root.querySelector('.actions-panel');
     if (!panel) return;
     const active = panel.dataset.activeActionFilter || 'all';
     const searchInput = panel.querySelector('[data-action-search]');
@@ -3106,11 +3134,15 @@
       const kinds = String(card.dataset.actionKind || '').split(/\s+/).filter(Boolean);
       const matchesKind = active === 'all' || kinds.includes(active);
       const matchesSearch = !query || normalizeName(card.dataset.actionSearch).includes(query);
-      card.hidden = !(matchesKind && matchesSearch);
+      const filtered = !(matchesKind && matchesSearch);
+      card.hidden = filtered;
+      card.classList.toggle('filtered-out', filtered);
     });
 
     panel.querySelectorAll('[data-action-group-section]').forEach(section => {
-      section.hidden = !section.querySelector('[data-action-card]:not([hidden])');
+      const filtered = !section.querySelector('[data-action-card]:not(.filtered-out)');
+      section.hidden = filtered;
+      section.classList.toggle('filtered-out', filtered);
     });
   }
 
