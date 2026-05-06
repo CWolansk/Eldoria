@@ -346,6 +346,22 @@
     "itemName": "Wooden Cuirass of Acid Resistance"
   },
   {
+    "id": "feature-effect-race-genasi-water-acid-resistance-eepc",
+    "sourceType": "race",
+    "sourceId": "race-genasi-water-acid-resistance-eepc",
+    "kind": "rules-text",
+    "name": "Acid Resistance",
+    "text": "You have resistance to acid damage."
+  },
+  {
+    "id": "feature-effect-race-genasi-water-acid-resistance-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-genasi-water-acid-resistance-mpmm",
+    "kind": "rules-text",
+    "name": "Acid Resistance",
+    "text": "You have resistance to acid damage."
+  },
+  {
     "id": "feature-effect-subclass-cleric-nature-1-acolyte-of-nature-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-cleric-nature-1-acolyte-of-nature-phb",
@@ -386,12 +402,52 @@
     "text": "2nd-level Graviturgy Magic feature As an action, you can magically alter the weight of one object or creature you can see within 30 feet of you."
   },
   {
+    "id": "feature-effect-race-orc-adrenaline-rush-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-orc-adrenaline-rush-mpmm",
+    "kind": "rules-text",
+    "name": "Adrenaline Rush",
+    "text": "You can take the Dash action as a bonus action."
+  },
+  {
+    "id": "feature-effect-race-vedalken-aether-lore-psk",
+    "sourceType": "race",
+    "sourceId": "race-vedalken-aether-lore-psk",
+    "kind": "rules-text",
+    "name": "Aether Lore",
+    "text": "Whenever you make an Intelligence (History) check related to magic items or aether-powered technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply."
+  },
+  {
     "id": "feat-effect-agent-of-order",
     "sourceType": "feat",
     "sourceId": "agent-of-order",
     "kind": "rules-text",
     "name": "Agent of Order",
     "text": "You can channel cosmic forces of order to gain these benefits:Ability Score Increase."
+  },
+  {
+    "id": "feature-effect-race-orc-aggressive-dmg",
+    "sourceType": "race",
+    "sourceId": "race-orc-aggressive-dmg",
+    "kind": "rules-text",
+    "name": "Aggressive",
+    "text": "As a bonus action, you can move up to your speed toward a hostile creature that you can see."
+  },
+  {
+    "id": "feature-effect-race-orc-aggressive-erlw",
+    "sourceType": "race",
+    "sourceId": "race-orc-aggressive-erlw",
+    "kind": "rules-text",
+    "name": "Aggressive",
+    "text": "As a bonus action, you can move up to your movement speed toward a hostile creature you can see or hear."
+  },
+  {
+    "id": "feature-effect-race-orc-aggressive-vgm",
+    "sourceType": "race",
+    "sourceId": "race-orc-aggressive-vgm",
+    "kind": "rules-text",
+    "name": "Aggressive",
+    "text": "As a bonus action, you can move up to your movement speed toward a hostile creature you can see or hear."
   },
   {
     "id": "feature-effect-subclass-monk-kensei-3-agile-parry-xge",
@@ -736,12 +792,52 @@
     "text": "Starting at 13th level, you excel at leading ambushes and acting first in a fight."
   },
   {
+    "id": "feature-effect-race-kenku-ambusher-dmg",
+    "sourceType": "race",
+    "sourceId": "race-kenku-ambusher-dmg",
+    "kind": "rules-text",
+    "name": "Ambusher",
+    "text": "In the first round of a combat, you have advantage on attack rolls against any creature who is surprised."
+  },
+  {
     "id": "feature-effect-subclass-warlock-undying-1-among-the-dead-scag",
     "sourceType": "subclass",
     "sourceId": "subclass-warlock-undying-1-among-the-dead-scag",
     "kind": "rules-text",
     "name": "Among the Dead",
     "text": "Starting at 1st level, you learn the spare the dying cantrip, which counts as a warlock cantrip for you."
+  },
+  {
+    "id": "feature-effect-race-plasmoid-amorphous-aag",
+    "sourceType": "race",
+    "sourceId": "race-plasmoid-amorphous-aag",
+    "kind": "rules-text",
+    "name": "Amorphous",
+    "text": "You can squeeze through a space as narrow as 1 inch wide, provided you are wearing and carrying nothing."
+  },
+  {
+    "id": "feature-effect-race-dhampir-ancestral-legacy-vrgr",
+    "sourceType": "race",
+    "sourceId": "race-dhampir-ancestral-legacy-vrgr",
+    "kind": "rules-text",
+    "name": "Ancestral Legacy",
+    "text": "If you replace a race with this lineage, you can keep the following elements of that race: any skill proficiencies you gained from it and any climbing, flying, or swimming speed you gained from it."
+  },
+  {
+    "id": "feature-effect-race-hexblood-ancestral-legacy-vrgr",
+    "sourceType": "race",
+    "sourceId": "race-hexblood-ancestral-legacy-vrgr",
+    "kind": "rules-text",
+    "name": "Ancestral Legacy",
+    "text": "If you replace a race with this lineage, you can keep the following elements of that race: any skill proficiencies you gained from it and any climbing, flying, or swimming speed you gained from it."
+  },
+  {
+    "id": "feature-effect-race-reborn-ancestral-legacy-vrgr",
+    "sourceType": "race",
+    "sourceId": "race-reborn-ancestral-legacy-vrgr",
+    "kind": "rules-text",
+    "name": "Ancestral Legacy",
+    "text": "If you replace a race with this lineage, you can keep the following elements of that race: any skill proficiencies you gained from it and any climbing, flying, or swimming speed you gained from it."
   },
   {
     "id": "feature-effect-subclass-barbarian-ancestral-guardian-3-ancestral-protectors-xge",
@@ -758,6 +854,14 @@
     "kind": "rules-text",
     "name": "Animating Performance",
     "text": "6th-level College of Creation feature As an action, you can animate one Large or smaller nonmagical item within 30 feet of you that isn't being worn or carried."
+  },
+  {
+    "id": "feature-effect-race-grung-arboreal-alertness-oga",
+    "sourceType": "race",
+    "sourceId": "race-grung-arboreal-alertness-oga",
+    "kind": "rules-text",
+    "name": "Arboreal Alertness",
+    "text": "You have proficiency in the Perception skill."
   },
   {
     "id": "feature-effect-subclass-wizard-chronurgy-10-arcane-abeyance-egw",
@@ -848,6 +952,22 @@
     "text": "3rd-level Way of the Astral Self feature Your mastery of your ki allows you to summon a portion of your astral self."
   },
   {
+    "id": "feature-effect-race-gnome-rock-artificer-s-lore-phb",
+    "sourceType": "race",
+    "sourceId": "race-gnome-rock-artificer-s-lore-phb",
+    "kind": "rules-text",
+    "name": "Artificer's Lore",
+    "text": "Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply."
+  },
+  {
+    "id": "feature-effect-race-dwarf-kaladesh-artisan-s-expertise-psk",
+    "sourceType": "race",
+    "sourceId": "race-dwarf-kaladesh-artisan-s-expertise-psk",
+    "kind": "rules-text",
+    "name": "Artisan's Expertise",
+    "text": "You gain proficiency with two kinds of artisan's tools of your choice."
+  },
+  {
     "id": "feature-effect-subclass-monk-ascendant-dragon-11-aspect-of-the-wyrm-ftd",
     "sourceType": "subclass",
     "sourceId": "subclass-monk-ascendant-dragon-11-aspect-of-the-wyrm-ftd",
@@ -862,6 +982,30 @@
     "kind": "rules-text",
     "name": "Assassinate",
     "text": "Starting at 3rd level, you are at your deadliest when you get the drop on your enemies."
+  },
+  {
+    "id": "feature-effect-race-githyanki-astral-knowledge-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-githyanki-astral-knowledge-mpmm",
+    "kind": "rules-text",
+    "name": "Astral Knowledge",
+    "text": "You can mystically access a reservoir of experiences of entities connected to the Astral Plane."
+  },
+  {
+    "id": "feature-effect-race-giff-astral-spark-aag",
+    "sourceType": "race",
+    "sourceId": "race-giff-astral-spark-aag",
+    "kind": "rules-text",
+    "name": "Astral Spark",
+    "text": "Your psychic connection to the Astral Plane enables you to mystically access a spark of divine power, which you can channel through your weapons."
+  },
+  {
+    "id": "feature-effect-race-astral-elf-astral-trance-aag",
+    "sourceType": "race",
+    "sourceId": "race-astral-elf-astral-trance-aag",
+    "kind": "rules-text",
+    "name": "Astral Trance",
+    "text": "You don't need to sleep, and magic can't put you to sleep."
   },
   {
     "id": "feat-effect-athlete",
@@ -1088,6 +1232,14 @@
     "text": "Starting at 6th level, you have the ability to twist fate using your wild magic."
   },
   {
+    "id": "feature-effect-race-shifter-bestial-instincts-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-shifter-bestial-instincts-mpmm",
+    "kind": "rules-text",
+    "name": "Bestial Instincts",
+    "text": "Channeling the beast within, you have proficiency in one of the following skills of your choice: Acrobatics, Athletics, Intimidation, or Survival."
+  },
+  {
     "id": "feature-effect-subclass-barbarian-beast-6-bestial-soul-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-barbarian-beast-6-bestial-soul-tce",
@@ -1118,6 +1270,22 @@
     "kind": "rules-text",
     "name": "Blessing of the Forge",
     "text": "At 1st level, you gain the ability to imbue magic into a weapon or armor."
+  },
+  {
+    "id": "feature-effect-race-elf-shadar-kai-blessing-of-the-raven-queen-mtf",
+    "sourceType": "race",
+    "sourceId": "race-elf-shadar-kai-blessing-of-the-raven-queen-mtf",
+    "kind": "rules-text",
+    "name": "Blessing of the Raven Queen",
+    "text": "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see."
+  },
+  {
+    "id": "feature-effect-race-shadar-kai-blessing-of-the-raven-queen-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-shadar-kai-blessing-of-the-raven-queen-mpmm",
+    "kind": "rules-text",
+    "name": "Blessing of the Raven Queen",
+    "text": "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see."
   },
   {
     "id": "feature-effect-subclass-cleric-trickery-1-blessing-of-the-trickster-phb",
@@ -1252,6 +1420,30 @@
     "text": "At 1st level, you learn two additional psionic disciplines of your choice."
   },
   {
+    "id": "feature-effect-class-expert-sidekick-1-bonus-proficiencies-tce",
+    "sourceType": "class",
+    "sourceId": "class-expert-sidekick-1-bonus-proficiencies-tce",
+    "kind": "rules-text",
+    "name": "Bonus Proficiencies",
+    "text": "1st-level Expert feature The sidekick gains proficiency in one saving throw of your choice: Dexterity, Intelligence, or Charisma."
+  },
+  {
+    "id": "feature-effect-class-spellcaster-sidekick-1-bonus-proficiencies-tce",
+    "sourceType": "class",
+    "sourceId": "class-spellcaster-sidekick-1-bonus-proficiencies-tce",
+    "kind": "rules-text",
+    "name": "Bonus Proficiencies",
+    "text": "1st-level Spellcaster feature The sidekick gains proficiency in one saving throw of your choice: Wisdom, Intelligence, or Charisma."
+  },
+  {
+    "id": "feature-effect-class-warrior-sidekick-1-bonus-proficiencies-tce",
+    "sourceType": "class",
+    "sourceId": "class-warrior-sidekick-1-bonus-proficiencies-tce",
+    "kind": "rules-text",
+    "name": "Bonus Proficiencies",
+    "text": "1st-level Warrior feature The sidekick gains proficiency in one saving throw of your choice: Strength, Dexterity, or Constitution."
+  },
+  {
     "id": "feature-effect-subclass-bard-lore-3-bonus-proficiencies-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-bard-lore-3-bonus-proficiencies-phb",
@@ -1324,14 +1516,6 @@
     "text": "At 1st level, you gain proficiency with martial weapons and heavy armor."
   },
   {
-    "id": "feature-effect-class-expert-sidekick-1-bonus-proficiencies-tce",
-    "sourceType": "class",
-    "sourceId": "class-expert-sidekick-1-bonus-proficiencies-tce",
-    "kind": "rules-text",
-    "name": "Bonus Proficiencies",
-    "text": "1st-level Expert feature The sidekick gains proficiency in one saving throw of your choice: Dexterity, Intelligence, or Charisma."
-  },
-  {
     "id": "feature-effect-subclass-fighter-rune-knight-3-bonus-proficiencies-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-fighter-rune-knight-3-bonus-proficiencies-tce",
@@ -1354,22 +1538,6 @@
     "kind": "rules-text",
     "name": "Bonus Proficiencies",
     "text": "When you choose this archetype at 3rd level, you gain proficiency with the disguise kit and the poisoner's kit."
-  },
-  {
-    "id": "feature-effect-class-spellcaster-sidekick-1-bonus-proficiencies-tce",
-    "sourceType": "class",
-    "sourceId": "class-spellcaster-sidekick-1-bonus-proficiencies-tce",
-    "kind": "rules-text",
-    "name": "Bonus Proficiencies",
-    "text": "1st-level Spellcaster feature The sidekick gains proficiency in one saving throw of your choice: Wisdom, Intelligence, or Charisma."
-  },
-  {
-    "id": "feature-effect-class-warrior-sidekick-1-bonus-proficiencies-tce",
-    "sourceType": "class",
-    "sourceId": "class-warrior-sidekick-1-bonus-proficiencies-tce",
-    "kind": "rules-text",
-    "name": "Bonus Proficiencies",
-    "text": "1st-level Warrior feature The sidekick gains proficiency in one saving throw of your choice: Strength, Dexterity, or Constitution."
   },
   {
     "id": "feature-effect-subclass-cleric-death-1-bonus-proficiency-dmg",
@@ -1436,6 +1604,14 @@
     "text": "When you choose this archetype at 3rd level, you gain proficiency in one of the following skills of your choice: History, Insight, Performance, or Persuasion."
   },
   {
+    "id": "feature-effect-race-aetherborn-born-of-aether-psk",
+    "sourceType": "race",
+    "sourceId": "race-aetherborn-born-of-aether-psk",
+    "kind": "rules-text",
+    "name": "Born of Aether",
+    "text": "You have resistance to necrotic damage."
+  },
+  {
     "id": "feature-effect-subclass-fighter-cavalier-3-born-to-the-saddle-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-fighter-cavalier-3-born-to-the-saddle-xge",
@@ -1452,12 +1628,76 @@
     "text": "As an action, you can magically vanish and enter your vessel, which remains in the space you left."
   },
   {
+    "id": "feature-effect-race-halfling-brave-phb",
+    "sourceType": "race",
+    "sourceId": "race-halfling-brave-phb",
+    "kind": "rules-text",
+    "name": "Brave",
+    "text": "You have advantage on saving throws against being frightened."
+  },
+  {
+    "id": "feature-effect-race-kor-brave-psz",
+    "sourceType": "race",
+    "sourceId": "race-kor-brave-psz",
+    "kind": "rules-text",
+    "name": "Brave",
+    "text": "You have advantage on saving throws against being frightened."
+  },
+  {
+    "id": "feature-effect-race-human-innistrad-nephalia-breadth-of-knowledge-psi",
+    "sourceType": "race",
+    "sourceId": "race-human-innistrad-nephalia-breadth-of-knowledge-psi",
+    "kind": "rules-text",
+    "name": "Breadth of Knowledge",
+    "text": "You gain proficiency in any combination of four skills or with four tools of your choice."
+  },
+  {
     "id": "feature-effect-subclass-monk-ascendant-dragon-3-breath-of-the-dragon-ftd",
     "sourceType": "subclass",
     "sourceId": "subclass-monk-ascendant-dragon-3-breath-of-the-dragon-ftd",
     "kind": "rules-text",
     "name": "Breath of the Dragon",
     "text": "3rd-level Way of the Ascendant Dragon feature You can channel destructive waves of energy, like those created by the dragons you emulate."
+  },
+  {
+    "id": "feature-effect-race-dragonborn-chromatic-breath-weapon-ftd",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-chromatic-breath-weapon-ftd",
+    "kind": "rules-text",
+    "name": "Breath Weapon",
+    "text": "When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of magical energy in a 30-foot line that is 5 feet wide."
+  },
+  {
+    "id": "feature-effect-race-dragonborn-gem-breath-weapon-ftd",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-gem-breath-weapon-ftd",
+    "kind": "rules-text",
+    "name": "Breath Weapon",
+    "text": "When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of magical energy in a 15-foot cone."
+  },
+  {
+    "id": "feature-effect-race-dragonborn-metallic-breath-weapon-ftd",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-metallic-breath-weapon-ftd",
+    "kind": "rules-text",
+    "name": "Breath Weapon",
+    "text": "When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of magical energy in a 15-foot cone."
+  },
+  {
+    "id": "feature-effect-race-dragonborn-breath-weapon-phb",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-breath-weapon-phb",
+    "kind": "rules-text",
+    "name": "Breath Weapon",
+    "text": "You can use your action to exhale destructive energy."
+  },
+  {
+    "id": "feature-effect-race-autognome-built-for-success-aag",
+    "sourceType": "race",
+    "sourceId": "race-autognome-built-for-success-aag",
+    "kind": "rules-text",
+    "name": "Built for Success",
+    "text": "You can add a d4 to one attack roll, ability check, or saving throw you make, and you can do so after seeing the d20 roll but before the effects of the roll are resolved."
   },
   {
     "id": "feature-effect-subclass-fighter-psi-warrior-15-bulwark-of-force-tce",
@@ -1484,6 +1724,22 @@
     "text": "14th-level Path of the Beast feature The beast within you grows so powerful that you can spread its ferocity to others and gain resilience from them joining your hunt."
   },
   {
+    "id": "feature-effect-race-tabaxi-cat-s-talent-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-tabaxi-cat-s-talent-mpmm",
+    "kind": "rules-text",
+    "name": "Cat's Talent",
+    "text": "You have proficiency in the Perception and Stealth skills."
+  },
+  {
+    "id": "feature-effect-race-tabaxi-cat-s-talents-vgm",
+    "sourceType": "race",
+    "sourceId": "race-tabaxi-cat-s-talents-vgm",
+    "kind": "rules-text",
+    "name": "Cat's Talents",
+    "text": "You have proficiency in the Perception and Stealth skills."
+  },
+  {
     "id": "feature-effect-subclass-druid-wildfire-10-cauterizing-flames-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-druid-wildfire-10-cauterizing-flames-tce",
@@ -1492,12 +1748,76 @@
     "text": "10th-level Circle of Wildfire feature You gain the ability to turn death into magical flames that can heal or incinerate."
   },
   {
+    "id": "feature-effect-race-aasimar-celestial-resistance-dmg",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-celestial-resistance-dmg",
+    "kind": "rules-text",
+    "name": "Celestial Resistance",
+    "text": "You have resistance to necrotic and radiant damage."
+  },
+  {
+    "id": "feature-effect-race-aasimar-celestial-resistance-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-celestial-resistance-mpmm",
+    "kind": "rules-text",
+    "name": "Celestial Resistance",
+    "text": "You have resistance to necrotic damage and radiant damage."
+  },
+  {
+    "id": "feature-effect-race-aasimar-celestial-resistance-vgm",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-celestial-resistance-vgm",
+    "kind": "rules-text",
+    "name": "Celestial Resistance",
+    "text": "You have resistance to necrotic damage and radiant damage."
+  },
+  {
+    "id": "feature-effect-race-aasimar-celestial-revelation-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-celestial-revelation-mpmm",
+    "kind": "rules-text",
+    "name": "Celestial Revelation",
+    "text": "When you reach 3rd level, choose one of the revelation options below."
+  },
+  {
+    "id": "feature-effect-race-thri-kreen-chameleon-carapace-aag",
+    "sourceType": "race",
+    "sourceId": "race-thri-kreen-chameleon-carapace-aag",
+    "kind": "rules-text",
+    "name": "Chameleon Carapace",
+    "text": "While you aren't wearing armor, your carapace gives you a base Armor Class of 13 + your Dexterity modifier."
+  },
+  {
+    "id": "feature-effect-race-troglodyte-chameleon-skin-dmg",
+    "sourceType": "race",
+    "sourceId": "race-troglodyte-chameleon-skin-dmg",
+    "kind": "rules-text",
+    "name": "Chameleon Skin",
+    "text": "You have advantage on Dexterity (Stealth) checks made to hide."
+  },
+  {
     "id": "feature-effect-subclass-paladin-crown-3-champion-challenge-scag",
     "sourceType": "subclass",
     "sourceId": "subclass-paladin-crown-3-champion-challenge-scag",
     "kind": "rules-text",
     "name": "Champion Challenge",
     "text": "As a bonus action, you issue a challenge that compels other creatures to do battle with you."
+  },
+  {
+    "id": "feature-effect-race-changeling-changeling-instincts-erlw",
+    "sourceType": "race",
+    "sourceId": "race-changeling-changeling-instincts-erlw",
+    "kind": "rules-text",
+    "name": "Changeling Instincts",
+    "text": "You gain proficiency with two of the following skills of your choice: Deception, Insight, Intimidation, and Persuasion."
+  },
+  {
+    "id": "feature-effect-race-changeling-changeling-instincts-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-changeling-changeling-instincts-mpmm",
+    "kind": "rules-text",
+    "name": "Changeling Instincts",
+    "text": "Thanks to your connection to the fey realm, you gain proficiency with two of the following skills of your choice: Deception, Insight, Intimidation, Performance, or Persuasion."
   },
   {
     "id": "feature-effect-subclass-paladin-open-sea-3-channel-divinity-tdcsr",
@@ -1588,6 +1908,22 @@
     "text": "At 6th level, when a creature within 30 feet of you makes an attack roll, you can use your reaction to grant that creature a +10 bonus to the roll, using your Channel Divinity."
   },
   {
+    "id": "feature-effect-race-centaur-charge-ggr",
+    "sourceType": "race",
+    "sourceId": "race-centaur-charge-ggr",
+    "kind": "rules-text",
+    "name": "Charge",
+    "text": "If you move at least 30 feet straight toward a target and then hit it with a melee weapon attack on the same turn, you can immediately follow that attack with a bonus action, making one attack against the target with your hooves."
+  },
+  {
+    "id": "feature-effect-race-centaur-charge-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-centaur-charge-mpmm",
+    "kind": "rules-text",
+    "name": "Charge",
+    "text": "If you move at least 30 feet straight toward a target and then hit it with a melee weapon attack on the same turn, you can immediately follow that attack with a bonus action, making one attack against the target with your hooves."
+  },
+  {
     "id": "feat-effect-charger",
     "sourceType": "feat",
     "sourceId": "charger",
@@ -1610,6 +1946,22 @@
     "kind": "rules-text",
     "name": "Chemical Mastery",
     "text": "By 15th level, you have been exposed to so many chemicals that they pose little risk to you, and you can use them to quickly end certain ailments: You gain resistance to acid damage and poison damage, and you are immune to the poisoned condition."
+  },
+  {
+    "id": "feature-effect-race-sea-elf-child-of-the-sea-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-sea-elf-child-of-the-sea-mpmm",
+    "kind": "rules-text",
+    "name": "Child of the Sea",
+    "text": "You can breathe air and water, and you have resistance to cold damage."
+  },
+  {
+    "id": "feature-effect-race-dragonborn-chromatic-chromatic-warding-ftd",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-chromatic-chromatic-warding-ftd",
+    "kind": "rules-text",
+    "name": "Chromatic Warding",
+    "text": "Starting at 5th level, as an action, you can channel your draconic energy to protect yourself."
   },
   {
     "id": "feature-effect-subclass-wizard-chronurgy-2-chronurgy-magic-egw",
@@ -2018,6 +2370,14 @@
     "text": "Overcoming difficulties has reinforced your spirit and renewed your faith in a brighter future."
   },
   {
+    "id": "feature-effect-race-warforged-constructed-resilience-erlw",
+    "sourceType": "race",
+    "sourceId": "race-warforged-constructed-resilience-erlw",
+    "kind": "rules-text",
+    "name": "Constructed Resilience",
+    "text": "You were created to have remarkable fortitude, represented by the following benefits: You have advantage on saving throws against being poisoned, and you have resistance to poison damage."
+  },
+  {
     "id": "feature-effect-subclass-paladin-oathbreaker-3-control-undead-dmg",
     "sourceType": "subclass",
     "sourceId": "subclass-paladin-oathbreaker-3-control-undead-dmg",
@@ -2056,6 +2416,14 @@
     "kind": "rules-text",
     "name": "Coven Witch",
     "text": "You have become an official member of a witches coven."
+  },
+  {
+    "id": "feature-effect-race-merfolk-zendikar-cosi-creed-creed-of-the-trickster-psz",
+    "sourceType": "race",
+    "sourceId": "race-merfolk-zendikar-cosi-creed-creed-of-the-trickster-psz",
+    "kind": "rules-text",
+    "name": "Creed of the Trickster",
+    "text": "You have proficiency in the Sleight of Hand and Stealth skills."
   },
   {
     "id": "feat-effect-crossbow-expert",
@@ -2106,6 +2474,14 @@
     "text": "Also at 3rd level, you learn how to use your wit to distract, confuse, and otherwise sap the confidence and competence of others."
   },
   {
+    "id": "feature-effect-race-dragonborn-damage-resistance-phb",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-damage-resistance-phb",
+    "kind": "rules-text",
+    "name": "Damage Resistance",
+    "text": "You have resistance to the damage type associated with your draconic ancestry."
+  },
+  {
     "id": "feature-effect-subclass-cleric-nature-6-dampen-elements-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-cleric-nature-6-dampen-elements-phb",
@@ -2130,12 +2506,36 @@
     "text": "At 2nd level, you gain an uncanny sense of when things nearby aren't as they should be, giving you an edge when you dodge away from danger."
   },
   {
+    "id": "feature-effect-race-human-innistrad-stensia-daunting-psi",
+    "sourceType": "race",
+    "sourceId": "race-human-innistrad-stensia-daunting-psi",
+    "kind": "rules-text",
+    "name": "Daunting",
+    "text": "You have proficiency in the Intimidation skill."
+  },
+  {
+    "id": "feature-effect-race-leonin-daunting-roar-mot",
+    "sourceType": "race",
+    "sourceId": "race-leonin-daunting-roar-mot",
+    "kind": "rules-text",
+    "name": "Daunting Roar",
+    "text": "As a bonus action, you can let out an especially menacing roar."
+  },
+  {
     "id": "feature-effect-subclass-rogue-assassin-17-death-strike-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-rogue-assassin-17-death-strike-phb",
     "kind": "rules-text",
     "name": "Death Strike",
     "text": "Starting at 17th level, you become a master of instant death."
+  },
+  {
+    "id": "feature-effect-race-reborn-deathless-nature-vrgr",
+    "sourceType": "race",
+    "sourceId": "race-reborn-deathless-nature-vrgr",
+    "kind": "rules-text",
+    "name": "Deathless Nature",
+    "text": "You have escaped death, a fact represented by the following benefits: You have advantage on saving throws against disease and being poisoned, and you have resistance to poison damage."
   },
   {
     "id": "feature-effect-subclass-monk-cobalt-soul-17-debilitating-barrage-tdcsr",
@@ -2202,6 +2602,14 @@
     "text": "You gain resistance to fire damage, and you don't suffer the effects of extreme heat, as described in the Dungeon Master's Guide."
   },
   {
+    "id": "feature-effect-race-hadozee-dexterous-feet-aag",
+    "sourceType": "race",
+    "sourceId": "race-hadozee-dexterous-feet-aag",
+    "kind": "rules-text",
+    "name": "Dexterous Feet",
+    "text": "As a bonus action, you can use your feet to manipulate an object, open or close a door or container, or pick up or set down a Tiny object."
+  },
+  {
     "id": "feature-effect-class-monk-14-diamond-soul-phb",
     "sourceType": "class",
     "sourceId": "class-monk-14-diamond-soul-phb",
@@ -2226,12 +2634,52 @@
     "text": "Your blows have become more forceful and your aim steadier, allowing you to do greater harm."
   },
   {
+    "id": "feature-effect-race-dragonborn-draconic-ancestry-phb",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-draconic-ancestry-phb",
+    "kind": "rules-text",
+    "name": "Draconic Ancestry",
+    "text": "You have draconic ancestry."
+  },
+  {
+    "id": "feature-effect-race-kobold-draconic-cry-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-kobold-draconic-cry-mpmm",
+    "kind": "rules-text",
+    "name": "Draconic Cry",
+    "text": "As a bonus action, you let out a cry at your enemies within 10 feet of you."
+  },
+  {
     "id": "feature-effect-subclass-sorcerer-draconic-18-draconic-presence-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-sorcerer-draconic-18-draconic-presence-phb",
     "kind": "rules-text",
     "name": "Draconic Presence",
     "text": "Beginning at 18th level, you can channel the dread presence of your dragon ancestor, causing those around you to become awestruck or frightened."
+  },
+  {
+    "id": "feature-effect-race-dragonborn-chromatic-draconic-resistance-ftd",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-chromatic-draconic-resistance-ftd",
+    "kind": "rules-text",
+    "name": "Draconic Resistance",
+    "text": "You have resistance to the damage type associated with your Chromatic Ancestry."
+  },
+  {
+    "id": "feature-effect-race-dragonborn-gem-draconic-resistance-ftd",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-gem-draconic-resistance-ftd",
+    "kind": "rules-text",
+    "name": "Draconic Resistance",
+    "text": "You have resistance to the damage type associated with your Gem Ancestry."
+  },
+  {
+    "id": "feature-effect-race-dragonborn-metallic-draconic-resistance-ftd",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-metallic-draconic-resistance-ftd",
+    "kind": "rules-text",
+    "name": "Draconic Resistance",
+    "text": "You have resistance to the damage type associated with your Metallic Ancestry."
   },
   {
     "id": "feature-effect-subclass-sorcerer-draconic-1-dragon-ancestor-phb",
@@ -2274,6 +2722,14 @@
     "text": "At 20th level, the paladin can, as an action, surround himself or herself with an aura of gloom that lasts for 1 minute."
   },
   {
+    "id": "feature-effect-race-elf-drow-drow-weapon-training-phb",
+    "sourceType": "race",
+    "sourceId": "race-elf-drow-drow-weapon-training-phb",
+    "kind": "rules-text",
+    "name": "Drow Weapon Training",
+    "text": "You have proficiency with rapier, shortsword, and hand crossbow."
+  },
+  {
     "id": "feature-effect-subclass-monk-drunken-master-11-drunkard-s-luck-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-monk-drunken-master-11-drunkard-s-luck-xge",
@@ -2282,12 +2738,28 @@
     "text": "Starting at 11th level, you always seem to get a lucky bounce at the right moment."
   },
   {
+    "id": "feature-effect-race-kalashtar-dual-mind-erlw",
+    "sourceType": "race",
+    "sourceId": "race-kalashtar-dual-mind-erlw",
+    "kind": "rules-text",
+    "name": "Dual Mind",
+    "text": "You have advantage on all Wisdom saving throws."
+  },
+  {
     "id": "feat-effect-dual-wielder",
     "sourceType": "feat",
     "sourceId": "dual-wielder",
     "kind": "rules-text",
     "name": "Dual Wielder",
     "text": "You master fighting with two weapons, gaining the following benefits:You gain a +1 bonus to AC while you are wielding a separate melee weapon in each hand."
+  },
+  {
+    "id": "feature-effect-race-dwarf-duergar-duergar-resilience-mtf",
+    "sourceType": "race",
+    "sourceId": "race-dwarf-duergar-duergar-resilience-mtf",
+    "kind": "rules-text",
+    "name": "Duergar Resilience",
+    "text": "You have advantage on saving throws against poison, and you have resistance against poison damage."
   },
   {
     "id": "feat-effect-dungeon-delver",
@@ -2322,6 +2794,46 @@
     "text": "The days of the Dragon have forged a strong alliance between the Bardings and the Dwarves of Erebor."
   },
   {
+    "id": "feature-effect-race-dwarf-mountain-dwarven-armor-training-phb",
+    "sourceType": "race",
+    "sourceId": "race-dwarf-mountain-dwarven-armor-training-phb",
+    "kind": "rules-text",
+    "name": "Dwarven Armor Training",
+    "text": "You have proficiency with light and medium armor."
+  },
+  {
+    "id": "feature-effect-race-dwarf-dwarven-combat-training-phb",
+    "sourceType": "race",
+    "sourceId": "race-dwarf-dwarven-combat-training-phb",
+    "kind": "rules-text",
+    "name": "Dwarven Combat Training",
+    "text": "You have proficiency with the battleaxe, handaxe, light hammer, and warhammer."
+  },
+  {
+    "id": "feature-effect-race-duergar-dwarven-resilience-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-duergar-dwarven-resilience-mpmm",
+    "kind": "rules-text",
+    "name": "Dwarven Resilience",
+    "text": "You have advantage on saving throws you make to avoid or end the poisoned condition on yourself."
+  },
+  {
+    "id": "feature-effect-race-dwarf-kaladesh-dwarven-resilience-psk",
+    "sourceType": "race",
+    "sourceId": "race-dwarf-kaladesh-dwarven-resilience-psk",
+    "kind": "rules-text",
+    "name": "Dwarven Resilience",
+    "text": "You have advantage on saving throws against poison, and you have resistance against poison damage."
+  },
+  {
+    "id": "feature-effect-race-dwarf-dwarven-resilience-phb",
+    "sourceType": "race",
+    "sourceId": "race-dwarf-dwarven-resilience-phb",
+    "kind": "rules-text",
+    "name": "Dwarven Resilience",
+    "text": "You have advantage on saving throws against poison, and you have resistance against poison damage."
+  },
+  {
     "id": "feature-effect-subclass-barbarian-totem-warrior-3-eagle-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-barbarian-totem-warrior-3-eagle-phb",
@@ -2344,6 +2856,14 @@
     "kind": "rules-text",
     "name": "Eclipse of Ill Omen",
     "text": "At 17th level, you can call upon the vermillion moon Ruidus to flare in the sky above you, eclipsing all other light."
+  },
+  {
+    "id": "feature-effect-race-hexblood-eerie-token-vrgr",
+    "sourceType": "race",
+    "sourceId": "race-hexblood-eerie-token-vrgr",
+    "kind": "rules-text",
+    "name": "Eerie Token",
+    "text": "As a bonus action, you can harmlessly remove a lock of your hair, one of your nails, or one of your teeth."
   },
   {
     "id": "feature-effect-subclass-paladin-ancients-20-elder-champion-phb",
@@ -2432,6 +2952,54 @@
     "kind": "rules-text",
     "name": "Elemental Mastery",
     "text": "Starting at 14th level, if you have resistance to a type of damage, you can spend 2 psi points as a reaction when you take damage of that type to ignore that damage; you gain immunity to that damage type until the end of your next turn."
+  },
+  {
+    "id": "feature-effect-race-elf-eladrin-elf-weapon-training-dmg",
+    "sourceType": "race",
+    "sourceId": "race-elf-eladrin-elf-weapon-training-dmg",
+    "kind": "rules-text",
+    "name": "Elf Weapon Training",
+    "text": "You have proficiency with the longsword, shortsword, shortbow, and longbow."
+  },
+  {
+    "id": "feature-effect-race-elf-high-elf-weapon-training-phb",
+    "sourceType": "race",
+    "sourceId": "race-elf-high-elf-weapon-training-phb",
+    "kind": "rules-text",
+    "name": "Elf Weapon Training",
+    "text": "You have proficiency with the longsword, shortsword, shortbow, and longbow."
+  },
+  {
+    "id": "feature-effect-race-elf-kaladesh-elf-weapon-training-psk",
+    "sourceType": "race",
+    "sourceId": "race-elf-kaladesh-elf-weapon-training-psk",
+    "kind": "rules-text",
+    "name": "Elf Weapon Training",
+    "text": "You have proficiency with the longsword, shortsword, shortbow, and longbow."
+  },
+  {
+    "id": "feature-effect-race-elf-wood-elf-weapon-training-phb",
+    "sourceType": "race",
+    "sourceId": "race-elf-wood-elf-weapon-training-phb",
+    "kind": "rules-text",
+    "name": "Elf Weapon Training",
+    "text": "You have proficiency with the longsword, shortsword, shortbow, and longbow."
+  },
+  {
+    "id": "feature-effect-race-elf-zendikar-joraga-nation-elf-weapon-training-psz",
+    "sourceType": "race",
+    "sourceId": "race-elf-zendikar-joraga-nation-elf-weapon-training-psz",
+    "kind": "rules-text",
+    "name": "Elf Weapon Training",
+    "text": "You have proficiency with the longsword, shortsword, shortbow, and longbow."
+  },
+  {
+    "id": "feature-effect-race-elf-zendikar-mul-daya-nation-elf-weapon-training-psz",
+    "sourceType": "race",
+    "sourceId": "race-elf-zendikar-mul-daya-nation-elf-weapon-training-psz",
+    "kind": "rules-text",
+    "name": "Elf Weapon Training",
+    "text": "You have proficiency with the longsword, shortsword, shortbow, and longbow."
   },
   {
     "id": "feature-effect-subclass-barbarian-totem-warrior-14-elk-scag",
@@ -2570,6 +3138,22 @@
     "text": "Beginning at 3rd level, whenever you finish a long rest, you can magically produce an experimental elixir in an empty flask you touch."
   },
   {
+    "id": "feature-effect-race-kenku-expert-duplication-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-kenku-expert-duplication-mpmm",
+    "kind": "rules-text",
+    "name": "Expert Duplication",
+    "text": "When you copy writing or craftwork produced by yourself or someone else, you have advantage on any ability checks you make to produce an exact duplicate."
+  },
+  {
+    "id": "feature-effect-race-kenku-expert-forgery-vgm",
+    "sourceType": "race",
+    "sourceId": "race-kenku-expert-forgery-vgm",
+    "kind": "rules-text",
+    "name": "Expert Forgery",
+    "text": "You can duplicate other creatures' handwriting and craftwork."
+  },
+  {
     "id": "feature-effect-class-bard-10-expertise-phb",
     "sourceType": "class",
     "sourceId": "class-bard-10-expertise-phb",
@@ -2626,44 +3210,12 @@
     "text": "Starting at 6th level, you can precisely strike a hidden cluster of nerves on a creature, temporarily preventing it from masking its true thoughts and intent."
   },
   {
-    "id": "feature-effect-subclass-artificer-armorer-5-extra-attack-tce",
-    "sourceType": "subclass",
-    "sourceId": "subclass-artificer-armorer-5-extra-attack-tce",
-    "kind": "rules-text",
-    "name": "Extra Attack",
-    "text": "5th-level Armorer feature You can attack twice, rather than once, whenever you take the Attack action on your turn."
-  },
-  {
-    "id": "feature-effect-subclass-artificer-battle-smith-5-extra-attack-tce",
-    "sourceType": "subclass",
-    "sourceId": "subclass-artificer-battle-smith-5-extra-attack-tce",
-    "kind": "rules-text",
-    "name": "Extra Attack",
-    "text": "Starting at 5th level, you can attack twice, rather than once, whenever you take the Attack action on your turn."
-  },
-  {
     "id": "feature-effect-class-barbarian-5-extra-attack-phb",
     "sourceType": "class",
     "sourceId": "class-barbarian-5-extra-attack-phb",
     "kind": "rules-text",
     "name": "Extra Attack",
     "text": "Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn."
-  },
-  {
-    "id": "feature-effect-subclass-bard-swords-6-extra-attack-xge",
-    "sourceType": "subclass",
-    "sourceId": "subclass-bard-swords-6-extra-attack-xge",
-    "kind": "rules-text",
-    "name": "Extra Attack",
-    "text": "Starting at 6th level, you can attack twice, instead of once, whenever you take the Attack action on your turn."
-  },
-  {
-    "id": "feature-effect-subclass-bard-valor-6-extra-attack-phb",
-    "sourceType": "subclass",
-    "sourceId": "subclass-bard-valor-6-extra-attack-phb",
-    "kind": "rules-text",
-    "name": "Extra Attack",
-    "text": "Starting at 6th level, you can attack twice, instead of once, whenever you take the Attack action on your turn."
   },
   {
     "id": "feature-effect-class-fighter-5-extra-attack-phb",
@@ -2704,6 +3256,38 @@
     "kind": "rules-text",
     "name": "Extra Attack",
     "text": "6th-level Warrior feature The sidekick can attack twice, instead of once, whenever it takes the Attack action on its turn."
+  },
+  {
+    "id": "feature-effect-subclass-artificer-armorer-5-extra-attack-tce",
+    "sourceType": "subclass",
+    "sourceId": "subclass-artificer-armorer-5-extra-attack-tce",
+    "kind": "rules-text",
+    "name": "Extra Attack",
+    "text": "5th-level Armorer feature You can attack twice, rather than once, whenever you take the Attack action on your turn."
+  },
+  {
+    "id": "feature-effect-subclass-artificer-battle-smith-5-extra-attack-tce",
+    "sourceType": "subclass",
+    "sourceId": "subclass-artificer-battle-smith-5-extra-attack-tce",
+    "kind": "rules-text",
+    "name": "Extra Attack",
+    "text": "Starting at 5th level, you can attack twice, rather than once, whenever you take the Attack action on your turn."
+  },
+  {
+    "id": "feature-effect-subclass-bard-swords-6-extra-attack-xge",
+    "sourceType": "subclass",
+    "sourceId": "subclass-bard-swords-6-extra-attack-xge",
+    "kind": "rules-text",
+    "name": "Extra Attack",
+    "text": "Starting at 6th level, you can attack twice, instead of once, whenever you take the Attack action on your turn."
+  },
+  {
+    "id": "feature-effect-subclass-bard-valor-6-extra-attack-phb",
+    "sourceType": "subclass",
+    "sourceId": "subclass-bard-valor-6-extra-attack-phb",
+    "kind": "rules-text",
+    "name": "Extra Attack",
+    "text": "Starting at 6th level, you can attack twice, instead of once, whenever you take the Attack action on your turn."
   },
   {
     "id": "feature-effect-subclass-wizard-bladesinging-6-extra-attack-tce",
@@ -2778,6 +3362,22 @@
     "text": "1st-level ranger optional class features, which replaces the Favored Enemy feature and works with the Foe Slayer feature When you hit a creature with an attack roll, you can call on your mystical bond with nature to mark the target as your favored enemy for 1..."
   },
   {
+    "id": "feature-effect-race-kender-fearless-dsotdq",
+    "sourceType": "race",
+    "sourceId": "race-kender-fearless-dsotdq",
+    "kind": "rules-text",
+    "name": "Fearless",
+    "text": "You have advantage on saving throws you make to avoid or end the frightened condition on yourself."
+  },
+  {
+    "id": "feature-effect-race-vampire-ixalan-feast-of-blood-psx",
+    "sourceType": "race",
+    "sourceId": "race-vampire-ixalan-feast-of-blood-psx",
+    "kind": "rules-text",
+    "name": "Feast of Blood",
+    "text": "When you drain blood with your Bloodthirst ability, you experience a surge of vitality."
+  },
+  {
     "id": "feature-effect-class-barbarian-7-feral-instinct-phb",
     "sourceType": "class",
     "sourceId": "class-barbarian-7-feral-instinct-phb",
@@ -2802,6 +3402,118 @@
     "text": "Starting at 15th level, you can run down your foes, whether you're mounted or not."
   },
   {
+    "id": "feature-effect-race-astral-elf-fey-ancestry-aag",
+    "sourceType": "race",
+    "sourceId": "race-astral-elf-fey-ancestry-aag",
+    "kind": "rules-text",
+    "name": "Fey Ancestry",
+    "text": "You have advantage on saving throws you make to avoid or end the charmed condition on yourself."
+  },
+  {
+    "id": "feature-effect-race-bugbear-fey-ancestry-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-bugbear-fey-ancestry-mpmm",
+    "kind": "rules-text",
+    "name": "Fey Ancestry",
+    "text": "You have advantage on saving throws you make to avoid or end the charmed condition on yourself."
+  },
+  {
+    "id": "feature-effect-race-eladrin-fey-ancestry-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-eladrin-fey-ancestry-mpmm",
+    "kind": "rules-text",
+    "name": "Fey Ancestry",
+    "text": "You have advantage on saving throws you make to avoid or end the charmed condition on yourself."
+  },
+  {
+    "id": "feature-effect-race-elf-kaladesh-fey-ancestry-psk",
+    "sourceType": "race",
+    "sourceId": "race-elf-kaladesh-fey-ancestry-psk",
+    "kind": "rules-text",
+    "name": "Fey Ancestry",
+    "text": "You have advantage on saving throws against being charmed, and magic can't put you to sleep."
+  },
+  {
+    "id": "feature-effect-race-elf-zendikar-fey-ancestry-psz",
+    "sourceType": "race",
+    "sourceId": "race-elf-zendikar-fey-ancestry-psz",
+    "kind": "rules-text",
+    "name": "Fey Ancestry",
+    "text": "You have advantage on saving throws against being charmed, and magic can't put you to sleep."
+  },
+  {
+    "id": "feature-effect-race-elf-fey-ancestry-phb",
+    "sourceType": "race",
+    "sourceId": "race-elf-fey-ancestry-phb",
+    "kind": "rules-text",
+    "name": "Fey Ancestry",
+    "text": "You have advantage on saving throws against being charmed, and magic can't put you to sleep."
+  },
+  {
+    "id": "feature-effect-race-goblin-fey-ancestry-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-goblin-fey-ancestry-mpmm",
+    "kind": "rules-text",
+    "name": "Fey Ancestry",
+    "text": "You have advantage on saving throws you make to avoid or end the charmed condition on yourself."
+  },
+  {
+    "id": "feature-effect-race-half-elf-fey-ancestry-phb",
+    "sourceType": "race",
+    "sourceId": "race-half-elf-fey-ancestry-phb",
+    "kind": "rules-text",
+    "name": "Fey Ancestry",
+    "text": "You have advantage on saving throws against being charmed, and magic can't put you to sleep."
+  },
+  {
+    "id": "feature-effect-race-hobgoblin-fey-ancestry-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-hobgoblin-fey-ancestry-mpmm",
+    "kind": "rules-text",
+    "name": "Fey Ancestry",
+    "text": "You have advantage on saving throws you make to avoid or end the charmed condition on yourself."
+  },
+  {
+    "id": "feature-effect-race-sea-elf-fey-ancestry-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-sea-elf-fey-ancestry-mpmm",
+    "kind": "rules-text",
+    "name": "Fey Ancestry",
+    "text": "You have advantage on saving throws you make to avoid or end the charmed condition on yourself."
+  },
+  {
+    "id": "feature-effect-race-shadar-kai-fey-ancestry-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-shadar-kai-fey-ancestry-mpmm",
+    "kind": "rules-text",
+    "name": "Fey Ancestry",
+    "text": "You have advantage on saving throws you make to avoid or end the charmed condition on yourself."
+  },
+  {
+    "id": "feature-effect-race-hobgoblin-fey-gift-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-hobgoblin-fey-gift-mpmm",
+    "kind": "rules-text",
+    "name": "Fey Gift",
+    "text": "You can use this trait to take the Help action as a bonus action, and you can do so a number of times equal to your proficiency bonus."
+  },
+  {
+    "id": "feature-effect-race-eladrin-fey-step-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-eladrin-fey-step-mpmm",
+    "kind": "rules-text",
+    "name": "Fey Step",
+    "text": "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see."
+  },
+  {
+    "id": "feature-effect-race-elf-eladrin-fey-step-mtf",
+    "sourceType": "race",
+    "sourceId": "race-elf-eladrin-fey-step-mtf",
+    "kind": "rules-text",
+    "name": "Fey Step",
+    "text": "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see."
+  },
+  {
     "id": "feat-effect-fey-touched",
     "sourceType": "feat",
     "sourceId": "fey-touched",
@@ -2818,6 +3530,14 @@
     "text": "Starting at 10th level, you can choose one damage type when you finish a short or long rest."
   },
   {
+    "id": "feature-effect-race-shifter-longtooth-fierce-erlw",
+    "sourceType": "race",
+    "sourceId": "race-shifter-longtooth-fierce-erlw",
+    "kind": "rules-text",
+    "name": "Fierce",
+    "text": "You have proficiency in the Intimidation skill."
+  },
+  {
     "id": "feature-effect-subclass-sorcerer-pyromancer-psk-18-fiery-soul-psk",
     "sourceType": "subclass",
     "sourceId": "subclass-sorcerer-pyromancer-psk-18-fiery-soul-psk",
@@ -2832,14 +3552,6 @@
     "kind": "rules-text",
     "name": "Fighting Spirit",
     "text": "Starting at 3rd level, your intensity in battle can shield you and help you strike true."
-  },
-  {
-    "id": "feature-effect-subclass-bard-swords-3-fighting-style-xge",
-    "sourceType": "subclass",
-    "sourceId": "subclass-bard-swords-3-fighting-style-xge",
-    "kind": "rules-text",
-    "name": "Fighting Style",
-    "text": "At 3rd level, you adopt a style of fighting as your specialty."
   },
   {
     "id": "feature-effect-class-fighter-1-fighting-style-phb",
@@ -2864,6 +3576,14 @@
     "kind": "rules-text",
     "name": "Fighting Style",
     "text": "At 2nd level, you adopt a particular style of fighting as your specialty."
+  },
+  {
+    "id": "feature-effect-subclass-bard-swords-3-fighting-style-xge",
+    "sourceType": "subclass",
+    "sourceId": "subclass-bard-swords-3-fighting-style-xge",
+    "kind": "rules-text",
+    "name": "Fighting Style",
+    "text": "At 3rd level, you adopt a style of fighting as your specialty."
   },
   {
     "id": "feature-effect-subclass-sorcerer-pyromancer-psk-6-fire-in-the-veins-psk",
@@ -3584,6 +4304,30 @@
     "itemName": "Wooden Cuirass of Fire Resistance"
   },
   {
+    "id": "feature-effect-race-genasi-fire-fire-resistance-eepc",
+    "sourceType": "race",
+    "sourceId": "race-genasi-fire-fire-resistance-eepc",
+    "kind": "rules-text",
+    "name": "Fire Resistance",
+    "text": "You have resistance to fire damage."
+  },
+  {
+    "id": "feature-effect-race-genasi-fire-fire-resistance-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-genasi-fire-fire-resistance-mpmm",
+    "kind": "rules-text",
+    "name": "Fire Resistance",
+    "text": "You have resistance to fire damage."
+  },
+  {
+    "id": "feature-effect-race-giff-firearms-mastery-aag",
+    "sourceType": "race",
+    "sourceId": "race-giff-firearms-mastery-aag",
+    "kind": "rules-text",
+    "name": "Firearms Mastery",
+    "text": "You have a mystical connection to firearms that traces back to the gods of the giff, who delighted in such weapons."
+  },
+  {
     "id": "feature-effect-class-sorcerer-2-flexible-casting-phb",
     "sourceType": "class",
     "sourceId": "class-sorcerer-2-flexible-casting-phb",
@@ -3810,6 +4554,22 @@
     "itemName": "Wooden Cuirass of Force Resistance"
   },
   {
+    "id": "feature-effect-race-dragonborn-draconblood-forceful-presence-egw",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-draconblood-forceful-presence-egw",
+    "kind": "rules-text",
+    "name": "Forceful Presence",
+    "text": "You can use your understanding of creative diplomacy or intimidation to guide a conversation in your favor."
+  },
+  {
+    "id": "feature-effect-race-human-innistrad-kessig-forest-folk-psi",
+    "sourceType": "race",
+    "sourceId": "race-human-innistrad-kessig-forest-folk-psi",
+    "kind": "rules-text",
+    "name": "Forest Folk",
+    "text": "You have proficiency in the Survival skill."
+  },
+  {
     "id": "feature-effect-subclass-warlock-undead-1-form-of-dread-vrgr",
     "sourceType": "subclass",
     "sourceId": "subclass-warlock-undead-1-form-of-dread-vrgr",
@@ -3824,6 +4584,14 @@
     "kind": "rules-text",
     "name": "Fortified Position",
     "text": "Starting at 15th level, you're a master at forming well-defended emplacements using Eldritch Cannon: You and your allies have Cover while within 10 feet of a cannon you create with Eldritch Cannon, as a result of a shimmering field of magical protection that..."
+  },
+  {
+    "id": "feature-effect-race-hobgoblin-fortune-from-the-many-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-hobgoblin-fortune-from-the-many-mpmm",
+    "kind": "rules-text",
+    "name": "Fortune from the Many",
+    "text": "If you miss with an attack roll or fail an ability check or a saving throw, you can draw on your bonds of reciprocity to gain a bonus to the roll equal to the number of allies you can see within 30 feet of you (maximum bonus of +3)."
   },
   {
     "id": "feature-effect-subclass-druid-blighted-10-foul-conjuration-tdcsr",
@@ -3858,12 +4626,28 @@
     "text": "You've manifested the icy might emblematic of frost giants, granting you the following benefits:Ability Score Increase."
   },
   {
+    "id": "feature-effect-race-goblin-fury-of-the-small-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-goblin-fury-of-the-small-mpmm",
+    "kind": "rules-text",
+    "name": "Fury of the Small",
+    "text": "When you damage a creature with an attack or a spell and the creature's size is larger than yours, you can cause the attack or spell to deal extra damage to the creature."
+  },
+  {
     "id": "feature-effect-subclass-paladin-open-sea-3-fury-of-the-tides-tdcsr",
     "sourceType": "subclass",
     "sourceId": "subclass-paladin-open-sea-3-fury-of-the-tides-tdcsr",
     "kind": "rules-text",
     "name": "Fury of the Tides",
     "text": "As a bonus action, you channel the powerful might of the waves to bolster your attacks for 1 minute."
+  },
+  {
+    "id": "feature-effect-race-dragonborn-gem-gem-flight-ftd",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-gem-gem-flight-ftd",
+    "kind": "rules-text",
+    "name": "Gem Flight",
+    "text": "Starting at 5th level, you can use a bonus action to manifest spectral wings on your body."
   },
   {
     "id": "feature-effect-subclass-warlock-genie-1-genie-s-vessel-tce",
@@ -3914,12 +4698,100 @@
     "text": "15th-level Oath of Glory feature You can turn defense into a sudden strike."
   },
   {
+    "id": "feature-effect-race-gnome-deep-gnome-cunning-dmg",
+    "sourceType": "race",
+    "sourceId": "race-gnome-deep-gnome-cunning-dmg",
+    "kind": "rules-text",
+    "name": "Gnome Cunning",
+    "text": "You have advantage on Intelligence, Wisdom, and Charisma saving throws against magic."
+  },
+  {
+    "id": "feature-effect-race-gnome-gnome-cunning-phb",
+    "sourceType": "race",
+    "sourceId": "race-gnome-gnome-cunning-phb",
+    "kind": "rules-text",
+    "name": "Gnome Cunning",
+    "text": "You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic."
+  },
+  {
+    "id": "feature-effect-race-deep-gnome-gnomish-magic-resistance-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-deep-gnome-gnomish-magic-resistance-mpmm",
+    "kind": "rules-text",
+    "name": "Gnomish Magic Resistance",
+    "text": "You have advantage on Intelligence, Wisdom, and Charisma saving throws against spells."
+  },
+  {
+    "id": "feature-effect-race-minotaur-goring-rush-ggr",
+    "sourceType": "race",
+    "sourceId": "race-minotaur-goring-rush-ggr",
+    "kind": "rules-text",
+    "name": "Goring Rush",
+    "text": "Immediately after you use the Dash action on your turn and move at least 20 feet, you can make one melee attack with your horns as a bonus action."
+  },
+  {
+    "id": "feature-effect-race-minotaur-goring-rush-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-minotaur-goring-rush-mpmm",
+    "kind": "rules-text",
+    "name": "Goring Rush",
+    "text": "Immediately after you take the Dash action on your turn and move at least 20 feet, you can make one melee attack with your Horns as a bonus action."
+  },
+  {
+    "id": "feature-effect-race-shifter-swiftstride-graceful-erlw",
+    "sourceType": "race",
+    "sourceId": "race-shifter-swiftstride-graceful-erlw",
+    "kind": "rules-text",
+    "name": "Graceful",
+    "text": "You have proficiency in the Acrobatics skill."
+  },
+  {
     "id": "feat-effect-great-weapon-master",
     "sourceType": "feat",
     "sourceId": "great-weapon-master",
     "kind": "rules-text",
     "name": "Great Weapon Master",
     "text": "You've learned to put the weight of a weapon to your advantage, letting its momentum empower your strikes."
+  },
+  {
+    "id": "feature-effect-race-goblin-zendikar-grotag-tribe-grit-psz",
+    "sourceType": "race",
+    "sourceId": "race-goblin-zendikar-grotag-tribe-grit-psz",
+    "kind": "rules-text",
+    "name": "Grit",
+    "text": "You have resistance to fire damage and psychic damage."
+  },
+  {
+    "id": "feature-effect-race-goblin-zendikar-lavastep-tribe-grit-psz",
+    "sourceType": "race",
+    "sourceId": "race-goblin-zendikar-lavastep-tribe-grit-psz",
+    "kind": "rules-text",
+    "name": "Grit",
+    "text": "You have resistance to fire damage and psychic damage."
+  },
+  {
+    "id": "feature-effect-race-goblin-zendikar-tuktuk-tribe-grit-psz",
+    "sourceType": "race",
+    "sourceId": "race-goblin-zendikar-tuktuk-tribe-grit-psz",
+    "kind": "rules-text",
+    "name": "Grit",
+    "text": "You have resistance to fire damage and psychic damage."
+  },
+  {
+    "id": "feature-effect-race-goblin-zendikar-grotag-tribe-grotag-tamer-psz",
+    "sourceType": "race",
+    "sourceId": "race-goblin-zendikar-grotag-tribe-grotag-tamer-psz",
+    "kind": "rules-text",
+    "name": "Grotag Tamer",
+    "text": "You have proficiency in the Animal Handling skill."
+  },
+  {
+    "id": "feature-effect-race-kobold-grovel-cower-and-beg-vgm",
+    "sourceType": "race",
+    "sourceId": "race-kobold-grovel-cower-and-beg-vgm",
+    "kind": "rules-text",
+    "name": "Grovel, Cower, and Beg",
+    "text": "As an action on your turn, you can cower pathetically to distract nearby foes."
   },
   {
     "id": "feature-effect-subclass-fighter-psi-warrior-10-guarded-mind-tce",
@@ -3936,6 +4808,22 @@
     "kind": "rules-text",
     "name": "Guardian",
     "text": "When a Huge or smaller creature you can see ends its turn within 30 feet of you, you can use your reaction to magically force it to make a Strength saving throw against your spell save DC."
+  },
+  {
+    "id": "feature-effect-race-triton-guardian-of-the-depths-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-triton-guardian-of-the-depths-mpmm",
+    "kind": "rules-text",
+    "name": "Guardian of the Depths",
+    "text": "Adapted to the frigid ocean depths, you have resistance to cold damage."
+  },
+  {
+    "id": "feature-effect-race-triton-guardians-of-the-depths-vgm",
+    "sourceType": "race",
+    "sourceId": "race-triton-guardians-of-the-depths-vgm",
+    "kind": "rules-text",
+    "name": "Guardians of the Depths",
+    "text": "Adapted to even the most extreme ocean depths, you have resistance to cold damage."
   },
   {
     "id": "feature-effect-subclass-paladin-conquest-3-guided-strike-xge",
@@ -3962,12 +4850,76 @@
     "text": "You have a quick hand and keen eye when employing firearms, granting you the following benefits:Increase your Dexterity score by 1, to a maximum of 20."
   },
   {
+    "id": "feature-effect-race-hadozee-hadozee-dodge-aag",
+    "sourceType": "race",
+    "sourceId": "race-hadozee-hadozee-dodge-aag",
+    "kind": "rules-text",
+    "name": "Hadozee Dodge",
+    "text": "The magic that runs in your veins heightens your natural defenses."
+  },
+  {
+    "id": "feature-effect-race-minotaur-hammering-horns-ggr",
+    "sourceType": "race",
+    "sourceId": "race-minotaur-hammering-horns-ggr",
+    "kind": "rules-text",
+    "name": "Hammering Horns",
+    "text": "Immediately after you hit a creature with a melee attack as part of the Attack action on your turn, you can use a bonus action to attempt to shove that target with your horns."
+  },
+  {
+    "id": "feature-effect-race-minotaur-hammering-horns-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-minotaur-hammering-horns-mpmm",
+    "kind": "rules-text",
+    "name": "Hammering Horns",
+    "text": "Immediately after you hit a creature with a melee attack as part of the Attack action on your turn, you can use a bonus action to attempt to push that target with your horns."
+  },
+  {
     "id": "feat-effect-hardiness",
     "sourceType": "feat",
     "sourceId": "hardiness",
     "kind": "rules-text",
     "name": "Hardiness",
     "text": "Your determination and stamina have improved through hardship and toil."
+  },
+  {
+    "id": "feature-effect-race-harengon-hare-trigger-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-harengon-hare-trigger-mpmm",
+    "kind": "rules-text",
+    "name": "Hare-Trigger",
+    "text": "You can add your proficiency bonus to your initiative rolls."
+  },
+  {
+    "id": "feature-effect-race-harengon-hare-trigger-wbtw",
+    "sourceType": "race",
+    "sourceId": "race-harengon-hare-trigger-wbtw",
+    "kind": "rules-text",
+    "name": "Hare-Trigger",
+    "text": "You can add your proficiency bonus to your initiative rolls."
+  },
+  {
+    "id": "feature-effect-race-aven-hawk-headed-hawkeyed-psa",
+    "sourceType": "race",
+    "sourceId": "race-aven-hawk-headed-hawkeyed-psa",
+    "kind": "rules-text",
+    "name": "Hawkeyed",
+    "text": "You have proficiency in the Perception skill."
+  },
+  {
+    "id": "feature-effect-race-aven-hawkeyed-psd",
+    "sourceType": "race",
+    "sourceId": "race-aven-hawkeyed-psd",
+    "kind": "rules-text",
+    "name": "Hawkeyed",
+    "text": "You have proficiency in the Perception skill."
+  },
+  {
+    "id": "feature-effect-race-aasimar-healing-hands-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-healing-hands-mpmm",
+    "kind": "rules-text",
+    "name": "Healing Hands",
+    "text": "As an action, you can touch a creature and roll a number of d4s equal to your proficiency bonus."
   },
   {
     "id": "feature-effect-subclass-warlock-celestial-1-healing-light-xge",
@@ -4000,6 +4952,14 @@
     "kind": "rules-text",
     "name": "Heavily Armored",
     "text": "You have trained to master the use of heavy armor, gaining the following benefits:Increase your Strength score by 1, to a maximum of 20."
+  },
+  {
+    "id": "feature-effect-race-tiefling-hellish-resistance-phb",
+    "sourceType": "race",
+    "sourceId": "race-tiefling-hellish-resistance-phb",
+    "kind": "rules-text",
+    "name": "Hellish Resistance",
+    "text": "You have resistance to fire damage."
   },
   {
     "id": "feature-effect-class-expert-sidekick-1-helpful-tce",
@@ -4042,12 +5002,36 @@
     "text": "Starting at 10th level, you can use the hidden, magical pathways that some fey use to traverse space in the blink of an eye."
   },
   {
+    "id": "feature-effect-race-firbolg-hidden-step-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-firbolg-hidden-step-mpmm",
+    "kind": "rules-text",
+    "name": "Hidden Step",
+    "text": "As a bonus action, you can magically turn invisible until the start of your next turn or until you attack, make a damage roll, or force someone to make a saving throw."
+  },
+  {
+    "id": "feature-effect-race-firbolg-hidden-step-vgm",
+    "sourceType": "race",
+    "sourceId": "race-firbolg-hidden-step-vgm",
+    "kind": "rules-text",
+    "name": "Hidden Step",
+    "text": "As a bonus action, you can magically turn invisible until the start of your next turn or until you attack, make a damage roll, or force someone to make a saving throw."
+  },
+  {
     "id": "feature-effect-class-ranger-10-hide-in-plain-sight-phb",
     "sourceType": "class",
     "sourceId": "class-ranger-10-hide-in-plain-sight-phb",
     "kind": "rules-text",
     "name": "Hide in Plain Sight",
     "text": "Starting at 10th level, you can spend 1 minute creating camouflage for yourself."
+  },
+  {
+    "id": "feature-effect-race-giff-hippo-build-aag",
+    "sourceType": "race",
+    "sourceId": "race-giff-hippo-build-aag",
+    "kind": "rules-text",
+    "name": "Hippo Build",
+    "text": "You have advantage on Strength-based ability checks and Strength saving throws."
   },
   {
     "id": "feat-effect-hit-die",
@@ -4080,6 +5064,38 @@
     "kind": "rules-text",
     "name": "Hound of Ill Omen",
     "text": "At 6th level, you gain the ability to call forth a howling creature of darkness to harass your foes."
+  },
+  {
+    "id": "feature-effect-race-lizardfolk-hungry-jaws-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-lizardfolk-hungry-jaws-mpmm",
+    "kind": "rules-text",
+    "name": "Hungry Jaws",
+    "text": "You can throw yourself into a feeding frenzy."
+  },
+  {
+    "id": "feature-effect-race-lizardfolk-hungry-jaws-vgm",
+    "sourceType": "race",
+    "sourceId": "race-lizardfolk-hungry-jaws-vgm",
+    "kind": "rules-text",
+    "name": "Hungry Jaws",
+    "text": "In battle, you can throw yourself into a vicious feeding frenzy."
+  },
+  {
+    "id": "feature-effect-race-leonin-hunter-s-instincts-mot",
+    "sourceType": "race",
+    "sourceId": "race-leonin-hunter-s-instincts-mot",
+    "kind": "rules-text",
+    "name": "Hunter's Instincts",
+    "text": "You have proficiency in one of the following skills of your choice: Athletics, Intimidation, Perception, or Survival."
+  },
+  {
+    "id": "feature-effect-race-lizardfolk-hunter-s-lore-vgm",
+    "sourceType": "race",
+    "sourceId": "race-lizardfolk-hunter-s-lore-vgm",
+    "kind": "rules-text",
+    "name": "Hunter's Lore",
+    "text": "You gain proficiency with two of the following skills of your choice: Animal Handling, Nature, Perception, Stealth, and Survival."
   },
   {
     "id": "feature-effect-subclass-ranger-monster-slayer-3-hunter-s-sense-xge",
@@ -4128,6 +5144,14 @@
     "kind": "rules-text",
     "name": "Implements of Mercy",
     "text": "3rd-level Way of Mercy feature You gain proficiency in the Insight and Medicine skills, and you gain proficiency with the herbalism kit."
+  },
+  {
+    "id": "feature-effect-race-minotaur-imposing-presence-ggr",
+    "sourceType": "race",
+    "sourceId": "race-minotaur-imposing-presence-ggr",
+    "kind": "rules-text",
+    "name": "Imposing Presence",
+    "text": "You have proficiency in one of the following skills of your choice: Intimidation or Persuasion."
   },
   {
     "id": "feature-effect-subclass-rogue-assassin-13-impostor-phb",
@@ -4184,6 +5208,14 @@
     "kind": "rules-text",
     "name": "Incarnation of Corruption",
     "text": "At 14th level, your physical form begins to take on the tainted traits of the land you are bonded to."
+  },
+  {
+    "id": "feature-effect-race-elf-pallid-incisive-sense-egw",
+    "sourceType": "race",
+    "sourceId": "race-elf-pallid-incisive-sense-egw",
+    "kind": "rules-text",
+    "name": "Incisive Sense",
+    "text": "You have advantage on Intelligence (Investigation) and Wisdom (Insight) checks."
   },
   {
     "id": "feature-effect-subclass-warlock-undying-14-indestructible-life-scag",
@@ -5424,6 +6456,14 @@
     "text": "7th-level barbarian optional class features As part of the bonus action you take to enter your rage, you can move up to half your speed."
   },
   {
+    "id": "feature-effect-race-warforged-integrated-protection-erlw",
+    "sourceType": "race",
+    "sourceId": "race-warforged-integrated-protection-erlw",
+    "kind": "rules-text",
+    "name": "Integrated Protection",
+    "text": "Your body has built-in defensive layers, which can be enhanced with armor: You gain a +1 bonus to Armor Class."
+  },
+  {
     "id": "feature-effect-subclass-barbarian-berserker-10-intimidating-presence-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-barbarian-berserker-10-intimidating-presence-phb",
@@ -5464,6 +6504,78 @@
     "text": "Starting at 2nd level, you can add half your proficiency bonus, rounded down, to any ability check you make that doesn't already include your proficiency bonus."
   },
   {
+    "id": "feature-effect-race-grimlock-keen-hearing-and-smell-dmg",
+    "sourceType": "race",
+    "sourceId": "race-grimlock-keen-hearing-and-smell-dmg",
+    "kind": "rules-text",
+    "name": "Keen Hearing and Smell",
+    "text": "You have advantage on Wisdom (Perception) checks that rely on hearing or smell."
+  },
+  {
+    "id": "feature-effect-race-astral-elf-keen-senses-aag",
+    "sourceType": "race",
+    "sourceId": "race-astral-elf-keen-senses-aag",
+    "kind": "rules-text",
+    "name": "Keen Senses",
+    "text": "You have proficiency in the Perception skill."
+  },
+  {
+    "id": "feature-effect-race-eladrin-keen-senses-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-eladrin-keen-senses-mpmm",
+    "kind": "rules-text",
+    "name": "Keen Senses",
+    "text": "You have proficiency in the Perception skill."
+  },
+  {
+    "id": "feature-effect-race-elf-kaladesh-keen-senses-psk",
+    "sourceType": "race",
+    "sourceId": "race-elf-kaladesh-keen-senses-psk",
+    "kind": "rules-text",
+    "name": "Keen Senses",
+    "text": "You have proficiency in the Perception skill."
+  },
+  {
+    "id": "feature-effect-race-elf-zendikar-keen-senses-psz",
+    "sourceType": "race",
+    "sourceId": "race-elf-zendikar-keen-senses-psz",
+    "kind": "rules-text",
+    "name": "Keen Senses",
+    "text": "You have proficiency in the Perception skill."
+  },
+  {
+    "id": "feature-effect-race-elf-keen-senses-phb",
+    "sourceType": "race",
+    "sourceId": "race-elf-keen-senses-phb",
+    "kind": "rules-text",
+    "name": "Keen Senses",
+    "text": "You have proficiency in the Perception skill."
+  },
+  {
+    "id": "feature-effect-race-sea-elf-keen-senses-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-sea-elf-keen-senses-mpmm",
+    "kind": "rules-text",
+    "name": "Keen Senses",
+    "text": "You have proficiency in the Perception skill."
+  },
+  {
+    "id": "feature-effect-race-shadar-kai-keen-senses-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-shadar-kai-keen-senses-mpmm",
+    "kind": "rules-text",
+    "name": "Keen Senses",
+    "text": "You have proficiency in the Perception skill."
+  },
+  {
+    "id": "feature-effect-race-loxodon-keen-smell-ggr",
+    "sourceType": "race",
+    "sourceId": "race-loxodon-keen-smell-ggr",
+    "kind": "rules-text",
+    "name": "Keen Smell",
+    "text": "Thanks to your sensitive trunk, you have advantage on Wisdom (Perception), Wisdom (Survival), and Intelligence (Investigation) checks that involve smell."
+  },
+  {
     "id": "feat-effect-keenness-of-the-stone-giant",
     "sourceType": "feat",
     "sourceId": "keenness-of-the-stone-giant",
@@ -5472,12 +6584,52 @@
     "text": "You've manifested the physical talents emblematic of stone giants, granting you the following benefits:Ability Score Increase."
   },
   {
+    "id": "feature-effect-race-aven-ibis-headed-kefnet-s-blessing-psa",
+    "sourceType": "race",
+    "sourceId": "race-aven-ibis-headed-kefnet-s-blessing-psa",
+    "kind": "rules-text",
+    "name": "Kefnet's Blessing",
+    "text": "You can add half your proficiency bonus, rounded down, to any Intelligence check you make that doesn't already include your proficiency bonus."
+  },
+  {
+    "id": "feature-effect-race-human-keldon-keldon-resilience-psd",
+    "sourceType": "race",
+    "sourceId": "race-human-keldon-keldon-resilience-psd",
+    "kind": "rules-text",
+    "name": "Keldon Resilience",
+    "text": "You have proficiency in Strength saving throws."
+  },
+  {
+    "id": "feature-effect-race-kender-kender-curiosity-dsotdq",
+    "sourceType": "race",
+    "sourceId": "race-kender-kender-curiosity-dsotdq",
+    "kind": "rules-text",
+    "name": "Kender Curiosity",
+    "text": "Thanks to the mystical origin of your people, you gain proficiency with one of the following skills of your choice: Insight, Investigation, Sleight of Hand, Stealth, or Survival."
+  },
+  {
+    "id": "feature-effect-race-kenku-kenku-recall-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-kenku-kenku-recall-mpmm",
+    "kind": "rules-text",
+    "name": "Kenku Recall",
+    "text": "Thanks to your supernaturally good memory, you have proficiency in two skills of your choice."
+  },
+  {
     "id": "feature-effect-subclass-monk-kensei-3-kensei-s-shot-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-monk-kensei-3-kensei-s-shot-xge",
     "kind": "rules-text",
     "name": "Kensei's Shot",
     "text": "You can use a bonus action on your turn to make your ranged attacks with a kensei weapon more deadly."
+  },
+  {
+    "id": "feature-effect-race-khenra-khenra-weapon-training-psa",
+    "sourceType": "race",
+    "sourceId": "race-khenra-khenra-weapon-training-psa",
+    "kind": "rules-text",
+    "name": "Khenra Weapon Training",
+    "text": "You have proficiency with the khopesh (longsword), spear, and javelin."
   },
   {
     "id": "feature-effect-class-monk-6-ki-empowered-strikes-phb",
@@ -5496,12 +6648,28 @@
     "text": "3rd-level monk optional class features If you spend 1 ki point or more as part of your action on your turn, you can make one attack with an unarmed strike or a monk weapon as a bonus action before the end of the turn."
   },
   {
-    "id": "feature-effect-subclass-druid-land-6-land-s-stride-phb",
-    "sourceType": "subclass",
-    "sourceId": "subclass-druid-land-6-land-s-stride-phb",
+    "id": "feature-effect-race-reborn-knowledge-from-a-past-life-vrgr",
+    "sourceType": "race",
+    "sourceId": "race-reborn-knowledge-from-a-past-life-vrgr",
     "kind": "rules-text",
-    "name": "Land's Stride",
-    "text": "Starting at 6th level, moving through nonmagical difficult terrain costs you no extra movement."
+    "name": "Knowledge from a Past Life",
+    "text": "You temporarily remember glimpses of the past, perhaps faded memories from ages ago or a previous life."
+  },
+  {
+    "id": "feature-effect-race-kor-kor-climbing-psz",
+    "sourceType": "race",
+    "sourceId": "race-kor-kor-climbing-psz",
+    "kind": "rules-text",
+    "name": "Kor Climbing",
+    "text": "You have proficiency in the Athletics and Acrobatics skills."
+  },
+  {
+    "id": "feature-effect-race-minotaur-labyrinthine-recall-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-minotaur-labyrinthine-recall-mpmm",
+    "kind": "rules-text",
+    "name": "Labyrinthine Recall",
+    "text": "You always know which direction is north, and you have advantage on any Wisdom (Survival) check you make to navigate or track."
   },
   {
     "id": "feature-effect-class-ranger-8-land-s-stride-phb",
@@ -5512,12 +6680,52 @@
     "text": "Starting at 8th level, moving through nonmagical difficult terrain costs you no extra movement."
   },
   {
+    "id": "feature-effect-subclass-druid-land-6-land-s-stride-phb",
+    "sourceType": "subclass",
+    "sourceId": "subclass-druid-land-6-land-s-stride-phb",
+    "kind": "rules-text",
+    "name": "Land's Stride",
+    "text": "Starting at 6th level, moving through nonmagical difficult terrain costs you no extra movement."
+  },
+  {
+    "id": "feature-effect-race-goblin-zendikar-lavastep-tribe-lavastep-grit-psz",
+    "sourceType": "race",
+    "sourceId": "race-goblin-zendikar-lavastep-tribe-lavastep-grit-psz",
+    "kind": "rules-text",
+    "name": "Lavastep Grit",
+    "text": "You have advantage on Dexterity (Stealth) checks made to hide in rocky or subterranean environments."
+  },
+  {
     "id": "feature-effect-subclass-fighter-echo-knight-18-legion-of-one-egw",
     "sourceType": "subclass",
     "sourceId": "subclass-fighter-echo-knight-18-legion-of-one-egw",
     "kind": "rules-text",
     "name": "Legion of One",
     "text": "18th-level Echo Knight feature You can use a bonus action to create two echoes with your Manifest Echo feature, and these echoes can coexist."
+  },
+  {
+    "id": "feature-effect-race-harengon-leporine-senses-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-harengon-leporine-senses-mpmm",
+    "kind": "rules-text",
+    "name": "Leporine Senses",
+    "text": "You have proficiency in the Perception skill."
+  },
+  {
+    "id": "feature-effect-race-harengon-leporine-senses-wbtw",
+    "sourceType": "race",
+    "sourceId": "race-harengon-leporine-senses-wbtw",
+    "kind": "rules-text",
+    "name": "Leporine Senses",
+    "text": "You have proficiency in the Perception skill."
+  },
+  {
+    "id": "feature-effect-race-locathah-leviathan-will-lr",
+    "sourceType": "race",
+    "sourceId": "race-locathah-leviathan-will-lr",
+    "kind": "rules-text",
+    "name": "Leviathan Will",
+    "text": "You have advantage on saving throws against being charmed, frightened, paralyzed, poisoned, stunned, or put to sleep."
   },
   {
     "id": "feat-effect-lightly-armored",
@@ -5858,6 +7066,14 @@
     "itemName": "Wooden Cuirass of Lightning Resistance"
   },
   {
+    "id": "feature-effect-race-genasi-air-lightning-resistance-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-genasi-air-lightning-resistance-mpmm",
+    "kind": "rules-text",
+    "name": "Lightning Resistance",
+    "text": "You have resistance to lightning damage."
+  },
+  {
     "id": "feat-effect-linguist",
     "sourceType": "feat",
     "sourceId": "linguist",
@@ -5866,12 +7082,36 @@
     "text": "You have studied languages and codes, gaining the following benefits:Increase your Intelligence score by 1, to a maximum of 20."
   },
   {
+    "id": "feature-effect-race-goliath-little-giant-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-goliath-little-giant-mpmm",
+    "kind": "rules-text",
+    "name": "Little Giant",
+    "text": "You have proficiency in the Athletics skill, and you count as one size larger when determining your carrying weight and the weight you can push, drag, or lift."
+  },
+  {
     "id": "feature-effect-subclass-paladin-glory-20-living-legend-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-paladin-glory-20-living-legend-tce",
     "kind": "rules-text",
     "name": "Living Legend",
     "text": "20th-level Oath of Glory feature You can empower yourself with the legends—whether true or exaggerated—of your great deeds."
+  },
+  {
+    "id": "feature-effect-race-merfolk-ixalan-blue-lore-of-the-waters-psx",
+    "sourceType": "race",
+    "sourceId": "race-merfolk-ixalan-blue-lore-of-the-waters-psx",
+    "kind": "rules-text",
+    "name": "Lore of the Waters",
+    "text": "You gain proficiency in the History and Nature skills."
+  },
+  {
+    "id": "feature-effect-race-loxodon-loxodon-serenity-ggr",
+    "sourceType": "race",
+    "sourceId": "race-loxodon-loxodon-serenity-ggr",
+    "kind": "rules-text",
+    "name": "Loxodon Serenity",
+    "text": "You have advantage on saving throws against being charmed or frightened."
   },
   {
     "id": "feature-effect-subclass-sorcerer-lunar-6-lunar-boons-dsotdq",
@@ -5928,6 +7168,38 @@
     "kind": "rules-text",
     "name": "Magic Awareness",
     "text": "3rd-level Path of Wild Magic feature As an action, you can open your awareness to the presence of concentrated magic."
+  },
+  {
+    "id": "feature-effect-race-satyr-magic-resistance-mot",
+    "sourceType": "race",
+    "sourceId": "race-satyr-magic-resistance-mot",
+    "kind": "rules-text",
+    "name": "Magic Resistance",
+    "text": "You have advantage on saving throws against spells and other magical effects."
+  },
+  {
+    "id": "feature-effect-race-satyr-magic-resistance-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-satyr-magic-resistance-mpmm",
+    "kind": "rules-text",
+    "name": "Magic Resistance",
+    "text": "You have advantage on saving throws against spells."
+  },
+  {
+    "id": "feature-effect-race-yuan-ti-magic-resistance-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-yuan-ti-magic-resistance-mpmm",
+    "kind": "rules-text",
+    "name": "Magic Resistance",
+    "text": "You have advantage on saving throws against spells."
+  },
+  {
+    "id": "feature-effect-race-yuan-ti-pureblood-magic-resistance-vgm",
+    "sourceType": "race",
+    "sourceId": "race-yuan-ti-pureblood-magic-resistance-vgm",
+    "kind": "rules-text",
+    "name": "Magic Resistance",
+    "text": "You have advantage on saving throws against spells and other magical effects."
   },
   {
     "id": "1-arming-sword-1-arming-sword-magic-weapon-bonus",
@@ -19686,6 +20958,14 @@
     "text": "2nd-level bard optional class features If a creature has a Bardic Inspiration die from you and casts a spell that restores hit points or deals damage, the creature can roll that die and choose a target affected by the spell."
   },
   {
+    "id": "feature-effect-race-human-mark-of-making-maker-s-gift-erlw",
+    "sourceType": "race",
+    "sourceId": "race-human-mark-of-making-maker-s-gift-erlw",
+    "kind": "rules-text",
+    "name": "Maker's Gift",
+    "text": "You gain proficiency with one type of artisan's tools of your choice."
+  },
+  {
     "id": "feature-effect-subclass-fighter-battle-master-3-maneuver-options-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-fighter-battle-master-3-maneuver-options-tce",
@@ -19740,6 +21020,14 @@
     "kind": "rules-text",
     "name": "Mantle of Whispers",
     "text": "At 6th level, you gain the ability to adopt a humanoid's persona."
+  },
+  {
+    "id": "feature-effect-race-hobgoblin-martial-advantage-dmg",
+    "sourceType": "race",
+    "sourceId": "race-hobgoblin-martial-advantage-dmg",
+    "kind": "rules-text",
+    "name": "Martial Advantage",
+    "text": "Once per turn, you can deal an extra 2d6 damage to a creature you hit with a weapon attack if that creature is within 5 ft."
   },
   {
     "id": "feature-effect-class-monk-1-martial-arts-phb",
@@ -19822,12 +21110,92 @@
     "text": "You have practised certain skills until they have become as natural as breathing."
   },
   {
+    "id": "feature-effect-race-autognome-mechanical-nature-aag",
+    "sourceType": "race",
+    "sourceId": "race-autognome-mechanical-nature-aag",
+    "kind": "rules-text",
+    "name": "Mechanical Nature",
+    "text": "You have resistance to poison damage and immunity to disease, and you have advantage on saving throws against being paralyzed or poisoned."
+  },
+  {
     "id": "feat-effect-medium-armor-master",
     "sourceType": "feat",
     "sourceId": "medium-armor-master",
     "kind": "rules-text",
     "name": "Medium Armor Master",
     "text": "You have practiced moving in medium armor to gain the following benefits:Wearing medium armor doesn't impose disadvantage on your Dexterity (Stealth) checks."
+  },
+  {
+    "id": "feature-effect-race-aetherborn-menacing-psk",
+    "sourceType": "race",
+    "sourceId": "race-aetherborn-menacing-psk",
+    "kind": "rules-text",
+    "name": "Menacing",
+    "text": "You have proficiency in the Intimidation skill."
+  },
+  {
+    "id": "feature-effect-race-half-orc-menacing-phb",
+    "sourceType": "race",
+    "sourceId": "race-half-orc-menacing-phb",
+    "kind": "rules-text",
+    "name": "Menacing",
+    "text": "You gain proficiency in the Intimidation skill."
+  },
+  {
+    "id": "feature-effect-race-minotaur-amonkhet-menacing-psa",
+    "sourceType": "race",
+    "sourceId": "race-minotaur-amonkhet-menacing-psa",
+    "kind": "rules-text",
+    "name": "Menacing",
+    "text": "You gain proficiency in the Intimidation skill."
+  },
+  {
+    "id": "feature-effect-race-orc-ixalan-menacing-psx",
+    "sourceType": "race",
+    "sourceId": "race-orc-ixalan-menacing-psx",
+    "kind": "rules-text",
+    "name": "Menacing",
+    "text": "You gain proficiency in the Intimidation skill."
+  },
+  {
+    "id": "feature-effect-race-gith-githzerai-mental-discipline-mtf",
+    "sourceType": "race",
+    "sourceId": "race-gith-githzerai-mental-discipline-mtf",
+    "kind": "rules-text",
+    "name": "Mental Discipline",
+    "text": "You have advantage on saving throws against the charmed and frightened conditions."
+  },
+  {
+    "id": "feature-effect-race-githzerai-mental-discipline-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-githzerai-mental-discipline-mpmm",
+    "kind": "rules-text",
+    "name": "Mental Discipline",
+    "text": "Your innate psychic defenses grant you advantage on saving throws you make to avoid or end the charmed and frightened conditions on yourself."
+  },
+  {
+    "id": "feature-effect-race-kalashtar-mental-discipline-erlw",
+    "sourceType": "race",
+    "sourceId": "race-kalashtar-mental-discipline-erlw",
+    "kind": "rules-text",
+    "name": "Mental Discipline",
+    "text": "You have resistance to psychic damage."
+  },
+  {
+    "id": "feature-effect-race-genasi-earth-merge-with-stone-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-genasi-earth-merge-with-stone-mpmm",
+    "kind": "rules-text",
+    "name": "Merge with Stone",
+    "text": "You know the blade ward cantrip."
+  },
+  {
+    "id": "feature-effect-race-dragonborn-metallic-metallic-breath-weapon-ftd",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-metallic-metallic-breath-weapon-ftd",
+    "kind": "rules-text",
+    "name": "Metallic Breath Weapon",
+    "text": "At 5th level, you gain a second breath weapon."
   },
   {
     "id": "feature-effect-subclass-barbarian-giant-10-mighty-impel-bgg",
@@ -19846,6 +21214,14 @@
     "text": "Starting at 6th level, beasts and fey that you conjure are more resilient than normal."
   },
   {
+    "id": "feature-effect-race-kenku-mimicry-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-kenku-mimicry-mpmm",
+    "kind": "rules-text",
+    "name": "Mimicry",
+    "text": "You can accurately mimic sounds you have heard, including voices."
+  },
+  {
     "id": "feat-effect-moderately-armored",
     "sourceType": "feat",
     "sourceId": "moderately-armored",
@@ -19860,6 +21236,22 @@
     "kind": "rules-text",
     "name": "Mortal Bulwark",
     "text": "20th-level Oath of the Watchers feature You manifest a spark of divine power in defense of the mortal realms."
+  },
+  {
+    "id": "feature-effect-race-goliath-mountain-born-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-goliath-mountain-born-mpmm",
+    "kind": "rules-text",
+    "name": "Mountain Born",
+    "text": "You have resistance to cold damage."
+  },
+  {
+    "id": "feature-effect-race-goliath-mountain-born-vgm",
+    "sourceType": "race",
+    "sourceId": "race-goliath-mountain-born-vgm",
+    "kind": "rules-text",
+    "name": "Mountain Born",
+    "text": "You have resistance to cold damage."
   },
   {
     "id": "feature-effect-subclass-ranger-hunter-7-multiattack-defense-phb",
@@ -19920,12 +21312,116 @@
     "text": "At 20th level, you learn to channel the spirits of historic sea captains to briefly become a paragon of heroic adventure."
   },
   {
+    "id": "feature-effect-race-centaur-natural-affinity-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-centaur-natural-affinity-mpmm",
+    "kind": "rules-text",
+    "name": "Natural Affinity",
+    "text": "Your fey connection to nature gives you an intuitive connection to the natural world and the animals within it."
+  },
+  {
+    "id": "feature-effect-race-lizardfolk-natural-armor-dmg",
+    "sourceType": "race",
+    "sourceId": "race-lizardfolk-natural-armor-dmg",
+    "kind": "rules-text",
+    "name": "Natural Armor",
+    "text": "Your scales function as natural armor, granting you a +3 bonus to Armor Class."
+  },
+  {
+    "id": "feature-effect-race-tortle-natural-armor-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-tortle-natural-armor-mpmm",
+    "kind": "rules-text",
+    "name": "Natural Armor",
+    "text": "Your shell provides you a base AC of 17 (your Dexterity modifier doesn't affect this number)."
+  },
+  {
+    "id": "feature-effect-race-tortle-natural-armor-ttp",
+    "sourceType": "race",
+    "sourceId": "race-tortle-natural-armor-ttp",
+    "kind": "rules-text",
+    "name": "Natural Armor",
+    "text": "Due to your shell and the shape of your body, you are ill-suited to wearing armor."
+  },
+  {
+    "id": "feature-effect-race-troglodyte-natural-armor-dmg",
+    "sourceType": "race",
+    "sourceId": "race-troglodyte-natural-armor-dmg",
+    "kind": "rules-text",
+    "name": "Natural Armor",
+    "text": "Your thick hide grants you a +1 bonus to Armor Class."
+  },
+  {
+    "id": "feature-effect-race-goliath-natural-athlete-vgm",
+    "sourceType": "race",
+    "sourceId": "race-goliath-natural-athlete-vgm",
+    "kind": "rules-text",
+    "name": "Natural Athlete",
+    "text": "You have proficiency in the Athletics skill."
+  },
+  {
+    "id": "feature-effect-race-human-keldon-natural-athlete-psd",
+    "sourceType": "race",
+    "sourceId": "race-human-keldon-natural-athlete-psd",
+    "kind": "rules-text",
+    "name": "Natural Athlete",
+    "text": "You have proficiency in the Athletics skill."
+  },
+  {
+    "id": "feature-effect-race-shifter-beasthide-natural-athlete-erlw",
+    "sourceType": "race",
+    "sourceId": "race-shifter-beasthide-natural-athlete-erlw",
+    "kind": "rules-text",
+    "name": "Natural Athlete",
+    "text": "You have proficiency in the Athletics skill."
+  },
+  {
     "id": "feature-effect-class-ranger-1-natural-explorer-phb",
     "sourceType": "class",
     "sourceId": "class-ranger-1-natural-explorer-phb",
     "kind": "rules-text",
     "name": "Natural Explorer",
     "text": "You are particularly familiar with one type of natural environment and are adept at traveling and surviving in such regions."
+  },
+  {
+    "id": "feature-effect-race-plasmoid-natural-resilience-aag",
+    "sourceType": "race",
+    "sourceId": "race-plasmoid-natural-resilience-aag",
+    "kind": "rules-text",
+    "name": "Natural Resilience",
+    "text": "You have resistance to acid and poison damage, and you have advantage on saving throws against being poisoned."
+  },
+  {
+    "id": "feature-effect-race-shifter-wildhunt-natural-tracker-erlw",
+    "sourceType": "race",
+    "sourceId": "race-shifter-wildhunt-natural-tracker-erlw",
+    "kind": "rules-text",
+    "name": "Natural Tracker",
+    "text": "You have proficiency in the Survival skill."
+  },
+  {
+    "id": "feature-effect-race-naga-natural-weapons-psa",
+    "sourceType": "race",
+    "sourceId": "race-naga-natural-weapons-psa",
+    "kind": "rules-text",
+    "name": "Natural Weapons",
+    "text": "Your fanged maw and constricting serpentine body are natural weapons, which you can use to make unarmed strikes."
+  },
+  {
+    "id": "feature-effect-race-lizardfolk-nature-s-intuition-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-lizardfolk-nature-s-intuition-mpmm",
+    "kind": "rules-text",
+    "name": "Nature's Intuition",
+    "text": "Thanks to your mystical connection to nature, you gain proficiency with two of the following skills of your choice: Animal Handling, Medicine, Nature, Perception, Stealth, or Survival."
+  },
+  {
+    "id": "feature-effect-race-tortle-nature-s-intuition-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-tortle-nature-s-intuition-mpmm",
+    "kind": "rules-text",
+    "name": "Nature's Intuition",
+    "text": "Thanks to your mystical connection to nature, you gain proficiency with one of the following skills of your choice: Animal Handling, Medicine, Nature, Perception, Stealth, or Survival."
   },
   {
     "id": "feature-effect-subclass-druid-land-14-nature-s-sanctuary-phb",
@@ -20310,6 +21806,54 @@
     "itemName": "Xibalban Blade"
   },
   {
+    "id": "feature-effect-race-elf-shadar-kai-necrotic-resistance-mtf",
+    "sourceType": "race",
+    "sourceId": "race-elf-shadar-kai-necrotic-resistance-mtf",
+    "kind": "rules-text",
+    "name": "Necrotic Resistance",
+    "text": "You have resistance to necrotic damage."
+  },
+  {
+    "id": "feature-effect-race-shadar-kai-necrotic-resistance-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-shadar-kai-necrotic-resistance-mpmm",
+    "kind": "rules-text",
+    "name": "Necrotic Resistance",
+    "text": "You have resistance to necrotic damage."
+  },
+  {
+    "id": "feature-effect-race-aasimar-fallen-necrotic-shroud-vgm",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-fallen-necrotic-shroud-vgm",
+    "kind": "rules-text",
+    "name": "Necrotic Shroud",
+    "text": "Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing your eyes to turn into pools of darkness and two skeletal, ghostly, flightless wings to sprout from your back."
+  },
+  {
+    "id": "feature-effect-race-goblin-nimble-escape-dmg",
+    "sourceType": "race",
+    "sourceId": "race-goblin-nimble-escape-dmg",
+    "kind": "rules-text",
+    "name": "Nimble Escape",
+    "text": "You can take the Disengage or Hide action as a bonus action on each of your turns."
+  },
+  {
+    "id": "feature-effect-race-goblin-nimble-escape-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-goblin-nimble-escape-mpmm",
+    "kind": "rules-text",
+    "name": "Nimble Escape",
+    "text": "You can take the Disengage or Hide action as a bonus action on each of your turns."
+  },
+  {
+    "id": "feature-effect-race-goblin-nimble-escape-vgm",
+    "sourceType": "race",
+    "sourceId": "race-goblin-nimble-escape-vgm",
+    "kind": "rules-text",
+    "name": "Nimble Escape",
+    "text": "You can take the Disengage or Hide action as a bonus action on each of your turns."
+  },
+  {
     "id": "feat-effect-nimbleness",
     "sourceType": "feat",
     "sourceId": "nimbleness",
@@ -20362,6 +21906,14 @@
     "kind": "rules-text",
     "name": "Observant",
     "text": "Quick to notice details of your environment, you gain the following benefits:Increase your Intelligence or Wisdom by 1, to a maximum of 20."
+  },
+  {
+    "id": "feature-effect-race-locathah-observant-athletic-lr",
+    "sourceType": "race",
+    "sourceId": "race-locathah-observant-athletic-lr",
+    "kind": "rules-text",
+    "name": "Observant & Athletic",
+    "text": "You have proficiency in the Athletics and Perception skills."
   },
   {
     "id": "feature-effect-subclass-warlock-fathomless-6-oceanic-soul-tce",
@@ -20448,6 +22000,22 @@
     "text": "Starting at 14th level, you can increase the power of your simpler spells."
   },
   {
+    "id": "feature-effect-race-kobold-pack-tactics-dmg",
+    "sourceType": "race",
+    "sourceId": "race-kobold-pack-tactics-dmg",
+    "kind": "rules-text",
+    "name": "Pack Tactics",
+    "text": "You have advantage on an attack roll against a creature if at least one of your allies is within 5 feet of the creature and the ally isn't incapacitated."
+  },
+  {
+    "id": "feature-effect-race-kobold-pack-tactics-vgm",
+    "sourceType": "race",
+    "sourceId": "race-kobold-pack-tactics-vgm",
+    "kind": "rules-text",
+    "name": "Pack Tactics",
+    "text": "You have advantage on an attack roll against a creature if at least one of your allies is within 5 feet of the creature and the ally isn't incapacitated."
+  },
+  {
     "id": "feature-effect-subclass-rogue-swashbuckler-9-panache-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-rogue-swashbuckler-9-panache-xge",
@@ -20504,6 +22072,14 @@
     "text": "3rd-level College of Creation feature As an action, you can channel the magic of the Song of Creation to create one nonmagical item of your choice in an unoccupied space within 10 feet of you."
   },
   {
+    "id": "feature-effect-race-verdan-persuasive-ai",
+    "sourceType": "race",
+    "sourceId": "race-verdan-persuasive-ai",
+    "kind": "rules-text",
+    "name": "Persuasive",
+    "text": "Your people's lack of history makes you trustworthy and humble."
+  },
+  {
     "id": "feat-effect-piercer",
     "sourceType": "feat",
     "sourceId": "piercer",
@@ -20528,6 +22104,46 @@
     "kind": "rules-text",
     "name": "Planar Warrior",
     "text": "At 3rd level, you learn to draw on the energy of the multiverse to augment your attacks."
+  },
+  {
+    "id": "feature-effect-race-naga-poison-affinity-psa",
+    "sourceType": "race",
+    "sourceId": "race-naga-poison-affinity-psa",
+    "kind": "rules-text",
+    "name": "Poison Affinity",
+    "text": "You gain proficiency with the poisoner's kit."
+  },
+  {
+    "id": "feature-effect-race-grung-poison-immunity-oga",
+    "sourceType": "race",
+    "sourceId": "race-grung-poison-immunity-oga",
+    "kind": "rules-text",
+    "name": "Poison Immunity",
+    "text": "You're immune to poison damage and the poisoned condition."
+  },
+  {
+    "id": "feature-effect-race-naga-poison-immunity-psa",
+    "sourceType": "race",
+    "sourceId": "race-naga-poison-immunity-psa",
+    "kind": "rules-text",
+    "name": "Poison Immunity",
+    "text": "You are immune to poison damage and can't be poisoned."
+  },
+  {
+    "id": "feature-effect-race-yuan-ti-pureblood-poison-immunity-vgm",
+    "sourceType": "race",
+    "sourceId": "race-yuan-ti-pureblood-poison-immunity-vgm",
+    "kind": "rules-text",
+    "name": "Poison Immunity",
+    "text": "You are immune to poison damage and the poisoned condition."
+  },
+  {
+    "id": "feature-effect-race-yuan-ti-poison-resilience-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-yuan-ti-poison-resilience-mpmm",
+    "kind": "rules-text",
+    "name": "Poison Resilience",
+    "text": "You have advantage on saving throws you make to avoid or end the poisoned condition on yourself."
   },
   {
     "id": "armor-of-poison-resistance-armor-of-poison-resistance-poison-resistance",
@@ -20934,6 +22550,22 @@
     "text": "3rd-level Beast Master variant feature, which replaces the Ranger's Companion feature You magically summon a primal beast, which draws strength from your bond with nature."
   },
   {
+    "id": "feature-effect-race-orc-primal-intuition-erlw",
+    "sourceType": "race",
+    "sourceId": "race-orc-primal-intuition-erlw",
+    "kind": "rules-text",
+    "name": "Primal Intuition",
+    "text": "You have proficiency in two of the following skills of your choice: Animal Handling, Insight, Intimidation, Medicine, Nature, Perception, and Survival."
+  },
+  {
+    "id": "feature-effect-race-orc-primal-intuition-vgm",
+    "sourceType": "race",
+    "sourceId": "race-orc-primal-intuition-vgm",
+    "kind": "rules-text",
+    "name": "Primal Intuition",
+    "text": "You have proficiency in two of the following skills of your choice: Animal Handling, Insight, Intimidation, Medicine, Nature, Perception, and Survival."
+  },
+  {
     "id": "feature-effect-class-barbarian-3-primal-knowledge-tce",
     "sourceType": "class",
     "sourceId": "class-barbarian-3-primal-knowledge-tce",
@@ -20980,6 +22612,14 @@
     "kind": "rules-text",
     "name": "Psionic Body",
     "text": "At 20th level, your mastery of psionic power causes your mind to transcend the body."
+  },
+  {
+    "id": "feature-effect-race-duergar-psionic-fortitude-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-duergar-psionic-fortitude-mpmm",
+    "kind": "rules-text",
+    "name": "Psionic Fortitude",
+    "text": "You have advantage on saving throws you make to avoid or end the charmed or stunned condition on yourself."
   },
   {
     "id": "feature-effect-class-mystic-11-psionic-mastery-1-day-uathemysticclass",
@@ -21036,6 +22676,22 @@
     "kind": "rules-text",
     "name": "Psychic Defenses",
     "text": "6th-level Aberrant Mind feature You gain resistance to psychic damage, and you have advantage on saving throws against being charmed or frightened."
+  },
+  {
+    "id": "feature-effect-race-githyanki-psychic-resilience-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-githyanki-psychic-resilience-mpmm",
+    "kind": "rules-text",
+    "name": "Psychic Resilience",
+    "text": "You have resistance to psychic damage."
+  },
+  {
+    "id": "feature-effect-race-githzerai-psychic-resilience-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-githzerai-psychic-resilience-mpmm",
+    "kind": "rules-text",
+    "name": "Psychic Resilience",
+    "text": "You have resistance to psychic damage."
   },
   {
     "id": "armor-of-psychic-resistance-armor-of-psychic-resistance-psychic-resistance",
@@ -21418,6 +23074,30 @@
     "text": "4th-level monk optional class features As an action, you can spend 2 ki points and roll a Martial Arts die."
   },
   {
+    "id": "feature-effect-race-harengon-rabbit-hop-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-harengon-rabbit-hop-mpmm",
+    "kind": "rules-text",
+    "name": "Rabbit Hop",
+    "text": "As a bonus action, you can jump a number of feet equal to five times your proficiency bonus, without provoking opportunity attacks."
+  },
+  {
+    "id": "feature-effect-race-harengon-rabbit-hop-wbtw",
+    "sourceType": "race",
+    "sourceId": "race-harengon-rabbit-hop-wbtw",
+    "kind": "rules-text",
+    "name": "Rabbit Hop",
+    "text": "As a bonus action, you can jump a number of feet equal to five times your proficiency bonus, without provoking opportunity attacks."
+  },
+  {
+    "id": "feature-effect-race-aasimar-scourge-radiant-consumption-vgm",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-scourge-radiant-consumption-vgm",
+    "kind": "rules-text",
+    "name": "Radiant Consumption",
+    "text": "Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing a searing light to radiate from you, pour out of your eyes and mouth, and threaten to char you."
+  },
+  {
     "id": "armor-of-radiant-resistance-armor-of-radiant-resistance-radiant-resistance",
     "kind": "resistance",
     "target": "radiant",
@@ -21698,6 +23378,14 @@
     "itemName": "Wooden Cuirass of Radiant Resistance"
   },
   {
+    "id": "feature-effect-race-aasimar-protector-radiant-soul-vgm",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-protector-radiant-soul-vgm",
+    "kind": "rules-text",
+    "name": "Radiant Soul",
+    "text": "Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing your eyes to glimmer and two luminous, incorporeal wings to sprout from your back."
+  },
+  {
     "id": "feature-effect-subclass-warlock-celestial-6-radiant-soul-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-warlock-celestial-6-radiant-soul-xge",
@@ -21728,6 +23416,14 @@
     "kind": "rules-text",
     "name": "Rakish Audacity",
     "text": "Starting at 3rd level, your confidence propels you into battle."
+  },
+  {
+    "id": "feature-effect-race-gnoll-rampage-dmg",
+    "sourceType": "race",
+    "sourceId": "race-gnoll-rampage-dmg",
+    "kind": "rules-text",
+    "name": "Rampage",
+    "text": "When you reduce a creature to 0 hit points with a melee attack on your turn, you can take a bonus action to move up to half your speed and make a bite attack."
   },
   {
     "id": "feature-effect-subclass-ranger-beast-master-3-ranger-s-companion-phb",
@@ -21810,6 +23506,22 @@
     "text": "14th-level Aberrant Mind feature You can unleash the aberrant truth hidden within yourself."
   },
   {
+    "id": "feature-effect-race-satyr-reveler-mot",
+    "sourceType": "race",
+    "sourceId": "race-satyr-reveler-mot",
+    "kind": "rules-text",
+    "name": "Reveler",
+    "text": "You have proficiency in the Performance and Persuasion skills, and you have proficiency with one musical instrument of your choice."
+  },
+  {
+    "id": "feature-effect-race-satyr-reveler-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-satyr-reveler-mpmm",
+    "kind": "rules-text",
+    "name": "Reveler",
+    "text": "As an embodiment of revelry, you have proficiency in the Performance and Persuasion skills, and you have proficiency with one musical instrument of your choice."
+  },
+  {
     "id": "feature-effect-subclass-cleric-strength-psa-6-rhonas-s-blessing-psa",
     "sourceType": "subclass",
     "sourceId": "subclass-cleric-strength-psa-6-rhonas-s-blessing-psa",
@@ -21882,12 +23594,28 @@
     "text": "Once per turn when you roll damage for a melee weapon attack, you can reroll the weapon's damage dice and use either total."
   },
   {
+    "id": "feature-effect-race-hobgoblin-saving-face-vgm",
+    "sourceType": "race",
+    "sourceId": "race-hobgoblin-saving-face-vgm",
+    "kind": "rules-text",
+    "name": "Saving Face",
+    "text": "Hobgoblins are careful not to show weakness in front of their allies, for fear of losing status."
+  },
+  {
     "id": "feature-effect-subclass-barbarian-storm-herald-6-sea-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-barbarian-storm-herald-6-sea-xge",
     "kind": "rules-text",
     "name": "Sea",
     "text": "You gain resistance to lightning damage, and you can breathe underwater."
+  },
+  {
+    "id": "feature-effect-race-elf-sea-sea-elf-training-mtf",
+    "sourceType": "race",
+    "sourceId": "race-elf-sea-sea-elf-training-mtf",
+    "kind": "rules-text",
+    "name": "Sea Elf Training",
+    "text": "You have proficiency with the spear, trident, light crossbow, and net."
   },
   {
     "id": "feature-effect-subclass-monk-sun-soul-6-searing-arc-strike-xge",
@@ -21922,6 +23650,14 @@
     "text": "You have mastered techniques to take advantage of every drop in any enemy's guard, gaining the following benefits:When you hit a creature with an opportunity attack, the creature's speed becomes 0 for the rest of the turn."
   },
   {
+    "id": "feature-effect-race-kalashtar-severed-from-dreams-erlw",
+    "sourceType": "race",
+    "sourceId": "race-kalashtar-severed-from-dreams-erlw",
+    "kind": "rules-text",
+    "name": "Severed from Dreams",
+    "text": "Kalashtar sleep, but they don't connect to the plane of dreams as other creatures do."
+  },
+  {
     "id": "feature-effect-subclass-monk-shadow-6-shadow-step-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-monk-shadow-6-shadow-step-phb",
@@ -21954,6 +23690,14 @@
     "text": "Starting at 15th level, you can dodge in unforeseen ways, with wisps of supernatural shadow around you."
   },
   {
+    "id": "feature-effect-race-plasmoid-shape-self-aag",
+    "sourceType": "race",
+    "sourceId": "race-plasmoid-shape-self-aag",
+    "kind": "rules-text",
+    "name": "Shape Self",
+    "text": "As an action, you can reshape your body to give yourself a head, one or two arms, one or two legs, and makeshift hands and feet, or you can revert to a limbless blob."
+  },
+  {
     "id": "feature-effect-class-expert-sidekick-18-sharp-mind-tce",
     "sourceType": "class",
     "sourceId": "class-expert-sidekick-18-sharp-mind-tce",
@@ -21970,12 +23714,68 @@
     "text": "At 11th level, you gain the ability to augment your weapons further with your ki."
   },
   {
+    "id": "feature-effect-race-tortle-shell-defense-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-tortle-shell-defense-mpmm",
+    "kind": "rules-text",
+    "name": "Shell Defense",
+    "text": "You can withdraw into your shell as an action."
+  },
+  {
+    "id": "feature-effect-race-tortle-shell-defense-ttp",
+    "sourceType": "race",
+    "sourceId": "race-tortle-shell-defense-ttp",
+    "kind": "rules-text",
+    "name": "Shell Defense",
+    "text": "You can withdraw into your shell as an action."
+  },
+  {
     "id": "feature-effect-subclass-barbarian-storm-herald-10-shielding-storm-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-barbarian-storm-herald-10-shielding-storm-xge",
     "kind": "rules-text",
     "name": "Shielding Storm",
     "text": "At 10th level, you learn to use your mastery of the storm to protect others."
+  },
+  {
+    "id": "feature-effect-race-shifter-shifting-erlw",
+    "sourceType": "race",
+    "sourceId": "race-shifter-shifting-erlw",
+    "kind": "rules-text",
+    "name": "Shifting",
+    "text": "As a bonus action, you can assume a more bestial appearance."
+  },
+  {
+    "id": "feature-effect-race-shifter-shifting-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-shifter-shifting-mpmm",
+    "kind": "rules-text",
+    "name": "Shifting",
+    "text": "As a bonus action, you can assume a more bestial appearance."
+  },
+  {
+    "id": "feature-effect-race-shifter-beasthide-shifting-feature-erlw",
+    "sourceType": "race",
+    "sourceId": "race-shifter-beasthide-shifting-feature-erlw",
+    "kind": "rules-text",
+    "name": "Shifting Feature",
+    "text": "Whenever you shift, you gain 1d6 additional temporary hit points."
+  },
+  {
+    "id": "feature-effect-race-shifter-longtooth-shifting-feature-erlw",
+    "sourceType": "race",
+    "sourceId": "race-shifter-longtooth-shifting-feature-erlw",
+    "kind": "rules-text",
+    "name": "Shifting Feature",
+    "text": "While shifted, you can use your elongated fangs to make an unarmed strike as a bonus action."
+  },
+  {
+    "id": "feature-effect-race-shifter-wildhunt-shifting-feature-erlw",
+    "sourceType": "race",
+    "sourceId": "race-shifter-wildhunt-shifting-feature-erlw",
+    "kind": "rules-text",
+    "name": "Shifting Feature",
+    "text": "While shifted, you have advantage on Wisdom checks, and no creature within 30 feet of you can make an attack roll with advantage against you, unless you're incapacitated."
   },
   {
     "id": "feature-effect-subclass-sorcerer-runechild-6-sigilic-augmentation-tdcsr",
@@ -21986,6 +23786,14 @@
     "text": "At 6th level, you can channel your runes to temporarily bolster your physical capabilities."
   },
   {
+    "id": "feature-effect-race-owlin-silent-feathers-scc",
+    "sourceType": "race",
+    "sourceId": "race-owlin-silent-feathers-scc",
+    "kind": "rules-text",
+    "name": "Silent Feathers",
+    "text": "You have proficiency in the Stealth skill."
+  },
+  {
     "id": "feat-effect-skill-expert",
     "sourceType": "feat",
     "sourceId": "skill-expert",
@@ -21994,12 +23802,44 @@
     "text": "You have honed your proficiency with particular skills, granting you the following benefits:Increase one ability score of your choice by 1, to a maximum of 20."
   },
   {
+    "id": "feature-effect-race-elf-zendikar-tajuru-nation-skill-versatility-psz",
+    "sourceType": "race",
+    "sourceId": "race-elf-zendikar-tajuru-nation-skill-versatility-psz",
+    "kind": "rules-text",
+    "name": "Skill Versatility",
+    "text": "You have proficiency with any combination of two other skills or tools of your choice."
+  },
+  {
+    "id": "feature-effect-race-half-elf-skill-versatility-phb",
+    "sourceType": "race",
+    "sourceId": "race-half-elf-skill-versatility-phb",
+    "kind": "rules-text",
+    "name": "Skill Versatility",
+    "text": "You gain proficiency in two skills of your choice."
+  },
+  {
     "id": "feat-effect-skilled",
     "sourceType": "feat",
     "sourceId": "skilled",
     "kind": "rules-text",
     "name": "Skilled",
     "text": "You gain proficiency in any combination of three skills or tools of your choice."
+  },
+  {
+    "id": "feature-effect-race-human-amonkhet-skills-psa",
+    "sourceType": "race",
+    "sourceId": "race-human-amonkhet-skills-psa",
+    "kind": "rules-text",
+    "name": "Skills",
+    "text": "You gain proficiency in one skill of your choice."
+  },
+  {
+    "id": "feature-effect-race-human-variant-skills-phb",
+    "sourceType": "race",
+    "sourceId": "race-human-variant-skills-phb",
+    "kind": "rules-text",
+    "name": "Skills",
+    "text": "You gain proficiency in one skill of your choice."
   },
   {
     "id": "feat-effect-slasher",
@@ -22248,6 +24088,14 @@
     "text": "Starting at 3rd level, you can focus your ire on one foe, increasing the harm you inflict on it."
   },
   {
+    "id": "feature-effect-race-kuo-toa-slippery-dmg",
+    "sourceType": "race",
+    "sourceId": "race-kuo-toa-slippery-dmg",
+    "kind": "rules-text",
+    "name": "Slippery",
+    "text": "You have advantage on ability checks and saving throws made to escape a grapple."
+  },
+  {
     "id": "feature-effect-class-rogue-15-slippery-mind-phb",
     "sourceType": "class",
     "sourceId": "class-rogue-15-slippery-mind-phb",
@@ -22312,6 +24160,14 @@
     "text": "You've manifested the tempest magic emblematic of storm giants, granting you the following benefits:Ability Score Increase."
   },
   {
+    "id": "feature-effect-race-warforged-specialized-design-erlw",
+    "sourceType": "race",
+    "sourceId": "race-warforged-specialized-design-erlw",
+    "kind": "rules-text",
+    "name": "Specialized Design",
+    "text": "You gain one skill proficiency and one tool proficiency of your choice."
+  },
+  {
     "id": "feature-effect-subclass-ranger-horizon-walker-15-spectral-defense-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-ranger-horizon-walker-15-spectral-defense-xge",
@@ -22328,12 +24184,36 @@
     "text": "At 14th level, you gain the ability to become a ghostly figure of psionic energy."
   },
   {
+    "id": "feature-effect-race-firbolg-speech-of-beast-and-leaf-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-firbolg-speech-of-beast-and-leaf-mpmm",
+    "kind": "rules-text",
+    "name": "Speech of Beast and Leaf",
+    "text": "You have the ability to communicate in a limited manner with Beasts, Plants, and vegetation."
+  },
+  {
+    "id": "feature-effect-race-firbolg-speech-of-beast-and-leaf-vgm",
+    "sourceType": "race",
+    "sourceId": "race-firbolg-speech-of-beast-and-leaf-vgm",
+    "kind": "rules-text",
+    "name": "Speech of Beast and Leaf",
+    "text": "You have the ability to communicate in a limited manner with beasts and plants."
+  },
+  {
     "id": "feat-effect-speech-craft",
     "sourceType": "feat",
     "sourceId": "speech-craft",
     "kind": "rules-text",
     "name": "Speech-Craft",
     "text": "You are a student of Sindarin and Quenya, the Ancient Tongue, and have advantage on Charisma checks when interacting with Elves."
+  },
+  {
+    "id": "feature-effect-race-naga-speed-burst-psa",
+    "sourceType": "race",
+    "sourceId": "race-naga-speed-burst-psa",
+    "kind": "rules-text",
+    "name": "Speed Burst",
+    "text": "By lowering your body to the ground and propelling yourself with your arms, you can move more quickly for a time."
   },
   {
     "id": "feature-effect-subclass-wizard-abjuration-14-spell-resistance-phb",
@@ -22400,6 +24280,14 @@
     "text": "2nd-level Circle of the Stars feature You've created a star chart as part of your heavenly studies."
   },
   {
+    "id": "feature-effect-race-astral-elf-starlight-step-aag",
+    "sourceType": "race",
+    "sourceId": "race-astral-elf-starlight-step-aag",
+    "kind": "rules-text",
+    "name": "Starlight Step",
+    "text": "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see."
+  },
+  {
     "id": "feature-effect-subclass-druid-stars-2-starry-form-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-druid-stars-2-starry-form-tce",
@@ -22440,6 +24328,14 @@
     "text": "You have advantage on saving throws against being frightened."
   },
   {
+    "id": "feature-effect-race-troglodyte-stench-dmg",
+    "sourceType": "race",
+    "sourceId": "race-troglodyte-stench-dmg",
+    "kind": "rules-text",
+    "name": "Stench",
+    "text": "Any creature other than a troglodyte that starts its turn within 5 ft."
+  },
+  {
     "id": "feature-effect-class-monk-2-step-of-the-wind-phb",
     "sourceType": "class",
     "sourceId": "class-monk-2-step-of-the-wind-phb",
@@ -22456,6 +24352,54 @@
     "text": "6th-level Twilight Domain feature You can draw on the mystical power of night to rise into the air."
   },
   {
+    "id": "feature-effect-race-gnome-deep-stone-camouflage-dmg",
+    "sourceType": "race",
+    "sourceId": "race-gnome-deep-stone-camouflage-dmg",
+    "kind": "rules-text",
+    "name": "Stone Camouflage",
+    "text": "You have advantage on Dexterity (Stealth) checks to hide in rocky terrain."
+  },
+  {
+    "id": "feature-effect-race-gnome-deep-stone-camouflage-mtf",
+    "sourceType": "race",
+    "sourceId": "race-gnome-deep-stone-camouflage-mtf",
+    "kind": "rules-text",
+    "name": "Stone Camouflage",
+    "text": "You have advantage on Dexterity (Stealth) checks to hide in rocky terrain."
+  },
+  {
+    "id": "feature-effect-race-gnome-deep-svirfneblin-stone-camouflage-scag",
+    "sourceType": "race",
+    "sourceId": "race-gnome-deep-svirfneblin-stone-camouflage-scag",
+    "kind": "rules-text",
+    "name": "Stone Camouflage",
+    "text": "You have advantage on Dexterity (Stealth) checks to hide in rocky terrain."
+  },
+  {
+    "id": "feature-effect-race-grimlock-stone-camouflage-dmg",
+    "sourceType": "race",
+    "sourceId": "race-grimlock-stone-camouflage-dmg",
+    "kind": "rules-text",
+    "name": "Stone Camouflage",
+    "text": "You have advantage on Dexterity (Stealth) checks made to hide in rocky terrain."
+  },
+  {
+    "id": "feature-effect-race-goliath-stone-s-endurance-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-goliath-stone-s-endurance-mpmm",
+    "kind": "rules-text",
+    "name": "Stone's Endurance",
+    "text": "You can supernaturally draw on unyielding stone to shrug off harm."
+  },
+  {
+    "id": "feature-effect-race-dwarf-stonecunning-phb",
+    "sourceType": "race",
+    "sourceId": "race-dwarf-stonecunning-phb",
+    "kind": "rules-text",
+    "name": "Stonecunning",
+    "text": "Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus."
+  },
+  {
     "id": "feature-effect-subclass-barbarian-storm-herald-3-storm-aura-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-barbarian-storm-herald-3-storm-aura-xge",
@@ -22470,6 +24414,22 @@
     "kind": "rules-text",
     "name": "Storm Guide",
     "text": "At 6th level, you gain the ability to subtly control the weather around you."
+  },
+  {
+    "id": "feature-effect-race-half-elf-variant-mark-of-storm-storm-s-boon-erlw",
+    "sourceType": "race",
+    "sourceId": "race-half-elf-variant-mark-of-storm-storm-s-boon-erlw",
+    "kind": "rules-text",
+    "name": "Storm's Boon",
+    "text": "You have resistance to lightning damage."
+  },
+  {
+    "id": "feature-effect-race-halfling-stout-stout-resilience-phb",
+    "sourceType": "race",
+    "sourceId": "race-halfling-stout-stout-resilience-phb",
+    "kind": "rules-text",
+    "name": "Stout Resilience",
+    "text": "You have advantage on saving throws against poison, and you have resistance against poison damage."
   },
   {
     "id": "feature-effect-class-mystic-4-strength-of-mind-uathemysticclass",
@@ -22512,6 +24472,62 @@
     "text": "At 17th level, you become wreathed in a luminous, magical aura."
   },
   {
+    "id": "feature-effect-race-dwarf-duergar-sunlight-sensitivity-mtf",
+    "sourceType": "race",
+    "sourceId": "race-dwarf-duergar-sunlight-sensitivity-mtf",
+    "kind": "rules-text",
+    "name": "Sunlight Sensitivity",
+    "text": "You have disadvantage on attack rolls and Wisdom (Perception) checks that rely on sight when you, the target of your attack, or whatever you are trying to perceive is in direct sunlight."
+  },
+  {
+    "id": "feature-effect-race-elf-drow-sunlight-sensitivity-phb",
+    "sourceType": "race",
+    "sourceId": "race-elf-drow-sunlight-sensitivity-phb",
+    "kind": "rules-text",
+    "name": "Sunlight Sensitivity",
+    "text": "You have disadvantage on attack rolls and on Wisdom (Perception) checks that rely on sight when you, the target of your attack, or whatever you are trying to perceive is in direct sunlight."
+  },
+  {
+    "id": "feature-effect-race-elf-zendikar-mul-daya-nation-sunlight-sensitivity-psz",
+    "sourceType": "race",
+    "sourceId": "race-elf-zendikar-mul-daya-nation-sunlight-sensitivity-psz",
+    "kind": "rules-text",
+    "name": "Sunlight Sensitivity",
+    "text": "You have disadvantage on attack rolls and on Wisdom (Perception) checks that rely on sight when you, the target of your attack, or whatever you are trying to perceive is in direct sunlight."
+  },
+  {
+    "id": "feature-effect-race-kobold-sunlight-sensitivity-dmg",
+    "sourceType": "race",
+    "sourceId": "race-kobold-sunlight-sensitivity-dmg",
+    "kind": "rules-text",
+    "name": "Sunlight Sensitivity",
+    "text": "You have disadvantage on attack rolls and on Wisdom (Perception) checks that rely on sight when you, the target of your attack, or whatever you are trying to perceive is in direct sunlight."
+  },
+  {
+    "id": "feature-effect-race-kobold-sunlight-sensitivity-vgm",
+    "sourceType": "race",
+    "sourceId": "race-kobold-sunlight-sensitivity-vgm",
+    "kind": "rules-text",
+    "name": "Sunlight Sensitivity",
+    "text": "You have disadvantage on attack rolls and on Wisdom (Perception) checks that rely on sight when you, the target of your attack, or whatever you are trying to perceive is in direct sunlight."
+  },
+  {
+    "id": "feature-effect-race-kuo-toa-sunlight-sensitivity-dmg",
+    "sourceType": "race",
+    "sourceId": "race-kuo-toa-sunlight-sensitivity-dmg",
+    "kind": "rules-text",
+    "name": "Sunlight Sensitivity",
+    "text": "While in sunlight, you have disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+  },
+  {
+    "id": "feature-effect-race-troglodyte-sunlight-sensitivity-dmg",
+    "sourceType": "race",
+    "sourceId": "race-troglodyte-sunlight-sensitivity-dmg",
+    "kind": "rules-text",
+    "name": "Sunlight Sensitivity",
+    "text": "While in sunlight, you have disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+  },
+  {
     "id": "feature-effect-subclass-paladin-oathbreaker-15-supernatural-resistance-dmg",
     "sourceType": "subclass",
     "sourceId": "subclass-paladin-oathbreaker-15-supernatural-resistance-dmg",
@@ -22528,12 +24544,44 @@
     "text": "Starting at 9th level, you have advantage on a Dexterity (Stealth) check if you move no more than half your speed on the same turn."
   },
   {
+    "id": "feature-effect-race-tortle-survival-instinct-ttp",
+    "sourceType": "race",
+    "sourceId": "race-tortle-survival-instinct-ttp",
+    "kind": "rules-text",
+    "name": "Survival Instinct",
+    "text": "You gain proficiency in the Survival skill."
+  },
+  {
     "id": "feature-effect-subclass-rogue-scout-3-survivalist-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-rogue-scout-3-survivalist-xge",
     "kind": "rules-text",
     "name": "Survivalist",
     "text": "When you choose this archetype at 3rd level, you gain proficiency in the Nature and Survival skills if you don't already have it."
+  },
+  {
+    "id": "feature-effect-race-centaur-survivor-ggr",
+    "sourceType": "race",
+    "sourceId": "race-centaur-survivor-ggr",
+    "kind": "rules-text",
+    "name": "Survivor",
+    "text": "You have proficiency in one of the following skills of your choice: Animal Handling, Medicine, Nature, or Survival."
+  },
+  {
+    "id": "feature-effect-race-deep-gnome-svirfneblin-camouflage-mpmm",
+    "sourceType": "race",
+    "sourceId": "race-deep-gnome-svirfneblin-camouflage-mpmm",
+    "kind": "rules-text",
+    "name": "Svirfneblin Camouflage",
+    "text": "When you make a Dexterity (Stealth) check, you can make the check with advantage."
+  },
+  {
+    "id": "feature-effect-race-bullywug-swamp-camouflage-dmg",
+    "sourceType": "race",
+    "sourceId": "race-bullywug-swamp-camouflage-dmg",
+    "kind": "rules-text",
+    "name": "Swamp Camouflage",
+    "text": "You have advantage on Dexterity (Stealth) checks made to hide in swampy terrain."
   },
   {
     "id": "feature-effect-subclass-ranger-swarmkeeper-15-swarming-dispersal-tce",
@@ -22558,6 +24606,14 @@
     "kind": "rules-text",
     "name": "Tales from Beyond",
     "text": "3rd-level College of Spirits feature You reach out to spirits who tell their tales through you."
+  },
+  {
+    "id": "feature-effect-race-kender-taunt-dsotdq",
+    "sourceType": "race",
+    "sourceId": "race-kender-taunt-dsotdq",
+    "kind": "rules-text",
+    "name": "Taunt",
+    "text": "You have an extraordinary ability to fluster creatures."
   },
   {
     "id": "feat-effect-tavern-brawler",
@@ -22598,6 +24654,14 @@
     "kind": "rules-text",
     "name": "Telepathic",
     "text": "You awaken the ability to mentally connect with others, granting you the following benefits:Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20."
+  },
+  {
+    "id": "feature-effect-race-verdan-telepathic-insight-ai",
+    "sourceType": "race",
+    "sourceId": "race-verdan-telepathic-insight-ai",
+    "kind": "rules-text",
+    "name": "Telepathic Insight",
+    "text": "Your mind's connection to the world around you strengthens your will."
   },
   {
     "id": "feature-effect-subclass-sorcerer-aberrant-mind-1-telepathic-speech-tce",
@@ -22924,6 +24988,22 @@
     "text": "You gain proficiency in two skills from the following list: Athletics, Acrobatics, Stealth, and Survival."
   },
   {
+    "id": "feature-effect-race-halfling-lotusden-timberwalk-egw",
+    "sourceType": "race",
+    "sourceId": "race-halfling-lotusden-timberwalk-egw",
+    "kind": "rules-text",
+    "name": "Timberwalk",
+    "text": "Ability checks made to track you have disadvantage, and you can move across difficult terrain made of nonmagical plants and undergrowth without expending extra movement."
+  },
+  {
+    "id": "feature-effect-race-gnome-rock-tinker-phb",
+    "sourceType": "race",
+    "sourceId": "race-gnome-rock-tinker-phb",
+    "kind": "rules-text",
+    "name": "Tinker",
+    "text": "You have proficiency with artisan's tools (tinker's tools)."
+  },
+  {
     "id": "feature-effect-subclass-rogue-phantom-9-tokens-of-the-departed-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-rogue-phantom-9-tokens-of-the-departed-tce",
@@ -22938,6 +25018,14 @@
     "kind": "rules-text",
     "name": "Tool Expertise",
     "text": "6th-level artificer feature Your proficiency bonus is now doubled for any ability check you make that uses your proficiency with a tool."
+  },
+  {
+    "id": "feature-effect-race-dwarf-tool-proficiency-phb",
+    "sourceType": "race",
+    "sourceId": "race-dwarf-tool-proficiency-phb",
+    "kind": "rules-text",
+    "name": "Tool Proficiency",
+    "text": "You gain proficiency with the artisan's tools of your choice: Smith's tools, brewer's supplies, or mason's tools."
   },
   {
     "id": "feature-effect-subclass-artificer-alchemist-3-tool-proficiency-tce",
@@ -23012,6 +25100,14 @@
     "text": "Starting at 6th level, you can spend 8 hours creating a transmuter's stone that stores transmutation magic."
   },
   {
+    "id": "feature-effect-race-goblin-zendikar-tuktuk-tribe-tuktuk-cunning-psz",
+    "sourceType": "race",
+    "sourceId": "race-goblin-zendikar-tuktuk-tribe-tuktuk-cunning-psz",
+    "kind": "rules-text",
+    "name": "Tuktuk Cunning",
+    "text": "You have proficiency with thieves' tools."
+  },
+  {
     "id": "feature-effect-subclass-barbarian-storm-herald-6-tundra-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-barbarian-storm-herald-6-tundra-xge",
@@ -23050,6 +25146,22 @@
     "kind": "rules-text",
     "name": "Unbreakable Majesty",
     "text": "At 14th level, your appearance permanently gains an otherworldly aspect that makes you look more lovely and fierce."
+  },
+  {
+    "id": "feature-effect-race-skeleton-undead-nature-dmg",
+    "sourceType": "race",
+    "sourceId": "race-skeleton-undead-nature-dmg",
+    "kind": "rules-text",
+    "name": "Undead Nature",
+    "text": "You are immune to poison damage and exhaustion, and you can't be poisoned."
+  },
+  {
+    "id": "feature-effect-race-zombie-undead-nature-dmg",
+    "sourceType": "race",
+    "sourceId": "race-zombie-undead-nature-dmg",
+    "kind": "rules-text",
+    "name": "Undead Nature",
+    "text": "You are immune to poison damage, and you can't be poisoned."
   },
   {
     "id": "feature-effect-subclass-wizard-necromancy-6-undead-thralls-phb",
@@ -23108,12 +25220,84 @@
     "text": "Starting at 15th level, you have advantage on saving throws to avoid becoming paralyzed or stunned."
   },
   {
+    "id": "feature-effect-race-dhampir-vampiric-bite-vrgr",
+    "sourceType": "race",
+    "sourceId": "race-dhampir-vampiric-bite-vrgr",
+    "kind": "rules-text",
+    "name": "Vampiric Bite",
+    "text": "Your fanged bite is a natural weapon, which counts as a simple melee weapon with which you are proficient."
+  },
+  {
+    "id": "feature-effect-race-vampire-vampiric-resistance-psz",
+    "sourceType": "race",
+    "sourceId": "race-vampire-vampiric-resistance-psz",
+    "kind": "rules-text",
+    "name": "Vampiric Resistance",
+    "text": "You have resistance to necrotic damage."
+  },
+  {
     "id": "feature-effect-class-ranger-14-vanish-phb",
     "sourceType": "class",
     "sourceId": "class-ranger-14-vanish-phb",
     "kind": "rules-text",
     "name": "Vanish",
     "text": "Starting at 14th level, you can use the Hide action as a bonus action on your turn."
+  },
+  {
+    "id": "feature-effect-race-custom-lineage-variable-trait-tce",
+    "sourceType": "race",
+    "sourceId": "race-custom-lineage-variable-trait-tce",
+    "kind": "rules-text",
+    "name": "Variable Trait",
+    "text": "You gain one of the following options of your choice: (a) darkvision with a range of 60 feet or (b) proficiency in one skill of your choice."
+  },
+  {
+    "id": "feature-effect-race-half-elf-variant-aquatic-elf-descent-variant-feature-choose-1-scag",
+    "sourceType": "race",
+    "sourceId": "race-half-elf-variant-aquatic-elf-descent-variant-feature-choose-1-scag",
+    "kind": "rules-text",
+    "name": "Variant Feature (Choose 1)",
+    "text": "Skill Versatility: You gain proficiency in two skills of your choice."
+  },
+  {
+    "id": "feature-effect-race-half-elf-variant-drow-descent-variant-feature-choose-1-scag",
+    "sourceType": "race",
+    "sourceId": "race-half-elf-variant-drow-descent-variant-feature-choose-1-scag",
+    "kind": "rules-text",
+    "name": "Variant Feature (Choose 1)",
+    "text": "Skill Versatility: You gain proficiency in two skills of your choice."
+  },
+  {
+    "id": "feature-effect-race-half-elf-variant-moon-elf-or-sun-elf-descent-variant-feature-choose-1-scag",
+    "sourceType": "race",
+    "sourceId": "race-half-elf-variant-moon-elf-or-sun-elf-descent-variant-feature-choose-1-scag",
+    "kind": "rules-text",
+    "name": "Variant Feature (Choose 1)",
+    "text": "Skill Versatility: You gain proficiency in two skills of your choice."
+  },
+  {
+    "id": "feature-effect-race-half-elf-variant-wood-elf-descent-variant-feature-choose-1-scag",
+    "sourceType": "race",
+    "sourceId": "race-half-elf-variant-wood-elf-descent-variant-feature-choose-1-scag",
+    "kind": "rules-text",
+    "name": "Variant Feature (Choose 1)",
+    "text": "Skill Versatility: You gain proficiency in two skills of your choice."
+  },
+  {
+    "id": "feature-effect-race-vedalken-vedalken-cunning-psk",
+    "sourceType": "race",
+    "sourceId": "race-vedalken-vedalken-cunning-psk",
+    "kind": "rules-text",
+    "name": "Vedalken Cunning",
+    "text": "You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic."
+  },
+  {
+    "id": "feature-effect-race-vedalken-vedalken-dispassion-ggr",
+    "sourceType": "race",
+    "sourceId": "race-vedalken-vedalken-dispassion-ggr",
+    "kind": "rules-text",
+    "name": "Vedalken Dispassion",
+    "text": "You have advantage on all Intelligence, Wisdom, and Charisma saving throws."
   },
   {
     "id": "feature-effect-subclass-rogue-arcane-trickster-13-versatile-trickster-phb",
@@ -23220,6 +25404,14 @@
     "text": "You can use your Channel Divinity to invest your presence with the warding power of your faith."
   },
   {
+    "id": "feature-effect-race-merfolk-zendikar-ula-creed-water-creed-navigation-psz",
+    "sourceType": "race",
+    "sourceId": "race-merfolk-zendikar-ula-creed-water-creed-navigation-psz",
+    "kind": "rules-text",
+    "name": "Water Creed Navigation",
+    "text": "You have proficiency with navigator's tools and in the Survival skill."
+  },
+  {
     "id": "feature-effect-subclass-sorcerer-lunar-6-waxing-and-waning-dsotdq",
     "sourceType": "subclass",
     "sourceId": "subclass-sorcerer-lunar-6-waxing-and-waning-dsotdq",
@@ -23282,6 +25474,14 @@
     "kind": "rules-text",
     "name": "Wild Surge",
     "text": "3rd-level Path of Wild Magic feature The magical energy roiling inside you sometimes erupts from you."
+  },
+  {
+    "id": "feature-effect-race-merfolk-zendikar-emeria-creed-wind-creed-manipulation-psz",
+    "sourceType": "race",
+    "sourceId": "race-merfolk-zendikar-emeria-creed-wind-creed-manipulation-psz",
+    "kind": "rules-text",
+    "name": "Wind Creed Manipulation",
+    "text": "You have proficiency in the Deception and Persuasion skills."
   },
   {
     "id": "feature-effect-subclass-monk-ascendant-dragon-6-wings-unfurled-ftd",

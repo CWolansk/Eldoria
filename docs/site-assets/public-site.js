@@ -1529,7 +1529,7 @@
       return;
     }
     target.innerHTML = `<section class="combat-feature-section">
-      <h2>Class Abilities</h2>
+      <h2>Character Abilities</h2>
       <div class="action-row combat-feature-list">
         ${cards.map(renderActionCard).join('')}
       </div>
@@ -1556,7 +1556,7 @@
     if (!target) return;
     const features = player.ruleFeatures || [];
     if (!features.length) {
-      target.innerHTML = '<p>No class features found in canonical rules.</p>';
+      target.innerHTML = '<p>No class or racial features found in canonical rules.</p>';
       return;
     }
     target.innerHTML = `<div class="class-feature-list">
@@ -1580,7 +1580,7 @@
 
   function formatClassFeatureMeta(feature) {
     return [
-      feature.kind === 'subclass' ? feature.subclassName : feature.className,
+      feature.kind === 'race' ? feature.raceName || 'Race' : (feature.kind === 'subclass' ? feature.subclassName : feature.className),
       feature.level ? `Level ${feature.level}` : '',
       feature.timing,
       feature.resourceHint,

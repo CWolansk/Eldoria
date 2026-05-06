@@ -56,6 +56,7 @@ const SKILLS = [
   ['stealth', 'Stealth', 'dex'],
   ['survival', 'Survival', 'wis'],
 ];
+const RACE_SOURCE_PRIORITY = ['PHB', 'VGM', 'EEPC', 'DMG', 'XGE', 'TCE', 'SCAG', 'MPMM'];
 
 function main() {
   assertInside(DOCS_ROOT, PUBLIC_OUT);
@@ -139,7 +140,7 @@ function readIfExists(file) {
 }
 
 function loadCanonicalRules() {
-  const required = ['classes', 'subclasses', 'features', 'items', 'spells', 'feats', 'actions', 'effects', 'resources', 'manifest'];
+  const required = ['classes', 'subclasses', 'races', 'features', 'items', 'spells', 'feats', 'actions', 'effects', 'resources', 'manifest'];
   const rules = {};
   for (const name of required) {
     const file = path.join(RULES_ROOT, `${name}.json`);
@@ -317,6 +318,7 @@ function buildPlayer(page, controls, fileIndex, rules, itemCatalog, spellCatalog
   const backgrounds = extractLookupArray(page.body, 'BackgroundLookup');
   const feats = extractLookupArray(page.body, 'FeatLookup');
   const races = extractLookupArray(page.body, 'RaceLookup');
+  const raceNames = [...new Set([data.race, ...races].filter(Boolean).map(String))];
   const notesUrl = (page.body.match(/Direct link if Embed isn't working\s*:\s*(https?:\/\/\S+)/i) || [])[1] || '';
   const classUrlSuffix = (page.body.match(/urlSuffix:\s*([^\r\n]+)/i) || [])[1] || '';
   validateClassUrlState(page, classUrlSuffix, matchedClass, matchedSubclass, rules);
@@ -369,10 +371,10 @@ function buildPlayer(page, controls, fileIndex, rules, itemCatalog, spellCatalog
     spellScrolls,
     spellDetails: buildPlayerSpellDetails([...spells, ...spellScrolls.map(scroll => scroll.spellName)], spellCatalog),
     spellSlots: calculateSpellSlots(matchedClass, level, spellAbility),
-    resources: buildPlayerResources(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog),
-    ruleActions: buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, feats, spells),
-    ruleEffects: buildPlayerRuleEffects(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, feats),
-    ruleFeatures: buildPlayerRuleFeatures(rules, matchedClass, matchedSubclass, level),
+    resources: buildPlayerResources(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames),
+    ruleActions: buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, spells),
+    ruleEffects: buildPlayerRuleEffects(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats),
+    ruleFeatures: buildPlayerRuleFeatures(rules, matchedClass, matchedSubclass, level, raceNames),
     notes: data.notes || '',
     backgrounds,
     feats,
@@ -458,8 +460,8 @@ function inferHitDice(matchedClass, level) {
   return `${level}${hitDie}`;
 }
 
-function buildPlayerResources(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog) {
-  const availableFeatures = getAvailableFeatures(rules, matchedClass, matchedSubclass, level);
+function buildPlayerResources(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames = []) {
+  const availableFeatures = getAvailableFeatures(rules, matchedClass, matchedSubclass, level, raceNames);
   const featureIds = new Set(availableFeatures.map(feature => feature.id));
   const resources = [];
   for (const resource of rules.resources || []) {
@@ -501,6 +503,8 @@ function formatFeatureResource(resource, feature) {
     sourceId: feature.id,
     className: feature.className || resource.className || '',
     subclassName: feature.subclassShortName || feature.subclassName || resource.subclassName || '',
+    raceName: feature.raceName || resource.raceName || '',
+    source: feature.source || resource.source || '',
     text: cleanRulesText(feature.text || resource.text || ''),
   };
 }
@@ -514,10 +518,17 @@ function findAvailableFeatureForResource(resource, availableFeatures) {
   const candidates = (availableFeatures || []).filter(feature => {
     if (resource.sourceType === 'class' && feature.kind !== 'class') return false;
     if (resource.sourceType === 'subclass' && feature.kind !== 'subclass') return false;
+    if (resource.sourceType === 'race' && feature.kind !== 'race') return false;
+    if (resource.source && feature.source && resource.source !== feature.source) return false;
     if (resourceClass && normalizeItemName(feature.className) !== resourceClass) return false;
     if (resourceSubclass) {
       const featureSubclassNames = [feature.subclassName, feature.subclassShortName].map(normalizeItemName);
       if (!featureSubclassNames.includes(resourceSubclass)) return false;
+    }
+    const resourceRace = normalizeItemName(resource.raceName);
+    if (resourceRace) {
+      const featureRaceNames = [feature.raceName, feature.baseRaceName, feature.subraceName].map(normalizeItemName);
+      if (!featureRaceNames.includes(resourceRace)) return false;
     }
     return true;
   });
@@ -530,8 +541,8 @@ function findAvailableFeatureForResource(resource, availableFeatures) {
   }) || null;
 }
 
-function buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, feats, spells) {
-  const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level);
+function buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, spells) {
+  const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level, raceNames);
   const itemIds = new Set(equipment.map(itemName => {
     const item = findCatalogItem(itemCatalog, itemName);
     return item && item.id;
@@ -539,7 +550,7 @@ function buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equ
   const featIds = new Set((feats || []).map(slugify));
   const spellIds = new Set((spells || []).map(slugify));
   return (rules.actions || []).filter(action => {
-    if (action.sourceType === 'class' || action.sourceType === 'subclass') return featureIds.has(action.sourceId);
+    if (action.sourceType === 'class' || action.sourceType === 'subclass' || action.sourceType === 'race') return featureIds.has(action.sourceId);
     if (action.sourceType === 'item') return itemIds.has(action.sourceId);
     if (action.sourceType === 'feat') return featIds.has(action.sourceId);
     if (action.sourceType === 'spell') return spellIds.has(action.sourceId);
@@ -547,23 +558,23 @@ function buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equ
   }).slice(0, 160);
 }
 
-function buildPlayerRuleEffects(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, feats) {
-  const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level);
+function buildPlayerRuleEffects(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats) {
+  const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level, raceNames);
   const itemIds = new Set(equipment.map(itemName => {
     const item = findCatalogItem(itemCatalog, itemName);
     return item && item.id;
   }).filter(Boolean));
   const featIds = new Set((feats || []).map(slugify));
   return (rules.effects || []).filter(effect => {
-    if (effect.sourceType === 'class' || effect.sourceType === 'subclass') return featureIds.has(effect.sourceId);
+    if (effect.sourceType === 'class' || effect.sourceType === 'subclass' || effect.sourceType === 'race') return featureIds.has(effect.sourceId);
     if (effect.sourceType === 'item') return itemIds.has(effect.sourceId);
     if (effect.sourceType === 'feat') return featIds.has(effect.sourceId);
     return false;
   }).slice(0, 160);
 }
 
-function buildPlayerRuleFeatures(rules, matchedClass, matchedSubclass, level) {
-  const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level);
+function buildPlayerRuleFeatures(rules, matchedClass, matchedSubclass, level, raceNames = []) {
+  const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level, raceNames);
   return (rules.features || [])
     .filter(feature => featureIds.has(feature.id))
     .map(feature => ({
@@ -572,6 +583,10 @@ function buildPlayerRuleFeatures(rules, matchedClass, matchedSubclass, level) {
       name: feature.name,
       className: feature.className || '',
       subclassName: feature.subclassShortName || feature.subclassName || '',
+      raceName: feature.raceName || '',
+      baseRaceName: feature.baseRaceName || '',
+      subraceName: feature.subraceName || '',
+      raceId: feature.raceId || '',
       level: feature.level,
       source: feature.source || '',
       text: cleanRulesText(feature.text || ''),
@@ -582,21 +597,51 @@ function buildPlayerRuleFeatures(rules, matchedClass, matchedSubclass, level) {
     .slice(0, 120);
 }
 
-function getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level) {
-  return new Set(getAvailableFeatures(rules, matchedClass, matchedSubclass, level).map(feature => feature.id));
+function getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level, raceNames = []) {
+  return new Set(getAvailableFeatures(rules, matchedClass, matchedSubclass, level, raceNames).map(feature => feature.id));
 }
 
-function getAvailableFeatures(rules, matchedClass, matchedSubclass, level) {
+function getAvailableFeatures(rules, matchedClass, matchedSubclass, level, raceNames = []) {
   if (!rules || !matchedClass) return [];
   const className = normalizeItemName(matchedClass.name);
   const subclassNames = new Set([matchedSubclass && matchedSubclass.name, matchedSubclass && matchedSubclass.shortName].map(normalizeItemName).filter(Boolean));
-  return (rules.features || [])
+  const classFeatures = (rules.features || [])
     .filter(feature => feature.level <= level)
     .filter(feature => {
       if (normalizeItemName(feature.className) !== className) return false;
       if (feature.kind === 'class') return true;
       return subclassNames.has(normalizeItemName(feature.subclassName)) || subclassNames.has(normalizeItemName(feature.subclassShortName));
     });
+  return uniqueBy([...classFeatures, ...getAvailableRaceFeatures(rules, raceNames, level)], feature => feature.id);
+}
+
+function getAvailableRaceFeatures(rules, raceNames = [], level = 1) {
+  const selectedRaces = uniqueBy((raceNames || []).map(name => findRuleRace(rules, name)).filter(Boolean), race => race.id);
+  if (!selectedRaces.length) return [];
+  const acceptedRaceIds = new Set();
+  for (const race of selectedRaces) {
+    acceptedRaceIds.add(race.id);
+    if (race.parentRaceId) acceptedRaceIds.add(race.parentRaceId);
+  }
+  return (rules.features || [])
+    .filter(feature => feature.kind === 'race')
+    .filter(feature => (Number(feature.level) || 1) <= level)
+    .filter(feature => acceptedRaceIds.has(feature.raceId));
+}
+
+function findRuleRace(rules, raceName) {
+  const target = normalizeItemName(raceName);
+  if (!target) return null;
+  const candidates = (rules.races || []).filter(race => {
+    const keys = [race.name, race.baseName, race.subraceName, race.id, ...(race.aliases || [])].map(normalizeItemName).filter(Boolean);
+    return keys.includes(target);
+  });
+  return candidates.sort((a, b) => sourcePriority(a.source) - sourcePriority(b.source) || String(a.name).localeCompare(String(b.name)))[0] || null;
+}
+
+function sourcePriority(source) {
+  const index = RACE_SOURCE_PRIORITY.indexOf(String(source || '').toUpperCase());
+  return index === -1 ? RACE_SOURCE_PRIORITY.length : index;
 }
 
 function calculateSpellSlots(matchedClass, level, spellAbility) {
@@ -1071,7 +1116,7 @@ function renderPlayerPage(player, page) {
         ${infoCard('Race', p.races.join(', ') || p.race || '-', 'races')}
       </div>
       <section class="feature-notes">
-        <h2>Class Features</h2>
+        <h2>Class & Racial Features</h2>
         <div data-class-info-panel>${canonicalFeaturesHtml}</div>
       </section>
       <section class="feature-notes">
@@ -1122,18 +1167,27 @@ function inlineEditPanel(title, body, includeReset = false) {
 }
 
 function renderClassFeatureList(features) {
-  if (!features.length) return '<p>No class features found in canonical rules.</p>';
+  if (!features.length) return '<p>No class or racial features found in canonical rules.</p>';
   return `<div class="class-feature-list">
     ${features.map(feature => `<details class="class-feature-row">
       <summary>
         <span>
           <strong>${escapeHtml(feature.name)}</strong>
-          <small>${escapeHtml([feature.kind === 'subclass' ? feature.subclassName : feature.className, feature.level ? `Level ${feature.level}` : '', feature.timing, feature.resourceHint].filter(Boolean).join(' / '))}</small>
+          <small>${escapeHtml(formatFeatureMeta(feature))}</small>
         </span>
       </summary>
       <p>${escapeHtml(feature.text || 'No feature text recorded.')}</p>
     </details>`).join('')}
   </div>`;
+}
+
+function formatFeatureMeta(feature) {
+  return [
+    feature.kind === 'race' ? feature.raceName || 'Race' : (feature.kind === 'subclass' ? feature.subclassName : feature.className),
+    feature.level ? `Level ${feature.level}` : '',
+    feature.timing,
+    feature.resourceHint,
+  ].filter(Boolean).join(' / ');
 }
 
 function editNumberField(name, label, attrs = '') {

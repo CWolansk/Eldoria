@@ -1,9 +1,10 @@
 {
-  "generatedAtUtc": "2026-05-06T00:18:59.900Z",
+  "generatedAtUtc": "2026-05-06T10:46:44.183Z",
   "warnings": [],
   "canonicalRuntimeFiles": [
     "classes.json",
     "subclasses.json",
+    "races.json",
     "features.json",
     "items.json",
     "spells.json",

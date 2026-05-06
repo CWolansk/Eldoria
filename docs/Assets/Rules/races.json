@@ -1,0 +1,5622 @@
+[
+  {
+    "id": "race-dragonborn-phb",
+    "name": "Dragonborn",
+    "baseName": "Dragonborn",
+    "subraceName": "",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 32,
+    "parentRaceId": "",
+    "aliases": [
+      "Dragonborn"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "cha": 1
+      }
+    ],
+    "traitTags": [
+      "Uncommon Race"
+    ]
+  },
+  {
+    "id": "race-dwarf-phb",
+    "name": "Dwarf",
+    "baseName": "Dwarf",
+    "subraceName": "",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 18,
+    "parentRaceId": "",
+    "aliases": [
+      "Dwarf"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 25,
+    "ability": [
+      {
+        "con": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-dwarf-hill-phb",
+    "name": "Dwarf (Hill)",
+    "baseName": "Dwarf",
+    "subraceName": "Hill",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 20,
+    "parentRaceId": "race-dwarf-phb",
+    "aliases": [
+      "Dwarf",
+      "Dwarf (Hill)",
+      "Hill Dwarf",
+      "Dwarf Hill"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "wis": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-dwarf-mountain-phb",
+    "name": "Dwarf (Mountain)",
+    "baseName": "Dwarf",
+    "subraceName": "Mountain",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 20,
+    "parentRaceId": "race-dwarf-phb",
+    "aliases": [
+      "Dwarf",
+      "Dwarf (Mountain)",
+      "Mountain Dwarf",
+      "Dwarf Mountain"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "str": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-elf-phb",
+    "name": "Elf",
+    "baseName": "Elf",
+    "subraceName": "",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 21,
+    "parentRaceId": "",
+    "aliases": [
+      "Elf"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "dex": 2
+      }
+    ],
+    "traitTags": [
+      "Improved Resting"
+    ]
+  },
+  {
+    "id": "race-elf-drow-phb",
+    "name": "Elf (Drow)",
+    "baseName": "Elf",
+    "subraceName": "Drow",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 24,
+    "parentRaceId": "race-elf-phb",
+    "aliases": [
+      "Elf",
+      "Elf (Drow)",
+      "Drow Elf",
+      "Elf Drow"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "cha": 1
+      }
+    ],
+    "traitTags": [
+      "Sunlight Sensitivity"
+    ]
+  },
+  {
+    "id": "race-elf-high-phb",
+    "name": "Elf (High)",
+    "baseName": "Elf",
+    "subraceName": "High",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 23,
+    "parentRaceId": "race-elf-phb",
+    "aliases": [
+      "Elf",
+      "Elf (High)",
+      "High Elf",
+      "Elf High"
+    ],
+    "size": [],
+    "speed": 30,
+    "ability": [
+      {
+        "int": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-elf-wood-phb",
+    "name": "Elf (Wood)",
+    "baseName": "Elf",
+    "subraceName": "Wood",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 24,
+    "parentRaceId": "race-elf-phb",
+    "aliases": [
+      "Elf",
+      "Elf (Wood)",
+      "Wood Elf",
+      "Elf Wood"
+    ],
+    "size": [],
+    "speed": 35,
+    "ability": [
+      {
+        "wis": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-gnome-phb",
+    "name": "Gnome",
+    "baseName": "Gnome",
+    "subraceName": "",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 35,
+    "parentRaceId": "",
+    "aliases": [
+      "Gnome"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": 25,
+    "ability": [
+      {
+        "int": 2
+      }
+    ],
+    "traitTags": [
+      "Uncommon Race"
+    ]
+  },
+  {
+    "id": "race-gnome-forest-phb",
+    "name": "Gnome (Forest)",
+    "baseName": "Gnome",
+    "subraceName": "Forest",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 37,
+    "parentRaceId": "race-gnome-phb",
+    "aliases": [
+      "Gnome",
+      "Gnome (Forest)",
+      "Forest Gnome",
+      "Gnome Forest"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "dex": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-gnome-rock-phb",
+    "name": "Gnome (Rock)",
+    "baseName": "Gnome",
+    "subraceName": "Rock",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 37,
+    "parentRaceId": "race-gnome-phb",
+    "aliases": [
+      "Gnome",
+      "Gnome (Rock)",
+      "Rock Gnome",
+      "Gnome Rock"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "con": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-half-elf-phb",
+    "name": "Half-Elf",
+    "baseName": "Half-Elf",
+    "subraceName": "",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 38,
+    "parentRaceId": "",
+    "aliases": [
+      "Half-Elf"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "cha": 2,
+        "choose": {
+          "from": [
+            "str",
+            "dex",
+            "con",
+            "int",
+            "wis"
+          ],
+          "count": 2
+        }
+      }
+    ],
+    "traitTags": [
+      "Uncommon Race"
+    ]
+  },
+  {
+    "id": "race-half-orc-phb",
+    "name": "Half-Orc",
+    "baseName": "Half-Orc",
+    "subraceName": "",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 40,
+    "parentRaceId": "",
+    "aliases": [
+      "Half-Orc"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "con": 1
+      }
+    ],
+    "traitTags": [
+      "Uncommon Race"
+    ]
+  },
+  {
+    "id": "race-halfling-phb",
+    "name": "Halfling",
+    "baseName": "Halfling",
+    "subraceName": "",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 26,
+    "parentRaceId": "",
+    "aliases": [
+      "Halfling"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": 25,
+    "ability": [
+      {
+        "dex": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-halfling-lightfoot-phb",
+    "name": "Halfling (Lightfoot)",
+    "baseName": "Halfling",
+    "subraceName": "Lightfoot",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 28,
+    "parentRaceId": "race-halfling-phb",
+    "aliases": [
+      "Halfling",
+      "Halfling (Lightfoot)",
+      "Lightfoot Halfling",
+      "Halfling Lightfoot"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "cha": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-halfling-stout-phb",
+    "name": "Halfling (Stout)",
+    "baseName": "Halfling",
+    "subraceName": "Stout",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 28,
+    "parentRaceId": "race-halfling-phb",
+    "aliases": [
+      "Halfling",
+      "Halfling (Stout)",
+      "Stout Halfling",
+      "Halfling Stout"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "con": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-human-phb",
+    "name": "Human",
+    "baseName": "Human",
+    "subraceName": "",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 29,
+    "parentRaceId": "",
+    "aliases": [
+      "Human"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-human-variant-phb",
+    "name": "Human (Variant)",
+    "baseName": "Human",
+    "subraceName": "Variant",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 31,
+    "parentRaceId": "race-human-phb",
+    "aliases": [
+      "Human",
+      "Human (Variant)",
+      "Variant Human",
+      "Human Variant"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "choose": {
+          "from": [
+            "str",
+            "dex",
+            "con",
+            "int",
+            "wis",
+            "cha"
+          ],
+          "count": 2
+        }
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-tiefling-phb",
+    "name": "Tiefling",
+    "baseName": "Tiefling",
+    "subraceName": "",
+    "source": "PHB",
+    "raceSource": "PHB",
+    "page": 42,
+    "parentRaceId": "",
+    "aliases": [
+      "Tiefling"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "cha": 2,
+        "int": 1
+      }
+    ],
+    "traitTags": [
+      "Uncommon Race"
+    ]
+  },
+  {
+    "id": "race-aasimar-vgm",
+    "name": "Aasimar",
+    "baseName": "Aasimar",
+    "subraceName": "",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 104,
+    "parentRaceId": "",
+    "aliases": [
+      "Aasimar"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "cha": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-aasimar-fallen-vgm",
+    "name": "Aasimar (Fallen)",
+    "baseName": "Aasimar",
+    "subraceName": "Fallen",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 105,
+    "parentRaceId": "race-aasimar-vgm",
+    "aliases": [
+      "Aasimar",
+      "Aasimar (Fallen)",
+      "Fallen Aasimar",
+      "Aasimar Fallen"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "str": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-aasimar-protector-vgm",
+    "name": "Aasimar (Protector)",
+    "baseName": "Aasimar",
+    "subraceName": "Protector",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 105,
+    "parentRaceId": "race-aasimar-vgm",
+    "aliases": [
+      "Aasimar",
+      "Aasimar (Protector)",
+      "Protector Aasimar",
+      "Aasimar Protector"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "wis": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-aasimar-scourge-vgm",
+    "name": "Aasimar (Scourge)",
+    "baseName": "Aasimar",
+    "subraceName": "Scourge",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 105,
+    "parentRaceId": "race-aasimar-vgm",
+    "aliases": [
+      "Aasimar",
+      "Aasimar (Scourge)",
+      "Scourge Aasimar",
+      "Aasimar Scourge"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "con": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-bugbear-vgm",
+    "name": "Bugbear",
+    "baseName": "Bugbear",
+    "subraceName": "",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 119,
+    "parentRaceId": "",
+    "aliases": [
+      "Bugbear"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "dex": 1
+      }
+    ],
+    "traitTags": [
+      "Monstrous Race",
+      "Powerful Build"
+    ]
+  },
+  {
+    "id": "race-firbolg-vgm",
+    "name": "Firbolg",
+    "baseName": "Firbolg",
+    "subraceName": "",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 107,
+    "parentRaceId": "",
+    "aliases": [
+      "Firbolg"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "wis": 2,
+        "str": 1
+      }
+    ],
+    "traitTags": [
+      "Powerful Build"
+    ]
+  },
+  {
+    "id": "race-goblin-vgm",
+    "name": "Goblin",
+    "baseName": "Goblin",
+    "subraceName": "",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 119,
+    "parentRaceId": "",
+    "aliases": [
+      "Goblin"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "dex": 2,
+        "con": 1
+      }
+    ],
+    "traitTags": [
+      "Monstrous Race"
+    ]
+  },
+  {
+    "id": "race-goliath-vgm",
+    "name": "Goliath",
+    "baseName": "Goliath",
+    "subraceName": "",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 108,
+    "parentRaceId": "",
+    "aliases": [
+      "Goliath"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "con": 1
+      }
+    ],
+    "traitTags": [
+      "Powerful Build"
+    ]
+  },
+  {
+    "id": "race-hobgoblin-vgm",
+    "name": "Hobgoblin",
+    "baseName": "Hobgoblin",
+    "subraceName": "",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 119,
+    "parentRaceId": "",
+    "aliases": [
+      "Hobgoblin"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "con": 2,
+        "int": 1
+      }
+    ],
+    "traitTags": [
+      "Monstrous Race"
+    ]
+  },
+  {
+    "id": "race-kenku-vgm",
+    "name": "Kenku",
+    "baseName": "Kenku",
+    "subraceName": "",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 109,
+    "parentRaceId": "",
+    "aliases": [
+      "Kenku"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "dex": 2,
+        "wis": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-kobold-vgm",
+    "name": "Kobold",
+    "baseName": "Kobold",
+    "subraceName": "",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 119,
+    "parentRaceId": "",
+    "aliases": [
+      "Kobold"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "dex": 2
+      }
+    ],
+    "traitTags": [
+      "Monstrous Race",
+      "Sunlight Sensitivity"
+    ]
+  },
+  {
+    "id": "race-lizardfolk-vgm",
+    "name": "Lizardfolk",
+    "baseName": "Lizardfolk",
+    "subraceName": "",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 111,
+    "parentRaceId": "",
+    "aliases": [
+      "Lizardfolk"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "swim": 30
+    },
+    "ability": [
+      {
+        "con": 2,
+        "wis": 1
+      }
+    ],
+    "traitTags": [
+      "Natural Armor",
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-orc-vgm",
+    "name": "Orc",
+    "baseName": "Orc",
+    "subraceName": "",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 120,
+    "parentRaceId": "",
+    "aliases": [
+      "Orc"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "con": 1
+      }
+    ],
+    "traitTags": [
+      "Monstrous Race",
+      "Powerful Build"
+    ]
+  },
+  {
+    "id": "race-tabaxi-vgm",
+    "name": "Tabaxi",
+    "baseName": "Tabaxi",
+    "subraceName": "",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 113,
+    "parentRaceId": "",
+    "aliases": [
+      "Tabaxi"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "climb": 20
+    },
+    "ability": [
+      {
+        "dex": 2,
+        "cha": 1
+      }
+    ],
+    "traitTags": [
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-triton-vgm",
+    "name": "Triton",
+    "baseName": "Triton",
+    "subraceName": "",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 115,
+    "parentRaceId": "",
+    "aliases": [
+      "Triton"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "swim": 30
+    },
+    "ability": [
+      {
+        "str": 1,
+        "cha": 1,
+        "con": 1
+      }
+    ],
+    "traitTags": [
+      "Amphibious"
+    ]
+  },
+  {
+    "id": "race-yuan-ti-pureblood-vgm",
+    "name": "Yuan-ti Pureblood",
+    "baseName": "Yuan-ti Pureblood",
+    "subraceName": "",
+    "source": "VGM",
+    "raceSource": "VGM",
+    "page": 120,
+    "parentRaceId": "",
+    "aliases": [
+      "Yuan-ti Pureblood"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "cha": 2,
+        "int": 1
+      }
+    ],
+    "traitTags": [
+      "Magic Resistance",
+      "Monstrous Race"
+    ]
+  },
+  {
+    "id": "race-aarakocra-eepc",
+    "name": "Aarakocra",
+    "baseName": "Aarakocra",
+    "subraceName": "",
+    "source": "EEPC",
+    "raceSource": "EEPC",
+    "page": 5,
+    "parentRaceId": "",
+    "aliases": [
+      "Aarakocra"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 25,
+      "fly": 50
+    },
+    "ability": [
+      {
+        "dex": 2,
+        "wis": 1
+      }
+    ],
+    "traitTags": [
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-genasi-eepc",
+    "name": "Genasi",
+    "baseName": "Genasi",
+    "subraceName": "",
+    "source": "EEPC",
+    "raceSource": "EEPC",
+    "page": 9,
+    "parentRaceId": "",
+    "aliases": [
+      "Genasi"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "con": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-genasi-air-eepc",
+    "name": "Genasi (Air)",
+    "baseName": "Genasi",
+    "subraceName": "Air",
+    "source": "EEPC",
+    "raceSource": "EEPC",
+    "page": 9,
+    "parentRaceId": "race-genasi-eepc",
+    "aliases": [
+      "Genasi",
+      "Genasi (Air)",
+      "Air Genasi",
+      "Genasi Air"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "dex": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-genasi-earth-eepc",
+    "name": "Genasi (Earth)",
+    "baseName": "Genasi",
+    "subraceName": "Earth",
+    "source": "EEPC",
+    "raceSource": "EEPC",
+    "page": 9,
+    "parentRaceId": "race-genasi-eepc",
+    "aliases": [
+      "Genasi",
+      "Genasi (Earth)",
+      "Earth Genasi",
+      "Genasi Earth"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "str": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-genasi-fire-eepc",
+    "name": "Genasi (Fire)",
+    "baseName": "Genasi",
+    "subraceName": "Fire",
+    "source": "EEPC",
+    "raceSource": "EEPC",
+    "page": 9,
+    "parentRaceId": "race-genasi-eepc",
+    "aliases": [
+      "Genasi",
+      "Genasi (Fire)",
+      "Fire Genasi",
+      "Genasi Fire"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "int": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-genasi-water-eepc",
+    "name": "Genasi (Water)",
+    "baseName": "Genasi",
+    "subraceName": "Water",
+    "source": "EEPC",
+    "raceSource": "EEPC",
+    "page": 10,
+    "parentRaceId": "race-genasi-eepc",
+    "aliases": [
+      "Genasi",
+      "Genasi (Water)",
+      "Water Genasi",
+      "Genasi Water"
+    ],
+    "size": [],
+    "speed": {
+      "walk": 30,
+      "swim": 30
+    },
+    "ability": [
+      {
+        "wis": 1
+      }
+    ],
+    "traitTags": [
+      "Amphibious"
+    ]
+  },
+  {
+    "id": "race-aarakocra-dmg",
+    "name": "Aarakocra",
+    "baseName": "Aarakocra",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Aarakocra"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 20,
+      "fly": 50
+    },
+    "ability": [
+      {
+        "dex": 2,
+        "wis": 2
+      }
+    ],
+    "traitTags": [
+      "Natural Weapon",
+      "NPC Race"
+    ]
+  },
+  {
+    "id": "race-aasimar-dmg",
+    "name": "Aasimar",
+    "baseName": "Aasimar",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 286,
+    "parentRaceId": "",
+    "aliases": [
+      "Aasimar"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "wis": 1,
+        "cha": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-bullywug-dmg",
+    "name": "Bullywug",
+    "baseName": "Bullywug",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Bullywug"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 20,
+      "swim": 40
+    },
+    "ability": [
+      {
+        "int": -2,
+        "cha": -2
+      }
+    ],
+    "traitTags": [
+      "Amphibious",
+      "NPC Race"
+    ]
+  },
+  {
+    "id": "race-elf-eladrin-dmg",
+    "name": "Elf (Eladrin)",
+    "baseName": "Elf",
+    "subraceName": "Eladrin",
+    "source": "DMG",
+    "raceSource": "PHB",
+    "page": 286,
+    "parentRaceId": "race-elf-phb",
+    "aliases": [
+      "Elf",
+      "Elf (Eladrin)",
+      "Eladrin Elf",
+      "Elf Eladrin"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "int": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-gnoll-dmg",
+    "name": "Gnoll",
+    "baseName": "Gnoll",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Gnoll"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "int": -2
+      }
+    ],
+    "traitTags": [
+      "Natural Weapon",
+      "NPC Race"
+    ]
+  },
+  {
+    "id": "race-gnome-deep-dmg",
+    "name": "Gnome (Deep)",
+    "baseName": "Gnome (Deep)",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Gnome (Deep)"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": 20,
+    "ability": [
+      {
+        "str": 1,
+        "dex": 2
+      }
+    ],
+    "traitTags": [
+      "NPC Race"
+    ]
+  },
+  {
+    "id": "race-goblin-dmg",
+    "name": "Goblin",
+    "baseName": "Goblin",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Goblin"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": -2,
+        "dex": 2
+      }
+    ],
+    "traitTags": [
+      "NPC Race"
+    ]
+  },
+  {
+    "id": "race-grimlock-dmg",
+    "name": "Grimlock",
+    "baseName": "Grimlock",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Grimlock"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "cha": -2
+      }
+    ],
+    "traitTags": [
+      "NPC Race"
+    ]
+  },
+  {
+    "id": "race-hobgoblin-dmg",
+    "name": "Hobgoblin",
+    "baseName": "Hobgoblin",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Hobgoblin"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "NPC Race"
+    ]
+  },
+  {
+    "id": "race-kenku-dmg",
+    "name": "Kenku",
+    "baseName": "Kenku",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Kenku"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "dex": 2
+      }
+    ],
+    "traitTags": [
+      "NPC Race"
+    ]
+  },
+  {
+    "id": "race-kobold-dmg",
+    "name": "Kobold",
+    "baseName": "Kobold",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Kobold"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "dex": 2,
+        "str": -4
+      }
+    ],
+    "traitTags": [
+      "NPC Race",
+      "Sunlight Sensitivity"
+    ]
+  },
+  {
+    "id": "race-kuo-toa-dmg",
+    "name": "Kuo-Toa",
+    "baseName": "Kuo-Toa",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Kuo-Toa"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "swim": 30
+    },
+    "ability": [],
+    "traitTags": [
+      "Amphibious",
+      "NPC Race",
+      "Sunlight Sensitivity"
+    ]
+  },
+  {
+    "id": "race-lizardfolk-dmg",
+    "name": "Lizardfolk",
+    "baseName": "Lizardfolk",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Lizardfolk"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "swim": 30
+    },
+    "ability": [
+      {
+        "str": 2,
+        "int": -2
+      }
+    ],
+    "traitTags": [
+      "Natural Armor",
+      "NPC Race"
+    ]
+  },
+  {
+    "id": "race-merfolk-dmg",
+    "name": "Merfolk",
+    "baseName": "Merfolk",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Merfolk"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 10,
+      "swim": 40
+    },
+    "ability": [],
+    "traitTags": [
+      "Amphibious",
+      "NPC Race"
+    ]
+  },
+  {
+    "id": "race-orc-dmg",
+    "name": "Orc",
+    "baseName": "Orc",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Orc"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "int": -2
+      }
+    ],
+    "traitTags": [
+      "NPC Race"
+    ]
+  },
+  {
+    "id": "race-skeleton-dmg",
+    "name": "Skeleton",
+    "baseName": "Skeleton",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Skeleton"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "dex": 2,
+        "int": -4,
+        "cha": -4
+      }
+    ],
+    "traitTags": [
+      "Improved Resting",
+      "NPC Race"
+    ]
+  },
+  {
+    "id": "race-troglodyte-dmg",
+    "name": "Troglodyte",
+    "baseName": "Troglodyte",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Troglodyte"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "con": 2,
+        "int": -4,
+        "cha": -4
+      }
+    ],
+    "traitTags": [
+      "Natural Armor",
+      "NPC Race",
+      "Sunlight Sensitivity"
+    ]
+  },
+  {
+    "id": "race-zombie-dmg",
+    "name": "Zombie",
+    "baseName": "Zombie",
+    "subraceName": "",
+    "source": "DMG",
+    "raceSource": "DMG",
+    "page": 282,
+    "parentRaceId": "",
+    "aliases": [
+      "Zombie"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 1,
+        "con": 2,
+        "int": -6,
+        "wis": -4,
+        "cha": -4
+      }
+    ],
+    "traitTags": [
+      "Improved Resting",
+      "NPC Race"
+    ]
+  },
+  {
+    "id": "race-custom-lineage-tce",
+    "name": "Custom Lineage",
+    "baseName": "Custom Lineage",
+    "subraceName": "",
+    "source": "TCE",
+    "raceSource": "TCE",
+    "page": 8,
+    "parentRaceId": "",
+    "aliases": [
+      "Custom Lineage"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "choose": {
+          "from": [
+            "str",
+            "dex",
+            "con",
+            "int",
+            "wis",
+            "cha"
+          ],
+          "amount": 2
+        }
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-gnome-deep-svirfneblin-scag",
+    "name": "Gnome (Deep/Svirfneblin)",
+    "baseName": "Gnome",
+    "subraceName": "Deep/Svirfneblin",
+    "source": "SCAG",
+    "raceSource": "PHB",
+    "page": 115,
+    "parentRaceId": "race-gnome-phb",
+    "aliases": [
+      "Gnome",
+      "Gnome (Deep/Svirfneblin)",
+      "Deep/Svirfneblin Gnome",
+      "Gnome Deep/Svirfneblin"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "dex": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-half-elf-variant-aquatic-elf-descent-scag",
+    "name": "Half-Elf (Variant; Aquatic Elf Descent)",
+    "baseName": "Half-Elf",
+    "subraceName": "Variant; Aquatic Elf Descent",
+    "source": "SCAG",
+    "raceSource": "PHB",
+    "page": 116,
+    "parentRaceId": "race-half-elf-phb",
+    "aliases": [
+      "Half-Elf",
+      "Half-Elf (Variant; Aquatic Elf Descent)",
+      "Variant; Aquatic Elf Descent Half-Elf",
+      "Half-Elf Variant; Aquatic Elf Descent"
+    ],
+    "size": [],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-half-elf-variant-drow-descent-scag",
+    "name": "Half-Elf (Variant; Drow Descent)",
+    "baseName": "Half-Elf",
+    "subraceName": "Variant; Drow Descent",
+    "source": "SCAG",
+    "raceSource": "PHB",
+    "page": 116,
+    "parentRaceId": "race-half-elf-phb",
+    "aliases": [
+      "Half-Elf",
+      "Half-Elf (Variant; Drow Descent)",
+      "Variant; Drow Descent Half-Elf",
+      "Half-Elf Variant; Drow Descent"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-half-elf-variant-moon-elf-or-sun-elf-descent-scag",
+    "name": "Half-Elf (Variant; Moon Elf or Sun Elf Descent)",
+    "baseName": "Half-Elf",
+    "subraceName": "Variant; Moon Elf or Sun Elf Descent",
+    "source": "SCAG",
+    "raceSource": "PHB",
+    "page": 116,
+    "parentRaceId": "race-half-elf-phb",
+    "aliases": [
+      "Half-Elf",
+      "Half-Elf (Variant; Moon Elf or Sun Elf Descent)",
+      "Variant; Moon Elf or Sun Elf Descent Half-Elf",
+      "Half-Elf Variant; Moon Elf or Sun Elf Descent"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-half-elf-variant-wood-elf-descent-scag",
+    "name": "Half-Elf (Variant; Wood Elf Descent)",
+    "baseName": "Half-Elf",
+    "subraceName": "Variant; Wood Elf Descent",
+    "source": "SCAG",
+    "raceSource": "PHB",
+    "page": 116,
+    "parentRaceId": "race-half-elf-phb",
+    "aliases": [
+      "Half-Elf",
+      "Half-Elf (Variant; Wood Elf Descent)",
+      "Variant; Wood Elf Descent Half-Elf",
+      "Half-Elf Variant; Wood Elf Descent"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-halfling-ghostwise-scag",
+    "name": "Halfling (Ghostwise)",
+    "baseName": "Halfling",
+    "subraceName": "Ghostwise",
+    "source": "SCAG",
+    "raceSource": "PHB",
+    "page": 110,
+    "parentRaceId": "race-halfling-phb",
+    "aliases": [
+      "Halfling",
+      "Halfling (Ghostwise)",
+      "Ghostwise Halfling",
+      "Halfling Ghostwise"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "wis": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-tiefling-variant-devil-s-tongue-scag",
+    "name": "Tiefling (Variant; Devil's Tongue)",
+    "baseName": "Tiefling",
+    "subraceName": "Variant; Devil's Tongue",
+    "source": "SCAG",
+    "raceSource": "PHB",
+    "page": 118,
+    "parentRaceId": "race-tiefling-phb",
+    "aliases": [
+      "Tiefling",
+      "Tiefling (Variant; Devil's Tongue)",
+      "Variant; Devil's Tongue Tiefling",
+      "Tiefling Variant; Devil's Tongue"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "int": 1,
+        "choose": {
+          "from": [
+            "dex",
+            "cha"
+          ],
+          "count": 1,
+          "amount": 2
+        }
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-tiefling-variant-hellfire-scag",
+    "name": "Tiefling (Variant; Hellfire)",
+    "baseName": "Tiefling",
+    "subraceName": "Variant; Hellfire",
+    "source": "SCAG",
+    "raceSource": "PHB",
+    "page": 118,
+    "parentRaceId": "race-tiefling-phb",
+    "aliases": [
+      "Tiefling",
+      "Tiefling (Variant; Hellfire)",
+      "Variant; Hellfire Tiefling",
+      "Tiefling Variant; Hellfire"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "int": 1,
+        "choose": {
+          "from": [
+            "dex",
+            "cha"
+          ],
+          "count": 1,
+          "amount": 2
+        }
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-tiefling-variant-infernal-legacy-scag",
+    "name": "Tiefling (Variant; Infernal Legacy)",
+    "baseName": "Tiefling",
+    "subraceName": "Variant; Infernal Legacy",
+    "source": "SCAG",
+    "raceSource": "PHB",
+    "page": 118,
+    "parentRaceId": "race-tiefling-phb",
+    "aliases": [
+      "Tiefling",
+      "Tiefling (Variant; Infernal Legacy)",
+      "Variant; Infernal Legacy Tiefling",
+      "Tiefling Variant; Infernal Legacy"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "int": 1,
+        "choose": {
+          "from": [
+            "dex",
+            "cha"
+          ],
+          "count": 1,
+          "amount": 2
+        }
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-tiefling-variant-winged-scag",
+    "name": "Tiefling (Variant; Winged)",
+    "baseName": "Tiefling",
+    "subraceName": "Variant; Winged",
+    "source": "SCAG",
+    "raceSource": "PHB",
+    "page": 118,
+    "parentRaceId": "race-tiefling-phb",
+    "aliases": [
+      "Tiefling",
+      "Tiefling (Variant; Winged)",
+      "Variant; Winged Tiefling",
+      "Tiefling Variant; Winged"
+    ],
+    "size": [],
+    "speed": {
+      "walk": 30,
+      "fly": 30
+    },
+    "ability": [
+      {
+        "int": 1,
+        "choose": {
+          "from": [
+            "dex",
+            "cha"
+          ],
+          "count": 1,
+          "amount": 2
+        }
+      }
+    ],
+    "traitTags": [
+      "Uncommon Race"
+    ]
+  },
+  {
+    "id": "race-aarakocra-mpmm",
+    "name": "Aarakocra",
+    "baseName": "Aarakocra",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 5,
+    "parentRaceId": "",
+    "aliases": [
+      "Aarakocra"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "fly": true
+    },
+    "ability": [],
+    "traitTags": [
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-aasimar-mpmm",
+    "name": "Aasimar",
+    "baseName": "Aasimar",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 7,
+    "parentRaceId": "",
+    "aliases": [
+      "Aasimar"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-bugbear-mpmm",
+    "name": "Bugbear",
+    "baseName": "Bugbear",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 8,
+    "parentRaceId": "",
+    "aliases": [
+      "Bugbear"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Powerful Build"
+    ]
+  },
+  {
+    "id": "race-centaur-mpmm",
+    "name": "Centaur",
+    "baseName": "Centaur",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 9,
+    "parentRaceId": "",
+    "aliases": [
+      "Centaur"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 40,
+    "ability": [],
+    "traitTags": [
+      "Natural Weapon",
+      "Powerful Build"
+    ]
+  },
+  {
+    "id": "race-changeling-mpmm",
+    "name": "Changeling",
+    "baseName": "Changeling",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 10,
+    "parentRaceId": "",
+    "aliases": [
+      "Changeling"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-deep-gnome-mpmm",
+    "name": "Deep Gnome",
+    "baseName": "Deep Gnome",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 11,
+    "parentRaceId": "",
+    "aliases": [
+      "Deep Gnome"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Magic Resistance"
+    ]
+  },
+  {
+    "id": "race-duergar-mpmm",
+    "name": "Duergar",
+    "baseName": "Duergar",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 12,
+    "parentRaceId": "",
+    "aliases": [
+      "Duergar"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-eladrin-mpmm",
+    "name": "Eladrin",
+    "baseName": "Eladrin",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 13,
+    "parentRaceId": "",
+    "aliases": [
+      "Eladrin"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Improved Resting",
+      "Tool Proficiency",
+      "Weapon Proficiency"
+    ]
+  },
+  {
+    "id": "race-fairy-mpmm",
+    "name": "Fairy",
+    "baseName": "Fairy",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 14,
+    "parentRaceId": "",
+    "aliases": [
+      "Fairy"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": {
+      "walk": 30,
+      "fly": true
+    },
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-firbolg-mpmm",
+    "name": "Firbolg",
+    "baseName": "Firbolg",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 15,
+    "parentRaceId": "",
+    "aliases": [
+      "Firbolg"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Powerful Build"
+    ]
+  },
+  {
+    "id": "race-genasi-mpmm",
+    "name": "Genasi",
+    "baseName": "Genasi",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 16,
+    "parentRaceId": "",
+    "aliases": [
+      "Genasi"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-genasi-air-mpmm",
+    "name": "Genasi (Air)",
+    "baseName": "Genasi",
+    "subraceName": "Air",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 16,
+    "parentRaceId": "race-genasi-mpmm",
+    "aliases": [
+      "Genasi",
+      "Genasi (Air)",
+      "Air Genasi",
+      "Genasi Air"
+    ],
+    "size": [],
+    "speed": 35,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-genasi-earth-mpmm",
+    "name": "Genasi (Earth)",
+    "baseName": "Genasi",
+    "subraceName": "Earth",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 17,
+    "parentRaceId": "race-genasi-mpmm",
+    "aliases": [
+      "Genasi",
+      "Genasi (Earth)",
+      "Earth Genasi",
+      "Genasi Earth"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-genasi-fire-mpmm",
+    "name": "Genasi (Fire)",
+    "baseName": "Genasi",
+    "subraceName": "Fire",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 17,
+    "parentRaceId": "race-genasi-mpmm",
+    "aliases": [
+      "Genasi",
+      "Genasi (Fire)",
+      "Fire Genasi",
+      "Genasi Fire"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-genasi-water-mpmm",
+    "name": "Genasi (Water)",
+    "baseName": "Genasi",
+    "subraceName": "Water",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 17,
+    "parentRaceId": "race-genasi-mpmm",
+    "aliases": [
+      "Genasi",
+      "Genasi (Water)",
+      "Water Genasi",
+      "Genasi Water"
+    ],
+    "size": [],
+    "speed": {
+      "walk": 30,
+      "swim": true
+    },
+    "ability": [],
+    "traitTags": [
+      "Amphibious"
+    ]
+  },
+  {
+    "id": "race-githyanki-mpmm",
+    "name": "Githyanki",
+    "baseName": "Githyanki",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 18,
+    "parentRaceId": "",
+    "aliases": [
+      "Githyanki"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Weapon Proficiency"
+    ]
+  },
+  {
+    "id": "race-githzerai-mpmm",
+    "name": "Githzerai",
+    "baseName": "Githzerai",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 19,
+    "parentRaceId": "",
+    "aliases": [
+      "Githzerai"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-goblin-mpmm",
+    "name": "Goblin",
+    "baseName": "Goblin",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 20,
+    "parentRaceId": "",
+    "aliases": [
+      "Goblin"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-goliath-mpmm",
+    "name": "Goliath",
+    "baseName": "Goliath",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 21,
+    "parentRaceId": "",
+    "aliases": [
+      "Goliath"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Powerful Build"
+    ]
+  },
+  {
+    "id": "race-harengon-mpmm",
+    "name": "Harengon",
+    "baseName": "Harengon",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 22,
+    "parentRaceId": "",
+    "aliases": [
+      "Harengon"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-hobgoblin-mpmm",
+    "name": "Hobgoblin",
+    "baseName": "Hobgoblin",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 23,
+    "parentRaceId": "",
+    "aliases": [
+      "Hobgoblin"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-kenku-mpmm",
+    "name": "Kenku",
+    "baseName": "Kenku",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 24,
+    "parentRaceId": "",
+    "aliases": [
+      "Kenku"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-kobold-mpmm",
+    "name": "Kobold",
+    "baseName": "Kobold",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 25,
+    "parentRaceId": "",
+    "aliases": [
+      "Kobold"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-lizardfolk-mpmm",
+    "name": "Lizardfolk",
+    "baseName": "Lizardfolk",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 26,
+    "parentRaceId": "",
+    "aliases": [
+      "Lizardfolk"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "swim": true
+    },
+    "ability": [],
+    "traitTags": [
+      "Natural Armor",
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-minotaur-mpmm",
+    "name": "Minotaur",
+    "baseName": "Minotaur",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 27,
+    "parentRaceId": "",
+    "aliases": [
+      "Minotaur"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-orc-mpmm",
+    "name": "Orc",
+    "baseName": "Orc",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 28,
+    "parentRaceId": "",
+    "aliases": [
+      "Orc"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Powerful Build"
+    ]
+  },
+  {
+    "id": "race-satyr-mpmm",
+    "name": "Satyr",
+    "baseName": "Satyr",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 29,
+    "parentRaceId": "",
+    "aliases": [
+      "Satyr"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 35,
+    "ability": [],
+    "traitTags": [
+      "Magic Resistance",
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-sea-elf-mpmm",
+    "name": "Sea Elf",
+    "baseName": "Sea Elf",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 30,
+    "parentRaceId": "",
+    "aliases": [
+      "Sea Elf"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "swim": true
+    },
+    "ability": [],
+    "traitTags": [
+      "Amphibious",
+      "Improved Resting",
+      "Tool Proficiency",
+      "Weapon Proficiency"
+    ]
+  },
+  {
+    "id": "race-shadar-kai-mpmm",
+    "name": "Shadar-Kai",
+    "baseName": "Shadar-Kai",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 31,
+    "parentRaceId": "",
+    "aliases": [
+      "Shadar-Kai"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Improved Resting",
+      "Tool Proficiency",
+      "Weapon Proficiency"
+    ]
+  },
+  {
+    "id": "race-shifter-mpmm",
+    "name": "Shifter",
+    "baseName": "Shifter",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 32,
+    "parentRaceId": "",
+    "aliases": [
+      "Shifter"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-tabaxi-mpmm",
+    "name": "Tabaxi",
+    "baseName": "Tabaxi",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 33,
+    "parentRaceId": "",
+    "aliases": [
+      "Tabaxi"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "climb": true
+    },
+    "ability": [],
+    "traitTags": [
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-tortle-mpmm",
+    "name": "Tortle",
+    "baseName": "Tortle",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 34,
+    "parentRaceId": "",
+    "aliases": [
+      "Tortle"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Natural Armor",
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-triton-mpmm",
+    "name": "Triton",
+    "baseName": "Triton",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 35,
+    "parentRaceId": "",
+    "aliases": [
+      "Triton"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "swim": true
+    },
+    "ability": [],
+    "traitTags": [
+      "Amphibious"
+    ]
+  },
+  {
+    "id": "race-yuan-ti-mpmm",
+    "name": "Yuan-Ti",
+    "baseName": "Yuan-Ti",
+    "subraceName": "",
+    "source": "MPMM",
+    "raceSource": "MPMM",
+    "page": 36,
+    "parentRaceId": "",
+    "aliases": [
+      "Yuan-Ti"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Magic Resistance"
+    ]
+  },
+  {
+    "id": "race-aetherborn-psk",
+    "name": "Aetherborn",
+    "baseName": "Aetherborn",
+    "subraceName": "",
+    "source": "PSK",
+    "raceSource": "PSK",
+    "page": 17,
+    "parentRaceId": "",
+    "aliases": [
+      "Aetherborn"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "cha": 2,
+        "choose": {
+          "from": [
+            "str",
+            "dex",
+            "con",
+            "int",
+            "wis"
+          ],
+          "count": 2
+        }
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-astral-elf-aag",
+    "name": "Astral Elf",
+    "baseName": "Astral Elf",
+    "subraceName": "",
+    "source": "AAG",
+    "raceSource": "AAG",
+    "page": 10,
+    "parentRaceId": "",
+    "aliases": [
+      "Astral Elf"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Improved Resting",
+      "Tool Proficiency",
+      "Weapon Proficiency"
+    ]
+  },
+  {
+    "id": "race-autognome-aag",
+    "name": "Autognome",
+    "baseName": "Autognome",
+    "subraceName": "",
+    "source": "AAG",
+    "raceSource": "AAG",
+    "page": 11,
+    "parentRaceId": "",
+    "aliases": [
+      "Autognome"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Improved Resting",
+      "Natural Armor"
+    ]
+  },
+  {
+    "id": "race-aven-psa",
+    "name": "Aven",
+    "baseName": "Aven",
+    "subraceName": "",
+    "source": "PSA",
+    "raceSource": "PSA",
+    "page": 15,
+    "parentRaceId": "",
+    "aliases": [
+      "Aven"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 25,
+      "fly": 30
+    },
+    "ability": [
+      {
+        "dex": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-aven-psd",
+    "name": "Aven",
+    "baseName": "Aven",
+    "subraceName": "",
+    "source": "PSD",
+    "raceSource": "PSD",
+    "page": 6,
+    "parentRaceId": "",
+    "aliases": [
+      "Aven"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 25,
+      "fly": 30
+    },
+    "ability": [
+      {
+        "dex": 2,
+        "wis": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-aven-hawk-headed-psa",
+    "name": "Aven (Hawk-Headed)",
+    "baseName": "Aven",
+    "subraceName": "Hawk-Headed",
+    "source": "PSA",
+    "raceSource": "PSA",
+    "page": 16,
+    "parentRaceId": "race-aven-psa",
+    "aliases": [
+      "Aven",
+      "Aven (Hawk-Headed)",
+      "Hawk-Headed Aven",
+      "Aven Hawk-Headed"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "wis": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-aven-ibis-headed-psa",
+    "name": "Aven (Ibis-Headed)",
+    "baseName": "Aven",
+    "subraceName": "Ibis-Headed",
+    "source": "PSA",
+    "raceSource": "PSA",
+    "page": 16,
+    "parentRaceId": "race-aven-psa",
+    "aliases": [
+      "Aven",
+      "Aven (Ibis-Headed)",
+      "Ibis-Headed Aven",
+      "Aven Ibis-Headed"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "int": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-bugbear-erlw",
+    "name": "Bugbear",
+    "baseName": "Bugbear",
+    "subraceName": "",
+    "source": "ERLW",
+    "raceSource": "ERLW",
+    "page": 25,
+    "parentRaceId": "",
+    "aliases": [
+      "Bugbear"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "dex": 1
+      }
+    ],
+    "traitTags": [
+      "Monstrous Race",
+      "Powerful Build"
+    ]
+  },
+  {
+    "id": "race-centaur-ggr",
+    "name": "Centaur",
+    "baseName": "Centaur",
+    "subraceName": "",
+    "source": "GGR",
+    "raceSource": "GGR",
+    "page": 15,
+    "parentRaceId": "",
+    "aliases": [
+      "Centaur"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 40,
+    "ability": [
+      {
+        "str": 2,
+        "wis": 1
+      }
+    ],
+    "traitTags": [
+      "Natural Weapon",
+      "Powerful Build"
+    ]
+  },
+  {
+    "id": "race-centaur-mot",
+    "name": "Centaur",
+    "baseName": "Centaur",
+    "subraceName": "",
+    "source": "MOT",
+    "raceSource": "MOT",
+    "page": 18,
+    "parentRaceId": "",
+    "aliases": [
+      "Centaur"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-changeling-erlw",
+    "name": "Changeling",
+    "baseName": "Changeling",
+    "subraceName": "",
+    "source": "ERLW",
+    "raceSource": "ERLW",
+    "page": 17,
+    "parentRaceId": "",
+    "aliases": [
+      "Changeling"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "cha": 2,
+        "choose": {
+          "from": [
+            "str",
+            "dex",
+            "con",
+            "int",
+            "wis"
+          ],
+          "count": 1
+        }
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-dhampir-vrgr",
+    "name": "Dhampir",
+    "baseName": "Dhampir",
+    "subraceName": "",
+    "source": "VRGR",
+    "raceSource": "VRGR",
+    "page": 16,
+    "parentRaceId": "",
+    "aliases": [
+      "Dhampir"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": {
+      "walk": 35,
+      "climb": true
+    },
+    "ability": [],
+    "traitTags": [
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-dragonborn-chromatic-ftd",
+    "name": "Dragonborn (Chromatic)",
+    "baseName": "Dragonborn (Chromatic)",
+    "subraceName": "",
+    "source": "FTD",
+    "raceSource": "FTD",
+    "page": 10,
+    "parentRaceId": "",
+    "aliases": [
+      "Dragonborn (Chromatic)"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-dragonborn-draconblood-egw",
+    "name": "Dragonborn (Draconblood)",
+    "baseName": "Dragonborn",
+    "subraceName": "Draconblood",
+    "source": "EGW",
+    "raceSource": "PHB",
+    "page": 168,
+    "parentRaceId": "race-dragonborn-phb",
+    "aliases": [
+      "Dragonborn",
+      "Dragonborn (Draconblood)",
+      "Draconblood Dragonborn",
+      "Dragonborn Draconblood"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "int": 2,
+        "cha": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-dragonborn-gem-ftd",
+    "name": "Dragonborn (Gem)",
+    "baseName": "Dragonborn (Gem)",
+    "subraceName": "",
+    "source": "FTD",
+    "raceSource": "FTD",
+    "page": 11,
+    "parentRaceId": "",
+    "aliases": [
+      "Dragonborn (Gem)"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-dragonborn-metallic-ftd",
+    "name": "Dragonborn (Metallic)",
+    "baseName": "Dragonborn (Metallic)",
+    "subraceName": "",
+    "source": "FTD",
+    "raceSource": "FTD",
+    "page": 12,
+    "parentRaceId": "",
+    "aliases": [
+      "Dragonborn (Metallic)"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-dragonborn-ravenite-egw",
+    "name": "Dragonborn (Ravenite)",
+    "baseName": "Dragonborn",
+    "subraceName": "Ravenite",
+    "source": "EGW",
+    "raceSource": "PHB",
+    "page": 168,
+    "parentRaceId": "race-dragonborn-phb",
+    "aliases": [
+      "Dragonborn",
+      "Dragonborn (Ravenite)",
+      "Ravenite Dragonborn",
+      "Dragonborn Ravenite"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "str": 2,
+        "con": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-dwarf-duergar-mtf",
+    "name": "Dwarf (Duergar)",
+    "baseName": "Dwarf",
+    "subraceName": "Duergar",
+    "source": "MTF",
+    "raceSource": "PHB",
+    "page": 81,
+    "parentRaceId": "race-dwarf-phb",
+    "aliases": [
+      "Dwarf",
+      "Dwarf (Duergar)",
+      "Duergar Dwarf",
+      "Dwarf Duergar"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "str": 1
+      }
+    ],
+    "traitTags": [
+      "Sunlight Sensitivity"
+    ]
+  },
+  {
+    "id": "race-dwarf-kaladesh-psk",
+    "name": "Dwarf (Kaladesh)",
+    "baseName": "Dwarf (Kaladesh)",
+    "subraceName": "",
+    "source": "PSK",
+    "raceSource": "PSK",
+    "page": 19,
+    "parentRaceId": "",
+    "aliases": [
+      "Dwarf (Kaladesh)"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 25,
+    "ability": [
+      {
+        "con": 2,
+        "wis": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-dwarf-mark-of-warding-erlw",
+    "name": "Dwarf (Mark of Warding)",
+    "baseName": "Dwarf",
+    "subraceName": "Mark of Warding",
+    "source": "ERLW",
+    "raceSource": "PHB",
+    "page": 51,
+    "parentRaceId": "race-dwarf-phb",
+    "aliases": [
+      "Dwarf",
+      "Dwarf (Mark of Warding)",
+      "Mark of Warding Dwarf",
+      "Dwarf Mark of Warding"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "int": 1
+      }
+    ],
+    "traitTags": [
+      "Dragonmark",
+      "Skill Bonus Dice",
+      "Tool Bonus Dice"
+    ]
+  },
+  {
+    "id": "race-elf-eladrin-mtf",
+    "name": "Elf (Eladrin)",
+    "baseName": "Elf",
+    "subraceName": "Eladrin",
+    "source": "MTF",
+    "raceSource": "PHB",
+    "page": 61,
+    "parentRaceId": "race-elf-phb",
+    "aliases": [
+      "Elf",
+      "Elf (Eladrin)",
+      "Eladrin Elf",
+      "Elf Eladrin"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "cha": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-elf-kaladesh-psk",
+    "name": "Elf (Kaladesh)",
+    "baseName": "Elf (Kaladesh)",
+    "subraceName": "",
+    "source": "PSK",
+    "raceSource": "PSK",
+    "page": 20,
+    "parentRaceId": "",
+    "aliases": [
+      "Elf (Kaladesh)"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "dex": 2,
+        "wis": 1
+      }
+    ],
+    "traitTags": [
+      "Improved Resting"
+    ]
+  },
+  {
+    "id": "race-elf-kaladesh-bishatar-and-tirahar-psk",
+    "name": "Elf (Kaladesh) (Bishatar and Tirahar)",
+    "baseName": "Elf (Kaladesh)",
+    "subraceName": "Bishatar and Tirahar",
+    "source": "PSK",
+    "raceSource": "PSK",
+    "page": 21,
+    "parentRaceId": "race-elf-kaladesh-psk",
+    "aliases": [
+      "Elf (Kaladesh)",
+      "Elf (Kaladesh) (Bishatar and Tirahar)",
+      "Bishatar and Tirahar Elf (Kaladesh)",
+      "Elf (Kaladesh) Bishatar and Tirahar"
+    ],
+    "size": [],
+    "speed": 35,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-elf-kaladesh-vahadar-psk",
+    "name": "Elf (Kaladesh) (Vahadar)",
+    "baseName": "Elf (Kaladesh)",
+    "subraceName": "Vahadar",
+    "source": "PSK",
+    "raceSource": "PSK",
+    "page": 21,
+    "parentRaceId": "race-elf-kaladesh-psk",
+    "aliases": [
+      "Elf (Kaladesh)",
+      "Elf (Kaladesh) (Vahadar)",
+      "Vahadar Elf (Kaladesh)",
+      "Elf (Kaladesh) Vahadar"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-elf-mark-of-shadow-erlw",
+    "name": "Elf (Mark of Shadow)",
+    "baseName": "Elf",
+    "subraceName": "Mark of Shadow",
+    "source": "ERLW",
+    "raceSource": "PHB",
+    "page": 49,
+    "parentRaceId": "race-elf-phb",
+    "aliases": [
+      "Elf",
+      "Elf (Mark of Shadow)",
+      "Mark of Shadow Elf",
+      "Elf Mark of Shadow"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "cha": 1
+      }
+    ],
+    "traitTags": [
+      "Dragonmark",
+      "Skill Bonus Dice"
+    ]
+  },
+  {
+    "id": "race-elf-pallid-egw",
+    "name": "Elf (Pallid)",
+    "baseName": "Elf",
+    "subraceName": "Pallid",
+    "source": "EGW",
+    "raceSource": "PHB",
+    "page": 21,
+    "parentRaceId": "race-elf-phb",
+    "aliases": [
+      "Elf",
+      "Elf (Pallid)",
+      "Pallid Elf",
+      "Elf Pallid"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "wis": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-elf-sea-mtf",
+    "name": "Elf (Sea)",
+    "baseName": "Elf",
+    "subraceName": "Sea",
+    "source": "MTF",
+    "raceSource": "PHB",
+    "page": 62,
+    "parentRaceId": "race-elf-phb",
+    "aliases": [
+      "Elf",
+      "Elf (Sea)",
+      "Sea Elf",
+      "Elf Sea"
+    ],
+    "size": [],
+    "speed": {
+      "walk": 30,
+      "swim": 30
+    },
+    "ability": [
+      {
+        "con": 1
+      }
+    ],
+    "traitTags": [
+      "Amphibious"
+    ]
+  },
+  {
+    "id": "race-elf-shadar-kai-mtf",
+    "name": "Elf (Shadar-kai)",
+    "baseName": "Elf",
+    "subraceName": "Shadar-kai",
+    "source": "MTF",
+    "raceSource": "PHB",
+    "page": 62,
+    "parentRaceId": "race-elf-phb",
+    "aliases": [
+      "Elf",
+      "Elf (Shadar-kai)",
+      "Shadar-kai Elf",
+      "Elf Shadar-kai"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "con": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-elf-zendikar-psz",
+    "name": "Elf (Zendikar)",
+    "baseName": "Elf (Zendikar)",
+    "subraceName": "",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 18,
+    "parentRaceId": "",
+    "aliases": [
+      "Elf (Zendikar)"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "wis": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-elf-zendikar-joraga-nation-psz",
+    "name": "Elf (Zendikar) (Joraga Nation)",
+    "baseName": "Elf (Zendikar)",
+    "subraceName": "Joraga Nation",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 19,
+    "parentRaceId": "race-elf-zendikar-psz",
+    "aliases": [
+      "Elf (Zendikar)",
+      "Elf (Zendikar) (Joraga Nation)",
+      "Joraga Nation Elf (Zendikar)",
+      "Elf (Zendikar) Joraga Nation"
+    ],
+    "size": [],
+    "speed": 35,
+    "ability": [
+      {
+        "dex": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-elf-zendikar-mul-daya-nation-psz",
+    "name": "Elf (Zendikar) (Mul Daya Nation)",
+    "baseName": "Elf (Zendikar)",
+    "subraceName": "Mul Daya Nation",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 19,
+    "parentRaceId": "race-elf-zendikar-psz",
+    "aliases": [
+      "Elf (Zendikar)",
+      "Elf (Zendikar) (Mul Daya Nation)",
+      "Mul Daya Nation Elf (Zendikar)",
+      "Elf (Zendikar) Mul Daya Nation"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "str": 1
+      }
+    ],
+    "traitTags": [
+      "Sunlight Sensitivity"
+    ]
+  },
+  {
+    "id": "race-elf-zendikar-tajuru-nation-psz",
+    "name": "Elf (Zendikar) (Tajuru Nation)",
+    "baseName": "Elf (Zendikar)",
+    "subraceName": "Tajuru Nation",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 18,
+    "parentRaceId": "race-elf-zendikar-psz",
+    "aliases": [
+      "Elf (Zendikar)",
+      "Elf (Zendikar) (Tajuru Nation)",
+      "Tajuru Nation Elf (Zendikar)",
+      "Elf (Zendikar) Tajuru Nation"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "cha": 1
+      }
+    ],
+    "traitTags": [
+      "Skill Proficiency",
+      "Tool Proficiency"
+    ]
+  },
+  {
+    "id": "race-fairy-wbtw",
+    "name": "Fairy",
+    "baseName": "Fairy",
+    "subraceName": "",
+    "source": "WBtW",
+    "raceSource": "WBtW",
+    "page": 12,
+    "parentRaceId": "",
+    "aliases": [
+      "Fairy"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": {
+      "walk": 30,
+      "fly": true
+    },
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-giff-aag",
+    "name": "Giff",
+    "baseName": "Giff",
+    "subraceName": "",
+    "source": "AAG",
+    "raceSource": "AAG",
+    "page": 12,
+    "parentRaceId": "",
+    "aliases": [
+      "Giff"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "swim": true
+    },
+    "ability": [],
+    "traitTags": [
+      "Powerful Build"
+    ]
+  },
+  {
+    "id": "race-gith-mtf",
+    "name": "Gith",
+    "baseName": "Gith",
+    "subraceName": "",
+    "source": "MTF",
+    "raceSource": "MTF",
+    "page": 96,
+    "parentRaceId": "",
+    "aliases": [
+      "Gith"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "int": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-gith-githyanki-mtf",
+    "name": "Gith (Githyanki)",
+    "baseName": "Gith",
+    "subraceName": "Githyanki",
+    "source": "MTF",
+    "raceSource": "MTF",
+    "page": 96,
+    "parentRaceId": "race-gith-mtf",
+    "aliases": [
+      "Gith",
+      "Gith (Githyanki)",
+      "Githyanki Gith",
+      "Gith Githyanki"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "str": 2
+      }
+    ],
+    "traitTags": [
+      "Skill Proficiency",
+      "Tool Proficiency"
+    ]
+  },
+  {
+    "id": "race-gith-githzerai-mtf",
+    "name": "Gith (Githzerai)",
+    "baseName": "Gith",
+    "subraceName": "Githzerai",
+    "source": "MTF",
+    "raceSource": "MTF",
+    "page": 96,
+    "parentRaceId": "race-gith-mtf",
+    "aliases": [
+      "Gith",
+      "Gith (Githzerai)",
+      "Githzerai Gith",
+      "Gith Githzerai"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "wis": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-gnome-deep-mtf",
+    "name": "Gnome (Deep)",
+    "baseName": "Gnome",
+    "subraceName": "Deep",
+    "source": "MTF",
+    "raceSource": "PHB",
+    "page": 113,
+    "parentRaceId": "race-gnome-phb",
+    "aliases": [
+      "Gnome",
+      "Gnome (Deep)",
+      "Deep Gnome",
+      "Gnome Deep"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "dex": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-gnome-mark-of-scribing-erlw",
+    "name": "Gnome (Mark of Scribing)",
+    "baseName": "Gnome",
+    "subraceName": "Mark of Scribing",
+    "source": "ERLW",
+    "raceSource": "PHB",
+    "page": 47,
+    "parentRaceId": "race-gnome-phb",
+    "aliases": [
+      "Gnome",
+      "Gnome (Mark of Scribing)",
+      "Mark of Scribing Gnome",
+      "Gnome Mark of Scribing"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "cha": 1
+      }
+    ],
+    "traitTags": [
+      "Dragonmark",
+      "Skill Bonus Dice",
+      "Tool Bonus Dice"
+    ]
+  },
+  {
+    "id": "race-goblin-erlw",
+    "name": "Goblin",
+    "baseName": "Goblin",
+    "subraceName": "",
+    "source": "ERLW",
+    "raceSource": "ERLW",
+    "page": 26,
+    "parentRaceId": "",
+    "aliases": [
+      "Goblin"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-goblin-ggr",
+    "name": "Goblin",
+    "baseName": "Goblin",
+    "subraceName": "",
+    "source": "GGR",
+    "raceSource": "GGR",
+    "page": 16,
+    "parentRaceId": "",
+    "aliases": [
+      "Goblin"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-goblin-psz",
+    "name": "Goblin",
+    "baseName": "Goblin",
+    "subraceName": "",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 16,
+    "parentRaceId": "",
+    "aliases": [
+      "Goblin"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": 25,
+    "ability": [],
+    "traitTags": [
+      "Natural Armor"
+    ]
+  },
+  {
+    "id": "race-goblin-dankwood-awm",
+    "name": "Goblin (Dankwood)",
+    "baseName": "Goblin (Dankwood)",
+    "subraceName": "",
+    "source": "AWM",
+    "raceSource": "AWM",
+    "page": 35,
+    "parentRaceId": "",
+    "aliases": [
+      "Goblin (Dankwood)"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "dex": 2,
+        "wis": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-goblin-ixalan-psx",
+    "name": "Goblin (Ixalan)",
+    "baseName": "Goblin",
+    "subraceName": "Ixalan",
+    "source": "PSX",
+    "raceSource": "PSZ",
+    "page": 16,
+    "parentRaceId": "race-goblin-psz",
+    "aliases": [
+      "Goblin",
+      "Goblin (Ixalan)",
+      "Ixalan Goblin",
+      "Goblin Ixalan"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "dex": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-goblin-zendikar-grotag-tribe-psz",
+    "name": "Goblin (Zendikar; Grotag Tribe)",
+    "baseName": "Goblin",
+    "subraceName": "Zendikar; Grotag Tribe",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 17,
+    "parentRaceId": "race-goblin-psz",
+    "aliases": [
+      "Goblin",
+      "Goblin (Zendikar; Grotag Tribe)",
+      "Zendikar; Grotag Tribe Goblin",
+      "Goblin Zendikar; Grotag Tribe"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "con": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-goblin-zendikar-lavastep-tribe-psz",
+    "name": "Goblin (Zendikar; Lavastep Tribe)",
+    "baseName": "Goblin",
+    "subraceName": "Zendikar; Lavastep Tribe",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 17,
+    "parentRaceId": "race-goblin-psz",
+    "aliases": [
+      "Goblin",
+      "Goblin (Zendikar; Lavastep Tribe)",
+      "Zendikar; Lavastep Tribe Goblin",
+      "Goblin Zendikar; Lavastep Tribe"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "con": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-goblin-zendikar-tuktuk-tribe-psz",
+    "name": "Goblin (Zendikar; Tuktuk Tribe)",
+    "baseName": "Goblin",
+    "subraceName": "Zendikar; Tuktuk Tribe",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 17,
+    "parentRaceId": "race-goblin-psz",
+    "aliases": [
+      "Goblin",
+      "Goblin (Zendikar; Tuktuk Tribe)",
+      "Zendikar; Tuktuk Tribe Goblin",
+      "Goblin Zendikar; Tuktuk Tribe"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "con": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-grung-oga",
+    "name": "Grung",
+    "baseName": "Grung",
+    "subraceName": "",
+    "source": "OGA",
+    "raceSource": "OGA",
+    "page": 4,
+    "parentRaceId": "",
+    "aliases": [
+      "Grung"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": {
+      "walk": 25,
+      "climb": 25
+    },
+    "ability": [
+      {
+        "dex": 2,
+        "con": 1
+      }
+    ],
+    "traitTags": [
+      "Amphibious"
+    ]
+  },
+  {
+    "id": "race-hadozee-aag",
+    "name": "Hadozee",
+    "baseName": "Hadozee",
+    "subraceName": "",
+    "source": "AAG",
+    "raceSource": "AAG",
+    "page": 13,
+    "parentRaceId": "",
+    "aliases": [
+      "Hadozee"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "climb": true
+    },
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-half-elf-variant-mark-of-detection-erlw",
+    "name": "Half-Elf (Variant; Mark of Detection)",
+    "baseName": "Half-Elf",
+    "subraceName": "Variant; Mark of Detection",
+    "source": "ERLW",
+    "raceSource": "PHB",
+    "page": 40,
+    "parentRaceId": "race-half-elf-phb",
+    "aliases": [
+      "Half-Elf",
+      "Half-Elf (Variant; Mark of Detection)",
+      "Variant; Mark of Detection Half-Elf",
+      "Half-Elf Variant; Mark of Detection"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "wis": 2,
+        "choose": {
+          "from": [
+            "str",
+            "dex",
+            "con",
+            "int",
+            "cha"
+          ],
+          "count": 1
+        }
+      }
+    ],
+    "traitTags": [
+      "Dragonmark",
+      "Skill Bonus Dice"
+    ]
+  },
+  {
+    "id": "race-half-elf-variant-mark-of-storm-erlw",
+    "name": "Half-Elf (Variant; Mark of Storm)",
+    "baseName": "Half-Elf",
+    "subraceName": "Variant; Mark of Storm",
+    "source": "ERLW",
+    "raceSource": "PHB",
+    "page": 50,
+    "parentRaceId": "race-half-elf-phb",
+    "aliases": [
+      "Half-Elf",
+      "Half-Elf (Variant; Mark of Storm)",
+      "Variant; Mark of Storm Half-Elf",
+      "Half-Elf Variant; Mark of Storm"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "cha": 2,
+        "dex": 1
+      }
+    ],
+    "traitTags": [
+      "Dragonmark",
+      "Skill Bonus Dice",
+      "Tool Bonus Dice"
+    ]
+  },
+  {
+    "id": "race-half-orc-variant-mark-of-finding-erlw",
+    "name": "Half-Orc (Variant; Mark of Finding)",
+    "baseName": "Half-Orc",
+    "subraceName": "Variant; Mark of Finding",
+    "source": "ERLW",
+    "raceSource": "PHB",
+    "page": 41,
+    "parentRaceId": "race-half-orc-phb",
+    "aliases": [
+      "Half-Orc",
+      "Half-Orc (Variant; Mark of Finding)",
+      "Variant; Mark of Finding Half-Orc",
+      "Half-Orc Variant; Mark of Finding"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": [
+      "Dragonmark",
+      "Skill Bonus Dice"
+    ]
+  },
+  {
+    "id": "race-halfling-lotusden-egw",
+    "name": "Halfling (Lotusden)",
+    "baseName": "Halfling",
+    "subraceName": "Lotusden",
+    "source": "EGW",
+    "raceSource": "PHB",
+    "page": 164,
+    "parentRaceId": "race-halfling-phb",
+    "aliases": [
+      "Halfling",
+      "Halfling (Lotusden)",
+      "Lotusden Halfling",
+      "Halfling Lotusden"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "wis": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-halfling-mark-of-healing-erlw",
+    "name": "Halfling (Mark of Healing)",
+    "baseName": "Halfling",
+    "subraceName": "Mark of Healing",
+    "source": "ERLW",
+    "raceSource": "PHB",
+    "page": 43,
+    "parentRaceId": "race-halfling-phb",
+    "aliases": [
+      "Halfling",
+      "Halfling (Mark of Healing)",
+      "Mark of Healing Halfling",
+      "Halfling Mark of Healing"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "wis": 1
+      }
+    ],
+    "traitTags": [
+      "Dragonmark",
+      "Skill Bonus Dice",
+      "Tool Bonus Dice"
+    ]
+  },
+  {
+    "id": "race-halfling-mark-of-hospitality-erlw",
+    "name": "Halfling (Mark of Hospitality)",
+    "baseName": "Halfling",
+    "subraceName": "Mark of Hospitality",
+    "source": "ERLW",
+    "raceSource": "PHB",
+    "page": 44,
+    "parentRaceId": "race-halfling-phb",
+    "aliases": [
+      "Halfling",
+      "Halfling (Mark of Hospitality)",
+      "Mark of Hospitality Halfling",
+      "Halfling Mark of Hospitality"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "cha": 1
+      }
+    ],
+    "traitTags": [
+      "Dragonmark",
+      "Skill Bonus Dice",
+      "Tool Bonus Dice"
+    ]
+  },
+  {
+    "id": "race-harengon-wbtw",
+    "name": "Harengon",
+    "baseName": "Harengon",
+    "subraceName": "",
+    "source": "WBtW",
+    "raceSource": "WBtW",
+    "page": 13,
+    "parentRaceId": "",
+    "aliases": [
+      "Harengon"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-hexblood-vrgr",
+    "name": "Hexblood",
+    "baseName": "Hexblood",
+    "subraceName": "",
+    "source": "VRGR",
+    "raceSource": "VRGR",
+    "page": 18,
+    "parentRaceId": "",
+    "aliases": [
+      "Hexblood"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-hobgoblin-erlw",
+    "name": "Hobgoblin",
+    "baseName": "Hobgoblin",
+    "subraceName": "",
+    "source": "ERLW",
+    "raceSource": "ERLW",
+    "page": 26,
+    "parentRaceId": "",
+    "aliases": [
+      "Hobgoblin"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-human-amonkhet-psa",
+    "name": "Human (Amonkhet)",
+    "baseName": "Human (Amonkhet)",
+    "subraceName": "",
+    "source": "PSA",
+    "raceSource": "PSA",
+    "page": 14,
+    "parentRaceId": "",
+    "aliases": [
+      "Human (Amonkhet)"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "choose": {
+          "from": [
+            "str",
+            "dex",
+            "con",
+            "int",
+            "wis",
+            "cha"
+          ],
+          "count": 2
+        }
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-human-innistrad-psi",
+    "name": "Human (Innistrad)",
+    "baseName": "Human (Innistrad)",
+    "subraceName": "",
+    "source": "PSI",
+    "raceSource": "PSI",
+    "page": 8,
+    "parentRaceId": "",
+    "aliases": [
+      "Human (Innistrad)"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-human-innistrad-gavony-psi",
+    "name": "Human (Innistrad) (Gavony)",
+    "baseName": "Human (Innistrad)",
+    "subraceName": "Gavony",
+    "source": "PSI",
+    "raceSource": "PSI",
+    "page": 8,
+    "parentRaceId": "race-human-innistrad-psi",
+    "aliases": [
+      "Human (Innistrad)",
+      "Human (Innistrad) (Gavony)",
+      "Gavony Human (Innistrad)",
+      "Human (Innistrad) Gavony"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "str": 1,
+        "dex": 1,
+        "con": 1,
+        "int": 1,
+        "wis": 1,
+        "cha": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-human-innistrad-kessig-psi",
+    "name": "Human (Innistrad) (Kessig)",
+    "baseName": "Human (Innistrad)",
+    "subraceName": "Kessig",
+    "source": "PSI",
+    "raceSource": "PSI",
+    "page": 8,
+    "parentRaceId": "race-human-innistrad-psi",
+    "aliases": [
+      "Human (Innistrad)",
+      "Human (Innistrad) (Kessig)",
+      "Kessig Human (Innistrad)",
+      "Human (Innistrad) Kessig"
+    ],
+    "size": [],
+    "speed": 40,
+    "ability": [
+      {
+        "dex": 1,
+        "wis": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-human-innistrad-nephalia-psi",
+    "name": "Human (Innistrad) (Nephalia)",
+    "baseName": "Human (Innistrad)",
+    "subraceName": "Nephalia",
+    "source": "PSI",
+    "raceSource": "PSI",
+    "page": 8,
+    "parentRaceId": "race-human-innistrad-psi",
+    "aliases": [
+      "Human (Innistrad)",
+      "Human (Innistrad) (Nephalia)",
+      "Nephalia Human (Innistrad)",
+      "Human (Innistrad) Nephalia"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "int": 1,
+        "cha": 1
+      }
+    ],
+    "traitTags": [
+      "Skill Proficiency",
+      "Tool Proficiency"
+    ]
+  },
+  {
+    "id": "race-human-innistrad-stensia-psi",
+    "name": "Human (Innistrad) (Stensia)",
+    "baseName": "Human (Innistrad)",
+    "subraceName": "Stensia",
+    "source": "PSI",
+    "raceSource": "PSI",
+    "page": 8,
+    "parentRaceId": "race-human-innistrad-psi",
+    "aliases": [
+      "Human (Innistrad)",
+      "Human (Innistrad) (Stensia)",
+      "Stensia Human (Innistrad)",
+      "Human (Innistrad) Stensia"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "str": 1,
+        "con": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-human-ixalan-psx",
+    "name": "Human (Ixalan)",
+    "baseName": "Human (Ixalan)",
+    "subraceName": "",
+    "source": "PSX",
+    "raceSource": "PSX",
+    "page": 11,
+    "parentRaceId": "",
+    "aliases": [
+      "Human (Ixalan)"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "str": 1,
+        "dex": 1,
+        "con": 1,
+        "int": 1,
+        "wis": 1,
+        "cha": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-human-kaladesh-psk",
+    "name": "Human (Kaladesh)",
+    "baseName": "Human (Kaladesh)",
+    "subraceName": "",
+    "source": "PSK",
+    "raceSource": "PSK",
+    "page": 22,
+    "parentRaceId": "",
+    "aliases": [
+      "Human (Kaladesh)"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "str": 1,
+        "dex": 1,
+        "con": 1,
+        "int": 1,
+        "wis": 1,
+        "cha": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-human-keldon-psd",
+    "name": "Human (Keldon)",
+    "baseName": "Human",
+    "subraceName": "Keldon",
+    "source": "PSD",
+    "raceSource": "PHB",
+    "page": 19,
+    "parentRaceId": "race-human-phb",
+    "aliases": [
+      "Human",
+      "Human (Keldon)",
+      "Keldon Human",
+      "Human Keldon"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "str": 2,
+        "con": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-human-mark-of-handling-erlw",
+    "name": "Human (Mark of Handling)",
+    "baseName": "Human",
+    "subraceName": "Mark of Handling",
+    "source": "ERLW",
+    "raceSource": "PHB",
+    "page": 42,
+    "parentRaceId": "race-human-phb",
+    "aliases": [
+      "Human",
+      "Human (Mark of Handling)",
+      "Mark of Handling Human",
+      "Human Mark of Handling"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "wis": 2,
+        "choose": {
+          "from": [
+            "str",
+            "dex",
+            "con",
+            "int",
+            "cha"
+          ],
+          "count": 1
+        }
+      }
+    ],
+    "traitTags": [
+      "Dragonmark",
+      "Skill Bonus Dice"
+    ]
+  },
+  {
+    "id": "race-human-mark-of-making-erlw",
+    "name": "Human (Mark of Making)",
+    "baseName": "Human",
+    "subraceName": "Mark of Making",
+    "source": "ERLW",
+    "raceSource": "PHB",
+    "page": 45,
+    "parentRaceId": "race-human-phb",
+    "aliases": [
+      "Human",
+      "Human (Mark of Making)",
+      "Mark of Making Human",
+      "Human Mark of Making"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "int": 2,
+        "choose": {
+          "from": [
+            "str",
+            "dex",
+            "con",
+            "wis",
+            "cha"
+          ],
+          "count": 1
+        }
+      }
+    ],
+    "traitTags": [
+      "Dragonmark",
+      "Skill Bonus Dice",
+      "Tool Bonus Dice"
+    ]
+  },
+  {
+    "id": "race-human-mark-of-passage-erlw",
+    "name": "Human (Mark of Passage)",
+    "baseName": "Human",
+    "subraceName": "Mark of Passage",
+    "source": "ERLW",
+    "raceSource": "PHB",
+    "page": 46,
+    "parentRaceId": "race-human-phb",
+    "aliases": [
+      "Human",
+      "Human (Mark of Passage)",
+      "Mark of Passage Human",
+      "Human Mark of Passage"
+    ],
+    "size": [],
+    "speed": 35,
+    "ability": [
+      {
+        "dex": 2,
+        "choose": {
+          "from": [
+            "str",
+            "con",
+            "int",
+            "wis",
+            "cha"
+          ],
+          "count": 1
+        }
+      }
+    ],
+    "traitTags": [
+      "Dragonmark"
+    ]
+  },
+  {
+    "id": "race-human-mark-of-sentinel-erlw",
+    "name": "Human (Mark of Sentinel)",
+    "baseName": "Human",
+    "subraceName": "Mark of Sentinel",
+    "source": "ERLW",
+    "raceSource": "PHB",
+    "page": 48,
+    "parentRaceId": "race-human-phb",
+    "aliases": [
+      "Human",
+      "Human (Mark of Sentinel)",
+      "Mark of Sentinel Human",
+      "Human Mark of Sentinel"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "con": 2,
+        "wis": 1
+      }
+    ],
+    "traitTags": [
+      "Dragonmark",
+      "Skill Bonus Dice"
+    ]
+  },
+  {
+    "id": "race-human-variant-mark-of-finding-erlw",
+    "name": "Human (Variant; Mark of Finding)",
+    "baseName": "Human",
+    "subraceName": "Variant; Mark of Finding",
+    "source": "ERLW",
+    "raceSource": "PHB",
+    "page": 41,
+    "parentRaceId": "race-human-phb",
+    "aliases": [
+      "Human",
+      "Human (Variant; Mark of Finding)",
+      "Variant; Mark of Finding Human",
+      "Human Variant; Mark of Finding"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "con": 1,
+        "wis": 2
+      }
+    ],
+    "traitTags": [
+      "Dragonmark",
+      "Skill Bonus Dice"
+    ]
+  },
+  {
+    "id": "race-human-zendikar-psz",
+    "name": "Human (Zendikar)",
+    "baseName": "Human (Zendikar)",
+    "subraceName": "",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 9,
+    "parentRaceId": "",
+    "aliases": [
+      "Human (Zendikar)"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "str": 1,
+        "dex": 1,
+        "con": 1,
+        "int": 1,
+        "wis": 1,
+        "cha": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-kalashtar-erlw",
+    "name": "Kalashtar",
+    "baseName": "Kalashtar",
+    "subraceName": "",
+    "source": "ERLW",
+    "raceSource": "ERLW",
+    "page": 29,
+    "parentRaceId": "",
+    "aliases": [
+      "Kalashtar"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "wis": 2,
+        "cha": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-kender-dsotdq",
+    "name": "Kender",
+    "baseName": "Kender",
+    "subraceName": "",
+    "source": "DSotDQ",
+    "raceSource": "DSotDQ",
+    "page": 27,
+    "parentRaceId": "",
+    "aliases": [
+      "Kender"
+    ],
+    "size": [
+      "S"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-khenra-psa",
+    "name": "Khenra",
+    "baseName": "Khenra",
+    "subraceName": "",
+    "source": "PSA",
+    "raceSource": "PSA",
+    "page": 17,
+    "parentRaceId": "",
+    "aliases": [
+      "Khenra"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 35,
+    "ability": [
+      {
+        "dex": 2,
+        "str": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-kor-psz",
+    "name": "Kor",
+    "baseName": "Kor",
+    "subraceName": "",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 10,
+    "parentRaceId": "",
+    "aliases": [
+      "Kor"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "climb": 30
+    },
+    "ability": [
+      {
+        "dex": 2,
+        "wis": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-leonin-mot",
+    "name": "Leonin",
+    "baseName": "Leonin",
+    "subraceName": "",
+    "source": "MOT",
+    "raceSource": "MOT",
+    "page": 20,
+    "parentRaceId": "",
+    "aliases": [
+      "Leonin"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 35,
+    "ability": [
+      {
+        "str": 1,
+        "con": 2
+      }
+    ],
+    "traitTags": [
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-locathah-lr",
+    "name": "Locathah",
+    "baseName": "Locathah",
+    "subraceName": "",
+    "source": "LR",
+    "raceSource": "LR",
+    "page": 24,
+    "parentRaceId": "",
+    "aliases": [
+      "Locathah"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "swim": 30
+    },
+    "ability": [
+      {
+        "str": 2,
+        "dex": 1
+      }
+    ],
+    "traitTags": [
+      "Amphibious",
+      "Natural Armor"
+    ]
+  },
+  {
+    "id": "race-loxodon-ggr",
+    "name": "Loxodon",
+    "baseName": "Loxodon",
+    "subraceName": "",
+    "source": "GGR",
+    "raceSource": "GGR",
+    "page": 17,
+    "parentRaceId": "",
+    "aliases": [
+      "Loxodon"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "con": 2,
+        "wis": 1
+      }
+    ],
+    "traitTags": [
+      "Natural Armor",
+      "Powerful Build"
+    ]
+  },
+  {
+    "id": "race-merfolk-psz",
+    "name": "Merfolk",
+    "baseName": "Merfolk",
+    "subraceName": "",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 13,
+    "parentRaceId": "",
+    "aliases": [
+      "Merfolk"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "swim": 30
+    },
+    "ability": [
+      {
+        "cha": 1
+      }
+    ],
+    "traitTags": [
+      "Amphibious"
+    ]
+  },
+  {
+    "id": "race-merfolk-ixalan-blue-psx",
+    "name": "Merfolk (Ixalan; Blue)",
+    "baseName": "Merfolk",
+    "subraceName": "Ixalan; Blue",
+    "source": "PSX",
+    "raceSource": "PSZ",
+    "page": 12,
+    "parentRaceId": "race-merfolk-psz",
+    "aliases": [
+      "Merfolk",
+      "Merfolk (Ixalan; Blue)",
+      "Ixalan; Blue Merfolk",
+      "Merfolk Ixalan; Blue"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "int": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-merfolk-ixalan-green-psx",
+    "name": "Merfolk (Ixalan; Green)",
+    "baseName": "Merfolk",
+    "subraceName": "Ixalan; Green",
+    "source": "PSX",
+    "raceSource": "PSZ",
+    "page": 12,
+    "parentRaceId": "race-merfolk-psz",
+    "aliases": [
+      "Merfolk",
+      "Merfolk (Ixalan; Green)",
+      "Ixalan; Green Merfolk",
+      "Merfolk Ixalan; Green"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "wis": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-merfolk-zendikar-cosi-creed-psz",
+    "name": "Merfolk (Zendikar; Cosi Creed)",
+    "baseName": "Merfolk",
+    "subraceName": "Zendikar; Cosi Creed",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 13,
+    "parentRaceId": "race-merfolk-psz",
+    "aliases": [
+      "Merfolk",
+      "Merfolk (Zendikar; Cosi Creed)",
+      "Zendikar; Cosi Creed Merfolk",
+      "Merfolk Zendikar; Cosi Creed"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "int": 1,
+        "cha": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-merfolk-zendikar-emeria-creed-psz",
+    "name": "Merfolk (Zendikar; Emeria Creed)",
+    "baseName": "Merfolk",
+    "subraceName": "Zendikar; Emeria Creed",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 13,
+    "parentRaceId": "race-merfolk-psz",
+    "aliases": [
+      "Merfolk",
+      "Merfolk (Zendikar; Emeria Creed)",
+      "Zendikar; Emeria Creed Merfolk",
+      "Merfolk Zendikar; Emeria Creed"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "wis": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-merfolk-zendikar-ula-creed-psz",
+    "name": "Merfolk (Zendikar; Ula Creed)",
+    "baseName": "Merfolk",
+    "subraceName": "Zendikar; Ula Creed",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 13,
+    "parentRaceId": "race-merfolk-psz",
+    "aliases": [
+      "Merfolk",
+      "Merfolk (Zendikar; Ula Creed)",
+      "Zendikar; Ula Creed Merfolk",
+      "Merfolk Zendikar; Ula Creed"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "int": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-minotaur-ggr",
+    "name": "Minotaur",
+    "baseName": "Minotaur",
+    "subraceName": "",
+    "source": "GGR",
+    "raceSource": "GGR",
+    "page": 18,
+    "parentRaceId": "",
+    "aliases": [
+      "Minotaur"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "con": 1
+      }
+    ],
+    "traitTags": [
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-minotaur-mot",
+    "name": "Minotaur",
+    "baseName": "Minotaur",
+    "subraceName": "",
+    "source": "MOT",
+    "raceSource": "MOT",
+    "page": 22,
+    "parentRaceId": "",
+    "aliases": [
+      "Minotaur"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-minotaur-amonkhet-psa",
+    "name": "Minotaur (Amonkhet)",
+    "baseName": "Minotaur (Amonkhet)",
+    "subraceName": "",
+    "source": "PSA",
+    "raceSource": "PSA",
+    "page": 19,
+    "parentRaceId": "",
+    "aliases": [
+      "Minotaur (Amonkhet)"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "con": 1
+      }
+    ],
+    "traitTags": [
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-naga-psa",
+    "name": "Naga",
+    "baseName": "Naga",
+    "subraceName": "",
+    "source": "PSA",
+    "raceSource": "PSA",
+    "page": 21,
+    "parentRaceId": "",
+    "aliases": [
+      "Naga"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "con": 2,
+        "int": 1
+      }
+    ],
+    "traitTags": [
+      "Language Proficiency",
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-orc-egw",
+    "name": "Orc",
+    "baseName": "Orc",
+    "subraceName": "",
+    "source": "EGW",
+    "raceSource": "EGW",
+    "page": 178,
+    "parentRaceId": "",
+    "aliases": [
+      "Orc"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-orc-erlw",
+    "name": "Orc",
+    "baseName": "Orc",
+    "subraceName": "",
+    "source": "ERLW",
+    "raceSource": "ERLW",
+    "page": 31,
+    "parentRaceId": "",
+    "aliases": [
+      "Orc"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "con": 1
+      }
+    ],
+    "traitTags": [
+      "Powerful Build"
+    ]
+  },
+  {
+    "id": "race-orc-ixalan-psx",
+    "name": "Orc (Ixalan)",
+    "baseName": "Orc (Ixalan)",
+    "subraceName": "",
+    "source": "PSX",
+    "raceSource": "PSX",
+    "page": 15,
+    "parentRaceId": "",
+    "aliases": [
+      "Orc (Ixalan)"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "con": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-owlin-scc",
+    "name": "Owlin",
+    "baseName": "Owlin",
+    "subraceName": "",
+    "source": "SCC",
+    "raceSource": "SCC",
+    "page": 29,
+    "parentRaceId": "",
+    "aliases": [
+      "Owlin"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": {
+      "walk": 30,
+      "fly": true
+    },
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-plasmoid-aag",
+    "name": "Plasmoid",
+    "baseName": "Plasmoid",
+    "subraceName": "",
+    "source": "AAG",
+    "raceSource": "AAG",
+    "page": 14,
+    "parentRaceId": "",
+    "aliases": [
+      "Plasmoid"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-reborn-vrgr",
+    "name": "Reborn",
+    "baseName": "Reborn",
+    "subraceName": "",
+    "source": "VRGR",
+    "raceSource": "VRGR",
+    "page": 20,
+    "parentRaceId": "",
+    "aliases": [
+      "Reborn"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Improved Resting"
+    ]
+  },
+  {
+    "id": "race-satyr-mot",
+    "name": "Satyr",
+    "baseName": "Satyr",
+    "subraceName": "",
+    "source": "MOT",
+    "raceSource": "MOT",
+    "page": 24,
+    "parentRaceId": "",
+    "aliases": [
+      "Satyr"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 35,
+    "ability": [
+      {
+        "cha": 2,
+        "dex": 1
+      }
+    ],
+    "traitTags": [
+      "Magic Resistance",
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-shifter-erlw",
+    "name": "Shifter",
+    "baseName": "Shifter",
+    "subraceName": "",
+    "source": "ERLW",
+    "raceSource": "ERLW",
+    "page": 33,
+    "parentRaceId": "",
+    "aliases": [
+      "Shifter"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-shifter-beasthide-erlw",
+    "name": "Shifter (Beasthide)",
+    "baseName": "Shifter",
+    "subraceName": "Beasthide",
+    "source": "ERLW",
+    "raceSource": "ERLW",
+    "page": 34,
+    "parentRaceId": "race-shifter-erlw",
+    "aliases": [
+      "Shifter",
+      "Shifter (Beasthide)",
+      "Beasthide Shifter",
+      "Shifter Beasthide"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "con": 2,
+        "str": 1
+      }
+    ],
+    "traitTags": [
+      "Natural Armor"
+    ]
+  },
+  {
+    "id": "race-shifter-longtooth-erlw",
+    "name": "Shifter (Longtooth)",
+    "baseName": "Shifter",
+    "subraceName": "Longtooth",
+    "source": "ERLW",
+    "raceSource": "ERLW",
+    "page": 34,
+    "parentRaceId": "race-shifter-erlw",
+    "aliases": [
+      "Shifter",
+      "Shifter (Longtooth)",
+      "Longtooth Shifter",
+      "Shifter Longtooth"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "str": 2,
+        "dex": 1
+      }
+    ],
+    "traitTags": [
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-shifter-swiftstride-erlw",
+    "name": "Shifter (Swiftstride)",
+    "baseName": "Shifter",
+    "subraceName": "Swiftstride",
+    "source": "ERLW",
+    "raceSource": "ERLW",
+    "page": 34,
+    "parentRaceId": "race-shifter-erlw",
+    "aliases": [
+      "Shifter",
+      "Shifter (Swiftstride)",
+      "Swiftstride Shifter",
+      "Shifter Swiftstride"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "dex": 2,
+        "cha": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-shifter-wildhunt-erlw",
+    "name": "Shifter (Wildhunt)",
+    "baseName": "Shifter",
+    "subraceName": "Wildhunt",
+    "source": "ERLW",
+    "raceSource": "ERLW",
+    "page": 34,
+    "parentRaceId": "race-shifter-erlw",
+    "aliases": [
+      "Shifter",
+      "Shifter (Wildhunt)",
+      "Wildhunt Shifter",
+      "Shifter Wildhunt"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "wis": 2,
+        "dex": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-simic-hybrid-ggr",
+    "name": "Simic Hybrid",
+    "baseName": "Simic Hybrid",
+    "subraceName": "",
+    "source": "GGR",
+    "raceSource": "GGR",
+    "page": 20,
+    "parentRaceId": "",
+    "aliases": [
+      "Simic Hybrid"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 30
+    },
+    "ability": [
+      {
+        "con": 2,
+        "choose": {
+          "from": [
+            "str",
+            "dex",
+            "int",
+            "wis",
+            "cha"
+          ],
+          "count": 1
+        }
+      }
+    ],
+    "traitTags": [
+      "Amphibious",
+      "Natural Armor",
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-siren-psx",
+    "name": "Siren",
+    "baseName": "Siren",
+    "subraceName": "",
+    "source": "PSX",
+    "raceSource": "PSX",
+    "page": 17,
+    "parentRaceId": "",
+    "aliases": [
+      "Siren"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": {
+      "walk": 25,
+      "fly": 30
+    },
+    "ability": [
+      {
+        "cha": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-thri-kreen-aag",
+    "name": "Thri-kreen",
+    "baseName": "Thri-kreen",
+    "subraceName": "",
+    "source": "AAG",
+    "raceSource": "AAG",
+    "page": 15,
+    "parentRaceId": "",
+    "aliases": [
+      "Thri-kreen"
+    ],
+    "size": [
+      "S",
+      "M"
+    ],
+    "speed": 30,
+    "ability": [],
+    "traitTags": [
+      "Improved Resting",
+      "Natural Armor"
+    ]
+  },
+  {
+    "id": "race-tiefling-asmodeus-mtf",
+    "name": "Tiefling (Asmodeus)",
+    "baseName": "Tiefling",
+    "subraceName": "Asmodeus",
+    "source": "MTF",
+    "raceSource": "PHB",
+    "page": 21,
+    "parentRaceId": "race-tiefling-phb",
+    "aliases": [
+      "Tiefling",
+      "Tiefling (Asmodeus)",
+      "Asmodeus Tiefling",
+      "Tiefling Asmodeus"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-tiefling-baalzebul-mtf",
+    "name": "Tiefling (Baalzebul)",
+    "baseName": "Tiefling",
+    "subraceName": "Baalzebul",
+    "source": "MTF",
+    "raceSource": "PHB",
+    "page": 21,
+    "parentRaceId": "race-tiefling-phb",
+    "aliases": [
+      "Tiefling",
+      "Tiefling (Baalzebul)",
+      "Baalzebul Tiefling",
+      "Tiefling Baalzebul"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-tiefling-dispater-mtf",
+    "name": "Tiefling (Dispater)",
+    "baseName": "Tiefling",
+    "subraceName": "Dispater",
+    "source": "MTF",
+    "raceSource": "PHB",
+    "page": 21,
+    "parentRaceId": "race-tiefling-phb",
+    "aliases": [
+      "Tiefling",
+      "Tiefling (Dispater)",
+      "Dispater Tiefling",
+      "Tiefling Dispater"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "cha": 2,
+        "dex": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-tiefling-fierna-mtf",
+    "name": "Tiefling (Fierna)",
+    "baseName": "Tiefling",
+    "subraceName": "Fierna",
+    "source": "MTF",
+    "raceSource": "PHB",
+    "page": 21,
+    "parentRaceId": "race-tiefling-phb",
+    "aliases": [
+      "Tiefling",
+      "Tiefling (Fierna)",
+      "Fierna Tiefling",
+      "Tiefling Fierna"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "cha": 2,
+        "wis": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-tiefling-glasya-mtf",
+    "name": "Tiefling (Glasya)",
+    "baseName": "Tiefling",
+    "subraceName": "Glasya",
+    "source": "MTF",
+    "raceSource": "PHB",
+    "page": 22,
+    "parentRaceId": "race-tiefling-phb",
+    "aliases": [
+      "Tiefling",
+      "Tiefling (Glasya)",
+      "Glasya Tiefling",
+      "Tiefling Glasya"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "cha": 2,
+        "dex": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-tiefling-levistus-mtf",
+    "name": "Tiefling (Levistus)",
+    "baseName": "Tiefling",
+    "subraceName": "Levistus",
+    "source": "MTF",
+    "raceSource": "PHB",
+    "page": 22,
+    "parentRaceId": "race-tiefling-phb",
+    "aliases": [
+      "Tiefling",
+      "Tiefling (Levistus)",
+      "Levistus Tiefling",
+      "Tiefling Levistus"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "cha": 2,
+        "con": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-tiefling-mammon-mtf",
+    "name": "Tiefling (Mammon)",
+    "baseName": "Tiefling",
+    "subraceName": "Mammon",
+    "source": "MTF",
+    "raceSource": "PHB",
+    "page": 22,
+    "parentRaceId": "race-tiefling-phb",
+    "aliases": [
+      "Tiefling",
+      "Tiefling (Mammon)",
+      "Mammon Tiefling",
+      "Tiefling Mammon"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-tiefling-mephistopheles-mtf",
+    "name": "Tiefling (Mephistopheles)",
+    "baseName": "Tiefling",
+    "subraceName": "Mephistopheles",
+    "source": "MTF",
+    "raceSource": "PHB",
+    "page": 23,
+    "parentRaceId": "race-tiefling-phb",
+    "aliases": [
+      "Tiefling",
+      "Tiefling (Mephistopheles)",
+      "Mephistopheles Tiefling",
+      "Tiefling Mephistopheles"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-tiefling-zariel-mtf",
+    "name": "Tiefling (Zariel)",
+    "baseName": "Tiefling",
+    "subraceName": "Zariel",
+    "source": "MTF",
+    "raceSource": "PHB",
+    "page": 23,
+    "parentRaceId": "race-tiefling-phb",
+    "aliases": [
+      "Tiefling",
+      "Tiefling (Zariel)",
+      "Zariel Tiefling",
+      "Tiefling Zariel"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "cha": 2,
+        "str": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-tortle-ttp",
+    "name": "Tortle",
+    "baseName": "Tortle",
+    "subraceName": "",
+    "source": "TTP",
+    "raceSource": "TTP",
+    "page": 3,
+    "parentRaceId": "",
+    "aliases": [
+      "Tortle"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "str": 2,
+        "wis": 1
+      }
+    ],
+    "traitTags": [
+      "Natural Armor",
+      "Natural Weapon"
+    ]
+  },
+  {
+    "id": "race-triton-mot",
+    "name": "Triton",
+    "baseName": "Triton",
+    "subraceName": "",
+    "source": "MOT",
+    "raceSource": "MOT",
+    "page": 26,
+    "parentRaceId": "",
+    "aliases": [
+      "Triton"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [],
+    "traitTags": []
+  },
+  {
+    "id": "race-vampire-psz",
+    "name": "Vampire",
+    "baseName": "Vampire",
+    "subraceName": "",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 14,
+    "parentRaceId": "",
+    "aliases": [
+      "Vampire"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "cha": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-vampire-ixalan-psx",
+    "name": "Vampire (Ixalan)",
+    "baseName": "Vampire",
+    "subraceName": "Ixalan",
+    "source": "PSX",
+    "raceSource": "PSZ",
+    "page": 14,
+    "parentRaceId": "race-vampire-psz",
+    "aliases": [
+      "Vampire",
+      "Vampire (Ixalan)",
+      "Ixalan Vampire",
+      "Vampire Ixalan"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "wis": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-vampire-zendikar-psz",
+    "name": "Vampire (Zendikar)",
+    "baseName": "Vampire",
+    "subraceName": "Zendikar",
+    "source": "PSZ",
+    "raceSource": "PSZ",
+    "page": 14,
+    "parentRaceId": "race-vampire-psz",
+    "aliases": [
+      "Vampire",
+      "Vampire (Zendikar)",
+      "Zendikar Vampire",
+      "Vampire Zendikar"
+    ],
+    "size": [],
+    "speed": "",
+    "ability": [
+      {
+        "int": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-vedalken-ggr",
+    "name": "Vedalken",
+    "baseName": "Vedalken",
+    "subraceName": "",
+    "source": "GGR",
+    "raceSource": "GGR",
+    "page": 21,
+    "parentRaceId": "",
+    "aliases": [
+      "Vedalken"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "int": 2,
+        "wis": 1
+      }
+    ],
+    "traitTags": [
+      "Skill Bonus Dice",
+      "Tool Bonus Dice"
+    ]
+  },
+  {
+    "id": "race-vedalken-psk",
+    "name": "Vedalken",
+    "baseName": "Vedalken",
+    "subraceName": "",
+    "source": "PSK",
+    "raceSource": "PSK",
+    "page": 23,
+    "parentRaceId": "",
+    "aliases": [
+      "Vedalken"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "int": 2,
+        "wis": 1
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-verdan-ai",
+    "name": "Verdan",
+    "baseName": "Verdan",
+    "subraceName": "",
+    "source": "AI",
+    "raceSource": "AI",
+    "page": 72,
+    "parentRaceId": "",
+    "aliases": [
+      "Verdan"
+    ],
+    "size": [
+      "V"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "con": 1,
+        "cha": 2
+      }
+    ],
+    "traitTags": []
+  },
+  {
+    "id": "race-warforged-erlw",
+    "name": "Warforged",
+    "baseName": "Warforged",
+    "subraceName": "",
+    "source": "ERLW",
+    "raceSource": "ERLW",
+    "page": 35,
+    "parentRaceId": "",
+    "aliases": [
+      "Warforged"
+    ],
+    "size": [
+      "M"
+    ],
+    "speed": 30,
+    "ability": [
+      {
+        "con": 2,
+        "choose": {
+          "from": [
+            "str",
+            "dex",
+            "int",
+            "wis",
+            "cha"
+          ],
+          "count": 1
+        }
+      }
+    ],
+    "traitTags": [
+      "Improved Resting",
+      "Natural Armor"
+    ]
+  }
+]

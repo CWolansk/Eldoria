@@ -16,7 +16,10 @@ const ITEMS_CSV = path.join(DOCS_ROOT, 'Assets', 'Items', 'Items.csv');
 const SPELLS_CSV = path.join(DOCS_ROOT, 'Assets', 'Spells', 'Spells.csv');
 const FEATS_CSV = path.join(DOCS_ROOT, 'Assets', 'Feats', 'Feats.csv');
 const CLASS_ROOT = path.join(DOCS_ROOT, '5etools', 'data', 'class');
+const RACES_JSON = path.join(DOCS_ROOT, '5etools', 'data', 'races.json');
 const CHECK_ONLY = process.argv.includes('--check');
+const RACE_SOURCE_PRIORITY = ['PHB', 'VGM', 'EEPC', 'DMG', 'XGE', 'TCE', 'SCAG', 'MPMM'];
+const IGNORED_RACE_TRAIT_NAMES = new Set(['Age', 'Alignment', 'Names', 'Height and Weight']);
 
 const CURRENT_PARTY_ITEM_RULES = {
   'corpse slayer flamberge bastard sword': {
@@ -97,12 +100,14 @@ const CURRENT_PARTY_ITEM_RULES = {
 
 function main() {
   const classesAndFeatures = importClasses();
+  const racesAndFeatures = importRaces();
+  const features = [...classesAndFeatures.features, ...racesAndFeatures.features].sort((a, b) => `${a.kind} ${a.className || a.raceName || ''} ${a.level || 0} ${a.name}`.localeCompare(`${b.kind} ${b.className || b.raceName || ''} ${b.level || 0} ${b.name}`));
   const items = parseCsv(readIfExists(ITEMS_CSV)).map(buildItem).filter(Boolean).sort(byName);
   const spells = parseCsv(readIfExists(SPELLS_CSV)).map(buildSpell).filter(Boolean).sort(byName);
   const feats = parseCsv(readIfExists(FEATS_CSV)).map(buildFeat).filter(Boolean).sort(byName);
-  const actions = collectActions(classesAndFeatures.features, items, spells, feats).sort(byName);
-  const effects = collectEffects(classesAndFeatures.features, items, feats).sort(byName);
-  const resources = collectResources(classesAndFeatures.features, items).sort(byName);
+  const actions = collectActions(features, items, spells, feats).sort(byName);
+  const effects = collectEffects(features, items, feats).sort(byName);
+  const resources = collectResources(features, items).sort(byName);
   const generatedAtUtc = getGeneratedAtUtc();
   const manifest = {
     schemaVersion: 1,
@@ -112,11 +117,13 @@ function main() {
       itemsCsv: relative(DOCS_ROOT, ITEMS_CSV),
       spellsCsv: relative(DOCS_ROOT, SPELLS_CSV),
       featsCsv: relative(DOCS_ROOT, FEATS_CSV),
+      racesJson: relative(DOCS_ROOT, RACES_JSON),
     },
     counts: {
       classes: classesAndFeatures.classes.length,
       subclasses: classesAndFeatures.subclasses.length,
-      features: classesAndFeatures.features.length,
+      races: racesAndFeatures.races.length,
+      features: features.length,
       items: items.length,
       spells: spells.length,
       feats: feats.length,
@@ -125,11 +132,12 @@ function main() {
       resources: resources.length,
     },
   };
-  const report = buildReport({ ...classesAndFeatures, items, spells, feats, actions, effects, resources, manifest });
+  const report = buildReport({ ...classesAndFeatures, ...racesAndFeatures, features, items, spells, feats, actions, effects, resources, manifest });
 
   writeRulesJson('classes.json', classesAndFeatures.classes);
   writeRulesJson('subclasses.json', classesAndFeatures.subclasses);
-  writeRulesJson('features.json', classesAndFeatures.features);
+  writeRulesJson('races.json', racesAndFeatures.races);
+  writeRulesJson('features.json', features);
   writeRulesJson('items.json', items);
   writeRulesJson('spells.json', spells);
   writeRulesJson('feats.json', feats);
@@ -141,7 +149,7 @@ function main() {
 
   if (!CHECK_ONLY) {
     console.log(`Imported canonical rules JSON into ${relative(process.cwd(), RULES_OUT)}`);
-    console.log(`Classes ${manifest.counts.classes}, subclasses ${manifest.counts.subclasses}, features ${manifest.counts.features}`);
+    console.log(`Classes ${manifest.counts.classes}, subclasses ${manifest.counts.subclasses}, races ${manifest.counts.races}, features ${manifest.counts.features}`);
     console.log(`Items ${manifest.counts.items}, spells ${manifest.counts.spells}, actions ${manifest.counts.actions}, resources ${manifest.counts.resources}`);
   }
 }
@@ -200,6 +208,105 @@ function importClasses() {
     subclasses: uniqueBy(subclasses, item => item.id).sort((a, b) => `${a.className} ${a.name}`.localeCompare(`${b.className} ${b.name}`)),
     features: uniqueBy(features.filter(Boolean), item => item.id).sort((a, b) => `${a.className} ${a.subclassShortName || ''} ${a.level} ${a.name}`.localeCompare(`${b.className} ${b.subclassShortName || ''} ${b.level} ${b.name}`)),
   };
+}
+
+function importRaces() {
+  const races = [];
+  const features = [];
+  if (!fs.existsSync(RACES_JSON)) return { races, features };
+
+  const data = readJson(RACES_JSON);
+  for (const race of data.race || []) {
+    const record = buildRaceRecord(race, false);
+    if (!record) continue;
+    races.push(record);
+    features.push(...buildRaceFeatures(race, record));
+  }
+  for (const subrace of data.subrace || []) {
+    const record = buildRaceRecord(subrace, true);
+    if (!record) continue;
+    races.push(record);
+    features.push(...buildRaceFeatures(subrace, record));
+  }
+
+  return {
+    races: uniqueBy(races, race => race.id).sort((a, b) => sourcePriority(a.source) - sourcePriority(b.source) || a.name.localeCompare(b.name)),
+    features: uniqueBy(features.filter(Boolean), feature => feature.id).sort((a, b) => `${a.raceName} ${a.name}`.localeCompare(`${b.raceName} ${b.name}`)),
+  };
+}
+
+function buildRaceRecord(race, isSubrace) {
+  if (!race || !race.name) return null;
+  const baseName = isSubrace ? race.raceName || '' : race.name;
+  if (!baseName) return null;
+  const subraceName = isSubrace ? race.name : '';
+  const displayName = subraceName ? `${baseName} (${subraceName})` : baseName;
+  const source = race.source || '';
+  return {
+    id: slugify(['race', baseName, subraceName, source].filter(Boolean).join('-')),
+    name: displayName,
+    baseName,
+    subraceName,
+    source,
+    raceSource: race.raceSource || source,
+    page: race.page || '',
+    parentRaceId: subraceName ? slugify(['race', baseName, race.raceSource || source].filter(Boolean).join('-')) : '',
+    aliases: buildRaceAliases(baseName, subraceName),
+    size: race.size || [],
+    speed: race.speed || '',
+    ability: race.ability || [],
+    traitTags: race.traitTags || [],
+  };
+}
+
+function buildRaceAliases(baseName, subraceName) {
+  const aliases = [baseName];
+  if (subraceName) {
+    aliases.push(`${baseName} (${subraceName})`);
+    aliases.push(`${subraceName} ${baseName}`);
+    aliases.push(`${baseName} ${subraceName}`);
+  }
+  return [...new Set(aliases.filter(Boolean))];
+}
+
+function buildRaceFeatures(race, raceRecord) {
+  const entries = Array.isArray(race.entries) ? race.entries : [];
+  return entries
+    .map(entry => buildRaceFeature(entry, raceRecord))
+    .filter(Boolean);
+}
+
+function buildRaceFeature(entry, raceRecord) {
+  if (!entry || typeof entry !== 'object' || !entry.name) return null;
+  if (IGNORED_RACE_TRAIT_NAMES.has(entry.name)) return null;
+  const text = cleanRulesText(entriesToText(entry.entries || entry.items || entry.rows || []));
+  if (!text) return null;
+  return {
+    id: slugify(['race', raceRecord.name, entry.name, raceRecord.source].filter(Boolean).join('-')),
+    kind: 'race',
+    name: entry.name,
+    raceId: raceRecord.id,
+    parentRaceId: raceRecord.parentRaceId || '',
+    raceName: raceRecord.name,
+    baseRaceName: raceRecord.baseName,
+    subraceName: raceRecord.subraceName || '',
+    level: inferRaceFeatureLevel(entry.name, text),
+    source: raceRecord.source || '',
+    text,
+    timing: classifyTiming(`${entry.name} ${text}`),
+    resourceHint: inferFeatureResourceHint(entry.name, text),
+  };
+}
+
+function inferRaceFeatureLevel(_name, text) {
+  const opening = String(text || '').slice(0, 160);
+  const match = opening.match(/^\s*(?:starting at|when you reach|at) (\d+)(?:st|nd|rd|th) level\b/i);
+  return match ? Number(match[1]) || 1 : 1;
+}
+
+function sourcePriority(source) {
+  const index = RACE_SOURCE_PRIORITY.indexOf(String(source || '').toUpperCase());
+  return index === -1 ? RACE_SOURCE_PRIORITY.length : index;
 }
 
 function buildFeature(feature, kind) {
@@ -293,18 +400,19 @@ function buildFeat(row) {
 function collectActions(features, items, spells, feats) {
   const actions = [];
   for (const feature of features) {
+    const resource = inferFeatureResource(feature);
     const actionable = feature.timing && feature.timing !== 'Passive';
-    const important = feature.resourceHint || /\b(action|bonus action|reaction|turn undead|destroy undead|extra attack)\b/i.test(`${feature.name} ${feature.text}`);
+    const important = resource || feature.resourceHint || /\b(action|bonus action|reaction|turn undead|destroy undead|extra attack)\b/i.test(`${feature.name} ${feature.text}`);
     if (!actionable && !important) continue;
     actions.push({
       id: slugify(`feature-${feature.id}`),
       sourceType: feature.kind,
       sourceId: feature.id,
       group: feature.timing === 'Passive' ? 'Free / Utility' : feature.timing,
-      type: feature.kind === 'subclass' ? `${feature.subclassShortName || feature.subclassName || feature.className}` : feature.className,
+      type: getFeatureSourceLabel(feature),
       title: feature.name,
       detail: actionSummary(feature.text, 520),
-      tags: [feature.className, feature.subclassShortName, feature.level ? `Level ${feature.level}` : '', feature.resourceHint].filter(Boolean),
+      tags: [getFeatureSourceLabel(feature), feature.level ? `Level ${feature.level}` : '', feature.resourceHint || (resource && resource.name)].filter(Boolean),
     });
   }
   for (const item of items) actions.push(...(item.actions || []).map(action => ({ ...action, sourceType: 'item', sourceId: item.id, itemName: item.name })));
@@ -335,6 +443,13 @@ function collectActions(features, items, spells, feats) {
     });
   }
   return uniqueBy(actions, action => action.id);
+}
+
+function getFeatureSourceLabel(feature) {
+  if (feature.kind === 'race') return feature.raceName || feature.baseRaceName || 'Race';
+  if (feature.kind === 'subclass') return feature.subclassShortName || feature.subclassName || feature.className || 'Subclass';
+  if (feature.kind === 'class') return feature.className || 'Class';
+  return feature.kind || 'Feature';
 }
 
 function collectEffects(features, items, feats) {
@@ -496,11 +611,13 @@ function inferFeatureResource(feature) {
     sourceId: feature.id,
     className: feature.className,
     subclassName: feature.subclassShortName || feature.subclassName,
+    raceName: feature.raceName || '',
+    source: feature.source || '',
     text: firstSentence(feature.text, 240),
   };
   if (!hint) {
     const abilityUses = feature.text.match(/number of times equal to your (Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma) modifier \(a minimum of once\).*?regain all expended uses when you finish a (short|long) rest/i);
-    if (!abilityUses) return null;
+    if (!abilityUses) return inferLimitedFeatureResource(feature, common);
     const ability = abilityUses[1].slice(0, 3).toLowerCase();
     return {
       id: feature.id,
@@ -521,6 +638,52 @@ function inferFeatureResource(feature) {
   if (hint === 'Second Wind') return { id: 'second-wind', name: 'Second Wind', max: 1, reset: 'shortRest', ...common };
   if (hint === 'Portent') return { id: 'wizard-portent', name: 'Portent', maxFormula: 'level >= 14 ? 3 : 2', reset: 'longRest', ...common };
   return null;
+}
+
+function inferLimitedFeatureResource(feature, common) {
+  const text = cleanRulesText(feature.text || '');
+  const normalized = normalizeName(text);
+  const reset = inferLimitedFeatureResetFromText(text);
+  if (!reset) return null;
+  const limited = /\b(can t|cannot) (?:use|cast|do so|activate)[a-z0-9 ]{0,180}\bagain until\b/.test(normalized)
+    || /\bonce (?:you|this|the)[^.]{0,180}\b(?:use|used|cast|casts)\b/.test(normalized)
+    || /\bregain (?:the )?ability [^.]{0,180}\bwhen you finish\b/.test(normalized)
+    || /\bregain all expended uses when you finish\b/.test(normalized);
+  if (!limited) return null;
+  return {
+    id: feature.id,
+    name: feature.name,
+    max: inferLimitedFeatureMax(text),
+    reset,
+    ...common,
+  };
+}
+
+function inferLimitedFeatureResetFromText(text) {
+  const clean = cleanRulesText(text || '');
+  const resetPhrases = [
+    /\b(?:can't|cannot) (?:use|cast|do so|activate)[^.]{0,220}\bagain until you (?:finish|complete) a (short or long|short|long) rest\b/i,
+    /\bregain (?:all expended uses|the ability)[^.]{0,220}\bwhen you finish a (short or long|short|long) rest\b/i,
+    /\bonce [^.]{0,220}\b(?:can't|cannot) [^.]{0,220}\bagain until you (?:finish|complete) a (short or long|short|long) rest\b/i,
+  ];
+  for (const pattern of resetPhrases) {
+    const match = clean.match(pattern);
+    if (match) return inferLimitedFeatureReset(match[1]);
+  }
+  if (/\b(?:can't|cannot) [^.]{0,220}\bagain until (?:the )?next dawn\b/i.test(clean)) return 'dawn';
+  return '';
+}
+
+function inferLimitedFeatureMax(text) {
+  const uses = String(text || '').match(/\b(\d+) times\b/i) || String(text || '').match(/\b(\d+)\/day\b/i);
+  return uses ? Number(uses[1]) || 1 : 1;
+}
+
+function inferLimitedFeatureReset(restText) {
+  const clean = normalizeName(restText);
+  if (clean.includes('short')) return 'shortRest';
+  if (clean.includes('dawn')) return 'dawn';
+  return 'longRest';
 }
 
 function inferFeatureResourceHint(name, text) {
@@ -726,6 +889,7 @@ function buildReport(data) {
     canonicalRuntimeFiles: [
       'classes.json',
       'subclasses.json',
+      'races.json',
       'features.json',
       'items.json',
       'spells.json',
