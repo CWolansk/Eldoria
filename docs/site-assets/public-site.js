@@ -2477,8 +2477,19 @@
 
   function formatResourceLine(resource, max, used) {
     const reset = formatReset(resource.reset);
-    if (max === null) return `${formatResourceMax(resource, null)}; resets ${reset}`;
-    return `${max - used} / ${max} available; resets ${reset}`;
+    const source = formatResourceSource(resource);
+    const prefix = source ? `${source}; ` : '';
+    if (max === null) return `${prefix}${formatResourceMax(resource, null)}; resets ${reset}`;
+    return `${prefix}${max - used} / ${max} available; resets ${reset}`;
+  }
+
+  function formatResourceSource(resource) {
+    if (!resource) return '';
+    if (resource.itemName) return resource.itemName;
+    if (resource.subclassName) return resource.subclassName;
+    if (resource.className) return resource.className;
+    if (resource.sourceType && resource.sourceType !== 'core') return capitalize(resource.sourceType);
+    return '';
   }
 
   function evaluateResourceMax(resource, player) {
@@ -2910,7 +2921,7 @@
           <span class="equipment-meta">${renderItemBadges(item)}</span>
           <span class="equipment-statline">${escapeHtml(formatItemStatline(item))}</span>
         </summary>
-        ${renderEquipmentDetails(item)}
+        ${renderEquipmentDetails(item, player)}
       </details>
       <div class="equipment-row-actions">
         <button class="text-button" type="button" data-remove-equipment="${escapeAttr(item.id)}">Remove</button>
@@ -2918,7 +2929,7 @@
     </article>`;
   }
 
-  function renderEquipmentDetails(item) {
+  function renderEquipmentDetails(item, player) {
     const details = item.details || {};
     const rows = [
       ['Type', details.type || item.kind],
@@ -2930,14 +2941,80 @@
       ['Value', details.value],
       ['Source', formatSource(details)],
     ].filter(([, value]) => value);
+    const renderedActions = new Set((details.actions || []).map(action => normalizeName(action.title || action.name || action.id)));
+    const renderedResources = new Set((details.resources || []).map(resource => normalizeName(resource.name || resource.id)));
+    const renderedEffects = new Set((details.effects || []).map(effect => normalizeName(effect.name || effect.label || effect.id)));
+    const remainingAbilities = (item.abilities || []).filter(text => {
+      const normalized = normalizeName(text);
+      return ![...renderedActions, ...renderedResources, ...renderedEffects].some(name => name && normalized.startsWith(name));
+    });
 
     return `<div class="equipment-details">
       ${rows.length ? `<dl class="equipment-detail-grid">${rows.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>` : ''}
-      ${item.abilities && item.abilities.length ? `<section class="equipment-detail-section">
+      ${renderEquipmentActionSection(item, player)}
+      ${renderEquipmentResourceSection(item, player)}
+      ${remainingAbilities.length ? `<section class="equipment-detail-section">
         <h3>Item Abilities</h3>
-        <ul>${item.abilities.map(text => `<li>${escapeHtml(text)}</li>`).join('')}</ul>
+        <ul>${remainingAbilities.map(text => `<li>${escapeHtml(text)}</li>`).join('')}</ul>
       </section>` : ''}
       ${details.text ? `<p class="item-rules">${escapeHtml(truncateText(details.text, 1100))}</p>` : '<p class="empty-note">No item rules text is recorded yet.</p>'}
+    </div>`;
+  }
+
+  function renderEquipmentActionSection(item, player) {
+    const actions = item.details && Array.isArray(item.details.actions) ? item.details.actions : [];
+    if (!actions.length) return '';
+    return `<section class="equipment-detail-section">
+      <h3>Item Actions</h3>
+      <div class="equipment-action-list">
+        ${actions.map(action => renderEquipmentAction(item, player, action)).join('')}
+      </div>
+    </section>`;
+  }
+
+  function renderEquipmentAction(item, player, action) {
+    const title = action.title || action.name || item.name;
+    const group = normalizeActionGroup(action.group);
+    const detail = cleanRulesText(action.detail || action.text || '');
+    const resourceId = action.id || '';
+    const state = getResourceUseState(player, resourceId);
+    const controls = state && state.max !== null
+      ? `<div class="equipment-action-controls">
+          ${renderResourceSpendButton(resourceId, 'Use', state.available <= 0)}
+          <small>${escapeHtml(`${state.available} / ${state.max} left; resets ${formatReset(state.resource.reset)}`)}</small>
+        </div>`
+      : '';
+    return `<div class="equipment-action">
+      <div>
+        <strong>${escapeHtml(title)}</strong>
+        <small>${escapeHtml([group, action.type || 'Item'].filter(Boolean).join(' / '))}</small>
+      </div>
+      ${detail ? `<p>${escapeHtml(detail)}</p>` : ''}
+      ${controls}
+    </div>`;
+  }
+
+  function renderEquipmentResourceSection(item, player) {
+    const resources = item.details && Array.isArray(item.details.resources) ? item.details.resources : [];
+    const actionIds = new Set(((item.details && item.details.actions) || []).map(action => action.id).filter(Boolean));
+    const standalone = resources.filter(resource => !actionIds.has(resource.id));
+    if (!standalone.length) return '';
+    return `<section class="equipment-detail-section">
+      <h3>Item Uses</h3>
+      <div class="resource-list equipment-resource-list">
+        ${standalone.map(resource => renderEquipmentResource(player, resource)).join('')}
+      </div>
+    </section>`;
+  }
+
+  function renderEquipmentResource(player, resource) {
+    const state = getResourceUseState(player, resource.id);
+    if (!state || state.max === null) {
+      return `<div class="resource-row"><span><strong>${escapeHtml(resource.name || resource.id)}</strong><small>${escapeHtml(formatResourceMax(resource, null))}; resets ${escapeHtml(formatReset(resource.reset))}</small></span></div>`;
+    }
+    return `<div class="resource-row">
+      <span><strong>${escapeHtml(state.resource.name || resource.name || resource.id)}</strong><small>${escapeHtml(formatResourceLine(state.resource, state.max, state.used))}</small></span>
+      <span class="resource-controls">${renderResourceSpendButton(state.resource.id, 'Use', state.available <= 0)}</span>
     </div>`;
   }
 
