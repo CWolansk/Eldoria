@@ -1356,10 +1356,10 @@
         "maxFormula": "clericChannelDivinityUses(level)",
         "reset": "shortRest",
         "sourceType": "class",
-        "sourceId": "class-cleric-1-divine-domain-phb",
+        "sourceId": "class-cleric-2-channel-divinity-phb",
         "className": "Cleric",
         "subclassName": "",
-        "text": "Choose one domain related to your deity from the list of available domains."
+        "text": "At 2nd level, you gain the ability to channel divine energy directly from your deity, using that energy to fuel magical effects. You start with two such effects: Turn Undead and an effect determined by your domain. Some domains grant you additional effects as you advance in levels, as noted in the domain description. When you use your Channel Divinity, you choose which effect to create. You must then finish a short or long rest to use your Channel Divinity again. Some Channel Divinity effects require saving throws. When you use such an effect from this class, the DC equals your cleric spell save DC. Beginning at 6th level, you can use your Channel Divinity twice between rests, and beginning at 18th level, you can use it three times between rests. When you finish a short or long rest, you regain your expended uses."
       },
       {
         "id": "hit-dice",
@@ -1386,7 +1386,7 @@
         "sourceId": "subclass-cleric-tempest-1-wrath-of-the-storm-phb",
         "className": "Cleric",
         "subclassName": "Tempest",
-        "text": "Also at 1st level, you can thunderously rebuke attackers."
+        "text": "Also at 1st level, you can thunderously rebuke attackers. When a creature within 5 feet of you that you can see hits you with an attack, you can use your reaction to cause the creature to make a Dexterity saving throw. The creature takes 2d8 lightning or thunder damage (your choice) on a failed saving throw, and half as much damage on a successful one. You can use this feature a number of times equal to your Wisdom modifier (a minimum of once). You regain all expended uses when you finish a long rest."
       },
       {
         "id": "lightning-rod-lightning-rod-charges",
@@ -3345,7 +3345,7 @@
         "sourceId": "class-fighter-1-second-wind-phb",
         "className": "Fighter",
         "subclassName": "",
-        "text": "You have a limited well of stamina that you can draw on to protect yourself from harm."
+        "text": "You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level. Once you use this feature, you must finish a short or long rest before you can use it again."
       },
       {
         "id": "spell-slots",
@@ -3934,7 +3934,7 @@
         "sourceId": "class-bard-1-bardic-inspiration-phb",
         "className": "Bard",
         "subclassName": "",
-        "text": "You can inspire others through stirring words or music."
+        "text": "You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6. Once within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the DM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time. You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain any expended uses when you finish a long rest. Your Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level."
       },
       {
         "id": "hit-dice",

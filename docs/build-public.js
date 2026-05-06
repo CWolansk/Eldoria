@@ -466,18 +466,11 @@ function buildPlayerResources(rules, matchedClass, matchedSubclass, level, equip
     if (resource.sourceType === 'core') {
       resources.push(resource);
     } else if (resource.sourceId && featureIds.has(resource.sourceId)) {
-      resources.push(resource);
+      resources.push(repointResourceToAvailableFeature(resource, availableFeatures) || resource);
     } else {
       const matchedFeature = findAvailableFeatureForResource(resource, availableFeatures);
       if (matchedFeature) {
-        resources.push({
-          ...resource,
-          sourceType: matchedFeature.kind || resource.sourceType,
-          sourceId: matchedFeature.id,
-          className: matchedFeature.className || resource.className || '',
-          subclassName: matchedFeature.subclassShortName || matchedFeature.subclassName || resource.subclassName || '',
-          text: cleanRulesText(matchedFeature.text || resource.text || ''),
-        });
+        resources.push(formatFeatureResource(resource, matchedFeature));
       }
     }
   }
@@ -488,6 +481,28 @@ function buildPlayerResources(rules, matchedClass, matchedSubclass, level, equip
     }
   }
   return uniqueBy(resources, resource => resource.id);
+}
+
+function repointResourceToAvailableFeature(resource, availableFeatures) {
+  const current = (availableFeatures || []).find(feature => feature.id === resource.sourceId);
+  const best = findAvailableFeatureForResource(resource, availableFeatures);
+  if (!best) return current ? formatFeatureResource(resource, current) : null;
+  if (!current) return formatFeatureResource(resource, best);
+  const resourceName = normalizeItemName(resource.name || resource.id);
+  const currentExact = normalizeItemName(current.name) === resourceName;
+  const bestExact = normalizeItemName(best.name) === resourceName;
+  return formatFeatureResource(resource, bestExact && !currentExact ? best : current);
+}
+
+function formatFeatureResource(resource, feature) {
+  return {
+    ...resource,
+    sourceType: feature.kind || resource.sourceType,
+    sourceId: feature.id,
+    className: feature.className || resource.className || '',
+    subclassName: feature.subclassShortName || feature.subclassName || resource.subclassName || '',
+    text: cleanRulesText(feature.text || resource.text || ''),
+  };
 }
 
 function findAvailableFeatureForResource(resource, availableFeatures) {
@@ -1057,7 +1072,7 @@ function renderPlayerPage(player, page) {
       </div>
       <section class="feature-notes">
         <h2>Class Features</h2>
-        ${canonicalFeaturesHtml}
+        <div data-class-info-panel>${canonicalFeaturesHtml}</div>
       </section>
       <section class="feature-notes">
         <h2>Sheet Feature Notes</h2>

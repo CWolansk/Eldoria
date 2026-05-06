@@ -1624,6 +1624,9 @@ th {
 
 .class-feature-row summary {
   display: flex;
+  justify-content: space-between;
+  gap: .75rem;
+  align-items: flex-start;
   cursor: pointer;
   padding: .7rem .8rem;
 }
@@ -1635,6 +1638,13 @@ th {
 
 .class-feature-row summary small {
   color: var(--muted);
+}
+
+.class-feature-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: .45rem;
 }
 
 .class-feature-row p {
@@ -1730,12 +1740,17 @@ th {
     grid-template-columns: 1fr;
   }
 
+  .class-feature-row summary {
+    flex-direction: column;
+  }
+
   .equipment-statline {
     text-align: left;
   }
 
   .equipment-row-actions,
-  .equipment-action-controls {
+  .equipment-action-controls,
+  .class-feature-controls {
     justify-content: flex-start;
   }
 }

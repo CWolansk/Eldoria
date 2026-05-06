@@ -301,6 +301,7 @@
     renderArmorClassPanel(root, hydrated);
     renderWeaponAttacks(root, hydrated);
     renderCombatFeatureActions(root, hydrated);
+    renderClassInfoPanel(root, hydrated);
     renderActionsPanel(root, hydrated);
     renderResourcesPanel(root, hydrated);
     renderEquipmentPanel(root, hydrated);
@@ -1550,6 +1551,93 @@
     return index === -1 ? order.length : index;
   }
 
+  function renderClassInfoPanel(root, player) {
+    const target = root.querySelector('[data-class-info-panel]');
+    if (!target) return;
+    const features = player.ruleFeatures || [];
+    if (!features.length) {
+      target.innerHTML = '<p>No class features found in canonical rules.</p>';
+      return;
+    }
+    target.innerHTML = `<div class="class-feature-list">
+      ${features.map(feature => renderClassFeatureRow(player, feature)).join('')}
+    </div>`;
+  }
+
+  function renderClassFeatureRow(player, feature) {
+    const controls = renderClassFeatureControls(player, feature);
+    return `<details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>${escapeHtml(feature.name)}</strong>
+          <small>${escapeHtml(formatClassFeatureMeta(feature))}</small>
+        </span>
+        ${controls}
+      </summary>
+      <p>${escapeHtml(feature.text || 'No feature text recorded.')}</p>
+    </details>`;
+  }
+
+  function formatClassFeatureMeta(feature) {
+    return [
+      feature.kind === 'subclass' ? feature.subclassName : feature.className,
+      feature.level ? `Level ${feature.level}` : '',
+      feature.timing,
+      feature.resourceHint,
+    ].filter(Boolean).join(' / ');
+  }
+
+  function renderClassFeatureControls(player, feature) {
+    const resourceId = getFeatureResourceId(player, feature);
+    const controls = [];
+    const state = getResourceUseState(player, resourceId);
+    if (state && state.max !== null) {
+      controls.push(renderResourceSpendButton(resourceId, 'Use', state.available <= 0));
+      controls.push(`<span class="use-status">${escapeHtml(`${state.available} / ${state.max} left`)}</span>`);
+    }
+    const rollButton = renderFeatureRollButton(feature);
+    if (rollButton) controls.push(rollButton);
+    return controls.length ? `<span class="class-feature-controls">${controls.join('')}</span>` : '';
+  }
+
+  function getFeatureResourceId(player, feature) {
+    if (!feature) return '';
+    if (findPlayerResource(player, feature.id)) return feature.id;
+    const bySource = uniqueRuleRecords(player && player.resources || []).find(resource => resource.sourceId === feature.id);
+    if (bySource) return bySource.id;
+    const name = normalizeName(feature.name);
+    const hint = normalizeName(feature.resourceHint);
+    const resource = uniqueRuleRecords(player && player.resources || []).find(candidate => {
+      const candidateName = normalizeName(candidate.name || candidate.id);
+      const candidateId = normalizeName(candidate.id);
+      const nameMatches = candidateName && candidateName === name;
+      const idMatches = candidateId && candidateId === slugify(feature.name || '');
+      const hintMatches = candidateName && candidateName === hint || candidateId && candidateId === slugify(feature.resourceHint || '');
+      return Boolean((nameMatches || idMatches || hintMatches) && featureUsesResource(feature, candidate));
+    });
+    if (resource) return resource.id;
+    const channel = hint.includes('channel divinity') && findPlayerResource(player, 'cleric-channel-divinity');
+    if (channel && featureUsesResource(feature, channel)) return channel.id;
+    return '';
+  }
+
+  function featureUsesResource(feature, resource) {
+    if (!feature || !resource) return false;
+    if (resource.sourceId && resource.sourceId === feature.id) return true;
+    const name = normalizeName(feature.name);
+    const text = normalizeName(feature.text);
+    const resourceName = normalizeName(resource.name || resource.id);
+    if (name === resourceName) return true;
+    if (name.startsWith(`${resourceName} `)) return true;
+    const usesResource = text.includes(`use your ${resourceName}`) && !text.includes(`ways to use your ${resourceName}`)
+      || text.includes(`uses your ${resourceName}`)
+      || text.includes(`spend ${resourceName}`)
+      || text.includes(`spend a use of your ${resourceName}`)
+      || text.includes(`expend a use of your ${resourceName}`)
+      || text.includes(`expend ${resourceName}`);
+    return usesResource;
+  }
+
   function renderWeaponControls(item, player) {
     const weapon = item.weapon;
     const equipped = isItemEquipped(player, item);
@@ -1848,9 +1936,16 @@
   }
 
   function renderRuleActionRollButton(action) {
-    const title = normalizeName(action && (action.title || action.name));
+    return renderFeatureRollButton({
+      id: action && (action.sourceId || action.id),
+      name: action && (action.title || action.name),
+    });
+  }
+
+  function renderFeatureRollButton(feature) {
+    const title = normalizeName(feature && feature.name);
     if (title === 'second wind') {
-      return `<button class="roll-button" type="button" data-roll-feature="${escapeAttr(action.sourceId || action.id)}">Roll Heal</button>`;
+      return `<button class="roll-button" type="button" data-roll-feature="${escapeAttr(feature.id || '')}">Roll Heal</button>`;
     }
     return '';
   }
@@ -3275,6 +3370,7 @@
       const resourceSpend = event.target.closest('[data-resource-spend]');
       if (resourceSpend) {
         event.preventDefault();
+        event.stopPropagation();
         const player = root._playerState;
         if (player) spendResource(root, player, resourceSpend.dataset.resourceSpend);
         return;
@@ -3334,6 +3430,7 @@
       const featureRoll = event.target.closest('[data-roll-feature]');
       if (featureRoll) {
         event.preventDefault();
+        event.stopPropagation();
         const player = root._playerState;
         if (player) renderFeatureRoll(root, player, featureRoll.dataset.rollFeature);
         return;
