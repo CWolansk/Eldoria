@@ -821,6 +821,16 @@
     "itemName": "Constantori's Portrait"
   },
   {
+    "id": "fabulist-gem-counterfeit-coins",
+    "name": "Counterfeit Coins",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Counterfeit Coins: You can use your action to magically create a pile of coins, worth no more than 100 gp total, in an unoccupied space within 10 feet of yourself.  The pile must appear on a surface that can support it.  After 1 hour, the coins vanish, regardless of where they are.  Once this action is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "fabulist-gem",
+    "itemName": "Fabulist Gem"
+  },
+  {
     "id": "courtesan-s-fanblade-courtesan-s-fanblade-charges",
     "name": "Courtesan's Fanblade Charges",
     "max": 3,
@@ -1915,6 +1925,16 @@
     "itemName": "Hammer of Thunderbolts"
   },
   {
+    "id": "bigby-s-beneficent-bracelet-hand",
+    "name": "Hand",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Hand: As an action, you can use the bracelet to cast Bigby's hand as a 9th-level spell (spell attack bonus +13).  When you cast the spell this way, the spell doesn't require concentration.  Once this property is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "bigby-s-beneficent-bracelet",
+    "itemName": "Bigby's Beneficent Bracelet"
+  },
+  {
     "id": "hand-of-vecna-hand-of-vecna-charges",
     "name": "Hand of Vecna Charges",
     "max": 8,
@@ -2281,6 +2301,16 @@
     "sourceType": "item",
     "sourceId": "ironleaf-impaler",
     "itemName": "Ironleaf Impaler"
+  },
+  {
+    "id": "donjon-s-sundering-sphere-isolating-smite",
+    "name": "Isolating Smite",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Isolating Smite: When you hit a creature with this weapon, you can force the creature to make a DC 16 Charisma saving throw.  On a failed save, the creature is banished to a harmless demiplane until the end of its next turn.  When the banished creature returns, it reappears in the space it left or the nearest unoccupied space if that space is occupied.  Once this property is used, it can't be used again until the next dawn.  When you end your attunement to the sphere, the sphere harmlessly detaches from the weapon, and the weapon reverts to a nonmagical piece of equipment.",
+    "sourceType": "item",
+    "sourceId": "donjon-s-sundering-sphere",
+    "itemName": "Donjon's Sundering Sphere"
   },
   {
     "id": "izzet-guild-signet-izzet-guild-signet-charges",
@@ -2712,6 +2742,16 @@
     "sourceType": "item",
     "sourceId": "mask-of-the-beast",
     "itemName": "Mask of the Beast"
+  },
+  {
+    "id": "adze-of-annam-mattock",
+    "name": "Mattock",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Mattock: As an action, you can call upon the might of the All-Father and use the adze to cast move earth or fabricate.  Once this property is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "adze-of-annam",
+    "itemName": "Adze of Annam"
   },
   {
     "id": "medallion-of-thoughts-medallion-of-thoughts-charges",
@@ -3918,6 +3958,16 @@
     "itemName": "Selesnya Guild Signet"
   },
   {
+    "id": "fate-cutter-shears-sever-threads",
+    "name": "Sever Threads",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Sever Threads: When you hit a creature with the shears, you can cut that creature's fate.  Until the target finishes a long rest, attack rolls against it score a critical hit on a roll of 19 or 20 on the d20.  Once this property is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "fate-cutter-shears",
+    "itemName": "Fate Cutter Shears"
+  },
+  {
     "id": "veil-of-shadows-shadow-stab",
     "name": "Shadow Stab",
     "max": 1,
@@ -4115,6 +4165,16 @@
     "sourceType": "item",
     "sourceId": "skyglider-shield",
     "itemName": "Skyglider Shield"
+  },
+  {
+    "id": "sun-staff-solar-focus",
+    "name": "Solar Focus",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Solar Focus: You can use the staff as a spellcasting focus.  While holding the staff, you can reroll a number of damage dice up to your proficiency bonus when you use a spell slot to cast a spell that deals fire or radiant damage.  You must use the new rolls.  Once this property is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "sun-staff",
+    "itemName": "Sun Staff"
   },
   {
     "id": "sorcery-points",
@@ -4566,6 +4626,16 @@
     "itemName": "Steel-capped Staff of Verdict"
   },
   {
+    "id": "stonemaker-war-pick-stone",
+    "name": "Stone",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Stone: You can cast the Meld into Stone spell from this war pick.  Once this property is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "stonemaker-war-pick",
+    "itemName": "Stonemaker War Pick"
+  },
+  {
     "id": "stone-of-golorr-stone-of-golorr-charges",
     "name": "Stone of Golorr Charges",
     "max": 3,
@@ -4604,6 +4674,16 @@
     "sourceType": "item",
     "sourceId": "sun-eater-staff",
     "itemName": "Sun Eater Staff"
+  },
+  {
+    "id": "rod-of-hellish-flames-surge-of-brimstone",
+    "name": "Surge of Brimstone",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Surge of Brimstone: Whenever you cast a spell that deals fire or necrotic damage, you can use the rod to deal the maximum damage instead of rolling.  Once this property is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "rod-of-hellish-flames",
+    "itemName": "Rod of Hellish Flames"
   },
   {
     "id": "talisman-of-pure-good-talisman-of-pure-good-charges",
@@ -4744,6 +4824,16 @@
     "sourceType": "item",
     "sourceId": "tonfa-of-verdict",
     "itemName": "Tonfa of Verdict"
+  },
+  {
+    "id": "jester-s-mask-topsy-turvy",
+    "name": "Topsy-Turvy",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Topsy-Turvy: When you roll a 1 on a d20, you can treat the roll as if you rolled a 20 instead.  Once this property is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "jester-s-mask",
+    "itemName": "Jester's Mask"
   },
   {
     "id": "trident-of-fish-command-trident-of-fish-command-charges",

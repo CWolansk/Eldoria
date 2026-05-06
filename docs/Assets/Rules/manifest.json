@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-05-05T23:37:10.086Z",
+  "generatedAtUtc": "2026-05-06T00:18:59.900Z",
   "upstream": {
     "classRoot": "5etools/data/class",
     "itemsCsv": "Assets/Items/Items.csv",
@@ -16,6 +16,6 @@
     "feats": 785,
     "actions": 4017,
     "effects": 2441,
-    "resources": 540
+    "resources": 549
   }
 }

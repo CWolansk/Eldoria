@@ -18018,7 +18018,15 @@
       "versatileDamage": "",
       "magicBonus": 3
     },
-    "resources": [],
+    "resources": [
+      {
+        "id": "adze-of-annam-mattock",
+        "name": "Mattock",
+        "max": 1,
+        "reset": "dawn",
+        "text": "Mattock: As an action, you can call upon the might of the All-Father and use the adze to cast move earth or fabricate.  Once this property is used, it can't be used again until the next dawn."
+      }
+    ],
     "actions": [
       {
         "id": "adze-of-annam-mattock",
@@ -29490,7 +29498,15 @@
     "value": "0 gp",
     "text": "This gorgeous jewelry piece, crafted by the wizard Bigby himself, consists of four gold rings attached via delicate chains to a wrist cuff studded with sapphires and diamonds. Random Properties. The bracelet has the following random properties, determined by rolling on the appropriate table in the Dungeon Master's Guide:1 minor beneficial property1 major beneficial property1 minor detrimental property Dexterous Fingers. While wearing the bracelet, you can cast mage hand. Force Sculpture. By focusing and channeling the bracelet's magic for 1 minute, you can create a spectral copy of a Large or smaller nonmagical object. The copy appears in an unoccupied space within 10 feet of you, and it is made of tangible but translucent force that mimics the size, weight, and other properties of the object it's copying. The copy must appear on a surface or liquid that can support it. Creatures can touch and interact with the copy as if it were a nonmagical object. The copy is immune to all damage and can't be dispelled, but a disintegrate spell destroys it immediately. Otherwise, the copy disappears after 8 hours or when you dismiss it as an action. The bracelet can create up to three copies and regains all expended uses at dawn. Helpful Hand. As an action, you can use the bracelet to cast Bigby's hand as a 9th-level spell (spell attack bonus +13). When you cast the spell this way, the spell doesn't require concentration. Once this property is used, it can't be used again until the next dawn.",
     "weapon": null,
-    "resources": [],
+    "resources": [
+      {
+        "id": "bigby-s-beneficent-bracelet-hand",
+        "name": "Hand",
+        "max": 1,
+        "reset": "dawn",
+        "text": "Hand: As an action, you can use the bracelet to cast Bigby's hand as a 9th-level spell (spell attack bonus +13).  When you cast the spell this way, the spell doesn't require concentration.  Once this property is used, it can't be used again until the next dawn."
+      }
+    ],
     "actions": [
       {
         "id": "bigby-s-beneficent-bracelet-hand",
@@ -55116,7 +55132,15 @@
     "value": "12000 gp",
     "text": "This marble-size crystal sphere glows with extraplanar energy. As part of attuning to this item, you press the crystal sphere to the hilt of a nonmagical melee weapon of your choice, magically attaching the sphere to the weapon. The weapon becomes a magic weapon with a +1 bonus to attack and damage rolls. While wielding this weapon, you gain the following benefits:Dimensional Anchor. You have advantage on saving throws against spells or effects that would send you to an extradimensional space, a demiplane, or another plane of existence against your will. Isolating Smite. When you hit a creature with this weapon, you can force the creature to make a DC 16 Charisma saving throw. On a failed save, the creature is banished to a harmless demiplane until the end of its next turn. When the banished creature returns, it reappears in the space it left or the nearest unoccupied space if that space is occupied. Once this property is used, it can't be used again until the next dawn. When you end your attunement to the sphere, the sphere harmlessly detaches from the weapon, and the weapon reverts to a nonmagical piece of equipment.",
     "weapon": null,
-    "resources": [],
+    "resources": [
+      {
+        "id": "donjon-s-sundering-sphere-isolating-smite",
+        "name": "Isolating Smite",
+        "max": 1,
+        "reset": "dawn",
+        "text": "Isolating Smite: When you hit a creature with this weapon, you can force the creature to make a DC 16 Charisma saving throw.  On a failed save, the creature is banished to a harmless demiplane until the end of its next turn.  When the banished creature returns, it reappears in the space it left or the nearest unoccupied space if that space is occupied.  Once this property is used, it can't be used again until the next dawn.  When you end your attunement to the sphere, the sphere harmlessly detaches from the weapon, and the weapon reverts to a nonmagical piece of equipment."
+      }
+    ],
     "actions": [
       {
         "id": "donjon-s-sundering-sphere-isolating-smite",
@@ -62396,7 +62420,15 @@
     "value": "100 gp",
     "text": "This glittering red gem is commonly found embedded in a ring or brooch. While wearing the gem, you gain the following benefits. Counterfeit Coins. You can use your action to magically create a pile of coins, worth no more than 100 gp total, in an unoccupied space within 10 feet of yourself. The pile must appear on a surface that can support it. After 1 hour, the coins vanish, regardless of where they are. Once this action is used, it can't be used again until the next dawn. Illusory Fashion. As a bonus action, you can magically change the appearance of your clothing and armor. You can change the style, color, and apparent quality of what you're wearing, or you can make it appear as if you were wearing different garments entirely. In either case, the changes wrought by this magic fail to pass physical inspection.",
     "weapon": null,
-    "resources": [],
+    "resources": [
+      {
+        "id": "fabulist-gem-counterfeit-coins",
+        "name": "Counterfeit Coins",
+        "max": 1,
+        "reset": "dawn",
+        "text": "Counterfeit Coins: You can use your action to magically create a pile of coins, worth no more than 100 gp total, in an unoccupied space within 10 feet of yourself.  The pile must appear on a surface that can support it.  After 1 hour, the coins vanish, regardless of where they are.  Once this action is used, it can't be used again until the next dawn."
+      }
+    ],
     "actions": [
       {
         "id": "fabulist-gem-counterfeit-coins",
@@ -64439,7 +64471,15 @@
       "versatileDamage": "",
       "magicBonus": 0
     },
-    "resources": [],
+    "resources": [
+      {
+        "id": "fate-cutter-shears-sever-threads",
+        "name": "Sever Threads",
+        "max": 1,
+        "reset": "dawn",
+        "text": "Sever Threads: When you hit a creature with the shears, you can cut that creature's fate.  Until the target finishes a long rest, attack rolls against it score a critical hit on a roll of 19 or 20 on the d20.  Once this property is used, it can't be used again until the next dawn."
+      }
+    ],
     "actions": [
       {
         "id": "fate-cutter-shears-sharp",
@@ -96576,7 +96616,15 @@
     "value": "275000 gp",
     "text": "This colorful, harlequin domino mask is edged with pearls. While wearing this mask, you gain the following benefits:Charismatic Focus. You can use the mask as a spellcasting focus. You gain a +3 bonus to any spell attack rolls and spell saving throw DCs that use Charisma as the spellcasting ability. Marvelous Escape. When a creature hits you with an attack roll, you can use your reaction to disappear in a puff of smoke and colorful sparkles. You take no damage and instead teleport, along with anything you are wearing or carrying, to an unoccupied space you can see within 30 feet of yourself. Once this reaction is used, it can't be used again until the next dawn. Topsy-Turvy. When you roll a 1 on a d20, you can treat the roll as if you rolled a 20 instead. Once this property is used, it can't be used again until the next dawn.",
     "weapon": null,
-    "resources": [],
+    "resources": [
+      {
+        "id": "jester-s-mask-topsy-turvy",
+        "name": "Topsy-Turvy",
+        "max": 1,
+        "reset": "dawn",
+        "text": "Topsy-Turvy: When you roll a 1 on a d20, you can treat the roll as if you rolled a 20 instead.  Once this property is used, it can't be used again until the next dawn."
+      }
+    ],
     "actions": [
       {
         "id": "jester-s-mask-topsy-turvy",
@@ -137769,7 +137817,15 @@
     "value": "40000 gp",
     "text": "Glowing cinders orbit the flanged head of this black iron rod. This rod can be used as an arcane focus. While holding this rod, you gain the following benefits:Hellish Resistance. You have resistance to fire and necrotic damage. Searing Rebuke. You can cast the Hellish Rebuke spell as a 4th-level spell (save DC 16) from the rod. Once you use the rod to cast the spell, the rod can't cast the spell again until the next dawn. Surge of Brimstone. Whenever you cast a spell that deals fire or necrotic damage, you can use the rod to deal the maximum damage instead of rolling. Once this property is used, it can't be used again until the next dawn.",
     "weapon": null,
-    "resources": [],
+    "resources": [
+      {
+        "id": "rod-of-hellish-flames-surge-of-brimstone",
+        "name": "Surge of Brimstone",
+        "max": 1,
+        "reset": "dawn",
+        "text": "Surge of Brimstone: Whenever you cast a spell that deals fire or necrotic damage, you can use the rod to deal the maximum damage instead of rolling.  Once this property is used, it can't be used again until the next dawn."
+      }
+    ],
     "actions": [
       {
         "id": "rod-of-hellish-flames-surge-of-brimstone",
@@ -163759,7 +163815,15 @@
       "versatileDamage": "",
       "magicBonus": 1
     },
-    "resources": [],
+    "resources": [
+      {
+        "id": "stonemaker-war-pick-stone",
+        "name": "Stone",
+        "max": 1,
+        "reset": "dawn",
+        "text": "Stone: You can cast the Meld into Stone spell from this war pick.  Once this property is used, it can't be used again until the next dawn."
+      }
+    ],
     "actions": [],
     "effects": [
       {
@@ -164848,7 +164912,15 @@
       "versatileDamage": "1d8",
       "magicBonus": 1
     },
-    "resources": [],
+    "resources": [
+      {
+        "id": "sun-staff-solar-focus",
+        "name": "Solar Focus",
+        "max": 1,
+        "reset": "dawn",
+        "text": "Solar Focus: You can use the staff as a spellcasting focus.  While holding the staff, you can reroll a number of damage dice up to your proficiency bonus when you use a spell slot to cast a spell that deals fire or radiant damage.  You must use the new rolls.  Once this property is used, it can't be used again until the next dawn."
+      }
+    ],
     "actions": [
       {
         "id": "sun-staff-solar-focus",

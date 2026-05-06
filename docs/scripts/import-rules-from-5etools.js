@@ -467,6 +467,9 @@ function inferItemResources(item) {
   for (const ability of extractNamedAbilities(item.text)) {
     const uses = ability.text.match(/\((\d+)\/day\)/i) || ability.text.match(/\b(\d+)\/day\b/i);
     if (uses) resources.push({ id: slugify(ability.name), name: ability.name, max: Number(uses[1]), reset: 'longRest', text: ability.text });
+    if (!uses && /\bonce (?:this|the) (?:action|property|benefit|feature) is used,? it can't be used again until (?:the )?next dawn\b/i.test(ability.text)) {
+      resources.push({ id: slugify(ability.name), name: ability.name, max: 1, reset: 'dawn', text: ability.text });
+    }
   }
   return resources;
 }
