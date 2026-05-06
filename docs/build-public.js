@@ -856,6 +856,20 @@ function renderPlayerPage(player, page) {
     ? `<img src="${escapeAttr(player.portraitUrl)}" alt="${title} portrait">`
     : `<span>${escapeHtml(title.slice(0, 1))}</span>`;
   const playerBootstrap = renderPlayerBootstrap(p);
+  const sheetTabs = [
+    ['overview', 'Overview'],
+    ['abilities', 'Abilities'],
+    ['combat', 'Combat'],
+    ['actions', 'Actions'],
+    ['resources', 'Resources'],
+    ['skills', 'Skills/Saves'],
+    ['equipment', 'Equipment'],
+    ['spells', 'Spells'],
+    ['class-info', 'Class Info'],
+    ['notes', 'Notes'],
+  ];
+  const tabButtons = sheetTabs.map(([id, label], index) => tabButton(id, label, index === 0)).join('\n      ');
+  const tabOptions = sheetTabs.map(([id, label], index) => tabOption(id, label, index === 0)).join('\n        ');
 
   return `<!doctype html>
 <html lang="en">
@@ -888,17 +902,13 @@ function renderPlayerPage(player, page) {
     </section>
 
     <nav class="tabs" role="tablist" aria-label="Character sheet sections">
-      ${tabButton('overview', 'Overview', true)}
-      ${tabButton('abilities', 'Abilities')}
-      ${tabButton('combat', 'Combat')}
-      ${tabButton('actions', 'Actions')}
-      ${tabButton('resources', 'Resources')}
-      ${tabButton('skills', 'Skills/Saves')}
-      ${tabButton('equipment', 'Equipment')}
-      ${tabButton('spells', 'Spells')}
-      ${tabButton('class-info', 'Class Info')}
-      ${tabButton('notes', 'Notes')}
+      ${tabButtons}
     </nav>
+    <div class="tab-select-shell">
+      <select class="tab-select" data-tab-select aria-label="Character sheet section">
+        ${tabOptions}
+      </select>
+    </div>
 
     ${tabPanel('overview', true, `
       ${inlineEditPanel('Edit Overview', `
@@ -1033,6 +1043,10 @@ function renderPlayerPage(player, page) {
 
 function tabButton(id, label, active = false) {
   return `<button class="tab-button ${active ? 'active' : ''}" data-tab-target="${id}" type="button" role="tab" aria-selected="${active ? 'true' : 'false'}">${label}</button>`;
+}
+
+function tabOption(id, label, active = false) {
+  return `<option value="${escapeAttr(id)}"${active ? ' selected' : ''}>${escapeHtml(label)}</option>`;
 }
 
 function inlineEditPanel(title, body, includeReset = false) {

@@ -415,6 +415,22 @@ th {
   cursor: pointer;
 }
 
+.tab-select-shell {
+  display: none;
+}
+
+.tab-select {
+  width: 100%;
+  min-height: 2.8rem;
+  padding: 0 .8rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  font-weight: 800;
+}
+
 .tab-button.active,
 .tab-button:focus-visible {
   border-color: var(--accent);
@@ -1677,6 +1693,14 @@ th {
     position: static;
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .tabs {
+    display: none;
+  }
+
+  .tab-select-shell {
+    display: block;
   }
 
   .player-hero {

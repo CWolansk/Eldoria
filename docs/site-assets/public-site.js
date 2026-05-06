@@ -123,19 +123,27 @@
   function initTabs(root) {
     const buttons = Array.from(root.querySelectorAll('[data-tab-target]'));
     const panels = Array.from(root.querySelectorAll('[data-tab-panel]'));
+    const selectors = Array.from(root.querySelectorAll('[data-tab-select]'));
     if (!buttons.length || !panels.length) return;
 
     function activate(id) {
+      if (!panels.some(panel => panel.dataset.tabPanel === id)) return;
       buttons.forEach(button => {
         const active = button.dataset.tabTarget === id;
         button.classList.toggle('active', active);
         button.setAttribute('aria-selected', active ? 'true' : 'false');
       });
       panels.forEach(panel => panel.classList.toggle('active', panel.dataset.tabPanel === id));
+      selectors.forEach(selector => {
+        selector.value = id;
+      });
     }
 
     buttons.forEach(button => {
       button.addEventListener('click', () => activate(button.dataset.tabTarget));
+    });
+    selectors.forEach(selector => {
+      selector.addEventListener('change', () => activate(selector.value));
     });
   }
 
