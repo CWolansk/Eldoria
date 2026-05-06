@@ -38,33 +38,25 @@
 
     <nav class="tabs" role="tablist" aria-label="Character sheet sections">
       <button class="tab-button active" data-tab-target="overview" type="button" role="tab" aria-selected="true">Overview</button>
-      <button class="tab-button " data-tab-target="abilities" type="button" role="tab" aria-selected="false">Abilities</button>
+      <button class="tab-button " data-tab-target="stats" type="button" role="tab" aria-selected="false">Stats</button>
       <button class="tab-button " data-tab-target="combat" type="button" role="tab" aria-selected="false">Combat</button>
       <button class="tab-button " data-tab-target="actions" type="button" role="tab" aria-selected="false">Actions</button>
       <button class="tab-button " data-tab-target="resources" type="button" role="tab" aria-selected="false">Resources</button>
-      <button class="tab-button " data-tab-target="skills" type="button" role="tab" aria-selected="false">Skills/Saves</button>
-      <button class="tab-button " data-tab-target="equipment" type="button" role="tab" aria-selected="false">Equipment</button>
+      <button class="tab-button " data-tab-target="equipment" type="button" role="tab" aria-selected="false">Gear</button>
       <button class="tab-button " data-tab-target="spells" type="button" role="tab" aria-selected="false">Spells</button>
-      <button class="tab-button " data-tab-target="class-info" type="button" role="tab" aria-selected="false">Class Info</button>
-      <button class="tab-button " data-tab-target="race-info" type="button" role="tab" aria-selected="false">Race</button>
-      <button class="tab-button " data-tab-target="background-info" type="button" role="tab" aria-selected="false">Background</button>
-      <button class="tab-button " data-tab-target="feat-info" type="button" role="tab" aria-selected="false">Feats</button>
+      <button class="tab-button " data-tab-target="features" type="button" role="tab" aria-selected="false">Features</button>
       <button class="tab-button " data-tab-target="notes" type="button" role="tab" aria-selected="false">Notes</button>
     </nav>
     <div class="tab-select-shell">
       <select class="tab-select" data-tab-select aria-label="Character sheet section">
         <option value="overview" selected>Overview</option>
-        <option value="abilities">Abilities</option>
+        <option value="stats">Stats</option>
         <option value="combat">Combat</option>
         <option value="actions">Actions</option>
         <option value="resources">Resources</option>
-        <option value="skills">Skills/Saves</option>
-        <option value="equipment">Equipment</option>
+        <option value="equipment">Gear</option>
         <option value="spells">Spells</option>
-        <option value="class-info">Class Info</option>
-        <option value="race-info">Race</option>
-        <option value="background-info">Background</option>
-        <option value="feat-info">Feats</option>
+        <option value="features">Features</option>
         <option value="notes">Notes</option>
       </select>
     </div>
@@ -102,9 +94,9 @@
       </div>
     </section>
 
-    <section class="tab-panel " data-tab-panel="abilities" role="tabpanel">
+    <section class="tab-panel " data-tab-panel="stats" role="tabpanel">
       <details class="inline-edit-panel">
-    <summary><span>Edit Abilities</span><strong>Edit</strong></summary>
+    <summary><span>Edit Stats</span><strong>Edit</strong></summary>
     <form class="edit-form" data-player-edit-form>
       <div class="form-grid"><label><span>Strength</span><input name="str" type="number" inputmode="numeric" ></label><label><span>Dexterity</span><input name="dex" type="number" inputmode="numeric" ></label><label><span>Constitution</span><input name="con" type="number" inputmode="numeric" ></label><label><span>Intelligence</span><input name="int" type="number" inputmode="numeric" ></label><label><span>Wisdom</span><input name="wis" type="number" inputmode="numeric" ></label><label><span>Charisma</span><input name="cha" type="number" inputmode="numeric" ></label></div>
       <div class="form-actions">
@@ -120,6 +112,32 @@
 <div class="ability-card" data-player-ability="int"><span>Intelligence</span><strong>13</strong><em>+1</em></div>
 <div class="ability-card" data-player-ability="wis"><span>Wisdom</span><strong>15</strong><em>+2</em></div>
 <div class="ability-card" data-player-ability="cha"><span>Charisma</span><strong>13</strong><em>+1</em></div></div>
+      <div class="two-column stacked-section">
+        <section><h2>Saving Throws</h2><div class="line-list"><div class="line-stat proficient" data-player-save="str"><span>Strength</span><strong>+6</strong></div>
+<div class="line-stat proficient" data-player-save="dex"><span>Dexterity</span><strong>+7</strong></div>
+<div class="line-stat " data-player-save="con"><span>Constitution</span><strong>+3</strong></div>
+<div class="line-stat " data-player-save="int"><span>Intelligence</span><strong>+1</strong></div>
+<div class="line-stat " data-player-save="wis"><span>Wisdom</span><strong>+2</strong></div>
+<div class="line-stat " data-player-save="cha"><span>Charisma</span><strong>+1</strong></div></div></section>
+        <section><h2>Skills</h2><div class="line-list"><div class="line-stat " data-player-skill="acrobatics" data-ability="dex"><span>Acrobatics <small>DEX</small></span><strong>+4</strong></div>
+<div class="line-stat " data-player-skill="animalHandling" data-ability="wis"><span>Animal Handling <small>WIS</small></span><strong>+2</strong></div>
+<div class="line-stat " data-player-skill="arcana" data-ability="int"><span>Arcana <small>INT</small></span><strong>+1</strong></div>
+<div class="line-stat proficient" data-player-skill="athletics" data-ability="str"><span>Athletics <small>STR</small></span><strong>+6</strong></div>
+<div class="line-stat " data-player-skill="deception" data-ability="cha"><span>Deception <small>CHA</small></span><strong>+1</strong></div>
+<div class="line-stat " data-player-skill="history" data-ability="int"><span>History <small>INT</small></span><strong>+1</strong></div>
+<div class="line-stat proficient" data-player-skill="insight" data-ability="wis"><span>Insight <small>WIS</small></span><strong>+5</strong></div>
+<div class="line-stat " data-player-skill="intimidation" data-ability="cha"><span>Intimidation <small>CHA</small></span><strong>+1</strong></div>
+<div class="line-stat proficient" data-player-skill="investigation" data-ability="int"><span>Investigation <small>INT</small></span><strong>+4</strong></div>
+<div class="line-stat " data-player-skill="medicine" data-ability="wis"><span>Medicine <small>WIS</small></span><strong>+2</strong></div>
+<div class="line-stat " data-player-skill="nature" data-ability="int"><span>Nature <small>INT</small></span><strong>+1</strong></div>
+<div class="line-stat " data-player-skill="perception" data-ability="wis"><span>Perception <small>WIS</small></span><strong>+2</strong></div>
+<div class="line-stat " data-player-skill="performance" data-ability="cha"><span>Performance <small>CHA</small></span><strong>+1</strong></div>
+<div class="line-stat proficient" data-player-skill="persuasion" data-ability="cha"><span>Persuasion <small>CHA</small></span><strong>+4</strong></div>
+<div class="line-stat " data-player-skill="religion" data-ability="int"><span>Religion <small>INT</small></span><strong>+1</strong></div>
+<div class="line-stat " data-player-skill="sleightOfHand" data-ability="dex"><span>Sleight of Hand <small>DEX</small></span><strong>+4</strong></div>
+<div class="line-stat " data-player-skill="stealth" data-ability="dex"><span>Stealth <small>DEX</small></span><strong>+4</strong></div>
+<div class="line-stat proficient" data-player-skill="survival" data-ability="wis"><span>Survival <small>WIS</small></span><strong>+5</strong></div></div></section>
+      </div>
     </section>
 
     <section class="tab-panel " data-tab-panel="combat" role="tabpanel">
@@ -208,53 +226,16 @@
       <div data-resources-panel></div>
     </section>
 
-    <section class="tab-panel " data-tab-panel="skills" role="tabpanel">
-      <details class="inline-edit-panel">
-    <summary><span>Edit Abilities</span><strong>Edit</strong></summary>
-    <form class="edit-form" data-player-edit-form>
-      <div class="form-grid"><label><span>Strength</span><input name="str" type="number" inputmode="numeric" ></label><label><span>Dexterity</span><input name="dex" type="number" inputmode="numeric" ></label><label><span>Constitution</span><input name="con" type="number" inputmode="numeric" ></label><label><span>Intelligence</span><input name="int" type="number" inputmode="numeric" ></label><label><span>Wisdom</span><input name="wis" type="number" inputmode="numeric" ></label><label><span>Charisma</span><input name="cha" type="number" inputmode="numeric" ></label></div>
-      <div class="form-actions">
-        <button type="submit">Save</button>
-
-        <span data-player-edit-status></span>
-      </div>
-    </form>
-  </details>
-      <div class="two-column">
-        <section><h2>Saving Throws</h2><div class="line-list"><div class="line-stat proficient" data-player-save="str"><span>Strength</span><strong>+6</strong></div>
-<div class="line-stat proficient" data-player-save="dex"><span>Dexterity</span><strong>+7</strong></div>
-<div class="line-stat " data-player-save="con"><span>Constitution</span><strong>+3</strong></div>
-<div class="line-stat " data-player-save="int"><span>Intelligence</span><strong>+1</strong></div>
-<div class="line-stat " data-player-save="wis"><span>Wisdom</span><strong>+2</strong></div>
-<div class="line-stat " data-player-save="cha"><span>Charisma</span><strong>+1</strong></div></div></section>
-        <section><h2>Skills</h2><div class="line-list"><div class="line-stat " data-player-skill="acrobatics" data-ability="dex"><span>Acrobatics <small>DEX</small></span><strong>+4</strong></div>
-<div class="line-stat " data-player-skill="animalHandling" data-ability="wis"><span>Animal Handling <small>WIS</small></span><strong>+2</strong></div>
-<div class="line-stat " data-player-skill="arcana" data-ability="int"><span>Arcana <small>INT</small></span><strong>+1</strong></div>
-<div class="line-stat proficient" data-player-skill="athletics" data-ability="str"><span>Athletics <small>STR</small></span><strong>+6</strong></div>
-<div class="line-stat " data-player-skill="deception" data-ability="cha"><span>Deception <small>CHA</small></span><strong>+1</strong></div>
-<div class="line-stat " data-player-skill="history" data-ability="int"><span>History <small>INT</small></span><strong>+1</strong></div>
-<div class="line-stat proficient" data-player-skill="insight" data-ability="wis"><span>Insight <small>WIS</small></span><strong>+5</strong></div>
-<div class="line-stat " data-player-skill="intimidation" data-ability="cha"><span>Intimidation <small>CHA</small></span><strong>+1</strong></div>
-<div class="line-stat proficient" data-player-skill="investigation" data-ability="int"><span>Investigation <small>INT</small></span><strong>+4</strong></div>
-<div class="line-stat " data-player-skill="medicine" data-ability="wis"><span>Medicine <small>WIS</small></span><strong>+2</strong></div>
-<div class="line-stat " data-player-skill="nature" data-ability="int"><span>Nature <small>INT</small></span><strong>+1</strong></div>
-<div class="line-stat " data-player-skill="perception" data-ability="wis"><span>Perception <small>WIS</small></span><strong>+2</strong></div>
-<div class="line-stat " data-player-skill="performance" data-ability="cha"><span>Performance <small>CHA</small></span><strong>+1</strong></div>
-<div class="line-stat proficient" data-player-skill="persuasion" data-ability="cha"><span>Persuasion <small>CHA</small></span><strong>+4</strong></div>
-<div class="line-stat " data-player-skill="religion" data-ability="int"><span>Religion <small>INT</small></span><strong>+1</strong></div>
-<div class="line-stat " data-player-skill="sleightOfHand" data-ability="dex"><span>Sleight of Hand <small>DEX</small></span><strong>+4</strong></div>
-<div class="line-stat " data-player-skill="stealth" data-ability="dex"><span>Stealth <small>DEX</small></span><strong>+4</strong></div>
-<div class="line-stat proficient" data-player-skill="survival" data-ability="wis"><span>Survival <small>WIS</small></span><strong>+5</strong></div></div></section>
-      </div>
-    </section>
-
     <section class="tab-panel " data-tab-panel="equipment" role="tabpanel">
       <div data-equipment-panel data-items-url="../../Assets/Rules/items.json"></div>
     </section>
     <section class="tab-panel " data-tab-panel="spells" role="tabpanel"><div data-spell-panel data-spells-url="../../data/spells.json"></div></section>
-    <section class="tab-panel " data-tab-panel="class-info" role="tabpanel">
+    <section class="tab-panel " data-tab-panel="features" role="tabpanel">
       <div class="sheet-grid">
         <div class="info-card"><span>Class</span><strong data-player-field="classSummary">Ranger (Hunter)</strong></div>
+        <div class="info-card"><span>Race</span><strong data-player-field="races">Human</strong></div>
+        <div class="info-card"><span>Background</span><strong data-player-field="backgrounds">Variant Guild Artisan (Guild Merchant)</strong></div>
+        <div class="info-card"><span>Feats</span><strong data-player-field="feats">durable</strong></div>
       </div>
       <section class="feature-notes">
         <h2>Class Features</h2>
@@ -429,11 +410,6 @@
 <h3 id="proficiencies">Proficiencies</h3>
 <ul><li>Common language from Human</li><li>Common language from Ranger: Beasts</li><li>Common language from Human</li><li>Common language from Guild Merchant: Goblin</li></ul>
       </section>
-    </section>
-    <section class="tab-panel " data-tab-panel="race-info" role="tabpanel">
-      <div class="sheet-grid">
-        <div class="info-card"><span>Race</span><strong data-player-field="races">Human</strong></div>
-      </div>
       <section class="feature-notes">
         <h2>Racial Traits</h2>
         <div data-race-info-panel><div class="class-feature-list">
@@ -456,11 +432,6 @@
     </details>
   </div></div>
       </section>
-    </section>
-    <section class="tab-panel " data-tab-panel="background-info" role="tabpanel">
-      <div class="sheet-grid">
-        <div class="info-card"><span>Background</span><strong data-player-field="backgrounds">Variant Guild Artisan (Guild Merchant)</strong></div>
-      </div>
       <section class="feature-notes">
         <h2>Background Benefits</h2>
         <div data-background-info-panel><div class="class-feature-list">
@@ -476,11 +447,6 @@
     </details>
   </div></div>
       </section>
-    </section>
-    <section class="tab-panel " data-tab-panel="feat-info" role="tabpanel">
-      <div class="sheet-grid">
-        <div class="info-card"><span>Feats</span><strong data-player-field="feats">durable</strong></div>
-      </div>
       <section class="feature-notes">
         <h2>Feat Benefits</h2>
         <div data-feat-info-panel><div class="class-feature-list">

@@ -1021,17 +1021,13 @@ function renderPlayerPage(player, page) {
   const playerBootstrap = renderPlayerBootstrap(p);
   const sheetTabs = [
     ['overview', 'Overview'],
-    ['abilities', 'Abilities'],
+    ['stats', 'Stats'],
     ['combat', 'Combat'],
     ['actions', 'Actions'],
     ['resources', 'Resources'],
-    ['skills', 'Skills/Saves'],
-    ['equipment', 'Equipment'],
+    ['equipment', 'Gear'],
     ['spells', 'Spells'],
-    ['class-info', 'Class Info'],
-    ['race-info', 'Race'],
-    ['background-info', 'Background'],
-    ['feat-info', 'Feats'],
+    ['features', 'Features'],
     ['notes', 'Notes'],
   ];
   const tabButtons = sheetTabs.map(([id, label], index) => tabButton(id, label, index === 0)).join('\n      ');
@@ -1099,9 +1095,13 @@ function renderPlayerPage(player, page) {
       </div>
     `)}
 
-    ${tabPanel('abilities', false, `
-      ${inlineEditPanel('Edit Abilities', `<div class="form-grid">${abilityEditFields()}</div>`)}
+    ${tabPanel('stats', false, `
+      ${inlineEditPanel('Edit Stats', `<div class="form-grid">${abilityEditFields()}</div>`)}
       <div class="abilities-grid">${abilities}</div>
+      <div class="two-column stacked-section">
+        <section><h2>Saving Throws</h2><div class="line-list">${saves}</div></section>
+        <section><h2>Skills</h2><div class="line-list">${skills}</div></section>
+      </div>
     `)}
 
     ${tabPanel('combat', false, `
@@ -1160,21 +1160,16 @@ function renderPlayerPage(player, page) {
       <div data-resources-panel></div>
     `)}
 
-    ${tabPanel('skills', false, `
-      ${inlineEditPanel('Edit Abilities', `<div class="form-grid">${abilityEditFields()}</div>`)}
-      <div class="two-column">
-        <section><h2>Saving Throws</h2><div class="line-list">${saves}</div></section>
-        <section><h2>Skills</h2><div class="line-list">${skills}</div></section>
-      </div>
-    `)}
-
     ${tabPanel('equipment', false, `
       <div data-equipment-panel data-items-url="${escapeAttr(relativeUrl(page.url, 'Assets/Rules/items.json'))}"></div>
     `)}
     ${tabPanel('spells', false, `<div data-spell-panel data-spells-url="${escapeAttr(relativeUrl(page.url, 'data/spells.json'))}"></div>`)}
-    ${tabPanel('class-info', false, `
+    ${tabPanel('features', false, `
       <div class="sheet-grid">
         ${infoCard('Class', `${p.class}${p.subclassShortName ? ` (${p.subclassShortName})` : ''}`, 'classSummary')}
+        ${infoCard('Race', p.races.join(', ') || p.race || '-', 'races')}
+        ${infoCard('Background', p.backgrounds.join(', ') || p.background || '-', 'backgrounds')}
+        ${infoCard('Feats', p.feats.join(', ') || '-', 'feats')}
       </div>
       <section class="feature-notes">
         <h2>Class Features</h2>
@@ -1184,29 +1179,14 @@ function renderPlayerPage(player, page) {
         <h2>Sheet Feature Notes</h2>
         ${featuresHtml}
       </section>
-    `)}
-    ${tabPanel('race-info', false, `
-      <div class="sheet-grid">
-        ${infoCard('Race', p.races.join(', ') || p.race || '-', 'races')}
-      </div>
       <section class="feature-notes">
         <h2>Racial Traits</h2>
         <div data-race-info-panel>${raceFeaturesHtml}</div>
       </section>
-    `)}
-    ${tabPanel('background-info', false, `
-      <div class="sheet-grid">
-        ${infoCard('Background', p.backgrounds.join(', ') || p.background || '-', 'backgrounds')}
-      </div>
       <section class="feature-notes">
         <h2>Background Benefits</h2>
         <div data-background-info-panel>${backgroundDetailsHtml}</div>
       </section>
-    `)}
-    ${tabPanel('feat-info', false, `
-      <div class="sheet-grid">
-        ${infoCard('Feats', p.feats.join(', ') || '-', 'feats')}
-      </div>
       <section class="feature-notes">
         <h2>Feat Benefits</h2>
         <div data-feat-info-panel>${featDetailsHtml}</div>
