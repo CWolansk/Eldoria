@@ -46,6 +46,7 @@
       <button class="tab-button " data-tab-target="equipment" type="button" role="tab" aria-selected="false">Equipment</button>
       <button class="tab-button " data-tab-target="spells" type="button" role="tab" aria-selected="false">Spells</button>
       <button class="tab-button " data-tab-target="class-info" type="button" role="tab" aria-selected="false">Class Info</button>
+      <button class="tab-button " data-tab-target="race-info" type="button" role="tab" aria-selected="false">Race</button>
       <button class="tab-button " data-tab-target="notes" type="button" role="tab" aria-selected="false">Notes</button>
     </nav>
     <div class="tab-select-shell">
@@ -59,6 +60,7 @@
         <option value="equipment">Equipment</option>
         <option value="spells">Spells</option>
         <option value="class-info">Class Info</option>
+        <option value="race-info">Race</option>
         <option value="notes">Notes</option>
       </select>
     </div>
@@ -251,10 +253,9 @@
         <div class="info-card"><span>Class</span><strong data-player-field="classSummary">Bard (Lore)</strong></div>
         <div class="info-card"><span>Background</span><strong data-player-field="backgrounds">Acolyte</strong></div>
         <div class="info-card"><span>Feats</span><strong data-player-field="feats">Jack of All Trades</strong></div>
-        <div class="info-card"><span>Race</span><strong data-player-field="races">Elf</strong></div>
       </div>
       <section class="feature-notes">
-        <h2>Class & Racial Features</h2>
+        <h2>Class Features</h2>
         <div data-class-info-panel><div class="class-feature-list">
     <details class="class-feature-row">
       <summary>
@@ -272,54 +273,6 @@
         </span>
       </summary>
       <p>You have learned to untangle and reshape the fabric of reality in harmony with your wishes and music. Your spells are part of your vast repertoire, magic that you can tune to different situations. See chapter 10 for the general rules of spellcasting and chapter 11 for the bard spell list. Cantrips: You know two cantrips of your choice from the bard spell list. You learn additional bard cantrips of your choice at higher levels, learning a 3rd cantrip at 4th level and a 4th at 10th level. Spell Slots: The Bard table shows how many spell slots you have to cast your bard spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell&#39;s level or higher. You regain all expended spell slots when you finish a long rest. For example, if you know the 1st-level spell cure wounds and have a 1st-level and a 2nd-level spell slot available, you can cast cure wounds using either slot. Spells Known of 1st Level and Higher: You know four 1st-level spells of your choice from the bard spell list. You learn an additional bard spell of your choice at each level except 12th, 16th, 19th, and 20th. Each of these spells must be of a level for which you have spell slots. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level. Additionally, when you gain a level in this class, you can choose one of the bard spells you know and replace it with another spell from the bard spell list, which also must be of a level for which you have spell slots. Spellcasting Ability: Charisma is your spellcasting ability for your bard spells. Your magic comes from the heart and soul you pour into the performance of your music or oration. You use your Charisma whenever a spell refers to your spellcasting ability. In addition, you use your Charisma modifier when setting the saving throw DC for a bard spell you cast and when making an attack roll with one. Spell: Spell: Ritual Casting: You can cast any bard spell you know as a ritual if that spell has the ritual tag. Spellcasting Focus: You can use a musical instrument as a spellcasting focus for your bard spells.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Darkvision</strong>
-          <small>Elf / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>Accustomed to twilit forests and the night sky, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can&#39;t discern color in darkness, only shades of gray.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Fey Ancestry</strong>
-          <small>Elf / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>You have advantage on saving throws against being charmed, and magic can&#39;t put you to sleep.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Keen Senses</strong>
-          <small>Elf / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>You have proficiency in the Perception skill.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Languages</strong>
-          <small>Elf / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Size</strong>
-          <small>Elf / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Trance</strong>
-          <small>Elf / Level 1 / Out of Combat</small>
-        </span>
-      </summary>
-      <p>Elves don&#39;t need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is &quot;trance.&quot;) While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep. If you meditate during a long rest, you finish the rest after only 4 hours. You otherwise obey all the rules for a long rest; only the duration is changed.</p>
     </details><details class="class-feature-row">
       <summary>
         <span>
@@ -422,6 +375,65 @@
       <section class="feature-notes">
         <h2>Sheet Feature Notes</h2>
         <p>No extra class features recorded.</p>
+      </section>
+    </section>
+    <section class="tab-panel " data-tab-panel="race-info" role="tabpanel">
+      <div class="sheet-grid">
+        <div class="info-card"><span>Race</span><strong data-player-field="races">Elf</strong></div>
+      </div>
+      <section class="feature-notes">
+        <h2>Racial Traits</h2>
+        <div data-race-info-panel><div class="class-feature-list">
+    <details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Darkvision</strong>
+          <small>Elf / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>Accustomed to twilit forests and the night sky, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can&#39;t discern color in darkness, only shades of gray.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Fey Ancestry</strong>
+          <small>Elf / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>You have advantage on saving throws against being charmed, and magic can&#39;t put you to sleep.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Keen Senses</strong>
+          <small>Elf / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>You have proficiency in the Perception skill.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Languages</strong>
+          <small>Elf / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Size</strong>
+          <small>Elf / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Trance</strong>
+          <small>Elf / Level 1 / Out of Combat</small>
+        </span>
+      </summary>
+      <p>Elves don&#39;t need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is &quot;trance.&quot;) While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep. If you meditate during a long rest, you finish the rest after only 4 hours. You otherwise obey all the rules for a long rest; only the duration is changed.</p>
+    </details>
+  </div></div>
       </section>
     </section>
     <section class="tab-panel " data-tab-panel="notes" role="tabpanel">

@@ -46,6 +46,7 @@
       <button class="tab-button " data-tab-target="equipment" type="button" role="tab" aria-selected="false">Equipment</button>
       <button class="tab-button " data-tab-target="spells" type="button" role="tab" aria-selected="false">Spells</button>
       <button class="tab-button " data-tab-target="class-info" type="button" role="tab" aria-selected="false">Class Info</button>
+      <button class="tab-button " data-tab-target="race-info" type="button" role="tab" aria-selected="false">Race</button>
       <button class="tab-button " data-tab-target="notes" type="button" role="tab" aria-selected="false">Notes</button>
     </nav>
     <div class="tab-select-shell">
@@ -59,6 +60,7 @@
         <option value="equipment">Equipment</option>
         <option value="spells">Spells</option>
         <option value="class-info">Class Info</option>
+        <option value="race-info">Race</option>
         <option value="notes">Notes</option>
       </select>
     </div>
@@ -251,10 +253,9 @@
         <div class="info-card"><span>Class</span><strong data-player-field="classSummary">Ranger (Hunter)</strong></div>
         <div class="info-card"><span>Background</span><strong data-player-field="backgrounds">Variant Guild Artisan (Guild Merchant)</strong></div>
         <div class="info-card"><span>Feats</span><strong data-player-field="feats">durable</strong></div>
-        <div class="info-card"><span>Race</span><strong data-player-field="races">Human</strong></div>
       </div>
       <section class="feature-notes">
-        <h2>Class & Racial Features</h2>
+        <h2>Class Features</h2>
         <div data-class-info-panel><div class="class-feature-list">
     <details class="class-feature-row">
       <summary>
@@ -288,22 +289,6 @@
         </span>
       </summary>
       <p>You are particularly familiar with one type of natural environment and are adept at traveling and surviving in such regions. Choose one type of favored terrain: arctic, coast, desert, forest, grassland, mountain, swamp, or the Underdark. When you make an Intelligence or Wisdom check related to your favored terrain, your proficiency bonus is doubled if you are using a skill that you&#39;re proficient in. While traveling for an hour or more in your favored terrain, you gain the following benefits: Difficult terrain doesn&#39;t slow your group&#39;s travel. Your group can&#39;t become lost except by magical means. Even when you are engaged in another activity while traveling (such as foraging, navigating, or tracking), you remain alert to danger. If you are traveling alone, you can move stealthily at a normal pace. When you forage, you find twice as much food as you normally would. While tracking other creatures, you also learn their exact number, their sizes, and how long ago they passed through the area. You choose additional favored terrain types at 6th and 10th level.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Languages</strong>
-          <small>Human / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Size</strong>
-          <small>Human / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.</p>
     </details><details class="class-feature-row">
       <summary>
         <span>
@@ -441,6 +426,33 @@
 <ul><li>Piercing Shot: 3 uses</li><li>Precise Aim: 1 use</li></ul>
 <h3 id="proficiencies">Proficiencies</h3>
 <ul><li>Common language from Human</li><li>Common language from Ranger: Beasts</li><li>Common language from Human</li><li>Common language from Guild Merchant: Goblin</li></ul>
+      </section>
+    </section>
+    <section class="tab-panel " data-tab-panel="race-info" role="tabpanel">
+      <div class="sheet-grid">
+        <div class="info-card"><span>Race</span><strong data-player-field="races">Human</strong></div>
+      </div>
+      <section class="feature-notes">
+        <h2>Racial Traits</h2>
+        <div data-race-info-panel><div class="class-feature-list">
+    <details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Languages</strong>
+          <small>Human / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Size</strong>
+          <small>Human / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.</p>
+    </details>
+  </div></div>
       </section>
     </section>
     <section class="tab-panel " data-tab-panel="notes" role="tabpanel">

@@ -953,7 +953,8 @@ function renderPlayerPage(player, page) {
   }).join('\n');
 
   const featuresHtml = player.features ? renderMarkdown(player.features, page, { byVaultPath: new Map(), byBasename: new Map() }) : '<p>No extra class features recorded.</p>';
-  const canonicalFeaturesHtml = renderClassFeatureList(p.ruleFeatures || []);
+  const classFeaturesHtml = renderRuleFeatureList((p.ruleFeatures || []).filter(feature => feature.kind !== 'race'), 'No class features found in canonical rules.');
+  const raceFeaturesHtml = renderRuleFeatureList((p.ruleFeatures || []).filter(feature => feature.kind === 'race'), 'No racial traits found in canonical rules.');
   const portrait = player.portraitUrl
     ? `<img src="${escapeAttr(player.portraitUrl)}" alt="${title} portrait">`
     : `<span>${escapeHtml(title.slice(0, 1))}</span>`;
@@ -968,6 +969,7 @@ function renderPlayerPage(player, page) {
     ['equipment', 'Equipment'],
     ['spells', 'Spells'],
     ['class-info', 'Class Info'],
+    ['race-info', 'Race'],
     ['notes', 'Notes'],
   ];
   const tabButtons = sheetTabs.map(([id, label], index) => tabButton(id, label, index === 0)).join('\n      ');
@@ -1113,15 +1115,23 @@ function renderPlayerPage(player, page) {
         ${infoCard('Class', `${p.class}${p.subclassShortName ? ` (${p.subclassShortName})` : ''}`, 'classSummary')}
         ${infoCard('Background', p.backgrounds.join(', ') || p.background || '-', 'backgrounds')}
         ${infoCard('Feats', p.feats.join(', ') || '-', 'feats')}
-        ${infoCard('Race', p.races.join(', ') || p.race || '-', 'races')}
       </div>
       <section class="feature-notes">
-        <h2>Class & Racial Features</h2>
-        <div data-class-info-panel>${canonicalFeaturesHtml}</div>
+        <h2>Class Features</h2>
+        <div data-class-info-panel>${classFeaturesHtml}</div>
       </section>
       <section class="feature-notes">
         <h2>Sheet Feature Notes</h2>
         ${featuresHtml}
+      </section>
+    `)}
+    ${tabPanel('race-info', false, `
+      <div class="sheet-grid">
+        ${infoCard('Race', p.races.join(', ') || p.race || '-', 'races')}
+      </div>
+      <section class="feature-notes">
+        <h2>Racial Traits</h2>
+        <div data-race-info-panel>${raceFeaturesHtml}</div>
       </section>
     `)}
     ${tabPanel('notes', false, `
@@ -1166,8 +1176,8 @@ function inlineEditPanel(title, body, includeReset = false) {
   </details>`;
 }
 
-function renderClassFeatureList(features) {
-  if (!features.length) return '<p>No class or racial features found in canonical rules.</p>';
+function renderRuleFeatureList(features, emptyText = 'No features found in canonical rules.') {
+  if (!features.length) return `<p>${escapeHtml(emptyText)}</p>`;
   return `<div class="class-feature-list">
     ${features.map(feature => `<details class="class-feature-row">
       <summary>

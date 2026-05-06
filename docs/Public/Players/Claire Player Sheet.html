@@ -46,6 +46,7 @@
       <button class="tab-button " data-tab-target="equipment" type="button" role="tab" aria-selected="false">Equipment</button>
       <button class="tab-button " data-tab-target="spells" type="button" role="tab" aria-selected="false">Spells</button>
       <button class="tab-button " data-tab-target="class-info" type="button" role="tab" aria-selected="false">Class Info</button>
+      <button class="tab-button " data-tab-target="race-info" type="button" role="tab" aria-selected="false">Race</button>
       <button class="tab-button " data-tab-target="notes" type="button" role="tab" aria-selected="false">Notes</button>
     </nav>
     <div class="tab-select-shell">
@@ -59,6 +60,7 @@
         <option value="equipment">Equipment</option>
         <option value="spells">Spells</option>
         <option value="class-info">Class Info</option>
+        <option value="race-info">Race</option>
         <option value="notes">Notes</option>
       </select>
     </div>
@@ -251,10 +253,9 @@
         <div class="info-card"><span>Class</span><strong data-player-field="classSummary">Cleric (Tempest)</strong></div>
         <div class="info-card"><span>Background</span><strong data-player-field="backgrounds">Sailor</strong></div>
         <div class="info-card"><span>Feats</span><strong data-player-field="feats">Elemental Adept</strong></div>
-        <div class="info-card"><span>Race</span><strong data-player-field="races">Genasi (Water)</strong></div>
       </div>
       <section class="feature-notes">
-        <h2>Class & Racial Features</h2>
+        <h2>Class Features</h2>
         <div data-class-info-panel><div class="class-feature-list">
     <details class="class-feature-row">
       <summary>
@@ -272,54 +273,6 @@
         </span>
       </summary>
       <p>As a conduit for divine power, you can cast cleric spells. See chapter 10 for the general rules of spellcasting and chapter 11 for a selection of cleric spells. Cantrips: At 1st level, you know three cantrips of your choice from the cleric spell list. You learn additional cleric cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Cleric table. Preparing and Casting Spells: The Cleric table shows how many spell slots you have to cast your cleric spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell&#39;s level or higher. You regain all expended spell slots when you finish a long rest. You prepare the list of cleric spells that are available for you to cast, choosing from the cleric spell list. When you do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots. For example, if you are a 3rd-level cleric, you have four 1st-level and two 2nd-level spell slots. With a Wisdom of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell cure wounds, you can cast it using a 1st-level or 2nd-level slot. Casting the spell doesn&#39;t remove it from your list of prepared spells. You can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list. Spellcasting Ability: Wisdom is your spellcasting ability for your cleric spells. The power of your spells comes from your devotion to your deity. You use your Wisdom whenever a cleric spell refers to your spellcasting ability. In addition, you use your Wisdom modifier when setting the saving throw DC for a cleric spell you cast and when making an attack roll with one. Spell: Spell: Ritual Casting: You can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared. Spellcasting Focus: You can use a holy symbol as a spellcasting focus for your cleric spells.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Acid Resistance</strong>
-          <small>Genasi (Water) / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>You have resistance to acid damage.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Amphibious</strong>
-          <small>Genasi (Water) / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>You can breathe air and water.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Call to the Wave</strong>
-          <small>Genasi (Water) / Level 1 / Triggered</small>
-        </span>
-      </summary>
-      <p>You know the shape water cantrip. When you reach 3rd level, you can cast the create or destroy water spell as a 2nd-level spell once with this trait, and you regain the ability to cast it this way when you finish a long rest. Constitution is your spellcasting ability for these spells.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Languages</strong>
-          <small>Genasi / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>You can speak, read, and write Common and Primordial. Primordial is a guttural language, filled with harsh syllables and hard consonants.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Size</strong>
-          <small>Genasi / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>Genasi are as varied as their mortal parents but are generally built like humans, standing anywhere from 5 feet to over 6 feet tall. Your size is Medium.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Swim</strong>
-          <small>Genasi (Water) / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>You have a swimming speed of 30 feet.</p>
     </details><details class="class-feature-row">
       <summary>
         <span>
@@ -414,6 +367,65 @@
       <section class="feature-notes">
         <h2>Sheet Feature Notes</h2>
         <p>No extra class features recorded.</p>
+      </section>
+    </section>
+    <section class="tab-panel " data-tab-panel="race-info" role="tabpanel">
+      <div class="sheet-grid">
+        <div class="info-card"><span>Race</span><strong data-player-field="races">Genasi (Water)</strong></div>
+      </div>
+      <section class="feature-notes">
+        <h2>Racial Traits</h2>
+        <div data-race-info-panel><div class="class-feature-list">
+    <details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Acid Resistance</strong>
+          <small>Genasi (Water) / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>You have resistance to acid damage.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Amphibious</strong>
+          <small>Genasi (Water) / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>You can breathe air and water.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Call to the Wave</strong>
+          <small>Genasi (Water) / Level 1 / Triggered</small>
+        </span>
+      </summary>
+      <p>You know the shape water cantrip. When you reach 3rd level, you can cast the create or destroy water spell as a 2nd-level spell once with this trait, and you regain the ability to cast it this way when you finish a long rest. Constitution is your spellcasting ability for these spells.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Languages</strong>
+          <small>Genasi / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>You can speak, read, and write Common and Primordial. Primordial is a guttural language, filled with harsh syllables and hard consonants.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Size</strong>
+          <small>Genasi / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>Genasi are as varied as their mortal parents but are generally built like humans, standing anywhere from 5 feet to over 6 feet tall. Your size is Medium.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Swim</strong>
+          <small>Genasi (Water) / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>You have a swimming speed of 30 feet.</p>
+    </details>
+  </div></div>
       </section>
     </section>
     <section class="tab-panel " data-tab-panel="notes" role="tabpanel">

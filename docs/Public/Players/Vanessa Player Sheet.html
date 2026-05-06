@@ -46,6 +46,7 @@
       <button class="tab-button " data-tab-target="equipment" type="button" role="tab" aria-selected="false">Equipment</button>
       <button class="tab-button " data-tab-target="spells" type="button" role="tab" aria-selected="false">Spells</button>
       <button class="tab-button " data-tab-target="class-info" type="button" role="tab" aria-selected="false">Class Info</button>
+      <button class="tab-button " data-tab-target="race-info" type="button" role="tab" aria-selected="false">Race</button>
       <button class="tab-button " data-tab-target="notes" type="button" role="tab" aria-selected="false">Notes</button>
     </nav>
     <div class="tab-select-shell">
@@ -59,6 +60,7 @@
         <option value="equipment">Equipment</option>
         <option value="spells">Spells</option>
         <option value="class-info">Class Info</option>
+        <option value="race-info">Race</option>
         <option value="notes">Notes</option>
       </select>
     </div>
@@ -251,10 +253,9 @@
         <div class="info-card"><span>Class</span><strong data-player-field="classSummary">Druid (Land)</strong></div>
         <div class="info-card"><span>Background</span><strong data-player-field="backgrounds">Hermit</strong></div>
         <div class="info-card"><span>Feats</span><strong data-player-field="feats">Lucky</strong></div>
-        <div class="info-card"><span>Race</span><strong data-player-field="races">Dragonborn</strong></div>
       </div>
       <section class="feature-notes">
-        <h2>Class & Racial Features</h2>
+        <h2>Class Features</h2>
         <div data-class-info-panel><div class="class-feature-list">
     <details class="class-feature-row">
       <summary>
@@ -272,46 +273,6 @@
         </span>
       </summary>
       <p>Drawing on the divine essence of nature itself, you can cast spells to shape that essence to your will. See chapter 10 for the general rules of spellcasting and chapter 11 for the druid spell list. Cantrips: At 1st level, you know two cantrips of your choice from the druid spell list. You learn additional druid cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Druid table. Preparing and Casting Spells: The Druid table shows how many spell slots you have to cast your druid spells of 1st level and higher. To cast one of these druid spells, you must expend a slot of the spell&#39;s level or higher. You regain all expended spell slots when you finish a long rest. You prepare the list of druid spells that are available for you to cast, choosing from the druid spell list. When you do so, choose a number of druid spells equal to your Wisdom modifier + your druid level (minimum of one spell). The spells must be of a level for which you have spell slots. For example, if you are a 3rd-level druid, you have four 1st-level and two 2nd-level spell slots. With a Wisdom of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell cure wounds, you can cast it using a 1st-level or 2nd-level slot. Casting the spell doesn&#39;t remove it from your list of prepared spells. You can also change your list of prepared spells when you finish a long rest. Preparing a new list of druid spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list. Spellcasting Ability: Wisdom is your spellcasting ability for your druid spells, since your magic draws upon your devotion and attunement to nature. You use your Wisdom whenever a spell refers to your spellcasting ability. In addition, you use your Wisdom modifier when setting the saving throw DC for a druid spell you cast and when making an attack roll with one. Spell: Spell: Ritual Casting: You can cast a druid spell as a ritual if that spell has the ritual tag and you have the spell prepared. Spellcasting Focus: You can use a druidic focus as a spellcasting focus for your druid spells.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Breath Weapon</strong>
-          <small>Dragonborn / Level 1 / Action</small>
-        </span>
-      </summary>
-      <p>You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation. When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level. After you use your breath weapon, you can&#39;t use it again until you complete a short or long rest.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Damage Resistance</strong>
-          <small>Dragonborn / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>You have resistance to the damage type associated with your draconic ancestry.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Draconic Ancestry</strong>
-          <small>Dragonborn / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table. Draconic Ancestry Black Acid 5 by 30 ft. line (Dex. save) Blue Lightning 5 by 30 ft. line (Dex. save) Brass Fire 5 by 30 ft. line (Dex. save) Bronze Lightning 5 by 30 ft. line (Dex. save) Copper Acid 5 by 30 ft. line (Dex. save) Gold Fire 15 ft. cone (Dex. save) Green Poison 15 ft. cone (Con. save) Red Fire 15 ft. cone (Dex. save) Silver Cold 15 ft. cone (Con. save) White Cold 15 ft. cone (Con. save)</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Languages</strong>
-          <small>Dragonborn / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>You can speak, read, and write Common and Draconic. Draconic is thought to be one of the oldest languages and is often used in the study of magic. The language sounds harsh to most other creatures and includes numerous hard consonants and sibilants.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Size</strong>
-          <small>Dragonborn / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250 pounds. Your size is Medium.</p>
     </details><details class="class-feature-row">
       <summary>
         <span>
@@ -398,6 +359,57 @@
       <section class="feature-notes">
         <h2>Sheet Feature Notes</h2>
         <p>No extra class features recorded.</p>
+      </section>
+    </section>
+    <section class="tab-panel " data-tab-panel="race-info" role="tabpanel">
+      <div class="sheet-grid">
+        <div class="info-card"><span>Race</span><strong data-player-field="races">Dragonborn</strong></div>
+      </div>
+      <section class="feature-notes">
+        <h2>Racial Traits</h2>
+        <div data-race-info-panel><div class="class-feature-list">
+    <details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Breath Weapon</strong>
+          <small>Dragonborn / Level 1 / Action</small>
+        </span>
+      </summary>
+      <p>You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation. When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level. After you use your breath weapon, you can&#39;t use it again until you complete a short or long rest.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Damage Resistance</strong>
+          <small>Dragonborn / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>You have resistance to the damage type associated with your draconic ancestry.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Draconic Ancestry</strong>
+          <small>Dragonborn / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table. Draconic Ancestry Black Acid 5 by 30 ft. line (Dex. save) Blue Lightning 5 by 30 ft. line (Dex. save) Brass Fire 5 by 30 ft. line (Dex. save) Bronze Lightning 5 by 30 ft. line (Dex. save) Copper Acid 5 by 30 ft. line (Dex. save) Gold Fire 15 ft. cone (Dex. save) Green Poison 15 ft. cone (Con. save) Red Fire 15 ft. cone (Dex. save) Silver Cold 15 ft. cone (Con. save) White Cold 15 ft. cone (Con. save)</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Languages</strong>
+          <small>Dragonborn / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>You can speak, read, and write Common and Draconic. Draconic is thought to be one of the oldest languages and is often used in the study of magic. The language sounds harsh to most other creatures and includes numerous hard consonants and sibilants.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Size</strong>
+          <small>Dragonborn / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250 pounds. Your size is Medium.</p>
+    </details>
+  </div></div>
       </section>
     </section>
     <section class="tab-panel " data-tab-panel="notes" role="tabpanel">

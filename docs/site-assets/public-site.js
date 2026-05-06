@@ -302,6 +302,7 @@
     renderWeaponAttacks(root, hydrated);
     renderCombatFeatureActions(root, hydrated);
     renderClassInfoPanel(root, hydrated);
+    renderRaceInfoPanel(root, hydrated);
     renderActionsPanel(root, hydrated);
     renderResourcesPanel(root, hydrated);
     renderEquipmentPanel(root, hydrated);
@@ -1554,9 +1555,22 @@
   function renderClassInfoPanel(root, player) {
     const target = root.querySelector('[data-class-info-panel]');
     if (!target) return;
-    const features = player.ruleFeatures || [];
+    const features = (player.ruleFeatures || []).filter(feature => feature.kind !== 'race');
     if (!features.length) {
-      target.innerHTML = '<p>No class or racial features found in canonical rules.</p>';
+      target.innerHTML = '<p>No class features found in canonical rules.</p>';
+      return;
+    }
+    target.innerHTML = `<div class="class-feature-list">
+      ${features.map(feature => renderClassFeatureRow(player, feature)).join('')}
+    </div>`;
+  }
+
+  function renderRaceInfoPanel(root, player) {
+    const target = root.querySelector('[data-race-info-panel]');
+    if (!target) return;
+    const features = (player.ruleFeatures || []).filter(feature => feature.kind === 'race');
+    if (!features.length) {
+      target.innerHTML = '<p>No racial traits found in canonical rules.</p>';
       return;
     }
     target.innerHTML = `<div class="class-feature-list">

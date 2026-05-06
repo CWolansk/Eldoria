@@ -46,6 +46,7 @@
       <button class="tab-button " data-tab-target="equipment" type="button" role="tab" aria-selected="false">Equipment</button>
       <button class="tab-button " data-tab-target="spells" type="button" role="tab" aria-selected="false">Spells</button>
       <button class="tab-button " data-tab-target="class-info" type="button" role="tab" aria-selected="false">Class Info</button>
+      <button class="tab-button " data-tab-target="race-info" type="button" role="tab" aria-selected="false">Race</button>
       <button class="tab-button " data-tab-target="notes" type="button" role="tab" aria-selected="false">Notes</button>
     </nav>
     <div class="tab-select-shell">
@@ -59,6 +60,7 @@
         <option value="equipment">Equipment</option>
         <option value="spells">Spells</option>
         <option value="class-info">Class Info</option>
+        <option value="race-info">Race</option>
         <option value="notes">Notes</option>
       </select>
     </div>
@@ -251,10 +253,9 @@
         <div class="info-card"><span>Class</span><strong data-player-field="classSummary">Monk (Drunken Master)</strong></div>
         <div class="info-card"><span>Background</span><strong data-player-field="backgrounds">Sailor</strong></div>
         <div class="info-card"><span>Feats</span><strong data-player-field="feats">Actor</strong></div>
-        <div class="info-card"><span>Race</span><strong data-player-field="races">Half-Orc</strong></div>
       </div>
       <section class="feature-notes">
-        <h2>Class & Racial Features</h2>
+        <h2>Class Features</h2>
         <div data-class-info-panel><div class="class-feature-list">
     <details class="class-feature-row">
       <summary>
@@ -272,54 +273,6 @@
         </span>
       </summary>
       <p>Beginning at 1st level, while you are wearing no armor and not wielding a shield, your AC equals 10 + your Dexterity modifier + your Wisdom modifier.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Darkvision</strong>
-          <small>Half-Orc / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>Thanks to your orc blood, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can&#39;t discern color in darkness, only shades of gray.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Languages</strong>
-          <small>Half-Orc / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>You can speak, read, and write Common and Orc. Orc is a harsh, grating language with hard consonants. It has no script of its own but is written in the Dwarvish script.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Menacing</strong>
-          <small>Half-Orc / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>You gain proficiency in the Intimidation skill.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Relentless Endurance</strong>
-          <small>Half-Orc / Level 1 / Triggered</small>
-        </span>
-      </summary>
-      <p>When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can&#39;t use this feature again until you finish a long rest.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Savage Attacks</strong>
-          <small>Half-Orc / Level 1 / Triggered</small>
-        </span>
-      </summary>
-      <p>When you score a critical hit with a melee weapon attack, you can roll one of the weapon&#39;s damage dice one additional time and add it to the extra damage of the critical hit.</p>
-    </details><details class="class-feature-row">
-      <summary>
-        <span>
-          <strong>Size</strong>
-          <small>Half-Orc / Level 1 / Passive</small>
-        </span>
-      </summary>
-      <p>Half-orcs are somewhat larger and bulkier than humans, and they range from 5 to well over 6 feet tall. Your size is Medium.</p>
     </details><details class="class-feature-row">
       <summary>
         <span>
@@ -470,6 +423,65 @@
       <section class="feature-notes">
         <h2>Sheet Feature Notes</h2>
         <p>No extra class features recorded.</p>
+      </section>
+    </section>
+    <section class="tab-panel " data-tab-panel="race-info" role="tabpanel">
+      <div class="sheet-grid">
+        <div class="info-card"><span>Race</span><strong data-player-field="races">Half-Orc</strong></div>
+      </div>
+      <section class="feature-notes">
+        <h2>Racial Traits</h2>
+        <div data-race-info-panel><div class="class-feature-list">
+    <details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Darkvision</strong>
+          <small>Half-Orc / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>Thanks to your orc blood, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can&#39;t discern color in darkness, only shades of gray.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Languages</strong>
+          <small>Half-Orc / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>You can speak, read, and write Common and Orc. Orc is a harsh, grating language with hard consonants. It has no script of its own but is written in the Dwarvish script.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Menacing</strong>
+          <small>Half-Orc / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>You gain proficiency in the Intimidation skill.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Relentless Endurance</strong>
+          <small>Half-Orc / Level 1 / Triggered</small>
+        </span>
+      </summary>
+      <p>When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can&#39;t use this feature again until you finish a long rest.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Savage Attacks</strong>
+          <small>Half-Orc / Level 1 / Triggered</small>
+        </span>
+      </summary>
+      <p>When you score a critical hit with a melee weapon attack, you can roll one of the weapon&#39;s damage dice one additional time and add it to the extra damage of the critical hit.</p>
+    </details><details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>Size</strong>
+          <small>Half-Orc / Level 1 / Passive</small>
+        </span>
+      </summary>
+      <p>Half-orcs are somewhat larger and bulkier than humans, and they range from 5 to well over 6 feet tall. Your size is Medium.</p>
+    </details>
+  </div></div>
       </section>
     </section>
     <section class="tab-panel " data-tab-panel="notes" role="tabpanel">
