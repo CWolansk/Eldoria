@@ -300,6 +300,7 @@
     renderTemporaryEffectsPanel(root, hydrated);
     renderArmorClassPanel(root, hydrated);
     renderWeaponAttacks(root, hydrated);
+    renderCombatFeatureActions(root, hydrated);
     renderActionsPanel(root, hydrated);
     renderResourcesPanel(root, hydrated);
     renderEquipmentPanel(root, hydrated);
@@ -1518,6 +1519,37 @@
     }).join('');
   }
 
+  function renderCombatFeatureActions(root, player) {
+    const target = root.querySelector('[data-combat-features]');
+    if (!target) return;
+    const cards = buildCombatFeatureCards(player);
+    if (!cards.length) {
+      target.innerHTML = '';
+      return;
+    }
+    target.innerHTML = `<section class="combat-feature-section">
+      <h2>Class Abilities</h2>
+      <div class="action-row combat-feature-list">
+        ${cards.map(renderActionCard).join('')}
+      </div>
+    </section>`;
+  }
+
+  function buildCombatFeatureCards(player) {
+    const featureSources = new Set(['class', 'subclass', 'feat', 'race', 'background']);
+    return buildRuleActionCards(player)
+      .filter(card => featureSources.has(card.sourceType))
+      .filter(card => card.resourceId)
+      .filter(card => normalizeActionGroup(card.group) !== 'Out of Combat')
+      .sort((a, b) => actionGroupSort(a.group) - actionGroupSort(b.group) || String(a.title || '').localeCompare(String(b.title || '')));
+  }
+
+  function actionGroupSort(group) {
+    const order = ['Action', 'Bonus Action', 'Reaction', 'Triggered', 'Free / Utility'];
+    const index = order.indexOf(normalizeActionGroup(group));
+    return index === -1 ? order.length : index;
+  }
+
   function renderWeaponControls(item, player) {
     const weapon = item.weapon;
     const equipped = isItemEquipped(player, item);
@@ -1789,6 +1821,7 @@
         const resourceId = getRuleActionResourceId(player, action);
         const detail = getRuleActionDetail(player, action);
         return {
+          id: action.id || action.sourceId || slugify(action.title || action.name || 'rule-action'),
           group: normalizeRuleActionGroup(action),
           sourceType: action.sourceType || 'rule',
           type: action.type || action.sourceType || 'Rule',
@@ -1796,9 +1829,30 @@
           meta: [action.sourceType, action.className, action.itemName].filter(Boolean).join(' / '),
           detail,
           tags: Array.isArray(action.tags) ? action.tags.filter(Boolean).slice(0, 5) : [],
-          controls: resourceId ? renderActionResourceControls(player, resourceId) : '',
+          resourceId,
+          controls: renderRuleActionControls(player, action, resourceId),
         };
       });
+  }
+
+  function renderRuleActionControls(player, action, resourceId) {
+    const controls = [];
+    const state = getResourceUseState(player, resourceId);
+    if (state && state.max !== null) {
+      controls.push(renderResourceSpendButton(resourceId, 'Use', state.available <= 0));
+      controls.push(`<span class="use-status">${escapeHtml(`${state.available} / ${state.max} left`)}</span>`);
+    }
+    const rollButton = renderRuleActionRollButton(action);
+    if (rollButton) controls.push(rollButton);
+    return controls.length ? `<div class="action-controls">${controls.join('')}</div>` : '';
+  }
+
+  function renderRuleActionRollButton(action) {
+    const title = normalizeName(action && (action.title || action.name));
+    if (title === 'second wind') {
+      return `<button class="roll-button" type="button" data-roll-feature="${escapeAttr(action.sourceId || action.id)}">Roll Heal</button>`;
+    }
+    return '';
   }
 
   function getRuleActionDetail(player, action) {
@@ -3277,6 +3331,14 @@
         return;
       }
 
+      const featureRoll = event.target.closest('[data-roll-feature]');
+      if (featureRoll) {
+        event.preventDefault();
+        const player = root._playerState;
+        if (player) renderFeatureRoll(root, player, featureRoll.dataset.rollFeature);
+        return;
+      }
+
       const reset = event.target.closest('[data-player-reset]');
       if (reset) {
         const player = root._playerState;
@@ -3701,6 +3763,20 @@
     }
     const roll = rollSpellProfile(profile);
     renderSheetLog(root, `${spell.name} ${profile.kind}: ${roll.total}`, roll.detail);
+  }
+
+  function renderFeatureRoll(root, player, featureId) {
+    const feature = (player.ruleFeatures || []).find(candidate => candidate.id === featureId)
+      || (player.ruleActions || []).find(candidate => candidate.sourceId === featureId || candidate.id === featureId);
+    const title = feature && (feature.name || feature.title) || 'Feature';
+    if (normalizeName(title) === 'second wind') {
+      const die = rollDice('1d10');
+      const level = Number(player.level) || 1;
+      const total = die.total + level;
+      renderSheetLog(root, `Second Wind healing: ${total}`, `${die.detail} + fighter level ${level}`);
+      return;
+    }
+    renderSheetLog(root, `${title} roll unavailable`, 'No roll formula is recorded for this feature yet.');
   }
 
   function renderSheetLog(root, label, detail) {

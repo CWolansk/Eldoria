@@ -532,6 +532,14 @@ th {
   margin: 0;
 }
 
+.combat-feature-section {
+  margin-top: 1.5rem;
+}
+
+.combat-feature-section h2 {
+  margin-top: 0;
+}
+
 .combat-toggle-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));

@@ -459,13 +459,26 @@ function inferHitDice(matchedClass, level) {
 }
 
 function buildPlayerResources(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog) {
-  const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level);
+  const availableFeatures = getAvailableFeatures(rules, matchedClass, matchedSubclass, level);
+  const featureIds = new Set(availableFeatures.map(feature => feature.id));
   const resources = [];
   for (const resource of rules.resources || []) {
     if (resource.sourceType === 'core') {
       resources.push(resource);
     } else if (resource.sourceId && featureIds.has(resource.sourceId)) {
       resources.push(resource);
+    } else {
+      const matchedFeature = findAvailableFeatureForResource(resource, availableFeatures);
+      if (matchedFeature) {
+        resources.push({
+          ...resource,
+          sourceType: matchedFeature.kind || resource.sourceType,
+          sourceId: matchedFeature.id,
+          className: matchedFeature.className || resource.className || '',
+          subclassName: matchedFeature.subclassShortName || matchedFeature.subclassName || resource.subclassName || '',
+          text: cleanRulesText(matchedFeature.text || resource.text || ''),
+        });
+      }
     }
   }
   for (const itemName of equipment) {
@@ -475,6 +488,31 @@ function buildPlayerResources(rules, matchedClass, matchedSubclass, level, equip
     }
   }
   return uniqueBy(resources, resource => resource.id);
+}
+
+function findAvailableFeatureForResource(resource, availableFeatures) {
+  if (!resource || !['class', 'subclass', 'feat', 'race', 'background'].includes(resource.sourceType)) return null;
+  const resourceName = normalizeItemName(resource.name || resource.id);
+  const resourceId = normalizeItemName(resource.id);
+  const resourceClass = normalizeItemName(resource.className);
+  const resourceSubclass = normalizeItemName(resource.subclassName);
+  const candidates = (availableFeatures || []).filter(feature => {
+    if (resource.sourceType === 'class' && feature.kind !== 'class') return false;
+    if (resource.sourceType === 'subclass' && feature.kind !== 'subclass') return false;
+    if (resourceClass && normalizeItemName(feature.className) !== resourceClass) return false;
+    if (resourceSubclass) {
+      const featureSubclassNames = [feature.subclassName, feature.subclassShortName].map(normalizeItemName);
+      if (!featureSubclassNames.includes(resourceSubclass)) return false;
+    }
+    return true;
+  });
+  return candidates.find(feature => {
+    const name = normalizeItemName(feature.name);
+    return Boolean(name && (name === resourceName || name === resourceId));
+  }) || candidates.find(feature => {
+    const hint = normalizeItemName(feature.resourceHint);
+    return Boolean(hint && (hint === resourceName || hint === resourceId || normalizeItemName(slugify(hint)) === resourceId));
+  }) || null;
 }
 
 function buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, feats, spells) {
@@ -530,16 +568,20 @@ function buildPlayerRuleFeatures(rules, matchedClass, matchedSubclass, level) {
 }
 
 function getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level) {
+  return new Set(getAvailableFeatures(rules, matchedClass, matchedSubclass, level).map(feature => feature.id));
+}
+
+function getAvailableFeatures(rules, matchedClass, matchedSubclass, level) {
+  if (!rules || !matchedClass) return [];
   const className = normalizeItemName(matchedClass.name);
-  const subclassNames = new Set([matchedSubclass.name, matchedSubclass.shortName].map(normalizeItemName));
-  return new Set((rules.features || [])
+  const subclassNames = new Set([matchedSubclass && matchedSubclass.name, matchedSubclass && matchedSubclass.shortName].map(normalizeItemName).filter(Boolean));
+  return (rules.features || [])
     .filter(feature => feature.level <= level)
     .filter(feature => {
       if (normalizeItemName(feature.className) !== className) return false;
       if (feature.kind === 'class') return true;
       return subclassNames.has(normalizeItemName(feature.subclassName)) || subclassNames.has(normalizeItemName(feature.subclassShortName));
-    })
-    .map(feature => feature.id));
+    });
 }
 
 function calculateSpellSlots(matchedClass, level, spellAbility) {
@@ -966,6 +1008,7 @@ function renderPlayerPage(player, page) {
         <div class="weapon-grid" data-weapon-attacks></div>
         <div class="roll-log" data-roll-log></div>
       </section>
+      <div data-combat-features></div>
       <div data-temporary-effects-panel></div>
     `)}
 
