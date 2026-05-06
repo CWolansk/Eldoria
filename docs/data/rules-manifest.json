@@ -1,11 +1,12 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-05-06T10:46:44.183Z",
+  "generatedAtUtc": "2026-05-06T12:45:09.540Z",
   "upstream": {
     "classRoot": "5etools/data/class",
     "itemsCsv": "Assets/Items/Items.csv",
     "spellsCsv": "Assets/Spells/Spells.csv",
     "featsCsv": "Assets/Feats/Feats.csv",
+    "backgroundsCsv": "Assets/Backgrounds/Backgrounds.csv",
     "racesJson": "5etools/data/races.json"
   },
   "counts": {
@@ -15,9 +16,10 @@
     "features": 2193,
     "items": 5013,
     "spells": 692,
-    "feats": 785,
-    "actions": 4268,
-    "effects": 2716,
-    "resources": 764
+    "feats": 194,
+    "backgrounds": 144,
+    "actions": 4382,
+    "effects": 2932,
+    "resources": 810
   }
 }

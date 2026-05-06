@@ -36,6 +36,16 @@
     "text": "At 17th level, you can use Action Surge twice before a rest, but only once on the same turn."
   },
   {
+    "id": "adept-of-the-red-robes",
+    "name": "Adept of the Red Robes",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "adept-of-the-red-robes",
+    "source": "DSotDQ",
+    "text": "You chose the moon Lunitari to influence your magic, and your dedication to maintaining the balance between all things has been recognized by the Order of the Red Robes, granting you these benefits:Insightful Magic."
+  },
+  {
     "id": "race-orc-adrenaline-rush-mpmm",
     "name": "Adrenaline Rush",
     "max": 1,
@@ -45,6 +55,16 @@
     "raceName": "Orc",
     "source": "MPMM",
     "text": "You can take the Dash action as a bonus action."
+  },
+  {
+    "id": "agent-of-order",
+    "name": "Agent of Order",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "agent-of-order",
+    "source": "SatO",
+    "text": "You can channel cosmic forces of order to gain these benefits:Ability Score Increase."
   },
   {
     "id": "alchemical-compendium-alchemical-compendium-charges",
@@ -358,6 +378,16 @@
     "itemName": "Baba Yaga's Pestle"
   },
   {
+    "id": "baleful-scion",
+    "name": "Baleful Scion",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "baleful-scion",
+    "source": "SatO",
+    "text": "You can channel cosmic forces of evil to gain these benefits:Ability Score Increase."
+  },
+  {
     "id": "bane-shield-bane-shield-charges",
     "name": "Bane Shield Charges",
     "max": 3,
@@ -399,6 +429,16 @@
     "sourceType": "item",
     "sourceId": "bardiche-of-verdict",
     "itemName": "Bardiche of Verdict"
+  },
+  {
+    "id": "baruk-khazad",
+    "name": "Baruk Khazâd!",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "feat",
+    "sourceId": "baruk-khazad",
+    "source": "TLotRR",
+    "text": "The secret tongue of the Dwarves is guarded as a treasure of the past, yet their battle-cry is well-known and feared by their foes."
   },
   {
     "id": "bastard-sword-of-grass-bastard-sword-of-grass-charges",
@@ -763,6 +803,16 @@
     "itemName": "Broadsword of Verdict"
   },
   {
+    "id": "broken-spells",
+    "name": "Broken Spells",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "broken-spells",
+    "source": "TLotRR",
+    "text": "In ancient times, the Dwarves made mighty spells."
+  },
+  {
     "id": "race-autognome-built-for-success-aag",
     "name": "Built for Success",
     "max": 1,
@@ -795,6 +845,16 @@
     "raceName": "",
     "source": "TCE",
     "text": "15th-level Psi Warrior feature You can shield yourself and others with telekinetic force."
+  },
+  {
+    "id": "bumbling-fool",
+    "name": "Bumbling Fool",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "bumbling-fool",
+    "source": "ObojimaTallGrass",
+    "text": "You have a peculiar way of fumbling through life that somehow always works out in your favor, succeeding in situations through what others might view as accidental luck."
   },
   {
     "id": "cabal-s-ruin-awakened-cabal-s-ruin-awakened-charges",
@@ -847,6 +907,16 @@
     "raceName": "Genasi (Water)",
     "source": "MPMM",
     "text": "You know the acid splash cantrip."
+  },
+  {
+    "id": "canden-and-moon-s-master-cut",
+    "name": "Canden and Moon's Master Cut",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "canden-and-moon-s-master-cut",
+    "source": "ObojimaTallGrass",
+    "text": "Having trained with the masters of the first sword school of Obojima, you've picked up a handful of useful skills."
   },
   {
     "id": "cape-of-enlargement-cape-of-enlargement-charges",
@@ -1112,6 +1182,16 @@
     "itemName": "Clockwork Plated Chainmail"
   },
   {
+    "id": "cloud-hopper",
+    "name": "Cloud Hopper",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "cloud-hopper",
+    "source": "ObojimaTallGrass",
+    "text": "Your exposure to the great wind spirit has changed you."
+  },
+  {
     "id": "club-of-dancing-club-of-dancing-charges",
     "name": "Club of Dancing Charges",
     "max": 3,
@@ -1251,6 +1331,16 @@
     "sourceType": "item",
     "sourceId": "courtesan-s-fanblade",
     "itemName": "Courtesan's Fanblade"
+  },
+  {
+    "id": "coven-witch",
+    "name": "Coven Witch",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "coven-witch",
+    "source": "ObojimaTallGrass",
+    "text": "You have become an official member of a witches coven."
   },
   {
     "id": "crook-of-rao-crook-of-rao-charges",
@@ -1562,6 +1652,16 @@
     "itemName": "Dao of Verdict"
   },
   {
+    "id": "dark-for-dark-business",
+    "name": "Dark for Dark Business",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "dark-for-dark-business",
+    "source": "TLotRR",
+    "text": "Your kind is not troubled by mere darkness in itself, as most members of other cultures are."
+  },
+  {
     "id": "subclass-warlock-fiend-6-dark-one-s-own-luck-phb",
     "name": "Dark One's Own Luck",
     "max": 1,
@@ -1833,6 +1933,16 @@
     "text": "11th-level Drakewarden feature As an action, you can exhale a 30-foot cone of damaging breath or cause your drake to exhale it."
   },
   {
+    "id": "drow-high-magic",
+    "name": "Drow High Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "drow-high-magic",
+    "source": "XGE",
+    "text": "You learn more of the magic typical of dark elves."
+  },
+  {
     "id": "race-elf-drow-drow-magic-phb",
     "name": "Drow Magic",
     "max": 1,
@@ -1907,6 +2017,16 @@
     "text": "As a bonus action, you can harmlessly remove a lock of your hair, one of your nails, or one of your teeth."
   },
   {
+    "id": "elbereth-gilthoniel",
+    "name": "Elbereth Gilthoniel!",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "elbereth-gilthoniel",
+    "source": "TLotRR",
+    "text": "The name of Elbereth, the Queen of the Stars, is revered by all the Eldar still dwelling in Middle-earth."
+  },
+  {
     "id": "subclass-artificer-artillerist-3-eldritch-cannon-tce",
     "name": "Eldritch Cannon",
     "max": 1,
@@ -1979,6 +2099,26 @@
     "sourceType": "item",
     "sourceId": "elven-glaive-of-verdict",
     "itemName": "Elven Glaive of Verdict"
+  },
+  {
+    "id": "elvish-spirit",
+    "name": "Elvish Spirit",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "elvish-spirit",
+    "source": "TLotRR",
+    "text": "The spirit of Elves is so strong that their bodies recover swiftly from many ills and injuries."
+  },
+  {
+    "id": "ember-of-the-fire-giant",
+    "name": "Ember of the Fire Giant",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "ember-of-the-fire-giant",
+    "source": "BGG",
+    "text": "You've manifested the fiery combat emblematic of fire giants, granting you the following benefits:Ability Score Increase."
   },
   {
     "id": "subclass-cleric-peace-1-emboldening-bond-tce",
@@ -2112,6 +2252,16 @@
     "raceName": "",
     "source": "XGE",
     "text": "At 1st level, you gain the ability to occasionally sense the presence of the undead, whose existence is an insult to the natural cycle of life."
+  },
+  {
+    "id": "fade-away",
+    "name": "Fade Away",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "feat",
+    "sourceId": "fade-away",
+    "source": "XGE",
+    "text": "Your people are clever, with a knack for illusion magic."
   },
   {
     "id": "failed-experiment-wand-failed-experiment-wand-charges",
@@ -2379,6 +2529,26 @@
     "text": "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see."
   },
   {
+    "id": "fey-teleportation",
+    "name": "Fey Teleportation",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "feat",
+    "sourceId": "fey-teleportation",
+    "source": "XGE",
+    "text": "Your study of high elven lore has unlocked fey power that few other elves possess, except your eladrin cousins."
+  },
+  {
+    "id": "fey-touched",
+    "name": "Fey Touched",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "fey-touched",
+    "source": "TCE",
+    "text": "Your exposure to the Feywild's magic has changed you, granting you the following benefits:Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20."
+  },
+  {
     "id": "feywrought-armor-feywrought-armor-charges",
     "name": "Feywrought Armor Charges",
     "max": 3,
@@ -2437,6 +2607,16 @@
     "sourceType": "item",
     "sourceId": "feywrought-wooden-cuirass",
     "itemName": "Feywrought Wooden Cuirass"
+  },
+  {
+    "id": "field-medic",
+    "name": "Field Medic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "field-medic",
+    "source": "HumblewoodTales",
+    "text": "You have been specially trained in magical triage and are able to identify the signs of shock and fatigue in those suffering from injuries."
   },
   {
     "id": "figurine-of-wondrous-power-ivory-goats-figurine-of-wondrous-power-ivory-goats-charges",
@@ -2522,6 +2702,16 @@
     "itemName": "Flame Lance"
   },
   {
+    "id": "flamewoken",
+    "name": "Flamewoken",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "feat",
+    "sourceId": "flamewoken",
+    "source": "HumblewoodTales",
+    "text": "Living in the Scorched Grove or other areas touched by elemental fire can sometimes cause strange abilities to manifest among their inhabitants."
+  },
+  {
     "id": "class-artificer-7-flash-of-genius-tce",
     "name": "Flash of Genius",
     "max": 1,
@@ -2578,6 +2768,16 @@
     "sourceType": "item",
     "sourceId": "fulminating-treatise",
     "itemName": "Fulminating Treatise"
+  },
+  {
+    "id": "fury-of-the-frost-giant",
+    "name": "Fury of the Frost Giant",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "fury-of-the-frost-giant",
+    "source": "BGG",
+    "text": "You've manifested the icy might emblematic of frost giants, granting you the following benefits:Ability Score Increase."
   },
   {
     "id": "race-goblin-fury-of-the-small-vgm",
@@ -2640,6 +2840,36 @@
     "sourceType": "item",
     "sourceId": "gentleman-s-saber",
     "itemName": "Gentleman's Saber"
+  },
+  {
+    "id": "gift-of-the-chromatic-dragon",
+    "name": "Gift of the Chromatic Dragon",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "gift-of-the-chromatic-dragon",
+    "source": "FTD",
+    "text": "You've manifested some of the power of chromatic dragons, granting you the following benefits:Chromatic Infusion."
+  },
+  {
+    "id": "gift-of-the-gem-dragon",
+    "name": "Gift of the Gem Dragon",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "gift-of-the-gem-dragon",
+    "source": "FTD",
+    "text": "You've manifested some of the power of gem dragons, granting you the following benefits:Ability Score Increase."
+  },
+  {
+    "id": "gift-of-the-metallic-dragon",
+    "name": "Gift of the Metallic Dragon",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "gift-of-the-metallic-dragon",
+    "source": "FTD",
+    "text": "You've manifested some of the power of metallic dragons, granting you the following benefits:Draconic Healing."
   },
   {
     "id": "race-deep-gnome-gift-of-the-svirfneblin-mpmm",
@@ -2912,6 +3142,16 @@
     "sourceType": "item",
     "sourceId": "guardian-s-reliquary",
     "itemName": "Guardian's Reliquary"
+  },
+  {
+    "id": "guile-of-the-cloud-giant",
+    "name": "Guile of the Cloud Giant",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "guile-of-the-cloud-giant",
+    "source": "BGG",
+    "text": "You've manifested the confounding magic emblematic of cloud giants, granting you the following benefits:Ability Score Increase."
   },
   {
     "id": "gulthias-staff-gulthias-staff-charges",
@@ -3741,6 +3981,16 @@
     "itemName": "Katana of Verdict"
   },
   {
+    "id": "keenness-of-the-stone-giant",
+    "name": "Keenness of the Stone Giant",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "keenness-of-the-stone-giant",
+    "source": "BGG",
+    "text": "You've manifested the physical talents emblematic of stone giants, granting you the following benefits:Ability Score Increase."
+  },
+  {
     "id": "race-kenku-kenku-recall-mpmm",
     "name": "Kenku Recall",
     "max": 1,
@@ -3773,6 +4023,36 @@
     "raceName": "",
     "source": "PHB",
     "text": "Beginning at 14th level, your mastery of ki grants you proficiency in all saving throws."
+  },
+  {
+    "id": "knight-of-the-crown",
+    "name": "Knight of the Crown",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "knight-of-the-crown",
+    "source": "DSotDQ",
+    "text": "You are a Knight of Solamnia aligned with the Order of the Crown, a group that extols the virtues of cooperation, loyalty, and obedience."
+  },
+  {
+    "id": "knight-of-the-rose",
+    "name": "Knight of the Rose",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "knight-of-the-rose",
+    "source": "DSotDQ",
+    "text": "You are a Knight of Solamnia aligned with the Order of the Rose, a group known for leadership, justice, and wisdom."
+  },
+  {
+    "id": "knight-of-the-sword",
+    "name": "Knight of the Sword",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "knight-of-the-sword",
+    "source": "DSotDQ",
+    "text": "You are a Knight of Solamnia aligned with the Order of the Sword, a group devoted to heroism and courage."
   },
   {
     "id": "race-reborn-knowledge-from-a-past-life-vrgr",
@@ -4069,6 +4349,16 @@
     "itemName": "Lost Crown of Besilmer"
   },
   {
+    "id": "feat-lucky-luck-points",
+    "name": "Luck Points",
+    "max": 3,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "lucky",
+    "source": "PHB",
+    "text": "You have inexplicable luck that seems to kick in at just the right moment."
+  },
+  {
     "id": "subclass-sorcerer-lunar-1-lunar-embodiment-dsotdq",
     "name": "Lunar Embodiment",
     "max": 1,
@@ -4188,6 +4478,16 @@
     "raceName": "Human (Mark of Passage)",
     "source": "ERLW",
     "text": "You can cast the misty step spell once with this trait, and you regain the ability to cast it when you finish a long rest."
+  },
+  {
+    "id": "magically-mischievous",
+    "name": "Magically Mischievous",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "magically-mischievous",
+    "source": "ObojimaTallGrass",
+    "text": "You've picked up a few magical tricks that assist your nefarious skills."
   },
   {
     "id": "subclass-wizard-scribes-6-manifest-mind-tce",
@@ -4428,6 +4728,16 @@
     "raceName": "Genasi (Air)",
     "source": "MPMM",
     "text": "You know the shocking grasp cantrip."
+  },
+  {
+    "id": "minor-corruption",
+    "name": "Minor Corruption",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "minor-corruption",
+    "source": "ObojimaTallGrass",
+    "text": "You were exposed to the Corruption, a dark magic that's poisoning the island."
   },
   {
     "id": "subclass-warlock-archfey-6-misty-escape-phb",
@@ -4933,6 +5243,16 @@
     "itemName": "Orb of Skoraeus"
   },
   {
+    "id": "orcish-fury",
+    "name": "Orcish Fury",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "feat",
+    "sourceId": "orcish-fury",
+    "source": "XGE",
+    "text": "Your fury burns tirelessly."
+  },
+  {
     "id": "orner-s-venomous-crossbow-orner-s-venomous-crossbow-charges",
     "name": "Orner's Venomous Crossbow Charges",
     "max": 4,
@@ -5057,6 +5377,16 @@
     "sourceType": "item",
     "sourceId": "bracer-of-piercing-arrows",
     "itemName": "Bracer of Piercing Arrows"
+  },
+  {
+    "id": "planar-wanderer",
+    "name": "Planar Wanderer",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "planar-wanderer",
+    "source": "SatO",
+    "text": "You can draw on the forces of the multiverse to survive cosmic extremes and to traverse its infinite realms, granting you these benefits:Planar Adaptation."
   },
   {
     "id": "planecaller-s-codex-planecaller-s-codex-charges",
@@ -5518,6 +5848,16 @@
     "itemName": "Riff's Dimensional Ripper"
   },
   {
+    "id": "righteous-heritor",
+    "name": "Righteous Heritor",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "righteous-heritor",
+    "source": "SatO",
+    "text": "You can channel cosmic forces of good to gain these benefits:Ability Score Increase."
+  },
+  {
     "id": "ring-of-air-elemental-command-ring-of-air-elemental-command-charges",
     "name": "Ring of Air Elemental Command Charges",
     "max": 5,
@@ -5798,6 +6138,16 @@
     "itemName": "Royal Incinerator"
   },
   {
+    "id": "royalty-revealed",
+    "name": "Royalty Revealed",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "feat",
+    "sourceId": "royalty-revealed",
+    "source": "TLotRR",
+    "text": "Your kin belong to a bloodline of kings, but they have learnt to hide from their enemies in the twilight years of their kingdom."
+  },
+  {
     "id": "ruby-rod-of-asmodeus-ruby-rod-of-asmodeus-charges",
     "name": "Ruby Rod of Asmodeus Charges",
     "max": 66,
@@ -6067,6 +6417,16 @@
     "sourceType": "item",
     "sourceId": "veil-of-shadows",
     "itemName": "Veil of Shadows"
+  },
+  {
+    "id": "shadow-touched",
+    "name": "Shadow Touched",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "shadow-touched",
+    "source": "TCE",
+    "text": "Your exposure to the Shadowfell's magic has changed you, granting you the following benefits:Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20."
   },
   {
     "id": "race-elf-mark-of-shadow-shape-shadows-erlw",
@@ -6360,6 +6720,16 @@
     "itemName": "Soul Lamp"
   },
   {
+    "id": "soul-of-the-storm-giant",
+    "name": "Soul of the Storm Giant",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "soul-of-the-storm-giant",
+    "source": "BGG",
+    "text": "You've manifested the tempest magic emblematic of storm giants, granting you the following benefits:Ability Score Increase."
+  },
+  {
     "id": "soul-pendant-soul-pendant-charges",
     "name": "Soul Pendant Charges",
     "max": 3,
@@ -6529,6 +6899,16 @@
     "raceName": "",
     "source": "XGE",
     "text": "Starting at 2nd level, you can call forth nature spirits to influence the world around you."
+  },
+  {
+    "id": "squire-of-solamnia",
+    "name": "Squire of Solamnia",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "squire-of-solamnia",
+    "source": "DSotDQ",
+    "text": "Your training in the ways of the Knights of Solamnia grants you these benefits:Mount Up."
   },
   {
     "id": "staff-of-birdcalls-staff-of-birdcalls-charges",
@@ -6898,6 +7278,16 @@
     "itemName": "Stone of Golorr"
   },
   {
+    "id": "stone-hard",
+    "name": "Stone-Hard",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "feat",
+    "sourceId": "stone-hard",
+    "source": "TLotRR",
+    "text": "The Dwarves were made to be strong to endure, for they came unto the world when a great evil ruled Middle-earth."
+  },
+  {
     "id": "race-goliath-stone-s-endurance-mpmm",
     "name": "Stone's Endurance",
     "max": 1,
@@ -6956,6 +7346,26 @@
     "text": "Starting at 1st level, your existence in a twilight state between life and death makes you difficult to defeat."
   },
   {
+    "id": "strike-of-the-giants",
+    "name": "Strike of the Giants",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "strike-of-the-giants",
+    "source": "BGG",
+    "text": "You have absorbed primeval magic that gives you an echo of the might of giants."
+  },
+  {
+    "id": "strixhaven-mascot",
+    "name": "Strixhaven Mascot",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "strixhaven-mascot",
+    "source": "SCC",
+    "text": "You have learned how to summon a Strixhaven mascot to assist you, granting you these benefits:You can cast the find familiar spell as a ritual."
+  },
+  {
     "id": "class-rogue-20-stroke-of-luck-phb",
     "name": "Stroke of Luck",
     "max": 1,
@@ -7008,6 +7418,16 @@
     "raceName": "Deep Gnome",
     "source": "MPMM",
     "text": "When you make a Dexterity (Stealth) check, you can make the check with advantage."
+  },
+  {
+    "id": "svirfneblin-magic",
+    "name": "Svirfneblin Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "svirfneblin-magic",
+    "source": "MTF",
+    "text": "You have inherited the innate spellcasting ability of your ancestors."
   },
   {
     "id": "subclass-ranger-swarmkeeper-15-swarming-dispersal-tce",
@@ -7141,6 +7561,16 @@
     "sourceType": "item",
     "sourceId": "the-griffon-s-saddlebag",
     "itemName": "The Griffon's Saddlebag"
+  },
+  {
+    "id": "the-language-of-birds",
+    "name": "The Language of Birds",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "the-language-of-birds",
+    "source": "TLotRR",
+    "text": "Stories told in the North say how Dalemen can become so wise as to comprehend the speech of birds, and so by understanding their song be forewarned of impending threats, or be able to spot a weakness in their enemies' defences."
   },
   {
     "id": "the-shield-of-sacred-flame-the-shield-of-sacred-flame-charges",
@@ -7425,6 +7855,16 @@
     "raceName": "",
     "source": "PHB",
     "text": "Starting at 17th level, you can call up visions of the past that relate to an object you hold or your immediate surroundings."
+  },
+  {
+    "id": "vocalist-arcanist",
+    "name": "Vocalist Arcanist",
+    "max": 1,
+    "reset": "dawn",
+    "sourceType": "feat",
+    "sourceId": "vocalist-arcanist",
+    "source": "ObojimaTallGrass",
+    "text": "Your unique method of weaving song into magic allows you to enhance your spells through your magical vocals."
   },
   {
     "id": "voyager-staff-voyager-staff-charges",
@@ -7836,6 +8276,16 @@
     "text": "6th-Level Lunar Sorcery Feature You gain greater control over the phases of your lunar magic."
   },
   {
+    "id": "ways-of-the-wild",
+    "name": "Ways of the Wild",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "ways-of-the-wild",
+    "source": "TLotRR",
+    "text": "The Rangers of the North roam ceaselessly, hunting for wicked things and guarding all frontiers."
+  },
+  {
     "id": "weapon-of-throne-s-command-weapon-of-throne-s-command-charges",
     "name": "Weapon of Throne's Command Charges",
     "max": 5,
@@ -7963,6 +8413,16 @@
     "sourceType": "item",
     "sourceId": "witherbloom-primer",
     "itemName": "Witherbloom Primer"
+  },
+  {
+    "id": "wood-elf-magic",
+    "name": "Wood Elf Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "wood-elf-magic",
+    "source": "XGE",
+    "text": "You learn the magic of the primeval woods, which are revered and protected by your people."
   },
   {
     "id": "wooden-cuirass-of-weightlessness-wooden-cuirass-of-weightlessness-charges",

@@ -1,5 +1,5 @@
 {
-  "generatedAtUtc": "2026-05-06T10:46:44.183Z",
+  "generatedAtUtc": "2026-05-06T12:45:09.540Z",
   "warnings": [],
   "canonicalRuntimeFiles": [
     "classes.json",
@@ -9,6 +9,7 @@
     "items.json",
     "spells.json",
     "feats.json",
+    "backgrounds.json",
     "actions.json",
     "effects.json",
     "resources.json"

@@ -723,18 +723,6 @@
     "itemName": "+3 Tower Shield"
   },
   {
-    "id": "feat-a-spirit-statue-mascot-lorehold",
-    "sourceType": "feat",
-    "sourceId": "a-spirit-statue-mascot-lorehold",
-    "group": "Action",
-    "type": "Feat",
-    "title": "a spirit statue mascot (Lorehold)",
-    "detail": "you can teleport as an action",
-    "tags": [
-      "Feat"
-    ]
-  },
-  {
     "id": "feature-subclass-sorcerer-aberrant-mind-1-aberrant-mind-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-sorcerer-aberrant-mind-1-aberrant-mind-tce",
@@ -1914,6 +1902,18 @@
     "itemName": "Powered Armor"
   },
   {
+    "id": "feat-actor",
+    "sourceType": "feat",
+    "sourceId": "actor",
+    "group": "Out of Combat",
+    "type": "Feat",
+    "title": "Actor",
+    "detail": "Skilled at mimicry and dramatics, you gain the following benefits:Increase your Charisma score by 1, to a maximum of 20.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-subclass-fighter-arcane-archer-10-additional-arcane-shot-option-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-fighter-arcane-archer-10-additional-arcane-shot-option-xge",
@@ -1966,6 +1966,42 @@
     ]
   },
   {
+    "id": "feat-adept-of-the-black-robes",
+    "sourceType": "feat",
+    "sourceId": "adept-of-the-black-robes",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Adept of the Black Robes",
+    "detail": "You chose the moon Nuitari to influence your magic, and your ambition and loyalty to the Order of the Black Robes have been recognized, granting you these benefits:Ambitious Magic.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
+    "id": "feat-adept-of-the-red-robes",
+    "sourceType": "feat",
+    "sourceId": "adept-of-the-red-robes",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Adept of the Red Robes",
+    "detail": "You chose the moon Lunitari to influence your magic, and your dedication to maintaining the balance between all things has been recognized by the Order of the Red Robes, granting you these benefits:Insightful Magic.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
+    "id": "feat-adept-of-the-white-robes",
+    "sourceType": "feat",
+    "sourceId": "adept-of-the-white-robes",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Adept of the White Robes",
+    "detail": "You chose the moon Solinari to influence your magic, and your oath to use magic to make the world a better place has been recognized by the Order of the White Robes, granting you these benefits:Protective Magic.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-subclass-wizard-graviturgy-2-adjust-density-egw",
     "sourceType": "subclass",
     "sourceId": "subclass-wizard-graviturgy-2-adjust-density-egw",
@@ -2003,6 +2039,18 @@
     "tags": [
       "Vedalken",
       "Level 1"
+    ]
+  },
+  {
+    "id": "feat-agent-of-order",
+    "sourceType": "feat",
+    "sourceId": "agent-of-order",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Agent of Order",
+    "detail": "You can channel cosmic forces of order to gain these benefits:Ability Score Increase.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -3073,6 +3121,18 @@
     "sourceType": "item",
     "sourceId": "arrow-catching-shield",
     "itemName": "Arrow-Catching Shield"
+  },
+  {
+    "id": "feat-art-of-disappearing",
+    "sourceType": "feat",
+    "sourceId": "art-of-disappearing",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Art of Disappearing",
+    "detail": "Hobbits are said to have little or no magic about them, but the way they can choose to disappear quickly and quietly can be described by others only as supernatural.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "feature-race-gnome-rock-artificer-s-lore-phb",
@@ -4220,6 +4280,19 @@
     "itemName": "Azorius Keyrune"
   },
   {
+    "id": "background-variant-sailor-pirate",
+    "sourceType": "background",
+    "sourceId": "variant-sailor-pirate",
+    "group": "Triggered",
+    "type": "Background",
+    "title": "Bad Reputation",
+    "detail": "No matter where you go, people are afraid of you due to your reputation.  When you are in a civilized settlement, you can get away with minor criminal offenses, such as refusing to pay for food at a tavern or breaking down doors at a local shop, since most people will not report your activity to the authorities.",
+    "tags": [
+      "Background",
+      "Variant Sailor (Pirate)"
+    ]
+  },
+  {
     "id": "badge-of-the-savant-badge-of-the-savant",
     "group": "Action",
     "type": "Item",
@@ -4411,6 +4484,18 @@
     "itemName": "Balance Card"
   },
   {
+    "id": "feat-baleful-scion",
+    "sourceType": "feat",
+    "sourceId": "baleful-scion",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Baleful Scion",
+    "detail": "You can channel cosmic forces of evil to gain these benefits:Ability Score Increase.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "ball-bearings-bag-of-1-000-ball-bearings-bag-of-1-000",
     "group": "Action",
     "type": "Item",
@@ -4470,6 +4555,18 @@
     "tags": [
       "Dreams",
       "Level 2"
+    ]
+  },
+  {
+    "id": "feat-bandit-cunning",
+    "sourceType": "feat",
+    "sourceId": "bandit-cunning",
+    "group": "Action",
+    "type": "Feat",
+    "title": "Bandit Cunning",
+    "detail": "Your time as a bandit has granted you a sense for danger, and made you skilled at sizing up opponents.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -4858,6 +4955,18 @@
       "Druid",
       "Level 18",
       "Wild Shape"
+    ]
+  },
+  {
+    "id": "feat-beast-craft",
+    "sourceType": "feat",
+    "sourceId": "beast-craft",
+    "group": "Action",
+    "type": "Feat",
+    "title": "Beast-Craft",
+    "detail": "You gain the ability to comprehend and verbally communicate with beasts.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -5859,6 +5968,18 @@
     "itemName": "Bookmark"
   },
   {
+    "id": "feat-boomerang-expert",
+    "sourceType": "feat",
+    "sourceId": "boomerang-expert",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Boomerang Expert",
+    "detail": "You have mastered the versatile boomerang and are capable of performing extraordinary feats with the weapon.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "boots-of-haste-boots-of-haste",
     "group": "Bonus Action",
     "type": "Item",
@@ -5960,7 +6081,7 @@
     "id": "feat-bountiful-luck",
     "sourceType": "feat",
     "sourceId": "bountiful-luck",
-    "group": "Triggered",
+    "group": "Reaction",
     "type": "Feat",
     "title": "Bountiful Luck",
     "detail": "Your people have extraordinary luck, which you have learned to mystically lend to your companions when you see them falter.",
@@ -6230,6 +6351,18 @@
     ]
   },
   {
+    "id": "feat-bree-pony",
+    "sourceType": "feat",
+    "sourceId": "bree-pony",
+    "group": "Action",
+    "type": "Feat",
+    "title": "Bree-Pony",
+    "detail": "Bree- ponies are very similar to their owners, the Bree-folk—they don't seem to have anything special compared to their peers in other parts of Middle-earth, and yet some of them display uncommon courage and exceptional memory.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "bridle-of-capturing-bridle-of-capturing",
     "group": "Action",
     "type": "Item",
@@ -6306,6 +6439,18 @@
     "sourceType": "item",
     "sourceId": "broadsword-of-wounding",
     "itemName": "Broadsword of Wounding"
+  },
+  {
+    "id": "feat-broken-spells",
+    "sourceType": "feat",
+    "sourceId": "broken-spells",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Broken Spells",
+    "detail": "In ancient times, the Dwarves made mighty spells.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "bronze-dragon-scale-mail-bronze-dragon-scale-mail",
@@ -6397,6 +6542,18 @@
       "Psi Warrior",
       "Level 15",
       "Bulwark of Force"
+    ]
+  },
+  {
+    "id": "feat-bumbling-fool",
+    "sourceType": "feat",
+    "sourceId": "bumbling-fool",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Bumbling Fool",
+    "detail": "You have a peculiar way of fumbling through life that somehow always works out in your favor, succeeding in situations through what others might view as accidental luck.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -6576,6 +6733,18 @@
     "sourceType": "item",
     "sourceId": "camper-s-respite",
     "itemName": "Camper's Respite"
+  },
+  {
+    "id": "feat-canden-and-moon-s-master-cut",
+    "sourceType": "feat",
+    "sourceId": "canden-and-moon-s-master-cut",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Canden and Moon's Master Cut",
+    "detail": "Having trained with the masters of the first sword school of Obojima, you've picked up a handful of useful skills.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "candle-of-invocation-candle-of-invocation",
@@ -6820,6 +6989,18 @@
     "sourceType": "item",
     "sourceId": "cartographer-s-map-case",
     "itemName": "Cartographer's Map Case"
+  },
+  {
+    "id": "feat-cartomancer",
+    "sourceType": "feat",
+    "sourceId": "cartomancer",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Cartomancer",
+    "detail": "You have learned to channel your magic through a deck of cards.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "spell-abi-dalzim-s-horrid-wilting",
@@ -17405,6 +17586,18 @@
     "itemName": "Charred Wand of Magic Missiles"
   },
   {
+    "id": "feat-chef",
+    "sourceType": "feat",
+    "sourceId": "chef",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Chef",
+    "detail": "Time spent mastering the culinary arts has paid off, granting you the following benefits:Increase your Constitution or Wisdom by 1, to a maximum of 20.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-subclass-artificer-alchemist-15-chemical-mastery-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-artificer-alchemist-15-chemical-mastery-tce",
@@ -17643,6 +17836,32 @@
     "sourceType": "item",
     "sourceId": "circlet-of-the-sharpened-mind",
     "itemName": "Circlet of the Sharpened Mind"
+  },
+  {
+    "id": "background-baldur-s-gate-urchin",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-urchin",
+    "group": "Triggered",
+    "type": "Background",
+    "title": "City Secrets",
+    "detail": "You know the secret patterns and flow to cities and can find passages through the urban sprawl that others would miss.  When you are not in combat, you (and companions you lead) can travel between any two locations in the city twice as fast as your speed would normally allow.",
+    "tags": [
+      "Background",
+      "Baldur's Gate Urchin"
+    ]
+  },
+  {
+    "id": "background-urchin",
+    "sourceType": "background",
+    "sourceId": "urchin",
+    "group": "Triggered",
+    "type": "Background",
+    "title": "City Secrets",
+    "detail": "You know the secret patterns and flow to cities and can find passages through the urban sprawl that others would miss.  When you are not in combat, you (and companions you lead) can travel between any two locations in the city twice as fast as your speed would normally allow.",
+    "tags": [
+      "Background",
+      "Urchin"
+    ]
   },
   {
     "id": "feature-subclass-cleric-moon-1-clarity-of-catha-tdcsr",
@@ -17988,6 +18207,18 @@
     "sourceType": "item",
     "sourceId": "clockwork-mend-a-pillar",
     "itemName": "Clockwork Mend-A-Pillar"
+  },
+  {
+    "id": "feat-cloud-hopper",
+    "sourceType": "feat",
+    "sourceId": "cloud-hopper",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Cloud Hopper",
+    "detail": "Your exposure to the great wind spirit has changed you.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "arcanist-s-scribing-wand-cloudscript",
@@ -19819,6 +20050,19 @@
     "itemName": "Conjurer's Canvas"
   },
   {
+    "id": "background-spirit-kin",
+    "sourceType": "background",
+    "sourceId": "spirit-kin",
+    "group": "Out of Combat",
+    "type": "Background",
+    "title": "Connections Beyond Material",
+    "detail": "You have come to know two spirits by name, and through your relationship have learned special rituals and techniques that allow you to find them across the Physical and Spirit Realms.  By using two unique ingredients that you choose when taking this background, you can contact these spirits from any distance or plane of existence.",
+    "tags": [
+      "Background",
+      "Spirit Kin"
+    ]
+  },
+  {
     "id": "feature-subclass-paladin-conquest-3-conquering-presence-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-paladin-conquest-3-conquering-presence-xge",
@@ -20334,6 +20578,18 @@
     "sourceType": "item",
     "sourceId": "courtesan-s-fanblade",
     "itemName": "Courtesan's Fanblade"
+  },
+  {
+    "id": "feat-coven-witch",
+    "sourceType": "feat",
+    "sourceId": "coven-witch",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Coven Witch",
+    "detail": "You have become an official member of a witches coven.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "feature-subclass-warlock-great-old-one-14-create-thrall-phb",
@@ -21700,6 +21956,18 @@
     ]
   },
   {
+    "id": "feat-dark-for-dark-business",
+    "sourceType": "feat",
+    "sourceId": "dark-for-dark-business",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Dark for Dark Business",
+    "detail": "Your kind is not troubled by mere darkness in itself, as most members of other cultures are.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "dark-mantle-dark-mantle",
     "group": "Action",
     "type": "Item",
@@ -21779,6 +22047,18 @@
     "sourceType": "item",
     "sourceId": "inscrutable-staff",
     "itemName": "Inscrutable Staff"
+  },
+  {
+    "id": "feat-deadly-archery",
+    "sourceType": "feat",
+    "sourceId": "deadly-archery",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Deadly Archery",
+    "detail": "Elves possess a natural talent for hitting the mark when using their bows.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "card-sharp-s-deck-deal",
@@ -22095,6 +22375,18 @@
     ]
   },
   {
+    "id": "feat-defiance",
+    "sourceType": "feat",
+    "sourceId": "defiance",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Defiance",
+    "detail": "Many realms have risen and fallen in the Lone-lands of Eriador since the Elder Days.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-subclass-druid-blighted-2-defile-ground-tdcsr",
     "sourceType": "subclass",
     "sourceId": "subclass-druid-blighted-2-defile-ground-tdcsr",
@@ -22337,6 +22629,18 @@
     "tags": [
       "Storm Herald",
       "Level 6"
+    ]
+  },
+  {
+    "id": "feat-desperate-courage",
+    "sourceType": "feat",
+    "sourceId": "desperate-courage",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Desperate Courage",
+    "detail": "You have lived all your life on the edge of the Wild, but the worst news that has come to Bree in your time concerned only brigands or packs of hungry wolves.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -23272,6 +23576,18 @@
     ]
   },
   {
+    "id": "feat-dragon-fear",
+    "sourceType": "feat",
+    "sourceId": "dragon-fear",
+    "group": "Out of Combat",
+    "type": "Feat",
+    "title": "Dragon Fear",
+    "detail": "When angered, you radiate menace.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "red-dragon-mask-dragon-fire",
     "group": "Action",
     "type": "Item",
@@ -23596,6 +23912,18 @@
     "itemName": "Driftglobe"
   },
   {
+    "id": "feat-drow-high-magic",
+    "sourceType": "feat",
+    "sourceId": "drow-high-magic",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Drow High Magic",
+    "detail": "You learn more of the magic typical of dark elves.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-race-elf-drow-drow-magic-phb",
     "sourceType": "race",
     "sourceId": "race-elf-drow-drow-magic-phb",
@@ -23714,6 +24042,18 @@
     ]
   },
   {
+    "id": "feat-durin-s-way",
+    "sourceType": "feat",
+    "sourceId": "durin-s-way",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Durin's Way",
+    "detail": "The Dwarves have fought many wars in deep places beneath the earth.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "dusk-cleaver-dusk-cleaver",
     "group": "Action",
     "type": "Item",
@@ -23782,6 +24122,18 @@
     "itemName": "Dust of Sneezing and Choking"
   },
   {
+    "id": "feat-dwarf-friend",
+    "sourceType": "feat",
+    "sourceId": "dwarf-friend",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Dwarf-Friend",
+    "detail": "The days of the Dragon have forged a strong alliance between the Bardings and the Dwarves of Erebor.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "dwarven-boozehound-s-backpack-dwarven-boozehound-s-backpack",
     "group": "Action",
     "type": "Item",
@@ -23793,6 +24145,18 @@
     "sourceType": "item",
     "sourceId": "dwarven-boozehound-s-backpack",
     "itemName": "Dwarven Boozehound's Backpack"
+  },
+  {
+    "id": "feat-dwarven-fortitude",
+    "sourceType": "feat",
+    "sourceId": "dwarven-fortitude",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Dwarven Fortitude",
+    "detail": "You have the blood of dwarf heroes flowing through your veins.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "dwarven-plate-dwarven-plate",
@@ -24024,6 +24388,18 @@
     "itemName": "Direstone Runic Wand"
   },
   {
+    "id": "feat-elbereth-gilthoniel",
+    "sourceType": "feat",
+    "sourceId": "elbereth-gilthoniel",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Elbereth Gilthoniel!",
+    "detail": "The name of Elbereth, the Queen of the Stars, is revered by all the Eldar still dwelling in Middle-earth.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-subclass-paladin-ancients-20-elder-champion-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-paladin-ancients-20-elder-champion-phb",
@@ -24035,6 +24411,18 @@
       "Ancients",
       "Level 20",
       "Channel Divinity"
+    ]
+  },
+  {
+    "id": "feat-eldritch-adept",
+    "sourceType": "feat",
+    "sourceId": "eldritch-adept",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Eldritch Adept",
+    "detail": "Studying occult lore, you learn one Eldritch Invocation option of your choice from the warlock class.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -24188,7 +24576,7 @@
     "group": "Triggered",
     "type": "Feat",
     "title": "Elemental Adept",
-    "detail": "When you gain this feat, choose one of the following damage types:",
+    "detail": "When you gain this feat, choose one of the following damage types: acid, cold, fire, lightning, or thunder.",
     "tags": [
       "Feat"
     ]
@@ -24483,6 +24871,18 @@
     ]
   },
   {
+    "id": "feat-elven-accuracy",
+    "sourceType": "feat",
+    "sourceId": "elven-accuracy",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Elven Accuracy",
+    "detail": "The accuracy of elves is legendary, especially that of elf archers and spellcasters.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "elven-glaive-of-throne-s-command-elven-glaive-of-throne-s-command",
     "group": "Bonus Action",
     "type": "Item",
@@ -24495,6 +24895,30 @@
     "sourceType": "item",
     "sourceId": "elven-glaive-of-throne-s-command",
     "itemName": "Elven Glaive of Throne's Command"
+  },
+  {
+    "id": "feat-elvish-spirit",
+    "sourceType": "feat",
+    "sourceId": "elvish-spirit",
+    "group": "Out of Combat",
+    "type": "Feat",
+    "title": "Elvish Spirit",
+    "detail": "The spirit of Elves is so strong that their bodies recover swiftly from many ills and injuries.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
+    "id": "feat-ember-of-the-fire-giant",
+    "sourceType": "feat",
+    "sourceId": "ember-of-the-fire-giant",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Ember of the Fire Giant",
+    "detail": "You've manifested the fiery combat emblematic of fire giants, granting you the following benefits:Ability Score Increase.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "feature-subclass-cleric-order-6-embodiment-of-the-law-tce",
@@ -25409,6 +25833,18 @@
       "Grave",
       "Level 1",
       "Eyes of the Grave"
+    ]
+  },
+  {
+    "id": "feat-fade-away",
+    "sourceType": "feat",
+    "sourceId": "fade-away",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Fade Away",
+    "detail": "Your people are clever, with a knack for illusion magic.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -26596,6 +27032,18 @@
     ]
   },
   {
+    "id": "feat-fey-teleportation",
+    "sourceType": "feat",
+    "sourceId": "fey-teleportation",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Fey Teleportation",
+    "detail": "Your study of high elven lore has unlocked fey power that few other elves possess, except your eladrin cousins.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "fey-tulwar-fey-tulwar",
     "group": "Bonus Action",
     "type": "Item",
@@ -26752,6 +27200,18 @@
     "itemName": "Sovereignseed Satchel"
   },
   {
+    "id": "feat-field-medic",
+    "sourceType": "feat",
+    "sourceId": "field-medic",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Field Medic",
+    "detail": "You have been specially trained in magical triage and are able to identify the signs of shock and fatigue in those suffering from injuries.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-subclass-warlock-fiend-10-fiendish-resilience-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-warlock-fiend-10-fiendish-resilience-phb",
@@ -26762,6 +27222,30 @@
     "tags": [
       "Fiend",
       "Level 10"
+    ]
+  },
+  {
+    "id": "feat-fierce-shot",
+    "sourceType": "feat",
+    "sourceId": "fierce-shot",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Fierce Shot",
+    "detail": "The Black Arrow that brought down Smaug the Dragon may have been fated to do so, but the hand that sent it flying so fiercely was exceedingly strong.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
+    "id": "feat-fighting-initiate",
+    "sourceType": "feat",
+    "sourceId": "fighting-initiate",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Fighting Initiate",
+    "detail": "Your martial training has helped you develop a particular style of fighting.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -27580,6 +28064,30 @@
     "sourceType": "item",
     "sourceId": "flames-card",
     "itemName": "Flames Card"
+  },
+  {
+    "id": "feat-flames-of-phlegethos",
+    "sourceType": "feat",
+    "sourceId": "flames-of-phlegethos",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Flames of Phlegethos",
+    "detail": "You learn to call on hellfire to serve your commands.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
+    "id": "feat-flamewoken",
+    "sourceType": "feat",
+    "sourceId": "flamewoken",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Flamewoken",
+    "detail": "Living in the Scorched Grove or other areas touched by elemental fire can sometimes cause strange abilities to manifest among their inhabitants.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "flammable-tincture-flammable-tincture",
@@ -28434,6 +28942,18 @@
     "itemName": "Foresight Nunchaku"
   },
   {
+    "id": "feat-foresight-of-their-kindred",
+    "sourceType": "feat",
+    "sourceId": "foresight-of-their-kindred",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Foresight of their Kindred",
+    "detail": "The Rangers of the North still possess a measure of the foresight that their ancestors possessed in full.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "foresight-repeating-crossbow-foresight-repeating-crossbow",
     "group": "Reaction",
     "type": "Item",
@@ -28899,6 +29419,18 @@
     "tags": [
       "Spores",
       "Level 6"
+    ]
+  },
+  {
+    "id": "feat-fury-of-the-frost-giant",
+    "sourceType": "feat",
+    "sourceId": "fury-of-the-frost-giant",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Fury of the Frost Giant",
+    "detail": "You've manifested the icy might emblematic of frost giants, granting you the following benefits:Ability Score Increase.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -29399,6 +29931,42 @@
     ]
   },
   {
+    "id": "feat-gift-of-the-chromatic-dragon",
+    "sourceType": "feat",
+    "sourceId": "gift-of-the-chromatic-dragon",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Gift of the Chromatic Dragon",
+    "detail": "You've manifested some of the power of chromatic dragons, granting you the following benefits:Chromatic Infusion.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
+    "id": "feat-gift-of-the-gem-dragon",
+    "sourceType": "feat",
+    "sourceId": "gift-of-the-gem-dragon",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Gift of the Gem Dragon",
+    "detail": "You've manifested some of the power of gem dragons, granting you the following benefits:Ability Score Increase.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
+    "id": "feat-gift-of-the-metallic-dragon",
+    "sourceType": "feat",
+    "sourceId": "gift-of-the-metallic-dragon",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Gift of the Metallic Dragon",
+    "detail": "You've manifested some of the power of metallic dragons, granting you the following benefits:Draconic Healing.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-race-deep-gnome-gift-of-the-svirfneblin-mpmm",
     "sourceType": "race",
     "sourceId": "race-deep-gnome-gift-of-the-svirfneblin-mpmm",
@@ -29711,6 +30279,18 @@
     "itemName": "Glass Carver"
   },
   {
+    "id": "feat-gleam-of-wrath",
+    "sourceType": "feat",
+    "sourceId": "gleam-of-wrath",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Gleam of Wrath",
+    "detail": "Your folk have seen many defeats, and many fruitless victories in their wars against the Shadow.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-race-hadozee-glide-aag",
     "sourceType": "race",
     "sourceId": "race-hadozee-glide-aag",
@@ -29966,6 +30546,18 @@
     ]
   },
   {
+    "id": "feat-grappler",
+    "sourceType": "feat",
+    "sourceId": "grappler",
+    "group": "Action",
+    "type": "Feat",
+    "title": "Grappler",
+    "detail": "You've developed the skills necessary to hold your own in close-quarters grappling.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "grasping-staff-grasping-staff",
     "group": "Action",
     "type": "Item",
@@ -30071,6 +30663,18 @@
     "tags": [
       "Rune Knight",
       "Level 10"
+    ]
+  },
+  {
+    "id": "feat-great-weapon-master",
+    "sourceType": "feat",
+    "sourceId": "great-weapon-master",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Great Weapon Master",
+    "detail": "You've learned to put the weight of a weapon to your advantage, letting its momentum empower your strikes.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -30433,6 +31037,18 @@
     ]
   },
   {
+    "id": "feat-guile-of-the-cloud-giant",
+    "sourceType": "feat",
+    "sourceId": "guile-of-the-cloud-giant",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Guile of the Cloud Giant",
+    "detail": "You've manifested the confounding magic emblematic of cloud giants, granting you the following benefits:Ability Score Increase.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "gum-of-adhesion-gum-of-adhesion",
     "group": "Action",
     "type": "Item",
@@ -30684,6 +31300,18 @@
     "itemName": "Hand of Vecna"
   },
   {
+    "id": "feat-hand-craft",
+    "sourceType": "feat",
+    "sourceId": "hand-craft",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Hand-Craft",
+    "detail": "This craft is not meant to cover the whole range of abilities of smiths, wrights, and other artisans, but reflects a talent for making things with superior skill and cunning.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feat-hardiness",
     "sourceType": "feat",
     "sourceId": "hardiness",
@@ -30757,6 +31385,18 @@
       "Half-Elf (Variant; Mark of Storm)",
       "Level 1",
       "Headwinds"
+    ]
+  },
+  {
+    "id": "feat-healer",
+    "sourceType": "feat",
+    "sourceId": "healer",
+    "group": "Action",
+    "type": "Feat",
+    "title": "Healer",
+    "detail": "You are an able physician, allowing you to mend wounds quickly and get your allies back in the fight.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -31466,6 +32106,31 @@
     "sourceType": "item",
     "sourceId": "hideaway-vase",
     "itemName": "Hideaway Vase"
+  },
+  {
+    "id": "feat-high-destiny",
+    "sourceType": "feat",
+    "sourceId": "high-destiny",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "High Destiny",
+    "detail": "Stories tell that those who belong to the race of Dale are destined for greatness, a fact proven true by your King and his story.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
+    "id": "background-archaeologist",
+    "sourceType": "background",
+    "sourceId": "archaeologist",
+    "group": "Triggered",
+    "type": "Background",
+    "title": "Historical Knowledge",
+    "detail": "When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether those were dwarves, elves, humans, yuan-ti, or some other known race.  In addition, you can determine the monetary value of art objects more than a century old.",
+    "tags": [
+      "Background",
+      "Archaeologist"
+    ]
   },
   {
     "id": "rejuvenating-draft-legendary-hit-dice",
@@ -32231,6 +32896,19 @@
     ]
   },
   {
+    "id": "background-shipwright",
+    "sourceType": "background",
+    "sourceId": "shipwright",
+    "group": "Triggered",
+    "type": "Background",
+    "title": "I'll Patch It!",
+    "detail": "Provided you have carpenter's tools and wood, you can perform repairs on a water vehicle.  When you use this ability, you restore a number of hit points to the hull of a water vehicle equal to 5 × your proficiency modifier.  A vehicle cannot be patched by you in this way again until after it has been pulled ashore and fully repaired.",
+    "tags": [
+      "Background",
+      "Shipwright"
+    ]
+  },
+  {
     "id": "shard-of-the-ise-rune-icy-mantle",
     "group": "Action",
     "type": "Item",
@@ -32846,7 +33524,7 @@
     "id": "feat-inspiring-leader",
     "sourceType": "feat",
     "sourceId": "inspiring-leader",
-    "group": "Out of Combat",
+    "group": "Triggered",
     "type": "Feat",
     "title": "Inspiring Leader",
     "detail": "You can spend 10 minutes inspiring your companions, shoring up their resolve to fight.",
@@ -34043,6 +34721,30 @@
     "itemName": "Katana of Wounding"
   },
   {
+    "id": "feat-keen-mind",
+    "sourceType": "feat",
+    "sourceId": "keen-mind",
+    "group": "Out of Combat",
+    "type": "Feat",
+    "title": "Keen Mind",
+    "detail": "You have a mind that can track time, direction, and detail with uncanny precision.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
+    "id": "feat-keenness-of-the-stone-giant",
+    "sourceType": "feat",
+    "sourceId": "keenness-of-the-stone-giant",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Keenness of the Stone Giant",
+    "detail": "You've manifested the physical talents emblematic of stone giants, granting you the following benefits:Ability Score Increase.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "keg-of-alchemist-s-fire-keg-of-alchemist-s-fire",
     "group": "Action",
     "type": "Item",
@@ -34233,6 +34935,42 @@
     "sourceType": "item",
     "sourceId": "knight-card",
     "itemName": "Knight Card"
+  },
+  {
+    "id": "feat-knight-of-the-crown",
+    "sourceType": "feat",
+    "sourceId": "knight-of-the-crown",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Knight of the Crown",
+    "detail": "You are a Knight of Solamnia aligned with the Order of the Crown, a group that extols the virtues of cooperation, loyalty, and obedience.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
+    "id": "feat-knight-of-the-rose",
+    "sourceType": "feat",
+    "sourceId": "knight-of-the-rose",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Knight of the Rose",
+    "detail": "You are a Knight of Solamnia aligned with the Order of the Rose, a group known for leadership, justice, and wisdom.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
+    "id": "feat-knight-of-the-sword",
+    "sourceType": "feat",
+    "sourceId": "knight-of-the-sword",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Knight of the Sword",
+    "detail": "You are a Knight of Solamnia aligned with the Order of the Sword, a group devoted to heroism and courage.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "feature-subclass-fighter-battle-master-7-know-your-enemy-phb",
@@ -34565,6 +35303,18 @@
     ]
   },
   {
+    "id": "feat-leech-craft",
+    "sourceType": "feat",
+    "sourceId": "leech-craft",
+    "group": "Action",
+    "type": "Feat",
+    "title": "Leech-Craft",
+    "detail": "You are skilled, according to ancient traditions, in the healing of wounds and sickness.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-race-tiefling-zariel-legacy-of-avernus-mtf",
     "sourceType": "race",
     "sourceId": "race-tiefling-zariel-legacy-of-avernus-mtf",
@@ -34674,6 +35424,19 @@
       "Tiefling (Levistus)",
       "Level 1",
       "Legacy of Stygia"
+    ]
+  },
+  {
+    "id": "background-azorius-functionary",
+    "sourceType": "background",
+    "sourceId": "azorius-functionary",
+    "group": "Triggered",
+    "type": "Background",
+    "title": "Legal Authority",
+    "detail": "You have the authority to enforce the laws of Ravnica, and that status inspires a certain amount of respect and even fear in the populace.  People mind their manners in your presence and avoid drawing your attention; they assume you have the right to be wherever you are.",
+    "tags": [
+      "Background",
+      "Azorius Functionary"
     ]
   },
   {
@@ -34803,6 +35566,18 @@
     "sourceType": "item",
     "sourceId": "light-drinker",
     "itemName": "Light Drinker"
+  },
+  {
+    "id": "feat-light-foot",
+    "sourceType": "feat",
+    "sourceId": "light-foot",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Light Foot",
+    "detail": "You are exceptionally speedy and agile.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "light-sling-light-sling",
@@ -35484,6 +36259,18 @@
     ]
   },
   {
+    "id": "feat-lucky",
+    "sourceType": "feat",
+    "sourceId": "lucky",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Lucky",
+    "detail": "You have inexplicable luck that seems to kick in at just the right moment.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-race-harengon-lucky-footwork-mpmm",
     "sourceType": "race",
     "sourceId": "race-harengon-lucky-footwork-mpmm",
@@ -35853,6 +36640,19 @@
     "itemName": "Mace of the Priest"
   },
   {
+    "id": "background-mechanic",
+    "sourceType": "background",
+    "sourceId": "mechanic",
+    "group": "Out of Combat",
+    "type": "Background",
+    "title": "Machine Whisperer",
+    "detail": "You have a knack for machines and can tell what state one is in by spending a few minutes with it.  Machines that have been sundered are unusable and should be scrapped for parts.  Machines in disrepair could potentially function again if someone fixed them up, and functioning machines do just that.  Function!",
+    "tags": [
+      "Background",
+      "Mechanic"
+    ]
+  },
+  {
     "id": "macuahuitl-armblade-macuahuitl-armblade",
     "group": "Bonus Action",
     "type": "Item",
@@ -36067,6 +36867,18 @@
     ]
   },
   {
+    "id": "feat-magically-mischievous",
+    "sourceType": "feat",
+    "sourceId": "magically-mischievous",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Magically Mischievous",
+    "detail": "You've picked up a few magical tricks that assist your nefarious skills.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "magnificent-pocket-vanity-magnificent-pocket-vanity",
     "group": "Action",
     "type": "Item",
@@ -36219,6 +37031,18 @@
     "tags": [
       "Open Sea",
       "Level 3"
+    ]
+  },
+  {
+    "id": "feat-martial-adept",
+    "sourceType": "feat",
+    "sourceId": "martial-adept",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Martial Adept",
+    "detail": "You have martial training that allows you to perform special combat maneuvers.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -36959,6 +37783,18 @@
     "itemName": "Medallion of Harmonious Resonance"
   },
   {
+    "id": "feat-memory-of-ancient-days",
+    "sourceType": "feat",
+    "sourceId": "memory-of-ancient-days",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Memory of Ancient Days",
+    "detail": "Long centuries and uncounted generations of Men seem but a little while to the Elves.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-subclass-mystic-nomad-3-memory-of-one-thousand-steps-uathemysticclass",
     "sourceType": "subclass",
     "sourceId": "subclass-mystic-nomad-3-memory-of-one-thousand-steps-uathemysticclass",
@@ -37102,6 +37938,18 @@
     "tags": [
       "Sorcerer",
       "Level 3"
+    ]
+  },
+  {
+    "id": "feat-metamagic-adept",
+    "sourceType": "feat",
+    "sourceId": "metamagic-adept",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Metamagic Adept",
+    "detail": "You've learned how to exert your will on your spells to alter how they function:You learn two Metamagic options of your choice from the sorcerer class.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -37368,6 +38216,18 @@
     ]
   },
   {
+    "id": "feat-minor-corruption",
+    "sourceType": "feat",
+    "sourceId": "minor-corruption",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Minor Corruption",
+    "detail": "You were exposed to the Corruption, a dark magic that's poisoning the island.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "hecate-s-lantern-mire",
     "group": "Action",
     "type": "Item",
@@ -37508,6 +38368,18 @@
     "sourceType": "item",
     "sourceId": "mizzium-mortar",
     "itemName": "Mizzium Mortar"
+  },
+  {
+    "id": "feat-mobile",
+    "sourceType": "feat",
+    "sourceId": "mobile",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Mobile",
+    "detail": "You are exceptionally speedy and agile.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "feature-subclass-bard-swords-3-mobile-flourish-xge",
@@ -38200,6 +39072,30 @@
     "sourceType": "item",
     "sourceId": "naginata-of-throne-s-command",
     "itemName": "Naginata of Throne's Command"
+  },
+  {
+    "id": "feat-nakudama-s-electric-bloodline",
+    "sourceType": "feat",
+    "sourceId": "nakudama-s-electric-bloodline",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Nakudama's Electric Bloodline",
+    "detail": "Although it's uncommon in today's day and age, some Nakudama are able to awaken the now dormant skills held by their warring ancestors.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
+    "id": "feat-nakudama-s-toxin-bloodline",
+    "sourceType": "feat",
+    "sourceId": "nakudama-s-toxin-bloodline",
+    "group": "Action",
+    "type": "Feat",
+    "title": "Nakudama's Toxin Bloodline",
+    "detail": "Although it's uncommon in today's day and age, some Nakudama are able to awaken the now dormant skills held by their warring ancestors.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "narycrash-narycrash",
@@ -39163,6 +40059,18 @@
     ]
   },
   {
+    "id": "feat-opportunistic-thief",
+    "sourceType": "feat",
+    "sourceId": "opportunistic-thief",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Opportunistic Thief",
+    "detail": "You have learned the tricks of the trade of thievery, allowing you to exploit opportunities for pick-pocketing both in and out of combat.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "orb-of-direction-orb-of-direction",
     "group": "Action",
     "type": "Item",
@@ -39337,6 +40245,18 @@
     "itemName": "Orc Stone"
   },
   {
+    "id": "feat-orcish-fury",
+    "sourceType": "feat",
+    "sourceId": "orcish-fury",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Orcish Fury",
+    "detail": "Your fury burns tirelessly.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-subclass-cleric-order-1-order-domain-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-cleric-order-1-order-domain-tce",
@@ -39488,6 +40408,18 @@
     "sourceType": "item",
     "sourceId": "outer-essence-shard-lawful",
     "itemName": "Outer Essence Shard (Lawful)"
+  },
+  {
+    "id": "feat-outlands-envoy",
+    "sourceType": "feat",
+    "sourceId": "outlands-envoy",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Outlands Envoy",
+    "detail": "You have spent significant time in Sigil or the Outlands, the crossroads of the multiverse.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "feature-subclass-wizard-evocation-14-overchannel-phb",
@@ -40124,6 +41056,18 @@
     "itemName": "Planar Key"
   },
   {
+    "id": "feat-planar-wanderer",
+    "sourceType": "feat",
+    "sourceId": "planar-wanderer",
+    "group": "Action",
+    "type": "Feat",
+    "title": "Planar Wanderer",
+    "detail": "You can draw on the forces of the multiverse to survive cosmic extremes and to traverse its infinite realms, granting you these benefits:Planar Adaptation.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-subclass-ranger-horizon-walker-3-planar-warrior-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-ranger-horizon-walker-3-planar-warrior-xge",
@@ -40134,6 +41078,18 @@
     "tags": [
       "Horizon Walker",
       "Level 3"
+    ]
+  },
+  {
+    "id": "feat-plantmender",
+    "sourceType": "feat",
+    "sourceId": "plantmender",
+    "group": "Action",
+    "type": "Feat",
+    "title": "Plantmender",
+    "detail": "One of the basic forms of Tender magic, plantmending is often taught to seedlings of the order.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -40317,6 +41273,18 @@
     "sourceType": "item",
     "sourceId": "pole-of-collapsing",
     "itemName": "Pole of Collapsing"
+  },
+  {
+    "id": "feat-polearm-master",
+    "sourceType": "feat",
+    "sourceId": "polearm-master",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Polearm Master",
+    "detail": "You can keep your enemies at bay with reach weapons.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "poltergeist-candle-holder-poltergeist-candle-holder",
@@ -41951,6 +42919,32 @@
     "itemName": "Repeating Hand Crossbow of Warning"
   },
   {
+    "id": "background-baldur-s-gate-sage",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-sage",
+    "group": "Triggered",
+    "type": "Background",
+    "title": "Researcher",
+    "detail": "When you attempt to learn or recall a piece of lore, if you do not know that information, you often know where and from whom you can obtain it.  Usually, this information comes from a library, scriptorium, university, or a sage or other learned person or creature.  Your DM might rule that the knowledge you seek is secreted away in an almost inaccessible place, or that it simply cannot be found.",
+    "tags": [
+      "Background",
+      "Baldur's Gate Sage"
+    ]
+  },
+  {
+    "id": "background-sage",
+    "sourceType": "background",
+    "sourceId": "sage",
+    "group": "Triggered",
+    "type": "Background",
+    "title": "Researcher",
+    "detail": "When you attempt to learn or recall a piece of lore, if you do not know that information, you often know where and from whom you can obtain it.  Usually, this information comes from a library, scriptorium, university, or a sage or other learned person or creature.  Your DM might rule that the knowledge you seek is secreted away in an almost inaccessible place, or that it simply cannot be found.",
+    "tags": [
+      "Background",
+      "Sage"
+    ]
+  },
+  {
     "id": "feature-subclass-barbarian-juggernaut-6-resolute-stance-tdcsr",
     "sourceType": "subclass",
     "sourceId": "subclass-barbarian-juggernaut-6-resolute-stance-tdcsr",
@@ -42124,6 +43118,18 @@
     "itemName": "Reveler's Concertina"
   },
   {
+    "id": "feat-revenant-blade",
+    "sourceType": "feat",
+    "sourceId": "revenant-blade",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Revenant Blade",
+    "detail": "You are descended from a master of the double-bladed scimitar, and some of that mastery has passed on to you.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "steel-revivify",
     "group": "Action",
     "type": "Item",
@@ -42189,6 +43195,18 @@
     "sourceType": "item",
     "sourceId": "rift-sheath",
     "itemName": "Rift Sheath"
+  },
+  {
+    "id": "feat-righteous-heritor",
+    "sourceType": "feat",
+    "sourceId": "righteous-heritor",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Righteous Heritor",
+    "detail": "You can channel cosmic forces of good to gain these benefits:Ability Score Increase.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "ring-of-amity-ring-of-amity",
@@ -42512,7 +43530,7 @@
     "id": "feat-ritual-caster",
     "sourceType": "feat",
     "sourceId": "ritual-caster",
-    "group": "Out of Combat",
+    "group": "Triggered",
     "type": "Feat",
     "title": "Ritual Caster",
     "detail": "You have learned a number of spells that you can cast as rituals.",
@@ -42838,6 +43856,18 @@
     "sourceType": "item",
     "sourceId": "rose-quartz-koi",
     "itemName": "Rose Quartz Koi"
+  },
+  {
+    "id": "feat-royalty-revealed",
+    "sourceType": "feat",
+    "sourceId": "royalty-revealed",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Royalty Revealed",
+    "detail": "Your kin belong to a bloodline of kings, but they have learnt to hide from their enemies in the twilight years of their kingdom.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "ruby-of-the-war-mage-ruby-of-the-war-mage",
@@ -43835,6 +44865,18 @@
     ]
   },
   {
+    "id": "feat-rune-craft",
+    "sourceType": "feat",
+    "sourceId": "rune-craft",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Rune-Craft",
+    "detail": "You can now read and write runic inscriptions.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "wyrmreaver-gauntlets-runes",
     "group": "Bonus Action",
     "type": "Item",
@@ -44717,6 +45759,18 @@
     ]
   },
   {
+    "id": "feat-second-chance",
+    "sourceType": "feat",
+    "sourceId": "second-chance",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Second Chance",
+    "detail": "Fortune favors you when someone tries to strike you.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "second-fiddle-second-fiddle",
     "group": "Reaction",
     "type": "Item",
@@ -45337,6 +46391,18 @@
     "itemName": "Shield Guardian Amulet"
   },
   {
+    "id": "feat-shield-master",
+    "sourceType": "feat",
+    "sourceId": "shield-master",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Shield Master",
+    "detail": "You use shields not just for protection but also for offense.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "shield-of-expression-shield-of-expression",
     "group": "Bonus Action",
     "type": "Item",
@@ -45580,6 +46646,32 @@
     "sourceType": "item",
     "sourceId": "shimmering-spectacles",
     "itemName": "Shimmering Spectacles"
+  },
+  {
+    "id": "background-baldur-s-gate-sailor",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-sailor",
+    "group": "Triggered",
+    "type": "Background",
+    "title": "Ship's Passage",
+    "detail": "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions.  You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate).  Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need.",
+    "tags": [
+      "Background",
+      "Baldur's Gate Sailor"
+    ]
+  },
+  {
+    "id": "background-sailor",
+    "sourceType": "background",
+    "sourceId": "sailor",
+    "group": "Triggered",
+    "type": "Background",
+    "title": "Ship's Passage",
+    "detail": "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions.  You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate).  Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need.",
+    "tags": [
+      "Background",
+      "Sailor"
+    ]
   },
   {
     "id": "whelm-shock-wave",
@@ -46077,6 +47169,18 @@
     ]
   },
   {
+    "id": "feat-skulker",
+    "sourceType": "feat",
+    "sourceId": "skulker",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Skulker",
+    "detail": "You are expert at slinking through shadows.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "skull-card-skull-card",
     "group": "Action",
     "type": "Item",
@@ -46529,6 +47633,18 @@
     ]
   },
   {
+    "id": "feat-song-craft",
+    "sourceType": "feat",
+    "sourceId": "song-craft",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Song-Craft",
+    "detail": "You have been trained in the art of singing, according to the tradition of the wandering minstrels.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "harp-of-gilded-plenty-soothing-melody",
     "group": "Action",
     "type": "Item",
@@ -46688,6 +47804,18 @@
     "sourceType": "item",
     "sourceId": "h-rethi-soul-scepter",
     "itemName": "H'rethi Soul Scepter"
+  },
+  {
+    "id": "feat-soul-of-the-storm-giant",
+    "sourceType": "feat",
+    "sourceId": "soul-of-the-storm-giant",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Soul of the Storm Giant",
+    "detail": "You've manifested the tempest magic emblematic of storm giants, granting you the following benefits:Ability Score Increase.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "feature-subclass-paladin-vengeance-15-soul-of-vengeance-phb",
@@ -48001,6 +49129,18 @@
     "itemName": "Spymaster's Signet"
   },
   {
+    "id": "feat-squire-of-solamnia",
+    "sourceType": "feat",
+    "sourceId": "squire-of-solamnia",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Squire of Solamnia",
+    "detail": "Your training in the ways of the Knights of Solamnia grants you these benefits:Mount Up.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "sream-s-stoppered-oasis-sream-s-stoppered-oasis",
     "group": "Action",
     "type": "Item",
@@ -48518,6 +49658,19 @@
     "itemName": "Starshot Repeating Hand Crossbow"
   },
   {
+    "id": "background-marine",
+    "sourceType": "background",
+    "sourceId": "marine",
+    "group": "Out of Combat",
+    "type": "Background",
+    "title": "Steady",
+    "detail": "You can move twice the normal amount of time (up to 16 hours) each day before being subject to the effect of a forced march (see \"Travel Pace\" in chapter 8 of the Player's Handbook).  Additionally, you can automatically find a safe route to land a boat on shore, provided such a route exists.",
+    "tags": [
+      "Background",
+      "Marine"
+    ]
+  },
+  {
     "id": "feature-class-rogue-3-steady-aim-tce",
     "sourceType": "class",
     "sourceId": "class-rogue-3-steady-aim-tce",
@@ -48928,6 +50081,18 @@
     "itemName": "Stone of Controlling Earth Elementals"
   },
   {
+    "id": "feat-stone-hard",
+    "sourceType": "feat",
+    "sourceId": "stone-hard",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Stone-Hard",
+    "detail": "The Dwarves were made to be strong to endure, for they came unto the world when a great evil ruled Middle-earth.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-race-goliath-stone-s-endurance-mpmm",
     "sourceType": "race",
     "sourceId": "race-goliath-stone-s-endurance-mpmm",
@@ -49177,6 +50342,18 @@
       "Shadow",
       "Level 1",
       "Strength of the Grave"
+    ]
+  },
+  {
+    "id": "feat-strength-of-will",
+    "sourceType": "feat",
+    "sourceId": "strength-of-will",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Strength of Will",
+    "detail": "You have been raised in a land dotted with desolate ruins and burial mounds.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -49453,10 +50630,22 @@
     "itemName": "Staff of Thunder and Lightning"
   },
   {
+    "id": "feat-strike-of-the-giants",
+    "sourceType": "feat",
+    "sourceId": "strike-of-the-giants",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Strike of the Giants",
+    "detail": "You have absorbed primeval magic that gives you an echo of the might of giants.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feat-strixhaven-mascot",
     "sourceType": "feat",
     "sourceId": "strixhaven-mascot",
-    "group": "Out of Combat",
+    "group": "Action",
     "type": "Feat",
     "title": "Strixhaven Mascot",
     "detail": "You have learned how to summon a Strixhaven mascot to assist you, granting you these benefits:You can cast the find familiar spell as a ritual.",
@@ -49819,6 +51008,18 @@
     ]
   },
   {
+    "id": "feat-sure-at-the-mark",
+    "sourceType": "feat",
+    "sourceId": "sure-at-the-mark",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Sure at the Mark",
+    "detail": "Hobbits are nimble and keen-eyed, qualities that make them good archers.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-race-human-innistrad-kessig-sure-footed-psi",
     "sourceType": "race",
     "sourceId": "race-human-innistrad-kessig-sure-footed-psi",
@@ -49882,6 +51083,18 @@
       "Deep Gnome",
       "Level 1",
       "Svirfneblin Camouflage"
+    ]
+  },
+  {
+    "id": "feat-svirfneblin-magic",
+    "sourceType": "feat",
+    "sourceId": "svirfneblin-magic",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Svirfneblin Magic",
+    "detail": "You have inherited the innate spellcasting ability of your ancestors.",
+    "tags": [
+      "Feat"
     ]
   },
   {
@@ -50399,6 +51612,18 @@
     "itemName": "Tekkō-kagi of Warning"
   },
   {
+    "id": "feat-telekinetic",
+    "sourceType": "feat",
+    "sourceId": "telekinetic",
+    "group": "Bonus Action",
+    "type": "Feat",
+    "title": "Telekinetic",
+    "detail": "You learn to move things with your mind, granting you the following benefits:Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-subclass-fighter-psi-warrior-18-telekinetic-master-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-fighter-psi-warrior-18-telekinetic-master-tce",
@@ -50462,6 +51687,18 @@
     "sourceType": "item",
     "sourceId": "teleportation-tablet",
     "itemName": "Teleportation Tablet"
+  },
+  {
+    "id": "feat-tellu-and-scale-s-master-cut",
+    "sourceType": "feat",
+    "sourceId": "tellu-and-scale-s-master-cut",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Tellu and Scale's Master Cut",
+    "detail": "Having trained with the masters of the valley sword school, you have learned the usefulness of quickly changing between different fighting techniques in the midst of battle.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "tempest-griffon-bracers-tempest-griffon-bracers",
@@ -50851,6 +52088,18 @@
     "sourceType": "item",
     "sourceId": "thomas-s-dimensional-trousers",
     "itemName": "Thomas's Dimensional Trousers"
+  },
+  {
+    "id": "feat-three-is-company",
+    "sourceType": "feat",
+    "sourceId": "three-is-company",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Three is Company",
+    "detail": "The Wise say that it is sometimes best to trust to friendship than to great wisdom.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "three-section-staff-three-section-staff",
@@ -51294,6 +52543,18 @@
     "itemName": "Jester's Mask"
   },
   {
+    "id": "feat-toraf-and-bolder-s-master-cut",
+    "sourceType": "feat",
+    "sourceId": "toraf-and-bolder-s-master-cut",
+    "group": "Out of Combat",
+    "type": "Feat",
+    "title": "Toraf and Bolder's Master Cut",
+    "detail": "Having trained with the masters of the mountain sword school, you've learned how to pull off difficult weapon maneuvers which allow you to target specific parts of a creature's anatomy.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "torrdok-s-magnificent-forgery-torrdok-s-magnificent-forgery",
     "group": "Action",
     "type": "Item",
@@ -51352,6 +52613,18 @@
     "type": "Feat",
     "title": "Tough",
     "detail": "Your hit point maximum increases by an amount equal to twice your level when you gain this feat.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
+    "id": "feat-tough-as-old-tree-roots",
+    "sourceType": "feat",
+    "sourceId": "tough-as-old-tree-roots",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Tough as Old Tree-Roots",
+    "detail": "They say that Hobbits are difficult to dismay or kill, and that they recover their health at a prodigious pace if allowed to enjoy some peace and quiet.",
     "tags": [
       "Feat"
     ]
@@ -51945,6 +53218,19 @@
     ]
   },
   {
+    "id": "background-golgari-agent",
+    "sourceType": "background",
+    "sourceId": "golgari-agent",
+    "group": "Triggered",
+    "type": "Background",
+    "title": "Undercity Paths",
+    "detail": "You know hidden, underground pathways that you can use to bypass crowds, obstacles, and observation as you move through the city.  When you aren't in combat, you and companions you lead can travel between any two locations in the city twice as fast as your speed would normally allow.",
+    "tags": [
+      "Background",
+      "Golgari Agent"
+    ]
+  },
+  {
     "id": "feather-of-diatryma-summoning-underdark",
     "group": "Action",
     "type": "Item",
@@ -52152,6 +53438,19 @@
     "tags": [
       "Mystic",
       "Level 1"
+    ]
+  },
+  {
+    "id": "background-uthgardt-tribe-member",
+    "sourceType": "background",
+    "sourceId": "uthgardt-tribe-member",
+    "group": "Triggered",
+    "type": "Background",
+    "title": "Uthgardt Heritage",
+    "detail": "You have an excellent knowledge of not only your tribe's territory, but also the terrain and natural resources of the rest of the North.  You are familiar enough with any wilderness area that you can find twice as much food and water as you normally would when you forage there.",
+    "tags": [
+      "Background",
+      "Uthgardt Tribe Member"
     ]
   },
   {
@@ -52669,6 +53968,18 @@
     ]
   },
   {
+    "id": "feat-vigor-of-the-hill-giant",
+    "sourceType": "feat",
+    "sourceId": "vigor-of-the-hill-giant",
+    "group": "Reaction",
+    "type": "Feat",
+    "title": "Vigor of the Hill Giant",
+    "detail": "You've manifested the resilience emblematic of hill giants, granting you the following benefits:Ability Score Increase.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-subclass-wizard-graviturgy-10-violent-attraction-egw",
     "sourceType": "subclass",
     "sourceId": "subclass-wizard-graviturgy-10-violent-attraction-egw",
@@ -52762,6 +54073,18 @@
     "sourceType": "item",
     "sourceId": "rakdos-riteknife",
     "itemName": "Rakdos Riteknife"
+  },
+  {
+    "id": "feat-vocalist-arcanist",
+    "sourceType": "feat",
+    "sourceId": "vocalist-arcanist",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Vocalist Arcanist",
+    "detail": "Your unique method of weaving song into magic allows you to enhance your spells through your magical vocals.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "feature-subclass-cleric-order-1-voice-of-authority-tce",
@@ -54400,6 +55723,18 @@
     "itemName": "Wayfinder Sphere"
   },
   {
+    "id": "feat-ways-of-the-wild",
+    "sourceType": "feat",
+    "sourceId": "ways-of-the-wild",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Ways of the Wild",
+    "detail": "The Rangers of the North roam ceaselessly, hunting for wicked things and guarding all frontiers.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
     "id": "feature-subclass-fighter-eldritch-knight-3-weapon-bond-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-fighter-eldritch-knight-3-weapon-bond-phb",
@@ -54425,6 +55760,18 @@
     "sourceType": "item",
     "sourceId": "weapon-of-throne-s-command",
     "itemName": "Weapon of Throne's Command"
+  },
+  {
+    "id": "feat-weapon-craft",
+    "sourceType": "feat",
+    "sourceId": "weapon-craft",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Weapon-Craft",
+    "detail": "Choose a type of weapon.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "weaving-wasp-needles-weaving-wasp-needles",
@@ -54460,6 +55807,18 @@
     "sourceType": "item",
     "sourceId": "well-of-many-worlds",
     "itemName": "Well of Many Worlds"
+  },
+  {
+    "id": "feat-wetland-explorer",
+    "sourceType": "feat",
+    "sourceId": "wetland-explorer",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Wetland Explorer",
+    "detail": "Your deep knowledge of the dangerous creatures that inhabit the world aid you in both fighting and tracking them.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "quaal-s-feather-token-whip-whip",
@@ -55272,6 +56631,30 @@
     "sourceType": "item",
     "sourceId": "wolfskin-cloak",
     "itemName": "Wolfskin Cloak"
+  },
+  {
+    "id": "feat-wood-elf-magic",
+    "sourceType": "feat",
+    "sourceId": "wood-elf-magic",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Wood Elf Magic",
+    "detail": "You learn the magic of the primeval woods, which are revered and protected by your people.",
+    "tags": [
+      "Feat"
+    ]
+  },
+  {
+    "id": "feat-wood-craft",
+    "sourceType": "feat",
+    "sourceId": "wood-craft",
+    "group": "Triggered",
+    "type": "Feat",
+    "title": "Wood-Craft",
+    "detail": "You are familiar with the difficulties encountered when crossing wild lands, and with the ways of overcoming them.",
+    "tags": [
+      "Feat"
+    ]
   },
   {
     "id": "wooden-cuirass-of-fungal-spores-wooden-cuirass-of-fungal-spores",

@@ -740,6 +740,14 @@
         "kind": "rules-text",
         "name": "Natural Explorer",
         "text": "You are particularly familiar with one type of natural environment and are adept at traveling and surviving in such regions."
+      },
+      {
+        "id": "background-effect-variant-guild-artisan-guild-merchant",
+        "sourceType": "background",
+        "sourceId": "variant-guild-artisan-guild-merchant",
+        "kind": "rules-text",
+        "name": "Variant Guild Artisan (Guild Merchant)",
+        "text": "As an established and respected member of a guild, you can rely on certain benefits that membership provides."
       }
     ],
     "ruleFeatures": [
@@ -1068,8 +1076,46 @@
     "backgrounds": [
       "Variant Guild Artisan (Guild Merchant)"
     ],
+    "backgroundDetails": [
+      {
+        "id": "variant-guild-artisan-guild-merchant",
+        "name": "Variant Guild Artisan (Guild Merchant)",
+        "source": "PHB",
+        "page": "133",
+        "prerequisites": "",
+        "abilityScores": "",
+        "repeatable": "",
+        "skillProficiencies": "Insight, Persuasion",
+        "toolProficiencies": "One type of artisan's tools, or navigator's tools, or an additional language",
+        "languages": "One of your choice",
+        "equipment": "A set of artisan's tools (one of your choice) or a mule and cart, a letter of introduction from your guild, a set of traveler's clothes, and a belt pouch containing 15 gp",
+        "featureName": "Guild Membership",
+        "featureText": "As an established and respected member of a guild, you can rely on certain benefits that membership provides. Your fellow guild members will provide you with lodging and food if necessary, and pay for your funeral if needed. In some cities and towns, a guildhall offers a central place to meet other members of your profession, which can be a good place to meet potential patrons, allies, or hirelings. Guilds often wield tremendous political power. If you are accused of a crime, your guild will support you if a good case can be made for your innocence or the crime is justifiable. You can also gain access to powerful political figures through the guild, if you are a member in good standing. Such connections might require the donation of money or magic items to the guild's coffers. You must pay dues of 5 gp per month to the guild. If you miss payments, you must make up back dues to remain in the guild's good graces.",
+        "text": "Skill Proficiencies: Insight, Persuasion Tool Proficiencies: One type of artisan's tools, or navigator's tools, or an additional language Languages: One of your choice Equipment: A set of artisan's tools (one of your choice) or a mule and cart, a letter of introduction from your guild, a set of traveler's clothes, and a belt pouch containing 15 gp Feature: Guild Membership[–] As an established and respected member of a guild, you can rely on certain benefits that membership provides. Your fellow guild members will provide you with lodging and food if necessary, and pay for your funeral if needed. In some cities and towns, a guildhall offers a central place to meet other members of your profession, which can be a good place to meet potential patrons, allies, or hirelings. Guilds often wield tremendous political power. If you are accused of a crime, your guild will support you if a good case can be made for your innocence or the crime is justifiable. You can also gain access to powerful political figures through the guild, if you are a member in good standing. Such connections might require the donation of money or magic items to the guild's coffers. You must pay dues of 5 gp per month to the guild. If you miss payments, you must make up back dues to remain in the guild's good graces.",
+        "timing": "Passive"
+      }
+    ],
     "feats": [
       "durable"
+    ],
+    "featDetails": [
+      {
+        "id": "durable",
+        "name": "Durable",
+        "source": "PHB",
+        "page": "166",
+        "prerequisites": "",
+        "abilityScores": "",
+        "repeatable": "No",
+        "skillProficiencies": "",
+        "toolProficiencies": "",
+        "languages": "",
+        "equipment": "",
+        "featureName": "",
+        "featureText": "",
+        "text": "Hardy and resilient, you gain the following benefits:Increase your Constitution score by 1, to a maximum of 20. When you roll a Hit Die to regain hit points, the minimum number of hit points you regain from the roll equals twice your Constitution modifier (minimum of 2).",
+        "timing": "Triggered"
+      }
     ],
     "races": [
       "Human"
@@ -1079,7 +1125,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-06T10:46:44.183Z"
+      "generatedAtUtc": "2026-05-06T12:45:09.540Z"
     },
     "url": "Public/Players/Justin Player Sheet.html",
     "searchText": "Character Stats Equipment Spells 1st Level Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJustinDnDNotes Full Class Info Class Features & Abilities Hunter's Prey (Colossus Slayer) Once per turn when hitting a creature below max HP, deal an extra 1d8 damage. Archery Fighting Style +2 bonus on attack rolls with ranged weapons. Zephyr Strike Move like the wind. For the duration, movement doesn't provoke opportunity attacks. Once before the spell ends, can give yourself advantage on one weapon attack roll on your turn. That attack deals an extra 1d8 force damage on a hit. Whether you hit or miss, walking speed increases by 30 feet until end of that turn. Ensnaring Strike The next time you hit a creature with a weapon attack before this spell ends, a writhing mass of thorny vines appears at the point of impact, and the target must succeed on a Strength saving throw or be restrained by the magical vines until the spell ends. A Large or larger creature has advantage on this saving throw. If the target succeeds on the save, the vines shrivel away. While restrained by this spell, the target takes 1d6 piercing damage at the start of each of its turns. A creature restrained by the vines or one that can touch the creature can use its action to make a Strength check against your spell save DC. On a success, the target is freed. Cure Wounds 1 creature is healed for 1d8+1d8/SL+spellcasting ability modifier hp. Piercing Shot 3/day. Before making an attack roll, you can activate Piercing Shot and target a specific body part. If the attack hits, the target suffers a debilitating injury. The creature suffers disadvantage on Wisdom (Perception) checks relying on sight and on attack/damage rolls. The creature can no longer hold two handed weapons and can only hold a single object at a time. Arm/Hand Movement speed is halved. Foot/Leg The creature must make a Constitution saving throw when attempting the next action in combat (DC = 10 + attacker's proficiency + Dexterity modifier). On a failed save, they lose their action and reactions until the start of your next turn. Precise Aim 1/day. At the start of your turn, activate Precise Aim to focus your attacks. Until the end of your next turn, whenever you hit a creature, allies gain advantage on attack rolls against that target. Primeval Awareness Ensnaring strike, Zephyr strike, Cure wounds Limited Features Piercing Shot 3 uses Precise Aim 1 use Proficiencies Common language from Human Common language from Ranger Beasts Common language from Human Common language from Guild Merchant Goblin"
@@ -1721,7 +1767,7 @@
         "group": "Triggered",
         "type": "Feat",
         "title": "Elemental Adept",
-        "detail": "When you gain this feat, choose one of the following damage types:",
+        "detail": "When you gain this feat, choose one of the following damage types: acid, cold, fire, lightning, or thunder.",
         "tags": [
           "Feat"
         ]
@@ -1736,6 +1782,19 @@
         "sourceType": "item",
         "sourceId": "griffon-key-loop",
         "itemName": "Griffon Key Loop"
+      },
+      {
+        "id": "background-sailor",
+        "sourceType": "background",
+        "sourceId": "sailor",
+        "group": "Triggered",
+        "type": "Background",
+        "title": "Ship's Passage",
+        "detail": "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions.  You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate).  Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need.",
+        "tags": [
+          "Background",
+          "Sailor"
+        ]
       },
       {
         "id": "feature-class-cleric-1-spellcasting-phb",
@@ -1806,7 +1865,7 @@
         "sourceId": "elemental-adept",
         "kind": "rules-text",
         "name": "Elemental Adept",
-        "text": "When you gain this feat, choose one of the following damage types:"
+        "text": "When you gain this feat, choose one of the following damage types: acid, cold, fire, lightning, or thunder."
       },
       {
         "id": "warhammer-of-warning-warhammer-of-warning-initiative-advantage",
@@ -1827,6 +1886,14 @@
         "sourceType": "item",
         "sourceId": "1-warhammer",
         "itemName": "+1 Warhammer"
+      },
+      {
+        "id": "background-effect-sailor",
+        "sourceType": "background",
+        "sourceId": "sailor",
+        "kind": "rules-text",
+        "name": "Sailor",
+        "text": "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions."
       }
     ],
     "ruleFeatures": [
@@ -2139,8 +2206,46 @@
     "backgrounds": [
       "Sailor"
     ],
+    "backgroundDetails": [
+      {
+        "id": "sailor",
+        "name": "Sailor",
+        "source": "PHB",
+        "page": "139",
+        "prerequisites": "",
+        "abilityScores": "",
+        "repeatable": "",
+        "skillProficiencies": "Athletics, Perception",
+        "toolProficiencies": "Navigator's tools, vehicles (water)",
+        "languages": "",
+        "equipment": "A belaying pin (club), silk rope (50 feet), a lucky charm such as a rabbit foot or a small stone with a hole in the center (or you may roll for a random trinket on the Trinkets table in chapter 5), a set of common clothes, and a belt pouch containing 10 gp",
+        "featureName": "Ship's Passage",
+        "featureText": "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate). Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need. Your Dungeon Master will determine how long it takes to get where you need to go. In return for your free passage, you and your companions are expected to assist the crew during the voyage.",
+        "text": "Skill Proficiencies: Athletics, Perception Tool Proficiencies: Navigator's tools, vehicles (water) Equipment: A belaying pin (club), silk rope (50 feet), a lucky charm such as a rabbit foot or a small stone with a hole in the center (or you may roll for a random trinket on the Trinkets table in chapter 5), a set of common clothes, and a belt pouch containing 10 gp Feature: Ship's Passage[–] When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate). Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need. Your Dungeon Master will determine how long it takes to get where you need to go. In return for your free passage, you and your companions are expected to assist the crew during the voyage.",
+        "timing": "Triggered"
+      }
+    ],
     "feats": [
       "Elemental Adept"
+    ],
+    "featDetails": [
+      {
+        "id": "elemental-adept",
+        "name": "Elemental Adept",
+        "source": "PHB",
+        "page": "166",
+        "prerequisites": "The ability to cast at least one spell",
+        "abilityScores": "",
+        "repeatable": "No",
+        "skillProficiencies": "",
+        "toolProficiencies": "",
+        "languages": "",
+        "equipment": "",
+        "featureName": "",
+        "featureText": "",
+        "text": "When you gain this feat, choose one of the following damage types: acid, cold, fire, lightning, or thunder. Spells you cast ignore resistance to damage of the chosen type. In addition, when you roll damage for a spell you cast that deals damage of that type, you can treat any 1 on a damage die as a 2. You can select this feat multiple times. Each time you do so, you must choose a different damage type.",
+        "timing": "Triggered"
+      }
     ],
     "races": [
       "Genasi (Water)"
@@ -2150,7 +2255,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-06T10:46:44.183Z"
+      "generatedAtUtc": "2026-05-06T12:45:09.540Z"
     },
     "url": "Public/Players/Claire Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaClaireDnDNotes Full Class Info"
@@ -2551,6 +2656,18 @@
         ]
       },
       {
+        "id": "feat-actor",
+        "sourceType": "feat",
+        "sourceId": "actor",
+        "group": "Out of Combat",
+        "type": "Feat",
+        "title": "Actor",
+        "detail": "Skilled at mimicry and dramatics, you gain the following benefits:Increase your Charisma score by 1, to a maximum of 20.",
+        "tags": [
+          "Feat"
+        ]
+      },
+      {
         "id": "feature-subclass-monk-drunken-master-3-bonus-proficiencies-xge",
         "sourceType": "subclass",
         "sourceId": "subclass-monk-drunken-master-3-bonus-proficiencies-xge",
@@ -2805,6 +2922,19 @@
         ]
       },
       {
+        "id": "background-sailor",
+        "sourceType": "background",
+        "sourceId": "sailor",
+        "group": "Triggered",
+        "type": "Background",
+        "title": "Ship's Passage",
+        "detail": "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions.  You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate).  Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need.",
+        "tags": [
+          "Background",
+          "Sailor"
+        ]
+      },
+      {
         "id": "feature-class-monk-4-slow-fall-phb",
         "sourceType": "class",
         "sourceId": "class-monk-4-slow-fall-phb",
@@ -2963,6 +3093,14 @@
         "kind": "rules-text",
         "name": "Quickened Healing",
         "text": "4th-level monk optional class features As an action, you can spend 2 ki points and roll a Martial Arts die."
+      },
+      {
+        "id": "background-effect-sailor",
+        "sourceType": "background",
+        "sourceId": "sailor",
+        "kind": "rules-text",
+        "name": "Sailor",
+        "text": "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions."
       },
       {
         "id": "feature-effect-class-monk-2-step-of-the-wind-phb",
@@ -3403,8 +3541,46 @@
     "backgrounds": [
       "Sailor"
     ],
+    "backgroundDetails": [
+      {
+        "id": "sailor",
+        "name": "Sailor",
+        "source": "PHB",
+        "page": "139",
+        "prerequisites": "",
+        "abilityScores": "",
+        "repeatable": "",
+        "skillProficiencies": "Athletics, Perception",
+        "toolProficiencies": "Navigator's tools, vehicles (water)",
+        "languages": "",
+        "equipment": "A belaying pin (club), silk rope (50 feet), a lucky charm such as a rabbit foot or a small stone with a hole in the center (or you may roll for a random trinket on the Trinkets table in chapter 5), a set of common clothes, and a belt pouch containing 10 gp",
+        "featureName": "Ship's Passage",
+        "featureText": "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate). Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need. Your Dungeon Master will determine how long it takes to get where you need to go. In return for your free passage, you and your companions are expected to assist the crew during the voyage.",
+        "text": "Skill Proficiencies: Athletics, Perception Tool Proficiencies: Navigator's tools, vehicles (water) Equipment: A belaying pin (club), silk rope (50 feet), a lucky charm such as a rabbit foot or a small stone with a hole in the center (or you may roll for a random trinket on the Trinkets table in chapter 5), a set of common clothes, and a belt pouch containing 10 gp Feature: Ship's Passage[–] When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate). Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need. Your Dungeon Master will determine how long it takes to get where you need to go. In return for your free passage, you and your companions are expected to assist the crew during the voyage.",
+        "timing": "Triggered"
+      }
+    ],
     "feats": [
       "Actor"
+    ],
+    "featDetails": [
+      {
+        "id": "actor",
+        "name": "Actor",
+        "source": "PHB",
+        "page": "165",
+        "prerequisites": "",
+        "abilityScores": "",
+        "repeatable": "No",
+        "skillProficiencies": "",
+        "toolProficiencies": "",
+        "languages": "",
+        "equipment": "",
+        "featureName": "",
+        "featureText": "",
+        "text": "Skilled at mimicry and dramatics, you gain the following benefits:Increase your Charisma score by 1, to a maximum of 20. You have advantage on Charisma (Deception) and Charisma (Performance) checks when trying to pass yourself off as a different person. You can mimic the speech of another person or the sounds made by other creatures. You must have heard the person speaking, or heard the creature make the sound, for at least 1 minute. A successful Wisdom (Insight) check contested by your Charisma (Deception) check allows a listener to determine that the effect is faked.",
+        "timing": "Out of Combat"
+      }
     ],
     "races": [
       "Half-Orc"
@@ -3414,7 +3590,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-06T10:46:44.183Z"
+      "generatedAtUtc": "2026-05-06T12:45:09.540Z"
     },
     "url": "Public/Players/JP Player Sheet.html",
     "searchText": "Character Stats Equipment Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJpPlayerNotes Full Class Info"
@@ -3988,6 +4164,31 @@
         ]
       },
       {
+        "id": "feat-great-weapon-master",
+        "sourceType": "feat",
+        "sourceId": "great-weapon-master",
+        "group": "Bonus Action",
+        "type": "Feat",
+        "title": "Great Weapon Master",
+        "detail": "You've learned to put the weight of a weapon to your advantage, letting its momentum empower your strikes.",
+        "tags": [
+          "Feat"
+        ]
+      },
+      {
+        "id": "background-archaeologist",
+        "sourceType": "background",
+        "sourceId": "archaeologist",
+        "group": "Triggered",
+        "type": "Background",
+        "title": "Historical Knowledge",
+        "detail": "When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether those were dwarves, elves, humans, yuan-ti, or some other known race.  In addition, you can determine the monetary value of art objects more than a century old.",
+        "tags": [
+          "Background",
+          "Archaeologist"
+        ]
+      },
+      {
         "id": "feature-subclass-fighter-champion-3-improved-critical-phb",
         "sourceType": "subclass",
         "sourceId": "subclass-fighter-champion-3-improved-critical-phb",
@@ -4079,6 +4280,14 @@
       }
     ],
     "ruleEffects": [
+      {
+        "id": "background-effect-archaeologist",
+        "sourceType": "background",
+        "sourceId": "archaeologist",
+        "kind": "rules-text",
+        "name": "Archaeologist",
+        "text": "When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether those were dwarves, elves, humans, yuan-ti, or some other known race."
+      },
       {
         "id": "feature-effect-class-fighter-5-extra-attack-phb",
         "sourceType": "class",
@@ -4320,9 +4529,64 @@
     "backgrounds": [
       "Archaeologist"
     ],
+    "backgroundDetails": [
+      {
+        "id": "archaeologist",
+        "name": "Archaeologist",
+        "source": "ToA",
+        "page": "192",
+        "prerequisites": "",
+        "abilityScores": "",
+        "repeatable": "",
+        "skillProficiencies": "History, Survival",
+        "toolProficiencies": "Cartographer's tools or navigator's tools",
+        "languages": "One of your choice",
+        "equipment": "A wooden case containing a map to a ruin or dungeon, a bullseye lantern, a miner's pick, a set of traveler's clothes, a shovel, a two-person tent, a trinket recovered from a dig site, and a pouch containing 25 gp Dust Digger Prior to becoming an adventurer, you spent most of your young life crawling around in the dust, pilfering relics of questionable value from crypts and ruins. Though you managed to sell a few of your discoveries and earn enough coin to buy proper adventuring gear, you have held onto an item that has great emotional value to you. Roll on the Signature Item table to see what you have, or choose an item from the table. Signature Item d8 | Item 1 | 10-foot pole 2 | Crowbar 3 | Hat 4 | Hooded lantern 5 | Medallion 6 | Shovel 7 | Sledgehammer 8 | Whip",
+        "featureName": "Historical Knowledge",
+        "featureText": "When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether those were dwarves, elves, humans, yuan-ti, or some other known race. In addition, you can determine the monetary value of art objects more than a century old. Suggested Characteristics Few archaeologists can resist the lure of an unexplored ruin or dungeon, particularly if such a site is the source of legends or is rumored to contain the treasures and relics of wizards, warlords, or royalty. Some archaeologists plunder for wealth or fame, while others consider it their calling to illuminate the past or keep the world's greatest treasures from falling into the wrong hands. Whatever their motivations, archaeologists combine the qualities of a scrappy historian with the self-made heroism of a treasure-hunting scoundrel. d8 | Personality Trait 1 | I love a good puzzle or mystery 2 | I'm a pack rat who never throws anything away. 3 | Fame is more important to me than money. 4 | I have no qualms about stealing from the dead. 5 | I'm happier in a dusty old tomb than I am in the centers of civilization. 6 | Traps don't make me nervous. Idiots who trigger traps make me nervous. 7 | I might fail, but I will never give up. 8 | You might think I'm a scholar, but I love a good brawl. These fists were made for punching. d6 | Ideal 1 | Preservation. That artifact belongs in a museum. (Good) 2 | Greed. I won't risk my life for nothing. I expect some kind of payment. (Any) 3 | Death Wish. Nothing is more exhilarating than a narrow escape from the jaws of death. (Chaotic) 4 | Dignity. The dead and their belongings deserve to be treated with respect. (Lawful) 5 | Immortality. All of my exploring is part of a plan to find the secret of everlasting life. (Any) 6 | Danger. With every great discovery comes grave danger. The two walk hand in hand. (Any) d6 | Bond 1 | Ever since I was a child, I've heard stories about a lost city. I aim to find it, learn its secrets, and earn my place in the history books. 2 | I want to find my mentor, who disappeared on an expedition some time ago. 3 | I have a friendly rival. Only one of us can be the best, and I aim to prove it's me. 4 | I won't sell an art object or other treasure that has historical significance or is one of a kind. 5 | I'm secretly in love with the wealthy patron who sponsors my archaeological exploits. 6 | I hope to bring prestige to a library, a museum, or a university. d6 | Flaw 1 | I have a secret fear of some common wild animal - and in my work, I see them everywhere. 2 | I can't leave a room without searching it for secret doors. 3 | When I'm not exploring dungeons or ruins. I get jittery and impatient. 4 | I have no time for friends or family. I spend every waking moment thinking about and preparing for my next expedition. 5 | When given the choice of going left or right, I always go left. 6 | I can't sleep except in total darkness.",
+        "text": "Skill Proficiencies: History, Survival Tool Proficiencies: Cartographer's tools or navigator's tools Languages: One of your choice Equipment: A wooden case containing a map to a ruin or dungeon, a bullseye lantern, a miner's pick, a set of traveler's clothes, a shovel, a two-person tent, a trinket recovered from a dig site, and a pouch containing 25 gp Dust Digger Prior to becoming an adventurer, you spent most of your young life crawling around in the dust, pilfering relics of questionable value from crypts and ruins. Though you managed to sell a few of your discoveries and earn enough coin to buy proper adventuring gear, you have held onto an item that has great emotional value to you. Roll on the Signature Item table to see what you have, or choose an item from the table. Signature Item d8 | Item 1 | 10-foot pole 2 | Crowbar 3 | Hat 4 | Hooded lantern 5 | Medallion 6 | Shovel 7 | Sledgehammer 8 | Whip Feature: Historical Knowledge When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether those were dwarves, elves, humans, yuan-ti, or some other known race. In addition, you can determine the monetary value of art objects more than a century old. Suggested Characteristics Few archaeologists can resist the lure of an unexplored ruin or dungeon, particularly if such a site is the source of legends or is rumored to contain the treasures and relics of wizards, warlords, or royalty. Some archaeologists plunder for wealth or fame, while others consider it their calling to illuminate the past or keep the world's greatest treasures from falling into the wrong hands. Whatever their motivations, archaeologists combine the qualities of a scrappy historian with the self-made heroism of a treasure-hunting scoundrel. d8 | Personality Trait 1 | I love a good puzzle or mystery 2 | I'm a pack rat who never throws anything away. 3 | Fame is more important to me than money. 4 | I have no qualms about stealing from the dead. 5 | I'm happier in a dusty old tomb than I am in the centers of civilization. 6 | Traps don't make me nervous. Idiots who trigger traps make me nervous. 7 | I might fail, but I will never give up. 8 | You might think I'm a scholar, but I love a good brawl. These fists were made for punching. d6 | Ideal 1 | Preservation. That artifact belongs in a museum. (Good) 2 | Greed. I won't risk my life for nothing. I expect some kind of payment. (Any) 3 | Death Wish. Nothing is more exhilarating than a narrow escape from the jaws of death. (Chaotic) 4 | Dignity. The dead and their belongings deserve to be treated with respect. (Lawful) 5 | Immortality. All of my exploring is part of a plan to find the secret of everlasting life. (Any) 6 | Danger. With every great discovery comes grave danger. The two walk hand in hand. (Any) d6 | Bond 1 | Ever since I was a child, I've heard stories about a lost city. I aim to find it, learn its secrets, and earn my place in the history books. 2 | I want to find my mentor, who disappeared on an expedition some time ago. 3 | I have a friendly rival. Only one of us can be the best, and I aim to prove it's me. 4 | I won't sell an art object or other treasure that has historical significance or is one of a kind. 5 | I'm secretly in love with the wealthy patron who sponsors my archaeological exploits. 6 | I hope to bring prestige to a library, a museum, or a university. d6 | Flaw 1 | I have a secret fear of some common wild animal - and in my work, I see them everywhere. 2 | I can't leave a room without searching it for secret doors. 3 | When I'm not exploring dungeons or ruins. I get jittery and impatient. 4 | I have no time for friends or family. I spend every waking moment thinking about and preparing for my next expedition. 5 | When given the choice of going left or right, I always go left. 6 | I can't sleep except in total darkness.",
+        "timing": "Triggered"
+      }
+    ],
     "feats": [
       "Great Weapon Master",
       "Tough"
+    ],
+    "featDetails": [
+      {
+        "id": "great-weapon-master",
+        "name": "Great Weapon Master",
+        "source": "PHB",
+        "page": "167",
+        "prerequisites": "",
+        "abilityScores": "",
+        "repeatable": "No",
+        "skillProficiencies": "",
+        "toolProficiencies": "",
+        "languages": "",
+        "equipment": "",
+        "featureName": "",
+        "featureText": "",
+        "text": "You've learned to put the weight of a weapon to your advantage, letting its momentum empower your strikes. You gain the following benefits:On your turn, when you score a critical hit with a melee weapon or reduce a creature to 0 hit points with one, you can make one melee weapon attack as a bonus action. Before you make a melee attack with a heavy weapon that you are proficient with, you can choose to take a -5 penalty to the attack roll. If the attack hits, you add +10 to the attack's damage.",
+        "timing": "Bonus Action"
+      },
+      {
+        "id": "tough",
+        "name": "Tough",
+        "source": "PHB",
+        "page": "170",
+        "prerequisites": "",
+        "abilityScores": "",
+        "repeatable": "No",
+        "skillProficiencies": "",
+        "toolProficiencies": "",
+        "languages": "",
+        "equipment": "",
+        "featureName": "",
+        "featureText": "",
+        "text": "Your hit point maximum increases by an amount equal to twice your level when you gain this feat. Whenever you gain a level thereafter, your hit point maximum increases by an additional 2 hit points.",
+        "timing": "Triggered"
+      }
     ],
     "races": [
       "Human"
@@ -4332,7 +4596,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-06T10:46:44.183Z"
+      "generatedAtUtc": "2026-05-06T12:45:09.540Z"
     },
     "url": "Public/Players/Julie Player Sheet.html",
     "searchText": "Character Stats Equipment Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJulieDnDNotes Full Class Info"
@@ -4753,6 +5017,14 @@
     ],
     "ruleEffects": [
       {
+        "id": "background-effect-acolyte",
+        "sourceType": "background",
+        "sourceId": "acolyte",
+        "kind": "rules-text",
+        "name": "Acolyte",
+        "text": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity."
+      },
+      {
         "id": "feature-effect-class-bard-1-bardic-inspiration-phb",
         "sourceType": "class",
         "sourceId": "class-bard-1-bardic-inspiration-phb",
@@ -5161,8 +5433,34 @@
     "backgrounds": [
       "Acolyte"
     ],
+    "backgroundDetails": [
+      {
+        "id": "acolyte",
+        "name": "Acolyte",
+        "source": "PHB",
+        "page": "127",
+        "prerequisites": "",
+        "abilityScores": "",
+        "repeatable": "",
+        "skillProficiencies": "Insight, Religion",
+        "toolProficiencies": "",
+        "languages": "Two of your choice",
+        "equipment": "A holy symbol (a gift to you when you entered the priesthood), a prayer book or prayer wheel, 5 sticks of incense, vestments, a set of common clothes, and a belt pouch containing 15 gp",
+        "featureName": "Shelter of the Faithful",
+        "featureText": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle. You might also have ties to a specific temple dedicated to your chosen deity or pantheon, and you have a residence there. This could be the temple where you used to serve, if you remain on good terms with it, or a temple where you have found a new home. While near your temple, you can call upon the priests for assistance, provided the assistance you ask for is not hazardous and you remain in good standing with your temple.",
+        "text": "Skill Proficiencies: Insight, Religion Languages: Two of your choice Equipment: A holy symbol (a gift to you when you entered the priesthood), a prayer book or prayer wheel, 5 sticks of incense, vestments, a set of common clothes, and a belt pouch containing 15 gp Feature: Shelter of the Faithful[–] As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle. You might also have ties to a specific temple dedicated to your chosen deity or pantheon, and you have a residence there. This could be the temple where you used to serve, if you remain on good terms with it, or a temple where you have found a new home. While near your temple, you can call upon the priests for assistance, provided the assistance you ask for is not hazardous and you remain in good standing with your temple.",
+        "timing": "Passive"
+      }
+    ],
     "feats": [
       "Jack of All Trades"
+    ],
+    "featDetails": [
+      {
+        "id": "jack-of-all-trades",
+        "name": "Jack of All Trades",
+        "missing": true
+      }
     ],
     "races": [
       "Elf"
@@ -5172,7 +5470,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-06T10:46:44.183Z"
+      "generatedAtUtc": "2026-05-06T12:45:09.540Z"
     },
     "url": "Public/Players/Liz Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaLizDnDNotes Full Class Info"
@@ -5599,6 +5897,16 @@
         "text": "Regain up to half your maximum hit dice after a long rest."
       },
       {
+        "id": "feat-lucky-luck-points",
+        "name": "Luck Points",
+        "max": 3,
+        "reset": "longRest",
+        "sourceType": "feat",
+        "sourceId": "lucky",
+        "source": "PHB",
+        "text": "You have inexplicable luck that seems to kick in at just the right moment."
+      },
+      {
         "id": "subclass-druid-land-2-natural-recovery-phb",
         "name": "Natural Recovery",
         "max": 1,
@@ -5829,6 +6137,18 @@
         "itemName": "Talisman of Elemental Fury"
       },
       {
+        "id": "feat-lucky",
+        "sourceType": "feat",
+        "sourceId": "lucky",
+        "group": "Triggered",
+        "type": "Feat",
+        "title": "Lucky",
+        "detail": "You have inexplicable luck that seems to kick in at just the right moment.",
+        "tags": [
+          "Feat"
+        ]
+      },
+      {
         "id": "feature-subclass-druid-land-2-natural-recovery-phb",
         "sourceType": "subclass",
         "sourceId": "subclass-druid-land-2-natural-recovery-phb",
@@ -5930,6 +6250,22 @@
         "kind": "rules-text",
         "name": "Draconic Ancestry",
         "text": "You have draconic ancestry."
+      },
+      {
+        "id": "background-effect-hermit",
+        "sourceType": "background",
+        "sourceId": "hermit",
+        "kind": "rules-text",
+        "name": "Hermit",
+        "text": "The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery."
+      },
+      {
+        "id": "feat-effect-lucky",
+        "sourceType": "feat",
+        "sourceId": "lucky",
+        "kind": "rules-text",
+        "name": "Lucky",
+        "text": "You have inexplicable luck that seems to kick in at just the right moment."
       },
       {
         "id": "feature-effect-class-druid-2-wild-shape-phb",
@@ -6218,8 +6554,46 @@
     "backgrounds": [
       "Hermit"
     ],
+    "backgroundDetails": [
+      {
+        "id": "hermit",
+        "name": "Hermit",
+        "source": "PHB",
+        "page": "134",
+        "prerequisites": "",
+        "abilityScores": "",
+        "repeatable": "",
+        "skillProficiencies": "Medicine, Religion",
+        "toolProficiencies": "Herbalism kit",
+        "languages": "One of your choice",
+        "equipment": "A scroll case stuffed full of notes from your studies or prayers, a winter blanket, a set of common clothes, an herbalism kit, and 5 gp",
+        "featureName": "Discovery",
+        "featureText": "The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery. The exact nature of this revelation depends on the nature of your seclusion. It might be a great truth about the cosmos, the deities, the powerful beings of the outer planes, or the forces of nature. It could be a site that no one else has ever seen. You might have uncovered a fact that has long been forgotten, or unearthed some relic of the past that could rewrite history. It might be information that would be damaging to the people who or consigned you to exile, and hence the reason for your return to society. Work with your DM to determine the details of your discovery and its impact on the campaign.",
+        "text": "Skill Proficiencies: Medicine, Religion Tool Proficiencies: Herbalism kit Languages: One of your choice Equipment: A scroll case stuffed full of notes from your studies or prayers, a winter blanket, a set of common clothes, an herbalism kit, and 5 gp Feature: Discovery[–] The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery. The exact nature of this revelation depends on the nature of your seclusion. It might be a great truth about the cosmos, the deities, the powerful beings of the outer planes, or the forces of nature. It could be a site that no one else has ever seen. You might have uncovered a fact that has long been forgotten, or unearthed some relic of the past that could rewrite history. It might be information that would be damaging to the people who or consigned you to exile, and hence the reason for your return to society. Work with your DM to determine the details of your discovery and its impact on the campaign.",
+        "timing": "Passive"
+      }
+    ],
     "feats": [
       "Lucky"
+    ],
+    "featDetails": [
+      {
+        "id": "lucky",
+        "name": "Lucky",
+        "source": "PHB",
+        "page": "167",
+        "prerequisites": "",
+        "abilityScores": "",
+        "repeatable": "No",
+        "skillProficiencies": "",
+        "toolProficiencies": "",
+        "languages": "",
+        "equipment": "",
+        "featureName": "",
+        "featureText": "",
+        "text": "You have inexplicable luck that seems to kick in at just the right moment. You have 3 luck points. Whenever you make an attack roll, an ability check, or a saving throw, you can spend one luck point to roll an additional d20. You can choose to spend one of your luck points after you roll the die, but before the outcome is determined. You choose which of the d20s is used for the attack roll, ability check, or saving throw. You can also spend one luck point when an attack roll is made against you. Roll a d20, and then choose whether the attack uses the attacker's roll or yours. If more than one creature spends a luck point to influence the outcome of a roll, the points cancel each other out; no additional dice are rolled. You regain your expended luck points when you finish a long rest.",
+        "timing": "Triggered"
+      }
     ],
     "races": [
       "Dragonborn"
@@ -6229,7 +6603,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-06T10:46:44.183Z"
+      "generatedAtUtc": "2026-05-06T12:45:09.540Z"
     },
     "url": "Public/Players/Vanessa Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaVanessaDnDNotes Full Class Info"
@@ -6761,6 +7135,14 @@
         "kind": "rules-text",
         "name": "Celestial Resistance",
         "text": "You have resistance to necrotic damage and radiant damage."
+      },
+      {
+        "id": "background-effect-cloistered-scholar",
+        "sourceType": "background",
+        "sourceId": "cloistered-scholar",
+        "kind": "rules-text",
+        "name": "Cloistered Scholar",
+        "text": "Though others must often endure extensive interviews and significant fees to gain access to even the most common archives in your library, you have free and easy access to the majority of the library, though it might also have repositories of lore that are to..."
       }
     ],
     "ruleFeatures": [
@@ -6993,7 +7375,27 @@
     "backgrounds": [
       "Cloistered Scholar"
     ],
+    "backgroundDetails": [
+      {
+        "id": "cloistered-scholar",
+        "name": "Cloistered Scholar",
+        "source": "SCAG",
+        "page": "146",
+        "prerequisites": "",
+        "abilityScores": "",
+        "repeatable": "",
+        "skillProficiencies": "History, plus your choice of one from among Arcana, Nature, and Religion",
+        "toolProficiencies": "",
+        "languages": "any two of your choice",
+        "equipment": "The scholar's robes of your cloister, a writing kit (small pouch with a quill, ink, folded parchment, and a small penknife), a borrowed book on the subject of your current study, and a pouch containing 10 gp",
+        "featureName": "Library Access",
+        "featureText": "Though others must often endure extensive interviews and significant fees to gain access to even the most common archives in your library, you have free and easy access to the majority of the library, though it might also have repositories of lore that are too valuable, magical, or secret to permit anyone immediate access. You have a working knowledge of your cloister's personnel and bureaucracy, and you know how to navigate those connections with some ease. Additionally, you are likely to gain preferential treatment at other libraries across the Realms, as professional courtesy to a fellow scholar.",
+        "text": "Skill Proficiencies: History, plus your choice of one from among Arcana, Nature, and Religion Languages: any two of your choice Equipment: The scholar's robes of your cloister, a writing kit (small pouch with a quill, ink, folded parchment, and a small penknife), a borrowed book on the subject of your current study, and a pouch containing 10 gp Feature: Library Access[–] Though others must often endure extensive interviews and significant fees to gain access to even the most common archives in your library, you have free and easy access to the majority of the library, though it might also have repositories of lore that are too valuable, magical, or secret to permit anyone immediate access. You have a working knowledge of your cloister's personnel and bureaucracy, and you know how to navigate those connections with some ease. Additionally, you are likely to gain preferential treatment at other libraries across the Realms, as professional courtesy to a fellow scholar.",
+        "timing": "Passive"
+      }
+    ],
     "feats": [],
+    "featDetails": [],
     "races": [
       "Aasimar"
     ],
@@ -7002,7 +7404,7 @@
     "rulesSource": {
       "kind": "canonical-json",
       "schemaVersion": 1,
-      "generatedAtUtc": "2026-05-06T10:46:44.183Z"
+      "generatedAtUtc": "2026-05-06T12:45:09.540Z"
     },
     "url": "Public/Players/Randi Player Sheet.html",
     "searchText": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaRandiDnDNotes Full Class Info"

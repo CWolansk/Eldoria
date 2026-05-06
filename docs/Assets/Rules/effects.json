@@ -10,6 +10,38 @@
     "itemName": "Lightning Rod"
   },
   {
+    "id": "background-effect-a-life-of-toil",
+    "sourceType": "background",
+    "sourceId": "a-life-of-toil",
+    "kind": "rules-text",
+    "name": "A Life of Toil",
+    "text": "Skill Proficiencies."
+  },
+  {
+    "id": "background-effect-a-merchant-family",
+    "sourceType": "background",
+    "sourceId": "a-merchant-family",
+    "kind": "rules-text",
+    "name": "A Merchant Family",
+    "text": "Skill Proficiencies."
+  },
+  {
+    "id": "background-effect-a-patient-hunter",
+    "sourceType": "background",
+    "sourceId": "a-patient-hunter",
+    "kind": "rules-text",
+    "name": "A Patient Hunter",
+    "text": "Skill Proficiencies."
+  },
+  {
+    "id": "background-effect-a-penetrating-gaze",
+    "sourceType": "background",
+    "sourceId": "a-penetrating-gaze",
+    "kind": "rules-text",
+    "name": "A Penetrating Gaze",
+    "text": "Skill Proficiencies."
+  },
+  {
     "id": "elemental-essence-shard-earth-elemental-essence-shard-earth-a-resistance",
     "kind": "resistance",
     "target": "a",
@@ -362,6 +394,14 @@
     "text": "You have resistance to acid damage."
   },
   {
+    "id": "background-effect-acolyte",
+    "sourceType": "background",
+    "sourceId": "acolyte",
+    "kind": "rules-text",
+    "name": "Acolyte",
+    "text": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity."
+  },
+  {
     "id": "feature-effect-subclass-cleric-nature-1-acolyte-of-nature-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-cleric-nature-1-acolyte-of-nature-phb",
@@ -394,6 +434,30 @@
     "text": "At 10th level, you can choose a second option from the Fighting Style class feature."
   },
   {
+    "id": "feat-effect-adept-of-the-black-robes",
+    "sourceType": "feat",
+    "sourceId": "adept-of-the-black-robes",
+    "kind": "rules-text",
+    "name": "Adept of the Black Robes",
+    "text": "You chose the moon Nuitari to influence your magic, and your ambition and loyalty to the Order of the Black Robes have been recognized, granting you these benefits:Ambitious Magic."
+  },
+  {
+    "id": "feat-effect-adept-of-the-red-robes",
+    "sourceType": "feat",
+    "sourceId": "adept-of-the-red-robes",
+    "kind": "rules-text",
+    "name": "Adept of the Red Robes",
+    "text": "You chose the moon Lunitari to influence your magic, and your dedication to maintaining the balance between all things has been recognized by the Order of the Red Robes, granting you these benefits:Insightful Magic."
+  },
+  {
+    "id": "feat-effect-adept-of-the-white-robes",
+    "sourceType": "feat",
+    "sourceId": "adept-of-the-white-robes",
+    "kind": "rules-text",
+    "name": "Adept of the White Robes",
+    "text": "You chose the moon Solinari to influence your magic, and your oath to use magic to make the world a better place has been recognized by the Order of the White Robes, granting you these benefits:Protective Magic."
+  },
+  {
     "id": "feature-effect-subclass-wizard-graviturgy-2-adjust-density-egw",
     "sourceType": "subclass",
     "sourceId": "subclass-wizard-graviturgy-2-adjust-density-egw",
@@ -416,6 +480,14 @@
     "kind": "rules-text",
     "name": "Aether Lore",
     "text": "Whenever you make an Intelligence (History) check related to magic items or aether-powered technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply."
+  },
+  {
+    "id": "feat-effect-against-the-unseen",
+    "sourceType": "feat",
+    "sourceId": "against-the-unseen",
+    "kind": "rules-text",
+    "name": "Against the Unseen",
+    "text": "Elves can perceive creatures that dwell in the wraith-world, be they spirits or ghosts, even when they are normally invisible to the eyes of the living and appear only as a chilling whisper of voices."
   },
   {
     "id": "feat-effect-agent-of-order",
@@ -856,6 +928,30 @@
     "text": "6th-level College of Creation feature As an action, you can animate one Large or smaller nonmagical item within 30 feet of you that isn't being worn or carried."
   },
   {
+    "id": "background-effect-apprentice-diver",
+    "sourceType": "background",
+    "sourceId": "apprentice-diver",
+    "kind": "rules-text",
+    "name": "Apprentice Diver",
+    "text": "When visiting either of the Coastal Diver's Lodges, you always have free room and board."
+  },
+  {
+    "id": "background-effect-apprentice-of-aha",
+    "sourceType": "background",
+    "sourceId": "apprentice-of-aha",
+    "kind": "rules-text",
+    "name": "Apprentice of AHA",
+    "text": "Due to your time spent in the field you've met or are familiar with many of the intellectuals and creative minds in Obojima's villages."
+  },
+  {
+    "id": "background-effect-apprentice-witch",
+    "sourceType": "background",
+    "sourceId": "apprentice-witch",
+    "kind": "rules-text",
+    "name": "Apprentice Witch",
+    "text": "You have a close and trustworthy friend who studied under the same witch as you and has now made it into one of the six main covens."
+  },
+  {
     "id": "feature-effect-race-grung-arboreal-alertness-oga",
     "sourceType": "race",
     "sourceId": "race-grung-arboreal-alertness-oga",
@@ -928,6 +1024,14 @@
     "text": "When you choose this domain at 1st level, you gain proficiency in the Arcana skill, and you gain two cantrips of your choice from the wizard spell list."
   },
   {
+    "id": "background-effect-archaeologist",
+    "sourceType": "background",
+    "sourceId": "archaeologist",
+    "kind": "rules-text",
+    "name": "Archaeologist",
+    "text": "When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether those were dwarves, elves, humans, yuan-ti, or some other known race."
+  },
+  {
     "id": "feature-effect-subclass-druid-stars-2-archer-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-druid-stars-2-archer-tce",
@@ -950,6 +1054,22 @@
     "kind": "rules-text",
     "name": "Arms of the Astral Self",
     "text": "3rd-level Way of the Astral Self feature Your mastery of your ki allows you to summon a portion of your astral self."
+  },
+  {
+    "id": "feat-effect-art-of-disappearing",
+    "sourceType": "feat",
+    "sourceId": "art-of-disappearing",
+    "kind": "rules-text",
+    "name": "Art of Disappearing",
+    "text": "Hobbits are said to have little or no magic about them, but the way they can choose to disappear quickly and quietly can be described by others only as supernatural."
+  },
+  {
+    "id": "feat-effect-artificer-initiate",
+    "sourceType": "feat",
+    "sourceId": "artificer-initiate",
+    "kind": "rules-text",
+    "name": "Artificer Initiate",
+    "text": "You've learned some of an artificer's inventiveness:You learn one cantrip of your choice from the artificer spell list, and you learn one 1st-level spell of your choice from that list."
   },
   {
     "id": "feature-effect-race-gnome-rock-artificer-s-lore-phb",
@@ -984,6 +1104,14 @@
     "text": "Starting at 3rd level, you are at your deadliest when you get the drop on your enemies."
   },
   {
+    "id": "background-effect-astral-drifter",
+    "sourceType": "background",
+    "sourceId": "astral-drifter",
+    "kind": "rules-text",
+    "name": "Astral Drifter",
+    "text": "Skill Proficiencies: Insight, Religion Languages: Two of your choice (Celestial or Gith recommended) Equipment: A set of traveler's clothes, a diary, an ink pen, a bottle of ink, and a pouch containing 10 gp Longevity[–] You are 20d6 years older than you look..."
+  },
+  {
     "id": "feature-effect-race-githyanki-astral-knowledge-mpmm",
     "sourceType": "race",
     "sourceId": "race-githyanki-astral-knowledge-mpmm",
@@ -1014,6 +1142,14 @@
     "kind": "rules-text",
     "name": "Athlete",
     "text": "You have undergone extensive physical training to gain the following benefits:Increase your Strength or Dexterity by 1, to a maximum of 20."
+  },
+  {
+    "id": "background-effect-athlete",
+    "sourceType": "background",
+    "sourceId": "athlete",
+    "kind": "rules-text",
+    "name": "Athlete",
+    "text": "You have attracted admiration among spectators, fellow athletes, and trainers in the region that hosted your past athletic victories."
   },
   {
     "id": "feature-effect-subclass-paladin-oathbreaker-7-aura-of-hate-dmg",
@@ -1104,6 +1240,118 @@
     "text": "At 1st level, you gain proficiency with two of the following skills of your choice: Animal Handling, Deception, Insight, Intimidation, Investigation, Perception, and Persuasion."
   },
   {
+    "id": "background-effect-azorius-functionary",
+    "sourceType": "background",
+    "sourceId": "azorius-functionary",
+    "kind": "rules-text",
+    "name": "Azorius Functionary",
+    "text": "You have the authority to enforce the laws of Ravnica, and that status inspires a certain amount of respect and even fear in the populace."
+  },
+  {
+    "id": "background-effect-baldur-s-gate-acolyte",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-acolyte",
+    "kind": "rules-text",
+    "name": "Baldur's Gate Acolyte",
+    "text": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity."
+  },
+  {
+    "id": "background-effect-baldur-s-gate-charlatan",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-charlatan",
+    "kind": "rules-text",
+    "name": "Baldur's Gate Charlatan",
+    "text": "You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona."
+  },
+  {
+    "id": "background-effect-baldur-s-gate-criminal",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-criminal",
+    "kind": "rules-text",
+    "name": "Baldur's Gate Criminal",
+    "text": "You have a reliable and trustworthy contact who acts as your liaison to a network of other criminals."
+  },
+  {
+    "id": "background-effect-baldur-s-gate-entertainer",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-entertainer",
+    "kind": "rules-text",
+    "name": "Baldur's Gate Entertainer",
+    "text": "You can always find a place to perform, usually in an inn or tavern but possibly with a circus, at a theater, or even in a noble's court."
+  },
+  {
+    "id": "background-effect-baldur-s-gate-folk-hero",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-folk-hero",
+    "kind": "rules-text",
+    "name": "Baldur's Gate Folk Hero",
+    "text": "Since you come from the ranks of the common folk, you fit in among them with ease."
+  },
+  {
+    "id": "background-effect-baldur-s-gate-guild-artisan",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-guild-artisan",
+    "kind": "rules-text",
+    "name": "Baldur's Gate Guild Artisan",
+    "text": "As an established and respected member of a guild, you can rely on certain benefits that membership provides."
+  },
+  {
+    "id": "background-effect-baldur-s-gate-hermit",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-hermit",
+    "kind": "rules-text",
+    "name": "Baldur's Gate Hermit",
+    "text": "The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery."
+  },
+  {
+    "id": "background-effect-baldur-s-gate-noble",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-noble",
+    "kind": "rules-text",
+    "name": "Baldur's Gate Noble",
+    "text": "The effects of a Baldur's Gate feature can be used only while the character is in Baldur's Gate—though, at the DM's discretion, they might have applicable effects in situations similar to those in Baldur's Gate."
+  },
+  {
+    "id": "background-effect-baldur-s-gate-outlander",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-outlander",
+    "kind": "rules-text",
+    "name": "Baldur's Gate Outlander",
+    "text": "You have an excellent memory for maps and geography, and you can always recall the general layout of terrain, settlements, and other features around you."
+  },
+  {
+    "id": "background-effect-baldur-s-gate-sage",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-sage",
+    "kind": "rules-text",
+    "name": "Baldur's Gate Sage",
+    "text": "When you attempt to learn or recall a piece of lore, if you do not know that information, you often know where and from whom you can obtain it."
+  },
+  {
+    "id": "background-effect-baldur-s-gate-sailor",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-sailor",
+    "kind": "rules-text",
+    "name": "Baldur's Gate Sailor",
+    "text": "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions."
+  },
+  {
+    "id": "background-effect-baldur-s-gate-soldier",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-soldier",
+    "kind": "rules-text",
+    "name": "Baldur's Gate Soldier",
+    "text": "You have a military rank from your career as a soldier."
+  },
+  {
+    "id": "background-effect-baldur-s-gate-urchin",
+    "sourceType": "background",
+    "sourceId": "baldur-s-gate-urchin",
+    "kind": "rules-text",
+    "name": "Baldur's Gate Urchin",
+    "text": "You know the secret patterns and flow to cities and can find passages through the urban sprawl that others would miss."
+  },
+  {
     "id": "feat-effect-baleful-scion",
     "sourceType": "feat",
     "sourceId": "baleful-scion",
@@ -1118,6 +1366,14 @@
     "kind": "rules-text",
     "name": "Balm of the Summer Court",
     "text": "At 2nd level, you become imbued with the blessings of the Summer Court."
+  },
+  {
+    "id": "feat-effect-bandit-cunning",
+    "sourceType": "feat",
+    "sourceId": "bandit-cunning",
+    "kind": "rules-text",
+    "name": "Bandit Cunning",
+    "text": "Your time as a bandit has granted you a sense for danger, and made you skilled at sizing up opponents."
   },
   {
     "id": "feature-effect-class-bard-1-bardic-inspiration-phb",
@@ -1248,6 +1504,14 @@
     "text": "6th-level Path of the Beast feature The feral power within you increases, causing the natural weapons of your Form of the Beast to count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage."
   },
   {
+    "id": "background-effect-bitter-exile",
+    "sourceType": "background",
+    "sourceId": "bitter-exile",
+    "kind": "rules-text",
+    "name": "Bitter Exile",
+    "text": "Skill Proficiencies."
+  },
+  {
     "id": "feature-effect-subclass-wizard-bladesinging-2-bladesong-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-wizard-bladesinging-2-bladesong-tce",
@@ -1310,14 +1574,6 @@
     "kind": "rules-text",
     "name": "Blighted Shape",
     "text": "Also at 2nd level, your physical form begins to show effects of the corruption you wield, tracing blackened veins across your skin, producing gnarled, bony protrusions, or other eerie phenomena."
-  },
-  {
-    "id": "feat-effect-blinded",
-    "sourceType": "feat",
-    "sourceId": "blinded",
-    "kind": "rules-text",
-    "name": "blinded",
-    "text": "up to a number of times equal to half your proficiency bonus."
   },
   {
     "id": "armor-of-vulnerability-bludgeoning-armor-of-vulnerability-bludgeoning-bludgeoning-resistance",
@@ -1604,6 +1860,14 @@
     "text": "When you choose this archetype at 3rd level, you gain proficiency in one of the following skills of your choice: History, Insight, Performance, or Persuasion."
   },
   {
+    "id": "feat-effect-boomerang-expert",
+    "sourceType": "feat",
+    "sourceId": "boomerang-expert",
+    "kind": "rules-text",
+    "name": "Boomerang Expert",
+    "text": "You have mastered the versatile boomerang and are capable of performing extraordinary feats with the weapon."
+  },
+  {
     "id": "feature-effect-race-aetherborn-born-of-aether-psk",
     "sourceType": "race",
     "sourceId": "race-aetherborn-born-of-aether-psk",
@@ -1620,12 +1884,28 @@
     "text": "Starting at 3rd level, your mastery as a rider becomes apparent."
   },
   {
+    "id": "background-effect-boros-legionnaire",
+    "sourceType": "background",
+    "sourceId": "boros-legionnaire",
+    "kind": "rules-text",
+    "name": "Boros Legionnaire",
+    "text": "You have an established place in the hierarchy of the Boros Legion."
+  },
+  {
     "id": "feature-effect-subclass-warlock-genie-1-bottled-respite-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-warlock-genie-1-bottled-respite-tce",
     "kind": "rules-text",
     "name": "Bottled Respite",
     "text": "As an action, you can magically vanish and enter your vessel, which remains in the space you left."
+  },
+  {
+    "id": "feat-effect-bountiful-luck",
+    "sourceType": "feat",
+    "sourceId": "bountiful-luck",
+    "kind": "rules-text",
+    "name": "Bountiful Luck",
+    "text": "Your people have extraordinary luck, which you have learned to mystically lend to your companions when you see them falter."
   },
   {
     "id": "feature-effect-race-halfling-brave-phb",
@@ -1642,6 +1922,14 @@
     "kind": "rules-text",
     "name": "Brave",
     "text": "You have advantage on saving throws against being frightened."
+  },
+  {
+    "id": "feat-effect-brave-at-a-pinch",
+    "sourceType": "feat",
+    "sourceId": "brave-at-a-pinch",
+    "kind": "rules-text",
+    "name": "Brave at a Pinch",
+    "text": "One of the Wise once said that you have to put a Hobbit in a tight place before you find out what is in them."
   },
   {
     "id": "feature-effect-race-human-innistrad-nephalia-breadth-of-knowledge-psi",
@@ -1692,6 +1980,30 @@
     "text": "You can use your action to exhale destructive energy."
   },
   {
+    "id": "feat-effect-bree-pony",
+    "sourceType": "feat",
+    "sourceId": "bree-pony",
+    "kind": "rules-text",
+    "name": "Bree-Pony",
+    "text": "Bree- ponies are very similar to their owners, the Bree-folk—they don't seem to have anything special compared to their peers in other parts of Middle-earth, and yet some of them display uncommon courage and exceptional memory."
+  },
+  {
+    "id": "feat-effect-broken-spells",
+    "sourceType": "feat",
+    "sourceId": "broken-spells",
+    "kind": "rules-text",
+    "name": "Broken Spells",
+    "text": "In ancient times, the Dwarves made mighty spells."
+  },
+  {
+    "id": "background-effect-bucklander",
+    "sourceType": "background",
+    "sourceId": "bucklander",
+    "kind": "rules-text",
+    "name": "Bucklander",
+    "text": "Skill Proficiencies."
+  },
+  {
     "id": "feature-effect-race-autognome-built-for-success-aag",
     "sourceType": "race",
     "sourceId": "race-autognome-built-for-success-aag",
@@ -1708,6 +2020,14 @@
     "text": "15th-level Psi Warrior feature You can shield yourself and others with telekinetic force."
   },
   {
+    "id": "background-effect-by-hammer-and-anvil",
+    "sourceType": "background",
+    "sourceId": "by-hammer-and-anvil",
+    "kind": "rules-text",
+    "name": "By Hammer and Anvil",
+    "text": "Skill Proficiencies."
+  },
+  {
     "id": "feature-effect-subclass-druid-blighted-6-call-of-the-shadowseeds-tdcsr",
     "sourceType": "subclass",
     "sourceId": "subclass-druid-blighted-6-call-of-the-shadowseeds-tdcsr",
@@ -1722,6 +2042,30 @@
     "kind": "rules-text",
     "name": "Call the Hunt",
     "text": "14th-level Path of the Beast feature The beast within you grows so powerful that you can spread its ferocity to others and gain resilience from them joining your hunt."
+  },
+  {
+    "id": "feat-effect-canden-and-moon-s-master-cut",
+    "sourceType": "feat",
+    "sourceId": "canden-and-moon-s-master-cut",
+    "kind": "rules-text",
+    "name": "Canden and Moon's Master Cut",
+    "text": "Having trained with the masters of the first sword school of Obojima, you've picked up a handful of useful skills."
+  },
+  {
+    "id": "feat-effect-careful-crafter",
+    "sourceType": "feat",
+    "sourceId": "careful-crafter",
+    "kind": "rules-text",
+    "name": "Careful Crafter",
+    "text": "You've trained in crafting items using a skill or tool that you're proficient with, and your creations are known for being well made and reliable."
+  },
+  {
+    "id": "feat-effect-cartomancer",
+    "sourceType": "feat",
+    "sourceId": "cartomancer",
+    "kind": "rules-text",
+    "name": "Cartomancer",
+    "text": "You have learned to channel your magic through a deck of cards."
   },
   {
     "id": "feature-effect-race-tabaxi-cat-s-talent-mpmm",
@@ -1746,6 +2090,14 @@
     "kind": "rules-text",
     "name": "Cauterizing Flames",
     "text": "10th-level Circle of Wildfire feature You gain the ability to turn death into magical flames that can heal or incinerate."
+  },
+  {
+    "id": "background-effect-celebrity-adventurer-s-scion",
+    "sourceType": "background",
+    "sourceId": "celebrity-adventurer-s-scion",
+    "kind": "rules-text",
+    "name": "Celebrity Adventurer's Scion",
+    "text": "You know and have met any number of powerful people across the land—and some of them might even remember you."
   },
   {
     "id": "feature-effect-race-aasimar-celestial-resistance-dmg",
@@ -1932,6 +2284,14 @@
     "text": "When you use your action to Dash, you can use a bonus action to make one melee weapon attack or to shove a creature."
   },
   {
+    "id": "background-effect-charlatan",
+    "sourceType": "background",
+    "sourceId": "charlatan",
+    "kind": "rules-text",
+    "name": "Charlatan",
+    "text": "You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona."
+  },
+  {
     "id": "feat-effect-chef",
     "sourceType": "feat",
     "sourceId": "chef",
@@ -1980,12 +2340,44 @@
     "text": "At 1st level, you gain the ability to manipulate the line between life and death."
   },
   {
+    "id": "background-effect-city-watch",
+    "sourceType": "background",
+    "sourceId": "city-watch",
+    "kind": "rules-text",
+    "name": "City Watch",
+    "text": "Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals."
+  },
+  {
+    "id": "background-effect-clan-crafter",
+    "sourceType": "background",
+    "sourceId": "clan-crafter",
+    "kind": "rules-text",
+    "name": "Clan Crafter",
+    "text": "As well respected as clan crafters are among outsiders, no one esteems them quite so highly as dwarves do."
+  },
+  {
     "id": "feature-effect-subclass-cleric-moon-1-clarity-of-catha-tdcsr",
     "sourceType": "subclass",
     "sourceId": "subclass-cleric-moon-1-clarity-of-catha-tdcsr",
     "kind": "rules-text",
     "name": "Clarity of Catha",
     "text": "When you choose this domain at 1st level, you learn to shine light upon the mind's most dire moments, shielding those you protect."
+  },
+  {
+    "id": "background-effect-cloistered-scholar",
+    "sourceType": "background",
+    "sourceId": "cloistered-scholar",
+    "kind": "rules-text",
+    "name": "Cloistered Scholar",
+    "text": "Though others must often endure extensive interviews and significant fees to gain access to even the most common archives in your library, you have free and easy access to the majority of the library, though it might also have repositories of lore that are to..."
+  },
+  {
+    "id": "feat-effect-cloud-hopper",
+    "sourceType": "feat",
+    "sourceId": "cloud-hopper",
+    "kind": "rules-text",
+    "name": "Cloud Hopper",
+    "text": "Your exposure to the great wind spirit has changed you."
   },
   {
     "id": "adventurer-s-overcoat-adventurer-s-overcoat-cold-resistance",
@@ -2402,12 +2794,36 @@
     "text": "6th-level Circle of the Stars feature Whenever you finish a long rest, you can consult your Star Map for omens."
   },
   {
+    "id": "background-effect-counsellor",
+    "sourceType": "background",
+    "sourceId": "counsellor",
+    "kind": "rules-text",
+    "name": "Counsellor",
+    "text": "Skill Proficiencies."
+  },
+  {
     "id": "feature-effect-class-bard-6-countercharm-phb",
     "sourceType": "class",
     "sourceId": "class-bard-6-countercharm-phb",
     "kind": "rules-text",
     "name": "Countercharm",
     "text": "At 6th level, you gain the ability to use musical notes or words of power to disrupt mind-influencing effects."
+  },
+  {
+    "id": "background-effect-courier-brigade-cadet",
+    "sourceType": "background",
+    "sourceId": "courier-brigade-cadet",
+    "kind": "rules-text",
+    "name": "Courier Brigade Cadet",
+    "text": "You have an old worn out pocket map of the island from your time as a cadet."
+  },
+  {
+    "id": "background-effect-courtier",
+    "sourceType": "background",
+    "sourceId": "courtier",
+    "kind": "rules-text",
+    "name": "Courtier",
+    "text": "Your knowledge of how bureaucracies function lets you gain access to the records and inner workings of any noble court or government you encounter."
   },
   {
     "id": "feat-effect-coven-witch",
@@ -2426,12 +2842,28 @@
     "text": "You have proficiency in the Sleight of Hand and Stealth skills."
   },
   {
+    "id": "background-effect-criminal",
+    "sourceType": "background",
+    "sourceId": "criminal",
+    "kind": "rules-text",
+    "name": "Criminal",
+    "text": "You have a reliable and trustworthy contact who acts as your liaison to a network of other criminals."
+  },
+  {
     "id": "feat-effect-crossbow-expert",
     "sourceType": "feat",
     "sourceId": "crossbow-expert",
     "kind": "rules-text",
     "name": "Crossbow Expert",
     "text": "Thanks to extensive practice with the crossbow, you gain the following benefits:You ignore the loading quality of crossbows with which you are proficient."
+  },
+  {
+    "id": "background-effect-crossroads-of-the-north",
+    "sourceType": "background",
+    "sourceId": "crossroads-of-the-north",
+    "kind": "rules-text",
+    "name": "Crossroads of the North",
+    "text": "Skill Proficiencies."
   },
   {
     "id": "feat-effect-crusher",
@@ -2464,6 +2896,14 @@
     "kind": "rules-text",
     "name": "Curving Shot",
     "text": "At 7th level, you learn how to direct an errant arrow toward a new target."
+  },
+  {
+    "id": "background-effect-custom-background",
+    "sourceType": "background",
+    "sourceId": "custom-background",
+    "kind": "rules-text",
+    "name": "Custom Background",
+    "text": "Choose a"
   },
   {
     "id": "feature-effect-subclass-bard-lore-3-cutting-words-phb",
@@ -2506,6 +2946,14 @@
     "text": "At 2nd level, you gain an uncanny sense of when things nearby aren't as they should be, giving you an edge when you dodge away from danger."
   },
   {
+    "id": "feat-effect-dark-for-dark-business",
+    "sourceType": "feat",
+    "sourceId": "dark-for-dark-business",
+    "kind": "rules-text",
+    "name": "Dark for Dark Business",
+    "text": "Your kind is not troubled by mere darkness in itself, as most members of other cultures are."
+  },
+  {
     "id": "feature-effect-race-human-innistrad-stensia-daunting-psi",
     "sourceType": "race",
     "sourceId": "race-human-innistrad-stensia-daunting-psi",
@@ -2520,6 +2968,14 @@
     "kind": "rules-text",
     "name": "Daunting Roar",
     "text": "As a bonus action, you can let out an especially menacing roar."
+  },
+  {
+    "id": "feat-effect-deadly-archery",
+    "sourceType": "feat",
+    "sourceId": "deadly-archery",
+    "kind": "rules-text",
+    "name": "Deadly Archery",
+    "text": "Elves possess a natural talent for hitting the mark when using their bows."
   },
   {
     "id": "feature-effect-subclass-rogue-assassin-17-death-strike-phb",
@@ -2562,6 +3018,14 @@
     "text": "As a bonus action, you can gain temporary hit points equal to your level in this class, replacing any temporary hit points you already have."
   },
   {
+    "id": "feat-effect-defiance",
+    "sourceType": "feat",
+    "sourceId": "defiance",
+    "kind": "rules-text",
+    "name": "Defiance",
+    "text": "Many realms have risen and fallen in the Lone-lands of Eriador since the Elder Days."
+  },
+  {
     "id": "feature-effect-subclass-druid-blighted-2-defile-ground-tdcsr",
     "sourceType": "subclass",
     "sourceId": "subclass-druid-blighted-2-defile-ground-tdcsr",
@@ -2600,6 +3064,14 @@
     "kind": "rules-text",
     "name": "Desert",
     "text": "You gain resistance to fire damage, and you don't suffer the effects of extreme heat, as described in the Dungeon Master's Guide."
+  },
+  {
+    "id": "feat-effect-desperate-courage",
+    "sourceType": "feat",
+    "sourceId": "desperate-courage",
+    "kind": "rules-text",
+    "name": "Desperate Courage",
+    "text": "You have lived all your life on the edge of the Wild, but the worst news that has come to Bree in your time concerned only brigands or packs of hungry wolves."
   },
   {
     "id": "feature-effect-race-hadozee-dexterous-feet-aag",
@@ -2690,12 +3162,44 @@
     "text": "At 1st level, you choose one type of dragon as your ancestor."
   },
   {
+    "id": "feat-effect-dragon-fear",
+    "sourceType": "feat",
+    "sourceId": "dragon-fear",
+    "kind": "rules-text",
+    "name": "Dragon Fear",
+    "text": "When angered, you radiate menace."
+  },
+  {
+    "id": "feat-effect-dragon-hide",
+    "sourceType": "feat",
+    "sourceId": "dragon-hide",
+    "kind": "rules-text",
+    "name": "Dragon Hide",
+    "text": "You manifest scales and claws reminiscent of your draconic ancestors."
+  },
+  {
+    "id": "background-effect-dragon-stories",
+    "sourceType": "background",
+    "sourceId": "dragon-stories",
+    "kind": "rules-text",
+    "name": "Dragon Stories",
+    "text": "Skill Proficiencies."
+  },
+  {
     "id": "feature-effect-subclass-sorcerer-draconic-14-dragon-wings-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-sorcerer-draconic-14-dragon-wings-phb",
     "kind": "rules-text",
     "name": "Dragon Wings",
     "text": "At 14th level, you gain the ability to sprout a pair of dragon wings from your back, gaining a flying speed equal to your current speed."
+  },
+  {
+    "id": "feat-effect-dragon-slayer",
+    "sourceType": "feat",
+    "sourceId": "dragon-slayer",
+    "kind": "rules-text",
+    "name": "Dragon-Slayer",
+    "text": "The legend of Bard the Bowman has inspired many young men and women from Dale, so much that they long to prove their worth with the killing of a great monster."
   },
   {
     "id": "feature-effect-subclass-ranger-drakewarden-3-drake-companion-ftd",
@@ -2786,6 +3290,14 @@
     "text": "Beginning at 10th level, the magic you channel helps ward off harm."
   },
   {
+    "id": "feat-effect-durin-s-way",
+    "sourceType": "feat",
+    "sourceId": "durin-s-way",
+    "kind": "rules-text",
+    "name": "Durin's Way",
+    "text": "The Dwarves have fought many wars in deep places beneath the earth."
+  },
+  {
     "id": "feat-effect-dwarf-friend",
     "sourceType": "feat",
     "sourceId": "dwarf-friend",
@@ -2808,6 +3320,14 @@
     "kind": "rules-text",
     "name": "Dwarven Combat Training",
     "text": "You have proficiency with the battleaxe, handaxe, light hammer, and warhammer."
+  },
+  {
+    "id": "feat-effect-dwarven-fortitude",
+    "sourceType": "feat",
+    "sourceId": "dwarven-fortitude",
+    "kind": "rules-text",
+    "name": "Dwarven Fortitude",
+    "text": "You have the blood of dwarf heroes flowing through your veins."
   },
   {
     "id": "feature-effect-race-duergar-dwarven-resilience-mpmm",
@@ -2866,6 +3386,14 @@
     "text": "As a bonus action, you can harmlessly remove a lock of your hair, one of your nails, or one of your teeth."
   },
   {
+    "id": "feat-effect-elbereth-gilthoniel",
+    "sourceType": "feat",
+    "sourceId": "elbereth-gilthoniel",
+    "kind": "rules-text",
+    "name": "Elbereth Gilthoniel!",
+    "text": "The name of Elbereth, the Queen of the Stars, is revered by all the Eldar still dwelling in Middle-earth."
+  },
+  {
     "id": "feature-effect-subclass-paladin-ancients-20-elder-champion-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-paladin-ancients-20-elder-champion-phb",
@@ -2911,7 +3439,7 @@
     "sourceId": "elemental-adept",
     "kind": "rules-text",
     "name": "Elemental Adept",
-    "text": "When you gain this feat, choose one of the following damage types:"
+    "text": "When you gain this feat, choose one of the following damage types: acid, cold, fire, lightning, or thunder."
   },
   {
     "id": "feature-effect-subclass-sorcerer-draconic-6-elemental-affinity-phb",
@@ -3010,12 +3538,36 @@
     "text": "While raging, you can use a bonus action during your move to pass through the space of a Large or smaller creature."
   },
   {
+    "id": "background-effect-eloquent-orator",
+    "sourceType": "background",
+    "sourceId": "eloquent-orator",
+    "kind": "rules-text",
+    "name": "Eloquent Orator",
+    "text": "Skill Proficiencies."
+  },
+  {
     "id": "feature-effect-class-rogue-18-elusive-phb",
     "sourceType": "class",
     "sourceId": "class-rogue-18-elusive-phb",
     "kind": "rules-text",
     "name": "Elusive",
     "text": "Beginning at 18th level, you are so evasive that attackers rarely gain the upper hand against you."
+  },
+  {
+    "id": "feat-effect-elven-accuracy",
+    "sourceType": "feat",
+    "sourceId": "elven-accuracy",
+    "kind": "rules-text",
+    "name": "Elven Accuracy",
+    "text": "The accuracy of elves is legendary, especially that of elf archers and spellcasters."
+  },
+  {
+    "id": "feat-effect-elvish-spirit",
+    "sourceType": "feat",
+    "sourceId": "elvish-spirit",
+    "kind": "rules-text",
+    "name": "Elvish Spirit",
+    "text": "The spirit of Elves is so strong that their bodies recover swiftly from many ills and injuries."
   },
   {
     "id": "feat-effect-ember-of-the-fire-giant",
@@ -3066,12 +3618,28 @@
     "text": "Beginning at 18th level, you can use your action to spend 4 ki points to become invisible for 1 minute."
   },
   {
+    "id": "feat-effect-endurance-of-the-ranger",
+    "sourceType": "feat",
+    "sourceId": "endurance-of-the-ranger",
+    "kind": "rules-text",
+    "name": "Endurance of the Ranger",
+    "text": "They say that a Ranger with a clear trail to follow can never be weary."
+  },
+  {
     "id": "feature-effect-subclass-druid-wildfire-6-enhanced-bond-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-druid-wildfire-6-enhanced-bond-tce",
     "kind": "rules-text",
     "name": "Enhanced Bond",
     "text": "6th-level Circle of Wildfire feature The bond with your wildfire spirit enhances your destructive and restorative spells."
+  },
+  {
+    "id": "background-effect-entertainer",
+    "sourceType": "background",
+    "sourceId": "entertainer",
+    "kind": "rules-text",
+    "name": "Entertainer",
+    "text": "You can always find a place to perform, usually in an inn or tavern but possibly with a circus, at a theater, or even in a noble's court."
   },
   {
     "id": "feature-effect-subclass-warlock-great-old-one-6-entropic-ward-phb",
@@ -3338,6 +3906,54 @@
     "text": "Starting at 3rd level, you can use a bonus action to make a Wisdom (Perception) check to spot a hidden creature or object or to make an Intelligence (Investigation) check to uncover or decipher clues."
   },
   {
+    "id": "background-effect-faction-agent",
+    "sourceType": "background",
+    "sourceId": "faction-agent",
+    "kind": "rules-text",
+    "name": "Faction Agent",
+    "text": "As a faction agent, you have access to a secret network of supporters and operatives who can provide assistance on your adventures."
+  },
+  {
+    "id": "feat-effect-fade-away",
+    "sourceType": "feat",
+    "sourceId": "fade-away",
+    "kind": "rules-text",
+    "name": "Fade Away",
+    "text": "Your people are clever, with a knack for illusion magic."
+  },
+  {
+    "id": "background-effect-failed-merchant",
+    "sourceType": "background",
+    "sourceId": "failed-merchant",
+    "kind": "rules-text",
+    "name": "Failed Merchant",
+    "text": "From your time as a merchant, you retain connections with wholesalers, suppliers, and other merchants and entrepreneurs."
+  },
+  {
+    "id": "background-effect-far-trader",
+    "sourceType": "background",
+    "sourceId": "far-trader",
+    "kind": "rules-text",
+    "name": "Far Trader",
+    "text": "Skill Proficiencies."
+  },
+  {
+    "id": "background-effect-far-traveler",
+    "sourceType": "background",
+    "sourceId": "far-traveler",
+    "kind": "rules-text",
+    "name": "Far Traveler",
+    "text": "Your accent, mannerisms, figures of speech, and perhaps even your appearance all mark you as foreign."
+  },
+  {
+    "id": "background-effect-far-reaching-herald",
+    "sourceType": "background",
+    "sourceId": "far-reaching-herald",
+    "kind": "rules-text",
+    "name": "Far-Reaching Herald",
+    "text": "Skill Proficiencies."
+  },
+  {
     "id": "feature-effect-subclass-rogue-thief-3-fast-hands-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-rogue-thief-3-fast-hands-phb",
@@ -3514,12 +4130,36 @@
     "text": "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see."
   },
   {
+    "id": "feat-effect-fey-teleportation",
+    "sourceType": "feat",
+    "sourceId": "fey-teleportation",
+    "kind": "rules-text",
+    "name": "Fey Teleportation",
+    "text": "Your study of high elven lore has unlocked fey power that few other elves possess, except your eladrin cousins."
+  },
+  {
     "id": "feat-effect-fey-touched",
     "sourceType": "feat",
     "sourceId": "fey-touched",
     "kind": "rules-text",
     "name": "Fey Touched",
     "text": "Your exposure to the Feywild's magic has changed you, granting you the following benefits:Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20."
+  },
+  {
+    "id": "background-effect-feylost",
+    "sourceType": "background",
+    "sourceId": "feylost",
+    "kind": "rules-text",
+    "name": "Feylost",
+    "text": "Your mannerisms and knowledge of fey customs are recognized by natives of the Feywild, who see you as one of their own."
+  },
+  {
+    "id": "feat-effect-field-medic",
+    "sourceType": "feat",
+    "sourceId": "field-medic",
+    "kind": "rules-text",
+    "name": "Field Medic",
+    "text": "You have been specially trained in magical triage and are able to identify the signs of shock and fatigue in those suffering from injuries."
   },
   {
     "id": "feature-effect-subclass-warlock-fiend-10-fiendish-resilience-phb",
@@ -3536,6 +4176,14 @@
     "kind": "rules-text",
     "name": "Fierce",
     "text": "You have proficiency in the Intimidation skill."
+  },
+  {
+    "id": "feat-effect-fierce-shot",
+    "sourceType": "feat",
+    "sourceId": "fierce-shot",
+    "kind": "rules-text",
+    "name": "Fierce Shot",
+    "text": "The Black Arrow that brought down Smaug the Dragon may have been fated to do so, but the hand that sent it flying so fiercely was exceedingly strong."
   },
   {
     "id": "feature-effect-subclass-sorcerer-pyromancer-psk-18-fiery-soul-psk",
@@ -4328,6 +4976,30 @@
     "text": "You have a mystical connection to firearms that traces back to the gods of the giff, who delighted in such weapons."
   },
   {
+    "id": "background-effect-fisher",
+    "sourceType": "background",
+    "sourceId": "fisher",
+    "kind": "rules-text",
+    "name": "Fisher",
+    "text": "You gain advantage on ability checks made using fishing tackle."
+  },
+  {
+    "id": "feat-effect-flames-of-phlegethos",
+    "sourceType": "feat",
+    "sourceId": "flames-of-phlegethos",
+    "kind": "rules-text",
+    "name": "Flames of Phlegethos",
+    "text": "You learn to call on hellfire to serve your commands."
+  },
+  {
+    "id": "feat-effect-flamewoken",
+    "sourceType": "feat",
+    "sourceId": "flamewoken",
+    "kind": "rules-text",
+    "name": "Flamewoken",
+    "text": "Living in the Scorched Grove or other areas touched by elemental fire can sometimes cause strange abilities to manifest among their inhabitants."
+  },
+  {
     "id": "feature-effect-class-sorcerer-2-flexible-casting-phb",
     "sourceType": "class",
     "sourceId": "class-sorcerer-2-flexible-casting-phb",
@@ -4342,6 +5014,22 @@
     "kind": "rules-text",
     "name": "Flurry of Blows",
     "text": "Immediately after you take the Attack action on your turn, you can spend 1 ki point to make two unarmed strikes as a bonus action."
+  },
+  {
+    "id": "background-effect-folk-hero",
+    "sourceType": "background",
+    "sourceId": "folk-hero",
+    "kind": "rules-text",
+    "name": "Folk Hero",
+    "text": "Since you come from the ranks of the common folk, you fit in among them with ease."
+  },
+  {
+    "id": "feat-effect-forager",
+    "sourceType": "feat",
+    "sourceId": "forager",
+    "kind": "rules-text",
+    "name": "Forager",
+    "text": "You've spent countless hours exploring the island searching for ingredients."
   },
   {
     "id": "armor-of-force-resistance-armor-of-force-resistance-force-resistance",
@@ -4562,12 +5250,36 @@
     "text": "You can use your understanding of creative diplomacy or intimidation to guide a conversation in your favor."
   },
   {
+    "id": "feat-effect-foresight-of-their-kindred",
+    "sourceType": "feat",
+    "sourceId": "foresight-of-their-kindred",
+    "kind": "rules-text",
+    "name": "Foresight of their Kindred",
+    "text": "The Rangers of the North still possess a measure of the foresight that their ancestors possessed in full."
+  },
+  {
     "id": "feature-effect-race-human-innistrad-kessig-forest-folk-psi",
     "sourceType": "race",
     "sourceId": "race-human-innistrad-kessig-forest-folk-psi",
     "kind": "rules-text",
     "name": "Forest Folk",
     "text": "You have proficiency in the Survival skill."
+  },
+  {
+    "id": "feat-effect-forest-sage",
+    "sourceType": "feat",
+    "sourceId": "forest-sage",
+    "kind": "rules-text",
+    "name": "Forest Sage",
+    "text": "The Tenders value diversity among ideas, and although they began as a purely druidic order, they have since learned to accept many different ways of thinking about the natural world, especially regarding the application of magic."
+  },
+  {
+    "id": "background-effect-forest-dweller",
+    "sourceType": "background",
+    "sourceId": "forest-dweller",
+    "kind": "rules-text",
+    "name": "Forest-Dweller",
+    "text": "Skill Proficiencies."
   },
   {
     "id": "feature-effect-subclass-warlock-undead-1-form-of-dread-vrgr",
@@ -4602,12 +5314,28 @@
     "text": "Starting at 10th level, the creatures you conjure are malformed and bloated with toxins."
   },
   {
+    "id": "feat-effect-freediver",
+    "sourceType": "feat",
+    "sourceId": "freediver",
+    "kind": "rules-text",
+    "name": "Freediver",
+    "text": "You have undergone extensive underwater training."
+  },
+  {
     "id": "feature-effect-subclass-barbarian-berserker-3-frenzy-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-barbarian-berserker-3-frenzy-phb",
     "kind": "rules-text",
     "name": "Frenzy",
     "text": "Starting when you choose this path at 3rd level, you can go into a frenzy when you rage."
+  },
+  {
+    "id": "feat-effect-friendly-and-familiar",
+    "sourceType": "feat",
+    "sourceId": "friendly-and-familiar",
+    "kind": "rules-text",
+    "name": "Friendly and Familiar",
+    "text": "Since you started your adventures, you have realised that your folk's custom of trading with foreigners may help you in your endeavours."
   },
   {
     "id": "feature-effect-subclass-druid-stars-14-full-of-stars-tce",
@@ -4640,6 +5368,22 @@
     "kind": "rules-text",
     "name": "Fury of the Tides",
     "text": "As a bonus action, you channel the powerful might of the waves to bolster your attacks for 1 minute."
+  },
+  {
+    "id": "background-effect-gambler",
+    "sourceType": "background",
+    "sourceId": "gambler",
+    "kind": "rules-text",
+    "name": "Gambler",
+    "text": "Odds and probability are your bread and butter."
+  },
+  {
+    "id": "background-effect-gate-warden",
+    "sourceType": "background",
+    "sourceId": "gate-warden",
+    "kind": "rules-text",
+    "name": "Gate Warden",
+    "text": "Living in a gate-town or a similar location steeped you in planar energy."
   },
   {
     "id": "feature-effect-race-dragonborn-gem-gem-flight-ftd",
@@ -4682,12 +5426,44 @@
     "text": "3rd-level Rune Knight feature You have learned how to imbue yourself with the might of giants."
   },
   {
+    "id": "feat-effect-gift-of-the-chromatic-dragon",
+    "sourceType": "feat",
+    "sourceId": "gift-of-the-chromatic-dragon",
+    "kind": "rules-text",
+    "name": "Gift of the Chromatic Dragon",
+    "text": "You've manifested some of the power of chromatic dragons, granting you the following benefits:Chromatic Infusion."
+  },
+  {
     "id": "feat-effect-gift-of-the-gem-dragon",
     "sourceType": "feat",
     "sourceId": "gift-of-the-gem-dragon",
     "kind": "rules-text",
     "name": "Gift of the Gem Dragon",
     "text": "You've manifested some of the power of gem dragons, granting you the following benefits:Ability Score Increase."
+  },
+  {
+    "id": "feat-effect-gift-of-the-metallic-dragon",
+    "sourceType": "feat",
+    "sourceId": "gift-of-the-metallic-dragon",
+    "kind": "rules-text",
+    "name": "Gift of the Metallic Dragon",
+    "text": "You've manifested some of the power of metallic dragons, granting you the following benefits:Draconic Healing."
+  },
+  {
+    "id": "background-effect-gifted-senses",
+    "sourceType": "background",
+    "sourceId": "gifted-senses",
+    "kind": "rules-text",
+    "name": "Gifted Senses",
+    "text": "Skill Proficiencies."
+  },
+  {
+    "id": "feat-effect-gleam-of-wrath",
+    "sourceType": "feat",
+    "sourceId": "gleam-of-wrath",
+    "kind": "rules-text",
+    "name": "Gleam of Wrath",
+    "text": "Your folk have seen many defeats, and many fruitless victories in their wars against the Shadow."
   },
   {
     "id": "feature-effect-subclass-paladin-glory-15-glorious-defense-tce",
@@ -4722,6 +5498,14 @@
     "text": "You have advantage on Intelligence, Wisdom, and Charisma saving throws against spells."
   },
   {
+    "id": "background-effect-golgari-agent",
+    "sourceType": "background",
+    "sourceId": "golgari-agent",
+    "kind": "rules-text",
+    "name": "Golgari Agent",
+    "text": "You know hidden, underground pathways that you can use to bypass crowds, obstacles, and observation as you move through the city."
+  },
+  {
     "id": "feature-effect-race-minotaur-goring-rush-ggr",
     "sourceType": "race",
     "sourceId": "race-minotaur-goring-rush-ggr",
@@ -4744,6 +5528,14 @@
     "kind": "rules-text",
     "name": "Graceful",
     "text": "You have proficiency in the Acrobatics skill."
+  },
+  {
+    "id": "feat-effect-grappler",
+    "sourceType": "feat",
+    "sourceId": "grappler",
+    "kind": "rules-text",
+    "name": "Grappler",
+    "text": "You've developed the skills necessary to hold your own in close-quarters grappling."
   },
   {
     "id": "feat-effect-great-weapon-master",
@@ -4786,12 +5578,28 @@
     "text": "You have proficiency in the Animal Handling skill."
   },
   {
+    "id": "feat-effect-group-combatant",
+    "sourceType": "feat",
+    "sourceId": "group-combatant",
+    "kind": "rules-text",
+    "name": "Group Combatant",
+    "text": "You've honed your fighting skills and are just as comfortable fighting a group of enemies as you are facing a combatant one on one."
+  },
+  {
     "id": "feature-effect-race-kobold-grovel-cower-and-beg-vgm",
     "sourceType": "race",
     "sourceId": "race-kobold-grovel-cower-and-beg-vgm",
     "kind": "rules-text",
     "name": "Grovel, Cower, and Beg",
     "text": "As an action on your turn, you can cower pathetically to distract nearby foes."
+  },
+  {
+    "id": "background-effect-gruul-anarch",
+    "sourceType": "background",
+    "sourceId": "gruul-anarch",
+    "kind": "rules-text",
+    "name": "Gruul Anarch",
+    "text": "You are intimately familiar with areas of the city that most people shun: ruined neighborhoods where wurms rampaged, overgrown parks that no hand has tended in decades, and the vast, sprawling rubblebelts of broken terrain that civilized folk have long abando..."
   },
   {
     "id": "feature-effect-subclass-fighter-psi-warrior-10-guarded-mind-tce",
@@ -4834,6 +5642,14 @@
     "text": "You can use your Channel Divinity to strike with supernatural accuracy."
   },
   {
+    "id": "background-effect-guild-artisan",
+    "sourceType": "background",
+    "sourceId": "guild-artisan",
+    "kind": "rules-text",
+    "name": "Guild Artisan",
+    "text": "As an established and respected member of a guild, you can rely on certain benefits that membership provides."
+  },
+  {
     "id": "feat-effect-guile-of-the-cloud-giant",
     "sourceType": "feat",
     "sourceId": "guile-of-the-cloud-giant",
@@ -4874,6 +5690,14 @@
     "text": "Immediately after you hit a creature with a melee attack as part of the Attack action on your turn, you can use a bonus action to attempt to push that target with your horns."
   },
   {
+    "id": "feat-effect-hand-craft",
+    "sourceType": "feat",
+    "sourceId": "hand-craft",
+    "kind": "rules-text",
+    "name": "Hand-Craft",
+    "text": "This craft is not meant to cover the whole range of abilities of smiths, wrights, and other artisans, but reflects a talent for making things with superior skill and cunning."
+  },
+  {
     "id": "feat-effect-hardiness",
     "sourceType": "feat",
     "sourceId": "hardiness",
@@ -4898,6 +5722,14 @@
     "text": "You can add your proficiency bonus to your initiative rolls."
   },
   {
+    "id": "background-effect-haunted-one",
+    "sourceType": "background",
+    "sourceId": "haunted-one",
+    "kind": "rules-text",
+    "name": "Haunted One",
+    "text": "Those who look into your eyes can see that you have faced unimaginable horror and that you are no stranger to darkness."
+  },
+  {
     "id": "feature-effect-race-aven-hawk-headed-hawkeyed-psa",
     "sourceType": "race",
     "sourceId": "race-aven-hawk-headed-hawkeyed-psa",
@@ -4920,6 +5752,14 @@
     "kind": "rules-text",
     "name": "Healing Hands",
     "text": "As an action, you can touch a creature and roll a number of d4s equal to your proficiency bonus."
+  },
+  {
+    "id": "background-effect-healing-hands",
+    "sourceType": "background",
+    "sourceId": "healing-hands",
+    "kind": "rules-text",
+    "name": "Healing Hands",
+    "text": "Skill Proficiencies."
   },
   {
     "id": "feature-effect-subclass-warlock-celestial-1-healing-light-xge",
@@ -4954,6 +5794,22 @@
     "text": "You have trained to master the use of heavy armor, gaining the following benefits:Increase your Strength score by 1, to a maximum of 20."
   },
   {
+    "id": "feat-effect-heavy-armor-master",
+    "sourceType": "feat",
+    "sourceId": "heavy-armor-master",
+    "kind": "rules-text",
+    "name": "Heavy Armor Master",
+    "text": "You can use your armor to deflect strikes that would kill others."
+  },
+  {
+    "id": "feat-effect-heir-of-arnor",
+    "sourceType": "feat",
+    "sourceId": "heir-of-arnor",
+    "kind": "rules-text",
+    "name": "Heir of Arnor",
+    "text": "The days of your folk have darkened, and not many of you remain; but ever the memory of the Kings is passed from generation to generation."
+  },
+  {
     "id": "feature-effect-race-tiefling-hellish-resistance-phb",
     "sourceType": "race",
     "sourceId": "race-tiefling-hellish-resistance-phb",
@@ -4968,6 +5824,14 @@
     "kind": "rules-text",
     "name": "Helpful",
     "text": "1st-level Expert feature The sidekick is adept at giving well-timed assistance; the sidekick can take the Help action as a bonus action."
+  },
+  {
+    "id": "background-effect-hermit",
+    "sourceType": "background",
+    "sourceId": "hermit",
+    "kind": "rules-text",
+    "name": "Hermit",
+    "text": "The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery."
   },
   {
     "id": "feature-effect-subclass-mystic-wu-jen-1-hermit-s-study-uathemysticclass",
@@ -5026,6 +5890,14 @@
     "text": "Starting at 10th level, you can spend 1 minute creating camouflage for yourself."
   },
   {
+    "id": "feat-effect-high-destiny",
+    "sourceType": "feat",
+    "sourceId": "high-destiny",
+    "kind": "rules-text",
+    "name": "High Destiny",
+    "text": "Stories tell that those who belong to the race of Dale are destined for greatness, a fact proven true by your King and his story."
+  },
+  {
     "id": "feature-effect-race-giff-hippo-build-aag",
     "sourceType": "race",
     "sourceId": "race-giff-hippo-build-aag",
@@ -5080,6 +5952,14 @@
     "kind": "rules-text",
     "name": "Hungry Jaws",
     "text": "In battle, you can throw yourself into a vicious feeding frenzy."
+  },
+  {
+    "id": "background-effect-hunter-of-orcs",
+    "sourceType": "background",
+    "sourceId": "hunter-of-orcs",
+    "kind": "rules-text",
+    "name": "Hunter of Orcs",
+    "text": "Skill Proficiencies."
   },
   {
     "id": "feature-effect-race-leonin-hunter-s-instincts-mot",
@@ -5240,6 +6120,14 @@
     "kind": "rules-text",
     "name": "Infectious Fury",
     "text": "10th-level Path of the Beast feature When you hit a creature with your natural weapons while you are raging, the beast within you can curse your target with rabid fury."
+  },
+  {
+    "id": "feat-effect-infernal-constitution",
+    "sourceType": "feat",
+    "sourceId": "infernal-constitution",
+    "kind": "rules-text",
+    "name": "Infernal Constitution",
+    "text": "Fiendish blood runs strong in you, unlocking a resilience akin to that possessed by some fiends."
   },
   {
     "id": "feature-effect-subclass-rogue-assassin-9-infiltration-expertise-phb",
@@ -6480,6 +7368,14 @@
     "text": "Beginning at 10th level, you have resistance to necrotic damage, and your hit point maximum can't be reduced."
   },
   {
+    "id": "background-effect-investigator",
+    "sourceType": "background",
+    "sourceId": "investigator",
+    "kind": "rules-text",
+    "name": "Investigator",
+    "text": "You're experienced at gaining access to people and places to get the information you need."
+  },
+  {
     "id": "feature-effect-subclass-paladin-conquest-20-invincible-conqueror-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-paladin-conquest-20-invincible-conqueror-xge",
@@ -6496,6 +7392,14 @@
     "text": "By 7th level, you have honed your ability to resist the mind-altering powers of your prey."
   },
   {
+    "id": "background-effect-izzet-engineer",
+    "sourceType": "background",
+    "sourceId": "izzet-engineer",
+    "kind": "rules-text",
+    "name": "Izzet Engineer",
+    "text": "The popular conception of the Izzet League is based on mad inventions, dangerous experiments, and explosive blasts."
+  },
+  {
     "id": "feature-effect-class-bard-2-jack-of-all-trades-phb",
     "sourceType": "class",
     "sourceId": "class-bard-2-jack-of-all-trades-phb",
@@ -6510,6 +7414,14 @@
     "kind": "rules-text",
     "name": "Keen Hearing and Smell",
     "text": "You have advantage on Wisdom (Perception) checks that rely on hearing or smell."
+  },
+  {
+    "id": "feat-effect-keen-mind",
+    "sourceType": "feat",
+    "sourceId": "keen-mind",
+    "kind": "rules-text",
+    "name": "Keen Mind",
+    "text": "You have a mind that can track time, direction, and detail with uncanny precision."
   },
   {
     "id": "feature-effect-race-astral-elf-keen-senses-aag",
@@ -6584,6 +7496,14 @@
     "text": "You've manifested the physical talents emblematic of stone giants, granting you the following benefits:Ability Score Increase."
   },
   {
+    "id": "background-effect-keeper-of-lore",
+    "sourceType": "background",
+    "sourceId": "keeper-of-lore",
+    "kind": "rules-text",
+    "name": "Keeper of Lore",
+    "text": "Skill Proficiencies."
+  },
+  {
     "id": "feature-effect-race-aven-ibis-headed-kefnet-s-blessing-psa",
     "sourceType": "race",
     "sourceId": "race-aven-ibis-headed-kefnet-s-blessing-psa",
@@ -6646,6 +7566,46 @@
     "kind": "rules-text",
     "name": "Ki-Fueled Attack",
     "text": "3rd-level monk optional class features If you spend 1 ki point or more as part of your action on your turn, you can make one attack with an unarmed strike or a monk weapon as a bonus action before the end of the turn."
+  },
+  {
+    "id": "background-effect-knight-of-solamnia",
+    "sourceType": "background",
+    "sourceId": "knight-of-solamnia",
+    "kind": "rules-text",
+    "name": "Knight of Solamnia",
+    "text": "You gain the Squire of Solamnia feat."
+  },
+  {
+    "id": "feat-effect-knight-of-the-crown",
+    "sourceType": "feat",
+    "sourceId": "knight-of-the-crown",
+    "kind": "rules-text",
+    "name": "Knight of the Crown",
+    "text": "You are a Knight of Solamnia aligned with the Order of the Crown, a group that extols the virtues of cooperation, loyalty, and obedience."
+  },
+  {
+    "id": "background-effect-knight-of-the-order",
+    "sourceType": "background",
+    "sourceId": "knight-of-the-order",
+    "kind": "rules-text",
+    "name": "Knight of the Order",
+    "text": "You receive shelter and succor from members of your knightly order and those who are sympathetic to its aims."
+  },
+  {
+    "id": "feat-effect-knight-of-the-rose",
+    "sourceType": "feat",
+    "sourceId": "knight-of-the-rose",
+    "kind": "rules-text",
+    "name": "Knight of the Rose",
+    "text": "You are a Knight of Solamnia aligned with the Order of the Rose, a group known for leadership, justice, and wisdom."
+  },
+  {
+    "id": "feat-effect-knight-of-the-sword",
+    "sourceType": "feat",
+    "sourceId": "knight-of-the-sword",
+    "kind": "rules-text",
+    "name": "Knight of the Sword",
+    "text": "You are a Knight of Solamnia aligned with the Order of the Sword, a group devoted to heroism and courage."
   },
   {
     "id": "feature-effect-race-reborn-knowledge-from-a-past-life-vrgr",
@@ -6726,6 +7686,14 @@
     "kind": "rules-text",
     "name": "Leviathan Will",
     "text": "You have advantage on saving throws against being charmed, frightened, paralyzed, poisoned, stunned, or put to sleep."
+  },
+  {
+    "id": "feat-effect-light-foot",
+    "sourceType": "feat",
+    "sourceId": "light-foot",
+    "kind": "rules-text",
+    "name": "Light Foot",
+    "text": "You are exceptionally speedy and agile."
   },
   {
     "id": "feat-effect-lightly-armored",
@@ -7114,6 +8082,14 @@
     "text": "You have advantage on saving throws against being charmed or frightened."
   },
   {
+    "id": "feat-effect-lucky",
+    "sourceType": "feat",
+    "sourceId": "lucky",
+    "kind": "rules-text",
+    "name": "Lucky",
+    "text": "You have inexplicable luck that seems to kick in at just the right moment."
+  },
+  {
     "id": "feature-effect-subclass-sorcerer-lunar-6-lunar-boons-dsotdq",
     "sourceType": "subclass",
     "sourceId": "subclass-sorcerer-lunar-6-lunar-boons-dsotdq",
@@ -7144,6 +8120,14 @@
     "kind": "rules-text",
     "name": "Mage Hand Legerdemain",
     "text": "Starting at 3rd level, when you cast mage hand, you can make the spectral hand invisible, and you can perform the following additional tasks with it: You can stow one object the hand is holding in a container worn or carried by another creature."
+  },
+  {
+    "id": "background-effect-mage-of-high-sorcery",
+    "sourceType": "background",
+    "sourceId": "mage-of-high-sorcery",
+    "kind": "rules-text",
+    "name": "Mage of High Sorcery",
+    "text": "You gain the Initiate of High Sorcery feat."
   },
   {
     "id": "feat-effect-mage-slayer",
@@ -20958,6 +21942,22 @@
     "text": "2nd-level bard optional class features If a creature has a Bardic Inspiration die from you and casts a spell that restores hit points or deals damage, the creature can roll that die and choose a target affected by the spell."
   },
   {
+    "id": "feat-effect-magically-mischievous",
+    "sourceType": "feat",
+    "sourceId": "magically-mischievous",
+    "kind": "rules-text",
+    "name": "Magically Mischievous",
+    "text": "You've picked up a few magical tricks that assist your nefarious skills."
+  },
+  {
+    "id": "background-effect-maker-of-ships",
+    "sourceType": "background",
+    "sourceId": "maker-of-ships",
+    "kind": "rules-text",
+    "name": "Maker of Ships",
+    "text": "Skill Proficiencies."
+  },
+  {
     "id": "feature-effect-race-human-mark-of-making-maker-s-gift-erlw",
     "sourceType": "race",
     "sourceId": "race-human-mark-of-making-maker-s-gift-erlw",
@@ -21020,6 +22020,22 @@
     "kind": "rules-text",
     "name": "Mantle of Whispers",
     "text": "At 6th level, you gain the ability to adopt a humanoid's persona."
+  },
+  {
+    "id": "background-effect-marine",
+    "sourceType": "background",
+    "sourceId": "marine",
+    "kind": "rules-text",
+    "name": "Marine",
+    "text": "You can move twice the normal amount of time (up to 16 hours) each day before being subject to the effect of a forced march (see \"Travel Pace\" in chapter 8 of the Player's Handbook)."
+  },
+  {
+    "id": "feat-effect-martial-adept",
+    "sourceType": "feat",
+    "sourceId": "martial-adept",
+    "kind": "rules-text",
+    "name": "Martial Adept",
+    "text": "You have martial training that allows you to perform special combat maneuvers."
   },
   {
     "id": "feature-effect-race-hobgoblin-martial-advantage-dmg",
@@ -21110,6 +22126,14 @@
     "text": "You have practised certain skills until they have become as natural as breathing."
   },
   {
+    "id": "background-effect-mechanic",
+    "sourceType": "background",
+    "sourceId": "mechanic",
+    "kind": "rules-text",
+    "name": "Mechanic",
+    "text": "You have a knack for machines and can tell what state one is in by spending a few minutes with it."
+  },
+  {
     "id": "feature-effect-race-autognome-mechanical-nature-aag",
     "sourceType": "race",
     "sourceId": "race-autognome-mechanical-nature-aag",
@@ -21124,6 +22148,22 @@
     "kind": "rules-text",
     "name": "Medium Armor Master",
     "text": "You have practiced moving in medium armor to gain the following benefits:Wearing medium armor doesn't impose disadvantage on your Dexterity (Stealth) checks."
+  },
+  {
+    "id": "feat-effect-member-of-aha",
+    "sourceType": "feat",
+    "sourceId": "member-of-aha",
+    "kind": "rules-text",
+    "name": "Member of AHA",
+    "text": "You have become an official member of AHA."
+  },
+  {
+    "id": "feat-effect-memory-of-ancient-days",
+    "sourceType": "feat",
+    "sourceId": "memory-of-ancient-days",
+    "kind": "rules-text",
+    "name": "Memory of Ancient Days",
+    "text": "Long centuries and uncounted generations of Men seem but a little while to the Elves."
   },
   {
     "id": "feature-effect-race-aetherborn-menacing-psk",
@@ -21182,6 +22222,14 @@
     "text": "You have resistance to psychic damage."
   },
   {
+    "id": "background-effect-mercenary-veteran",
+    "sourceType": "background",
+    "sourceId": "mercenary-veteran",
+    "kind": "rules-text",
+    "name": "Mercenary Veteran",
+    "text": "You know the mercenary life as only someone who has experienced it can."
+  },
+  {
     "id": "feature-effect-race-genasi-earth-merge-with-stone-mpmm",
     "sourceType": "race",
     "sourceId": "race-genasi-earth-merge-with-stone-mpmm",
@@ -21222,6 +22270,22 @@
     "text": "You can accurately mimic sounds you have heard, including voices."
   },
   {
+    "id": "feat-effect-minor-corruption",
+    "sourceType": "feat",
+    "sourceId": "minor-corruption",
+    "kind": "rules-text",
+    "name": "Minor Corruption",
+    "text": "You were exposed to the Corruption, a dark magic that's poisoning the island."
+  },
+  {
+    "id": "feat-effect-mobile",
+    "sourceType": "feat",
+    "sourceId": "mobile",
+    "kind": "rules-text",
+    "name": "Mobile",
+    "text": "You are exceptionally speedy and agile."
+  },
+  {
     "id": "feat-effect-moderately-armored",
     "sourceType": "feat",
     "sourceId": "moderately-armored",
@@ -21252,6 +22316,14 @@
     "kind": "rules-text",
     "name": "Mountain Born",
     "text": "You have resistance to cold damage."
+  },
+  {
+    "id": "feat-effect-mounted-combatant",
+    "sourceType": "feat",
+    "sourceId": "mounted-combatant",
+    "kind": "rules-text",
+    "name": "Mounted Combatant",
+    "text": "You are a dangerous foe to face while mounted."
   },
   {
     "id": "feature-effect-subclass-ranger-hunter-7-multiattack-defense-phb",
@@ -21310,6 +22382,22 @@
     "kind": "rules-text",
     "name": "Mythic Swashbuckler",
     "text": "At 20th level, you learn to channel the spirits of historic sea captains to briefly become a paragon of heroic adventure."
+  },
+  {
+    "id": "feat-effect-nakudama-s-electric-bloodline",
+    "sourceType": "feat",
+    "sourceId": "nakudama-s-electric-bloodline",
+    "kind": "rules-text",
+    "name": "Nakudama's Electric Bloodline",
+    "text": "Although it's uncommon in today's day and age, some Nakudama are able to awaken the now dormant skills held by their warring ancestors."
+  },
+  {
+    "id": "feat-effect-nakudama-s-toxin-bloodline",
+    "sourceType": "feat",
+    "sourceId": "nakudama-s-toxin-bloodline",
+    "kind": "rules-text",
+    "name": "Nakudama's Toxin Bloodline",
+    "text": "Although it's uncommon in today's day and age, some Nakudama are able to awaken the now dormant skills held by their warring ancestors."
   },
   {
     "id": "feature-effect-race-centaur-natural-affinity-mpmm",
@@ -21870,6 +22958,22 @@
     "text": "Upon reaching 14th level, you can touch a willing creature as an action and empower it with tragic heroism."
   },
   {
+    "id": "background-effect-no-longer-free-from-care-and-fear",
+    "sourceType": "background",
+    "sourceId": "no-longer-free-from-care-and-fear",
+    "kind": "rules-text",
+    "name": "No Longer Free from Care and Fear",
+    "text": "Skill Proficiencies."
+  },
+  {
+    "id": "background-effect-noble",
+    "sourceType": "background",
+    "sourceId": "noble",
+    "kind": "rules-text",
+    "name": "Noble",
+    "text": "Thanks to your noble birth, people are inclined to think the best of you."
+  },
+  {
     "id": "armor-of-invulnerability-armor-of-invulnerability-nonmagical-resistance",
     "kind": "resistance",
     "target": "nonmagical",
@@ -21924,12 +23028,28 @@
     "text": "6th-level Fathomless feature You are now even more at home in the depths."
   },
   {
+    "id": "background-effect-off-with-dwarves",
+    "sourceType": "background",
+    "sourceId": "off-with-dwarves",
+    "kind": "rules-text",
+    "name": "Off with Dwarves",
+    "text": "Skill Proficiencies."
+  },
+  {
     "id": "feature-effect-subclass-cleric-solidarity-psa-6-oketra-s-blessing-psa",
     "sourceType": "subclass",
     "sourceId": "subclass-cleric-solidarity-psa-6-oketra-s-blessing-psa",
     "kind": "rules-text",
     "name": "Oketra's Blessing",
     "text": "At 6th level, when a creature within 30 feet of you makes an attack roll, you can use your reaction to grant that creature a +10 bonus to the roll, using your Channel Divinity."
+  },
+  {
+    "id": "background-effect-on-patrol",
+    "sourceType": "background",
+    "sourceId": "on-patrol",
+    "kind": "rules-text",
+    "name": "On Patrol",
+    "text": "Skill Proficiencies."
   },
   {
     "id": "dragon-horn-pauldron-dragon-horn-pauldron-one-resistance",
@@ -21968,12 +23088,36 @@
     "text": "14th-level Order of Scribes feature Your connection to your Awakened Spellbook has become so profound that your soul has become entwined with it."
   },
   {
+    "id": "feat-effect-opportunistic-thief",
+    "sourceType": "feat",
+    "sourceId": "opportunistic-thief",
+    "kind": "rules-text",
+    "name": "Opportunistic Thief",
+    "text": "You have learned the tricks of the trade of thievery, allowing you to exploit opportunities for pick-pocketing both in and out of combat."
+  },
+  {
     "id": "feature-effect-class-artificer-1-optional-rule-firearm-proficiency-tce",
     "sourceType": "class",
     "sourceId": "class-artificer-1-optional-rule-firearm-proficiency-tce",
     "kind": "rules-text",
     "name": "Optional Rule: Firearm Proficiency",
     "text": "The secrets of creating and operating gunpowder weapons have been discovered in various corners of the D&D multiverse."
+  },
+  {
+    "id": "feat-effect-orcish-fury",
+    "sourceType": "feat",
+    "sourceId": "orcish-fury",
+    "kind": "rules-text",
+    "name": "Orcish Fury",
+    "text": "Your fury burns tirelessly."
+  },
+  {
+    "id": "background-effect-orzhov-representative",
+    "sourceType": "background",
+    "sourceId": "orzhov-representative",
+    "kind": "rules-text",
+    "name": "Orzhov Representative",
+    "text": "You can exert leverage over one or more individuals below you in the guild's hierarchy and demand their help as needs warrant."
   },
   {
     "id": "feature-effect-subclass-ranger-fey-wanderer-3-otherworldly-glamour-tce",
@@ -21990,6 +23134,22 @@
     "kind": "rules-text",
     "name": "Otherworldly Wings",
     "text": "Starting at 14th level, you can use a bonus action to manifest a pair of spectral wings from your back."
+  },
+  {
+    "id": "background-effect-outlander",
+    "sourceType": "background",
+    "sourceId": "outlander",
+    "kind": "rules-text",
+    "name": "Outlander",
+    "text": "You have an excellent memory for maps and geography, and you can always recall the general layout of terrain, settlements, and other features around you."
+  },
+  {
+    "id": "feat-effect-outlands-envoy",
+    "sourceType": "feat",
+    "sourceId": "outlands-envoy",
+    "kind": "rules-text",
+    "name": "Outlands Envoy",
+    "text": "You have spent significant time in Sigil or the Outlands, the crossroads of the multiverse."
   },
   {
     "id": "feature-effect-subclass-wizard-evocation-14-overchannel-phb",
@@ -22056,6 +23216,14 @@
     "text": "As a bonus action, you can use your Channel Divinity to augment your athleticism."
   },
   {
+    "id": "feat-effect-perfect-landing",
+    "sourceType": "feat",
+    "sourceId": "perfect-landing",
+    "kind": "rules-text",
+    "name": "Perfect Landing",
+    "text": "Years of living at great heights have taught you how to fall more gracefully."
+  },
+  {
     "id": "feature-effect-subclass-ranger-drakewarden-15-perfected-bond-ftd",
     "sourceType": "subclass",
     "sourceId": "subclass-ranger-drakewarden-15-perfected-bond-ftd",
@@ -22096,6 +23264,22 @@
     "sourceType": "item",
     "sourceId": "armor-of-vulnerability-piercing",
     "itemName": "Armor of Vulnerability (Piercing)"
+  },
+  {
+    "id": "background-effect-plaintiff",
+    "sourceType": "background",
+    "sourceId": "plaintiff",
+    "kind": "rules-text",
+    "name": "Plaintiff",
+    "text": "Your experience with your local legal system has given you a firm knowledge of the ins and outs of that system."
+  },
+  {
+    "id": "feat-effect-planar-wanderer",
+    "sourceType": "feat",
+    "sourceId": "planar-wanderer",
+    "kind": "rules-text",
+    "name": "Planar Wanderer",
+    "text": "You can draw on the forces of the multiverse to survive cosmic extremes and to traverse its infinite realms, granting you these benefits:Planar Adaptation."
   },
   {
     "id": "feature-effect-subclass-ranger-horizon-walker-3-planar-warrior-xge",
@@ -22534,6 +23718,22 @@
     "text": "You can prepare and deliver deadly poisons, granting you the following benefits:When you make a damage roll that deals poison damage, it ignores resistance to poison damage."
   },
   {
+    "id": "feat-effect-polearm-master",
+    "sourceType": "feat",
+    "sourceId": "polearm-master",
+    "kind": "rules-text",
+    "name": "Polearm Master",
+    "text": "You can keep your enemies at bay with reach weapons."
+  },
+  {
+    "id": "feat-effect-postal-knight",
+    "sourceType": "feat",
+    "sourceId": "postal-knight",
+    "kind": "rules-text",
+    "name": "Postal Knight",
+    "text": "You have trained as a member of the Courier Brigade."
+  },
+  {
     "id": "feature-effect-subclass-cleric-zeal-psa-1-priest-of-zeal-psa",
     "sourceType": "subclass",
     "sourceId": "subclass-cleric-zeal-psa-1-priest-of-zeal-psa",
@@ -22580,6 +23780,22 @@
     "kind": "rules-text",
     "name": "Primal Strike",
     "text": "Starting at 6th level, your attacks in beast form count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage."
+  },
+  {
+    "id": "feat-effect-prodigy",
+    "sourceType": "feat",
+    "sourceId": "prodigy",
+    "kind": "rules-text",
+    "name": "Prodigy",
+    "text": "You have a knack for learning new things."
+  },
+  {
+    "id": "background-effect-protector-of-the-land",
+    "sourceType": "background",
+    "sourceId": "protector-of-the-land",
+    "kind": "rules-text",
+    "name": "Protector of the Land",
+    "text": "Skill Proficiencies."
   },
   {
     "id": "feat-effect-prowess",
@@ -23482,12 +24698,28 @@
     "text": "17th-level Soulknife feature You can sweep your Psychic Blades directly through a creature's mind."
   },
   {
+    "id": "feat-effect-resilient",
+    "sourceType": "feat",
+    "sourceId": "resilient",
+    "kind": "rules-text",
+    "name": "Resilient",
+    "text": "Choose one ability score."
+  },
+  {
     "id": "feature-effect-subclass-barbarian-juggernaut-6-resolute-stance-tdcsr",
     "sourceType": "subclass",
     "sourceId": "subclass-barbarian-juggernaut-6-resolute-stance-tdcsr",
     "kind": "rules-text",
     "name": "Resolute Stance",
     "text": "Also at 6th level, you can temporarily refocus your combat ability to make yourself a bulwark of defense."
+  },
+  {
+    "id": "background-effect-restless-farmer",
+    "sourceType": "background",
+    "sourceId": "restless-farmer",
+    "kind": "rules-text",
+    "name": "Restless Farmer",
+    "text": "Skill Proficiencies."
   },
   {
     "id": "feature-effect-subclass-sorcerer-clockwork-soul-1-restore-balance-tce",
@@ -23522,6 +24754,22 @@
     "text": "As an embodiment of revelry, you have proficiency in the Performance and Persuasion skills, and you have proficiency with one musical instrument of your choice."
   },
   {
+    "id": "feat-effect-revenant-blade",
+    "sourceType": "feat",
+    "sourceId": "revenant-blade",
+    "kind": "rules-text",
+    "name": "Revenant Blade",
+    "text": "You are descended from a master of the double-bladed scimitar, and some of that mastery has passed on to you."
+  },
+  {
+    "id": "background-effect-rewarded",
+    "sourceType": "background",
+    "sourceId": "rewarded",
+    "kind": "rules-text",
+    "name": "Rewarded",
+    "text": "Your unexpected good fortune is reflected by a minor boon."
+  },
+  {
     "id": "feature-effect-subclass-cleric-strength-psa-6-rhonas-s-blessing-psa",
     "sourceType": "subclass",
     "sourceId": "subclass-cleric-strength-psa-6-rhonas-s-blessing-psa",
@@ -23538,6 +24786,14 @@
     "text": "You can channel cosmic forces of good to gain these benefits:Ability Score Increase."
   },
   {
+    "id": "background-effect-rival-intern",
+    "sourceType": "background",
+    "sourceId": "rival-intern",
+    "kind": "rules-text",
+    "name": "Rival Intern",
+    "text": "You have connections to your previous employer or other groups you dealt with during your previous employment."
+  },
+  {
     "id": "feature-effect-subclass-fighter-purple-dragon-knight-banneret-7-royal-envoy-scag",
     "sourceType": "subclass",
     "sourceId": "subclass-fighter-purple-dragon-knight-banneret-7-royal-envoy-scag",
@@ -23546,12 +24802,36 @@
     "text": "A Purple Dragon Knight serves as an envoy of the Cormyrean crown."
   },
   {
+    "id": "feat-effect-royalty-revealed",
+    "sourceType": "feat",
+    "sourceId": "royalty-revealed",
+    "kind": "rules-text",
+    "name": "Royalty Revealed",
+    "text": "Your kin belong to a bloodline of kings, but they have learnt to hide from their enemies in the twilight years of their kingdom."
+  },
+  {
+    "id": "background-effect-ruined",
+    "sourceType": "background",
+    "sourceId": "ruined",
+    "kind": "rules-text",
+    "name": "Ruined",
+    "text": "You have weathered ruinous misfortune, and you possess hidden reserves others don't expect."
+  },
+  {
     "id": "feature-effect-subclass-fighter-rune-knight-3-rune-carver-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-fighter-rune-knight-3-rune-carver-tce",
     "kind": "rules-text",
     "name": "Rune Carver",
     "text": "3rd-level Rune Knight feature You can use magic runes to enhance your gear."
+  },
+  {
+    "id": "feat-effect-rune-craft",
+    "sourceType": "feat",
+    "sourceId": "rune-craft",
+    "kind": "rules-text",
+    "name": "Rune-Craft",
+    "text": "You can now read and write runic inscriptions."
   },
   {
     "id": "feature-effect-subclass-fighter-rune-knight-7-runic-shield-tce",
@@ -23568,6 +24848,22 @@
     "kind": "rules-text",
     "name": "Sacred Weapon",
     "text": "As an action, you can imbue one weapon that you are holding with positive energy, using your Channel Divinity."
+  },
+  {
+    "id": "background-effect-sage",
+    "sourceType": "background",
+    "sourceId": "sage",
+    "kind": "rules-text",
+    "name": "Sage",
+    "text": "When you attempt to learn or recall a piece of lore, if you do not know that information, you often know where and from whom you can obtain it."
+  },
+  {
+    "id": "background-effect-sailor",
+    "sourceType": "background",
+    "sourceId": "sailor",
+    "kind": "rules-text",
+    "name": "Sailor",
+    "text": "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions."
   },
   {
     "id": "feature-effect-subclass-cleric-forge-17-saint-of-forge-and-fire-xge",
@@ -23626,6 +24922,14 @@
     "text": "At 6th level, you gain the ability to channel your ki into searing waves of energy."
   },
   {
+    "id": "feat-effect-second-chance",
+    "sourceType": "feat",
+    "sourceId": "second-chance",
+    "kind": "rules-text",
+    "name": "Second Chance",
+    "text": "Fortune favors you when someone tries to strike you."
+  },
+  {
     "id": "feature-effect-class-fighter-1-second-wind-phb",
     "sourceType": "class",
     "sourceId": "class-fighter-1-second-wind-phb",
@@ -23640,6 +24944,14 @@
     "kind": "rules-text",
     "name": "Second Wind",
     "text": "2nd-level Warrior feature The sidekick can use a bonus action on its turn to regain hit points equal to 1d10 + its level in this class."
+  },
+  {
+    "id": "background-effect-selesnya-initiate",
+    "sourceType": "background",
+    "sourceId": "selesnya-initiate",
+    "kind": "rules-text",
+    "name": "Selesnya Initiate",
+    "text": "As a member of the Selesnya Conclave, you can count on your guild mates to provide shelter and aid."
   },
   {
     "id": "feat-effect-sentinel",
@@ -23714,6 +25026,14 @@
     "text": "At 11th level, you gain the ability to augment your weapons further with your ki."
   },
   {
+    "id": "feat-effect-sharpshooter",
+    "sourceType": "feat",
+    "sourceId": "sharpshooter",
+    "kind": "rules-text",
+    "name": "Sharpshooter",
+    "text": "You have mastered ranged weapons and can make shots that others find impossible."
+  },
+  {
     "id": "feature-effect-race-tortle-shell-defense-mpmm",
     "sourceType": "race",
     "sourceId": "race-tortle-shell-defense-mpmm",
@@ -23728,6 +25048,14 @@
     "kind": "rules-text",
     "name": "Shell Defense",
     "text": "You can withdraw into your shell as an action."
+  },
+  {
+    "id": "feat-effect-shield-master",
+    "sourceType": "feat",
+    "sourceId": "shield-master",
+    "kind": "rules-text",
+    "name": "Shield Master",
+    "text": "You use shields not just for protection but also for offense."
   },
   {
     "id": "feature-effect-subclass-barbarian-storm-herald-10-shielding-storm-xge",
@@ -23776,6 +25104,14 @@
     "kind": "rules-text",
     "name": "Shifting Feature",
     "text": "While shifted, you have advantage on Wisdom checks, and no creature within 30 feet of you can make an attack roll with advantage against you, unless you're incapacitated."
+  },
+  {
+    "id": "background-effect-shipwright",
+    "sourceType": "background",
+    "sourceId": "shipwright",
+    "kind": "rules-text",
+    "name": "Shipwright",
+    "text": "Provided you have carpenter's tools and wood, you can perform repairs on a water vehicle."
   },
   {
     "id": "feature-effect-subclass-sorcerer-runechild-6-sigilic-augmentation-tdcsr",
@@ -23840,6 +25176,22 @@
     "kind": "rules-text",
     "name": "Skills",
     "text": "You gain proficiency in one skill of your choice."
+  },
+  {
+    "id": "feat-effect-skulker",
+    "sourceType": "feat",
+    "sourceId": "skulker",
+    "kind": "rules-text",
+    "name": "Skulker",
+    "text": "You are expert at slinking through shadows."
+  },
+  {
+    "id": "background-effect-sky-watcher",
+    "sourceType": "background",
+    "sourceId": "sky-watcher",
+    "kind": "rules-text",
+    "name": "Sky-Watcher",
+    "text": "Skill Proficiencies."
   },
   {
     "id": "feat-effect-slasher",
@@ -24104,6 +25456,22 @@
     "text": "By 15th level, you have acquired greater mental strength."
   },
   {
+    "id": "feat-effect-small-folk",
+    "sourceType": "feat",
+    "sourceId": "small-folk",
+    "kind": "rules-text",
+    "name": "Small Folk",
+    "text": "Hobbits are a little people, but their resourcefulness far exceeds their stature."
+  },
+  {
+    "id": "background-effect-smuggler",
+    "sourceType": "background",
+    "sourceId": "smuggler",
+    "kind": "rules-text",
+    "name": "Smuggler",
+    "text": "You are acquainted with a network of smugglers who are willing to help you out of tight situations."
+  },
+  {
     "id": "feature-effect-class-rogue-1-sneak-attack-phb",
     "sourceType": "class",
     "sourceId": "class-rogue-1-sneak-attack-phb",
@@ -24120,12 +25488,28 @@
     "text": "You gain the Sneak Attack feature."
   },
   {
+    "id": "background-effect-soldier",
+    "sourceType": "background",
+    "sourceId": "soldier",
+    "kind": "rules-text",
+    "name": "Soldier",
+    "text": "You have a military rank from your career as a soldier."
+  },
+  {
     "id": "feature-effect-subclass-cleric-solidarity-psa-1-solidarity-s-action-psa",
     "sourceType": "subclass",
     "sourceId": "subclass-cleric-solidarity-psa-1-solidarity-s-action-psa",
     "kind": "rules-text",
     "name": "Solidarity's Action",
     "text": "Also at 1st level, when you take the Help action to aid an ally's attack, you can make one weapon attack as a bonus action."
+  },
+  {
+    "id": "feat-effect-song-craft",
+    "sourceType": "feat",
+    "sourceId": "song-craft",
+    "kind": "rules-text",
+    "name": "Song-Craft",
+    "text": "You have been trained in the art of singing, according to the tradition of the wandering minstrels."
   },
   {
     "id": "feature-effect-subclass-mystic-soul-knife-1-soul-knife-uathemysticclass",
@@ -24200,6 +25584,14 @@
     "text": "You have the ability to communicate in a limited manner with beasts and plants."
   },
   {
+    "id": "feat-effect-speech-of-the-ancient-beasts",
+    "sourceType": "feat",
+    "sourceId": "speech-of-the-ancient-beasts",
+    "kind": "rules-text",
+    "name": "Speech of the Ancient Beasts",
+    "text": "You have a special connection with the natural world."
+  },
+  {
     "id": "feat-effect-speech-craft",
     "sourceType": "feat",
     "sourceId": "speech-craft",
@@ -24230,6 +25622,14 @@
     "kind": "rules-text",
     "name": "Spell Sniper",
     "text": "You have learned techniques to enhance your attacks with certain kinds of spells, gaining the following benefits:When you cast a spell that requires you to make an attack roll, the spell's range is doubled."
+  },
+  {
+    "id": "background-effect-spirit-kin",
+    "sourceType": "background",
+    "sourceId": "spirit-kin",
+    "kind": "rules-text",
+    "name": "Spirit Kin",
+    "text": "You have come to know two spirits by name, and through your relationship have learned special rituals and techniques that allow you to find them across the Physical and Spirit Realms."
   },
   {
     "id": "feature-effect-subclass-warlock-undead-14-spirit-projection-vrgr",
@@ -24270,6 +25670,22 @@
     "kind": "rules-text",
     "name": "Spreading Spores",
     "text": "At 10th level, you gain the ability to seed an area with deadly spores."
+  },
+  {
+    "id": "feat-effect-squat-nimbleness",
+    "sourceType": "feat",
+    "sourceId": "squat-nimbleness",
+    "kind": "rules-text",
+    "name": "Squat Nimbleness",
+    "text": "You are uncommonly nimble for your race."
+  },
+  {
+    "id": "feat-effect-squire-of-solamnia",
+    "sourceType": "feat",
+    "sourceId": "squire-of-solamnia",
+    "kind": "rules-text",
+    "name": "Squire of Solamnia",
+    "text": "Your training in the ways of the Knights of Solamnia grants you these benefits:Mount Up."
   },
   {
     "id": "feature-effect-subclass-druid-stars-2-star-map-tce",
@@ -24384,6 +25800,14 @@
     "text": "You have advantage on Dexterity (Stealth) checks made to hide in rocky terrain."
   },
   {
+    "id": "feat-effect-stone-hard",
+    "sourceType": "feat",
+    "sourceId": "stone-hard",
+    "kind": "rules-text",
+    "name": "Stone-Hard",
+    "text": "The Dwarves were made to be strong to endure, for they came unto the world when a great evil ruled Middle-earth."
+  },
+  {
     "id": "feature-effect-race-goliath-stone-s-endurance-mpmm",
     "sourceType": "race",
     "sourceId": "race-goliath-stone-s-endurance-mpmm",
@@ -24432,12 +25856,52 @@
     "text": "You have advantage on saving throws against poison, and you have resistance against poison damage."
   },
   {
+    "id": "feat-effect-stout-hearted",
+    "sourceType": "feat",
+    "sourceId": "stout-hearted",
+    "kind": "rules-text",
+    "name": "Stout-Hearted",
+    "text": "Living for many a year under the ever-present menace of Smaug the Dreadful has made the Bardings a courageous race."
+  },
+  {
+    "id": "feat-effect-strange-as-news-from-bree",
+    "sourceType": "feat",
+    "sourceId": "strange-as-news-from-bree",
+    "kind": "rules-text",
+    "name": "Strange as News from Bree",
+    "text": "It is indeed true that the affairs of the four villages are the chief concern of the Bree-folk, but the most inquisitive among the inhabitants are always ready to gather what tidings come from distant lands."
+  },
+  {
     "id": "feature-effect-class-mystic-4-strength-of-mind-uathemysticclass",
     "sourceType": "class",
     "sourceId": "class-mystic-4-strength-of-mind-uathemysticclass",
     "kind": "rules-text",
     "name": "Strength of Mind",
     "text": "Even the simplest psionic technique requires a deep understanding of how psionic energy can augment mind and body."
+  },
+  {
+    "id": "feat-effect-strength-of-will",
+    "sourceType": "feat",
+    "sourceId": "strength-of-will",
+    "kind": "rules-text",
+    "name": "Strength of Will",
+    "text": "You have been raised in a land dotted with desolate ruins and burial mounds."
+  },
+  {
+    "id": "feat-effect-strike-of-the-giants",
+    "sourceType": "feat",
+    "sourceId": "strike-of-the-giants",
+    "kind": "rules-text",
+    "name": "Strike of the Giants",
+    "text": "You have absorbed primeval magic that gives you an echo of the might of giants."
+  },
+  {
+    "id": "feat-effect-strixhaven-mascot",
+    "sourceType": "feat",
+    "sourceId": "strixhaven-mascot",
+    "kind": "rules-text",
+    "name": "Strixhaven Mascot",
+    "text": "You have learned how to summon a Strixhaven mascot to assist you, granting you these benefits:You can cast the find familiar spell as a ritual."
   },
   {
     "id": "feature-effect-subclass-fighter-battle-master-3-student-of-war-phb",
@@ -24542,6 +26006,14 @@
     "kind": "rules-text",
     "name": "Supreme Sneak",
     "text": "Starting at 9th level, you have advantage on a Dexterity (Stealth) check if you move no more than half your speed on the same turn."
+  },
+  {
+    "id": "feat-effect-sure-at-the-mark",
+    "sourceType": "feat",
+    "sourceId": "sure-at-the-mark",
+    "kind": "rules-text",
+    "name": "Sure at the Mark",
+    "text": "Hobbits are nimble and keen-eyed, qualities that make them good archers."
   },
   {
     "id": "feature-effect-race-tortle-survival-instinct-ttp",
@@ -24672,6 +26144,14 @@
     "text": "1st-level Aberrant Mind feature You can form a telepathic connection between your mind and the mind of another."
   },
   {
+    "id": "feat-effect-tellu-and-scale-s-master-cut",
+    "sourceType": "feat",
+    "sourceId": "tellu-and-scale-s-master-cut",
+    "kind": "rules-text",
+    "name": "Tellu and Scale's Master Cut",
+    "text": "Having trained with the masters of the valley sword school, you have learned the usefulness of quickly changing between different fighting techniques in the midst of battle."
+  },
+  {
     "id": "feature-effect-subclass-sorcerer-storm-1-tempestuous-magic-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-sorcerer-storm-1-tempestuous-magic-xge",
@@ -24694,6 +26174,22 @@
     "kind": "rules-text",
     "name": "The Art of Smoking",
     "text": "You have mastered the art of smoking pipe-weed, and you always carry your pipe with you, as well as a bag of tobacco, for using it grants you patience and clarity of mind."
+  },
+  {
+    "id": "background-effect-the-call-of-the-sea",
+    "sourceType": "background",
+    "sourceId": "the-call-of-the-sea",
+    "kind": "rules-text",
+    "name": "The Call of the Sea",
+    "text": "Skill Proficiencies."
+  },
+  {
+    "id": "background-effect-the-grief-of-azanulbizar",
+    "sourceType": "background",
+    "sourceId": "the-grief-of-azanulbizar",
+    "kind": "rules-text",
+    "name": "The Grief of Azanulbizar",
+    "text": "Skill Proficiencies."
   },
   {
     "id": "feat-effect-the-language-of-birds",
@@ -24724,14 +26220,6 @@
     "itemName": "Draconic Visage"
   },
   {
-    "id": "feat-effect-the-weapon-s-damage-die-for-this-attack-is-a-d4",
-    "sourceType": "feat",
-    "sourceId": "the-weapon-s-damage-die-for-this-attack-is-a-d4",
-    "kind": "rules-text",
-    "name": "The weapon's damage die for this attack is a d4",
-    "text": "other creatures provoke an opportunity attack from you when they enter the reach you have with that weapon."
-  },
-  {
     "id": "feature-effect-subclass-wizard-blood-magic-14-thicker-than-water-tdcsr",
     "sourceType": "subclass",
     "sourceId": "subclass-wizard-blood-magic-14-thicker-than-water-tdcsr",
@@ -24746,6 +26234,14 @@
     "kind": "rules-text",
     "name": "Thought Shield",
     "text": "Starting at 10th level, your thoughts can't be read by telepathy or other means unless you allow it."
+  },
+  {
+    "id": "feat-effect-three-is-company",
+    "sourceType": "feat",
+    "sourceId": "three-is-company",
+    "kind": "rules-text",
+    "name": "Three is Company",
+    "text": "The Wise say that it is sometimes best to trust to friendship than to great wisdom."
   },
   {
     "id": "feature-effect-subclass-artificer-armorer-3-thunder-gauntlets-tce",
@@ -25012,6 +26508,22 @@
     "text": "9th-level Phantom feature When a life ends in your presence, you're able to snatch a token from the departing soul, a sliver of its life essence that takes physical form: as a reaction when a creature you can see dies within 30 feet of you, you can open your..."
   },
   {
+    "id": "background-effect-too-many-paths-to-tread",
+    "sourceType": "background",
+    "sourceId": "too-many-paths-to-tread",
+    "kind": "rules-text",
+    "name": "Too Many Paths to Tread",
+    "text": "Skill Proficiencies."
+  },
+  {
+    "id": "background-effect-tookish-blood",
+    "sourceType": "background",
+    "sourceId": "tookish-blood",
+    "kind": "rules-text",
+    "name": "Tookish Blood",
+    "text": "Skill Proficiencies."
+  },
+  {
     "id": "feature-effect-class-artificer-6-tool-expertise-tce",
     "sourceType": "class",
     "sourceId": "class-artificer-6-tool-expertise-tce",
@@ -25060,12 +26572,36 @@
     "text": "3rd-level Armorer feature You gain proficiency with heavy armor."
   },
   {
+    "id": "feat-effect-toraf-and-bolder-s-master-cut",
+    "sourceType": "feat",
+    "sourceId": "toraf-and-bolder-s-master-cut",
+    "kind": "rules-text",
+    "name": "Toraf and Bolder's Master Cut",
+    "text": "Having trained with the masters of the mountain sword school, you've learned how to pull off difficult weapon maneuvers which allow you to target specific parts of a creature's anatomy."
+  },
+  {
     "id": "feat-effect-tough",
     "sourceType": "feat",
     "sourceId": "tough",
     "kind": "rules-text",
     "name": "Tough",
     "text": "Your hit point maximum increases by an amount equal to twice your level when you gain this feat."
+  },
+  {
+    "id": "feat-effect-tough-as-old-tree-roots",
+    "sourceType": "feat",
+    "sourceId": "tough-as-old-tree-roots",
+    "kind": "rules-text",
+    "name": "Tough as Old Tree-Roots",
+    "text": "They say that Hobbits are difficult to dismay or kill, and that they recover their health at a prodigious pace if allowed to enjoy some peace and quiet."
+  },
+  {
+    "id": "background-effect-tower-guard",
+    "sourceType": "background",
+    "sourceId": "tower-guard",
+    "kind": "rules-text",
+    "name": "Tower Guard",
+    "text": "Skill Proficiencies."
   },
   {
     "id": "feature-effect-subclass-wizard-bladesinging-2-training-in-war-and-song-bladesinging-tce",
@@ -25204,6 +26740,14 @@
     "text": "At 14th level, your fury in battle makes you unstoppable."
   },
   {
+    "id": "feat-effect-untameable-spirit",
+    "sourceType": "feat",
+    "sourceId": "untameable-spirit",
+    "kind": "rules-text",
+    "name": "Untameable Spirit",
+    "text": "Dwarves were made from their beginning to resist any form of domination."
+  },
+  {
     "id": "feature-effect-subclass-fighter-cavalier-3-unwavering-mark-xge",
     "sourceType": "subclass",
     "sourceId": "subclass-fighter-cavalier-3-unwavering-mark-xge",
@@ -25218,6 +26762,38 @@
     "kind": "rules-text",
     "name": "Unyielding Spirit",
     "text": "Starting at 15th level, you have advantage on saving throws to avoid becoming paralyzed or stunned."
+  },
+  {
+    "id": "background-effect-up-the-greenway",
+    "sourceType": "background",
+    "sourceId": "up-the-greenway",
+    "kind": "rules-text",
+    "name": "Up the Greenway",
+    "text": "Skill Proficiencies."
+  },
+  {
+    "id": "background-effect-urban-bounty-hunter",
+    "sourceType": "background",
+    "sourceId": "urban-bounty-hunter",
+    "kind": "rules-text",
+    "name": "Urban Bounty Hunter",
+    "text": "You are in frequent contact with people in the segment of society that your chosen quarries move through."
+  },
+  {
+    "id": "background-effect-urchin",
+    "sourceType": "background",
+    "sourceId": "urchin",
+    "kind": "rules-text",
+    "name": "Urchin",
+    "text": "You know the secret patterns and flow to cities and can find passages through the urban sprawl that others would miss."
+  },
+  {
+    "id": "background-effect-uthgardt-tribe-member",
+    "sourceType": "background",
+    "sourceId": "uthgardt-tribe-member",
+    "kind": "rules-text",
+    "name": "Uthgardt Tribe Member",
+    "text": "You have an excellent knowledge of not only your tribe's territory, but also the terrain and natural resources of the rest of the North."
   },
   {
     "id": "feature-effect-race-dhampir-vampiric-bite-vrgr",
@@ -25252,6 +26828,30 @@
     "text": "You gain one of the following options of your choice: (a) darkvision with a range of 60 feet or (b) proficiency in one skill of your choice."
   },
   {
+    "id": "background-effect-variant-city-watch-investigator",
+    "sourceType": "background",
+    "sourceId": "variant-city-watch-investigator",
+    "kind": "rules-text",
+    "name": "Variant City Watch (Investigator)",
+    "text": "Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals."
+  },
+  {
+    "id": "background-effect-variant-criminal-spy",
+    "sourceType": "background",
+    "sourceId": "variant-criminal-spy",
+    "kind": "rules-text",
+    "name": "Variant Criminal (Spy)",
+    "text": "You have a reliable and trustworthy contact who acts as your liaison to a network of other spies."
+  },
+  {
+    "id": "background-effect-variant-entertainer-gladiator",
+    "sourceType": "background",
+    "sourceId": "variant-entertainer-gladiator",
+    "kind": "rules-text",
+    "name": "Variant Entertainer (Gladiator)",
+    "text": "You can always find a place to perform in any place that features combat for entertainment—perhaps a gladiatorial arena or secret pit fighting club."
+  },
+  {
     "id": "feature-effect-race-half-elf-variant-aquatic-elf-descent-variant-feature-choose-1-scag",
     "sourceType": "race",
     "sourceId": "race-half-elf-variant-aquatic-elf-descent-variant-feature-choose-1-scag",
@@ -25282,6 +26882,38 @@
     "kind": "rules-text",
     "name": "Variant Feature (Choose 1)",
     "text": "Skill Versatility: You gain proficiency in two skills of your choice."
+  },
+  {
+    "id": "background-effect-variant-guild-artisan-guild-merchant",
+    "sourceType": "background",
+    "sourceId": "variant-guild-artisan-guild-merchant",
+    "kind": "rules-text",
+    "name": "Variant Guild Artisan (Guild Merchant)",
+    "text": "As an established and respected member of a guild, you can rely on certain benefits that membership provides."
+  },
+  {
+    "id": "background-effect-variant-noble-knight",
+    "sourceType": "background",
+    "sourceId": "variant-noble-knight",
+    "kind": "rules-text",
+    "name": "Variant Noble (Knight)",
+    "text": "As an emblem of chivalry and the ideals of courtly love, you might include among your equipment a banner or other token from a noble lord or lady to whom you have given your heart-in a chaste sort of devotion."
+  },
+  {
+    "id": "background-effect-variant-noble-retainers",
+    "sourceType": "background",
+    "sourceId": "variant-noble-retainers",
+    "kind": "rules-text",
+    "name": "Variant Noble (Retainers)",
+    "text": "You have the service of three retainers loyal to your family."
+  },
+  {
+    "id": "background-effect-variant-sailor-pirate",
+    "sourceType": "background",
+    "sourceId": "variant-sailor-pirate",
+    "kind": "rules-text",
+    "name": "Variant Sailor (Pirate)",
+    "text": "No matter where you go, people are afraid of you due to your reputation."
   },
   {
     "id": "feature-effect-race-vedalken-vedalken-cunning-psk",
@@ -25330,6 +26962,22 @@
     "kind": "rules-text",
     "name": "Visage of the Astral Self",
     "text": "6th-level Way of the Astral Self feature You can summon the visage of your astral self."
+  },
+  {
+    "id": "background-effect-visitor-to-the-mountains",
+    "sourceType": "background",
+    "sourceId": "visitor-to-the-mountains",
+    "kind": "rules-text",
+    "name": "Visitor to the Mountains",
+    "text": "Skill Proficiencies."
+  },
+  {
+    "id": "feat-effect-vocalist-arcanist",
+    "sourceType": "feat",
+    "sourceId": "vocalist-arcanist",
+    "kind": "rules-text",
+    "name": "Vocalist Arcanist",
+    "text": "Your unique method of weaving song into magic allows you to enhance your spells through your magical vocals."
   },
   {
     "id": "feature-effect-subclass-paladin-vengeance-3-vow-of-enmity-phb",
@@ -25396,6 +27044,14 @@
     "text": "At 7th level, you learn to fend off strikes directed at you, your mount, or other creatures nearby."
   },
   {
+    "id": "background-effect-watcher-on-the-border",
+    "sourceType": "background",
+    "sourceId": "watcher-on-the-border",
+    "kind": "rules-text",
+    "name": "Watcher on the Border",
+    "text": "Skill Proficiencies."
+  },
+  {
     "id": "feature-effect-subclass-paladin-watchers-3-watcher-s-will-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-paladin-watchers-3-watcher-s-will-tce",
@@ -25410,6 +27066,14 @@
     "kind": "rules-text",
     "name": "Water Creed Navigation",
     "text": "You have proficiency with navigator's tools and in the Survival skill."
+  },
+  {
+    "id": "background-effect-waterdhavian-noble",
+    "sourceType": "background",
+    "sourceId": "waterdhavian-noble",
+    "kind": "rules-text",
+    "name": "Waterdhavian Noble",
+    "text": "While you are in Waterdeep or elsewhere in the North, your house sees to your everyday needs."
   },
   {
     "id": "feature-effect-subclass-sorcerer-lunar-6-waxing-and-waning-dsotdq",
@@ -25428,6 +27092,14 @@
     "text": "Monks of the Way of the Long Death are obsessed with the meaning and mechanics of dying."
   },
   {
+    "id": "feat-effect-ways-of-the-wild",
+    "sourceType": "feat",
+    "sourceId": "ways-of-the-wild",
+    "kind": "rules-text",
+    "name": "Ways of the Wild",
+    "text": "The Rangers of the North roam ceaselessly, hunting for wicked things and guarding all frontiers."
+  },
+  {
     "id": "feature-effect-subclass-fighter-eldritch-knight-3-weapon-bond-phb",
     "sourceType": "subclass",
     "sourceId": "subclass-fighter-eldritch-knight-3-weapon-bond-phb",
@@ -25442,6 +27114,22 @@
     "kind": "rules-text",
     "name": "Weapon Master",
     "text": "You have practiced extensively with a variety of weapons, gaining the following benefits:Increase your Strength or Dexterity by 1, to a maximum of 20."
+  },
+  {
+    "id": "feat-effect-weapon-craft",
+    "sourceType": "feat",
+    "sourceId": "weapon-craft",
+    "kind": "rules-text",
+    "name": "Weapon-Craft",
+    "text": "Choose a type of weapon."
+  },
+  {
+    "id": "feat-effect-wetland-explorer",
+    "sourceType": "feat",
+    "sourceId": "wetland-explorer",
+    "kind": "rules-text",
+    "name": "Wetland Explorer",
+    "text": "Your deep knowledge of the dangerous creatures that inhabit the world aid you in both fighting and tracking them."
   },
   {
     "id": "feature-effect-subclass-rogue-phantom-3-whispers-of-the-dead-tce",
@@ -25492,6 +27180,22 @@
     "text": "6th-level Way of the Ascendant Dragon feature When you use your Step of the Wind, you can unfurl spectral draconic wings from your back that vanish at the end of your turn."
   },
   {
+    "id": "background-effect-witchlight-hand",
+    "sourceType": "background",
+    "sourceId": "witchlight-hand",
+    "kind": "rules-text",
+    "name": "Witchlight Hand",
+    "text": "The Witchlight Carnival provides you with free, modest lodging and food."
+  },
+  {
+    "id": "background-effect-witty-gentlehobbit",
+    "sourceType": "background",
+    "sourceId": "witty-gentlehobbit",
+    "kind": "rules-text",
+    "name": "Witty Gentlehobbit",
+    "text": "Skill Proficiencies."
+  },
+  {
     "id": "feature-effect-subclass-wizard-scribes-2-wizardly-quill-tce",
     "sourceType": "subclass",
     "sourceId": "subclass-wizard-scribes-2-wizardly-quill-tce",
@@ -25514,6 +27218,30 @@
     "kind": "rules-text",
     "name": "Wolf",
     "text": "While you're raging, your friends have advantage on melee attack rolls against any creature within 5 feet of you that is hostile to you."
+  },
+  {
+    "id": "feat-effect-wood-craft",
+    "sourceType": "feat",
+    "sourceId": "wood-craft",
+    "kind": "rules-text",
+    "name": "Wood-Craft",
+    "text": "You are familiar with the difficulties encountered when crossing wild lands, and with the ways of overcoming them."
+  },
+  {
+    "id": "feat-effect-woodwise",
+    "sourceType": "feat",
+    "sourceId": "woodwise",
+    "kind": "rules-text",
+    "name": "Woodwise",
+    "text": "You have lived your entire life in the gnarled, wooded areas of the world."
+  },
+  {
+    "id": "background-effect-wordweaver",
+    "sourceType": "background",
+    "sourceId": "wordweaver",
+    "kind": "rules-text",
+    "name": "Wordweaver",
+    "text": "Skill Proficiencies."
   },
   {
     "id": "feature-effect-subclass-ranger-swarmkeeper-7-writhing-tide-tce",

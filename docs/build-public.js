@@ -75,6 +75,8 @@ function main() {
   const rules = loadCanonicalRules();
   const itemCatalog = buildRuleCatalog(rules.items);
   const spellCatalog = buildRuleCatalog(rules.spells);
+  const featCatalog = buildRuleCatalog(rules.feats);
+  const backgroundCatalog = buildRuleCatalog(rules.backgrounds);
 
   copyPublicAssets(assetFiles);
 
@@ -85,7 +87,7 @@ function main() {
 
   for (const page of pages) {
     if (isPlayerSheet(page)) {
-      const player = buildPlayer(page, playerControls, fileIndex, rules, itemCatalog, spellCatalog);
+      const player = buildPlayer(page, playerControls, fileIndex, rules, itemCatalog, spellCatalog, featCatalog, backgroundCatalog);
       players.push(player.publicData);
       writeOutput(page.outputPath, renderPlayerPage(player, page, fileIndex));
       addIndexRecords(page, player.publicData.searchText, entities, searchIndex);
@@ -140,7 +142,7 @@ function readIfExists(file) {
 }
 
 function loadCanonicalRules() {
-  const required = ['classes', 'subclasses', 'races', 'features', 'items', 'spells', 'feats', 'actions', 'effects', 'resources', 'manifest'];
+  const required = ['classes', 'subclasses', 'races', 'features', 'items', 'spells', 'feats', 'backgrounds', 'actions', 'effects', 'resources', 'manifest'];
   const rules = {};
   for (const name of required) {
     const file = path.join(RULES_ROOT, `${name}.json`);
@@ -160,6 +162,7 @@ function buildRuleCatalog(rows) {
       normalizeItemName(row.name),
       row.id ? normalizeItemName(row.id) : '',
       row.shortName ? normalizeItemName(row.shortName) : '',
+      ...(Array.isArray(row.aliases) ? row.aliases.map(normalizeItemName) : []),
     ].filter(Boolean);
     for (const key of keys) {
       if (!catalog.has(key)) catalog.set(key, row);
@@ -303,7 +306,7 @@ function isPlayerSheet(page) {
   return page.relMd.startsWith('Players/') && /Player Sheet\.md$/i.test(page.relMd);
 }
 
-function buildPlayer(page, controls, fileIndex, rules, itemCatalog, spellCatalog) {
+function buildPlayer(page, controls, fileIndex, rules, itemCatalog, spellCatalog, featCatalog, backgroundCatalog) {
   const data = extractCharacterData(page.body, controls);
   const className = cleanRequiredString(data.class, `${page.relMd}: CharacterSheetDisplay requires class`);
   const subclassName = cleanRequiredString(data.subclass, `${page.relMd}: CharacterSheetDisplay requires subclass`);
@@ -319,6 +322,7 @@ function buildPlayer(page, controls, fileIndex, rules, itemCatalog, spellCatalog
   const feats = extractLookupArray(page.body, 'FeatLookup');
   const races = extractLookupArray(page.body, 'RaceLookup');
   const raceNames = [...new Set([data.race, ...races].filter(Boolean).map(String))];
+  const backgroundNames = [...new Set([data.background, ...backgrounds].filter(Boolean).map(String))];
   const notesUrl = (page.body.match(/Direct link if Embed isn't working\s*:\s*(https?:\/\/\S+)/i) || [])[1] || '';
   const classUrlSuffix = (page.body.match(/urlSuffix:\s*([^\r\n]+)/i) || [])[1] || '';
   validateClassUrlState(page, classUrlSuffix, matchedClass, matchedSubclass, rules);
@@ -371,13 +375,15 @@ function buildPlayer(page, controls, fileIndex, rules, itemCatalog, spellCatalog
     spellScrolls,
     spellDetails: buildPlayerSpellDetails([...spells, ...spellScrolls.map(scroll => scroll.spellName)], spellCatalog),
     spellSlots: calculateSpellSlots(matchedClass, level, spellAbility),
-    resources: buildPlayerResources(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames),
-    ruleActions: buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, spells),
-    ruleEffects: buildPlayerRuleEffects(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats),
+    resources: buildPlayerResources(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, backgroundNames),
+    ruleActions: buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, spells, backgroundNames),
+    ruleEffects: buildPlayerRuleEffects(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, backgroundNames),
     ruleFeatures: buildPlayerRuleFeatures(rules, matchedClass, matchedSubclass, level, raceNames),
     notes: data.notes || '',
     backgrounds,
+    backgroundDetails: buildPlayerRuleDetails(backgroundNames, backgroundCatalog),
     feats,
+    featDetails: buildPlayerRuleDetails(feats, featCatalog),
     races,
     notesUrl,
     classUrl: classUrlSuffix ? `5etools/classes.html${classUrlSuffix}` : '',
@@ -460,12 +466,18 @@ function inferHitDice(matchedClass, level) {
   return `${level}${hitDie}`;
 }
 
-function buildPlayerResources(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames = []) {
+function buildPlayerResources(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames = [], feats = [], backgrounds = []) {
   const availableFeatures = getAvailableFeatures(rules, matchedClass, matchedSubclass, level, raceNames);
   const featureIds = new Set(availableFeatures.map(feature => feature.id));
+  const featIds = new Set((feats || []).map(slugify));
+  const backgroundIds = new Set((backgrounds || []).map(slugify));
   const resources = [];
   for (const resource of rules.resources || []) {
     if (resource.sourceType === 'core') {
+      resources.push(resource);
+    } else if (resource.sourceType === 'feat' && resource.sourceId && featIds.has(resource.sourceId)) {
+      resources.push(resource);
+    } else if (resource.sourceType === 'background' && resource.sourceId && backgroundIds.has(resource.sourceId)) {
       resources.push(resource);
     } else if (resource.sourceId && featureIds.has(resource.sourceId)) {
       resources.push(repointResourceToAvailableFeature(resource, availableFeatures) || resource);
@@ -541,7 +553,7 @@ function findAvailableFeatureForResource(resource, availableFeatures) {
   }) || null;
 }
 
-function buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, spells) {
+function buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, spells, backgrounds = []) {
   const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level, raceNames);
   const itemIds = new Set(equipment.map(itemName => {
     const item = findCatalogItem(itemCatalog, itemName);
@@ -549,26 +561,30 @@ function buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equ
   }).filter(Boolean));
   const featIds = new Set((feats || []).map(slugify));
   const spellIds = new Set((spells || []).map(slugify));
+  const backgroundIds = new Set((backgrounds || []).map(slugify));
   return (rules.actions || []).filter(action => {
     if (action.sourceType === 'class' || action.sourceType === 'subclass' || action.sourceType === 'race') return featureIds.has(action.sourceId);
     if (action.sourceType === 'item') return itemIds.has(action.sourceId);
     if (action.sourceType === 'feat') return featIds.has(action.sourceId);
+    if (action.sourceType === 'background') return backgroundIds.has(action.sourceId);
     if (action.sourceType === 'spell') return spellIds.has(action.sourceId);
     return false;
   }).slice(0, 160);
 }
 
-function buildPlayerRuleEffects(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats) {
+function buildPlayerRuleEffects(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, backgrounds = []) {
   const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level, raceNames);
   const itemIds = new Set(equipment.map(itemName => {
     const item = findCatalogItem(itemCatalog, itemName);
     return item && item.id;
   }).filter(Boolean));
   const featIds = new Set((feats || []).map(slugify));
+  const backgroundIds = new Set((backgrounds || []).map(slugify));
   return (rules.effects || []).filter(effect => {
     if (effect.sourceType === 'class' || effect.sourceType === 'subclass' || effect.sourceType === 'race') return featureIds.has(effect.sourceId);
     if (effect.sourceType === 'item') return itemIds.has(effect.sourceId);
     if (effect.sourceType === 'feat') return featIds.has(effect.sourceId);
+    if (effect.sourceType === 'background') return backgroundIds.has(effect.sourceId);
     return false;
   }).slice(0, 160);
 }
@@ -752,6 +768,48 @@ function buildPlayerSpellDetails(spells, spellCatalog) {
   for (const name of spells) {
     const spell = spellCatalog.get(normalizeItemName(name));
     if (spell) out[name] = spell;
+  }
+  return out;
+}
+
+function buildPlayerRuleDetails(names, catalog) {
+  const out = [];
+  const seen = new Set();
+  for (const name of [...new Set((names || []).map(String).filter(Boolean))]) {
+    const rule = catalog && catalog.get(normalizeItemName(name));
+    if (!rule) {
+      const detail = {
+        id: slugify(name),
+        name,
+        missing: true,
+      };
+      if (!seen.has(detail.id)) {
+        seen.add(detail.id);
+        out.push(detail);
+      }
+      continue;
+    }
+    const detail = {
+      id: rule.id || slugify(rule.name || name),
+      name: rule.name || name,
+      source: rule.source || '',
+      page: rule.page || '',
+      prerequisites: rule.prerequisites || '',
+      abilityScores: rule.abilityScores || '',
+      repeatable: rule.repeatable || '',
+      skillProficiencies: rule.skillProficiencies || '',
+      toolProficiencies: rule.toolProficiencies || '',
+      languages: rule.languages || '',
+      equipment: rule.equipment || '',
+      featureName: rule.featureName || '',
+      featureText: cleanRulesText(rule.featureText || ''),
+      text: cleanRulesText(rule.text || ''),
+      timing: rule.timing || '',
+    };
+    if (!seen.has(detail.id)) {
+      seen.add(detail.id);
+      out.push(detail);
+    }
   }
   return out;
 }
@@ -955,6 +1013,8 @@ function renderPlayerPage(player, page) {
   const featuresHtml = player.features ? renderMarkdown(player.features, page, { byVaultPath: new Map(), byBasename: new Map() }) : '<p>No extra class features recorded.</p>';
   const classFeaturesHtml = renderRuleFeatureList((p.ruleFeatures || []).filter(feature => feature.kind !== 'race'), 'No class features found in canonical rules.');
   const raceFeaturesHtml = renderRuleFeatureList((p.ruleFeatures || []).filter(feature => feature.kind === 'race'), 'No racial traits found in canonical rules.');
+  const backgroundDetailsHtml = renderRuleDetailList(p.backgroundDetails || [], 'No background details found in canonical rules.');
+  const featDetailsHtml = renderRuleDetailList(p.featDetails || [], 'No feats recorded on this sheet.');
   const portrait = player.portraitUrl
     ? `<img src="${escapeAttr(player.portraitUrl)}" alt="${title} portrait">`
     : `<span>${escapeHtml(title.slice(0, 1))}</span>`;
@@ -970,6 +1030,8 @@ function renderPlayerPage(player, page) {
     ['spells', 'Spells'],
     ['class-info', 'Class Info'],
     ['race-info', 'Race'],
+    ['background-info', 'Background'],
+    ['feat-info', 'Feats'],
     ['notes', 'Notes'],
   ];
   const tabButtons = sheetTabs.map(([id, label], index) => tabButton(id, label, index === 0)).join('\n      ');
@@ -1113,8 +1175,6 @@ function renderPlayerPage(player, page) {
     ${tabPanel('class-info', false, `
       <div class="sheet-grid">
         ${infoCard('Class', `${p.class}${p.subclassShortName ? ` (${p.subclassShortName})` : ''}`, 'classSummary')}
-        ${infoCard('Background', p.backgrounds.join(', ') || p.background || '-', 'backgrounds')}
-        ${infoCard('Feats', p.feats.join(', ') || '-', 'feats')}
       </div>
       <section class="feature-notes">
         <h2>Class Features</h2>
@@ -1132,6 +1192,24 @@ function renderPlayerPage(player, page) {
       <section class="feature-notes">
         <h2>Racial Traits</h2>
         <div data-race-info-panel>${raceFeaturesHtml}</div>
+      </section>
+    `)}
+    ${tabPanel('background-info', false, `
+      <div class="sheet-grid">
+        ${infoCard('Background', p.backgrounds.join(', ') || p.background || '-', 'backgrounds')}
+      </div>
+      <section class="feature-notes">
+        <h2>Background Benefits</h2>
+        <div data-background-info-panel>${backgroundDetailsHtml}</div>
+      </section>
+    `)}
+    ${tabPanel('feat-info', false, `
+      <div class="sheet-grid">
+        ${infoCard('Feats', p.feats.join(', ') || '-', 'feats')}
+      </div>
+      <section class="feature-notes">
+        <h2>Feat Benefits</h2>
+        <div data-feat-info-panel>${featDetailsHtml}</div>
       </section>
     `)}
     ${tabPanel('notes', false, `
@@ -1189,6 +1267,47 @@ function renderRuleFeatureList(features, emptyText = 'No features found in canon
       <p>${escapeHtml(feature.text || 'No feature text recorded.')}</p>
     </details>`).join('')}
   </div>`;
+}
+
+function renderRuleDetailList(details, emptyText) {
+  if (!details.length) return `<p>${escapeHtml(emptyText || 'No details found in canonical rules.')}</p>`;
+  return `<div class="class-feature-list">
+    ${details.map(detail => `<details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>${escapeHtml(detail.name)}</strong>
+          <small>${escapeHtml(formatRuleDetailMeta(detail))}</small>
+        </span>
+      </summary>
+      ${renderRuleDetailFields(detail)}
+      <p>${escapeHtml(formatRuleDetailText(detail))}</p>
+    </details>`).join('')}
+  </div>`;
+}
+
+function renderRuleDetailFields(detail) {
+  const rows = [
+    ['Skill Proficiencies', detail.skillProficiencies],
+    ['Tool Proficiencies', detail.toolProficiencies],
+    ['Languages', detail.languages],
+    ['Equipment', detail.equipment],
+    ['Prerequisites', detail.prerequisites],
+    ['Ability Score', detail.abilityScores],
+    ['Repeatable', detail.repeatable],
+  ].filter(([, value]) => value);
+  if (!rows.length) return '';
+  return `<dl class="equipment-detail-grid">${rows.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>`;
+}
+
+function formatRuleDetailMeta(detail) {
+  if (detail.missing) return 'Details unavailable';
+  return [detail.featureName, detail.source && (detail.page ? `${detail.source} p. ${detail.page}` : detail.source), detail.timing].filter(Boolean).join(' / ');
+}
+
+function formatRuleDetailText(detail) {
+  if (detail.missing) return 'No canonical rules entry matched this sheet value yet.';
+  if (detail.featureName && detail.featureText) return `${detail.featureName}: ${detail.featureText}`;
+  return detail.featureText || detail.text || 'No rules text recorded.';
 }
 
 function formatFeatureMeta(feature) {

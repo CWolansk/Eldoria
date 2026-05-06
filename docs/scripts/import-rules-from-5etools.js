@@ -15,6 +15,7 @@ const RULES_OUT = path.join(DOCS_ROOT, 'Assets', 'Rules');
 const ITEMS_CSV = path.join(DOCS_ROOT, 'Assets', 'Items', 'Items.csv');
 const SPELLS_CSV = path.join(DOCS_ROOT, 'Assets', 'Spells', 'Spells.csv');
 const FEATS_CSV = path.join(DOCS_ROOT, 'Assets', 'Feats', 'Feats.csv');
+const BACKGROUNDS_CSV = path.join(DOCS_ROOT, 'Assets', 'Backgrounds', 'Backgrounds.csv');
 const CLASS_ROOT = path.join(DOCS_ROOT, '5etools', 'data', 'class');
 const RACES_JSON = path.join(DOCS_ROOT, '5etools', 'data', 'races.json');
 const CHECK_ONLY = process.argv.includes('--check');
@@ -105,9 +106,10 @@ function main() {
   const items = parseCsv(readIfExists(ITEMS_CSV)).map(buildItem).filter(Boolean).sort(byName);
   const spells = parseCsv(readIfExists(SPELLS_CSV)).map(buildSpell).filter(Boolean).sort(byName);
   const feats = parseCsv(readIfExists(FEATS_CSV)).map(buildFeat).filter(Boolean).sort(byName);
-  const actions = collectActions(features, items, spells, feats).sort(byName);
-  const effects = collectEffects(features, items, feats).sort(byName);
-  const resources = collectResources(features, items).sort(byName);
+  const backgrounds = parseCsv(readIfExists(BACKGROUNDS_CSV)).map(buildBackground).filter(Boolean).sort(byName);
+  const actions = collectActions(features, items, spells, feats, backgrounds).sort(byName);
+  const effects = collectEffects(features, items, feats, backgrounds).sort(byName);
+  const resources = collectResources(features, items, feats).sort(byName);
   const generatedAtUtc = getGeneratedAtUtc();
   const manifest = {
     schemaVersion: 1,
@@ -117,6 +119,7 @@ function main() {
       itemsCsv: relative(DOCS_ROOT, ITEMS_CSV),
       spellsCsv: relative(DOCS_ROOT, SPELLS_CSV),
       featsCsv: relative(DOCS_ROOT, FEATS_CSV),
+      backgroundsCsv: relative(DOCS_ROOT, BACKGROUNDS_CSV),
       racesJson: relative(DOCS_ROOT, RACES_JSON),
     },
     counts: {
@@ -127,12 +130,13 @@ function main() {
       items: items.length,
       spells: spells.length,
       feats: feats.length,
+      backgrounds: backgrounds.length,
       actions: actions.length,
       effects: effects.length,
       resources: resources.length,
     },
   };
-  const report = buildReport({ ...classesAndFeatures, ...racesAndFeatures, features, items, spells, feats, actions, effects, resources, manifest });
+  const report = buildReport({ ...classesAndFeatures, ...racesAndFeatures, features, items, spells, feats, backgrounds, actions, effects, resources, manifest });
 
   writeRulesJson('classes.json', classesAndFeatures.classes);
   writeRulesJson('subclasses.json', classesAndFeatures.subclasses);
@@ -141,6 +145,7 @@ function main() {
   writeRulesJson('items.json', items);
   writeRulesJson('spells.json', spells);
   writeRulesJson('feats.json', feats);
+  writeRulesJson('backgrounds.json', backgrounds);
   writeRulesJson('actions.json', actions);
   writeRulesJson('effects.json', effects);
   writeRulesJson('resources.json', resources);
@@ -150,7 +155,8 @@ function main() {
   if (!CHECK_ONLY) {
     console.log(`Imported canonical rules JSON into ${relative(process.cwd(), RULES_OUT)}`);
     console.log(`Classes ${manifest.counts.classes}, subclasses ${manifest.counts.subclasses}, races ${manifest.counts.races}, features ${manifest.counts.features}`);
-    console.log(`Items ${manifest.counts.items}, spells ${manifest.counts.spells}, actions ${manifest.counts.actions}, resources ${manifest.counts.resources}`);
+    console.log(`Items ${manifest.counts.items}, spells ${manifest.counts.spells}, feats ${manifest.counts.feats}, backgrounds ${manifest.counts.backgrounds}`);
+    console.log(`Actions ${manifest.counts.actions}, effects ${manifest.counts.effects}, resources ${manifest.counts.resources}`);
   }
 }
 
@@ -397,7 +403,102 @@ function buildFeat(row) {
   };
 }
 
-function collectActions(features, items, spells, feats) {
+function buildBackground(row) {
+  if (!row.Name) return null;
+  const text = cleanRulesText(row.Description || '');
+  const benefits = extractBackgroundBenefits(text);
+  const feature = extractBackgroundFeature(text);
+  return {
+    id: slugify(row.Name),
+    name: row.Name,
+    aliases: buildBackgroundAliases(row.Name),
+    source: row.Source || '',
+    page: row.Page || '',
+    skillProficiencies: benefits.skillProficiencies || '',
+    toolProficiencies: benefits.toolProficiencies || '',
+    languages: benefits.languages || '',
+    equipment: benefits.equipment || '',
+    featureName: feature.name || '',
+    featureText: feature.text || '',
+    text,
+    timing: classifyTiming(feature.text || text),
+  };
+}
+
+function buildBackgroundAliases(name) {
+  const aliases = [];
+  const text = String(name || '');
+  const variant = text.match(/^Variant\s+(.+?)\s*\((.+?)\)$/i);
+  if (variant) {
+    aliases.push(variant[1], variant[2]);
+  }
+  if (/archaeologist/i.test(text)) aliases.push(text.replace(/archaeologist/ig, 'Archeologist'));
+  return aliases.filter(Boolean);
+}
+
+function extractBackgroundBenefits(text) {
+  const sections = extractLabeledRuleSections(text, [
+    'Skill Proficiencies',
+    'Skill Proficiency',
+    'Tool Proficiencies',
+    'Tool Proficiency',
+    'Languages',
+    'Language',
+    'Equipment',
+    'Feature',
+    'Distinctive Features',
+    'Suggested Characteristics',
+  ]);
+  return {
+    skillProficiencies: sections['skill proficiencies'] || sections['skill proficiency'] || '',
+    toolProficiencies: sections['tool proficiencies'] || sections['tool proficiency'] || '',
+    languages: sections.languages || sections.language || '',
+    equipment: sections.equipment || '',
+  };
+}
+
+function extractBackgroundFeature(text) {
+  const sections = extractLabeledRuleSections(text, [
+    'Feature',
+    'Suggested Characteristics',
+    'Personality Trait',
+    'Ideal',
+    'Bond',
+    'Flaw',
+  ]);
+  const feature = cleanRulesText(sections.feature || '');
+  if (!feature) return { name: '', text: '' };
+  const marked = feature.match(/^(.{2,80}?)\s*(?:\[?[-–]\]?|:)\s*(.+)$/);
+  if (marked) return { name: marked[1].trim(), text: marked[2].trim() };
+  const naturalBreak = feature.match(/^([A-Z][A-Za-z0-9 '&-]{2,80}?)\s+(?=(?:As|When|While|You|Your|The|Though|If)\b)(.+)$/);
+  if (naturalBreak) return { name: naturalBreak[1].trim(), text: naturalBreak[2].trim() };
+  return { name: '', text: feature };
+}
+
+function extractLabeledRuleSections(text, labels) {
+  const clean = cleanRulesText(text);
+  const escaped = labels.map(label => escapeRegExp(label)).join('|');
+  const pattern = new RegExp(`\\b(${escaped})\\s*(?::|\\.|\\[?[-–]\\]?)\\s*`, 'gi');
+  const matches = [];
+  let match;
+  while ((match = pattern.exec(clean))) {
+    matches.push({
+      key: normalizeName(match[1]),
+      start: match.index,
+      bodyStart: pattern.lastIndex,
+    });
+  }
+  const sections = {};
+  for (let index = 0; index < matches.length; index += 1) {
+    const current = matches[index];
+    const next = matches[index + 1];
+    const body = cleanRulesText(clean.slice(current.bodyStart, next ? next.start : clean.length));
+    if (body && !sections[current.key]) sections[current.key] = body;
+  }
+  return sections;
+}
+
+function collectActions(features, items, spells, feats, backgrounds) {
   const actions = [];
   for (const feature of features) {
     const resource = inferFeatureResource(feature);
@@ -430,6 +531,20 @@ function collectActions(features, items, spells, feats) {
       });
     }
   }
+  for (const background of backgrounds) {
+    if (background.timing && background.timing !== 'Passive') {
+      actions.push({
+        id: slugify(`background-${background.id}`),
+        sourceType: 'background',
+        sourceId: background.id,
+        group: background.timing,
+        type: 'Background',
+        title: background.featureName || background.name,
+        detail: actionSummary(background.featureText || background.text, 420),
+        tags: ['Background', background.name].filter(Boolean),
+      });
+    }
+  }
   for (const spell of spells) {
     actions.push({
       id: slugify(`spell-${spell.id}`),
@@ -452,7 +567,7 @@ function getFeatureSourceLabel(feature) {
   return feature.kind || 'Feature';
 }
 
-function collectEffects(features, items, feats) {
+function collectEffects(features, items, feats, backgrounds) {
   const effects = [];
   for (const item of items) effects.push(...(item.effects || []).map(effect => ({ ...effect, sourceType: 'item', sourceId: item.id, itemName: item.name })));
   for (const feature of features) {
@@ -479,16 +594,32 @@ function collectEffects(features, items, feats) {
       });
     }
   }
+  for (const background of backgrounds) {
+    if (/proficienc|language|equipment|feature/i.test(background.text)) {
+      effects.push({
+        id: slugify(`background-effect-${background.id}`),
+        sourceType: 'background',
+        sourceId: background.id,
+        kind: 'rules-text',
+        name: background.name,
+        text: firstSentence(background.featureText || background.text, 260),
+      });
+    }
+  }
   return uniqueBy(effects, effect => effect.id);
 }
 
-function collectResources(features, items) {
+function collectResources(features, items, feats) {
   const resources = [];
   for (const feature of features) {
     const resource = inferFeatureResource(feature);
     if (resource) resources.push(resource);
   }
   for (const item of items) resources.push(...(item.resources || []).map(resource => ({ ...resource, sourceType: 'item', sourceId: item.id, itemName: item.name })));
+  for (const feat of feats) {
+    const resource = inferFeatResource(feat);
+    if (resource) resources.push(resource);
+  }
   resources.push(
     { id: 'hit-dice', name: 'Hit Dice', sourceType: 'core', maxFormula: 'level', reset: 'longRestHalf', text: 'Regain up to half your maximum hit dice after a long rest.' },
     { id: 'spell-slots', name: 'Spell Slots', sourceType: 'core', maxFormula: 'byClassLevel', reset: 'longRest', text: 'Spell slots are calculated from class level and reset on a long rest.' },
@@ -638,6 +769,28 @@ function inferFeatureResource(feature) {
   if (hint === 'Second Wind') return { id: 'second-wind', name: 'Second Wind', max: 1, reset: 'shortRest', ...common };
   if (hint === 'Portent') return { id: 'wizard-portent', name: 'Portent', maxFormula: 'level >= 14 ? 3 : 2', reset: 'longRest', ...common };
   return null;
+}
+
+function inferFeatResource(feat) {
+  const text = cleanRulesText(feat && feat.text || '');
+  if (!feat || !text) return null;
+  const common = {
+    sourceType: 'feat',
+    sourceId: feat.id,
+    source: feat.source || '',
+    text: firstSentence(text, 240),
+  };
+  const luck = text.match(/\b(\d+)\s+luck points?\b/i);
+  if (luck || normalizeName(feat.name) === 'lucky') {
+    return {
+      id: 'feat-lucky-luck-points',
+      name: 'Luck Points',
+      max: luck ? Number(luck[1]) || 3 : 3,
+      reset: 'longRest',
+      ...common,
+    };
+  }
+  return inferLimitedFeatureResource({ ...feat, kind: 'feat', text }, common);
 }
 
 function inferLimitedFeatureResource(feature, common) {
@@ -826,13 +979,45 @@ function getCasterProgression(cls) {
 }
 
 function parseCsv(text) {
-  const lines = text.split(/\r?\n/).filter(line => line.trim());
-  if (!lines.length) return [];
-  const headers = parseCsvLine(lines[0]);
-  return lines.slice(1).map(line => {
-    const values = parseCsvLine(line);
+  const rows = parseCsvRows(text);
+  if (!rows.length) return [];
+  const headers = rows[0];
+  return rows.slice(1).map(values => {
     return Object.fromEntries(headers.map((header, index) => [header, values[index] || '']));
   });
+}
+
+function parseCsvRows(text) {
+  const rows = [];
+  let row = [];
+  let current = '';
+  let inQuotes = false;
+  const source = String(text || '');
+  for (let index = 0; index < source.length; index += 1) {
+    const char = source[index];
+    if (char === '"') {
+      if (inQuotes && source[index + 1] === '"') {
+        current += '"';
+        index += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (char === ',' && !inQuotes) {
+      row.push(current.trim());
+      current = '';
+    } else if ((char === '\n' || char === '\r') && !inQuotes) {
+      row.push(current.trim());
+      if (row.some(field => field.trim())) rows.push(row);
+      row = [];
+      current = '';
+      if (char === '\r' && source[index + 1] === '\n') index += 1;
+    } else {
+      current += char;
+    }
+  }
+  row.push(current.trim());
+  if (row.some(field => field.trim())) rows.push(row);
+  return rows;
 }
 
 function parseCsvLine(line) {
@@ -894,6 +1079,7 @@ function buildReport(data) {
       'items.json',
       'spells.json',
       'feats.json',
+      'backgrounds.json',
       'actions.json',
       'effects.json',
       'resources.json',
@@ -1068,6 +1254,10 @@ function slugify(value) {
 
 function normalizeName(value) {
   return String(value || '').toLowerCase().replace(/[^a-z0-9+]+/g, ' ').trim();
+}
+
+function escapeRegExp(value) {
+  return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 function formatBonus(value) {

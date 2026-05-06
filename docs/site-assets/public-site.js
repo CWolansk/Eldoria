@@ -303,6 +303,8 @@
     renderCombatFeatureActions(root, hydrated);
     renderClassInfoPanel(root, hydrated);
     renderRaceInfoPanel(root, hydrated);
+    renderBackgroundInfoPanel(root, hydrated);
+    renderFeatInfoPanel(root, hydrated);
     renderActionsPanel(root, hydrated);
     renderResourcesPanel(root, hydrated);
     renderEquipmentPanel(root, hydrated);
@@ -387,6 +389,8 @@
       spells: Array.isArray(player.spells) ? player.spells.filter(Boolean).map(String) : [],
       itemDetails: player.itemDetails && typeof player.itemDetails === 'object' ? player.itemDetails : {},
       spellDetails: player.spellDetails && typeof player.spellDetails === 'object' ? player.spellDetails : {},
+      backgroundDetails: normalizeRuleDetailArray(player.backgroundDetails),
+      featDetails: normalizeRuleDetailArray(player.featDetails),
       ruleActions: Array.isArray(player.ruleActions) ? player.ruleActions : [],
       ruleEffects: Array.isArray(player.ruleEffects) ? player.ruleEffects : [],
       resources: Array.isArray(player.resources) ? player.resources : [],
@@ -422,6 +426,30 @@
     prepared.speedProfile = buildSpeedProfile(prepared);
     prepared.speed = prepared.speedProfile.total;
     return prepared;
+  }
+
+  function normalizeRuleDetailArray(value) {
+    const rows = Array.isArray(value)
+      ? value
+      : (value && typeof value === 'object' ? Object.values(value) : []);
+    return rows.map(detail => ({
+      id: cleanDetailValue(detail && detail.id),
+      name: cleanDetailValue(detail && detail.name),
+      source: cleanDetailValue(detail && detail.source),
+      page: cleanDetailValue(detail && detail.page),
+      prerequisites: cleanDetailValue(detail && detail.prerequisites),
+      abilityScores: cleanDetailValue(detail && detail.abilityScores),
+      repeatable: cleanDetailValue(detail && detail.repeatable),
+      skillProficiencies: cleanDetailValue(detail && detail.skillProficiencies),
+      toolProficiencies: cleanDetailValue(detail && detail.toolProficiencies),
+      languages: cleanDetailValue(detail && detail.languages),
+      equipment: cleanDetailValue(detail && detail.equipment),
+      featureName: cleanDetailValue(detail && detail.featureName),
+      featureText: cleanRulesText(detail && detail.featureText),
+      text: cleanRulesText(detail && detail.text),
+      timing: cleanDetailValue(detail && detail.timing),
+      missing: Boolean(detail && detail.missing),
+    })).filter(detail => detail.name);
   }
 
   function getBaseSheetValue(currentValue, baseValue, previousTotal, fallback) {
@@ -1578,6 +1606,63 @@
     </div>`;
   }
 
+  function renderBackgroundInfoPanel(root, player) {
+    const target = root.querySelector('[data-background-info-panel]');
+    if (!target) return;
+    target.innerHTML = renderRuleDetailRows(player.backgroundDetails || [], 'No background details found in canonical rules.');
+  }
+
+  function renderFeatInfoPanel(root, player) {
+    const target = root.querySelector('[data-feat-info-panel]');
+    if (!target) return;
+    target.innerHTML = renderRuleDetailRows(player.featDetails || [], 'No feats recorded on this sheet.');
+  }
+
+  function renderRuleDetailRows(details, emptyText) {
+    if (!details.length) return `<p>${escapeHtml(emptyText || 'No details found in canonical rules.')}</p>`;
+    return `<div class="class-feature-list">
+      ${details.map(renderRuleDetailRow).join('')}
+    </div>`;
+  }
+
+  function renderRuleDetailRow(detail) {
+    return `<details class="class-feature-row">
+      <summary>
+        <span>
+          <strong>${escapeHtml(detail.name)}</strong>
+          <small>${escapeHtml(formatRuleDetailMeta(detail))}</small>
+        </span>
+      </summary>
+      ${renderRuleDetailFields(detail)}
+      <p>${escapeHtml(formatRuleDetailText(detail))}</p>
+    </details>`;
+  }
+
+  function renderRuleDetailFields(detail) {
+    const rows = [
+      ['Skill Proficiencies', detail.skillProficiencies],
+      ['Tool Proficiencies', detail.toolProficiencies],
+      ['Languages', detail.languages],
+      ['Equipment', detail.equipment],
+      ['Prerequisites', detail.prerequisites],
+      ['Ability Score', detail.abilityScores],
+      ['Repeatable', detail.repeatable],
+    ].filter(([, value]) => value);
+    if (!rows.length) return '';
+    return `<dl class="equipment-detail-grid">${rows.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>`;
+  }
+
+  function formatRuleDetailMeta(detail) {
+    if (detail.missing) return 'Details unavailable';
+    return [detail.featureName, formatSource(detail), detail.timing].filter(Boolean).join(' / ');
+  }
+
+  function formatRuleDetailText(detail) {
+    if (detail.missing) return 'No canonical rules entry matched this sheet value yet.';
+    if (detail.featureName && detail.featureText) return `${detail.featureName}: ${detail.featureText}`;
+    return detail.featureText || detail.text || 'No rules text recorded.';
+  }
+
   function renderClassFeatureRow(player, feature) {
     const controls = renderClassFeatureControls(player, feature);
     return `<details class="class-feature-row">
@@ -2016,6 +2101,8 @@
     if (!action) return '';
     if (findPlayerResource(player, action.id)) return action.id;
     if (findPlayerResource(player, action.sourceId)) return action.sourceId;
+    const bySource = uniqueRuleRecords(player && player.resources || []).find(resource => resource.sourceId && resource.sourceId === action.sourceId);
+    if (bySource) return bySource.id;
     const titleId = slugify(action.title || action.name || '');
     if (findPlayerResource(player, titleId)) return titleId;
     const text = normalizeName(`${action.title || ''} ${action.detail || ''} ${Array.isArray(action.tags) ? action.tags.join(' ') : ''}`);
