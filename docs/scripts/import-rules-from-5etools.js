@@ -18,9 +18,11 @@ const FEATS_CSV = path.join(DOCS_ROOT, 'Assets', 'Feats', 'Feats.csv');
 const BACKGROUNDS_CSV = path.join(DOCS_ROOT, 'Assets', 'Backgrounds', 'Backgrounds.csv');
 const CLASS_ROOT = path.join(DOCS_ROOT, '5etools', 'data', 'class');
 const RACES_JSON = path.join(DOCS_ROOT, '5etools', 'data', 'races.json');
+const RULE_OVERRIDES_JSON = path.join(RULES_OUT, 'rule-overrides.json');
 const CHECK_ONLY = process.argv.includes('--check');
 const RACE_SOURCE_PRIORITY = ['PHB', 'VGM', 'EEPC', 'DMG', 'XGE', 'TCE', 'SCAG', 'MPMM'];
 const IGNORED_RACE_TRAIT_NAMES = new Set(['Age', 'Alignment', 'Names', 'Height and Weight']);
+const RULE_OVERRIDE_COLLECTIONS = ['items', 'spells', 'features', 'actions', 'resources', 'effects', 'rules', 'backgrounds', 'feats', 'races', 'classes', 'subclasses'];
 
 const CURRENT_PARTY_ITEM_RULES = {
   'corpse slayer flamberge bastard sword': {
@@ -86,6 +88,33 @@ const CURRENT_PARTY_ITEM_RULES = {
   },
   'gauntlets of whirling strikes': {
     resources: [{ id: 'whirling-fury', name: 'Whirling Fury', max: 1, reset: 'longRest' }, { id: 'evasive-maneuver', name: 'Evasive Maneuver', max: 1, reset: 'longRest' }],
+    actions: {
+      'whirling-fury': { remove: true },
+    },
+    toggles: {
+      'whirling-fury': {
+        label: 'Whirling Fury',
+        timing: 'on-hit',
+        appliesTo: 'equipped-weapon',
+        resourceId: 'gauntlets-of-whirling-strikes-whirling-fury',
+        consumeOn: 'activation',
+        valueKey: 'whirling-fury-damage-bonus',
+        defaultValue: 1,
+        min: 0,
+        step: 1,
+        effects: [{
+          kind: 'weapon-damage-bonus',
+          label: 'Whirling Fury',
+          valueMode: 'manual',
+          valueKey: 'whirling-fury-damage-bonus',
+          defaultValue: 1,
+          min: 0,
+          step: 1,
+          valueLabel: 'Damage bonus',
+        }],
+        text: 'Activate once per long rest. While active, add the current Whirling Fury bonus as same-type weapon damage. Increase the bonus manually for consecutive hits, and reset it if you miss or switch targets.',
+      },
+    },
   },
   'talisman of elemental fury': {
     resources: [{ id: 'elemental-surge', name: 'Elemental Surge', max: 1, reset: 'longRest' }, { id: 'elemental-ward', name: 'Elemental Ward', max: 1, reset: 'longRest' }],
@@ -97,19 +126,54 @@ const CURRENT_PARTY_ITEM_RULES = {
     resources: [{ id: 'lightning-rod-charges', name: 'Lightning Rod Charges', max: 6, reset: 'dawnLose1d6' }],
     effects: [{ kind: 'resistance', target: 'lightning', mode: 'conditional', text: 'Immune to lightning damage while holding it until it reaches 6 charges; then resistance instead.' }],
   },
+  'medallion of harmonious resonance': {
+    weapon: false,
+    damage: '',
+    tags: ['NoWeaponAttack', 'NoAutoDamage'],
+    actions: {
+      'resonant-crescendo': { roll: false, tags: ['Attunement', '1 use', 'NoAutoDamage'] },
+      'melodic-harmony': { roll: false, tags: ['Attunement', '1 use'] },
+    },
+  },
+};
+
+const DEFAULT_RULE_OVERRIDES = {
+  schemaVersion: 1,
+  items: Object.fromEntries(Object.entries(CURRENT_PARTY_ITEM_RULES).map(([key, value]) => [slugify(key), value])),
+  spells: {},
+  features: {},
+  actions: {},
+  resources: {},
+  effects: {},
+  rules: {},
+  backgrounds: {},
+  feats: {},
+  races: {},
+  classes: {},
+  subclasses: {},
 };
 
 function main() {
+  const ruleOverrides = loadRuleOverrides();
   const classesAndFeatures = importClasses();
   const racesAndFeatures = importRaces();
-  const features = [...classesAndFeatures.features, ...racesAndFeatures.features].sort((a, b) => `${a.kind} ${a.className || a.raceName || ''} ${a.level || 0} ${a.name}`.localeCompare(`${b.kind} ${b.className || b.raceName || ''} ${b.level || 0} ${b.name}`));
-  const items = parseCsv(readIfExists(ITEMS_CSV)).map(buildItem).filter(Boolean).sort(byName);
-  const spells = parseCsv(readIfExists(SPELLS_CSV)).map(buildSpell).filter(Boolean).sort(byName);
-  const feats = parseCsv(readIfExists(FEATS_CSV)).map(buildFeat).filter(Boolean).sort(byName);
-  const backgrounds = parseCsv(readIfExists(BACKGROUNDS_CSV)).map(buildBackground).filter(Boolean).sort(byName);
-  const actions = collectActions(features, items, spells, feats, backgrounds).sort(byName);
-  const effects = collectEffects(features, items, feats, backgrounds).sort(byName);
-  const resources = collectResources(features, items, feats).sort(byName);
+  classesAndFeatures.classes = applyCollectionOverrides(classesAndFeatures.classes, ruleOverrides.classes).sort(byName);
+  classesAndFeatures.subclasses = applyCollectionOverrides(classesAndFeatures.subclasses, ruleOverrides.subclasses).sort(byName);
+  racesAndFeatures.races = applyCollectionOverrides(racesAndFeatures.races, ruleOverrides.races).sort(byName);
+  const features = applyCollectionOverrides([...classesAndFeatures.features, ...racesAndFeatures.features], ruleOverrides.features)
+    .sort((a, b) => `${a.kind} ${a.className || a.raceName || ''} ${a.level || 0} ${a.name}`.localeCompare(`${b.kind} ${b.className || b.raceName || ''} ${b.level || 0} ${b.name}`));
+  const items = parseCsv(readIfExists(ITEMS_CSV)).map(row => buildItem(row, ruleOverrides.items)).filter(Boolean).sort(byName);
+  const spells = applyCollectionOverrides(parseCsv(readIfExists(SPELLS_CSV)).map(buildSpell).filter(Boolean), ruleOverrides.spells).sort(byName);
+  const feats = applyCollectionOverrides(parseCsv(readIfExists(FEATS_CSV)).map(buildFeat).filter(Boolean), ruleOverrides.feats).sort(byName);
+  const backgrounds = applyCollectionOverrides(parseCsv(readIfExists(BACKGROUNDS_CSV)).map(buildBackground).filter(Boolean), ruleOverrides.backgrounds).sort(byName);
+  classesAndFeatures.classes = withResolvedClassCollections(classesAndFeatures.classes, features).sort(byName);
+  classesAndFeatures.subclasses = withResolvedSubclassCollections(classesAndFeatures.subclasses, features)
+    .sort((a, b) => `${a.className} ${a.name}`.localeCompare(`${b.className} ${b.name}`));
+  racesAndFeatures.races = withResolvedRaceCollections(racesAndFeatures.races, features)
+    .sort((a, b) => sourcePriority(a.source) - sourcePriority(b.source) || a.name.localeCompare(b.name));
+  const actions = applyCollectionOverrides(collectActions(features, items, spells, feats, backgrounds), ruleOverrides.actions).sort(byName);
+  const effects = applyCollectionOverrides(collectEffects(features, items, feats, backgrounds), ruleOverrides.effects).sort(byName);
+  const resources = applyCollectionOverrides(collectResources(features, items, feats), ruleOverrides.resources).sort(byName);
   const generatedAtUtc = getGeneratedAtUtc();
   const manifest = {
     schemaVersion: 1,
@@ -121,6 +185,11 @@ function main() {
       featsCsv: relative(DOCS_ROOT, FEATS_CSV),
       backgroundsCsv: relative(DOCS_ROOT, BACKGROUNDS_CSV),
       racesJson: relative(DOCS_ROOT, RACES_JSON),
+      ruleOverrides: relative(DOCS_ROOT, RULE_OVERRIDES_JSON),
+    },
+    overrides: {
+      schemaVersion: ruleOverrides.schemaVersion || 1,
+      counts: countRuleOverrides(ruleOverrides),
     },
     counts: {
       classes: classesAndFeatures.classes.length,
@@ -180,6 +249,7 @@ function importClasses() {
     const data = readJson(path.join(CLASS_ROOT, file));
     for (const cls of data.class || []) {
       if (!cls.name) continue;
+      const origin = buildClassOriginBlock(cls);
       classes.push({
         id: slugify(cls.name),
         name: cls.name,
@@ -190,6 +260,8 @@ function importClasses() {
         spellcastingAbility: cls.spellcastingAbility || '',
         casterProgression: getCasterProgression(cls),
         classFeatures: cls.classFeatures || [],
+        origin,
+        ...(origin.grants && origin.grants.length ? { grants: origin.grants } : {}),
       });
     }
 
@@ -202,6 +274,7 @@ function importClasses() {
         className: subclass.className,
         source: subclass.source || '',
         subclassFeatures: subclass.subclassFeatures || [],
+        origin: buildSubclassOriginBlock(subclass),
       });
     }
 
@@ -216,6 +289,67 @@ function importClasses() {
   };
 }
 
+function buildClassOriginBlock(cls) {
+  const hitDie = cls && cls.hd && cls.hd.faces ? `d${cls.hd.faces}` : '';
+  const grants = [];
+  (Array.isArray(cls && cls.proficiency) ? cls.proficiency : []).forEach(ability => {
+    grants.push({ type: 'saving-throw', ability, levelGate: 1 });
+  });
+  if (hitDie) grants.push({ type: 'hit-die', value: hitDie, levelGate: 1 });
+  if (cls && cls.spellcastingAbility) {
+    grants.push({
+      type: 'spellcasting',
+      ability: cls.spellcastingAbility,
+      progression: getCasterProgression(cls),
+      levelGate: 1,
+    });
+  }
+  return {
+    type: 'class-origin',
+    source: cls && cls.source || '',
+    ...(hitDie ? { hitDie } : {}),
+    grants: uniqueBy(grants, grantKey),
+  };
+}
+
+function buildSubclassOriginBlock(subclass) {
+  return {
+    type: 'subclass-origin',
+    source: subclass && subclass.source || '',
+    className: subclass && subclass.className || '',
+  };
+}
+
+function withResolvedClassCollections(classes, features) {
+  const featuresByClass = groupBy((features || []).filter(feature => feature.kind === 'class'), feature => normalizeName(feature.className));
+  return (classes || []).map(cls => {
+    const rows = (featuresByClass.get(normalizeName(cls.name)) || [])
+      .filter(feature => Number(feature.level || 1) >= 1)
+      .sort((a, b) => Number(a.level || 0) - Number(b.level || 0) || a.name.localeCompare(b.name));
+    return {
+      ...cls,
+      featureIds: rows.map(feature => feature.id),
+      features: rows,
+    };
+  });
+}
+
+function withResolvedSubclassCollections(subclasses, features) {
+  const subclassFeatures = (features || []).filter(feature => feature.kind === 'subclass');
+  return (subclasses || []).map(subclass => {
+    const rows = subclassFeatures
+      .filter(feature => normalizeName(feature.className) === normalizeName(subclass.className))
+      .filter(feature => normalizeName(feature.subclassShortName || feature.subclassName) === normalizeName(subclass.shortName || subclass.name)
+        || normalizeName(feature.subclassName) === normalizeName(subclass.name))
+      .sort((a, b) => Number(a.level || 0) - Number(b.level || 0) || a.name.localeCompare(b.name));
+    return {
+      ...subclass,
+      featureIds: rows.map(feature => feature.id),
+      features: rows,
+    };
+  });
+}
+
 function importRaces() {
   const races = [];
   const features = [];
@@ -225,19 +359,23 @@ function importRaces() {
   for (const race of data.race || []) {
     const record = buildRaceRecord(race, false);
     if (!record) continue;
+    const raceFeatures = buildRaceFeatures(race, record);
     races.push(record);
-    features.push(...buildRaceFeatures(race, record));
+    features.push(...raceFeatures);
   }
   for (const subrace of data.subrace || []) {
     const record = buildRaceRecord(subrace, true);
     if (!record) continue;
+    const raceFeatures = buildRaceFeatures(subrace, record);
     races.push(record);
-    features.push(...buildRaceFeatures(subrace, record));
+    features.push(...raceFeatures);
   }
 
+  const uniqueRaces = uniqueBy(races, race => race.id);
+  const uniqueFeatures = uniqueBy(features.filter(Boolean), feature => feature.id);
   return {
-    races: uniqueBy(races, race => race.id).sort((a, b) => sourcePriority(a.source) - sourcePriority(b.source) || a.name.localeCompare(b.name)),
-    features: uniqueBy(features.filter(Boolean), feature => feature.id).sort((a, b) => `${a.raceName} ${a.name}`.localeCompare(`${b.raceName} ${b.name}`)),
+    races: uniqueRaces.sort((a, b) => sourcePriority(a.source) - sourcePriority(b.source) || a.name.localeCompare(b.name)),
+    features: uniqueFeatures.sort((a, b) => `${a.raceName} ${a.name}`.localeCompare(`${b.raceName} ${b.name}`)),
   };
 }
 
@@ -248,6 +386,8 @@ function buildRaceRecord(race, isSubrace) {
   const subraceName = isSubrace ? race.name : '';
   const displayName = subraceName ? `${baseName} (${subraceName})` : baseName;
   const source = race.source || '';
+  const rules = buildRaceRules(race);
+  const parentRaceId = subraceName ? slugify(['race', baseName, race.raceSource || source].filter(Boolean).join('-')) : '';
   return {
     id: slugify(['race', baseName, subraceName, source].filter(Boolean).join('-')),
     name: displayName,
@@ -256,13 +396,116 @@ function buildRaceRecord(race, isSubrace) {
     source,
     raceSource: race.raceSource || source,
     page: race.page || '',
-    parentRaceId: subraceName ? slugify(['race', baseName, race.raceSource || source].filter(Boolean).join('-')) : '',
+    parentRaceId,
     aliases: buildRaceAliases(baseName, subraceName),
     size: race.size || [],
     speed: race.speed || '',
     ability: race.ability || [],
     traitTags: race.traitTags || [],
+    origin: buildRaceOriginBlock(race, rules, parentRaceId),
+    ...(Object.keys(rules).length ? { rules } : {}),
   };
+}
+
+function buildRaceOriginBlock(race, rules = {}, parentRaceId = '') {
+  const origin = {
+    type: 'race-origin',
+    source: race && race.source || '',
+    parentRaceId,
+  };
+  [
+    ['abilityScores', 'abilityScores'],
+    ['size', 'size'],
+    ['speed', 'speed'],
+    ['languages', 'languages'],
+    ['defenses', 'defenses'],
+    ['senses', 'senses'],
+    ['traits', 'traits'],
+    ['spells', 'spells'],
+  ].forEach(([targetKey, sourceKey]) => {
+    if (Array.isArray(rules[sourceKey]) && rules[sourceKey].length) origin[targetKey] = rules[sourceKey];
+  });
+  return origin;
+}
+
+function withResolvedRaceCollections(races, features) {
+  const racesById = new Map((races || []).map(race => [race.id, race]));
+  const featuresByRaceId = groupBy((features || []).filter(feature => feature.kind === 'race'), feature => feature.raceId || '');
+  return (races || []).map(race => withResolvedRaceBlocks(race, racesById, featuresByRaceId));
+}
+
+function withResolvedRaceBlocks(race, racesById, featuresByRaceId) {
+  const chain = getRaceInheritanceChain(race, racesById);
+  const origin = mergeRaceOriginBlocks(chain.map(row => row.origin));
+  const features = chain.flatMap(row => (featuresByRaceId.get(row.id) || []).map(feature => (
+    row.id === race.id
+      ? feature
+      : {
+        ...feature,
+        inherited: true,
+        inheritedFromRaceId: row.id,
+        inheritedFromRaceName: row.name,
+      }
+  )));
+  return {
+    ...race,
+    origin: {
+      ...origin,
+      type: 'race-origin',
+      parentRaceId: race.parentRaceId || '',
+    },
+    featureIds: features.map(feature => feature.id),
+    features,
+  };
+}
+
+function getRaceInheritanceChain(race, racesById) {
+  if (!race) return [];
+  const parent = race.parentRaceId && racesById.get(race.parentRaceId);
+  return parent ? [...getRaceInheritanceChain(parent, racesById), race] : [race];
+}
+
+function mergeRaceOriginBlocks(origins) {
+  const out = {};
+  const sources = new Set();
+  for (const origin of origins || []) {
+    if (!origin || typeof origin !== 'object') continue;
+    if (origin.source) {
+      String(origin.source).split('+').filter(Boolean).forEach(source => sources.add(source));
+      out.source = [...sources].join('+');
+    }
+    [
+      'abilityScores',
+      'size',
+      'speed',
+      'languages',
+      'defenses',
+      'senses',
+      'traits',
+      'spells',
+    ].forEach(key => {
+      const values = Array.isArray(origin[key]) ? origin[key] : [];
+      if (!values.length) return;
+      out[key] = uniqueBy([...(out[key] || []), ...values.map(value => ({ ...value }))], stableJson);
+    });
+  }
+  return out;
+}
+
+function groupBy(items, getKey) {
+  const out = new Map();
+  for (const item of items || []) {
+    const key = getKey(item);
+    if (!out.has(key)) out.set(key, []);
+    out.get(key).push(item);
+  }
+  return out;
+}
+
+function stableJson(value) {
+  if (!value || typeof value !== 'object') return String(value);
+  if (Array.isArray(value)) return `[${value.map(stableJson).join(',')}]`;
+  return `{${Object.keys(value).sort().map(key => `${key}:${stableJson(value[key])}`).join(',')}}`;
 }
 
 function buildRaceAliases(baseName, subraceName) {
@@ -277,16 +520,18 @@ function buildRaceAliases(baseName, subraceName) {
 
 function buildRaceFeatures(race, raceRecord) {
   const entries = Array.isArray(race.entries) ? race.entries : [];
+  const raceRules = buildRaceRules(race);
   return entries
-    .map(entry => buildRaceFeature(entry, raceRecord))
+    .map(entry => buildRaceFeature(entry, raceRecord, raceRules))
     .filter(Boolean);
 }
 
-function buildRaceFeature(entry, raceRecord) {
+function buildRaceFeature(entry, raceRecord, raceRules = {}) {
   if (!entry || typeof entry !== 'object' || !entry.name) return null;
   if (IGNORED_RACE_TRAIT_NAMES.has(entry.name)) return null;
   const text = cleanRulesText(entriesToText(entry.entries || entry.items || entry.rows || []));
   if (!text) return null;
+  const grants = buildRaceFeatureGrants(entry, text, raceRules);
   return {
     id: slugify(['race', raceRecord.name, entry.name, raceRecord.source].filter(Boolean).join('-')),
     kind: 'race',
@@ -301,7 +546,312 @@ function buildRaceFeature(entry, raceRecord) {
     text,
     timing: classifyTiming(`${entry.name} ${text}`),
     resourceHint: inferFeatureResourceHint(entry.name, text),
+    ...(grants.length ? { grants } : {}),
   };
+}
+
+function buildRaceRules(race) {
+  const rules = {};
+  const abilityScores = normalizeRaceAbilityGrants(race && race.ability);
+  const size = normalizeRaceSizeGrants(race && race.size);
+  const speed = normalizeRaceSpeedGrants(race && race.speed);
+  const languages = normalizeRaceLanguageGrants(race && race.languageProficiencies);
+  const defenses = normalizeRaceDefenseGrants(race && race.resist, 'resistance');
+  const senses = normalizeRaceSenseGrants(race);
+  const traits = normalizeRaceTraitGrants(race && race.traitTags);
+  const spells = normalizeAdditionalSpellGrants(race && race.additionalSpells, race);
+  if (abilityScores.length) rules.abilityScores = abilityScores;
+  if (size.length) rules.size = size;
+  if (speed.length) rules.speed = speed;
+  if (languages.length) rules.languages = languages;
+  if (defenses.length) rules.defenses = defenses;
+  if (senses.length) rules.senses = senses;
+  if (traits.length) rules.traits = traits;
+  if (spells.length) rules.spells = spells;
+  return rules;
+}
+
+function buildRaceFeatureGrants(entry, text, raceRules = {}) {
+  const name = normalizeName(entry && entry.name);
+  const clean = normalizeName(`${entry && entry.name || ''} ${text || ''}`);
+  const grants = [];
+  if (isFeatChoiceGrant(name, clean)) {
+    grants.push(buildFeatChoiceGrant(inferRaceFeatureLevel(name, text)));
+  }
+  if (name === 'languages') grants.push(...(raceRules.languages || []));
+  if (name === 'size') grants.push(...(raceRules.size || []));
+  (raceRules.defenses || []).forEach(grant => {
+    if (raceFeatureMatchesDefenseGrant(name, clean, grant)) grants.push(grant);
+  });
+  (raceRules.speed || []).forEach(grant => {
+    if (raceFeatureMatchesSpeedGrant(name, clean, grant)) grants.push(grant);
+  });
+  (raceRules.senses || []).forEach(grant => {
+    if (clean.includes(normalizeName(grant.sense || '')) || clean.includes('darkvision')) grants.push(grant);
+  });
+  (raceRules.traits || []).forEach(grant => {
+    if (clean.includes(normalizeName(grant.name || grant.trait || ''))) grants.push(grant);
+  });
+  (raceRules.spells || []).forEach(grant => {
+    const spellName = normalizeName(grant.spellName || grant.name || grant.spellId || '');
+    if (spellName && clean.includes(spellName)) grants.push(normalizeFeatureSpellSlotFallback(grant, text));
+  });
+  return uniqueBy(grants, grantKey);
+}
+
+function isFeatChoiceGrant(name, clean) {
+  return name === 'feat'
+    || /\bgain (?:one|a|1) feat\b/i.test(clean || '')
+    || /\bgain [a-z ]{0,80}feat of your choice\b/i.test(clean || '');
+}
+
+function buildFeatChoiceGrant(levelGate = 1) {
+  return {
+    type: 'feat',
+    mode: 'choice',
+    count: 1,
+    optionSet: 'feats',
+    levelGate: Number(levelGate) || 1,
+    nonRemovable: true,
+  };
+}
+
+function grantKey(grant) {
+  return [
+    grant && grant.type,
+    grant && (grant.spellId || grant.featId || grant.spellName || grant.featName || grant.language || grant.skill || grant.tool || grant.weapon || grant.ability || grant.damageType || grant.movement || grant.sense || grant.name || grant.value || grant.optionSet),
+    grant && (grant.levelGate || ''),
+    grant && (grant.mode || grant.grantMode || ''),
+    grant && (grant.count || ''),
+  ].map(value => String(value || '').toLowerCase()).join(':');
+}
+
+function raceFeatureMatchesDefenseGrant(name, clean, grant) {
+  const damageType = normalizeName(grant && (grant.damageType || grant.value));
+  const defenseType = normalizeName(grant && grant.type);
+  const defenseWords = ['resistance', 'immunity', 'vulnerability', 'defense', 'defenses'];
+  if (!damageType) return false;
+  const featureMentionsDefense = defenseWords.some(word => name.includes(word) || clean.includes(word));
+  const featureMentionsDamage = name.includes(damageType) || clean.includes(`${damageType} damage`);
+  return featureMentionsDefense && featureMentionsDamage;
+}
+
+function raceFeatureMatchesSpeedGrant(name, clean, grant) {
+  if (name === 'speed') return true;
+  const movement = normalizeName(grant && (grant.movement || grant.speedType));
+  if (!movement) return false;
+  if (!clean.includes('speed')) return false;
+  const terms = {
+    walk: ['walk', 'walking'],
+    swim: ['swim', 'swimming'],
+    climb: ['climb', 'climbing'],
+    fly: ['fly', 'flying', 'flight'],
+    burrow: ['burrow', 'burrowing'],
+  }[movement] || [movement];
+  return terms.some(term => clean.includes(term));
+}
+
+function normalizeFeatureSpellSlotFallback(grant, text) {
+  if (!grant || grant.type !== 'spell' || normalizeName(grant.mode || grant.grantMode) !== 'feature cast') return grant;
+  const next = { ...grant };
+  if (featureTextAllowsSpellSlotFallback(text)) next.canUseSpellSlots = true;
+  else delete next.canUseSpellSlots;
+  return next;
+}
+
+function normalizeRaceAbilityGrants(ability) {
+  const rows = Array.isArray(ability) ? ability : [];
+  const out = [];
+  rows.forEach(row => {
+    if (!row || typeof row !== 'object') return;
+    Object.entries(row).forEach(([abilityKey, value]) => {
+      if (abilityKey === 'choose') {
+        out.push({ type: 'ability-score', mode: 'choice', options: value });
+      } else if (Number(value)) {
+        out.push({ type: 'ability-score', ability: abilityKey, value: Number(value) });
+      }
+    });
+  });
+  return out;
+}
+
+function normalizeRaceSizeGrants(size) {
+  const values = (Array.isArray(size) ? size : [size])
+    .filter(Boolean)
+    .map(value => String(value));
+  if (values.length > 1) return [{ type: 'size', mode: 'choice', options: values }];
+  return values.map(value => ({ type: 'size', value }));
+}
+
+function normalizeRaceSpeedGrants(speed) {
+  if (!speed) return [];
+  if (typeof speed === 'number') return [{ type: 'speed', movement: 'walk', value: speed }];
+  if (typeof speed !== 'object') return [];
+  return Object.entries(speed)
+    .filter(([, value]) => value !== false && value !== null && value !== undefined && value !== '')
+    .map(([movement, value]) => {
+      const grant = {
+        type: 'speed',
+        movement,
+        value: value === true ? 'walk' : value,
+      };
+      if (value === true) grant.equals = 'walk';
+      return grant;
+    });
+}
+
+function normalizeRaceLanguageGrants(languageProficiencies) {
+  const out = [];
+  (Array.isArray(languageProficiencies) ? languageProficiencies : []).forEach(row => {
+    if (!row || typeof row !== 'object') return;
+    Object.entries(row).forEach(([language, value]) => {
+      if (language === 'choose') {
+        out.push({ type: 'language', mode: 'choice', count: Number(value && value.count) || 1, options: value && value.from || [] });
+      } else if (value) {
+        out.push({ type: 'language', language: languageName(language) });
+      }
+    });
+  });
+  return out;
+}
+
+function normalizeRaceDefenseGrants(values, kind) {
+  return (Array.isArray(values) ? values : [])
+    .filter(Boolean)
+    .map(value => ({ type: kind, damageType: String(value).toLowerCase() }));
+}
+
+function normalizeRaceSenseGrants(race) {
+  const out = [];
+  if (race && race.darkvision) out.push({ type: 'sense', sense: 'darkvision', range: Number(race.darkvision) || race.darkvision });
+  return out;
+}
+
+function normalizeRaceTraitGrants(traitTags) {
+  return (Array.isArray(traitTags) ? traitTags : [])
+    .filter(Boolean)
+    .map(name => ({ type: 'trait', name }));
+}
+
+function normalizeAdditionalSpellGrants(additionalSpells, race = null) {
+  const out = [];
+  const canUseSpellSlots = raceAllowsAdditionalSpellSlots(race);
+  (Array.isArray(additionalSpells) ? additionalSpells : []).forEach(block => {
+    const ability = normalizeSpellGrantAbility(block && block.ability);
+    Object.entries(block && block.known || {}).forEach(([levelGate, spells]) => {
+      normalizeSpellGrantSpellList(spells).forEach(ref => {
+        out.push(formatAdditionalSpellGrant(ref, {
+          mode: 'known',
+          levelGate,
+          ability,
+          autoKnown: true,
+          nonRemovable: true,
+        }));
+      });
+    });
+    collectInnateSpellRefs(block && block.innate, 1, '', null, canUseSpellSlots).forEach(row => {
+      out.push(formatAdditionalSpellGrant(row.ref, {
+        mode: 'feature-cast',
+        levelGate: row.levelGate,
+        ability,
+        uses: row.uses,
+        reset: row.reset,
+        castLevel: row.ref.castLevel,
+        consumesSlot: false,
+        canUseSpellSlots: row.canUseSpellSlots,
+        nonRemovable: true,
+      }));
+    });
+  });
+  return out.filter(Boolean);
+}
+
+function normalizeSpellGrantAbility(ability) {
+  if (!ability) return {};
+  if (typeof ability === 'string') return { ability };
+  if (ability && Array.isArray(ability.choose)) return { abilityOptions: ability.choose };
+  return {};
+}
+
+function collectInnateSpellRefs(innate, levelGate = 1, reset = '', uses = null, canUseSpellSlots = false) {
+  const out = [];
+  if (!innate) return out;
+  if (Array.isArray(innate)) {
+    normalizeSpellGrantSpellList(innate).forEach(ref => out.push({ ref, levelGate, reset, uses, canUseSpellSlots }));
+    return out;
+  }
+  if (typeof innate !== 'object') return out;
+  Object.entries(innate).forEach(([key, value]) => {
+    if (/^\d+$/.test(key)) {
+      out.push(...collectInnateSpellRefs(value, Number(key) || levelGate, reset, uses, canUseSpellSlots));
+    } else if (key === 'daily') {
+      Object.entries(value || {}).forEach(([count, spells]) => {
+        normalizeSpellGrantSpellList(spells).forEach(ref => out.push({ ref, levelGate, reset: 'longRest', uses: Number(count) || 1, canUseSpellSlots }));
+      });
+    } else if (key === 'rest') {
+      Object.entries(value || {}).forEach(([count, spells]) => {
+        normalizeSpellGrantSpellList(spells).forEach(ref => out.push({ ref, levelGate, reset: 'shortRest', uses: Number(count) || 1, canUseSpellSlots }));
+      });
+    } else {
+      out.push(...collectInnateSpellRefs(value, levelGate, reset, uses, canUseSpellSlots));
+    }
+  });
+  return out;
+}
+
+function raceAllowsAdditionalSpellSlots(race) {
+  if (!race) return false;
+  return featureTextAllowsSpellSlotFallback(entriesToText(race.entries || []));
+}
+
+function featureTextAllowsSpellSlotFallback(text) {
+  return /\b(?:using|with|expend(?:ing)?)\s+(?:any\s+)?spell slots?\b|\bspell slots? you have\b/i.test(String(text || ''));
+}
+
+function normalizeSpellGrantSpellList(value) {
+  return (Array.isArray(value) ? value : [value])
+    .map(parseSpellReference)
+    .filter(ref => ref && ref.spellId);
+}
+
+function parseSpellReference(value) {
+  const text = String(value || '').trim();
+  if (!text) return null;
+  const hashIndex = text.indexOf('#');
+  const rawName = (hashIndex >= 0 ? text.slice(0, hashIndex) : text).split('|')[0].trim();
+  const suffix = hashIndex >= 0 ? text.slice(hashIndex + 1).trim() : '';
+  const castLevel = suffix === 'c' ? 0 : Number(suffix) || null;
+  return {
+    spellId: slugify(rawName),
+    spellName: rawName,
+    castLevel,
+  };
+}
+
+function formatAdditionalSpellGrant(ref, options = {}) {
+  if (!ref || !ref.spellId) return null;
+  return {
+    type: 'spell',
+    spellId: ref.spellId,
+    spellName: ref.spellName,
+    mode: options.mode || 'granted',
+    grantMode: options.mode || 'granted',
+    levelGate: Number(options.levelGate) || 1,
+    ...(ref.castLevel !== null && ref.castLevel !== undefined ? { castLevel: ref.castLevel } : {}),
+    ...(options.castLevel !== null && options.castLevel !== undefined ? { castLevel: options.castLevel } : {}),
+    ...(options.ability && options.ability.ability ? { ability: options.ability.ability } : {}),
+    ...(options.ability && options.ability.abilityOptions ? { abilityOptions: options.ability.abilityOptions } : {}),
+    ...(options.uses ? { uses: options.uses } : {}),
+    ...(options.reset ? { reset: options.reset } : {}),
+    ...(Object.prototype.hasOwnProperty.call(options, 'consumesSlot') ? { consumesSlot: Boolean(options.consumesSlot) } : {}),
+    ...(options.canUseSpellSlots ? { canUseSpellSlots: true } : {}),
+    ...(options.autoKnown ? { autoKnown: true } : {}),
+    ...(options.nonRemovable ? { nonRemovable: true } : {}),
+  };
+}
+
+function languageName(value) {
+  return String(value || '').split(/[-_]/).map(capitalize).join(' ');
 }
 
 function inferRaceFeatureLevel(_name, text) {
@@ -318,6 +868,7 @@ function sourcePriority(source) {
 function buildFeature(feature, kind) {
   if (!feature || !feature.name) return null;
   const text = cleanRulesText(entriesToText(feature.entries || []));
+  const grants = buildFeatureGrants(feature, kind, text);
   return {
     id: slugify([kind, feature.className, feature.subclassShortName, feature.level, feature.name, feature.source].filter(Boolean).join('-')),
     kind,
@@ -330,14 +881,34 @@ function buildFeature(feature, kind) {
     text,
     timing: classifyTiming(`${feature.name} ${text}`),
     resourceHint: inferFeatureResourceHint(feature.name, text),
+    ...(grants.length ? { grants } : {}),
   };
 }
 
-function buildItem(row) {
+function buildFeatureGrants(feature, kind, text) {
+  const name = normalizeName(feature && feature.name);
+  const clean = normalizeName(`${feature && feature.name || ''} ${text || ''}`);
+  const grants = [];
+  if (kind === 'class' && name === 'ability score improvement') {
+    grants.push({
+      type: 'ability-score',
+      mode: 'choice',
+      optionSet: 'abilities-or-feat',
+      count: 2,
+      value: 1,
+      levelGate: Number(feature && feature.level) || 1,
+      featAlternative: true,
+    });
+  }
+  if (isFeatChoiceGrant(name, clean)) {
+    grants.push(buildFeatChoiceGrant(Number(feature && feature.level) || 1));
+  }
+  return uniqueBy(grants, grantKey);
+}
+
+function buildItem(row, itemOverrides = {}) {
   if (!row.Name) return null;
-  const normalized = normalizeName(row.Name);
-  const override = CURRENT_PARTY_ITEM_RULES[normalized] || {};
-  const item = {
+  let item = {
     id: slugify(row.Name),
     name: row.Name,
     source: row.Source || '',
@@ -352,11 +923,13 @@ function buildItem(row) {
     value: row.Value || '',
     text: cleanRulesText(row.Text || ''),
   };
-  item.weapon = override.weapon || inferWeapon(item);
-  item.resources = normalizeItemRecords(override.resources || inferItemResources(item), item.id);
-  item.actions = normalizeItemRecords(override.actions || inferItemActions(item), item.id);
-  item.effects = normalizeItemRecords(override.effects || inferItemEffects(item), item.id);
-  item.toggles = normalizeItemRecords(override.toggles || [], item.id);
+  const override = getRuleOverride(item, itemOverrides).override;
+  item = applyRuleOverride(item, pickBaseItemOverride(override));
+  item.weapon = resolveWeaponOverride(item, override);
+  item.resources = resolveItemRecordList(item, override, 'resources', inferItemResources(item));
+  item.actions = resolveItemRecordList(item, override, 'actions', inferItemActions(item));
+  item.effects = resolveItemRecordList(item, override, 'effects', inferItemEffects(item));
+  item.toggles = resolveItemRecordList(item, override, 'toggles', []);
   return item;
 }
 
@@ -390,6 +963,7 @@ function buildSpell(row) {
 function buildFeat(row) {
   if (!row.Name) return null;
   const text = cleanRulesText(row.Description || '');
+  const grants = normalizeFeatAbilityGrants(row['Ability Scores'] || '');
   return {
     id: slugify(row.Name),
     name: row.Name,
@@ -400,6 +974,12 @@ function buildFeat(row) {
     repeatable: row.Repeatable || '',
     text,
     timing: classifyTiming(text),
+    origin: {
+      type: 'feat-origin',
+      source: row.Source || '',
+      grants,
+    },
+    ...(grants.length ? { grants } : {}),
   };
 }
 
@@ -408,6 +988,7 @@ function buildBackground(row) {
   const text = cleanRulesText(row.Description || '');
   const benefits = extractBackgroundBenefits(text);
   const feature = extractBackgroundFeature(text);
+  const grants = buildBackgroundGrants(benefits);
   return {
     id: slugify(row.Name),
     name: row.Name,
@@ -422,7 +1003,97 @@ function buildBackground(row) {
     featureText: feature.text || '',
     text,
     timing: classifyTiming(feature.text || text),
+    origin: {
+      type: 'background-origin',
+      source: row.Source || '',
+      grants,
+    },
+    ...(grants.length ? { grants } : {}),
   };
+}
+
+function normalizeFeatAbilityGrants(text) {
+  const clean = cleanRulesText(text || '');
+  if (!clean) return [];
+  const grants = [];
+  const abilities = [
+    ['str', 'Strength'],
+    ['dex', 'Dexterity'],
+    ['con', 'Constitution'],
+    ['int', 'Intelligence'],
+    ['wis', 'Wisdom'],
+    ['cha', 'Charisma'],
+  ];
+  const mentioned = abilities
+    .filter(([key, label]) => new RegExp(`\\b(?:${key}|${escapeRegExp(label)})\\b`, 'i').test(clean))
+    .map(([key]) => key);
+  const amount = Number((clean.match(/\+(\d+)/) || [])[1]) || 1;
+  if (/choose|choice| or |\bone of\b|\bany\b/i.test(clean) && mentioned.length) {
+    grants.push({ type: 'ability-score', mode: 'choice', options: mentioned, count: 1, value: amount, max: 20 });
+  } else {
+    mentioned.forEach(ability => grants.push({ type: 'ability-score', ability, value: amount, max: 20 }));
+  }
+  return uniqueBy(grants, grantKey);
+}
+
+function buildBackgroundGrants(benefits) {
+  return uniqueBy([
+    ...normalizeTextProficiencyGrants('skill', 'skill', benefits && benefits.skillProficiencies, 'skills'),
+    ...normalizeTextProficiencyGrants('tool', 'tool', benefits && benefits.toolProficiencies, 'tools'),
+    ...normalizeTextProficiencyGrants('language', 'language', benefits && benefits.languages, 'languages'),
+  ], grantKey);
+}
+
+function normalizeTextProficiencyGrants(type, prop, text, optionSet) {
+  const clean = cleanRulesText(text || '');
+  if (!clean) return [];
+  const count = parseChoiceCount(clean);
+  if (/\b(?:of your choice|your choice|choose|any)\b/i.test(clean)) {
+    return [{
+      type,
+      mode: 'choice',
+      count,
+      optionSet,
+      levelGate: 1,
+    }];
+  }
+  if (/\s+or\s+/i.test(clean)) {
+    const options = splitProficiencyList(clean);
+    if (options.length > 1) {
+      return [{
+        type,
+        mode: 'choice',
+        count: 1,
+        options,
+        optionSet,
+        levelGate: 1,
+      }];
+    }
+  }
+  return splitProficiencyList(clean)
+    .filter(value => value && !/\b(?:none|n\/a)\b/i.test(value))
+    .map(value => ({ type, [prop]: normalizeGrantLabel(value), levelGate: 1 }));
+}
+
+function parseChoiceCount(text) {
+  const lower = String(text || '').toLowerCase();
+  const wordCounts = { one: 1, a: 1, an: 1, two: 2, three: 3, four: 4, five: 5 };
+  const wordMatch = lower.match(/\b(one|a|an|two|three|four|five)\b/);
+  if (wordMatch) return wordCounts[wordMatch[1]] || 1;
+  const numberMatch = lower.match(/\b(\d+)\b/);
+  return numberMatch ? Number(numberMatch[1]) || 1 : 1;
+}
+
+function splitProficiencyList(text) {
+  return String(text || '')
+    .replace(/\.$/, '')
+    .split(/\s*,\s*|\s+and\s+|\s+or\s+/i)
+    .map(part => part.trim())
+    .filter(Boolean);
+}
+
+function normalizeGrantLabel(value) {
+  return String(value || '').trim().replace(/\s+/g, ' ');
 }
 
 function buildBackgroundAliases(name) {
@@ -866,18 +1537,21 @@ function classifyTiming(text) {
 
 function hasBonusActionTiming(clean) {
   return /\b(as a bonus action|use a bonus action|use your bonus action|uses a bonus action|bonus action to|take a bonus action)\b/.test(clean)
+    || /\bbonus action\s+(?:\d+|pb|proficiency|at will|once|per|short|long|recharge|charges?)\b/.test(clean)
     || clean === 'bonus action'
     || clean === '1 bonus action';
 }
 
 function hasActionTiming(clean) {
   return /\b(as an action|use an action|use your action|uses an action|spend an action|take an action|you can take the action|action to|requires an action|requires your action)\b/.test(clean)
+    || /\baction\s+(?:\d+|pb|proficiency|at will|once|per|short|long|recharge|charges?)\b/.test(clean)
     || clean === 'action'
     || clean === '1 action';
 }
 
 function hasReactionTiming(clean) {
   return /\b(as a reaction|use a reaction|use your reaction|uses its reaction|using your reaction|spend your reaction|take a reaction|reaction to)\b/.test(clean)
+    || /\breaction\s+(?:\d+|pb|proficiency|at will|once|per|short|long|recharge|charges?)\b/.test(clean)
     || clean === 'reaction'
     || clean === '1 reaction';
 }
@@ -1065,6 +1739,222 @@ function writeRulesJson(filename, data) {
     return;
   }
   fs.writeFileSync(file, content, 'utf8');
+}
+
+function loadRuleOverrides() {
+  const fallback = normalizeRuleOverrides(DEFAULT_RULE_OVERRIDES);
+  const text = readIfExists(RULE_OVERRIDES_JSON);
+  if (!text.trim()) return fallback;
+  try {
+    return normalizeRuleOverrides(deepMerge(fallback, JSON.parse(text)));
+  } catch (error) {
+    console.warn(`Could not parse ${relative(process.cwd(), RULE_OVERRIDES_JSON)}: ${error.message}. Using built-in rule overrides.`);
+    return fallback;
+  }
+}
+
+function normalizeRuleOverrides(overrides) {
+  const out = { schemaVersion: Number(overrides && overrides.schemaVersion) || 1 };
+  for (const collection of RULE_OVERRIDE_COLLECTIONS) {
+    out[collection] = isPlainObject(overrides && overrides[collection]) ? overrides[collection] : {};
+  }
+  return out;
+}
+
+function countRuleOverrides(overrides) {
+  const counts = {};
+  for (const collection of RULE_OVERRIDE_COLLECTIONS) {
+    counts[collection] = Object.keys((overrides && overrides[collection]) || {}).length;
+  }
+  return counts;
+}
+
+function applyCollectionOverrides(records, overrides, options = {}) {
+  if (!isPlainObject(overrides) || !Object.keys(overrides).length) return records;
+  const matchedKeys = new Set();
+  const out = [];
+  for (const record of records) {
+    const match = getRuleOverride(record, overrides, options);
+    for (const key of match.keys) matchedKeys.add(key);
+    if (match.override.hidden || match.override.remove) continue;
+    out.push(applyRuleOverride(record, match.override));
+  }
+  for (const [key, override] of Object.entries(overrides)) {
+    if (matchedKeys.has(key) || !isPlainObject(override) || (!override.add && !override.create)) continue;
+    if (override.hidden || override.remove) continue;
+    out.push(applyRuleOverride({ id: slugify(override.id || key), name: override.name || override.title || key }, override));
+  }
+  return out;
+}
+
+function getRuleOverride(record, overrides, options = {}) {
+  const keys = buildOverrideCandidateKeys(record);
+  let override = {};
+  const matched = [];
+  for (const key of keys) {
+    if (!hasOwn(overrides, key)) continue;
+    matched.push(key);
+    override = deepMerge(override, overrides[key]);
+  }
+  if (options.allowFuzzy) {
+    for (const [rawKey, value] of Object.entries(overrides || {})) {
+      if (matched.includes(rawKey)) continue;
+      const key = slugify(rawKey);
+      if (!keys.some(candidate => {
+        const clean = slugify(candidate);
+        return clean && key && (clean.endsWith(`-${key}`) || key.endsWith(`-${clean}`));
+      })) continue;
+      matched.push(rawKey);
+      override = deepMerge(override, value);
+    }
+  }
+  return { override, keys: matched };
+}
+
+function buildOverrideCandidateKeys(record) {
+  const seen = new Set();
+  const keys = [];
+  const add = value => {
+    const text = String(value || '').trim();
+    if (!text) return;
+    for (const candidate of [text, slugify(text), normalizeName(text)]) {
+      if (candidate && !seen.has(candidate)) {
+        seen.add(candidate);
+        keys.push(candidate);
+      }
+    }
+  };
+  add(record.name);
+  add(record.title);
+  add(record.itemName);
+  add(record.sourceId);
+  add(record.id);
+  return keys;
+}
+
+function pickBaseItemOverride(override) {
+  const derived = new Set(['weapon', 'resources', 'actions', 'effects', 'toggles']);
+  return Object.fromEntries(Object.entries(override || {}).filter(([key]) => !derived.has(key)));
+}
+
+function resolveWeaponOverride(item, override) {
+  if (hasOwn(override, 'weapon')) {
+    if (override.weapon === false || override.weapon === null) return null;
+    if (isPlainObject(override.weapon)) return cloneJson(override.weapon);
+    if (override.weapon === true) return inferWeapon(item);
+  }
+  return inferWeapon(item);
+}
+
+function resolveItemRecordList(item, override, key, inferredRecords) {
+  const inferred = normalizeItemRecords(inferredRecords, item.id);
+  if (!hasOwn(override, key)) return inferred;
+  const overrideValue = override[key];
+  if (overrideValue === false || overrideValue === null) return [];
+  if (Array.isArray(overrideValue)) return normalizeItemRecords(overrideValue, item.id);
+  if (isPlainObject(overrideValue)) return addMissingItemRecords(item, key, applyCollectionOverrides(inferred, overrideValue, { allowFuzzy: true }), overrideValue);
+  return inferred;
+}
+
+function addMissingItemRecords(item, kind, records, overrides) {
+  const out = [...records];
+  for (const [key, override] of Object.entries(overrides)) {
+    if (!isPlainObject(override) || override.hidden || override.remove) continue;
+    if (out.some(record => getRuleOverride(record, { [key]: override }, { allowFuzzy: true }).keys.length)) continue;
+    out.push(applyRuleOverride(buildItemRecordSeed(item, kind, key, override), override));
+  }
+  return out;
+}
+
+function buildItemRecordSeed(item, kind, key, override) {
+  const label = override.name || override.title || override.label || key;
+  const seed = { id: slugify(`${item.id}-${override.id || key}`) };
+  if (kind === 'actions') {
+    seed.group = 'Free / Utility';
+    seed.type = 'Item';
+    seed.title = label;
+    seed.detail = override.detail || '';
+  } else if (kind === 'resources') {
+    seed.name = label;
+    seed.max = 1;
+    seed.reset = 'manual';
+  } else if (kind === 'toggles') {
+    seed.label = label;
+    seed.timing = 'manual';
+  } else {
+    seed.name = label;
+  }
+  return seed;
+}
+
+function applyRuleOverride(record, override) {
+  if (!isPlainObject(override) || !Object.keys(override).length) return cloneJson(record);
+  const out = cloneJson(record);
+  for (const [key, value] of Object.entries(override)) {
+    if (isOverrideControlKey(key)) continue;
+    if (key === 'appendTags') {
+      out.tags = uniqueStrings([...(Array.isArray(out.tags) ? out.tags : []), ...toStringArray(value)]);
+      continue;
+    }
+    if (key === 'removeTags') {
+      const remove = new Set(toStringArray(value).map(normalizeName));
+      out.tags = (Array.isArray(out.tags) ? out.tags : []).filter(tag => !remove.has(normalizeName(tag)));
+      continue;
+    }
+    if (key === 'weapon' && (value === false || value === null)) {
+      out.weapon = null;
+      continue;
+    }
+    if (isPlainObject(out[key]) && isPlainObject(value)) {
+      out[key] = deepMerge(out[key], value);
+    } else {
+      out[key] = cloneJson(value);
+    }
+  }
+  return out;
+}
+
+function isOverrideControlKey(key) {
+  return ['hidden', 'remove', 'add', 'create', 'note', 'notes'].includes(key);
+}
+
+function deepMerge(base, patch) {
+  if (!isPlainObject(base)) return cloneJson(patch);
+  if (!isPlainObject(patch)) return cloneJson(patch);
+  const out = cloneJson(base);
+  for (const [key, value] of Object.entries(patch)) {
+    out[key] = isPlainObject(out[key]) && isPlainObject(value) ? deepMerge(out[key], value) : cloneJson(value);
+  }
+  return out;
+}
+
+function isPlainObject(value) {
+  return value && typeof value === 'object' && !Array.isArray(value);
+}
+
+function cloneJson(value) {
+  if (value === undefined) return undefined;
+  return JSON.parse(JSON.stringify(value));
+}
+
+function hasOwn(object, key) {
+  return Object.prototype.hasOwnProperty.call(object || {}, key);
+}
+
+function uniqueStrings(values) {
+  const seen = new Set();
+  const out = [];
+  for (const value of toStringArray(values)) {
+    const key = normalizeName(value);
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    out.push(value);
+  }
+  return out;
+}
+
+function toStringArray(value) {
+  return Array.isArray(value) ? value.map(String).filter(Boolean) : (value ? [String(value)] : []);
 }
 
 function buildReport(data) {

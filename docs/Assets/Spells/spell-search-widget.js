@@ -85,6 +85,38 @@ class SpellSearchWidget {
             .spell-search-button:active {
                 opacity: 0.6;
             }
+            .spell-search-filters {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+                gap: 8px;
+                margin-top: 8px;
+            }
+            .spell-search-filter,
+            .spell-search-reset {
+                min-width: 0;
+                padding: 7px 10px;
+                font-size: 13px;
+                border: 1px solid var(--background-modifier-border);
+                border-radius: 4px;
+                background-color: var(--background-primary);
+                color: var(--text-normal);
+            }
+            .spell-search-filter {
+                cursor: pointer;
+            }
+            .spell-search-filter:focus,
+            .spell-search-reset:focus {
+                border-color: var(--interactive-accent);
+                outline: none;
+            }
+            .spell-search-reset {
+                cursor: pointer;
+                white-space: nowrap;
+            }
+            .spell-search-reset:hover {
+                color: var(--text-accent);
+                border-color: var(--interactive-accent);
+            }
             .spell-search-info {
                 margin-top: 10px;
                 font-size: 13px;
@@ -226,6 +258,150 @@ class SpellSearchWidget {
         }
     }
 
+    escapeHTML(value) {
+        return String(value ?? '').replace(/[&<>"']/g, char => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[char]));
+    }
+
+    getBaseSchool(school) {
+        return (school || '').replace(/\s*\([^)]*\)\s*/g, '').trim();
+    }
+
+    getSpellLevels() {
+        const availableLevels = new Set(this.csvData.map(spell => spell.Level).filter(Boolean));
+        const levelOrder = ['Cantrip', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th'];
+        return levelOrder.filter(level => availableLevels.has(level));
+    }
+
+    getSpellClasses() {
+        const classNames = [
+            'Artificer',
+            'Bard',
+            'Cleric',
+            'Druid',
+            'Paladin',
+            'Ranger',
+            'Sorcerer',
+            'Warlock',
+            'Wizard',
+            'Fighter',
+            'Rogue'
+        ];
+
+        return classNames.filter(className => {
+            const normalizedClass = className.toLowerCase();
+            return this.csvData.some(spell => this.getSpellClassText(spell).includes(normalizedClass));
+        });
+    }
+
+    getSpellClassText(spell) {
+        return [
+            spell.Classes,
+            spell['Optional/Variant Classes'],
+            spell.Subclasses
+        ].filter(Boolean).join(' ').toLowerCase();
+    }
+
+    getSpellSchools() {
+        const schools = new Set();
+        this.csvData.forEach(spell => {
+            const school = this.getBaseSchool(spell.School);
+            if (school) {
+                schools.add(school);
+            }
+        });
+        return Array.from(schools).sort((a, b) => a.localeCompare(b));
+    }
+
+    getSpellSources() {
+        const sources = new Set();
+        this.csvData.forEach(spell => {
+            if (spell.Source) {
+                sources.add(spell.Source);
+            }
+        });
+        return Array.from(sources).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+    }
+
+    createSelectOptions(values) {
+        return values.map(value => {
+            const escapedValue = this.escapeHTML(value);
+            return `<option value="${escapedValue}">${escapedValue}</option>`;
+        }).join('');
+    }
+
+    getActiveFilters(containerId) {
+        const getValue = suffix => {
+            const element = document.getElementById(`${containerId}-${suffix}`);
+            return element ? element.value : '';
+        };
+
+        return {
+            level: getValue('level'),
+            className: getValue('class'),
+            school: getValue('school'),
+            source: getValue('source')
+        };
+    }
+
+    hasActiveSearch(query, filters) {
+        return Boolean(
+            (query && query.trim()) ||
+            filters.level ||
+            filters.className ||
+            filters.school ||
+            filters.source
+        );
+    }
+
+    spellMatchesFilters(spell, filters) {
+        if (filters.level && spell.Level !== filters.level) {
+            return false;
+        }
+
+        if (filters.className && !this.getSpellClassText(spell).includes(filters.className.toLowerCase())) {
+            return false;
+        }
+
+        if (filters.school && this.getBaseSchool(spell.School) !== filters.school) {
+            return false;
+        }
+
+        if (filters.source && spell.Source !== filters.source) {
+            return false;
+        }
+
+        return true;
+    }
+
+    describeSearch(query, filters) {
+        const parts = [];
+        const trimmedQuery = query ? query.trim() : '';
+
+        if (trimmedQuery) {
+            parts.push(`"${trimmedQuery}"`);
+        }
+        if (filters.level) {
+            parts.push(`level ${filters.level}`);
+        }
+        if (filters.className) {
+            parts.push(filters.className);
+        }
+        if (filters.school) {
+            parts.push(filters.school);
+        }
+        if (filters.source) {
+            parts.push(filters.source);
+        }
+
+        return parts.length > 0 ? parts.join(' + ') : 'all spells';
+    }
+
     // Create HTML for spells (from spell-lookup.js)
     createSpellsHTML(spells) {
         if (spells.length === 0) {
@@ -304,17 +480,22 @@ class SpellSearchWidget {
     }
 
     // Search for spells with fuzzy matching
-    searchSpells(query, maxResults = 50) {
-        if (!this.csvData || !query) {
+    searchSpells(query, filters = {}, maxResults = 50) {
+        if (!this.csvData || !this.hasActiveSearch(query, filters)) {
             return [];
         }
         
         const results = [];
+        const trimmedQuery = query ? query.trim() : '';
         
         for (const spell of this.csvData) {
             if (!spell.Name) continue;
+
+            if (!this.spellMatchesFilters(spell, filters)) {
+                continue;
+            }
             
-            const score = this.fuzzyMatch(query, spell.Name);
+            const score = trimmedQuery ? this.fuzzyMatch(trimmedQuery, spell.Name) : 1;
             if (score > 0) {
                 results.push({ spell, score });
             }
@@ -334,6 +515,11 @@ class SpellSearchWidget {
 
     // Create the search interface HTML
     createSearchHTML(containerId) {
+        const levelOptions = this.createSelectOptions(this.getSpellLevels());
+        const classOptions = this.createSelectOptions(this.getSpellClasses());
+        const schoolOptions = this.createSelectOptions(this.getSpellSchools());
+        const sourceOptions = this.createSelectOptions(this.getSpellSources());
+
         return `
             <div class="spell-search-widget" id="${containerId}">
                 <div class="spell-search-container">
@@ -354,8 +540,27 @@ class SpellSearchWidget {
                             id="${containerId}-button"
                         >Search</button>
                     </div>
+                    <div class="spell-search-filters" id="${containerId}-filters">
+                        <select class="spell-search-filter" id="${containerId}-level" aria-label="Filter by spell level">
+                            <option value="">Level</option>
+                            ${levelOptions}
+                        </select>
+                        <select class="spell-search-filter" id="${containerId}-class" aria-label="Filter by spell class">
+                            <option value="">Class</option>
+                            ${classOptions}
+                        </select>
+                        <select class="spell-search-filter" id="${containerId}-school" aria-label="Filter by spell school">
+                            <option value="">School</option>
+                            ${schoolOptions}
+                        </select>
+                        <select class="spell-search-filter" id="${containerId}-source" aria-label="Filter by spell source">
+                            <option value="">Source</option>
+                            ${sourceOptions}
+                        </select>
+                        <button class="spell-search-reset" id="${containerId}-reset" title="Reset search and filters">Reset</button>
+                    </div>
                     <div class="spell-search-info">
-                        Type to search through ${this.csvData ? this.csvData.length : '...'} spells. Supports fuzzy matching.
+                        Search ${this.csvData ? this.csvData.length : '...'} spells by name, level, class, school, and source.
                     </div>
                 </div>
                 <div class="spell-search-results" id="${containerId}-results"></div>
@@ -366,8 +571,9 @@ class SpellSearchWidget {
     // Handle search execution
     async executeSearch(dv, containerId, query) {
         const resultsContainer = document.getElementById(`${containerId}-results`);
+        const filters = this.getActiveFilters(containerId);
         
-        if (!query || query.trim().length === 0) {
+        if (!this.hasActiveSearch(query, filters)) {
             resultsContainer.innerHTML = '';
             return;
         }
@@ -376,13 +582,15 @@ class SpellSearchWidget {
         resultsContainer.innerHTML = '<div class="spell-search-loading">Searching...</div>';
         
         // Perform search
-        const results = this.searchSpells(query);
+        const results = this.searchSpells(query, filters);
+        const searchDescription = this.describeSearch(query, filters);
+        const escapedDescription = this.escapeHTML(searchDescription);
         
         // Display results
         if (results.length === 0) {
             resultsContainer.innerHTML = `
                 <div class="spell-search-no-results">
-                    No spells found for "${query}". Try a different search term.
+                    No spells found matching ${escapedDescription}. Try a different search term or filter.
                 </div>
             `;
             return;
@@ -391,7 +599,7 @@ class SpellSearchWidget {
         // Show results count
         const statsHTML = `
             <div class="spell-search-stats">
-                Found ${results.length} spell${results.length === 1 ? '' : 's'} matching "${query}"
+                Showing ${results.length} spell${results.length === 1 ? '' : 's'} matching ${escapedDescription}
             </div>
         `;
         
@@ -401,14 +609,53 @@ class SpellSearchWidget {
         resultsContainer.innerHTML = statsHTML + spellsHTML;
     }
 
+    updateClearVisibility(containerId) {
+        const input = document.getElementById(`${containerId}-input`);
+        const clear = document.getElementById(`${containerId}-clear`);
+        if (!input || !clear) return;
+
+        const filters = this.getActiveFilters(containerId);
+        if (this.hasActiveSearch(input.value, filters)) {
+            clear.classList.add('visible');
+        } else {
+            clear.classList.remove('visible');
+        }
+    }
+
+    resetSearch(containerId) {
+        const input = document.getElementById(`${containerId}-input`);
+        const resultsContainer = document.getElementById(`${containerId}-results`);
+        const filters = ['level', 'class', 'school', 'source']
+            .map(suffix => document.getElementById(`${containerId}-${suffix}`))
+            .filter(Boolean);
+
+        if (input) {
+            input.value = '';
+        }
+        filters.forEach(filter => {
+            filter.value = '';
+        });
+        if (resultsContainer) {
+            resultsContainer.innerHTML = '';
+        }
+        this.updateClearVisibility(containerId);
+        if (input) {
+            input.focus();
+        }
+    }
+
     // Setup event listeners
-    setupEventListeners(dv, containerId) {
+    setupEventListeners(dv, containerId, autoFocus = true) {
         const input = document.getElementById(`${containerId}-input`);
         const button = document.getElementById(`${containerId}-button`);
         const clear = document.getElementById(`${containerId}-clear`);
+        const reset = document.getElementById(`${containerId}-reset`);
+        const filters = ['level', 'class', 'school', 'source']
+            .map(suffix => document.getElementById(`${containerId}-${suffix}`))
+            .filter(Boolean);
         
         // Check if elements exist before adding listeners
-        if (!input || !button || !clear) {
+        if (!input || !button || !clear || !reset) {
             console.warn(`Search widget elements not found for container: ${containerId}`);
             return;
         }
@@ -427,23 +674,29 @@ class SpellSearchWidget {
         
         // Show/hide clear button
         input.addEventListener('input', () => {
-            if (input.value.length > 0) {
-                clear.classList.add('visible');
-            } else {
-                clear.classList.remove('visible');
-            }
+            this.updateClearVisibility(containerId);
+        });
+
+        filters.forEach(filter => {
+            filter.addEventListener('change', () => {
+                this.updateClearVisibility(containerId);
+                this.executeSearch(dv, containerId, input.value);
+            });
         });
         
         // Clear button functionality
         clear.addEventListener('click', () => {
-            input.value = '';
-            clear.classList.remove('visible');
-            document.getElementById(`${containerId}-results`).innerHTML = '';
-            input.focus();
+            this.resetSearch(containerId);
+        });
+
+        reset.addEventListener('click', () => {
+            this.resetSearch(containerId);
         });
         
         // Focus input on load
-        setTimeout(() => input.focus(), 100);
+        if (autoFocus) {
+            setTimeout(() => input.focus(), 100);
+        }
     }
 
     // Main display function for use in dataviewjs
@@ -465,20 +718,24 @@ class SpellSearchWidget {
         
         // Setup event listeners after DOM is ready
         setTimeout(() => {
-            this.setupEventListeners(dv, containerId);
+            this.setupEventListeners(dv, containerId, autoFocus);
         }, 0);
     }
 
     // Display with initial search
     async displayWithSearch(dv, initialQuery, options = {}) {
+        if (!options.containerId) {
+            options = { ...options, containerId: `spell-search-${Date.now()}` };
+        }
         await this.display(dv, options);
         
         // Execute initial search after a short delay
-        const containerId = options.containerId || `spell-search-${Date.now()}`;
+        const containerId = options.containerId;
         setTimeout(() => {
             const input = document.getElementById(`${containerId}-input`);
             if (input) {
                 input.value = initialQuery;
+                this.updateClearVisibility(containerId);
                 this.executeSearch(dv, containerId, initialQuery);
             }
         }, 100);

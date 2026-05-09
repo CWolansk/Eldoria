@@ -1,15 +1,5 @@
 [
   {
-    "kind": "resistance",
-    "target": "lightning",
-    "mode": "conditional",
-    "text": "Immune to lightning damage while holding it until it reaches 6 charges; then resistance instead.",
-    "id": "lightning-rod-resistance",
-    "sourceType": "item",
-    "sourceId": "lightning-rod",
-    "itemName": "Lightning Rod"
-  },
-  {
     "id": "background-effect-a-life-of-toil",
     "sourceType": "background",
     "sourceId": "a-life-of-toil",
@@ -7832,6 +7822,17 @@
     "sourceType": "item",
     "sourceId": "leather-golem-armor",
     "itemName": "Leather Golem Armor"
+  },
+  {
+    "id": "lightning-rod-lightning-rod-lightning-resistance",
+    "kind": "resistance",
+    "target": "lightning",
+    "name": "Lightning resistance",
+    "text": "Immune to lightning damage while holding it until it reaches 6 charges; then resistance instead.",
+    "mode": "conditional",
+    "sourceType": "item",
+    "sourceId": "lightning-rod",
+    "itemName": "Lightning Rod"
   },
   {
     "id": "metal-cuirass-of-lightning-resistance-metal-cuirass-of-lightning-resistance-lightning-resistance",
@@ -16884,6 +16885,16 @@
     "sourceType": "item",
     "sourceId": "lightbringer",
     "itemName": "Lightbringer"
+  },
+  {
+    "id": "lightning-rod-lightning-rod-magic-weapon-bonus",
+    "kind": "weapon-bonus",
+    "name": "Magic weapon bonus",
+    "value": 1,
+    "text": "+1 to attack and damage rolls with this weapon.",
+    "sourceType": "item",
+    "sourceId": "lightning-rod",
+    "itemName": "Lightning Rod"
   },
   {
     "id": "long-axe-of-agonizing-paralysis-long-axe-of-agonizing-paralysis-magic-weapon-bonus",

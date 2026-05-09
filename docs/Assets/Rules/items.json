@@ -18894,13 +18894,15 @@
         "id": "amulet-of-divine-retribution-divine-wrath",
         "name": "Divine Wrath",
         "max": 1,
-        "reset": "longRest"
+        "reset": "longRest",
+        "text": "Divine Wrath (1/day): As an action, you may target one hostile creature you can see within 60 feet. That creature must make an Intelligence saving throw against your spell save DC. On a failed save, the creature becomes vulnerable to radiant and fire damage for 1 minute. The creature may repeat the saving throw at the end of each of its turns, ending the effect on a success."
       },
       {
         "id": "amulet-of-divine-retribution-divine-protection",
         "name": "Divine Protection",
         "max": 1,
-        "reset": "longRest"
+        "reset": "longRest",
+        "text": "Divine Protection (1/day): As an action, you radiate a protective aura of holy energy. At the start of each of your turns for up to 1 minute (as long as you maintain concentration), all allies within 30 feet regain 1d10 hit points. This effect ends early if your concentration is broken."
       }
     ],
     "actions": [
@@ -33538,13 +33540,15 @@
         "id": "bracer-of-piercing-arrows-piercing-shot",
         "name": "Piercing Shot",
         "max": 3,
-        "reset": "longRest"
+        "reset": "longRest",
+        "text": "Piercing Shot (3/day): Before making an attack roll with a ranged weapon, you can activate Piercing Shot and choose a specific body part to target. On a hit, the target suffers a special effect based on the location struck: - Eyes – Target has disadvantage on Wisdom (Perception) checks relying on sight and on ranged attack rolls until the end of its next turn. - Arm/Hand – Target cannot wield two-handed weapons and may only hold a single object at a time until the end of its next turn. - Foot/Leg – Target’s movement speed is halved until the end of its next turn. - Torso – Target must make a Constitution saving throw (DC = 10 + your proficiency bonus + your Dexterity modifier) the next time it attempts an action. On a failed save, the target loses its action and reactions until the start of its next turn."
       },
       {
         "id": "bracer-of-piercing-arrows-precise-aim",
         "name": "Precise Aim",
         "max": 1,
-        "reset": "longRest"
+        "reset": "longRest",
+        "text": "Precise Aim (1/day): As a bonus action at the start of your turn, you may activate Precise Aim. Until the end of your next turn, whenever you hit a creature with a weapon attack, all allies gain advantage on attack rolls against that target."
       }
     ],
     "actions": [
@@ -77093,27 +77097,18 @@
         "id": "gauntlets-of-whirling-strikes-whirling-fury",
         "name": "Whirling Fury",
         "max": 1,
-        "reset": "longRest"
+        "reset": "longRest",
+        "text": "Whirling Fury (1/day): When you hit a single target with multiple consecutive attacks, each hit deals +1 additional damage of the same type. This bonus resets if you miss or switch targets."
       },
       {
         "id": "gauntlets-of-whirling-strikes-evasive-maneuver",
         "name": "Evasive Maneuver",
         "max": 1,
-        "reset": "longRest"
+        "reset": "longRest",
+        "text": "Evasive Maneuver (1/day): As a bonus action, grant yourself and all allies within 10 feet a +1 bonus to AC and Dexterity saving throws for 1 minute."
       }
     ],
     "actions": [
-      {
-        "id": "gauntlets-of-whirling-strikes-whirling-fury",
-        "group": "Triggered",
-        "type": "Item",
-        "title": "Whirling Fury",
-        "detail": "Whirling Fury (1/day): When you hit a single target with multiple consecutive attacks, each hit deals +1 additional damage of the same type. This bonus resets if you miss or switch targets.",
-        "tags": [
-          "Attunement",
-          "1 use"
-        ]
-      },
       {
         "id": "gauntlets-of-whirling-strikes-evasive-maneuver",
         "group": "Bonus Action",
@@ -77127,7 +77122,33 @@
       }
     ],
     "effects": [],
-    "toggles": []
+    "toggles": [
+      {
+        "id": "gauntlets-of-whirling-strikes-whirling-fury",
+        "label": "Whirling Fury",
+        "timing": "on-hit",
+        "appliesTo": "equipped-weapon",
+        "resourceId": "gauntlets-of-whirling-strikes-whirling-fury",
+        "consumeOn": "activation",
+        "valueKey": "whirling-fury-damage-bonus",
+        "defaultValue": 1,
+        "min": 0,
+        "step": 1,
+        "effects": [
+          {
+            "kind": "weapon-damage-bonus",
+            "label": "Whirling Fury",
+            "valueMode": "manual",
+            "valueKey": "whirling-fury-damage-bonus",
+            "defaultValue": 1,
+            "min": 0,
+            "step": 1,
+            "valueLabel": "Damage bonus"
+          }
+        ],
+        "text": "Activate once per long rest. While active, add the current Whirling Fury bonus as same-type weapon damage. Increase the bonus manually for consecutive hits, and reset it if you miss or switch targets."
+      }
+    ]
   },
   {
     "id": "gavel-of-the-venn-rune",
@@ -101984,17 +102005,26 @@
         "id": "lightning-rod-lightning-rod-charges",
         "name": "Lightning Rod Charges",
         "max": 6,
-        "reset": "dawnLose1d6"
+        "reset": "dawnLose1d6",
+        "text": "This rod is made from the blackened wood of a lightning-struck tree and topped with a spike of twisted iron."
       }
     ],
     "actions": [],
     "effects": [
       {
+        "id": "lightning-rod-lightning-rod-magic-weapon-bonus",
+        "kind": "weapon-bonus",
+        "name": "Magic weapon bonus",
+        "value": 1,
+        "text": "+1 to attack and damage rolls with this weapon."
+      },
+      {
+        "id": "lightning-rod-lightning-rod-lightning-resistance",
         "kind": "resistance",
         "target": "lightning",
-        "mode": "conditional",
+        "name": "Lightning resistance",
         "text": "Immune to lightning damage while holding it until it reaches 6 charges; then resistance instead.",
-        "id": "lightning-rod-resistance"
+        "mode": "conditional"
       }
     ],
     "toggles": []
@@ -113116,7 +113146,7 @@
     "rarity": "rare",
     "type": "wondrous item (medallion)",
     "attunement": "requires attunement by a creature with at least 1 level in Bard",
-    "damage": "1d12 thunder (conditional)",
+    "damage": "",
     "properties": [
       "Resonant Crescendo (1/day)",
       "Melodic Harmony (1/day)"
@@ -113125,21 +113155,11 @@
     "weight": "½ lb",
     "value": "1,800 gp",
     "text": "This ornate medallion is shaped like a musical note and inlaid with shimmering opals that glow softly when magical energy flows through it. It hums faintly when the wearer channels bardic power, amplifying melodies that stir the soul and bolster allies in the heat of battle. - Resonant Crescendo (Reaction, 1/day): When an ally you can see makes an attack roll, you may use your reaction to grant them +2 to the roll. If the attack hits, it deals an additional 1d12 thunder damage as your music echoes through the strike. - Melodic Harmony (Action, 1/day): You perform a magically infused tune that invigorates your allies. You and all allies within 30 feet gain temporary hit points equal to your Bard level, and have advantage on all saving throws for 1 minute (concentration required).",
-    "weapon": {
-      "baseName": "Medallion of Harmonious Resonance",
-      "type": "simple",
-      "style": "melee",
-      "ability": "str",
-      "damage": "1d12",
-      "damageType": "thunder",
-      "properties": [
-        "Resonant Crescendo (1/day)",
-        "Melodic Harmony (1/day)"
-      ],
-      "range": "",
-      "versatileDamage": "",
-      "magicBonus": 0
-    },
+    "tags": [
+      "NoWeaponAttack",
+      "NoAutoDamage"
+    ],
+    "weapon": null,
     "resources": [
       {
         "id": "medallion-of-harmonious-resonance-resonant-crescendo",
@@ -113166,18 +113186,20 @@
         "tags": [
           "Attunement",
           "1 use"
-        ]
+        ],
+        "roll": false
       },
       {
         "id": "medallion-of-harmonious-resonance-melodic-harmony",
-        "group": "Out of Combat",
+        "group": "Action",
         "type": "Item",
         "title": "Melodic Harmony",
         "detail": "Melodic Harmony (Action, 1/day): You perform a magically infused tune that invigorates your allies. You and all allies within 30 feet gain temporary hit points equal to your Bard level, and have advantage on all saving throws for 1 minute (concentration required).",
         "tags": [
           "Attunement",
           "1 use"
-        ]
+        ],
+        "roll": false
       }
     ],
     "effects": [],
@@ -137410,7 +137432,7 @@
     "actions": [
       {
         "id": "robe-of-elemental-radiance-chaos-distortion",
-        "group": "Passive",
+        "group": "Action",
         "type": "Item",
         "title": "Chaos Distortion",
         "detail": "Chaos Distortion (Action, 1/day): Unleash a pulse of chaotic energy in a 20-foot radius centered on a point within 60 feet. All affected enemies suffer disadvantage on their next attack rolls.",
@@ -145835,7 +145857,7 @@
     "actions": [
       {
         "id": "seal-of-holy-vengeance-judgment",
-        "group": "Triggered",
+        "group": "Bonus Action",
         "type": "Item",
         "title": "Judgment",
         "detail": "Judgment (Bonus Action, 1/day): Imbue your next melee weapon attack with radiant energy. On a hit, deal an extra 2d6 radiant damage. If the target is a fiend or undead, a 10-foot aura of radiant light appears centered on it for one round. Creatures of your choice in the area gain temporary hit points equal to your Charisma modifier, while enemies take 1d6 radiant damage at the start of their turns.",
@@ -145846,7 +145868,7 @@
       },
       {
         "id": "seal-of-holy-vengeance-sanctuary",
-        "group": "Out of Combat",
+        "group": "Action",
         "type": "Item",
         "title": "Sanctuary",
         "detail": "Sanctuary (Action, 1/day): You create a 30-foot aura that grants temporary hit points equal to twice your Charisma modifier to all allies. While it lasts (up to 1 minute, concentration), enemies that strike those allies with melee attacks take radiant damage equal to your Charisma modifier.",
@@ -149590,16 +149612,18 @@
     "weapon": null,
     "resources": [
       {
-        "id": "sigil-of-thunderous-might-sigil-crushing-strike",
+        "id": "sigil-of-thunderous-might-crushing-strike",
         "name": "Crushing Strike",
         "max": 1,
-        "reset": "longRest"
+        "reset": "longRest",
+        "text": "Crushing Strike (1/day): Before determining if an attack hits, you may activate this ability. If the attack hits, it deals an additional 2d6 thunder damage, channeling raw force through your blow."
       },
       {
-        "id": "sigil-of-thunderous-might-sigil-shielding-impact",
+        "id": "sigil-of-thunderous-might-shielding-impact",
         "name": "Shielding Impact",
         "max": 1,
-        "reset": "longRest"
+        "reset": "longRest",
+        "text": "Shielding Impact (1/day): Before determining if an attack hits, you may activate this ability. On a hit, you and up to two allies within 20 feet gain temporary hit points equal to half the damage dealt."
       }
     ],
     "actions": [
@@ -149633,7 +149657,7 @@
         "label": "Crushing Strike",
         "timing": "before-attack",
         "appliesTo": "equipped-weapon",
-        "resourceId": "sigil-crushing-strike",
+        "resourceId": "sigil-of-thunderous-might-crushing-strike",
         "effects": [
           {
             "kind": "extra-damage",
@@ -149649,7 +149673,7 @@
         "label": "Shielding Impact",
         "timing": "before-attack",
         "appliesTo": "equipped-weapon",
-        "resourceId": "sigil-shielding-impact",
+        "resourceId": "sigil-of-thunderous-might-shielding-impact",
         "effects": [
           {
             "kind": "on-hit",
@@ -165964,19 +165988,21 @@
         "id": "talisman-of-elemental-fury-elemental-surge",
         "name": "Elemental Surge",
         "max": 1,
-        "reset": "longRest"
+        "reset": "longRest",
+        "text": "Elemental Surge (Action, 1/day): Choose an element (fire, cold, lightning, acid, or poison). Creatures within a 10-foot radius of a point you choose within 30 feet must make a Dexterity saving throw (DC = 8 + your Wisdom modifier + proficiency bonus). On a failed save, they take 2d8 damage of the chosen type and suffer one of the following effects: - Fire: Target ignites, taking 1d6 fire damage at the start of their next turn. - Cold: Movement speed is reduced by 10 feet. - Lightning: Cannot take reactions until the end of their next turn. - Acid: Armor/shields take -1 penalty to AC. - Poison: Target is poisoned until end of next turn. Damage increases to 3d8 at 5th level, 4d8 at 11th, 5d8 at 17th."
       },
       {
         "id": "talisman-of-elemental-fury-elemental-ward",
         "name": "Elemental Ward",
         "max": 1,
-        "reset": "longRest"
+        "reset": "longRest",
+        "text": "Elemental Ward (Action, 1/day): You summon an aura within 20 feet for 1 minute. Allies in the aura are immune to being frightened or charmed. If they were already affected by either condition, it ends when the aura activates."
       }
     ],
     "actions": [
       {
         "id": "talisman-of-elemental-fury-elemental-surge",
-        "group": "Passive",
+        "group": "Action",
         "type": "Item",
         "title": "Elemental Surge",
         "detail": "Elemental Surge (Action, 1/day): Choose an element (fire, cold, lightning, acid, or poison). Creatures within a 10-foot radius of a point you choose within 30 feet must make a Dexterity saving throw (DC = 8 + your Wisdom modifier + proficiency bonus). On a failed save, they take 2d8 damage of the chosen type and suffer one of the following effects: - Fire: Target ignites, taking 1d6 fire damage at the start of their next turn. - Cold: Movement speed is reduced by 10 feet. - Lightning: Cannot take reactions until the end of their next turn. - Acid: Armor/shields take -1 penalty to AC. - Poison: Target is poisoned until end of next turn. Damage increases to 3d8 at 5th level, 4d8 at 11th, 5d8 at 17th.",
@@ -165987,7 +166013,7 @@
       },
       {
         "id": "talisman-of-elemental-fury-elemental-ward",
-        "group": "Out of Combat",
+        "group": "Action",
         "type": "Item",
         "title": "Elemental Ward",
         "detail": "Elemental Ward (Action, 1/day): You summon an aura within 20 feet for 1 minute. Allies in the aura are immune to being frightened or charmed. If they were already affected by either condition, it ends when the aura activates.",
@@ -167050,19 +167076,21 @@
         "id": "the-aegis-codex-arcane-distraction",
         "name": "Arcane Distraction",
         "max": 1,
-        "reset": "longRest"
+        "reset": "longRest",
+        "text": "Arcane Distraction (Reaction, 1/day): When a creature you can see makes an ability check or saving throw, you may force them to reroll with a -2 penalty. They must use the lower result."
       },
       {
         "id": "the-aegis-codex-arcane-barrier",
         "name": "Arcane Barrier",
         "max": 1,
-        "reset": "longRest"
+        "reset": "longRest",
+        "text": "Arcane Barrier (Bonus Action, 1/day): You create a protective field around allies within 30 feet. While you maintain concentration (up to 1 minute), affected allies gain a +2 bonus to AC."
       }
     ],
     "actions": [
       {
         "id": "the-aegis-codex-arcane-distraction",
-        "group": "Passive",
+        "group": "Reaction",
         "type": "Item",
         "title": "Arcane Distraction",
         "detail": "Arcane Distraction (Reaction, 1/day): When a creature you can see makes an ability check or saving throw, you may force them to reroll with a -2 penalty. They must use the lower result.",
@@ -167073,7 +167101,7 @@
       },
       {
         "id": "the-aegis-codex-arcane-barrier",
-        "group": "Out of Combat",
+        "group": "Bonus Action",
         "type": "Item",
         "title": "Arcane Barrier",
         "detail": "Arcane Barrier (Bonus Action, 1/day): You create a protective field around allies within 30 feet. While you maintain concentration (up to 1 minute), affected allies gain a +2 bonus to AC.",
@@ -171547,7 +171575,7 @@
     "actions": [
       {
         "id": "veil-of-shadows-shadow-stab",
-        "group": "Passive",
+        "group": "Bonus Action",
         "type": "Item",
         "title": "Shadow Stab",
         "detail": "Shadow Stab (Bonus Action, 1/day): Your next melee weapon attack deals an additional 2d6 necrotic damage. If made while hidden, the target must succeed on a Wisdom saving throw (DC = 8 + your Dexterity modifier + proficiency bonus) or become frightened of you until the end of its next turn.",
@@ -171558,7 +171586,7 @@
       },
       {
         "id": "veil-of-shadows-concealed-escape",
-        "group": "Triggered",
+        "group": "Reaction",
         "type": "Item",
         "title": "Concealed Escape",
         "detail": "Concealed Escape (Reaction, 1/day): When you take damage or are targeted by an attack, you may become invisible until the start of your next turn and move up to half your speed without provoking opportunity attacks.",

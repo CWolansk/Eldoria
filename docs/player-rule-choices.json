@@ -1,0 +1,34 @@
+{
+  "defaults": {
+    "includeOptionalFeatures": false
+  },
+  "players": {
+    "claire-player-sheet": {
+      "raceId": "race-genasi-water-eepc",
+      "backgroundId": "sailor"
+    },
+    "jp-player-sheet": {
+      "raceId": "race-half-orc-phb",
+      "backgroundId": "sailor"
+    },
+    "julie-player-sheet": {
+      "raceId": "race-human-variant-phb",
+      "backgroundId": "archaeologist"
+    },
+    "justin-player-sheet": {
+      "raceId": "race-human-phb",
+      "featureChoices": {
+        "Hunter's Prey": "Colossus Slayer"
+      }
+    },
+    "liz-player-sheet": {
+      "raceId": "race-elf-wood-phb"
+    },
+    "randi-player-sheet": {
+      "raceId": "race-aasimar-dmg"
+    },
+    "vanessa-player-sheet": {
+      "raceId": "race-dragonborn-phb"
+    }
+  }
+}

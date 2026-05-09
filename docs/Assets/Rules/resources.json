@@ -174,6 +174,7 @@
     "name": "Arcane Barrier",
     "max": 1,
     "reset": "longRest",
+    "text": "Arcane Barrier (Bonus Action, 1/day): You create a protective field around allies within 30 feet. While you maintain concentration (up to 1 minute), affected allies gain a +2 bonus to AC.",
     "sourceType": "item",
     "sourceId": "the-aegis-codex",
     "itemName": "The Aegis Codex"
@@ -183,6 +184,7 @@
     "name": "Arcane Distraction",
     "max": 1,
     "reset": "longRest",
+    "text": "Arcane Distraction (Reaction, 1/day): When a creature you can see makes an ability check or saving throw, you may force them to reroll with a -2 penalty. They must use the lower result.",
     "sourceType": "item",
     "sourceId": "the-aegis-codex",
     "itemName": "The Aegis Codex"
@@ -1383,10 +1385,11 @@
     "itemName": "Crown of Whirling Comets"
   },
   {
-    "id": "sigil-of-thunderous-might-sigil-crushing-strike",
+    "id": "sigil-of-thunderous-might-crushing-strike",
     "name": "Crushing Strike",
     "max": 1,
     "reset": "longRest",
+    "text": "Crushing Strike (1/day): Before determining if an attack hits, you may activate this ability. If the attack hits, it deals an additional 2d6 thunder damage, channeling raw force through your blow.",
     "sourceType": "item",
     "sourceId": "sigil-of-thunderous-might",
     "itemName": "Sigil of Thunderous Might"
@@ -1792,6 +1795,7 @@
     "name": "Divine Protection",
     "max": 1,
     "reset": "longRest",
+    "text": "Divine Protection (1/day): As an action, you radiate a protective aura of holy energy. At the start of each of your turns for up to 1 minute (as long as you maintain concentration), all allies within 30 feet regain 1d10 hit points. This effect ends early if your concentration is broken.",
     "sourceType": "item",
     "sourceId": "amulet-of-divine-retribution",
     "itemName": "Amulet of Divine Retribution"
@@ -1801,6 +1805,7 @@
     "name": "Divine Wrath",
     "max": 1,
     "reset": "longRest",
+    "text": "Divine Wrath (1/day): As an action, you may target one hostile creature you can see within 60 feet. That creature must make an Intelligence saving throw against your spell save DC. On a failed save, the creature becomes vulnerable to radiant and fire damage for 1 minute. The creature may repeat the saving throw at the end of each of its turns, ending the effect on a success.",
     "sourceType": "item",
     "sourceId": "amulet-of-divine-retribution",
     "itemName": "Amulet of Divine Retribution"
@@ -2067,6 +2072,7 @@
     "name": "Elemental Surge",
     "max": 1,
     "reset": "longRest",
+    "text": "Elemental Surge (Action, 1/day): Choose an element (fire, cold, lightning, acid, or poison). Creatures within a 10-foot radius of a point you choose within 30 feet must make a Dexterity saving throw (DC = 8 + your Wisdom modifier + proficiency bonus). On a failed save, they take 2d8 damage of the chosen type and suffer one of the following effects: - Fire: Target ignites, taking 1d6 fire damage at the start of their next turn. - Cold: Movement speed is reduced by 10 feet. - Lightning: Cannot take reactions until the end of their next turn. - Acid: Armor/shields take -1 penalty to AC. - Poison: Target is poisoned until end of next turn. Damage increases to 3d8 at 5th level, 4d8 at 11th, 5d8 at 17th.",
     "sourceType": "item",
     "sourceId": "talisman-of-elemental-fury",
     "itemName": "Talisman of Elemental Fury"
@@ -2076,6 +2082,7 @@
     "name": "Elemental Ward",
     "max": 1,
     "reset": "longRest",
+    "text": "Elemental Ward (Action, 1/day): You summon an aura within 20 feet for 1 minute. Allies in the aura are immune to being frightened or charmed. If they were already affected by either condition, it ends when the aura activates.",
     "sourceType": "item",
     "sourceId": "talisman-of-elemental-fury",
     "itemName": "Talisman of Elemental Fury"
@@ -2177,6 +2184,7 @@
     "name": "Evasive Maneuver",
     "max": 1,
     "reset": "longRest",
+    "text": "Evasive Maneuver (1/day): As a bonus action, grant yourself and all allies within 10 feet a +1 bonus to AC and Dexterity saving throws for 1 minute.",
     "sourceType": "item",
     "sourceId": "gauntlets-of-whirling-strikes",
     "itemName": "Gauntlets of Whirling Strikes"
@@ -4271,6 +4279,7 @@
     "name": "Lightning Rod Charges",
     "max": 6,
     "reset": "dawnLose1d6",
+    "text": "This rod is made from the blackened wood of a lightning-struck tree and topped with a spike of twisted iron.",
     "sourceType": "item",
     "sourceId": "lightning-rod",
     "itemName": "Lightning Rod"
@@ -5374,6 +5383,7 @@
     "name": "Piercing Shot",
     "max": 3,
     "reset": "longRest",
+    "text": "Piercing Shot (3/day): Before making an attack roll with a ranged weapon, you can activate Piercing Shot and choose a specific body part to target. On a hit, the target suffers a special effect based on the location struck: - Eyes – Target has disadvantage on Wisdom (Perception) checks relying on sight and on ranged attack rolls until the end of its next turn. - Arm/Hand – Target cannot wield two-handed weapons and may only hold a single object at a time until the end of its next turn. - Foot/Leg – Target’s movement speed is halved until the end of its next turn. - Torso – Target must make a Constitution saving throw (DC = 10 + your proficiency bonus + your Dexterity modifier) the next time it attempts an action. On a failed save, the target loses its action and reactions until the start of its next turn.",
     "sourceType": "item",
     "sourceId": "bracer-of-piercing-arrows",
     "itemName": "Bracer of Piercing Arrows"
@@ -5466,6 +5476,7 @@
     "name": "Precise Aim",
     "max": 1,
     "reset": "longRest",
+    "text": "Precise Aim (1/day): As a bonus action at the start of your turn, you may activate Precise Aim. Until the end of your next turn, whenever you hit a creature with a weapon attack, all allies gain advantage on attack rolls against that target.",
     "sourceType": "item",
     "sourceId": "bracer-of-piercing-arrows",
     "itemName": "Bracer of Piercing Arrows"
@@ -6553,10 +6564,11 @@
     "itemName": "Shield of the Justicars"
   },
   {
-    "id": "sigil-of-thunderous-might-sigil-shielding-impact",
+    "id": "sigil-of-thunderous-might-shielding-impact",
     "name": "Shielding Impact",
     "max": 1,
     "reset": "longRest",
+    "text": "Shielding Impact (1/day): Before determining if an attack hits, you may activate this ability. On a hit, you and up to two allies within 20 feet gain temporary hit points equal to half the damage dealt.",
     "sourceType": "item",
     "sourceId": "sigil-of-thunderous-might",
     "itemName": "Sigil of Thunderous Might"
@@ -8340,6 +8352,7 @@
     "name": "Whirling Fury",
     "max": 1,
     "reset": "longRest",
+    "text": "Whirling Fury (1/day): When you hit a single target with multiple consecutive attacks, each hit deals +1 additional damage of the same type. This bonus resets if you miss or switch targets.",
     "sourceType": "item",
     "sourceId": "gauntlets-of-whirling-strikes",
     "itemName": "Gauntlets of Whirling Strikes"

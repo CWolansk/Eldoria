@@ -27,6 +27,8 @@ $include = @(
     'host.json',
     'package.json',
     'players',
+    'characters',
+    'rules',
     'entities',
     'search',
     'shared',

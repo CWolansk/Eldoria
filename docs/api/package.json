@@ -5,17 +5,18 @@
   "description": "Azure Functions API for generated Eldoria public data and player sheet edits",
   "main": "shared/public-data.js",
   "dependencies": {
-    "mssql": "^11.0.1"
+    "@azure/data-tables": "^13.3.1",
+    "@azure/identity": "^4.10.2"
   },
   "scripts": {
     "smoke": "node smoke-test.js",
     "login": "powershell -ExecutionPolicy Bypass -File scripts/Login-Azure.ps1",
     "init-config": "powershell -ExecutionPolicy Bypass -File scripts/Initialize-LocalConfig.ps1",
-    "install-sqlcmd": "powershell -ExecutionPolicy Bypass -File scripts/Install-SqlcmdTools.ps1",
     "check-config": "powershell -ExecutionPolicy Bypass -File scripts/Test-AzureOpsConfig.ps1",
     "check-tools": "powershell -ExecutionPolicy Bypass -File scripts/Test-AzureOpsTools.ps1",
     "settings": "powershell -ExecutionPolicy Bypass -File scripts/Set-FunctionAppSettings.ps1",
     "deploy": "powershell -ExecutionPolicy Bypass -File scripts/Deploy-FunctionApp.ps1",
-    "migrate": "powershell -ExecutionPolicy Bypass -File scripts/Run-SqlMigrations.ps1"
+    "seed-player-sheets": "powershell -ExecutionPolicy Bypass -File scripts/Seed-PlayerSheets.ps1",
+    "seed-rules": "powershell -ExecutionPolicy Bypass -File scripts/Seed-Rules.ps1"
   }
 }

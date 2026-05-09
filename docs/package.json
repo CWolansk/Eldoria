@@ -8,14 +8,15 @@
     "build-public": "node build-public.js",
     "validate-public": "node validate-public.js",
     "api-smoke": "node api/smoke-test.js",
+    "smoke:player-sheet": "node smoke-player-sheet.js",
     "api:login": "powershell -ExecutionPolicy Bypass -File api/scripts/Login-Azure.ps1",
     "api:init-config": "powershell -ExecutionPolicy Bypass -File api/scripts/Initialize-LocalConfig.ps1",
-    "api:install-sqlcmd": "powershell -ExecutionPolicy Bypass -File api/scripts/Install-SqlcmdTools.ps1",
     "api:check-config": "powershell -ExecutionPolicy Bypass -File api/scripts/Test-AzureOpsConfig.ps1",
     "api:check-tools": "powershell -ExecutionPolicy Bypass -File api/scripts/Test-AzureOpsTools.ps1",
     "api:settings": "powershell -ExecutionPolicy Bypass -File api/scripts/Set-FunctionAppSettings.ps1",
     "api:deploy": "powershell -ExecutionPolicy Bypass -File api/scripts/Deploy-FunctionApp.ps1",
-    "api:migrate": "powershell -ExecutionPolicy Bypass -File api/scripts/Run-SqlMigrations.ps1",
+    "api:seed-player-sheets": "powershell -ExecutionPolicy Bypass -File api/scripts/Seed-PlayerSheets.ps1",
+    "api:seed-rules": "powershell -ExecutionPolicy Bypass -File api/scripts/Seed-Rules.ps1",
     "generate-index": "node generate-index.js",
     "generate-jarvis": "node generate-jarvis-index.js",
     "start-jarvis": "node jarvis-server.js",
@@ -24,7 +25,14 @@
   "dependencies": {
     "ws": "^8.18.0"
   },
-  "keywords": ["dnd", "campaign", "eldoria"],
+  "keywords": [
+    "dnd",
+    "campaign",
+    "eldoria"
+  ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1"
+  }
 }

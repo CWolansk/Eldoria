@@ -324,13 +324,13 @@
   {
     "id": "public-players-claire-player-sheet-md",
     "name": "Claire Player Sheet",
-    "type": "Page",
+    "type": "Player",
     "region": "",
     "location": "",
     "tags": [],
     "path": "Public/Players/Claire Player Sheet.md",
     "url": "Public/Players/Claire Player Sheet.html",
-    "summary": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaClaireDnDNotes Full Class Info"
+    "summary": "Claire Player Sheet character builder"
   },
   {
     "id": "public-world-crestfall-ardenville-npcs-corin-tidehammer-md",
@@ -430,6 +430,17 @@
     "path": "Public/World/Crestfall/Highreach/NPCs/Don Gnocianno.md",
     "url": "Public/World/Crestfall/Highreach/NPCs/Don Gnocianno.html",
     "summary": "Appearance Flamboyant gnome with a rat tail beard and pinstripe vest. Always impeccably dressed. What We Know Guildmaster of the Exterminators Guild in Highreach. Runs the city's premier pest control operation. Known for his business acumen"
+  },
+  {
+    "id": "public-players-e2e-test-player-sheet-md",
+    "name": "E2E Test Player Sheet",
+    "type": "Player",
+    "region": "",
+    "location": "",
+    "tags": [],
+    "path": "Public/Players/E2E Test Player Sheet.md",
+    "url": "Public/Players/E2E Test Player Sheet.html",
+    "summary": "E2E Test Player Sheet character builder"
   },
   {
     "id": "public-world-crestfall-ardenville-npcs-edda-netsong-md",
@@ -1293,35 +1304,35 @@
   {
     "id": "public-players-jp-player-sheet-md",
     "name": "JP Player Sheet",
-    "type": "Page",
+    "type": "Player",
     "region": "",
     "location": "",
     "tags": [],
     "path": "Public/Players/JP Player Sheet.md",
     "url": "Public/Players/JP Player Sheet.html",
-    "summary": "Character Stats Equipment Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJpPlayerNotes Full Class Info"
+    "summary": "JP Player Sheet character builder"
   },
   {
     "id": "public-players-julie-player-sheet-md",
     "name": "Julie Player Sheet",
-    "type": "Page",
+    "type": "Player",
     "region": "",
     "location": "",
     "tags": [],
     "path": "Public/Players/Julie Player Sheet.md",
     "url": "Public/Players/Julie Player Sheet.html",
-    "summary": "Character Stats Equipment Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJulieDnDNotes Full Class Info"
+    "summary": "Julie Player Sheet character builder"
   },
   {
     "id": "public-players-justin-player-sheet-md",
     "name": "Justin Player Sheet",
-    "type": "Page",
+    "type": "Player",
     "region": "",
     "location": "",
     "tags": [],
     "path": "Public/Players/Justin Player Sheet.md",
     "url": "Public/Players/Justin Player Sheet.html",
-    "summary": "Character Stats Equipment Spells 1st Level Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaJustinDnDNotes Full Class Info Class Features & Abilities"
+    "summary": "Justin Player Sheet character builder"
   },
   {
     "id": "public-world-crestfall-highreach-npcs-kara-nightshade-md",
@@ -1457,13 +1468,13 @@
   {
     "id": "public-players-liz-player-sheet-md",
     "name": "Liz Player Sheet",
-    "type": "Page",
+    "type": "Player",
     "region": "",
     "location": "",
     "tags": [],
     "path": "Public/Players/Liz Player Sheet.md",
     "url": "Public/Players/Liz Player Sheet.html",
-    "summary": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaLizDnDNotes Full Class Info"
+    "summary": "Liz Player Sheet character builder"
   },
   {
     "id": "public-world-crestfall-highreach-npcs-lord-cedric-brightblade-md",
@@ -2313,13 +2324,13 @@
   {
     "id": "public-players-randi-player-sheet-md",
     "name": "Randi Player Sheet",
-    "type": "Page",
+    "type": "Player",
     "region": "",
     "location": "",
     "tags": [],
     "path": "Public/Players/Randi Player Sheet.md",
     "url": "Public/Players/Randi Player Sheet.html",
-    "summary": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaRandiDnDNotes Full Class Info"
+    "summary": "Randi Player Sheet character builder"
   },
   {
     "id": "public-world-crestfall-highreach-npcs-ratcatcher-vex-md",
@@ -3104,13 +3115,13 @@
   {
     "id": "public-players-vanessa-player-sheet-md",
     "name": "Vanessa Player Sheet",
-    "type": "Page",
+    "type": "Player",
     "region": "",
     "location": "",
     "tags": [],
     "path": "Public/Players/Vanessa Player Sheet.md",
     "url": "Public/Players/Vanessa Player Sheet.html",
-    "summary": "Character Stats Equipment Spells Full Spell List with Filters Quick Spell lookup Class Information Background Feats Race Notes Direct link if Embed isn't working https //u.cave.su/p/EldoriaVanessaDnDNotes Full Class Info"
+    "summary": "Vanessa Player Sheet character builder"
   },
   {
     "id": "public-world-crestfall-stonehaven-npcs-vera-shadowpeak-md",

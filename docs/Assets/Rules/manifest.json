@@ -1,13 +1,31 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-05-06T12:45:09.540Z",
+  "generatedAtUtc": "2026-05-09T19:51:13.840Z",
   "upstream": {
     "classRoot": "5etools/data/class",
     "itemsCsv": "Assets/Items/Items.csv",
     "spellsCsv": "Assets/Spells/Spells.csv",
     "featsCsv": "Assets/Feats/Feats.csv",
     "backgroundsCsv": "Assets/Backgrounds/Backgrounds.csv",
-    "racesJson": "5etools/data/races.json"
+    "racesJson": "5etools/data/races.json",
+    "ruleOverrides": "Assets/Rules/rule-overrides.json"
+  },
+  "overrides": {
+    "schemaVersion": 1,
+    "counts": {
+      "items": 9,
+      "spells": 0,
+      "features": 0,
+      "actions": 0,
+      "resources": 0,
+      "effects": 0,
+      "rules": 0,
+      "backgrounds": 0,
+      "feats": 0,
+      "races": 0,
+      "classes": 0,
+      "subclasses": 0
+    }
   },
   "counts": {
     "classes": 17,
@@ -18,8 +36,8 @@
     "spells": 692,
     "feats": 194,
     "backgrounds": 144,
-    "actions": 4382,
-    "effects": 2932,
+    "actions": 4381,
+    "effects": 2933,
     "resources": 810
   }
 }

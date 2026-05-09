@@ -26,73 +26,14 @@ function Assert-Command {
     }
 }
 
-function Get-SqlcmdCommandPath {
-    param([object]$Config = $null)
-
-    if ($null -ne $Config -and $null -ne $Config.sql) {
-        $pathProperty = $Config.sql.PSObject.Properties['sqlcmdPath']
-        if ($null -ne $pathProperty -and -not [string]::IsNullOrWhiteSpace([string]$pathProperty.Value)) {
-            $configured = [string]$pathProperty.Value
-            if (-not (Test-Path -LiteralPath $configured)) {
-                throw "Configured sqlcmdPath does not exist: $configured"
-            }
-            return $configured
-        }
-    }
-
-    $knownModernPaths = @(
-        'C:\Program Files\SqlCmd\sqlcmd.exe'
-    )
-    foreach ($candidate in $knownModernPaths) {
-        if (Test-Path -LiteralPath $candidate) {
-            return $candidate
-        }
-    }
-
-    $command = Get-Command sqlcmd -ErrorAction SilentlyContinue
-    if (-not $command) {
-        throw 'Required command not found: sqlcmd'
-    }
-    return $command.Source
-}
-
-function Get-SqlcmdHelp {
-    param([string]$SqlcmdPath)
-    return (& $SqlcmdPath -? 2>&1 | Out-String)
-}
-
-function Get-SqlcmdVersionLine {
-    param([string]$Help)
-
-    $line = ($Help -split "`r?`n" | Where-Object { $_ -match '^Version(?:\s|:)' } | Select-Object -First 1)
-    if ($null -eq $line) {
-        return ''
-    }
-
-    return [string]$line
-}
-
-function Assert-SqlcmdSupportsEntra {
-    param(
-        [string]$SqlcmdPath,
-        [string]$Help
-    )
-
-    if ($Help -notmatch '-G use Azure Active Directory for authentication' -and $Help -notmatch '--authentication-method') {
-        throw 'sqlcmd is installed, but this version did not advertise Microsoft Entra authentication.'
-    }
-
-    $versionLine = Get-SqlcmdVersionLine -Help $Help
-    $versionMatch = [regex]::Match($versionLine, '^Version\s+(\d+)\.')
-    if ($versionMatch.Success) {
-        $majorVersion = [int]$versionMatch.Groups[1].Value
-        if ($majorVersion -lt 15) {
-            throw "sqlcmd is too old for Microsoft Entra migrations ($versionLine). Install a current sqlcmd, or set sql.sqlcmdPath in azure.local.json to a modern sqlcmd."
-        }
-    }
-}
-
 function Ensure-AzureCliPath {
+    if ([string]::IsNullOrWhiteSpace($env:AZURE_CORE_NO_COLOR)) {
+        $env:AZURE_CORE_NO_COLOR = 'true'
+    }
+    if ([string]::IsNullOrWhiteSpace($env:AZURE_EXTENSION_USE_DYNAMIC_INSTALL)) {
+        $env:AZURE_EXTENSION_USE_DYNAMIC_INSTALL = 'no'
+    }
+
     if (Get-Command az -ErrorAction SilentlyContinue) {
         return
     }
@@ -140,22 +81,78 @@ function Invoke-Az {
     }
 }
 
-function Get-SqlServerName {
-    param([object]$Config)
-    if (-not [string]::IsNullOrWhiteSpace([string]$Config.sql.serverName)) {
-        return [string]$Config.sql.serverName
+function Get-ConfigSection {
+    param(
+        [object]$Config,
+        [string]$Name
+    )
+
+    $property = $Config.PSObject.Properties[$Name]
+    if ($null -eq $property) {
+        return $null
     }
 
-    $fqdn = [string]$Config.sql.serverFqdn
-    return $fqdn -replace '\.database\.windows\.net$', ''
+    return $property.Value
 }
 
-function Get-SqlServerFqdn {
-    param([object]$Config)
-    if (-not [string]::IsNullOrWhiteSpace([string]$Config.sql.serverFqdn)) {
-        return [string]$Config.sql.serverFqdn
+function Get-ConfigValue {
+    param(
+        [object]$Section,
+        [string]$Name,
+        [object]$Default = ''
+    )
+
+    if ($null -eq $Section) {
+        return $Default
     }
 
-    $serverName = Get-SqlServerName -Config $Config
-    return "$serverName.database.windows.net"
+    $property = $Section.PSObject.Properties[$Name]
+    if ($null -eq $property) {
+        return $Default
+    }
+
+    return $property.Value
+}
+
+function Get-StorageAccountName {
+    param([object]$Config)
+    $storage = Get-ConfigSection -Config $Config -Name 'storage'
+    return [string](Get-ConfigValue -Section $storage -Name 'accountName')
+}
+
+function Get-StorageTableEndpoint {
+    param([object]$Config)
+    $storage = Get-ConfigSection -Config $Config -Name 'storage'
+    $endpoint = [string](Get-ConfigValue -Section $storage -Name 'tableEndpoint')
+    if (-not [string]::IsNullOrWhiteSpace($endpoint)) {
+        return $endpoint
+    }
+
+    $accountName = Get-StorageAccountName -Config $Config
+    if ([string]::IsNullOrWhiteSpace($accountName)) {
+        return ''
+    }
+
+    return "https://$accountName.table.core.windows.net"
+}
+
+function Get-PlayerSheetsTableName {
+    param([object]$Config)
+    $storage = Get-ConfigSection -Config $Config -Name 'storage'
+    $tableName = [string](Get-ConfigValue -Section $storage -Name 'playerSheetsTable' -Default 'PlayerSheets')
+    return $tableName
+}
+
+function Get-CharacterBuildsTableName {
+    param([object]$Config)
+    $storage = Get-ConfigSection -Config $Config -Name 'storage'
+    $tableName = [string](Get-ConfigValue -Section $storage -Name 'characterBuildsTable' -Default 'CharacterBuilds')
+    return $tableName
+}
+
+function Get-RulesTableName {
+    param([object]$Config)
+    $storage = Get-ConfigSection -Config $Config -Name 'storage'
+    $tableName = [string](Get-ConfigValue -Section $storage -Name 'rulesTable' -Default 'Rules')
+    return $tableName
 }

@@ -6,6 +6,12 @@ Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'AzureOps.Common.ps1')
 
 $config = if ($ConfigPath) { Get-AzureOpsConfig -ConfigPath $ConfigPath } else { Get-AzureOpsConfig }
+$storageAccountName = Get-StorageAccountName -Config $config
+$storageTableEndpoint = Get-StorageTableEndpoint -Config $config
+$playerSheetsTable = Get-PlayerSheetsTableName -Config $config
+$characterBuildsTable = Get-CharacterBuildsTableName -Config $config
+$rulesTable = Get-RulesTableName -Config $config
+$rulesAdminToken = [string](Get-ConfigValue -Section $config -Name 'rulesAdminToken')
 $errors = New-Object System.Collections.Generic.List[string]
 $warnings = New-Object System.Collections.Generic.List[string]
 
@@ -22,31 +28,31 @@ function Add-Missing {
 Add-Missing $config.resourceGroup 'resourceGroup'
 Add-Missing $config.functionAppName 'functionAppName'
 Add-Missing $config.githubPagesOrigin 'githubPagesOrigin'
-Add-Missing $config.sql.serverFqdn 'sql.serverFqdn'
-Add-Missing $config.sql.database 'sql.database'
-Add-Missing $config.sql.runtimeAuthMode 'sql.runtimeAuthMode'
-Add-Missing $config.sql.migrationAuthMode 'sql.migrationAuthMode'
+Add-Missing $storageAccountName 'storage.accountName'
+Add-Missing $storageTableEndpoint 'storage.tableEndpoint'
+Add-Missing $playerSheetsTable 'storage.playerSheetsTable'
+Add-Missing $characterBuildsTable 'storage.characterBuildsTable'
+Add-Missing $rulesTable 'storage.rulesTable'
 
 if ([string]$config.githubPagesOrigin -like '*YOUR_GITHUB_USER_OR_ORG*') {
     $warnings.Add('githubPagesOrigin still contains the template placeholder')
 }
 
-if ([string]$config.sql.serverFqdn -like 'YOUR_SQL_SERVER*') {
-    $errors.Add('sql.serverFqdn still contains the template placeholder')
-}
-
-if ($config.sql.migrationAuthMode -eq 'sql') {
-    Add-Missing $config.sql.migrationUser 'sql.migrationUser'
-    Add-Missing $config.sql.migrationPassword 'sql.migrationPassword'
-} elseif ($config.sql.migrationAuthMode -ne 'entra') {
-    $errors.Add('sql.migrationAuthMode must be "entra" or "sql"')
+if ([string]$storageAccountName -like 'YOUR_STORAGE_ACCOUNT*') {
+    $errors.Add('storage.accountName still contains the template placeholder')
 }
 
 Write-Host "Function App: $($config.functionAppName)"
-Write-Host "Database: $($config.sql.database)"
-Write-Host "SQL server: $($config.sql.serverFqdn)"
-Write-Host "Runtime SQL auth: $($config.sql.runtimeAuthMode)"
-Write-Host "Migration SQL auth: $($config.sql.migrationAuthMode)"
+Write-Host "Table storage account: $storageAccountName"
+Write-Host "Table endpoint: $storageTableEndpoint"
+Write-Host "Player sheets table: $playerSheetsTable"
+Write-Host "Character builds table: $characterBuildsTable"
+Write-Host "Rules table: $rulesTable"
+if (-not [string]::IsNullOrWhiteSpace($rulesAdminToken)) {
+    Write-Host "Rules admin token: configured"
+} else {
+    Write-Warning "Rules admin token is not configured; /api/rules write endpoints will be open."
+}
 
 foreach ($warning in $warnings) {
     Write-Warning $warning

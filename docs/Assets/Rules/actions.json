@@ -1866,7 +1866,7 @@
     "id": "feature-class-fighter-2-action-surge-phb",
     "sourceType": "class",
     "sourceId": "class-fighter-2-action-surge-phb",
-    "group": "Free / Utility",
+    "group": "Action",
     "type": "Fighter",
     "title": "Action Surge",
     "detail": "Starting at 2nd level, you can push yourself beyond your normal limits for a moment.  On your turn, you can take one additional action.  Once you use this feature, you must finish a short or long rest before you can use it again.",
@@ -2640,7 +2640,7 @@
   },
   {
     "id": "the-aegis-codex-arcane-barrier",
-    "group": "Out of Combat",
+    "group": "Bonus Action",
     "type": "Item",
     "title": "Arcane Barrier",
     "detail": "Arcane Barrier (Bonus Action, 1/day): You create a protective field around allies within 30 feet. While you maintain concentration (up to 1 minute), affected allies gain a +2 bonus to AC.",
@@ -2694,7 +2694,7 @@
   },
   {
     "id": "the-aegis-codex-arcane-distraction",
-    "group": "Passive",
+    "group": "Reaction",
     "type": "Item",
     "title": "Arcane Distraction",
     "detail": "Arcane Distraction (Reaction, 1/day): When a creature you can see makes an ability check or saving throw, you may force them to reroll with a -2 penalty. They must use the lower result.",
@@ -17495,7 +17495,7 @@
   },
   {
     "id": "robe-of-elemental-radiance-chaos-distortion",
-    "group": "Passive",
+    "group": "Action",
     "type": "Item",
     "title": "Chaos Distortion",
     "detail": "Chaos Distortion (Action, 1/day): Unleash a pulse of chaotic energy in a 20-foot radius centered on a point within 60 feet. All affected enemies suffer disadvantage on their next attack rolls.",
@@ -19221,7 +19221,7 @@
   },
   {
     "id": "veil-of-shadows-concealed-escape",
-    "group": "Triggered",
+    "group": "Reaction",
     "type": "Item",
     "title": "Concealed Escape",
     "detail": "Concealed Escape (Reaction, 1/day): When you take damage or are targeted by an attack, you may become invisible until the start of your next turn and move up to half your speed without provoking opportunity attacks.",
@@ -24802,7 +24802,7 @@
   },
   {
     "id": "talisman-of-elemental-fury-elemental-surge",
-    "group": "Passive",
+    "group": "Action",
     "type": "Item",
     "title": "Elemental Surge",
     "detail": "Elemental Surge (Action, 1/day): Choose an element (fire, cold, lightning, acid, or poison). Creatures within a 10-foot radius of a point you choose within 30 feet must make a Dexterity saving throw (DC = 8 + your Wisdom modifier + proficiency bonus). On a failed save, they take 2d8 damage of the chosen type and suffer one of the following effects: - Fire: Target ignites, taking 1d6 fire damage at the start of their next turn. - Cold: Movement speed is reduced by 10 feet. - Lightning: Cannot take reactions until the end of their next turn. - Acid: Armor/shields take -1 penalty to AC. - Poison: Target is poisoned until end of next turn. Damage increases to 3d8 at 5th level, 4d8 at 11th, 5d8 at 17th.",
@@ -24816,7 +24816,7 @@
   },
   {
     "id": "talisman-of-elemental-fury-elemental-ward",
-    "group": "Out of Combat",
+    "group": "Action",
     "type": "Item",
     "title": "Elemental Ward",
     "detail": "Elemental Ward (Action, 1/day): You summon an aura within 20 feet for 1 minute. Allies in the aura are immune to being frightened or charmed. If they were already affected by either condition, it ends when the aura activates.",
@@ -34614,7 +34614,7 @@
   },
   {
     "id": "seal-of-holy-vengeance-judgment",
-    "group": "Triggered",
+    "group": "Bonus Action",
     "type": "Item",
     "title": "Judgment",
     "detail": "Judgment (Bonus Action, 1/day): Imbue your next melee weapon attack with radiant energy. On a hit, deal an extra 2d6 radiant damage. If the target is a fiend or undead, a 10-foot aura of radiant light appears centered on it for one round. Creatures of your choice in the area gain temporary hit points equal to your Charisma modifier, while enemies take 1d6 radiant damage at the start of their turns.",
@@ -37770,7 +37770,7 @@
   },
   {
     "id": "medallion-of-harmonious-resonance-melodic-harmony",
-    "group": "Out of Combat",
+    "group": "Action",
     "type": "Item",
     "title": "Melodic Harmony",
     "detail": "Melodic Harmony (Action, 1/day): You perform a magically infused tune that invigorates your allies. You and all allies within 30 feet gain temporary hit points equal to your Bard level, and have advantage on all saving throws for 1 minute (concentration required).",
@@ -37778,6 +37778,7 @@
       "Attunement",
       "1 use"
     ],
+    "roll": false,
     "sourceType": "item",
     "sourceId": "medallion-of-harmonious-resonance",
     "itemName": "Medallion of Harmonious Resonance"
@@ -38124,7 +38125,7 @@
     "id": "feature-subclass-monk-cobalt-soul-11-mind-of-mercury-tdcsr",
     "sourceType": "subclass",
     "sourceId": "subclass-monk-cobalt-soul-11-mind-of-mercury-tdcsr",
-    "group": "Free / Utility",
+    "group": "Reaction",
     "type": "Cobalt Soul",
     "title": "Mind of Mercury",
     "detail": "Starting at 11th level, you've honed your awareness and reflexes through mental aptitude and pattern recognition.  Once per turn, if you've already taken your reaction, you may spend 1 ki point to take an additional reaction.  You can use only one reaction per triggering effect.",
@@ -42967,6 +42968,7 @@
       "Attunement",
       "1 use"
     ],
+    "roll": false,
     "sourceType": "item",
     "sourceId": "medallion-of-harmonious-resonance",
     "itemName": "Medallion of Harmonious Resonance"
@@ -45218,7 +45220,7 @@
   },
   {
     "id": "seal-of-holy-vengeance-sanctuary",
-    "group": "Out of Combat",
+    "group": "Action",
     "type": "Item",
     "title": "Sanctuary",
     "detail": "Sanctuary (Action, 1/day): You create a 30-foot aura that grants temporary hit points equal to twice your Charisma modifier to all allies. While it lasts (up to 1 minute, concentration), enemies that strike those allies with melee attacks take radiant damage equal to your Charisma modifier.",
@@ -46132,7 +46134,7 @@
   },
   {
     "id": "veil-of-shadows-shadow-stab",
-    "group": "Passive",
+    "group": "Bonus Action",
     "type": "Item",
     "title": "Shadow Stab",
     "detail": "Shadow Stab (Bonus Action, 1/day): Your next melee weapon attack deals an additional 2d6 necrotic damage. If made while hidden, the target must succeed on a Wisdom saving throw (DC = 8 + your Dexterity modifier + proficiency bonus) or become frightened of you until the end of its next turn.",
@@ -55918,20 +55920,6 @@
     "sourceType": "item",
     "sourceId": "whirling-falchion",
     "itemName": "Whirling Falchion"
-  },
-  {
-    "id": "gauntlets-of-whirling-strikes-whirling-fury",
-    "group": "Triggered",
-    "type": "Item",
-    "title": "Whirling Fury",
-    "detail": "Whirling Fury (1/day): When you hit a single target with multiple consecutive attacks, each hit deals +1 additional damage of the same type. This bonus resets if you miss or switch targets.",
-    "tags": [
-      "Attunement",
-      "1 use"
-    ],
-    "sourceType": "item",
-    "sourceId": "gauntlets-of-whirling-strikes",
-    "itemName": "Gauntlets of Whirling Strikes"
   },
   {
     "id": "crown-of-whirling-comets-whirling-hail",

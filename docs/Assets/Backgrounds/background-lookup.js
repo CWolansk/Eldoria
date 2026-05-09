@@ -240,21 +240,40 @@ class BackgroundLookup {
         return result;
     }
 
-    // Find backgrounds by names
+    // Find backgrounds by names with optional source, e.g. "Sailor|PHB"
     findBackgrounds(backgrounds, backgroundNames) {
         const found = [];
         backgroundNames.forEach(searchName => {
-            const normalizedSearch = searchName.toLowerCase().trim();
+            const parsed = this.parseSourceQualifiedName(searchName);
+            const normalizedSearch = parsed.name.toLowerCase().trim();
             
-            const match = backgrounds.find(background => 
-                background.Name.toLowerCase().trim() === normalizedSearch
-            );
+            const matches = backgrounds.filter(background => {
+                const nameMatches = background.Name.toLowerCase().trim() === normalizedSearch;
+                if (!nameMatches) return false;
+                return !parsed.source || this.normalizeSource(background.Source) === parsed.source;
+            });
             
-            if (match && !found.find(b => b.Name === match.Name)) {
-                found.push(match);
-            }
+            matches.forEach(match => {
+                if (!found.find(b => b.Name === match.Name && b.Source === match.Source)) {
+                    found.push(match);
+                }
+            });
         });
         return found;
+    }
+
+    parseSourceQualifiedName(searchName) {
+        const text = String(searchName || '').trim();
+        const pipeMatch = text.match(/^(.+?)\s*\|\s*(.+?)\s*$/);
+        if (!pipeMatch) return { name: text, source: '' };
+        return {
+            name: pipeMatch[1].trim(),
+            source: this.normalizeSource(pipeMatch[2]),
+        };
+    }
+
+    normalizeSource(source) {
+        return String(source || '').toUpperCase().replace(/[^A-Z0-9]+/g, '');
     }
 
     // Create HTML for backgrounds

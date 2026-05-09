@@ -3,22 +3,24 @@
 /*
  * Eldoria lean public-site builder.
  *
- * Source of truth stays in the Obsidian vault under Public/. This script renders
- * those notes into small static HTML pages, shared CSS/JS, and JSON indexes.
+ * Public notes render into static HTML pages, shared CSS/JS, and JSON indexes.
+ * Player sheet HTML is an identity-only shell; runtime character data comes from
+ * the cloud player-sheet API.
  */
 
 const fs = require('fs');
 const path = require('path');
+const { createRuleset } = require('./site-assets/eldoria-ruleset');
 
 const DOCS_ROOT = __dirname;
 const VAULT_ROOT = path.resolve(DOCS_ROOT, '..');
 const PUBLIC_SRC = path.join(VAULT_ROOT, 'Public');
-const PRIVATE_PLAYER_CONTROLS = path.join(VAULT_ROOT, 'Private', '1. The Party', 'Players', 'Player Controls.md');
 const PUBLIC_OUT = path.join(DOCS_ROOT, 'Public');
 const DATA_OUT = path.join(DOCS_ROOT, 'data');
 const API_DATA_OUT = path.join(DOCS_ROOT, 'api', 'data');
 const SITE_ASSETS_OUT = path.join(DOCS_ROOT, 'site-assets');
 const RULES_ROOT = path.join(DOCS_ROOT, 'Assets', 'Rules');
+const PUBLIC_SITE_ASSET_VERSION = '20260509-whirling-fury-manual';
 const UTILITY_ALIASES = [
   ['Background Searcher.html', '../background-search.html', 'Background Search'],
   ['Feat Searcher.html', '../feat-search.html', 'Feat Search'],
@@ -57,13 +59,67 @@ const SKILLS = [
   ['survival', 'Survival', 'wis'],
 ];
 const RACE_SOURCE_PRIORITY = ['PHB', 'VGM', 'EEPC', 'DMG', 'XGE', 'TCE', 'SCAG', 'MPMM'];
+const OPTIONAL_CLASS_FEATURE_NAMES = new Set([
+  'Additional Artificer Infusions',
+  'Additional Bard Spells',
+  'Additional Cleric Spells',
+  'Additional Druid Spells',
+  'Additional Paladin Spells',
+  'Additional Ranger Spells',
+  'Additional Sorcerer Spells',
+  'Additional Warlock Spells',
+  'Additional Wizard Spells',
+  'Additional Monk Weapons',
+  'Bardic Versatility',
+  'Blessed Strikes',
+  'Cantrip Formulas',
+  'Cantrip Versatility',
+  'Dedicated Weapon',
+  'Deft Explorer',
+  'Expanded Spell List',
+  'Favored Foe',
+  'Focused Aim',
+  'Harness Divine Power',
+  'Instinctive Pounce',
+  'Ki-Fueled Attack',
+  'Magical Inspiration',
+  'Martial Versatility',
+  'Primal Awareness',
+  'Primal Knowledge',
+  'Quickened Healing',
+  'Spell Versatility',
+  'Spellcasting Focus',
+  'Steady Aim',
+  'Wild Companion',
+]);
+const FEATURE_CHOICE_GROUPS = [
+  {
+    className: 'Ranger',
+    subclassName: 'Hunter',
+    level: 3,
+    group: "Hunter's Prey",
+    options: ['Colossus Slayer', 'Giant Killer', 'Horde Breaker'],
+  },
+];
+const RULE_RESOURCE_ALIASES = [
+  { match: /channel divinity/i, resourceId: 'cleric-channel-divinity' },
+  { match: /ki\b|ki point/i, resourceId: 'monk-ki' },
+  { match: /bardic inspiration/i, resourceId: 'bardic-inspiration' },
+  { match: /wild shape/i, resourceId: 'druid-wild-shape' },
+  { match: /action surge/i, resourceId: 'action-surge' },
+  { match: /second wind/i, resourceId: 'second-wind' },
+  { match: /portent/i, resourceId: 'wizard-portent' },
+  { match: /healing hands/i, resourceId: 'race-aasimar-healing-hands-vgm' },
+  { match: /breath weapon/i, resourceId: 'race-dragonborn-breath-weapon-phb' },
+  { match: /luck points|lucky/i, resourceId: 'feat-lucky-luck-points' },
+];
 
 function main() {
   assertInside(DOCS_ROOT, PUBLIC_OUT);
   assertInside(DOCS_ROOT, DATA_OUT);
   assertInside(DOCS_ROOT, API_DATA_OUT);
   ensureDir(DOCS_ROOT);
-  cleanDir(PUBLIC_OUT);
+  cleanDir(PUBLIC_OUT, { tolerateBusy: true });
   cleanDir(DATA_OUT);
   cleanDir(API_DATA_OUT);
   ensureDir(SITE_ASSETS_OUT);
@@ -71,24 +127,27 @@ function main() {
   const markdownFiles = walk(PUBLIC_SRC).filter(file => file.endsWith('.md'));
   const assetFiles = walk(PUBLIC_SRC).filter(file => !file.endsWith('.md'));
   const fileIndex = buildFileIndex(markdownFiles, assetFiles);
-  const playerControls = parseFrontmatter(readIfExists(PRIVATE_PLAYER_CONTROLS)).data;
   const rules = loadCanonicalRules();
-  const itemCatalog = buildRuleCatalog(rules.items);
-  const spellCatalog = buildRuleCatalog(rules.spells);
-  const featCatalog = buildRuleCatalog(rules.feats);
-  const backgroundCatalog = buildRuleCatalog(rules.backgrounds);
+  const ruleset = createRuleset(rules, rules.rulesetProfile || {});
+  const activeRules = ruleset.rules;
+  const itemCatalog = buildRuleCatalog(activeRules.items);
+  const spellCatalog = buildRuleCatalog(activeRules.spells);
+  const featCatalog = buildRuleCatalog(activeRules.feats);
+  const backgroundCatalog = buildRuleCatalog(activeRules.backgrounds);
 
   copyPublicAssets(assetFiles);
 
   const pages = markdownFiles.map(file => readPage(file));
   const players = [];
+  const playerRuleReports = [];
   const entities = [];
   const searchIndex = [];
 
   for (const page of pages) {
     if (isPlayerSheet(page)) {
-      const player = buildPlayer(page, playerControls, fileIndex, rules, itemCatalog, spellCatalog, featCatalog, backgroundCatalog);
+      const player = buildPlayer(page, null, fileIndex, ruleset, itemCatalog, spellCatalog, featCatalog, backgroundCatalog, {});
       players.push(player.publicData);
+      playerRuleReports.push(player.ruleReport);
       writeOutput(page.outputPath, renderPlayerPage(player, page, fileIndex));
       addIndexRecords(page, player.publicData.searchText, entities, searchIndex);
     } else {
@@ -103,8 +162,10 @@ function main() {
   const sortedPlayers = players.sort(byName);
 
   writePublicDataJson('players.json', sortedPlayers);
+  writePublicDataJson('player-rule-report.json', buildPlayerRuleReport(playerRuleReports));
   writePublicDataJson('spells.json', uniqueBy(Array.from(spellCatalog.values()), spell => spell.id || spell.name).sort(byName));
   writePublicDataJson('rules-manifest.json', rules.manifest || {});
+  writePublicDataJson('ruleset-profile.json', activeRules.rulesetProfile || rules.rulesetProfile || {});
   writePublicDataJson('entities.json', sortedEntities);
   writePublicDataJson('entity-index.json', sortedEntities);
   writePublicDataJson('search-index.json', sortedSearch);
@@ -119,6 +180,8 @@ function main() {
   console.log(`Wrote ${UTILITY_ALIASES.length} utility compatibility pages`);
   console.log('Mirrored public JSON for Azure Functions');
   console.log(`Indexed ${sortedEntities.length} entities and ${sortedPlayers.length} players`);
+  const issueCount = playerRuleReports.reduce((sum, report) => sum + report.issues.length, 0);
+  if (issueCount) console.log(`Player rule report has ${issueCount} choice/data item(s) to review`);
 }
 
 function assertInside(root, target) {
@@ -128,17 +191,31 @@ function assertInside(root, target) {
   }
 }
 
-function cleanDir(dir) {
-  if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true, force: true });
+function cleanDir(dir, options = {}) {
+  if (fs.existsSync(dir)) {
+    if (options.tolerateBusy) cleanDirContents(dir, options);
+    else fs.rmSync(dir, { recursive: true, force: true });
+  }
   fs.mkdirSync(dir, { recursive: true });
+}
+
+function cleanDirContents(dir, options = {}) {
+  for (const item of fs.readdirSync(dir)) {
+    const target = path.join(dir, item);
+    try {
+      fs.rmSync(target, { recursive: true, force: true });
+    } catch (error) {
+      if (options.tolerateBusy && (error.code === 'EBUSY' || error.code === 'EPERM')) {
+        console.warn(`Keeping locked output file: ${normalizePath(path.relative(DOCS_ROOT, target))}`);
+        continue;
+      }
+      throw error;
+    }
+  }
 }
 
 function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
-}
-
-function readIfExists(file) {
-  return fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : '';
 }
 
 function loadCanonicalRules() {
@@ -150,6 +227,10 @@ function loadCanonicalRules() {
       throw new Error(`Missing canonical rules file: ${normalizePath(path.relative(DOCS_ROOT, file))}. Run npm run rules:import first.`);
     }
     rules[name] = JSON.parse(fs.readFileSync(file, 'utf8'));
+  }
+  const profileFile = path.join(RULES_ROOT, 'ruleset-profile.json');
+  if (fs.existsSync(profileFile)) {
+    rules.rulesetProfile = JSON.parse(fs.readFileSync(profileFile, 'utf8'));
   }
   return rules;
 }
@@ -188,7 +269,15 @@ function copyPublicAssets(assetFiles) {
     const rel = path.relative(PUBLIC_SRC, src);
     const dest = path.join(PUBLIC_OUT, rel);
     ensureDir(path.dirname(dest));
-    fs.copyFileSync(src, dest);
+    try {
+      fs.copyFileSync(src, dest);
+    } catch (error) {
+      if ((error.code === 'EBUSY' || error.code === 'EPERM') && fs.existsSync(dest)) {
+        console.warn(`Keeping locked copied asset: ${normalizePath(path.relative(DOCS_ROOT, dest))}`);
+        continue;
+      }
+      throw error;
+    }
   }
 }
 
@@ -234,11 +323,33 @@ function addBasename(map, name, url) {
 }
 
 function readPage(file) {
-  const raw = fs.readFileSync(file, 'utf8');
-  const parsed = parseFrontmatter(raw);
   const relMd = normalizePath(path.relative(PUBLIC_SRC, file));
   const relHtml = relMd.replace(/\.md$/i, '.html');
   const outputPath = path.join(PUBLIC_OUT, relHtml);
+  const isPlayer = relMd.startsWith('Players/') && /Player Sheet\.md$/i.test(relMd);
+
+  if (isPlayer) {
+    const raw = fs.readFileSync(file, 'utf8');
+    const parsed = parseFrontmatter(raw);
+    const title = path.basename(file, '.md');
+    return {
+      sourcePath: file,
+      relMd,
+      relHtml,
+      outputPath,
+      vaultPath: normalizePath(path.join('Public', relMd)),
+      url: normalizePath(path.join('Public', relHtml)),
+      fm: parsed.data,
+      playerIdentity: extractPlayerSheetIdentity(parsed.body, parsed.data),
+      title,
+      type: 'Player',
+      body: '',
+      searchText: title,
+    };
+  }
+
+  const raw = fs.readFileSync(file, 'utf8');
+  const parsed = parseFrontmatter(raw);
   const name = parsed.data.name || path.basename(file, '.md');
   const title = String(name).replace(/^["']|["']$/g, '');
   const body = parsed.body.trim();
@@ -291,6 +402,49 @@ function parseYamlValue(raw) {
   return val;
 }
 
+function extractPlayerSheetIdentity(body, fm = {}) {
+  const portrait = cleanPlayerAssetPath(fm.portrait || fm.portraitUrl || extractObjectStringProperty(body, 'CharacterSheetDisplay.display', 'portrait'));
+  const classUrl = extractPlayerClassUrl(body);
+  return {
+    portrait,
+    classUrl,
+  };
+}
+
+function extractPlayerClassUrl(body) {
+  const match = String(body || '').match(/urlSuffix:\s*([^\r\n]+)/i);
+  const suffix = match ? match[1].trim() : '';
+  return suffix ? `5etools/classes.html${suffix}` : '';
+}
+
+function extractObjectStringProperty(body, call, property) {
+  const source = String(body || '');
+  const idx = source.indexOf(call);
+  if (idx < 0) return '';
+  const objectStart = source.indexOf('{', idx);
+  if (objectStart < 0) return '';
+  const objectEnd = findMatching(source, objectStart, '{', '}');
+  if (objectEnd < 0) return '';
+  const objectSource = source.slice(objectStart, objectEnd + 1);
+  const re = new RegExp(`\\b${escapeRegExp(property)}\\s*:\\s*(['"\`])((?:\\\\.|(?!\\1)[\\s\\S])*?)\\1`);
+  const match = objectSource.match(re);
+  return match ? match[2].replace(/\\(['"\`\\])/g, '$1') : '';
+}
+
+function cleanPlayerAssetPath(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  if (/^(https?:|data:|blob:)/i.test(raw)) return raw;
+  const clean = raw
+    .replace(/\\/g, '/')
+    .replace(/^docs\//i, '')
+    .replace(/^\.\//, '')
+    .replace(/^\/+/, '');
+  if (/^Public\//i.test(clean)) return clean;
+  if (/^(Players|Storylines|World)\//i.test(clean)) return `Public/${clean}`;
+  return clean;
+}
+
 function normalizeType(type, relMd) {
   if (type) return String(type);
   const lower = relMd.toLowerCase();
@@ -306,102 +460,131 @@ function isPlayerSheet(page) {
   return page.relMd.startsWith('Players/') && /Player Sheet\.md$/i.test(page.relMd);
 }
 
-function buildPlayer(page, controls, fileIndex, rules, itemCatalog, spellCatalog, featCatalog, backgroundCatalog) {
-  const data = extractCharacterData(page.body, controls);
-  const className = cleanRequiredString(data.class, `${page.relMd}: CharacterSheetDisplay requires class`);
-  const subclassName = cleanRequiredString(data.subclass, `${page.relMd}: CharacterSheetDisplay requires subclass`);
-  const matchedClass = findRuleClass(rules, className);
-  if (!matchedClass) throw new Error(`${page.relMd}: class "${className}" is not present in canonical rules JSON.`);
-  const matchedSubclass = findRuleSubclass(rules, className, subclassName);
-  if (!matchedSubclass) throw new Error(`${page.relMd}: subclass "${subclassName}" is not present for class "${className}" in canonical rules JSON.`);
-
-  const equipment = extractLookupArray(page.body, 'ItemLookup');
-  const spells = extractLookupArray(page.body, 'SpellLookup');
-  const spellScrolls = buildSpellScrolls(equipment, itemCatalog, spellCatalog);
-  const backgrounds = extractLookupArray(page.body, 'BackgroundLookup');
-  const feats = extractLookupArray(page.body, 'FeatLookup');
-  const races = extractLookupArray(page.body, 'RaceLookup');
-  const raceNames = [...new Set([data.race, ...races].filter(Boolean).map(String))];
-  const backgroundNames = [...new Set([data.background, ...backgrounds].filter(Boolean).map(String))];
-  const notesUrl = (page.body.match(/Direct link if Embed isn't working\s*:\s*(https?:\/\/\S+)/i) || [])[1] || '';
-  const classUrlSuffix = (page.body.match(/urlSuffix:\s*([^\r\n]+)/i) || [])[1] || '';
-  validateClassUrlState(page, classUrlSuffix, matchedClass, matchedSubclass, rules);
-  const features = extractSection(page.body, 'Class Features & Abilities');
-
-  const level = toNumber(data.level, 1);
-  const proficiencyBonus = toNumber(data.proficiencyBonus, calculateProficiencyBonus(level));
-  const modifiers = Object.fromEntries(ABILITIES.map(ability => [ability, calculateModifier(toNumber(data[ability], 10))]));
-  const spellAbility = data.spellcasting || false;
-  const spellMod = spellAbility ? modifiers[spellAbility] || 0 : 0;
-
-  const publicData = {
-    id: slugify(path.basename(page.relMd, '.md')),
-    name: data.name || page.title,
+function buildPlayer(page, _controls, _fileIndex, ruleset, _itemCatalog, _spellCatalog, _featCatalog, _backgroundCatalog, _playerRuleChoices = {}) {
+  const playerId = slugify(path.basename(page.relMd, '.md'));
+  const identity = page.playerIdentity || {};
+  const shellData = makePlayerIdentityShell({
+    id: playerId,
+    name: page.title,
     sheetTitle: page.title,
-    class: matchedClass.name,
-    subclass: matchedSubclass.name,
-    subclassShortName: matchedSubclass.shortName || matchedSubclass.name,
-    level,
-    race: data.race || '',
-    background: data.background || '',
-    portrait: data.portrait || '',
-    experience: toNumber(data.experience, 0),
-    gold: toNumber(data.gold, 0),
-    heroPoints: toNumber(data.heroPoints, 0),
-    guildPoints: toNumber(data.guildPoints, 0),
-    guildRank: data.guildRank || '',
-    abilities: Object.fromEntries(ABILITIES.map(ability => [ability, toNumber(data[ability], 10)])),
-    ac: toNumber(data.ac, 10),
-    speed: toNumber(data.speed, 30),
-    maxHp: data.maxHp !== undefined ? toNumber(data.maxHp, 0) : null,
-    currentHp: data.currentHp !== undefined ? toNumber(data.currentHp, data.maxHp || 0) : null,
-    proficiencyBonus,
-    initiative: data.initiative !== undefined ? toNumber(data.initiative, modifiers.dex) : modifiers.dex,
-    saves: Array.isArray(data.saves) ? data.saves : [],
-    skills: Array.isArray(data.skills) ? data.skills.map(normalizeSkillId).filter(Boolean) : [],
-    spellcasting: spellAbility,
-    spellAttack: spellAbility ? spellMod + proficiencyBonus : null,
-    spellSaveDc: spellAbility ? 8 + spellMod + proficiencyBonus : null,
-    attackBonuses: {
-      ranged: /archery fighting style/i.test(features) ? 2 : 0,
-    },
-    simpleWeapons: data.simpleWeapons === true,
-    martialWeapons: data.martialWeapons === true,
-    hitDice: data.hitDice || inferHitDice(matchedClass, level),
-    equipment,
-    itemDetails: buildPlayerItemDetails(equipment, itemCatalog),
-    equipped: [],
-    spells,
-    spellScrolls,
-    spellDetails: buildPlayerSpellDetails([...spells, ...spellScrolls.map(scroll => scroll.spellName)], spellCatalog),
-    spellSlots: calculateSpellSlots(matchedClass, level, spellAbility),
-    resources: buildPlayerResources(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, backgroundNames),
-    ruleActions: buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, spells, backgroundNames),
-    ruleEffects: buildPlayerRuleEffects(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, backgroundNames),
-    ruleFeatures: buildPlayerRuleFeatures(rules, matchedClass, matchedSubclass, level, raceNames),
-    notes: data.notes || '',
-    backgrounds,
-    backgroundDetails: buildPlayerRuleDetails(backgroundNames, backgroundCatalog),
-    feats,
-    featDetails: buildPlayerRuleDetails(feats, featCatalog),
-    races,
-    notesUrl,
-    classUrl: classUrlSuffix ? `5etools/classes.html${classUrlSuffix}` : '',
+    portrait: identity.portrait || '',
+    classUrl: identity.classUrl || '',
+    rulesetId: ruleset.id,
+    rulesVersion: ruleset.version,
     rulesSource: {
-      kind: 'canonical-json',
-      schemaVersion: rules.manifest && rules.manifest.schemaVersion,
-      generatedAtUtc: rules.manifest && rules.manifest.generatedAtUtc,
+      kind: 'eldoria-ruleset',
+      rulesetId: ruleset.id,
+      rulesVersion: ruleset.version,
+      schemaVersion: ruleset.rules && ruleset.rules.manifest && ruleset.rules.manifest.schemaVersion,
+      generatedAtUtc: ruleset.rules && ruleset.rules.manifest && ruleset.rules.manifest.generatedAtUtc,
     },
     url: page.url,
-    searchText: markdownToText(page.body),
-  };
+  });
+  const shellModifiers = Object.fromEntries(ABILITIES.map(ability => [ability, calculateModifier(shellData.abilities[ability])]));
 
   return {
-    data: publicData,
-    publicData,
-    modifiers,
-    features,
-    portraitUrl: data.portrait ? relativeUrl(page.url, resolveVaultTarget(data.portrait, page, fileIndex)) : '',
+    data: shellData,
+    publicData: {
+      id: playerId,
+      name: page.title,
+      sheetTitle: page.title,
+      portrait: shellData.portrait,
+      url: page.url,
+      searchText: `${page.title} character builder`.trim(),
+    },
+    modifiers: shellModifiers,
+    features: '',
+    portraitUrl: playerAssetUrl(page, shellData.portrait),
+    ruleReport: {
+      id: playerId,
+      name: page.title,
+      sheetTitle: page.title,
+      source: page.vaultPath,
+      counts: { features: 0, resources: 0, actions: 0, linkedActions: 0 },
+      actionWellCount: 0,
+      choices: {},
+      issues: [],
+    },
+  };
+}
+
+function playerAssetUrl(page, value) {
+  const clean = cleanPlayerAssetPath(value);
+  if (!clean) return '';
+  if (/^(https?:|data:|blob:)/i.test(clean)) return clean;
+  return relativeUrl(page.url, clean);
+}
+
+function makePlayerIdentityShell(player) {
+  const abilities = Object.fromEntries(ABILITIES.map(ability => [ability, 10]));
+  return {
+    id: player.id,
+    name: player.name,
+    sheetTitle: player.sheetTitle,
+    builderVersion: 'fresh-v1',
+    rulesetId: player.rulesetId || 'eldoria-5e',
+    rulesVersion: player.rulesVersion || '',
+    class: '',
+    classId: '',
+    subclass: '',
+    subclassId: '',
+    subclassShortName: '',
+    level: 1,
+    race: '',
+    background: '',
+    portrait: player.portrait || '',
+    classUrl: player.classUrl || '',
+    experience: 0,
+    gold: 0,
+    heroPoints: 0,
+    guildPoints: 0,
+    guildRank: '',
+    abilities,
+    ac: 10,
+    speed: 30,
+    hpMode: 'auto-average',
+    maxHp: null,
+    currentHp: null,
+    proficiencyBonus: 2,
+    initiative: 0,
+    saves: [],
+    skills: [],
+    spellcasting: false,
+    spellAttack: null,
+    spellSaveDc: null,
+    attackBonuses: { ranged: 0 },
+    simpleWeapons: false,
+    martialWeapons: false,
+    hitDice: '',
+    equipment: [],
+    itemIds: [],
+    itemDetails: {},
+    equipped: [],
+    spells: [],
+    spellIds: [],
+    spellScrolls: [],
+    spellDetails: {},
+    spellSlots: {},
+    resources: [],
+    ruleActions: [],
+    actionWells: [],
+    ruleEffects: [],
+    ruleFeatures: [],
+    notes: '',
+    backgrounds: [],
+    backgroundIds: [],
+    backgroundDetails: [],
+    feats: [],
+    featIds: [],
+    featDetails: [],
+    races: [],
+    raceIds: [],
+    ruleChoices: { featureChoices: {}, issueCount: 0 },
+    ruleReport: { issueCount: 0, actionWellCount: 0 },
+    notesUrl: '',
+    rulesSource: player.rulesSource || {},
+    url: player.url,
+    searchText: `${player.name || ''} ${player.sheetTitle || ''} character builder`.trim(),
   };
 }
 
@@ -466,8 +649,8 @@ function inferHitDice(matchedClass, level) {
   return `${level}${hitDie}`;
 }
 
-function buildPlayerResources(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames = [], feats = [], backgrounds = []) {
-  const availableFeatures = getAvailableFeatures(rules, matchedClass, matchedSubclass, level, raceNames);
+function buildPlayerResources(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames = [], feats = [], backgrounds = [], availableFeaturesOverride = null) {
+  const availableFeatures = availableFeaturesOverride || getAvailableFeatures(rules, matchedClass, matchedSubclass, level, raceNames);
   const featureIds = new Set(availableFeatures.map(feature => feature.id));
   const featIds = new Set((feats || []).map(slugify));
   const backgroundIds = new Set((backgrounds || []).map(slugify));
@@ -488,6 +671,10 @@ function buildPlayerResources(rules, matchedClass, matchedSubclass, level, equip
       }
     }
   }
+  for (const feature of availableFeatures) {
+    const resource = inferPlayerFeatureResource(feature);
+    if (resource && !resources.some(existing => existing.id === resource.id)) resources.push(resource);
+  }
   for (const itemName of equipment) {
     const item = findCatalogItem(itemCatalog, itemName);
     if (item && Array.isArray(item.resources)) {
@@ -495,6 +682,45 @@ function buildPlayerResources(rules, matchedClass, matchedSubclass, level, equip
     }
   }
   return uniqueBy(resources, resource => resource.id);
+}
+
+function inferPlayerFeatureResource(feature) {
+  if (!feature) return null;
+  const text = cleanRulesText(feature.text || '');
+  const hint = feature.resourceHint || '';
+  const common = {
+    sourceType: feature.kind || 'feature',
+    sourceId: feature.id,
+    className: feature.className || '',
+    subclassName: feature.subclassShortName || feature.subclassName || '',
+    raceName: feature.raceName || '',
+    source: feature.source || '',
+    text: firstWords(text, 40),
+  };
+  if (hint === 'Channel Divinity') return { id: 'cleric-channel-divinity', name: 'Channel Divinity', maxFormula: 'clericChannelDivinityUses(level)', reset: 'shortRest', ...common };
+  if (hint === 'Bardic Inspiration') return { id: 'bardic-inspiration', name: 'Bardic Inspiration', maxFormula: 'max(1, chaMod)', reset: 'longRestUntilFontOfInspirationThenShortRest', ...common };
+  if (hint === 'Ki') return { id: 'monk-ki', name: 'Ki', maxFormula: 'level', reset: 'shortRest', ...common };
+  if (hint === 'Wild Shape') return { id: 'druid-wild-shape', name: 'Wild Shape', max: 2, reset: 'shortRest', ...common };
+  if (hint === 'Action Surge') return { id: 'action-surge', name: 'Action Surge', maxFormula: 'level >= 17 ? 2 : 1', reset: 'shortRest', ...common };
+  if (hint === 'Second Wind') return { id: 'second-wind', name: 'Second Wind', max: 1, reset: 'shortRest', ...common };
+  if (hint === 'Portent') return { id: 'wizard-portent', name: 'Portent', maxFormula: 'level >= 14 ? 3 : 2', reset: 'longRest', ...common };
+  const abilityUses = text.match(/number of times equal to your (Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma) modifier \(a minimum of once\).*?regain all expended uses when you finish a (short|long) rest/i);
+  if (abilityUses) {
+    return {
+      id: feature.id,
+      name: feature.name,
+      maxFormula: `${abilityUses[1].slice(0, 3).toLowerCase()}Mod`,
+      reset: `${abilityUses[2].toLowerCase()}Rest`,
+      ...common,
+    };
+  }
+  if (/\bonce per day\b/i.test(text) || /\bcan't use (?:it|this feature|this ability|the feature|the ability|this trait|the trait|this action|this reaction)?[^.]{0,180}again until you finish a long rest\b/i.test(text)) {
+    return { id: feature.id, name: feature.name, max: 1, reset: 'longRest', ...common };
+  }
+  if (/\bcan't use (?:it|this feature|this ability|the feature|the ability|this trait|the trait|this action|this reaction)?[^.]{0,180}again until you finish a short or long rest\b/i.test(text)) {
+    return { id: feature.id, name: feature.name, max: 1, reset: 'shortRest', ...common };
+  }
+  return null;
 }
 
 function repointResourceToAvailableFeature(resource, availableFeatures) {
@@ -553,8 +779,8 @@ function findAvailableFeatureForResource(resource, availableFeatures) {
   }) || null;
 }
 
-function buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, spells, backgrounds = []) {
-  const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level, raceNames);
+function buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, spells, backgrounds = [], availableFeaturesOverride = null) {
+  const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level, raceNames, availableFeaturesOverride);
   const itemIds = new Set(equipment.map(itemName => {
     const item = findCatalogItem(itemCatalog, itemName);
     return item && item.id;
@@ -572,8 +798,8 @@ function buildPlayerRuleActions(rules, matchedClass, matchedSubclass, level, equ
   }).slice(0, 160);
 }
 
-function buildPlayerRuleEffects(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, backgrounds = []) {
-  const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level, raceNames);
+function buildPlayerRuleEffects(rules, matchedClass, matchedSubclass, level, equipment, itemCatalog, raceNames, feats, backgrounds = [], availableFeaturesOverride = null) {
+  const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level, raceNames, availableFeaturesOverride);
   const itemIds = new Set(equipment.map(itemName => {
     const item = findCatalogItem(itemCatalog, itemName);
     return item && item.id;
@@ -589,10 +815,9 @@ function buildPlayerRuleEffects(rules, matchedClass, matchedSubclass, level, equ
   }).slice(0, 160);
 }
 
-function buildPlayerRuleFeatures(rules, matchedClass, matchedSubclass, level, raceNames = []) {
-  const featureIds = getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level, raceNames);
-  return (rules.features || [])
-    .filter(feature => featureIds.has(feature.id))
+function buildPlayerRuleFeatures(rules, matchedClass, matchedSubclass, level, raceNames = [], availableFeaturesOverride = null, resources = []) {
+  const features = availableFeaturesOverride || (rules.features || []).filter(feature => getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level, raceNames).has(feature.id));
+  return features
     .map(feature => ({
       id: feature.id,
       kind: feature.kind,
@@ -608,13 +833,18 @@ function buildPlayerRuleFeatures(rules, matchedClass, matchedSubclass, level, ra
       text: cleanRulesText(feature.text || ''),
       timing: feature.timing || '',
       resourceHint: feature.resourceHint || '',
+      resourceId: findResourceIdForRule({ sourceId: feature.id, title: feature.name, detail: feature.text, tags: [feature.resourceHint] }, resources, [feature]),
+      grants: Array.isArray(feature.grants) ? feature.grants : [],
+      optional: Boolean(feature.optional),
+      choiceGroup: feature.choiceGroup || '',
+      selectedChoice: Boolean(feature.selectedChoice),
     }))
     .sort((a, b) => a.level - b.level || `${a.kind} ${a.name}`.localeCompare(`${b.kind} ${b.name}`))
     .slice(0, 120);
 }
 
-function getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level, raceNames = []) {
-  return new Set(getAvailableFeatures(rules, matchedClass, matchedSubclass, level, raceNames).map(feature => feature.id));
+function getAvailableFeatureIds(rules, matchedClass, matchedSubclass, level, raceNames = [], availableFeaturesOverride = null) {
+  return new Set((availableFeaturesOverride || getAvailableFeatures(rules, matchedClass, matchedSubclass, level, raceNames)).map(feature => feature.id));
 }
 
 function getAvailableFeatures(rules, matchedClass, matchedSubclass, level, raceNames = []) {
@@ -646,18 +876,480 @@ function getAvailableRaceFeatures(rules, raceNames = [], level = 1) {
 }
 
 function findRuleRace(rules, raceName) {
-  const target = normalizeItemName(raceName);
+  const parsed = parseSourceQualifiedName(raceName);
+  const target = normalizeItemName(parsed.name);
   if (!target) return null;
-  const candidates = (rules.races || []).filter(race => {
-    const keys = [race.name, race.baseName, race.subraceName, race.id, ...(race.aliases || [])].map(normalizeItemName).filter(Boolean);
-    return keys.includes(target);
-  });
+  const candidates = findRuleRaceCandidates(rules, raceName);
   return candidates.sort((a, b) => sourcePriority(a.source) - sourcePriority(b.source) || String(a.name).localeCompare(String(b.name)))[0] || null;
 }
 
+function findRuleRaceById(rules, raceId) {
+  const target = normalizeItemName(raceId);
+  if (!target) return null;
+  return (rules.races || []).find(race => normalizeItemName(race.id) === target) || null;
+}
+
+function findRuleRaceCandidates(rules, raceName) {
+  const parsed = parseSourceQualifiedName(raceName);
+  const target = normalizeItemName(parsed.name);
+  if (!target) return [];
+  return (rules.races || []).filter(race => {
+    if (parsed.source && normalizeRuleSource(race.source) !== parsed.source) return false;
+    const keys = [race.name, race.baseName, race.subraceName, race.id, ...(race.aliases || [])].map(normalizeItemName).filter(Boolean);
+    return keys.includes(target);
+  });
+}
+
 function sourcePriority(source) {
-  const index = RACE_SOURCE_PRIORITY.indexOf(String(source || '').toUpperCase());
+  const index = RACE_SOURCE_PRIORITY.map(normalizeRuleSource).indexOf(normalizeRuleSource(source));
   return index === -1 ? RACE_SOURCE_PRIORITY.length : index;
+}
+
+function normalizeRuleSource(source) {
+  return String(source || '').toUpperCase().replace(/[^A-Z0-9]+/g, '');
+}
+
+function parseSourceQualifiedName(value) {
+  const text = String(value || '').trim();
+  const pipeMatch = text.match(/^(.+?)\s*\|\s*(.+?)\s*$/);
+  if (!pipeMatch) return { name: text, source: '' };
+  return {
+    name: pipeMatch[1].trim(),
+    source: normalizeRuleSource(pipeMatch[2]),
+  };
+}
+
+function findPlayerRuleChoices(config, playerId, playerName, sheetTitle) {
+  const root = config && config.players && typeof config.players === 'object' ? config.players : config;
+  const defaults = config && config.defaults && typeof config.defaults === 'object' ? config.defaults : {};
+  const keys = [playerId, playerName, sheetTitle].filter(Boolean);
+  for (const key of [...keys, ...keys.map(slugify)]) {
+    if (root && root[key]) return { ...defaults, ...root[key] };
+  }
+  return { ...defaults };
+}
+
+function createPlayerRuleReport(page, data, choices) {
+  return {
+    id: slugify(path.basename(page.relMd, '.md')),
+    name: data.name || page.title,
+    sheetTitle: page.title,
+    source: page.vaultPath,
+    choices: choices || {},
+    issues: [],
+    counts: {},
+    actionWellCount: 0,
+  };
+}
+
+function addRuleIssue(report, severity, kind, message, detail = {}) {
+  if (!report) return;
+  const key = `${severity}:${kind}:${message}:${JSON.stringify(detail)}`;
+  if (!report._issueKeys) report._issueKeys = new Set();
+  if (report._issueKeys.has(key)) return;
+  report._issueKeys.add(key);
+  report.issues.push({ severity, kind, message, ...detail });
+}
+
+function mergeRulesetIssues(report, issues = []) {
+  for (const issue of issues || []) {
+    const { severity = 'warning', kind = 'ruleset_issue', message = '', ...detail } = issue || {};
+    if (!message) continue;
+    addRuleIssue(report, severity, kind, message, detail);
+  }
+}
+
+function resolvePlayerRaces(rules, sheetRace, lookupRaces, choices, report) {
+  const explicitRaceIds = normalizeIdChoiceList(choices.raceIds || choices.raceId || choices.ruleRaceIds || choices.ruleRaceId);
+  const explicitRace = cleanChoiceString(choices.race || choices.rulesRace);
+  if (explicitRaceIds.length) {
+    const resolvedById = [];
+    for (const raceId of explicitRaceIds) {
+      const race = findRuleRaceById(rules, raceId);
+      if (!race) {
+        addRuleIssue(report, 'warning', 'missing_race_rule_id', `No canonical race matched id "${raceId}".`, { raceId });
+        continue;
+      }
+      resolvedById.push(race);
+    }
+    const uniqueById = uniqueBy(resolvedById, race => race.id);
+    return {
+      displayRace: uniqueById[0] ? uniqueById[0].name : sheetRace,
+      raceNames: uniqueById.length ? uniqueById.map(race => race.name) : [sheetRace, ...(lookupRaces || [])].filter(Boolean).map(String),
+      raceIds: uniqueById.map(race => race.id),
+    };
+  }
+  const requested = explicitRace ? [explicitRace] : [...new Set([sheetRace, ...(lookupRaces || [])].filter(Boolean).map(String))];
+  const resolved = [];
+  for (const raceName of requested) {
+    const candidates = findRuleRaceCandidates(rules, raceName);
+    if (!candidates.length) {
+      addRuleIssue(report, 'warning', 'missing_race_rule', `No canonical race matched "${raceName}".`, { raceName });
+      continue;
+    }
+    const ranked = candidates.slice().sort((a, b) => sourcePriority(a.source) - sourcePriority(b.source) || String(a.name).localeCompare(String(b.name)));
+    const best = ranked[0];
+    resolved.push(best);
+    if (raceNameRequiresPicker(ranked, raceName)) {
+      addRuleIssue(report, 'warning', 'ambiguous_race_picker_required', `"${raceName}" has multiple canonical race matches; using "${best.name}" for this port until a raceId is selected.`, {
+        raceName,
+        selected: best.name,
+        selectedId: best.id,
+        options: ranked.slice(0, 12).map(candidate => ({
+          id: candidate.id,
+          name: candidate.name,
+          source: candidate.source || '',
+        })),
+      });
+    }
+  }
+  const unique = uniqueBy(resolved, race => race.id);
+  return {
+    displayRace: unique[0] ? unique[0].name : sheetRace,
+    raceNames: unique.length ? unique.map(race => race.name) : requested,
+    raceIds: unique.map(race => race.id),
+  };
+}
+
+function raceNameRequiresPicker(candidates, raceName) {
+  if (!candidates || candidates.length <= 1) return false;
+  const target = normalizeItemName(parseSourceQualifiedName(raceName).name);
+  const exact = candidates.filter(candidate => {
+    const keys = [candidate.name, candidate.baseName, candidate.subraceName, candidate.id, ...(candidate.aliases || [])]
+      .map(normalizeItemName)
+      .filter(Boolean);
+    return keys.includes(target);
+  });
+  if (exact.length <= 1) return false;
+  const distinctIds = new Set(exact.map(candidate => candidate.id));
+  return distinctIds.size > 1;
+}
+
+function resolvePlayerCatalogRefs(rows, requestedNames, explicitIds, kind, report) {
+  const ids = normalizeIdChoiceList(explicitIds);
+  if (ids.length) {
+    const resolvedById = [];
+    for (const id of ids) {
+      const row = findRuleRowById(rows, id);
+      if (!row) {
+        addRuleIssue(report, 'warning', `missing_${kind}_rule_id`, `No canonical ${kind} matched id "${id}".`, { id });
+        continue;
+      }
+      resolvedById.push(row);
+    }
+    const uniqueById = uniqueBy(resolvedById, row => row.id || slugify(row.name || 'rule'));
+    return {
+      names: uniqueById.map(row => row.name).filter(Boolean),
+      ids: uniqueById.map(row => row.id).filter(Boolean),
+    };
+  }
+
+  const resolved = [];
+  for (const name of requestedNames || []) {
+    const ranked = rankRuleRows(findRuleRowCandidates(rows, name));
+    if (ranked[0]) resolved.push(ranked[0]);
+  }
+  const uniqueById = uniqueBy(resolved, row => row.id || slugify(row.name || 'rule'));
+  return {
+    names: uniqueById.map(row => row.name).filter(Boolean),
+    ids: uniqueById.map(row => row.id).filter(Boolean),
+  };
+}
+
+function addCatalogAmbiguityIssues(report, rows, names, kind, explicitIds) {
+  if (normalizeIdChoiceList(explicitIds).length) return;
+  for (const name of names || []) {
+    const ranked = rankRuleRows(findRuleRowCandidates(rows, name));
+    if (!ruleRowsRequirePicker(ranked, name)) continue;
+    const best = ranked[0];
+    addRuleIssue(report, 'warning', `ambiguous_${kind}_picker_required`, `"${name}" has multiple canonical ${kind} matches; using "${best.name}" for this port until a ${kind}Id is selected.`, {
+      name,
+      selected: best.name,
+      selectedId: best.id || '',
+      options: ranked.slice(0, 12).map(row => ({
+        id: row.id || '',
+        name: row.name || '',
+        source: row.source || '',
+      })),
+    });
+  }
+}
+
+function findRuleRowById(rows, id) {
+  const target = normalizeItemName(id);
+  if (!target) return null;
+  return (rows || []).find(row => normalizeItemName(row && row.id) === target) || null;
+}
+
+function findRuleRowCandidates(rows, name) {
+  const parsed = parseSourceQualifiedName(name);
+  const target = normalizeItemName(parsed.name);
+  if (!target) return [];
+  return (rows || []).filter(row => {
+    if (parsed.source && normalizeRuleSource(row && row.source) !== parsed.source) return false;
+    const keys = [row && row.name, row && row.id, row && row.shortName, ...(Array.isArray(row && row.aliases) ? row.aliases : [])]
+      .map(normalizeItemName)
+      .filter(Boolean);
+    return keys.includes(target);
+  });
+}
+
+function rankRuleRows(rows) {
+  return (rows || []).slice().sort((a, b) => sourcePriority(a && a.source) - sourcePriority(b && b.source) || String(a && a.name).localeCompare(String(b && b.name)));
+}
+
+function ruleRowsRequirePicker(candidates, name) {
+  if (!candidates || candidates.length <= 1) return false;
+  const target = normalizeItemName(parseSourceQualifiedName(name).name);
+  const exact = candidates.filter(row => {
+    const keys = [row && row.name, row && row.id, row && row.shortName, ...(Array.isArray(row && row.aliases) ? row.aliases : [])]
+      .map(normalizeItemName)
+      .filter(Boolean);
+    return keys.includes(target);
+  });
+  if (exact.length <= 1) return false;
+  const distinctIds = new Set(exact.map(row => row.id || slugify(row.name || 'rule')));
+  return distinctIds.size > 1;
+}
+
+function resolveAvailableFeatures(rules, matchedClass, matchedSubclass, level, raceNames, choices, featureNotes, report) {
+  const selected = new Set(normalizeChoiceList([
+    ...(choices.includeFeatures || []),
+    ...(choices.selectedFeatures || []),
+    ...(choices.classFeatures || []),
+  ]));
+  const excluded = new Set(normalizeChoiceList(choices.excludeFeatures || []));
+  const optionalSelections = new Set(normalizeChoiceList(choices.optionalFeatures || []));
+  const notesText = normalizeItemName(featureNotes || '');
+  let features = getAvailableFeatures(rules, matchedClass, matchedSubclass, level, raceNames)
+    .map(feature => ({ ...feature, optional: isOptionalClassFeature(feature) }));
+
+  features = features.filter(feature => {
+    const featureName = normalizeItemName(feature.name);
+    const featureId = normalizeItemName(feature.id);
+    if (excluded.has(featureName) || excluded.has(featureId)) return false;
+    if (!feature.optional) return true;
+    const allowed = choices.includeOptionalFeatures === true
+      || optionalSelections.has(featureName)
+      || optionalSelections.has(featureId)
+      || selected.has(featureName)
+      || selected.has(featureId);
+    if (!allowed) {
+      addRuleIssue(report, 'info', 'optional_feature_unselected', `Optional feature "${feature.name}" is available but not selected.`, {
+        feature: feature.name,
+        source: feature.source || '',
+      });
+    }
+    return allowed;
+  });
+
+  for (const group of FEATURE_CHOICE_GROUPS) {
+    if (!featureGroupApplies(group, matchedClass, matchedSubclass, level)) continue;
+    const optionNames = new Set(group.options.map(normalizeItemName));
+    const presentOptions = features.filter(feature => optionNames.has(normalizeItemName(feature.name)));
+    if (!presentOptions.length) continue;
+    const explicitSelections = normalizeChoiceList(getChoiceGroupSelection(choices, group.group));
+    const selectedOptions = presentOptions.filter(feature => {
+      const name = normalizeItemName(feature.name);
+      return explicitSelections.includes(name)
+        || selected.has(name)
+        || selected.has(normalizeItemName(feature.id))
+        || notesText.includes(name);
+    });
+    if (!selectedOptions.length) {
+      addRuleIssue(report, 'warning', 'feature_choice_unresolved', `${group.group} needs one selected option.`, {
+        group: group.group,
+        options: group.options,
+      });
+      features = features.filter(feature => !optionNames.has(normalizeItemName(feature.name)));
+      continue;
+    }
+    const selectedIds = new Set(selectedOptions.map(feature => feature.id));
+    features = features
+      .filter(feature => !optionNames.has(normalizeItemName(feature.name)) || selectedIds.has(feature.id))
+      .map(feature => selectedIds.has(feature.id) ? { ...feature, choiceGroup: group.group, selectedChoice: true } : feature);
+  }
+
+  return uniqueBy(features, feature => feature.id);
+}
+
+function isOptionalClassFeature(feature) {
+  return feature && feature.kind === 'class'
+    && String(feature.source || '').toUpperCase() === 'TCE'
+    && OPTIONAL_CLASS_FEATURE_NAMES.has(feature.name);
+}
+
+function featureGroupApplies(group, matchedClass, matchedSubclass, level) {
+  if (group.level && Number(group.level) > Number(level || 1)) return false;
+  if (normalizeItemName(group.className) !== normalizeItemName(matchedClass && matchedClass.name)) return false;
+  if (!group.subclassName) return true;
+  const subclassNames = [matchedSubclass && matchedSubclass.name, matchedSubclass && matchedSubclass.shortName].map(normalizeItemName);
+  return subclassNames.includes(normalizeItemName(group.subclassName));
+}
+
+function getChoiceGroupSelection(choices, groupName) {
+  const groups = choices.featureChoices || choices.choiceGroups || {};
+  if (!groups || typeof groups !== 'object') return [];
+  const target = normalizeItemName(groupName);
+  for (const [key, value] of Object.entries(groups)) {
+    if (normalizeItemName(key) === target) return Array.isArray(value) ? value : [value];
+  }
+  return [];
+}
+
+function linkRuleActionsToResources(actions, resources, availableFeatures) {
+  return (actions || []).map(action => {
+    const resourceId = findResourceIdForRule(action, resources, availableFeatures);
+    if (!resourceId) return action;
+    const resource = (resources || []).find(candidate => candidate.id === resourceId);
+    return {
+      ...action,
+      resourceId,
+      resourceCost: Number(action.resourceCost) || 1,
+      resourceName: resource && resource.name || '',
+    };
+  });
+}
+
+function findResourceIdForRule(action, resources, availableFeatures = []) {
+  if (!action || !resources || !resources.length) return '';
+  if (action.resourceId && resources.some(resource => resource.id === action.resourceId)) return action.resourceId;
+  if (action.id) {
+    const byId = resources.find(resource => resource.id === action.id);
+    if (byId) return byId.id;
+  }
+  const feature = action.sourceId ? availableFeatures.find(candidate => candidate.id === action.sourceId) : null;
+  const haystack = `${action.title || action.name || ''} ${action.detail || action.text || ''} ${(action.tags || []).join(' ')} ${feature ? `${feature.name} ${feature.resourceHint} ${feature.text}` : ''}`;
+  const clean = normalizeItemName(haystack);
+  const title = normalizeItemName(action.title || action.name || '');
+  for (const resource of resources) {
+    const resourceName = normalizeItemName(resource.name || resource.id);
+    const resourceId = normalizeItemName(resource.id || '');
+    if (resourceName && title === resourceName) return resource.id;
+    if (resourceId && title === resourceId) return resource.id;
+    if (resourceName && title.includes(resourceName)) return resource.id;
+    if (resourceName && (clean.includes(`spend ${resourceName}`) || clean.includes(`expend ${resourceName}`) || clean.includes(`use your ${resourceName}`))) return resource.id;
+    if (resourceId && clean.includes(`spend ${resourceId}`)) return resource.id;
+  }
+  if (action.sourceId) {
+    const sourceResources = resources.filter(resource => resource.sourceId && resource.sourceId === action.sourceId);
+    if (sourceResources.length === 1) return sourceResources[0].id;
+  }
+  for (const alias of RULE_RESOURCE_ALIASES) {
+    if (!alias.match.test(haystack)) continue;
+    const resource = resources.find(candidate => candidate.id === alias.resourceId);
+    if (resource) return resource.id;
+  }
+  return '';
+}
+
+function addPlayerCatalogIssues(report, equipment, ruleActions, itemCatalog, spells, spellCatalog, backgroundNames, backgroundCatalog, feats, featCatalog, availableFeatures = []) {
+  for (const itemName of equipment || []) {
+    if (!findCatalogItem(itemCatalog, itemName)) addRuleIssue(report, 'warning', 'missing_item_rule', `No canonical item matched "${itemName}".`, { itemName });
+  }
+  for (const spellName of spells || []) {
+    if (!spellCatalog.get(normalizeItemName(spellName))) addRuleIssue(report, 'warning', 'missing_spell_rule', `No canonical spell matched "${spellName}".`, { spellName });
+  }
+  for (const backgroundName of backgroundNames || []) {
+    if (!backgroundCatalog.get(normalizeItemName(backgroundName))) addRuleIssue(report, 'warning', 'missing_background_rule', `No canonical background matched "${backgroundName}".`, { backgroundName });
+  }
+  for (const featName of feats || []) {
+    if (featCatalog.get(normalizeItemName(featName))) continue;
+    const feature = availableFeatures.find(candidate => normalizeItemName(candidate.name) === normalizeItemName(featName));
+    addRuleIssue(report, 'warning', feature ? 'class_feature_in_feat_lookup' : 'missing_feat_rule', feature
+      ? `"${featName}" is a class feature, not a feat lookup entry.`
+      : `No canonical feat matched "${featName}".`, { featName });
+  }
+  for (const action of ruleActions || []) {
+    if (action.resourceId && !action.resourceName) addRuleIssue(report, 'info', 'action_well_linked', `"${action.title}" links to resource "${action.resourceId}".`, { action: action.title, resourceId: action.resourceId });
+  }
+}
+
+function addPlayerActionWellIssues(report, ruleActions) {
+  for (const action of ruleActions || []) {
+    const text = `${action.title || ''} ${action.detail || ''} ${(action.tags || []).join(' ')}`;
+    if (normalizeActionGroupName(action.group) === 'out of combat') continue;
+    if (action.resourceId || !looksLikeLimitedAction(text)) continue;
+    addRuleIssue(report, 'warning', 'action_well_unresolved', `"${action.title}" looks limited-use, but no resource well was linked.`, {
+      action: action.title,
+      sourceType: action.sourceType || '',
+    });
+  }
+}
+
+function looksLikeLimitedAction(text) {
+  return /\b(regain all expended uses|number of times equal|channel divinity|ki point|bardic inspiration|breath weapon|healing hands|action surge|second wind|wrath of the storm|portent)\b/i.test(text || '');
+}
+
+function normalizeActionGroupName(value) {
+  return normalizeItemName(value || '').replace(/\s+/g, ' ');
+}
+
+function finalizePlayerRuleReport(report, features, resources, actions) {
+  report.counts = {
+    features: features.length,
+    resources: resources.length,
+    actions: actions.length,
+    linkedActions: actions.filter(action => action.resourceId).length,
+  };
+  report.actionWellCount = report.counts.linkedActions;
+  delete report._issueKeys;
+}
+
+function buildPlayerRuleReport(reports) {
+  const players = (reports || []).map(report => ({
+    id: report.id,
+    name: report.name,
+    sheetTitle: report.sheetTitle,
+    source: report.source,
+    counts: report.counts,
+    actionWellCount: report.actionWellCount,
+    choices: summarizePlayerRuleChoices(report.choices || {}, report),
+    issues: report.issues,
+  }));
+  return {
+    generatedAtUtc: new Date().toISOString(),
+    playerCount: players.length,
+    issueCount: players.reduce((sum, player) => sum + player.issues.length, 0),
+    players,
+  };
+}
+
+function summarizePlayerRuleChoices(choices, report) {
+  return {
+    race: choices.race || choices.rulesRace || '',
+    raceId: choices.raceId || choices.ruleRaceId || '',
+    raceIds: normalizeIdChoiceList(choices.raceIds || choices.ruleRaceIds || []),
+    backgroundId: choices.backgroundId || choices.ruleBackgroundId || '',
+    backgroundIds: normalizeIdChoiceList(choices.backgroundIds || choices.ruleBackgroundIds || []),
+    featId: choices.featId || choices.ruleFeatId || '',
+    featIds: normalizeIdChoiceList(choices.featIds || choices.ruleFeatIds || []),
+    itemIds: normalizeIdChoiceList(choices.itemIds || choices.ruleItemIds || []),
+    spellIds: normalizeIdChoiceList(choices.spellIds || choices.ruleSpellIds || []),
+    includeOptionalFeatures: choices.includeOptionalFeatures === true,
+    optionalFeatures: choices.optionalFeatures || [],
+    includeFeatures: choices.includeFeatures || choices.selectedFeatures || choices.classFeatures || [],
+    excludeFeatures: choices.excludeFeatures || [],
+    featureChoices: choices.featureChoices || choices.choiceGroups || {},
+    issueCount: report && report.issues ? report.issues.length : 0,
+  };
+}
+
+function normalizeChoiceList(values) {
+  return (Array.isArray(values) ? values : [values]).filter(Boolean).map(normalizeItemName);
+}
+
+function normalizeIdChoiceList(values) {
+  const raw = Array.isArray(values)
+    ? values
+    : values && typeof values === 'object'
+      ? Object.values(values).flat()
+      : [values];
+  return raw.map(value => String(value || '').trim()).filter(Boolean);
+}
+
+function cleanChoiceString(value) {
+  return String(value || '').trim();
 }
 
 function calculateSpellSlots(matchedClass, level, spellAbility) {
@@ -700,21 +1392,6 @@ function getPactSlots(level) {
   if (level < 11) return { pact: { level: 5, slots: 2 } };
   if (level < 17) return { pact: { level: 5, slots: 3 } };
   return { pact: { level: 5, slots: 4 } };
-}
-
-function extractCharacterData(body, controls) {
-  const callIndex = body.indexOf('CharacterSheetDisplay.display');
-  if (callIndex < 0) return {};
-  const braceStart = body.indexOf('{', callIndex);
-  const braceEnd = findMatching(body, braceStart, '{', '}');
-  if (braceStart < 0 || braceEnd < 0) return {};
-  let objectSource = body.slice(braceStart, braceEnd + 1);
-  objectSource = objectSource
-    .replace(/dv\.page\("Player Controls"\)\.level/g, JSON.stringify(toNumber(controls.level, 1)))
-    .replace(/dv\.page\("Player Controls"\)\.ExperiencePoints/g, JSON.stringify(toNumber(controls.ExperiencePoints, 0)))
-    .replace(/dv\.page\("Player Controls"\)\.GuildPoints/g, JSON.stringify(toNumber(controls.GuildPoints, 0)))
-    .replace(/dv\.page\("Player Controls"\)\.GuildRank/g, JSON.stringify(controls.GuildRank || ''));
-  return safeEvalExpression(objectSource, {});
 }
 
 function extractLookupArray(body, className) {
@@ -966,9 +1643,9 @@ function renderStandardPage(page, bodyHtml, fileIndex) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${title} - Eldoria</title>
-  <link rel="stylesheet" href="${assetPrefix}public-site.css">
+  <link rel="stylesheet" href="${assetPrefix}public-site.css?v=${PUBLIC_SITE_ASSET_VERSION}">
   <script src="${assetPrefix}site-config.js"></script>
-  <script src="${assetPrefix}public-site.js" defer></script>
+  <script src="${assetPrefix}public-site.js?v=${PUBLIC_SITE_ASSET_VERSION}" defer></script>
 </head>
 <body>
   ${renderSiteHeader(page)}
@@ -1018,9 +1695,7 @@ function renderPlayerPage(player, page) {
   const portrait = player.portraitUrl
     ? `<img src="${escapeAttr(player.portraitUrl)}" alt="${title} portrait">`
     : `<span>${escapeHtml(title.slice(0, 1))}</span>`;
-  const playerBootstrap = renderPlayerBootstrap(p);
   const sheetTabs = [
-    ['overview', 'Overview'],
     ['stats', 'Stats'],
     ['combat', 'Combat'],
     ['actions', 'Actions'],
@@ -1039,16 +1714,18 @@ function renderPlayerPage(player, page) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${title} - Eldoria Player Sheet</title>
-  <link rel="stylesheet" href="${assetPrefix}public-site.css">
+  <link rel="stylesheet" href="${assetPrefix}public-site.css?v=${PUBLIC_SITE_ASSET_VERSION}">
+  <link rel="stylesheet" href="${assetPrefix}character-builder.css">
   <script src="${assetPrefix}site-config.js"></script>
-  ${playerBootstrap}
-  <script src="${assetPrefix}public-site.js" defer></script>
+  <script src="${assetPrefix}eldoria-ruleset.js" defer></script>
+  <script src="${assetPrefix}public-site.js?v=${PUBLIC_SITE_ASSET_VERSION}" defer></script>
+  <script src="${assetPrefix}character-builder.js" defer></script>
 </head>
 <body>
   ${renderSiteHeader(page)}
-  <main class="player-sheet" data-tabs data-player-sheet data-player-id="${escapeAttr(p.id)}">
+  <main class="player-sheet" data-tabs data-player-sheet data-player-id="${escapeAttr(p.id)}" data-player-portrait-src="${escapeAttr(p.portrait || '')}" data-player-class-url="${escapeAttr(p.classUrl || '')}">
     <section class="player-hero">
-      <div class="portrait">${portrait}</div>
+      <div class="portrait" data-player-portrait>${portrait}</div>
       <div>
         <div class="kicker">Player Character</div>
         <h1 data-player-field="name">${title}</h1>
@@ -1060,7 +1737,28 @@ function renderPlayerPage(player, page) {
         <div><span>Prof</span><strong data-player-stat="proficiencyBonus">${formatBonus(p.proficiencyBonus)}</strong></div>
         <div><span>Speed</span><strong data-player-stat="speed">${p.speed} ft</strong></div>
       </div>
+      <div class="hero-overview">
+        ${infoCard('Class', p.class, 'class')}
+        ${infoCard('Subclass', p.subclassShortName || p.subclass || '-', 'subclass')}
+        ${infoCard('Race', p.race, 'race')}
+        ${infoCard('Background', p.background, 'background')}
+        ${infoCard('Experience', p.experience || '-', 'experience')}
+        ${infoCard('Gold', p.gold || 0, 'gold')}
+        ${infoCard('Hero Points', p.heroPoints || 0, 'heroPoints')}
+        ${infoCard('Guild Rank', p.guildRank || '-', 'guildRank')}
+        ${infoCard('Guild Points', p.guildPoints || '-', 'guildPoints')}
+      </div>
       <div class="equipped-summary" data-equipped-summary></div>
+      <div class="hero-actions">
+        <div class="hero-rest-actions" aria-label="Rest controls">
+          <button type="button" data-rest-type="short">Short Rest</button>
+          <button type="button" data-rest-type="long">Long Rest</button>
+          <span data-resource-status></span>
+        </div>
+        <div class="hero-builder-actions">
+          <button type="button" data-character-assistant-open>Level Up / Audit</button>
+        </div>
+      </div>
     </section>
 
     <nav class="tabs" role="tablist" aria-label="Character sheet sections">
@@ -1072,31 +1770,7 @@ function renderPlayerPage(player, page) {
       </select>
     </div>
 
-    ${tabPanel('overview', true, `
-      ${inlineEditPanel('Edit Overview', `
-        <div class="form-grid">
-          ${editNumberField('currentHp', 'Current HP')}
-          ${editNumberField('tempHp', 'Temp HP', 'min="0"')}
-          ${editNumberField('maxHp', 'Max HP')}
-          ${editNumberField('gold', 'Gold', 'min="0"')}
-          ${editNumberField('heroPoints', 'Hero Points', 'min="0"')}
-        </div>
-      `, true)}
-      <div class="sheet-grid">
-        ${infoCard('Class', p.class, 'class')}
-        ${infoCard('Subclass', p.subclassShortName || p.subclass || '-', 'subclass')}
-        ${infoCard('Race', p.race, 'race')}
-        ${infoCard('Background', p.background, 'background')}
-        ${infoCard('Experience', p.experience || '-', 'experience')}
-        ${infoCard('Gold', p.gold || 0, 'gold')}
-        ${infoCard('Hero Points', p.heroPoints || 0, 'heroPoints')}
-        ${infoCard('Guild Rank', p.guildRank || '-', 'guildRank')}
-        ${infoCard('Guild Points', p.guildPoints || '-', 'guildPoints')}
-      </div>
-    `)}
-
-    ${tabPanel('stats', false, `
-      ${inlineEditPanel('Edit Stats', `<div class="form-grid">${abilityEditFields()}</div>`)}
+    ${tabPanel('stats', true, `
       <div class="abilities-grid">${abilities}</div>
       <div class="two-column stacked-section">
         <section><h2>Saving Throws</h2><div class="line-list">${saves}</div></section>
@@ -1105,25 +1779,16 @@ function renderPlayerPage(player, page) {
     `)}
 
     ${tabPanel('combat', false, `
-      ${inlineEditPanel('Edit Combat', `
-        <div class="form-grid">
-          ${editNumberField('currentHp', 'Current HP')}
-          ${editNumberField('tempHp', 'Temp HP', 'min="0"')}
-          ${editNumberField('maxHp', 'Max HP')}
-          ${editNumberField('ac', 'Armor Class')}
-          ${editNumberField('speed', 'Speed')}
-        </div>
-      `)}
       <div data-ac-panel></div>
       <div class="sheet-grid">
         ${infoCard('Armor Class', p.ac, 'ac')}
         ${infoCard('Initiative', formatBonus(p.initiative), 'initiative')}
         ${infoCard('Proficiency', formatBonus(p.proficiencyBonus), 'proficiencyBonus')}
         ${infoCard('Speed', `${p.speed} ft`, 'speed')}
-        ${infoCard('Simple Melee', formatBonus(player.modifiers.str + (p.simpleWeapons ? p.proficiencyBonus : 0)))}
-        ${infoCard('Simple Ranged', formatBonus(player.modifiers.dex + (p.simpleWeapons ? p.proficiencyBonus : 0)))}
-        ${infoCard('Martial Melee', formatBonus(player.modifiers.str + (p.martialWeapons ? p.proficiencyBonus : 0)))}
-        ${infoCard('Martial Ranged', formatBonus(player.modifiers.dex + (p.martialWeapons ? p.proficiencyBonus : 0)))}
+        ${infoCard('Simple Melee', formatBonus(player.modifiers.str + (p.simpleWeapons ? p.proficiencyBonus : 0)), 'simpleMelee')}
+        ${infoCard('Simple Ranged', formatBonus(player.modifiers.dex + (p.simpleWeapons ? p.proficiencyBonus : 0)), 'simpleRanged')}
+        ${infoCard('Martial Melee', formatBonus(player.modifiers.str + (p.martialWeapons ? p.proficiencyBonus : 0)), 'martialMelee')}
+        ${infoCard('Martial Ranged', formatBonus(player.modifiers.dex + (p.martialWeapons ? p.proficiencyBonus : 0)), 'martialRanged')}
         ${infoCard('Spell Attack', p.spellAttack === null ? '-' : formatBonus(p.spellAttack), 'spellAttack')}
         ${infoCard('Spell Save DC', p.spellSaveDc === null ? '-' : p.spellSaveDc, 'spellSaveDc')}
       </div>
@@ -1137,31 +1802,22 @@ function renderPlayerPage(player, page) {
     `)}
 
     ${tabPanel('actions', false, `
-      ${inlineEditPanel('Edit Combat Stats', `
-        <div class="form-grid">
-          ${editNumberField('currentHp', 'Current HP')}
-          ${editNumberField('tempHp', 'Temp HP', 'min="0"')}
-          ${editNumberField('maxHp', 'Max HP')}
-          ${editNumberField('ac', 'Armor Class')}
-          ${editNumberField('speed', 'Speed')}
-        </div>
-      `)}
       <div data-actions-panel></div>
     `)}
 
     ${tabPanel('resources', false, `
-      ${inlineEditPanel('Edit Health', `
-        <div class="form-grid">
-          ${editNumberField('currentHp', 'Current HP')}
-          ${editNumberField('tempHp', 'Temp HP', 'min="0"')}
-          ${editNumberField('maxHp', 'Max HP')}
-        </div>
-      `)}
       <div data-resources-panel></div>
     `)}
 
     ${tabPanel('equipment', false, `
-      <div data-equipment-panel data-items-url="${escapeAttr(relativeUrl(page.url, 'Assets/Rules/items.json'))}"></div>
+      <div
+        data-equipment-panel
+        data-rules-base="${escapeAttr(relativeUrl(page.url, 'Assets/Rules/'))}"
+        data-items-url="${escapeAttr(relativeUrl(page.url, 'Assets/Rules/items.json'))}"
+        data-classes-url="${escapeAttr(relativeUrl(page.url, 'Assets/Rules/classes.json'))}"
+        data-races-url="${escapeAttr(relativeUrl(page.url, 'Assets/Rules/races.json'))}"
+        data-backgrounds-url="${escapeAttr(relativeUrl(page.url, 'Assets/Rules/backgrounds.json'))}"
+      ></div>
     `)}
     ${tabPanel('spells', false, `<div data-spell-panel data-spells-url="${escapeAttr(relativeUrl(page.url, 'data/spells.json'))}"></div>`)}
     ${tabPanel('features', false, `
@@ -1200,12 +1856,13 @@ function renderPlayerPage(player, page) {
           <span data-player-notes-status></span>
         </div>
       </form>
-      <div class="resource-links">
+      <div class="resource-links" data-player-resource-links>
         ${p.notesUrl ? `<a href="${escapeAttr(p.notesUrl)}">Player notes</a>` : ''}
         ${p.classUrl ? `<a href="${escapeAttr(relativeUrl(page.url, p.classUrl))}">Full class info</a>` : ''}
         <a href="${escapeAttr(relativeUrl(page.url, 'spell-search.html'))}">Quick spell lookup</a>
       </div>
     `)}
+    ${renderCharacterAssistantModal(page, p)}
   </main>
 </body>
 </html>
@@ -1216,22 +1873,160 @@ function tabButton(id, label, active = false) {
   return `<button class="tab-button ${active ? 'active' : ''}" data-tab-target="${id}" type="button" role="tab" aria-selected="${active ? 'true' : 'false'}">${label}</button>`;
 }
 
-function tabOption(id, label, active = false) {
-  return `<option value="${escapeAttr(id)}"${active ? ' selected' : ''}>${escapeHtml(label)}</option>`;
+function renderCharacterAssistantModal(page, player) {
+  return `<dialog class="character-assistant-dialog" data-character-assistant-modal aria-labelledby="builder-title">
+    <div class="character-assistant-frame">
+      <button class="character-assistant-close" type="button" data-character-assistant-close aria-label="Close character assistant">&times;</button>
+      ${renderCharacterBuilderPanel(page, player)}
+    </div>
+  </dialog>`;
 }
 
-function inlineEditPanel(title, body, includeReset = false) {
-  return `<details class="inline-edit-panel">
-    <summary><span>${escapeHtml(title)}</span><strong>Edit</strong></summary>
-    <form class="edit-form" data-player-edit-form>
-      ${body}
-      <div class="form-actions">
-        <button type="submit">Save</button>
-        ${includeReset ? '<button type="button" data-player-reset>Reset</button>' : ''}
-        <span data-player-edit-status></span>
+function renderCharacterBuilderPanel(page, player) {
+  const rulesBase = relativeUrl(page.url, 'index.html').replace(/index\.html$/i, '');
+  return `<div class="builder-shell sheet-builder" data-character-builder data-builder-mode="sheet" data-builder-character-id="${escapeAttr(player.id)}" data-builder-player-name="${escapeAttr(player.name)}" data-builder-sheet-title="${escapeAttr(player.sheetTitle || '')}" data-builder-portrait="${escapeAttr(player.portrait || '')}" data-rules-base="${escapeAttr(rulesBase)}">
+    <section class="builder-hero" aria-labelledby="builder-title">
+      <div>
+        <div class="kicker">Character Rules</div>
+        <h2 id="builder-title">Character Builder</h2>
       </div>
-    </form>
-  </details>`;
+      <div class="builder-status" data-builder-status>Loading rules...</div>
+    </section>
+
+    <nav class="builder-stepper" aria-label="Character builder steps">
+      <button type="button" data-step-target="levels">Levels</button>
+    </nav>
+
+    <section class="builder-grid">
+      <aside class="builder-panel builder-panel-sticky" aria-labelledby="cloud-title">
+        <h2 id="cloud-title">Character Build</h2>
+        <select data-character-select hidden aria-hidden="true">
+          <option value="${escapeAttr(player.id)}">${escapeHtml(player.name)}</option>
+        </select>
+        <div class="builder-sheet-summary">
+          <strong>${escapeHtml(player.name)}</strong>
+          <span>New character draft</span>
+        </div>
+        <div class="builder-actions">
+          <button type="button" data-new-draft>New Draft</button>
+          <button type="button" data-level-up>Next Level</button>
+          <button type="button" data-save-cloud>Save</button>
+        </div>
+        <p class="builder-note" data-storage-note>Characters save to the Eldoria cloud API when it is configured.</p>
+        <div class="builder-current-state" data-current-state></div>
+      </aside>
+
+      <div class="builder-main">
+        <section class="builder-panel" data-step="levels" aria-labelledby="audit-title">
+          <div class="panel-heading">
+            <h2 id="audit-title">Builder Review</h2>
+            <span data-audit-summary></span>
+          </div>
+          <div class="audit-list" data-audit-list></div>
+          <div class="next-level-summary" data-next-level-summary></div>
+        </section>
+
+        <section class="builder-panel" data-step="levels" aria-labelledby="identity-title">
+          <h2 id="identity-title">Level 1: Identity And Scores</h2>
+          <div class="form-grid">
+            <label>
+              Character Name
+              <input type="text" data-field="name" autocomplete="off">
+            </label>
+            <label>
+              Level
+              <input type="number" data-field="level" min="1" max="20">
+            </label>
+            <label>
+              Ability Method
+              <select data-field="abilityMethod">
+                <option value="manual">Manual / Imported</option>
+                <option value="standard-array">Standard Array</option>
+                <option value="point-buy">Point Buy</option>
+                <option value="rolled">Rolled</option>
+              </select>
+            </label>
+          </div>
+          <div class="ability-edit-grid" aria-label="Ability scores">
+            ${['str', 'dex', 'con', 'int', 'wis', 'cha'].map(key => `<label>${key.toUpperCase()}<input type="number" min="1" max="30" data-ability-field="${key}"></label>`).join('')}
+          </div>
+          <div class="form-grid">
+            <label>
+              Health Mode
+              <select data-field="hpMode">
+                <option value="auto-average">Auto Average On Level Up</option>
+                <option value="manual">Manual Hit Points</option>
+              </select>
+            </label>
+            <label>
+              Max HP
+              <input type="number" data-field="maxHp" min="0" max="999">
+            </label>
+            <label>
+              Current HP
+              <input type="number" data-field="currentHp" min="0" max="999">
+            </label>
+          </div>
+        </section>
+
+        <section class="builder-panel" data-step="levels" aria-labelledby="origin-title">
+          <h2 id="origin-title">Level 1: Origin</h2>
+          <div class="form-grid">
+            <label>
+              Race
+              <select data-field="raceId"></select>
+            </label>
+            <label>
+              Background
+              <select data-field="backgroundId"></select>
+            </label>
+          </div>
+          <div class="rule-detail-grid">
+            <div class="rule-detail-slot" data-rule-detail="race"></div>
+            <div class="rule-detail-slot" data-rule-detail="background"></div>
+          </div>
+        </section>
+
+        <section class="builder-panel" data-step="levels" aria-labelledby="class-title">
+          <div class="panel-heading">
+            <h2 id="class-title">Level 1: Class Path</h2>
+            <span data-class-gate></span>
+          </div>
+          <div class="form-grid">
+            <label>
+              Class
+              <select data-field="classId"></select>
+            </label>
+            <label data-subclass-field hidden>
+              Subclass
+              <select data-field="subclassId"></select>
+            </label>
+          </div>
+          <div class="rule-detail-grid">
+            <div class="rule-detail-slot" data-rule-detail="class"></div>
+            <div class="rule-detail-slot" data-rule-detail="subclass" hidden></div>
+          </div>
+        </section>
+
+        <section class="builder-panel" data-step="levels" aria-labelledby="features-title">
+          <div class="panel-heading">
+            <h2 id="features-title">Levels</h2>
+            <span data-feature-summary></span>
+          </div>
+          <div class="choice-groups" data-choice-groups></div>
+        </section>
+
+        <div class="builder-nav">
+          <button type="button" data-prev-step>Previous</button>
+          <button type="button" data-next-step>Next</button>
+        </div>
+      </div>
+    </section>
+  </div>`;
+}
+
+function tabOption(id, label, active = false) {
+  return `<option value="${escapeAttr(id)}"${active ? ' selected' : ''}>${escapeHtml(label)}</option>`;
 }
 
 function renderRuleFeatureList(features, emptyText = 'No features found in canonical rules.') {
@@ -1297,20 +2092,6 @@ function formatFeatureMeta(feature) {
     feature.timing,
     feature.resourceHint,
   ].filter(Boolean).join(' / ');
-}
-
-function editNumberField(name, label, attrs = '') {
-  return `<label><span>${escapeHtml(label)}</span><input name="${escapeAttr(name)}" type="number" inputmode="numeric" ${attrs}></label>`;
-}
-
-function abilityEditFields() {
-  return ABILITIES.map(ability => editNumberField(ability, ABILITY_NAMES[ability])).join('');
-}
-
-function renderPlayerBootstrap(player) {
-  const slim = { ...player };
-  delete slim.searchText;
-  return `<script type="application/json" data-player-bootstrap>${escapeScriptJson(JSON.stringify(slim))}</script>`;
 }
 
 function tabPanel(id, active, html) {
@@ -1665,9 +2446,9 @@ function writeSearchPage() {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Eldoria Public Search</title>
-  <link rel="stylesheet" href="./site-assets/public-site.css">
+  <link rel="stylesheet" href="./site-assets/public-site.css?v=${PUBLIC_SITE_ASSET_VERSION}">
   <script src="./site-assets/site-config.js"></script>
-  <script src="./site-assets/public-site.js" defer></script>
+  <script src="./site-assets/public-site.js?v=${PUBLIC_SITE_ASSET_VERSION}" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -1708,7 +2489,7 @@ function renderUtilityAliasPage(filename, target, title) {
   <meta http-equiv="refresh" content="0; url=${escapeHtml(target)}">
   <title>${escapeHtml(title)} - Eldoria</title>
   <link rel="canonical" href="${escapeHtml(target)}">
-  <link rel="stylesheet" href="../site-assets/public-site.css">
+  <link rel="stylesheet" href="../site-assets/public-site.css?v=${PUBLIC_SITE_ASSET_VERSION}">
   <script>
     window.location.replace(${JSON.stringify(target)});
   </script>

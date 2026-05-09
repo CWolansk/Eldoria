@@ -3,9 +3,10 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "node",
-    "SQL_SERVER": "YOUR_SQL_SERVER.database.windows.net",
-    "SQL_DATABASE": "YOUR_DATABASE",
-    "SQL_AUTH_MODE": "managed_identity",
+    "TABLE_STORAGE_ACCOUNT": "YOUR_STORAGE_ACCOUNT",
+    "TABLE_STORAGE_ENDPOINT": "https://YOUR_STORAGE_ACCOUNT.table.core.windows.net",
+    "PLAYER_SHEETS_TABLE": "PlayerSheets",
+    "CHARACTER_BUILDS_TABLE": "CharacterBuilds",
     "GITHUB_PAGES_ORIGIN": "https://YOUR_GITHUB_USER_OR_ORG.github.io"
   }
 }
