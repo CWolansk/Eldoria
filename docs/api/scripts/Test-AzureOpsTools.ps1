@@ -22,16 +22,6 @@ if (Get-Command az -ErrorAction SilentlyContinue) {
     $errors.Add('Azure CLI `az` is missing. Required for api:settings and api:deploy.')
 }
 
-try {
-    $sqlcmdPath = Get-SqlcmdCommandPath -Config $config
-    $help = Get-SqlcmdHelp -SqlcmdPath $sqlcmdPath
-    $versionLine = Get-SqlcmdVersionLine -Help $help
-    Write-Host "sqlcmd: $versionLine ($sqlcmdPath)"
-    Assert-SqlcmdSupportsEntra -SqlcmdPath $sqlcmdPath -Help $help
-} catch {
-    $errors.Add($_.Exception.Message)
-}
-
 if ($errors.Count -gt 0) {
     foreach ($errorMessage in $errors) {
         Write-Error $errorMessage

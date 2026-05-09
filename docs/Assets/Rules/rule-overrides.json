@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "items": {
+    "corpse-slayer-flamberge-bastard-sword": {
+      "weapon": {
+        "baseName": "Flamberge Bastard Sword",
+        "type": "martial",
+        "style": "melee",
+        "ability": "str",
+        "damage": "2d4",
+        "damageType": "slashing",
+        "properties": [
+          "heavy",
+          "versatile (2d6)",
+          "special"
+        ],
+        "magicBonus": 1
+      },
+      "toggles": {
+        "corpse-slayer-undead-target": {
+          "label": "Undead target",
+          "timing": "on-hit",
+          "appliesTo": "this-weapon",
+          "effects": [
+            {
+              "kind": "extra-damage",
+              "dice": "1d8",
+              "damageType": "weapon",
+              "label": "Corpse Slayer vs undead"
+            }
+          ],
+          "text": "On a hit against an undead creature, add 1d8 weapon damage and give it disadvantage on saves against turn undead effects until your next turn."
+        }
+      },
+      "actions": {
+        "corpse-slayer-flamberge-bastard-sword": {
+          "hidden": true
+        },
+        "corpse-slayer-defensive-parry": {
+          "group": "Reaction",
+          "type": "Weapon",
+          "title": "Corpse Slayer Defensive Parry",
+          "detail": "While wielding this weapon, add proficiency bonus to AC against one melee attack that would hit you.",
+          "tags": [
+            "Reaction",
+            "Melee attack",
+            "Wielding weapon"
+          ]
+        }
+      }
+    },
+    "sigil-of-thunderous-might": {
+      "resources": {
+        "crushing-strike": {
+          "name": "Crushing Strike",
+          "max": 1,
+          "reset": "longRest"
+        },
+        "shielding-impact": {
+          "name": "Shielding Impact",
+          "max": 1,
+          "reset": "longRest"
+        }
+      },
+      "toggles": {
+        "sigil-crushing-strike": {
+          "label": "Crushing Strike",
+          "timing": "before-attack",
+          "appliesTo": "equipped-weapon",
+          "resourceId": "sigil-of-thunderous-might-crushing-strike",
+          "effects": [
+            {
+              "kind": "extra-damage",
+              "dice": "2d6",
+              "damageType": "thunder",
+              "label": "Crushing Strike"
+            }
+          ],
+          "text": "Before determining if an attack hits, add 2d6 thunder damage on a hit."
+        },
+        "sigil-shielding-impact": {
+          "label": "Shielding Impact",
+          "timing": "before-attack",
+          "appliesTo": "equipped-weapon",
+          "resourceId": "sigil-of-thunderous-might-shielding-impact",
+          "effects": [
+            {
+              "kind": "on-hit",
+              "label": "Shielding Impact",
+              "text": "You and up to two allies within 20 feet gain temporary hit points equal to half the damage dealt."
+            }
+          ],
+          "text": "Before determining if an attack hits, grant temporary hit points on a hit."
+        }
+      }
+    },
+    "bracer-of-piercing-arrows": {
+      "resources": {
+        "piercing-shot": {
+          "name": "Piercing Shot",
+          "max": 3,
+          "reset": "longRest"
+        },
+        "precise-aim": {
+          "name": "Precise Aim",
+          "max": 1,
+          "reset": "longRest"
+        }
+      }
+    },
+    "amulet-of-divine-retribution": {
+      "resources": {
+        "divine-wrath": {
+          "name": "Divine Wrath",
+          "max": 1,
+          "reset": "longRest"
+        },
+        "divine-protection": {
+          "name": "Divine Protection",
+          "max": 1,
+          "reset": "longRest"
+        }
+      }
+    },
+    "gauntlets-of-whirling-strikes": {
+      "resources": {
+        "whirling-fury": {
+          "name": "Whirling Fury",
+          "max": 1,
+          "reset": "longRest"
+        },
+        "evasive-maneuver": {
+          "name": "Evasive Maneuver",
+          "max": 1,
+          "reset": "longRest"
+        }
+      },
+      "actions": {
+        "whirling-fury": {
+          "remove": true
+        }
+      },
+      "toggles": {
+        "whirling-fury": {
+          "label": "Whirling Fury",
+          "timing": "on-hit",
+          "appliesTo": "equipped-weapon",
+          "resourceId": "gauntlets-of-whirling-strikes-whirling-fury",
+          "consumeOn": "activation",
+          "valueKey": "whirling-fury-damage-bonus",
+          "defaultValue": 1,
+          "min": 0,
+          "step": 1,
+          "effects": [
+            {
+              "kind": "weapon-damage-bonus",
+              "label": "Whirling Fury",
+              "valueMode": "manual",
+              "valueKey": "whirling-fury-damage-bonus",
+              "defaultValue": 1,
+              "min": 0,
+              "step": 1,
+              "valueLabel": "Damage bonus"
+            }
+          ],
+          "text": "Activate once per long rest. While active, add the current Whirling Fury bonus as same-type weapon damage. Increase the bonus manually for consecutive hits, and reset it if you miss or switch targets."
+        }
+      }
+    },
+    "talisman-of-elemental-fury": {
+      "resources": {
+        "elemental-surge": {
+          "name": "Elemental Surge",
+          "max": 1,
+          "reset": "longRest"
+        },
+        "elemental-ward": {
+          "name": "Elemental Ward",
+          "max": 1,
+          "reset": "longRest"
+        }
+      }
+    },
+    "the-aegis-codex": {
+      "resources": {
+        "arcane-distraction": {
+          "name": "Arcane Distraction",
+          "max": 1,
+          "reset": "longRest"
+        },
+        "arcane-barrier": {
+          "name": "Arcane Barrier",
+          "max": 1,
+          "reset": "longRest"
+        }
+      }
+    },
+    "lightning-rod": {
+      "resources": {
+        "lightning-rod-charges": {
+          "name": "Lightning Rod Charges",
+          "max": 6,
+          "reset": "dawnLose1d6"
+        }
+      },
+      "effects": {
+        "lightning-rod-lightning-resistance": {
+          "kind": "resistance",
+          "target": "lightning",
+          "mode": "conditional",
+          "text": "Immune to lightning damage while holding it until it reaches 6 charges; then resistance instead."
+        }
+      }
+    },
+    "medallion-of-harmonious-resonance": {
+      "weapon": false,
+      "damage": "",
+      "tags": [
+        "NoWeaponAttack",
+        "NoAutoDamage"
+      ],
+      "actions": {
+        "resonant-crescendo": {
+          "group": "Reaction",
+          "type": "Item",
+          "title": "Resonant Crescendo",
+          "roll": false,
+          "tags": [
+            "Attunement",
+            "1 use"
+          ],
+          "detail": "Resonant Crescendo (Reaction, 1/day): When an ally you can see makes an attack roll, you may use your reaction to grant them +2 to the roll. If the attack hits, it deals an additional 1d12 thunder damage as your music echoes through the strike."
+        },
+        "melodic-harmony": {
+          "group": "Action",
+          "type": "Item",
+          "title": "Melodic Harmony",
+          "roll": false,
+          "tags": [
+            "Attunement",
+            "1 use"
+          ],
+          "detail": "Melodic Harmony (Action, 1/day): You perform a magically infused tune that invigorates your allies. You and all allies within 30 feet gain temporary hit points equal to your Bard level, and have advantage on all saving throws for 1 minute (concentration required)."
+        }
+      }
+    }
+  },
+  "spells": {},
+  "features": {
+    "class-monk-2-flurry-of-blows-phb": {
+      "activations": [
+        {
+          "id": "class-monk-2-flurry-of-blows-phb-flurry-of-blows",
+          "label": "Flurry of Blows",
+          "timing": "Bonus Action",
+          "appliesTo": "bonus-action-attack",
+          "resourceId": "monk-ki",
+          "resourceCost": 1,
+          "consumeOn": "activation",
+          "control": "button",
+          "duration": "instant",
+          "text": "Spend 1 ki after taking the Attack action to make two unarmed strikes as a bonus action."
+        }
+      ]
+    },
+    "class-monk-2-patient-defense-phb": {
+      "activations": [
+        {
+          "id": "class-monk-2-patient-defense-phb-patient-defense",
+          "label": "Patient Defense",
+          "timing": "Bonus Action",
+          "appliesTo": "self",
+          "resourceId": "monk-ki",
+          "resourceCost": 1,
+          "consumeOn": "activation",
+          "control": "button",
+          "duration": "instant",
+          "text": "Spend 1 ki to take the Dodge action as a bonus action on your turn."
+        }
+      ]
+    },
+    "class-monk-2-step-of-the-wind-phb": {
+      "activations": [
+        {
+          "id": "class-monk-2-step-of-the-wind-phb-step-of-the-wind",
+          "label": "Step of the Wind",
+          "timing": "Bonus Action",
+          "appliesTo": "self",
+          "resourceId": "monk-ki",
+          "resourceCost": 1,
+          "consumeOn": "activation",
+          "control": "button",
+          "duration": "instant",
+          "text": "Spend 1 ki to take the Dash or Disengage action as a bonus action; your jump distance doubles for the turn."
+        }
+      ]
+    },
+    "class-monk-3-ki-fueled-attack-tce": {
+      "activations": [
+        {
+          "id": "class-monk-3-ki-fueled-attack-tce-ki-fueled-attack",
+          "label": "Ki-Fueled Attack",
+          "timing": "Bonus Action",
+          "appliesTo": "bonus-action-attack",
+          "resourceId": "",
+          "resourceCost": 0,
+          "consumeOn": "manual",
+          "text": "Turn on after spending 1 or more ki as part of your action; you can make one unarmed strike or monk weapon attack as a bonus action before the turn ends."
+        }
+      ]
+    },
+    "class-monk-4-quickened-healing-tce": {
+      "activations": [
+        {
+          "id": "class-monk-4-quickened-healing-tce-quickened-healing",
+          "label": "Quickened Healing",
+          "timing": "Action",
+          "appliesTo": "self",
+          "resourceId": "monk-ki",
+          "resourceCost": 2,
+          "consumeOn": "activation",
+          "control": "button",
+          "duration": "instant",
+          "text": "Spend 2 ki and roll a Martial Arts die; regain hit points equal to the roll plus proficiency bonus."
+        }
+      ]
+    },
+    "class-monk-5-focused-aim-tce": {
+      "activations": [
+        {
+          "id": "class-monk-5-focused-aim-tce-focused-aim",
+          "label": "Focused Aim",
+          "timing": "after-miss",
+          "appliesTo": "weapon-attack",
+          "resourceId": "monk-ki",
+          "resourceCostKey": "focused-aim-ki",
+          "consumeOn": "attack-roll",
+          "valueKey": "focused-aim-ki",
+          "defaultValue": 1,
+          "min": 1,
+          "max": 3,
+          "step": 1,
+          "effects": [
+            {
+              "kind": "weapon-attack-bonus",
+              "label": "Focused Aim",
+              "valueMode": "manual",
+              "valueKey": "focused-aim-ki",
+              "defaultValue": 1,
+              "min": 1,
+              "max": 3,
+              "step": 1,
+              "multiplier": 2,
+              "valueLabel": "Ki points"
+            }
+          ],
+          "text": "After missing with an attack roll, spend 1 to 3 ki to increase the attack roll by 2 per ki point."
+        }
+      ]
+    },
+    "class-monk-5-stunning-strike-phb": {
+      "activations": [
+        {
+          "id": "class-monk-5-stunning-strike-phb-stunning-strike",
+          "label": "Stunning Strike",
+          "timing": "on-hit",
+          "appliesTo": "melee-weapon-attack",
+          "resourceId": "monk-ki",
+          "resourceCost": 1,
+          "consumeOn": "damage-roll",
+          "effects": [
+            {
+              "kind": "on-hit",
+              "label": "Stunning Strike",
+              "saveAbility": "con",
+              "saveDcSource": "ki",
+              "text": "Target makes a Constitution saving throw against your ki save DC or is stunned until the end of your next turn."
+            }
+          ],
+          "text": "On a melee weapon hit, spend 1 ki to force a Constitution save against your ki save DC; on a failure, the target is stunned until the end of your next turn."
+        }
+      ]
+    }
+  },
+  "actions": {
+    "feature-class-monk-2-ki-phb": {
+      "remove": true
+    }
+  },
+  "resources": {},
+  "effects": {},
+  "rules": {},
+  "backgrounds": {},
+  "feats": {},
+  "races": {},
+  "classes": {},
+  "subclasses": {}
+}

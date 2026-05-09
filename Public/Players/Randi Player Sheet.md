@@ -63,7 +63,7 @@ await FeatLookup.display(dv, [])
 ## Race 
 ```dataviewjs
 const {RaceLookup} = await cJS()
-await RaceLookup.display(dv, ['Aasimar'])
+await RaceLookup.display(dv, ['Aasimar|DMG'])
 ```
 
 ## Notes

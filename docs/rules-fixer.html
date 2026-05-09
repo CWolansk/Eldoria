@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eldoria Rules Database</title>
+  <link rel="stylesheet" href="site-assets/public-site.css">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #151719;
+      --panel: #202427;
+      --panel-strong: #292f32;
+      --text: #f0eee8;
+      --muted: #b7b0a6;
+      --line: #3b4346;
+      --accent: #72b8ad;
+      --accent-strong: #98d0c7;
+      --gold: #d9a651;
+      --warning: #d9a651;
+      --danger: #dc756b;
+      --shadow: 0 18px 45px rgba(0, 0, 0, .28);
+    }
+
+    .rules-fixer {
+      width: calc(100% - 2rem);
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 1rem 0 2rem;
+    }
+
+    .fixer-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: end;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .fixer-header h1 {
+      font-size: 2rem;
+    }
+
+    .fixer-header p,
+    .fixer-status,
+    .record-meta,
+    .field-note {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .fixer-toolbar,
+    .quick-controls,
+    .fixer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      align-items: center;
+    }
+
+    .fixer-toolbar {
+      margin: 1rem 0;
+      justify-content: space-between;
+    }
+
+    .collection-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .collection-tabs button,
+    .fixer-actions button,
+    .quick-controls button,
+    .quick-controls label,
+    .record-row {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      color: var(--text);
+    }
+
+    .collection-tabs button,
+    .fixer-actions button,
+    .quick-controls button {
+      min-height: 2.2rem;
+      padding: .45rem .75rem;
+      font: inherit;
+      font-size: .88rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .collection-tabs button[aria-selected="true"],
+    .fixer-actions button.primary,
+    .quick-controls label.active {
+      border-color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 18%, var(--panel));
+      color: var(--accent-strong);
+    }
+
+    .fixer-actions button:disabled {
+      cursor: not-allowed;
+      opacity: .55;
+    }
+
+    .search-box {
+      min-width: min(100%, 20rem);
+      min-height: 2.35rem;
+      padding: .45rem .7rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      color: var(--text);
+      font: inherit;
+    }
+
+    .fixer-grid {
+      display: grid;
+      grid-template-columns: minmax(260px, 360px) 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .record-list,
+    .detail-panel,
+    .json-panel,
+    .summary-panel {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .record-list {
+      max-height: calc(100vh - 220px);
+      overflow: auto;
+      padding: .5rem;
+    }
+
+    .record-row {
+      display: grid;
+      width: 100%;
+      gap: .2rem;
+      margin: 0 0 .45rem;
+      padding: .65rem .7rem;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .record-row[aria-selected="true"] {
+      border-color: var(--accent);
+      box-shadow: inset 3px 0 0 var(--accent);
+    }
+
+    .record-row strong {
+      font-size: .92rem;
+    }
+
+    .record-row span {
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .override-badge {
+      justify-self: start;
+      padding: .08rem .35rem;
+      border-radius: 4px;
+      background: color-mix(in srgb, var(--gold) 20%, var(--panel));
+      color: var(--gold);
+      font-size: .72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .detail-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, .9fr);
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .summary-panel,
+    .json-panel {
+      padding: .9rem;
+    }
+
+    .summary-panel h2,
+    .json-panel h2,
+    .summary-panel h3 {
+      margin-top: 0;
+    }
+
+    .quick-controls {
+      margin: .75rem 0;
+    }
+
+    .guided-editor {
+      display: grid;
+      gap: .75rem;
+      margin: .85rem 0;
+      padding: .75rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--panel-strong) 72%, var(--panel));
+    }
+
+    .guided-editor > header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem .8rem;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .guided-editor h3,
+    .guided-section h4 {
+      margin: 0;
+    }
+
+    .guided-editor > header span,
+    .guided-section label span,
+    .inline-editor span {
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .guided-section {
+      display: grid;
+      gap: .55rem;
+      padding-top: .65rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .guided-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: .5rem;
+      align-items: end;
+    }
+
+    .guided-grid.compact {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .guided-section label,
+    .inline-editor {
+      display: grid;
+      gap: .25rem;
+      min-width: 0;
+    }
+
+    .guided-section input,
+    .guided-section select,
+    .guided-section textarea {
+      box-sizing: border-box;
+      width: 100%;
+      min-height: 2.15rem;
+      padding: .4rem .5rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      color: var(--text);
+      font: inherit;
+      font-size: .84rem;
+    }
+
+    .guided-section textarea {
+      min-height: 4.8rem;
+      resize: vertical;
+    }
+
+    .guided-section .wide {
+      grid-column: 1 / -1;
+    }
+
+    .check-row {
+      display: flex !important;
+      grid-template-columns: none !important;
+      align-items: center;
+      gap: .45rem !important;
+      min-height: 2.15rem;
+    }
+
+    .check-row input {
+      width: auto;
+      min-height: auto;
+    }
+
+    .tag-row,
+    .builder-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+    }
+
+    .tag-row {
+      align-items: center;
+    }
+
+    .builder-tabs {
+      display: grid;
+    }
+
+    .builder-tabs details {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      padding: .45rem .55rem;
+    }
+
+    .builder-tabs summary,
+    .embedded-editor-card summary {
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .builder-tabs details[open] summary {
+      margin-bottom: .55rem;
+      color: var(--accent-strong);
+    }
+
+    .embedded-group {
+      display: grid;
+      gap: .45rem;
+    }
+
+    .embedded-group > header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .7rem;
+    }
+
+    .embedded-group > header span {
+      min-width: 1.6rem;
+      padding: .08rem .4rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .74rem;
+      font-weight: 800;
+    }
+
+    .embedded-card-list {
+      display: grid;
+      gap: .45rem;
+    }
+
+    .embedded-editor-card {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      padding: .5rem .6rem;
+    }
+
+    .embedded-editor-card summary {
+      display: grid;
+      gap: .15rem;
+    }
+
+    .embedded-editor-card summary small {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 500;
+    }
+
+    .embedded-editor-card[open] summary {
+      margin-bottom: .6rem;
+      color: var(--accent-strong);
+    }
+
+    .embedded-card-actions {
+      margin-bottom: 0;
+    }
+
+    .save-editor {
+      margin: .55rem 0 0;
+      padding: .65rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+
+    .save-editor legend {
+      padding: 0 .25rem;
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
+    .guided-section button,
+    .rf-chip {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      color: var(--text);
+      min-height: 2rem;
+      padding: .35rem .6rem;
+      font: inherit;
+      font-size: .82rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .guided-section button:hover,
+    .rf-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent-strong);
+    }
+
+    .rf-chip.active {
+      border-color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 18%, var(--panel));
+      color: var(--accent-strong);
+    }
+
+    .quick-controls label {
+      display: inline-flex;
+      gap: .45rem;
+      align-items: center;
+      min-height: 2.2rem;
+      padding: .4rem .65rem;
+      font-size: .86rem;
+      font-weight: 700;
+    }
+
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: .45rem;
+      margin: .75rem 0;
+    }
+
+    .fact-grid div {
+      padding: .55rem .6rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel-strong);
+    }
+
+    .fact-grid dt {
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .fact-grid dd {
+      margin: .15rem 0 0;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .mini-table {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      margin: .7rem 0 0;
+      font-size: .85rem;
+    }
+
+    .editor-stack {
+      display: grid;
+      gap: .75rem;
+    }
+
+    .editor-label {
+      display: grid;
+      gap: .35rem;
+    }
+
+    .editor-heading {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: .45rem;
+      font-size: .9rem;
+      font-weight: 800;
+    }
+
+    .json-editor {
+      box-sizing: border-box;
+      width: 100%;
+      min-height: 420px;
+      resize: vertical;
+      padding: .75rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel-strong);
+      color: var(--text);
+      font: 13px/1.45 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      tab-size: 2;
+    }
+
+    .json-editor.compact {
+      min-height: 220px;
+    }
+
+    .original-json {
+      max-height: 520px;
+      overflow: auto;
+      max-width: 100%;
+      font-size: .78rem;
+    }
+
+    .status-line {
+      min-height: 1.4rem;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .status-line.error {
+      color: var(--danger);
+    }
+
+    .status-line.ok {
+      color: var(--accent-strong);
+    }
+
+    .rf-meta,
+    .rf-card header span,
+    .rf-search small {
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .rf-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: .45rem;
+      margin: .75rem 0;
+    }
+
+    .rf-summary-grid div,
+    .rf-card {
+      padding: .55rem .6rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel-strong);
+    }
+
+    .rf-section {
+      display: grid;
+      gap: .5rem;
+      margin-top: .8rem;
+      padding-top: .8rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .rf-section h3 {
+      margin: 0;
+    }
+
+    .rf-card-list {
+      display: grid;
+      gap: .45rem;
+    }
+
+    .rf-card header {
+      display: flex;
+      justify-content: space-between;
+      gap: .6rem;
+      margin-bottom: .25rem;
+    }
+
+    .rf-card p {
+      margin: 0;
+      font-size: .84rem;
+      line-height: 1.4;
+    }
+
+    .rf-chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .25rem;
+      margin-top: .35rem;
+    }
+
+    .rf-chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--muted);
+      padding: .08rem .38rem;
+      font-size: .72rem;
+      font-weight: 700;
+    }
+
+    .rf-empty {
+      padding: .75rem;
+      border: 1px dashed var(--line);
+      border-radius: 6px;
+      color: var(--muted);
+    }
+
+    .rf-validation {
+      min-height: 1.4rem;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .rf-validation.error {
+      color: var(--danger);
+    }
+
+    .rf-validation.ok {
+      color: var(--accent-strong);
+    }
+
+    .rf-log {
+      min-height: 4.4rem;
+      max-height: 13rem;
+      overflow: auto;
+      white-space: pre-wrap;
+      font: 12px/1.45 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+    }
+
+    .file-warning {
+      margin: 1rem 0;
+      padding: .75rem .9rem;
+      border: 1px solid var(--warning);
+      border-radius: 6px;
+      background: color-mix(in srgb, var(--warning) 12%, var(--panel));
+      color: var(--text);
+    }
+
+    @media (max-width: 980px) {
+      .fixer-header,
+      .fixer-grid,
+      .detail-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .record-list {
+        max-height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-title" href="index.html">Eldoria</a>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Hub</a>
+      <a href="item-search.html">Items</a>
+      <a href="spell-search.html">Spells</a>
+      <a href="character-builder.html">Character Builder</a>
+    </nav>
+  </header>
+
+  <main class="rules-fixer" data-rules-fixer>
+    <section class="fixer-header">
+      <div>
+        <h1>Rules Database</h1>
+        <p>Edit item, spell, feature, action, and character option records directly. Saves update the canonical rule data sheets load.</p>
+      </div>
+      <div class="fixer-status" data-summary>Loading rules...</div>
+    </section>
+
+    <section class="file-warning" data-file-warning hidden>
+      Start the local docs server and open <strong>http://localhost:8086/rules-fixer.html</strong> to load and save rule records.
+    </section>
+
+    <section class="fixer-toolbar">
+      <div class="collection-tabs" data-tabs role="tablist" aria-label="Rule collections"></div>
+      <label class="rf-search">
+        <span class="field-note">Search current collection</span>
+        <input class="search-box" type="search" data-search placeholder="Search rules">
+        <small data-list-count>0 entries</small>
+      </label>
+    </section>
+
+    <section class="fixer-grid">
+      <div class="record-list" data-record-list aria-label="Rules"></div>
+      <div class="detail-panel" data-detail>
+        <p class="empty-note">Select a rule to inspect or edit its database record.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="site-assets/site-config.js"></script>
+  <script src="site-assets/rules-fixer.js"></script>
+</body>
+</html>

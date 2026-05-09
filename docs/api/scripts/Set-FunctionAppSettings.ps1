@@ -7,32 +7,62 @@ Set-StrictMode -Version Latest
 
 Assert-Command az
 $config = if ($ConfigPath) { Get-AzureOpsConfig -ConfigPath $ConfigPath } else { Get-AzureOpsConfig }
+$storageAccountName = Get-StorageAccountName -Config $config
+$storageTableEndpoint = Get-StorageTableEndpoint -Config $config
+$playerSheetsTable = Get-PlayerSheetsTableName -Config $config
+$characterBuildsTable = Get-CharacterBuildsTableName -Config $config
+$rulesTable = Get-RulesTableName -Config $config
+$rulesAdminToken = [string](Get-ConfigValue -Section $config -Name 'rulesAdminToken')
 
 Assert-ConfigValue $config.resourceGroup 'resourceGroup'
 Assert-ConfigValue $config.functionAppName 'functionAppName'
-Assert-ConfigValue $config.sql.serverFqdn 'sql.serverFqdn'
-Assert-ConfigValue $config.sql.database 'sql.database'
+Assert-ConfigValue $storageAccountName 'storage.accountName'
+Assert-ConfigValue $storageTableEndpoint 'storage.tableEndpoint'
 
 Set-AzureSubscription -Config $config
 
 $settings = @(
-    "SQL_SERVER=$(Get-SqlServerFqdn -Config $config)",
-    "SQL_DATABASE=$($config.sql.database)",
-    "SQL_AUTH_MODE=$($config.sql.runtimeAuthMode)",
+    "TABLE_STORAGE_ACCOUNT=$storageAccountName",
+    "TABLE_STORAGE_ENDPOINT=$storageTableEndpoint",
+    "PLAYER_SHEETS_TABLE=$playerSheetsTable",
+    "CHARACTER_BUILDS_TABLE=$characterBuildsTable",
+    "RULES_TABLE=$rulesTable",
     "GITHUB_PAGES_ORIGIN=$($config.githubPagesOrigin)"
 )
 
-if ($config.sql.runtimeAuthMode -eq 'sql') {
-    Assert-ConfigValue $config.sql.migrationUser 'sql.migrationUser'
-    Assert-ConfigValue $config.sql.migrationPassword 'sql.migrationPassword'
-    $settings += "SQL_USER=$($config.sql.migrationUser)"
-    $settings += "SQL_PASSWORD=$($config.sql.migrationPassword)"
+if (-not [string]::IsNullOrWhiteSpace($rulesAdminToken)) {
+    $settings += "RULES_ADMIN_TOKEN=$rulesAdminToken"
 }
 
-if ($config.sql.runtimeAuthMode -eq 'managed_identity') {
-    Invoke-Az functionapp identity assign `
-        --name $config.functionAppName `
-        --resource-group $config.resourceGroup | Out-Null
+$principalId = (Invoke-Az functionapp identity assign `
+    --name $config.functionAppName `
+    --resource-group $config.resourceGroup `
+    --query principalId `
+    --output tsv | Select-Object -First 1)
+
+Assert-ConfigValue $principalId 'functionApp.identity.principalId'
+
+$storageScope = (Invoke-Az storage account show `
+    --name $storageAccountName `
+    --resource-group $config.resourceGroup `
+    --query id `
+    --output tsv | Select-Object -First 1)
+
+Assert-ConfigValue $storageScope 'storage.account.id'
+
+$roleName = 'Storage Table Data Contributor'
+$existingRoleAssignment = (Invoke-Az role assignment list `
+    --assignee $principalId `
+    --role $roleName `
+    --scope $storageScope `
+    --query '[0].id' `
+    --output tsv | Select-Object -First 1)
+
+if ([string]::IsNullOrWhiteSpace([string]$existingRoleAssignment)) {
+    Invoke-Az role assignment create `
+        --assignee $principalId `
+        --role $roleName `
+        --scope $storageScope | Out-Null
 }
 
 $settingsArguments = @(
@@ -55,5 +85,10 @@ Invoke-Az functionapp cors add `
     --name $config.functionAppName `
     --resource-group $config.resourceGroup `
     --allowed-origins 'http://localhost:8086' | Out-Null
+
+Invoke-Az functionapp cors add `
+    --name $config.functionAppName `
+    --resource-group $config.resourceGroup `
+    --allowed-origins 'http://127.0.0.1:8086' | Out-Null
 
 Write-Host "Function App settings and CORS updated for $($config.functionAppName)."

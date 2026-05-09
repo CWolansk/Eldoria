@@ -42,7 +42,7 @@ await ItemLookup.display(dv, ['+1 Quarterstaff',  'Gauntlets of Whirling Strikes
 ## Background
 ```dataviewjs
 const {BackgroundLookup} = await cJS()
-await BackgroundLookup.display(dv, ['Sailor'])
+await BackgroundLookup.display(dv, ['Sailor|PHB'])
 ```
 
 ## Feats
@@ -54,7 +54,7 @@ await FeatLookup.display(dv, ['Actor'])
 ## Race
 ```dataviewjs
 const {RaceLookup} = await cJS()
-await RaceLookup.display(dv, ['Half-Orc'])
+await RaceLookup.display(dv, ['Half-Orc|PHB'])
 ```
 
 ## Notes

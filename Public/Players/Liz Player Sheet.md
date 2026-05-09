@@ -9,7 +9,7 @@ await CharacterSheetDisplay.display(dv, {
   class: "Bard",
   subclass: "College of Lore",
   level: dv.page("Player Controls").level,
-  race: "Elf",
+  race: "Elf (Wood)",
   experience: dv.page("Player Controls").ExperiencePoints,
   guildPoints: dv.page("Player Controls").GuildPoints,
   guildRank: dv.page("Player Controls").GuildRank,
@@ -56,13 +56,13 @@ await BackgroundLookup.display(dv, ['Acolyte'])
 ## Feats
 ```dataviewjs
 const {FeatLookup} = await cJS()
-await FeatLookup.display(dv, ['Jack of All Trades',])
+await FeatLookup.display(dv, [])
 ```
 
 ## Race 
 ```dataviewjs
 const {RaceLookup} = await cJS()
-await RaceLookup.display(dv, ['Elf'])
+await RaceLookup.display(dv, ['Elf (Wood)|PHB'])
 ```
 
 ## Notes

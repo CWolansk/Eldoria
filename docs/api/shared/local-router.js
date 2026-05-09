@@ -1,8 +1,12 @@
 const { URL } = require('url');
 const { handleEntities, handlePlayers, handleSearch } = require('./public-data');
+const { handleCharacters } = require('./character-builds');
+const { handleRules } = require('./rules-data');
+
+const MAX_LOCAL_API_BODY_BYTES = 512 * 1024;
 
 function handleLocalPublicApi(req, res) {
-  if (!['GET', 'PATCH', 'OPTIONS'].includes(req.method) || !req.url.startsWith('/api/')) return false;
+  if (!['GET', 'POST', 'PUT', 'PATCH', 'OPTIONS'].includes(req.method) || !req.url.startsWith('/api/')) return false;
 
   const url = new URL(req.url, 'http://localhost');
   const parts = url.pathname.split('/').filter(Boolean).map(decodeURIComponent);
@@ -12,6 +16,30 @@ function handleLocalPublicApi(req, res) {
     readJsonBody(req).then(body => {
       req.body = body;
       return handlePlayers({ slug: parts[2] }, Object.fromEntries(url.searchParams), req);
+    }).then(response => sendJson(res, response)).catch(error => {
+      sendJson(res, {
+        status: 400,
+        headers: { 'content-type': 'application/json; charset=utf-8' },
+        body: { error: 'bad_request', message: error.message },
+      });
+    });
+    return true;
+  } else if (parts[1] === 'characters') {
+    readJsonBody(req).then(body => {
+      req.body = body;
+      return handleCharacters({ slug: parts[2] }, Object.fromEntries(url.searchParams), req);
+    }).then(response => sendJson(res, response)).catch(error => {
+      sendJson(res, {
+        status: 400,
+        headers: { 'content-type': 'application/json; charset=utf-8' },
+        body: { error: 'bad_request', message: error.message },
+      });
+    });
+    return true;
+  } else if (parts[1] === 'rules') {
+    readJsonBody(req).then(body => {
+      req.body = body;
+      return handleRules({ collection: parts[2], id: parts[3] }, Object.fromEntries(url.searchParams), req);
     }).then(response => sendJson(res, response)).catch(error => {
       sendJson(res, {
         status: 400,
@@ -37,12 +65,12 @@ function handleLocalPublicApi(req, res) {
 }
 
 function readJsonBody(req) {
-  if (req.method !== 'PATCH') return Promise.resolve({});
+  if (!['PATCH', 'POST', 'PUT'].includes(req.method)) return Promise.resolve({});
   return new Promise((resolve, reject) => {
     let body = '';
     req.on('data', chunk => {
       body += chunk.toString();
-      if (body.length > 32768) {
+      if (body.length > MAX_LOCAL_API_BODY_BYTES) {
         reject(new Error('Request body is too large.'));
         req.destroy();
       }

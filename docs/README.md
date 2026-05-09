@@ -12,13 +12,12 @@ From the `docs` folder:
 npm run build-public
 npm run validate-public
 npm run api:login
-npm run api:install-sqlcmd
 npm run api:init-config
 npm run api:check-config
 npm run api:check-tools
 npm run api:settings
+npm run api:seed-player-sheets
 npm run api:deploy
-npm run api:migrate
 npm run build
 ```
 
@@ -26,13 +25,12 @@ npm run build
 - `validate-public` checks generated public HTML for broken local links and unresolved wiki-links.
 - `api-smoke` checks the read-only public API handlers against the generated JSON.
 - `api:login` signs Azure CLI in from this repo's PowerShell scripts.
-- `api:install-sqlcmd` installs the modern Microsoft.Sqlcmd tool through winget.
 - `api:init-config` creates ignored local Azure config files if they do not exist.
-- `api:check-config` validates the ignored local Azure config before deploy/migration.
-- `api:check-tools` checks for Azure CLI and `sqlcmd` before deploy/migration.
-- `api:settings` pushes Function App settings and CORS from local config.
+- `api:check-config` validates the ignored local Azure config before storage setup and deploy.
+- `api:check-tools` checks Azure CLI login before storage setup and deploy.
+- `api:settings` pushes Function App settings, CORS, managed identity, and Table Storage role assignment from local config.
+- `api:seed-player-sheets` copies generated player sheet JSON into Azure Table Storage as full cloud sheet documents.
 - `api:deploy` packages and deploys `docs/api` to an existing Azure Function App.
-- `api:migrate` applies tracked SQL migrations to Azure SQL using local-only credentials.
 - `build` runs the public build, validates it, smoke-tests the public API, then refreshes the Jarvis index.
 
 The legacy `generate-index.js` script is still available as `npm run generate-index`, but the lean public generator now writes the NPC and location indexes directly.
@@ -108,7 +106,7 @@ window.ELDORIA_PUBLIC_CONFIG = {
 
 When `apiBaseUrl` is set, the public search page calls the Azure `/api/search` endpoint and player sheets call `/api/players/{slug}`. If the API is unavailable or the value is blank, the pages fall back to generated static JSON and pre-rendered HTML.
 
-Player sheets support browser-saved and cloud-saved edits for HP, AC, speed, ability scores, gold, hero points, equipment, equipped items, spells, and notes. Spell tabs can search the generated spell catalog and add/remove spells in-page, while weapon cards show attack and damage math breakdowns. Combat toggles surface conditional effects such as Great Weapon Master and equipped item abilities like the Sigil of Thunderous Might. There is intentionally no edit token; the public write endpoint only accepts targeted sheet updates for an existing player id, clamps numeric values to safe ranges, length-limits equipment and spell strings, strips tag delimiters from player text, and stores merged patches through parameterized SQL.
+Player sheets support browser-saved and cloud-saved edits for HP, AC, speed, ability scores, gold, hero points, equipment, equipped items, spells, and notes. Spell tabs can search the generated spell catalog and add/remove spells in-page, while weapon cards show attack and damage math breakdowns. Combat toggles surface conditional effects such as Great Weapon Master and equipped item abilities like the Sigil of Thunderous Might. There is intentionally no edit token; the public write endpoint only accepts targeted sheet updates for an existing player id, clamps numeric values to safe ranges, length-limits equipment and spell strings, strips tag delimiters from player text, and writes the complete player sheet document back to Azure Table Storage.
 
 The API responses include public CORS headers for browser calls from GitHub Pages. If you later restrict CORS in Azure, allow your GitHub Pages origin and local review origin:
 
@@ -133,24 +131,22 @@ docs/api/config/azure.local.example.json
 docs/api/local.settings.sample.json
 ```
 
-Fill `azure.local.json` with your subscription, resource group, Function App, GitHub Pages origin, SQL server, and migration login. Then run:
+Fill `azure.local.json` with your subscription, resource group, Function App, GitHub Pages origin, and Table Storage account. The current storage account is `eldoriargac5b`. Then run:
 
 ```powershell
 npm run api:login
 npm run api:check-config
 npm run api:check-tools
 npm run api:settings
+npm run api:seed-player-sheets
 npm run api:deploy
-npm run api:migrate
 ```
 
-The runtime API is set up for managed identity by default. The local migration runner uses Microsoft Entra auth through `sqlcmd -G` when `migrationAuthMode` is `entra`; SQL username/password remains available as an ignored local-only fallback.
+The runtime API uses managed identity with Azure Table Storage. `api:settings` assigns the Function App identity and grants `Storage Table Data Contributor` on the configured storage account.
 
 If Azure CLI reports `AADSTS50076` or asks for MFA, keep `tenantId` and `loginUseDeviceCode` set in `azure.local.json`, then run `npm run api:login` again and complete the browser/device-code prompt.
 
-For SQL migrations, use a current `sqlcmd` and Microsoft ODBC Driver 18. If your SQL Entra account requires MFA, set `sql.migrationUser` in ignored `azure.local.json`; the migration script will use interactive `sqlcmd -G -U <user>`.
-
-If `api:migrate` reports `Microsoft Online Services Sign-In Assistant could not be found`, Windows is using an old ODBC 13-era `sqlcmd`. Run `npm run api:install-sqlcmd`, open a new terminal, then rerun `npm run api:check-tools`. If the old tool still wins PATH precedence, set `sql.sqlcmdPath` in ignored `azure.local.json` to the modern `sqlcmd.exe`.
+Run `npm run api:seed-player-sheets` after `npm run build-public` when you want to bootstrap or refresh the cloud player sheet documents from generated vault data. The local seed script installs API dependencies if needed and uses a temporary storage account key from Azure CLI; the deployed API still uses managed identity. After seeding, the cloud `PlayerSheets` table is the API source of truth for player sheets.
 
 ## Player Sheets
 
@@ -165,10 +161,10 @@ Each generated sheet renders tabbed sections for overview, abilities, combat, sk
 ## Azure Roadmap
 
 - V1: Deploy generated static files only.
-- V2: Host static files from GitHub Pages and deploy `docs/api` to Azure Functions for read-only player, entity, and search endpoints.
-- V3: Move normalized public data into Azure SQL tables such as `Players`, `PlayerStats`, `Inventory`, `KnownSpells`, `PublicEntities`, and `SearchDocuments`.
+- V2: Host static files from GitHub Pages and deploy `docs/api` to Azure Functions for public player, entity, search, and character builder endpoints.
+- V3: Keep player sheets and character builds in Azure Table Storage; add Azure AI Search only if the local JSON search becomes too limited.
 
-Use custom Azure Functions over direct database exposure for public read APIs. Data API Builder can be evaluated later for admin/internal CRUD, and Azure AI Search can be added only if the local JSON search becomes too limited.
+Use custom Azure Functions over direct storage exposure for public APIs.
 
 Optional Static Web Apps settings if the static host moves to Azure later:
 

@@ -9,7 +9,7 @@ await CharacterSheetDisplay.display(dv, {
   class: "Fighter",
   subclass: "Champion",
   level: dv.page("Player Controls").level,
-  race: "Human",
+  race: "Human (Variant)",
   background: "Archeologist",
   experience: dv.page("Player Controls").ExperiencePoints,
   guildPoints: dv.page("Player Controls").GuildPoints,
@@ -56,7 +56,7 @@ await FeatLookup.display(dv, ['Great Weapon Master', 'Tough'])
 ## Race 
 ```dataviewjs
 const {RaceLookup} = await cJS()
-await RaceLookup.display(dv, ['Human'])
+await RaceLookup.display(dv, ['Human (Variant)|PHB'])
 ```
 
 ## Notes

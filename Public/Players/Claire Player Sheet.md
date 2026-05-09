@@ -61,7 +61,7 @@ await SpellLookup.display(dv, [])
 ## Background
 ```dataviewjs
 const {BackgroundLookup} = await cJS()
-await BackgroundLookup.display(dv, ['Sailor'])
+await BackgroundLookup.display(dv, ['Sailor|PHB'])
 ```
 
 ## Feats
@@ -73,7 +73,7 @@ await FeatLookup.display(dv, ['Elemental Adept'])
 ## Race 
 ```dataviewjs
 const {RaceLookup} = await cJS()
-await RaceLookup.display(dv, ['Genasi (Water)'])
+await RaceLookup.display(dv, ['Genasi (Water)|EEPC'])
 ```
 
 ## Notes

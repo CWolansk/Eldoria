@@ -10,6 +10,19 @@
     "itemName": "Abracadabrus"
   },
   {
+    "id": "subclass-warlock-hexblade-6-accursed-specter-xge",
+    "name": "Accursed Specter",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-hexblade-6-accursed-specter-xge",
+    "className": "Warlock",
+    "subclassName": "Hexblade",
+    "raceName": "",
+    "source": "XGE",
+    "text": "Starting at 6th level, you can curse the soul of a person you slay, temporarily binding it to your service."
+  },
+  {
     "id": "action-surge",
     "name": "Action Surge",
     "maxFormula": "level >= 17 ? 2 : 1",
@@ -18,7 +31,40 @@
     "sourceId": "class-fighter-17-action-surge-two-uses-phb",
     "className": "Fighter",
     "subclassName": "",
+    "raceName": "",
+    "source": "PHB",
     "text": "At 17th level, you can use Action Surge twice before a rest, but only once on the same turn."
+  },
+  {
+    "id": "adept-of-the-red-robes",
+    "name": "Adept of the Red Robes",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "adept-of-the-red-robes",
+    "source": "DSotDQ",
+    "text": "You chose the moon Lunitari to influence your magic, and your dedication to maintaining the balance between all things has been recognized by the Order of the Red Robes, granting you these benefits:Insightful Magic."
+  },
+  {
+    "id": "race-orc-adrenaline-rush-mpmm",
+    "name": "Adrenaline Rush",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-orc-adrenaline-rush-mpmm",
+    "raceName": "Orc",
+    "source": "MPMM",
+    "text": "You can take the Dash action as a bonus action."
+  },
+  {
+    "id": "agent-of-order",
+    "name": "Agent of Order",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "agent-of-order",
+    "source": "SatO",
+    "text": "You can channel cosmic forces of order to gain these benefits:Ability Score Increase."
   },
   {
     "id": "alchemical-compendium-alchemical-compendium-charges",
@@ -111,10 +157,24 @@
     "itemName": "Arc Rifle"
   },
   {
+    "id": "subclass-wizard-chronurgy-10-arcane-abeyance-egw",
+    "name": "Arcane Abeyance",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-wizard-chronurgy-10-arcane-abeyance-egw",
+    "className": "Wizard",
+    "subclassName": "Chronurgy",
+    "raceName": "",
+    "source": "EGW",
+    "text": "10th-level Chronurgy Magic feature When you cast a spell using a spell slot of 4th level or lower, you can condense the spell's magic into a mote."
+  },
+  {
     "id": "the-aegis-codex-arcane-barrier",
     "name": "Arcane Barrier",
     "max": 1,
     "reset": "longRest",
+    "text": "Arcane Barrier (Bonus Action, 1/day): You create a protective field around allies within 30 feet. While you maintain concentration (up to 1 minute), affected allies gain a +2 bonus to AC.",
     "sourceType": "item",
     "sourceId": "the-aegis-codex",
     "itemName": "The Aegis Codex"
@@ -124,6 +184,7 @@
     "name": "Arcane Distraction",
     "max": 1,
     "reset": "longRest",
+    "text": "Arcane Distraction (Reaction, 1/day): When a creature you can see makes an ability check or saving throw, you may force them to reroll with a -2 penalty. They must use the lower result.",
     "sourceType": "item",
     "sourceId": "the-aegis-codex",
     "itemName": "The Aegis Codex"
@@ -137,6 +198,19 @@
     "sourceType": "item",
     "sourceId": "robe-of-elemental-radiance",
     "itemName": "Robe of Elemental Radiance"
+  },
+  {
+    "id": "subclass-artificer-battle-smith-9-arcane-jolt-tce",
+    "name": "Arcane Jolt",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-artificer-battle-smith-9-arcane-jolt-tce",
+    "className": "Artificer",
+    "subclassName": "Battle Smith",
+    "raceName": "",
+    "source": "TCE",
+    "text": "At 9th level, you learn new ways to channel arcane energy to harm or heal."
   },
   {
     "id": "arcanist-s-scribing-wand-arcanist-s-scribing-wand-charges",
@@ -209,6 +283,17 @@
     "itemName": "Armor of Weightlessness"
   },
   {
+    "id": "race-giff-astral-spark-aag",
+    "name": "Astral Spark",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-giff-astral-spark-aag",
+    "raceName": "Giff",
+    "source": "AAG",
+    "text": "Your psychic connection to the Astral Plane enables you to mystically access a spark of divine power, which you can channel through your weapons."
+  },
+  {
     "id": "astromancy-archive-astromancy-archive-charges",
     "name": "Astromancy Archive Charges",
     "max": 3,
@@ -227,6 +312,32 @@
     "sourceType": "item",
     "sourceId": "atlas-of-endless-horizons",
     "itemName": "Atlas of Endless Horizons"
+  },
+  {
+    "id": "subclass-paladin-vengeance-20-avenging-angel-phb",
+    "name": "Avenging Angel",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-paladin-vengeance-20-avenging-angel-phb",
+    "className": "Paladin",
+    "subclassName": "Vengeance",
+    "raceName": "",
+    "source": "PHB",
+    "text": "At 20th level, you can assume the form of an angelic avenger."
+  },
+  {
+    "id": "subclass-wizard-scribes-2-awakened-spellbook-tce",
+    "name": "Awakened Spellbook",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-wizard-scribes-2-awakened-spellbook-tce",
+    "className": "Wizard",
+    "subclassName": "Scribes",
+    "raceName": "",
+    "source": "TCE",
+    "text": "2nd-level Order of Scribes feature Using specially prepared inks and ancient incantations passed down by your wizardly order, you have awakened an arcane sentience within your spellbook."
   },
   {
     "id": "azorius-guild-signet-azorius-guild-signet-charges",
@@ -269,6 +380,16 @@
     "itemName": "Baba Yaga's Pestle"
   },
   {
+    "id": "baleful-scion",
+    "name": "Baleful Scion",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "baleful-scion",
+    "source": "SatO",
+    "text": "You can channel cosmic forces of evil to gain these benefits:Ability Score Increase."
+  },
+  {
     "id": "bane-shield-bane-shield-charges",
     "name": "Bane Shield Charges",
     "max": 3,
@@ -287,6 +408,8 @@
     "sourceId": "class-bard-1-bardic-inspiration-phb",
     "className": "Bard",
     "subclassName": "",
+    "raceName": "",
+    "source": "PHB",
     "text": "You can inspire others through stirring words or music."
   },
   {
@@ -308,6 +431,16 @@
     "sourceType": "item",
     "sourceId": "bardiche-of-verdict",
     "itemName": "Bardiche of Verdict"
+  },
+  {
+    "id": "baruk-khazad",
+    "name": "Baruk Khazâd!",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "feat",
+    "sourceId": "baruk-khazad",
+    "source": "TLotRR",
+    "text": "The secret tongue of the Dwarves is guarded as a treasure of the past, yet their battle-cry is well-known and feared by their foes."
   },
   {
     "id": "bastard-sword-of-grass-bastard-sword-of-grass-charges",
@@ -420,6 +553,19 @@
     "itemName": "Bellhop Topper"
   },
   {
+    "id": "subclass-wizard-conjuration-6-benign-transposition-phb",
+    "name": "Benign Transposition",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-wizard-conjuration-6-benign-transposition-phb",
+    "className": "Wizard",
+    "subclassName": "Conjuration",
+    "raceName": "",
+    "source": "PHB",
+    "text": "Starting at 6th level, you can use your action to teleport up to 30 feet to an unoccupied space that you can see."
+  },
+  {
     "id": "blackstaff-blackstaff-charges",
     "name": "Blackstaff Charges",
     "max": 20,
@@ -440,6 +586,78 @@
     "itemName": "Blade of Grass"
   },
   {
+    "id": "subclass-cleric-zeal-psa-17-blaze-of-glory-psa",
+    "name": "Blaze of Glory",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-zeal-psa-17-blaze-of-glory-psa",
+    "className": "Cleric",
+    "subclassName": "Zeal (PSA)",
+    "raceName": "",
+    "source": "PSA",
+    "text": "Starting at 17th level, you can delay death for an instant to perform a final heroic act."
+  },
+  {
+    "id": "subclass-druid-wildfire-14-blazing-revival-tce",
+    "name": "Blazing Revival",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-druid-wildfire-14-blazing-revival-tce",
+    "className": "Druid",
+    "subclassName": "Wildfire",
+    "raceName": "",
+    "source": "TCE",
+    "text": "14th-level Circle of Wildfire feature The bond with your wildfire spirit can save you from death."
+  },
+  {
+    "id": "subclass-cleric-forge-1-blessing-of-the-forge-xge",
+    "name": "Blessing of the Forge",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-forge-1-blessing-of-the-forge-xge",
+    "className": "Cleric",
+    "subclassName": "Forge",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 1st level, you gain the ability to imbue magic into a weapon or armor."
+  },
+  {
+    "id": "race-elf-pallid-blessing-of-the-moon-weaver-egw",
+    "name": "Blessing of the Moon Weaver",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-elf-pallid-blessing-of-the-moon-weaver-egw",
+    "raceName": "Elf (Pallid)",
+    "source": "EGW",
+    "text": "You know the light cantrip."
+  },
+  {
+    "id": "race-elf-shadar-kai-blessing-of-the-raven-queen-mtf",
+    "name": "Blessing of the Raven Queen",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-elf-shadar-kai-blessing-of-the-raven-queen-mtf",
+    "raceName": "Elf (Shadar-kai)",
+    "source": "MTF",
+    "text": "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see."
+  },
+  {
+    "id": "race-shadar-kai-blessing-of-the-raven-queen-mpmm",
+    "name": "Blessing of the Raven Queen",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-shadar-kai-blessing-of-the-raven-queen-mpmm",
+    "raceName": "Shadar-Kai",
+    "source": "MPMM",
+    "text": "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see."
+  },
+  {
     "id": "bloodmire-rod-of-the-witch-doctor-bloodmire-rod-of-the-witch-doctor-charges",
     "name": "Bloodmire Rod of the Witch Doctor Charges",
     "max": 6,
@@ -448,6 +666,19 @@
     "sourceType": "item",
     "sourceId": "bloodmire-rod-of-the-witch-doctor",
     "itemName": "Bloodmire Rod of the Witch Doctor"
+  },
+  {
+    "id": "subclass-barbarian-wild-magic-6-bolstering-magic-tce",
+    "name": "Bolstering Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-barbarian-wild-magic-6-bolstering-magic-tce",
+    "className": "Barbarian",
+    "subclassName": "Wild Magic",
+    "raceName": "",
+    "source": "TCE",
+    "text": "6th-level Path of Wild Magic feature You can harness your wild magic to bolster yourself or a companion."
   },
   {
     "id": "book-of-ebon-tides-book-of-ebon-tides-charges",
@@ -500,6 +731,50 @@
     "itemName": "Breastplate of Balance"
   },
   {
+    "id": "race-dragonborn-chromatic-breath-weapon-ftd",
+    "name": "Breath Weapon",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-chromatic-breath-weapon-ftd",
+    "raceName": "Dragonborn (Chromatic)",
+    "source": "FTD",
+    "text": "When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of magical energy in a 30-foot line that is 5 feet wide."
+  },
+  {
+    "id": "race-dragonborn-gem-breath-weapon-ftd",
+    "name": "Breath Weapon",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-gem-breath-weapon-ftd",
+    "raceName": "Dragonborn (Gem)",
+    "source": "FTD",
+    "text": "When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of magical energy in a 15-foot cone."
+  },
+  {
+    "id": "race-dragonborn-metallic-breath-weapon-ftd",
+    "name": "Breath Weapon",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-metallic-breath-weapon-ftd",
+    "raceName": "Dragonborn (Metallic)",
+    "source": "FTD",
+    "text": "When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of magical energy in a 15-foot cone."
+  },
+  {
+    "id": "race-dragonborn-breath-weapon-phb",
+    "name": "Breath Weapon",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-breath-weapon-phb",
+    "raceName": "Dragonborn",
+    "source": "PHB",
+    "text": "You can use your action to exhale destructive energy."
+  },
+  {
     "id": "broadsword-of-grass-broadsword-of-grass-charges",
     "name": "Broadsword of Grass Charges",
     "max": 7,
@@ -530,6 +805,27 @@
     "itemName": "Broadsword of Verdict"
   },
   {
+    "id": "broken-spells",
+    "name": "Broken Spells",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "broken-spells",
+    "source": "TLotRR",
+    "text": "In ancient times, the Dwarves made mighty spells."
+  },
+  {
+    "id": "race-autognome-built-for-success-aag",
+    "name": "Built for Success",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-autognome-built-for-success-aag",
+    "raceName": "Autognome",
+    "source": "AAG",
+    "text": "You can add a d4 to one attack roll, ability check, or saving throw you make, and you can do so after seeing the d20 roll but before the effects of the roll are resolved."
+  },
+  {
     "id": "bulette-bulwark-bulette-bulwark-charges",
     "name": "Bulette Bulwark Charges",
     "max": 3,
@@ -538,6 +834,29 @@
     "sourceType": "item",
     "sourceId": "bulette-bulwark",
     "itemName": "Bulette Bulwark"
+  },
+  {
+    "id": "subclass-fighter-psi-warrior-15-bulwark-of-force-tce",
+    "name": "Bulwark of Force",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-fighter-psi-warrior-15-bulwark-of-force-tce",
+    "className": "Fighter",
+    "subclassName": "Psi Warrior",
+    "raceName": "",
+    "source": "TCE",
+    "text": "15th-level Psi Warrior feature You can shield yourself and others with telekinetic force."
+  },
+  {
+    "id": "bumbling-fool",
+    "name": "Bumbling Fool",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "bumbling-fool",
+    "source": "ObojimaTallGrass",
+    "text": "You have a peculiar way of fumbling through life that somehow always works out in your favor, succeeding in situations through what others might view as accidental luck."
   },
   {
     "id": "cabal-s-ruin-awakened-cabal-s-ruin-awakened-charges",
@@ -570,6 +889,38 @@
     "itemName": "Cabal's Ruin (Exalted)"
   },
   {
+    "id": "race-genasi-water-call-to-the-wave-eepc",
+    "name": "Call to the Wave",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-genasi-water-call-to-the-wave-eepc",
+    "raceName": "Genasi (Water)",
+    "source": "EEPC",
+    "text": "You know the shape water cantrip."
+  },
+  {
+    "id": "race-genasi-water-call-to-the-wave-mpmm",
+    "name": "Call to the Wave",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-genasi-water-call-to-the-wave-mpmm",
+    "raceName": "Genasi (Water)",
+    "source": "MPMM",
+    "text": "You know the acid splash cantrip."
+  },
+  {
+    "id": "canden-and-moon-s-master-cut",
+    "name": "Canden and Moon's Master Cut",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "canden-and-moon-s-master-cut",
+    "source": "ObojimaTallGrass",
+    "text": "Having trained with the masters of the first sword school of Obojima, you've picked up a handful of useful skills."
+  },
+  {
     "id": "cape-of-enlargement-cape-of-enlargement-charges",
     "name": "Cape of Enlargement Charges",
     "max": 3,
@@ -578,6 +929,41 @@
     "sourceType": "item",
     "sourceId": "cape-of-enlargement",
     "itemName": "Cape of Enlargement"
+  },
+  {
+    "id": "subclass-druid-wildfire-10-cauterizing-flames-tce",
+    "name": "Cauterizing Flames",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-druid-wildfire-10-cauterizing-flames-tce",
+    "className": "Druid",
+    "subclassName": "Wildfire",
+    "raceName": "",
+    "source": "TCE",
+    "text": "10th-level Circle of Wildfire feature You gain the ability to turn death into magical flames that can heal or incinerate."
+  },
+  {
+    "id": "race-aasimar-celestial-legacy-dmg",
+    "name": "Celestial Legacy",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-celestial-legacy-dmg",
+    "raceName": "Aasimar",
+    "source": "DMG",
+    "text": "You know the light cantrip."
+  },
+  {
+    "id": "race-aasimar-celestial-revelation-mpmm",
+    "name": "Celestial Revelation",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-celestial-revelation-mpmm",
+    "raceName": "Aasimar",
+    "source": "MPMM",
+    "text": "When you reach 3rd level, choose one of the revelation options below."
   },
   {
     "id": "cestus-of-verdict-cestus-of-verdict-charges",
@@ -648,6 +1034,8 @@
     "sourceId": "class-cleric-1-divine-domain-phb",
     "className": "Cleric",
     "subclassName": "",
+    "raceName": "",
+    "source": "PHB",
     "text": "Choose one domain related to your deity from the list of available domains."
   },
   {
@@ -679,6 +1067,41 @@
     "sourceType": "item",
     "sourceId": "charred-wand-of-magic-missiles",
     "itemName": "Charred Wand of Magic Missiles"
+  },
+  {
+    "id": "subclass-artificer-alchemist-15-chemical-mastery-tce",
+    "name": "Chemical Mastery",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-artificer-alchemist-15-chemical-mastery-tce",
+    "className": "Artificer",
+    "subclassName": "Alchemist",
+    "raceName": "",
+    "source": "TCE",
+    "text": "By 15th level, you have been exposed to so many chemicals that they pose little risk to you, and you can use them to quickly end certain ailments: You gain resistance to acid damage and poison damage, and you are immune to the poisoned con..."
+  },
+  {
+    "id": "race-halfling-lotusden-child-of-the-wood-egw",
+    "name": "Child of the Wood",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-halfling-lotusden-child-of-the-wood-egw",
+    "raceName": "Halfling (Lotusden)",
+    "source": "EGW",
+    "text": "You know the druidcraft cantrip."
+  },
+  {
+    "id": "race-dragonborn-chromatic-chromatic-warding-ftd",
+    "name": "Chromatic Warding",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-chromatic-chromatic-warding-ftd",
+    "raceName": "Dragonborn (Chromatic)",
+    "source": "FTD",
+    "text": "Starting at 5th level, as an action, you can channel your draconic energy to protect yourself."
   },
   {
     "id": "chronomancer-s-eyepiece-chronomancer-s-eyepiece-charges",
@@ -761,6 +1184,16 @@
     "itemName": "Clockwork Plated Chainmail"
   },
   {
+    "id": "cloud-hopper",
+    "name": "Cloud Hopper",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "cloud-hopper",
+    "source": "ObojimaTallGrass",
+    "text": "Your exposure to the great wind spirit has changed you."
+  },
+  {
     "id": "club-of-dancing-club-of-dancing-charges",
     "name": "Club of Dancing Charges",
     "max": 3,
@@ -821,6 +1254,77 @@
     "itemName": "Constantori's Portrait"
   },
   {
+    "id": "subclass-barbarian-ancestral-guardian-10-consult-the-spirits-xge",
+    "name": "Consult the Spirits",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-barbarian-ancestral-guardian-10-consult-the-spirits-xge",
+    "className": "Barbarian",
+    "subclassName": "Ancestral Guardian",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 10th level, you gain the ability to consult with your ancestral spirits."
+  },
+  {
+    "id": "class-mystic-10-consumptive-power-uathemysticclass",
+    "name": "Consumptive Power",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "class",
+    "sourceId": "class-mystic-10-consumptive-power-uathemysticclass",
+    "className": "Mystic",
+    "subclassName": "",
+    "raceName": "",
+    "source": "UATheMysticClass",
+    "text": "At 10th level, you gain the ability to sacrifice your physical durability in exchange for psionic power."
+  },
+  {
+    "id": "race-triton-control-air-and-water-mpmm",
+    "name": "Control Air and Water",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-triton-control-air-and-water-mpmm",
+    "raceName": "Triton",
+    "source": "MPMM",
+    "text": "You can cast fog cloud with this trait."
+  },
+  {
+    "id": "race-triton-control-air-and-water-vgm",
+    "name": "Control Air and Water",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-triton-control-air-and-water-vgm",
+    "raceName": "Triton",
+    "source": "VGM",
+    "text": "A child of the sea, you can call on the magic of elemental air and water."
+  },
+  {
+    "id": "subclass-druid-stars-6-cosmic-omen-tce",
+    "name": "Cosmic Omen",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-druid-stars-6-cosmic-omen-tce",
+    "className": "Druid",
+    "subclassName": "Stars",
+    "raceName": "",
+    "source": "TCE",
+    "text": "6th-level Circle of the Stars feature Whenever you finish a long rest, you can consult your Star Map for omens."
+  },
+  {
+    "id": "fabulist-gem-counterfeit-coins",
+    "name": "Counterfeit Coins",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Counterfeit Coins: You can use your action to magically create a pile of coins, worth no more than 100 gp total, in an unoccupied space within 10 feet of yourself.  The pile must appear on a surface that can support it.  After 1 hour, the coins vanish, regardless of where they are.  Once this action is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "fabulist-gem",
+    "itemName": "Fabulist Gem"
+  },
+  {
     "id": "courtesan-s-fanblade-courtesan-s-fanblade-charges",
     "name": "Courtesan's Fanblade Charges",
     "max": 3,
@@ -829,6 +1333,16 @@
     "sourceType": "item",
     "sourceId": "courtesan-s-fanblade",
     "itemName": "Courtesan's Fanblade"
+  },
+  {
+    "id": "coven-witch",
+    "name": "Coven Witch",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "coven-witch",
+    "source": "ObojimaTallGrass",
+    "text": "You have become an official member of a witches coven."
   },
   {
     "id": "crook-of-rao-crook-of-rao-charges",
@@ -871,10 +1385,11 @@
     "itemName": "Crown of Whirling Comets"
   },
   {
-    "id": "sigil-of-thunderous-might-sigil-crushing-strike",
+    "id": "sigil-of-thunderous-might-crushing-strike",
     "name": "Crushing Strike",
     "max": 1,
     "reset": "longRest",
+    "text": "Crushing Strike (1/day): Before determining if an attack hits, you may activate this ability. If the attack hits, it deals an additional 2d6 thunder damage, channeling raw force through your blow.",
     "sourceType": "item",
     "sourceId": "sigil-of-thunderous-might",
     "itemName": "Sigil of Thunderous Might"
@@ -1140,6 +1655,40 @@
     "itemName": "Dao of Verdict"
   },
   {
+    "id": "dark-for-dark-business",
+    "name": "Dark for Dark Business",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "dark-for-dark-business",
+    "source": "TLotRR",
+    "text": "Your kind is not troubled by mere darkness in itself, as most members of other cultures are."
+  },
+  {
+    "id": "subclass-warlock-fiend-6-dark-one-s-own-luck-phb",
+    "name": "Dark One's Own Luck",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-fiend-6-dark-one-s-own-luck-phb",
+    "className": "Warlock",
+    "subclassName": "Fiend",
+    "raceName": "",
+    "source": "PHB",
+    "text": "Starting at 6th level, you can call on your patron to alter fate in your favor."
+  },
+  {
+    "id": "race-leonin-daunting-roar-mot",
+    "name": "Daunting Roar",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-leonin-daunting-roar-mot",
+    "raceName": "Leonin",
+    "source": "MOT",
+    "text": "As a bonus action, you can let out an especially menacing roar."
+  },
+  {
     "id": "deck-of-dimensions-deck-of-dimensions-charges",
     "name": "Deck of Dimensions Charges",
     "max": 6,
@@ -1150,6 +1699,45 @@
     "itemName": "Deck of Dimensions"
   },
   {
+    "id": "subclass-artificer-armorer-3-defensive-field-tce",
+    "name": "Defensive Field",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-artificer-armorer-3-defensive-field-tce",
+    "className": "Artificer",
+    "subclassName": "Armorer",
+    "raceName": "",
+    "source": "TCE",
+    "text": "As a bonus action, you can gain temporary hit points equal to your level in this class, replacing any temporary hit points you already have."
+  },
+  {
+    "id": "class-ranger-10-deft-explorer-improvement-tce",
+    "name": "Deft Explorer Improvement",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "class",
+    "sourceId": "class-ranger-10-deft-explorer-improvement-tce",
+    "className": "Ranger",
+    "subclassName": "",
+    "raceName": "",
+    "source": "TCE",
+    "text": "You gain an additional benefit when you reach 10th level in this class."
+  },
+  {
+    "id": "subclass-warlock-undying-6-defy-death-scag",
+    "name": "Defy Death",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-undying-6-defy-death-scag",
+    "className": "Warlock",
+    "subclassName": "Undying",
+    "raceName": "",
+    "source": "SCAG",
+    "text": "Starting at 6th level, you can give yourself vitality when you cheat death or when you help someone else cheat it."
+  },
+  {
     "id": "demonomicon-of-iggwilv-demonomicon-of-iggwilv-charges",
     "name": "Demonomicon of Iggwilv Charges",
     "max": 8,
@@ -1158,6 +1746,19 @@
     "sourceType": "item",
     "sourceId": "demonomicon-of-iggwilv",
     "itemName": "Demonomicon of Iggwilv"
+  },
+  {
+    "id": "subclass-ranger-horizon-walker-3-detect-portal-xge",
+    "name": "Detect Portal",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-ranger-horizon-walker-3-detect-portal-xge",
+    "className": "Ranger",
+    "subclassName": "Horizon Walker",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 3rd level, you gain the ability to magically sense the presence of a planar portal."
   },
   {
     "id": "devlin-s-staff-of-striking-devlin-s-staff-of-striking-charges",
@@ -1194,6 +1795,7 @@
     "name": "Divine Protection",
     "max": 1,
     "reset": "longRest",
+    "text": "Divine Protection (1/day): As an action, you radiate a protective aura of holy energy. At the start of each of your turns for up to 1 minute (as long as you maintain concentration), all allies within 30 feet regain 1d10 hit points. This effect ends early if your concentration is broken.",
     "sourceType": "item",
     "sourceId": "amulet-of-divine-retribution",
     "itemName": "Amulet of Divine Retribution"
@@ -1203,6 +1805,7 @@
     "name": "Divine Wrath",
     "max": 1,
     "reset": "longRest",
+    "text": "Divine Wrath (1/day): As an action, you may target one hostile creature you can see within 60 feet. That creature must make an Intelligence saving throw against your spell save DC. On a failed save, the creature becomes vulnerable to radiant and fire damage for 1 minute. The creature may repeat the saving throw at the end of each of its turns, ending the effect on a success.",
     "sourceType": "item",
     "sourceId": "amulet-of-divine-retribution",
     "itemName": "Amulet of Divine Retribution"
@@ -1268,6 +1871,17 @@
     "itemName": "Double-Bladed Scimitar of Verdict"
   },
   {
+    "id": "race-kobold-draconic-cry-mpmm",
+    "name": "Draconic Cry",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-kobold-draconic-cry-mpmm",
+    "raceName": "Kobold",
+    "source": "MPMM",
+    "text": "As a bonus action, you let out a cry at your enemies within 10 feet of you."
+  },
+  {
     "id": "dragon-pole-of-throne-s-command-dragon-pole-of-throne-s-command-charges",
     "name": "Dragon Pole of Throne's Command Charges",
     "max": 5,
@@ -1296,6 +1910,75 @@
     "sourceType": "item",
     "sourceId": "dragonstaff-of-ahghairon",
     "itemName": "Dragonstaff of Ahghairon"
+  },
+  {
+    "id": "subclass-ranger-drakewarden-3-drake-companion-ftd",
+    "name": "Drake Companion",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-ranger-drakewarden-3-drake-companion-ftd",
+    "className": "Ranger",
+    "subclassName": "Drakewarden",
+    "raceName": "",
+    "source": "FTD",
+    "text": "3rd-level Drakewarden feature As an action, you can magically summon the drake that is bound to you."
+  },
+  {
+    "id": "subclass-ranger-drakewarden-11-drake-s-breath-ftd",
+    "name": "Drake's Breath",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-ranger-drakewarden-11-drake-s-breath-ftd",
+    "className": "Ranger",
+    "subclassName": "Drakewarden",
+    "raceName": "",
+    "source": "FTD",
+    "text": "11th-level Drakewarden feature As an action, you can exhale a 30-foot cone of damaging breath or cause your drake to exhale it."
+  },
+  {
+    "id": "drow-high-magic",
+    "name": "Drow High Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "drow-high-magic",
+    "source": "XGE",
+    "text": "You learn more of the magic typical of dark elves."
+  },
+  {
+    "id": "race-elf-drow-drow-magic-phb",
+    "name": "Drow Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-elf-drow-drow-magic-phb",
+    "raceName": "Elf (Drow)",
+    "source": "PHB",
+    "text": "You know the dancing lights cantrip."
+  },
+  {
+    "id": "race-duergar-duergar-magic-mpmm",
+    "name": "Duergar Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-duergar-duergar-magic-mpmm",
+    "raceName": "Duergar",
+    "source": "MPMM",
+    "text": "Starting at 3rd level, you can cast the enlarge/reduce spell on yourself with this trait, without requiring a material component."
+  },
+  {
+    "id": "race-dwarf-duergar-duergar-magic-mtf",
+    "name": "Duergar Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-dwarf-duergar-duergar-magic-mtf",
+    "raceName": "Dwarf (Duergar)",
+    "source": "MTF",
+    "text": "When you reach 3rd level, you can cast the Enlarge/Reduce spell on yourself once with this trait, using only the spell's enlarge option."
   },
   {
     "id": "duplicitous-manuscript-duplicitous-manuscript-charges",
@@ -1328,6 +2011,40 @@
     "itemName": "Earworm"
   },
   {
+    "id": "race-hexblood-eerie-token-vrgr",
+    "name": "Eerie Token",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-hexblood-eerie-token-vrgr",
+    "raceName": "Hexblood",
+    "source": "VRGR",
+    "text": "As a bonus action, you can harmlessly remove a lock of your hair, one of your nails, or one of your teeth."
+  },
+  {
+    "id": "elbereth-gilthoniel",
+    "name": "Elbereth Gilthoniel!",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "elbereth-gilthoniel",
+    "source": "TLotRR",
+    "text": "The name of Elbereth, the Queen of the Stars, is revered by all the Eldar still dwelling in Middle-earth."
+  },
+  {
+    "id": "subclass-artificer-artillerist-3-eldritch-cannon-tce",
+    "name": "Eldritch Cannon",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-artificer-artillerist-3-eldritch-cannon-tce",
+    "className": "Artificer",
+    "subclassName": "Artillerist",
+    "raceName": "",
+    "source": "TCE",
+    "text": "At 3rd level, you learn how to create a magical cannon."
+  },
+  {
     "id": "eldritch-staff-eldritch-staff-charges",
     "name": "Eldritch Staff Charges",
     "max": 10,
@@ -1338,10 +2055,24 @@
     "itemName": "Eldritch Staff"
   },
   {
+    "id": "subclass-warlock-genie-6-elemental-gift-tce",
+    "name": "Elemental Gift",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-genie-6-elemental-gift-tce",
+    "className": "Warlock",
+    "subclassName": "Genie",
+    "raceName": "",
+    "source": "TCE",
+    "text": "6th-level Genie feature You begin to take on characteristics of your patron's kind."
+  },
+  {
     "id": "talisman-of-elemental-fury-elemental-surge",
     "name": "Elemental Surge",
     "max": 1,
     "reset": "longRest",
+    "text": "Elemental Surge (Action, 1/day): Choose an element (fire, cold, lightning, acid, or poison). Creatures within a 10-foot radius of a point you choose within 30 feet must make a Dexterity saving throw (DC = 8 + your Wisdom modifier + proficiency bonus). On a failed save, they take 2d8 damage of the chosen type and suffer one of the following effects: - Fire: Target ignites, taking 1d6 fire damage at the start of their next turn. - Cold: Movement speed is reduced by 10 feet. - Lightning: Cannot take reactions until the end of their next turn. - Acid: Armor/shields take -1 penalty to AC. - Poison: Target is poisoned until end of next turn. Damage increases to 3d8 at 5th level, 4d8 at 11th, 5d8 at 17th.",
     "sourceType": "item",
     "sourceId": "talisman-of-elemental-fury",
     "itemName": "Talisman of Elemental Fury"
@@ -1351,6 +2082,7 @@
     "name": "Elemental Ward",
     "max": 1,
     "reset": "longRest",
+    "text": "Elemental Ward (Action, 1/day): You summon an aura within 20 feet for 1 minute. Allies in the aura are immune to being frightened or charmed. If they were already affected by either condition, it ends when the aura activates.",
     "sourceType": "item",
     "sourceId": "talisman-of-elemental-fury",
     "itemName": "Talisman of Elemental Fury"
@@ -1376,13 +2108,112 @@
     "itemName": "Elven Glaive of Verdict"
   },
   {
+    "id": "elvish-spirit",
+    "name": "Elvish Spirit",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "elvish-spirit",
+    "source": "TLotRR",
+    "text": "The spirit of Elves is so strong that their bodies recover swiftly from many ills and injuries."
+  },
+  {
+    "id": "ember-of-the-fire-giant",
+    "name": "Ember of the Fire Giant",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "ember-of-the-fire-giant",
+    "source": "BGG",
+    "text": "You've manifested the fiery combat emblematic of fire giants, granting you the following benefits:Ability Score Increase."
+  },
+  {
+    "id": "subclass-cleric-peace-1-emboldening-bond-tce",
+    "name": "Emboldening Bond",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-peace-1-emboldening-bond-tce",
+    "className": "Cleric",
+    "subclassName": "Peace",
+    "raceName": "",
+    "source": "TCE",
+    "text": "1st-level Peace Domain feature You can forge an empowering bond among people who are at peace with one another."
+  },
+  {
+    "id": "subclass-bard-glamour-3-enthralling-performance-xge",
+    "name": "Enthralling Performance",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-bard-glamour-3-enthralling-performance-xge",
+    "className": "Bard",
+    "subclassName": "Glamour",
+    "raceName": "",
+    "source": "XGE",
+    "text": "Starting at 3rd level, you can charge your performance with seductive, fey magic."
+  },
+  {
+    "id": "subclass-warlock-great-old-one-6-entropic-ward-phb",
+    "name": "Entropic Ward",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-great-old-one-6-entropic-ward-phb",
+    "className": "Warlock",
+    "subclassName": "Great Old One",
+    "raceName": "",
+    "source": "PHB",
+    "text": "At 6th level, you learn to magically ward yourself against attack and to turn an enemy's failed strike into good luck for yourself."
+  },
+  {
+    "id": "subclass-ranger-horizon-walker-7-ethereal-step-xge",
+    "name": "Ethereal Step",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-ranger-horizon-walker-7-ethereal-step-xge",
+    "className": "Ranger",
+    "subclassName": "Horizon Walker",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 7th level, you learn to step through the Ethereal Plane."
+  },
+  {
     "id": "gauntlets-of-whirling-strikes-evasive-maneuver",
     "name": "Evasive Maneuver",
     "max": 1,
     "reset": "longRest",
+    "text": "Evasive Maneuver (1/day): As a bonus action, grant yourself and all allies within 10 feet a +1 bonus to AC and Dexterity saving throws for 1 minute.",
     "sourceType": "item",
     "sourceId": "gauntlets-of-whirling-strikes",
     "itemName": "Gauntlets of Whirling Strikes"
+  },
+  {
+    "id": "subclass-wizard-graviturgy-14-event-horizon-egw",
+    "name": "Event Horizon",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-wizard-graviturgy-14-event-horizon-egw",
+    "className": "Wizard",
+    "subclassName": "Graviturgy",
+    "raceName": "",
+    "source": "EGW",
+    "text": "14th-level Graviturgy Magic feature As an action, you can magically emit a powerful field of gravitational energy that tugs at other creatures for up to 1 minute or until your concentration ends (as if you were concentration on a spell)."
+  },
+  {
+    "id": "subclass-paladin-crown-20-exalted-champion-scag",
+    "name": "Exalted Champion",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-paladin-crown-20-exalted-champion-scag",
+    "className": "Paladin",
+    "subclassName": "Crown",
+    "raceName": "",
+    "source": "SCAG",
+    "text": "At 20th level, your presence on the field of battle is an inspiration to those dedicated to your cause."
   },
   {
     "id": "eye-and-hand-of-vecna-eye-and-hand-of-vecna-charges",
@@ -1405,6 +2236,42 @@
     "itemName": "Eye of Vecna"
   },
   {
+    "id": "subclass-cleric-twilight-1-eyes-of-night-tce",
+    "name": "Eyes of Night",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-twilight-1-eyes-of-night-tce",
+    "className": "Cleric",
+    "subclassName": "Twilight",
+    "raceName": "",
+    "source": "TCE",
+    "text": "1st-level Twilight Domain feature You can see through the deepest gloom."
+  },
+  {
+    "id": "subclass-cleric-grave-1-eyes-of-the-grave-xge",
+    "name": "Eyes of the Grave",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-grave-1-eyes-of-the-grave-xge",
+    "className": "Cleric",
+    "subclassName": "Grave",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 1st level, you gain the ability to occasionally sense the presence of the undead, whose existence is an insult to the natural cycle of life."
+  },
+  {
+    "id": "fade-away",
+    "name": "Fade Away",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "feat",
+    "sourceId": "fade-away",
+    "source": "XGE",
+    "text": "Your people are clever, with a knack for illusion magic."
+  },
+  {
     "id": "failed-experiment-wand-failed-experiment-wand-charges",
     "name": "Failed Experiment Wand Charges",
     "max": 2,
@@ -1423,6 +2290,41 @@
     "sourceType": "item",
     "sourceId": "failed-purity-spear",
     "itemName": "Failed Purity Spear"
+  },
+  {
+    "id": "race-fairy-fairy-magic-mpmm",
+    "name": "Fairy Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-fairy-fairy-magic-mpmm",
+    "raceName": "Fairy",
+    "source": "MPMM",
+    "text": "You know the druidcraft cantrip."
+  },
+  {
+    "id": "race-fairy-fairy-magic-wbtw",
+    "name": "Fairy Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-fairy-fairy-magic-wbtw",
+    "raceName": "Fairy",
+    "source": "WBtW",
+    "text": "You know the druidcraft cantrip."
+  },
+  {
+    "id": "subclass-druid-shepherd-14-faithful-summons-xge",
+    "name": "Faithful Summons",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-druid-shepherd-14-faithful-summons-xge",
+    "className": "Druid",
+    "subclassName": "Shepherd",
+    "raceName": "",
+    "source": "XGE",
+    "text": "Starting at 14th level, the nature spirits you commune with protect you when you are the most defenseless."
   },
   {
     "id": "falcata-of-grass-falcata-of-grass-charges",
@@ -1515,6 +2417,146 @@
     "itemName": "Fan Axe of Verdict"
   },
   {
+    "id": "subclass-warlock-fathomless-14-fathomless-plunge-tce",
+    "name": "Fathomless Plunge",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-fathomless-14-fathomless-plunge-tce",
+    "className": "Warlock",
+    "subclassName": "Fathomless",
+    "raceName": "",
+    "source": "TCE",
+    "text": "14th-level Fathomless feature You can magically open temporary conduits to watery destinations."
+  },
+  {
+    "id": "subclass-sorcerer-divine-soul-1-favored-by-the-gods-xge",
+    "name": "Favored by the Gods",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-sorcerer-divine-soul-1-favored-by-the-gods-xge",
+    "className": "Sorcerer",
+    "subclassName": "Divine Soul",
+    "raceName": "",
+    "source": "XGE",
+    "text": "Starting at 1st level, divine power guards your destiny."
+  },
+  {
+    "id": "class-ranger-1-favored-foe-tce",
+    "name": "Favored Foe",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "class",
+    "sourceId": "class-ranger-1-favored-foe-tce",
+    "className": "Ranger",
+    "subclassName": "",
+    "raceName": "",
+    "source": "TCE",
+    "text": "1st-level ranger optional class features, which replaces the Favored Enemy feature and works with the Foe Slayer feature When you hit a creature with an attack roll, you can call on your mystical bond with nature to mark the target as your..."
+  },
+  {
+    "id": "race-kender-fearless-dsotdq",
+    "name": "Fearless",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-kender-fearless-dsotdq",
+    "raceName": "Kender",
+    "source": "DSotDQ",
+    "text": "You have advantage on saving throws you make to avoid or end the frightened condition on yourself."
+  },
+  {
+    "id": "race-hobgoblin-fey-gift-mpmm",
+    "name": "Fey Gift",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-hobgoblin-fey-gift-mpmm",
+    "raceName": "Hobgoblin",
+    "source": "MPMM",
+    "text": "You can use this trait to take the Help action as a bonus action, and you can do so a number of times equal to your proficiency bonus."
+  },
+  {
+    "id": "subclass-warlock-archfey-1-fey-presence-phb",
+    "name": "Fey Presence",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-archfey-1-fey-presence-phb",
+    "className": "Warlock",
+    "subclassName": "Archfey",
+    "raceName": "",
+    "source": "PHB",
+    "text": "Starting at 1st level, your patron bestows upon you the ability to project the beguiling and fearsome presence of the fey."
+  },
+  {
+    "id": "subclass-ranger-fey-wanderer-11-fey-reinforcements-tce",
+    "name": "Fey Reinforcements",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-ranger-fey-wanderer-11-fey-reinforcements-tce",
+    "className": "Ranger",
+    "subclassName": "Fey Wanderer",
+    "raceName": "",
+    "source": "TCE",
+    "text": "11th-level Fey Wanderer feature The royal courts of the Feywild have blessed you with the assistance of fey beings: you know summon fey."
+  },
+  {
+    "id": "race-eladrin-fey-step-mpmm",
+    "name": "Fey Step",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-eladrin-fey-step-mpmm",
+    "raceName": "Eladrin",
+    "source": "MPMM",
+    "text": "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see."
+  },
+  {
+    "id": "race-elf-eladrin-fey-step-dmg",
+    "name": "Fey Step",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-elf-eladrin-fey-step-dmg",
+    "raceName": "Elf (Eladrin)",
+    "source": "DMG",
+    "text": "You can cast the misty step spell once using this trait."
+  },
+  {
+    "id": "race-elf-eladrin-fey-step-mtf",
+    "name": "Fey Step",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-elf-eladrin-fey-step-mtf",
+    "raceName": "Elf (Eladrin)",
+    "source": "MTF",
+    "text": "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see."
+  },
+  {
+    "id": "fey-teleportation",
+    "name": "Fey Teleportation",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "feat",
+    "sourceId": "fey-teleportation",
+    "source": "XGE",
+    "text": "Your study of high elven lore has unlocked fey power that few other elves possess, except your eladrin cousins."
+  },
+  {
+    "id": "fey-touched",
+    "name": "Fey Touched",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "fey-touched",
+    "source": "TCE",
+    "text": "Your exposure to the Feywild's magic has changed you, granting you the following benefits:Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20."
+  },
+  {
     "id": "feywrought-armor-feywrought-armor-charges",
     "name": "Feywrought Armor Charges",
     "max": 3,
@@ -1575,6 +2617,16 @@
     "itemName": "Feywrought Wooden Cuirass"
   },
   {
+    "id": "field-medic",
+    "name": "Field Medic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "field-medic",
+    "source": "HumblewoodTales",
+    "text": "You have been specially trained in magical triage and are able to identify the signs of shock and fatigue in those suffering from injuries."
+  },
+  {
     "id": "figurine-of-wondrous-power-ivory-goats-figurine-of-wondrous-power-ivory-goats-charges",
     "name": "Figurine of Wondrous Power, Ivory Goats Charges",
     "max": 24,
@@ -1583,6 +2635,39 @@
     "sourceType": "item",
     "sourceId": "figurine-of-wondrous-power-ivory-goats",
     "itemName": "Figurine of Wondrous Power, Ivory Goats"
+  },
+  {
+    "id": "race-half-orc-variant-mark-of-finding-finder-s-magic-erlw",
+    "name": "Finder's Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-half-orc-variant-mark-of-finding-finder-s-magic-erlw",
+    "raceName": "Half-Orc (Variant; Mark of Finding)",
+    "source": "ERLW",
+    "text": "You can cast the hunter's mark spell with this trait."
+  },
+  {
+    "id": "race-human-variant-mark-of-finding-finder-s-magic-erlw",
+    "name": "Finder's Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-human-variant-mark-of-finding-finder-s-magic-erlw",
+    "raceName": "Human (Variant; Mark of Finding)",
+    "source": "ERLW",
+    "text": "You can cast the hunter's mark spell with this trait."
+  },
+  {
+    "id": "race-firbolg-firbolg-magic-mpmm",
+    "name": "Firbolg Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-firbolg-firbolg-magic-mpmm",
+    "raceName": "Firbolg",
+    "source": "MPMM",
+    "text": "You can cast detect magic and disguise self spells with this trait."
   },
   {
     "id": "flamberge-bastard-sword-of-grass-flamberge-bastard-sword-of-grass-charges",
@@ -1625,6 +2710,64 @@
     "itemName": "Flame Lance"
   },
   {
+    "id": "flamewoken",
+    "name": "Flamewoken",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "feat",
+    "sourceId": "flamewoken",
+    "source": "HumblewoodTales",
+    "text": "Living in the Scorched Grove or other areas touched by elemental fire can sometimes cause strange abilities to manifest among their inhabitants."
+  },
+  {
+    "id": "class-artificer-7-flash-of-genius-tce",
+    "name": "Flash of Genius",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "class",
+    "sourceId": "class-artificer-7-flash-of-genius-tce",
+    "className": "Artificer",
+    "subclassName": "",
+    "raceName": "",
+    "source": "TCE",
+    "text": "7th-level artificer feature You've gained the ability to come up with solutions under pressure."
+  },
+  {
+    "id": "race-dragonborn-draconblood-forceful-presence-egw",
+    "name": "Forceful Presence",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-draconblood-forceful-presence-egw",
+    "raceName": "Dragonborn (Draconblood)",
+    "source": "EGW",
+    "text": "You can use your understanding of creative diplomacy or intimidation to guide a conversation in your favor."
+  },
+  {
+    "id": "subclass-warlock-undead-1-form-of-dread-vrgr",
+    "name": "Form of Dread",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-undead-1-form-of-dread-vrgr",
+    "className": "Warlock",
+    "subclassName": "Undead",
+    "raceName": "",
+    "source": "VRGR",
+    "text": "1st-level Undead feature You manifest an aspect of your patron's dreadful power."
+  },
+  {
+    "id": "race-hobgoblin-fortune-from-the-many-mpmm",
+    "name": "Fortune from the Many",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-hobgoblin-fortune-from-the-many-mpmm",
+    "raceName": "Hobgoblin",
+    "source": "MPMM",
+    "text": "If you miss with an attack roll or fail an ability check or a saving throw, you can draw on your bonds of reciprocity to gain a bonus to the roll equal to the number of allies you can see within 30 feet of you (maximum bonus of +3)."
+  },
+  {
     "id": "fulminating-treatise-fulminating-treatise-charges",
     "name": "Fulminating Treatise Charges",
     "max": 3,
@@ -1635,6 +2778,27 @@
     "itemName": "Fulminating Treatise"
   },
   {
+    "id": "fury-of-the-frost-giant",
+    "name": "Fury of the Frost Giant",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "fury-of-the-frost-giant",
+    "source": "BGG",
+    "text": "You've manifested the icy might emblematic of frost giants, granting you the following benefits:Ability Score Increase."
+  },
+  {
+    "id": "race-goblin-fury-of-the-small-vgm",
+    "name": "Fury of the Small",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-goblin-fury-of-the-small-vgm",
+    "raceName": "Goblin",
+    "source": "VGM",
+    "text": "When you damage a creature with an attack or a spell and the creature's size is larger than yours, you can cause the attack or spell to deal extra damage to the creature."
+  },
+  {
     "id": "galder-s-bubble-pipe-galder-s-bubble-pipe-charges",
     "name": "Galder's Bubble Pipe Charges",
     "max": 3,
@@ -1643,6 +2807,17 @@
     "sourceType": "item",
     "sourceId": "galder-s-bubble-pipe",
     "itemName": "Galder's Bubble Pipe"
+  },
+  {
+    "id": "race-dragonborn-gem-gem-flight-ftd",
+    "name": "Gem Flight",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-gem-gem-flight-ftd",
+    "raceName": "Dragonborn (Gem)",
+    "source": "FTD",
+    "text": "Starting at 5th level, you can use a bonus action to manifest spectral wings on your body."
   },
   {
     "id": "gem-of-brightness-gem-of-brightness-charges",
@@ -1673,6 +2848,91 @@
     "sourceType": "item",
     "sourceId": "gentleman-s-saber",
     "itemName": "Gentleman's Saber"
+  },
+  {
+    "id": "gift-of-the-chromatic-dragon",
+    "name": "Gift of the Chromatic Dragon",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "gift-of-the-chromatic-dragon",
+    "source": "FTD",
+    "text": "You've manifested some of the power of chromatic dragons, granting you the following benefits:Chromatic Infusion."
+  },
+  {
+    "id": "gift-of-the-gem-dragon",
+    "name": "Gift of the Gem Dragon",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "gift-of-the-gem-dragon",
+    "source": "FTD",
+    "text": "You've manifested some of the power of gem dragons, granting you the following benefits:Ability Score Increase."
+  },
+  {
+    "id": "gift-of-the-metallic-dragon",
+    "name": "Gift of the Metallic Dragon",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "gift-of-the-metallic-dragon",
+    "source": "FTD",
+    "text": "You've manifested some of the power of metallic dragons, granting you the following benefits:Draconic Healing."
+  },
+  {
+    "id": "race-deep-gnome-gift-of-the-svirfneblin-mpmm",
+    "name": "Gift of the Svirfneblin",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-deep-gnome-gift-of-the-svirfneblin-mpmm",
+    "raceName": "Deep Gnome",
+    "source": "MPMM",
+    "text": "Starting at 3rd level, you can cast the disguise self spell with this trait."
+  },
+  {
+    "id": "race-gith-githyanki-githyanki-psionics-mtf",
+    "name": "Githyanki Psionics",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-gith-githyanki-githyanki-psionics-mtf",
+    "raceName": "Gith (Githyanki)",
+    "source": "MTF",
+    "text": "You know the mage hand cantrip, and the hand is invisible when you cast the cantrip with this trait."
+  },
+  {
+    "id": "race-githyanki-githyanki-psionics-mpmm",
+    "name": "Githyanki Psionics",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-githyanki-githyanki-psionics-mpmm",
+    "raceName": "Githyanki",
+    "source": "MPMM",
+    "text": "You know the mage hand cantrip, and the hand is invisible when you cast the cantrip with this trait."
+  },
+  {
+    "id": "race-gith-githzerai-githzerai-psionics-mtf",
+    "name": "Githzerai Psionics",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-gith-githzerai-githzerai-psionics-mtf",
+    "raceName": "Gith (Githzerai)",
+    "source": "MTF",
+    "text": "You know the mage hand cantrip, and the hand is invisible when you cast the cantrip with this trait."
+  },
+  {
+    "id": "race-githzerai-githzerai-psionics-mpmm",
+    "name": "Githzerai Psionics",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-githzerai-githzerai-psionics-mpmm",
+    "raceName": "Githzerai",
+    "source": "MPMM",
+    "text": "You know the mage hand cantrip, and the hand is invisible when you cast the cantrip with this trait."
   },
   {
     "id": "gladius-of-grass-gladius-of-grass-charges",
@@ -1765,6 +3025,19 @@
     "itemName": "Gloomwrought Wooden Cuirass"
   },
   {
+    "id": "subclass-paladin-glory-15-glorious-defense-tce",
+    "name": "Glorious Defense",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-paladin-glory-15-glorious-defense-tce",
+    "className": "Paladin",
+    "subclassName": "Glory",
+    "raceName": "",
+    "source": "TCE",
+    "text": "15th-level Oath of Glory feature You can turn defense into a sudden strike."
+  },
+  {
     "id": "golgari-guild-signet-golgari-guild-signet-charges",
     "name": "Golgari Guild Signet Charges",
     "max": 3,
@@ -1785,6 +3058,19 @@
     "itemName": "Grasping Staff"
   },
   {
+    "id": "subclass-warlock-fathomless-10-grasping-tentacles-tce",
+    "name": "Grasping Tentacles",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-fathomless-10-grasping-tentacles-tce",
+    "className": "Warlock",
+    "subclassName": "Fathomless",
+    "raceName": "",
+    "source": "TCE",
+    "text": "10th-level Fathomless feature You learn the spell Evard's black tentacles."
+  },
+  {
     "id": "great-owl-s-shroud-great-owl-s-shroud-charges",
     "name": "Great Owl's Shroud Charges",
     "max": 10,
@@ -1803,6 +3089,17 @@
     "sourceType": "item",
     "sourceId": "greatbow-of-throne-s-command",
     "itemName": "Greatbow of Throne's Command"
+  },
+  {
+    "id": "race-kobold-grovel-cower-and-beg-vgm",
+    "name": "Grovel, Cower, and Beg",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-kobold-grovel-cower-and-beg-vgm",
+    "raceName": "Kobold",
+    "source": "VGM",
+    "text": "As an action on your turn, you can cower pathetically to distract nearby foes."
   },
   {
     "id": "gruul-guild-signet-gruul-guild-signet-charges",
@@ -1855,6 +3152,16 @@
     "itemName": "Guardian's Reliquary"
   },
   {
+    "id": "guile-of-the-cloud-giant",
+    "name": "Guile of the Cloud Giant",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "guile-of-the-cloud-giant",
+    "source": "BGG",
+    "text": "You've manifested the confounding magic emblematic of cloud giants, granting you the following benefits:Ability Score Increase."
+  },
+  {
     "id": "gulthias-staff-gulthias-staff-charges",
     "name": "Gulthias Staff Charges",
     "max": 10,
@@ -1883,6 +3190,17 @@
     "sourceType": "item",
     "sourceId": "h-rethi-soul-scepter",
     "itemName": "H'rethi Soul Scepter"
+  },
+  {
+    "id": "race-hadozee-hadozee-dodge-aag",
+    "name": "Hadozee Dodge",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-hadozee-hadozee-dodge-aag",
+    "raceName": "Hadozee",
+    "source": "AAG",
+    "text": "The magic that runs in your veins heightens your natural defenses."
   },
   {
     "id": "half-plate-of-the-blind-martyr-half-plate-of-the-blind-martyr-charges",
@@ -1915,6 +3233,16 @@
     "itemName": "Hammer of Thunderbolts"
   },
   {
+    "id": "bigby-s-beneficent-bracelet-hand",
+    "name": "Hand",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Hand: As an action, you can use the bracelet to cast Bigby's hand as a 9th-level spell (spell attack bonus +13).  When you cast the spell this way, the spell doesn't require concentration.  Once this property is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "bigby-s-beneficent-bracelet",
+    "itemName": "Bigby's Beneficent Bracelet"
+  },
+  {
     "id": "hand-of-vecna-hand-of-vecna-charges",
     "name": "Hand of Vecna Charges",
     "max": 8,
@@ -1943,6 +3271,50 @@
     "sourceType": "item",
     "sourceId": "hazirawn",
     "itemName": "Hazirawn"
+  },
+  {
+    "id": "race-half-elf-variant-mark-of-storm-headwinds-erlw",
+    "name": "Headwinds",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-half-elf-variant-mark-of-storm-headwinds-erlw",
+    "raceName": "Half-Elf (Variant; Mark of Storm)",
+    "source": "ERLW",
+    "text": "You know the gust cantrip."
+  },
+  {
+    "id": "race-aasimar-healing-hands-mpmm",
+    "name": "Healing Hands",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-healing-hands-mpmm",
+    "raceName": "Aasimar",
+    "source": "MPMM",
+    "text": "As an action, you can touch a creature and roll a number of d4s equal to your proficiency bonus."
+  },
+  {
+    "id": "race-aasimar-healing-hands-vgm",
+    "name": "Healing Hands",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-healing-hands-vgm",
+    "raceName": "Aasimar",
+    "source": "VGM",
+    "text": "As an action, you can touch a creature and cause it to regain a number of hit points equal to your level."
+  },
+  {
+    "id": "race-halfling-mark-of-healing-healing-touch-erlw",
+    "name": "Healing Touch",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-halfling-mark-of-healing-healing-touch-erlw",
+    "raceName": "Halfling (Mark of Healing)",
+    "source": "ERLW",
+    "text": "You can cast the cure wounds spell with this trait."
   },
   {
     "id": "heart-weaver-s-primer-heart-weaver-s-primer-charges",
@@ -2105,6 +3477,52 @@
     "itemName": "Heward's Handy Spice Pouch"
   },
   {
+    "id": "race-hexblood-hex-magic-vrgr",
+    "name": "Hex Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-hexblood-hex-magic-vrgr",
+    "raceName": "Hexblood",
+    "source": "VRGR",
+    "text": "You can cast the disguise self and hex spells with this trait."
+  },
+  {
+    "id": "subclass-warlock-hexblade-1-hexblade-s-curse-xge",
+    "name": "Hexblade's Curse",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-hexblade-1-hexblade-s-curse-xge",
+    "className": "Warlock",
+    "subclassName": "Hexblade",
+    "raceName": "",
+    "source": "XGE",
+    "text": "Starting at 1st level, you gain the ability to place a baleful curse on someone."
+  },
+  {
+    "id": "race-firbolg-hidden-step-mpmm",
+    "name": "Hidden Step",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-firbolg-hidden-step-mpmm",
+    "raceName": "Firbolg",
+    "source": "MPMM",
+    "text": "As a bonus action, you can magically turn invisible until the start of your next turn or until you attack, make a damage roll, or force someone to make a saving throw."
+  },
+  {
+    "id": "race-firbolg-hidden-step-vgm",
+    "name": "Hidden Step",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-firbolg-hidden-step-vgm",
+    "raceName": "Firbolg",
+    "source": "VGM",
+    "text": "As a bonus action, you can magically turn invisible until the start of your next turn or until you attack, make a damage roll, or force someone to make a saving throw."
+  },
+  {
     "id": "hit-dice",
     "name": "Hit Dice",
     "sourceType": "core",
@@ -2121,6 +3539,19 @@
     "sourceType": "item",
     "sourceId": "hither-thither-staff",
     "itemName": "Hither-Thither Staff"
+  },
+  {
+    "id": "subclass-paladin-devotion-20-holy-nimbus-phb",
+    "name": "Holy Nimbus",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-paladin-devotion-20-holy-nimbus-phb",
+    "className": "Paladin",
+    "subclassName": "Devotion",
+    "raceName": "",
+    "source": "PHB",
+    "text": "At 20th level, as an action, you can emanate an aura of sunlight."
   },
   {
     "id": "holy-symbol-of-ravenkind-holy-symbol-of-ravenkind-charges",
@@ -2233,6 +3664,28 @@
     "itemName": "Hourglass of Slumber"
   },
   {
+    "id": "race-lizardfolk-hungry-jaws-mpmm",
+    "name": "Hungry Jaws",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-lizardfolk-hungry-jaws-mpmm",
+    "raceName": "Lizardfolk",
+    "source": "MPMM",
+    "text": "You can throw yourself into a feeding frenzy."
+  },
+  {
+    "id": "race-lizardfolk-hungry-jaws-vgm",
+    "name": "Hungry Jaws",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-lizardfolk-hungry-jaws-vgm",
+    "raceName": "Lizardfolk",
+    "source": "VGM",
+    "text": "In battle, you can throw yourself into a vicious feeding frenzy."
+  },
+  {
     "id": "hunter-s-coat-hunter-s-coat-charges",
     "name": "Hunter's Coat Charges",
     "max": 3,
@@ -2241,6 +3694,93 @@
     "sourceType": "item",
     "sourceId": "hunter-s-coat",
     "itemName": "Hunter's Coat"
+  },
+  {
+    "id": "subclass-warlock-fiend-14-hurl-through-hell-phb",
+    "name": "Hurl Through Hell",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-fiend-14-hurl-through-hell-phb",
+    "className": "Warlock",
+    "subclassName": "Fiend",
+    "raceName": "",
+    "source": "PHB",
+    "text": "Starting at 14th level, when you hit a creature with an attack, you can use this feature to instantly transport the target through the lower planes."
+  },
+  {
+    "id": "subclass-wizard-enchantment-2-hypnotic-gaze-phb",
+    "name": "Hypnotic Gaze",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-wizard-enchantment-2-hypnotic-gaze-phb",
+    "className": "Wizard",
+    "subclassName": "Enchantment",
+    "raceName": "",
+    "source": "PHB",
+    "text": "Starting at 2nd level when you choose this school, your soft words and enchanting gaze can magically enthrall another creature."
+  },
+  {
+    "id": "subclass-wizard-illusion-10-illusory-self-phb",
+    "name": "Illusory Self",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-wizard-illusion-10-illusory-self-phb",
+    "className": "Wizard",
+    "subclassName": "Illusion",
+    "raceName": "",
+    "source": "PHB",
+    "text": "Beginning at 10th level, you can create an illusory duplicate of yourself as an instant, almost instinctual reaction to danger."
+  },
+  {
+    "id": "subclass-warlock-undying-14-indestructible-life-scag",
+    "name": "Indestructible Life",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-undying-14-indestructible-life-scag",
+    "className": "Warlock",
+    "subclassName": "Undying",
+    "raceName": "",
+    "source": "SCAG",
+    "text": "When you reach 14th level, you partake some of the true secrets of the Undying."
+  },
+  {
+    "id": "class-fighter-9-indomitable-phb",
+    "name": "Indomitable",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "class",
+    "sourceId": "class-fighter-9-indomitable-phb",
+    "className": "Fighter",
+    "subclassName": "",
+    "raceName": "",
+    "source": "PHB",
+    "text": "Beginning at 9th level, you can reroll a saving throw that you fail."
+  },
+  {
+    "id": "race-tiefling-infernal-legacy-phb",
+    "name": "Infernal Legacy",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-tiefling-infernal-legacy-phb",
+    "raceName": "Tiefling",
+    "source": "PHB",
+    "text": "You know the thaumaturgy cantrip."
+  },
+  {
+    "id": "race-yuan-ti-pureblood-innate-spellcasting-vgm",
+    "name": "Innate Spellcasting",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-yuan-ti-pureblood-innate-spellcasting-vgm",
+    "raceName": "Yuan-ti Pureblood",
+    "source": "VGM",
+    "text": "You know the poison spray cantrip."
   },
   {
     "id": "inscrutable-staff-inscrutable-staff-charges",
@@ -2253,6 +3793,19 @@
     "itemName": "Inscrutable Staff"
   },
   {
+    "id": "subclass-wizard-enchantment-6-instinctive-charm-phb",
+    "name": "Instinctive Charm",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-wizard-enchantment-6-instinctive-charm-phb",
+    "className": "Wizard",
+    "subclassName": "Enchantment",
+    "raceName": "",
+    "source": "PHB",
+    "text": "Beginning at 6th level, when a creature you can see within 30 feet of you makes an attack roll against you, you can use your reaction to divert the attack, provided that another creature is within the attack's range."
+  },
+  {
     "id": "instrument-of-scribing-instrument-of-scribing-charges",
     "name": "Instrument of Scribing Charges",
     "max": 3,
@@ -2261,6 +3814,19 @@
     "sourceType": "item",
     "sourceId": "instrument-of-scribing",
     "itemName": "Instrument of Scribing"
+  },
+  {
+    "id": "subclass-paladin-conquest-20-invincible-conqueror-xge",
+    "name": "Invincible Conqueror",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-paladin-conquest-20-invincible-conqueror-xge",
+    "className": "Paladin",
+    "subclassName": "Conquest",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 20th level, you gain the ability to harness extraordinary martial prowess."
   },
   {
     "id": "ironfang-ironfang-charges",
@@ -2281,6 +3847,16 @@
     "sourceType": "item",
     "sourceId": "ironleaf-impaler",
     "itemName": "Ironleaf Impaler"
+  },
+  {
+    "id": "donjon-s-sundering-sphere-isolating-smite",
+    "name": "Isolating Smite",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Isolating Smite: When you hit a creature with this weapon, you can force the creature to make a DC 16 Charisma saving throw.  On a failed save, the creature is banished to a harmless demiplane until the end of its next turn.  When the banished creature returns, it reappears in the space it left or the nearest unoccupied space if that space is occupied.  Once this property is used, it can't be used again until the next dawn.  When you end your attunement to the sphere, the sphere harmlessly detaches from the weapon, and the weapon reverts to a nonmagical piece of equipment.",
+    "sourceType": "item",
+    "sourceId": "donjon-s-sundering-sphere",
+    "itemName": "Donjon's Sundering Sphere"
   },
   {
     "id": "izzet-guild-signet-izzet-guild-signet-charges",
@@ -2413,6 +3989,27 @@
     "itemName": "Katana of Verdict"
   },
   {
+    "id": "keenness-of-the-stone-giant",
+    "name": "Keenness of the Stone Giant",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "keenness-of-the-stone-giant",
+    "source": "BGG",
+    "text": "You've manifested the physical talents emblematic of stone giants, granting you the following benefits:Ability Score Increase."
+  },
+  {
+    "id": "race-kenku-kenku-recall-mpmm",
+    "name": "Kenku Recall",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-kenku-kenku-recall-mpmm",
+    "raceName": "Kenku",
+    "source": "MPMM",
+    "text": "Thanks to your supernaturally good memory, you have proficiency in two skills of your choice."
+  },
+  {
     "id": "khrusor-spear-of-heliod-khrusor-spear-of-heliod-charges",
     "name": "Khrusor, Spear of Heliod Charges",
     "max": 10,
@@ -2431,7 +4028,50 @@
     "sourceId": "class-monk-14-diamond-soul-phb",
     "className": "Monk",
     "subclassName": "",
+    "raceName": "",
+    "source": "PHB",
     "text": "Beginning at 14th level, your mastery of ki grants you proficiency in all saving throws."
+  },
+  {
+    "id": "knight-of-the-crown",
+    "name": "Knight of the Crown",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "knight-of-the-crown",
+    "source": "DSotDQ",
+    "text": "You are a Knight of Solamnia aligned with the Order of the Crown, a group that extols the virtues of cooperation, loyalty, and obedience."
+  },
+  {
+    "id": "knight-of-the-rose",
+    "name": "Knight of the Rose",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "knight-of-the-rose",
+    "source": "DSotDQ",
+    "text": "You are a Knight of Solamnia aligned with the Order of the Rose, a group known for leadership, justice, and wisdom."
+  },
+  {
+    "id": "knight-of-the-sword",
+    "name": "Knight of the Sword",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "knight-of-the-sword",
+    "source": "DSotDQ",
+    "text": "You are a Knight of Solamnia aligned with the Order of the Sword, a group devoted to heroism and courage."
+  },
+  {
+    "id": "race-reborn-knowledge-from-a-past-life-vrgr",
+    "name": "Knowledge from a Past Life",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-reborn-knowledge-from-a-past-life-vrgr",
+    "raceName": "Reborn",
+    "source": "VRGR",
+    "text": "You temporarily remember glimpses of the past, perhaps faded memories from ages ago or a previous life."
   },
   {
     "id": "kodachi-of-grass-kodachi-of-grass-charges",
@@ -2532,7 +4172,97 @@
     "sourceId": "class-paladin-1-lay-on-hands-phb",
     "className": "Paladin",
     "subclassName": "",
+    "raceName": "",
+    "source": "PHB",
     "text": "Your blessed touch can heal wounds."
+  },
+  {
+    "id": "race-tiefling-zariel-legacy-of-avernus-mtf",
+    "name": "Legacy of Avernus",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-tiefling-zariel-legacy-of-avernus-mtf",
+    "raceName": "Tiefling (Zariel)",
+    "source": "MTF",
+    "text": "You know the thaumaturgy cantrip."
+  },
+  {
+    "id": "race-tiefling-mephistopheles-legacy-of-cania-mtf",
+    "name": "Legacy of Cania",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-tiefling-mephistopheles-legacy-of-cania-mtf",
+    "raceName": "Tiefling (Mephistopheles)",
+    "source": "MTF",
+    "text": "You know the mage hand cantrip."
+  },
+  {
+    "id": "race-tiefling-dispater-legacy-of-dis-mtf",
+    "name": "Legacy of Dis",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-tiefling-dispater-legacy-of-dis-mtf",
+    "raceName": "Tiefling (Dispater)",
+    "source": "MTF",
+    "text": "You know the thaumaturgy cantrip."
+  },
+  {
+    "id": "race-tiefling-baalzebul-legacy-of-maladomini-mtf",
+    "name": "Legacy of Maladomini",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-tiefling-baalzebul-legacy-of-maladomini-mtf",
+    "raceName": "Tiefling (Baalzebul)",
+    "source": "MTF",
+    "text": "You know the thaumaturgy cantrip."
+  },
+  {
+    "id": "race-tiefling-glasya-legacy-of-malbolge-mtf",
+    "name": "Legacy of Malbolge",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-tiefling-glasya-legacy-of-malbolge-mtf",
+    "raceName": "Tiefling (Glasya)",
+    "source": "MTF",
+    "text": "You know the minor illusion cantrip."
+  },
+  {
+    "id": "race-tiefling-mammon-legacy-of-minauros-mtf",
+    "name": "Legacy of Minauros",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-tiefling-mammon-legacy-of-minauros-mtf",
+    "raceName": "Tiefling (Mammon)",
+    "source": "MTF",
+    "text": "You know the mage hand cantrip."
+  },
+  {
+    "id": "race-tiefling-fierna-legacy-of-phlegethos-mtf",
+    "name": "Legacy of Phlegethos",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-tiefling-fierna-legacy-of-phlegethos-mtf",
+    "raceName": "Tiefling (Fierna)",
+    "source": "MTF",
+    "text": "You know the friends cantrip."
+  },
+  {
+    "id": "race-tiefling-levistus-legacy-of-stygia-mtf",
+    "name": "Legacy of Stygia",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-tiefling-levistus-legacy-of-stygia-mtf",
+    "raceName": "Tiefling (Levistus)",
+    "source": "MTF",
+    "text": "You know the ray of frost cantrip."
   },
   {
     "id": "libram-of-souls-and-flesh-libram-of-souls-and-flesh-charges",
@@ -2549,9 +4279,23 @@
     "name": "Lightning Rod Charges",
     "max": 6,
     "reset": "dawnLose1d6",
+    "text": "This rod is made from the blackened wood of a lightning-struck tree and topped with a spike of twisted iron.",
     "sourceType": "item",
     "sourceId": "lightning-rod",
     "itemName": "Lightning Rod"
+  },
+  {
+    "id": "subclass-paladin-glory-20-living-legend-tce",
+    "name": "Living Legend",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-paladin-glory-20-living-legend-tce",
+    "className": "Paladin",
+    "subclassName": "Glory",
+    "raceName": "",
+    "source": "TCE",
+    "text": "20th-level Oath of Glory feature You can empower yourself with the legends—whether true or exaggerated—of your great deeds."
   },
   {
     "id": "long-axe-of-grass-long-axe-of-grass-charges",
@@ -2614,6 +4358,29 @@
     "itemName": "Lost Crown of Besilmer"
   },
   {
+    "id": "feat-lucky-luck-points",
+    "name": "Luck Points",
+    "max": 3,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "lucky",
+    "source": "PHB",
+    "text": "You have inexplicable luck that seems to kick in at just the right moment."
+  },
+  {
+    "id": "subclass-sorcerer-lunar-1-lunar-embodiment-dsotdq",
+    "name": "Lunar Embodiment",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-sorcerer-lunar-1-lunar-embodiment-dsotdq",
+    "className": "Sorcerer",
+    "subclassName": "Lunar",
+    "raceName": "",
+    "source": "DSotDQ",
+    "text": "1st-Level Lunar Sorcery Feature You learn additional spells when you reach certain levels in this class, as shown on the Lunar Spells table."
+  },
+  {
     "id": "mace-of-terror-mace-of-terror-charges",
     "name": "Mace of Terror Charges",
     "max": 3,
@@ -2674,6 +4441,90 @@
     "itemName": "Mageplate Ring"
   },
   {
+    "id": "subclass-barbarian-wild-magic-3-magic-awareness-tce",
+    "name": "Magic Awareness",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-barbarian-wild-magic-3-magic-awareness-tce",
+    "className": "Barbarian",
+    "subclassName": "Wild Magic",
+    "raceName": "",
+    "source": "TCE",
+    "text": "3rd-level Path of Wild Magic feature As an action, you can open your awareness to the presence of concentrated magic."
+  },
+  {
+    "id": "subclass-ranger-monster-slayer-11-magic-user-s-nemesis-xge",
+    "name": "Magic-User's Nemesis",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-ranger-monster-slayer-11-magic-user-s-nemesis-xge",
+    "className": "Ranger",
+    "subclassName": "Monster Slayer",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 11th level, you gain the ability to thwart someone else's magic."
+  },
+  {
+    "id": "race-half-elf-variant-mark-of-detection-magical-detection-erlw",
+    "name": "Magical Detection",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-half-elf-variant-mark-of-detection-magical-detection-erlw",
+    "raceName": "Half-Elf (Variant; Mark of Detection)",
+    "source": "ERLW",
+    "text": "You can cast the detect magic and detect poison and disease spells with this trait."
+  },
+  {
+    "id": "race-human-mark-of-passage-magical-passage-erlw",
+    "name": "Magical Passage",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-human-mark-of-passage-magical-passage-erlw",
+    "raceName": "Human (Mark of Passage)",
+    "source": "ERLW",
+    "text": "You can cast the misty step spell once with this trait, and you regain the ability to cast it when you finish a long rest."
+  },
+  {
+    "id": "magically-mischievous",
+    "name": "Magically Mischievous",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "magically-mischievous",
+    "source": "ObojimaTallGrass",
+    "text": "You've picked up a few magical tricks that assist your nefarious skills."
+  },
+  {
+    "id": "subclass-wizard-scribes-6-manifest-mind-tce",
+    "name": "Manifest Mind",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-wizard-scribes-6-manifest-mind-tce",
+    "className": "Wizard",
+    "subclassName": "Scribes",
+    "raceName": "",
+    "source": "TCE",
+    "text": "6th-level Order of Scribes feature You can conjure forth the mind of your Awakened Spellbook."
+  },
+  {
+    "id": "subclass-bard-glamour-6-mantle-of-majesty-xge",
+    "name": "Mantle of Majesty",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-bard-glamour-6-mantle-of-majesty-xge",
+    "className": "Bard",
+    "subclassName": "Glamour",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 6th level, you gain the ability to cloak yourself in a fey magic that makes others want to serve you."
+  },
+  {
     "id": "masakari-axe-of-grass-masakari-axe-of-grass-charges",
     "name": "Masakari Axe of Grass Charges",
     "max": 7,
@@ -2714,6 +4565,42 @@
     "itemName": "Mask of the Beast"
   },
   {
+    "id": "subclass-rogue-swashbuckler-17-master-duelist-xge",
+    "name": "Master Duelist",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-rogue-swashbuckler-17-master-duelist-xge",
+    "className": "Rogue",
+    "subclassName": "Swashbuckler",
+    "raceName": "",
+    "source": "XGE",
+    "text": "Beginning at 17th level, your mastery of the blade lets you turn failure into success in combat."
+  },
+  {
+    "id": "subclass-fighter-rune-knight-15-master-of-runes-tce",
+    "name": "Master of Runes",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-fighter-rune-knight-15-master-of-runes-tce",
+    "className": "Fighter",
+    "subclassName": "Rune Knight",
+    "raceName": "",
+    "source": "TCE",
+    "text": "15th-level Rune Knight feature You can invoke each rune you know from your Rune Carver feature twice, rather than once, and you regain all expended uses when you finish a short or long rest."
+  },
+  {
+    "id": "adze-of-annam-mattock",
+    "name": "Mattock",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Mattock: As an action, you can call upon the might of the All-Father and use the adze to cast move earth or fabricate.  Once this property is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "adze-of-annam",
+    "itemName": "Adze of Annam"
+  },
+  {
     "id": "medallion-of-thoughts-medallion-of-thoughts-charges",
     "name": "Medallion of Thoughts Charges",
     "max": 3,
@@ -2734,6 +4621,41 @@
     "itemName": "Medallion of Harmonious Resonance"
   },
   {
+    "id": "subclass-mystic-nomad-3-memory-of-one-thousand-steps-uathemysticclass",
+    "name": "Memory of One Thousand Steps",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-mystic-nomad-3-memory-of-one-thousand-steps-uathemysticclass",
+    "className": "Mystic",
+    "subclassName": "Nomad",
+    "raceName": "",
+    "source": "UATheMysticClass",
+    "text": "At 3rd level, you gain the ability to use psionics to recall your steps."
+  },
+  {
+    "id": "race-genasi-earth-merge-with-stone-eepc",
+    "name": "Merge with Stone",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-genasi-earth-merge-with-stone-eepc",
+    "raceName": "Genasi (Earth)",
+    "source": "EEPC",
+    "text": "You can cast the pass without trace spell once with this trait, requiring no material components, and you regain the ability to cast it this way when you finish a long rest."
+  },
+  {
+    "id": "race-genasi-earth-merge-with-stone-mpmm",
+    "name": "Merge with Stone",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-genasi-earth-merge-with-stone-mpmm",
+    "raceName": "Genasi (Earth)",
+    "source": "MPMM",
+    "text": "You know the blade ward cantrip."
+  },
+  {
     "id": "metal-cuirass-of-weightlessness-metal-cuirass-of-weightlessness-charges",
     "name": "Metal Cuirass of Weightlessness Charges",
     "max": 5,
@@ -2742,6 +4664,17 @@
     "sourceType": "item",
     "sourceId": "metal-cuirass-of-weightlessness",
     "itemName": "Metal Cuirass of Weightlessness"
+  },
+  {
+    "id": "race-dragonborn-metallic-metallic-breath-weapon-ftd",
+    "name": "Metallic Breath Weapon",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-metallic-metallic-breath-weapon-ftd",
+    "raceName": "Dragonborn (Metallic)",
+    "source": "FTD",
+    "text": "At 5th level, you gain a second breath weapon."
   },
   {
     "id": "meteor-hammer-of-throne-s-command-meteor-hammer-of-throne-s-command-charges",
@@ -2784,6 +4717,64 @@
     "itemName": "Mindrazor"
   },
   {
+    "id": "race-genasi-air-mingle-with-the-wind-eepc",
+    "name": "Mingle with the Wind",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-genasi-air-mingle-with-the-wind-eepc",
+    "raceName": "Genasi (Air)",
+    "source": "EEPC",
+    "text": "You can cast the levitate spell once with this trait, requiring no material components, and you regain the ability to cast it this way when you finish a long rest."
+  },
+  {
+    "id": "race-genasi-air-mingle-with-the-wind-mpmm",
+    "name": "Mingle with the Wind",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-genasi-air-mingle-with-the-wind-mpmm",
+    "raceName": "Genasi (Air)",
+    "source": "MPMM",
+    "text": "You know the shocking grasp cantrip."
+  },
+  {
+    "id": "minor-corruption",
+    "name": "Minor Corruption",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "minor-corruption",
+    "source": "ObojimaTallGrass",
+    "text": "You were exposed to the Corruption, a dark magic that's poisoning the island."
+  },
+  {
+    "id": "subclass-warlock-archfey-6-misty-escape-phb",
+    "name": "Misty Escape",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-archfey-6-misty-escape-phb",
+    "className": "Warlock",
+    "subclassName": "Archfey",
+    "raceName": "",
+    "source": "PHB",
+    "text": "Starting at 6th level, you can vanish in a puff of mist in response to harm."
+  },
+  {
+    "id": "subclass-ranger-fey-wanderer-15-misty-wanderer-tce",
+    "name": "Misty Wanderer",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-ranger-fey-wanderer-15-misty-wanderer-tce",
+    "className": "Ranger",
+    "subclassName": "Fey Wanderer",
+    "raceName": "",
+    "source": "TCE",
+    "text": "15th-level Fey Wanderer feature You can slip in and out of the Feywild to move in a blink of an eye: you can cast misty step without expending a spell slot."
+  },
+  {
     "id": "mizzium-mortar-mizzium-mortar-charges",
     "name": "Mizzium Mortar Charges",
     "max": 4,
@@ -2792,6 +4783,19 @@
     "sourceType": "item",
     "sourceId": "mizzium-mortar",
     "itemName": "Mizzium Mortar"
+  },
+  {
+    "id": "subclass-wizard-chronurgy-6-momentary-stasis-egw",
+    "name": "Momentary Stasis",
+    "maxFormula": "intMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-wizard-chronurgy-6-momentary-stasis-egw",
+    "className": "Wizard",
+    "subclassName": "Chronurgy",
+    "raceName": "",
+    "source": "EGW",
+    "text": "6th-level Chronurgy Magic feature As an action, you can magically force a Large or smaller creature you can see within 60 feet of you to make a Constitution saving throw against your spell save DC."
   },
   {
     "id": "monarch-mantle-monarch-mantle-charges",
@@ -3014,6 +5018,19 @@
     "itemName": "Morath, Scepter of the Soul Vortex"
   },
   {
+    "id": "subclass-paladin-watchers-20-mortal-bulwark-tce",
+    "name": "Mortal Bulwark",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-paladin-watchers-20-mortal-bulwark-tce",
+    "className": "Paladin",
+    "subclassName": "Watchers",
+    "raceName": "",
+    "source": "TCE",
+    "text": "20th-level Oath of the Watchers feature You manifest a spark of divine power in defense of the mortal realms."
+  },
+  {
     "id": "mourningsteel-war-banner-mourningsteel-war-banner-charges",
     "name": "Mourningsteel War Banner Charges",
     "max": 3,
@@ -3022,6 +5039,17 @@
     "sourceType": "item",
     "sourceId": "mourningsteel-war-banner",
     "itemName": "Mourningsteel War Banner"
+  },
+  {
+    "id": "race-elf-zendikar-mul-daya-nation-mul-daya-magic-psz",
+    "name": "Mul Daya Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-elf-zendikar-mul-daya-nation-mul-daya-magic-psz",
+    "raceName": "Elf (Zendikar) (Mul Daya Nation)",
+    "source": "PSZ",
+    "text": "You know the chill touch cantrip."
   },
   {
     "id": "naginata-of-throne-s-command-naginata-of-throne-s-command-charges",
@@ -3042,6 +5070,43 @@
     "sourceType": "item",
     "sourceId": "naginata-of-verdict",
     "itemName": "Naginata of Verdict"
+  },
+  {
+    "id": "subclass-druid-land-2-natural-recovery-phb",
+    "name": "Natural Recovery",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-druid-land-2-natural-recovery-phb",
+    "className": "Druid",
+    "subclassName": "Land",
+    "raceName": "",
+    "source": "PHB",
+    "text": "Starting at 2nd level, you can regain some of your magical energy by sitting in meditation and communing with nature."
+  },
+  {
+    "id": "class-ranger-10-nature-s-veil-tce",
+    "name": "Nature's Veil",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "class",
+    "sourceId": "class-ranger-10-nature-s-veil-tce",
+    "className": "Ranger",
+    "subclassName": "",
+    "raceName": "",
+    "source": "TCE",
+    "text": "10th-level ranger optional class features, which replaces the Hide in Plain Sight feature You draw on the powers of nature to hide yourself from view briefly."
+  },
+  {
+    "id": "race-aasimar-fallen-necrotic-shroud-vgm",
+    "name": "Necrotic Shroud",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-fallen-necrotic-shroud-vgm",
+    "raceName": "Aasimar (Fallen)",
+    "source": "VGM",
+    "text": "Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing your eyes to turn into pools of darkness and two skeletal, ghostly, flightless wings to sprout from your back."
   },
   {
     "id": "needler-pistol-needler-pistol-charges",
@@ -3154,6 +5219,19 @@
     "itemName": "Nunchaku of Verdict"
   },
   {
+    "id": "subclass-wizard-scribes-14-one-with-the-word-tce",
+    "name": "One with the Word",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-wizard-scribes-14-one-with-the-word-tce",
+    "className": "Wizard",
+    "subclassName": "Scribes",
+    "raceName": "",
+    "source": "TCE",
+    "text": "14th-level Order of Scribes feature Your connection to your Awakened Spellbook has become so profound that your soul has become entwined with it."
+  },
+  {
     "id": "orb-of-dragonkind-orb-of-dragonkind-charges",
     "name": "Orb of Dragonkind Charges",
     "max": 7,
@@ -3172,6 +5250,16 @@
     "sourceType": "item",
     "sourceId": "orb-of-skoraeus",
     "itemName": "Orb of Skoraeus"
+  },
+  {
+    "id": "orcish-fury",
+    "name": "Orcish Fury",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "feat",
+    "sourceId": "orcish-fury",
+    "source": "XGE",
+    "text": "Your fury burns tirelessly."
   },
   {
     "id": "orner-s-venomous-crossbow-orner-s-venomous-crossbow-charges",
@@ -3212,6 +5300,43 @@
     "sourceType": "item",
     "sourceId": "paralysis-pistol",
     "itemName": "Paralysis Pistol"
+  },
+  {
+    "id": "race-vedalken-partially-amphibious-ggr",
+    "name": "Partially Amphibious",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-vedalken-partially-amphibious-ggr",
+    "raceName": "Vedalken",
+    "source": "GGR",
+    "text": "By absorbing oxygen through your skin, you can breathe underwater for up to 1 hour."
+  },
+  {
+    "id": "subclass-ranger-drakewarden-15-perfected-bond-ftd",
+    "name": "Perfected Bond",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-ranger-drakewarden-15-perfected-bond-ftd",
+    "className": "Ranger",
+    "subclassName": "Drakewarden",
+    "raceName": "",
+    "source": "FTD",
+    "text": "15th-level Drakewarden feature Your bond to your drake reaches the pinnacle of its power."
+  },
+  {
+    "id": "subclass-bard-creation-3-performance-of-creation-tce",
+    "name": "Performance of Creation",
+    "max": 20,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-bard-creation-3-performance-of-creation-tce",
+    "className": "Bard",
+    "subclassName": "Creation",
+    "raceName": "",
+    "source": "TCE",
+    "text": "3rd-level College of Creation feature As an action, you can channel the magic of the Song of Creation to create one nonmagical item of your choice in an unoccupied space within 10 feet of you."
   },
   {
     "id": "phasing-bow-phasing-bow-charges",
@@ -3258,9 +5383,20 @@
     "name": "Piercing Shot",
     "max": 3,
     "reset": "longRest",
+    "text": "Piercing Shot (3/day): Before making an attack roll with a ranged weapon, you can activate Piercing Shot and choose a specific body part to target. On a hit, the target suffers a special effect based on the location struck: - Eyes – Target has disadvantage on Wisdom (Perception) checks relying on sight and on ranged attack rolls until the end of its next turn. - Arm/Hand – Target cannot wield two-handed weapons and may only hold a single object at a time until the end of its next turn. - Foot/Leg – Target’s movement speed is halved until the end of its next turn. - Torso – Target must make a Constitution saving throw (DC = 10 + your proficiency bonus + your Dexterity modifier) the next time it attempts an action. On a failed save, the target loses its action and reactions until the start of its next turn.",
     "sourceType": "item",
     "sourceId": "bracer-of-piercing-arrows",
     "itemName": "Bracer of Piercing Arrows"
+  },
+  {
+    "id": "planar-wanderer",
+    "name": "Planar Wanderer",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "planar-wanderer",
+    "source": "SatO",
+    "text": "You can draw on the forces of the multiverse to survive cosmic extremes and to traverse its infinite realms, granting you these benefits:Planar Adaptation."
   },
   {
     "id": "planecaller-s-codex-planecaller-s-codex-charges",
@@ -3321,6 +5457,8 @@
     "sourceId": "subclass-cleric-moon-1-moon-domain-tdcsr",
     "className": "Cleric",
     "subclassName": "Moon",
+    "raceName": "",
+    "source": "TDCSR",
     "text": "Since the Founding, all mortal creatures have looked to the skies and sensed the power and mystery carried by Catha and Ruidus, the two moons of Exandria."
   },
   {
@@ -3338,9 +5476,47 @@
     "name": "Precise Aim",
     "max": 1,
     "reset": "longRest",
+    "text": "Precise Aim (1/day): As a bonus action at the start of your turn, you may activate Precise Aim. Until the end of your next turn, whenever you hit a creature with a weapon attack, all allies gain advantage on attack rolls against that target.",
     "sourceType": "item",
     "sourceId": "bracer-of-piercing-arrows",
     "itemName": "Bracer of Piercing Arrows"
+  },
+  {
+    "id": "subclass-cleric-zeal-psa-1-priest-of-zeal-psa",
+    "name": "Priest of Zeal",
+    "maxFormula": "wisMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-zeal-psa-1-priest-of-zeal-psa",
+    "className": "Cleric",
+    "subclassName": "Zeal (PSA)",
+    "raceName": "",
+    "source": "PSA",
+    "text": "From 1st level, Hazoret delivers bolts of inspiration to you while you are engaged in battle."
+  },
+  {
+    "id": "class-ranger-3-primal-awareness-tce",
+    "name": "Primal Awareness",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "class",
+    "sourceId": "class-ranger-3-primal-awareness-tce",
+    "className": "Ranger",
+    "subclassName": "",
+    "raceName": "",
+    "source": "TCE",
+    "text": "3rd-level ranger optional class features, which replaces the Primeval Awareness feature You can focus your awareness through the interconnections of nature: you learn additional spells when you reach certain levels in this class if you don..."
+  },
+  {
+    "id": "race-human-mark-of-handling-primal-connection-erlw",
+    "name": "Primal Connection",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-human-mark-of-handling-primal-connection-erlw",
+    "raceName": "Human (Mark of Handling)",
+    "source": "ERLW",
+    "text": "You can cast the animal friendship and speak with animals spells with this trait, requiring no material component."
   },
   {
     "id": "prismari-primer-prismari-primer-charges",
@@ -3373,6 +5549,71 @@
     "itemName": "Prototype Thunderberd"
   },
   {
+    "id": "subclass-fighter-psi-warrior-7-psi-powered-leap-tce",
+    "name": "Psi-Powered Leap",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-fighter-psi-warrior-7-psi-powered-leap-tce",
+    "className": "Fighter",
+    "subclassName": "Psi Warrior",
+    "raceName": "",
+    "source": "TCE",
+    "text": "As a bonus action, you can propel your body with your mind."
+  },
+  {
+    "id": "subclass-mystic-awakened-3-psionic-investigation-uathemysticclass",
+    "name": "Psionic Investigation",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-mystic-awakened-3-psionic-investigation-uathemysticclass",
+    "className": "Mystic",
+    "subclassName": "Awakened",
+    "raceName": "",
+    "source": "UATheMysticClass",
+    "text": "Starting at 3rd level, you can focus your mind to read the psionic imprint left on an object."
+  },
+  {
+    "id": "subclass-fighter-psi-warrior-3-psionic-power-tce",
+    "name": "Psionic Power",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-fighter-psi-warrior-3-psionic-power-tce",
+    "className": "Fighter",
+    "subclassName": "Psi Warrior",
+    "raceName": "",
+    "source": "TCE",
+    "text": "3rd-level Psi Warrior feature You harbor a wellspring of psionic energy within yourself."
+  },
+  {
+    "id": "subclass-rogue-soulknife-3-psionic-power-tce",
+    "name": "Psionic Power",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-rogue-soulknife-3-psionic-power-tce",
+    "className": "Rogue",
+    "subclassName": "Soulknife",
+    "raceName": "",
+    "source": "TCE",
+    "text": "3rd-level Soulknife feature You harbor a wellspring of psionic energy within yourself."
+  },
+  {
+    "id": "subclass-rogue-soulknife-13-psychic-veil-tce",
+    "name": "Psychic Veil",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-rogue-soulknife-13-psychic-veil-tce",
+    "className": "Rogue",
+    "subclassName": "Soulknife",
+    "raceName": "",
+    "source": "TCE",
+    "text": "13th-level Soulknife feature You can weave a veil of psychic static to mask yourself."
+  },
+  {
     "id": "quandrix-primer-quandrix-primer-charges",
     "name": "Quandrix Primer Charges",
     "max": 3,
@@ -3383,15 +5624,61 @@
     "itemName": "Quandrix Primer"
   },
   {
+    "id": "race-harengon-rabbit-hop-mpmm",
+    "name": "Rabbit Hop",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-harengon-rabbit-hop-mpmm",
+    "raceName": "Harengon",
+    "source": "MPMM",
+    "text": "As a bonus action, you can jump a number of feet equal to five times your proficiency bonus, without provoking opportunity attacks."
+  },
+  {
+    "id": "race-harengon-rabbit-hop-wbtw",
+    "name": "Rabbit Hop",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-harengon-rabbit-hop-wbtw",
+    "raceName": "Harengon",
+    "source": "WBtW",
+    "text": "As a bonus action, you can jump a number of feet equal to five times your proficiency bonus, without provoking opportunity attacks."
+  },
+  {
+    "id": "race-aasimar-scourge-radiant-consumption-vgm",
+    "name": "Radiant Consumption",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-scourge-radiant-consumption-vgm",
+    "raceName": "Aasimar (Scourge)",
+    "source": "VGM",
+    "text": "Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing a searing light to radiate from you, pour out of your eyes and mouth, and threaten to char you."
+  },
+  {
+    "id": "race-aasimar-protector-radiant-soul-vgm",
+    "name": "Radiant Soul",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-aasimar-protector-radiant-soul-vgm",
+    "raceName": "Aasimar (Protector)",
+    "source": "VGM",
+    "text": "Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing your eyes to glimmer and two luminous, incorporeal wings to sprout from your back."
+  },
+  {
     "id": "barbarian-rage",
     "name": "Rage",
     "maxFormula": "barbarianRages(level)",
     "reset": "longRest",
-    "sourceType": "subclass",
-    "sourceId": "subclass-artificer-battle-smith-3-battle-smith-spells-tce",
-    "className": "Artificer",
-    "subclassName": "Battle Smith",
-    "text": "Starting at 3rd level, you always have certain spells prepared after you reach particular levels in this class, as shown in the Battle Smith Spells table."
+    "sourceType": "class",
+    "sourceId": "class-barbarian-1-rage-phb",
+    "className": "Barbarian",
+    "subclassName": "",
+    "raceName": "",
+    "source": "PHB",
+    "text": "In battle, you fight with primal ferocity."
   },
   {
     "id": "rakdos-guild-signet-rakdos-guild-signet-charges",
@@ -3404,6 +5691,41 @@
     "itemName": "Rakdos Guild Signet"
   },
   {
+    "id": "race-genasi-fire-reach-to-the-blaze-eepc",
+    "name": "Reach to the Blaze",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-genasi-fire-reach-to-the-blaze-eepc",
+    "raceName": "Genasi (Fire)",
+    "source": "EEPC",
+    "text": "You know the produce flame cantrip."
+  },
+  {
+    "id": "race-genasi-fire-reach-to-the-blaze-mpmm",
+    "name": "Reach to the Blaze",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-genasi-fire-reach-to-the-blaze-mpmm",
+    "raceName": "Genasi (Fire)",
+    "source": "MPMM",
+    "text": "You know the produce flame cantrip."
+  },
+  {
+    "id": "subclass-fighter-echo-knight-15-reclaim-potential-egw",
+    "name": "Reclaim Potential",
+    "maxFormula": "conMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-fighter-echo-knight-15-reclaim-potential-egw",
+    "className": "Fighter",
+    "subclassName": "Echo Knight",
+    "raceName": "",
+    "source": "EGW",
+    "text": "15th-level Echo Knight feature You've learned to absorb the fleeting magic of your echo."
+  },
+  {
     "id": "red-queen-s-burden-red-queen-s-burden-charges",
     "name": "Red Queen's Burden Charges",
     "max": 7,
@@ -3412,6 +5734,63 @@
     "sourceType": "item",
     "sourceId": "red-queen-s-burden",
     "itemName": "Red Queen's Burden"
+  },
+  {
+    "id": "race-half-orc-relentless-endurance-phb",
+    "name": "Relentless Endurance",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-half-orc-relentless-endurance-phb",
+    "raceName": "Half-Orc",
+    "source": "PHB",
+    "text": "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead."
+  },
+  {
+    "id": "race-minotaur-amonkhet-relentless-endurance-psa",
+    "name": "Relentless Endurance",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-minotaur-amonkhet-relentless-endurance-psa",
+    "raceName": "Minotaur (Amonkhet)",
+    "source": "PSA",
+    "text": "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead."
+  },
+  {
+    "id": "race-orc-ixalan-relentless-endurance-psx",
+    "name": "Relentless Endurance",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-orc-ixalan-relentless-endurance-psx",
+    "raceName": "Orc (Ixalan)",
+    "source": "PSX",
+    "text": "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead."
+  },
+  {
+    "id": "race-orc-relentless-endurance-mpmm",
+    "name": "Relentless Endurance",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-orc-relentless-endurance-mpmm",
+    "raceName": "Orc",
+    "source": "MPMM",
+    "text": "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead."
+  },
+  {
+    "id": "subclass-rogue-soulknife-17-rend-mind-tce",
+    "name": "Rend Mind",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-rogue-soulknife-17-rend-mind-tce",
+    "className": "Rogue",
+    "subclassName": "Soulknife",
+    "raceName": "",
+    "source": "TCE",
+    "text": "17th-level Soulknife feature You can sweep your Psychic Blades directly through a creature's mind."
   },
   {
     "id": "repeating-crossbow-of-throne-s-command-repeating-crossbow-of-throne-s-command-charges",
@@ -3444,6 +5823,32 @@
     "itemName": "Medallion of Harmonious Resonance"
   },
   {
+    "id": "subclass-artificer-alchemist-9-restorative-reagents-tce",
+    "name": "Restorative Reagents",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-artificer-alchemist-9-restorative-reagents-tce",
+    "className": "Artificer",
+    "subclassName": "Alchemist",
+    "raceName": "",
+    "source": "TCE",
+    "text": "Starting at 9th level, you can incorporate restorative reagents into some of your works: Whenever a creature drinks an experimental elixir you created, the creature gains temporary hit points equal to 2d6 + your Intelligence modifier (mini..."
+  },
+  {
+    "id": "subclass-sorcerer-clockwork-soul-1-restore-balance-tce",
+    "name": "Restore Balance",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-sorcerer-clockwork-soul-1-restore-balance-tce",
+    "className": "Sorcerer",
+    "subclassName": "Clockwork Soul",
+    "raceName": "",
+    "source": "TCE",
+    "text": "1st-level Clockwork Soul feature Your connection to the plane of absolute order allows you to equalize chaotic moments."
+  },
+  {
     "id": "riff-s-dimensional-ripper-riff-s-dimensional-ripper-charges",
     "name": "Riff's Dimensional Ripper Charges",
     "max": 4,
@@ -3452,6 +5857,16 @@
     "sourceType": "item",
     "sourceId": "riff-s-dimensional-ripper",
     "itemName": "Riff's Dimensional Ripper"
+  },
+  {
+    "id": "righteous-heritor",
+    "name": "Righteous Heritor",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "righteous-heritor",
+    "source": "SatO",
+    "text": "You can channel cosmic forces of good to gain these benefits:Ability Score Increase."
   },
   {
     "id": "ring-of-air-elemental-command-ring-of-air-elemental-command-charges",
@@ -3734,6 +6149,16 @@
     "itemName": "Royal Incinerator"
   },
   {
+    "id": "royalty-revealed",
+    "name": "Royalty Revealed",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "feat",
+    "sourceId": "royalty-revealed",
+    "source": "TLotRR",
+    "text": "Your kin belong to a bloodline of kings, but they have learnt to hide from their enemies in the twilight years of their kingdom."
+  },
+  {
     "id": "ruby-rod-of-asmodeus-ruby-rod-of-asmodeus-charges",
     "name": "Ruby Rod of Asmodeus Charges",
     "max": 66,
@@ -3752,6 +6177,19 @@
     "sourceType": "item",
     "sourceId": "ruby-weave-gem",
     "itemName": "Ruby Weave Gem"
+  },
+  {
+    "id": "subclass-fighter-rune-knight-7-runic-shield-tce",
+    "name": "Runic Shield",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-fighter-rune-knight-7-runic-shield-tce",
+    "className": "Fighter",
+    "subclassName": "Rune Knight",
+    "raceName": "",
+    "source": "TCE",
+    "text": "7th-level Rune Knight feature You learn to invoke your rune magic to protect your allies."
   },
   {
     "id": "sage-s-mirror-sage-s-mirror-charges",
@@ -3804,6 +6242,17 @@
     "itemName": "Sash of Sorcerous Synergy"
   },
   {
+    "id": "race-hobgoblin-saving-face-vgm",
+    "name": "Saving Face",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-hobgoblin-saving-face-vgm",
+    "raceName": "Hobgoblin",
+    "source": "VGM",
+    "text": "Hobgoblins are careful not to show weakness in front of their allies, for fear of losing status."
+  },
+  {
     "id": "scarab-of-protection-scarab-of-protection-charges",
     "name": "Scarab of Protection Charges",
     "max": 12,
@@ -3844,6 +6293,17 @@
     "itemName": "Scourge of Verdict"
   },
   {
+    "id": "race-gnome-mark-of-scribing-scribe-s-insight-erlw",
+    "name": "Scribe's Insight",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-gnome-mark-of-scribing-scribe-s-insight-erlw",
+    "raceName": "Gnome (Mark of Scribing)",
+    "source": "ERLW",
+    "text": "You know the message cantrip."
+  },
+  {
     "id": "scythe-of-verdict-scythe-of-verdict-charges",
     "name": "Scythe of Verdict Charges",
     "max": 3,
@@ -3854,6 +6314,19 @@
     "itemName": "Scythe of Verdict"
   },
   {
+    "id": "subclass-warlock-celestial-14-searing-vengeance-xge",
+    "name": "Searing Vengeance",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-celestial-14-searing-vengeance-xge",
+    "className": "Warlock",
+    "subclassName": "Celestial",
+    "raceName": "",
+    "source": "XGE",
+    "text": "Starting at 14th level, the radiant energy you channel allows you to resist death."
+  },
+  {
     "id": "second-wind",
     "name": "Second Wind",
     "max": 1,
@@ -3862,6 +6335,8 @@
     "sourceId": "class-fighter-1-second-wind-phb",
     "className": "Fighter",
     "subclassName": "",
+    "raceName": "",
+    "source": "PHB",
     "text": "You have a limited well of stamina that you can draw on to protect yourself from harm."
   },
   {
@@ -3885,6 +6360,66 @@
     "itemName": "Selesnya Guild Signet"
   },
   {
+    "id": "subclass-cleric-grave-6-sentinel-at-death-s-door-xge",
+    "name": "Sentinel at Death's Door",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-grave-6-sentinel-at-death-s-door-xge",
+    "className": "Cleric",
+    "subclassName": "Grave",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 6th level, you gain the ability to impede death's progress."
+  },
+  {
+    "id": "race-yuan-ti-serpentine-spellcasting-mpmm",
+    "name": "Serpentine Spellcasting",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-yuan-ti-serpentine-spellcasting-mpmm",
+    "raceName": "Yuan-Ti",
+    "source": "MPMM",
+    "text": "You know the poison spray cantrip."
+  },
+  {
+    "id": "fate-cutter-shears-sever-threads",
+    "name": "Sever Threads",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Sever Threads: When you hit a creature with the shears, you can cut that creature's fate.  Until the target finishes a long rest, attack rolls against it score a critical hit on a roll of 19 or 20 on the d20.  Once this property is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "fate-cutter-shears",
+    "itemName": "Fate Cutter Shears"
+  },
+  {
+    "id": "subclass-bard-whispers-14-shadow-lore-xge",
+    "name": "Shadow Lore",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-bard-whispers-14-shadow-lore-xge",
+    "className": "Bard",
+    "subclassName": "Whispers",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 14th level, you gain the ability to weave dark magic into your words and tap into a creature's deepest fears."
+  },
+  {
+    "id": "subclass-fighter-echo-knight-10-shadow-martyr-egw",
+    "name": "Shadow Martyr",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-fighter-echo-knight-10-shadow-martyr-egw",
+    "className": "Fighter",
+    "subclassName": "Echo Knight",
+    "raceName": "",
+    "source": "EGW",
+    "text": "10th-level Echo Knight feature You can make your echo throw itself in front of an attack directed at another creature that you can see."
+  },
+  {
     "id": "veil-of-shadows-shadow-stab",
     "name": "Shadow Stab",
     "max": 1,
@@ -3893,6 +6428,40 @@
     "sourceType": "item",
     "sourceId": "veil-of-shadows",
     "itemName": "Veil of Shadows"
+  },
+  {
+    "id": "shadow-touched",
+    "name": "Shadow Touched",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "shadow-touched",
+    "source": "TCE",
+    "text": "Your exposure to the Shadowfell's magic has changed you, granting you the following benefits:Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20."
+  },
+  {
+    "id": "race-elf-mark-of-shadow-shape-shadows-erlw",
+    "name": "Shape Shadows",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-elf-mark-of-shadow-shape-shadows-erlw",
+    "raceName": "Elf (Mark of Shadow)",
+    "source": "ERLW",
+    "text": "You know the minor illusion cantrip."
+  },
+  {
+    "id": "subclass-wizard-transmutation-10-shapechanger-phb",
+    "name": "Shapechanger",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-wizard-transmutation-10-shapechanger-phb",
+    "className": "Wizard",
+    "subclassName": "Transmutation",
+    "raceName": "",
+    "source": "PHB",
+    "text": "At 10th level, you add the polymorph spell to your spellbook, if it is not there already."
   },
   {
     "id": "shard-solitaire-black-sapphire-shard-solitaire-black-sapphire-charges",
@@ -3995,13 +6564,36 @@
     "itemName": "Shield of the Justicars"
   },
   {
-    "id": "sigil-of-thunderous-might-sigil-shielding-impact",
+    "id": "sigil-of-thunderous-might-shielding-impact",
     "name": "Shielding Impact",
     "max": 1,
     "reset": "longRest",
+    "text": "Shielding Impact (1/day): Before determining if an attack hits, you may activate this ability. On a hit, you and up to two allies within 20 feet gain temporary hit points equal to half the damage dealt.",
     "sourceType": "item",
     "sourceId": "sigil-of-thunderous-might",
     "itemName": "Sigil of Thunderous Might"
+  },
+  {
+    "id": "race-shifter-shifting-erlw",
+    "name": "Shifting",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-shifter-shifting-erlw",
+    "raceName": "Shifter",
+    "source": "ERLW",
+    "text": "As a bonus action, you can assume a more bestial appearance."
+  },
+  {
+    "id": "race-shifter-shifting-mpmm",
+    "name": "Shifting",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-shifter-shifting-mpmm",
+    "raceName": "Shifter",
+    "source": "MPMM",
+    "text": "As a bonus action, you can assume a more bestial appearance."
   },
   {
     "id": "shikomizue-of-grass-shikomizue-of-grass-charges",
@@ -4054,6 +6646,19 @@
     "itemName": "Siege Staff"
   },
   {
+    "id": "class-wizard-20-signature-spells-phb",
+    "name": "Signature Spells",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "class",
+    "sourceId": "class-wizard-20-signature-spells-phb",
+    "className": "Wizard",
+    "subclassName": "",
+    "raceName": "",
+    "source": "PHB",
+    "text": "When you reach 20th level, you gain mastery over two powerful spells and can cast them with little effort."
+  },
+  {
     "id": "silverquill-primer-silverquill-primer-charges",
     "name": "Silverquill Primer Charges",
     "max": 3,
@@ -4084,6 +6689,16 @@
     "itemName": "Skyglider Shield"
   },
   {
+    "id": "sun-staff-solar-focus",
+    "name": "Solar Focus",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Solar Focus: You can use the staff as a spellcasting focus.  While holding the staff, you can reroll a number of damage dice up to your proficiency bonus when you use a spell slot to cast a spell that deals fire or radiant damage.  You must use the new rolls.  Once this property is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "sun-staff",
+    "itemName": "Sun Staff"
+  },
+  {
     "id": "sorcery-points",
     "name": "Sorcery Points",
     "maxFormula": "level",
@@ -4092,6 +6707,8 @@
     "sourceId": "class-sorcerer-2-flexible-casting-phb",
     "className": "Sorcerer",
     "subclassName": "",
+    "raceName": "",
+    "source": "PHB",
     "text": "You can use your sorcery points to gain additional spell slots, or sacrifice spell slots to gain additional sorcery points."
   },
   {
@@ -4115,6 +6732,16 @@
     "itemName": "Soul Lamp"
   },
   {
+    "id": "soul-of-the-storm-giant",
+    "name": "Soul of the Storm Giant",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "soul-of-the-storm-giant",
+    "source": "BGG",
+    "text": "You've manifested the tempest magic emblematic of storm giants, granting you the following benefits:Ability Score Increase."
+  },
+  {
     "id": "soul-pendant-soul-pendant-charges",
     "name": "Soul Pendant Charges",
     "max": 3,
@@ -4135,12 +6762,49 @@
     "itemName": "Spear of Gael Wode"
   },
   {
+    "id": "subclass-mystic-awakened-14-spectral-form-uathemysticclass",
+    "name": "Spectral Form",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-mystic-awakened-14-spectral-form-uathemysticclass",
+    "className": "Mystic",
+    "subclassName": "Awakened",
+    "raceName": "",
+    "source": "UATheMysticClass",
+    "text": "At 14th level, you gain the ability to become a ghostly figure of psionic energy."
+  },
+  {
     "id": "spell-slots",
     "name": "Spell Slots",
     "sourceType": "core",
     "maxFormula": "byClassLevel",
     "reset": "longRest",
     "text": "Spell slots are calculated from class level and reset on a long rest."
+  },
+  {
+    "id": "subclass-rogue-arcane-trickster-17-spell-thief-phb",
+    "name": "Spell Thief",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-rogue-arcane-trickster-17-spell-thief-phb",
+    "className": "Rogue",
+    "subclassName": "Arcane Trickster",
+    "raceName": "",
+    "source": "PHB",
+    "text": "At 17th level, you gain the ability to magically steal the knowledge of how to cast a spell from another spellcaster."
+  },
+  {
+    "id": "race-human-mark-of-making-spellsmith-erlw",
+    "name": "Spellsmith",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-human-mark-of-making-spellsmith-erlw",
+    "raceName": "Human (Mark of Making)",
+    "source": "ERLW",
+    "text": "You know the mending cantrip."
   },
   {
     "id": "spider-staff-spider-staff-charges",
@@ -4221,6 +6885,42 @@
     "sourceType": "item",
     "sourceId": "spire-of-conflux-exalted",
     "itemName": "Spire of Conflux (Exalted)"
+  },
+  {
+    "id": "subclass-warlock-undead-14-spirit-projection-vrgr",
+    "name": "Spirit Projection",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-undead-14-spirit-projection-vrgr",
+    "className": "Warlock",
+    "subclassName": "Undead",
+    "raceName": "",
+    "source": "VRGR",
+    "text": "14th-level Undead feature Your spirit can become untethered from your physical form."
+  },
+  {
+    "id": "subclass-druid-shepherd-2-spirit-totem-xge",
+    "name": "Spirit Totem",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-druid-shepherd-2-spirit-totem-xge",
+    "className": "Druid",
+    "subclassName": "Shepherd",
+    "raceName": "",
+    "source": "XGE",
+    "text": "Starting at 2nd level, you can call forth nature spirits to influence the world around you."
+  },
+  {
+    "id": "squire-of-solamnia",
+    "name": "Squire of Solamnia",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "squire-of-solamnia",
+    "source": "DSotDQ",
+    "text": "Your training in the ways of the Knights of Solamnia grants you these benefits:Mount Up."
   },
   {
     "id": "staff-of-birdcalls-staff-of-birdcalls-charges",
@@ -4413,6 +7113,19 @@
     "itemName": "Staff of Withering"
   },
   {
+    "id": "subclass-druid-stars-2-star-map-tce",
+    "name": "Star Map",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-druid-stars-2-star-map-tce",
+    "className": "Druid",
+    "subclassName": "Stars",
+    "raceName": "",
+    "source": "TCE",
+    "text": "2nd-level Circle of the Stars feature You've created a star chart as part of your heavenly studies."
+  },
+  {
     "id": "starcrossed-bow-starcrossed-bow-charges",
     "name": "Starcrossed Bow Charges",
     "max": 3,
@@ -4471,6 +7184,17 @@
     "sourceType": "item",
     "sourceId": "starcrossed-repeating-hand-crossbow",
     "itemName": "Starcrossed Repeating Hand Crossbow"
+  },
+  {
+    "id": "race-astral-elf-starlight-step-aag",
+    "name": "Starlight Step",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-astral-elf-starlight-step-aag",
+    "raceName": "Astral Elf",
+    "source": "AAG",
+    "text": "As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see."
   },
   {
     "id": "starshot-crossbow-starshot-crossbow-charges",
@@ -4533,6 +7257,29 @@
     "itemName": "Steel-capped Staff of Verdict"
   },
   {
+    "id": "subclass-cleric-twilight-6-steps-of-night-tce",
+    "name": "Steps of Night",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-twilight-6-steps-of-night-tce",
+    "className": "Cleric",
+    "subclassName": "Twilight",
+    "raceName": "",
+    "source": "TCE",
+    "text": "6th-level Twilight Domain feature You can draw on the mystical power of night to rise into the air."
+  },
+  {
+    "id": "stonemaker-war-pick-stone",
+    "name": "Stone",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Stone: You can cast the Meld into Stone spell from this war pick.  Once this property is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "stonemaker-war-pick",
+    "itemName": "Stonemaker War Pick"
+  },
+  {
     "id": "stone-of-golorr-stone-of-golorr-charges",
     "name": "Stone of Golorr Charges",
     "max": 3,
@@ -4543,6 +7290,38 @@
     "itemName": "Stone of Golorr"
   },
   {
+    "id": "stone-hard",
+    "name": "Stone-Hard",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "feat",
+    "sourceId": "stone-hard",
+    "source": "TLotRR",
+    "text": "The Dwarves were made to be strong to endure, for they came unto the world when a great evil ruled Middle-earth."
+  },
+  {
+    "id": "race-goliath-stone-s-endurance-mpmm",
+    "name": "Stone's Endurance",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-goliath-stone-s-endurance-mpmm",
+    "raceName": "Goliath",
+    "source": "MPMM",
+    "text": "You can supernaturally draw on unyielding stone to shrug off harm."
+  },
+  {
+    "id": "race-goliath-stone-s-endurance-vgm",
+    "name": "Stone's Endurance",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-goliath-stone-s-endurance-vgm",
+    "raceName": "Goliath",
+    "source": "VGM",
+    "text": "You can focus yourself to occasionally shrug off injury."
+  },
+  {
     "id": "stonespeaker-crystal-stonespeaker-crystal-charges",
     "name": "Stonespeaker Crystal Charges",
     "max": 10,
@@ -4551,6 +7330,65 @@
     "sourceType": "item",
     "sourceId": "stonespeaker-crystal",
     "itemName": "Stonespeaker Crystal"
+  },
+  {
+    "id": "subclass-fighter-samurai-18-strength-before-death-xge",
+    "name": "Strength before Death",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-fighter-samurai-18-strength-before-death-xge",
+    "className": "Fighter",
+    "subclassName": "Samurai",
+    "raceName": "",
+    "source": "XGE",
+    "text": "Starting at 18th level, your fighting spirit can delay the grasp of death."
+  },
+  {
+    "id": "subclass-sorcerer-shadow-1-strength-of-the-grave-xge",
+    "name": "Strength of the Grave",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-sorcerer-shadow-1-strength-of-the-grave-xge",
+    "className": "Sorcerer",
+    "subclassName": "Shadow",
+    "raceName": "",
+    "source": "XGE",
+    "text": "Starting at 1st level, your existence in a twilight state between life and death makes you difficult to defeat."
+  },
+  {
+    "id": "strike-of-the-giants",
+    "name": "Strike of the Giants",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "strike-of-the-giants",
+    "source": "BGG",
+    "text": "You have absorbed primeval magic that gives you an echo of the might of giants."
+  },
+  {
+    "id": "strixhaven-mascot",
+    "name": "Strixhaven Mascot",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "strixhaven-mascot",
+    "source": "SCC",
+    "text": "You have learned how to summon a Strixhaven mascot to assist you, granting you these benefits:You can cast the find familiar spell as a ritual."
+  },
+  {
+    "id": "class-rogue-20-stroke-of-luck-phb",
+    "name": "Stroke of Luck",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "class",
+    "sourceId": "class-rogue-20-stroke-of-luck-phb",
+    "className": "Rogue",
+    "subclassName": "",
+    "raceName": "",
+    "source": "PHB",
+    "text": "At 20th level, you have an uncanny knack for succeeding when you need to."
   },
   {
     "id": "summer-s-dance-summer-s-dance-charges",
@@ -4573,6 +7411,50 @@
     "itemName": "Sun Eater Staff"
   },
   {
+    "id": "rod-of-hellish-flames-surge-of-brimstone",
+    "name": "Surge of Brimstone",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Surge of Brimstone: Whenever you cast a spell that deals fire or necrotic damage, you can use the rod to deal the maximum damage instead of rolling.  Once this property is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "rod-of-hellish-flames",
+    "itemName": "Rod of Hellish Flames"
+  },
+  {
+    "id": "race-deep-gnome-svirfneblin-camouflage-mpmm",
+    "name": "Svirfneblin Camouflage",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-deep-gnome-svirfneblin-camouflage-mpmm",
+    "raceName": "Deep Gnome",
+    "source": "MPMM",
+    "text": "When you make a Dexterity (Stealth) check, you can make the check with advantage."
+  },
+  {
+    "id": "svirfneblin-magic",
+    "name": "Svirfneblin Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "svirfneblin-magic",
+    "source": "MTF",
+    "text": "You have inherited the innate spellcasting ability of your ancestors."
+  },
+  {
+    "id": "subclass-ranger-swarmkeeper-15-swarming-dispersal-tce",
+    "name": "Swarming Dispersal",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-ranger-swarmkeeper-15-swarming-dispersal-tce",
+    "className": "Ranger",
+    "subclassName": "Swarmkeeper",
+    "raceName": "",
+    "source": "TCE",
+    "text": "15th-level Swarmkeeper feature You can discorporate into your swarm, avoiding danger."
+  },
+  {
     "id": "talisman-of-pure-good-talisman-of-pure-good-charges",
     "name": "Talisman of Pure Good Charges",
     "max": 7,
@@ -4591,6 +7473,17 @@
     "sourceType": "item",
     "sourceId": "talisman-of-ultimate-evil",
     "itemName": "Talisman of Ultimate Evil"
+  },
+  {
+    "id": "race-kender-taunt-dsotdq",
+    "name": "Taunt",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-kender-taunt-dsotdq",
+    "raceName": "Kender",
+    "source": "DSotDQ",
+    "text": "You have an extraordinary ability to fluster creatures."
   },
   {
     "id": "tearulai-tearulai-charges",
@@ -4633,6 +7526,45 @@
     "itemName": "Tekkō-kagi of Verdict"
   },
   {
+    "id": "subclass-fighter-psi-warrior-18-telekinetic-master-tce",
+    "name": "Telekinetic Master",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-fighter-psi-warrior-18-telekinetic-master-tce",
+    "className": "Fighter",
+    "subclassName": "Psi Warrior",
+    "raceName": "",
+    "source": "TCE",
+    "text": "18th-level Psi Warrior feature Your ability to move creatures and objects with your mind is matched by few."
+  },
+  {
+    "id": "subclass-fighter-psi-warrior-3-telekinetic-movement-tce",
+    "name": "Telekinetic Movement",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-fighter-psi-warrior-3-telekinetic-movement-tce",
+    "className": "Fighter",
+    "subclassName": "Psi Warrior",
+    "raceName": "",
+    "source": "TCE",
+    "text": "You can move an object or a creature with your mind."
+  },
+  {
+    "id": "subclass-warlock-fathomless-1-tentacle-of-the-deeps-tce",
+    "name": "Tentacle of the Deeps",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-warlock-fathomless-1-tentacle-of-the-deeps-tce",
+    "className": "Warlock",
+    "subclassName": "Fathomless",
+    "raceName": "",
+    "source": "TCE",
+    "text": "1st-level Fathomless feature You can magically summon a spectral tentacle that strikes at your foes."
+  },
+  {
     "id": "the-griffon-s-saddlebag-the-griffon-s-saddlebag-charges",
     "name": "The Griffon's Saddlebag Charges",
     "max": 8,
@@ -4641,6 +7573,16 @@
     "sourceType": "item",
     "sourceId": "the-griffon-s-saddlebag",
     "itemName": "The Griffon's Saddlebag"
+  },
+  {
+    "id": "the-language-of-birds",
+    "name": "The Language of Birds",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "the-language-of-birds",
+    "source": "TLotRR",
+    "text": "Stories told in the North say how Dalemen can become so wise as to comprehend the speech of birds, and so by understanding their song be forewarned of impending threats, or be able to spot a weakness in their enemies' defences."
   },
   {
     "id": "the-shield-of-sacred-flame-the-shield-of-sacred-flame-charges",
@@ -4713,6 +7655,16 @@
     "itemName": "Tonfa of Verdict"
   },
   {
+    "id": "jester-s-mask-topsy-turvy",
+    "name": "Topsy-Turvy",
+    "max": 1,
+    "reset": "dawn",
+    "text": "Topsy-Turvy: When you roll a 1 on a d20, you can treat the roll as if you rolled a 20 instead.  Once this property is used, it can't be used again until the next dawn.",
+    "sourceType": "item",
+    "sourceId": "jester-s-mask",
+    "itemName": "Jester's Mask"
+  },
+  {
     "id": "trident-of-fish-command-trident-of-fish-command-charges",
     "name": "Trident of Fish Command Charges",
     "max": 3,
@@ -4783,6 +7735,117 @@
     "itemName": "Ulfberht Sword of Verdict"
   },
   {
+    "id": "subclass-bard-glamour-14-unbreakable-majesty-xge",
+    "name": "Unbreakable Majesty",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-bard-glamour-14-unbreakable-majesty-xge",
+    "className": "Bard",
+    "subclassName": "Glamour",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 14th level, your appearance permanently gains an otherworldly aspect that makes you look more lovely and fierce."
+  },
+  {
+    "id": "subclass-paladin-ancients-15-undying-sentinel-phb",
+    "name": "Undying Sentinel",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-paladin-ancients-15-undying-sentinel-phb",
+    "className": "Paladin",
+    "subclassName": "Ancients",
+    "raceName": "",
+    "source": "PHB",
+    "text": "Starting at 15th level, when you are reduced to 0 hit points and are not killed outright, you can choose to drop to 1 hit point instead."
+  },
+  {
+    "id": "subclass-sorcerer-divine-soul-18-unearthly-recovery-xge",
+    "name": "Unearthly Recovery",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-sorcerer-divine-soul-18-unearthly-recovery-xge",
+    "className": "Sorcerer",
+    "subclassName": "Divine Soul",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 18th level, you gain the ability to overcome grievous injuries."
+  },
+  {
+    "id": "subclass-bard-eloquence-6-universal-speech-tce",
+    "name": "Universal Speech",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-bard-eloquence-6-universal-speech-tce",
+    "className": "Bard",
+    "subclassName": "Eloquence",
+    "raceName": "",
+    "source": "TCE",
+    "text": "6th-level College of Eloquence feature You have gained the ability to make your speech intelligible to any creature."
+  },
+  {
+    "id": "subclass-fighter-echo-knight-3-unleash-incarnation-egw",
+    "name": "Unleash Incarnation",
+    "maxFormula": "conMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-fighter-echo-knight-3-unleash-incarnation-egw",
+    "className": "Fighter",
+    "subclassName": "Echo Knight",
+    "raceName": "",
+    "source": "EGW",
+    "text": "3rd-level Echo Knight feature You can heighten your echo's fury."
+  },
+  {
+    "id": "race-dhampir-vampiric-bite-vrgr",
+    "name": "Vampiric Bite",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-dhampir-vampiric-bite-vrgr",
+    "raceName": "Dhampir",
+    "source": "VRGR",
+    "text": "Your fanged bite is a natural weapon, which counts as a simple melee weapon with which you are proficient."
+  },
+  {
+    "id": "race-dragonborn-ravenite-vengeful-assault-egw",
+    "name": "Vengeful Assault",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "race",
+    "sourceId": "race-dragonborn-ravenite-vengeful-assault-egw",
+    "raceName": "Dragonborn (Ravenite)",
+    "source": "EGW",
+    "text": "When you take damage from a creature in range of a weapon you are wielding, you can use your reaction to make an attack with the weapon against that creature."
+  },
+  {
+    "id": "race-human-mark-of-sentinel-vigilant-guardian-erlw",
+    "name": "Vigilant Guardian",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-human-mark-of-sentinel-vigilant-guardian-erlw",
+    "raceName": "Human (Mark of Sentinel)",
+    "source": "ERLW",
+    "text": "When a creature you can see within 5 feet of you is hit by an attack roll, you can use your reaction to swap places with that creature, and you are hit by the attack instead."
+  },
+  {
+    "id": "subclass-wizard-graviturgy-10-violent-attraction-egw",
+    "name": "Violent Attraction",
+    "maxFormula": "intMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-wizard-graviturgy-10-violent-attraction-egw",
+    "className": "Wizard",
+    "subclassName": "Graviturgy",
+    "raceName": "",
+    "source": "EGW",
+    "text": "10th-level Graviturgy Magic feature When another creature that you can see within 60 feet of you hits with a weapon attack, you can use your reaction to increase the attack's velocity, causing the attack's target to take an extra 1d10 dama..."
+  },
+  {
     "id": "violet-king-s-promise-violet-king-s-promise-charges",
     "name": "Violet King's Promise Charges",
     "max": 7,
@@ -4793,6 +7856,29 @@
     "itemName": "Violet King's Promise"
   },
   {
+    "id": "subclass-cleric-knowledge-17-visions-of-the-past-phb",
+    "name": "Visions of the Past",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-knowledge-17-visions-of-the-past-phb",
+    "className": "Cleric",
+    "subclassName": "Knowledge",
+    "raceName": "",
+    "source": "PHB",
+    "text": "Starting at 17th level, you can call up visions of the past that relate to an object you hold or your immediate surroundings."
+  },
+  {
+    "id": "vocalist-arcanist",
+    "name": "Vocalist Arcanist",
+    "max": 1,
+    "reset": "dawn",
+    "sourceType": "feat",
+    "sourceId": "vocalist-arcanist",
+    "source": "ObojimaTallGrass",
+    "text": "Your unique method of weaving song into magic allows you to enhance your spells through your magical vocals."
+  },
+  {
     "id": "voyager-staff-voyager-staff-charges",
     "name": "Voyager Staff Charges",
     "max": 10,
@@ -4801,6 +7887,32 @@
     "sourceType": "item",
     "sourceId": "voyager-staff",
     "itemName": "Voyager Staff"
+  },
+  {
+    "id": "subclass-rogue-phantom-3-wails-from-the-grave-tce",
+    "name": "Wails from the Grave",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-rogue-phantom-3-wails-from-the-grave-tce",
+    "className": "Rogue",
+    "subclassName": "Phantom",
+    "raceName": "",
+    "source": "TCE",
+    "text": "3rd-level Phantom feature As you nudge someone closer to the grave, you can channel the power of death to harm someone else as well."
+  },
+  {
+    "id": "subclass-druid-dreams-14-walker-in-dreams-xge",
+    "name": "Walker in Dreams",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-druid-dreams-14-walker-in-dreams-xge",
+    "className": "Druid",
+    "subclassName": "Dreams",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 14th level, the magic of the Feywild grants you the ability to travel mentally or physically through dreamlands."
   },
   {
     "id": "wand-of-binding-wand-of-binding-charges",
@@ -5113,6 +8225,79 @@
     "itemName": "Wand of Wonder"
   },
   {
+    "id": "subclass-cleric-war-1-war-priest-phb",
+    "name": "War Priest",
+    "maxFormula": "wisMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-war-1-war-priest-phb",
+    "className": "Cleric",
+    "subclassName": "War",
+    "raceName": "",
+    "source": "PHB",
+    "text": "From 1st level, your god delivers bolts of inspiration to you while you are engaged in battle."
+  },
+  {
+    "id": "subclass-cleric-ambition-psa-1-warding-flare-psa",
+    "name": "Warding Flare",
+    "maxFormula": "wisMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-ambition-psa-1-warding-flare-psa",
+    "className": "Cleric",
+    "subclassName": "Ambition (PSA)",
+    "raceName": "",
+    "source": "PSA",
+    "text": "When you choose this domain at 1st level, you can interpose divine light between yourself and an attacking enemy."
+  },
+  {
+    "id": "subclass-cleric-light-1-warding-flare-phb",
+    "name": "Warding Flare",
+    "maxFormula": "wisMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-light-1-warding-flare-phb",
+    "className": "Cleric",
+    "subclassName": "Light",
+    "raceName": "",
+    "source": "PHB",
+    "text": "Also at 1st level, you can interpose divine light between yourself and an attacking enemy."
+  },
+  {
+    "id": "race-dwarf-mark-of-warding-wards-and-seals-erlw",
+    "name": "Wards and Seals",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-dwarf-mark-of-warding-wards-and-seals-erlw",
+    "raceName": "Dwarf (Mark of Warding)",
+    "source": "ERLW",
+    "text": "You can cast the alarm and mage armor spells with this trait."
+  },
+  {
+    "id": "subclass-sorcerer-lunar-6-waxing-and-waning-dsotdq",
+    "name": "Waxing and Waning",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-sorcerer-lunar-6-waxing-and-waning-dsotdq",
+    "className": "Sorcerer",
+    "subclassName": "Lunar",
+    "raceName": "",
+    "source": "DSotDQ",
+    "text": "6th-Level Lunar Sorcery Feature You gain greater control over the phases of your lunar magic."
+  },
+  {
+    "id": "ways-of-the-wild",
+    "name": "Ways of the Wild",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "ways-of-the-wild",
+    "source": "TLotRR",
+    "text": "The Rangers of the North roam ceaselessly, hunting for wicked things and guarding all frontiers."
+  },
+  {
     "id": "weapon-of-throne-s-command-weapon-of-throne-s-command-charges",
     "name": "Weapon of Throne's Command Charges",
     "max": 5,
@@ -5167,6 +8352,7 @@
     "name": "Whirling Fury",
     "max": 1,
     "reset": "longRest",
+    "text": "Whirling Fury (1/day): When you hit a single target with multiple consecutive attacks, each hit deals +1 additional damage of the same type. This bonus resets if you miss or switch targets.",
     "sourceType": "item",
     "sourceId": "gauntlets-of-whirling-strikes",
     "itemName": "Gauntlets of Whirling Strikes"
@@ -5180,7 +8366,46 @@
     "sourceId": "class-druid-18-beast-spells-phb",
     "className": "Druid",
     "subclassName": "",
+    "raceName": "",
+    "source": "PHB",
     "text": "Beginning at 18th level, you can cast many of your druid spells in any shape you assume using Wild Shape."
+  },
+  {
+    "id": "race-aarakocra-wind-caller-mpmm",
+    "name": "Wind Caller",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "race",
+    "sourceId": "race-aarakocra-wind-caller-mpmm",
+    "raceName": "Aarakocra",
+    "source": "MPMM",
+    "text": "Starting at 3rd level, you can cast the gust of wind spell with this trait, without requiring a material component."
+  },
+  {
+    "id": "subclass-sorcerer-storm-18-wind-soul-xge",
+    "name": "Wind Soul",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-sorcerer-storm-18-wind-soul-xge",
+    "className": "Sorcerer",
+    "subclassName": "Storm",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 18th level, you gain immunity to lightning and thunder damage."
+  },
+  {
+    "id": "subclass-monk-ascendant-dragon-6-wings-unfurled-ftd",
+    "name": "Wings Unfurled",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-monk-ascendant-dragon-6-wings-unfurled-ftd",
+    "className": "Monk",
+    "subclassName": "Ascendant Dragon",
+    "raceName": "",
+    "source": "FTD",
+    "text": "6th-level Way of the Ascendant Dragon feature When you use your Step of the Wind, you can unfurl spectral draconic wings from your back that vanish at the end of your turn."
   },
   {
     "id": "wingwear-wingwear-charges",
@@ -5203,6 +8428,16 @@
     "itemName": "Witherbloom Primer"
   },
   {
+    "id": "wood-elf-magic",
+    "name": "Wood Elf Magic",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "feat",
+    "sourceId": "wood-elf-magic",
+    "source": "XGE",
+    "text": "You learn the magic of the primeval woods, which are revered and protected by your people."
+  },
+  {
     "id": "wooden-cuirass-of-weightlessness-wooden-cuirass-of-weightlessness-charges",
     "name": "Wooden Cuirass of Weightlessness Charges",
     "max": 5,
@@ -5211,6 +8446,45 @@
     "sourceType": "item",
     "sourceId": "wooden-cuirass-of-weightlessness",
     "itemName": "Wooden Cuirass of Weightlessness"
+  },
+  {
+    "id": "subclass-bard-whispers-3-words-of-terror-xge",
+    "name": "Words of Terror",
+    "max": 1,
+    "reset": "shortRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-bard-whispers-3-words-of-terror-xge",
+    "className": "Bard",
+    "subclassName": "Whispers",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 3rd level, you learn to infuse innocent-seeming words with an insidious magic that can inspire terror."
+  },
+  {
+    "id": "subclass-cleric-tempest-1-wrath-of-the-storm-phb",
+    "name": "Wrath of the Storm",
+    "maxFormula": "wisMod",
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-cleric-tempest-1-wrath-of-the-storm-phb",
+    "className": "Cleric",
+    "subclassName": "Tempest",
+    "raceName": "",
+    "source": "PHB",
+    "text": "Also at 1st level, you can thunderously rebuke attackers."
+  },
+  {
+    "id": "subclass-ranger-swarmkeeper-7-writhing-tide-tce",
+    "name": "Writhing Tide",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-ranger-swarmkeeper-7-writhing-tide-tce",
+    "className": "Ranger",
+    "subclassName": "Swarmkeeper",
+    "raceName": "",
+    "source": "TCE",
+    "text": "7th-level Swarmkeeper feature You can condense part of your swarm into a focused mass that lifts you up."
   },
   {
     "id": "wrought-iron-tower-wrought-iron-tower-charges",
@@ -5301,5 +8575,18 @@
     "sourceType": "item",
     "sourceId": "yklwa-of-verdict",
     "itemName": "Yklwa of Verdict"
+  },
+  {
+    "id": "subclass-barbarian-zealot-10-zealous-presence-xge",
+    "name": "Zealous Presence",
+    "max": 1,
+    "reset": "longRest",
+    "sourceType": "subclass",
+    "sourceId": "subclass-barbarian-zealot-10-zealous-presence-xge",
+    "className": "Barbarian",
+    "subclassName": "Zealot",
+    "raceName": "",
+    "source": "XGE",
+    "text": "At 10th level, you learn to channel divine power to inspire zealotry in others."
   }
 ]

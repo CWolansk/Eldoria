@@ -5,7 +5,7 @@
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "methods": ["get", "patch", "options"],
+      "methods": ["get", "post", "put", "patch", "options"],
       "route": "players/{slug?}"
     },
     {

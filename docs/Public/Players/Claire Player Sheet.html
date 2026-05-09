@@ -3,11 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Claire - Eldoria Player Sheet</title>
+  <title>Claire Player Sheet - Eldoria Player Sheet</title>
   <link rel="stylesheet" href="../../site-assets/public-site.css">
+  <link rel="stylesheet" href="../../site-assets/character-builder.css">
   <script src="../../site-assets/site-config.js"></script>
-  <script type="application/json" data-player-bootstrap>{"id":"claire-player-sheet","name":"Claire","sheetTitle":"Claire Player Sheet","class":"Cleric","subclass":"Tempest Domain","subclassShortName":"Tempest","level":5,"race":"Water Genasi","background":"Sailor","portrait":"Public/Players/ClaireDnD.png","experience":8000,"gold":0,"heroPoints":0,"guildPoints":51,"guildRank":"E","abilities":{"str":16,"dex":8,"con":16,"int":14,"wis":18,"cha":12},"ac":18,"speed":30,"maxHp":null,"currentHp":null,"proficiencyBonus":3,"initiative":-1,"saves":["wis","cha"],"skills":["insight","medicine","perception","persuasion","religion"],"spellcasting":"wis","spellAttack":7,"spellSaveDc":15,"attackBonuses":{"ranged":0},"simpleWeapons":true,"martialWeapons":true,"hitDice":"5d8","equipment":["+1 Warhammer","Light Crossbow","Lightning Rod","Warhammer of Warning","E-tier Adventurer's Guild Badge","Spell Scroll (1st Level)|Burning Hands","Amulet of Divine Retribution","Griffon Key Loop","Silverleaf Brooch"],"itemDetails":{"+1 Warhammer":{"id":"1-warhammer","name":"+1 Warhammer","source":"DMG'14","page":"213","rarity":"uncommon","type":"weapon, martial weapon, melee weapon","attunement":"","damage":"1d8 bludgeoning","properties":"versatile (1d10)","weight":"2 lb.","value":"400 gp","text":"You have a +1 bonus to attack and damage rolls made with this magic weapon. Versatile. This weapon can be used with one or two hands. A damage value in parentheses appears with the property—the damage when the weapon is used with two hands to make a melee attack.","weapon":{"baseName":"Warhammer","type":"martial","style":"melee","ability":"str","damage":"1d8","damageType":"bludgeoning","properties":["versatile (1d10)"],"range":"","versatileDamage":"1d10","magicBonus":1},"actions":[],"effects":[{"id":"1-warhammer-1-warhammer-magic-weapon-bonus","kind":"weapon-bonus","name":"Magic weapon bonus","value":1,"text":"+1 to attack and damage rolls with this weapon."}],"resources":[],"toggles":[]},"Light Crossbow":{"id":"light-crossbow","name":"Light Crossbow","source":"PHB'14","page":"149","rarity":"","type":"weapon, simple weapon, ranged weapon","attunement":"","damage":"1d8 piercing","properties":"ammunition (80/320 ft.), loading, two‑handed","weight":"5 lb.","value":"25 gp","text":"Range. A weapon that can be used to make a ranged attack has a range shown in parentheses after the ammunition or thrown property. The range lists two numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's maximum range. When attacking a target beyond normal range, you have disadvantage on the attack roll. You can't attack a target beyond the weapon's long range. Ammunition. You can use a weapon that has the ammunition property to make a ranged attack only if you have ammunition to fire from the weapon. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack. Loading a one-handed weapon requires a free hand. At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield. If you use a weapon that has the ammunition property to make a melee attack, you treat the weapon as an improvised weapon. A sling must be loaded to deal any damage when used in this way. Loading. Because of the time required to load this weapon, you can fire only one piece of ammunition from it when you use an action, bonus action, or reaction to fire it, regardless of the number of attacks you can normally make. Two-Handed. This weapon requires two hands to use. This property is relevant only when you attack with the weapon, not when you simply hold it.","weapon":{"baseName":"Light Crossbow","type":"simple","style":"ranged","ability":"dex","damage":"1d8","damageType":"piercing","properties":["ammunition (80/320 ft.)","loading","two‑handed"],"range":"80/320","versatileDamage":"","magicBonus":0},"actions":[{"id":"light-crossbow-light-crossbow","group":"Bonus Action","type":"Item","title":"Light Crossbow","detail":"Range.","tags":[]}],"effects":[],"resources":[],"toggles":[]},"Lightning Rod":{"id":"lightning-rod","name":"Lightning Rod","source":"Homebrew","page":"","rarity":"rare","type":"rod","attunement":"requires attunement","damage":"1d6 piercing","properties":"thrown (30/120 ft.)","weight":"2 lb.","value":"","text":"This rod is made from the blackened wood of a lightning-struck tree and topped with a spike of twisted iron. It functions as a magic javelin that grants a +1 bonus to attack and damage rolls made with it. While holding it, you are immune to lightning damage, and each creature within 5 feet of you has resistance to lightning damage. The rod can hold up to 6 charges, but it has 0 charges when you first attune to it. Whenever you are subjected to lightning damage, the rod gains 1 charge. While the rod has 6 charges, you have resistance to lightning damage instead of immunity. The rod loses 1d6 charges daily at dawn.","weapon":{"baseName":"Lightning Rod","type":"simple","style":"melee","ability":"str","damage":"1d6","damageType":"piercing","properties":["thrown (30/120 ft.)"],"range":"30/120","versatileDamage":"","magicBonus":1},"actions":[],"effects":[{"kind":"resistance","target":"lightning","mode":"conditional","text":"Immune to lightning damage while holding it until it reaches 6 charges; then resistance instead.","id":"lightning-rod-resistance"}],"resources":[{"id":"lightning-rod-lightning-rod-charges","name":"Lightning Rod Charges","max":6,"reset":"dawnLose1d6"}],"toggles":[]},"Warhammer of Warning":{"id":"warhammer-of-warning","name":"Warhammer of Warning","source":"DMG'14","page":"213","rarity":"uncommon","type":"weapon, martial weapon, melee weapon","attunement":"requires attunement","damage":"1d8 bludgeoning","properties":"versatile (1d10)","weight":"2 lb.","value":"100 gp","text":"This magic weapon warns you of danger. While the weapon is on your person, you have advantage on initiative rolls. In addition, you and any of your companions within 30 feet of you can't be surprised, except when incapacitated by something other than nonmagical sleep. The weapon magically awakens you and your companions within range if any of you are sleeping naturally when combat begins. Versatile. This weapon can be used with one or two hands. A damage value in parentheses appears with the property—the damage when the weapon is used with two hands to make a melee attack.","weapon":{"baseName":"Warhammer of Warning","type":"martial","style":"melee","ability":"str","damage":"1d8","damageType":"bludgeoning","properties":["versatile (1d10)"],"range":"","versatileDamage":"1d10","magicBonus":0},"actions":[],"effects":[{"id":"warhammer-of-warning-warhammer-of-warning-initiative-advantage","kind":"advantage","target":"initiative","name":"Initiative advantage","text":"Advantage on initiative rolls while carried/worn as described."}],"resources":[],"toggles":[]},"Spell Scroll (1st Level)|Burning Hands":{"id":"spell-scroll-1st-level","name":"Spell Scroll (1st Level)","source":"DMG'14","page":"200","rarity":"common","type":"scroll","attunement":"","damage":"","properties":"None","weight":"None","value":"15 gp","text":"A spell scroll bears the words of a single spell, written as a mystical cipher. If the spell is on your class's spell list, you can read the scroll and cast its spell without providing any material components. Otherwise, the scroll is unintelligible. Casting the spell by reading the scroll requires the spell's normal casting time. Once the spell is cast, the words on the scroll fade, and it crumbles to dust. If the casting is interrupted, the scroll is not lost. If the spell is on your class's spell list but of a higher level than you can normally cast, you must make an ability check using your spellcasting ability to determine whether you cast it successfully. The DC is 11. On a failed check, the spell disappears from the scroll with no other effect. Once the spell is cast, the words on the scroll fade, and the scroll itself crumbles to dust. A spell cast from this scroll has a save DC of 13 and an attack bonus of +5. A wizard spell on a spell scroll can be copied just as spells in spellbooks can be copied. When a spell is copied from a spell scroll, the copier must succeed on a DC 11 Intelligence (Arcana) check. If the check succeeds, the spell is successfully copied. Whether the check succeeds or fails, the spell scroll is destroyed.","weapon":null,"actions":[],"effects":[],"resources":[],"toggles":[]},"Amulet of Divine Retribution":{"id":"amulet-of-divine-retribution","name":"Amulet of Divine Retribution","source":"Homebrew","page":"—","rarity":"rare","type":"wondrous item","attunement":"requires attunement by a creature with at least 1 level in Cleric","damage":"","properties":"Divine Wrath (1/day), Divine Protection (1/day)","weight":"½ lb","value":"1,500 gp","text":"This silver amulet, engraved with glowing holy runes, hums faintly with divine power. When a cleric channels their faith, the amulet lashes out at their foes, turning holy resolve into swift judgment. - Divine Wrath (1/day): As an action, you may target one hostile creature you can see within 60 feet. That creature must make an Intelligence saving throw against your spell save DC. On a failed save, the creature becomes vulnerable to radiant and fire damage for 1 minute. The creature may repeat the saving throw at the end of each of its turns, ending the effect on a success. - Divine Protection (1/day): As an action, you radiate a protective aura of holy energy. At the start of each of your turns for up to 1 minute (as long as you maintain concentration), all allies within 30 feet regain 1d10 hit points. This effect ends early if your concentration is broken.","weapon":null,"actions":[{"id":"amulet-of-divine-retribution-divine-wrath","group":"Action","type":"Item","title":"Divine Wrath","detail":"Divine Wrath (1/day): As an action, you may target one hostile creature you can see within 60 feet. That creature must make an Intelligence saving throw against your spell save DC. On a failed save, the creature becomes vulnerable to radiant and fire damage for 1 minute. The creature may repeat the saving throw at the end of each of its turns, ending the effect on a success.","tags":["Attunement","1 use"]},{"id":"amulet-of-divine-retribution-divine-protection","group":"Action","type":"Item","title":"Divine Protection","detail":"Divine Protection (1/day): As an action, you radiate a protective aura of holy energy. At the start of each of your turns for up to 1 minute (as long as you maintain concentration), all allies within 30 feet regain 1d10 hit points. This effect ends early if your concentration is broken.","tags":["Attunement","1 use"]}],"effects":[],"resources":[{"id":"amulet-of-divine-retribution-divine-wrath","name":"Divine Wrath","max":1,"reset":"longRest"},{"id":"amulet-of-divine-retribution-divine-protection","name":"Divine Protection","max":1,"reset":"longRest"}],"toggles":[]},"Griffon Key Loop":{"id":"griffon-key-loop","name":"Griffon Key Loop","source":"TGS2","page":"95","rarity":"common","type":"wondrous item","attunement":"","damage":"","properties":"","weight":"","value":"60 gp","text":"This leather key loop is stylized in the fashion of the legendary griffon's saddlebag, a classic motif in children's fiction. You can attach a key to the key loop by holding them together for 1 minute. When you do, the key is shunted into an extradimensional space. You can use an action to speak the key loop's command word, causing one or more of the attached keys to reappear on the loop (your choice). Speaking the command word again causes them to disappear once more. You can have up to 10 keys attached to the key loop in this way at a time, and can remove one by gently pulling on it for 1 minute. While holding the key loop, you can touch it to a lock whose key has been attached to the loop. When you do, the lock becomes unlocked or locked (your choice), as if you had used its key. When you shake the key loop, you can faintly hear the sound of its keys jingling.","weapon":null,"actions":[{"id":"griffon-key-loop-griffon-key-loop","group":"Action","type":"Item","title":"Griffon Key Loop","detail":"This leather key loop is stylized in the fashion of the legendary griffon's saddlebag, a classic motif in children's fiction.","tags":[]}],"effects":[],"resources":[],"toggles":[]},"Silverleaf Brooch":{"id":"silverleaf-brooch","name":"Silverleaf Brooch","source":"Eldoria","page":"-","rarity":"common","type":"wondrous item","attunement":"","damage":"","properties":"","weight":"-","value":"500 gp","text":"This delicate brooch is crafted from a real leaf dipped in enchanted silver, preserving its veins and texture in perfect detail. It serves as a diplomatic passport to the Silverleaf Lands. When worn on a visible part of the body, the brooch allows the wearer and their traveling companions to pass through the magical wards guarding the elven kingdom. These brooches are typically gifted by Silverleaf citizens to outsiders who have proven themselves friends of the forest.","weapon":null,"actions":[],"effects":[],"resources":[],"toggles":[]}},"equipped":[],"spells":[],"spellScrolls":[{"id":"spell-scroll-1st-level-burning-hands","itemName":"Spell Scroll (1st Level)|Burning Hands","scrollName":"Spell Scroll (1st Level)","spellName":"Burning Hands","source":"Spell Scroll (1st Level)","castingTime":"Action","level":"1st","school":"Evocation","range":"Self (15-foot cone)","saveDc":13,"attackBonus":5,"text":"A spell scroll bears the words of a single spell, written as a mystical cipher. If the spell is on your class's spell list, you can read the scroll and cast its spell without providing any material components. Otherwise, the scroll is unintelligible. Casting the spell by reading the scroll requires the spell's normal casting time. Once the spell is cast, the words on the scroll fade, and it crumbles to dust. If the casting is interrupted, the scroll is not lost. If the spell is on your class's spell list but of a higher level than you can normally cast, you must make an ability check using your spellcasting ability to determine whether you cast it successfully. The DC is 11. On a failed check, the spell disappears from the scroll with no other effect. Once the spell is cast, the words on the scroll fade, and the scroll itself crumbles to dust. A spell cast from this scroll has a save DC of 13 and an attack bonus of +5. A wizard spell on a spell scroll can be copied just as spells in spellbooks can be copied. When a spell is copied from a spell scroll, the copier must succeed on a DC 11 Intelligence (Arcana) check. If the check succeeds, the spell is successfully copied. Whether the check succeeds or fails, the spell scroll is destroyed."}],"spellDetails":{"Burning Hands":{"id":"burning-hands","name":"Burning Hands","source":"PHB","page":"220","level":"1st","castingTime":"Action","duration":"Instantaneous","school":"Evocation","range":"Self (15-foot cone)","components":"V, S","classes":"Sorcerer (PHB), Wizard (PHB)","optionalClasses":"","subclasses":"Arcane Trickster (PHB) Rogue, Architect of Ruin (IllR) Illrigger, Wildfire (TCE) Druid, Eldritch Knight (PHB) Fighter, Light (PHB) Cleric, Fiend (PHB) Warlock, Genie (Efreeti) (TCE) Warlock, Sun Soul (XGE) Monk","text":"As you hold your hands with thumbs touching and fingers spread, a thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone must make a Dexterity saving throw. A creature takes 3d6 fire damage on a failed save, or half as much damage on a successful one. The fire ignites any flammable objects in the area that aren't being worn or carried.","higherLevels":"At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.","timing":"Passive","attackType":"","saveAbility":"dex","damage":{"dice":"3d6","damageType":"fire"}}},"spellSlots":{"1":4,"2":3,"3":2},"resources":[{"id":"cleric-channel-divinity","name":"Channel Divinity","maxFormula":"clericChannelDivinityUses(level)","reset":"shortRest","sourceType":"class","sourceId":"class-cleric-1-divine-domain-phb","className":"Cleric","subclassName":"","text":"Choose one domain related to your deity from the list of available domains."},{"id":"hit-dice","name":"Hit Dice","sourceType":"core","maxFormula":"level","reset":"longRestHalf","text":"Regain up to half your maximum hit dice after a long rest."},{"id":"spell-slots","name":"Spell Slots","sourceType":"core","maxFormula":"byClassLevel","reset":"longRest","text":"Spell slots are calculated from class level and reset on a long rest."},{"id":"lightning-rod-lightning-rod-charges","name":"Lightning Rod Charges","max":6,"reset":"dawnLose1d6","sourceType":"item","sourceId":"lightning-rod","itemName":"Lightning Rod"},{"id":"amulet-of-divine-retribution-divine-wrath","name":"Divine Wrath","max":1,"reset":"longRest","sourceType":"item","sourceId":"amulet-of-divine-retribution","itemName":"Amulet of Divine Retribution"},{"id":"amulet-of-divine-retribution-divine-protection","name":"Divine Protection","max":1,"reset":"longRest","sourceType":"item","sourceId":"amulet-of-divine-retribution","itemName":"Amulet of Divine Retribution"}],"ruleActions":[{"id":"feature-class-cleric-4-ability-score-improvement-phb","sourceType":"class","sourceId":"class-cleric-4-ability-score-improvement-phb","group":"Triggered","type":"Cleric","title":"Ability Score Improvement","detail":"When you reach 4th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1.","tags":["Cleric","Level 4"]},{"id":"feature-class-cleric-4-cantrip-versatility-tce","sourceType":"class","sourceId":"class-cleric-4-cantrip-versatility-tce","group":"Triggered","type":"Cleric","title":"Cantrip Versatility","detail":"4th-level cleric optional class features Whenever you reach a level in this class that grants the Ability Score Improvement feature, you can replace one cantrip you learned from this class's Spellcasting feature with another cantrip from the cleric spell list.","tags":["Cleric","Level 4"]},{"id":"feature-class-cleric-2-channel-divinity-phb","sourceType":"class","sourceId":"class-cleric-2-channel-divinity-phb","group":"Triggered","type":"Cleric","title":"Channel Divinity","detail":"At 2nd level, you gain the ability to channel divine energy directly from your deity, using that energy to fuel magical effects.","tags":["Cleric","Level 2","Channel Divinity"]},{"id":"feature-subclass-cleric-tempest-2-channel-divinity-destructive-wrath-phb","sourceType":"subclass","sourceId":"subclass-cleric-tempest-2-channel-divinity-destructive-wrath-phb","group":"Triggered","type":"Tempest","title":"Channel Divinity: Destructive Wrath","detail":"Starting at 2nd level, you can use your Channel Divinity to wield the power of the storm with unchecked ferocity.","tags":["Cleric","Tempest","Level 2","Channel Divinity"]},{"id":"feature-class-cleric-2-channel-divinity-harness-divine-power-tce","sourceType":"class","sourceId":"class-cleric-2-channel-divinity-harness-divine-power-tce","group":"Bonus Action","type":"Cleric","title":"Channel Divinity: Harness Divine Power","detail":"2nd-level cleric optional class features You can expend a use of your Channel Divinity to fuel your spells.","tags":["Cleric","Level 2","Channel Divinity"]},{"id":"feature-class-cleric-2-channel-divinity-turn-undead-phb","sourceType":"class","sourceId":"class-cleric-2-channel-divinity-turn-undead-phb","group":"Reaction","type":"Cleric","title":"Channel Divinity: Turn Undead","detail":"As an action, you present your holy symbol and speak a prayer censuring the undead.","tags":["Cleric","Level 2","Channel Divinity"]},{"id":"feature-class-cleric-5-destroy-undead-cr-1-2-phb","sourceType":"class","sourceId":"class-cleric-5-destroy-undead-cr-1-2-phb","group":"Free / Utility","type":"Cleric","title":"Destroy Undead (CR 1/2)","detail":"Starting at 5th level, when an undead of CR 1/2 or lower fails its saving throw against your Turn Undead feature, the creature is instantly destroyed.","tags":["Cleric","Level 5"]},{"id":"feature-class-cleric-1-divine-domain-phb","sourceType":"class","sourceId":"class-cleric-1-divine-domain-phb","group":"Triggered","type":"Cleric","title":"Divine Domain","detail":"Choose one domain related to your deity from the list of available domains.","tags":["Cleric","Level 1","Channel Divinity"]},{"id":"amulet-of-divine-retribution-divine-protection","group":"Action","type":"Item","title":"Divine Protection","detail":"Divine Protection (1/day): As an action, you radiate a protective aura of holy energy. At the start of each of your turns for up to 1 minute (as long as you maintain concentration), all allies within 30 feet regain 1d10 hit points. This effect ends early if your concentration is broken.","tags":["Attunement","1 use"],"sourceType":"item","sourceId":"amulet-of-divine-retribution","itemName":"Amulet of Divine Retribution"},{"id":"amulet-of-divine-retribution-divine-wrath","group":"Action","type":"Item","title":"Divine Wrath","detail":"Divine Wrath (1/day): As an action, you may target one hostile creature you can see within 60 feet. That creature must make an Intelligence saving throw against your spell save DC. On a failed save, the creature becomes vulnerable to radiant and fire damage for 1 minute. The creature may repeat the saving throw at the end of each of its turns, ending the effect on a success.","tags":["Attunement","1 use"],"sourceType":"item","sourceId":"amulet-of-divine-retribution","itemName":"Amulet of Divine Retribution"},{"id":"feat-elemental-adept","sourceType":"feat","sourceId":"elemental-adept","group":"Triggered","type":"Feat","title":"Elemental Adept","detail":"When you gain this feat, choose one of the following damage types:","tags":["Feat"]},{"id":"griffon-key-loop-griffon-key-loop","group":"Action","type":"Item","title":"Griffon Key Loop","detail":"This leather key loop is stylized in the fashion of the legendary griffon's saddlebag, a classic motif in children's fiction.","tags":[],"sourceType":"item","sourceId":"griffon-key-loop","itemName":"Griffon Key Loop"},{"id":"light-crossbow-light-crossbow","group":"Bonus Action","type":"Item","title":"Light Crossbow","detail":"Range.","tags":[],"sourceType":"item","sourceId":"light-crossbow","itemName":"Light Crossbow"},{"id":"feature-class-cleric-1-spellcasting-phb","sourceType":"class","sourceId":"class-cleric-1-spellcasting-phb","group":"Triggered","type":"Cleric","title":"Spellcasting","detail":"As a conduit for divine power, you can cast cleric spells.","tags":["Cleric","Level 1"]},{"id":"feature-subclass-cleric-tempest-1-tempest-domain-phb","sourceType":"subclass","sourceId":"subclass-cleric-tempest-1-tempest-domain-phb","group":"Free / Utility","type":"Tempest","title":"Tempest Domain","detail":"Gods whose portfolios include the Tempest domain—including Talos, Umberlee, Kord, Zeboim, the Devourer, Zeus, and Thor—govern storms, sea, and sky.","tags":["Cleric","Tempest","Level 1","Rage"]},{"id":"feature-subclass-cleric-tempest-1-wrath-of-the-storm-phb","sourceType":"subclass","sourceId":"subclass-cleric-tempest-1-wrath-of-the-storm-phb","group":"Reaction","type":"Tempest","title":"Wrath of the Storm","detail":"Also at 1st level, you can thunderously rebuke attackers.","tags":["Cleric","Tempest","Level 1"]}],"ruleEffects":[{"kind":"resistance","target":"lightning","mode":"conditional","text":"Immune to lightning damage while holding it until it reaches 6 charges; then resistance instead.","id":"lightning-rod-resistance","sourceType":"item","sourceId":"lightning-rod","itemName":"Lightning Rod"},{"id":"feature-effect-subclass-cleric-tempest-1-bonus-proficiencies-phb","sourceType":"subclass","sourceId":"subclass-cleric-tempest-1-bonus-proficiencies-phb","kind":"rules-text","name":"Bonus Proficiencies","text":"At 1st level, you gain proficiency with martial weapons and heavy armor."},{"id":"feature-effect-class-cleric-2-channel-divinity-harness-divine-power-tce","sourceType":"class","sourceId":"class-cleric-2-channel-divinity-harness-divine-power-tce","kind":"rules-text","name":"Channel Divinity: Harness Divine Power","text":"2nd-level cleric optional class features You can expend a use of your Channel Divinity to fuel your spells."},{"id":"feat-effect-elemental-adept","sourceType":"feat","sourceId":"elemental-adept","kind":"rules-text","name":"Elemental Adept","text":"When you gain this feat, choose one of the following damage types:"},{"id":"warhammer-of-warning-warhammer-of-warning-initiative-advantage","kind":"advantage","target":"initiative","name":"Initiative advantage","text":"Advantage on initiative rolls while carried/worn as described.","sourceType":"item","sourceId":"warhammer-of-warning","itemName":"Warhammer of Warning"},{"id":"1-warhammer-1-warhammer-magic-weapon-bonus","kind":"weapon-bonus","name":"Magic weapon bonus","value":1,"text":"+1 to attack and damage rolls with this weapon.","sourceType":"item","sourceId":"1-warhammer","itemName":"+1 Warhammer"}],"notes":"","backgrounds":["Sailor"],"feats":["Elemental Adept"],"races":["Genasi (Water)"],"notesUrl":"https://u.cave.su/p/EldoriaClaireDnDNotes","classUrl":"5etools/classes.html#cleric_phb,state:sub_tempest_phb=b1","rulesSource":{"kind":"canonical-json","schemaVersion":1,"generatedAtUtc":"2026-05-05T17:45:50.680Z"},"url":"Public/Players/Claire Player Sheet.html"}</script>
+  <script src="../../site-assets/eldoria-ruleset.js" defer></script>
   <script src="../../site-assets/public-site.js" defer></script>
+  <script src="../../site-assets/character-builder.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -19,141 +21,171 @@
       <a href="../../location-reference.html">Locations</a>
     </nav>
   </header>
-  <main class="player-sheet" data-tabs data-player-sheet data-player-id="claire-player-sheet">
+  <main class="player-sheet" data-tabs data-player-sheet data-player-id="claire-player-sheet" data-player-portrait-src="Public/Players/ClaireDnD.png" data-player-class-url="5etools/classes.html#cleric_phb,state:sub_tempest_phb=b1">
     <section class="player-hero">
-      <div class="portrait"><img src="./ClaireDnD.png" alt="Claire portrait"></div>
+      <div class="portrait" data-player-portrait><img src="./ClaireDnD.png" alt="Claire Player Sheet portrait"></div>
       <div>
         <div class="kicker">Player Character</div>
-        <h1 data-player-field="name">Claire</h1>
-        <p data-player-summary>Water Genasi / Cleric (Tempest) / Level 5</p>
+        <h1 data-player-field="name">Claire Player Sheet</h1>
+        <p data-player-summary>Level 1</p>
       </div>
       <div class="hero-stats">
-        <div><span>AC</span><strong data-player-stat="ac">18</strong></div>
-        <div><span>Init</span><strong data-player-stat="initiative">-1</strong></div>
-        <div><span>Prof</span><strong data-player-stat="proficiencyBonus">+3</strong></div>
+        <div><span>AC</span><strong data-player-stat="ac">10</strong></div>
+        <div><span>Init</span><strong data-player-stat="initiative">+0</strong></div>
+        <div><span>Prof</span><strong data-player-stat="proficiencyBonus">+2</strong></div>
         <div><span>Speed</span><strong data-player-stat="speed">30 ft</strong></div>
       </div>
+      <div class="hero-overview">
+        <div class="info-card"><span>Class</span><strong data-player-field="class"></strong></div>
+        <div class="info-card"><span>Subclass</span><strong data-player-field="subclass">-</strong></div>
+        <div class="info-card"><span>Race</span><strong data-player-field="race"></strong></div>
+        <div class="info-card"><span>Background</span><strong data-player-field="background"></strong></div>
+        <div class="info-card"><span>Experience</span><strong data-player-field="experience">-</strong></div>
+        <div class="info-card"><span>Gold</span><strong data-player-field="gold">0</strong></div>
+        <div class="info-card"><span>Hero Points</span><strong data-player-field="heroPoints">0</strong></div>
+        <div class="info-card"><span>Guild Rank</span><strong data-player-field="guildRank">-</strong></div>
+        <div class="info-card"><span>Guild Points</span><strong data-player-field="guildPoints">-</strong></div>
+      </div>
       <div class="equipped-summary" data-equipped-summary></div>
+      <div class="hero-actions">
+        <div class="hero-rest-actions" aria-label="Rest controls">
+          <button type="button" data-rest-type="short">Short Rest</button>
+          <button type="button" data-rest-type="long">Long Rest</button>
+          <span data-resource-status></span>
+        </div>
+        <div class="hero-builder-actions">
+          <button type="button" data-character-assistant-open>Level Up / Audit</button>
+        </div>
+      </div>
     </section>
 
     <nav class="tabs" role="tablist" aria-label="Character sheet sections">
-      <button class="tab-button active" data-tab-target="overview" type="button" role="tab" aria-selected="true">Overview</button>
-      <button class="tab-button " data-tab-target="abilities" type="button" role="tab" aria-selected="false">Abilities</button>
+      <button class="tab-button active" data-tab-target="stats" type="button" role="tab" aria-selected="true">Stats</button>
       <button class="tab-button " data-tab-target="combat" type="button" role="tab" aria-selected="false">Combat</button>
       <button class="tab-button " data-tab-target="actions" type="button" role="tab" aria-selected="false">Actions</button>
       <button class="tab-button " data-tab-target="resources" type="button" role="tab" aria-selected="false">Resources</button>
-      <button class="tab-button " data-tab-target="skills" type="button" role="tab" aria-selected="false">Skills/Saves</button>
-      <button class="tab-button " data-tab-target="equipment" type="button" role="tab" aria-selected="false">Equipment</button>
+      <button class="tab-button " data-tab-target="equipment" type="button" role="tab" aria-selected="false">Gear</button>
       <button class="tab-button " data-tab-target="spells" type="button" role="tab" aria-selected="false">Spells</button>
-      <button class="tab-button " data-tab-target="class-info" type="button" role="tab" aria-selected="false">Class Info</button>
-      <button class="tab-button " data-tab-target="edit" type="button" role="tab" aria-selected="false">Edit</button>
+      <button class="tab-button " data-tab-target="features" type="button" role="tab" aria-selected="false">Features</button>
       <button class="tab-button " data-tab-target="notes" type="button" role="tab" aria-selected="false">Notes</button>
     </nav>
+    <div class="tab-select-shell">
+      <select class="tab-select" data-tab-select aria-label="Character sheet section">
+        <option value="stats" selected>Stats</option>
+        <option value="combat">Combat</option>
+        <option value="actions">Actions</option>
+        <option value="resources">Resources</option>
+        <option value="equipment">Gear</option>
+        <option value="spells">Spells</option>
+        <option value="features">Features</option>
+        <option value="notes">Notes</option>
+      </select>
+    </div>
 
-    <section class="tab-panel active" data-tab-panel="overview" role="tabpanel">
-      <div class="sheet-grid">
-        <div class="info-card"><span>Class</span><strong data-player-field="class">Cleric</strong></div>
-        <div class="info-card"><span>Subclass</span><strong data-player-field="subclass">Tempest</strong></div>
-        <div class="info-card"><span>Race</span><strong data-player-field="race">Water Genasi</strong></div>
-        <div class="info-card"><span>Background</span><strong data-player-field="background">Sailor</strong></div>
-        <div class="info-card"><span>Experience</span><strong data-player-field="experience">8000</strong></div>
-        <div class="info-card"><span>Gold</span><strong data-player-field="gold">0</strong></div>
-        <div class="info-card"><span>Hero Points</span><strong data-player-field="heroPoints">0</strong></div>
-        <div class="info-card"><span>Guild Rank</span><strong data-player-field="guildRank">E</strong></div>
-        <div class="info-card"><span>Guild Points</span><strong data-player-field="guildPoints">51</strong></div>
+    <section class="tab-panel active" data-tab-panel="stats" role="tabpanel">
+      <div class="abilities-grid"><div class="ability-card" data-player-ability="str"><span>Strength</span><strong>10</strong><em>+0</em></div>
+<div class="ability-card" data-player-ability="dex"><span>Dexterity</span><strong>10</strong><em>+0</em></div>
+<div class="ability-card" data-player-ability="con"><span>Constitution</span><strong>10</strong><em>+0</em></div>
+<div class="ability-card" data-player-ability="int"><span>Intelligence</span><strong>10</strong><em>+0</em></div>
+<div class="ability-card" data-player-ability="wis"><span>Wisdom</span><strong>10</strong><em>+0</em></div>
+<div class="ability-card" data-player-ability="cha"><span>Charisma</span><strong>10</strong><em>+0</em></div></div>
+      <div class="two-column stacked-section">
+        <section><h2>Saving Throws</h2><div class="line-list"><div class="line-stat " data-player-save="str"><span>Strength</span><strong>+0</strong></div>
+<div class="line-stat " data-player-save="dex"><span>Dexterity</span><strong>+0</strong></div>
+<div class="line-stat " data-player-save="con"><span>Constitution</span><strong>+0</strong></div>
+<div class="line-stat " data-player-save="int"><span>Intelligence</span><strong>+0</strong></div>
+<div class="line-stat " data-player-save="wis"><span>Wisdom</span><strong>+0</strong></div>
+<div class="line-stat " data-player-save="cha"><span>Charisma</span><strong>+0</strong></div></div></section>
+        <section><h2>Skills</h2><div class="line-list"><div class="line-stat " data-player-skill="acrobatics" data-ability="dex"><span>Acrobatics <small>DEX</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="animalHandling" data-ability="wis"><span>Animal Handling <small>WIS</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="arcana" data-ability="int"><span>Arcana <small>INT</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="athletics" data-ability="str"><span>Athletics <small>STR</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="deception" data-ability="cha"><span>Deception <small>CHA</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="history" data-ability="int"><span>History <small>INT</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="insight" data-ability="wis"><span>Insight <small>WIS</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="intimidation" data-ability="cha"><span>Intimidation <small>CHA</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="investigation" data-ability="int"><span>Investigation <small>INT</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="medicine" data-ability="wis"><span>Medicine <small>WIS</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="nature" data-ability="int"><span>Nature <small>INT</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="perception" data-ability="wis"><span>Perception <small>WIS</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="performance" data-ability="cha"><span>Performance <small>CHA</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="persuasion" data-ability="cha"><span>Persuasion <small>CHA</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="religion" data-ability="int"><span>Religion <small>INT</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="sleightOfHand" data-ability="dex"><span>Sleight of Hand <small>DEX</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="stealth" data-ability="dex"><span>Stealth <small>DEX</small></span><strong>+0</strong></div>
+<div class="line-stat " data-player-skill="survival" data-ability="wis"><span>Survival <small>WIS</small></span><strong>+0</strong></div></div></section>
       </div>
     </section>
 
-    <section class="tab-panel " data-tab-panel="abilities" role="tabpanel"><div class="abilities-grid"><div class="ability-card" data-player-ability="str"><span>Strength</span><strong>16</strong><em>+3</em></div>
-<div class="ability-card" data-player-ability="dex"><span>Dexterity</span><strong>8</strong><em>-1</em></div>
-<div class="ability-card" data-player-ability="con"><span>Constitution</span><strong>16</strong><em>+3</em></div>
-<div class="ability-card" data-player-ability="int"><span>Intelligence</span><strong>14</strong><em>+2</em></div>
-<div class="ability-card" data-player-ability="wis"><span>Wisdom</span><strong>18</strong><em>+4</em></div>
-<div class="ability-card" data-player-ability="cha"><span>Charisma</span><strong>12</strong><em>+1</em></div></div></section>
-
     <section class="tab-panel " data-tab-panel="combat" role="tabpanel">
+      <div data-ac-panel></div>
       <div class="sheet-grid">
-        <div class="info-card"><span>Armor Class</span><strong data-player-field="ac">18</strong></div>
-        <div class="info-card"><span>Initiative</span><strong data-player-field="initiative">-1</strong></div>
-        <div class="info-card"><span>Proficiency</span><strong data-player-field="proficiencyBonus">+3</strong></div>
+        <div class="info-card"><span>Armor Class</span><strong data-player-field="ac">10</strong></div>
+        <div class="info-card"><span>Initiative</span><strong data-player-field="initiative">+0</strong></div>
+        <div class="info-card"><span>Proficiency</span><strong data-player-field="proficiencyBonus">+2</strong></div>
         <div class="info-card"><span>Speed</span><strong data-player-field="speed">30 ft</strong></div>
-        <div class="info-card"><span>Simple Melee</span><strong>+6</strong></div>
-        <div class="info-card"><span>Simple Ranged</span><strong>+2</strong></div>
-        <div class="info-card"><span>Martial Melee</span><strong>+6</strong></div>
-        <div class="info-card"><span>Martial Ranged</span><strong>+2</strong></div>
-        <div class="info-card"><span>Spell Attack</span><strong data-player-field="spellAttack">+7</strong></div>
-        <div class="info-card"><span>Spell Save DC</span><strong data-player-field="spellSaveDc">15</strong></div>
+        <div class="info-card"><span>Simple Melee</span><strong data-player-field="simpleMelee">+0</strong></div>
+        <div class="info-card"><span>Simple Ranged</span><strong data-player-field="simpleRanged">+0</strong></div>
+        <div class="info-card"><span>Martial Melee</span><strong data-player-field="martialMelee">+0</strong></div>
+        <div class="info-card"><span>Martial Ranged</span><strong data-player-field="martialRanged">+0</strong></div>
+        <div class="info-card"><span>Spell Attack</span><strong data-player-field="spellAttack">-</strong></div>
+        <div class="info-card"><span>Spell Save DC</span><strong data-player-field="spellSaveDc">-</strong></div>
       </div>
       <section>
         <h2>Weapon Attacks</h2>
         <div class="weapon-grid" data-weapon-attacks></div>
         <div class="roll-log" data-roll-log></div>
       </section>
+      <div data-combat-features></div>
+      <div data-temporary-effects-panel></div>
     </section>
 
-    <section class="tab-panel " data-tab-panel="actions" role="tabpanel"><div data-actions-panel></div></section>
-
-    <section class="tab-panel " data-tab-panel="resources" role="tabpanel"><div data-resources-panel></div></section>
-
-    <section class="tab-panel " data-tab-panel="skills" role="tabpanel">
-      <div class="two-column">
-        <section><h2>Saving Throws</h2><div class="line-list"><div class="line-stat " data-player-save="str"><span>Strength</span><strong>+3</strong></div>
-<div class="line-stat " data-player-save="dex"><span>Dexterity</span><strong>-1</strong></div>
-<div class="line-stat " data-player-save="con"><span>Constitution</span><strong>+3</strong></div>
-<div class="line-stat " data-player-save="int"><span>Intelligence</span><strong>+2</strong></div>
-<div class="line-stat proficient" data-player-save="wis"><span>Wisdom</span><strong>+7</strong></div>
-<div class="line-stat proficient" data-player-save="cha"><span>Charisma</span><strong>+4</strong></div></div></section>
-        <section><h2>Skills</h2><div class="line-list"><div class="line-stat " data-player-skill="acrobatics" data-ability="dex"><span>Acrobatics <small>DEX</small></span><strong>-1</strong></div>
-<div class="line-stat " data-player-skill="animalHandling" data-ability="wis"><span>Animal Handling <small>WIS</small></span><strong>+4</strong></div>
-<div class="line-stat " data-player-skill="arcana" data-ability="int"><span>Arcana <small>INT</small></span><strong>+2</strong></div>
-<div class="line-stat " data-player-skill="athletics" data-ability="str"><span>Athletics <small>STR</small></span><strong>+3</strong></div>
-<div class="line-stat " data-player-skill="deception" data-ability="cha"><span>Deception <small>CHA</small></span><strong>+1</strong></div>
-<div class="line-stat " data-player-skill="history" data-ability="int"><span>History <small>INT</small></span><strong>+2</strong></div>
-<div class="line-stat proficient" data-player-skill="insight" data-ability="wis"><span>Insight <small>WIS</small></span><strong>+7</strong></div>
-<div class="line-stat " data-player-skill="intimidation" data-ability="cha"><span>Intimidation <small>CHA</small></span><strong>+1</strong></div>
-<div class="line-stat " data-player-skill="investigation" data-ability="int"><span>Investigation <small>INT</small></span><strong>+2</strong></div>
-<div class="line-stat proficient" data-player-skill="medicine" data-ability="wis"><span>Medicine <small>WIS</small></span><strong>+7</strong></div>
-<div class="line-stat " data-player-skill="nature" data-ability="int"><span>Nature <small>INT</small></span><strong>+2</strong></div>
-<div class="line-stat proficient" data-player-skill="perception" data-ability="wis"><span>Perception <small>WIS</small></span><strong>+7</strong></div>
-<div class="line-stat " data-player-skill="performance" data-ability="cha"><span>Performance <small>CHA</small></span><strong>+1</strong></div>
-<div class="line-stat proficient" data-player-skill="persuasion" data-ability="cha"><span>Persuasion <small>CHA</small></span><strong>+4</strong></div>
-<div class="line-stat proficient" data-player-skill="religion" data-ability="int"><span>Religion <small>INT</small></span><strong>+5</strong></div>
-<div class="line-stat " data-player-skill="sleightOfHand" data-ability="dex"><span>Sleight of Hand <small>DEX</small></span><strong>-1</strong></div>
-<div class="line-stat " data-player-skill="stealth" data-ability="dex"><span>Stealth <small>DEX</small></span><strong>-1</strong></div>
-<div class="line-stat " data-player-skill="survival" data-ability="wis"><span>Survival <small>WIS</small></span><strong>+4</strong></div></div></section>
-      </div>
+    <section class="tab-panel " data-tab-panel="actions" role="tabpanel">
+      <div data-actions-panel></div>
     </section>
 
-    <section class="tab-panel " data-tab-panel="equipment" role="tabpanel"><div data-equipment-panel></div></section>
+    <section class="tab-panel " data-tab-panel="resources" role="tabpanel">
+      <div data-resources-panel></div>
+    </section>
+
+    <section class="tab-panel " data-tab-panel="equipment" role="tabpanel">
+      <div
+        data-equipment-panel
+        data-rules-base="../../Assets/Rules"
+        data-items-url="../../Assets/Rules/items.json"
+        data-classes-url="../../Assets/Rules/classes.json"
+        data-races-url="../../Assets/Rules/races.json"
+        data-backgrounds-url="../../Assets/Rules/backgrounds.json"
+      ></div>
+    </section>
     <section class="tab-panel " data-tab-panel="spells" role="tabpanel"><div data-spell-panel data-spells-url="../../data/spells.json"></div></section>
-    <section class="tab-panel " data-tab-panel="class-info" role="tabpanel">
+    <section class="tab-panel " data-tab-panel="features" role="tabpanel">
       <div class="sheet-grid">
-        <div class="info-card"><span>Class</span><strong data-player-field="classSummary">Cleric (Tempest)</strong></div>
-        <div class="info-card"><span>Background</span><strong data-player-field="backgrounds">Sailor</strong></div>
-        <div class="info-card"><span>Feats</span><strong data-player-field="feats">Elemental Adept</strong></div>
-        <div class="info-card"><span>Race</span><strong data-player-field="races">Genasi (Water)</strong></div>
+        <div class="info-card"><span>Class</span><strong data-player-field="classSummary"></strong></div>
+        <div class="info-card"><span>Race</span><strong data-player-field="races">-</strong></div>
+        <div class="info-card"><span>Background</span><strong data-player-field="backgrounds">-</strong></div>
+        <div class="info-card"><span>Feats</span><strong data-player-field="feats">-</strong></div>
       </div>
-      <section class="feature-notes"><p>No extra class features recorded.</p></section>
-    </section>
-    <section class="tab-panel " data-tab-panel="edit" role="tabpanel">
-      <form class="edit-form" data-player-edit-form>
-        <div class="form-grid">
-          <label><span>Current HP</span><input name="currentHp" type="number" inputmode="numeric"></label>
-          <label><span>Temp HP</span><input name="tempHp" type="number" inputmode="numeric" min="0"></label>
-          <label><span>Max HP</span><input name="maxHp" type="number" inputmode="numeric"></label>
-          <label><span>Armor Class</span><input name="ac" type="number" inputmode="numeric"></label>
-          <label><span>Speed</span><input name="speed" type="number" inputmode="numeric"></label>
-          <label><span>Gold</span><input name="gold" type="number" inputmode="numeric" min="0"></label>
-          <label><span>Hero Points</span><input name="heroPoints" type="number" inputmode="numeric" min="0"></label>
-          <label><span>Strength</span><input name="str" type="number" inputmode="numeric"></label><label><span>Dexterity</span><input name="dex" type="number" inputmode="numeric"></label><label><span>Constitution</span><input name="con" type="number" inputmode="numeric"></label><label><span>Intelligence</span><input name="int" type="number" inputmode="numeric"></label><label><span>Wisdom</span><input name="wis" type="number" inputmode="numeric"></label><label><span>Charisma</span><input name="cha" type="number" inputmode="numeric"></label>
-        </div>
-        <label class="wide-field"><span>Equipment</span><textarea name="equipment" rows="8"></textarea></label>
-        <div class="form-actions">
-          <button type="submit">Save</button>
-          <button type="button" data-player-reset>Reset</button>
-          <span data-player-edit-status></span>
-        </div>
-      </form>
+      <section class="feature-notes">
+        <h2>Class Features</h2>
+        <div data-class-info-panel><p>No class features found in canonical rules.</p></div>
+      </section>
+      <section class="feature-notes">
+        <h2>Sheet Feature Notes</h2>
+        <p>No extra class features recorded.</p>
+      </section>
+      <section class="feature-notes">
+        <h2>Racial Traits</h2>
+        <div data-race-info-panel><p>No racial traits found in canonical rules.</p></div>
+      </section>
+      <section class="feature-notes">
+        <h2>Background Benefits</h2>
+        <div data-background-info-panel><p>No background details found in canonical rules.</p></div>
+      </section>
+      <section class="feature-notes">
+        <h2>Feat Benefits</h2>
+        <div data-feat-info-panel><p>No feats recorded on this sheet.</p></div>
+      </section>
     </section>
     <section class="tab-panel " data-tab-panel="notes" role="tabpanel">
       <form class="notes-form" data-player-notes-form>
@@ -163,12 +195,156 @@
           <span data-player-notes-status></span>
         </div>
       </form>
-      <div class="resource-links">
-        <a href="https://u.cave.su/p/EldoriaClaireDnDNotes">Player notes</a>
+      <div class="resource-links" data-player-resource-links>
+
         <a href="../../5etools/classes.html#cleric_phb,state:sub_tempest_phb=b1">Full class info</a>
         <a href="../../spell-search.html">Quick spell lookup</a>
       </div>
     </section>
+    <dialog class="character-assistant-dialog" data-character-assistant-modal aria-labelledby="builder-title">
+    <div class="character-assistant-frame">
+      <button class="character-assistant-close" type="button" data-character-assistant-close aria-label="Close character assistant">&times;</button>
+      <div class="builder-shell sheet-builder" data-character-builder data-builder-mode="sheet" data-builder-character-id="claire-player-sheet" data-builder-player-name="Claire Player Sheet" data-builder-sheet-title="Claire Player Sheet" data-builder-portrait="Public/Players/ClaireDnD.png" data-rules-base="../../">
+    <section class="builder-hero" aria-labelledby="builder-title">
+      <div>
+        <div class="kicker">Character Rules</div>
+        <h2 id="builder-title">Character Builder</h2>
+      </div>
+      <div class="builder-status" data-builder-status>Loading rules...</div>
+    </section>
+
+    <nav class="builder-stepper" aria-label="Character builder steps">
+      <button type="button" data-step-target="levels">Levels</button>
+    </nav>
+
+    <section class="builder-grid">
+      <aside class="builder-panel builder-panel-sticky" aria-labelledby="cloud-title">
+        <h2 id="cloud-title">Character Build</h2>
+        <select data-character-select hidden aria-hidden="true">
+          <option value="claire-player-sheet">Claire Player Sheet</option>
+        </select>
+        <div class="builder-sheet-summary">
+          <strong>Claire Player Sheet</strong>
+          <span>New character draft</span>
+        </div>
+        <div class="builder-actions">
+          <button type="button" data-new-draft>New Draft</button>
+          <button type="button" data-level-up>Next Level</button>
+          <button type="button" data-save-cloud>Save</button>
+        </div>
+        <p class="builder-note" data-storage-note>Characters save to the Eldoria cloud API when it is configured.</p>
+        <div class="builder-current-state" data-current-state></div>
+      </aside>
+
+      <div class="builder-main">
+        <section class="builder-panel" data-step="levels" aria-labelledby="audit-title">
+          <div class="panel-heading">
+            <h2 id="audit-title">Builder Review</h2>
+            <span data-audit-summary></span>
+          </div>
+          <div class="audit-list" data-audit-list></div>
+          <div class="next-level-summary" data-next-level-summary></div>
+        </section>
+
+        <section class="builder-panel" data-step="levels" aria-labelledby="identity-title">
+          <h2 id="identity-title">Level 1: Identity And Scores</h2>
+          <div class="form-grid">
+            <label>
+              Character Name
+              <input type="text" data-field="name" autocomplete="off">
+            </label>
+            <label>
+              Level
+              <input type="number" data-field="level" min="1" max="20">
+            </label>
+            <label>
+              Ability Method
+              <select data-field="abilityMethod">
+                <option value="manual">Manual / Imported</option>
+                <option value="standard-array">Standard Array</option>
+                <option value="point-buy">Point Buy</option>
+                <option value="rolled">Rolled</option>
+              </select>
+            </label>
+          </div>
+          <div class="ability-edit-grid" aria-label="Ability scores">
+            <label>STR<input type="number" min="1" max="30" data-ability-field="str"></label><label>DEX<input type="number" min="1" max="30" data-ability-field="dex"></label><label>CON<input type="number" min="1" max="30" data-ability-field="con"></label><label>INT<input type="number" min="1" max="30" data-ability-field="int"></label><label>WIS<input type="number" min="1" max="30" data-ability-field="wis"></label><label>CHA<input type="number" min="1" max="30" data-ability-field="cha"></label>
+          </div>
+          <div class="form-grid">
+            <label>
+              Health Mode
+              <select data-field="hpMode">
+                <option value="auto-average">Auto Average On Level Up</option>
+                <option value="manual">Manual Hit Points</option>
+              </select>
+            </label>
+            <label>
+              Max HP
+              <input type="number" data-field="maxHp" min="0" max="999">
+            </label>
+            <label>
+              Current HP
+              <input type="number" data-field="currentHp" min="0" max="999">
+            </label>
+          </div>
+        </section>
+
+        <section class="builder-panel" data-step="levels" aria-labelledby="origin-title">
+          <h2 id="origin-title">Level 1: Origin</h2>
+          <div class="form-grid">
+            <label>
+              Race
+              <select data-field="raceId"></select>
+            </label>
+            <label>
+              Background
+              <select data-field="backgroundId"></select>
+            </label>
+          </div>
+          <div class="rule-detail-grid">
+            <div class="rule-detail-slot" data-rule-detail="race"></div>
+            <div class="rule-detail-slot" data-rule-detail="background"></div>
+          </div>
+        </section>
+
+        <section class="builder-panel" data-step="levels" aria-labelledby="class-title">
+          <div class="panel-heading">
+            <h2 id="class-title">Level 1: Class Path</h2>
+            <span data-class-gate></span>
+          </div>
+          <div class="form-grid">
+            <label>
+              Class
+              <select data-field="classId"></select>
+            </label>
+            <label data-subclass-field hidden>
+              Subclass
+              <select data-field="subclassId"></select>
+            </label>
+          </div>
+          <div class="rule-detail-grid">
+            <div class="rule-detail-slot" data-rule-detail="class"></div>
+            <div class="rule-detail-slot" data-rule-detail="subclass" hidden></div>
+          </div>
+        </section>
+
+        <section class="builder-panel" data-step="levels" aria-labelledby="features-title">
+          <div class="panel-heading">
+            <h2 id="features-title">Levels</h2>
+            <span data-feature-summary></span>
+          </div>
+          <div class="choice-groups" data-choice-groups></div>
+        </section>
+
+        <div class="builder-nav">
+          <button type="button" data-prev-step>Previous</button>
+          <button type="button" data-next-step>Next</button>
+        </div>
+      </div>
+    </section>
+  </div>
+    </div>
+  </dialog>
   </main>
 </body>
 </html>

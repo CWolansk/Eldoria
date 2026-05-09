@@ -2,6 +2,12 @@
 .env
 .env.*
 !.env.example
+docs/api/local.settings.json
+docs/api/config/*.local.json
+docs/api/config/*.private.json
+docs/api/.deploy/
+docs/api/*.zip
+docs/site-assets/site-config.local.js
 
 # === Node ===
 node_modules/
