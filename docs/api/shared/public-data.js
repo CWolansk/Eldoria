@@ -145,7 +145,7 @@ function sanitizePlayerPatch(body) {
 
   if (Object.prototype.hasOwnProperty.call(body, 'acMode')) {
     const acMode = sanitizeText(body.acMode, 20);
-    if (acMode === 'official' || acMode === 'custom') patch.acMode = acMode;
+    if (acMode === 'official') patch.acMode = acMode;
   }
 
   if (body.abilities && typeof body.abilities === 'object') {
@@ -252,12 +252,15 @@ function sanitizePlayerSheet(body, fallbackId = '') {
     'spellAttack', 'spellSaveDc', 'attackBonuses', 'simpleWeapons',
     'martialWeapons', 'weaponProficiencies', 'armorProficiencies',
     'toolProficiencies', 'hitDice', 'equipment', 'itemIds', 'itemDetails',
+    'resistances', 'vulnerabilities', 'immunities',
+    'damageResistances', 'damageVulnerabilities', 'damageImmunities',
+    'resistanceDetails', 'vulnerabilityDetails', 'immunityDetails', 'defenses',
     'equipped', 'spells', 'preparedSpells', 'spellIds', 'spellScrolls',
     'spellDetails', 'manualSpells', 'manualSpellIds', 'manualSpellDetails',
     'grantedSpells', 'grantedSpellIds', 'grantedSpellDetails',
     'spellGrantDetails', 'spellListAdditions', 'spellListAdditionIds',
     'spellListAdditionDetails', 'spellMetadata', 'spellMetadataByName',
-    'spellSlots', 'resources', 'resourceUses', 'ruleActions',
+    'spellSlots', 'resources', 'resourceUses', 'ruleActions', 'ruleActivations',
     'actionWells', 'ruleEffects', 'ruleFeatures', 'actionUses',
     'spellSlotUses', 'itemCharges', 'temporaryEffects', 'combatToggles',
     'conditions', 'concentration', 'notes', 'backgrounds', 'backgroundIds',

@@ -73,7 +73,8 @@
     "XGE"
   ],
   "overlaySources": [
-    "ELDORIA"
+    "ELDORIA",
+    "HOMEBREW"
   ],
   "mandatorySubraceBaseRaceIds": [
     "race-aasimar-vgm",

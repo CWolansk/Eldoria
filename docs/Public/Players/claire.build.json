@@ -1,0 +1,274 @@
+{
+  "id": "claire",
+  "name": "Claire",
+  "schemaVersion": 2,
+  "rulesetId": "eldoria-5e",
+  "rulesVersion": "2026-05-17",
+  "raceId": "water-genasi",
+  "backgroundId": "sailor",
+  "classId": "cleric",
+  "subclassId": "tempest-domain",
+  "level": 5,
+  "abilities": {
+    "base": {
+      "str": 16,
+      "dex": 8,
+      "con": 16,
+      "int": 14,
+      "wis": 18,
+      "cha": 12
+    },
+    "history": []
+  },
+  "levelHistory": [
+    {
+      "level": 1,
+      "classId": "cleric",
+      "hpRoll": {
+        "mode": "max",
+        "value": 8
+      },
+      "grants": [
+        "feature:spellcasting:cleric",
+        "feature:divine-domain:tempest"
+      ],
+      "choices": {
+        "skillProficiencies": [
+          "insight",
+          "medicine",
+          "perception",
+          "persuasion",
+          "religion"
+        ]
+      },
+      "spellsLearned": [],
+      "lockedAt": "2026-05-17T00:00:00Z"
+    },
+    {
+      "level": 2,
+      "classId": "cleric",
+      "hpRoll": {
+        "mode": "avg",
+        "value": 5
+      },
+      "grants": [
+        "feature:channel-divinity",
+        "feature:destructive-wrath"
+      ],
+      "choices": {},
+      "spellsLearned": [],
+      "lockedAt": "2026-05-17T00:00:00Z"
+    },
+    {
+      "level": 3,
+      "classId": "cleric",
+      "hpRoll": {
+        "mode": "avg",
+        "value": 5
+      },
+      "grants": [],
+      "choices": {},
+      "spellsLearned": [],
+      "lockedAt": "2026-05-17T00:00:00Z"
+    },
+    {
+      "level": 4,
+      "classId": "cleric",
+      "hpRoll": {
+        "mode": "avg",
+        "value": 5
+      },
+      "grants": [],
+      "choices": {
+        "asiKind": "feat",
+        "featId": "elemental-adept"
+      },
+      "spellsLearned": [],
+      "lockedAt": "2026-05-17T00:00:00Z"
+    },
+    {
+      "level": 5,
+      "classId": "cleric",
+      "hpRoll": {
+        "mode": "avg",
+        "value": 5
+      },
+      "grants": [
+        "feature:destroy-undead"
+      ],
+      "choices": {},
+      "spellsLearned": [],
+      "lockedAt": "2026-05-17T00:00:00Z"
+    }
+  ],
+  "inventory": [
+    {
+      "instanceId": "itm-001",
+      "itemId": "warhammer-plus-1",
+      "displayName": "+1 Warhammer",
+      "equipped": true,
+      "attuned": false,
+      "weapon": {
+        "category": "melee",
+        "damage": {
+          "dice": "1d8",
+          "type": "bludgeoning"
+        },
+        "useDex": false,
+        "finesse": false,
+        "twoHanded": false,
+        "versatile": "1d10",
+        "magicBonus": 1
+      }
+    },
+    {
+      "instanceId": "itm-002",
+      "itemId": "light-crossbow",
+      "displayName": "Light Crossbow",
+      "equipped": true,
+      "attuned": false,
+      "weapon": {
+        "category": "ranged",
+        "damage": {
+          "dice": "1d8",
+          "type": "piercing"
+        },
+        "useDex": true,
+        "finesse": false,
+        "twoHanded": true,
+        "ammunition": true,
+        "loading": true,
+        "range": "80/320",
+        "magicBonus": 0
+      }
+    },
+    {
+      "instanceId": "itm-003",
+      "itemId": "plate-armor",
+      "displayName": "Plate Armor",
+      "equipped": true,
+      "attuned": false,
+      "armor": {
+        "category": "heavy",
+        "baseAC": 18,
+        "dexUse": "none",
+        "strRequirement": 15,
+        "stealthDisadvantage": true
+      }
+    },
+    {
+      "instanceId": "itm-004",
+      "itemId": "shield",
+      "displayName": "Shield",
+      "equipped": false,
+      "attuned": false,
+      "armor": {
+        "category": "shield",
+        "baseAC": 2,
+        "dexUse": "none"
+      }
+    },
+    {
+      "instanceId": "itm-005",
+      "itemId": "lightning-rod",
+      "displayName": "Lightning Rod",
+      "equipped": false,
+      "attuned": false
+    },
+    {
+      "instanceId": "itm-006",
+      "itemId": "warhammer-of-warning",
+      "displayName": "Warhammer of Warning",
+      "equipped": false,
+      "attuned": false,
+      "weapon": {
+        "category": "melee",
+        "damage": {
+          "dice": "1d8",
+          "type": "bludgeoning"
+        },
+        "useDex": false,
+        "finesse": false,
+        "twoHanded": false,
+        "versatile": "1d10",
+        "magicBonus": 0,
+        "note": "Advantage on initiative; you and companions within 30 ft. cannot be surprised."
+      }
+    },
+    {
+      "instanceId": "itm-007",
+      "itemId": "adventurers-guild-badge-e",
+      "displayName": "E-tier Adventurer's Guild Badge",
+      "equipped": false,
+      "attuned": false
+    },
+    {
+      "instanceId": "itm-008",
+      "itemId": "spell-scroll-burning-hands",
+      "displayName": "Spell Scroll (1st Level) - Burning Hands",
+      "equipped": false,
+      "attuned": false
+    },
+    {
+      "instanceId": "itm-009",
+      "itemId": "amulet-of-divine-retribution",
+      "displayName": "Amulet of Divine Retribution",
+      "equipped": true,
+      "attuned": true
+    },
+    {
+      "instanceId": "itm-010",
+      "itemId": "griffon-key-loop",
+      "displayName": "Griffon Key Loop",
+      "equipped": false,
+      "attuned": false
+    },
+    {
+      "instanceId": "itm-011",
+      "itemId": "silverleaf-brooch",
+      "displayName": "Silverleaf Brooch",
+      "equipped": false,
+      "attuned": false
+    }
+  ],
+  "mechanicBlocks": [
+    {
+      "id": "mb-cleric-dc",
+      "kind": "save_dc",
+      "ownerRef": "feature:spellcasting:cleric",
+      "label": "Cleric Spell Save DC",
+      "formula": [
+        {
+          "type": "fixed",
+          "amount": 8
+        },
+        {
+          "type": "proficiency"
+        },
+        {
+          "type": "ability_mod",
+          "ability": "wis"
+        }
+      ]
+    },
+    {
+      "id": "mb-channel-divinity-uses",
+      "kind": "resource",
+      "ownerRef": "feature:channel-divinity",
+      "label": "Channel Divinity",
+      "max": {
+        "type": "fixed",
+        "amount": 1
+      },
+      "recharge": "short_rest",
+      "consumesOn": "activate"
+    }
+  ],
+  "toggleState": {},
+  "resourceState": {
+    "mb-channel-divinity-uses": {
+      "remaining": 1,
+      "lastReset": "short"
+    }
+  }
+}

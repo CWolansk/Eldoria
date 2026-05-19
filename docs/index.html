@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head> 
     <meta charset="UTF-8">
@@ -52,10 +52,20 @@
         footer { text-align: center; padding: 2rem; background-color: var(--background-secondary); border-top: 1px solid var(--background-modifier-border); color: var(--text-muted); margin-top: auto; }
         @media (max-width: 768px) { header h1 { font-size: 2rem; } header p { font-size: 1rem; } .section-title { font-size: 1.5rem; } .grid { grid-template-columns: 1fr; } }
     </style>
+    <link rel="stylesheet" href="site-assets/public-site.css">
 </head>
-<body>
+<body class="docs-page docs-hub">
+    <header class="site-header">
+        <a class="site-title" href="index.html">Eldoria</a>
+        <nav>
+            <a href="search.html">Search</a>
+            <a href="WorldMap.html">Map</a>
+            <a href="npc-reference.html">NPCs</a>
+            <a href="location-reference.html">Locations</a>
+        </nav>
+    </header>
     <header>
-        <h1> Eldoria Campaign Hub</h1>
+        <h1>Eldoria Campaign Hub</h1>
         <p>Your gateway to the world of Eldoria</p>
     </header>
     <div class="container">
@@ -87,6 +97,7 @@
             <div class="card"><h3>Spells</h3><p>Comprehensive spell database with filters and detailed descriptions.</p><a href="spell-search.html">Search Spells</a></div>
             <div class="card"><h3>Items</h3><p>Find weapons, armor, magical items, and adventuring gear.</p><a href="item-search.html">Search Items</a></div>
             <div class="card"><h3>Rules Database</h3><p>Edit item, action, spell, and feature records used by sheets and widgets.</p><a href="rules-fixer.html">Open Rules Database</a></div>
+            <div class="card"><h3>Combat Review</h3><p>Approve or override where player combat options should live before parser changes are promoted.</p><a href="combat-classification-review.html">Review Combat Options</a></div>
             <div class="card"><h3>5etools</h3><p>Access the complete 5etools reference library and tools.</p><a href="5etools/5etools.html">Open 5etools</a></div>
         </div>
 

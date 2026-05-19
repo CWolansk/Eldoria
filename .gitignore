@@ -8,6 +8,8 @@ docs/api/config/*.private.json
 docs/api/.deploy/
 docs/api/*.zip
 docs/site-assets/site-config.local.js
+docs/.codex-sheet-feedback/
+docs/test-results/
 
 # === Node ===
 node_modules/

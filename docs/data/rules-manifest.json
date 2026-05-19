@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-05-08T21:52:02.436Z",
+  "generatedAtUtc": "2026-05-16T10:07:00.204Z",
   "upstream": {
     "classRoot": "5etools/data/class",
     "itemsCsv": "Assets/Items/Items.csv",
@@ -13,15 +13,15 @@
   "overrides": {
     "schemaVersion": 1,
     "counts": {
-      "items": 9,
+      "items": 10,
       "spells": 0,
-      "features": 0,
+      "features": 1,
       "actions": 0,
       "resources": 0,
       "effects": 0,
       "rules": 0,
       "backgrounds": 0,
-      "feats": 0,
+      "feats": 1,
       "races": 0,
       "classes": 0,
       "subclasses": 0
@@ -36,8 +36,8 @@
     "spells": 692,
     "feats": 194,
     "backgrounds": 144,
-    "actions": 4382,
+    "actions": 4248,
     "effects": 2933,
-    "resources": 810
+    "resources": 816
   }
 }

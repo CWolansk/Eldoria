@@ -10,6 +10,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { createRuleset } = require('./site-assets/eldoria-ruleset');
 
 const DOCS_ROOT = __dirname;
@@ -20,7 +21,17 @@ const DATA_OUT = path.join(DOCS_ROOT, 'data');
 const API_DATA_OUT = path.join(DOCS_ROOT, 'api', 'data');
 const SITE_ASSETS_OUT = path.join(DOCS_ROOT, 'site-assets');
 const RULES_ROOT = path.join(DOCS_ROOT, 'Assets', 'Rules');
-const PUBLIC_SITE_ASSET_VERSION = '20260509-whirling-fury-manual';
+const PUBLIC_SITE_ASSET_VERSION = (() => {
+  try {
+    const hash = crypto.createHash('sha256');
+    for (const rel of ['eldoria-ruleset.js', 'public-site.js', 'public-site.css']) {
+      hash.update(fs.readFileSync(path.join(SITE_ASSETS_OUT, rel)));
+    }
+    return hash.digest('hex').slice(0, 12);
+  } catch (err) {
+    return Date.now().toString(36);
+  }
+})();
 const UTILITY_ALIASES = [
   ['Background Searcher.html', '../background-search.html', 'Background Search'],
   ['Feat Searcher.html', '../feat-search.html', 'Feat Search'],
@@ -343,7 +354,7 @@ function readPage(file) {
       playerIdentity: extractPlayerSheetIdentity(parsed.body, parsed.data),
       title,
       type: 'Player',
-      body: '',
+      body: parsed.body,
       searchText: title,
     };
   }
@@ -405,7 +416,9 @@ function parseYamlValue(raw) {
 function extractPlayerSheetIdentity(body, fm = {}) {
   const portrait = cleanPlayerAssetPath(fm.portrait || fm.portraitUrl || extractObjectStringProperty(body, 'CharacterSheetDisplay.display', 'portrait'));
   const classUrl = extractPlayerClassUrl(body);
+  const name = cleanPlayerIdentityName(fm.name || fm.characterName || extractObjectStringProperty(body, 'CharacterSheetDisplay.display', 'name'));
   return {
+    name,
     portrait,
     classUrl,
   };
@@ -445,6 +458,41 @@ function cleanPlayerAssetPath(value) {
   return clean;
 }
 
+function cleanPlayerIdentityName(value) {
+  return String(value || '').trim().replace(/^["']|["']$/g, '');
+}
+
+function extractPlayerSheetLabel(value) {
+  return cleanPlayerIdentityName(value).replace(/\s+player sheet$/i, '').trim();
+}
+
+function playerNameIncludesLabel(name, label) {
+  const cleanName = cleanPlayerIdentityName(name).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const cleanLabel = cleanPlayerIdentityName(label).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  if (!cleanName || !cleanLabel) return false;
+  if (cleanName === cleanLabel) return true;
+  return ` ${cleanName} `.includes(` ${cleanLabel} `);
+}
+
+function formatPlayerSheetDocumentTitle(player, fallbackTitle) {
+  const sheetTitle = cleanPlayerIdentityName(player && (player.sheetTitle || fallbackTitle)) || cleanPlayerIdentityName(fallbackTitle) || 'Player Sheet';
+  const name = cleanPlayerIdentityName(player && player.name);
+  const label = extractPlayerSheetLabel(player && (player.sheetLabel || sheetTitle));
+  if (name && label && !playerNameIncludesLabel(name, label)) {
+    return `${name} - ${sheetTitle} - Eldoria Player Sheet`;
+  }
+  return `${sheetTitle} - Eldoria Player Sheet`;
+}
+
+function formatPlayerSheetKicker(player, fallbackTitle = '') {
+  const name = cleanPlayerIdentityName(player && player.name);
+  const label = extractPlayerSheetLabel(player && (player.sheetLabel || player.sheetTitle || fallbackTitle));
+  if (name && label && !playerNameIncludesLabel(name, label)) {
+    return `Player Character - ${label}`;
+  }
+  return 'Player Character';
+}
+
 function normalizeType(type, relMd) {
   if (type) return String(type);
   const lower = relMd.toLowerCase();
@@ -463,9 +511,10 @@ function isPlayerSheet(page) {
 function buildPlayer(page, _controls, _fileIndex, ruleset, _itemCatalog, _spellCatalog, _featCatalog, _backgroundCatalog, _playerRuleChoices = {}) {
   const playerId = slugify(path.basename(page.relMd, '.md'));
   const identity = page.playerIdentity || {};
+  const fallback = buildPlayerShellFallback(page, _spellCatalog);
   const shellData = makePlayerIdentityShell({
     id: playerId,
-    name: page.title,
+    name: identity.name || page.title,
     sheetTitle: page.title,
     portrait: identity.portrait || '',
     classUrl: identity.classUrl || '',
@@ -489,12 +538,15 @@ function buildPlayer(page, _controls, _fileIndex, ruleset, _itemCatalog, _spellC
       name: page.title,
       sheetTitle: page.title,
       portrait: shellData.portrait,
+      spells: fallback.spells,
+      spellDetails: fallback.spellDetails,
       url: page.url,
-      searchText: `${page.title} character builder`.trim(),
+      searchText: [page.title, identity.name, 'character builder'].filter(Boolean).join(' '),
     },
     modifiers: shellModifiers,
     features: '',
     portraitUrl: playerAssetUrl(page, shellData.portrait),
+    fallback,
     ruleReport: {
       id: playerId,
       name: page.title,
@@ -505,6 +557,17 @@ function buildPlayer(page, _controls, _fileIndex, ruleset, _itemCatalog, _spellC
       choices: {},
       issues: [],
     },
+  };
+}
+
+function buildPlayerShellFallback(page, spellCatalog) {
+  const body = String(page && page.body || '');
+  const equipment = extractLookupArray(body, 'ItemLookup');
+  const spells = extractLookupArray(body, 'SpellLookup');
+  return {
+    equipment,
+    spells,
+    spellDetails: buildPlayerSpellDetails(spells, spellCatalog),
   };
 }
 
@@ -559,6 +622,16 @@ function makePlayerIdentityShell(player) {
     equipment: [],
     itemIds: [],
     itemDetails: {},
+    resistances: [],
+    vulnerabilities: [],
+    immunities: [],
+    damageResistances: [],
+    damageVulnerabilities: [],
+    damageImmunities: [],
+    resistanceDetails: [],
+    vulnerabilityDetails: [],
+    immunityDetails: [],
+    defenses: { resistances: [], vulnerabilities: [], immunities: [], conditionImmunities: [] },
     equipped: [],
     spells: [],
     spellIds: [],
@@ -1666,10 +1739,63 @@ ${bodyHtml}
 `;
 }
 
+function loadPlayerBuildSeed(playerId) {
+  if (!playerId) return null;
+  // Source of truth: Public/Players/<id>.build.json (kebab-case slug)
+  const slug = String(playerId).toLowerCase();
+  const file = path.join(PUBLIC_SRC, 'Players', slug + '.build.json');
+  if (!fs.existsSync(file)) return null;
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch (e) {
+    console.warn(`Bad build seed for ${slug}:`, e.message);
+    return null;
+  }
+}
+
 function renderPlayerPage(player, page) {
   const p = player.data;
   const title = escapeHtml(p.name);
   const assetPrefix = relativeUrl(page.url, 'site-assets/public-site.css').replace(/public-site\.css$/, '');
+  // Seed from .build.json if present, else minimal identity-only shell.
+  const seedBuildId = (p.id || slugify(p.name) || '').replace(/-player-sheet$/, '');
+  const seedBuild = loadPlayerBuildSeed(seedBuildId) || {
+    id: seedBuildId || slugify(p.name) || 'new-character',
+    name: p.name,
+    schemaVersion: 2,
+    rulesetId: 'eldoria-5e',
+    classId: '', level: 0,
+    abilities: { base: { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 }, history: [] },
+    levelHistory: [], inventory: [], mechanicBlocks: [], toggleState: {}, resourceState: {},
+  };
+  const seedBuildJson = escapeScriptJson(JSON.stringify(seedBuild));
+  const sheetAssetPrefix = assetPrefix; // sheet/ lives under site-assets/
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${escapeHtml(seedBuild.name || title)}</title>
+  <link rel="stylesheet" href="${sheetAssetPrefix}sheet/sheet.css">
+  <script src="${assetPrefix}site-config.js"></script>
+</head>
+<body>
+  ${renderSiteHeader(page)}
+  <main id="sheet-root" data-cloud="true" data-cloud-api="/api">
+    <script type="application/json" data-player-build>${seedBuildJson}</script>
+  </main>
+  <script type="module" src="${sheetAssetPrefix}sheet/boot.js"></script>
+</body>
+</html>
+`;
+}
+
+// Old v1 renderer kept for reference. No longer called; will be deleted in teardown.
+function renderPlayerPageLegacy(player, page) {
+  const p = player.data;
+  const title = escapeHtml(p.name);
+  const assetPrefix = relativeUrl(page.url, 'site-assets/public-site.css').replace(/public-site\.css$/, '');
+  const fallbackJson = escapeScriptJson(JSON.stringify(player.fallback || {}));
   const abilities = ABILITIES.map(ability => {
     const score = p.abilities[ability];
     return `<div class="ability-card" data-player-ability="${ability}"><span>${ABILITY_NAMES[ability]}</span><strong>${score}</strong><em>${formatBonus(player.modifiers[ability])}</em></div>`;
@@ -1695,10 +1821,12 @@ function renderPlayerPage(player, page) {
   const portrait = player.portraitUrl
     ? `<img src="${escapeAttr(player.portraitUrl)}" alt="${title} portrait">`
     : `<span>${escapeHtml(title.slice(0, 1))}</span>`;
+  const heroName = p.name || title;
+  const heroKicker = formatPlayerSheetKicker(p, title);
+  const documentTitle = formatPlayerSheetDocumentTitle(p, title);
   const sheetTabs = [
     ['stats', 'Stats'],
     ['combat', 'Combat'],
-    ['actions', 'Actions'],
     ['resources', 'Resources'],
     ['equipment', 'Gear'],
     ['spells', 'Spells'],
@@ -1713,22 +1841,23 @@ function renderPlayerPage(player, page) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${title} - Eldoria Player Sheet</title>
+  <title>${escapeHtml(documentTitle)}</title>
   <link rel="stylesheet" href="${assetPrefix}public-site.css?v=${PUBLIC_SITE_ASSET_VERSION}">
   <link rel="stylesheet" href="${assetPrefix}character-builder.css">
   <script src="${assetPrefix}site-config.js"></script>
-  <script src="${assetPrefix}eldoria-ruleset.js" defer></script>
+  <script src="${assetPrefix}eldoria-ruleset.js?v=${PUBLIC_SITE_ASSET_VERSION}" defer></script>
   <script src="${assetPrefix}public-site.js?v=${PUBLIC_SITE_ASSET_VERSION}" defer></script>
   <script src="${assetPrefix}character-builder.js" defer></script>
 </head>
 <body>
   ${renderSiteHeader(page)}
   <main class="player-sheet" data-tabs data-player-sheet data-player-id="${escapeAttr(p.id)}" data-player-portrait-src="${escapeAttr(p.portrait || '')}" data-player-class-url="${escapeAttr(p.classUrl || '')}">
+    <script type="application/json" data-player-fallback>${fallbackJson}</script>
     <section class="player-hero">
       <div class="portrait" data-player-portrait>${portrait}</div>
       <div>
-        <div class="kicker">Player Character</div>
-        <h1 data-player-field="name">${title}</h1>
+        <div class="kicker" data-player-kicker>${escapeHtml(heroKicker)}</div>
+        <h1 data-player-field="name">${escapeHtml(heroName)}</h1>
         <p data-player-summary>${escapeHtml([p.race, `${p.class}${p.subclassShortName ? ` (${p.subclassShortName})` : ''}`, `Level ${p.level}`].filter(Boolean).join(' / '))}</p>
       </div>
       <div class="hero-stats">
@@ -1779,30 +1908,8 @@ function renderPlayerPage(player, page) {
     `)}
 
     ${tabPanel('combat', false, `
-      <div data-ac-panel></div>
-      <div class="sheet-grid">
-        ${infoCard('Armor Class', p.ac, 'ac')}
-        ${infoCard('Initiative', formatBonus(p.initiative), 'initiative')}
-        ${infoCard('Proficiency', formatBonus(p.proficiencyBonus), 'proficiencyBonus')}
-        ${infoCard('Speed', `${p.speed} ft`, 'speed')}
-        ${infoCard('Simple Melee', formatBonus(player.modifiers.str + (p.simpleWeapons ? p.proficiencyBonus : 0)), 'simpleMelee')}
-        ${infoCard('Simple Ranged', formatBonus(player.modifiers.dex + (p.simpleWeapons ? p.proficiencyBonus : 0)), 'simpleRanged')}
-        ${infoCard('Martial Melee', formatBonus(player.modifiers.str + (p.martialWeapons ? p.proficiencyBonus : 0)), 'martialMelee')}
-        ${infoCard('Martial Ranged', formatBonus(player.modifiers.dex + (p.martialWeapons ? p.proficiencyBonus : 0)), 'martialRanged')}
-        ${infoCard('Spell Attack', p.spellAttack === null ? '-' : formatBonus(p.spellAttack), 'spellAttack')}
-        ${infoCard('Spell Save DC', p.spellSaveDc === null ? '-' : p.spellSaveDc, 'spellSaveDc')}
-      </div>
-      <section>
-        <h2>Weapon Attacks</h2>
-        <div class="weapon-grid" data-weapon-attacks></div>
-        <div class="roll-log" data-roll-log></div>
-      </section>
+      <div data-combat-toggles></div>
       <div data-combat-features></div>
-      <div data-temporary-effects-panel></div>
-    `)}
-
-    ${tabPanel('actions', false, `
-      <div data-actions-panel></div>
     `)}
 
     ${tabPanel('resources', false, `

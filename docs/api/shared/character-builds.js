@@ -81,6 +81,7 @@ function sanitizeCharacterBuild(body) {
   build.id = sanitizeId(body.id);
   build.name = sanitizeText(body.name, 200);
   build.builderVersion = sanitizeText(body.builderVersion, 40);
+  build.schemaVersion = clamp(nullableNumber(body.schemaVersion) || 1, 1, 99);
   build.rulesetId = sanitizeId(body.rulesetId || 'eldoria-5e');
   build.rulesVersion = sanitizeText(body.rulesVersion || body.rulesSchemaVersion, 80);
   build.level = clamp(nullableNumber(body.level) || 1, 1, 20);
@@ -106,8 +107,13 @@ function sanitizeCharacterBuild(body) {
   build.selectedFeatureIds = sanitizeIdList(body.selectedFeatureIds, 240);
   build.featureChoices = sanitizeChoiceMap(body.featureChoices, 80);
   build.levelChoices = sanitizeLevelChoices(body.levelChoices);
+  build.levelHistory = sanitizeLevelHistory(body.levelHistory);
   build.startingGear = sanitizeStartingGear(body.startingGear);
   build.proficiencies = sanitizeProficiencies(body.proficiencies);
+  build.inventory = sanitizeInventory(body.inventory);
+  build.mechanicBlocks = sanitizeMechanicBlocks(body.mechanicBlocks);
+  build.toggleState = sanitizeToggleState(body.toggleState);
+  build.resourceState = sanitizeResourceState(body.resourceState);
   build.notes = sanitizeNote(body.notes, 20000);
   build.updatedAtUtc = new Date().toISOString();
   return stripEmpty(build);
@@ -149,11 +155,172 @@ function sanitizeClassLevels(values, fallbackClassId, fallbackSubclassId, fallba
 }
 
 function sanitizeAbilities(value) {
-  const out = {};
   const source = value && typeof value === 'object' ? value : {};
-  for (const ability of ['str', 'dex', 'con', 'int', 'wis', 'cha']) {
+  const ABILITIES = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+
+  // v2 nested form: { base: {...}, history: [...] }
+  if (source.base && typeof source.base === 'object') {
+    const base = {};
+    for (const ability of ABILITIES) {
+      const num = nullableNumber(source.base[ability]);
+      if (num !== undefined && num !== null) base[ability] = clamp(num, 1, 30);
+    }
+    const history = Array.isArray(source.history) ? source.history.slice(0, 40) : [];
+    const cleanHistory = [];
+    for (const h of history) {
+      if (!h || typeof h !== 'object') continue;
+      const level = clamp(nullableNumber(h.level) || 0, 0, 20);
+      const src = sanitizeText(h.source, 80);
+      const delta = {};
+      if (h.delta && typeof h.delta === 'object') {
+        for (const ability of ABILITIES) {
+          const n = nullableNumber(h.delta[ability]);
+          if (n !== undefined && n !== null) delta[ability] = clamp(n, -10, 10);
+        }
+      }
+      if (!Object.keys(delta).length) continue;
+      const entry = { level, source: src, delta };
+      if (h.fromLevelCommit) entry.fromLevelCommit = true;
+      cleanHistory.push(entry);
+    }
+    const out = { base };
+    if (cleanHistory.length) out.history = cleanHistory;
+    // Also project a flat view for back-compat consumers
+    const final = { ...base };
+    for (const entry of cleanHistory) {
+      for (const ab of ABILITIES) if (entry.delta[ab]) final[ab] = (final[ab] || 10) + entry.delta[ab];
+    }
+    for (const ab of ABILITIES) if (final[ab] != null) out[ab] = final[ab];
+    return out;
+  }
+
+  // v1 flat form
+  const out = {};
+  for (const ability of ABILITIES) {
     const num = nullableNumber(source[ability]);
     if (num !== undefined && num !== null) out[ability] = clamp(num, 1, 30);
+  }
+  return out;
+}
+
+function sanitizeLevelHistory(value) {
+  if (!Array.isArray(value)) return [];
+  const out = [];
+  const seenLevels = new Set();
+  for (const raw of value.slice(0, 20)) {
+    if (!raw || typeof raw !== 'object') continue;
+    const level = clamp(nullableNumber(raw.level) || 0, 1, 20);
+    if (!level || seenLevels.has(level)) continue;
+    seenLevels.add(level);
+    const entry = { level };
+    const classId = sanitizeId(raw.classId);
+    if (classId) entry.classId = classId;
+    const subclassId = sanitizeId(raw.subclassId);
+    if (subclassId) entry.subclassId = subclassId;
+    if (raw.hpRoll && typeof raw.hpRoll === 'object') {
+      entry.hpRoll = {
+        mode: sanitizeEnum(raw.hpRoll.mode, ['avg', 'max', 'roll', 'manual'], 'avg'),
+        value: nullableNumber(raw.hpRoll.value),
+      };
+      if (entry.hpRoll.value !== null && entry.hpRoll.value !== undefined) {
+        entry.hpRoll.value = clamp(Math.floor(entry.hpRoll.value), 0, 200);
+      }
+    }
+    if (Array.isArray(raw.grants)) {
+      entry.grants = raw.grants.map(g => sanitizeText(g, 120)).filter(Boolean).slice(0, 20);
+    }
+    if (raw.choices && typeof raw.choices === 'object' && !Array.isArray(raw.choices)) {
+      entry.choices = sanitizeChoiceMap(raw.choices, 40);
+    }
+    if (Array.isArray(raw.spellsLearned)) {
+      entry.spellsLearned = raw.spellsLearned.map(s => sanitizeId(s)).filter(Boolean).slice(0, 40);
+    }
+    if (raw.abilityDelta && typeof raw.abilityDelta === 'object') {
+      const delta = {};
+      for (const ab of ['str', 'dex', 'con', 'int', 'wis', 'cha']) {
+        const n = nullableNumber(raw.abilityDelta[ab]);
+        if (n !== undefined && n !== null) delta[ab] = clamp(n, -10, 10);
+      }
+      if (Object.keys(delta).length) entry.abilityDelta = delta;
+      const src = sanitizeText(raw.abilityDeltaSource, 80);
+      if (src) entry.abilityDeltaSource = src;
+    }
+    const lockedAt = sanitizeText(raw.lockedAt, 40);
+    if (lockedAt) entry.lockedAt = lockedAt;
+    out.push(entry);
+  }
+  out.sort((a, b) => a.level - b.level);
+  return out;
+}
+
+function sanitizeInventory(value) {
+  if (!Array.isArray(value)) return [];
+  const out = [];
+  const seen = new Set();
+  for (const raw of value.slice(0, 200)) {
+    if (!raw || typeof raw !== 'object') continue;
+    const instanceId = sanitizeText(raw.instanceId, 40) || ('itm-' + out.length);
+    if (seen.has(instanceId)) continue;
+    seen.add(instanceId);
+    const itemId = sanitizeId(raw.itemId);
+    if (!itemId) continue;
+    const entry = { instanceId, itemId };
+    const displayName = sanitizeText(raw.displayName, 200);
+    if (displayName) entry.displayName = displayName;
+    if (raw.equipped) entry.equipped = true;
+    if (raw.attuned) entry.attuned = true;
+    out.push(entry);
+  }
+  return out;
+}
+
+const MECHANIC_BLOCK_KINDS = new Set(['passive_modifier', 'damage_rider', 'resource', 'toggle', 'save_dc', 'effect_on_target']);
+
+function sanitizeMechanicBlocks(value) {
+  if (!Array.isArray(value)) return [];
+  const out = [];
+  const seen = new Set();
+  for (const raw of value.slice(0, 200)) {
+    if (!raw || typeof raw !== 'object') continue;
+    const id = sanitizeText(raw.id, 80);
+    if (!id || seen.has(id)) continue;
+    const kind = sanitizeText(raw.kind, 40);
+    if (!MECHANIC_BLOCK_KINDS.has(kind)) continue;
+    seen.add(id);
+    // Pass through the kind-specific payload as opaque JSON, capped via the
+    // outer 256KB body limit. Don't whitelist every field — the block schema
+    // is intentionally evolvable.
+    const safe = JSON.parse(JSON.stringify(raw));
+    safe.id = id;
+    safe.kind = kind;
+    out.push(safe);
+  }
+  return out;
+}
+
+function sanitizeToggleState(value) {
+  const out = {};
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return out;
+  for (const [k, v] of Object.entries(value).slice(0, 200)) {
+    const cleanKey = sanitizeText(k, 80);
+    if (cleanKey) out[cleanKey] = Boolean(v);
+  }
+  return out;
+}
+
+function sanitizeResourceState(value) {
+  const out = {};
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return out;
+  for (const [k, v] of Object.entries(value).slice(0, 200)) {
+    const cleanKey = sanitizeText(k, 80);
+    if (!cleanKey) continue;
+    if (!v || typeof v !== 'object') continue;
+    const remaining = nullableNumber(v.remaining);
+    const lastReset = sanitizeText(v.lastReset, 40);
+    const entry = {};
+    if (remaining !== null && remaining !== undefined) entry.remaining = clamp(Math.floor(remaining), 0, 999);
+    if (lastReset) entry.lastReset = lastReset;
+    if (Object.keys(entry).length) out[cleanKey] = entry;
   }
   return out;
 }
@@ -226,6 +393,14 @@ function mergeBuild(existing, incoming) {
   merged.featureChoices = { ...(existing.featureChoices || {}), ...(incoming.featureChoices || {}) };
   merged.levelChoices = { ...(existing.levelChoices || {}), ...(incoming.levelChoices || {}) };
   merged.proficiencies = { ...(existing.proficiencies || {}), ...(incoming.proficiencies || {}) };
+  // v2 arrays and runtime state: PATCH replaces wholesale when present. This
+  // is intentional — rewinds drop entries, so a shallow merge would let stale
+  // levels survive. If the client omits the field, keep what's on the server.
+  if (Array.isArray(incoming.levelHistory)) merged.levelHistory = incoming.levelHistory;
+  if (Array.isArray(incoming.inventory))    merged.inventory = incoming.inventory;
+  if (Array.isArray(incoming.mechanicBlocks)) merged.mechanicBlocks = incoming.mechanicBlocks;
+  if (incoming.toggleState && typeof incoming.toggleState === 'object') merged.toggleState = incoming.toggleState;
+  if (incoming.resourceState && typeof incoming.resourceState === 'object') merged.resourceState = incoming.resourceState;
   return merged;
 }
 

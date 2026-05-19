@@ -1,0 +1,320 @@
+{
+  "id": "justin",
+  "name": "Justin",
+  "schemaVersion": 2,
+  "rulesetId": "eldoria-5e",
+  "rulesVersion": "2026-05-17",
+  "raceId": "human-variant",
+  "backgroundId": "guild-merchant",
+  "classId": "ranger",
+  "subclassId": "hunter",
+  "level": 5,
+  "abilities": {
+    "base": {
+      "str": 15,
+      "dex": 17,
+      "con": 16,
+      "int": 13,
+      "wis": 15,
+      "cha": 13
+    },
+    "history": [
+      {
+        "level": 1,
+        "source": "racial:human-variant",
+        "delta": {
+          "str": 1,
+          "dex": 1
+        }
+      }
+    ]
+  },
+  "levelHistory": [
+    {
+      "level": 1,
+      "classId": "ranger",
+      "hpRoll": {
+        "mode": "max",
+        "value": 10
+      },
+      "grants": [
+        "feature:favored-enemy",
+        "feature:natural-explorer"
+      ],
+      "choices": {
+        "favoredEnemy": "humanoid-orc",
+        "naturalTerrain": "forest",
+        "skillProficiencies": [
+          "athletics",
+          "insight",
+          "investigation",
+          "persuasion",
+          "survival"
+        ]
+      },
+      "spellsLearned": [],
+      "lockedAt": "2026-05-17T00:00:00Z"
+    },
+    {
+      "level": 2,
+      "classId": "ranger",
+      "hpRoll": {
+        "mode": "avg",
+        "value": 6
+      },
+      "grants": [
+        "feature:fighting-style",
+        "feature:spellcasting:ranger"
+      ],
+      "choices": {
+        "fightingStyle": "archery"
+      },
+      "spellsLearned": [
+        "cure-wounds",
+        "ensnaring-strike"
+      ],
+      "lockedAt": "2026-05-17T00:00:00Z"
+    },
+    {
+      "level": 3,
+      "classId": "ranger",
+      "subclassId": "hunter",
+      "hpRoll": {
+        "mode": "avg",
+        "value": 6
+      },
+      "grants": [
+        "feature:primeval-awareness",
+        "feature:hunters-prey"
+      ],
+      "choices": {
+        "huntersPrey": "colossus-slayer"
+      },
+      "spellsLearned": [],
+      "lockedAt": "2026-05-17T00:00:00Z"
+    },
+    {
+      "level": 4,
+      "classId": "ranger",
+      "hpRoll": {
+        "mode": "avg",
+        "value": 6
+      },
+      "grants": [],
+      "choices": {
+        "asiKind": "feat",
+        "featId": "durable"
+      },
+      "spellsLearned": [],
+      "lockedAt": "2026-05-17T00:00:00Z"
+    },
+    {
+      "level": 5,
+      "classId": "ranger",
+      "hpRoll": {
+        "mode": "avg",
+        "value": 6
+      },
+      "grants": [
+        "feature:extra-attack"
+      ],
+      "choices": {},
+      "spellsLearned": [
+        "zephyr-strike"
+      ],
+      "lockedAt": "2026-05-17T00:00:00Z"
+    }
+  ],
+  "inventory": [
+    {
+      "instanceId": "itm-001",
+      "itemId": "longbow-plus-1",
+      "equipped": true,
+      "attuned": false,
+      "weapon": {
+        "category": "ranged",
+        "damage": {
+          "dice": "1d8",
+          "type": "piercing"
+        },
+        "useDex": true,
+        "finesse": false,
+        "twoHanded": true,
+        "ammunition": true,
+        "heavy": true,
+        "range": "150/600",
+        "magicBonus": 1
+      },
+      "displayName": "+1 Longbow"
+    },
+    {
+      "instanceId": "itm-002",
+      "itemId": "shortsword",
+      "equipped": true,
+      "attuned": false,
+      "weapon": {
+        "category": "melee",
+        "damage": {
+          "dice": "1d6",
+          "type": "piercing"
+        },
+        "useDex": false,
+        "finesse": true,
+        "twoHanded": false,
+        "versatile": null,
+        "light": true,
+        "magicBonus": 0
+      },
+      "displayName": "Shortsword"
+    },
+    {
+      "instanceId": "itm-003",
+      "itemId": "leather-armor",
+      "equipped": true,
+      "attuned": false,
+      "armor": {
+        "category": "light",
+        "baseAC": 11,
+        "dexUse": "full"
+      },
+      "displayName": "Leather Armor"
+    },
+    {
+      "instanceId": "itm-004",
+      "itemId": "bracer-of-piercing-arrows",
+      "equipped": true,
+      "attuned": true
+    }
+  ],
+  "mechanicBlocks": [
+    {
+      "id": "mb-archery",
+      "kind": "passive_modifier",
+      "ownerRef": "feature:fighting-style:archery",
+      "label": "Archery",
+      "target": "attack_roll",
+      "filter": {
+        "isRanged": true
+      },
+      "value": {
+        "type": "fixed",
+        "amount": 2
+      }
+    },
+    {
+      "id": "mb-colossus",
+      "kind": "damage_rider",
+      "ownerRef": "feature:hunters-prey:colossus-slayer",
+      "label": "Colossus Slayer",
+      "trigger": "on_hit",
+      "filter": {},
+      "damage": {
+        "dice": "1d8",
+        "type": "weapon"
+      },
+      "frequency": {
+        "per": "per_turn",
+        "count": 1
+      },
+      "conditionText": "Target below max HP"
+    },
+    {
+      "id": "mb-ranger-dc",
+      "kind": "save_dc",
+      "ownerRef": "feature:spellcasting:ranger",
+      "label": "Ranger Spell Save DC",
+      "formula": [
+        {
+          "type": "fixed",
+          "amount": 8
+        },
+        {
+          "type": "proficiency"
+        },
+        {
+          "type": "ability_mod",
+          "ability": "wis"
+        }
+      ]
+    },
+    {
+      "id": "mb-bracer-attack",
+      "kind": "passive_modifier",
+      "ownerRef": "item:bracer-of-piercing-arrows",
+      "label": "Bracer of Piercing Arrows (magic)",
+      "target": "attack_roll",
+      "filter": {
+        "isRanged": true
+      },
+      "value": {
+        "type": "fixed",
+        "amount": 1
+      },
+      "requiresAttunement": true
+    },
+    {
+      "id": "mb-bracer-damage",
+      "kind": "passive_modifier",
+      "ownerRef": "item:bracer-of-piercing-arrows",
+      "label": "Bracer of Piercing Arrows (magic)",
+      "target": "damage",
+      "filter": {
+        "isRanged": true
+      },
+      "value": {
+        "type": "fixed",
+        "amount": 1
+      },
+      "requiresAttunement": true
+    },
+    {
+      "id": "mb-piercing-shot",
+      "kind": "resource",
+      "ownerRef": "item:bracer-of-piercing-arrows#piercing",
+      "label": "Piercing Shot",
+      "max": {
+        "type": "fixed",
+        "amount": 3
+      },
+      "recharge": "long_rest",
+      "consumesOn": "activate",
+      "requiresAttunement": true
+    },
+    {
+      "id": "mb-precise-aim-uses",
+      "kind": "resource",
+      "ownerRef": "item:bracer-of-piercing-arrows#precise-aim",
+      "label": "Precise Aim uses",
+      "max": {
+        "type": "fixed",
+        "amount": 1
+      },
+      "recharge": "long_rest",
+      "consumesOn": "activate",
+      "requiresAttunement": true
+    },
+    {
+      "id": "mb-precise-aim",
+      "kind": "toggle",
+      "ownerRef": "item:bracer-of-piercing-arrows#precise-aim",
+      "label": "Precise Aim",
+      "default": false,
+      "linkedResourceId": "mb-precise-aim-uses",
+      "whileActive": [],
+      "requiresAttunement": true
+    }
+  ],
+  "toggleState": {
+    "mb-precise-aim": false
+  },
+  "resourceState": {
+    "mb-piercing-shot": {
+      "remaining": 3,
+      "lastReset": "long"
+    },
+    "mb-precise-aim-uses": {
+      "remaining": 1,
+      "lastReset": "long"
+    }
+  }
+}

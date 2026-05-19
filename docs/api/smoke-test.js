@@ -26,9 +26,13 @@ const EldoriaRuleset = require('../site-assets/eldoria-ruleset');
     spellMetadataByName: {
       'Shape Water': { id: 'shape-water', name: 'Shape Water', granted: true, nonRemovable: true, removable: false },
     },
+    ruleActivations: [{ id: 'smoke-attack-toggle', label: 'Smoke Attack Toggle', uiSurface: 'combat-global', category: 'attack-modifier' }],
   });
   assert.deepStrictEqual(projectedSheet.grantedSpells, ['Shape Water'], 'expected granted spell names to survive API sanitization');
   assert.strictEqual(projectedSheet.spellMetadataByName['Shape Water'].nonRemovable, true, 'expected locked spell metadata to survive API sanitization');
+  assert.strictEqual(projectedSheet.ruleActivations[0].id, 'smoke-attack-toggle', 'expected rule activations to survive API sanitization');
+  assert.strictEqual(projectedSheet.ruleActivations[0].uiSurface, 'combat-global', 'expected rule activation UI surface to survive API sanitization');
+  assert.strictEqual(projectedSheet.ruleActivations[0].category, 'attack-modifier', 'expected rule activation category to survive API sanitization');
   assertClaireGrantedSpellProjection();
   assertVanessaGrantedSpellProjection();
 
@@ -121,6 +125,15 @@ function assertClaireGrantedSpellProjection() {
     assert.strictEqual(projection.spellMetadataByName[spell].nonRemovable, true, `expected ${spell} to be locked`);
   }
   assert.ok(!granted.includes('Fear'), 'Tempest Domain prose should not grant the Fear spell');
+  const ruleActions = Array.isArray(projection.ruleActions) ? projection.ruleActions : [];
+  const findAction = (label) => ruleActions.find(action => action.label === label || action.title === label || action.name === label);
+  assert.strictEqual(findAction('Ability Score Improvement').uiSurface, 'passive', 'expected passive feature notes to be classified');
+  assert.strictEqual(findAction('Spellcasting').uiSurface, 'out-of-combat', 'expected spell slot recovery to stay off the Combat tab');
+  assert.strictEqual(findAction('Cast Thunderwave').uiSurface, 'spell-action', 'expected direct spell casts to classify as spell actions');
+  assert.strictEqual(findAction('Channel Divinity: Turn Undead').uiSurface, 'action-card', 'expected limited-use combat actions to classify as action cards');
+  assert.strictEqual(findAction('Wrath of the Storm').uiSurface, 'action-card', 'expected reactions to classify as action cards');
+  assert.deepStrictEqual(projection.defenses.resistances, ['Acid'], 'expected immunity-normalized defenses to keep only acid resistance for Claire');
+  assert.deepStrictEqual(projection.defenses.immunities, [], 'expected no duplicate lightning immunity for Claire');
 }
 
 function assertVanessaGrantedSpellProjection() {

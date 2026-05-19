@@ -11,6 +11,7 @@ From the `docs` folder:
 ```bash
 npm run build-public
 npm run validate-public
+npm run feedback:player-sheets
 npm run api:login
 npm run api:init-config
 npm run api:check-config
@@ -24,6 +25,8 @@ npm run build
 - `build-public` regenerates `docs/Public`, `docs/data`, `docs/search.html`, `docs/npc-index.json`, and `docs/location-index.json`.
 - `validate-public` checks generated public HTML for broken local links and unresolved wiki-links.
 - `api-smoke` checks the read-only public API handlers against the generated JSON.
+- `feedback:player-sheets` runs sequential Codex CLI inspector agents against the live review server and writes structured sheet reports.
+- `feedback:player-sheets:fix` also lets a Codex fixer agent update generic docs/parser/runtime code between inspection passes, then reruns the loop.
 - `api:login` signs Azure CLI in from this repo's PowerShell scripts.
 - `api:init-config` creates ignored local Azure config files if they do not exist.
 - `api:check-config` validates the ignored local Azure config before storage setup and deploy.
@@ -82,6 +85,17 @@ node server.js
 ```
 
 Then open `http://localhost:8086`.
+
+For Codex-driven live player sheet feedback loops, keep the same review server running and run:
+
+```bash
+npm run feedback:player-sheets -- --sheets Julie,JP --max-passes 1
+npm run feedback:player-sheets:fix -- --max-passes 3 --verify full
+```
+
+The loop spawns one Codex CLI inspector per selected sheet. Each inspector uses Playwright against the rendered page, compares selected character options to the visible controls, and returns a JSON report under `docs/.codex-sheet-feedback/`. With `--fix`, a separate Codex fixer agent receives the findings, updates the owning generic layer, rebuilds, and starts the next inspection pass until all selected sheets pass or the max pass count is reached. If an inspector blocks but other inspectors returned issues, the fix-enabled loop continues with the completed findings and excludes the blocked report from the fixer prompt.
+
+If Codex's sandbox blocks launching Chromium on Windows, rerun the inspectors with `--inspector-sandbox danger-full-access` or, for a fully trusted local run only, `--inspector-sandbox bypass`. The inspector prompt still forbids source edits; these modes only exist so Playwright can open the live sheet.
 
 The local server also exposes the read-only API routes:
 
