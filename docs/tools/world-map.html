@@ -1,0 +1,169 @@
+﻿<!-- copied from site-src/public/tools/world-map.html - do not edit -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Map | Eldoria Player Wiki</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="../site-shell.js"></script>
+    <script src="./world-map.js" defer></script>
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/utilities.css">
+</head>
+<body classs="site-page">
+    <div id="site-nav" data-base-path="../" data-current="tools/world-map "></div>
+<body class="map-page">
+    <div id="map" data-world-map-root data-map-config-id="world-map-config" data-coords-output-id="coords-output"></div>
+    <div id="coordinate-display">
+        <h4>Coordinates</h4>
+        <div class="coords" id="coords-output">Hover over map</div>
+    </div>
+
+    <script id="world-map-config" type="application/json">
+        {
+            "imagePath": "../assets/images/eldoria-map.jpg",
+            "markers": [
+                {
+                    "name": "Highreach",
+                    "position": [0.729, 0.171],
+                    "link": "../world/crestfall/highreach/highreach.html",
+                    "description": "Highreach the Capital of the Human Kingdom of Crestfall"
+                },
+                {
+                    "name": "Hillcrest",
+                    "position": [0.623, 0.159],
+                    "link": "../world/crestfall/hillcrest/hillcrest.html",
+                    "description": "Wine capitol of Crestfall"
+                },
+                {
+                    "name": "Ardenville",
+                    "position": [0.790, 0.090],
+                    "link": "../world/crestfall/ardenville/ardenville.html",
+                    "description": "Port town of Crestfall"
+                },
+                {
+                    "name": "Fairfield",
+                    "position": [0.780, 0.337],
+                    "link": "../world/crestfall/fairfield/fairfield.html",
+                    "description": "Bustling trade center of Crestfall"
+                },
+                {
+                    "name": "Stonehaven",
+                    "position": [0.597, 0.288],
+                    "link": "../world/crestfall/stonehaven/stonehaven.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Lake Arden",
+                    "position": [0.776, 0.165],
+                    "link": "../world/crestfall/ardenville/lake-arden.html",
+                    "description": "Inland sea separating Ardenville and Highreach"
+                },
+                {
+                    "name": "Blackwood Forest",
+                    "position": [0.568, 0.382],
+                    "link": "../world/crestfall/stonehaven/blackwood-forest.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Starfall",
+                    "position": [0.813, 0.420],
+                    "link": "../world/silverleaf-lands/starfall/starfall.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Stardew",
+                    "position": [0.885, 0.391],
+                    "link": "../world/silverleaf-lands/stardew/stardew.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Frostglade",
+                    "position": [0.845, 0.466],
+                    "link": "../world/silverleaf-lands/frostglade/frostglade.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Serenity Hollow",
+                    "position": [0.824, 0.527],
+                    "link": "../world/silverleaf-lands/serenity-hollow/serenity-hollow.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Moonshade",
+                    "position": [0.898, 0.566],
+                    "link": "../world/silverleaf-lands/moonshade/moonshade.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Ironroot",
+                    "position": [0.708, 0.591],
+                    "link": "../world/ironpeak-mountains/ironroot/ironroot.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Gemstone Hollow",
+                    "position": [0.525, 0.466],
+                    "link": "../world/ironpeak-mountains/gemstone-hollow/gemstone-hollow.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Forgepeak",
+                    "position": [0.423, 0.226],
+                    "link": "../world/ironpeak-mountains/forgepeak/forgepeak.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Steamhammer",
+                    "position": [0.351, 0.320],
+                    "link": "../world/ironpeak-mountains/steamhammer/steamhammer.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Stoneforge",
+                    "position": [0.271, 0.242],
+                    "link": "../world/ironpeak-mountains/stoneforge/stoneforge.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Ironpeak Mountain",
+                    "position": [0.391, 0.188],
+                    "link": "../world/ironpeak-mountains/ironpeak-mountains.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Cannibal Camp",
+                    "position": [0.752, 0.633],
+                    "link": "../world/ironpeak-mountains/cannibal-camp/mountain-tribes.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Witch's Bog",
+                    "position": [0.439, 0.673],
+                    "link": "../world/orcish-wastes/witchs-bog/witchs-bog.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Red Dune Desert",
+                    "position": [0.235, 0.610],
+                    "link": "../world/orcish-wastes/red-dune-desert/red-dune-desert.html",
+                    "description": "????"
+                },
+                {
+                    "name": "Sand Dragon Valley",
+                    "position": [0.430, 0.835],
+                    "link": "../world/orcish-wastes/sand-dragon-valley/sand-dragon-valley.html",
+                    "description": "????"
+                }
+            ]
+        }
+    </script>
+</body>
+</body>
+
+</html>
+

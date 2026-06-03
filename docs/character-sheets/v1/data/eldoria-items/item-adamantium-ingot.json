@@ -1,0 +1,50 @@
+{
+  "id": "item:adamantium-ingot:eldoria",
+  "ref": "item-adamantium-ingot.json",
+  "refId": "item-adamantium-ingot",
+  "kind": "item",
+  "name": "Adamantium Ingot",
+  "source": "Eldoria",
+  "page": null,
+  "sourceKey": "Adamantium Ingot|Eldoria",
+  "baseItem": null,
+  "type": {
+    "code": "",
+    "abbreviation": "",
+    "source": "Eldoria",
+    "name": "trade good",
+    "ref": ""
+  },
+  "typeAlt": null,
+  "rarity": "common",
+  "value": null,
+  "weight": 5,
+  "attunement": {
+    "required": false,
+    "text": "",
+    "alternatives": [],
+    "tags": []
+  },
+  "tags": {
+    "crafting": true,
+    "metal": true
+  },
+  "bonuses": {},
+  "weapon": null,
+  "armor": null,
+  "conditionalDamage": [],
+  "mechanics": {},
+  "entries": [
+    "A dense ingot of adamantium-grade metal suitable for masterwork forging, reinforcement, or trade with specialized smiths. It has no active magical property on its own."
+  ],
+  "raw": {
+    "name": "Adamantium Ingot",
+    "source": "Eldoria",
+    "rarity": "common",
+    "reqAttune": false,
+    "type": "trade good",
+    "entries": [
+      "A dense ingot of adamantium-grade metal suitable for masterwork forging, reinforcement, or trade with specialized smiths. It has no active magical property on its own."
+    ]
+  }
+}

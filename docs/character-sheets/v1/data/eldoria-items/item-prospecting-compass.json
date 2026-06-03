@@ -1,0 +1,50 @@
+{
+  "id": "item:prospecting-compass:eldoria",
+  "ref": "item-prospecting-compass.json",
+  "refId": "item-prospecting-compass",
+  "kind": "item",
+  "name": "Prospecting Compass",
+  "source": "Eldoria",
+  "page": null,
+  "sourceKey": "Prospecting Compass|Eldoria",
+  "baseItem": null,
+  "type": {
+    "code": "",
+    "abbreviation": "",
+    "source": "Eldoria",
+    "name": "wondrous item",
+    "ref": ""
+  },
+  "typeAlt": null,
+  "rarity": "common",
+  "value": 10000,
+  "weight": 0.5,
+  "attunement": {
+    "required": false,
+    "text": "",
+    "alternatives": [],
+    "tags": []
+  },
+  "tags": {
+    "wondrous": true,
+    "utility": true
+  },
+  "bonuses": {},
+  "weapon": null,
+  "armor": null,
+  "conditionalDamage": [],
+  "mechanics": {},
+  "entries": [
+    "This brass field compass is tuned for survey work rather than navigation. When held near stone or soil, its needle twitches toward the strongest nearby seam of worked metal or mineable ore within 60 feet, if any is present. It does not reveal depth, purity, or a safe path to the deposit."
+  ],
+  "raw": {
+    "name": "Prospecting Compass",
+    "source": "Eldoria",
+    "rarity": "common",
+    "reqAttune": false,
+    "type": "wondrous item",
+    "entries": [
+      "This brass field compass is tuned for survey work rather than navigation. When held near stone or soil, its needle twitches toward the strongest nearby seam of worked metal or mineable ore within 60 feet, if any is present. It does not reveal depth, purity, or a safe path to the deposit."
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "id": "item:commoners-veneer:eldoria",
+  "ref": "item-commoners-veneer.json",
+  "refId": "item-commoners-veneer",
+  "kind": "item",
+  "name": "Commoners Veneer",
+  "source": "Eldoria",
+  "page": null,
+  "sourceKey": "Commoners Veneer|Eldoria",
+  "baseItem": null,
+  "type": {
+    "code": "",
+    "abbreviation": "",
+    "source": "Eldoria",
+    "name": "wondrous item",
+    "ref": ""
+  },
+  "typeAlt": null,
+  "rarity": "common",
+  "value": 5000,
+  "weight": 0.5,
+  "attunement": {
+    "required": false,
+    "text": "",
+    "alternatives": [],
+    "tags": []
+  },
+  "tags": {
+    "wondrous": true,
+    "disguise": true,
+    "glamer": true
+  },
+  "bonuses": {},
+  "weapon": null,
+  "armor": null,
+  "conditionalDamage": [],
+  "mechanics": {},
+  "entries": [
+    "When you wear this simple, homespun scarf around your neck or head, it casts a minor glamer over you that makes you blend in with nearby people.",
+    "When in an area containing 25 or more humanoids, such as a city street, market, or public locale, Wisdom (Perception) checks to spot you amid the crowd have disadvantage. The item's power only works for humanoids or creatures using magic to take on a humanoid form."
+  ],
+  "raw": {
+    "name": "Commoners Veneer",
+    "source": "Eldoria",
+    "rarity": "common",
+    "reqAttune": false,
+    "type": "wondrous item",
+    "entries": [
+      "When you wear this simple, homespun scarf around your neck or head, it casts a minor glamer over you that makes you blend in with nearby people.",
+      "When in an area containing 25 or more humanoids, such as a city street, market, or public locale, Wisdom (Perception) checks to spot you amid the crowd have disadvantage. The item's power only works for humanoids or creatures using magic to take on a humanoid form."
+    ]
+  }
+}

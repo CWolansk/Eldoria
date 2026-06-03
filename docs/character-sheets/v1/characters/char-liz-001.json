@@ -1,0 +1,498 @@
+{
+  "schemaVersion": "v1",
+  "id": "char-liz-001",
+  "lastModified": "2026-05-27T00:00:00.000Z",
+  "sourcePolicy": {
+    "ruleset": "2014",
+    "allowedSources": [
+      "PHB",
+      "XGE",
+      "TCE",
+      "SCAG",
+      "EEPC",
+      "ToA",
+      "DMG",
+      "Eldoria"
+    ]
+  },
+  "identity": {
+    "name": "Liz",
+    "playerName": "Liz",
+    "alignment": "Unaligned",
+    "experience": 8000,
+    "inspiration": false,
+    "portraitUrl": "/assets/portraits/liz.png",
+    "race": {
+      "ref": "race-wood-elf.json",
+      "name": "Elf",
+      "subrace": "Wood Elf",
+      "source": "PHB"
+    },
+    "background": {
+      "ref": "background-acolyte.json",
+      "name": "Acolyte",
+      "source": "PHB",
+      "feature": "Shelter of the Faithful",
+      "specialty": {}
+    }
+  },
+  "level": 5,
+  "proficiencyBonus": 3,
+  "initiative": 3,
+  "hp": {
+    "base": 0,
+    "modifiers": [
+      {
+        "source": "recorded",
+        "name": "HP not present in recorded sheet",
+        "amount": 0,
+        "active": true,
+        "conditional": "Confirm max/current HP and per-level rolls before table use."
+      }
+    ],
+    "max": 0,
+    "current": 0,
+    "temp": 0
+  },
+  "ac": {
+    "base": 15,
+    "modifiers": [
+      {
+        "source": "recorded",
+        "name": "Imported armor class",
+        "amount": 0,
+        "active": true,
+        "conditional": "Breakdown/formula pending."
+      }
+    ],
+    "value": 15
+  },
+  "speed": {
+    "base": 35,
+    "modifiers": [
+      {
+        "source": "recorded",
+        "name": "Imported speed",
+        "amount": 0,
+        "active": true,
+        "conditional": "Breakdown/formula pending."
+      }
+    ],
+    "value": 35
+  },
+  "hitDice": [
+    {
+      "size": "d8",
+      "total": 5,
+      "remaining": 5,
+      "class": "Bard"
+    }
+  ],
+  "deathSaves": {
+    "successes": 0,
+    "failures": 0
+  },
+  "abilities": {
+    "str": {
+      "score": 11,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "dex": {
+      "score": 16,
+      "savingThrow": {
+        "proficient": true,
+        "grantedBy": "class-bard"
+      }
+    },
+    "con": {
+      "score": 14,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "int": {
+      "score": 13,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "wis": {
+      "score": 14,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "cha": {
+      "score": 17,
+      "savingThrow": {
+        "proficient": true,
+        "grantedBy": "class-bard"
+      }
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "animalHandling": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "arcana": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "insight": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "investigation": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "perception": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "performance": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "persuasion": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "sleightOfHand": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    }
+  },
+  "proficiencies": {
+    "armor": [
+      {
+        "name": "Light Armor",
+        "grantedBy": "class-bard",
+        "multiclass": false
+      }
+    ],
+    "weapons": [
+      {
+        "name": "Simple Weapons",
+        "grantedBy": "class-bard",
+        "multiclass": false
+      },
+      {
+        "name": "Hand Crossbow",
+        "grantedBy": "class-bard",
+        "multiclass": false
+      },
+      {
+        "name": "Longsword",
+        "grantedBy": "class-bard",
+        "multiclass": false
+      },
+      {
+        "name": "Rapier",
+        "grantedBy": "class-bard",
+        "multiclass": false
+      },
+      {
+        "name": "Shortsword",
+        "grantedBy": "class-bard",
+        "multiclass": false
+      },
+      {
+        "name": "Longbow",
+        "grantedBy": "class-bard",
+        "multiclass": false
+      },
+      {
+        "name": "Shortbow",
+        "grantedBy": "class-bard",
+        "multiclass": false
+      }
+    ],
+    "tools": [
+      {
+        "name": "Musical Instrument",
+        "grantedBy": "recorded",
+        "multiclass": false
+      }
+    ],
+    "languages": [
+      "Common",
+      "Elvish"
+    ],
+    "savingThrows": [
+      "dex",
+      "cha"
+    ]
+  },
+  "classes": [
+    {
+      "main": "class-bard.json",
+      "sub": "College of Lore",
+      "subclassRef": "subclass-bard-lore.json",
+      "subclassVariant": null,
+      "isPrimary": true,
+      "isFirstClass": true,
+      "hitDieSize": 8,
+      "multiclassPrerequisite": null,
+      "fightingStyles": null,
+      "spellcasting": {
+        "ability": "cha",
+        "preparationStyle": "spells-known",
+        "spellPool": {
+          "type": "known-list",
+          "entries": [
+            {
+              "name": "Fireball",
+              "source": "PHB",
+              "level": 3,
+              "school": "V",
+              "addedAtLevel": 5
+            }
+          ]
+        },
+        "preparedSpells": null,
+        "cantrips": [],
+        "alwaysPrepared": [],
+        "spellAttackBonus": 6,
+        "spellSaveDc": 14,
+        "preparedFormula": "Confirm table details if needed.",
+        "preparedCount": 0,
+        "spellsKnown": 1,
+        "cantripsKnown": 0
+      },
+      "levels": [
+        {
+          "level": 1,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Spellcasting",
+            "Bardic Inspiration"
+          ]
+        },
+        {
+          "level": 2,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Jack of All Trades",
+            "Song of Rest"
+          ]
+        },
+        {
+          "level": 3,
+          "hpRolled": 0,
+          "decisions": [
+            {
+              "type": "subclass",
+              "value": "College of Lore"
+            }
+          ],
+          "featuresGained": [
+            "Bard College: College of Lore",
+            "Cutting Words"
+          ]
+        },
+        {
+          "level": 4,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Ability Score Improvement"
+          ]
+        },
+        {
+          "level": 5,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Font of Inspiration"
+          ]
+        }
+      ]
+    }
+  ],
+  "spellSlots": {
+    "byLevel": {
+      "1": {
+        "max": 4,
+        "expended": 0,
+        "recharge": "long rest"
+      },
+      "2": {
+        "max": 3,
+        "expended": 0,
+        "recharge": "long rest"
+      },
+      "3": {
+        "max": 2,
+        "expended": 0,
+        "recharge": "long rest"
+      }
+    }
+  },
+  "resources": [
+    {
+      "id": "bardic-inspiration",
+      "name": "Bardic Inspiration",
+      "source": "class-bard",
+      "kind": "counter",
+      "max": 3,
+      "current": 3,
+      "recharge": "short or long rest",
+      "note": "d8 at Bard 5."
+    }
+  ],
+  "inventory": {
+    "currency": {
+      "cp": 0,
+      "sp": 0,
+      "ep": 0,
+      "gp": 0,
+      "pp": 0
+    },
+    "carried": [
+      {
+        "ref": "item-1-repeating-crossbow.json",
+        "name": "+1 Repeating Crossbow",
+        "source": "Eldoria",
+        "quantity": 1,
+        "equipped": true,
+        "attunement": false
+      },
+      {
+        "ref": "item-bag-of-holding-dmg.json",
+        "name": "Bag of Holding",
+        "source": "DMG",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-ring-of-protection-dmg.json",
+        "name": "Ring of Protection",
+        "source": "DMG",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      }
+    ]
+  },
+  "features": [
+    {
+      "id": "feat-liz-wood-elf-traits",
+      "name": "Wood Elf Traits",
+      "source": "race-wood-elf",
+      "ref": "race-wood-elf.json#Wood Elf Traits"
+    },
+    {
+      "id": "feat-liz-shelter-of-the-faithful",
+      "name": "Shelter of the Faithful",
+      "source": "background-acolyte",
+      "ref": "background-acolyte.json#Shelter of the Faithful"
+    },
+    {
+      "id": "feat-liz-spellcasting",
+      "name": "Spellcasting",
+      "source": "class-bard",
+      "ref": "class-bard.json#Spellcasting"
+    },
+    {
+      "id": "feat-liz-bardic-inspiration",
+      "name": "Bardic Inspiration",
+      "source": "class-bard",
+      "ref": "class-bard.json#Bardic Inspiration"
+    },
+    {
+      "id": "feat-liz-jack-of-all-trades",
+      "name": "Jack of All Trades",
+      "source": "class-bard",
+      "ref": "class-bard.json#Jack of All Trades"
+    },
+    {
+      "id": "feat-liz-college-of-lore",
+      "name": "College of Lore",
+      "source": "subclass-bard-lore",
+      "ref": "subclass-bard-lore.json#College of Lore"
+    },
+    {
+      "id": "feat-liz-cutting-words",
+      "name": "Cutting Words",
+      "source": "subclass-bard-lore",
+      "ref": "subclass-bard-lore.json#Cutting Words"
+    }
+  ],
+  "featureChoices": [
+    {
+      "id": "fc-liz-progression-history",
+      "feature": "Level Progression History",
+      "source": "recorded",
+      "prompt": "Confirm ASI/feat origins, proficiency sources, starting equipment branches, and level-up decisions from levels 1-5.",
+      "resolved": false,
+      "value": null,
+      "blockedReason": "Confirm table details if needed.",
+      "blockedUntilLevel": null
+    },
+    {
+      "id": "fc-liz-hp-progression",
+      "feature": "Hit Point Progression",
+      "source": "recorded",
+      "prompt": "Confirm max/current HP and per-level HP rolls; recorded sheet did not expose hit points.",
+      "resolved": false,
+      "value": null,
+      "blockedReason": "Confirm table details if needed.",
+      "blockedUntilLevel": null
+    },
+    {
+      "id": "fc-liz-spell-history",
+      "feature": "Spell List And Preparation History",
+      "source": "recorded",
+      "prompt": "Confirm complete spells known/prepared and when each spell was learned or prepared.",
+      "resolved": false,
+      "value": {
+        "importedSpells": [
+          "Fireball"
+        ]
+      },
+      "blockedReason": "Legacy sheets list visible spell lookups but not full preparation or learn chronology.",
+      "blockedUntilLevel": null
+    }
+  ],
+  "builderOverrides": [
+    {
+      "id": "override-liz-ac-breakdown",
+      "field": "ac.modifiers",
+      "reason": "Confirm table details if needed.",
+      "manualValue": 15,
+      "appliedAt": "2026-05-22T00:00:00Z"
+    },
+    {
+      "id": "override-liz-hp-history",
+      "field": "hp",
+      "reason": "Confirm table details if needed.",
+      "manualValue": null,
+      "appliedAt": "2026-05-22T00:00:00Z"
+    }
+  ],
+  "notes": {
+    "freeform": "",
+    "conditions": [],
+    "exhaustion": 0
+  }
+}

@@ -1,22 +1,15 @@
 {
-  "name": "eldoria-public-api",
-  "version": "1.0.0",
+  "name": "eldoria-character-api",
+  "version": "0.1.0",
+  "description": "Azure Functions API for Eldoria cloud-backed character sheets.",
   "private": true,
-  "description": "Azure Functions API for generated Eldoria public data and player sheet edits",
-  "main": "shared/public-data.js",
-  "dependencies": {
-    "@azure/data-tables": "^13.3.1",
-    "@azure/identity": "^4.10.2"
-  },
+  "main": "src/index.js",
   "scripts": {
-    "smoke": "node smoke-test.js",
-    "login": "powershell -ExecutionPolicy Bypass -File scripts/Login-Azure.ps1",
-    "init-config": "powershell -ExecutionPolicy Bypass -File scripts/Initialize-LocalConfig.ps1",
-    "check-config": "powershell -ExecutionPolicy Bypass -File scripts/Test-AzureOpsConfig.ps1",
-    "check-tools": "powershell -ExecutionPolicy Bypass -File scripts/Test-AzureOpsTools.ps1",
-    "settings": "powershell -ExecutionPolicy Bypass -File scripts/Set-FunctionAppSettings.ps1",
-    "deploy": "powershell -ExecutionPolicy Bypass -File scripts/Deploy-FunctionApp.ps1",
-    "seed-player-sheets": "powershell -ExecutionPolicy Bypass -File scripts/Seed-PlayerSheets.ps1",
-    "seed-rules": "powershell -ExecutionPolicy Bypass -File scripts/Seed-Rules.ps1"
+    "check": "node --check src/index.js"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.0.0",
+    "@azure/identity": "^4.0.0",
+    "@azure/storage-blob": "^12.17.0"
   }
 }

@@ -1,0 +1,38 @@
+<!-- copied from site-src/public/character-sheets/v1/builder.html - do not edit -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eldoria Character Builder</title>
+  <script src="../../site-shell.js"></script>
+  <link rel="stylesheet" href="../../css/tokens.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="../../css/utilities.css">
+  <link rel="stylesheet" href="./builder/character-builder-styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <div
+      id="site-nav"
+      data-current="players"
+      data-base-path="../../"
+      data-breadcrumbs='[{"label":"Home","href":"index.html"},{"label":"Players","href":"players.html"},{"label":"Character Builder"}]'
+    ></div>
+
+    <main class="page-main page-wrap character-builder-page">
+      <header class="section-header" aria-label="Character builder controls">
+        <div>
+          <p class="section-kicker">Players</p>
+          <h1 data-character-title>Character Builder</h1>
+          <p class="section-copy" data-character-status>Loading builder...</p>
+        </div>
+      </header>
+      <div id="builder-root" class="character-builder-root" data-builder-embedded="true"></div>
+    </main>
+  </div>
+
+  <script type="module" src="./builder-boot.js"></script>
+</body>
+</html>

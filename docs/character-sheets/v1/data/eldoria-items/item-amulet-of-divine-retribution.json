@@ -1,0 +1,55 @@
+{
+  "id": "item:amulet-of-divine-retribution:eldoria",
+  "ref": "item-amulet-of-divine-retribution.json",
+  "refId": "item-amulet-of-divine-retribution",
+  "kind": "item",
+  "name": "Amulet of Divine Retribution",
+  "source": "Eldoria",
+  "page": null,
+  "sourceKey": "Amulet of Divine Retribution|Eldoria",
+  "baseItem": null,
+  "type": {
+    "code": "",
+    "abbreviation": "",
+    "source": "Eldoria",
+    "name": "wondrous item",
+    "ref": ""
+  },
+  "typeAlt": null,
+  "rarity": "rare",
+  "value": 150000,
+  "weight": 0.5,
+  "attunement": {
+    "required": true,
+    "text": "by a creature with at least 1 level in Cleric",
+    "alternatives": [],
+    "tags": []
+  },
+  "tags": {
+    "wondrous": true,
+    "divine": true,
+    "retribution": true
+  },
+  "bonuses": {},
+  "weapon": null,
+  "armor": null,
+  "conditionalDamage": [],
+  "mechanics": {},
+  "entries": [
+    "This silver amulet, engraved with glowing holy runes, hums faintly with divine power. When a cleric channels their faith, the amulet lashes out at their foes, turning holy resolve into swift judgment.",
+    "Divine Wrath (1/day). As an action, target one hostile creature you can see within 60 feet. The target must make an Intelligence saving throw against your spell save DC. On a failed save, it becomes vulnerable to radiant and fire damage for 1 minute. It repeats the saving throw at the end of each of its turns, ending the effect on a success.",
+    "Divine Protection (1/day). As an action, you radiate a protective aura for up to 1 minute while concentrating. At the start of each of your turns, allies within 30 feet regain 1d10 hit points."
+  ],
+  "raw": {
+    "name": "Amulet of Divine Retribution",
+    "source": "Eldoria",
+    "rarity": "rare",
+    "reqAttune": "by a creature with at least 1 level in Cleric",
+    "type": "wondrous item",
+    "entries": [
+      "This silver amulet, engraved with glowing holy runes, hums faintly with divine power. When a cleric channels their faith, the amulet lashes out at their foes, turning holy resolve into swift judgment.",
+      "Divine Wrath (1/day). As an action, target one hostile creature you can see within 60 feet. The target must make an Intelligence saving throw against your spell save DC. On a failed save, it becomes vulnerable to radiant and fire damage for 1 minute. It repeats the saving throw at the end of each of its turns, ending the effect on a success.",
+      "Divine Protection (1/day). As an action, you radiate a protective aura for up to 1 minute while concentrating. At the start of each of your turns, allies within 30 feet regain 1d10 hit points."
+    ]
+  }
+}

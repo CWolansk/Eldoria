@@ -1,0 +1,493 @@
+{
+  "schemaVersion": "v1",
+  "id": "char-julie-001",
+  "lastModified": "2026-05-27T00:00:00.000Z",
+  "sourcePolicy": {
+    "ruleset": "2014",
+    "allowedSources": [
+      "PHB",
+      "XGE",
+      "TCE",
+      "SCAG",
+      "EEPC",
+      "ToA",
+      "DMG",
+      "Eldoria"
+    ]
+  },
+  "identity": {
+    "name": "Julie",
+    "playerName": "Julie",
+    "alignment": "Unaligned",
+    "experience": 8000,
+    "inspiration": false,
+    "portraitUrl": "/assets/portraits/julie.png",
+    "race": {
+      "ref": "race-human-variant-phb.json",
+      "name": "Human",
+      "subrace": "Variant",
+      "source": "PHB"
+    },
+    "background": {
+      "ref": "background-archaeologist.json",
+      "name": "Archaeologist",
+      "source": "ToA",
+      "feature": "Historical Knowledge",
+      "specialty": {}
+    }
+  },
+  "level": 5,
+  "proficiencyBonus": 3,
+  "initiative": 2,
+  "hp": {
+    "base": 0,
+    "modifiers": [
+      {
+        "source": "recorded",
+        "name": "HP not present in recorded sheet",
+        "amount": 0,
+        "active": true,
+        "conditional": "Confirm max/current HP and per-level rolls before table use."
+      }
+    ],
+    "max": 0,
+    "current": 0,
+    "temp": 0
+  },
+  "ac": {
+    "base": 17,
+    "modifiers": [
+      {
+        "source": "recorded",
+        "name": "Imported armor class",
+        "amount": 0,
+        "active": true,
+        "conditional": "Breakdown/formula pending."
+      }
+    ],
+    "value": 17
+  },
+  "speed": {
+    "base": 30,
+    "modifiers": [
+      {
+        "source": "recorded",
+        "name": "Imported speed",
+        "amount": 0,
+        "active": true,
+        "conditional": "Breakdown/formula pending."
+      }
+    ],
+    "value": 30
+  },
+  "hitDice": [
+    {
+      "size": "d10",
+      "total": 5,
+      "remaining": 5,
+      "class": "Fighter"
+    }
+  ],
+  "deathSaves": {
+    "successes": 0,
+    "failures": 0
+  },
+  "abilities": {
+    "str": {
+      "score": 18,
+      "savingThrow": {
+        "proficient": true,
+        "grantedBy": "class-fighter"
+      }
+    },
+    "dex": {
+      "score": 14,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "con": {
+      "score": 16,
+      "savingThrow": {
+        "proficient": true,
+        "grantedBy": "class-fighter"
+      }
+    },
+    "int": {
+      "score": 6,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "wis": {
+      "score": 11,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "cha": {
+      "score": 11,
+      "savingThrow": {
+        "proficient": false
+      }
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "athletics": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "intimidation": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "perception": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "survival": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    }
+  },
+  "proficiencies": {
+    "armor": [
+      {
+        "name": "Light Armor",
+        "grantedBy": "class-fighter",
+        "multiclass": false
+      },
+      {
+        "name": "Medium Armor",
+        "grantedBy": "class-fighter",
+        "multiclass": false
+      },
+      {
+        "name": "Heavy Armor",
+        "grantedBy": "class-fighter",
+        "multiclass": false
+      },
+      {
+        "name": "Shields",
+        "grantedBy": "class-fighter",
+        "multiclass": false
+      }
+    ],
+    "weapons": [
+      {
+        "name": "Simple Weapons",
+        "grantedBy": "class-fighter",
+        "multiclass": false
+      },
+      {
+        "name": "Martial Weapons",
+        "grantedBy": "class-fighter",
+        "multiclass": false
+      }
+    ],
+    "tools": [
+      {
+        "name": "Cartographer's Tools",
+        "grantedBy": "recorded",
+        "multiclass": false
+      },
+      {
+        "name": "Navigator's Tools",
+        "grantedBy": "recorded",
+        "multiclass": false
+      }
+    ],
+    "languages": [],
+    "savingThrows": [
+      "str",
+      "con"
+    ]
+  },
+  "classes": [
+    {
+      "main": "class-fighter.json",
+      "sub": "Champion",
+      "subclassRef": "subclass-fighter-champion.json",
+      "subclassVariant": null,
+      "isPrimary": true,
+      "isFirstClass": true,
+      "hitDieSize": 10,
+      "multiclassPrerequisite": null,
+      "fightingStyles": null,
+      "spellcasting": null,
+      "levels": [
+        {
+          "level": 1,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Fighting Style",
+            "Second Wind"
+          ]
+        },
+        {
+          "level": 2,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Action Surge"
+          ]
+        },
+        {
+          "level": 3,
+          "hpRolled": 0,
+          "decisions": [
+            {
+              "type": "subclass",
+              "value": "Champion"
+            }
+          ],
+          "featuresGained": [
+            "Martial Archetype: Champion",
+            "Improved Critical"
+          ]
+        },
+        {
+          "level": 4,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Ability Score Improvement"
+          ]
+        },
+        {
+          "level": 5,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Extra Attack"
+          ]
+        }
+      ]
+    }
+  ],
+  "spellSlots": null,
+  "resources": [
+    {
+      "id": "second-wind",
+      "name": "Second Wind",
+      "source": "class-fighter",
+      "kind": "counter",
+      "max": 1,
+      "current": 1,
+      "recharge": "short or long rest"
+    },
+    {
+      "id": "action-surge",
+      "name": "Action Surge",
+      "source": "class-fighter",
+      "kind": "counter",
+      "max": 1,
+      "current": 1,
+      "recharge": "short or long rest"
+    },
+    {
+      "id": "improved-critical",
+      "name": "Improved Critical",
+      "source": "subclass-fighter-champion",
+      "kind": "static",
+      "value": [
+        19,
+        20
+      ]
+    }
+  ],
+  "inventory": {
+    "currency": {
+      "cp": 0,
+      "sp": 0,
+      "ep": 0,
+      "gp": 0,
+      "pp": 0
+    },
+    "carried": [
+      {
+        "ref": "item-corpse-slayer-flamberge-bastard-sword.json",
+        "name": "Corpse Slayer Flamberge Bastard Sword",
+        "source": "Eldoria",
+        "quantity": 1,
+        "equipped": true,
+        "attunement": false
+      },
+      {
+        "ref": "item-greataxe.json",
+        "name": "Greataxe",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-sigil-of-thunderous-might.json",
+        "name": "Sigil of Thunderous Might",
+        "source": "Eldoria",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-scourge-armblade.json",
+        "name": "Scourge Armblade",
+        "source": "Eldoria",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-chain-mail.json",
+        "name": "Chain Mail",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": true,
+        "attunement": false
+      },
+      {
+        "ref": "item-potion-of-healing-dmg.json",
+        "name": "Potion of Healing",
+        "source": "DMG",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-pipe-of-smoke-monsters.json",
+        "name": "Pipe of Smoke Monsters",
+        "source": "XGE",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-explorers-pack.json",
+        "name": "Explorer's Pack",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-grappling-hook.json",
+        "name": "Grappling Hook",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-handaxe.json",
+        "name": "Handaxe",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      }
+    ]
+  },
+  "features": [
+    {
+      "id": "feat-julie-human-variant-traits",
+      "name": "Human Variant Traits",
+      "source": "race-human-variant",
+      "ref": "race-human-variant-phb.json#Human Variant Traits"
+    },
+    {
+      "id": "feat-julie-historical-knowledge",
+      "name": "Historical Knowledge",
+      "source": "background-archaeologist",
+      "ref": "background-archaeologist.json#Historical Knowledge"
+    },
+    {
+      "id": "feat-julie-second-wind",
+      "name": "Second Wind",
+      "source": "class-fighter",
+      "ref": "class-fighter.json#Second Wind"
+    },
+    {
+      "id": "feat-julie-action-surge",
+      "name": "Action Surge",
+      "source": "class-fighter",
+      "ref": "class-fighter.json#Action Surge"
+    },
+    {
+      "id": "feat-julie-champion",
+      "name": "Champion",
+      "source": "subclass-fighter-champion",
+      "ref": "subclass-fighter-champion.json#Champion"
+    },
+    {
+      "id": "feat-julie-improved-critical",
+      "name": "Improved Critical",
+      "source": "subclass-fighter-champion",
+      "ref": "subclass-fighter-champion.json#Improved Critical"
+    },
+    {
+      "id": "feat-julie-great-weapon-master",
+      "name": "Great Weapon Master",
+      "source": "feat-great-weapon-master",
+      "ref": "feat-great-weapon-master.json"
+    },
+    {
+      "id": "feat-julie-tough",
+      "name": "Tough",
+      "source": "feat-tough",
+      "ref": "feat-tough.json"
+    }
+  ],
+  "featureChoices": [
+    {
+      "id": "fc-julie-progression-history",
+      "feature": "Level Progression History",
+      "source": "recorded",
+      "prompt": "Confirm ASI/feat origins, proficiency sources, starting equipment branches, and level-up decisions from levels 1-5.",
+      "resolved": false,
+      "value": null,
+      "blockedReason": "Confirm table details if needed.",
+      "blockedUntilLevel": null
+    },
+    {
+      "id": "fc-julie-hp-progression",
+      "feature": "Hit Point Progression",
+      "source": "recorded",
+      "prompt": "Confirm max/current HP and per-level HP rolls; recorded sheet did not expose hit points.",
+      "resolved": false,
+      "value": null,
+      "blockedReason": "Confirm table details if needed.",
+      "blockedUntilLevel": null
+    }
+  ],
+  "builderOverrides": [
+    {
+      "id": "override-julie-ac-breakdown",
+      "field": "ac.modifiers",
+      "reason": "Confirm table details if needed.",
+      "manualValue": 17,
+      "appliedAt": "2026-05-22T00:00:00Z"
+    },
+    {
+      "id": "override-julie-hp-history",
+      "field": "hp",
+      "reason": "Confirm table details if needed.",
+      "manualValue": null,
+      "appliedAt": "2026-05-22T00:00:00Z"
+    }
+  ],
+  "notes": {
+    "freeform": "",
+    "conditions": [],
+    "exhaustion": 0
+  }
+}

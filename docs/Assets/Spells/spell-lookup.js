@@ -11,6 +11,8 @@ class SpellLookup {
         this.isLoading = false;
         this.loadCallbacks = [];
         this.stylesInjected = false;
+        this.rulesCatalogWidgetData = null;
+        this.dataSource = '';
     }
 
     // Inject CSS styles into the document
@@ -21,7 +23,7 @@ class SpellLookup {
         if (typeof window.CommonLookupStyles === 'undefined') {
             // Load the common styles file using dataview
             try {
-                const commonStylesPath = 'docs/Assets/common-lookup-styles.js';
+                const commonStylesPath = 'docs/assets/common-lookup-styles.js';
                 const commonStylesCode = await dv.io.load(commonStylesPath);
                 // Execute the code to make CommonLookupStyles available
                 eval(commonStylesCode);
@@ -223,6 +225,36 @@ class SpellLookup {
         return spells;
     }
 
+    async loadRulesCatalogWidgetData(dv) {
+        if (this.rulesCatalogWidgetData) {
+            return this.rulesCatalogWidgetData;
+        }
+
+        if (typeof window.RulesCatalogWidgetData === 'undefined') {
+            const helperPaths = [
+                'docs/assets/rules-catalog-widget-data.js',
+                'assets/rules-catalog-widget-data.js'
+            ];
+
+            for (const helperPath of helperPaths) {
+                try {
+                    const helperCode = await dv.io.load(helperPath);
+                    (0, eval)(helperCode);
+                    break;
+                } catch (error) {
+                    console.warn('Failed to load rules catalog helper:', helperPath, error);
+                }
+            }
+        }
+
+        if (typeof window.RulesCatalogWidgetData === 'undefined') {
+            return null;
+        }
+
+        this.rulesCatalogWidgetData = window.RulesCatalogWidgetData.getDefault();
+        return this.rulesCatalogWidgetData;
+    }
+
     // Load CSV data using Dataview API
     async loadCSVData(dv) {
         if (this.csvData) {
@@ -239,12 +271,24 @@ class SpellLookup {
         this.isLoading = true;
 
         try {
-            // Use Dataview's CSV loader
-            const csvPath = 'docs/Assets/Spells/Spells.csv';
-            const data = await dv.io.csv(csvPath);
-            
-            // Convert DataArray to plain array of objects
-            this.csvData = data.array();
+            const catalogLoader = await this.loadRulesCatalogWidgetData(dv);
+            if (catalogLoader) {
+                const result = await catalogLoader.loadRows('spells', {
+                    dv,
+                    csvPaths: [
+                        'docs/data/spells.csv',
+                        'data/spells.csv'
+                    ]
+                });
+                this.csvData = result.rows;
+                this.dataSource = result.source;
+            } else {
+                // Use Dataview's CSV loader if the normalized catalog helper is unavailable.
+                const csvPath = 'docs/data/spells.csv';
+                const data = await dv.io.csv(csvPath);
+                this.csvData = data.array();
+                this.dataSource = 'csv-fallback';
+            }
             this.isLoading = false;
             
             // Resolve any waiting callbacks
@@ -254,7 +298,7 @@ class SpellLookup {
             return this.csvData;
         } catch (error) {
             this.isLoading = false;
-            console.error('Error loading Spells.csv:', error);
+            console.error('Error loading spell data:', error);
             
             // Reject any waiting callbacks
             this.loadCallbacks.forEach(cb => cb.reject(error));

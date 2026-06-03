@@ -178,8 +178,7 @@
                   "displayWeather": true,
                   "location": ""
                 },
-                "id": "ID_ab08197979da",
-                "child": "ID_6a8aba386b8a"
+                "id": "ID_ab08197979da"
               },
               "icon": "CALENDARIUM",
               "title": "Calendarium"
@@ -218,7 +217,6 @@
             "state": {
               "type": "CALENDARIUM_AGENDA",
               "state": {
-                "calendar": "ID_4b1be88869cb",
                 "id": "ID_6a8aba386b8a",
                 "parent": "ID_ab08197979da"
               },

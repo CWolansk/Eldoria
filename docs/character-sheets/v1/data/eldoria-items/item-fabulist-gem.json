@@ -1,0 +1,55 @@
+{
+  "id": "item:fabulist-gem:eldoria",
+  "ref": "item-fabulist-gem.json",
+  "refId": "item-fabulist-gem",
+  "kind": "item",
+  "name": "Fabulist Gem",
+  "source": "Eldoria",
+  "page": null,
+  "sourceKey": "Fabulist Gem|Eldoria",
+  "baseItem": null,
+  "type": {
+    "code": "",
+    "abbreviation": "",
+    "source": "Eldoria",
+    "name": "wondrous item",
+    "ref": ""
+  },
+  "typeAlt": null,
+  "rarity": "uncommon",
+  "value": 10000,
+  "weight": null,
+  "attunement": {
+    "required": true,
+    "text": "required",
+    "alternatives": [],
+    "tags": []
+  },
+  "tags": {
+    "wondrous": true,
+    "illusion": true,
+    "gem": true
+  },
+  "bonuses": {},
+  "weapon": null,
+  "armor": null,
+  "conditionalDamage": [],
+  "mechanics": {},
+  "entries": [
+    "This glittering red gem is commonly found embedded in a ring or brooch. While wearing the gem, you gain the following benefits.",
+    "Counterfeit Coins. As an action, magically create a pile of coins worth no more than 100 gp in an unoccupied space within 10 feet of yourself. After 1 hour, the coins vanish. Once used, this property cannot be used again until the next dawn.",
+    "Illusory Fashion. As a bonus action, magically change the appearance of your clothing and armor. The change can alter style, color, and apparent quality, but it fails to pass physical inspection."
+  ],
+  "raw": {
+    "name": "Fabulist Gem",
+    "source": "Eldoria",
+    "rarity": "uncommon",
+    "reqAttune": "required",
+    "type": "wondrous item",
+    "entries": [
+      "This glittering red gem is commonly found embedded in a ring or brooch. While wearing the gem, you gain the following benefits.",
+      "Counterfeit Coins. As an action, magically create a pile of coins worth no more than 100 gp in an unoccupied space within 10 feet of yourself. After 1 hour, the coins vanish. Once used, this property cannot be used again until the next dawn.",
+      "Illusory Fashion. As a bonus action, magically change the appearance of your clothing and armor. The change can alter style, color, and apparent quality, but it fails to pass physical inspection."
+    ]
+  }
+}

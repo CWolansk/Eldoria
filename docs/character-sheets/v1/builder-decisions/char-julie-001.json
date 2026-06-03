@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "builder-decisions-v1",
+  "characterId": "char-julie-001",
+  "derivedFromCharacterDto": true,
+  "identityChoices": {
+    "raceRef": "race-human-variant-phb.json",
+    "backgroundRef": "background-archaeologist.json",
+    "raceChoices": [],
+    "backgroundChoices": [],
+    "subclassFeatureChoices": []
+  },
+  "abilityScoreChoices": {
+    "method": "manual",
+    "characterLevel": 1,
+    "derivedFromCurrentScores": true,
+    "note": "",
+    "scores": {
+      "str": 18,
+      "dex": 14,
+      "con": 16,
+      "int": 6,
+      "wis": 11,
+      "cha": 11
+    }
+  },
+  "levelPlan": [
+    {
+      "characterLevel": 1,
+      "classRef": "class-fighter.json",
+      "classLevel": 1,
+      "decisions": []
+    },
+    {
+      "characterLevel": 2,
+      "classRef": "class-fighter.json",
+      "classLevel": 2,
+      "decisions": []
+    },
+    {
+      "characterLevel": 3,
+      "classRef": "class-fighter.json",
+      "classLevel": 3,
+      "decisions": [
+        {
+          "type": "subclass",
+          "value": "Champion"
+        }
+      ]
+    },
+    {
+      "characterLevel": 4,
+      "classRef": "class-fighter.json",
+      "classLevel": 4,
+      "decisions": []
+    },
+    {
+      "characterLevel": 5,
+      "classRef": "class-fighter.json",
+      "classLevel": 5,
+      "decisions": []
+    }
+  ],
+  "pendingChoices": [
+    {
+      "choiceId": "fc-julie-progression-history",
+      "type": "progression-history",
+      "classRef": "class-fighter.json",
+      "unlockAtClassLevel": 1,
+      "blockedReason": "Confirm table details if needed."
+    },
+    {
+      "choiceId": "fc-julie-hp-progression",
+      "type": "hit-points",
+      "classRef": "class-fighter.json",
+      "unlockAtClassLevel": 1,
+      "blockedReason": "Confirm table details if needed."
+    }
+  ],
+  "grantedSpellChoices": []
+}

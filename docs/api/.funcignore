@@ -1,0 +1,8 @@
+.git*
+.vscode/
+local.settings.json
+config/*.local.json
+config/*.private.json
+.deploy/
+*.zip
+npm-debug.log*

@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "builder-decisions-v1",
+  "characterId": "char-zazpoh-the-matyr-001",
+  "derivedFromCharacterDto": true,
+  "identityChoices": {
+    "raceRef": "race-aasimar-dmg.json",
+    "backgroundRef": "background-cloistered-scholar.json",
+    "raceChoices": [],
+    "backgroundChoices": [],
+    "subclassFeatureChoices": []
+  },
+  "abilityScoreChoices": {
+    "method": "manual",
+    "characterLevel": 1,
+    "derivedFromCurrentScores": true,
+    "note": "",
+    "scores": {
+      "str": 10,
+      "dex": 13,
+      "con": 14,
+      "int": 19,
+      "wis": 16,
+      "cha": 12
+    }
+  },
+  "levelPlan": [
+    {
+      "characterLevel": 1,
+      "classRef": "class-wizard.json",
+      "classLevel": 1,
+      "decisions": []
+    },
+    {
+      "characterLevel": 2,
+      "classRef": "class-wizard.json",
+      "classLevel": 2,
+      "decisions": [
+        {
+          "type": "subclass",
+          "value": "School of Divination"
+        }
+      ]
+    },
+    {
+      "characterLevel": 3,
+      "classRef": "class-wizard.json",
+      "classLevel": 3,
+      "decisions": []
+    },
+    {
+      "characterLevel": 4,
+      "classRef": "class-wizard.json",
+      "classLevel": 4,
+      "decisions": []
+    },
+    {
+      "characterLevel": 5,
+      "classRef": "class-wizard.json",
+      "classLevel": 5,
+      "decisions": []
+    }
+  ],
+  "pendingChoices": [
+    {
+      "choiceId": "fc-randi-progression-history",
+      "type": "progression-history",
+      "classRef": "class-wizard.json",
+      "unlockAtClassLevel": 1,
+      "blockedReason": "Confirm table details if needed."
+    },
+    {
+      "choiceId": "fc-randi-hp-progression",
+      "type": "hit-points",
+      "classRef": "class-wizard.json",
+      "unlockAtClassLevel": 1,
+      "blockedReason": "Confirm table details if needed."
+    },
+    {
+      "choiceId": "fc-randi-spell-history",
+      "type": "spell-history",
+      "classRef": "class-wizard.json",
+      "unlockAtClassLevel": 1,
+      "blockedReason": "Spell lookup lists were imported, but full spell choice/preparation history is pending."
+    }
+  ],
+  "grantedSpellChoices": [
+    {
+      "choiceId": "fc-randi-imported-spells",
+      "source": "recorded",
+      "spells": [
+        {
+          "name": "Light",
+          "source": "PHB",
+          "level": 0,
+          "school": "V",
+          "addedAtLevel": 5
+        },
+        {
+          "name": "Lesser Restoration",
+          "source": "PHB",
+          "level": 2,
+          "school": "A",
+          "addedAtLevel": 3,
+          "fromFeature": "Aasimar Legacy"
+        },
+        {
+          "name": "Daylight",
+          "source": "PHB",
+          "level": 3,
+          "school": "V",
+          "addedAtLevel": 5,
+          "fromFeature": "Aasimar Legacy"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "id": "item:scourge-armblade:eldoria",
+  "ref": "item-scourge-armblade.json",
+  "refId": "item-scourge-armblade",
+  "kind": "item",
+  "name": "Scourge Armblade",
+  "source": "Eldoria",
+  "page": null,
+  "sourceKey": "Scourge Armblade|Eldoria",
+  "baseItem": null,
+  "type": {
+    "code": "M",
+    "abbreviation": "M",
+    "source": "Eldoria",
+    "name": "Melee Weapon",
+    "ref": "item-type-melee-weapon.json"
+  },
+  "typeAlt": null,
+  "rarity": "common",
+  "value": 2000,
+  "weight": 3,
+  "attunement": {
+    "required": true,
+    "text": "by a warforged",
+    "alternatives": [],
+    "tags": []
+  },
+  "tags": {
+    "weapon": true,
+    "armblade": true
+  },
+  "bonuses": {},
+  "weapon": {
+    "category": "martial",
+    "properties": [],
+    "damage": {
+      "primary": "2d4",
+      "versatile": "",
+      "type": {
+        "code": "S",
+        "name": "slashing"
+      }
+    },
+    "range": {
+      "raw": "",
+      "normal": null,
+      "long": null
+    },
+    "reload": null,
+    "reach": null,
+    "ammoType": "",
+    "bonuses": {},
+    "tags": {}
+  },
+  "armor": null,
+  "conditionalDamage": [],
+  "mechanics": {},
+  "entries": [
+    "This armblade attaches to your arm, becoming inseparable from you while you are attuned to it.",
+    "As a bonus action, you can retract the armblade into your forearm or extend it. While extended, you can use the weapon as if you were holding it, and you cannot use that hand for other purposes."
+  ],
+  "raw": {
+    "name": "Scourge Armblade",
+    "source": "Eldoria",
+    "rarity": "common",
+    "reqAttune": "by a warforged",
+    "type": "Melee Weapon",
+    "entries": [
+      "This armblade attaches to your arm, becoming inseparable from you while you are attuned to it.",
+      "As a bonus action, you can retract the armblade into your forearm or extend it. While extended, you can use the weapon as if you were holding it, and you cannot use that hand for other purposes."
+    ]
+  }
+}

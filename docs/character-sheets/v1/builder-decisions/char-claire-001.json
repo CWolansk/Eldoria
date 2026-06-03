@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "builder-decisions-v1",
+  "characterId": "char-claire-001",
+  "derivedFromCharacterDto": true,
+  "identityChoices": {
+    "raceRef": "race-genasi-water-eepc.json",
+    "backgroundRef": "background-sailor.json",
+    "raceChoices": [],
+    "backgroundChoices": [],
+    "subclassFeatureChoices": []
+  },
+  "abilityScoreChoices": {
+    "method": "manual",
+    "characterLevel": 1,
+    "derivedFromCurrentScores": true,
+    "note": "",
+    "scores": {
+      "str": 16,
+      "dex": 8,
+      "con": 16,
+      "int": 14,
+      "wis": 18,
+      "cha": 12
+    }
+  },
+  "levelPlan": [
+    {
+      "characterLevel": 1,
+      "classRef": "class-cleric.json",
+      "classLevel": 1,
+      "decisions": [
+        {
+          "type": "subclass",
+          "value": "Tempest Domain"
+        }
+      ]
+    },
+    {
+      "characterLevel": 2,
+      "classRef": "class-cleric.json",
+      "classLevel": 2,
+      "decisions": []
+    },
+    {
+      "characterLevel": 3,
+      "classRef": "class-cleric.json",
+      "classLevel": 3,
+      "decisions": []
+    },
+    {
+      "characterLevel": 4,
+      "classRef": "class-cleric.json",
+      "classLevel": 4,
+      "decisions": []
+    },
+    {
+      "characterLevel": 5,
+      "classRef": "class-cleric.json",
+      "classLevel": 5,
+      "decisions": []
+    }
+  ],
+  "pendingChoices": [
+    {
+      "choiceId": "fc-claire-progression-history",
+      "type": "progression-history",
+      "classRef": "class-cleric.json",
+      "unlockAtClassLevel": 1,
+      "blockedReason": "Confirm table details if needed."
+    },
+    {
+      "choiceId": "fc-claire-hp-progression",
+      "type": "hit-points",
+      "classRef": "class-cleric.json",
+      "unlockAtClassLevel": 1,
+      "blockedReason": "Confirm table details if needed."
+    },
+    {
+      "choiceId": "fc-claire-spell-history",
+      "type": "spell-history",
+      "classRef": "class-cleric.json",
+      "unlockAtClassLevel": 1,
+      "blockedReason": "Spell lookup lists were imported, but full spell choice/preparation history is pending."
+    },
+    {
+      "choiceId": "fc-claire-elemental-adept-damage-type",
+      "type": "feat-option",
+      "classRef": "class-cleric.json",
+      "unlockAtClassLevel": 4,
+      "blockedReason": "Confirm table details if needed."
+    }
+  ],
+  "grantedSpellChoices": [
+    {
+      "choiceId": "fc-claire-imported-spells",
+      "source": "recorded",
+      "spells": []
+    }
+  ]
+}

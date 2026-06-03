@@ -1,0 +1,5310 @@
+{
+  "generatedAt": "2026-06-01T22:01:05.159Z",
+  "paths": {
+    "csv": "docs\\data\\items.csv",
+    "normalizedItems": "docs\\character-sheets\\v1\\data\\items.json",
+    "normalizedMagicVariants": "docs\\character-sheets\\v1\\data\\magic-variants.json",
+    "rawItems": "docs\\5etools\\data\\items.json",
+    "rawBaseItems": "docs\\5etools\\data\\items-base.json",
+    "rawMagicVariants": "docs\\5etools\\data\\magicvariants.json",
+    "homebrewDir": "docs\\5etools\\homebrew"
+  },
+  "counts": {
+    "csvRows": 5013,
+    "normalizedRecords": 1353,
+    "directRawRecords": 3310,
+    "baseItems": 176,
+    "magicVariants": 227,
+    "generatedVariantRecords": 6918,
+    "uniqueGeneratedVariantNameSource": 6894,
+    "totalCatalogRecords": 11581,
+    "uniqueCatalogNameSource": 10216,
+    "csvCoveredByNormalized": 1081,
+    "csvCoveredByDirectRaw": 1267,
+    "csvCoveredByGeneratedVariants": 2440,
+    "csvStillMissing": 225
+  },
+  "generatedByVariantSource": [
+    {
+      "value": "DMG",
+      "count": 1292
+    },
+    {
+      "value": "SaneMagicItemPricesExpanded",
+      "count": 1246
+    },
+    {
+      "value": "SCat",
+      "count": 1017
+    },
+    {
+      "value": "FTD",
+      "count": 486
+    },
+    {
+      "value": "MM",
+      "count": 402
+    },
+    {
+      "value": "GriffonsSaddlebag2",
+      "count": 359
+    },
+    {
+      "value": "BMT",
+      "count": 311
+    },
+    {
+      "value": "EGW",
+      "count": 272
+    },
+    {
+      "value": "XGE",
+      "count": 222
+    },
+    {
+      "value": "BookOfEbonTides",
+      "count": 152
+    },
+    {
+      "value": "PHB",
+      "count": 148
+    },
+    {
+      "value": "CRCotN",
+      "count": 127
+    },
+    {
+      "value": "AI",
+      "count": 126
+    },
+    {
+      "value": "BGDIA",
+      "count": 114
+    },
+    {
+      "value": "WhereEvilLives",
+      "count": 114
+    },
+    {
+      "value": "ERLW",
+      "count": 113
+    },
+    {
+      "value": "FFItemsGalore",
+      "count": 113
+    },
+    {
+      "value": "CoA",
+      "count": 107
+    },
+    {
+      "value": "LLK",
+      "count": 72
+    },
+    {
+      "value": "TDCSR",
+      "count": 43
+    },
+    {
+      "value": "BGG",
+      "count": 32
+    },
+    {
+      "value": "VGM",
+      "count": 29
+    },
+    {
+      "value": "GGR",
+      "count": 13
+    },
+    {
+      "value": "DitLCoT",
+      "count": 5
+    },
+    {
+      "value": "MOT",
+      "count": 3
+    }
+  ],
+  "generatedByBaseItemSource": [
+    {
+      "value": "FFItemsGalore",
+      "count": 3489
+    },
+    {
+      "value": "PHB",
+      "count": 2668
+    },
+    {
+      "value": "DMG",
+      "count": 426
+    },
+    {
+      "value": "ERLW",
+      "count": 80
+    },
+    {
+      "value": "OotA",
+      "count": 79
+    },
+    {
+      "value": "SCAG",
+      "count": 57
+    },
+    {
+      "value": "ToA",
+      "count": 41
+    },
+    {
+      "value": "DSotDQ",
+      "count": 39
+    },
+    {
+      "value": "SCat",
+      "count": 39
+    }
+  ],
+  "generatedByKind": [
+    {
+      "value": "cross-source",
+      "count": 3449
+    },
+    {
+      "value": "official",
+      "count": 1929
+    },
+    {
+      "value": "homebrew",
+      "count": 1540
+    }
+  ],
+  "csvGeneratedCoverageBySource": [
+    {
+      "value": "DMG'14",
+      "count": 1109
+    },
+    {
+      "value": "FTD",
+      "count": 253
+    },
+    {
+      "value": "TGS2",
+      "count": 178
+    },
+    {
+      "value": "BMT",
+      "count": 145
+    },
+    {
+      "value": "EGW",
+      "count": 140
+    },
+    {
+      "value": "XGE",
+      "count": 78
+    },
+    {
+      "value": "BoET",
+      "count": 74
+    },
+    {
+      "value": "CoA",
+      "count": 70
+    },
+    {
+      "value": "CRCotN",
+      "count": 63
+    },
+    {
+      "value": "BGDIA",
+      "count": 58
+    },
+    {
+      "value": "FFAIWG",
+      "count": 58
+    },
+    {
+      "value": "WEL",
+      "count": 58
+    },
+    {
+      "value": "LLK",
+      "count": 57
+    },
+    {
+      "value": "ERLW",
+      "count": 36
+    },
+    {
+      "value": "BGG",
+      "count": 20
+    },
+    {
+      "value": "VGM",
+      "count": 20
+    },
+    {
+      "value": "TDCSR",
+      "count": 12
+    },
+    {
+      "value": "AI",
+      "count": 5
+    },
+    {
+      "value": "GGR",
+      "count": 5
+    },
+    {
+      "value": "DitLCoT",
+      "count": 1
+    }
+  ],
+  "csvStillMissingBySource": [
+    {
+      "value": "GHLoE",
+      "count": 68
+    },
+    {
+      "value": "DoDk",
+      "count": 63
+    },
+    {
+      "value": "Homebrew",
+      "count": 22
+    },
+    {
+      "value": "TDCSR",
+      "count": 17
+    },
+    {
+      "value": "DMG'14",
+      "count": 15
+    },
+    {
+      "value": "EGW",
+      "count": 15
+    },
+    {
+      "value": "TGS2",
+      "count": 5
+    },
+    {
+      "value": "PHB'14",
+      "count": 4
+    },
+    {
+      "value": "ERLW",
+      "count": 2
+    },
+    {
+      "value": "ToB1'23",
+      "count": 2
+    },
+    {
+      "value": "BMT",
+      "count": 1
+    },
+    {
+      "value": "CAL",
+      "count": 1
+    },
+    {
+      "value": "CoA",
+      "count": 1
+    },
+    {
+      "value": "CRCotN",
+      "count": 1
+    },
+    {
+      "value": "GGR",
+      "count": 1
+    },
+    {
+      "value": "KftGV",
+      "count": 1
+    },
+    {
+      "value": "LLK",
+      "count": 1
+    },
+    {
+      "value": "PotA",
+      "count": 1
+    },
+    {
+      "value": "SCAG",
+      "count": 1
+    },
+    {
+      "value": "TftS",
+      "count": 1
+    },
+    {
+      "value": "UHftLH",
+      "count": 1
+    },
+    {
+      "value": "WBtW",
+      "count": 1
+    }
+  ],
+  "generatedCoverageSample": [
+    {
+      "row": 6,
+      "name": "+1 Arming Sword",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Arming Sword",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Arming Sword",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "name": "+1 Arrow",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Arrow",
+          "source": "DMG",
+          "page": 150,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Ammunition",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Arrow",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "name": "+1 Bardiche",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Bardiche",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Bardiche",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "name": "+1 Bastard Sword",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Bastard Sword",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Bastard Sword",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "name": "+1 Battleaxe",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Battleaxe",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Battleaxe",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "name": "+1 Bearded Axe",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Bearded Axe",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Bearded Axe",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "name": "+1 Blowgun",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Blowgun",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Blowgun",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "name": "+1 Blowgun Needle",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Blowgun Needle",
+          "source": "DMG",
+          "page": 150,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Ammunition",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Blowgun Needle",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "name": "+1 Brass Knuckles",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Brass Knuckles",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Brass Knuckles",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "name": "+1 Breastplate",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Breastplate",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Breastplate",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "name": "+1 Broadsword",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Broadsword",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Broadsword",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "name": "+1 Buckler",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Buckler",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Buckler",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        },
+        {
+          "name": "+1 Buckler",
+          "source": "DMG",
+          "page": 200,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Shield (*)",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Buckler",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "name": "+1 Cestus",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Cestus",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Cestus",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "name": "+1 Chain Mail",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Chain Mail",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Chain Mail",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "name": "+1 Chain Shirt",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Chain Shirt",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Chain Shirt",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "name": "+1 Chain-Sickle",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Chain-Sickle",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Chain-Sickle",
+          "baseItemSource": "SCat",
+          "baseItemFile": "docs\\5etools\\homebrew\\SailorCat; GachaBox.json"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "name": "+1 Changdao",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Changdao",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Changdao",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "name": "+1 Claymore",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Claymore",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Claymore",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "name": "+1 Club",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Club",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Club",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "name": "+1 Composite Bow",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Composite Bow",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Composite Bow",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "name": "+1 Crossbow Bolt",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Crossbow Bolt",
+          "source": "DMG",
+          "page": 150,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Ammunition",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Crossbow Bolt",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "name": "+1 Dagger",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Dagger",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Dagger",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "name": "+1 Dao",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Dao",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Dao",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "name": "+1 Dart",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Dart",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Dart",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "name": "+1 Double-Bladed Axe",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Double-Bladed Axe",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Double-Bladed Axe",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "name": "+1 Double-Bladed Scimitar",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Double-Bladed Scimitar",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Double-Bladed Scimitar",
+          "baseItemSource": "ERLW",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "name": "+1 Draconite Bolt",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Draconite Bolt",
+          "source": "DMG",
+          "page": 150,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Ammunition",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Draconite Bolt",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "name": "+1 Dragon Pole",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Dragon Pole",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Dragon Pole",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "name": "+1 Elven Glaive",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Elven Glaive",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Elven Glaive",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "name": "+1 Falcata",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Falcata",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Falcata",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "name": "+1 Falchion",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Falchion",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Falchion",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "name": "+1 Fan Axe",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Fan Axe",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Fan Axe",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "name": "+1 Flail",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Flail",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Flail",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "name": "+1 Flamberge Bastard Sword",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Flamberge Bastard Sword",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Flamberge Bastard Sword",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "name": "+1 Gladius",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Gladius",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Gladius",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "name": "+1 Glaive",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Glaive",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Glaive",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "name": "+1 Greataxe",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Greataxe",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Greataxe",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "name": "+1 Greatbow",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Greatbow",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Greatbow",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "name": "+1 Greatclub",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Greatclub",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Greatclub",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "name": "+1 Greatsword",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Greatsword",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Greatsword",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "name": "+1 Guandao",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Guandao",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Guandao",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "name": "+1 Halberd",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Halberd",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Halberd",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "name": "+1 Half Plate Armor",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Half Plate Armor",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Half Plate Armor",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "name": "+1 Hand Crossbow",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Hand Crossbow",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Hand Crossbow",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "name": "+1 Handaxe",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Handaxe",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Handaxe",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "name": "+1 Heavy Crossbow",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Heavy Crossbow",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Heavy Crossbow",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "name": "+1 Heavy Flail",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Heavy Flail",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Heavy Flail",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "name": "+1 Heavy Scimitar",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Heavy Scimitar",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Heavy Scimitar",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "name": "+1 Hide Armor",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Hide Armor",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Hide Armor",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "name": "+1 Hooked Shortspear",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Hooked Shortspear",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Hooked Shortspear",
+          "baseItemSource": "OotA",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "name": "+1 Hooked Sword",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Hooked Sword",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Hooked Sword",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "name": "+1 Hoopak",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Hoopak",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Hoopak",
+          "baseItemSource": "DSotDQ",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "name": "+1 Javelin",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Javelin",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Javelin",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "name": "+1 Kanabo",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Kanabo",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Kanabo",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "name": "+1 Katana",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Katana",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Katana",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "name": "+1 Kodachi",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Kodachi",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Kodachi",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "name": "+1 Kukri Knife",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Kukri Knife",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Kukri Knife",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "name": "+1 Kunai",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Kunai",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Kunai",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "name": "+1 Kusarigama",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Kusarigama",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Kusarigama",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 69,
+      "name": "+1 Lance",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Lance",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Lance",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "name": "+1 Leather Armor",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Leather Armor",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Leather Armor",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "name": "+1 Light Crossbow",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Light Crossbow",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Light Crossbow",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "name": "+1 Light Hammer",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Light Hammer",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Light Hammer",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 73,
+      "name": "+1 Light Repeating Crossbow",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Light Repeating Crossbow",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Light Repeating Crossbow",
+          "baseItemSource": "OotA",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 74,
+      "name": "+1 Long Axe",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Long Axe",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Long Axe",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 75,
+      "name": "+1 Longbow",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Longbow",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Longbow",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 76,
+      "name": "+1 Longsword",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Longsword",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Longsword",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 77,
+      "name": "+1 Mace",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Mace",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Mace",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 78,
+      "name": "+1 Macuahuitl",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Macuahuitl",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Macuahuitl",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 79,
+      "name": "+1 Masakari Axe",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Masakari Axe",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Masakari Axe",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 80,
+      "name": "+1 Maul",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Maul",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Maul",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 81,
+      "name": "+1 Metal Cuirass",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Metal Cuirass",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Metal Cuirass",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 82,
+      "name": "+1 Metal Shot",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Metal Shot",
+          "source": "DMG",
+          "page": 150,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Ammunition",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Metal Shot",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 83,
+      "name": "+1 Meteor Hammer",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Meteor Hammer",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Meteor Hammer",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 85,
+      "name": "+1 Morningstar",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Morningstar",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Morningstar",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 86,
+      "name": "+1 Naginata",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Naginata",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Naginata",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 87,
+      "name": "+1 Ninjatō",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Ninjatō",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Ninjatō",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 88,
+      "name": "+1 Nodachi",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Nodachi",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Nodachi",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 89,
+      "name": "+1 Nunchaku",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Nunchaku",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Nunchaku",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 90,
+      "name": "+1 Padded Armor",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Padded Armor",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Padded Armor",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 91,
+      "name": "+1 Pike",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Pike",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Pike",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 92,
+      "name": "+1 Plate Armor",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Plate Armor",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Plate Armor",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 93,
+      "name": "+1 Plated Chainmail",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Plated Chainmail",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Plated Chainmail",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 94,
+      "name": "+1 Quarterstaff",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Quarterstaff",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Quarterstaff",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 95,
+      "name": "+1 Rapier",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Rapier",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Rapier",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 96,
+      "name": "+1 Repeating Crossbow",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Repeating Crossbow",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Repeating Crossbow",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 97,
+      "name": "+1 Repeating Hand Crossbow",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Repeating Hand Crossbow",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Repeating Hand Crossbow",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 99,
+      "name": "+1 Ring Mail",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Ring Mail",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Ring Mail",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 101,
+      "name": "+1 Sai",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Sai",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Sai",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 102,
+      "name": "+1 Scale Mail",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Scale Mail",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Scale Mail",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 103,
+      "name": "+1 Scimitar",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Scimitar",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Scimitar",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 104,
+      "name": "+1 Scourge",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Scourge",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Scourge",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 105,
+      "name": "+1 Scythe",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Scythe",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Scythe",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 106,
+      "name": "+1 Segmented Plate",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Segmented Plate",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Segmented Plate",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 107,
+      "name": "+1 Shield",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Shield",
+          "source": "DMG",
+          "page": 152,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Armor",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Shield",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        },
+        {
+          "name": "+1 Shield",
+          "source": "DMG",
+          "page": 200,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Shield (*)",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Shield",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 109,
+      "name": "+1 Shikomizue",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Shikomizue",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Shikomizue",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 110,
+      "name": "+1 Shortbow",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Shortbow",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Shortbow",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 111,
+      "name": "+1 Shortsword",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Shortsword",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Shortsword",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    },
+    {
+      "row": 112,
+      "name": "+1 Shuriken",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Shuriken",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "cross-source",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Shuriken",
+          "baseItemSource": "FFItemsGalore",
+          "baseItemFile": "docs\\5etools\\homebrew\\Foxfire94; Armour, Items, and Weapons Galore.json"
+        }
+      ]
+    },
+    {
+      "row": 113,
+      "name": "+1 Sickle",
+      "source": "DMG'14",
+      "matches": [
+        {
+          "name": "+1 Sickle",
+          "source": "DMG",
+          "page": 213,
+          "bucket": "generated-magicvariant",
+          "kind": "official",
+          "variantName": "+1 Weapon",
+          "variantSource": "DMG",
+          "variantFile": "docs\\5etools\\data\\magicvariants.json",
+          "baseItemName": "Sickle",
+          "baseItemSource": "PHB",
+          "baseItemFile": "docs\\5etools\\data\\items-base.json"
+        }
+      ]
+    }
+  ],
+  "stillMissingSample": [
+    {
+      "row": 463,
+      "name": "Agony",
+      "source": "TDCSR",
+      "page": "202",
+      "type": "weapon (flail), martial weapon, melee weapon",
+      "rarity": "legendary",
+      "value": "200000 gp"
+    },
+    {
+      "row": 512,
+      "name": "Aqua Delerium",
+      "source": "DoDk",
+      "page": "230",
+      "type": "potion",
+      "rarity": "rare",
+      "value": "4000 gp"
+    },
+    {
+      "row": 513,
+      "name": "Aqua Expurgo",
+      "source": "DoDk",
+      "page": "230",
+      "type": "potion",
+      "rarity": "rare",
+      "value": "2500 gp"
+    },
+    {
+      "row": 518,
+      "name": "Arcane Focus",
+      "source": "PHB'14",
+      "page": "151",
+      "type": "spellcasting focus",
+      "rarity": "none",
+      "value": "0 gp"
+    },
+    {
+      "row": 519,
+      "name": "Arcane Oil",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "potion",
+      "rarity": "rare",
+      "value": "5500 gp"
+    },
+    {
+      "row": 556,
+      "name": "Armor of Resistance",
+      "source": "DMG'14",
+      "page": "162",
+      "type": "generic variant",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 559,
+      "name": "Armor of Vulnerability",
+      "source": "DMG'14",
+      "page": "152",
+      "type": "heavy armor (plate armor)",
+      "rarity": "rare",
+      "value": "14000 gp"
+    },
+    {
+      "row": 566,
+      "name": "Armor of the Valiant Soul",
+      "source": "TDCSR",
+      "page": "202",
+      "type": "medium armor (scale mail)",
+      "rarity": "legendary",
+      "value": "100000 gp"
+    },
+    {
+      "row": 669,
+      "name": "Bag of Tricks",
+      "source": "DMG'14",
+      "page": "154",
+      "type": "wondrous item",
+      "rarity": "uncommon",
+      "value": "400 gp"
+    },
+    {
+      "row": 767,
+      "name": "Blade of Broken Mirrors",
+      "source": "EGW",
+      "page": "275",
+      "type": "weapon (dagger), simple weapon, melee weapon",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 856,
+      "name": "Bottled Comet",
+      "source": "DoDk",
+      "page": "230",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 884,
+      "name": "Brazen Armor",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "heavy armor (plate armor)",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 932,
+      "name": "Cabal's Ruin",
+      "source": "TDCSR",
+      "page": "203",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "125000 gp"
+    },
+    {
+      "row": 958,
+      "name": "Carpet of Flying",
+      "source": "DMG'14",
+      "page": "157",
+      "type": "wondrous item",
+      "rarity": "very rare",
+      "value": "30000 gp"
+    },
+    {
+      "row": 1031,
+      "name": "Chancellor's Crest",
+      "source": "DoDk",
+      "page": "232",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "15000 gp"
+    },
+    {
+      "row": 1061,
+      "name": "Chromatic Rose",
+      "source": "WBtW",
+      "page": "208",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "7000 gp"
+    },
+    {
+      "row": 1067,
+      "name": "Circlet of Barbed Vision",
+      "source": "TDCSR",
+      "page": "203",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "75000 gp"
+    },
+    {
+      "row": 1121,
+      "name": "Coat of Lies",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 1129,
+      "name": "Comet Smasher",
+      "source": "DoDk",
+      "page": "230",
+      "type": "generic variant",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 1130,
+      "name": "Comet Smasher Brass Knuckles",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "30000 gp"
+    },
+    {
+      "row": 1131,
+      "name": "Comet Smasher Cestus",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "30000 gp"
+    },
+    {
+      "row": 1132,
+      "name": "Comet Smasher Dragon Pole",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "20000 gp"
+    },
+    {
+      "row": 1133,
+      "name": "Comet Smasher Heavy Flail",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "40000 gp"
+    },
+    {
+      "row": 1134,
+      "name": "Comet Smasher Kanabo",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "40000 gp"
+    },
+    {
+      "row": 1135,
+      "name": "Comet Smasher Macuahuitl",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 1136,
+      "name": "Comet Smasher Meteor Hammer",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 1137,
+      "name": "Comet Smasher Nunchaku",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "40000 gp"
+    },
+    {
+      "row": 1138,
+      "name": "Comet Smasher Sai",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "30000 gp"
+    },
+    {
+      "row": 1139,
+      "name": "Comet Smasher Steel-capped Staff",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 1140,
+      "name": "Comet Smasher Three-Section Staff",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 1141,
+      "name": "Comet Smasher Tonfa",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 1153,
+      "name": "Condemner",
+      "source": "TDCSR",
+      "page": "204",
+      "type": "weapon (heavy crossbow), martial weapon, ranged weapon",
+      "rarity": "legendary",
+      "value": "75000 gp"
+    },
+    {
+      "row": 1244,
+      "name": "Crown of Westemär",
+      "source": "DoDk",
+      "page": "233",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "175000 gp"
+    },
+    {
+      "row": 1252,
+      "name": "Crystal Ball (Legendary Version)",
+      "source": "DMG'14",
+      "page": "159",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "175000 gp"
+    },
+    {
+      "row": 1314,
+      "name": "Danoth's Visor",
+      "source": "EGW",
+      "page": "270",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "175000 gp"
+    },
+    {
+      "row": 1345,
+      "name": "Deathwalker's Ward",
+      "source": "TDCSR",
+      "page": "204",
+      "type": "light armor (studded leather armor)",
+      "rarity": "legendary",
+      "value": "175000 gp"
+    },
+    {
+      "row": 1387,
+      "name": "Delerium Crystal Focus",
+      "source": "DoDk",
+      "page": "230",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 1388,
+      "name": "Delerium-Forged Blade",
+      "source": "DoDk",
+      "page": "230",
+      "type": "generic variant",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 1389,
+      "name": "Delerium-Forged Blade Arming Sword",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 1390,
+      "name": "Delerium-Forged Blade Bastard Sword",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "20000 gp"
+    },
+    {
+      "row": 1391,
+      "name": "Delerium-Forged Blade Broadsword",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 1392,
+      "name": "Delerium-Forged Blade Changdao",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "14000 gp"
+    },
+    {
+      "row": 1393,
+      "name": "Delerium-Forged Blade Claymore",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "16000 gp"
+    },
+    {
+      "row": 1394,
+      "name": "Delerium-Forged Blade Dao",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "16000 gp"
+    },
+    {
+      "row": 1395,
+      "name": "Delerium-Forged Blade Double-Bladed Scimitar",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 1396,
+      "name": "Delerium-Forged Blade Falcata",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "5000 gp"
+    },
+    {
+      "row": 1397,
+      "name": "Delerium-Forged Blade Falchion",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 1398,
+      "name": "Delerium-Forged Blade Flamberge Bastard Sword",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "14000 gp"
+    },
+    {
+      "row": 1399,
+      "name": "Delerium-Forged Blade Gladius",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "18000 gp"
+    },
+    {
+      "row": 1400,
+      "name": "Delerium-Forged Blade Heavy Scimitar",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 1401,
+      "name": "Delerium-Forged Blade Hooked Sword",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "3000 gp"
+    },
+    {
+      "row": 1402,
+      "name": "Delerium-Forged Blade Katana",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "9000 gp"
+    },
+    {
+      "row": 1403,
+      "name": "Delerium-Forged Blade Kodachi",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "17000 gp"
+    },
+    {
+      "row": 1404,
+      "name": "Delerium-Forged Blade Nodachi",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "18000 gp"
+    },
+    {
+      "row": 1405,
+      "name": "Delerium-Forged Blade Shikomizue",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "9000 gp"
+    },
+    {
+      "row": 1406,
+      "name": "Delerium-Forged Blade Tulwar",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 1407,
+      "name": "Delerium-Forged Blade Ulfberht Sword",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "17000 gp"
+    },
+    {
+      "row": 1416,
+      "name": "Devastation Orb",
+      "source": "PotA",
+      "page": "222",
+      "type": "wondrous item",
+      "rarity": "very rare",
+      "value": "30000 gp"
+    },
+    {
+      "row": 1432,
+      "name": "Dissimortuum's Cursed Mask",
+      "source": "ToB1'23",
+      "page": "106",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "19000 gp"
+    },
+    {
+      "row": 1476,
+      "name": "Dragon Scale Mail",
+      "source": "DMG'14",
+      "page": "165",
+      "type": "medium armor",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 1526,
+      "name": "Druidic Focus",
+      "source": "PHB'14",
+      "page": "151",
+      "type": "spellcasting focus",
+      "rarity": "none",
+      "value": "0 gp"
+    },
+    {
+      "row": 1574,
+      "name": "Elemental Gem",
+      "source": "DMG'14",
+      "page": "167",
+      "type": "wondrous item",
+      "rarity": "uncommon",
+      "value": "500 gp"
+    },
+    {
+      "row": 1627,
+      "name": "Eye and Hand of Vecna",
+      "source": "DMG'14",
+      "page": "224",
+      "type": "wondrous item",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 1686,
+      "name": "Fenthras",
+      "source": "TDCSR",
+      "page": "205",
+      "type": "weapon (longbow), martial weapon, ranged weapon",
+      "rarity": "legendary",
+      "value": "125000 gp"
+    },
+    {
+      "row": 1757,
+      "name": "Flame Lance",
+      "source": "DoDk",
+      "page": "231",
+      "type": "weapon (lance), martial weapon, melee weapon",
+      "rarity": "uncommon",
+      "value": "600 gp"
+    },
+    {
+      "row": 2032,
+      "name": "Glass-Studded Armor",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "light armor (studded leather armor)",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 2101,
+      "name": "Grimoire Infinitus",
+      "source": "EGW",
+      "page": "271",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "225000 gp"
+    },
+    {
+      "row": 2105,
+      "name": "Grovelthrash",
+      "source": "EGW",
+      "page": "275",
+      "type": "weapon (warhammer), martial weapon, melee weapon",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 2119,
+      "name": "Guild Signet",
+      "source": "GGR",
+      "page": "178",
+      "type": "ring",
+      "rarity": "uncommon",
+      "value": "500 gp"
+    },
+    {
+      "row": 2153,
+      "name": "Hardened Delerium-tipped Arrows",
+      "source": "DoDk",
+      "page": "230",
+      "type": "generic variant",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 2163,
+      "name": "Hazewalker Plate",
+      "source": "DoDk",
+      "page": "230",
+      "type": "heavy armor (plate armor)",
+      "rarity": "very rare",
+      "value": "40000 gp"
+    },
+    {
+      "row": 2269,
+      "name": "Helm of Patron Saints",
+      "source": "DoDk",
+      "page": "234",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "16000 gp"
+    },
+    {
+      "row": 2300,
+      "name": "Hide of the Feral Guardian",
+      "source": "EGW",
+      "page": "271",
+      "type": "light armor (studded leather armor)",
+      "rarity": "legendary",
+      "value": "100000 gp"
+    },
+    {
+      "row": 2334,
+      "name": "Holy Symbol",
+      "source": "PHB'14",
+      "page": "151",
+      "type": "spellcasting focus",
+      "rarity": "none",
+      "value": "0 gp"
+    },
+    {
+      "row": 2339,
+      "name": "Honor's Last Stand",
+      "source": "TDCSR",
+      "page": "206",
+      "type": "shield (shield)",
+      "rarity": "legendary",
+      "value": "150000 gp"
+    },
+    {
+      "row": 2400,
+      "name": "Ignacious, the Sword of Burning Truth",
+      "source": "DoDk",
+      "page": "234",
+      "type": "weapon (longsword), martial weapon, melee weapon",
+      "rarity": "legendary",
+      "value": "250000 gp"
+    },
+    {
+      "row": 2410,
+      "name": "Imbued Wood Focus",
+      "source": "ERLW",
+      "page": "277",
+      "type": "wondrous item, spellcasting focus",
+      "rarity": "common",
+      "value": "40 gp"
+    },
+    {
+      "row": 2421,
+      "name": "Infiltrator's Key",
+      "source": "EGW",
+      "page": "272",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "100000 gp"
+    },
+    {
+      "row": 2430,
+      "name": "Inscrutable Staff",
+      "source": "DoDk",
+      "page": "233",
+      "type": "staff, weapon, simple weapon, melee weapon",
+      "rarity": "legendary",
+      "value": "100000 gp"
+    },
+    {
+      "row": 2446,
+      "name": "Ioun Stone",
+      "source": "LLK",
+      "page": "55",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "8000 gp"
+    },
+    {
+      "row": 2486,
+      "name": "Jewel of Three Prayers",
+      "source": "CRCotN",
+      "page": "213",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "125000 gp"
+    },
+    {
+      "row": 2528,
+      "name": "Kiss of the Changebringer",
+      "source": "TDCSR",
+      "page": "206",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "200000 gp"
+    },
+    {
+      "row": 2534,
+      "name": "Knifewing Cape",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "8000 gp"
+    },
+    {
+      "row": 2582,
+      "name": "Lash of Shadows",
+      "source": "EGW",
+      "page": "276",
+      "type": "weapon (whip), martial weapon, melee weapon",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 2626,
+      "name": "Lindwyrm Venom",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "potion",
+      "rarity": "very rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 2657,
+      "name": "Lord Commander's Badge",
+      "source": "DoDk",
+      "page": "233",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "15000 gp"
+    },
+    {
+      "row": 2694,
+      "name": "Lycan Arming Sword",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "8000 gp"
+    },
+    {
+      "row": 2695,
+      "name": "Lycan Bardiche",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 2696,
+      "name": "Lycan Bastard Sword",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 2697,
+      "name": "Lycan Bearded Axe",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "5000 gp"
+    },
+    {
+      "row": 2698,
+      "name": "Lycan Brass Knuckles",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 2699,
+      "name": "Lycan Broadsword",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 2700,
+      "name": "Lycan Cestus",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "rare",
+      "value": "7000 gp"
+    },
+    {
+      "row": 2701,
+      "name": "Lycan Chain-Sickle",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "18000 gp"
+    },
+    {
+      "row": 2702,
+      "name": "Lycan Changdao",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 2703,
+      "name": "Lycan Claymore",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "7000 gp"
+    },
+    {
+      "row": 2704,
+      "name": "Lycan Composite Bow",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, ranged weapon",
+      "rarity": "rare",
+      "value": "9000 gp"
+    },
+    {
+      "row": 2705,
+      "name": "Lycan Dao",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "3000 gp"
+    },
+    {
+      "row": 2706,
+      "name": "Lycan Double-Bladed Axe",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "15000 gp"
+    },
+    {
+      "row": 2707,
+      "name": "Lycan Double-Bladed Scimitar",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "11000 gp"
+    }
+  ],
+  "stillMissing": [
+    {
+      "row": 463,
+      "name": "Agony",
+      "source": "TDCSR",
+      "page": "202",
+      "type": "weapon (flail), martial weapon, melee weapon",
+      "rarity": "legendary",
+      "value": "200000 gp"
+    },
+    {
+      "row": 512,
+      "name": "Aqua Delerium",
+      "source": "DoDk",
+      "page": "230",
+      "type": "potion",
+      "rarity": "rare",
+      "value": "4000 gp"
+    },
+    {
+      "row": 513,
+      "name": "Aqua Expurgo",
+      "source": "DoDk",
+      "page": "230",
+      "type": "potion",
+      "rarity": "rare",
+      "value": "2500 gp"
+    },
+    {
+      "row": 518,
+      "name": "Arcane Focus",
+      "source": "PHB'14",
+      "page": "151",
+      "type": "spellcasting focus",
+      "rarity": "none",
+      "value": "0 gp"
+    },
+    {
+      "row": 519,
+      "name": "Arcane Oil",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "potion",
+      "rarity": "rare",
+      "value": "5500 gp"
+    },
+    {
+      "row": 556,
+      "name": "Armor of Resistance",
+      "source": "DMG'14",
+      "page": "162",
+      "type": "generic variant",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 559,
+      "name": "Armor of Vulnerability",
+      "source": "DMG'14",
+      "page": "152",
+      "type": "heavy armor (plate armor)",
+      "rarity": "rare",
+      "value": "14000 gp"
+    },
+    {
+      "row": 566,
+      "name": "Armor of the Valiant Soul",
+      "source": "TDCSR",
+      "page": "202",
+      "type": "medium armor (scale mail)",
+      "rarity": "legendary",
+      "value": "100000 gp"
+    },
+    {
+      "row": 669,
+      "name": "Bag of Tricks",
+      "source": "DMG'14",
+      "page": "154",
+      "type": "wondrous item",
+      "rarity": "uncommon",
+      "value": "400 gp"
+    },
+    {
+      "row": 767,
+      "name": "Blade of Broken Mirrors",
+      "source": "EGW",
+      "page": "275",
+      "type": "weapon (dagger), simple weapon, melee weapon",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 856,
+      "name": "Bottled Comet",
+      "source": "DoDk",
+      "page": "230",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 884,
+      "name": "Brazen Armor",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "heavy armor (plate armor)",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 932,
+      "name": "Cabal's Ruin",
+      "source": "TDCSR",
+      "page": "203",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "125000 gp"
+    },
+    {
+      "row": 958,
+      "name": "Carpet of Flying",
+      "source": "DMG'14",
+      "page": "157",
+      "type": "wondrous item",
+      "rarity": "very rare",
+      "value": "30000 gp"
+    },
+    {
+      "row": 1031,
+      "name": "Chancellor's Crest",
+      "source": "DoDk",
+      "page": "232",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "15000 gp"
+    },
+    {
+      "row": 1061,
+      "name": "Chromatic Rose",
+      "source": "WBtW",
+      "page": "208",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "7000 gp"
+    },
+    {
+      "row": 1067,
+      "name": "Circlet of Barbed Vision",
+      "source": "TDCSR",
+      "page": "203",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "75000 gp"
+    },
+    {
+      "row": 1121,
+      "name": "Coat of Lies",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 1129,
+      "name": "Comet Smasher",
+      "source": "DoDk",
+      "page": "230",
+      "type": "generic variant",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 1130,
+      "name": "Comet Smasher Brass Knuckles",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "30000 gp"
+    },
+    {
+      "row": 1131,
+      "name": "Comet Smasher Cestus",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "30000 gp"
+    },
+    {
+      "row": 1132,
+      "name": "Comet Smasher Dragon Pole",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "20000 gp"
+    },
+    {
+      "row": 1133,
+      "name": "Comet Smasher Heavy Flail",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "40000 gp"
+    },
+    {
+      "row": 1134,
+      "name": "Comet Smasher Kanabo",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "40000 gp"
+    },
+    {
+      "row": 1135,
+      "name": "Comet Smasher Macuahuitl",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 1136,
+      "name": "Comet Smasher Meteor Hammer",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 1137,
+      "name": "Comet Smasher Nunchaku",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "40000 gp"
+    },
+    {
+      "row": 1138,
+      "name": "Comet Smasher Sai",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "30000 gp"
+    },
+    {
+      "row": 1139,
+      "name": "Comet Smasher Steel-capped Staff",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 1140,
+      "name": "Comet Smasher Three-Section Staff",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 1141,
+      "name": "Comet Smasher Tonfa",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 1153,
+      "name": "Condemner",
+      "source": "TDCSR",
+      "page": "204",
+      "type": "weapon (heavy crossbow), martial weapon, ranged weapon",
+      "rarity": "legendary",
+      "value": "75000 gp"
+    },
+    {
+      "row": 1244,
+      "name": "Crown of Westemär",
+      "source": "DoDk",
+      "page": "233",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "175000 gp"
+    },
+    {
+      "row": 1252,
+      "name": "Crystal Ball (Legendary Version)",
+      "source": "DMG'14",
+      "page": "159",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "175000 gp"
+    },
+    {
+      "row": 1314,
+      "name": "Danoth's Visor",
+      "source": "EGW",
+      "page": "270",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "175000 gp"
+    },
+    {
+      "row": 1345,
+      "name": "Deathwalker's Ward",
+      "source": "TDCSR",
+      "page": "204",
+      "type": "light armor (studded leather armor)",
+      "rarity": "legendary",
+      "value": "175000 gp"
+    },
+    {
+      "row": 1387,
+      "name": "Delerium Crystal Focus",
+      "source": "DoDk",
+      "page": "230",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 1388,
+      "name": "Delerium-Forged Blade",
+      "source": "DoDk",
+      "page": "230",
+      "type": "generic variant",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 1389,
+      "name": "Delerium-Forged Blade Arming Sword",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 1390,
+      "name": "Delerium-Forged Blade Bastard Sword",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "20000 gp"
+    },
+    {
+      "row": 1391,
+      "name": "Delerium-Forged Blade Broadsword",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 1392,
+      "name": "Delerium-Forged Blade Changdao",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "14000 gp"
+    },
+    {
+      "row": 1393,
+      "name": "Delerium-Forged Blade Claymore",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "16000 gp"
+    },
+    {
+      "row": 1394,
+      "name": "Delerium-Forged Blade Dao",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "16000 gp"
+    },
+    {
+      "row": 1395,
+      "name": "Delerium-Forged Blade Double-Bladed Scimitar",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 1396,
+      "name": "Delerium-Forged Blade Falcata",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "5000 gp"
+    },
+    {
+      "row": 1397,
+      "name": "Delerium-Forged Blade Falchion",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 1398,
+      "name": "Delerium-Forged Blade Flamberge Bastard Sword",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "14000 gp"
+    },
+    {
+      "row": 1399,
+      "name": "Delerium-Forged Blade Gladius",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "18000 gp"
+    },
+    {
+      "row": 1400,
+      "name": "Delerium-Forged Blade Heavy Scimitar",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 1401,
+      "name": "Delerium-Forged Blade Hooked Sword",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "3000 gp"
+    },
+    {
+      "row": 1402,
+      "name": "Delerium-Forged Blade Katana",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "9000 gp"
+    },
+    {
+      "row": 1403,
+      "name": "Delerium-Forged Blade Kodachi",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "17000 gp"
+    },
+    {
+      "row": 1404,
+      "name": "Delerium-Forged Blade Nodachi",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "18000 gp"
+    },
+    {
+      "row": 1405,
+      "name": "Delerium-Forged Blade Shikomizue",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "9000 gp"
+    },
+    {
+      "row": 1406,
+      "name": "Delerium-Forged Blade Tulwar",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 1407,
+      "name": "Delerium-Forged Blade Ulfberht Sword",
+      "source": "DoDk",
+      "page": "230",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "17000 gp"
+    },
+    {
+      "row": 1416,
+      "name": "Devastation Orb",
+      "source": "PotA",
+      "page": "222",
+      "type": "wondrous item",
+      "rarity": "very rare",
+      "value": "30000 gp"
+    },
+    {
+      "row": 1432,
+      "name": "Dissimortuum's Cursed Mask",
+      "source": "ToB1'23",
+      "page": "106",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "19000 gp"
+    },
+    {
+      "row": 1476,
+      "name": "Dragon Scale Mail",
+      "source": "DMG'14",
+      "page": "165",
+      "type": "medium armor",
+      "rarity": "very rare",
+      "value": "50000 gp"
+    },
+    {
+      "row": 1526,
+      "name": "Druidic Focus",
+      "source": "PHB'14",
+      "page": "151",
+      "type": "spellcasting focus",
+      "rarity": "none",
+      "value": "0 gp"
+    },
+    {
+      "row": 1574,
+      "name": "Elemental Gem",
+      "source": "DMG'14",
+      "page": "167",
+      "type": "wondrous item",
+      "rarity": "uncommon",
+      "value": "500 gp"
+    },
+    {
+      "row": 1627,
+      "name": "Eye and Hand of Vecna",
+      "source": "DMG'14",
+      "page": "224",
+      "type": "wondrous item",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 1686,
+      "name": "Fenthras",
+      "source": "TDCSR",
+      "page": "205",
+      "type": "weapon (longbow), martial weapon, ranged weapon",
+      "rarity": "legendary",
+      "value": "125000 gp"
+    },
+    {
+      "row": 1757,
+      "name": "Flame Lance",
+      "source": "DoDk",
+      "page": "231",
+      "type": "weapon (lance), martial weapon, melee weapon",
+      "rarity": "uncommon",
+      "value": "600 gp"
+    },
+    {
+      "row": 2032,
+      "name": "Glass-Studded Armor",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "light armor (studded leather armor)",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 2101,
+      "name": "Grimoire Infinitus",
+      "source": "EGW",
+      "page": "271",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "225000 gp"
+    },
+    {
+      "row": 2105,
+      "name": "Grovelthrash",
+      "source": "EGW",
+      "page": "275",
+      "type": "weapon (warhammer), martial weapon, melee weapon",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 2119,
+      "name": "Guild Signet",
+      "source": "GGR",
+      "page": "178",
+      "type": "ring",
+      "rarity": "uncommon",
+      "value": "500 gp"
+    },
+    {
+      "row": 2153,
+      "name": "Hardened Delerium-tipped Arrows",
+      "source": "DoDk",
+      "page": "230",
+      "type": "generic variant",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 2163,
+      "name": "Hazewalker Plate",
+      "source": "DoDk",
+      "page": "230",
+      "type": "heavy armor (plate armor)",
+      "rarity": "very rare",
+      "value": "40000 gp"
+    },
+    {
+      "row": 2269,
+      "name": "Helm of Patron Saints",
+      "source": "DoDk",
+      "page": "234",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "16000 gp"
+    },
+    {
+      "row": 2300,
+      "name": "Hide of the Feral Guardian",
+      "source": "EGW",
+      "page": "271",
+      "type": "light armor (studded leather armor)",
+      "rarity": "legendary",
+      "value": "100000 gp"
+    },
+    {
+      "row": 2334,
+      "name": "Holy Symbol",
+      "source": "PHB'14",
+      "page": "151",
+      "type": "spellcasting focus",
+      "rarity": "none",
+      "value": "0 gp"
+    },
+    {
+      "row": 2339,
+      "name": "Honor's Last Stand",
+      "source": "TDCSR",
+      "page": "206",
+      "type": "shield (shield)",
+      "rarity": "legendary",
+      "value": "150000 gp"
+    },
+    {
+      "row": 2400,
+      "name": "Ignacious, the Sword of Burning Truth",
+      "source": "DoDk",
+      "page": "234",
+      "type": "weapon (longsword), martial weapon, melee weapon",
+      "rarity": "legendary",
+      "value": "250000 gp"
+    },
+    {
+      "row": 2410,
+      "name": "Imbued Wood Focus",
+      "source": "ERLW",
+      "page": "277",
+      "type": "wondrous item, spellcasting focus",
+      "rarity": "common",
+      "value": "40 gp"
+    },
+    {
+      "row": 2421,
+      "name": "Infiltrator's Key",
+      "source": "EGW",
+      "page": "272",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "100000 gp"
+    },
+    {
+      "row": 2430,
+      "name": "Inscrutable Staff",
+      "source": "DoDk",
+      "page": "233",
+      "type": "staff, weapon, simple weapon, melee weapon",
+      "rarity": "legendary",
+      "value": "100000 gp"
+    },
+    {
+      "row": 2446,
+      "name": "Ioun Stone",
+      "source": "LLK",
+      "page": "55",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "8000 gp"
+    },
+    {
+      "row": 2486,
+      "name": "Jewel of Three Prayers",
+      "source": "CRCotN",
+      "page": "213",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "125000 gp"
+    },
+    {
+      "row": 2528,
+      "name": "Kiss of the Changebringer",
+      "source": "TDCSR",
+      "page": "206",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "200000 gp"
+    },
+    {
+      "row": 2534,
+      "name": "Knifewing Cape",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "8000 gp"
+    },
+    {
+      "row": 2582,
+      "name": "Lash of Shadows",
+      "source": "EGW",
+      "page": "276",
+      "type": "weapon (whip), martial weapon, melee weapon",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 2626,
+      "name": "Lindwyrm Venom",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "potion",
+      "rarity": "very rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 2657,
+      "name": "Lord Commander's Badge",
+      "source": "DoDk",
+      "page": "233",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "15000 gp"
+    },
+    {
+      "row": 2694,
+      "name": "Lycan Arming Sword",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "8000 gp"
+    },
+    {
+      "row": 2695,
+      "name": "Lycan Bardiche",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 2696,
+      "name": "Lycan Bastard Sword",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 2697,
+      "name": "Lycan Bearded Axe",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "5000 gp"
+    },
+    {
+      "row": 2698,
+      "name": "Lycan Brass Knuckles",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 2699,
+      "name": "Lycan Broadsword",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 2700,
+      "name": "Lycan Cestus",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "rare",
+      "value": "7000 gp"
+    },
+    {
+      "row": 2701,
+      "name": "Lycan Chain-Sickle",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "18000 gp"
+    },
+    {
+      "row": 2702,
+      "name": "Lycan Changdao",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 2703,
+      "name": "Lycan Claymore",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "7000 gp"
+    },
+    {
+      "row": 2704,
+      "name": "Lycan Composite Bow",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, ranged weapon",
+      "rarity": "rare",
+      "value": "9000 gp"
+    },
+    {
+      "row": 2705,
+      "name": "Lycan Dao",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "3000 gp"
+    },
+    {
+      "row": 2706,
+      "name": "Lycan Double-Bladed Axe",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "15000 gp"
+    },
+    {
+      "row": 2707,
+      "name": "Lycan Double-Bladed Scimitar",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 2708,
+      "name": "Lycan Dragon Pole",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "5000 gp"
+    },
+    {
+      "row": 2709,
+      "name": "Lycan Elven Glaive",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "17000 gp"
+    },
+    {
+      "row": 2710,
+      "name": "Lycan Falcata",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "18000 gp"
+    },
+    {
+      "row": 2711,
+      "name": "Lycan Falchion",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "8000 gp"
+    },
+    {
+      "row": 2712,
+      "name": "Lycan Fan Axe",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 2713,
+      "name": "Lycan Flamberge Bastard Sword",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 2714,
+      "name": "Lycan Gladius",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "15000 gp"
+    },
+    {
+      "row": 2715,
+      "name": "Lycan Greatbow",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, ranged weapon",
+      "rarity": "rare",
+      "value": "17000 gp"
+    },
+    {
+      "row": 2716,
+      "name": "Lycan Guandao",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "6000 gp"
+    },
+    {
+      "row": 2717,
+      "name": "Lycan Heavy Flail",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "18000 gp"
+    },
+    {
+      "row": 2718,
+      "name": "Lycan Heavy Scimitar",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 2719,
+      "name": "Lycan Hooked Shortspear",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "17000 gp"
+    },
+    {
+      "row": 2720,
+      "name": "Lycan Hooked Sword",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "7000 gp"
+    },
+    {
+      "row": 2721,
+      "name": "Lycan Hoopak",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "7000 gp"
+    },
+    {
+      "row": 2722,
+      "name": "Lycan Kanabo",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 2723,
+      "name": "Lycan Katana",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 2724,
+      "name": "Lycan Kodachi",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "6000 gp"
+    },
+    {
+      "row": 2725,
+      "name": "Lycan Kukri Knife",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 2726,
+      "name": "Lycan Kunai",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, ranged weapon",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 2727,
+      "name": "Lycan Kusarigama",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 2728,
+      "name": "Lycan Light Repeating Crossbow",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, simple weapon, ranged weapon",
+      "rarity": "rare",
+      "value": "18000 gp"
+    },
+    {
+      "row": 2729,
+      "name": "Lycan Long Axe",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 2730,
+      "name": "Lycan Macuahuitl",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 2731,
+      "name": "Lycan Masakari Axe",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "8000 gp"
+    },
+    {
+      "row": 2732,
+      "name": "Lycan Meteor Hammer",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "16000 gp"
+    },
+    {
+      "row": 2733,
+      "name": "Lycan Naginata",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "15000 gp"
+    },
+    {
+      "row": 2734,
+      "name": "Lycan Ninjatō",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "rare",
+      "value": "7000 gp"
+    },
+    {
+      "row": 2735,
+      "name": "Lycan Nodachi",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "5000 gp"
+    },
+    {
+      "row": 2736,
+      "name": "Lycan Nunchaku",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 2737,
+      "name": "Lycan Repeating Crossbow",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, ranged weapon",
+      "rarity": "rare",
+      "value": "9000 gp"
+    },
+    {
+      "row": 2738,
+      "name": "Lycan Repeating Hand Crossbow",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, ranged weapon",
+      "rarity": "rare",
+      "value": "17000 gp"
+    },
+    {
+      "row": 2739,
+      "name": "Lycan Sai",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "8000 gp"
+    },
+    {
+      "row": 2740,
+      "name": "Lycan Scourge",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 2741,
+      "name": "Lycan Scythe",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 2742,
+      "name": "Lycan Shikomizue",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "17000 gp"
+    },
+    {
+      "row": 2743,
+      "name": "Lycan Shuriken",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, ranged weapon",
+      "rarity": "rare",
+      "value": "16000 gp"
+    },
+    {
+      "row": 2744,
+      "name": "Lycan Spiked Chain",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "5000 gp"
+    },
+    {
+      "row": 2745,
+      "name": "Lycan Steel-capped Staff",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "17000 gp"
+    },
+    {
+      "row": 2746,
+      "name": "Lycan Tekkō-kagi",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "18000 gp"
+    },
+    {
+      "row": 2747,
+      "name": "Lycan Three-Section Staff",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "5000 gp"
+    },
+    {
+      "row": 2748,
+      "name": "Lycan Tonfa",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "15000 gp"
+    },
+    {
+      "row": 2749,
+      "name": "Lycan Tulwar",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 2750,
+      "name": "Lycan Ulfberht Sword",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "8000 gp"
+    },
+    {
+      "row": 2751,
+      "name": "Lycan Weapon",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "generic variant",
+      "rarity": "rare",
+      "value": "17000 gp"
+    },
+    {
+      "row": 2752,
+      "name": "Lycan Yklwa",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "weapon, simple weapon, melee weapon",
+      "rarity": "rare",
+      "value": "15000 gp"
+    },
+    {
+      "row": 2753,
+      "name": "Lycanthropy Antidote",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "potion",
+      "rarity": "rare",
+      "value": "3500 gp"
+    },
+    {
+      "row": 2761,
+      "name": "Mace of the Black Crown",
+      "source": "EGW",
+      "page": "276",
+      "type": "weapon (mace), simple weapon, melee weapon",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 2791,
+      "name": "Manual of Golems",
+      "source": "DMG'14",
+      "page": "180",
+      "type": "wondrous item",
+      "rarity": "very rare",
+      "value": "20000 gp"
+    },
+    {
+      "row": 3010,
+      "name": "Monster Tamer's Arming",
+      "source": "TGS2",
+      "page": "124",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 3011,
+      "name": "Monster Tamer's Bastard",
+      "source": "TGS2",
+      "page": "124",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 3019,
+      "name": "Monster Tamer's Flamberge Bastard",
+      "source": "TGS2",
+      "page": "124",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 3022,
+      "name": "Monster Tamer's Hooked",
+      "source": "TGS2",
+      "page": "124",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "18000 gp"
+    },
+    {
+      "row": 3030,
+      "name": "Monster Tamer's Ulfberht",
+      "source": "TGS2",
+      "page": "124",
+      "type": "weapon, martial weapon, melee weapon",
+      "rarity": "rare",
+      "value": "6000 gp"
+    },
+    {
+      "row": 3083,
+      "name": "Musical Instrument",
+      "source": "PHB'14",
+      "page": "154",
+      "type": "instrument",
+      "rarity": "none",
+      "value": "0 gp"
+    },
+    {
+      "row": 3084,
+      "name": "Musical Instrument",
+      "source": "SCAG",
+      "page": "124",
+      "type": "instrument",
+      "rarity": "none",
+      "value": "0 gp"
+    },
+    {
+      "row": 3088,
+      "name": "Mythcarver",
+      "source": "TDCSR",
+      "page": "207",
+      "type": "weapon (longsword), martial weapon, melee weapon",
+      "rarity": "legendary",
+      "value": "125000 gp"
+    },
+    {
+      "row": 3120,
+      "name": "Niko's Mace",
+      "source": "UHftLH",
+      "page": "undefined",
+      "type": "weapon (mace), simple weapon, melee weapon",
+      "rarity": "very rare",
+      "value": "40000 gp"
+    },
+    {
+      "row": 3216,
+      "name": "Orb of Shielding",
+      "source": "ERLW",
+      "page": "278",
+      "type": "wondrous item, spellcasting focus",
+      "rarity": "common",
+      "value": "30 gp"
+    },
+    {
+      "row": 3261,
+      "name": "Painted Stones",
+      "source": "TftS",
+      "page": "176",
+      "type": "wondrous item",
+      "rarity": "uncommon",
+      "value": "500 gp"
+    },
+    {
+      "row": 3335,
+      "name": "Plate of the Dawnmartyr",
+      "source": "TDCSR",
+      "page": "208",
+      "type": "heavy armor (plate armor)",
+      "rarity": "legendary",
+      "value": "100000 gp"
+    },
+    {
+      "row": 3433,
+      "name": "Potion of Resistance",
+      "source": "DMG'14",
+      "page": "188",
+      "type": "potion",
+      "rarity": "uncommon",
+      "value": "100 gp"
+    },
+    {
+      "row": 3469,
+      "name": "Purging Rod",
+      "source": "DoDk",
+      "page": "230",
+      "type": "rod",
+      "rarity": "uncommon",
+      "value": "600 gp"
+    },
+    {
+      "row": 3471,
+      "name": "Pyremaul",
+      "source": "TDCSR",
+      "page": "208",
+      "type": "weapon (maul), martial weapon, melee weapon",
+      "rarity": "legendary",
+      "value": "200000 gp"
+    },
+    {
+      "row": 3477,
+      "name": "Quaal's Feather Token",
+      "source": "DMG'14",
+      "page": "188",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "2000 gp"
+    },
+    {
+      "row": 3511,
+      "name": "Ready Gunk",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "7000 gp"
+    },
+    {
+      "row": 3523,
+      "name": "Refined Delerium Dust",
+      "source": "DoDk",
+      "page": "231",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 3571,
+      "name": "Ring of Elemental Command",
+      "source": "DMG'14",
+      "page": "190",
+      "type": "ring",
+      "rarity": "legendary",
+      "value": "275000 gp"
+    },
+    {
+      "row": 3596,
+      "name": "Ring of Resistance",
+      "source": "DMG'14",
+      "page": "192",
+      "type": "ring",
+      "rarity": "rare",
+      "value": "16000 gp"
+    },
+    {
+      "row": 3742,
+      "name": "Ruin's Wake",
+      "source": "EGW",
+      "page": "277",
+      "type": "weapon (spear), simple weapon, melee weapon",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 3777,
+      "name": "Saint Vitruvio's Phylactery",
+      "source": "DoDk",
+      "page": "233",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "11000 gp"
+    },
+    {
+      "row": 3805,
+      "name": "Sceptre of Saint Vitruvio",
+      "source": "DoDk",
+      "page": "234",
+      "type": "staff, weapon, simple weapon, melee weapon",
+      "rarity": "rare",
+      "value": "8000 gp"
+    },
+    {
+      "row": 3831,
+      "name": "Scroll of Protection",
+      "source": "DMG'14",
+      "page": "199",
+      "type": "scroll",
+      "rarity": "rare",
+      "value": "9000 gp"
+    },
+    {
+      "row": 3887,
+      "name": "Shard Solitaire",
+      "source": "KftGV",
+      "page": "193",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "150000 gp"
+    },
+    {
+      "row": 3961,
+      "name": "Silken Spite",
+      "source": "EGW",
+      "page": "277",
+      "type": "weapon (rapier), martial weapon, melee weapon",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 3987,
+      "name": "Skymetal Shield",
+      "source": "DoDk",
+      "page": "232",
+      "type": "shield (shield)",
+      "rarity": "uncommon",
+      "value": "300 gp"
+    },
+    {
+      "row": 3988,
+      "name": "Skymetal Staff",
+      "source": "DoDk",
+      "page": "232",
+      "type": "staff, weapon (quarterstaff), simple weapon, melee weapon",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 4132,
+      "name": "Spellpiercing Wand",
+      "source": "DoDk",
+      "page": "232",
+      "type": "wand",
+      "rarity": "uncommon",
+      "value": "200 gp"
+    },
+    {
+      "row": 4162,
+      "name": "Spire of Conflux",
+      "source": "TDCSR",
+      "page": "209",
+      "type": "staff, weapon, simple weapon, melee weapon",
+      "rarity": "legendary",
+      "value": "150000 gp"
+    },
+    {
+      "row": 4185,
+      "name": "Spymaster's Signet",
+      "source": "DoDk",
+      "page": "233",
+      "type": "ring",
+      "rarity": "legendary",
+      "value": "125000 gp"
+    },
+    {
+      "row": 4191,
+      "name": "Staff of Contaminated Power",
+      "source": "DoDk",
+      "page": "232",
+      "type": "staff, weapon, simple weapon, melee weapon",
+      "rarity": "legendary",
+      "value": "300000 gp"
+    },
+    {
+      "row": 4222,
+      "name": "Star Razor",
+      "source": "TDCSR",
+      "page": "210",
+      "type": "weapon (longsword), martial weapon, melee weapon",
+      "rarity": "legendary",
+      "value": "250000 gp"
+    },
+    {
+      "row": 4227,
+      "name": "Starcrossed Bow",
+      "source": "DoDk",
+      "page": "232",
+      "type": "generic variant",
+      "rarity": "rare",
+      "value": "16000 gp"
+    },
+    {
+      "row": 4228,
+      "name": "Starcrossed Composite Bow",
+      "source": "DoDk",
+      "page": "232",
+      "type": "weapon, martial weapon, ranged weapon",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 4229,
+      "name": "Starcrossed Greatbow",
+      "source": "DoDk",
+      "page": "232",
+      "type": "weapon, martial weapon, ranged weapon",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 4230,
+      "name": "Starcrossed Light Repeating Crossbow",
+      "source": "DoDk",
+      "page": "232",
+      "type": "weapon, simple weapon, ranged weapon",
+      "rarity": "rare",
+      "value": "14000 gp"
+    },
+    {
+      "row": 4231,
+      "name": "Starcrossed Repeating Crossbow",
+      "source": "DoDk",
+      "page": "232",
+      "type": "weapon, martial weapon, ranged weapon",
+      "rarity": "rare",
+      "value": "10000 gp"
+    },
+    {
+      "row": 4232,
+      "name": "Starcrossed Repeating Hand Crossbow",
+      "source": "DoDk",
+      "page": "232",
+      "type": "weapon, martial weapon, ranged weapon",
+      "rarity": "rare",
+      "value": "13000 gp"
+    },
+    {
+      "row": 4252,
+      "name": "Steward's Seal",
+      "source": "DoDk",
+      "page": "233",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "12000 gp"
+    },
+    {
+      "row": 4327,
+      "name": "Stormgirdle",
+      "source": "EGW",
+      "page": "273",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "150000 gp"
+    },
+    {
+      "row": 4357,
+      "name": "Sword of Answering",
+      "source": "DMG'14",
+      "page": "206",
+      "type": "weapon (longsword), martial weapon, melee weapon",
+      "rarity": "legendary",
+      "value": "175000 gp"
+    },
+    {
+      "row": 4406,
+      "name": "The Bloody End",
+      "source": "EGW",
+      "page": "278",
+      "type": "weapon (morningstar), martial weapon, melee weapon",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 4414,
+      "name": "The Shield of Sacred Flame",
+      "source": "DoDk",
+      "page": "234",
+      "type": "shield (shield)",
+      "rarity": "rare",
+      "value": "8000 gp"
+    },
+    {
+      "row": 4436,
+      "name": "Titanstone Knuckles",
+      "source": "TDCSR",
+      "page": "211",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "225000 gp"
+    },
+    {
+      "row": 4475,
+      "name": "True-Ice Shards",
+      "source": "CoA",
+      "page": "275",
+      "type": "melee weapon",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 4526,
+      "name": "Vanisher Hat",
+      "source": "ToB1'23",
+      "page": "319",
+      "type": "wondrous item",
+      "rarity": "uncommon",
+      "value": "400 gp"
+    },
+    {
+      "row": 4581,
+      "name": "Verminshroud",
+      "source": "EGW",
+      "page": "273",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "175000 gp"
+    },
+    {
+      "row": 4811,
+      "name": "Wand of Silence",
+      "source": "GHLoE",
+      "page": "111",
+      "type": "wand",
+      "rarity": "uncommon",
+      "value": "400 gp"
+    },
+    {
+      "row": 4889,
+      "name": "Whisper",
+      "source": "TDCSR",
+      "page": "211",
+      "type": "weapon (dagger), simple weapon, melee weapon",
+      "rarity": "legendary",
+      "value": "200000 gp"
+    },
+    {
+      "row": 4904,
+      "name": "Will of the Talon",
+      "source": "EGW",
+      "page": "279",
+      "type": "weapon (war pick), martial weapon, melee weapon",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 4951,
+      "name": "Wraps of Dyamak",
+      "source": "TDCSR",
+      "page": "212",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "150000 gp"
+    },
+    {
+      "row": 4955,
+      "name": "Wraps of Unarmed Prowess",
+      "source": "BMT",
+      "page": "69",
+      "type": "wondrous item",
+      "rarity": "uncommon",
+      "value": "100 gp"
+    },
+    {
+      "row": 4957,
+      "name": "Wreath of the Prism",
+      "source": "EGW",
+      "page": "274",
+      "type": "wondrous item",
+      "rarity": "legendary",
+      "value": "225000 gp"
+    },
+    {
+      "row": 4991,
+      "name": "WoodCutters Axe",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "weapon (handaxe)",
+      "rarity": "uncommon",
+      "value": "300 gp"
+    },
+    {
+      "row": 4992,
+      "name": "Veil of Shadows",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "1,800 gp"
+    },
+    {
+      "row": 4993,
+      "name": "The Aegis Codex",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item (book)",
+      "rarity": "rare",
+      "value": "2,000 gp"
+    },
+    {
+      "row": 4994,
+      "name": "Tempest Lantern",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item",
+      "rarity": "artifact",
+      "value": "Priceless"
+    },
+    {
+      "row": 4995,
+      "name": "Talisman of Elemental Fury",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "1,800 gp"
+    },
+    {
+      "row": 4996,
+      "name": "Sigil of Thunderous Might",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "1,500 gp"
+    },
+    {
+      "row": 4997,
+      "name": "Shadowstride Boots",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item",
+      "rarity": "artifact",
+      "value": ""
+    },
+    {
+      "row": 4998,
+      "name": "Seekers Eye",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item",
+      "rarity": "artifact",
+      "value": ""
+    },
+    {
+      "row": 4999,
+      "name": "Seal of Holy Vengeance",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "2,000 gp"
+    },
+    {
+      "row": 5000,
+      "name": "Scroll of the Vanquisher's Amulet",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item",
+      "rarity": "Artifact",
+      "value": ""
+    },
+    {
+      "row": 5001,
+      "name": "Robe of Elemental Radiance",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "2,200 gp"
+    },
+    {
+      "row": 5002,
+      "name": "Ring of the grand wizard",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "ring",
+      "rarity": "rare",
+      "value": "2,000 gp"
+    },
+    {
+      "row": 5003,
+      "name": "Requiping Ring",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "ring",
+      "rarity": "rare",
+      "value": "1,800 gp"
+    },
+    {
+      "row": 5004,
+      "name": "Obsidian Blade",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "weapon (longsword or greatsword)",
+      "rarity": "artifact",
+      "value": ""
+    },
+    {
+      "row": 5005,
+      "name": "Medallion of Harmonious Resonance",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item (medallion)",
+      "rarity": "rare",
+      "value": "1,800 gp"
+    },
+    {
+      "row": 5006,
+      "name": "Gauntlets of Whirling Strikes",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item (gauntlets)",
+      "rarity": "rare",
+      "value": "1,600 gp"
+    },
+    {
+      "row": 5007,
+      "name": "Crystal of True Sight",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item",
+      "rarity": "artifact",
+      "value": ""
+    },
+    {
+      "row": 5008,
+      "name": "Celestial Shield",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "shield",
+      "rarity": "artifact",
+      "value": ""
+    },
+    {
+      "row": 5009,
+      "name": "Bracer of Piercing Arrows",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "1,500 gp"
+    },
+    {
+      "row": 5010,
+      "name": "Amulet of Divine Retribution",
+      "source": "Homebrew",
+      "page": "—",
+      "type": "wondrous item",
+      "rarity": "rare",
+      "value": "1,500 gp"
+    },
+    {
+      "row": 5011,
+      "name": "Aetherstone Compass",
+      "source": "CAL",
+      "page": "1",
+      "type": "wondrous item",
+      "rarity": "artifact",
+      "value": "0 gp"
+    },
+    {
+      "row": 5012,
+      "name": "Lightning Rod",
+      "source": "Homebrew",
+      "page": "",
+      "type": "rod",
+      "rarity": "rare",
+      "value": ""
+    },
+    {
+      "row": 5013,
+      "name": "Commoners Veneer",
+      "source": "Homebrew",
+      "page": "-",
+      "type": "wondrous item",
+      "rarity": "common",
+      "value": "50 gp"
+    }
+  ]
+}

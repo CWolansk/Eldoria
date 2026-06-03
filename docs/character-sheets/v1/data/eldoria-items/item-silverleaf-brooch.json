@@ -1,0 +1,53 @@
+{
+  "id": "item:silverleaf-brooch:eldoria",
+  "ref": "item-silverleaf-brooch.json",
+  "refId": "item-silverleaf-brooch",
+  "kind": "item",
+  "name": "Silverleaf Brooch",
+  "source": "Eldoria",
+  "page": null,
+  "sourceKey": "Silverleaf Brooch|Eldoria",
+  "baseItem": null,
+  "type": {
+    "code": "",
+    "abbreviation": "",
+    "source": "Eldoria",
+    "name": "wondrous item",
+    "ref": ""
+  },
+  "typeAlt": null,
+  "rarity": "common",
+  "value": 50000,
+  "weight": null,
+  "attunement": {
+    "required": false,
+    "text": "",
+    "alternatives": [],
+    "tags": []
+  },
+  "tags": {
+    "wondrous": true,
+    "silverleaf": true,
+    "travel": true
+  },
+  "bonuses": {},
+  "weapon": null,
+  "armor": null,
+  "conditionalDamage": [],
+  "mechanics": {},
+  "entries": [
+    "This delicate brooch is crafted from a real leaf dipped in enchanted silver, preserving its veins and texture in perfect detail.",
+    "It serves as a diplomatic passport to the Silverleaf Lands. When worn visibly, the brooch allows the wearer and their traveling companions to pass through the magical wards guarding the elven kingdom."
+  ],
+  "raw": {
+    "name": "Silverleaf Brooch",
+    "source": "Eldoria",
+    "rarity": "common",
+    "reqAttune": false,
+    "type": "wondrous item",
+    "entries": [
+      "This delicate brooch is crafted from a real leaf dipped in enchanted silver, preserving its veins and texture in perfect detail.",
+      "It serves as a diplomatic passport to the Silverleaf Lands. When worn visibly, the brooch allows the wearer and their traveling companions to pass through the magical wards guarding the elven kingdom."
+    ]
+  }
+}

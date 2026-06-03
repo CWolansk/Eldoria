@@ -1,0 +1,451 @@
+{
+  "Crestfall": {
+    "Ardenville": {
+      "basePath": "../world/crestfall/ardenville/npcs/",
+      "npcs": [
+        {
+          "name": "Corin Tidehammer",
+          "file": "corin-tidehammer.html",
+          "href": "../world/crestfall/ardenville/npcs/corin-tidehammer.html"
+        },
+        {
+          "name": "Edda Netsong",
+          "file": "edda-netsong.html",
+          "href": "../world/crestfall/ardenville/npcs/edda-netsong.html"
+        },
+        {
+          "name": "Gregor Woods",
+          "file": "gregor-woods.html",
+          "href": "../world/crestfall/ardenville/npcs/gregor-woods.html"
+        },
+        {
+          "name": "Isolde Fairweather",
+          "file": "isolde-fairweather.html",
+          "href": "../world/crestfall/ardenville/npcs/isolde-fairweather.html"
+        },
+        {
+          "name": "Kellen Redshore",
+          "file": "kellen-redshore.html",
+          "href": "../world/crestfall/ardenville/npcs/kellen-redshore.html"
+        },
+        {
+          "name": "Mira Softstep",
+          "file": "mira-softstep.html",
+          "href": "../world/crestfall/ardenville/npcs/mira-softstep.html"
+        },
+        {
+          "name": "Salty Pete",
+          "file": "salty-pete.html",
+          "href": "../world/crestfall/ardenville/npcs/salty-pete.html"
+        }
+      ]
+    },
+    "Fairfield": {
+      "basePath": "../world/crestfall/fairfield/npcs/",
+      "npcs": [
+        {
+          "name": "Bram Copperkettle",
+          "file": "bram-copperkettle.html",
+          "href": "../world/crestfall/fairfield/npcs/bram-copperkettle.html"
+        },
+        {
+          "name": "Meredith Caravan-Friend",
+          "file": "meredith-caravan-friend.html",
+          "href": "../world/crestfall/fairfield/npcs/meredith-caravan-friend.html"
+        },
+        {
+          "name": "Valeris Shadowmere",
+          "file": "valeris-shadowmere.html",
+          "href": "../world/crestfall/fairfield/npcs/valeris-shadowmere.html"
+        }
+      ]
+    },
+    "Highreach": {
+      "basePath": "../world/crestfall/highreach/npcs/",
+      "npcs": [
+        {
+          "name": "Aidan Reed",
+          "file": "aidan-reed.html",
+          "href": "../world/crestfall/highreach/npcs/aidan-reed.html"
+        },
+        {
+          "name": "Alaric Emberfell",
+          "file": "alaric-emberfell.html",
+          "href": "../world/crestfall/highreach/npcs/alaric-emberfell.html"
+        },
+        {
+          "name": "Alistair Goldman",
+          "file": "alistair-goldman.html",
+          "href": "../world/crestfall/highreach/npcs/alistair-goldman.html"
+        },
+        {
+          "name": "Alistair Grimwood",
+          "file": "alistair-grimwood.html",
+          "href": "../world/crestfall/highreach/npcs/alistair-grimwood.html"
+        },
+        {
+          "name": "Alma Ironfist nee Brightwater",
+          "file": "alma-ironfist-nee-brightwater.html",
+          "href": "../world/crestfall/highreach/npcs/alma-ironfist-nee-brightwater.html"
+        },
+        {
+          "name": "Aric Stormblade",
+          "file": "aric-stormblade.html",
+          "href": "../world/crestfall/highreach/npcs/aric-stormblade.html"
+        },
+        {
+          "name": "Beatrix Goldleaf",
+          "file": "beatrix-goldleaf.html",
+          "href": "../world/crestfall/highreach/npcs/beatrix-goldleaf.html"
+        },
+        {
+          "name": "Borin Stonefist",
+          "file": "borin-stonefist.html",
+          "href": "../world/crestfall/highreach/npcs/borin-stonefist.html"
+        },
+        {
+          "name": "Brenna Barkridge nee Ironfoot",
+          "file": "brenna-barkridge-nee-ironfoot.html",
+          "href": "../world/crestfall/highreach/npcs/brenna-barkridge-nee-ironfoot.html"
+        },
+        {
+          "name": "Brix Ironwhistle",
+          "file": "brix-ironwhistle.html",
+          "href": "../world/crestfall/highreach/npcs/brix-ironwhistle.html"
+        },
+        {
+          "name": "Brom Goldfang",
+          "file": "brom-goldfang.html",
+          "href": "../world/crestfall/highreach/npcs/brom-goldfang.html"
+        },
+        {
+          "name": "Celeste Stonetooth nee Moonwhisper",
+          "file": "celeste-stonetooth-nee-moonwhisper.html",
+          "href": "../world/crestfall/highreach/npcs/celeste-stonetooth-nee-moonwhisper.html"
+        },
+        {
+          "name": "Dame Isolde Swiftwind",
+          "file": "dame-isolde-swiftwind.html",
+          "href": "../world/crestfall/highreach/npcs/dame-isolde-swiftwind.html"
+        },
+        {
+          "name": "Don Gnocianno",
+          "file": "don-gnocianno.html",
+          "href": "../world/crestfall/highreach/npcs/don-gnocianno.html"
+        },
+        {
+          "name": "Elder Rowan",
+          "file": "elder-rowan.html",
+          "href": "../world/crestfall/highreach/npcs/elder-rowan.html"
+        },
+        {
+          "name": "Esmerelda Voss",
+          "file": "esmerelda-voss.html",
+          "href": "../world/crestfall/highreach/npcs/esmerelda-voss.html"
+        },
+        {
+          "name": "Evelyn Marroway",
+          "file": "evelyn-marroway.html",
+          "href": "../world/crestfall/highreach/npcs/evelyn-marroway.html"
+        },
+        {
+          "name": "Father Eldon Lightbringer",
+          "file": "father-eldon-lightbringer.html",
+          "href": "../world/crestfall/highreach/npcs/father-eldon-lightbringer.html"
+        },
+        {
+          "name": "Felix Tradewind",
+          "file": "felix-tradewind.html",
+          "href": "../world/crestfall/highreach/npcs/felix-tradewind.html"
+        },
+        {
+          "name": "Fiona Hammerfist nee Thistledown",
+          "file": "fiona-hammerfist-nee-thistledown.html",
+          "href": "../world/crestfall/highreach/npcs/fiona-hammerfist-nee-thistledown.html"
+        },
+        {
+          "name": "Gareth Ironbrow",
+          "file": "gareth-ironbrow.html",
+          "href": "../world/crestfall/highreach/npcs/gareth-ironbrow.html"
+        },
+        {
+          "name": "Garrick Ironbrow",
+          "file": "garrick-ironbrow.html",
+          "href": "../world/crestfall/highreach/npcs/garrick-ironbrow.html"
+        },
+        {
+          "name": "Highreach NPC Index",
+          "file": "highreach-npc-index.html",
+          "href": "../world/crestfall/highreach/npcs/highreach-npc-index.html"
+        },
+        {
+          "name": "Ingrid Hightower",
+          "file": "ingrid-hightower.html",
+          "href": "../world/crestfall/highreach/npcs/ingrid-hightower.html"
+        },
+        {
+          "name": "Jarek IronFist",
+          "file": "jarek-ironfist.html",
+          "href": "../world/crestfall/highreach/npcs/jarek-ironfist.html"
+        },
+        {
+          "name": "Jon Brightman",
+          "file": "jon-brightman.html",
+          "href": "../world/crestfall/highreach/npcs/jon-brightman.html"
+        },
+        {
+          "name": "Kara Nightshade",
+          "file": "kara-nightshade.html",
+          "href": "../world/crestfall/highreach/npcs/kara-nightshade.html"
+        },
+        {
+          "name": "Kara Stonefoot",
+          "file": "kara-stonefoot.html",
+          "href": "../world/crestfall/highreach/npcs/kara-stonefoot.html"
+        },
+        {
+          "name": "King Alaric Stormhelm",
+          "file": "king-alaric-stormhelm.html",
+          "href": "../world/crestfall/highreach/npcs/king-alaric-stormhelm.html"
+        },
+        {
+          "name": "Lady Elara Moonshadow",
+          "file": "lady-elara-moonshadow.html",
+          "href": "../world/crestfall/highreach/npcs/lady-elara-moonshadow.html"
+        },
+        {
+          "name": "Lady Millicent Goldleaf",
+          "file": "lady-millicent-goldleaf.html",
+          "href": "../world/crestfall/highreach/npcs/lady-millicent-goldleaf.html"
+        },
+        {
+          "name": "Lord Cedric Brightblade",
+          "file": "lord-cedric-brightblade.html",
+          "href": "../world/crestfall/highreach/npcs/lord-cedric-brightblade.html"
+        },
+        {
+          "name": "Lord Frederick Goldman",
+          "file": "lord-frederick-goldman.html",
+          "href": "../world/crestfall/highreach/npcs/lord-frederick-goldman.html"
+        },
+        {
+          "name": "Lyra Dawnbringer",
+          "file": "lyra-dawnbringer.html",
+          "href": "../world/crestfall/highreach/npcs/lyra-dawnbringer.html"
+        },
+        {
+          "name": "Nimble Nackfinger",
+          "file": "nimble-nackfinger.html",
+          "href": "../world/crestfall/highreach/npcs/nimble-nackfinger.html"
+        },
+        {
+          "name": "Nyla Windrider",
+          "file": "nyla-windrider.html",
+          "href": "../world/crestfall/highreach/npcs/nyla-windrider.html"
+        },
+        {
+          "name": "Oren Hammerfist",
+          "file": "oren-hammerfist.html",
+          "href": "../world/crestfall/highreach/npcs/oren-hammerfist.html"
+        },
+        {
+          "name": "Pip Whiskerwind",
+          "file": "pip-whiskerwind.html",
+          "href": "../world/crestfall/highreach/npcs/pip-whiskerwind.html"
+        },
+        {
+          "name": "Professor Astrid Starcaller",
+          "file": "professor-astrid-starcaller.html",
+          "href": "../world/crestfall/highreach/npcs/professor-astrid-starcaller.html"
+        },
+        {
+          "name": "Professor Elara Nightveil",
+          "file": "professor-elara-nightveil.html",
+          "href": "../world/crestfall/highreach/npcs/professor-elara-nightveil.html"
+        },
+        {
+          "name": "Professor Galen Thornbrew",
+          "file": "professor-galen-thornbrew.html",
+          "href": "../world/crestfall/highreach/npcs/professor-galen-thornbrew.html"
+        },
+        {
+          "name": "Professor Mordecai Runeweaver",
+          "file": "professor-mordecai-runeweaver.html",
+          "href": "../world/crestfall/highreach/npcs/professor-mordecai-runeweaver.html"
+        },
+        {
+          "name": "Professor Seraphine Duskwillow",
+          "file": "professor-seraphine-duskwillow.html",
+          "href": "../world/crestfall/highreach/npcs/professor-seraphine-duskwillow.html"
+        },
+        {
+          "name": "Professor Thaldris Flamehand",
+          "file": "professor-thaldris-flamehand.html",
+          "href": "../world/crestfall/highreach/npcs/professor-thaldris-flamehand.html"
+        },
+        {
+          "name": "Ratcatcher Vex",
+          "file": "ratcatcher-vex.html",
+          "href": "../world/crestfall/highreach/npcs/ratcatcher-vex.html"
+        },
+        {
+          "name": "Rolf Stonetooth",
+          "file": "rolf-stonetooth.html",
+          "href": "../world/crestfall/highreach/npcs/rolf-stonetooth.html"
+        },
+        {
+          "name": "Samantha Clerkson",
+          "file": "samantha-clerkson.html",
+          "href": "../world/crestfall/highreach/npcs/samantha-clerkson.html"
+        },
+        {
+          "name": "Sir Gareth Strongshield",
+          "file": "sir-gareth-strongshield.html",
+          "href": "../world/crestfall/highreach/npcs/sir-gareth-strongshield.html"
+        },
+        {
+          "name": "Sir Tristan Oakheart",
+          "file": "sir-tristan-oakheart.html",
+          "href": "../world/crestfall/highreach/npcs/sir-tristan-oakheart.html"
+        },
+        {
+          "name": "Squeak Tinkerbottom",
+          "file": "squeak-tinkerbottom.html",
+          "href": "../world/crestfall/highreach/npcs/squeak-tinkerbottom.html"
+        },
+        {
+          "name": "Thaldrin Stormblade",
+          "file": "thaldrin-stormblade.html",
+          "href": "../world/crestfall/highreach/npcs/thaldrin-stormblade.html"
+        },
+        {
+          "name": "Thoren Ironfist",
+          "file": "thoren-ironfist.html",
+          "href": "../world/crestfall/highreach/npcs/thoren-ironfist.html"
+        },
+        {
+          "name": "Tomlin Barkridge",
+          "file": "tomlin-barkridge.html",
+          "href": "../world/crestfall/highreach/npcs/tomlin-barkridge.html"
+        }
+      ]
+    },
+    "Hillcrest": {
+      "basePath": "../world/crestfall/hillcrest/npcs/",
+      "npcs": [
+        {
+          "name": "Benedict Vineward",
+          "file": "benedict-vineward.html",
+          "href": "../world/crestfall/hillcrest/npcs/benedict-vineward.html"
+        },
+        {
+          "name": "Edwin Barleyman",
+          "file": "edwin-barleyman.html",
+          "href": "../world/crestfall/hillcrest/npcs/edwin-barleyman.html"
+        },
+        {
+          "name": "Eliza Brightwine",
+          "file": "eliza-brightwine.html",
+          "href": "../world/crestfall/hillcrest/npcs/eliza-brightwine.html"
+        },
+        {
+          "name": "Guard Captain Roderick Stone",
+          "file": "guard-captain-roderick-stone.html",
+          "href": "../world/crestfall/hillcrest/npcs/guard-captain-roderick-stone.html"
+        },
+        {
+          "name": "Jasper Ironforge",
+          "file": "jasper-ironforge.html",
+          "href": "../world/crestfall/hillcrest/npcs/jasper-ironforge.html"
+        },
+        {
+          "name": "Liliana Moonleaf",
+          "file": "liliana-moonleaf.html",
+          "href": "../world/crestfall/hillcrest/npcs/liliana-moonleaf.html"
+        },
+        {
+          "name": "Lysander Thornfield",
+          "file": "lysander-thornfield.html",
+          "href": "../world/crestfall/hillcrest/npcs/lysander-thornfield.html"
+        },
+        {
+          "name": "Mayor Linden Hearthwood",
+          "file": "mayor-linden-hearthwood.html",
+          "href": "../world/crestfall/hillcrest/npcs/mayor-linden-hearthwood.html"
+        },
+        {
+          "name": "Rowan Grapeheart",
+          "file": "rowan-grapeheart.html",
+          "href": "../world/crestfall/hillcrest/npcs/rowan-grapeheart.html"
+        },
+        {
+          "name": "Seraphina Winecraft",
+          "file": "seraphina-winecraft.html",
+          "href": "../world/crestfall/hillcrest/npcs/seraphina-winecraft.html"
+        },
+        {
+          "name": "Thom Willow",
+          "file": "thom-willow.html",
+          "href": "../world/crestfall/hillcrest/npcs/thom-willow.html"
+        }
+      ]
+    },
+    "Stonehaven": {
+      "basePath": "../world/crestfall/stonehaven/npcs/",
+      "npcs": [
+        {
+          "name": "Astrid Ironfist",
+          "file": "astrid-ironfist.html",
+          "href": "../world/crestfall/stonehaven/npcs/astrid-ironfist.html"
+        },
+        {
+          "name": "Caelum Versewood",
+          "file": "caelum-versewood.html",
+          "href": "../world/crestfall/stonehaven/npcs/caelum-versewood.html"
+        },
+        {
+          "name": "Elias Thorn",
+          "file": "elias-thorn.html",
+          "href": "../world/crestfall/stonehaven/npcs/elias-thorn.html"
+        },
+        {
+          "name": "Erik Timber",
+          "file": "erik-timber.html",
+          "href": "../world/crestfall/stonehaven/npcs/erik-timber.html"
+        },
+        {
+          "name": "Gunnar Ironforge",
+          "file": "gunnar-ironforge.html",
+          "href": "../world/crestfall/stonehaven/npcs/gunnar-ironforge.html"
+        },
+        {
+          "name": "Hilda Ravenshadow",
+          "file": "hilda-ravenshadow.html",
+          "href": "../world/crestfall/stonehaven/npcs/hilda-ravenshadow.html"
+        },
+        {
+          "name": "Ingrid Stoneheart",
+          "file": "ingrid-stoneheart.html",
+          "href": "../world/crestfall/stonehaven/npcs/ingrid-stoneheart.html"
+        },
+        {
+          "name": "Vera Shadowpeak",
+          "file": "vera-shadowpeak.html",
+          "href": "../world/crestfall/stonehaven/npcs/vera-shadowpeak.html"
+        }
+      ]
+    }
+  },
+  "OrcishWastes": {
+    "Wizards Tower": {
+      "basePath": "../world/orcish-wastes/wizards-tower/npcs/",
+      "npcs": [
+        {
+          "name": "Summoner Jon AKA the wizard",
+          "file": "summoner-jon-aka-the-wizard.html",
+          "href": "../world/orcish-wastes/wizards-tower/npcs/summoner-jon-aka-the-wizard.html"
+        }
+      ]
+    }
+  }
+}

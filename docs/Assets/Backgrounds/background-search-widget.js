@@ -13,6 +13,8 @@ class BackgroundSearchWidget {
         this.loadCallbacks = [];
         this.stylesInjected = false;
         this.backgroundLookupStylesInjected = false;
+        this.rulesCatalogWidgetData = null;
+        this.dataSource = '';
     }
 
     // Inject CSS styles for the search widget
@@ -131,7 +133,7 @@ class BackgroundSearchWidget {
         // Load common styles if not already available
         if (typeof window.CommonLookupStyles === 'undefined') {
             try {
-                const commonStylesPath = 'Assets/common-lookup-styles.js';
+                const commonStylesPath = 'assets/common-lookup-styles.js';
                 const commonStylesCode = await dv.io.load(commonStylesPath);
                 (0, eval)(commonStylesCode);
             } catch (error) {
@@ -209,6 +211,36 @@ class BackgroundSearchWidget {
         return result;
     }
 
+    async loadRulesCatalogWidgetData(dv) {
+        if (this.rulesCatalogWidgetData) {
+            return this.rulesCatalogWidgetData;
+        }
+
+        if (typeof window.RulesCatalogWidgetData === 'undefined') {
+            const helperPaths = [
+                'assets/rules-catalog-widget-data.js',
+                'docs/assets/rules-catalog-widget-data.js'
+            ];
+
+            for (const helperPath of helperPaths) {
+                try {
+                    const helperCode = await dv.io.load(helperPath);
+                    (0, eval)(helperCode);
+                    break;
+                } catch (error) {
+                    console.warn('Failed to load rules catalog helper:', helperPath, error);
+                }
+            }
+        }
+
+        if (typeof window.RulesCatalogWidgetData === 'undefined') {
+            return null;
+        }
+
+        this.rulesCatalogWidgetData = window.RulesCatalogWidgetData.getDefault();
+        return this.rulesCatalogWidgetData;
+    }
+
     // Load CSV data
     async loadCSVData(dv) {
         if (this.csvData) {
@@ -224,10 +256,23 @@ class BackgroundSearchWidget {
         this.isLoading = true;
 
         try {
-            const csvPath = 'Assets/Backgrounds/Backgrounds.csv';
-            const csvText = await dv.io.load(csvPath);
-            
-            this.csvData = this.parseCSV(csvText);
+            const catalogLoader = await this.loadRulesCatalogWidgetData(dv);
+            if (catalogLoader) {
+                const result = await catalogLoader.loadRows('backgrounds', {
+                    dv,
+                    csvPaths: [
+                        'data/backgrounds.csv',
+                        'docs/data/backgrounds.csv'
+                    ]
+                });
+                this.csvData = result.rows;
+                this.dataSource = result.source;
+            } else {
+                const csvPath = 'data/backgrounds.csv';
+                const csvText = await dv.io.load(csvPath);
+                this.csvData = this.parseCSV(csvText);
+                this.dataSource = 'csv-fallback';
+            }
             this.isLoading = false;
             
             this.loadCallbacks.forEach(cb => cb.resolve(this.csvData));

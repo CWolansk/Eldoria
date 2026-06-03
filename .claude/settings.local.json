@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pwsh -NoProfile -Command ' *)",
+      "Bash(npx --yes --package playwright@1.57.0 playwright install chromium)",
+      "PowerShell(node Plans/PlayerSheetAndBuilderAuditScripts/probe.mjs 2>&1)"
+    ]
+  }
+}

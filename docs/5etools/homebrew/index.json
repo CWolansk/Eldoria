@@ -1,21 +1,25 @@
 {
-	"readme": [
-		"NOTE: This feature is designed for use in user-hosted copies of the site, and not for integrating \"official\" 5etools content.",
-		"The \"production\" version of the site (i.e., not the development ZIP) has this feature disabled. You can re-enable it by replacing `IS_DEPLOYED = \"X.Y.Z\";` in the file `js/utils.js`, with `IS_DEPLOYED = undefined;`",
-		"This file contains as an index for other homebrew files, which should be placed in the same directory.",
-		"For example, add \"My Homebrew.json\" to the \"toImport\" array below, and have a valid JSON homebrew file in this (\"homebrew/\") directory."
-	],
-	"toImport": [
-		"Aofhaocv; Common Magic Items.json",
-		"Foxfire94; Armour, Items, and Weapons Galore.json",
-		"Ghostfire Gaming; Grim Hollow - Player Pack.json",
-		"MCDM Productions; Flee, Mortals!.json",
-		"SailorCat; GachaBox.json",
-		"Saidoro; Sane Magic Item Prices.json",
-		"Giddy; Sane Magic Item Prices Expanded.json",
-		"MCDM Productions; Where Evil Lives.json",
-		"Kobold Press; Book of Ebon Tides.json",
-		"Kobold Press; Tales from the Shadows.json",
-		"Griffin Macaulay; The Griffon's Saddlebag, Book 2.json"
-	]
+  "readme": [
+    "NOTE: This feature is designed for use in user-hosted copies of the site, and not for integrating \"official\" 5etools content.",
+    "The \"production\" version of the site (i.e., not the development ZIP) has this feature disabled. You can re-enable it by replacing `IS_DEPLOYED = \"X.Y.Z\";` in the file `js/utils.js`, with `IS_DEPLOYED = undefined;`",
+    "This file contains as an index for other homebrew files, which should be placed in the same directory.",
+    "For example, add \"My Homebrew.json\" to the \"toImport\" array below, and have a valid JSON homebrew file in this (\"homebrew/\") directory."
+  ],
+  "toImport": [
+    "Aofhaocv; Common Magic Items.json",
+    "Foxfire94; Armour, Items, and Weapons Galore.json",
+    "Ghostfire Gaming; Grim Hollow - Player Pack.json",
+    "MCDM Productions; Flee, Mortals!.json",
+    "SailorCat; GachaBox.json",
+    "Saidoro; Sane Magic Item Prices.json",
+    "Giddy; Sane Magic Item Prices Expanded.json",
+    "MCDM Productions; Where Evil Lives.json",
+    "Kobold Press; Book of Ebon Tides.json",
+    "Kobold Press; Tales from the Shadows.json",
+    "Griffin Macaulay; The Griffon's Saddlebag, Book 2.json",
+    "Ghostfire Gaming; Grim Hollow - Lairs of Etharis.json",
+    "Ghostfire Gaming; Dungeons of Drakkenheim.json",
+    "Darrington Press; Tal’Dorei Campaign Setting Reborn.json",
+    "Kobold Press; Tome of Beasts 1 (2023 Edition).json"
+  ]
 }

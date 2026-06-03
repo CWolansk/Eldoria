@@ -12,6 +12,8 @@ class ItemLookup {
         this.loadCallbacks = [];
         this.stylesInjected = false;
         this.spellLookup = null;
+        this.rulesCatalogWidgetData = null;
+        this.dataSource = '';
     }
 
     // CSS styles (injected once)
@@ -22,7 +24,7 @@ class ItemLookup {
         // Load common styles if not already available
         if (typeof window.CommonLookupStyles === 'undefined') {
             try {
-                const commonStylesPath = 'docs/Assets/common-lookup-styles.js';
+                const commonStylesPath = 'docs/assets/common-lookup-styles.js';
                 const commonStylesCode = await dv.io.load(commonStylesPath);
                 eval(commonStylesCode);
             } catch (error) {
@@ -195,6 +197,36 @@ class ItemLookup {
         return items;
     }
 
+    async loadRulesCatalogWidgetData(dv) {
+        if (this.rulesCatalogWidgetData) {
+            return this.rulesCatalogWidgetData;
+        }
+
+        if (typeof window.RulesCatalogWidgetData === 'undefined') {
+            const helperPaths = [
+                'docs/assets/rules-catalog-widget-data.js',
+                'assets/rules-catalog-widget-data.js'
+            ];
+
+            for (const helperPath of helperPaths) {
+                try {
+                    const helperCode = await dv.io.load(helperPath);
+                    (0, eval)(helperCode);
+                    break;
+                } catch (error) {
+                    console.warn('Failed to load rules catalog helper:', helperPath, error);
+                }
+            }
+        }
+
+        if (typeof window.RulesCatalogWidgetData === 'undefined') {
+            return null;
+        }
+
+        this.rulesCatalogWidgetData = window.RulesCatalogWidgetData.getDefault();
+        return this.rulesCatalogWidgetData;
+    }
+
     // Load CSV data using Dataview API
     async loadCSVData(dv) {
         if (this.csvData) {
@@ -211,12 +243,24 @@ class ItemLookup {
         this.isLoading = true;
 
         try {
-            // Use Dataview's CSV loader
-            const csvPath = 'docs/Assets/Items/Items.csv';
-            const data = await dv.io.csv(csvPath);
-            
-            // Convert DataArray to plain array of objects
-            this.csvData = data.array();
+            const catalogLoader = await this.loadRulesCatalogWidgetData(dv);
+            if (catalogLoader) {
+                const result = await catalogLoader.loadRows('items', {
+                    dv,
+                    csvPaths: [
+                        'docs/data/items.csv',
+                        'data/items.csv'
+                    ]
+                });
+                this.csvData = result.rows;
+                this.dataSource = result.source;
+            } else {
+                // Use Dataview's CSV loader if the normalized catalog helper is unavailable.
+                const csvPath = 'docs/data/items.csv';
+                const data = await dv.io.csv(csvPath);
+                this.csvData = data.array();
+                this.dataSource = 'csv-fallback';
+            }
             this.isLoading = false;
             
             // Resolve any waiting callbacks
@@ -226,7 +270,7 @@ class ItemLookup {
             return this.csvData;
         } catch (error) {
             this.isLoading = false;
-            console.error('Error loading Items.csv:', error);
+            console.error('Error loading item data:', error);
             
             // Reject any waiting callbacks
             this.loadCallbacks.forEach(cb => cb.reject(error));
@@ -295,7 +339,7 @@ class ItemLookup {
         if (this.spellLookup) return this.spellLookup;
         
         try {
-            const spellLookupPath = 'docs/Assets/Spells/spell-lookup.js';
+            const spellLookupPath = 'docs/assets/Spells/spell-lookup.js';
             const spellLookupCode = await dv.io.load(spellLookupPath);
             
             if (!spellLookupCode) {
@@ -421,4 +465,3 @@ class ItemLookup {
         return this.findItems(allItems, itemNames);
     }
 }
-

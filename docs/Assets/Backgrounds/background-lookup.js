@@ -4,6 +4,8 @@ class BackgroundLookup {
         this.isLoading = false;
         this.loadCallbacks = [];
         this.stylesInjected = false;
+        this.rulesCatalogWidgetData = null;
+        this.dataSource = '';
     }
 
     // Inject CSS styles into the document
@@ -13,7 +15,7 @@ class BackgroundLookup {
         // Load common styles if not already available
         if (typeof window.CommonLookupStyles === 'undefined') {
             try {
-                const commonStylesPath = 'docs/Assets/common-lookup-styles.js';
+                const commonStylesPath = 'docs/assets/common-lookup-styles.js';
                 const commonStylesCode = await dv.io.load(commonStylesPath);
                 eval(commonStylesCode);
             } catch (error) {
@@ -142,6 +144,36 @@ class BackgroundLookup {
         this.stylesInjected = true;
     }
 
+    async loadRulesCatalogWidgetData(dv) {
+        if (this.rulesCatalogWidgetData) {
+            return this.rulesCatalogWidgetData;
+        }
+
+        if (typeof window.RulesCatalogWidgetData === 'undefined') {
+            const helperPaths = [
+                'docs/assets/rules-catalog-widget-data.js',
+                'assets/rules-catalog-widget-data.js'
+            ];
+
+            for (const helperPath of helperPaths) {
+                try {
+                    const helperCode = await dv.io.load(helperPath);
+                    (0, eval)(helperCode);
+                    break;
+                } catch (error) {
+                    console.warn('Failed to load rules catalog helper:', helperPath, error);
+                }
+            }
+        }
+
+        if (typeof window.RulesCatalogWidgetData === 'undefined') {
+            return null;
+        }
+
+        this.rulesCatalogWidgetData = window.RulesCatalogWidgetData.getDefault();
+        return this.rulesCatalogWidgetData;
+    }
+
     // Load CSV data
     async loadCSVData(dv) {
         if (this.csvData) {
@@ -157,11 +189,23 @@ class BackgroundLookup {
         this.isLoading = true;
 
         try {
-            const csvPath = 'docs/Assets/Backgrounds/Backgrounds.csv';
-            const csvText = await dv.io.load(csvPath);
-            
-            // Parse CSV handling multi-line fields
-            this.csvData = this.parseCSV(csvText);
+            const catalogLoader = await this.loadRulesCatalogWidgetData(dv);
+            if (catalogLoader) {
+                const result = await catalogLoader.loadRows('backgrounds', {
+                    dv,
+                    csvPaths: [
+                        'docs/data/backgrounds.csv',
+                        'data/backgrounds.csv'
+                    ]
+                });
+                this.csvData = result.rows;
+                this.dataSource = result.source;
+            } else {
+                const csvPath = 'docs/data/backgrounds.csv';
+                const csvText = await dv.io.load(csvPath);
+                this.csvData = this.parseCSV(csvText);
+                this.dataSource = 'csv-fallback';
+            }
             this.isLoading = false;
             
             this.loadCallbacks.forEach(cb => cb.resolve(this.csvData));
@@ -240,40 +284,21 @@ class BackgroundLookup {
         return result;
     }
 
-    // Find backgrounds by names with optional source, e.g. "Sailor|PHB"
+    // Find backgrounds by names
     findBackgrounds(backgrounds, backgroundNames) {
         const found = [];
         backgroundNames.forEach(searchName => {
-            const parsed = this.parseSourceQualifiedName(searchName);
-            const normalizedSearch = parsed.name.toLowerCase().trim();
+            const normalizedSearch = searchName.toLowerCase().trim();
             
-            const matches = backgrounds.filter(background => {
-                const nameMatches = background.Name.toLowerCase().trim() === normalizedSearch;
-                if (!nameMatches) return false;
-                return !parsed.source || this.normalizeSource(background.Source) === parsed.source;
-            });
+            const match = backgrounds.find(background => 
+                background.Name.toLowerCase().trim() === normalizedSearch
+            );
             
-            matches.forEach(match => {
-                if (!found.find(b => b.Name === match.Name && b.Source === match.Source)) {
-                    found.push(match);
-                }
-            });
+            if (match && !found.find(b => b.Name === match.Name)) {
+                found.push(match);
+            }
         });
         return found;
-    }
-
-    parseSourceQualifiedName(searchName) {
-        const text = String(searchName || '').trim();
-        const pipeMatch = text.match(/^(.+?)\s*\|\s*(.+?)\s*$/);
-        if (!pipeMatch) return { name: text, source: '' };
-        return {
-            name: pipeMatch[1].trim(),
-            source: this.normalizeSource(pipeMatch[2]),
-        };
-    }
-
-    normalizeSource(source) {
-        return String(source || '').toUpperCase().replace(/[^A-Z0-9]+/g, '');
     }
 
     // Create HTML for backgrounds

@@ -1,115 +1,128 @@
+﻿<!-- copied from site-src/public/index.html - do not edit -->
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eldoria - D&D Campaign Hub</title>
-    <style>
-        :root {
-            --background-primary: #ffffff;
-            --background-secondary: #f5f5f5;
-            --background-modifier-border: #ddd;
-            --text-normal: #2e3338;
-            --text-muted: #6c757d;
-            --text-on-accent: #ffffff;
-            --interactive-accent: #7c3aed;
-            --interactive-accent-hover: #6d28d9;
-            --font-text: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --background-primary: #1e1e1e;
-                --background-secondary: #2d2d2d;
-                --background-modifier-border: #464646;
-                --text-normal: #dcddde;
-                --text-muted: #a0a0a0;
-                --interactive-accent: #8b5cf6;
-                --interactive-accent-hover: #a78bfa;
-            }
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-text); background-color: var(--background-primary); color: var(--text-normal); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; flex: 1; }
-        header { text-align: center; padding: 3rem 1rem; background: linear-gradient(135deg, var(--interactive-accent) 0%, var(--interactive-accent-hover) 100%); color: var(--text-on-accent); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
-        header h1 { font-size: 3rem; margin-bottom: 0.5rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); }
-        header p { font-size: 1.2rem; opacity: 0.95; }
-        .section-title { font-size: 2rem; margin: 2rem 0 1.5rem; color: var(--interactive-accent); border-bottom: 2px solid var(--background-modifier-border); padding-bottom: 0.5rem; }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
-        .card { background-color: var(--background-secondary); border: 1px solid var(--background-modifier-border); border-radius: 8px; padding: 1.5rem; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); border-color: var(--interactive-accent); }
-        .card h3 { font-size: 1.4rem; margin-bottom: 0.75rem; color: var(--text-normal); }
-        .card p { color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem; }
-        .card a { display: inline-block; padding: 0.6rem 1.2rem; background-color: var(--interactive-accent); color: var(--text-on-accent); text-decoration: none; border-radius: 5px; font-weight: 500; transition: background-color 0.3s ease; }
-        .card a:hover { background-color: var(--interactive-accent-hover); }
-        .full-width-card { grid-column: 1 / -1; }
-        .player-list { background-color: var(--background-secondary); border: 1px solid var(--background-modifier-border); border-radius: 8px; padding: 1.5rem; list-style: none; }
-        .player-list li { padding: 0.5rem 1rem; margin-bottom: 0.25rem; background-color: var(--background-primary); border-radius: 5px; transition: all 0.3s ease; }
-        .player-list li:hover { transform: translateX(8px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
-        .player-list a { color: var(--interactive-accent); text-decoration: none; font-size: 1rem; font-weight: 500; }
-        .player-list a:hover { color: var(--interactive-accent-hover); }
-        footer { text-align: center; padding: 2rem; background-color: var(--background-secondary); border-top: 1px solid var(--background-modifier-border); color: var(--text-muted); margin-top: auto; }
-        @media (max-width: 768px) { header h1 { font-size: 2rem; } header p { font-size: 1rem; } .section-title { font-size: 1.5rem; } .grid { grid-template-columns: 1fr; } }
-    </style>
-    <link rel="stylesheet" href="site-assets/public-site.css">
+    <title>Eldoria Player Wiki</title>
+    <script src="site-shell.js"></script>
+    <script type="module" src="index.js"></script>
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/utilities.css">
 </head>
-<body class="docs-page docs-hub">
-    <header class="site-header">
-        <a class="site-title" href="index.html">Eldoria</a>
-        <nav>
-            <a href="search.html">Search</a>
-            <a href="WorldMap.html">Map</a>
-            <a href="npc-reference.html">NPCs</a>
-            <a href="location-reference.html">Locations</a>
-        </nav>
-    </header>
-    <header>
-        <h1>Eldoria Campaign Hub</h1>
-        <p>Your gateway to the world of Eldoria</p>
-    </header>
-    <div class="container">
-        <h2 class="section-title">Player Characters</h2>
-        <ul class="player-list">
-            <li><a href="Public/Players/Claire Player Sheet.html">Claire</a></li>
-            <li><a href="Public/Players/JP Player Sheet.html">JP</a></li>
-            <li><a href="Public/Players/Julie Player Sheet.html">Julie</a></li>
-            <li><a href="Public/Players/Justin Player Sheet.html">Justin</a></li>
-            <li><a href="Public/Players/Liz Player Sheet.html">Liz</a></li>
-            <li><a href="Public/Players/Randi Player Sheet.html">Randi</a></li>
-            <li><a href="Public/Players/Vanessa Player Sheet.html">Vanessa</a></li>
-        </ul>
+<body class="hub-page">
+    <div class="site-shell">
+        <div id="site-nav" data-current="home"></div>
 
-        <h2 class="section-title">World Information</h2>
-        <div class="grid">
-            <div class="card full-width-card"><h3>World Map</h3><p>Explore the interactive map of Eldoria and discover its locations, regions, and points of interest.</p><a href="WorldMap.html">View World Map</a></div>
-        </div>
+        <main class="page-main page-wrap">
+            <section class="hero" aria-labelledby="hub-title">
+                <div class="hero-copy">
+                    <h1 id="hub-title">Eldoria Player Wiki</h1>
+                </div>
+            </section>
 
-        <h2 class="section-title">Character Tools</h2>
-        <div class="grid">
-            <div class="card"><h3>Backgrounds</h3><p>Search and explore character backgrounds to shape your hero's past.</p><a href="background-search.html">Search Backgrounds</a></div>
-            <div class="card"><h3>Races</h3><p>Discover the diverse races that inhabit the world of Eldoria.</p><a href="race-search.html">Search Races</a></div>
-            <div class="card"><h3>Feats</h3><p>Browse special abilities and feats to customize your character.</p><a href="feat-search.html">Search Feats</a></div>
-        </div>
+            <section class="section" id="players" aria-labelledby="players-heading">
+                <header class="section-header">
+                    <article class="card yellow-card" href="players.html">    
+                        <div>
+                            <p class="section-kicker">Players</p>
+                            <h2 id="players-heading">Character Sheets</h2>
+                            <p class="section-copy">Click here to view and edit your character sheet</p>
+                        </div>
+                        <a class="button" href="players.html">View Sheets</a>
+                    </article>
+                </header>
+            </section>
 
-        <h2 class="section-title">Game Resources</h2>
-        <div class="grid">
-            <div class="card"><h3>Spells</h3><p>Comprehensive spell database with filters and detailed descriptions.</p><a href="spell-search.html">Search Spells</a></div>
-            <div class="card"><h3>Items</h3><p>Find weapons, armor, magical items, and adventuring gear.</p><a href="item-search.html">Search Items</a></div>
-            <div class="card"><h3>Rules Database</h3><p>Edit item, action, spell, and feature records used by sheets and widgets.</p><a href="rules-fixer.html">Open Rules Database</a></div>
-            <div class="card"><h3>Combat Review</h3><p>Approve or override where player combat options should live before parser changes are promoted.</p><a href="combat-classification-review.html">Review Combat Options</a></div>
-            <div class="card"><h3>5etools</h3><p>Access the complete 5etools reference library and tools.</p><a href="5etools/5etools.html">Open 5etools</a></div>
-        </div>
+            <section class="section" id="world" aria-labelledby="world-heading">
+                <header class="section-header">
+                    <div>
+                        <p class="section-kicker">World</p>
+                        <h2 id="world-heading">World Reference</h2>
+                        <p class="section-copy">Searchable NPCS, location references, and the campaign map.</p>
+                    </div>
+                </header>
+                <div class="card-grid">
+                    <article class="card green-card">
+                        <h3>NPC Reference</h3>
+                        <p>Search public NPC records by name, location, and region.</p>
+                        <a class="button" href="tools/npc-reference.html">View NPCs</a>
+                    </article>
+                    <article class="card green-card">
+                        <h3>Location Reference</h3>
+                        <p>Browse known settlements, landmarks, stores, and regions.</p>
+                        <a class="button" href="tools/location-reference.html">View Locations</a>
+                    </article>
+                    <article class="card green-card">
+                        <h3>World Map</h3>
+                        <p>Explore the true world of Eldoria</p>
+                        <a class="button" href="tools/spell-search.html">Open World Map</a>
+                    </article>
+                </div>
+            </section>
 
-        <h2 class="section-title">Campaign References</h2>
-        <div class="grid">
-            <div class="card"><h3>NPCs</h3><p>Browse all non-player characters you've encountered in your adventures.</p><a href="npc-reference.html">View NPCs</a></div>
-            <div class="card"><h3>Locations</h3><p>Explore the towns, cities, and regions of Eldoria and beyond.</p><a href="location-reference.html">View Locations</a></div>
-            <div class="card"><h3>Public Search</h3><p>Search player-safe world pages, people, places, events, and groups.</p><a href="search.html">Search Docs</a></div>
-        </div>
+            <section class="section" id="tools" aria-labelledby="tools-heading">
+                <header class="section-header">
+                    <div>
+                        <p class="section-kicker">Search Tools</p>
+                        <h2 id="tools-heading">Character and Rules Browsers</h2>
+                        <p class="section-copy">Focused lookup pages for common table and character-creation searches.</p>
+                    </div>
+                </header>
+                <div class="card-grid">
+                    <article class="card red-card "><h3>Items</h3><p>Weapons, armor, gear, and magic items.</p><a class="button " href="tools/item-search.html">Search Items</a></article>
+                    <article class="card red-card "><h3>Spells</h3><p>Spell list with filters and details.</p><a class="button " href="tools/spell-search.html">Search Spells</a></article>
+                    <article class="card red-card "><h3>Backgrounds</h3><p>Character background options.</p><a class="button " href="tools/background-search.html">Search Backgrounds</a></article>
+                    <article class="card red-card "><h3>Races</h3><p>Playable ancestry and race options.</p><a class="button " href="tools/race-search.html">Search Races</a></article>
+                    <article class="card red-card "><h3>Feats</h3><p>Feat options and prerequisites.</p><a class="button " href="tools/feat-search.html">Search Feats</a></article>
+                    <article class="card red-card "><h3>2014 5e tools</h3><p>Complete reference site for 2014 5e rules</p><a class="button " href="https://2014.5e.tools/">2014 Rules</a></article>
+                </div>
+            </section>
+
+            <section class="section" id="storylines" aria-labelledby="storylines-heading">
+                <header class="section-header">
+                    <div>
+                        <p class="section-kicker">Storylines</p>
+                        <h2 id="storylines-heading">Active Plot Threads</h2>
+                        <p class="section-copy">TODO: Change this to something more like 'QUESTS COMPLETED' Player-visible storyline summaries generated from the public vault.</p>
+                    </div>
+                </header>
+                <div class="card-grid">
+                    <article class="card">
+                        <h3>Ardenville Convergence</h3>
+                        <p>Player-known thread centered on Ardenville's current tensions.</p>
+                        <a class="button button-secondary" href="storylines/ardenville-convergence.html">Open Storyline</a>
+                    </article>
+                    <article class="card">
+                        <h3>Exterminators Guild</h3>
+                        <p>Guild ties, rank, and consequences from recent sessions.</p>
+                        <a class="button button-secondary" href="storylines/exterminators-guild.html">Open Storyline</a>
+                    </article>
+                    <article class="card">
+                        <h3>Merchants Guild Corruption</h3>
+                        <p>Public-facing thread for the party's merchant guild discoveries.</p>
+                        <a class="button button-secondary" href="storylines/merchants-guild-corruption.html">Open Storyline</a>
+                    </article>
+                    <article class="card">
+                        <h3>The Artifact Wars</h3>
+                        <p>Larger historical and campaign arc context.</p>
+                        <a class="button button-secondary" href="storylines/the-artifact-wars.html">Open Storyline</a>
+                    </article>
+                </div>
+            </section>
+
+
+        </main>
+
+        <footer class="site-footer">
+            <div class="page-wrap split">
+                <span>Eldoria Player Wiki</span>
+                <span>Player-safe static site</span>
+            </div>
+        </footer>
     </div>
-    <footer>
-        <p>&copy; 2025 Eldoria Campaign | Powered by D&D 5th Edition</p>
-    </footer>
 </body>
 </html>
+

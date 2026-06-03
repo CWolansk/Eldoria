@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "v1",
+  "generatedBy": "scripts/migrate-player-sheet.js",
+  "pages": {
+    "Players/Claire Player Sheet.md": "char-claire-001",
+    "Players/JP Player Sheet.md": "char-grum-ironjaw-001",
+    "Players/Julie Player Sheet.md": "char-julie-001",
+    "Players/Justin Player Sheet.md": "char-austin-001",
+    "Players/Liz Player Sheet.md": "char-liz-001",
+    "Players/Randi Player Sheet.md": "char-zazpoh-the-matyr-001",
+    "Players/Vanessa Player Sheet.md": "char-vanessa-001"
+  }
+}

@@ -13,6 +13,8 @@ class ItemSearchWidget {
         this.loadCallbacks = [];
         this.stylesInjected = false;
         this.itemLookupStylesInjected = false;
+        this.rulesCatalogWidgetData = null;
+        this.dataSource = '';
     }
 
     // Inject CSS styles for the search widget
@@ -85,38 +87,6 @@ class ItemSearchWidget {
             .item-search-button:active {
                 opacity: 0.6;
             }
-            .item-search-filters {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                gap: 8px;
-                margin-top: 8px;
-            }
-            .item-search-filter,
-            .item-search-reset {
-                min-width: 0;
-                padding: 7px 10px;
-                font-size: 13px;
-                border: 1px solid var(--background-modifier-border);
-                border-radius: 4px;
-                background-color: var(--background-primary);
-                color: var(--text-normal);
-            }
-            .item-search-filter {
-                cursor: pointer;
-            }
-            .item-search-filter:focus,
-            .item-search-reset:focus {
-                border-color: var(--interactive-accent);
-                outline: none;
-            }
-            .item-search-reset {
-                cursor: pointer;
-                white-space: nowrap;
-            }
-            .item-search-reset:hover {
-                color: var(--text-accent);
-                border-color: var(--interactive-accent);
-            }
             .item-search-info {
                 margin-top: 10px;
                 font-size: 13px;
@@ -163,7 +133,7 @@ class ItemSearchWidget {
         // Load common styles if not already available
         if (typeof window.CommonLookupStyles === 'undefined') {
             try {
-                const commonStylesPath = 'Assets/common-lookup-styles.js';
+                const commonStylesPath = 'assets/common-lookup-styles.js';
                 const commonStylesCode = await dv.io.load(commonStylesPath);
                 (0, eval)(commonStylesCode);
             } catch (error) {
@@ -215,6 +185,36 @@ class ItemSearchWidget {
         return result;
     }
 
+    async loadRulesCatalogWidgetData(dv) {
+        if (this.rulesCatalogWidgetData) {
+            return this.rulesCatalogWidgetData;
+        }
+
+        if (typeof window.RulesCatalogWidgetData === 'undefined') {
+            const helperPaths = [
+                'assets/rules-catalog-widget-data.js',
+                'docs/assets/rules-catalog-widget-data.js'
+            ];
+
+            for (const helperPath of helperPaths) {
+                try {
+                    const helperCode = await dv.io.load(helperPath);
+                    (0, eval)(helperCode);
+                    break;
+                } catch (error) {
+                    console.warn('Failed to load rules catalog helper:', helperPath, error);
+                }
+            }
+        }
+
+        if (typeof window.RulesCatalogWidgetData === 'undefined') {
+            return null;
+        }
+
+        this.rulesCatalogWidgetData = window.RulesCatalogWidgetData.getDefault();
+        return this.rulesCatalogWidgetData;
+    }
+
     // Load CSV data using Dataview API
     async loadCSVData(dv) {
         if (this.csvData) {
@@ -231,12 +231,24 @@ class ItemSearchWidget {
         this.isLoading = true;
 
         try {
-            // Use Dataview's CSV loader
-            const csvPath = 'Assets/Items/Items.csv';
-            const data = await dv.io.csv(csvPath);
-            
-            // Convert DataArray to plain array of objects
-            this.csvData = data.array();
+            const catalogLoader = await this.loadRulesCatalogWidgetData(dv);
+            if (catalogLoader) {
+                const result = await catalogLoader.loadRows('items', {
+                    dv,
+                    csvPaths: [
+                        'data/items.csv',
+                        'docs/data/items.csv'
+                    ]
+                });
+                this.csvData = result.rows;
+                this.dataSource = result.source;
+            } else {
+                // Use Dataview's CSV loader if the normalized catalog helper is unavailable.
+                const csvPath = 'data/items.csv';
+                const data = await dv.io.csv(csvPath);
+                this.csvData = data.array();
+                this.dataSource = 'csv-fallback';
+            }
             this.isLoading = false;
             
             // Resolve any waiting callbacks
@@ -246,7 +258,7 @@ class ItemSearchWidget {
             return this.csvData;
         } catch (error) {
             this.isLoading = false;
-            console.error('Error loading Items.csv:', error);
+            console.error('Error loading item data:', error);
             
             // Reject any waiting callbacks
             this.loadCallbacks.forEach(cb => cb.reject(error));
@@ -254,174 +266,6 @@ class ItemSearchWidget {
             
             throw error;
         }
-    }
-
-    escapeHTML(value) {
-        return String(value ?? '').replace(/[&<>"']/g, char => ({
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#39;'
-        }[char]));
-    }
-
-    titleCase(value) {
-        return (value || '').replace(/\b\w/g, char => char.toUpperCase());
-    }
-
-    getItemRarities() {
-        const availableRarities = new Set(this.csvData.map(item => item.Rarity).filter(Boolean));
-        const rarityOrder = ['common', 'uncommon', 'rare', 'very rare', 'legendary', 'artifact', 'none'];
-        const orderedRarities = rarityOrder.filter(rarity => availableRarities.has(rarity));
-        const extraRarities = Array.from(availableRarities)
-            .filter(rarity => !rarityOrder.includes(rarity))
-            .sort((a, b) => a.localeCompare(b));
-
-        return orderedRarities.concat(extraRarities);
-    }
-
-    getItemCategories() {
-        const categories = new Set();
-        this.csvData.forEach(item => {
-            this.getItemCategoriesForItem(item).forEach(category => categories.add(category));
-        });
-
-        const categoryOrder = [
-            'Weapon',
-            'Armor',
-            'Shield',
-            'Ammunition',
-            'Wondrous Item',
-            'Potion',
-            'Ring',
-            'Rod',
-            'Scroll',
-            'Staff',
-            'Wand',
-            'Adventuring Gear',
-            'Tool/Instrument',
-            'Spellcasting Focus',
-            'Trade Good',
-            'Generic Variant',
-            'Other'
-        ];
-
-        return categoryOrder.filter(category => categories.has(category));
-    }
-
-    getItemCategoriesForItem(item) {
-        const type = (item.Type || '').toLowerCase();
-        const categories = [];
-        const addCategory = category => {
-            if (!categories.includes(category)) {
-                categories.push(category);
-            }
-        };
-
-        if (!type) {
-            addCategory('Other');
-            return categories;
-        }
-
-        if (type.includes('weapon')) addCategory('Weapon');
-        if (type.includes('armor')) addCategory('Armor');
-        if (type.includes('shield')) addCategory('Shield');
-        if (type.includes('ammunition')) addCategory('Ammunition');
-        if (type.includes('wondrous item')) addCategory('Wondrous Item');
-        if (type.includes('potion')) addCategory('Potion');
-        if (type.includes('ring')) addCategory('Ring');
-        if (type.includes('rod')) addCategory('Rod');
-        if (type.includes('scroll')) addCategory('Scroll');
-        if (type.includes('staff')) addCategory('Staff');
-        if (type.includes('wand')) addCategory('Wand');
-        if (type.includes('adventuring gear')) addCategory('Adventuring Gear');
-        if (type.includes('instrument') || type.includes('tool')) addCategory('Tool/Instrument');
-        if (type.includes('spellcasting focus')) addCategory('Spellcasting Focus');
-        if (type.includes('trade good')) addCategory('Trade Good');
-        if (type.includes('generic variant')) addCategory('Generic Variant');
-
-        if (categories.length === 0) {
-            addCategory('Other');
-        }
-
-        return categories;
-    }
-
-    getItemSources() {
-        const sources = new Set();
-        this.csvData.forEach(item => {
-            if (item.Source) {
-                sources.add(item.Source);
-            }
-        });
-        return Array.from(sources).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
-    }
-
-    createSelectOptions(values, labelFormatter = value => value) {
-        return values.map(value => {
-            const escapedValue = this.escapeHTML(value);
-            const escapedLabel = this.escapeHTML(labelFormatter(value));
-            return `<option value="${escapedValue}">${escapedLabel}</option>`;
-        }).join('');
-    }
-
-    getActiveFilters(containerId) {
-        const getValue = suffix => {
-            const element = document.getElementById(`${containerId}-${suffix}`);
-            return element ? element.value : '';
-        };
-
-        return {
-            rarity: getValue('rarity'),
-            category: getValue('category'),
-            source: getValue('source')
-        };
-    }
-
-    hasActiveSearch(query, filters) {
-        return Boolean(
-            (query && query.trim()) ||
-            filters.rarity ||
-            filters.category ||
-            filters.source
-        );
-    }
-
-    itemMatchesFilters(item, filters) {
-        if (filters.rarity && item.Rarity !== filters.rarity) {
-            return false;
-        }
-
-        if (filters.category && !this.getItemCategoriesForItem(item).includes(filters.category)) {
-            return false;
-        }
-
-        if (filters.source && item.Source !== filters.source) {
-            return false;
-        }
-
-        return true;
-    }
-
-    describeSearch(query, filters) {
-        const parts = [];
-        const trimmedQuery = query ? query.trim() : '';
-
-        if (trimmedQuery) {
-            parts.push(`"${trimmedQuery}"`);
-        }
-        if (filters.rarity) {
-            parts.push(this.titleCase(filters.rarity));
-        }
-        if (filters.category) {
-            parts.push(filters.category);
-        }
-        if (filters.source) {
-            parts.push(filters.source);
-        }
-
-        return parts.length > 0 ? parts.join(' + ') : 'all items';
     }
 
     // Create HTML for items (from item-lookup.js)
@@ -498,22 +342,17 @@ class ItemSearchWidget {
     }
 
     // Search for items with fuzzy matching
-    searchItems(query, filters = {}, maxResults = 50) {
-        if (!this.csvData || !this.hasActiveSearch(query, filters)) {
+    searchItems(query, maxResults = 50) {
+        if (!this.csvData || !query) {
             return [];
         }
         
         const results = [];
-        const trimmedQuery = query ? query.trim() : '';
         
         for (const item of this.csvData) {
             if (!item.Name) continue;
-
-            if (!this.itemMatchesFilters(item, filters)) {
-                continue;
-            }
             
-            const score = trimmedQuery ? this.fuzzyMatch(trimmedQuery, item.Name) : 1;
+            const score = this.fuzzyMatch(query, item.Name);
             if (score > 0) {
                 results.push({ item, score });
             }
@@ -533,10 +372,6 @@ class ItemSearchWidget {
 
     // Create the search interface HTML
     createSearchHTML(containerId) {
-        const rarityOptions = this.createSelectOptions(this.getItemRarities(), rarity => this.titleCase(rarity));
-        const categoryOptions = this.createSelectOptions(this.getItemCategories());
-        const sourceOptions = this.createSelectOptions(this.getItemSources());
-
         return `
             <div class="item-search-widget" id="${containerId}">
                 <div class="item-search-container">
@@ -557,23 +392,8 @@ class ItemSearchWidget {
                             id="${containerId}-button"
                         >Search</button>
                     </div>
-                    <div class="item-search-filters" id="${containerId}-filters">
-                        <select class="item-search-filter" id="${containerId}-rarity" aria-label="Filter by item rarity">
-                            <option value="">Rarity</option>
-                            ${rarityOptions}
-                        </select>
-                        <select class="item-search-filter" id="${containerId}-category" aria-label="Filter by item category">
-                            <option value="">Type</option>
-                            ${categoryOptions}
-                        </select>
-                        <select class="item-search-filter" id="${containerId}-source" aria-label="Filter by item source">
-                            <option value="">Source</option>
-                            ${sourceOptions}
-                        </select>
-                        <button class="item-search-reset" id="${containerId}-reset" title="Reset search and filters">Reset</button>
-                    </div>
                     <div class="item-search-info">
-                        Search ${this.csvData ? this.csvData.length : '...'} items by name, rarity, type, and source.
+                        Type to search through ${this.csvData ? this.csvData.length : '...'} items. Supports fuzzy matching.
                     </div>
                 </div>
                 <div class="item-search-results" id="${containerId}-results"></div>
@@ -584,9 +404,8 @@ class ItemSearchWidget {
     // Handle search execution
     async executeSearch(dv, containerId, query) {
         const resultsContainer = document.getElementById(`${containerId}-results`);
-        const filters = this.getActiveFilters(containerId);
         
-        if (!this.hasActiveSearch(query, filters)) {
+        if (!query || query.trim().length === 0) {
             resultsContainer.innerHTML = '';
             return;
         }
@@ -595,15 +414,13 @@ class ItemSearchWidget {
         resultsContainer.innerHTML = '<div class="item-search-loading">Searching...</div>';
         
         // Perform search
-        const results = this.searchItems(query, filters);
-        const searchDescription = this.describeSearch(query, filters);
-        const escapedDescription = this.escapeHTML(searchDescription);
+        const results = this.searchItems(query);
         
         // Display results
         if (results.length === 0) {
             resultsContainer.innerHTML = `
                 <div class="item-search-no-results">
-                    No items found matching ${escapedDescription}. Try a different search term or filter.
+                    No items found for "${query}". Try a different search term.
                 </div>
             `;
             return;
@@ -612,7 +429,7 @@ class ItemSearchWidget {
         // Show results count
         const statsHTML = `
             <div class="item-search-stats">
-                Showing ${results.length} item${results.length === 1 ? '' : 's'} matching ${escapedDescription}
+                Found ${results.length} item${results.length === 1 ? '' : 's'} matching "${query}"
             </div>
         `;
         
@@ -622,53 +439,14 @@ class ItemSearchWidget {
         resultsContainer.innerHTML = statsHTML + itemsHTML;
     }
 
-    updateClearVisibility(containerId) {
-        const input = document.getElementById(`${containerId}-input`);
-        const clear = document.getElementById(`${containerId}-clear`);
-        if (!input || !clear) return;
-
-        const filters = this.getActiveFilters(containerId);
-        if (this.hasActiveSearch(input.value, filters)) {
-            clear.classList.add('visible');
-        } else {
-            clear.classList.remove('visible');
-        }
-    }
-
-    resetSearch(containerId) {
-        const input = document.getElementById(`${containerId}-input`);
-        const resultsContainer = document.getElementById(`${containerId}-results`);
-        const filters = ['rarity', 'category', 'source']
-            .map(suffix => document.getElementById(`${containerId}-${suffix}`))
-            .filter(Boolean);
-
-        if (input) {
-            input.value = '';
-        }
-        filters.forEach(filter => {
-            filter.value = '';
-        });
-        if (resultsContainer) {
-            resultsContainer.innerHTML = '';
-        }
-        this.updateClearVisibility(containerId);
-        if (input) {
-            input.focus();
-        }
-    }
-
     // Setup event listeners
-    setupEventListeners(dv, containerId, autoFocus = true) {
+    setupEventListeners(dv, containerId) {
         const input = document.getElementById(`${containerId}-input`);
         const button = document.getElementById(`${containerId}-button`);
         const clear = document.getElementById(`${containerId}-clear`);
-        const reset = document.getElementById(`${containerId}-reset`);
-        const filters = ['rarity', 'category', 'source']
-            .map(suffix => document.getElementById(`${containerId}-${suffix}`))
-            .filter(Boolean);
         
         // Check if elements exist before adding listeners
-        if (!input || !button || !clear || !reset) {
+        if (!input || !button || !clear) {
             console.warn(`Search widget elements not found for container: ${containerId}`);
             return;
         }
@@ -687,29 +465,23 @@ class ItemSearchWidget {
         
         // Show/hide clear button
         input.addEventListener('input', () => {
-            this.updateClearVisibility(containerId);
-        });
-
-        filters.forEach(filter => {
-            filter.addEventListener('change', () => {
-                this.updateClearVisibility(containerId);
-                this.executeSearch(dv, containerId, input.value);
-            });
+            if (input.value.length > 0) {
+                clear.classList.add('visible');
+            } else {
+                clear.classList.remove('visible');
+            }
         });
         
         // Clear button functionality
         clear.addEventListener('click', () => {
-            this.resetSearch(containerId);
-        });
-
-        reset.addEventListener('click', () => {
-            this.resetSearch(containerId);
+            input.value = '';
+            clear.classList.remove('visible');
+            document.getElementById(`${containerId}-results`).innerHTML = '';
+            input.focus();
         });
         
         // Focus input on load
-        if (autoFocus) {
-            setTimeout(() => input.focus(), 100);
-        }
+        setTimeout(() => input.focus(), 100);
     }
 
     // Main display function for use in dataviewjs
@@ -731,24 +503,20 @@ class ItemSearchWidget {
         
         // Setup event listeners after DOM is ready
         setTimeout(() => {
-            this.setupEventListeners(dv, containerId, autoFocus);
+            this.setupEventListeners(dv, containerId);
         }, 0);
     }
 
     // Display with initial search
     async displayWithSearch(dv, initialQuery, options = {}) {
-        if (!options.containerId) {
-            options = { ...options, containerId: `item-search-${Date.now()}` };
-        }
         await this.display(dv, options);
         
         // Execute initial search after a short delay
-        const containerId = options.containerId;
+        const containerId = options.containerId || `item-search-${Date.now()}`;
         setTimeout(() => {
             const input = document.getElementById(`${containerId}-input`);
             if (input) {
                 input.value = initialQuery;
-                this.updateClearVisibility(containerId);
                 this.executeSearch(dv, containerId, initialQuery);
             }
         }, 100);

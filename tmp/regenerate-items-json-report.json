@@ -1,0 +1,48 @@
+{
+  "generatedAt": "2026-06-02T09:20:23.842Z",
+  "downloadedHomebrew": [
+    {
+      "remotePath": "collection/Ghostfire Gaming; Grim Hollow - Lairs of Etharis.json",
+      "fileName": "Ghostfire Gaming; Grim Hollow - Lairs of Etharis.json",
+      "targetPath": "docs\\5etools\\homebrew\\Ghostfire Gaming; Grim Hollow - Lairs of Etharis.json"
+    },
+    {
+      "remotePath": "collection/Ghostfire Gaming; Dungeons of Drakkenheim.json",
+      "fileName": "Ghostfire Gaming; Dungeons of Drakkenheim.json",
+      "targetPath": "docs\\5etools\\homebrew\\Ghostfire Gaming; Dungeons of Drakkenheim.json"
+    },
+    {
+      "remotePath": "collection/Darrington Press; Tal’Dorei Campaign Setting Reborn.json",
+      "fileName": "Darrington Press; Tal’Dorei Campaign Setting Reborn.json",
+      "targetPath": "docs\\5etools\\homebrew\\Darrington Press; Tal’Dorei Campaign Setting Reborn.json"
+    },
+    {
+      "remotePath": "creature/Kobold Press; Tome of Beasts 1 (2023 Edition).json",
+      "fileName": "Kobold Press; Tome of Beasts 1 (2023 Edition).json",
+      "targetPath": "docs\\5etools\\homebrew\\Kobold Press; Tome of Beasts 1 (2023 Edition).json"
+    }
+  ],
+  "stats": {
+    "existing": 2883,
+    "rawItemsAdded": 0,
+    "rawBaseItemsAdded": 0,
+    "rawMagicVariantsAdded": 0,
+    "generatedAdded": 5829,
+    "csvBackfillAdded": 93,
+    "valuesFromCsv": 5006
+  },
+  "counts": {
+    "items": 8805,
+    "baseItems": 176,
+    "magicItems": 8629,
+    "magicVariants": 191,
+    "preGeneratedCombinations": 5829,
+    "csvBackfill": 93,
+    "pricedItems": 5567,
+    "csvRows": 5013,
+    "csvRowsCovered": 5013,
+    "csvRowsMissing": 0
+  },
+  "manifestUpdated": true,
+  "csvMissing": []
+}

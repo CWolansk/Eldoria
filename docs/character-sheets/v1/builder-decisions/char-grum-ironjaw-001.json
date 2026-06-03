@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "builder-decisions-v1",
+  "characterId": "char-grum-ironjaw-001",
+  "derivedFromCharacterDto": true,
+  "identityChoices": {
+    "raceRef": "race-half-orc.json",
+    "backgroundRef": "background-sailor.json",
+    "raceChoices": [],
+    "backgroundChoices": [],
+    "subclassFeatureChoices": []
+  },
+  "abilityScoreChoices": {
+    "method": "manual",
+    "characterLevel": 1,
+    "derivedFromCurrentScores": true,
+    "note": "",
+    "scores": {
+      "str": 12,
+      "dex": 14,
+      "con": 12,
+      "int": 10,
+      "wis": 14,
+      "cha": 12
+    }
+  },
+  "levelPlan": [
+    {
+      "characterLevel": 1,
+      "classRef": "class-monk.json",
+      "classLevel": 1,
+      "decisions": []
+    },
+    {
+      "characterLevel": 2,
+      "classRef": "class-monk.json",
+      "classLevel": 2,
+      "decisions": []
+    },
+    {
+      "characterLevel": 3,
+      "classRef": "class-monk.json",
+      "classLevel": 3,
+      "decisions": [
+        {
+          "type": "subclass",
+          "value": "Way of the Drunken Master"
+        }
+      ]
+    },
+    {
+      "characterLevel": 4,
+      "classRef": "class-monk.json",
+      "classLevel": 4,
+      "decisions": []
+    },
+    {
+      "characterLevel": 5,
+      "classRef": "class-monk.json",
+      "classLevel": 5,
+      "decisions": []
+    }
+  ],
+  "pendingChoices": [
+    {
+      "choiceId": "fc-jp-progression-history",
+      "type": "progression-history",
+      "classRef": "class-monk.json",
+      "unlockAtClassLevel": 1,
+      "blockedReason": "Confirm table details if needed."
+    },
+    {
+      "choiceId": "fc-jp-hp-progression",
+      "type": "hit-points",
+      "classRef": "class-monk.json",
+      "unlockAtClassLevel": 1,
+      "blockedReason": "Confirm table details if needed."
+    }
+  ],
+  "grantedSpellChoices": []
+}

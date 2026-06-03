@@ -11,6 +11,8 @@ class FeatLookup {
         this.isLoading = false;
         this.loadCallbacks = [];
         this.stylesInjected = false;
+        this.rulesCatalogWidgetData = null;
+        this.dataSource = '';
     }
 
     // Inject CSS styles into the document
@@ -20,7 +22,7 @@ class FeatLookup {
         // Load common styles if not already available
         if (typeof window.CommonLookupStyles === 'undefined') {
             try {
-                const commonStylesPath = 'docs/Assets/common-lookup-styles.js';
+                const commonStylesPath = 'docs/assets/common-lookup-styles.js';
                 const commonStylesCode = await dv.io.load(commonStylesPath);
                 eval(commonStylesCode);
             } catch (error) {
@@ -209,6 +211,36 @@ class FeatLookup {
         return result;
     }
 
+    async loadRulesCatalogWidgetData(dv) {
+        if (this.rulesCatalogWidgetData) {
+            return this.rulesCatalogWidgetData;
+        }
+
+        if (typeof window.RulesCatalogWidgetData === 'undefined') {
+            const helperPaths = [
+                'docs/assets/rules-catalog-widget-data.js',
+                'assets/rules-catalog-widget-data.js'
+            ];
+
+            for (const helperPath of helperPaths) {
+                try {
+                    const helperCode = await dv.io.load(helperPath);
+                    (0, eval)(helperCode);
+                    break;
+                } catch (error) {
+                    console.warn('Failed to load rules catalog helper:', helperPath, error);
+                }
+            }
+        }
+
+        if (typeof window.RulesCatalogWidgetData === 'undefined') {
+            return null;
+        }
+
+        this.rulesCatalogWidgetData = window.RulesCatalogWidgetData.getDefault();
+        return this.rulesCatalogWidgetData;
+    }
+
     // Load CSV data
     async loadCSVData(dv) {
         if (this.csvData) {
@@ -224,11 +256,23 @@ class FeatLookup {
         this.isLoading = true;
 
         try {
-            const csvPath = 'docs/Assets/Feats/Feats.csv';
-            const csvText = await dv.io.load(csvPath);
-            
-            // Parse CSV handling multi-line fields
-            this.csvData = this.parseCSV(csvText);
+            const catalogLoader = await this.loadRulesCatalogWidgetData(dv);
+            if (catalogLoader) {
+                const result = await catalogLoader.loadRows('feats', {
+                    dv,
+                    csvPaths: [
+                        'docs/data/feats.csv',
+                        'data/feats.csv'
+                    ]
+                });
+                this.csvData = result.rows;
+                this.dataSource = result.source;
+            } else {
+                const csvPath = 'docs/data/feats.csv';
+                const csvText = await dv.io.load(csvPath);
+                this.csvData = this.parseCSV(csvText);
+                this.dataSource = 'csv-fallback';
+            }
             this.isLoading = false;
             
             this.loadCallbacks.forEach(cb => cb.resolve(this.csvData));

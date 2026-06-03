@@ -1,0 +1,51 @@
+{
+  "id": "item:e-tier-adventurer-s-guild-badge:eldoria",
+  "ref": "item-e-tier-adventurer-s-guild-badge.json",
+  "refId": "item-e-tier-adventurer-s-guild-badge",
+  "kind": "item",
+  "name": "E-tier Adventurer's Guild Badge",
+  "source": "Eldoria",
+  "page": null,
+  "sourceKey": "E-tier Adventurer's Guild Badge|Eldoria",
+  "baseItem": null,
+  "type": {
+    "code": "",
+    "abbreviation": "",
+    "source": "Eldoria",
+    "name": "wondrous item",
+    "ref": ""
+  },
+  "typeAlt": null,
+  "rarity": "common",
+  "value": 0,
+  "weight": 0.1,
+  "attunement": {
+    "required": false,
+    "text": "",
+    "alternatives": [],
+    "tags": []
+  },
+  "tags": {
+    "wondrous": true,
+    "badge": true,
+    "guild": true
+  },
+  "bonuses": {},
+  "weapon": null,
+  "armor": null,
+  "conditionalDamage": [],
+  "mechanics": {},
+  "entries": [
+    "A stamped Adventurers Guild badge identifying the bearer as an E-rank member in good standing. It can be shown to guild staff, local guards, and quest brokers as proof of rank and membership."
+  ],
+  "raw": {
+    "name": "E-tier Adventurer's Guild Badge",
+    "source": "Eldoria",
+    "rarity": "common",
+    "reqAttune": false,
+    "type": "wondrous item",
+    "entries": [
+      "A stamped Adventurers Guild badge identifying the bearer as an E-rank member in good standing. It can be shown to guild staff, local guards, and quest brokers as proof of rank and membership."
+    ]
+  }
+}

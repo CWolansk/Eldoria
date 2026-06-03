@@ -1,0 +1,40 @@
+﻿<!-- copied from site-src/public/players.html - do not edit -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players | Eldoria Player Wiki</title>
+    <script src="site-shell.js"></script>
+    <script type="module" src="players.js"></script>
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="character-sheets/v1/sheet/character-sheet-styles.css">
+    <link rel="stylesheet" href="character-sheets/v1/builder/character-builder-styles.css">
+</head>
+<body class="site-page players-page">
+    <div id="site-nav" data-current="players"></div>
+    <header>
+        <h1>Player Characters</h1>
+        <p>Eldoria party roster</p>
+    </header>
+
+    <main class="container">
+        <div class="topbar">
+            <div class="toolbar-actions">
+                <p class="status-text" data-roster-status>Loading roster...</p>
+                <button class="button button-secondary" type="button" data-create-character-button>Create Character</button>
+            </div>
+        </div>
+
+        <section class="roster-list" data-roster aria-live="polite"></section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Eldoria Player Wiki | Powered by D&D 5th Edition</p>
+    </footer>
+</body>
+</html>
+

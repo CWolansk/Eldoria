@@ -1,0 +1,506 @@
+{
+  "schemaVersion": "v1",
+  "id": "char-zazpoh-the-matyr-001",
+  "lastModified": "2026-05-27T00:00:00.000Z",
+  "sourcePolicy": {
+    "ruleset": "2014",
+    "allowedSources": [
+      "PHB",
+      "XGE",
+      "TCE",
+      "SCAG",
+      "EEPC",
+      "ToA",
+      "DMG",
+      "Eldoria"
+    ]
+  },
+  "identity": {
+    "name": "Zazpoh the Matyr",
+    "playerName": "Randi",
+    "alignment": "Unaligned",
+    "experience": 8000,
+    "inspiration": false,
+    "portraitUrl": "/assets/portraits/randi.png",
+    "race": {
+      "ref": "race-aasimar-dmg.json",
+      "name": "Aasimar",
+      "subrace": null,
+      "source": "DMG"
+    },
+    "background": {
+      "ref": "background-cloistered-scholar.json",
+      "name": "Cloistered Scholar",
+      "source": "SCAG",
+      "feature": "Library Access",
+      "specialty": {}
+    }
+  },
+  "level": 5,
+  "proficiencyBonus": 3,
+  "initiative": 1,
+  "hp": {
+    "base": 0,
+    "modifiers": [
+      {
+        "source": "recorded",
+        "name": "HP not present in recorded sheet",
+        "amount": 0,
+        "active": true,
+        "conditional": "Confirm max/current HP and per-level rolls before table use."
+      }
+    ],
+    "max": 0,
+    "current": 0,
+    "temp": 0
+  },
+  "ac": {
+    "base": 15,
+    "modifiers": [
+      {
+        "source": "recorded",
+        "name": "Imported armor class",
+        "amount": 0,
+        "active": true,
+        "conditional": "Breakdown/formula pending."
+      }
+    ],
+    "value": 15
+  },
+  "speed": {
+    "base": 30,
+    "modifiers": [
+      {
+        "source": "recorded",
+        "name": "Imported speed",
+        "amount": 0,
+        "active": true,
+        "conditional": "Breakdown/formula pending."
+      }
+    ],
+    "value": 30
+  },
+  "hitDice": [
+    {
+      "size": "d6",
+      "total": 5,
+      "remaining": 5,
+      "class": "Wizard"
+    }
+  ],
+  "deathSaves": {
+    "successes": 0,
+    "failures": 0
+  },
+  "abilities": {
+    "str": {
+      "score": 10,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "dex": {
+      "score": 13,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "con": {
+      "score": 14,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "int": {
+      "score": 19,
+      "savingThrow": {
+        "proficient": true,
+        "grantedBy": "class-wizard"
+      }
+    },
+    "wis": {
+      "score": 16,
+      "savingThrow": {
+        "proficient": true,
+        "grantedBy": "class-wizard"
+      }
+    },
+    "cha": {
+      "score": 12,
+      "savingThrow": {
+        "proficient": false
+      }
+    }
+  },
+  "skills": {
+    "arcana": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "history": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "investigation": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    }
+  },
+  "proficiencies": {
+    "armor": [],
+    "weapons": [
+      {
+        "name": "Dagger",
+        "grantedBy": "class-wizard",
+        "multiclass": false
+      },
+      {
+        "name": "Dart",
+        "grantedBy": "class-wizard",
+        "multiclass": false
+      },
+      {
+        "name": "Sling",
+        "grantedBy": "class-wizard",
+        "multiclass": false
+      },
+      {
+        "name": "Quarterstaff",
+        "grantedBy": "class-wizard",
+        "multiclass": false
+      },
+      {
+        "name": "Light Crossbow",
+        "grantedBy": "class-wizard",
+        "multiclass": false
+      }
+    ],
+    "tools": [
+      {
+        "name": "Calligrapher's Supplies",
+        "grantedBy": "recorded",
+        "multiclass": false
+      }
+    ],
+    "languages": [],
+    "savingThrows": [
+      "int",
+      "wis"
+    ]
+  },
+  "classes": [
+    {
+      "main": "class-wizard.json",
+      "sub": "School of Divination",
+      "subclassRef": "subclass-wizard-divination.json",
+      "subclassVariant": null,
+      "isPrimary": true,
+      "isFirstClass": true,
+      "hitDieSize": 6,
+      "multiclassPrerequisite": null,
+      "fightingStyles": null,
+      "spellcasting": {
+        "ability": "int",
+        "preparationStyle": "prepared-from-spellbook",
+        "spellPool": {
+          "type": "spellbook",
+          "entries": [
+            {
+              "name": "Lesser Restoration",
+              "source": "PHB",
+              "level": 2,
+              "school": "A",
+              "addedAtLevel": 3,
+              "fromFeature": "Aasimar Legacy"
+            },
+            {
+              "name": "Daylight",
+              "source": "PHB",
+              "level": 3,
+              "school": "V",
+              "addedAtLevel": 5,
+              "fromFeature": "Aasimar Legacy"
+            }
+          ]
+        },
+        "preparedSpells": [
+          "Lesser Restoration",
+          "Daylight"
+        ],
+        "cantrips": [
+          "Light"
+        ],
+        "alwaysPrepared": [
+          {
+            "spell": "Light",
+            "fromFeature": "Aasimar Legacy"
+          },
+          {
+            "spell": "Lesser Restoration",
+            "fromFeature": "Aasimar Legacy"
+          },
+          {
+            "spell": "Daylight",
+            "fromFeature": "Aasimar Legacy"
+          }
+        ],
+        "spellAttackBonus": 7,
+        "spellSaveDc": 15,
+        "preparedFormula": "<$wizard_level$> + <$int_mod$>",
+        "preparedCount": 9,
+        "spellsKnown": 2,
+        "cantripsKnown": 1
+      },
+      "levels": [
+        {
+          "level": 1,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Spellcasting",
+            "Arcane Recovery"
+          ]
+        },
+        {
+          "level": 2,
+          "hpRolled": 0,
+          "decisions": [
+            {
+              "type": "subclass",
+              "value": "School of Divination"
+            }
+          ],
+          "featuresGained": [
+            "Arcane Tradition: School of Divination",
+            "Portent"
+          ]
+        },
+        {
+          "level": 3,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": []
+        },
+        {
+          "level": 4,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Ability Score Improvement"
+          ]
+        },
+        {
+          "level": 5,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": []
+        }
+      ]
+    }
+  ],
+  "spellSlots": {
+    "byLevel": {
+      "1": {
+        "max": 4,
+        "expended": 0,
+        "recharge": "long rest"
+      },
+      "2": {
+        "max": 3,
+        "expended": 0,
+        "recharge": "long rest"
+      },
+      "3": {
+        "max": 2,
+        "expended": 0,
+        "recharge": "long rest"
+      }
+    }
+  },
+  "resources": [
+    {
+      "id": "arcane-recovery",
+      "name": "Arcane Recovery",
+      "source": "class-wizard",
+      "kind": "counter",
+      "max": 1,
+      "current": 1,
+      "recharge": "long rest"
+    },
+    {
+      "id": "portent",
+      "name": "Portent",
+      "source": "subclass-wizard-divination",
+      "kind": "counter",
+      "max": 2,
+      "current": 2,
+      "recharge": "long rest"
+    },
+    {
+      "id": "aasimar-legacy-spells",
+      "name": "Aasimar Legacy Spells",
+      "source": "race-aasimar",
+      "kind": "text-block",
+      "body": "Legacy spell lookup lists Light, Lesser Restoration, and Daylight. Confirm whether these are racial spells or class spells."
+    }
+  ],
+  "inventory": {
+    "currency": {
+      "cp": 0,
+      "sp": 0,
+      "ep": 0,
+      "gp": 0,
+      "pp": 0
+    },
+    "carried": [
+      {
+        "ref": "item-the-aegis-codex.json",
+        "name": "The Aegis Codex",
+        "source": "Eldoria",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-quarterstaff.json",
+        "name": "Quarterstaff",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": true,
+        "attunement": false
+      },
+      {
+        "ref": "item-dagger.json",
+        "name": "Dagger",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-calligraphers-supplies.json",
+        "name": "Calligrapher's Supplies",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-scholars-pack.json",
+        "name": "Scholar's Pack",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-staff.json",
+        "name": "Arcane Focus (Staff)",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": true,
+        "attunement": false
+      }
+    ]
+  },
+  "features": [
+    {
+      "id": "feat-randi-aasimar-traits",
+      "name": "Aasimar Traits",
+      "source": "race-aasimar",
+      "ref": "race-aasimar-dmg.json#Aasimar Traits"
+    },
+    {
+      "id": "feat-randi-library-access",
+      "name": "Library Access",
+      "source": "background-cloistered-scholar",
+      "ref": "background-cloistered-scholar.json#Library Access"
+    },
+    {
+      "id": "feat-randi-spellcasting",
+      "name": "Spellcasting",
+      "source": "class-wizard",
+      "ref": "class-wizard.json#Spellcasting"
+    },
+    {
+      "id": "feat-randi-arcane-recovery",
+      "name": "Arcane Recovery",
+      "source": "class-wizard",
+      "ref": "class-wizard.json#Arcane Recovery"
+    },
+    {
+      "id": "feat-randi-school-of-divination",
+      "name": "School of Divination",
+      "source": "subclass-wizard-divination",
+      "ref": "subclass-wizard-divination.json#School of Divination"
+    },
+    {
+      "id": "feat-randi-portent",
+      "name": "Portent",
+      "source": "subclass-wizard-divination",
+      "ref": "subclass-wizard-divination.json#Portent"
+    }
+  ],
+  "featureChoices": [
+    {
+      "id": "fc-randi-progression-history",
+      "feature": "Level Progression History",
+      "source": "recorded",
+      "prompt": "Confirm ASI/feat origins, proficiency sources, starting equipment branches, and level-up decisions from levels 1-5.",
+      "resolved": false,
+      "value": null,
+      "blockedReason": "Confirm table details if needed.",
+      "blockedUntilLevel": null
+    },
+    {
+      "id": "fc-randi-hp-progression",
+      "feature": "Hit Point Progression",
+      "source": "recorded",
+      "prompt": "Confirm max/current HP and per-level HP rolls; recorded sheet did not expose hit points.",
+      "resolved": false,
+      "value": null,
+      "blockedReason": "Confirm table details if needed.",
+      "blockedUntilLevel": null
+    },
+    {
+      "id": "fc-randi-spell-history",
+      "feature": "Spell List And Preparation History",
+      "source": "recorded",
+      "prompt": "Confirm complete spells known/prepared and when each spell was learned or prepared.",
+      "resolved": false,
+      "value": {
+        "importedSpells": [
+          "Light",
+          "Lesser Restoration",
+          "Daylight"
+        ]
+      },
+      "blockedReason": "Legacy sheets list visible spell lookups but not full preparation or learn chronology.",
+      "blockedUntilLevel": null
+    }
+  ],
+  "builderOverrides": [
+    {
+      "id": "override-randi-ac-breakdown",
+      "field": "ac.modifiers",
+      "reason": "Confirm table details if needed.",
+      "manualValue": 15,
+      "appliedAt": "2026-05-22T00:00:00Z"
+    },
+    {
+      "id": "override-randi-hp-history",
+      "field": "hp",
+      "reason": "Confirm table details if needed.",
+      "manualValue": null,
+      "appliedAt": "2026-05-22T00:00:00Z"
+    }
+  ],
+  "notes": {
+    "freeform": "",
+    "conditions": [],
+    "exhaustion": 0
+  }
+}

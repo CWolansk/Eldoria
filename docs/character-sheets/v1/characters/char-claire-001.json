@@ -1,0 +1,541 @@
+{
+  "schemaVersion": "v1",
+  "id": "char-claire-001",
+  "lastModified": "2026-05-27T00:00:00.000Z",
+  "sourcePolicy": {
+    "ruleset": "2014",
+    "allowedSources": [
+      "PHB",
+      "XGE",
+      "TCE",
+      "SCAG",
+      "EEPC",
+      "ToA",
+      "DMG",
+      "Eldoria"
+    ]
+  },
+  "identity": {
+    "name": "Claire",
+    "playerName": "Claire",
+    "alignment": "Unaligned",
+    "experience": 8000,
+    "inspiration": false,
+    "portraitUrl": "/assets/portraits/claire.png",
+    "race": {
+      "ref": "race-genasi-water-eepc.json",
+      "name": "Genasi",
+      "subrace": "Water",
+      "source": "EEPC"
+    },
+    "background": {
+      "ref": "background-sailor.json",
+      "name": "Sailor",
+      "source": "PHB",
+      "feature": "Ship's Passage",
+      "specialty": {}
+    }
+  },
+  "level": 5,
+  "proficiencyBonus": 3,
+  "initiative": -1,
+  "hp": {
+    "base": 0,
+    "modifiers": [
+      {
+        "source": "recorded",
+        "name": "HP not present in recorded sheet",
+        "amount": 0,
+        "active": true,
+        "conditional": "Confirm max/current HP and per-level rolls before table use."
+      }
+    ],
+    "max": 0,
+    "current": 0,
+    "temp": 0
+  },
+  "ac": {
+    "base": 18,
+    "modifiers": [
+      {
+        "source": "recorded",
+        "name": "Imported armor class",
+        "amount": 0,
+        "active": true,
+        "conditional": "Breakdown/formula pending."
+      }
+    ],
+    "value": 18
+  },
+  "speed": {
+    "base": 30,
+    "modifiers": [
+      {
+        "source": "recorded",
+        "name": "Imported speed",
+        "amount": 0,
+        "active": true,
+        "conditional": "Breakdown/formula pending."
+      }
+    ],
+    "value": 30
+  },
+  "hitDice": [
+    {
+      "size": "d8",
+      "total": 5,
+      "remaining": 5,
+      "class": "Cleric"
+    }
+  ],
+  "deathSaves": {
+    "successes": 0,
+    "failures": 0
+  },
+  "abilities": {
+    "str": {
+      "score": 16,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "dex": {
+      "score": 8,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "con": {
+      "score": 16,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "int": {
+      "score": 14,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "wis": {
+      "score": 18,
+      "savingThrow": {
+        "proficient": true,
+        "grantedBy": "class-cleric"
+      }
+    },
+    "cha": {
+      "score": 12,
+      "savingThrow": {
+        "proficient": true,
+        "grantedBy": "class-cleric"
+      }
+    }
+  },
+  "skills": {
+    "insight": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "medicine": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "perception": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "persuasion": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "religion": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    }
+  },
+  "proficiencies": {
+    "armor": [
+      {
+        "name": "Light Armor",
+        "grantedBy": "class-cleric",
+        "multiclass": false
+      },
+      {
+        "name": "Medium Armor",
+        "grantedBy": "class-cleric",
+        "multiclass": false
+      },
+      {
+        "name": "Heavy Armor",
+        "grantedBy": "class-cleric",
+        "multiclass": false
+      },
+      {
+        "name": "Shields",
+        "grantedBy": "class-cleric",
+        "multiclass": false
+      }
+    ],
+    "weapons": [
+      {
+        "name": "Simple Weapons",
+        "grantedBy": "class-cleric",
+        "multiclass": false
+      },
+      {
+        "name": "Martial Weapons",
+        "grantedBy": "class-cleric",
+        "multiclass": false
+      }
+    ],
+    "tools": [
+      {
+        "name": "Navigator's Tools",
+        "grantedBy": "recorded",
+        "multiclass": false
+      },
+      {
+        "name": "Vehicles (Water)",
+        "grantedBy": "recorded",
+        "multiclass": false
+      }
+    ],
+    "languages": [],
+    "savingThrows": [
+      "wis",
+      "cha"
+    ]
+  },
+  "classes": [
+    {
+      "main": "class-cleric.json",
+      "sub": "Tempest Domain",
+      "subclassRef": "subclass-cleric-tempest.json",
+      "subclassVariant": null,
+      "isPrimary": true,
+      "isFirstClass": true,
+      "hitDieSize": 8,
+      "multiclassPrerequisite": null,
+      "fightingStyles": null,
+      "spellcasting": {
+        "ability": "wis",
+        "preparationStyle": "prepared-from-list",
+        "spellPool": {
+          "type": "class-list",
+          "entries": []
+        },
+        "preparedSpells": [],
+        "cantrips": [],
+        "alwaysPrepared": [],
+        "spellAttackBonus": 7,
+        "spellSaveDc": 15,
+        "preparedFormula": "<$cleric_level$> + <$wis_mod$>",
+        "preparedCount": 9,
+        "spellsKnown": 0,
+        "cantripsKnown": 0
+      },
+      "levels": [
+        {
+          "level": 1,
+          "hpRolled": 0,
+          "decisions": [
+            {
+              "type": "subclass",
+              "value": "Tempest Domain"
+            }
+          ],
+          "featuresGained": [
+            "Spellcasting",
+            "Divine Domain: Tempest Domain",
+            "Wrath of the Storm"
+          ]
+        },
+        {
+          "level": 2,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Channel Divinity",
+            "Destructive Wrath"
+          ]
+        },
+        {
+          "level": 3,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": []
+        },
+        {
+          "level": 4,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Ability Score Improvement"
+          ]
+        },
+        {
+          "level": 5,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Destroy Undead (CR 1/2)"
+          ]
+        }
+      ]
+    }
+  ],
+  "spellSlots": {
+    "byLevel": {
+      "1": {
+        "max": 4,
+        "expended": 0,
+        "recharge": "long rest"
+      },
+      "2": {
+        "max": 3,
+        "expended": 0,
+        "recharge": "long rest"
+      },
+      "3": {
+        "max": 2,
+        "expended": 0,
+        "recharge": "long rest"
+      }
+    }
+  },
+  "resources": [
+    {
+      "id": "channel-divinity",
+      "name": "Channel Divinity",
+      "source": "class-cleric",
+      "kind": "counter",
+      "max": 1,
+      "current": 1,
+      "recharge": "short or long rest"
+    },
+    {
+      "id": "wrath-of-the-storm",
+      "name": "Wrath of the Storm",
+      "source": "subclass-cleric-tempest",
+      "kind": "counter",
+      "max": 4,
+      "current": 4,
+      "recharge": "long rest"
+    }
+  ],
+  "inventory": {
+    "currency": {
+      "cp": 0,
+      "sp": 0,
+      "ep": 0,
+      "gp": 0,
+      "pp": 0
+    },
+    "carried": [
+      {
+        "ref": "item-warhammer.json",
+        "name": "+1 Warhammer",
+        "source": "DMG",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-light-crossbow.json",
+        "name": "Light Crossbow",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-lightning-rod.json",
+        "name": "Lightning Rod",
+        "source": "Eldoria",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-warhammer.json",
+        "name": "Warhammer of Warning",
+        "source": "DMG",
+        "quantity": 1,
+        "equipped": true,
+        "attunement": false
+      },
+      {
+        "ref": "item-e-tier-adventurers-guild-badge.json",
+        "name": "E-tier Adventurer's Guild Badge",
+        "source": "Eldoria",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-spell-scroll-1st-level-dmg.json",
+        "name": "Spell Scroll (Burning Hands)",
+        "source": "DMG",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-amulet-of-divine-retribution.json",
+        "name": "Amulet of Divine Retribution",
+        "source": "Eldoria",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-griffon-key-loop.json",
+        "name": "Griffon Key Loop",
+        "source": "Eldoria",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-silverleaf-brooch.json",
+        "name": "Silverleaf Brooch",
+        "source": "Eldoria",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "name": "Spell Scroll (1st Level)",
+        "quantity": 1,
+        "equipped": false,
+        "attuned": false,
+        "source": "DMG",
+        "ref": "item-spell-scroll-1st-level-dmg.json"
+      }
+    ]
+  },
+  "features": [
+    {
+      "id": "feat-claire-water-genasi-traits",
+      "name": "Water Genasi Traits",
+      "source": "race-genasi-water",
+      "ref": "race-genasi-water-eepc.json#Water Genasi Traits"
+    },
+    {
+      "id": "feat-claire-ship-s-passage",
+      "name": "Ship's Passage",
+      "source": "background-sailor",
+      "ref": "background-sailor.json#Ship's Passage"
+    },
+    {
+      "id": "feat-claire-spellcasting",
+      "name": "Spellcasting",
+      "source": "class-cleric",
+      "ref": "class-cleric.json#Spellcasting"
+    },
+    {
+      "id": "feat-claire-channel-divinity",
+      "name": "Channel Divinity",
+      "source": "class-cleric",
+      "ref": "class-cleric.json#Channel Divinity"
+    },
+    {
+      "id": "feat-claire-tempest-domain",
+      "name": "Tempest Domain",
+      "source": "subclass-cleric-tempest",
+      "ref": "subclass-cleric-tempest.json#Tempest Domain"
+    },
+    {
+      "id": "feat-claire-wrath-of-the-storm",
+      "name": "Wrath of the Storm",
+      "source": "subclass-cleric-tempest",
+      "ref": "subclass-cleric-tempest.json#Wrath of the Storm"
+    },
+    {
+      "id": "feat-claire-destructive-wrath",
+      "name": "Destructive Wrath",
+      "source": "subclass-cleric-tempest",
+      "ref": "subclass-cleric-tempest.json#Destructive Wrath"
+    },
+    {
+      "id": "feat-claire-elemental-adept",
+      "name": "Elemental Adept",
+      "source": "feat-elemental-adept",
+      "ref": "feat-elemental-adept.json",
+      "linkedChoice": "fc-claire-elemental-adept-damage-type"
+    }
+  ],
+  "featureChoices": [
+    {
+      "id": "fc-claire-progression-history",
+      "feature": "Level Progression History",
+      "source": "recorded",
+      "prompt": "Confirm ASI/feat origins, proficiency sources, starting equipment branches, and level-up decisions from levels 1-5.",
+      "resolved": false,
+      "value": null,
+      "blockedReason": "Confirm table details if needed.",
+      "blockedUntilLevel": null
+    },
+    {
+      "id": "fc-claire-hp-progression",
+      "feature": "Hit Point Progression",
+      "source": "recorded",
+      "prompt": "Confirm max/current HP and per-level HP rolls; recorded sheet did not expose hit points.",
+      "resolved": false,
+      "value": null,
+      "blockedReason": "Confirm table details if needed.",
+      "blockedUntilLevel": null
+    },
+    {
+      "id": "fc-claire-spell-history",
+      "feature": "Spell List And Preparation History",
+      "source": "recorded",
+      "prompt": "Confirm complete spells known/prepared and when each spell was learned or prepared.",
+      "resolved": false,
+      "value": {
+        "importedSpells": []
+      },
+      "blockedReason": "Legacy sheets list visible spell lookups but not full preparation or learn chronology.",
+      "blockedUntilLevel": null
+    },
+    {
+      "id": "fc-claire-elemental-adept-damage-type",
+      "feature": "Elemental Adept",
+      "source": "feat-elemental-adept",
+      "prompt": "Confirm the chosen damage type for Elemental Adept.",
+      "resolved": false,
+      "value": {
+        "feat": "Elemental Adept"
+      },
+      "blockedReason": "Confirm table details if needed.",
+      "blockedUntilLevel": null
+    }
+  ],
+  "builderOverrides": [
+    {
+      "id": "override-claire-ac-breakdown",
+      "field": "ac.modifiers",
+      "reason": "Confirm table details if needed.",
+      "manualValue": 18,
+      "appliedAt": "2026-05-22T00:00:00Z"
+    },
+    {
+      "id": "override-claire-hp-history",
+      "field": "hp",
+      "reason": "Confirm table details if needed.",
+      "manualValue": null,
+      "appliedAt": "2026-05-22T00:00:00Z"
+    }
+  ],
+  "notes": {
+    "freeform": "",
+    "conditions": [],
+    "exhaustion": 0
+  }
+}

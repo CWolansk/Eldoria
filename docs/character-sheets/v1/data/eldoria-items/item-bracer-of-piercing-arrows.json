@@ -1,0 +1,55 @@
+{
+  "id": "item:bracer-of-piercing-arrows:eldoria",
+  "ref": "item-bracer-of-piercing-arrows.json",
+  "refId": "item-bracer-of-piercing-arrows",
+  "kind": "item",
+  "name": "Bracer of Piercing Arrows",
+  "source": "Eldoria",
+  "page": null,
+  "sourceKey": "Bracer of Piercing Arrows|Eldoria",
+  "baseItem": null,
+  "type": {
+    "code": "",
+    "abbreviation": "",
+    "source": "Eldoria",
+    "name": "wondrous item",
+    "ref": ""
+  },
+  "typeAlt": null,
+  "rarity": "rare",
+  "value": 150000,
+  "weight": 1,
+  "attunement": {
+    "required": true,
+    "text": "by a creature with at least 1 level in Ranger",
+    "alternatives": [],
+    "tags": []
+  },
+  "tags": {
+    "wondrous": true,
+    "ranger": true,
+    "archery": true
+  },
+  "bonuses": {},
+  "weapon": null,
+  "armor": null,
+  "conditionalDamage": [],
+  "mechanics": {},
+  "entries": [
+    "This finely tooled leather bracer is decorated with intricate carvings of fletched arrows. When worn, it gives the ranger's shots uncanny precision.",
+    "Piercing Shot (3/day). Before making a ranged weapon attack, choose a specific body part to target. On a hit, the target suffers the matching effect until the end of its next turn: eyes impose disadvantage on sight-based Wisdom (Perception) checks and ranged attack rolls; arm or hand prevents wielding two-handed weapons and limits the target to holding one object; foot or leg halves speed; torso forces a Constitution saving throw with DC = 10 + your proficiency bonus + your Dexterity modifier the next time the target attempts an action, losing its action and reactions until the start of its next turn on a failure.",
+    "Precise Aim (1/day). As a bonus action at the start of your turn, you focus your aim. Until the end of your next turn, whenever you hit a creature with a weapon attack, all allies gain advantage on attack rolls against that target."
+  ],
+  "raw": {
+    "name": "Bracer of Piercing Arrows",
+    "source": "Eldoria",
+    "rarity": "rare",
+    "reqAttune": "by a creature with at least 1 level in Ranger",
+    "type": "wondrous item",
+    "entries": [
+      "This finely tooled leather bracer is decorated with intricate carvings of fletched arrows. When worn, it gives the ranger's shots uncanny precision.",
+      "Piercing Shot (3/day). Before making a ranged weapon attack, choose a specific body part to target. On a hit, the target suffers the matching effect until the end of its next turn: eyes impose disadvantage on sight-based Wisdom (Perception) checks and ranged attack rolls; arm or hand prevents wielding two-handed weapons and limits the target to holding one object; foot or leg halves speed; torso forces a Constitution saving throw with DC = 10 + your proficiency bonus + your Dexterity modifier the next time the target attempts an action, losing its action and reactions until the start of its next turn on a failure.",
+      "Precise Aim (1/day). As a bonus action at the start of your turn, you focus your aim. Until the end of your next turn, whenever you hit a creature with a weapon attack, all allies gain advantage on attack rolls against that target."
+    ]
+  }
+}

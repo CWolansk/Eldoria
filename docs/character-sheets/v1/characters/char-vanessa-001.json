@@ -1,0 +1,608 @@
+{
+  "schemaVersion": "v1",
+  "id": "char-vanessa-001",
+  "lastModified": "2026-05-27T00:00:00.000Z",
+  "sourcePolicy": {
+    "ruleset": "2014",
+    "allowedSources": [
+      "PHB",
+      "XGE",
+      "TCE",
+      "SCAG",
+      "EEPC",
+      "ToA",
+      "DMG",
+      "Eldoria"
+    ]
+  },
+  "identity": {
+    "name": "Vanessa",
+    "playerName": "Vanessa",
+    "alignment": "Unaligned",
+    "experience": 8000,
+    "inspiration": false,
+    "portraitUrl": "/assets/portraits/vanessa.png",
+    "race": {
+      "ref": "race-dragonborn.json",
+      "name": "Dragonborn",
+      "subrace": null,
+      "source": "PHB"
+    },
+    "background": {
+      "ref": "background-hermit.json",
+      "name": "Hermit",
+      "source": "PHB",
+      "feature": "Discovery",
+      "specialty": {}
+    }
+  },
+  "level": 5,
+  "proficiencyBonus": 3,
+  "initiative": 2,
+  "hp": {
+    "base": 36,
+    "modifiers": [],
+    "max": 36,
+    "current": 36,
+    "temp": 0
+  },
+  "ac": {
+    "base": 15,
+    "modifiers": [
+      {
+        "source": "recorded",
+        "name": "Imported armor class",
+        "amount": 0,
+        "active": true,
+        "conditional": "Breakdown/formula pending."
+      }
+    ],
+    "value": 15
+  },
+  "speed": {
+    "base": 30,
+    "modifiers": [
+      {
+        "source": "recorded",
+        "name": "Imported speed",
+        "amount": 0,
+        "active": true,
+        "conditional": "Breakdown/formula pending."
+      }
+    ],
+    "value": 30
+  },
+  "hitDice": [
+    {
+      "size": "d8",
+      "total": 5,
+      "remaining": 5,
+      "class": "Druid"
+    }
+  ],
+  "deathSaves": {
+    "successes": 0,
+    "failures": 0
+  },
+  "abilities": {
+    "str": {
+      "score": 13,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "dex": {
+      "score": 14,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "con": {
+      "score": 16,
+      "savingThrow": {
+        "proficient": false
+      }
+    },
+    "int": {
+      "score": 13,
+      "savingThrow": {
+        "proficient": true,
+        "grantedBy": "class-druid"
+      }
+    },
+    "wis": {
+      "score": 17,
+      "savingThrow": {
+        "proficient": true,
+        "grantedBy": "class-druid"
+      }
+    },
+    "cha": {
+      "score": 12,
+      "savingThrow": {
+        "proficient": false
+      }
+    }
+  },
+  "skills": {
+    "medicine": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "nature": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "religion": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    },
+    "survival": {
+      "proficient": true,
+      "expertise": false,
+      "source": "recorded"
+    }
+  },
+  "proficiencies": {
+    "armor": [
+      {
+        "name": "Light Armor",
+        "grantedBy": "class-druid",
+        "multiclass": false
+      },
+      {
+        "name": "Medium Armor",
+        "grantedBy": "class-druid",
+        "multiclass": false
+      },
+      {
+        "name": "Shields",
+        "grantedBy": "class-druid",
+        "multiclass": false
+      }
+    ],
+    "weapons": [
+      {
+        "name": "Club",
+        "grantedBy": "class-druid",
+        "multiclass": false
+      },
+      {
+        "name": "Dagger",
+        "grantedBy": "class-druid",
+        "multiclass": false
+      },
+      {
+        "name": "Dart",
+        "grantedBy": "class-druid",
+        "multiclass": false
+      },
+      {
+        "name": "Javelin",
+        "grantedBy": "class-druid",
+        "multiclass": false
+      },
+      {
+        "name": "Mace",
+        "grantedBy": "class-druid",
+        "multiclass": false
+      },
+      {
+        "name": "Quarterstaff",
+        "grantedBy": "class-druid",
+        "multiclass": false
+      },
+      {
+        "name": "Scimitar",
+        "grantedBy": "class-druid",
+        "multiclass": false
+      },
+      {
+        "name": "Sickle",
+        "grantedBy": "class-druid",
+        "multiclass": false
+      },
+      {
+        "name": "Sling",
+        "grantedBy": "class-druid",
+        "multiclass": false
+      },
+      {
+        "name": "Spear",
+        "grantedBy": "class-druid",
+        "multiclass": false
+      }
+    ],
+    "tools": [
+      {
+        "name": "Herbalism Kit",
+        "grantedBy": "recorded",
+        "multiclass": false
+      }
+    ],
+    "languages": [],
+    "savingThrows": [
+      "int",
+      "wis"
+    ]
+  },
+  "classes": [
+    {
+      "main": "class-druid.json",
+      "sub": "Circle of the Land",
+      "subclassRef": "subclass-druid-land.json",
+      "subclassVariant": null,
+      "isPrimary": true,
+      "isFirstClass": true,
+      "hitDieSize": 8,
+      "multiclassPrerequisite": null,
+      "fightingStyles": null,
+      "spellcasting": {
+        "ability": "wis",
+        "preparationStyle": "prepared-from-list",
+        "spellPool": {
+          "type": "class-list",
+          "entries": [
+            {
+              "name": "Cure Wounds",
+              "source": "PHB",
+              "level": 1,
+              "school": "V",
+              "addedAtLevel": 5
+            },
+            {
+              "name": "Ice Knife",
+              "source": "XGE",
+              "level": 1,
+              "school": "C",
+              "addedAtLevel": 5
+            },
+            {
+              "name": "Barkskin",
+              "source": "PHB",
+              "level": 2,
+              "school": "T",
+              "addedAtLevel": 5
+            },
+            {
+              "name": "Flame Blade",
+              "source": "PHB",
+              "level": 2,
+              "school": "V",
+              "addedAtLevel": 5
+            },
+            {
+              "name": "Pass without Trace",
+              "source": "PHB",
+              "level": 2,
+              "school": "A",
+              "addedAtLevel": 5
+            },
+            {
+              "name": "Call Lightning",
+              "source": "PHB",
+              "level": 3,
+              "school": "C",
+              "addedAtLevel": 5
+            },
+            {
+              "name": "Plant Growth",
+              "source": "PHB",
+              "level": 3,
+              "school": "T",
+              "addedAtLevel": 5
+            },
+            {
+              "name": "Water Breathing",
+              "source": "PHB",
+              "level": 3,
+              "school": "T",
+              "addedAtLevel": 5
+            }
+          ]
+        },
+        "preparedSpells": [
+          "Cure Wounds",
+          "Ice Knife",
+          "Barkskin",
+          "Flame Blade",
+          "Pass without Trace",
+          "Call Lightning",
+          "Plant Growth",
+          "Water Breathing"
+        ],
+        "cantrips": [],
+        "alwaysPrepared": [],
+        "spellAttackBonus": 6,
+        "spellSaveDc": 14,
+        "preparedFormula": "<$druid_level$> + <$wis_mod$>",
+        "preparedCount": 8,
+        "spellsKnown": 8,
+        "cantripsKnown": 0
+      },
+      "levels": [
+        {
+          "level": 1,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Spellcasting"
+          ]
+        },
+        {
+          "level": 2,
+          "hpRolled": 0,
+          "decisions": [
+            {
+              "type": "subclass",
+              "value": "Circle of the Land"
+            }
+          ],
+          "featuresGained": [
+            "Wild Shape",
+            "Druid Circle: Circle of the Land",
+            "Natural Recovery"
+          ]
+        },
+        {
+          "level": 3,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": []
+        },
+        {
+          "level": 4,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": [
+            "Ability Score Improvement"
+          ]
+        },
+        {
+          "level": 5,
+          "hpRolled": 0,
+          "decisions": [],
+          "featuresGained": []
+        }
+      ]
+    }
+  ],
+  "spellSlots": {
+    "byLevel": {
+      "1": {
+        "max": 4,
+        "expended": 0,
+        "recharge": "long rest"
+      },
+      "2": {
+        "max": 3,
+        "expended": 0,
+        "recharge": "long rest"
+      },
+      "3": {
+        "max": 2,
+        "expended": 0,
+        "recharge": "long rest"
+      }
+    }
+  },
+  "resources": [
+    {
+      "id": "wild-shape",
+      "name": "Wild Shape",
+      "source": "class-druid",
+      "kind": "counter",
+      "max": 2,
+      "current": 2,
+      "recharge": "short or long rest"
+    },
+    {
+      "id": "natural-recovery",
+      "name": "Natural Recovery",
+      "source": "subclass-druid-land",
+      "kind": "counter",
+      "max": 1,
+      "current": 1,
+      "recharge": "long rest"
+    },
+    {
+      "id": "lucky",
+      "name": "Lucky",
+      "source": "feat-lucky",
+      "kind": "counter",
+      "max": 3,
+      "current": 3,
+      "recharge": "long rest"
+    }
+  ],
+  "inventory": {
+    "currency": {
+      "cp": 0,
+      "sp": 0,
+      "ep": 0,
+      "gp": 0,
+      "pp": 0
+    },
+    "carried": [
+      {
+        "ref": "item-talisman-of-elemental-fury.json",
+        "name": "Talisman of Elemental Fury",
+        "source": "Eldoria",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      },
+      {
+        "ref": "item-leather-armor.json",
+        "name": "Leather Armor",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": true,
+        "attunement": false
+      },
+      {
+        "ref": "item-shield.json",
+        "name": "Wooden Shield",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": true,
+        "attunement": false
+      },
+      {
+        "ref": "item-scimitar.json",
+        "name": "Scimitar",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": true,
+        "attunement": false
+      },
+      {
+        "ref": "item-shield.json",
+        "name": "Shield",
+        "source": "PHB",
+        "quantity": 1,
+        "equipped": false,
+        "attunement": false
+      }
+    ]
+  },
+  "features": [
+    {
+      "id": "feat-vanessa-dragonborn-traits",
+      "name": "Dragonborn Traits",
+      "source": "race-dragonborn",
+      "ref": "race-dragonborn.json#Dragonborn Traits",
+      "linkedChoice": "fc-vanessa-draconic-ancestry"
+    },
+    {
+      "id": "feat-vanessa-discovery",
+      "name": "Discovery",
+      "source": "background-hermit",
+      "ref": "background-hermit.json#Discovery"
+    },
+    {
+      "id": "feat-vanessa-spellcasting",
+      "name": "Spellcasting",
+      "source": "class-druid",
+      "ref": "class-druid.json#Spellcasting"
+    },
+    {
+      "id": "feat-vanessa-wild-shape",
+      "name": "Wild Shape",
+      "source": "class-druid",
+      "ref": "class-druid.json#Wild Shape"
+    },
+    {
+      "id": "feat-vanessa-circle-of-the-land",
+      "name": "Circle of the Land",
+      "source": "subclass-druid-land",
+      "ref": "subclass-druid-land.json#Circle of the Land",
+      "linkedChoice": "fc-vanessa-land-circle"
+    },
+    {
+      "id": "feat-vanessa-natural-recovery",
+      "name": "Natural Recovery",
+      "source": "subclass-druid-land",
+      "ref": "subclass-druid-land.json#Natural Recovery"
+    },
+    {
+      "id": "feat-vanessa-lucky",
+      "name": "Lucky",
+      "source": "feat-lucky",
+      "ref": "feat-lucky.json"
+    }
+  ],
+  "featureChoices": [
+    {
+      "id": "fc-vanessa-progression-history",
+      "feature": "Level Progression History",
+      "source": "recorded",
+      "prompt": "Confirm ASI/feat origins, proficiency sources, starting equipment branches, and level-up decisions from levels 1-5.",
+      "resolved": false,
+      "value": null,
+      "blockedReason": "Confirm table details if needed.",
+      "blockedUntilLevel": null
+    },
+    {
+      "id": "fc-vanessa-hp-progression",
+      "feature": "Hit Point Progression",
+      "source": "recorded",
+      "prompt": "Confirm per-level HP rolls; max/current HP were imported from the recorded sheet.",
+      "resolved": false,
+      "value": {
+        "maxHp": 36,
+        "currentHp": 36
+      },
+      "blockedReason": "Confirm table details if needed.",
+      "blockedUntilLevel": null
+    },
+    {
+      "id": "fc-vanessa-spell-history",
+      "feature": "Spell List And Preparation History",
+      "source": "recorded",
+      "prompt": "Confirm complete spells known/prepared and when each spell was learned or prepared.",
+      "resolved": false,
+      "value": {
+        "importedSpells": [
+          "Cure Wounds",
+          "Ice Knife",
+          "Barkskin",
+          "Flame Blade",
+          "Pass without Trace",
+          "Call Lightning",
+          "Plant Growth",
+          "Water Breathing"
+        ]
+      },
+      "blockedReason": "Legacy sheets list visible spell lookups but not full preparation or learn chronology.",
+      "blockedUntilLevel": null
+    },
+    {
+      "id": "fc-vanessa-draconic-ancestry",
+      "feature": "Draconic Ancestry",
+      "source": "race-dragonborn",
+      "prompt": "Confirm Dragonborn ancestry/damage type.",
+      "resolved": false,
+      "value": null,
+      "blockedReason": "Confirm table details if needed.",
+      "blockedUntilLevel": null
+    },
+    {
+      "id": "fc-vanessa-land-circle",
+      "feature": "Circle of the Land Terrain",
+      "source": "subclass-druid-land",
+      "prompt": "Confirm Circle of the Land terrain selection.",
+      "resolved": false,
+      "value": null,
+      "blockedReason": "Confirm table details if needed.",
+      "blockedUntilLevel": null
+    }
+  ],
+  "builderOverrides": [
+    {
+      "id": "override-vanessa-ac-breakdown",
+      "field": "ac.modifiers",
+      "reason": "Confirm table details if needed.",
+      "manualValue": 15,
+      "appliedAt": "2026-05-22T00:00:00Z"
+    },
+    {
+      "id": "override-vanessa-hp-history",
+      "field": "hp",
+      "reason": "Confirm table details if needed.",
+      "manualValue": {
+        "max": 36,
+        "current": 36
+      },
+      "appliedAt": "2026-05-22T00:00:00Z"
+    }
+  ],
+  "notes": {
+    "freeform": "",
+    "conditions": [],
+    "exhaustion": 0
+  }
+}
