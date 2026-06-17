@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Public/Players/Vanessa Player Sheet.md",
+                "file": "Public/Players/Claire Player Sheet.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "Vanessa Player Sheet"
+              "title": "Claire Player Sheet"
             }
           }
         ]
@@ -178,7 +178,8 @@
                   "displayWeather": true,
                   "location": ""
                 },
-                "id": "ID_ab08197979da"
+                "id": "ID_ab08197979da",
+                "child": "ID_6a8aba386b8a"
               },
               "icon": "CALENDARIUM",
               "title": "Calendarium"
@@ -250,6 +251,8 @@
   },
   "active": "deaaadac720c90a2",
   "lastOpenFiles": [
+    "Public/Players/ClaireDnD.png",
+    "Public/Players/Vanessa Player Sheet.md",
     "docs/Public/Background Searcher.html",
     "docs/api/shared/local-config.js",
     "docs/api/scripts/Seed-Rules.ps1",
@@ -260,7 +263,6 @@
     "docs/api/shared/rules-data.js",
     "docs/site-assets/rules-fixer.js",
     "docs/rules-fixer.html",
-    "docs/Assets/Rules/rule-overrides.json",
     "TODO.md",
     "Public/Players/Randi Player Sheet.md",
     "Public/Players/Liz Player Sheet.md",
@@ -279,7 +281,6 @@
     "Public/Players/RandiDnD.png",
     "Public/Players/LizDnD.png",
     "Public/Players/JustinDnD.png",
-    "Public/Players/ClaireDnD.png",
     "docs/api/migrations/README.md",
     "docs/api/config/README.md",
     "docs/Public/World/Images/OrcCityC.png",
@@ -294,7 +295,6 @@
     "Public/World/Orcish Wastes/Orc Town C/Orc City C.md",
     "Public/World/Orcish Wastes/Orc Town B/Orc City B.md",
     "Public/World/Orcish Wastes/Orc Capitol/Orc Capitol.md",
-    "Public/World/Ironpeak Mountains/Stoneforge/Stoneforge.md",
-    "Public/World/Ironpeak Mountains/Steamhammer/Steamhammer.md"
+    "Public/World/Ironpeak Mountains/Stoneforge/Stoneforge.md"
   ]
 }

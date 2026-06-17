@@ -1,0 +1,238 @@
+<!-- copied from site-src/public/index.html - do not edit -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Sheet | Eldoria Player Wiki</title>
+    <script src="../../site-shell.js"></script>
+    <script type="module" src="PlayerSheet.js"></script>
+    <link rel="stylesheet" href="../../css/tokens.css">
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/utilities.css">
+    <link rel="stylesheet" href="../players.css">
+    <link rel="stylesheet" href="./LevelEditorJavaScript/LevelEditor.css">
+</head>
+<body class="hub-page">
+    <div class="site-shell">
+        <div id="site-nav" data-base-path="../../../" data-current="playersSheet"></div>
+        <main class="container">
+            <section class="section player-sheet-page">
+                <header>
+                    <div>
+                        <p class="section-kicker">Player Sheets</p>
+                        <h1>Player Character Sheets</h1>
+                    </div>
+                </header>
+                <div class="player-sheet-container">
+                    <aside class="levelEditor level-editor" id="sidebar-level-editor" data-level-editor>
+                        <h2 class="level-editor__title" id="level-editor-title">Level Editor</h2>
+                        <ul class="level-editor__list" id="level-editor-list" data-level-editor-list>
+                            <li class="level-editor__list-item level-editor__list-item--base" id="level-editor-base-item">
+                                <details class="level-editor__section level-editor__section--base" id="level-editor-base" data-level-editor-section="base" open>
+                                    <summary class="level-editor__summary level-editor__summary--base" id="level-editor-base-summary">Base</summary>
+                                    <div class="level-editor__body level-editor__body--base" id="level-editor-base-body" data-level-editor-base-body>
+                                        <div class="level-editor__row level-editor__row--characterName" id="characterNameDiv" data-editor-control="characterName"></div>
+                                        <div class="level-editor__row level-editor__row--playerName" id="playerNameDiv" data-editor-control="playerName"></div>
+                                        <div class="level-editor__row level-editor__row--race" id="raceDiv" data-editor-control="race"></div>
+                                        <div class="level-editor__row level-editor__row--background" id="backgroundDiv" data-editor-control="background"></div>
+                                        <div class="level-editor__row level-editor__row--ability-scores" id="abilityScoreDiv" data-editor-control="ability-scores"></div>
+                                    </div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-1-item" data-character-level="1">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-1" data-character-level="1">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-1-summary">Level 1</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-1-body" data-level-editor-level-body="1"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-2-item" data-character-level="2">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-2" data-character-level="2">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-2-summary">Level 2</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-2-body" data-level-editor-level-body="2"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-3-item" data-character-level="3">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-3" data-character-level="3">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-3-summary">Level 3</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-3-body" data-level-editor-level-body="3"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-4-item" data-character-level="4">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-4" data-character-level="4">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-4-summary">Level 4</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-4-body" data-level-editor-level-body="4"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-5-item" data-character-level="5">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-5" data-character-level="5">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-5-summary">Level 5</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-5-body" data-level-editor-level-body="5"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-6-item" data-character-level="6">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-6" data-character-level="6">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-6-summary">Level 6</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-6-body" data-level-editor-level-body="6"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-7-item" data-character-level="7">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-7" data-character-level="7">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-7-summary">Level 7</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-7-body" data-level-editor-level-body="7"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-8-item" data-character-level="8">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-8" data-character-level="8">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-8-summary">Level 8</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-8-body" data-level-editor-level-body="8"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-9-item" data-character-level="9">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-9" data-character-level="9">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-9-summary">Level 9</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-9-body" data-level-editor-level-body="9"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-10-item" data-character-level="10">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-10" data-character-level="10">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-10-summary">Level 10</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-10-body" data-level-editor-level-body="10"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-11-item" data-character-level="11">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-11" data-character-level="11">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-11-summary">Level 11</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-11-body" data-level-editor-level-body="11"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-12-item" data-character-level="12">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-12" data-character-level="12">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-12-summary">Level 12</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-12-body" data-level-editor-level-body="12"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-13-item" data-character-level="13">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-13" data-character-level="13">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-13-summary">Level 13</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-13-body" data-level-editor-level-body="13"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-14-item" data-character-level="14">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-14" data-character-level="14">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-14-summary">Level 14</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-14-body" data-level-editor-level-body="14"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-15-item" data-character-level="15">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-15" data-character-level="15">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-15-summary">Level 15</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-15-body" data-level-editor-level-body="15"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-16-item" data-character-level="16">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-16" data-character-level="16">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-16-summary">Level 16</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-16-body" data-level-editor-level-body="16"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-17-item" data-character-level="17">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-17" data-character-level="17">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-17-summary">Level 17</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-17-body" data-level-editor-level-body="17"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-18-item" data-character-level="18">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-18" data-character-level="18">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-18-summary">Level 18</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-18-body" data-level-editor-level-body="18"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-19-item" data-character-level="19">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-19" data-character-level="19">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-19-summary">Level 19</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-19-body" data-level-editor-level-body="19"></div>
+                                </details>
+                            </li>
+                            <li class="level-editor__list-item level-editor__list-item--level" id="level-editor-level-20-item" data-character-level="20">
+                                <details class="level-editor__section level-editor__section--level" id="level-editor-level-20" data-character-level="20">
+                                    <summary class="level-editor__summary level-editor__level-summary" id="level-editor-level-20-summary">Level 20</summary>
+                                    <div class="level-editor__body level-editor__level-body" id="level-editor-level-20-body" data-level-editor-level-body="20"></div>
+                                </details>
+                            </li>
+                        </ul>
+                    </aside>
+                    <main class="playerSheet" id="player-sheet">
+                        <div class="playerSheetHeader" id="GlobalCharacterSheetInformationHeader">
+                            <div class="CharacterHeaderContainer">
+                                <div class="HeaderInfo">
+                                    <div class="Level"></div>
+                                    <div class="XP"></div>
+                                    <div class="Name"></div>
+                                    <div class="ClassArea">
+                                        <div class="Class"></div>
+                                        <div class="Subclass"></div>
+                                    </div>
+                                    <div class="Proficiency"></div>
+                                </div>
+                                <div class="FooterInfo">
+                                    <div class="Size"></div>
+                                    <div class="Speed"></div>
+                                    <div class="AbilityScoresSummary" aria-label="Ability scores">
+                                        <div class="STR"></div>
+                                        <div class="Dex"></div>
+                                        <div class="con"></div>
+                                        <div class="int"></div>
+                                        <div class="wis"></div>
+                                        <div class="cha"></div>
+                                    </div>
+                                </div>
+                                <div class="CombatHeader">
+                                    <div class="AC"></div>
+                                    <div class="HP">
+                                        <div class="CombatHP"></div>
+                                        <div class="TempHP"></div>
+                                    </div>
+                                    <div class="Area3">
+                                        <div class="Initiative"></div>
+                                        <div class="DeathSaves"></div>
+                                        <div class="DeathFailures"></div>
+                                    </div>
+                                    <div class="SavingThrows">
+                                        <div class="STRSave"></div>
+                                        <div class="DEXSave"></div>
+                                        <div class="ConSave"></div>
+                                        <div class="IntSave"></div>
+                                        <div class="WisSave"></div>
+                                        <div class="ChaSave"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="playerSheetTabsContainer" id="CharacterSheetTabArea">
+                            <div id="TabRowList">
+                                <button data-tab="Offense" onclick="setTab('Offense')">Offense</button>
+                                <button data-tab="Defense" onclick="setTab('Defense')">Defense</button>
+                                <button data-tab="Gear" onclick="setTab('Gear')">Gear</button>
+                                <button data-tab="Skills" onclick="setTab('Skills')">Skills</button>
+                                <button data-tab="Spells" onclick="setTab('Spells')">Spells</button>
+                                <button data-tab="Pets" onclick="setTab('Pets')">Pets</button>
+                                <button data-tab="Feats" onclick="setTab('Feats')">Feats</button>
+                                <button data-tab="Reference" onclick="setTab('Reference')">Reference</button>
+                            </div>
+                            <div id="TabContent">
+                                <P>Loading...</P>
+                            </div>
+                        </div>
+                        <div class="playerSheetSideBar" id="GlobalCharacterSheetSidebar">
+                            <p>Sidebar</p>
+                        </div>
+
+                    </main>
+                    
+                </div>
+            </section>
+        </main>
+    </div>
+</body>

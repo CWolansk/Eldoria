@@ -1,0 +1,1293 @@
+{
+  "schema": "eldoria.normalized-rules-catalog.item-properties",
+  "schemaVersion": 3,
+  "generatedAt": "2026-05-29T01:34:34.231Z",
+  "generator": {
+    "name": "generate-public-rules-data",
+    "manifest": "site-src/public-rules-manifest.json"
+  },
+  "counts": {
+    "itemProperties": 13,
+    "itemTypes": 34
+  },
+  "itemProperties": [
+    {
+      "id": "item-property:a:phb",
+      "kind": "itemProperty",
+      "name": "Ammunition",
+      "abbreviation": "A",
+      "source": "PHB",
+      "page": 146,
+      "sourceKey": "A|PHB",
+      "template": "{{prop_name_lower}} ({{item.range}} ft.)",
+      "entries": [
+        {
+          "type": "entries",
+          "name": "Ammunition",
+          "entries": [
+            "You can use a weapon that has the ammunition property to make a ranged attack only if you have ammunition to fire from the weapon. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack. Loading a one-handed weapon requires a free hand. At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.",
+            "If you use a weapon that has the ammunition property to make a melee attack, you treat the weapon as an improvised weapon. A sling must be loaded to deal any damage when used in this way."
+          ]
+        }
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "abbreviation": "A",
+        "source": "PHB",
+        "page": 146,
+        "template": "{{prop_name_lower}} ({{item.range}} ft.)",
+        "entries": [
+          {
+            "type": "entries",
+            "name": "Ammunition",
+            "entries": [
+              "You can use a weapon that has the ammunition property to make a ranged attack only if you have ammunition to fire from the weapon. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack. Loading a one-handed weapon requires a free hand. At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.",
+              "If you use a weapon that has the ammunition property to make a melee attack, you treat the weapon as an improvised weapon. A sling must be loaded to deal any damage when used in this way."
+            ]
+          }
+        ]
+      },
+      "ref": "item-property-ammunition-phb.json",
+      "refId": "item-property-ammunition-phb"
+    },
+    {
+      "id": "item-property:af:dmg",
+      "kind": "itemProperty",
+      "name": "Ammunition",
+      "abbreviation": "AF",
+      "source": "DMG",
+      "page": 267,
+      "sourceKey": "AF|DMG",
+      "template": "{{prop_name_lower}} ({{item.range}} ft.)",
+      "entries": [
+        {
+          "type": "entries",
+          "name": "Ammunition",
+          "entries": [
+            "You can use a weapon that has the ammunition property to make a ranged attack only if you have ammunition to fire from the weapon. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack. Loading a one-handed weapon requires a free hand. The ammunition of a firearm is destroyed upon use.",
+            "If you use a weapon that has the ammunition property to make a melee attack, you treat the weapon as an improvised weapon. A sling must be loaded to deal any damage when used in this way."
+          ]
+        }
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "abbreviation": "AF",
+        "source": "DMG",
+        "page": 267,
+        "template": "{{prop_name_lower}} ({{item.range}} ft.)",
+        "entries": [
+          {
+            "type": "entries",
+            "name": "Ammunition",
+            "entries": [
+              "You can use a weapon that has the ammunition property to make a ranged attack only if you have ammunition to fire from the weapon. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack. Loading a one-handed weapon requires a free hand. The ammunition of a firearm is destroyed upon use.",
+              "If you use a weapon that has the ammunition property to make a melee attack, you treat the weapon as an improvised weapon. A sling must be loaded to deal any damage when used in this way."
+            ]
+          }
+        ]
+      },
+      "ref": "item-property-ammunition-dmg.json",
+      "refId": "item-property-ammunition-dmg"
+    },
+    {
+      "id": "item-property:bf:dmg",
+      "kind": "itemProperty",
+      "name": "Burst Fire",
+      "abbreviation": "BF",
+      "source": "DMG",
+      "page": 267,
+      "sourceKey": "BF|DMG",
+      "template": "{{prop_name_lower}}",
+      "entries": [
+        {
+          "type": "entries",
+          "name": "Burst Fire",
+          "entries": [
+            "A weapon that has the burst fire property can make a single-target attack, or it can spray a 10-foot-cube area within normal range with shots. Each creature in the area must succeed on a {@dc 15} Dexterity saving throw or take the weapon's normal damage. This action uses ten pieces of ammunition."
+          ]
+        }
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "abbreviation": "BF",
+        "source": "DMG",
+        "page": 267,
+        "template": "{{prop_name_lower}}",
+        "entries": [
+          {
+            "type": "entries",
+            "name": "Burst Fire",
+            "entries": [
+              "A weapon that has the burst fire property can make a single-target attack, or it can spray a 10-foot-cube area within normal range with shots. Each creature in the area must succeed on a {@dc 15} Dexterity saving throw or take the weapon's normal damage. This action uses ten pieces of ammunition."
+            ]
+          }
+        ]
+      },
+      "ref": "item-property-burst-fire.json",
+      "refId": "item-property-burst-fire"
+    },
+    {
+      "id": "item-property:f:phb",
+      "kind": "itemProperty",
+      "name": "Finesse",
+      "abbreviation": "F",
+      "source": "PHB",
+      "page": 147,
+      "sourceKey": "F|PHB",
+      "template": "{{prop_name_lower}}",
+      "entries": [
+        {
+          "type": "entries",
+          "name": "Finesse",
+          "entries": [
+            "When making an attack with a finesse weapon, you use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls."
+          ]
+        }
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "abbreviation": "F",
+        "source": "PHB",
+        "page": 147,
+        "template": "{{prop_name_lower}}",
+        "entries": [
+          {
+            "type": "entries",
+            "name": "Finesse",
+            "entries": [
+              "When making an attack with a finesse weapon, you use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls."
+            ]
+          }
+        ]
+      },
+      "ref": "item-property-finesse.json",
+      "refId": "item-property-finesse"
+    },
+    {
+      "id": "item-property:h:phb",
+      "kind": "itemProperty",
+      "name": "Heavy",
+      "abbreviation": "H",
+      "source": "PHB",
+      "page": 147,
+      "sourceKey": "H|PHB",
+      "template": "{{prop_name_lower}}",
+      "entries": [
+        {
+          "type": "entries",
+          "name": "Heavy",
+          "entries": [
+            "Creatures that are Small or Tiny have disadvantage on attack rolls with heavy weapons. A heavy weapon's size and bulk make it too large for a Small or Tiny creature to use effectively."
+          ]
+        }
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "abbreviation": "H",
+        "source": "PHB",
+        "page": 147,
+        "template": "{{prop_name_lower}}",
+        "entries": [
+          {
+            "type": "entries",
+            "name": "Heavy",
+            "entries": [
+              "Creatures that are Small or Tiny have disadvantage on attack rolls with heavy weapons. A heavy weapon's size and bulk make it too large for a Small or Tiny creature to use effectively."
+            ]
+          }
+        ]
+      },
+      "ref": "item-property-heavy.json",
+      "refId": "item-property-heavy"
+    },
+    {
+      "id": "item-property:l:phb",
+      "kind": "itemProperty",
+      "name": "Light",
+      "abbreviation": "L",
+      "source": "PHB",
+      "page": 147,
+      "sourceKey": "L|PHB",
+      "template": "{{prop_name_lower}}",
+      "entries": [
+        {
+          "type": "entries",
+          "name": "Light",
+          "entries": [
+            "A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons."
+          ]
+        }
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "abbreviation": "L",
+        "source": "PHB",
+        "page": 147,
+        "template": "{{prop_name_lower}}",
+        "entries": [
+          {
+            "type": "entries",
+            "name": "Light",
+            "entries": [
+              "A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons."
+            ]
+          }
+        ]
+      },
+      "ref": "item-property-light.json",
+      "refId": "item-property-light"
+    },
+    {
+      "id": "item-property:ld:phb",
+      "kind": "itemProperty",
+      "name": "Loading",
+      "abbreviation": "LD",
+      "source": "PHB",
+      "page": 147,
+      "sourceKey": "LD|PHB",
+      "template": "{{prop_name_lower}}",
+      "entries": [
+        {
+          "type": "entries",
+          "name": "Loading",
+          "entries": [
+            "Because of the time required to load this weapon, you can fire only one piece of ammunition from it when you use an action, bonus action, or reaction to fire it, regardless of the number of attacks you can normally make."
+          ]
+        }
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "abbreviation": "LD",
+        "source": "PHB",
+        "page": 147,
+        "template": "{{prop_name_lower}}",
+        "entries": [
+          {
+            "type": "entries",
+            "name": "Loading",
+            "entries": [
+              "Because of the time required to load this weapon, you can fire only one piece of ammunition from it when you use an action, bonus action, or reaction to fire it, regardless of the number of attacks you can normally make."
+            ]
+          }
+        ]
+      },
+      "ref": "item-property-loading.json",
+      "refId": "item-property-loading"
+    },
+    {
+      "id": "item-property:r:phb",
+      "kind": "itemProperty",
+      "name": "Reach",
+      "abbreviation": "R",
+      "source": "PHB",
+      "page": 147,
+      "sourceKey": "R|PHB",
+      "template": "{{prop_name_lower}}",
+      "entries": [
+        {
+          "type": "entries",
+          "name": "Reach",
+          "entries": [
+            "This weapon adds 5 feet to your reach when you attack with it. This property also determines your reach for opportunity attacks with a reach weapon."
+          ]
+        }
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "abbreviation": "R",
+        "source": "PHB",
+        "page": 147,
+        "template": "{{prop_name_lower}}",
+        "entries": [
+          {
+            "type": "entries",
+            "name": "Reach",
+            "entries": [
+              "This weapon adds 5 feet to your reach when you attack with it. This property also determines your reach for opportunity attacks with a reach weapon."
+            ]
+          }
+        ]
+      },
+      "ref": "item-property-reach.json",
+      "refId": "item-property-reach"
+    },
+    {
+      "id": "item-property:rld:dmg",
+      "kind": "itemProperty",
+      "name": "Reload",
+      "abbreviation": "RLD",
+      "source": "DMG",
+      "page": 267,
+      "sourceKey": "RLD|DMG",
+      "template": "{{prop_name_lower}} ({{item.reload}} shots)",
+      "entries": [
+        {
+          "type": "entries",
+          "name": "Reload",
+          "entries": [
+            "A limited number of shots can be made with a weapon that has the reload property. A character must then reload it using an action or a bonus action (the character's choice)."
+          ]
+        }
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "abbreviation": "RLD",
+        "source": "DMG",
+        "page": 267,
+        "template": "{{prop_name_lower}} ({{item.reload}} shots)",
+        "entries": [
+          {
+            "type": "entries",
+            "name": "Reload",
+            "entries": [
+              "A limited number of shots can be made with a weapon that has the reload property. A character must then reload it using an action or a bonus action (the character's choice)."
+            ]
+          }
+        ]
+      },
+      "ref": "item-property-reload-dmg.json",
+      "refId": "item-property-reload-dmg"
+    },
+    {
+      "id": "item-property:s:phb",
+      "kind": "itemProperty",
+      "name": "special",
+      "abbreviation": "S",
+      "source": "PHB",
+      "page": 147,
+      "sourceKey": "S|PHB",
+      "template": "{{prop_name_lower}}",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "special",
+        "abbreviation": "S",
+        "source": "PHB",
+        "page": 147,
+        "template": "{{prop_name_lower}}"
+      },
+      "ref": "item-property-special.json",
+      "refId": "item-property-special"
+    },
+    {
+      "id": "item-property:t:phb",
+      "kind": "itemProperty",
+      "name": "Thrown",
+      "abbreviation": "T",
+      "source": "PHB",
+      "page": 147,
+      "sourceKey": "T|PHB",
+      "template": "{{prop_name_lower}} ({{item.range}} ft.)",
+      "entries": [
+        {
+          "type": "entries",
+          "name": "Thrown",
+          "entries": [
+            "If a weapon has the thrown property, you can throw the weapon to make a ranged attack. If the weapon is a melee weapon, you use the same ability modifier for that attack roll and damage roll that you would use for a melee attack with the weapon. For example, if you throw a handaxe, you use your Strength, but if you throw a dagger, you can use either your Strength or your Dexterity, since the dagger has the finesse property."
+          ]
+        }
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "abbreviation": "T",
+        "source": "PHB",
+        "page": 147,
+        "template": "{{prop_name_lower}} ({{item.range}} ft.)",
+        "entries": [
+          {
+            "type": "entries",
+            "name": "Thrown",
+            "entries": [
+              "If a weapon has the thrown property, you can throw the weapon to make a ranged attack. If the weapon is a melee weapon, you use the same ability modifier for that attack roll and damage roll that you would use for a melee attack with the weapon. For example, if you throw a handaxe, you use your Strength, but if you throw a dagger, you can use either your Strength or your Dexterity, since the dagger has the finesse property."
+            ]
+          }
+        ]
+      },
+      "ref": "item-property-thrown.json",
+      "refId": "item-property-thrown"
+    },
+    {
+      "id": "item-property:2h:phb",
+      "kind": "itemProperty",
+      "name": "Two-Handed",
+      "abbreviation": "2H",
+      "source": "PHB",
+      "page": 147,
+      "sourceKey": "2H|PHB",
+      "template": "{{prop_name_lower}}",
+      "entries": [
+        {
+          "type": "entries",
+          "name": "Two-Handed",
+          "entries": [
+            "This weapon requires two hands to use. This property is relevant only when you attack with the weapon, not when you simply hold it."
+          ]
+        }
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "abbreviation": "2H",
+        "source": "PHB",
+        "page": 147,
+        "template": "{{prop_name_lower}}",
+        "entries": [
+          {
+            "type": "entries",
+            "name": "Two-Handed",
+            "entries": [
+              "This weapon requires two hands to use. This property is relevant only when you attack with the weapon, not when you simply hold it."
+            ]
+          }
+        ]
+      },
+      "ref": "item-property-two-handed.json",
+      "refId": "item-property-two-handed"
+    },
+    {
+      "id": "item-property:v:phb",
+      "kind": "itemProperty",
+      "name": "Versatile",
+      "abbreviation": "V",
+      "source": "PHB",
+      "page": 147,
+      "sourceKey": "V|PHB",
+      "template": "{{prop_name_lower}} ({{item.dmg2}})",
+      "entries": [
+        {
+          "type": "entries",
+          "name": "Versatile",
+          "entries": [
+            "This weapon can be used with one or two hands. A damage value in parentheses appears with the property—the damage when the weapon is used with two hands to make a melee attack."
+          ]
+        }
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "abbreviation": "V",
+        "source": "PHB",
+        "page": 147,
+        "template": "{{prop_name_lower}} ({{item.dmg2}})",
+        "entries": [
+          {
+            "type": "entries",
+            "name": "Versatile",
+            "entries": [
+              "This weapon can be used with one or two hands. A damage value in parentheses appears with the property—the damage when the weapon is used with two hands to make a melee attack."
+            ]
+          }
+        ]
+      },
+      "ref": "item-property-versatile.json",
+      "refId": "item-property-versatile"
+    }
+  ],
+  "itemTypes": [
+    {
+      "id": "item-type:g:phb",
+      "kind": "itemType",
+      "name": "Adventuring Gear",
+      "abbreviation": "G",
+      "source": "PHB",
+      "page": 148,
+      "sourceKey": "G|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Adventuring Gear",
+        "abbreviation": "G",
+        "source": "PHB",
+        "page": 148
+      },
+      "ref": "item-type-adventuring-gear.json",
+      "refId": "item-type-adventuring-gear"
+    },
+    {
+      "id": "item-type:a:phb",
+      "kind": "itemType",
+      "name": "Ammunition",
+      "abbreviation": "A",
+      "source": "PHB",
+      "page": 148,
+      "sourceKey": "A|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Ammunition",
+        "abbreviation": "A",
+        "source": "PHB",
+        "page": 148
+      },
+      "ref": "item-type-ammunition-phb.json",
+      "refId": "item-type-ammunition-phb"
+    },
+    {
+      "id": "item-type:af:dmg",
+      "kind": "itemType",
+      "name": "Ammunition",
+      "abbreviation": "AF",
+      "source": "DMG",
+      "page": 267,
+      "sourceKey": "AF|DMG",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Ammunition",
+        "abbreviation": "AF",
+        "source": "DMG",
+        "page": 267
+      },
+      "ref": "item-type-ammunition-dmg.json",
+      "refId": "item-type-ammunition-dmg"
+    },
+    {
+      "id": "item-type:at:phb",
+      "kind": "itemType",
+      "name": "Artisan's Tools",
+      "abbreviation": "AT",
+      "source": "PHB",
+      "page": 154,
+      "sourceKey": "AT|PHB",
+      "template": "",
+      "entries": [
+        "These special tools include the items needed to pursue a craft or trade. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency."
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Artisan's Tools",
+        "abbreviation": "AT",
+        "source": "PHB",
+        "page": 154,
+        "entries": [
+          "These special tools include the items needed to pursue a craft or trade. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency."
+        ]
+      },
+      "ref": "item-type-artisans-tools.json",
+      "refId": "item-type-artisans-tools"
+    },
+    {
+      "id": "item-type:exp:dmg",
+      "kind": "itemType",
+      "name": "Explosive",
+      "abbreviation": "EXP",
+      "source": "DMG",
+      "page": 267,
+      "sourceKey": "EXP|DMG",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Explosive",
+        "abbreviation": "EXP",
+        "source": "DMG",
+        "page": 267
+      },
+      "ref": "item-type-explosive.json",
+      "refId": "item-type-explosive"
+    },
+    {
+      "id": "item-type:fd:phb",
+      "kind": "itemType",
+      "name": "Food and Drink",
+      "abbreviation": "FD",
+      "source": "PHB",
+      "page": 158,
+      "sourceKey": "FD|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Food and Drink",
+        "abbreviation": "FD",
+        "source": "PHB",
+        "page": 158
+      },
+      "ref": "item-type-food-and-drink.json",
+      "refId": "item-type-food-and-drink"
+    },
+    {
+      "id": "item-type:gs:phb",
+      "kind": "itemType",
+      "name": "Gaming Set",
+      "abbreviation": "GS",
+      "source": "PHB",
+      "page": 154,
+      "sourceKey": "GS|PHB",
+      "template": "",
+      "entries": [
+        "If you are proficient with a gaming set, you can add your proficiency bonus to ability checks you make to play a game with that set. Each type of gaming set requires a separate proficiency."
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Gaming Set",
+        "abbreviation": "GS",
+        "source": "PHB",
+        "page": 154,
+        "entries": [
+          "If you are proficient with a gaming set, you can add your proficiency bonus to ability checks you make to play a game with that set. Each type of gaming set requires a separate proficiency."
+        ]
+      },
+      "ref": "item-type-gaming-set.json",
+      "refId": "item-type-gaming-set"
+    },
+    {
+      "id": "item-type:gv:dmg",
+      "kind": "itemType",
+      "name": "Generic Variant",
+      "abbreviation": "GV",
+      "source": "DMG",
+      "page": 135,
+      "sourceKey": "GV|DMG",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Generic Variant",
+        "abbreviation": "GV",
+        "source": "DMG",
+        "page": 135
+      },
+      "ref": "item-type-generic-variant.json",
+      "refId": "item-type-generic-variant"
+    },
+    {
+      "id": "item-type:ha:phb",
+      "kind": "itemType",
+      "name": "Heavy Armor",
+      "abbreviation": "HA",
+      "source": "PHB",
+      "page": 145,
+      "sourceKey": "HA|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Heavy Armor",
+        "abbreviation": "HA",
+        "source": "PHB",
+        "page": 145
+      },
+      "ref": "item-type-heavy-armor.json",
+      "refId": "item-type-heavy-armor"
+    },
+    {
+      "id": "item-type:ins:phb",
+      "kind": "itemType",
+      "name": "Instrument",
+      "abbreviation": "INS",
+      "source": "PHB",
+      "page": 154,
+      "sourceKey": "INS|PHB",
+      "template": "",
+      "entries": [
+        "If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency."
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Instrument",
+        "abbreviation": "INS",
+        "source": "PHB",
+        "page": 154,
+        "entries": [
+          "If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency."
+        ]
+      },
+      "ref": "item-type-instrument.json",
+      "refId": "item-type-instrument"
+    },
+    {
+      "id": "item-type:la:phb",
+      "kind": "itemType",
+      "name": "Light Armor",
+      "abbreviation": "LA",
+      "source": "PHB",
+      "page": 144,
+      "sourceKey": "LA|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Light Armor",
+        "abbreviation": "LA",
+        "source": "PHB",
+        "page": 144
+      },
+      "ref": "item-type-light-armor.json",
+      "refId": "item-type-light-armor"
+    },
+    {
+      "id": "item-type:ma:phb",
+      "kind": "itemType",
+      "name": "Medium Armor",
+      "abbreviation": "MA",
+      "source": "PHB",
+      "page": 144,
+      "sourceKey": "MA|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Medium Armor",
+        "abbreviation": "MA",
+        "source": "PHB",
+        "page": 144
+      },
+      "ref": "item-type-medium-armor.json",
+      "refId": "item-type-medium-armor"
+    },
+    {
+      "id": "item-type:m:phb",
+      "kind": "itemType",
+      "name": "Melee Weapon",
+      "abbreviation": "M",
+      "source": "PHB",
+      "page": 146,
+      "sourceKey": "M|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Melee Weapon",
+        "abbreviation": "M",
+        "source": "PHB",
+        "page": 146
+      },
+      "ref": "item-type-melee-weapon.json",
+      "refId": "item-type-melee-weapon"
+    },
+    {
+      "id": "item-type:mnt:phb",
+      "kind": "itemType",
+      "name": "Mount",
+      "abbreviation": "MNT",
+      "source": "PHB",
+      "page": 155,
+      "sourceKey": "MNT|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Mount",
+        "abbreviation": "MNT",
+        "source": "PHB",
+        "page": 155
+      },
+      "ref": "item-type-mount.json",
+      "refId": "item-type-mount"
+    },
+    {
+      "id": "item-type:oth:phb",
+      "kind": "itemType",
+      "name": "Other",
+      "abbreviation": "OTH",
+      "source": "PHB",
+      "page": 143,
+      "sourceKey": "OTH|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Other",
+        "abbreviation": "OTH",
+        "source": "PHB",
+        "page": 143
+      },
+      "ref": "item-type-other.json",
+      "refId": "item-type-other"
+    },
+    {
+      "id": "item-type:p:phb",
+      "kind": "itemType",
+      "name": "Potion",
+      "abbreviation": "P",
+      "source": "PHB",
+      "page": 148,
+      "sourceKey": "P|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Potion",
+        "abbreviation": "P",
+        "source": "PHB",
+        "page": 148
+      },
+      "ref": "item-type-potion.json",
+      "refId": "item-type-potion"
+    },
+    {
+      "id": "item-type:r:phb",
+      "kind": "itemType",
+      "name": "Ranged Weapon",
+      "abbreviation": "R",
+      "source": "PHB",
+      "page": 146,
+      "sourceKey": "R|PHB",
+      "template": "",
+      "entries": [
+        {
+          "type": "entries",
+          "name": "Range",
+          "entries": [
+            "A weapon that can be used to make a ranged attack has a range shown in parentheses after the ammunition or thrown property. The range lists two numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's maximum range. When attacking a target beyond normal range, you have disadvantage on the attack roll. You can't attack a target beyond the weapon's long range."
+          ]
+        }
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Ranged Weapon",
+        "abbreviation": "R",
+        "source": "PHB",
+        "page": 146,
+        "entries": [
+          {
+            "type": "entries",
+            "name": "Range",
+            "entries": [
+              "A weapon that can be used to make a ranged attack has a range shown in parentheses after the ammunition or thrown property. The range lists two numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's maximum range. When attacking a target beyond normal range, you have disadvantage on the attack roll. You can't attack a target beyond the weapon's long range."
+            ]
+          }
+        ]
+      },
+      "ref": "item-type-ranged-weapon.json",
+      "refId": "item-type-ranged-weapon"
+    },
+    {
+      "id": "item-type:rg:dmg",
+      "kind": "itemType",
+      "name": "Ring",
+      "abbreviation": "RG",
+      "source": "DMG",
+      "page": 139,
+      "sourceKey": "RG|DMG",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Ring",
+        "abbreviation": "RG",
+        "source": "DMG",
+        "page": 139
+      },
+      "ref": "item-type-ring.json",
+      "refId": "item-type-ring"
+    },
+    {
+      "id": "item-type:rd:dmg",
+      "kind": "itemType",
+      "name": "Rod",
+      "abbreviation": "RD",
+      "source": "DMG",
+      "page": 139,
+      "sourceKey": "RD|DMG",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Rod",
+        "abbreviation": "RD",
+        "source": "DMG",
+        "page": 139
+      },
+      "ref": "item-type-rod.json",
+      "refId": "item-type-rod"
+    },
+    {
+      "id": "item-type:sc:dmg",
+      "kind": "itemType",
+      "name": "Scroll",
+      "abbreviation": "SC",
+      "source": "DMG",
+      "page": 139,
+      "sourceKey": "SC|DMG",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Scroll",
+        "abbreviation": "SC",
+        "source": "DMG",
+        "page": 139
+      },
+      "ref": "item-type-scroll.json",
+      "refId": "item-type-scroll"
+    },
+    {
+      "id": "item-type:s:phb",
+      "kind": "itemType",
+      "name": "Shield",
+      "abbreviation": "S",
+      "source": "PHB",
+      "page": 144,
+      "sourceKey": "S|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Shield",
+        "abbreviation": "S",
+        "source": "PHB",
+        "page": 144
+      },
+      "ref": "item-type-shield.json",
+      "refId": "item-type-shield"
+    },
+    {
+      "id": "item-type:scf:phb",
+      "kind": "itemType",
+      "name": "Spellcasting Focus",
+      "abbreviation": "SCF",
+      "source": "PHB",
+      "page": 148,
+      "sourceKey": "SCF|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Spellcasting Focus",
+        "abbreviation": "SCF",
+        "source": "PHB",
+        "page": 148
+      },
+      "ref": "item-type-spellcasting-focus.json",
+      "refId": "item-type-spellcasting-focus"
+    },
+    {
+      "id": "item-type:tah:phb",
+      "kind": "itemType",
+      "name": "Tack and Harness",
+      "abbreviation": "TAH",
+      "source": "PHB",
+      "page": 155,
+      "sourceKey": "TAH|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Tack and Harness",
+        "abbreviation": "TAH",
+        "source": "PHB",
+        "page": 155
+      },
+      "ref": "item-type-tack-and-harness.json",
+      "refId": "item-type-tack-and-harness"
+    },
+    {
+      "id": "item-type:t:phb",
+      "kind": "itemType",
+      "name": "Tool",
+      "abbreviation": "T",
+      "source": "PHB",
+      "page": 154,
+      "sourceKey": "T|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Tool",
+        "abbreviation": "T",
+        "source": "PHB",
+        "page": 154
+      },
+      "ref": "item-type-tool.json",
+      "refId": "item-type-tool"
+    },
+    {
+      "id": "item-type:tg:phb",
+      "kind": "itemType",
+      "name": "Trade Good",
+      "abbreviation": "TG",
+      "source": "PHB",
+      "page": 146,
+      "sourceKey": "TG|PHB",
+      "template": "",
+      "entries": [
+        "Most wealth is not in coins. It is measured in livestock, grain, land, rights to collect taxes, or rights to resources (such as a mine or a forest).",
+        "Guilds, nobles, and royalty regulate trade. Chartered companies are granted rights to conduct trade along certain routes, to send merchant ships to various ports, or to buy or sell specific goods. Guilds set prices for the goods or services that they control, and determine who may or may not offer those goods and services. Merchants commonly exchange trade goods without using currency."
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Trade Good",
+        "abbreviation": "TG",
+        "source": "PHB",
+        "page": 146,
+        "entries": [
+          "Most wealth is not in coins. It is measured in livestock, grain, land, rights to collect taxes, or rights to resources (such as a mine or a forest).",
+          "Guilds, nobles, and royalty regulate trade. Chartered companies are granted rights to conduct trade along certain routes, to send merchant ships to various ports, or to buy or sell specific goods. Guilds set prices for the goods or services that they control, and determine who may or may not offer those goods and services. Merchants commonly exchange trade goods without using currency."
+        ]
+      },
+      "ref": "item-type-trade-good.json",
+      "refId": "item-type-trade-good"
+    },
+    {
+      "id": "item-type:0:dmg",
+      "kind": "itemType",
+      "name": "Treasure",
+      "abbreviation": "$",
+      "source": "DMG",
+      "page": 133,
+      "sourceKey": "$|DMG",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Treasure",
+        "abbreviation": "$",
+        "source": "DMG",
+        "page": 133
+      },
+      "ref": "item-type-treasure.json",
+      "refId": "item-type-treasure"
+    },
+    {
+      "id": "item-type:a:dmg",
+      "kind": "itemType",
+      "name": "Treasure (Art Object)",
+      "abbreviation": "$A",
+      "source": "DMG",
+      "page": 133,
+      "sourceKey": "$A|DMG",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Treasure (Art Object)",
+        "abbreviation": "$A",
+        "source": "DMG",
+        "page": 133
+      },
+      "ref": "item-type-treasure-art-object.json",
+      "refId": "item-type-treasure-art-object"
+    },
+    {
+      "id": "item-type:c:phb",
+      "kind": "itemType",
+      "name": "Treasure (Coinage)",
+      "abbreviation": "$C",
+      "source": "PHB",
+      "page": 143,
+      "sourceKey": "$C|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Treasure (Coinage)",
+        "abbreviation": "$C",
+        "source": "PHB",
+        "page": 143
+      },
+      "ref": "item-type-treasure-coinage.json",
+      "refId": "item-type-treasure-coinage"
+    },
+    {
+      "id": "item-type:g:dmg",
+      "kind": "itemType",
+      "name": "Treasure (Gemstone)",
+      "abbreviation": "$G",
+      "source": "DMG",
+      "page": 133,
+      "sourceKey": "$G|DMG",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Treasure (Gemstone)",
+        "abbreviation": "$G",
+        "source": "DMG",
+        "page": 133
+      },
+      "ref": "item-type-treasure-gemstone.json",
+      "refId": "item-type-treasure-gemstone"
+    },
+    {
+      "id": "item-type:air:dmg",
+      "kind": "itemType",
+      "name": "Vehicle (Air)",
+      "abbreviation": "AIR",
+      "source": "DMG",
+      "page": 119,
+      "sourceKey": "AIR|DMG",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Vehicle (Air)",
+        "abbreviation": "AIR",
+        "source": "DMG",
+        "page": 119,
+        "_copy": {
+          "abbreviation": "SHP",
+          "source": "DMG"
+        }
+      },
+      "ref": "item-type-vehicle-air.json",
+      "refId": "item-type-vehicle-air"
+    },
+    {
+      "id": "item-type:veh:phb",
+      "kind": "itemType",
+      "name": "Vehicle (Land)",
+      "abbreviation": "VEH",
+      "source": "PHB",
+      "page": 155,
+      "sourceKey": "VEH|PHB",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Vehicle (Land)",
+        "abbreviation": "VEH",
+        "source": "PHB",
+        "page": 155
+      },
+      "ref": "item-type-vehicle-land.json",
+      "refId": "item-type-vehicle-land"
+    },
+    {
+      "id": "item-type:spc:aag",
+      "kind": "itemType",
+      "name": "Vehicle (Space)",
+      "abbreviation": "SPC",
+      "source": "AAG",
+      "page": 24,
+      "sourceKey": "SPC|AAG",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Vehicle (Space)",
+        "abbreviation": "SPC",
+        "source": "AAG",
+        "page": 24
+      },
+      "ref": "item-type-vehicle-space.json",
+      "refId": "item-type-vehicle-space"
+    },
+    {
+      "id": "item-type:shp:dmg",
+      "kind": "itemType",
+      "name": "Vehicle (Water)",
+      "abbreviation": "SHP",
+      "source": "DMG",
+      "page": 119,
+      "sourceKey": "SHP|DMG",
+      "template": "",
+      "entries": [
+        {
+          "type": "entries",
+          "name": "Crew",
+          "entries": [
+            "A ship needs a crew of skilled hirelings to function. As per the Player's Handbook, one skilled hireling costs at least 2 gp per day. The minimum number of skilled hirelings needed to crew a ship depends on the type of vessel.",
+            "You can track the loyalty of individual crew members or the crew as a whole using the optional loyalty rules in chapter 4 of the Dungeon Master's Guide. If at least half the crew becomes disloyal during a voyage, the crew turns hostile and stages a mutiny. If the ship is berthed, disloyal crew members leave the ship and never return."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Passengers",
+          "entries": [
+            "This indicates the number of Small and Medium passengers the ship can accommodate.",
+            "Accommodations consist of shared hammocks in tight quarters. A ship outfitted with private accommodations can carry one-fifth as many passengers.",
+            "A passenger is usually expected to pay 5 sp per day for a hammock, but prices can vary from ship to ship. A small private cabin usually costs 2 gp per day."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Cargo",
+          "entries": [
+            "The maximum tonnage the ship can carry."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Damage Threshold",
+          "entries": [
+            "If a ship has a Damage Threshold, it has immunity to all damage unless it takes an amount of damage equal to or greater than its damage threshold, in which case it takes damage as normal. Any damage that fails to meet or exceed the damage threshold is considered superficial and doesn't reduce the ship's hit points."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Ship Repair",
+          "entries": [
+            "Repairs to a damaged ship can be made while the vessel is berthed. Repairing 1 hit point of damage requires 1 day and costs 20 gp for materials and labor."
+          ]
+        }
+      ],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Vehicle (Water)",
+        "abbreviation": "SHP",
+        "source": "DMG",
+        "page": 119,
+        "entries": [
+          {
+            "type": "entries",
+            "name": "Crew",
+            "entries": [
+              "A ship needs a crew of skilled hirelings to function. As per the Player's Handbook, one skilled hireling costs at least 2 gp per day. The minimum number of skilled hirelings needed to crew a ship depends on the type of vessel.",
+              "You can track the loyalty of individual crew members or the crew as a whole using the optional loyalty rules in chapter 4 of the Dungeon Master's Guide. If at least half the crew becomes disloyal during a voyage, the crew turns hostile and stages a mutiny. If the ship is berthed, disloyal crew members leave the ship and never return."
+            ]
+          },
+          {
+            "type": "entries",
+            "name": "Passengers",
+            "entries": [
+              "This indicates the number of Small and Medium passengers the ship can accommodate.",
+              "Accommodations consist of shared hammocks in tight quarters. A ship outfitted with private accommodations can carry one-fifth as many passengers.",
+              "A passenger is usually expected to pay 5 sp per day for a hammock, but prices can vary from ship to ship. A small private cabin usually costs 2 gp per day."
+            ]
+          },
+          {
+            "type": "entries",
+            "name": "Cargo",
+            "entries": [
+              "The maximum tonnage the ship can carry."
+            ]
+          },
+          {
+            "type": "entries",
+            "name": "Damage Threshold",
+            "entries": [
+              "If a ship has a Damage Threshold, it has immunity to all damage unless it takes an amount of damage equal to or greater than its damage threshold, in which case it takes damage as normal. Any damage that fails to meet or exceed the damage threshold is considered superficial and doesn't reduce the ship's hit points."
+            ]
+          },
+          {
+            "type": "entries",
+            "name": "Ship Repair",
+            "entries": [
+              "Repairs to a damaged ship can be made while the vessel is berthed. Repairing 1 hit point of damage requires 1 day and costs 20 gp for materials and labor."
+            ]
+          }
+        ]
+      },
+      "ref": "item-type-vehicle-water.json",
+      "refId": "item-type-vehicle-water"
+    },
+    {
+      "id": "item-type:wd:dmg",
+      "kind": "itemType",
+      "name": "Wand",
+      "abbreviation": "WD",
+      "source": "DMG",
+      "page": 139,
+      "sourceKey": "WD|DMG",
+      "template": "",
+      "entries": [],
+      "entriesTemplate": [],
+      "raw": {
+        "name": "Wand",
+        "abbreviation": "WD",
+        "source": "DMG",
+        "page": 139
+      },
+      "ref": "item-type-wand.json",
+      "refId": "item-type-wand"
+    }
+  ],
+  "sourceRefs": [
+    "AAG",
+    "DMG",
+    "PHB"
+  ]
+}

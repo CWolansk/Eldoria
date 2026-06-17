@@ -395,11 +395,12 @@ export class CharacterSheetLoader {
       }
 
       const method = normalizeString(options.method ?? this.#config.saveMethod) || "PUT";
+      const useSimpleCorsBody = method.toUpperCase() === "POST" && options.simpleCors !== false;
       const response = await fetch(url, {
         method,
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": useSimpleCorsBody ? "text/plain" : "application/json"
         },
         body
       });

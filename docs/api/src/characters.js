@@ -1,128 +1,158 @@
 "use strict";
 
-const { deleteDocs, listCharacters, readDoc, writeDoc } = require("./blobStore");
+const {
+  deleteCharacterSheet,
+  listCharacters,
+  normalizeDocumentId,
+  readCharacterSheet,
+  readPlayersManifest,
+  writeCharacterSheet,
+  writePlayersManifest
+} = require("./blobStore");
+const { httpError, json, noContent, withErrors } = require("./http");
+const {
+  normalizePlayerSheetDto
+} = require("./playerSheetDto");
 
-const MAX_BODY_BYTES = 512 * 1024;
+const DEFAULT_MAX_BODY_BYTES = 1024 * 1024;
 
-function json(status, body) {
-  return {
-    status,
-    headers: {
-      "content-type": "application/json; charset=utf-8",
-      "cache-control": "no-store",
-    },
-    body: JSON.stringify(body),
-  };
-}
-
-function noContent() {
-  return { status: 204 };
+function getMaxBodyBytes() {
+  const configured = Number(process.env.ELDORIA_MAX_BODY_BYTES || DEFAULT_MAX_BODY_BYTES);
+  return Number.isFinite(configured) && configured > 0 ? configured : DEFAULT_MAX_BODY_BYTES;
 }
 
 function getId(request) {
-  const id = request.params?.id;
-  if (!id || !String(id).trim()) {
-    throw Object.assign(new Error("Character id is required."), { statusCode: 400 });
-  }
-  return String(id).trim();
-}
-
-function getSearchParams(request) {
-  return new URL(request.url).searchParams;
-}
-
-function getKind(request, { required = true } = {}) {
-  const kind = getSearchParams(request).get("kind");
-  if (!kind && !required) {
-    return null;
-  }
-  if (kind !== "build" && kind !== "sheet") {
-    throw Object.assign(new Error("Query parameter 'kind' must be 'build' or 'sheet'."), {
-      statusCode: 400,
-    });
-  }
-  return kind;
+  return normalizeDocumentId(request.params?.id);
 }
 
 async function readRequestJson(request) {
-  const contentLength = Number(request.headers.get("content-length") || 0);
-  if (contentLength > MAX_BODY_BYTES) {
-    throw Object.assign(new Error("Request body is too large."), { statusCode: 413 });
+  const maxBodyBytes = getMaxBodyBytes();
+  const contentLength = Number(request.headers?.get?.("content-length") || 0);
+  if (contentLength > maxBodyBytes) {
+    throw httpError(413, "Request body is too large.", {
+      maxBodyBytes
+    });
   }
 
   const raw = await request.text();
-  if (Buffer.byteLength(raw, "utf8") > MAX_BODY_BYTES) {
-    throw Object.assign(new Error("Request body is too large."), { statusCode: 413 });
+  if (!raw.trim()) {
+    throw httpError(400, "Request body must be valid JSON.");
   }
 
-  let body;
+  if (Buffer.byteLength(raw, "utf8") > maxBodyBytes) {
+    throw httpError(413, "Request body is too large.", {
+      maxBodyBytes
+    });
+  }
+
   try {
-    body = JSON.parse(raw);
-  } catch {
-    throw Object.assign(new Error("Request body must be valid JSON."), { statusCode: 400 });
-  }
-
-  if (!body || typeof body !== "object" || Array.isArray(body)) {
-    throw Object.assign(new Error("Request body must be a JSON object."), { statusCode: 400 });
-  }
-
-  return body;
-}
-
-function errorResponse(error, context) {
-  const status = error.statusCode || error.status || 500;
-  if (status >= 500) {
-    context.error(error);
-  }
-
-  return json(status, {
-    error: status >= 500 ? "Internal server error." : error.message,
-  });
-}
-
-async function withErrors(context, action) {
-  try {
-    return await action();
+    const body = JSON.parse(raw);
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      throw new Error("JSON payload must be an object.");
+    }
+    return body;
   } catch (error) {
-    return errorResponse(error, context);
+    throw httpError(400, "Request body must be a JSON object.", {
+      cause: error.message
+    });
   }
+}
+
+async function healthHandler(request, context) {
+  return withErrors(request, context, async () => json(request, 200, {
+    status: "ok",
+    service: "eldoria-character-api",
+    timestamp: new Date().toISOString()
+  }));
+}
+
+async function playersManifestHandler(request, context) {
+  return withErrors(request, context, async () => {
+    if (request.method === "GET") {
+      const manifest = await readPlayersManifest();
+      if (!manifest) {
+        return json(request, 404, {
+          error: "Players manifest not found."
+        });
+      }
+      return json(request, 200, manifest);
+    }
+
+    if (request.method === "PUT") {
+      const manifest = await readRequestJson(request);
+      return json(request, 200, await writePlayersManifest(manifest));
+    }
+
+    throw httpError(405, "Method not allowed.");
+  });
 }
 
 async function listCharactersHandler(request, context) {
-  return withErrors(context, async () => json(200, { characters: await listCharacters() }));
-}
-
-async function getCharacterHandler(request, context) {
-  return withErrors(context, async () => {
-    const doc = await readDoc(getId(request), getKind(request));
-    if (!doc) {
-      return json(404, { error: "Character document not found." });
-    }
-    return json(200, doc);
+  return withErrors(request, context, async () => {
+    const characters = await listCharacters();
+    return json(request, 200, {
+      count: characters.length,
+      characters
+    });
   });
 }
 
-async function putCharacterHandler(request, context) {
-  return withErrors(context, async () => {
+async function getCharacterSheetHandler(request, context) {
+  return withErrors(request, context, async () => {
     const id = getId(request);
-    const kind = getKind(request);
-    const body = await readRequestJson(request);
-    body.id = id;
-    const stored = await writeDoc(id, kind, body);
-    return json(200, stored);
+    const sheet = await readCharacterSheet(id);
+    if (!sheet) {
+      return json(request, 404, {
+        error: "Character sheet not found."
+      });
+    }
+    return json(request, 200, normalizePlayerSheetDto(sheet, { id }));
   });
 }
 
-async function deleteCharacterHandler(request, context) {
-  return withErrors(context, async () => {
-    await deleteDocs(getId(request), getKind(request, { required: false }));
-    return noContent();
+async function saveCharacterSheetHandler(request, context) {
+  return withErrors(request, context, async () => {
+    const id = getId(request);
+    const body = await readRequestJson(request);
+    const timestamp = new Date().toISOString();
+    const dto = normalizePlayerSheetDto(body, {
+      id,
+      lastModified: timestamp
+    });
+    dto.lastModified = timestamp;
+    const stored = await writeCharacterSheet(id, dto);
+    return json(request, 200, stored);
+  });
+}
+
+async function deleteCharacterSheetHandler(request, context) {
+  return withErrors(request, context, async () => {
+    await deleteCharacterSheet(getId(request));
+    return noContent(request);
+  });
+}
+
+async function characterSheetHandler(request, context) {
+  if (request.method === "GET") {
+    return getCharacterSheetHandler(request, context);
+  }
+
+  if (request.method === "POST" || request.method === "PUT") {
+    return saveCharacterSheetHandler(request, context);
+  }
+
+  if (request.method === "DELETE") {
+    return deleteCharacterSheetHandler(request, context);
+  }
+
+  return withErrors(request, context, async () => {
+    throw httpError(405, "Method not allowed.");
   });
 }
 
 module.exports = {
-  deleteCharacterHandler,
-  getCharacterHandler,
+  characterSheetHandler,
+  healthHandler,
   listCharactersHandler,
-  putCharacterHandler,
+  playersManifestHandler
 };

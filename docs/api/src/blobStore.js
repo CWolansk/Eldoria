@@ -2,78 +2,137 @@
 
 const { DefaultAzureCredential } = require("@azure/identity");
 const { BlobServiceClient } = require("@azure/storage-blob");
+const { httpError } = require("./http");
 
-const KINDS = new Set(["build", "sheet"]);
-const DEFAULT_CONTAINER = "characters";
+const DEFAULT_CONTAINER = "eldoria-character-data";
+const ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/u;
 
 let containerClientPromise;
 
-function getRequiredEnv(name) {
-  const value = process.env[name];
-  if (!value || !value.trim()) {
-    throw new Error(`Missing required environment variable: ${name}`);
-  }
-  return value.trim();
+function cleanEnv(name) {
+  return String(process.env[name] || "").trim();
 }
 
-function assertValidId(id) {
-  if (typeof id !== "string" || !id.trim()) {
-    throw Object.assign(new Error("Character id is required."), { statusCode: 400 });
-  }
-
-  const normalized = id.trim();
-  if (
-    normalized.length > 128 ||
-    /[\\/]/u.test(normalized) ||
-    /[^\x20-\x7e]/u.test(normalized)
-  ) {
-    throw Object.assign(new Error("Character id contains invalid characters."), {
-      statusCode: 400,
-    });
-  }
-
-  return normalized;
+function getContainerName() {
+  return cleanEnv("ELDORIA_CHARACTER_CONTAINER")
+    || cleanEnv("CHARACTERS_CONTAINER")
+    || DEFAULT_CONTAINER;
 }
 
-function assertValidKind(kind) {
-  if (!KINDS.has(kind)) {
-    throw Object.assign(new Error("Character kind must be 'build' or 'sheet'."), {
-      statusCode: 400,
-    });
+function getBlobPrefix() {
+  return cleanEnv("ELDORIA_BLOB_PREFIX").replace(/^\/+|\/+$/gu, "");
+}
+
+function joinBlobName(...parts) {
+  return parts
+    .filter((part) => part != null && String(part).trim())
+    .map((part) => String(part).replace(/^\/+|\/+$/gu, ""))
+    .filter(Boolean)
+    .join("/");
+}
+
+function createBlobServiceClient() {
+  const connectionString = cleanEnv("ELDORIA_STORAGE_CONNECTION_STRING")
+    || cleanEnv("AzureWebJobsStorage");
+
+  if (connectionString) {
+    return BlobServiceClient.fromConnectionString(connectionString);
   }
-  return kind;
-}
 
-function blobName(id, kind) {
-  return `${assertValidId(id)}/${assertValidKind(kind)}.json`;
-}
+  const storageAccount = cleanEnv("ELDORIA_STORAGE_ACCOUNT") || cleanEnv("STORAGE_ACCOUNT");
+  if (!storageAccount) {
+    throw new Error(
+      "Missing storage configuration. Set ELDORIA_STORAGE_CONNECTION_STRING or ELDORIA_STORAGE_ACCOUNT."
+    );
+  }
 
-function isBlobNotFound(error) {
-  return (
-    error &&
-    (error.statusCode === 404 ||
-      error.code === "BlobNotFound" ||
-      error.details?.errorCode === "BlobNotFound")
+  return new BlobServiceClient(
+    `https://${storageAccount}.blob.core.windows.net`,
+    new DefaultAzureCredential()
   );
 }
 
-async function getContainer() {
+async function getContainerClient() {
   if (!containerClientPromise) {
     containerClientPromise = (async () => {
-      const storageAccount = getRequiredEnv("STORAGE_ACCOUNT");
-      const containerName =
-        (process.env.CHARACTERS_CONTAINER || DEFAULT_CONTAINER).trim() || DEFAULT_CONTAINER;
-      const serviceClient = new BlobServiceClient(
-        `https://${storageAccount}.blob.core.windows.net`,
-        new DefaultAzureCredential()
-      );
-      const containerClient = serviceClient.getContainerClient(containerName);
-      await containerClient.createIfNotExists();
+      const serviceClient = createBlobServiceClient();
+      const containerClient = serviceClient.getContainerClient(getContainerName());
+      if (cleanEnv("ELDORIA_CREATE_CONTAINER").toLowerCase() !== "false") {
+        await containerClient.createIfNotExists();
+      }
       return containerClient;
     })();
   }
 
   return containerClientPromise;
+}
+
+function normalizeDocumentId(value) {
+  let id = String(value || "").trim();
+  if (id.toLowerCase().endsWith(".json")) {
+    id = id.slice(0, -5);
+  }
+
+  if (!id) {
+    throw httpError(400, "Character id is required.");
+  }
+
+  if (!ID_PATTERN.test(id)) {
+    throw httpError(400, "Character id may only contain letters, numbers, '.', '_', and '-'.", {
+      id
+    });
+  }
+
+  return id;
+}
+
+function getDocumentBlobName(id) {
+  const normalizedId = normalizeDocumentId(id);
+  return joinBlobName(getBlobPrefix(), `characters/${normalizedId}/sheet.json`);
+}
+
+function getPlayersManifestBlobName() {
+  return joinBlobName(getBlobPrefix(), "manifests/players.json");
+}
+
+function isBlobNotFound(error) {
+  return Boolean(
+    error
+      && (
+        error.statusCode === 404
+        || error.code === "BlobNotFound"
+        || error.details?.errorCode === "BlobNotFound"
+      )
+  );
+}
+
+async function streamToString(stream) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    stream.on("data", (chunk) => {
+      chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+    });
+    stream.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
+    stream.on("error", reject);
+  });
+}
+
+async function readJsonBlob(blobName) {
+  const containerClient = await getContainerClient();
+  const blobClient = containerClient.getBlobClient(blobName);
+
+  try {
+    const response = await blobClient.download();
+    const text = response.readableStreamBody
+      ? await streamToString(response.readableStreamBody)
+      : "";
+    return JSON.parse(text);
+  } catch (error) {
+    if (isBlobNotFound(error)) {
+      return null;
+    }
+    throw error;
+  }
 }
 
 function sanitizeMetadataValue(value, fallback = "") {
@@ -87,127 +146,129 @@ function sanitizeMetadataValue(value, fallback = "") {
   return (ascii || fallback || "").slice(0, 256);
 }
 
-function getDocumentName(id, obj) {
+function getDocumentDisplayName(id, document) {
   const candidates = [
-    obj?.name,
-    obj?.characterName,
-    obj?.character?.name,
-    obj?.profile?.name,
-    obj?.summary?.name,
+    document?.identity?.name,
+    document?.identity?.playerName,
+    document?.characterName,
+    document?.name,
+    document?.summary?.name,
+    document?.profile?.name,
+    document?.character?.name
   ];
-  return sanitizeMetadataValue(candidates.find((value) => value), id);
+  return sanitizeMetadataValue(candidates.find(Boolean), id);
 }
 
-async function readDoc(id, kind) {
-  const containerClient = await getContainer();
-  const client = containerClient.getBlockBlobClient(blobName(id, kind));
+async function writeJsonBlob(blobName, document, metadata = {}) {
+  const containerClient = await getContainerClient();
+  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+  const body = `${JSON.stringify(document, null, 2)}\n`;
 
-  try {
-    const buffer = await client.downloadToBuffer();
-    return JSON.parse(buffer.toString("utf8"));
-  } catch (error) {
-    if (isBlobNotFound(error)) {
-      return null;
-    }
-    throw error;
-  }
-}
-
-async function writeDoc(id, kind, obj) {
-  const normalizedId = assertValidId(id);
-  const normalizedKind = assertValidKind(kind);
-  const lastModified = new Date().toISOString();
-  const stored = {
-    ...obj,
-    id: normalizedId,
-    lastModified,
-  };
-  const payload = Buffer.from(`${JSON.stringify(stored, null, 2)}\n`, "utf8");
-  const containerClient = await getContainer();
-  const client = containerClient.getBlockBlobClient(blobName(normalizedId, normalizedKind));
-
-  await client.uploadData(payload, {
+  await blockBlobClient.uploadData(Buffer.from(body, "utf8"), {
     blobHTTPHeaders: {
-      blobContentType: "application/json; charset=utf-8",
+      blobContentType: "application/json; charset=utf-8"
     },
-    metadata: {
-      name: getDocumentName(normalizedId, stored),
-      kind: normalizedKind,
-      lastmodified: lastModified,
-    },
+    metadata: Object.fromEntries(
+      Object.entries(metadata)
+        .filter(([, value]) => value != null && String(value).trim())
+        .map(([key, value]) => [key.toLowerCase(), sanitizeMetadataValue(value)])
+    )
   });
 
-  return stored;
+  return document;
 }
 
-async function deleteDocs(id, kind) {
-  const normalizedId = assertValidId(id);
-  const kinds = kind ? [assertValidKind(kind)] : Array.from(KINDS);
-  const containerClient = await getContainer();
+async function deleteJsonBlob(blobName) {
+  const containerClient = await getContainerClient();
+  await containerClient.getBlockBlobClient(blobName).deleteIfExists();
+}
 
-  await Promise.all(
-    kinds.map((docKind) =>
-      containerClient.getBlockBlobClient(blobName(normalizedId, docKind)).deleteIfExists()
-    )
-  );
+async function readCharacterSheet(id) {
+  return readJsonBlob(getDocumentBlobName(id));
+}
+
+async function writeCharacterSheet(id, document) {
+  const normalizedId = normalizeDocumentId(id);
+  const stored = {
+    ...document,
+    id: normalizedId
+  };
+
+  return writeJsonBlob(getDocumentBlobName(normalizedId), stored, {
+    kind: "sheet",
+    characterId: normalizedId,
+    name: getDocumentDisplayName(normalizedId, stored),
+    updatedAt: new Date().toISOString()
+  });
+}
+
+async function deleteCharacterSheet(id) {
+  await deleteJsonBlob(getDocumentBlobName(id));
+}
+
+async function readPlayersManifest() {
+  return readJsonBlob(getPlayersManifestBlobName());
+}
+
+async function writePlayersManifest(manifest) {
+  return writeJsonBlob(getPlayersManifestBlobName(), manifest, {
+    kind: "players-manifest",
+    name: "Eldoria Players Manifest",
+    updatedAt: new Date().toISOString()
+  });
 }
 
 function getBlobLastModified(blob, metadata) {
-  const metadataDate = metadata?.lastmodified ? new Date(metadata.lastmodified) : null;
+  const metadataDate = metadata?.updatedat ? new Date(metadata.updatedat) : null;
   const propertyDate = blob.properties?.lastModified || null;
-  const bestDate =
-    metadataDate && !Number.isNaN(metadataDate.valueOf()) ? metadataDate : propertyDate;
+  const bestDate = metadataDate && !Number.isNaN(metadataDate.valueOf())
+    ? metadataDate
+    : propertyDate;
   return bestDate ? bestDate.toISOString() : null;
 }
 
 async function listCharacters() {
-  const containerClient = await getContainer();
-  const groups = new Map();
+  const containerClient = await getContainerClient();
+  const characters = [];
+  const prefix = getBlobPrefix();
+  const prefixPath = prefix ? `${prefix}/` : "";
 
   for await (const blob of containerClient.listBlobsFlat({ includeMetadata: true })) {
-    const match = /^([^/]+)\/(build|sheet)\.json$/u.exec(blob.name);
+    const relativeBlobName = prefixPath
+      ? (blob.name.startsWith(prefixPath) ? blob.name.slice(prefixPath.length) : "")
+      : blob.name;
+    const match = /^characters\/([^/]+)\/sheet\.json$/u.exec(relativeBlobName);
     if (!match) {
       continue;
     }
 
-    const [, id, kind] = match;
+    const [, id] = match;
     const metadata = blob.metadata || {};
-    const blobLastModified = getBlobLastModified(blob, metadata);
-    const existing = groups.get(id) || {
+    const lastModified = getBlobLastModified(blob, metadata);
+
+    characters.push({
       id,
       name: sanitizeMetadataValue(metadata.name, id),
-      kinds: [],
-      lastModified: null,
-    };
-
-    if (!existing.kinds.includes(kind)) {
-      existing.kinds.push(kind);
-    }
-
-    if (!existing.lastModified || (blobLastModified && blobLastModified > existing.lastModified)) {
-      existing.lastModified = blobLastModified;
-      existing.name = sanitizeMetadataValue(metadata.name, existing.name || id);
-    }
-
-    groups.set(id, existing);
+      lastModified,
+      blobName: blob.name,
+      contentLength: blob.properties?.contentLength || null,
+      etag: blob.properties?.etag || null
+    });
   }
 
-  return Array.from(groups.values())
-    .map((entry) => ({
-      ...entry,
-      kinds: entry.kinds.sort(),
-    }))
-    .sort((left, right) => {
-      const modified = String(right.lastModified || "").localeCompare(String(left.lastModified || ""));
-      return modified || left.id.localeCompare(right.id);
-    });
+  return characters.sort((left, right) => {
+    const modified = String(right.lastModified || "").localeCompare(String(left.lastModified || ""));
+    return modified || left.id.localeCompare(right.id);
+  });
 }
 
 module.exports = {
-  KINDS,
-  deleteDocs,
-  getContainer,
+  getContainerClient,
   listCharacters,
-  readDoc,
-  writeDoc,
+  normalizeDocumentId,
+  readCharacterSheet,
+  readPlayersManifest,
+  writeCharacterSheet,
+  writePlayersManifest,
+  deleteCharacterSheet
 };

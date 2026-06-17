@@ -1,0 +1,232 @@
+{
+  "schemaVersion": "player-sheet-v2",
+  "id": "char-placeholder-001",
+  "lastModified": "2026-06-10T00:00:00.000Z",
+  "identity": {
+    "name": "",
+    "playerName": "",
+    "alignment": "",
+    "experience": 0,
+    "portraitUrl": "",
+    "inspiration": false
+  },
+  "baseChoices": {
+    "race": null,
+    "subrace": null,
+    "raceChoices": {},
+    "background": null,
+    "backgroundChoices": {},
+    "abilityScores": {
+      "str": 10,
+      "dex": 10,
+      "con": 10,
+      "int": 10,
+      "wis": 10,
+      "cha": 10
+    },
+    "startingProficiencies": {
+      "skills": [],
+      "tools": [],
+      "languages": [],
+      "armor": [],
+      "weapons": [],
+      "savingThrows": []
+    }
+  },
+  "levels": [
+    {
+      "characterLevel": 1,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    },
+    {
+      "characterLevel": 2,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    },
+    {
+      "characterLevel": 3,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    },
+    {
+      "characterLevel": 4,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": [],
+      "feat": null,
+      "AbilityScoreIncrease": []
+    },
+    {
+      "characterLevel": 5,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    },
+    {
+      "characterLevel": 6,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    },
+    {
+      "characterLevel": 7,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    },
+    {
+      "characterLevel": 8,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": [],
+      "feat": null,
+      "AbilityScoreIncrease": []
+    },
+    {
+      "characterLevel": 9,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    },
+    {
+      "characterLevel": 10,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    },
+    {
+      "characterLevel": 11,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    },
+    {
+      "characterLevel": 12,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": [],
+      "feat": null,
+      "AbilityScoreIncrease": []
+    },
+    {
+      "characterLevel": 13,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    },
+    {
+      "characterLevel": 14,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    },
+    {
+      "characterLevel": 15,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    },
+    {
+      "characterLevel": 16,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": [],
+      "feat": null,
+      "AbilityScoreIncrease": []
+    },
+    {
+      "characterLevel": 17,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    },
+    {
+      "characterLevel": 18,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    },
+    {
+      "characterLevel": 19,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": [],
+      "feat": null,
+      "AbilityScoreIncrease": []
+    },
+    {
+      "characterLevel": 20,
+      "class": null,
+      "subclass": null,
+      "hp": 0,
+      "choices": []
+    }
+  ],
+  "combatState": {
+    "ac": 10,
+    "currentHp": 0,
+    "tempHp": 0,
+    "deathSaves": {
+      "successes": 0,
+      "failures": 0
+    },
+    "conditions": [],
+    "exhaustion": 0
+  },
+  "inventory": {
+    "currency": {
+      "cp": 0,
+      "sp": 0,
+      "ep": 0,
+      "gp": 0,
+      "pp": 0
+    },
+    "items": []
+  },
+  "spells": {
+    "spellcastingAbility": "",
+    "cantrips": [],
+    "known": [],
+    "prepared": [],
+    "alwaysPrepared": [],
+    "spellSlots": {
+      "byLevel": {}
+    }
+  },
+  "resources": [],
+  "notes": {
+    "freeform": "",
+    "conditions": [],
+    "exhaustion": 0
+  },
+  "metadata": {
+    "sourcePolicy": {
+      "ruleset": "2014",
+      "allowedSources": []
+    },
+    "tags": []
+  }
+}

@@ -1,5 +1,9 @@
 .git*
 .vscode/
+apiClient/
+apiDeploy/
+seed/
+tools/
 local.settings.json
 config/*.local.json
 config/*.private.json

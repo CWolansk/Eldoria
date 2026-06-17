@@ -495,10 +495,18 @@
     }
 
     function formatItemValue(item) {
-        return normalizeString(item.valueLabel) || formatCopperValue(item.value);
+        return normalizeString(item.valueLabel ?? item._l_value) || formatCopperValue(item.value);
     }
 
     function formatItemType(item) {
+        if (toArray(item._typeListText).length) {
+            return toArray(item._typeListText).map(value => normalizeString(value).toLowerCase()).filter(Boolean).join(', ');
+        }
+
+        if (item._typeHtml) {
+            return normalizeString(item._typeHtml).replace(/<[^>]+>/g, '').toLowerCase();
+        }
+
         const parts = [];
         if (item.tags?.wondrous) {
             parts.push('wondrous item');
@@ -522,7 +530,41 @@
         return dedupe(parts).join(', ') || 'item';
     }
 
+    const ITEM_DAMAGE_TYPES = {
+        A: 'acid',
+        B: 'bludgeoning',
+        C: 'cold',
+        F: 'fire',
+        O: 'force',
+        L: 'lightning',
+        N: 'necrotic',
+        P: 'piercing',
+        I: 'poison',
+        Y: 'psychic',
+        R: 'radiant',
+        S: 'slashing',
+        T: 'thunder'
+    };
+
+    function formatItemAttunement(item) {
+        if (item.attunement?.required) {
+            return formatAttunement(item.attunement);
+        }
+
+        if (item.reqAttune) {
+            const text = normalizeString(item.reqAttune);
+            return text === 'true' ? 'requires attunement' : `requires attunement ${text}`;
+        }
+
+        return normalizeString(item._attunement).replace(/[()]/g, '');
+    }
+
     function formatItemDamage(item) {
+        if (item.dmg1) {
+            const damageType = ITEM_DAMAGE_TYPES[normalizeString(item.dmgType).toUpperCase()] || normalizeString(item.dmgType);
+            return [item.dmg1, damageType].filter(Boolean).join(' ');
+        }
+
         const damage = item.weapon?.damage;
         if (!damage?.primary) {
             return '';
@@ -531,6 +573,10 @@
     }
 
     function formatItemProperties(item) {
+        if (toArray(item._fProperties).length) {
+            return toArray(item._fProperties).map(value => normalizeString(value).toLowerCase()).filter(Boolean).join(', ');
+        }
+
         const damage = item.weapon?.damage ?? {};
         return toArray(item.weapon?.properties).map(property => {
             const name = normalizeString(property.name || property.code).toLowerCase();
@@ -568,6 +614,10 @@
     }
 
     function getItemPropertyEntries(item, propertyLookup) {
+        if (!propertyLookup || typeof propertyLookup.get !== 'function') {
+            return [];
+        }
+
         return toArray(item.weapon?.properties).flatMap(property => {
             const keys = [
                 property.abbreviation,
@@ -585,9 +635,14 @@
     function formatItemText(item, propertyLookup) {
         const variables = {
             ...item.bonuses,
-            bonusWeapon: item.bonuses?.bonusWeapon,
-            bonusAc: item.bonuses?.bonusAc
+            bonusWeapon: item.bonuses?.bonusWeapon ?? item.bonusWeapon,
+            bonusAc: item.bonuses?.bonusAc ?? item.bonusAc
         };
+
+        if (toArray(item._fullEntries).length) {
+            return cleanRulesText(item._fullEntries, variables);
+        }
+
         const entries = [
             ...toArray(item.entries),
             ...getItemPropertyEntries(item, propertyLookup)
@@ -861,15 +916,15 @@
             Page: item.page == null ? '' : String(item.page),
             Rarity: normalizeString(item.rarity) || 'common',
             Type: formatItemType(item),
-            Attunement: formatAttunement(item.attunement),
+            Attunement: formatItemAttunement(item),
             Damage: formatItemDamage(item),
             Properties: formatItemProperties(item),
             Mastery: normalizeString(item.mastery),
-            Weight: formatWeight(item.weight),
+            Weight: normalizeString(item._l_weight) || formatWeight(item.weight),
             Value: formatItemValue(item),
             Text: formatItemText(item, propertyLookup),
-            _catalogRef: normalizeString(item.ref),
-            _catalogKind: normalizeString(item.kind) || 'item'
+            _catalogRef: normalizeString(item.ref || item.id || item.baseItem),
+            _catalogKind: normalizeString(item.kind || item.__prop) || 'item'
         };
     }
 
@@ -903,7 +958,7 @@
             Name: normalizeString(race.name),
             Source: normalizeString(race.source),
             Page: race.page == null ? '' : String(race.page),
-            'Ability Scores': formatAbilityScores(race.grants),
+            'Ability Scores': formatAbilityScores(race.grants || { ability: race.ability }),
             Size: formatSize(race.size),
             Speed: formatSpeed(race.speed),
             Description: formatEntryText(race.entries),
@@ -1014,11 +1069,12 @@
             const propertyLookup = makePropertyLookup(catalogs['item-properties']);
             const items = toArray(catalogs.items?.items);
             const variants = toArray(catalogs['magic-variants']?.magicVariants);
+            const hasItemsPageExport = items.some(item => item?._isEnhanced || item?.__prop);
             const hasPreGeneratedCombinations = Number(catalogs.items?.counts?.preGeneratedCombinations ?? 0) > 0;
             const rows = [
                 ...items.map(item => itemToRow(item, propertyLookup)),
-                ...variants.map(magicVariantToRow),
-                ...(hasPreGeneratedCombinations ? [] : composeMagicVariantRows(items, variants, propertyLookup))
+                ...(hasItemsPageExport ? [] : variants.map(magicVariantToRow)),
+                ...(hasItemsPageExport || hasPreGeneratedCombinations ? [] : composeMagicVariantRows(items, variants, propertyLookup))
             ];
             const seen = new Set();
             return rows.filter(row => {

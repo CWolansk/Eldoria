@@ -5,13 +5,22 @@
 (function (global) {
   var features = global.EldoriaFeatureSource = global.EldoriaFeatureSource || {};
 
-  features.loadLocationIndex = async function loadLocationIndex() {
-    var response = await fetch("../data/location-index.json");
-    if (!response.ok) {
-      throw new Error("HTTP " + response.status);
+  async function createApiClient() {
+    if (!features._referencePagesApiClientPromise) {
+      features._referencePagesApiClientPromise = (async function () {
+        var module = await import(global.ELDORIA_API_CLIENT_PATH || "../api/apiClient/index.js");
+        return module.createEldoriaApiClient({
+          baseUrl: global.ELDORIA_API_BASE_URL || "/api",
+          functionKey: global.ELDORIA_API_FUNCTION_KEY || ""
+        });
+      }());
     }
 
-    return response.json();
+    return features._referencePagesApiClientPromise;
+  }
+
+  features.loadLocationIndex = async function loadLocationIndex() {
+    return (await createApiClient()).getLocationIndex();
   };
 }(window));
 
@@ -60,7 +69,6 @@
   }
 
   function createRegionSection(regionName, regionData) {
-        console.log("here2")
     var regionSection = document.createElement("div");
     regionSection.className = "region-section";
     regionSection.dataset.region = regionName.toLowerCase();
@@ -199,13 +207,22 @@
 (function (global) {
   var features = global.EldoriaFeatureSource = global.EldoriaFeatureSource || {};
 
-  features.loadNpcIndex = async function loadNpcIndex() {
-    var response = await fetch("../data/npc-index.json");
-    if (!response.ok) {
-      throw new Error("HTTP " + response.status);
+  async function createApiClient() {
+    if (!features._referencePagesApiClientPromise) {
+      features._referencePagesApiClientPromise = (async function () {
+        var module = await import(global.ELDORIA_API_CLIENT_PATH || "../api/apiClient/index.js");
+        return module.createEldoriaApiClient({
+          baseUrl: global.ELDORIA_API_BASE_URL || "/api",
+          functionKey: global.ELDORIA_API_FUNCTION_KEY || ""
+        });
+      }());
     }
 
-    return response.json();
+    return features._referencePagesApiClientPromise;
+  }
+
+  features.loadNpcIndex = async function loadNpcIndex() {
+    return (await createApiClient()).getNpcIndex();
   };
 }(window));
 
@@ -245,7 +262,6 @@
   }
 
   function createRegionSection(regionName, regionLocations) {
-    console.log("here")
     var section = document.createElement("div");
     section.className = "region-section";
     section.dataset.region = regionName;
@@ -275,10 +291,7 @@
 
     var hasNpcs = false;
     Object.entries(indexData).forEach(function (entry) {
-      console.log(entry)
-      console.log(entry[1])
       var section = createRegionSection(entry[0], entry[1]);
-      console.log(section);
       if (section) {
         hasNpcs = true;
         container.appendChild(section);
@@ -367,4 +380,3 @@
     bootNpcReferencePage();
   }
 }(window));
-

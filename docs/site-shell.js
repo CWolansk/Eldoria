@@ -130,11 +130,11 @@
   var shell = global.EldoriaSiteShellSource = global.EldoriaSiteShellSource || {};
 
   shell.navItems = [
-    { key: "world", label: "World", href: "tools/location-reference.html" },
+    { key: "world", label: "World", href: "tools/location-search/location-reference.html" },
     { key: "players", label: "Players", href: "players.html" },
     { key: "storylines", label: "Storylines", href: "index.html#storylines" },
-    { key: "npcs", label: "NPCs", href: "tools/npc-reference.html" },
-    { key: "locations", label: "Locations", href: "tools/location-reference.html" },
+    { key: "npcs", label: "NPCs", href: "tools/npc-search/npc-reference.html" },
+    { key: "locations", label: "Locations", href: "tools/location-search/location-reference.html" },
     { key: "map", label: "Map", href: "tools/world-map.html" }
   ];
 
@@ -143,11 +143,11 @@
       key: "rules",
       label: "Rules",
       items: [
-        { label: "Item Search", href: "tools/item-search.html" },
-        { label: "Spell Search", href: "tools/spell-search.html" },
-        { label: "Background Search", href: "tools/background-search.html" },
-        { label: "Race Search", href: "tools/race-search.html" },
-        { label: "Feat Search", href: "tools/feat-search.html" }
+        { label: "Item Search", href: "tools/item-search/item-search.html" },
+        { label: "Spell Search", href: "tools/spell-search/spell-search.html" },
+        { label: "Background Search", href: "tools/background-search/background-search.html" },
+        { label: "Race Search", href: "tools/race-search/race-search.html" },
+        { label: "Feat Search", href: "tools/feat-search/feat-search.html" }
       ]
     }
   ];

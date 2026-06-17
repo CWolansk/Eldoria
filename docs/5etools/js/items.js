@@ -237,6 +237,119 @@ class ItemsPage extends ListPage {
 
 	get primaryLists () { return [this._mundaneList, this._magicList]; }
 
+	_pOnLoad_bindMiscButtons () {
+		super._pOnLoad_bindMiscButtons();
+		this._bindExportItemsJsonButton();
+	}
+
+	_bindExportItemsJsonButton () {
+		$(`#btn-export-items-json`)
+			.off("click")
+			.on("click", () => this._pHandleClickExportItemsJson());
+	}
+
+	async _pHandleClickExportItemsJson () {
+		const exportable = this._getExportableItemsJson();
+		DataUtil.userDownload("items-page-full-normalized", exportable, {isSkipAdditionalMetadata: true});
+		JqueryUtil.doToast(`Exported ${exportable.counts.items.toLocaleString()} items as JSON.`);
+	}
+
+	_getExportableItemsJson () {
+		const items = this._dataList || [];
+		const itemRefs = new WeakMap();
+
+		items.forEach((item, i) => itemRefs.set(item, this._getExportableItemsJson_getItemRef(item, i)));
+
+		return {
+			schema: "eldoria.5etools.items-page.normalized-export",
+			schemaVersion: 1,
+			generatedAt: new Date().toISOString(),
+			generator: {
+				name: "items-page-full-normalized-export",
+				page: UrlUtil.PG_ITEMS,
+				description: "All items loaded by the 5etools Items page after copy resolution, itemEntry dereferencing, item enhancement, and generic magic variant expansion.",
+			},
+			counts: this._getExportableItemsJson_getCounts(items),
+			items: items.map((item, i) => this._getExportableItemsJson_getCleanItem(item, {itemRefs, rootItem: item, path: `#/items/${i}`})),
+		};
+	}
+
+	_getExportableItemsJson_getCounts (items) {
+		const sources = new Set();
+		items.forEach(item => {
+			const source = item.source || item.inherits?.source;
+			if (source) sources.add(source);
+		});
+
+		return {
+			items: items.length,
+			baseItems: items.filter(item => item._isBaseItem || item._category === "Basic").length,
+			itemGroups: items.filter(item => item._isItemGroup).length,
+			genericVariants: items.filter(item => item._category === "Generic Variant").length,
+			specificVariants: items.filter(item => item._category === "Specific Variant").length,
+			mundaneItems: items.filter(item => Renderer.item.isMundane(item)).length,
+			magicItems: items.filter(item => !Renderer.item.isMundane(item)).length,
+			noDisplayItems: items.filter(item => item.noDisplay).length,
+			sources: sources.size,
+		};
+	}
+
+	_getExportableItemsJson_getItemRef (item, ix) {
+		const source = item.source || item.inherits?.source || "";
+		const hash = UrlUtil.URL_TO_HASH_BUILDER[UrlUtil.PG_ITEMS]({name: item.name, source});
+		return {
+			$ref: `#/items/${ix}`,
+			name: item.name,
+			source,
+			hash,
+		};
+	}
+
+	_getExportableItemsJson_getCleanItem (item, {itemRefs, rootItem, path}) {
+		return this._getExportableItemsJson_getCleanValue(item, {
+			itemRefs,
+			rootItem,
+			path,
+			seen: new WeakMap(),
+		});
+	}
+
+	_getExportableItemsJson_getCleanValue (value, {itemRefs, rootItem, path, seen}) {
+		if (value == null || typeof value !== "object") return value;
+
+		if (itemRefs.has(value) && value !== rootItem) return MiscUtil.copyFast(itemRefs.get(value));
+		if (seen.has(value)) return {$ref: seen.get(value)};
+
+		seen.set(value, path);
+
+		if (value instanceof Array) {
+			return value.map((it, i) => this._getExportableItemsJson_getCleanValue(it, {
+				itemRefs,
+				rootItem,
+				path: `${path}/${i}`,
+				seen,
+			}));
+		}
+
+		return Object.entries(value)
+			.mergeMap(([k, v]) => {
+				if (typeof v === "function") return {};
+
+				return {
+					[k]: this._getExportableItemsJson_getCleanValue(v, {
+						itemRefs,
+						rootItem,
+						path: `${path}/${this._getExportableItemsJson_getJsonPointerPart(k)}`,
+						seen,
+					}),
+				};
+			});
+	}
+
+	_getExportableItemsJson_getJsonPointerPart (part) {
+		return `${part}`.replace(/~/g, "~0").replace(/\//g, "~1");
+	}
+
 	getListItem (item, itI, isExcluded) {
 		const hash = UrlUtil.autoEncodeHash(item);
 

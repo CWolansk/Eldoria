@@ -1,8 +1,11 @@
 {
   "IsEncrypted": false,
   "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "node",
-    "STORAGE_ACCOUNT": "eldoriargac5b",
-    "CHARACTERS_CONTAINER": "characters"
+    "ELDORIA_STORAGE_CONNECTION_STRING": "UseDevelopmentStorage=true",
+    "ELDORIA_CHARACTER_CONTAINER": "eldoria-character-data",
+    "ELDORIA_CATALOG_TABLE": "eldoriacatalog",
+    "ELDORIA_ALLOWED_ORIGINS": "*"
   }
 }

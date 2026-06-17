@@ -1,0 +1,173 @@
+{
+  "schema": "eldoria.public-rules-catalog.manifest",
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-08T20:40:01.578Z",
+  "generator": {
+    "name": "generate-public-rules-data",
+    "manifest": "site-src/public-rules-manifest.json"
+  },
+  "policy": {
+    "summary": "Player-safe rules catalog for the Eldoria public wiki.",
+    "officialSources": "Player-facing official 5e rules sources and sources currently needed by active player sheets.",
+    "campaignHomebrew": "Only explicitly approved Eldoria item files are published.",
+    "excluded": [
+      "adventure-only treasure rows outside the approved source list",
+      "third-party and full 5etools homebrew sources",
+      "DM-only campaign notes",
+      "future quest rewards not listed below"
+    ]
+  },
+  "counts": {
+    "catalogs": {
+      "items": {
+        "items": 14389,
+        "baseItems": 240,
+        "itemGroups": 177,
+        "genericVariants": 280,
+        "specificVariants": 10487,
+        "mundaneItems": 1212,
+        "magicItems": 13177,
+        "noDisplayItems": 0,
+        "sources": 86,
+        "pricedItems": 14389
+      },
+      "eldoriaItems": {
+        "items": 17
+      },
+      "magicVariants": {
+        "magicVariants": 53,
+        "runtimeComposed": 227,
+        "preGeneratedCombinations": 0
+      },
+      "spells": {
+        "spells": 517,
+        "cantrips": 57
+      },
+      "classes": {
+        "classes": 16,
+        "subclasses": 107
+      },
+      "features": {
+        "classFeatures": 352,
+        "subclassFeatures": 778
+      },
+      "races": {
+        "races": 180,
+        "baseRaces": 106,
+        "subraces": 74
+      },
+      "backgrounds": {
+        "backgrounds": 96
+      },
+      "feats": {
+        "feats": 104
+      }
+    },
+    "csv": {
+      "items": 5013,
+      "spells": 517,
+      "feats": 104,
+      "races": 180,
+      "backgrounds": 96
+    }
+  },
+  "catalogs": [
+    {
+      "id": "items",
+      "schema": "eldoria.5etools.items-page.normalized-export",
+      "schemaVersion": 1,
+      "path": "items-page-full-normalized.json",
+      "counts": {
+        "items": 14389,
+        "baseItems": 240,
+        "itemGroups": 177,
+        "genericVariants": 280,
+        "specificVariants": 10487,
+        "mundaneItems": 1212,
+        "magicItems": 13177,
+        "noDisplayItems": 0,
+        "sources": 86,
+        "pricedItems": 14389
+      }
+    },
+    {
+      "id": "eldoria-items",
+      "schema": "eldoria.normalized-rules-catalog.eldoria-items",
+      "schemaVersion": 1,
+      "path": "eldoria-items-index.json",
+      "counts": {
+        "items": 17
+      }
+    },
+    {
+      "id": "magic-variants",
+      "schema": "eldoria.normalized-rules-catalog.magic-variants",
+      "schemaVersion": 3,
+      "path": "magic-variants.json",
+      "counts": {
+        "magicVariants": 53,
+        "runtimeComposed": 227,
+        "preGeneratedCombinations": 0
+      }
+    },
+    {
+      "id": "spells",
+      "schema": "eldoria.normalized-rules-catalog.spells",
+      "schemaVersion": 3,
+      "path": "spells.json",
+      "counts": {
+        "spells": 517,
+        "cantrips": 57
+      }
+    },
+    {
+      "id": "classes",
+      "schema": "eldoria.normalized-rules-catalog.classes",
+      "schemaVersion": 3,
+      "path": "classes.json",
+      "counts": {
+        "classes": 16,
+        "subclasses": 107
+      }
+    },
+    {
+      "id": "features",
+      "schema": "eldoria.normalized-rules-catalog.features",
+      "schemaVersion": 3,
+      "path": "features.json",
+      "counts": {
+        "classFeatures": 352,
+        "subclassFeatures": 778
+      }
+    },
+    {
+      "id": "races",
+      "schema": "eldoria.normalized-rules-catalog.races",
+      "schemaVersion": 3,
+      "path": "races.json",
+      "counts": {
+        "races": 180,
+        "baseRaces": 106,
+        "subraces": 74
+      }
+    },
+    {
+      "id": "backgrounds",
+      "schema": "eldoria.normalized-rules-catalog.backgrounds",
+      "schemaVersion": 3,
+      "path": "backgrounds.json",
+      "counts": {
+        "backgrounds": 96
+      }
+    },
+    {
+      "id": "feats",
+      "schema": "eldoria.normalized-rules-catalog.feats",
+      "schemaVersion": 3,
+      "path": "feats.json",
+      "counts": {
+        "feats": 104
+      }
+    }
+  ]
+}

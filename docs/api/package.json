@@ -1,15 +1,23 @@
 {
   "name": "eldoria-character-api",
   "version": "0.1.0",
-  "description": "Azure Functions API for Eldoria cloud-backed character sheets.",
+  "description": "Azure Functions API for Eldoria cloud-backed PlayerSheetDTO v2 sheets.",
   "private": true,
   "main": "src/index.js",
   "scripts": {
-    "check": "node --check src/index.js"
+    "start": "func start",
+    "check": "node tools/check-syntax.js",
+    "seed": "node seed/seedBlobStorage.js",
+    "seed:characters": "node seed/seedBlobStorage.js",
+    "seed:reset-players": "node seed/seedBlobStorage.js --purge-character-documents",
+    "seed:catalog": "node seed/seedTableStorage.js",
+    "deploy": "powershell -ExecutionPolicy Bypass -File apiDeploy/deploy.ps1",
+    "buddy:actions": "node apiClient/tester-actions-server.cjs"
   },
   "dependencies": {
-    "@azure/functions": "^4.0.0",
-    "@azure/identity": "^4.0.0",
-    "@azure/storage-blob": "^12.17.0"
+    "@azure/data-tables": "^13.3.2",
+    "@azure/functions": "^4.6.0",
+    "@azure/identity": "^4.13.0",
+    "@azure/storage-blob": "^12.29.1"
   }
 }

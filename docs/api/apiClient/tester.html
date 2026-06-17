@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Eldoria API Buddy</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel-2: #1d2129;
+    --border: #2a2f3a;
+    --text: #e6e8ec;
+    --muted: #8b93a1;
+    --accent: #6ea8fe;
+    --accent-2: #4b7bd6;
+    --green: #3fb950;
+    --red: #f85149;
+    --amber: #d29922;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --get: #3fb950;
+    --put: #d29922;
+    --delete: #f85149;
+    --post: #a371f7;
+    --patch: #db61a2;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ---- Header / connection bar ---- */
+  header {
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .brand { font-weight: 700; font-size: 15px; letter-spacing: .3px; white-space: nowrap; }
+  .brand span { color: var(--accent); }
+  header label { color: var(--muted); font-size: 12px; }
+  header input {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 6px 9px;
+    font: 13px var(--mono);
+  }
+  #baseUrl { width: 320px; }
+  #functionKey { width: 180px; }
+  #actionsUrl { width: 220px; }
+  #actionsKey { width: 150px; }
+  .grow { flex: 1; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); display: inline-block; }
+  .dot.ok { background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .dot.bad { background: var(--red); box-shadow: 0 0 6px var(--red); }
+  .pingwrap { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); }
+
+  button {
+    background: var(--accent-2);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 13px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:hover { background: var(--accent); }
+  button.ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); font-weight: 500; }
+  button.ghost:hover { background: var(--panel-2); color: var(--text); }
+  button.tiny { padding: 3px 8px; font-size: 11px; }
+
+  /* ---- Layout ---- */
+  .layout { display: grid; grid-template-columns: 270px 1fr; min-height: 0; }
+  .sidebar {
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 8px 0 40px;
+  }
+  .group-title {
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: .6px;
+    color: var(--muted);
+    padding: 14px 16px 4px;
+  }
+  .op {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+  }
+  .op:hover { background: var(--panel-2); }
+  .op.active { background: var(--panel-2); border-left-color: var(--accent); }
+  .op .name { font-size: 13px; }
+  .verb {
+    font: 700 10px var(--mono);
+    padding: 2px 5px;
+    border-radius: 4px;
+    min-width: 46px;
+    text-align: center;
+    color: #0b0d10;
+  }
+  .verb.GET { background: var(--get); }
+  .verb.PUT { background: var(--put); }
+  .verb.DELETE { background: var(--delete); }
+  .verb.POST { background: var(--post); }
+  .verb.PATCH { background: var(--patch); }
+  .verb.ANY { background: var(--muted); }
+
+  .main { overflow-y: auto; padding: 20px 24px 60px; min-height: 0; }
+  .op-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .op-head h2 { margin: 0; font-size: 18px; }
+  .path {
+    font: 13px var(--mono);
+    color: var(--muted);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+  .desc { color: var(--muted); margin: 8px 0 18px; font-size: 13px; }
+
+  .field { margin-bottom: 14px; max-width: 760px; }
+  .field > label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 5px; }
+  .field .req { color: var(--amber); }
+  .field input[type=text], .field input[type=number], .field select, .field textarea {
+    width: 100%;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  .field input[type=text], .field textarea { font-family: var(--mono); }
+  .field textarea { resize: vertical; min-height: 90px; }
+  .field textarea.tall { min-height: 160px; }
+  .field.check { display: flex; align-items: center; gap: 8px; }
+  .field.check label { margin: 0; color: var(--text); }
+  .field .hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .field.invalid input, .field.invalid textarea, .field.invalid select { border-color: var(--red); }
+
+  .actions { display: flex; gap: 10px; align-items: center; margin: 18px 0; max-width: 760px; }
+  .kbd { font: 11px var(--mono); color: var(--muted); }
+
+  /* ---- Response ---- */
+  .response { max-width: 980px; }
+  .resp-head { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+  .pill {
+    font: 700 12px var(--mono);
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+  }
+  .pill.ok { color: var(--green); border-color: var(--green); }
+  .pill.err { color: var(--red); border-color: var(--red); }
+  .meta { font: 12px var(--mono); color: var(--muted); }
+  .req-line {
+    font: 12px var(--mono);
+    color: var(--muted);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 10px;
+    margin-bottom: 8px;
+    word-break: break-all;
+  }
+  .req-line b { color: var(--text); }
+  pre.body {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    margin: 0;
+    overflow: auto;
+    max-height: 52vh;
+    font: 12.5px/1.55 var(--mono);
+    white-space: pre;
+  }
+  pre.body .key { color: #79c0ff; }
+  pre.body .str { color: #a5d6a7; }
+  pre.body .num { color: #f0883e; }
+  pre.body .bool { color: #d2a8ff; }
+  pre.body .null { color: #ff7b72; }
+  .empty-state { color: var(--muted); font-style: italic; padding: 10px 0; }
+  .toolbar { display: flex; gap: 8px; margin-bottom: 6px; }
+
+  /* ---- Info tabs ---- */
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; max-width: 980px; }
+  .info-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .info-card h3 { margin: 0 0 8px; font-size: 14px; }
+  .info-card p { color: var(--muted); margin: 0 0 10px; }
+  .info-card ul { margin: 8px 0 0 18px; padding: 0; color: var(--muted); }
+  .cmd-box {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: start;
+    margin-top: 8px;
+  }
+  .cmd-box pre {
+    margin: 0;
+    background: #0b0d10;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 9px 10px;
+    overflow: auto;
+    font: 12px/1.45 var(--mono);
+    color: var(--text);
+  }
+
+  /* ---- History ---- */
+  .history { margin-top: 26px; max-width: 980px; }
+  .history h3 { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+  .hist-row {
+    display: flex; gap: 10px; align-items: center;
+    padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px;
+    margin-bottom: 6px; cursor: pointer; font: 12px var(--mono);
+    background: var(--panel);
+  }
+  .hist-row:hover { background: var(--panel-2); }
+  .hist-row .scode { font-weight: 700; }
+  .hist-row .scode.ok { color: var(--green); }
+  .hist-row .scode.err { color: var(--red); }
+  .hist-row .hurl { color: var(--muted); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .hist-row .htime { color: var(--muted); }
+
+  .banner {
+    background: #3a1d1d; border: 1px solid var(--red); color: #ffd7d4;
+    padding: 12px 16px; margin: 16px 24px; border-radius: 8px; font-size: 13px;
+  }
+  .banner code { background: rgba(0,0,0,.3); padding: 1px 5px; border-radius: 4px; }
+  details.help { margin-top: 22px; max-width: 980px; }
+  details.help summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+  details.help div { color: var(--muted); font-size: 13px; line-height: 1.7; padding: 10px 0; }
+  details.help code { background: var(--panel-2); padding: 1px 6px; border-radius: 4px; font-family: var(--mono); }
+  .preset { display:flex; gap:6px; }
+  .toast {
+    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+    background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
+    padding: 9px 16px; border-radius: 8px; font-size: 13px; opacity: 0;
+    transition: opacity .2s; pointer-events: none; z-index: 50;
+  }
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="brand">Eldoria <span>API Buddy</span></div>
+    <label>Base URL</label>
+    <input id="baseUrl" type="text" placeholder="http://localhost:7071/api" />
+    <div class="preset">
+      <button class="ghost tiny" data-preset="http://localhost:7071/api">localhost:7071</button>
+      <button class="ghost tiny" data-preset="/api">/api</button>
+    </div>
+    <label>Function key</label>
+    <input id="functionKey" type="password" placeholder="optional" autocomplete="off" />
+    <label>Actions URL</label>
+    <input id="actionsUrl" type="text" placeholder="http://127.0.0.1:8787" />
+    <label>Actions key</label>
+    <input id="actionsKey" type="password" placeholder="from buddy:actions" autocomplete="off" />
+    <div class="grow"></div>
+    <div class="pingwrap">
+      <span id="pingDot" class="dot"></span>
+      <span id="pingText">not pinged</span>
+    </div>
+    <button id="pingBtn" class="ghost">Ping /health</button>
+  </header>
+
+  <div id="loadError"></div>
+
+  <div class="layout">
+    <nav class="sidebar" id="sidebar"></nav>
+    <main class="main" id="main">
+      <div class="empty-state">Loading…</div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script type="module">
+// Test the real client module that lives next to this page.
+let EldoriaApiClient, EldoriaApiError;
+try {
+  const mod = await import("./index.js");
+  EldoriaApiClient = mod.EldoriaApiClient;
+  EldoriaApiError = mod.EldoriaApiError;
+} catch (err) {
+  document.getElementById("loadError").innerHTML =
+    `<div class="banner">Could not load <code>./index.js</code> as an ES module: ${escapeHtmlText(String(err))}.
+     <br/>Open this page through a web server (module imports are blocked on <code>file://</code>).
+     For example, from <code>docs/api/apiClient/</code> run <code>npx http-server -p 8080</code> then open
+     <code>http://localhost:8080/tester.html</code>.</div>`;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Catalog + public index kinds (kept in sync with src/catalogModel.js)    */
+/* ----------------------------------------------------------------------- */
+const CATALOG_KINDS = [
+  "items", "spells", "races", "backgrounds", "feats", "classes", "subclasses",
+  "class-features", "subclass-features", "magic-variants", "eldoria-items"
+];
+const PUBLIC_KINDS = ["locations", "npcs"];
+const SAMPLE_CATALOG_ENTITY = `{
+  "name": "Test Catalog Item",
+  "source": "Eldoria",
+  "type": "G",
+  "rarity": "common",
+  "entries": ["Created from API Buddy."]
+}`;
+const SAMPLE_CATALOG_PATCH = `{
+  "rarity": "rare",
+  "entries": ["Updated from API Buddy."]
+}`;
+
+/* ----------------------------------------------------------------------- */
+/* Operation catalog — each maps to a real client method                   */
+/* ----------------------------------------------------------------------- */
+const OPERATIONS = [
+  {
+    id: "health", group: "System", verb: "GET", label: "Health check",
+    path: "GET /health", desc: "Liveness probe for the Functions host.",
+    params: [], run: (c) => c.health()
+  },
+
+  {
+    id: "getPlayers", group: "Players", verb: "GET", label: "Get players manifest",
+    path: "GET /players", desc: "Fetch the players manifest blob.",
+    params: [], run: (c) => c.getPlayersManifest()
+  },
+  {
+    id: "savePlayers", group: "Players", verb: "PUT", label: "Save players manifest",
+    path: "PUT /players", desc: "Overwrite the players manifest with the JSON body.",
+    params: [{ name: "manifest", type: "json", label: "Manifest JSON", required: true, tall: true }],
+    run: (c, v) => c.savePlayersManifest(v.manifest)
+  },
+
+  {
+    id: "listCharacters", group: "Characters", verb: "GET", label: "List characters",
+    path: "GET /characters", desc: "List all stored PlayerSheetDTO v2 character sheets.",
+    params: [], run: (c) => c.listCharacters()
+  },
+  {
+    id: "getDoc", group: "Characters", verb: "GET", label: "Get character sheet",
+    path: "GET /characters/{id}", desc: "Fetch a PlayerSheetDTO v2 character sheet.",
+    params: [
+      { name: "id", type: "text", label: "Character id", required: true, placeholder: "char-austin-001" }
+    ],
+    run: (c, v) => c.getCharacterSheet(v.id)
+  },
+  {
+    id: "saveDoc", group: "Characters", verb: "POST", label: "Save character sheet",
+    path: "POST /characters/{id}", desc: "Create or overwrite a PlayerSheetDTO v2 character sheet. The API client uses a simple CORS POST body for browser saves.",
+    params: [
+      { name: "id", type: "text", label: "Character id", required: true, placeholder: "char-austin-001" },
+      { name: "document", type: "json", label: "PlayerSheetDTO JSON", required: true, tall: true }
+    ],
+    run: (c, v) => c.saveCharacterSheet(v.id, v.document)
+  },
+  {
+    id: "deleteDoc", group: "Characters", verb: "DELETE", label: "Delete character sheet",
+    path: "DELETE /characters/{id}", desc: "Delete a PlayerSheetDTO v2 character sheet.",
+    params: [
+      { name: "id", type: "text", label: "Character id", required: true, placeholder: "char-austin-001" }
+    ],
+    run: (c, v) => c.deleteCharacterSheet(v.id)
+  },
+
+  {
+    id: "catalogManifest", group: "Catalog", verb: "GET", label: "Catalog manifest",
+    path: "GET /catalog", desc: "List available catalogs with counts.",
+    params: [], run: (c) => c.getCatalogManifest()
+  },
+  {
+    id: "listCatalog", group: "Catalog", verb: "GET", label: "List / search catalog",
+    path: "GET /catalog/{kind}", desc: "List, search (q) and filter a catalog. Toggle full for whole documents.",
+    params: [
+      { name: "kind", type: "select", label: "Kind", options: CATALOG_KINDS, required: true },
+      { name: "q", type: "text", label: "Search (q)", placeholder: "free text, e.g. moonblade" },
+      { name: "limit", type: "number", label: "Limit", placeholder: "0 = no limit" },
+      { name: "full", type: "checkbox", label: "Include full documents (full=true)" },
+      { name: "filters", type: "keyvalue", label: "Structured filters",
+        hint: "One key=value per line. e.g. level=3 or rarity=rare" }
+    ],
+    run: (c, v) => {
+      const query = { ...(v.filters || {}) };
+      if (v.limit != null && !Number.isNaN(v.limit)) query.limit = v.limit;
+      if (v.q) query.q = v.q;
+      return v.full ? c.listCatalogFull(v.kind, query) : c.listCatalog(v.kind, query);
+    }
+  },
+  {
+    id: "listCatalogOData", group: "Catalog", verb: "GET", label: "OData catalog list",
+    path: "GET /catalog/{kind}/odata", desc: "Fetch catalog objects using OData-style filter, ordering, projection, count, and paging parameters.",
+    params: [
+      { name: "kind", type: "select", label: "Kind", options: CATALOG_KINDS, required: true },
+      { name: "filter", type: "text", label: "$filter", placeholder: "rarity eq 'rare' and source eq 'DMG'" },
+      { name: "orderby", type: "text", label: "$orderby", placeholder: "name asc, source desc" },
+      { name: "select", type: "text", label: "$select", placeholder: "name,source,level,school" },
+      { name: "expand", type: "text", label: "$expand", placeholder: "entries,school or *" },
+      { name: "skip", type: "number", label: "$skip", placeholder: "0" },
+      { name: "top", type: "number", label: "$top", placeholder: "25" },
+      { name: "count", type: "checkbox", label: "Include total count ($count=true; slower)" },
+      { name: "q", type: "text", label: "Search (q)", placeholder: "optional text filter" }
+    ],
+    run: (c, v) => {
+      const query = {};
+      if (v.filter) query.$filter = v.filter;
+      if (v.orderby) query.$orderby = v.orderby;
+      if (v.select) query.$select = v.select;
+      if (v.expand) query.$expand = v.expand;
+      if (v.skip != null && !Number.isNaN(v.skip)) query.$skip = v.skip;
+      if (v.top != null && !Number.isNaN(v.top)) query.$top = v.top;
+      if (v.count) query.$count = "true";
+      if (v.q) query.q = v.q;
+      return c.listCatalogOData(v.kind, query);
+    }
+  },
+  {
+    id: "getCatalogEntity", group: "Catalog", verb: "GET", label: "Get catalog entity",
+    path: "GET /catalog/{kind}/{id}", desc: "Fetch one full catalog entity by id.",
+    params: [
+      { name: "kind", type: "select", label: "Kind", options: CATALOG_KINDS, required: true },
+      { name: "id", type: "text", label: "Entity id", required: true, placeholder: "spell-fireball" }
+    ],
+    run: (c, v) => c.getCatalogEntity(v.kind, v.id)
+  },
+  {
+    id: "createCatalogEntity", group: "Catalog", verb: "POST", label: "Create catalog entity",
+    path: "POST /catalog/{kind}", desc: "Create a new full catalog entity. Enable upsert to replace an existing id.",
+    params: [
+      { name: "kind", type: "select", label: "Kind", options: CATALOG_KINDS, required: true },
+      { name: "upsert", type: "checkbox", label: "Upsert if the entity already exists (?upsert=true)" },
+      { name: "entity", type: "json", label: "Entity JSON", required: true, tall: true, placeholder: SAMPLE_CATALOG_ENTITY }
+    ],
+    run: (c, v) => v.upsert
+      ? c.upsertCatalogEntity(v.kind, v.entity)
+      : c.createCatalogEntity(v.kind, v.entity)
+  },
+  {
+    id: "patchCatalogEntity", group: "Catalog", verb: "PATCH", label: "Patch catalog entity",
+    path: "PATCH /catalog/{kind}/{id}", desc: "Merge-patch an existing full catalog entity and return the updated object.",
+    params: [
+      { name: "kind", type: "select", label: "Kind", options: CATALOG_KINDS, required: true },
+      { name: "id", type: "text", label: "Entity id", required: true, placeholder: "spell-fireball" },
+      { name: "patch", type: "json", label: "Patch JSON", required: true, tall: true, placeholder: SAMPLE_CATALOG_PATCH }
+    ],
+    run: (c, v) => c.patchCatalogEntity(v.kind, v.id, v.patch)
+  },
+
+  {
+    id: "publicIndex", group: "Public Index", verb: "GET", label: "Get public index",
+    path: "GET /public-index/{kind}", desc: "Fetch a pre-built public index (locations / npcs).",
+    params: [{ name: "kind", type: "select", label: "Kind", options: PUBLIC_KINDS, required: true }],
+    run: (c, v) => c.getPublicIndex(v.kind)
+  },
+
+  {
+    id: "actionsHealth", group: "Deployment", verb: "GET", label: "Ping actions helper",
+    path: "GET {Actions URL}/health", desc: "Check that the local API Buddy actions helper is running.",
+    params: [],
+    run: () => runLocalActionHealth()
+  },
+  {
+    id: "deployApi", group: "Deployment", verb: "POST", label: "Deploy API",
+    path: "POST {Actions URL}/actions/deploy", desc: "Run the API deploy script from docs/api on this machine.",
+    params: [
+      { name: "resourceGroupName", type: "text", label: "Azure resource group", required: true },
+      { name: "functionAppName", type: "text", label: "Function App name", required: true },
+      { name: "storageAccountName", type: "text", label: "Storage account name", placeholder: "required for managed identity" },
+      { name: "storageConnectionString", type: "text", label: "Storage connection string", placeholder: "optional; overrides managed identity" },
+      { name: "subscription", type: "text", label: "Azure subscription", placeholder: "optional id or name" },
+      { name: "containerName", type: "text", label: "Character blob container", placeholder: "eldoria-character-data" },
+      { name: "catalogTable", type: "text", label: "Catalog table", placeholder: "eldoriacatalog" },
+      { name: "blobPrefix", type: "text", label: "Blob prefix", placeholder: "optional" },
+      { name: "allowedOrigins", type: "text", label: "Allowed origins", placeholder: "*" },
+      { name: "assignStorageRole", type: "checkbox", label: "Assign storage roles to the Function App identity" }
+    ],
+    run: (_c, v) => runLocalAction("deploy", compactObject(v))
+  },
+  {
+    id: "seedCatalog", group: "Deployment", verb: "POST", label: "Seed catalogs",
+    path: "POST {Actions URL}/actions/seed/catalog", desc: "Run the rules catalog table seeder from docs/api.",
+    params: [
+      { name: "storageConnectionString", type: "text", label: "Storage connection string", placeholder: "optional if using managed identity" },
+      { name: "storageAccountName", type: "text", label: "Storage account name", placeholder: "optional for managed identity" },
+      { name: "catalogTable", type: "text", label: "Catalog table", placeholder: "eldoriacatalog" },
+      { name: "only", type: "text", label: "Only these catalog kinds", placeholder: "items,spells" },
+      { name: "dataDir", type: "text", label: "Data directory", placeholder: "optional; defaults to docs/data" },
+      { name: "dryRun", type: "checkbox", label: "Dry run only", default: true },
+      { name: "purge", type: "checkbox", label: "Purge stale rows before seeding" },
+      { name: "skipManifest", type: "checkbox", label: "Skip manifest update" }
+    ],
+    run: (_c, v) => runLocalAction("seed/catalog", compactObject(v))
+  },
+  {
+    id: "seedCharacters", group: "Deployment", verb: "POST", label: "Seed characters",
+    path: "POST {Actions URL}/actions/seed/characters", desc: "Seed the players manifest and PlayerSheetDTO v2 character sheet blobs from docs/api.",
+    params: [
+      { name: "storageConnectionString", type: "text", label: "Storage connection string", placeholder: "optional if using managed identity" },
+      { name: "storageAccountName", type: "text", label: "Storage account name", placeholder: "optional for managed identity" },
+      { name: "containerName", type: "text", label: "Character blob container", placeholder: "eldoria-character-data" },
+      { name: "blobPrefix", type: "text", label: "Blob prefix", placeholder: "optional" },
+      { name: "charactersDir", type: "text", label: "V2 DTO directory", placeholder: "optional; used only with Use character files" },
+      { name: "playersManifest", type: "text", label: "Players manifest", placeholder: "optional" },
+      { name: "dryRun", type: "checkbox", label: "Dry run only", default: true },
+      { name: "purgeCharacterDocuments", type: "checkbox", label: "Purge existing player sheet blobs before seeding" },
+      { name: "useCharacterFiles", type: "checkbox", label: "Use DTO files instead of blank placeholders" },
+      { name: "skipCharacters", type: "checkbox", label: "Skip character sheets" },
+      { name: "skipPlayersManifest", type: "checkbox", label: "Skip players manifest" }
+    ],
+    run: (_c, v) => runLocalAction("seed/characters", compactObject(v))
+  },
+
+  {
+    id: "custom", group: "Custom", verb: "ANY", label: "Raw request",
+    path: "client.request(path, …)", desc: "Hit any path with any method via the client's request() helper.",
+    params: [
+      { name: "method", type: "select", label: "Method", options: ["GET", "PUT", "POST", "PATCH", "DELETE"], default: "GET" },
+      { name: "path", type: "text", label: "Path", required: true, placeholder: "characters/char-001 or catalog/spells" },
+      { name: "query", type: "keyvalue", label: "Query params", hint: "One key=value per line." },
+      { name: "body", type: "json", label: "Body JSON (PUT/POST/PATCH)", tall: true }
+    ],
+    run: (c, v) => {
+      const opts = { method: v.method, query: v.query || {} };
+      if (v.body !== undefined) opts.body = v.body;
+      return c.request(v.path, opts);
+    }
+  }
+];
+
+/* ----------------------------------------------------------------------- */
+/* Config persistence                                                      */
+/* ----------------------------------------------------------------------- */
+const LS = {
+  baseUrl: "eldoria-buddy:baseUrl",
+  key: "eldoria-buddy:key",
+  actionsUrl: "eldoria-buddy:actionsUrl",
+  actionsKey: "eldoria-buddy:actionsKey",
+  val: (op, p) => `eldoria-buddy:val:${op}:${p}`
+};
+const baseUrlEl = document.getElementById("baseUrl");
+const keyEl = document.getElementById("functionKey");
+const actionsUrlEl = document.getElementById("actionsUrl");
+const actionsKeyEl = document.getElementById("actionsKey");
+baseUrlEl.value = localStorage.getItem(LS.baseUrl) || "http://localhost:7071/api";
+keyEl.value = localStorage.getItem(LS.key) || "";
+actionsUrlEl.value = localStorage.getItem(LS.actionsUrl) || "http://127.0.0.1:8787";
+actionsKeyEl.value = localStorage.getItem(LS.actionsKey) || "";
+baseUrlEl.addEventListener("change", () => localStorage.setItem(LS.baseUrl, baseUrlEl.value.trim()));
+keyEl.addEventListener("change", () => localStorage.setItem(LS.key, keyEl.value.trim()));
+actionsUrlEl.addEventListener("change", () => localStorage.setItem(LS.actionsUrl, actionsUrlEl.value.trim()));
+actionsKeyEl.addEventListener("change", () => localStorage.setItem(LS.actionsKey, actionsKeyEl.value.trim()));
+document.querySelectorAll("[data-preset]").forEach((b) =>
+  b.addEventListener("click", () => {
+    baseUrlEl.value = b.dataset.preset;
+    localStorage.setItem(LS.baseUrl, baseUrlEl.value);
+  })
+);
+
+/* ----------------------------------------------------------------------- */
+/* Client factory with a fetch wrapper that records request metadata       */
+/* ----------------------------------------------------------------------- */
+let lastReq = null;
+function buildClient() {
+  if (!EldoriaApiClient) throw new Error("API client module failed to load.");
+  const wrappedFetch = async (url, init) => {
+    const start = performance.now();
+    lastReq = { url, method: init.method, headers: init.headers, body: init.body };
+    try {
+      const res = await fetch(url, init);
+      lastReq.durationMs = performance.now() - start;
+      lastReq.status = res.status;
+      lastReq.statusText = res.statusText;
+      return res;
+    } catch (e) {
+      lastReq.durationMs = performance.now() - start;
+      lastReq.networkError = String(e);
+      throw e;
+    }
+  };
+  return new EldoriaApiClient({
+    baseUrl: baseUrlEl.value.trim() || "/api",
+    functionKey: keyEl.value.trim(),
+    fetch: wrappedFetch
+  });
+}
+
+function buildActionsUrl(path) {
+  const base = (actionsUrlEl.value.trim() || "http://127.0.0.1:8787").replace(/\/+$/u, "");
+  return `${base}/${path.replace(/^\/+/u, "")}`;
+}
+
+async function runLocalActionHealth() {
+  return requestLocalAction("health", { method: "GET" });
+}
+
+async function runLocalAction(action, payload) {
+  return requestLocalAction(`actions/${action}`, {
+    method: "POST",
+    body: redactForRequest(payload)
+  });
+}
+
+async function requestLocalAction(path, options) {
+  const url = buildActionsUrl(path);
+  const bodyText = options.body ? JSON.stringify(options.body) : undefined;
+  const headers = {
+    "Accept": "application/json"
+  };
+  if (bodyText !== undefined) headers["Content-Type"] = "application/json";
+  const actionKey = actionsKeyEl.value.trim();
+  if (actionKey) headers["X-Api-Buddy-Action-Key"] = actionKey;
+
+  const start = performance.now();
+  const loggedHeaders = { ...headers };
+  if (loggedHeaders["X-Api-Buddy-Action-Key"]) loggedHeaders["X-Api-Buddy-Action-Key"] = "<redacted>";
+  const loggedBody = options.body ? JSON.stringify(redactSensitive(options.body)) : undefined;
+  lastReq = { url, method: options.method, headers: loggedHeaders, body: loggedBody };
+  try {
+    const res = await fetch(url, { method: options.method, headers, body: bodyText });
+    const text = await res.text();
+    let parsed = text;
+    try { parsed = text ? JSON.parse(text) : null; } catch {}
+    lastReq.durationMs = performance.now() - start;
+    lastReq.status = res.status;
+    lastReq.statusText = res.statusText;
+    if (!res.ok) {
+      const error = new Error(parsed?.error || res.statusText || "Local action failed.");
+      error.status = res.status;
+      error.body = parsed;
+      throw error;
+    }
+    return parsed;
+  } catch (error) {
+    lastReq.durationMs = performance.now() - start;
+    if (!lastReq.status) lastReq.networkError = String(error);
+    throw error;
+  }
+}
+
+function compactObject(value) {
+  const out = {};
+  for (const [key, child] of Object.entries(value)) {
+    if (child === "" || child === undefined || child === null) continue;
+    out[key] = child;
+  }
+  return out;
+}
+
+function redactForRequest(value) {
+  if (!value || typeof value !== "object") return value;
+  return { ...value };
+}
+
+function redactSensitive(value) {
+  if (Array.isArray(value)) return value.map(redactSensitive);
+  if (value && typeof value === "object") {
+    const out = {};
+    for (const [key, child] of Object.entries(value)) {
+      out[key] = key === "storageConnectionString" ? "<redacted>" : redactSensitive(child);
+    }
+    return out;
+  }
+  return value;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Sidebar                                                                  */
+/* ----------------------------------------------------------------------- */
+const sidebar = document.getElementById("sidebar");
+const main = document.getElementById("main");
+let currentId = OPERATIONS[0].id;
+const history = [];
+
+function renderSidebar() {
+  const groups = {};
+  for (const op of OPERATIONS) (groups[op.group] ||= []).push(op);
+  sidebar.innerHTML = "";
+  for (const [group, ops] of Object.entries(groups)) {
+    const title = document.createElement("div");
+    title.className = "group-title";
+    title.textContent = group;
+    sidebar.appendChild(title);
+    for (const op of ops) {
+      const row = document.createElement("div");
+      row.className = "op" + (op.id === currentId ? " active" : "");
+      row.innerHTML = `<span class="verb ${op.verb}">${op.verb}</span><span class="name"></span>`;
+      row.querySelector(".name").textContent = op.label;
+      row.addEventListener("click", () => { currentId = op.id; renderSidebar(); renderOp(); });
+      sidebar.appendChild(row);
+    }
+  }
+}
+
+/* ----------------------------------------------------------------------- */
+/* Operation panel + dynamic form                                          */
+/* ----------------------------------------------------------------------- */
+function renderOp() {
+  const op = OPERATIONS.find((o) => o.id === currentId);
+  main.innerHTML = "";
+
+  const head = document.createElement("div");
+  head.className = "op-head";
+  const h2 = document.createElement("h2");
+  h2.textContent = op.label;
+  const path = document.createElement("span");
+  path.className = "path";
+  path.textContent = op.path;
+  head.append(h2, path);
+  main.appendChild(head);
+
+  const desc = document.createElement("p");
+  desc.className = "desc";
+  desc.textContent = op.desc;
+  main.appendChild(desc);
+
+  if (op.infoSections) {
+    main.appendChild(renderInfoSections(op.infoSections));
+    main.appendChild(renderHelp());
+    return;
+  }
+
+  const form = document.createElement("div");
+  form.id = "form";
+  for (const p of op.params) form.appendChild(renderField(op, p));
+  main.appendChild(form);
+
+  const actions = document.createElement("div");
+  actions.className = "actions";
+  const send = document.createElement("button");
+  send.textContent = "Send request";
+  send.addEventListener("click", () => runOp(op));
+  const kbd = document.createElement("span");
+  kbd.className = "kbd";
+  kbd.textContent = "Ctrl/⌘ + Enter";
+  actions.append(send, kbd);
+  main.appendChild(actions);
+
+  const resp = document.createElement("div");
+  resp.className = "response";
+  resp.id = "response";
+  resp.innerHTML = `<div class="empty-state">No response yet — send a request.</div>`;
+  main.appendChild(resp);
+
+  if (history.length) main.appendChild(renderHistory());
+  main.appendChild(renderHelp());
+}
+
+function renderInfoSections(sections) {
+  const grid = document.createElement("div");
+  grid.className = "info-grid";
+
+  for (const section of sections) {
+    const card = document.createElement("section");
+    card.className = "info-card";
+
+    const h3 = document.createElement("h3");
+    h3.textContent = section.title;
+    card.appendChild(h3);
+
+    if (section.text) {
+      const p = document.createElement("p");
+      p.textContent = section.text;
+      card.appendChild(p);
+    }
+
+    for (const command of section.commands || []) {
+      const row = document.createElement("div");
+      row.className = "cmd-box";
+
+      const pre = document.createElement("pre");
+      pre.textContent = command;
+      row.appendChild(pre);
+
+      const button = document.createElement("button");
+      button.className = "ghost tiny";
+      button.textContent = "Copy";
+      button.addEventListener("click", () => copy(command));
+      row.appendChild(button);
+
+      card.appendChild(row);
+    }
+
+    if (section.notes?.length) {
+      const ul = document.createElement("ul");
+      for (const note of section.notes) {
+        const li = document.createElement("li");
+        li.textContent = note;
+        ul.appendChild(li);
+      }
+      card.appendChild(ul);
+    }
+
+    grid.appendChild(card);
+  }
+
+  return grid;
+}
+
+function renderField(op, p) {
+  const wrap = document.createElement("div");
+  wrap.className = "field" + (p.type === "checkbox" ? " check" : "");
+  wrap.dataset.param = p.name;
+  const saved = localStorage.getItem(LS.val(op.id, p.name));
+
+  if (p.type === "checkbox") {
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.id = `f_${p.name}`;
+    input.checked = saved == null ? Boolean(p.default) : saved === "true";
+    const label = document.createElement("label");
+    label.htmlFor = input.id;
+    label.textContent = p.label;
+    wrap.append(input, label);
+    return wrap;
+  }
+
+  const label = document.createElement("label");
+  label.innerHTML = escapeHtmlText(p.label) + (p.required ? ` <span class="req">*</span>` : "");
+  wrap.appendChild(label);
+
+  let input;
+  if (p.type === "select") {
+    input = document.createElement("select");
+    for (const opt of p.options) {
+      const o = document.createElement("option");
+      o.value = opt; o.textContent = opt;
+      input.appendChild(o);
+    }
+    input.value = saved || p.default || p.options[0];
+  } else if (p.type === "json" || p.type === "keyvalue") {
+    input = document.createElement("textarea");
+    if (p.tall) input.classList.add("tall");
+    input.placeholder = p.placeholder || (p.type === "json" ? '{\n  "key": "value"\n}' : "key=value");
+    if (saved) input.value = saved;
+  } else {
+    input = document.createElement("input");
+    input.type = p.type === "number" ? "number" : "text";
+    if (p.placeholder) input.placeholder = p.placeholder;
+    if (saved) input.value = saved;
+  }
+  input.id = `f_${p.name}`;
+  wrap.appendChild(input);
+
+  if (p.hint) {
+    const hint = document.createElement("div");
+    hint.className = "hint";
+    hint.textContent = p.hint;
+    wrap.appendChild(hint);
+  }
+  return wrap;
+}
+
+function collectValues(op) {
+  const values = {};
+  let firstError = null;
+  for (const p of op.params) {
+    const wrap = main.querySelector(`.field[data-param="${p.name}"]`);
+    wrap.classList.remove("invalid");
+    const el = document.getElementById(`f_${p.name}`);
+    let value;
+
+    if (p.type === "checkbox") {
+      value = el.checked;
+      localStorage.setItem(LS.val(op.id, p.name), String(value));
+    } else if (p.type === "number") {
+      const raw = el.value.trim();
+      localStorage.setItem(LS.val(op.id, p.name), raw);
+      value = raw === "" ? undefined : Number(raw);
+    } else if (p.type === "json") {
+      const raw = el.value.trim();
+      localStorage.setItem(LS.val(op.id, p.name), raw);
+      if (raw === "") {
+        value = undefined;
+      } else {
+        try { value = JSON.parse(raw); }
+        catch (e) { wrap.classList.add("invalid"); firstError ||= `${p.label}: invalid JSON (${e.message})`; }
+      }
+    } else if (p.type === "keyvalue") {
+      const raw = el.value;
+      localStorage.setItem(LS.val(op.id, p.name), raw);
+      value = parseKeyValue(raw);
+    } else {
+      value = el.value.trim();
+      localStorage.setItem(LS.val(op.id, p.name), value);
+    }
+
+    const missing = p.required && (value === undefined || value === "" ||
+      (p.type === "json" && value === undefined));
+    if (missing && !wrap.classList.contains("invalid")) {
+      wrap.classList.add("invalid");
+      firstError ||= `${p.label} is required.`;
+    }
+    values[p.name] = value;
+  }
+  if (firstError) throw new Error(firstError);
+  return values;
+}
+
+function parseKeyValue(raw) {
+  const out = {};
+  for (const line of String(raw).split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    const idx = trimmed.indexOf("=");
+    if (idx === -1) continue;
+    const k = trimmed.slice(0, idx).trim();
+    const val = trimmed.slice(idx + 1).trim();
+    if (k) out[k] = val;
+  }
+  return out;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Run + render response                                                    */
+/* ----------------------------------------------------------------------- */
+async function runOp(op) {
+  let values;
+  try { values = collectValues(op); }
+  catch (e) { return renderResponse({ clientError: e.message }); }
+
+  lastReq = null;
+  const respEl = document.getElementById("response");
+  respEl.innerHTML = `<div class="empty-state">Requesting…</div>`;
+
+  let result, error;
+  try {
+    const client = buildClient();
+    result = await op.run(client, values);
+  } catch (e) { error = e; }
+
+  const ok = !error;
+  const status = lastReq?.status ?? error?.status ?? 0;
+  const body = error ? (error.body ?? error.message) : result;
+  const snapshot = {
+    ok, status,
+    method: lastReq?.method || op.verb,
+    url: lastReq?.url || "",
+    durationMs: lastReq?.durationMs,
+    networkError: lastReq?.networkError || (error && !lastReq?.status ? String(error) : null),
+    body
+  };
+  history.unshift({ ...snapshot, label: op.label, at: new Date() });
+  if (history.length > 25) history.pop();
+  renderResponse(snapshot);
+  // keep history list fresh
+  const old = main.querySelector(".history");
+  if (old) old.replaceWith(renderHistory());
+  else main.querySelector(".response").after(renderHistory());
+}
+
+function renderResponse(r) {
+  const el = document.getElementById("response");
+  el.innerHTML = "";
+
+  if (r.clientError) {
+    el.innerHTML = `<div class="banner" style="margin:0">${escapeHtmlText(r.clientError)}</div>`;
+    return;
+  }
+
+  const head = document.createElement("div");
+  head.className = "resp-head";
+  const okState = r.ok && r.status >= 200 && r.status < 300;
+  const pill = document.createElement("span");
+  pill.className = "pill " + (okState ? "ok" : "err");
+  pill.textContent = r.status ? `${r.status}` : "no response";
+  head.appendChild(pill);
+  if (r.durationMs != null) {
+    const meta = document.createElement("span");
+    meta.className = "meta";
+    meta.textContent = `${r.durationMs.toFixed(0)} ms`;
+    head.appendChild(meta);
+  }
+  el.appendChild(head);
+
+  if (r.url) {
+    const line = document.createElement("div");
+    line.className = "req-line";
+    line.innerHTML = `<b>${escapeHtmlText(r.method)}</b> ${escapeHtmlText(r.url)}`;
+    el.appendChild(line);
+  }
+
+  if (r.networkError) {
+    const banner = document.createElement("div");
+    banner.className = "banner";
+    banner.style.margin = "0 0 10px";
+    banner.innerHTML = `Request failed: ${escapeHtmlText(r.networkError)}<br/>
+      This is usually CORS or the API not running. See <b>Help</b> below.`;
+    el.appendChild(banner);
+  }
+
+  const toolbar = document.createElement("div");
+  toolbar.className = "toolbar";
+  const copyJson = document.createElement("button");
+  copyJson.className = "ghost tiny";
+  copyJson.textContent = "Copy JSON";
+  copyJson.addEventListener("click", () => copy(typeof r.body === "string" ? r.body : JSON.stringify(r.body, null, 2)));
+  const copyCurl = document.createElement("button");
+  copyCurl.className = "ghost tiny";
+  copyCurl.textContent = "Copy as cURL";
+  copyCurl.addEventListener("click", () => copy(buildCurl()));
+  toolbar.append(copyJson, copyCurl);
+  el.appendChild(toolbar);
+
+  const pre = document.createElement("pre");
+  pre.className = "body";
+  if (r.body === null || r.body === undefined) {
+    pre.innerHTML = `<span class="null">(no content)</span>`;
+  } else if (typeof r.body === "string") {
+    pre.textContent = r.body;
+  } else {
+    pre.innerHTML = syntaxHighlight(r.body);
+  }
+  el.appendChild(pre);
+}
+
+function renderHistory() {
+  const wrap = document.createElement("div");
+  wrap.className = "history";
+  wrap.innerHTML = "<h3>History</h3>";
+  for (const h of history) {
+    const row = document.createElement("div");
+    row.className = "hist-row";
+    const ok = h.ok && h.status >= 200 && h.status < 300;
+    row.innerHTML =
+      `<span class="scode ${ok ? "ok" : "err"}">${h.status || "ERR"}</span>` +
+      `<span class="verb ${verbClass(h.method)}">${escapeHtmlText(h.method)}</span>` +
+      `<span class="hurl"></span>` +
+      `<span class="htime">${h.at.toLocaleTimeString()}</span>`;
+    row.querySelector(".hurl").textContent = h.url || h.label;
+    row.addEventListener("click", () => renderResponse(h));
+    wrap.appendChild(row);
+  }
+  return wrap;
+}
+
+function verbClass(m) {
+  m = String(m || "").toUpperCase();
+  return ["GET", "PUT", "DELETE", "POST", "PATCH"].includes(m) ? m : "ANY";
+}
+
+function renderHelp() {
+  const d = document.createElement("details");
+  d.className = "help";
+  d.innerHTML = `
+    <summary>Help — running locally &amp; CORS</summary>
+    <div>
+      <p>This page imports the real <code>./index.js</code> client, so it must be served over HTTP
+      (not opened from <code>file://</code>).</p>
+      <p><b>Serve the page:</b> from <code>docs/api/apiClient/</code> run
+      <code>npx http-server -p 8080</code> and open <code>http://localhost:8080/tester.html</code>.</p>
+      <p><b>Run the API:</b> from <code>docs/api/</code> run <code>func start</code>
+      (default <code>http://localhost:7071/api</code>).</p>
+      <p><b>Run deploy/seed actions:</b> from <code>docs/api/</code> run
+      <code>npm run buddy:actions</code>, then paste the printed action key into <b>Actions key</b>.
+      The Deployment tabs call this localhost helper because browser pages cannot execute shell commands directly.</p>
+      <p><b>CORS:</b> when the page and API are on different ports the Functions host must allow the
+      page's origin. Start it with <code>func start --cors http://localhost:8080</code> (or
+      <code>--cors *</code> for any), or add a <code>Host.CORS</code> entry to
+      <code>local.settings.json</code>. A function key sent as a header triggers a preflight, so CORS
+      must be configured for keyed calls too.</p>
+      <p>Using <code>/api</code> as the base URL only works when this page is served from the same
+      origin that also serves the API.</p>
+    </div>`;
+  return d;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Ping /health                                                             */
+/* ----------------------------------------------------------------------- */
+const pingDot = document.getElementById("pingDot");
+const pingText = document.getElementById("pingText");
+document.getElementById("pingBtn").addEventListener("click", async () => {
+  pingText.textContent = "pinging…";
+  pingDot.className = "dot";
+  const start = performance.now();
+  try {
+    await buildClient().health();
+    const ms = (performance.now() - start).toFixed(0);
+    pingDot.className = "dot ok";
+    pingText.textContent = `healthy (${ms} ms)`;
+  } catch (e) {
+    pingDot.className = "dot bad";
+    pingText.textContent = e?.status ? `error ${e.status}` : "unreachable";
+  }
+});
+
+/* ----------------------------------------------------------------------- */
+/* Utilities                                                                */
+/* ----------------------------------------------------------------------- */
+function buildCurl() {
+  if (!lastReq) return "";
+  const parts = [`curl -X ${lastReq.method} '${lastReq.url}'`];
+  const headers = lastReq.headers || {};
+  for (const [k, v] of Object.entries(headers)) parts.push(`  -H '${k}: ${v}'`);
+  if (lastReq.body) parts.push(`  --data '${String(lastReq.body).replace(/'/g, "'\\''")}'`);
+  return parts.join(" \\\n");
+}
+
+function syntaxHighlight(obj) {
+  const json = escapeHtmlText(JSON.stringify(obj, null, 2));
+  return json.replace(
+    /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false)\b|\bnull\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+    (m) => {
+      let cls = "num";
+      if (/^"/.test(m)) cls = /:$/.test(m) ? "key" : "str";
+      else if (/true|false/.test(m)) cls = "bool";
+      else if (/null/.test(m)) cls = "null";
+      return `<span class="${cls}">${m}</span>`;
+    }
+  );
+}
+
+function escapeHtmlText(s) {
+  return String(s).replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+// also expose for the module-load error handler above
+window.escapeHtmlText = escapeHtmlText;
+
+const toast = document.getElementById("toast");
+let toastTimer;
+function copy(text) {
+  navigator.clipboard?.writeText(text).then(() => {
+    toast.textContent = "Copied to clipboard";
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 1400);
+  });
+}
+
+document.addEventListener("keydown", (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+    const op = OPERATIONS.find((o) => o.id === currentId);
+    if (op?.run) runOp(op);
+  }
+});
+
+/* ----------------------------------------------------------------------- */
+/* Boot                                                                     */
+/* ----------------------------------------------------------------------- */
+renderSidebar();
+renderOp();
+</script>
+</body>
+</html>

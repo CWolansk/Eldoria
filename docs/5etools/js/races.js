@@ -136,6 +136,113 @@ class RacesPage extends ListPage {
 	_renderStats_doBuildStatsTab ({ent}) {
 		this._$pgContent.empty().append(RenderRaces.$getRenderedRace(ent));
 	}
+
+	_pOnLoad_bindMiscButtons () {
+		super._pOnLoad_bindMiscButtons();
+		this._bindExportRacesJsonButton();
+	}
+
+	_bindExportRacesJsonButton () {
+		$(`#btn-export-races-json`)
+			.off("click")
+			.on("click", () => this._pHandleClickExportRacesJson());
+	}
+
+	async _pHandleClickExportRacesJson () {
+		const exportable = this._getExportableRacesJson();
+		DataUtil.userDownload("races-page-full-normalized", exportable, {isSkipAdditionalMetadata: true});
+		JqueryUtil.doToast(`Exported ${exportable.counts.races.toLocaleString()} races as JSON.`);
+	}
+
+	_getExportableRacesJson () {
+		const races = this._dataList || [];
+		const raceRefs = new WeakMap();
+
+		races.forEach((race, i) => raceRefs.set(race, this._getExportableRacesJson_getRaceRef(race, i)));
+
+		return {
+			schema: "eldoria.5etools.races-page.normalized-export",
+			schemaVersion: 1,
+			generatedAt: new Date().toISOString(),
+			generator: {
+				name: "races-page-full-normalized-export",
+				page: UrlUtil.PG_RACES,
+				description: "All races loaded by the 5etools Races page after copy resolution, base-race generation, and subrace merging.",
+			},
+			counts: this._getExportableRacesJson_getCounts(races),
+			races: races.map((race, i) => this._getExportableRacesJson_getCleanRace(race, {raceRefs, rootRace: race, path: `#/races/${i}`})),
+		};
+	}
+
+	_getExportableRacesJson_getCounts (races) {
+		const sources = new Set();
+		races.forEach(race => {
+			if (race.source) sources.add(race.source);
+		});
+
+		return {
+			races: races.length,
+			baseRaces: races.filter(race => race._isBaseRace).length,
+			subraces: races.filter(race => race._baseName).length,
+			sources: sources.size,
+		};
+	}
+
+	_getExportableRacesJson_getRaceRef (race, ix) {
+		const source = race.source || "";
+		const hash = UrlUtil.URL_TO_HASH_BUILDER[UrlUtil.PG_RACES]({name: race.name, source});
+		return {
+			$ref: `#/races/${ix}`,
+			name: race.name,
+			source,
+			hash,
+		};
+	}
+
+	_getExportableRacesJson_getCleanRace (race, {raceRefs, rootRace, path}) {
+		return this._getExportableRacesJson_getCleanValue(race, {
+			raceRefs,
+			rootRace,
+			path,
+			seen: new WeakMap(),
+		});
+	}
+
+	_getExportableRacesJson_getCleanValue (value, {raceRefs, rootRace, path, seen}) {
+		if (value == null || typeof value !== "object") return value;
+
+		if (raceRefs.has(value) && value !== rootRace) return MiscUtil.copyFast(raceRefs.get(value));
+		if (seen.has(value)) return {$ref: seen.get(value)};
+
+		seen.set(value, path);
+
+		if (value instanceof Array) {
+			return value.map((it, i) => this._getExportableRacesJson_getCleanValue(it, {
+				raceRefs,
+				rootRace,
+				path: `${path}/${i}`,
+				seen,
+			}));
+		}
+
+		return Object.entries(value)
+			.mergeMap(([k, v]) => {
+				if (typeof v === "function") return {};
+
+				return {
+					[k]: this._getExportableRacesJson_getCleanValue(v, {
+						raceRefs,
+						rootRace,
+						path: `${path}/${this._getExportableRacesJson_getJsonPointerPart(k)}`,
+						seen,
+					}),
+				};
+			});
+	}
+
+	_getExportableRacesJson_getJsonPointerPart (part) {
+		return `${part}`.replace(/~/g, "~0").replace(/\//g, "~1");
+	}
 }
 
 const racesPage = new RacesPage();
