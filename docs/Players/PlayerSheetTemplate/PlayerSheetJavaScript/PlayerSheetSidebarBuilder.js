@@ -21,45 +21,49 @@ const SKILLS = [
   { key: "survival", label: "Survival", ability: "wis" }
 ];
 
-export function BuildPlayerSheetSidebar(PlayerSheetObj) {
-    const sidebarHTML = document.querySelector("#GlobalCharacterSheetSidebar");
-
-    if (sidebarHTML == null) {
-        return;
-    }
-
-    const proficiencyBonus = Number(GetJsonPathValues(PlayerSheetObj, "proficiencyBonus")) || 0;
-
-    // Skills (expertise doubles the proficiency bonus)
-    sidebarHTML.replaceChildren(createTextHTML("h3", "Skills"));
-    for(const skill of SKILLS) {
-        const score = Number(GetJsonPathValues(PlayerSheetObj, "abilities." + skill.ability + ".score")) || 0;
-        const proficient = GetJsonPathValues(PlayerSheetObj, "skills." + skill.key + ".proficient") === true;
-        const expertise = GetJsonPathValues(PlayerSheetObj, "skills." + skill.key + ".expertise") === true;
-        const proficiencyMultiplier = expertise ? 2 : (proficient ? 1 : 0);
-        const bonus = getAbilityModifier(score) + (proficiencyMultiplier * proficiencyBonus);
-        const marker = expertise ? " (expertise)" : (proficient ? " (proficient)" : "");
-        sidebarHTML.appendChild(createTextHTML("h2", skill.label + " : " + formatModifier(bonus) + marker));
-    }
-
-    // Senses
-    const wisModifier = getAbilityModifier(GetJsonPathValues(PlayerSheetObj, "abilities.wis.score"));
-    const perceptionProficient = GetJsonPathValues(PlayerSheetObj, "skills.perception.proficient") === true;
-    const passivePerception = 10 + wisModifier + (perceptionProficient ? proficiencyBonus : 0);
-    sidebarHTML.appendChild(createTextHTML("h3", "Senses"));
-    sidebarHTML.appendChild(createTextHTML("h2", "Passive Perception : " + passivePerception));
-    const darkvision = Number(GetJsonPathValues(PlayerSheetObj, "senses.darkvision")) || 0;
-    if (darkvision > 0) {
-        sidebarHTML.appendChild(createTextHTML("h2", "Darkvision : " + darkvision + " ft"));
-    }
-
-    const speedModes = GetJsonPathValues(PlayerSheetObj, "speed.modes") || {};
-    const movementEntries = Object.entries(speedModes)
-        .filter(([mode]) => mode !== "walk");
-    if (movementEntries.length) {
-        sidebarHTML.appendChild(createTextHTML("h3", "Movement"));
-        for (const [mode, value] of movementEntries) {
-            sidebarHTML.appendChild(createTextHTML("h2", mode.charAt(0).toUpperCase() + mode.slice(1) + " : " + value + " ft"));
-        }
-    }
+function appendSkillRow(sidebarHTML, playerSheetObject, skill, proficiencyBonus) {
+  const score = Number(GetJsonPathValues(playerSheetObject, `abilities.${skill.ability}.score`)) || 0;
+  const proficient = GetJsonPathValues(playerSheetObject, `skills.${skill.key}.proficient`) === true;
+  const expertise = GetJsonPathValues(playerSheetObject, `skills.${skill.key}.expertise`) === true;
+  const proficiencyMultiplier = expertise ? 2 : (proficient ? 1 : 0);
+  const bonus = getAbilityModifier(score) + (proficiencyMultiplier * proficiencyBonus);
+  const marker = expertise ? " (expertise)" : (proficient ? " (proficient)" : "");
+  sidebarHTML.appendChild(createTextHTML("h2", `${skill.label} : ${formatModifier(bonus)}${marker}`));
 }
+
+export function BuildPlayerSheetSidebar(playerSheetObject) {
+  const sidebarHTML = document.querySelector("#GlobalCharacterSheetSidebar");
+
+  if (sidebarHTML == null) {
+    return;
+  }
+
+  const proficiencyBonus = Number(GetJsonPathValues(playerSheetObject, "proficiencyBonus")) || 0;
+
+  sidebarHTML.replaceChildren(createTextHTML("h3", "Skills"));
+  for (const skill of SKILLS) {
+    appendSkillRow(sidebarHTML, playerSheetObject, skill, proficiencyBonus);
+  }
+
+  const wisModifier = getAbilityModifier(GetJsonPathValues(playerSheetObject, "abilities.wis.score"));
+  const perceptionProficient = GetJsonPathValues(playerSheetObject, "skills.perception.proficient") === true;
+  const passivePerception = 10 + wisModifier + (perceptionProficient ? proficiencyBonus : 0);
+  sidebarHTML.appendChild(createTextHTML("h3", "Senses"));
+  sidebarHTML.appendChild(createTextHTML("h2", `Passive Perception : ${passivePerception}`));
+
+  const darkvision = Number(GetJsonPathValues(playerSheetObject, "senses.darkvision")) || 0;
+  if (darkvision > 0) {
+    sidebarHTML.appendChild(createTextHTML("h2", `Darkvision : ${darkvision} ft`));
+  }
+
+  const speedModes = GetJsonPathValues(playerSheetObject, "speed.modes") || {};
+  const movementEntries = Object.entries(speedModes)
+    .filter(([mode]) => mode !== "walk");
+  if (movementEntries.length) {
+    sidebarHTML.appendChild(createTextHTML("h3", "Movement"));
+    for (const [mode, value] of movementEntries) {
+      sidebarHTML.appendChild(createTextHTML("h2", `${mode.charAt(0).toUpperCase()}${mode.slice(1)} : ${value} ft`));
+    }
+  }
+}
+

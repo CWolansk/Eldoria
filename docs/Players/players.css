@@ -47,7 +47,8 @@
 .playerSheetHeader .CharacterHeaderContainer,
 .playerSheetHeader .ClassArea,
 .playerSheetHeader .HP,
-.playerSheetHeader .Area3 {
+.playerSheetHeader .Area3,
+.playerSheetHeader .DefenseState {
   display: grid;
   gap: var(--sp-2);
   min-width: 0;
@@ -85,6 +86,7 @@
 .playerSheetHeader .ClassArea > div,
 .playerSheetHeader .HP > div,
 .playerSheetHeader .Area3 > div,
+.playerSheetHeader .DefenseState > div,
 .playerSheetHeader .SavingThrows > div,
 .playerSheetHeader .AbilityScoresSummary > div {
   min-width: 0;
@@ -122,7 +124,8 @@
 .playerSheetHeader .CombatHeader > .SavingThrows,
 .playerSheetHeader .HeaderInfo > .ClassArea,
 .playerSheetHeader .CombatHeader > .HP,
-.playerSheetHeader .CombatHeader > .Area3 {
+.playerSheetHeader .CombatHeader > .Area3,
+.playerSheetHeader .CombatHeader > .DefenseState {
   align-content: start;
 }
 
@@ -924,5 +927,226 @@
 
   #TabRowList button {
     flex: 1 1 7rem;
+  }
+}
+
+/* V2 dense table dashboard */
+.player-sheet-page {
+  --sheet-dashboard-bg: color-mix(in srgb, var(--panel-soft) 82%, white);
+  --sheet-dashboard-panel: var(--panel);
+  --sheet-dashboard-ink: var(--ink);
+  --sheet-dashboard-muted: var(--muted);
+  --sheet-dashboard-line: var(--line);
+  --sheet-dashboard-accent: var(--accent);
+}
+
+.player-sheet-page > header {
+  margin-bottom: var(--sp-3);
+}
+
+.player-sheet-container {
+  align-items: start;
+  grid-template-columns: minmax(16rem, 20rem) minmax(0, 1fr);
+  gap: var(--sp-3);
+}
+
+.playerSheet {
+  grid-template-areas:
+    "header header"
+    "menu content";
+  grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr);
+  gap: var(--sp-3);
+}
+
+.playerSheetHeader {
+  border-radius: var(--radius-2);
+  background: linear-gradient(180deg, var(--sheet-dashboard-panel), var(--sheet-dashboard-bg));
+  padding: var(--sp-3);
+}
+
+.playerSheetHeader .CharacterHeaderContainer {
+  gap: var(--sp-3);
+}
+
+.playerSheetHeader .HeaderInfo {
+  grid-template-columns: minmax(8rem, 0.7fr) minmax(13rem, 1.4fr) minmax(14rem, 1fr) minmax(6rem, 0.5fr);
+}
+
+.playerSheetHeader .FooterInfo {
+  grid-template-columns: minmax(5rem, 0.45fr) minmax(5rem, 0.45fr) minmax(0, 2.8fr);
+}
+
+.playerSheetHeader .CombatHeader {
+  grid-template-columns: minmax(5.5rem, 0.45fr) minmax(9rem, 0.75fr) minmax(8rem, 0.7fr) minmax(13rem, 1.2fr) minmax(15rem, 1.3fr);
+}
+
+.playerSheetHeader .HeaderInfo > div,
+.playerSheetHeader .FooterInfo > div,
+.playerSheetHeader .CombatHeader > div,
+.playerSheetHeader .AbilityScoresSummary > div {
+  border-radius: var(--radius-1);
+  background: var(--sheet-dashboard-panel);
+  box-shadow: none;
+  font-size: var(--fs-200);
+  min-height: 2.7rem;
+  padding: 0.45rem 0.55rem;
+}
+
+.playerSheetHeader .Name {
+  border-color: color-mix(in srgb, var(--sheet-dashboard-accent) 35%, var(--line));
+  font-size: var(--fs-500);
+}
+
+.playerSheetHeader .AbilityScoresSummary {
+  grid-template-columns: repeat(6, minmax(4.5rem, 1fr));
+  gap: 0.35rem;
+  padding: 0.45rem;
+}
+
+.playerSheetHeader .AbilityScoresSummary > div,
+.playerSheetHeader .SavingThrows > div {
+  text-align: center;
+}
+
+.playerSheetTabsContainer {
+  gap: var(--sp-2);
+}
+
+#TabRowList {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  gap: 0.35rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-2);
+  background: color-mix(in srgb, var(--panel) 94%, white);
+  padding: 0.35rem;
+}
+
+#TabRowList button,
+.player-sheet-button {
+  min-height: 2rem;
+  border-radius: var(--radius-1);
+  font-size: var(--fs-200);
+  padding: 0.35rem 0.6rem;
+}
+
+#TabRowList .player-sheet-tab-button--active {
+  box-shadow: inset 0 -2px 0 rgb(0 0 0 / 18%);
+}
+
+.playerSheetSideBar {
+  position: sticky;
+  top: 16px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  border-radius: var(--radius-2);
+  padding: var(--sp-2);
+}
+
+.playerSheetSideBar h3 {
+  margin-bottom: var(--sp-2);
+}
+
+.player-sheet-index-entry {
+  display: grid;
+  gap: 0.15rem;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-1);
+  background: var(--panel-strong);
+  padding: 0.45rem 0.55rem;
+}
+
+.player-sheet-index-entry + .player-sheet-index-entry {
+  margin-top: var(--sp-2);
+}
+
+.player-sheet-index-entry h4 {
+  color: var(--ink);
+  font-size: var(--fs-200);
+  line-height: 1.15;
+}
+
+.player-sheet-index-entry p {
+  color: var(--muted);
+  font-size: var(--fs-100);
+  line-height: 1.25;
+}
+
+.player-sheet-card-grid {
+  gap: var(--sp-2);
+}
+
+.player-sheet-card-grid--defense {
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+}
+
+.player-sheet-defense-card {
+  gap: var(--sp-2);
+}
+
+.player-sheet-defense-card .player-sheet-definition-list {
+  font-size: var(--fs-100);
+  grid-template-columns: minmax(5.5rem, 0.45fr) minmax(0, 1fr);
+}
+
+.player-sheet-item-row {
+  padding: 0.4rem 0.55rem;
+}
+
+.player-sheet-item-card,
+.player-sheet-info-card {
+  border-radius: var(--radius-2);
+  box-shadow: none;
+  padding: var(--sp-2);
+}
+
+.player-sheet-tab__title,
+.player-sheet-section__title {
+  font-size: var(--fs-400);
+}
+
+.levelEditor {
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  border-radius: var(--radius-2);
+  background: #1f2b3a;
+  padding: var(--sp-2);
+}
+
+.levelEditor summary {
+  min-height: 2rem;
+  padding: 0.35rem 0.55rem;
+}
+
+.levelEditor details > div {
+  padding: 0.45rem 0.55rem 0.55rem 1.45rem;
+}
+
+.level-editor__row {
+  gap: 0.4rem;
+}
+
+.level-editor__button {
+  min-height: 1.85rem;
+  padding: 0 0.55rem;
+}
+
+.level-editor__coverage-panel {
+  display: grid;
+  gap: var(--sp-2);
+}
+
+@media (max-width: 1180px) {
+  .playerSheet {
+    grid-template-areas:
+      "header"
+      "content"
+      "menu";
+    grid-template-columns: 1fr;
+  }
+
+  .playerSheetSideBar {
+    position: static;
+    max-height: none;
   }
 }

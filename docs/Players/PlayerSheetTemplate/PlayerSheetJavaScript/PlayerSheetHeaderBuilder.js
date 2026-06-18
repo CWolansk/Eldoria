@@ -39,6 +39,25 @@ function formatNumber(value) {
     return new Intl.NumberFormat("en-US").format(Number(value) || 0);
 }
 
+function toArray(value) {
+    return Array.isArray(value) ? value : [];
+}
+
+function formatList(values, empty = "none") {
+    const list = toArray(values).map((value) => String(value || "").trim()).filter(Boolean);
+    return list.length ? list.join(", ") : empty;
+}
+
+function formatDefenseSummary(playerSheetObject = {}) {
+    const defenses = playerSheetObject.defenses || {};
+    return [
+        ["Resist", formatList(defenses.damageResistances)],
+        ["Immune", formatList(defenses.damageImmunities)],
+        ["Vuln", formatList(defenses.damageVulnerabilities)],
+        ["Cond Imm", formatList(defenses.conditionImmunities)]
+    ].map(([label, value]) => `${label} ${value}`).join(" | ");
+}
+
 function buildExperienceHint(playerSheetObject) {
     const progression = playerSheetObject?.progression || {};
     const nextLevelExperience = progression.nextLevelExperience;
@@ -139,4 +158,7 @@ export function BuildPlayerSheetHeader(playerSheetObject, options = {}) {
     setHeaderText(headerHTML, "Initiative", "Initiative : " + formatModifier(Number(GetJsonPathValues(playerSheetObject, "initiative")) || 0));
     setHeaderText(headerHTML, "DeathSaves", "Death Saves : " + (GetJsonPathValues(playerSheetObject, "deathSaves.successes") || 0));
     setHeaderText(headerHTML, "DeathFailures", "Death Failures : " + (GetJsonPathValues(playerSheetObject, "deathSaves.failures") || 0));
+    setHeaderText(headerHTML, "Conditions", "Conditions : " + formatList(playerSheetObject.notes?.conditions));
+    setHeaderText(headerHTML, "Exhaustion", "Exhaustion : " + (GetJsonPathValues(playerSheetObject, "notes.exhaustion") || 0));
+    setHeaderText(headerHTML, "Defenses", "Defenses : " + formatDefenseSummary(playerSheetObject));
 }

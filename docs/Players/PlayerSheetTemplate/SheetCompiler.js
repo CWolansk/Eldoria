@@ -3,6 +3,8 @@ import {
     MAX_CHARACTER_LEVEL,
     PlayerSheetDtoHelper
 } from "./PlayerSheetDtoHelper.js";
+import { applyResolvedReferencesToDto } from "./ReferenceResolver.js";
+import { createStructuredOptionCoverage } from "./StructuredOptionCoverage.js";
 
 const SKILLS = [
     { key: "acrobatics", label: "Acrobatics", ability: "dex" },
@@ -1409,19 +1411,71 @@ function compileHitDice(classes) {
     }));
 }
 
+function getStructuredDefenses(source = {}) {
+    if (!source || typeof source !== "object") {
+        return {};
+    }
+
+    return source.defenses
+        || source.grants?.defenses
+        || source.profile?.defenses
+        || {};
+}
+
+function addDefenseGroup(targets, defenses = {}) {
+    toArray(defenses.damageResistances).forEach((value) => addUnique(targets.damageResistances, value));
+    toArray(defenses.resistances).forEach((value) => addUnique(targets.damageResistances, value));
+    toArray(defenses.resistances?.fixed).forEach((value) => addUnique(targets.damageResistances, value));
+
+    toArray(defenses.damageImmunities).forEach((value) => addUnique(targets.damageImmunities, value));
+    toArray(defenses.immunities).forEach((value) => addUnique(targets.damageImmunities, value));
+    toArray(defenses.immunities?.fixed).forEach((value) => addUnique(targets.damageImmunities, value));
+
+    toArray(defenses.damageVulnerabilities).forEach((value) => addUnique(targets.damageVulnerabilities, value));
+    toArray(defenses.vulnerabilities).forEach((value) => addUnique(targets.damageVulnerabilities, value));
+    toArray(defenses.vulnerabilities?.fixed).forEach((value) => addUnique(targets.damageVulnerabilities, value));
+
+    toArray(defenses.conditionImmunities).forEach((value) => addUnique(targets.conditionImmunities, value));
+    toArray(defenses.conditionImmunities?.fixed).forEach((value) => addUnique(targets.conditionImmunities, value));
+}
+
+function addIdentityDefenses(targets, identity) {
+    if (!identity || typeof identity !== "object") {
+        return;
+    }
+
+    addDefenseGroup(targets, getStructuredDefenses(identity));
+    addDefenseGroup(targets, identity);
+}
+
+function addItemDefenses(targets, item = {}) {
+    const record = item.snapshot || {};
+    addDefenseGroup(targets, getStructuredDefenses(item));
+    addDefenseGroup(targets, getStructuredDefenses(record));
+    addDefenseGroup(targets, record);
+
+    toArray(record?._fRes).forEach((value) => addUnique(targets.damageResistances, value));
+    toArray(record?._fImm).forEach((value) => addUnique(targets.damageImmunities, value));
+    toArray(record?._fCondImm).forEach((value) => addUnique(targets.conditionImmunities, value));
+}
+
 function compileDefenses(dto) {
-    const damageResistances = new Set();
-    const damageImmunities = new Set();
-    const damageVulnerabilities = new Set();
-    const conditionImmunities = new Set();
+    const targets = {
+        damageResistances: new Set(),
+        damageImmunities: new Set(),
+        damageVulnerabilities: new Set(),
+        conditionImmunities: new Set()
+    };
 
     // Fixed defenses granted directly by the race (Tiefling fire resistance,
     // Skeleton poison immunity, and so on).
     const profileDefenses = getRaceProfile(dto)?.defenses || {};
-    toArray(profileDefenses.resistances?.fixed).forEach((value) => addUnique(damageResistances, value));
-    toArray(profileDefenses.immunities).forEach((value) => addUnique(damageImmunities, value));
-    toArray(profileDefenses.vulnerabilities).forEach((value) => addUnique(damageVulnerabilities, value));
-    toArray(profileDefenses.conditionImmunities).forEach((value) => addUnique(conditionImmunities, value));
+    addDefenseGroup(targets, profileDefenses);
+    addDefenseGroup(targets, dto.combatState?.defenses);
+    addDefenseGroup(targets, dto.combatState);
+    addIdentityDefenses(targets, dto.baseChoices.race);
+    addIdentityDefenses(targets, dto.baseChoices.subrace);
+    addIdentityDefenses(targets, dto.baseChoices.background);
 
     for (const selection of getRaceSelectionList(dto)) {
         for (const option of getSelectionOptions(selection)) {
@@ -1429,22 +1483,36 @@ function compileDefenses(dto) {
             const skipResistance = selection.type === "draconic-ancestry" && isEgwDragonbornSelection(dto, selection);
 
             if (!skipResistance) {
-                toArray(defenses.damageResistances).forEach((value) => addUnique(damageResistances, value));
+                toArray(defenses.damageResistances).forEach((value) => addUnique(targets.damageResistances, value));
             }
-            toArray(defenses.damageImmunities).forEach((value) => addUnique(damageImmunities, value));
-            toArray(defenses.conditionImmunities).forEach((value) => addUnique(conditionImmunities, value));
+            toArray(defenses.damageImmunities).forEach((value) => addUnique(targets.damageImmunities, value));
+            toArray(defenses.damageVulnerabilities).forEach((value) => addUnique(targets.damageVulnerabilities, value));
+            toArray(defenses.conditionImmunities).forEach((value) => addUnique(targets.conditionImmunities, value));
 
             if (selection.type === "draconic-ancestry" && option.damageType && !skipResistance) {
-                addUnique(damageResistances, option.damageType);
+                addUnique(targets.damageResistances, option.damageType);
             }
         }
     }
 
+    for (const level of toArray(dto.levels)) {
+        addIdentityDefenses(targets, level.class);
+        addIdentityDefenses(targets, level.subclass);
+        addIdentityDefenses(targets, level.feat);
+        for (const choice of toArray(level.choices)) {
+            addDefenseGroup(targets, choice?.grants?.defenses || choice?.defenses);
+        }
+    }
+
+    for (const item of toArray(dto.inventory?.items)) {
+        addItemDefenses(targets, item);
+    }
+
     return {
-        damageResistances: toUniqueArray(damageResistances),
-        damageImmunities: toUniqueArray(damageImmunities),
-        damageVulnerabilities: toUniqueArray(damageVulnerabilities),
-        conditionImmunities: toUniqueArray(conditionImmunities)
+        damageResistances: toUniqueArray(targets.damageResistances),
+        damageImmunities: toUniqueArray(targets.damageImmunities),
+        damageVulnerabilities: toUniqueArray(targets.damageVulnerabilities),
+        conditionImmunities: toUniqueArray(targets.conditionImmunities)
     };
 }
 
@@ -1910,9 +1978,71 @@ function compileIdentity(dto) {
     };
 }
 
+function createDisplayIndex() {
+    const facts = {
+        identity: "header",
+        level: "header",
+        classSummary: "header",
+        experience: "header",
+        proficiencyBonus: "header",
+        abilities: "stat-strip",
+        savingThrows: "stat-strip",
+        armorClass: "stat-strip",
+        hitPoints: "stat-strip",
+        initiative: "stat-strip",
+        speed: "stat-strip",
+        deathSaves: "header",
+        conditions: "header",
+        exhaustion: "header",
+        damageResistances: "header",
+        damageImmunities: "header",
+        damageVulnerabilities: "header",
+        conditionImmunities: "header",
+        attacks: "offense",
+        offensiveSpells: "offense",
+        inventory: "gear",
+        equippedItems: "gear",
+        defensiveGear: "defense",
+        attunement: "gear",
+        currency: "gear",
+        spellSlots: "spells",
+        spellSaveDc: "spells",
+        spellAttackBonus: "spells",
+        knownSpells: "spells",
+        preparedSpells: "spells",
+        alwaysPreparedSpells: "spells",
+        skills: "sidebar",
+        passiveScores: "sidebar",
+        tools: "skills",
+        languages: "skills",
+        classFeatures: "features",
+        subclassFeatures: "features",
+        raceFeatures: "features",
+        backgroundFeatures: "features",
+        featFeatures: "features",
+        itemFeatures: "features"
+    };
+
+    const sections = {};
+    for (const [fact, owner] of Object.entries(facts)) {
+        if (!sections[owner]) {
+            sections[owner] = [];
+        }
+        sections[owner].push(fact);
+    }
+
+    return {
+        schemaVersion: 1,
+        facts,
+        sections
+    };
+}
+
 export class SheetCompiler {
     static compile(dtoInput, _options = {}) {
-        const sourceDto = PlayerSheetDtoHelper.normalize(dtoInput);
+        const sourceDto = _options.references
+            ? PlayerSheetDtoHelper.normalize(applyResolvedReferencesToDto(dtoInput, _options.references))
+            : PlayerSheetDtoHelper.normalize(dtoInput);
         const level = compileCurrentLevel(sourceDto, _options);
         const dto = createActiveLevelDto(sourceDto, level);
         const proficiencyBonus = compileProficiencyBonus(level);
@@ -1979,7 +2109,14 @@ export class SheetCompiler {
                 conditions: toArray(dto.combatState.conditions),
                 exhaustion: toNumber(dto.combatState.exhaustion, 0)
             },
-            metadata: deepClone(dto.metadata)
+            metadata: deepClone(dto.metadata),
+            displayIndex: createDisplayIndex(),
+            optionCoverage: createStructuredOptionCoverage(dto),
+            referenceResolution: {
+                ok: _options.references?.ok ?? true,
+                failures: toArray(_options.references?.failures),
+                resolvedAt: _options.references?.resolvedAt || ""
+            }
         };
     }
 

@@ -71,6 +71,20 @@ function normalizeStringList(value) {
     .filter(Boolean);
 }
 
+function normalizeDefenseList(value) {
+  return normalizeStringList(value).map((entry) => entry.toLowerCase());
+}
+
+function normalizeCombatDefenses(source = {}) {
+  const direct = isPlainObject(source.defenses) ? source.defenses : {};
+  return {
+    damageResistances: normalizeDefenseList(source.damageResistances || direct.damageResistances),
+    damageImmunities: normalizeDefenseList(source.damageImmunities || direct.damageImmunities),
+    damageVulnerabilities: normalizeDefenseList(source.damageVulnerabilities || direct.damageVulnerabilities),
+    conditionImmunities: normalizeDefenseList(source.conditionImmunities || direct.conditionImmunities)
+  };
+}
+
 function normalizeIdentityRef(value, kind = "") {
   if (!isPlainObject(value)) {
     return null;
@@ -108,6 +122,18 @@ function normalizeIdentityRef(value, kind = "") {
 
   if (Object.keys(options).length) {
     identity.options = options;
+  }
+
+  if (isPlainObject(value.choices)) {
+    identity.choices = deepClone(value.choices);
+  }
+
+  if (value.choiceSummary != null && value.choiceSummary !== "") {
+    identity.choiceSummary = normalizeString(value.choiceSummary);
+  }
+
+  if (value.spellcastingAbility != null && value.spellcastingAbility !== "") {
+    identity.spellcastingAbility = normalizeString(value.spellcastingAbility);
   }
 
   for (const key of ["size", "speed", "feature", "subrace"]) {
@@ -216,7 +242,8 @@ function normalizeCombatState(value = {}) {
       failures: toNumber(source.deathSaves?.failures, 0)
     },
     conditions: normalizeStringList(source.conditions),
-    exhaustion: toNumber(source.exhaustion, 0)
+    exhaustion: toNumber(source.exhaustion, 0),
+    defenses: normalizeCombatDefenses(source)
   };
 }
 
@@ -236,8 +263,7 @@ function normalizeInventory(value = {}) {
       quantity: toNumber(item?.quantity, 1),
       equipped: Boolean(item?.equipped),
       attuned: Boolean(item?.attuned),
-      catalog: normalizeIdentityRef(item?.catalog, "items"),
-      snapshot: isPlainObject(item?.snapshot) ? deepClone(item.snapshot) : null
+      catalog: normalizeIdentityRef(item?.catalog, "items")
     }))
   };
 }
@@ -275,6 +301,16 @@ function normalizeMetadata(value = {}) {
 }
 
 function assertV2OrEmpty(input) {
+  if (input?.schemaVersion === "player-sheet-v2-compiled") {
+    throw schemaError(
+      "Compiled player sheets are runtime-only and cannot be saved. Save the player-sheet-v2 DTO instead.",
+      {
+        schemaVersion: input.schemaVersion,
+        expected: PLAYER_SHEET_SCHEMA_VERSION
+      }
+    );
+  }
+
   if (input?.schemaVersion && input.schemaVersion !== PLAYER_SHEET_SCHEMA_VERSION) {
     throw schemaError(
       `Unsupported player sheet schemaVersion "${input.schemaVersion}". Expected "${PLAYER_SHEET_SCHEMA_VERSION}".`,

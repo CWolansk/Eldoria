@@ -12,6 +12,10 @@ import { BuildPlayerSheetReferenceTab } from "./PlayerSheetJavaScript/PlayerShee
 import { bootLevelEditor } from "./LevelEditorJavaScript/Core/LevelEditorBuilder.js";
 import { PlayerSheetDtoHelper } from "./PlayerSheetDtoHelper.js";
 import { SheetCompiler } from "./SheetCompiler.js";
+import {
+    applyResolvedReferencesToDto,
+    resolvePlayerSheetReferences
+} from "./ReferenceResolver.js";
 const DEFAULT_API_BASE_URL = "https://fn-eldoria-ahakafekhxczebhn.eastus-01.azurewebsites.net/api";
 
 function getApiBaseUrl() {
@@ -28,7 +32,9 @@ const api = new EldoriaApiClient({
 });
 
 let currentPlayerSheetDto = null;
+let currentRuntimePlayerSheetDto = null;
 let currentCharacterSheet = null;
+let currentReferenceResolution = null;
 let currentTabName = 'Offense'; 
 let saveTimer = null;
 let saveInFlight = false;
@@ -185,8 +191,11 @@ async function flushPendingSave() {
     setSaveStatus("saving", "Saving...");
 
     try {
+        const strictDto = PlayerSheetDtoHelper.toSaveDto(dtoToSave, {
+            id: characterId
+        });
         const persistedDto = await api.saveCharacterSheet(characterId, {
-            ...dtoToSave,
+            ...strictDto,
             id: characterId
         });
 
@@ -235,14 +244,29 @@ function hasUnsavedPlayerSheetChanges() {
 async function applyPlayerSheetDto(nextDto, options = {}) {
   const shouldPersist = options.persist !== false;
 
-  currentPlayerSheetDto = normalizeDtoForCurrentCharacter(nextDto);
+  currentPlayerSheetDto = PlayerSheetDtoHelper.toSaveDto(normalizeDtoForCurrentCharacter(nextDto));
 
-  currentCharacterSheet = SheetCompiler.compile(currentPlayerSheetDto);
+  try {
+    currentReferenceResolution = await resolvePlayerSheetReferences(currentPlayerSheetDto, api);
+    currentRuntimePlayerSheetDto = applyResolvedReferencesToDto(currentPlayerSheetDto, currentReferenceResolution);
+  } catch (error) {
+    console.warn("Reference resolution failed; rendering from strict DTO only:", error);
+    currentReferenceResolution = {
+        ok: false,
+        failures: [{ message: error?.message || String(error) }],
+        byPath: {}
+    };
+    currentRuntimePlayerSheetDto = currentPlayerSheetDto;
+  }
+
+  currentCharacterSheet = SheetCompiler.compile(currentPlayerSheetDto, {
+    references: currentReferenceResolution
+  });
 
   await renderCurrentPlayerSheet();
 
   if (shouldPersist) {
-    schedulePlayerSheetSave(currentPlayerSheetDto, options);
+    schedulePlayerSheetSave(PlayerSheetDtoHelper.toSaveDto(currentPlayerSheetDto), options);
   }
 }
 
@@ -261,8 +285,10 @@ async function renderCurrentPlayerSheet() {
   });
   BuildPlayerSheetSidebar(currentCharacterSheet);
   bootLevelEditor({
-    dto: currentPlayerSheetDto,
+    dto: currentRuntimePlayerSheetDto || currentPlayerSheetDto,
+    saveDto: currentPlayerSheetDto,
     compiled: currentCharacterSheet,
+    references: currentReferenceResolution,
     onChange: applyPlayerSheetDto,
     api
     });

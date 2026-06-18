@@ -38,6 +38,139 @@ function normalizeString(value) {
     return String(value || "").trim();
 }
 
+function stripForbiddenRuntimeFields(value) {
+    if (Array.isArray(value)) {
+        return value.map(stripForbiddenRuntimeFields);
+    }
+
+    if (!isPlainObject(value)) {
+        return value;
+    }
+
+    const forbidden = new Set([
+        "catalogRecord",
+        "classFeatures",
+        "entries",
+        "grants",
+        "profile",
+        "raw",
+        "rulesEntries",
+        "snapshot",
+        "startingEquipment",
+        "startingProficiencies",
+        "subclassFeatures",
+        "_fullEntries"
+    ]);
+    const output = {};
+
+    for (const [key, entry] of Object.entries(value)) {
+        if (forbidden.has(key)) {
+            continue;
+        }
+
+        output[key] = stripForbiddenRuntimeFields(entry);
+    }
+
+    return output;
+}
+
+function normalizeSaveIdentityRef(value, kind = "") {
+    const identity = normalizeIdentityRef(value, kind);
+    if (!identity) {
+        return null;
+    }
+
+    const output = {
+        id: identity.id,
+        name: identity.name,
+        source: identity.source,
+        kind: identity.kind || kind
+    };
+
+    for (const key of ["classLevel", "hitDie", "size", "speed", "subrace"]) {
+        if (identity[key] != null && identity[key] !== "") {
+            output[key] = identity[key];
+        }
+    }
+
+    if (identity.options && Object.keys(identity.options).length) {
+        output.options = stripForbiddenRuntimeFields(identity.options);
+    }
+
+    for (const key of ["choices", "choiceSummary", "spellcastingAbility"]) {
+        if (identity[key] != null && identity[key] !== "") {
+            output[key] = stripForbiddenRuntimeFields(identity[key]);
+        }
+    }
+
+    return output;
+}
+
+function normalizeSaveBaseChoices(value = {}) {
+    const source = isPlainObject(value) ? value : {};
+
+    return {
+        race: normalizeSaveIdentityRef(source.race, "races"),
+        subrace: normalizeSaveIdentityRef(source.subrace, "subraces"),
+        raceChoices: isPlainObject(source.raceChoices) ? stripForbiddenRuntimeFields(source.raceChoices) : {},
+        background: normalizeSaveIdentityRef(source.background, "backgrounds"),
+        backgroundChoices: isPlainObject(source.backgroundChoices) ? stripForbiddenRuntimeFields(source.backgroundChoices) : {},
+        abilityScores: normalizeAbilityScores(source.abilityScores),
+        startingProficiencies: normalizeStartingProficiencies(source.startingProficiencies),
+        proficiencyChoices: normalizeProficiencyChoices(source.proficiencyChoices)
+    };
+}
+
+function normalizeSaveLevel(value = {}, index = 0) {
+    const source = isPlainObject(value) ? value : {};
+    const characterLevel = index + 1;
+    const level = {
+        characterLevel,
+        class: normalizeSaveIdentityRef(source.class, "classes"),
+        subclass: normalizeSaveIdentityRef(source.subclass, "subclasses"),
+        hp: toNumber(source.hp, 0),
+        choices: toArray(source.choices).map(stripForbiddenRuntimeFields)
+    };
+
+    if (source.feat != null) {
+        level.feat = normalizeSaveIdentityRef(source.feat, "feats");
+    }
+
+    if (ASI_CHARACTER_LEVELS.has(characterLevel) || Array.isArray(source.AbilityScoreIncrease)) {
+        level.AbilityScoreIncrease = normalizeStringList(source.AbilityScoreIncrease)
+            .map((ability) => ability.toLowerCase())
+            .filter((ability) => ABILITY_KEYS.includes(ability));
+    }
+
+    return level;
+}
+
+function normalizeSaveLevels(levels = []) {
+    const sourceLevels = toArray(levels);
+    const normalized = [];
+
+    for (let index = 0; index < MAX_CHARACTER_LEVEL; index += 1) {
+        normalized.push(normalizeSaveLevel(sourceLevels[index], index));
+    }
+
+    return normalized;
+}
+
+function normalizeDefenseList(value) {
+    return normalizeStringList(value).map((entry) => entry.toLowerCase());
+}
+
+function normalizeCombatDefenses(source = {}) {
+    const direct = source.defenses && typeof source.defenses === "object" ? source.defenses : {};
+
+    return {
+        damageResistances: normalizeDefenseList(source.damageResistances || direct.damageResistances),
+        damageImmunities: normalizeDefenseList(source.damageImmunities || direct.damageImmunities),
+        damageVulnerabilities: normalizeDefenseList(source.damageVulnerabilities || direct.damageVulnerabilities),
+        conditionImmunities: normalizeDefenseList(source.conditionImmunities || direct.conditionImmunities)
+    };
+}
+
 function normalizeStartingProficiencyGrantGroup(value = {}) {
     const source = isPlainObject(value) ? value : {};
     return {
@@ -271,7 +404,8 @@ function normalizeCombatState(value = {}) {
             failures: toNumber(source.deathSaves?.failures, 0)
         },
         conditions: normalizeStringList(source.conditions),
-        exhaustion: toNumber(source.exhaustion, 0)
+        exhaustion: toNumber(source.exhaustion, 0),
+        defenses: normalizeCombatDefenses(source)
     };
 }
 
@@ -376,6 +510,38 @@ export function normalizePlayerSheetDto(input = {}, options = {}) {
     };
 }
 
+export function toSavePlayerSheetDto(input = {}, options = {}) {
+    if (input?.schemaVersion === "player-sheet-v2-compiled") {
+        throw new TypeError("Compiled player sheets are runtime-only and cannot be saved. Save the player-sheet-v2 DTO instead.");
+    }
+
+    const source = normalizePlayerSheetDto(input, options);
+    return {
+        schemaVersion: PLAYER_SHEET_SCHEMA_VERSION,
+        id: normalizeString(source.id || options.id),
+        lastModified: normalizeString(source.lastModified || options.lastModified || nowIso()),
+        identity: normalizeIdentity(source.identity),
+        baseChoices: normalizeSaveBaseChoices(source.baseChoices),
+        levels: normalizeSaveLevels(source.levels),
+        combatState: normalizeCombatState(source.combatState),
+        inventory: {
+            currency: deepClone(source.inventory.currency),
+            items: toArray(source.inventory.items).map((item) => ({
+                name: normalizeString(item?.name),
+                source: normalizeString(item?.source),
+                quantity: toNumber(item?.quantity, 1),
+                equipped: Boolean(item?.equipped),
+                attuned: Boolean(item?.attuned),
+                catalog: normalizeSaveIdentityRef(item?.catalog, "items")
+            }))
+        },
+        spells: stripForbiddenRuntimeFields(normalizeSpells(source.spells)),
+        resources: toArray(source.resources).map(stripForbiddenRuntimeFields),
+        notes: normalizeNotes(source.notes),
+        metadata: normalizeMetadata(source.metadata)
+    };
+}
+
 function parsePath(path) {
     return normalizeString(path)
         .replace(/\[(\d+)\]/gu, ".$1")
@@ -456,6 +622,10 @@ export class PlayerSheetDtoHelper {
 
     static patch(dto, path, value, options = {}) {
         return patchPlayerSheetDto(dto, path, value, options);
+    }
+
+    static toSaveDto(dto, options = {}) {
+        return toSavePlayerSheetDto(dto, options);
     }
 
     static touch(dto, timestamp = nowIso()) {

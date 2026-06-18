@@ -3,18 +3,21 @@ import {
     createEquipToggle,
     createItemList,
     createItemListItem,
+    createSection,
     createTabShell,
     resolveInventoryItems
 } from "./PlayerSheetTabHelpers.js";
 
 export async function BuildPlayerSheetDefenseTab(playerSheetObject, context = {}) {
     const shell = createTabShell("Defense");
+    const gearSection = createSection("Defensive Gear");
     const list = createItemList();
     const resolvedItems = await resolveInventoryItems(playerSheetObject, context.api);
     const defensiveItems = resolvedItems.filter((entry) => entry.defensive);
 
     if (!defensiveItems.length) {
-        appendEmptyState(shell, "No defensive gear recorded.");
+        appendEmptyState(gearSection, "No defensive gear recorded.");
+        shell.appendChild(gearSection);
         return;
     }
 
@@ -25,5 +28,6 @@ export async function BuildPlayerSheetDefenseTab(playerSheetObject, context = {}
         }));
     }
 
-    shell.appendChild(list);
+    gearSection.appendChild(list);
+    shell.appendChild(gearSection);
 }

@@ -194,7 +194,13 @@
       "failures": 0
     },
     "conditions": [],
-    "exhaustion": 0
+    "exhaustion": 0,
+    "defenses": {
+      "damageResistances": [],
+      "damageImmunities": [],
+      "damageVulnerabilities": [],
+      "conditionImmunities": []
+    }
   },
   "inventory": {
     "currency": {

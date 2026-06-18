@@ -18,6 +18,7 @@ import {
     buildFeatProfile,
     buildSubclassProfile
 } from "../CatalogProfile/Builder.js";
+import { getOptionCoverageForScope } from "../../StructuredOptionCoverage.js";
 import { buildRaceProfile } from "../Race/LevelEditorRaceProfile.js";
 import { buildCharacterNameContent } from "../Character/LevelEditorCharacterNameBuilder.js";
 import { buildClassContent } from "../Progression/LevelEditorClassBuilder.js";
@@ -561,6 +562,52 @@ function buildBaseEditor(context) {
         description: "Set base ability scores before level increases.",
         buildContent: () => buildAbilityScoreContent(context)
     });
+
+    renderStructuredOptionCoverageRow("level-editor-base-body", "base", context);
+}
+
+function createStructuredCoverageContent(scope, context) {
+    const coverage = getOptionCoverageForScope(context.compiled?.optionCoverage, scope);
+    const wrapper = createElement("section", "level-editor__coverage-panel");
+    wrapper.appendChild(createElement("p", "level-editor__modal-description", `${coverage.mapped} of ${coverage.total} structured options are mapped to editor controls.`));
+
+    if (!coverage.missingMappings.length) {
+        wrapper.appendChild(createElement("p", "level-editor__choice-status", "No unmapped structured options for this section."));
+        return wrapper;
+    }
+
+    const list = createElement("ul", "level-editor__mini-list");
+    for (const item of coverage.missingMappings) {
+        list.appendChild(createElement("li", "", `${item.source || "Catalog"}: ${item.label || item.type} needs structured catalog mapping (${item.path}).`));
+    }
+    wrapper.appendChild(list);
+    return wrapper;
+}
+
+function renderStructuredOptionCoverageRow(bodyId, scope, context) {
+    const coverage = getOptionCoverageForScope(context.compiled?.optionCoverage, scope);
+    if (!coverage.total && !coverage.missingMappings.length) {
+        return;
+    }
+
+    const body = document.querySelector(`#${bodyId}`);
+    if (!body) {
+        return;
+    }
+
+    const row = createElement("div");
+    row.id = `${bodyId}-${scope}-structured-coverage`;
+    buildModalHtml(row, {
+        type: "structured-options",
+        label: "Structured Options",
+        status: coverage.missingMappings.length
+            ? `${coverage.missingMappings.length} need mapping`
+            : `${coverage.total} mapped`,
+        modalId: `${bodyId}-${scope}-structured-coverage-modal`,
+        description: "Catalog choices are read from structured JSON fields only. Prose is not parsed.",
+        buildContent: () => createStructuredCoverageContent(scope, context)
+    });
+    body.appendChild(row);
 }
 
 function buildLevelEditor(playerSheetObject, context) {
@@ -737,6 +784,8 @@ function buildLevelEditor(playerSheetObject, context) {
         body.appendChild(asiRow);
 
     }
+
+    renderStructuredOptionCoverageRow(`level-editor-level-${context.characterLevel}-body`, `level-${context.characterLevel}`, context);
 
     const hasLevelOneRaceIdentity = context.characterLevel === 1
         && Boolean(getValue(context.dto, "baseChoices.race", null));
@@ -1069,9 +1118,11 @@ function getProfileTargets(dto) {
 // patch profiles only when there is structured data to profile; this avoids
 // persisting empty profiles during catalog outages.
 async function ensureCatalogProfiles(context) {
-    if (typeof context.onChange !== "function") {
-        return;
-    }
+    // Profiles are now runtime-only. ReferenceResolver hydrates the DTO used for
+    // rendering, while PlayerSheetDtoHelper.toSaveDto strips catalog payloads
+    // before persistence.
+    void context;
+    return;
 
     let nextDto = context.dto;
     let changed = false;

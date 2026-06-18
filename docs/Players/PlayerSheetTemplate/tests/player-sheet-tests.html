@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Sheet Browser Tests</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 2rem;
+      color: #172033;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+    }
+
+    #test-results {
+      display: grid;
+      gap: 0.45rem;
+      margin-top: 1rem;
+    }
+
+    .test-result {
+      border: 1px solid #d8dee9;
+      border-radius: 6px;
+      padding: 0.55rem 0.7rem;
+    }
+
+    .test-result[data-status="pass"] {
+      border-color: #6aa77a;
+      background: #f1faf3;
+    }
+
+    .test-result[data-status="fail"] {
+      border-color: #c86b6b;
+      background: #fff3f3;
+    }
+
+    .test-result pre {
+      white-space: pre-wrap;
+    }
+
+    #test-fixture {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Player Sheet Browser Tests</h1>
+  <p id="test-summary">Running...</p>
+  <div id="test-results"></div>
+  <div id="test-fixture"></div>
+  <script type="module" src="./player-sheet-tests.js"></script>
+</body>
+</html>
+
