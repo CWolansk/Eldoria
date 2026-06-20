@@ -9,6 +9,10 @@ import { BuildPlayerSheetDefenseTab } from "../PlayerSheetJavaScript/PlayerSheet
 import { BuildPlayerSheetFeatsTab } from "../PlayerSheetJavaScript/PlayerSheetFeatsTabBuilder.js";
 import { buildItemSearchModal } from "../PlayerSheetJavaScript/PlayerSheetGearTabBuilder.js";
 import { BuildPlayerSheetHeader } from "../PlayerSheetJavaScript/PlayerSheetHeaderBuilder.js";
+import {
+  BuildPlayerSheetNotesTab,
+  sanitizeNotesHtml
+} from "../PlayerSheetJavaScript/PlayerSheetNotesTabBuilder.js";
 import { BuildPlayerSheetReferenceTab } from "../PlayerSheetJavaScript/PlayerSheetReferenceTabBuilder.js";
 import {
   BuildPlayerSheetSpellsTab,
@@ -1381,10 +1385,61 @@ const tests = [
     assertEqual(compiled.displayIndex.facts.damageResistances, "header", "resistance display owner");
     assertEqual(compiled.displayIndex.facts.defensiveGear, "defense", "defensive gear display owner");
     assertEqual(compiled.displayIndex.facts.skills, "sidebar", "skill display owner");
+    assertEqual(compiled.displayIndex.facts.notes, "notes", "notes display owner");
     assertIncludes(compiled.defenses.damageResistances, "cold", "manual resistance should compile");
     assertIncludes(compiled.defenses.damageVulnerabilities, "radiant", "manual vulnerability should compile");
     assertIncludes(compiled.defenses.conditionImmunities, "poisoned", "manual condition immunity should compile");
     assertIncludes(compiled.defenses.damageImmunities, "poison", "item immunity should compile");
+  }],
+  ["notes DTO preserves rich text and plain text", () => {
+    const dto = PlayerSheetDtoHelper.normalize({
+      schemaVersion: "player-sheet-v2",
+      notes: {
+        freeform: "Plain note",
+        richText: "<p><strong>Rich note</strong></p>"
+      }
+    });
+
+    assertEqual(dto.notes.freeform, "Plain note", "plain notes should normalize");
+    assertEqual(dto.notes.richText, "<p><strong>Rich note</strong></p>", "rich notes should normalize");
+    assertEqual(PlayerSheetDtoHelper.toSaveDto(dto).notes.richText, "<p><strong>Rich note</strong></p>", "rich notes should save");
+  }],
+  ["notes sanitizer strips unsafe markup", () => {
+    const sanitized = sanitizeNotesHtml("<p>Hello <strong>world</strong><script>alert(1)</script><a href=\"javascript:bad()\">bad</a><a href=\"https://example.com\">ok</a></p>");
+    assert(sanitized.includes("<strong>world</strong>"), "sanitizer should preserve allowed formatting");
+    assert(!sanitized.includes("<script"), "sanitizer should remove scripts");
+    assert(!sanitized.includes("alert"), "sanitizer should remove script contents");
+    assert(!sanitized.includes("javascript:"), "sanitizer should remove unsafe links");
+    assert(sanitized.includes("href=\"https://example.com\""), "sanitizer should preserve safe links");
+  }],
+  ["notes tab edits and saves rich text", async () => {
+    const dto = createDto();
+    dto.notes.richText = "<p>Existing <strong>note</strong></p>";
+    const compiled = SheetCompiler.compile(dto);
+    let patchedDto = null;
+    fixture.innerHTML = "<div id=\"TabContent\"></div>";
+
+    BuildPlayerSheetNotesTab(compiled, {
+      dto,
+      async onChange(nextDto) {
+        patchedDto = nextDto;
+      }
+    });
+
+    const editor = fixture.querySelector(".player-sheet-notes__editor");
+    assert(editor, "notes editor should render");
+    assert(editor.innerHTML.includes("<strong>note</strong>"), "notes editor should render rich text");
+    editor.innerHTML = "<p>Session <strong>lead</strong></p><script>bad()</script>";
+    editor.dispatchEvent(new InputEvent("input", { bubbles: true }));
+
+    const save = fixture.querySelector(".player-sheet-notes__save");
+    assertEqual(save.dataset.dirty, "true", "notes save button should mark dirty");
+    save.click();
+
+    await waitForCondition(() => patchedDto != null, "notes save should patch DTO");
+    assert(patchedDto.notes.richText.includes("<strong>lead</strong>"), "patched DTO should keep rich text");
+    assert(!patchedDto.notes.richText.includes("<script"), "patched DTO should save sanitized notes");
+    assertEqual(patchedDto.notes.freeform, "Session lead", "patched DTO should keep plain text notes");
   }],
   ["compiler attaches background feature rules from resolved profiles", () => {
     const compiled = SheetCompiler.compile(createSoldierBackgroundFeatureDto());

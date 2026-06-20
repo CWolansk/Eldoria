@@ -8,6 +8,7 @@ import { BuildPlayerSheetSkillsTab } from "./PlayerSheetJavaScript/PlayerSheetSk
 import { BuildPlayerSheetSpellsTab } from "./PlayerSheetJavaScript/PlayerSheetSpellsTabBuilder.js";
 import { BuildPlayerSheetPetsTab } from "./PlayerSheetJavaScript/PlayerSheetPetsTabBuilder.js";
 import { BuildPlayerSheetFeatsTab } from "./PlayerSheetJavaScript/PlayerSheetFeatsTabBuilder.js";
+import { BuildPlayerSheetNotesTab } from "./PlayerSheetJavaScript/PlayerSheetNotesTabBuilder.js";
 import { BuildPlayerSheetReferenceTab } from "./PlayerSheetJavaScript/PlayerSheetReferenceTabBuilder.js";
 import { bootLevelEditor } from "./LevelEditorJavaScript/Core/LevelEditorBuilder.js";
 import { PlayerSheetDtoHelper } from "./PlayerSheetDtoHelper.js";
@@ -75,6 +76,7 @@ const TAB_BUILDERS = {
     Spells: BuildPlayerSheetSpellsTab,
     Pets: BuildPlayerSheetPetsTab,
     Feats: BuildPlayerSheetFeatsTab,
+    Notes: BuildPlayerSheetNotesTab,
     Reference: BuildPlayerSheetReferenceTab
 };
 

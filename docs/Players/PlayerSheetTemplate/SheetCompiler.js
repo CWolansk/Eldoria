@@ -2859,7 +2859,8 @@ function createDisplayIndex() {
         backgroundFeatures: "features",
         featFeatures: "features",
         itemFeatures: "features",
-        classResources: "reference"
+        classResources: "reference",
+        notes: "notes"
     };
 
     const sections = {};

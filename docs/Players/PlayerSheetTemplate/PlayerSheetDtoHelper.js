@@ -450,6 +450,7 @@ function normalizeNotes(value = {}) {
 
     return {
         freeform: normalizeString(source.freeform),
+        richText: normalizeString(source.richText || source.html),
         conditions: normalizeStringList(source.conditions),
         exhaustion: toNumber(source.exhaustion, 0)
     };

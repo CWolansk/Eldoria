@@ -2672,6 +2672,84 @@
   color: var(--sheet-red, #f87171);
 }
 
+.player-sheet-notes {
+  gap: 0.55rem;
+}
+
+.player-sheet-notes__toolbar,
+.player-sheet-notes__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.player-sheet-notes__toolbar {
+  border: 1px solid var(--sheet-line, var(--line));
+  border-radius: 6px;
+  background: var(--sheet-panel, var(--panel));
+  padding: 0.35rem;
+}
+
+.player-sheet-notes__toolbar-button {
+  min-width: 2rem;
+  min-height: 1.8rem;
+  font-size: 0.76rem;
+  line-height: 1;
+  padding: 0.28rem 0.5rem;
+}
+
+.player-sheet-notes__editor {
+  min-height: clamp(16rem, 42vh, 34rem);
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid var(--sheet-line, var(--line));
+  border-radius: 7px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 3.5%), transparent 42%),
+    var(--sheet-panel, var(--panel));
+  color: var(--sheet-text, var(--ink));
+  font-size: 0.92rem;
+  line-height: 1.52;
+  outline: none;
+  padding: 0.75rem;
+}
+
+.player-sheet-notes__editor:focus {
+  border-color: var(--sheet-accent, var(--accent));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--sheet-accent, var(--accent)) 20%, transparent);
+}
+
+.player-sheet-notes__editor p,
+.player-sheet-notes__editor ul,
+.player-sheet-notes__editor ol,
+.player-sheet-notes__editor blockquote {
+  margin: 0 0 0.65rem;
+}
+
+.player-sheet-notes__editor ul,
+.player-sheet-notes__editor ol {
+  padding-left: 1.35rem;
+}
+
+.player-sheet-notes__editor blockquote {
+  border-left: 3px solid color-mix(in srgb, var(--sheet-accent, var(--accent)) 45%, var(--sheet-line, var(--line)));
+  color: var(--sheet-muted, var(--muted));
+  padding-left: 0.75rem;
+}
+
+.player-sheet-notes__save[data-dirty="true"] {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--sheet-accent, var(--accent)) 18%, transparent);
+}
+
+.player-sheet-notes__status {
+  color: var(--sheet-muted, var(--muted));
+  font-size: 0.72rem;
+  font-weight: 850;
+  line-height: 1;
+}
+
 .player-sheet-class-resource-list {
   display: grid;
   gap: 0.65rem;
