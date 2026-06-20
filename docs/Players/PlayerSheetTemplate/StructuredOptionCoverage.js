@@ -12,6 +12,7 @@ const KNOWN_CHOICE_TYPES = new Set([
     "instrument",
     "language",
     "languages",
+    "lifeofseclusion",
     "origin",
     "racial-asi",
     "resistance",
@@ -101,7 +102,8 @@ function addProfileChoices(items, scope, source, profile, path) {
     toArray(profile.spells?.choices).forEach((choice, index) => {
         addChoice(items, scope, source, {
             ...choice,
-            type: choice.type || "spell"
+            rawType: choice.type || "",
+            type: "spell"
         }, `${path}.profile.spells.choices.${index}`);
     });
 
@@ -211,4 +213,3 @@ export function getOptionCoverageForScope(coverage, scope) {
         missingMappings: []
     };
 }
-

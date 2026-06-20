@@ -5,9 +5,11 @@ import {
     createElement
 } from "../../PlayerSheetHtmlHelper.js";
 import {
+    getCatalogDtoId,
     getCatalogDisplayName,
     getCatalogSource,
     getValue,
+    normalizeSearchText,
     toArray,
     toNumber
 } from "../Core/LevelEditorShared.js";
@@ -25,6 +27,7 @@ import {
     getProfileChoiceDefinitions
 } from "../CatalogProfile/Choices.js";
 import { enrichOptionalFeatureOptions } from "../Catalog/LevelEditorOptionalFeatureCatalog.js";
+import { getSpellOptionsForChoice } from "./LevelEditorFeatBuilder.js";
 
 const CLASS_OPTION_TYPE = "class-option";
 const classOptionStructureCaches = new WeakMap();
@@ -73,6 +76,11 @@ function getClassIdentity(context) {
     return levelEntry.class || context?.classEntry || null;
 }
 
+function getSubclassIdentity(context) {
+    const levelEntry = getLevelEntry(context);
+    return levelEntry.subclass || context?.subclassEntry || null;
+}
+
 function getStructureCache(context) {
     if (context?.api && typeof context.api === "object") {
         if (!classOptionStructureCaches.has(context.api)) {
@@ -101,7 +109,12 @@ function summarizeIdentity(identity) {
         optionRef: identity.options?.ref || "",
         optionId: identity.options?.id || "",
         optionCatalogId: identity.options?.catalogId || "",
-        inlineFeatureRefs: toArray(identity.classFeatures)
+        inlineFeatureRefs: [
+            ...toArray(identity.classFeatures),
+            ...toArray(identity.subclassFeatures),
+            ...toArray(identity.featureRefs),
+            ...toArray(identity.features)
+        ]
             .map(summarizeFeatureRef)
     };
 }
@@ -126,30 +139,115 @@ function summarizeFeatureRef(featureRef) {
 function getStructureCacheKey(context) {
     const levelEntry = getLevelEntry(context);
     const classIdentity = getClassIdentity(context);
+    const subclassIdentity = getSubclassIdentity(context);
     const classLevel = toNumber(levelEntry.class?.classLevel, toNumber(context?.classLevel, context?.characterLevel || 1));
     return JSON.stringify({
         characterLevel: toNumber(context?.characterLevel, 1),
         classLevel,
         classIdentity: summarizeIdentity(classIdentity),
+        subclassIdentity: summarizeIdentity(subclassIdentity),
         featureRefs: toArray(levelEntry.features).map(summarizeFeatureRef)
     });
 }
 
-async function loadLevelFeatureRecords(context) {
+async function loadLevelFeatureContext(context) {
     const levelEntry = getLevelEntry(context);
     const classLevel = toNumber(levelEntry.class?.classLevel, toNumber(context?.classLevel, context?.characterLevel || 1));
     const classRecord = await resolveCatalogEntity(context, "classes", getClassIdentity(context), { fallbackIdentity: true });
+    const subclassRecord = await resolveCatalogEntity(context, "subclasses", getSubclassIdentity(context), { fallbackIdentity: false });
     const records = await expandCatalogRecords(context, [classRecord], {
         includeLinkedFeatures: true,
         classLevel
     });
+    const subclassRecords = await expandCatalogRecords(context, [subclassRecord], {
+        includeLinkedFeatures: true,
+        classLevel,
+        featureKinds: ["subclass-features"]
+    });
     const featureRefs = toArray(levelEntry.features);
+
+    for (const record of subclassRecords) {
+        appendCatalogRecord(records, record);
+    }
 
     for (const featureRef of featureRefs) {
         appendCatalogRecord(records, await resolveCatalogFeatureEntity(context, featureRef, { fallbackIdentity: false }));
     }
 
-    return records.filter(isFeatureRecord);
+    return {
+        classLevel,
+        classRecord,
+        subclassRecord,
+        features: records.filter(isFeatureRecord)
+    };
+}
+
+// Optional class features (e.g. Tasha's "Dedicated Weapon", "Ki-Fueled Attack")
+// live inline in the class record's classFeatures list with optional:true. They
+// are opt-in: the player decides whether to add them. Surface every optional
+// feature unlocked at this class level so it can be toggled on.
+function collectOptionalFeaturesForLevel(classRecord, classLevel, loadedFeatures) {
+    const targetLevel = toNumber(classLevel, 0);
+    const byKey = new Map();
+
+    const addCandidate = (feature) => {
+        const name = String(feature?.name || "").trim();
+        if (!name) {
+            return;
+        }
+
+        const level = feature?.level != null ? toNumber(feature.level, targetLevel) : targetLevel;
+        if (level !== targetLevel) {
+            return;
+        }
+
+        const id = String(feature?.id || feature?.ref || "").trim();
+        const key = (id || name).toLowerCase();
+        const rulesEntries = feature?.entries
+            || feature?.raw?.entries
+            || feature?.rulesEntries
+            || feature?._fullEntries
+            || feature?.description
+            || feature?.summary
+            || null;
+        const candidate = {
+            id,
+            ref: feature?.ref || "",
+            name,
+            source: feature?.source || getCatalogSource(classRecord),
+            level,
+            rulesEntries,
+            selected: false
+        };
+
+        const existing = byKey.get(key);
+        if (!existing) {
+            byKey.set(key, candidate);
+            return;
+        }
+
+        // Merge: prefer whichever source carries an id and rules text.
+        if (!existing.rulesEntries && candidate.rulesEntries) {
+            existing.rulesEntries = candidate.rulesEntries;
+        }
+        if (!existing.id && candidate.id) {
+            existing.id = candidate.id;
+        }
+        if (!existing.ref && candidate.ref) {
+            existing.ref = candidate.ref;
+        }
+    };
+
+    toArray(classRecord?.classFeatures)
+        .filter((feature) => Boolean(feature?.optional))
+        .forEach(addCandidate);
+    getOptionalClassFeatureReviews(loadedFeatures).forEach(addCandidate);
+
+    return Array.from(byKey.values());
+}
+
+function optionalFeatureChoiceId(feature) {
+    return `optional-feature:${String(feature?.id || feature?.ref || feature?.name || "").toLowerCase()}`;
 }
 
 function normalizeClassOption(option) {
@@ -182,6 +280,364 @@ function normalizeClassOption(option) {
 
 function getOptionLabel(option) {
     return [option.label || option.value, option.source].filter(Boolean).join(" ");
+}
+
+function normalizeWeaponToken(value) {
+    const text = normalizeSearchText(value)
+        .replace(/[^a-z0-9]+/gu, " ")
+        .replace(/\bweapons\b/gu, "weapon")
+        .replace(/\s+/gu, " ")
+        .trim();
+    return text.endsWith("s") ? text.slice(0, -1) : text;
+}
+
+function getWeaponCategory(option) {
+    return normalizeSearchText(option?.category || option?.weaponCategory || option?.weapon?.category || "");
+}
+
+function getWeaponProperties(option) {
+    return [
+        ...toArray(option?.properties),
+        ...toArray(option?.weapon?.properties)
+            .flatMap((property) => [
+                property?.code,
+                property?.abbreviation,
+                property?.name
+            ])
+    ]
+        .map((property) => normalizeSearchText(property))
+        .filter(Boolean);
+}
+
+function isDedicatedWeaponLegalOption(option) {
+    const category = getWeaponCategory(option);
+    if (category !== "simple" && category !== "martial") {
+        return false;
+    }
+
+    const properties = getWeaponProperties(option);
+    return !properties.some((property) => property === "h" || property === "heavy" || property === "s" || property === "special");
+}
+
+function normalizeId(value) {
+    return normalizeSearchText(value)
+        .replace(/[^a-z0-9]+/gu, "-")
+        .replace(/^-+|-+$/gu, "");
+}
+
+function parseSpellChoiceFilter(value) {
+    const result = {};
+    for (const part of String(value || "").split("|")) {
+        const [rawKey, rawValue] = part.split("=");
+        const key = String(rawKey || "").trim().toLowerCase();
+        if (key && rawValue) {
+            result[key] = rawValue.trim();
+        }
+    }
+    return result;
+}
+
+function formatClassLabel(value) {
+    return String(value || "")
+        .replace(/[-_]+/gu, " ")
+        .replace(/\b\w/gu, (letter) => letter.toUpperCase())
+        .trim();
+}
+
+function formatSpellLevelLabel(level) {
+    const numericLevel = toNumber(level, NaN);
+    if (!Number.isFinite(numericLevel)) {
+        return "";
+    }
+    if (numericLevel === 0) {
+        return "Cantrip";
+    }
+    return `${numericLevel}${numericLevel === 1 ? "st" : numericLevel === 2 ? "nd" : numericLevel === 3 ? "rd" : "th"}-level Spell`;
+}
+
+function formatSpellChoiceLabel(definition, index) {
+    const filter = parseSpellChoiceFilter(definition.choose || definition.filter);
+    const levels = String(filter.level || "")
+        .split(";")
+        .map(formatSpellLevelLabel)
+        .filter(Boolean);
+    const levelLabel = levels.length
+        ? [...new Set(levels)].join("/")
+        : `Spell ${index + 1}`;
+    const classLabel = String(filter.class || "")
+        .split(";")
+        .map(formatClassLabel)
+        .filter(Boolean)
+        .join("/");
+    return [definition.group, levelLabel, classLabel].filter(Boolean).join(" - ");
+}
+
+function getSpellChoiceSignature(definition) {
+    return [
+        definition.choose || definition.filter || "",
+        definition.mode || "known",
+        definition.ability || "",
+        definition.unlockAtLevel || "",
+        definition.spellLevel || "",
+        definition.recharge || "",
+        definition.uses || ""
+    ].map((part) => String(part || "").trim()).join("|").toLowerCase();
+}
+
+function collapseSpellChoiceDefinitions(spellChoices) {
+    const bySignature = new Map();
+    for (const definition of toArray(spellChoices)) {
+        const signature = getSpellChoiceSignature(definition);
+        if (!bySignature.has(signature)) {
+            bySignature.set(signature, {
+                definition: cloneValue(definition),
+                totalCount: 0,
+                maxCount: 0,
+                groups: new Set()
+            });
+        }
+        const entry = bySignature.get(signature);
+        const count = Math.max(toNumber(definition.count, 1), 1);
+        entry.totalCount += count;
+        entry.maxCount = Math.max(entry.maxCount, count);
+        if (definition.group) {
+            entry.groups.add(String(definition.group));
+        }
+    }
+
+    return Array.from(bySignature.values()).map((entry, index) => ({
+        ...entry.definition,
+        group: entry.groups.size > 1 ? "" : entry.definition.group,
+        count: entry.groups.size > 1 ? entry.maxCount : entry.totalCount,
+        collapsedGroups: Array.from(entry.groups),
+        collapsedIndex: index
+    }));
+}
+
+function identityMatchesRecord(record, identity) {
+    if (!record || !identity) {
+        return false;
+    }
+
+    const recordTokens = [
+        getCatalogDtoId(record),
+        record.id,
+        record.ref,
+        record.refId,
+        record.sourceId,
+        getCatalogDisplayName(record, "")
+    ].map(normalizeSearchText).filter(Boolean);
+    const identityTokens = [
+        identity.options?.catalogId,
+        identity.catalogId,
+        identity.id,
+        identity.ref,
+        identity.refId,
+        identity.sourceId,
+        identity.name
+    ].map(normalizeSearchText).filter(Boolean);
+    return recordTokens.some((token) => identityTokens.includes(token));
+}
+
+function isRecordSelectedOnCurrentLevel(record, levelEntry) {
+    return identityMatchesRecord(record, levelEntry?.subclass)
+        || identityMatchesRecord(record, levelEntry?.class);
+}
+
+function isSpellChoiceAvailableAtLevel(definition, record, classLevel, levelEntry) {
+    const unlockAtLevel = toNumber(definition.unlockAtLevel ?? definition.level, 0);
+    if (!unlockAtLevel) {
+        return true;
+    }
+
+    if (unlockAtLevel === toNumber(classLevel, 0)) {
+        return true;
+    }
+
+    return isRecordSelectedOnCurrentLevel(record, levelEntry) && unlockAtLevel <= toNumber(classLevel, 0);
+}
+
+function createSpellChoiceFromDefinition(record, definition, index) {
+    const recordId = getCatalogDtoId(record) || record?.id || `spell-source-${index + 1}`;
+    const recordName = getCatalogDisplayName(record, record?.name || "Class Feature");
+    const count = Math.max(toNumber(definition.count, 1), 1);
+    const id = [
+        recordId,
+        "spell-choice",
+        definition.choose || definition.filter || "",
+        definition.mode || "known",
+        index + 1
+    ].map((part) => normalizeId(part)).filter(Boolean).join(":");
+
+    return {
+        id,
+        type: CLASS_OPTION_TYPE,
+        choiceType: "spell",
+        spellChoice: true,
+        featureId: recordId,
+        featureName: recordName,
+        label: definition.label || formatSpellChoiceLabel(definition, index),
+        prompt: definition.prompt || `Choose ${count} spell${count === 1 ? "" : "s"} granted by ${recordName}.`,
+        count,
+        options: [],
+        sourceName: definition.sourceName || recordName,
+        source: definition.source || getCatalogSource(record),
+        catalogKind: "spells",
+        mode: definition.mode || "known",
+        filter: definition.filter || definition.choose || "",
+        spellChoiceDefinition: cloneValue(definition),
+        selected: []
+    };
+}
+
+function createSpellGroupChoice(record, profile, classLevel, levelEntry) {
+    if (!isRecordSelectedOnCurrentLevel(record, levelEntry)) {
+        return null;
+    }
+
+    const groups = new Map();
+    for (const spellGrant of toArray(profile?.spells?.granted)) {
+        if (spellGrant?.type !== "spell" || !spellGrant.group) {
+            continue;
+        }
+
+        const group = String(spellGrant.group || "").trim();
+        if (!group) {
+            continue;
+        }
+        if (!groups.has(group)) {
+            groups.set(group, []);
+        }
+        groups.get(group).push(cloneValue(spellGrant));
+    }
+
+    if (groups.size <= 1) {
+        return null;
+    }
+
+    const recordId = getCatalogDtoId(record) || record?.id || "spell-group-source";
+    const recordName = getCatalogDisplayName(record, record?.name || "Class Feature");
+    return {
+        id: `${recordId}:spell-group`,
+        type: CLASS_OPTION_TYPE,
+        choiceType: "spell-group",
+        spellGroupChoice: true,
+        featureId: recordId,
+        featureName: recordName,
+        label: `${recordName}: Spell Group`,
+        prompt: `Choose the ${recordName} spell group.`,
+        count: 1,
+        options: Array.from(groups.entries())
+            .map(([group, spellGrants]) => ({
+                value: group,
+                label: group,
+                description: `${spellGrants.length} spells; applies as you reach the listed class levels.`,
+                spellGrants,
+                classLevel
+            }))
+            .sort((left, right) => left.label.localeCompare(right.label)),
+        sourceName: recordName,
+        source: getCatalogSource(record),
+        catalogKind: "spells",
+        selected: []
+    };
+}
+
+function buildSpellChoicesFromRecords(records, classLevel, levelEntry) {
+    const choices = [];
+    for (const record of toArray(records)) {
+        if (!record) {
+            continue;
+        }
+
+        const profile = buildCatalogProfile(record);
+        const spellChoices = collapseSpellChoiceDefinitions(profile?.spells?.choices)
+            .filter((definition) => isSpellChoiceAvailableAtLevel(definition, record, classLevel, levelEntry));
+        spellChoices.forEach((definition, index) => {
+            const choice = createSpellChoiceFromDefinition(record, definition, index);
+            if (choice) {
+                choices.push(choice);
+            }
+        });
+
+        const groupChoice = createSpellGroupChoice(record, profile, classLevel, levelEntry);
+        if (groupChoice) {
+            choices.push(groupChoice);
+        }
+    }
+
+    return choices;
+}
+
+function getCompiledWeaponProficiencyTokens(context) {
+    return toArray(context?.compiled?.proficiencies?.weapons)
+        .map((entry) => entry?.name || entry?.value || entry)
+        .map(normalizeWeaponToken)
+        .filter(Boolean);
+}
+
+function matchesWeaponProficiency(option, proficiencyTokens) {
+    if (!proficiencyTokens.length) {
+        return true;
+    }
+
+    const category = getWeaponCategory(option);
+    const label = normalizeWeaponToken(option?.label || option?.name || option?.value);
+    const categoryToken = `${category} weapon`;
+    return proficiencyTokens.some((token) => (
+        token === category
+        || token === categoryToken
+        || token === label
+        || token === `${label} weapon`
+    ));
+}
+
+function describeWeaponOption(option) {
+    const damage = option.damage || option.weapon?.damage?.primary || "";
+    const damageType = option.damageType || option.weapon?.damage?.type?.name || "";
+    const properties = getWeaponProperties(option)
+        .filter((property) => property.length > 1)
+        .map((property) => property.replace(/\b\w/gu, (letter) => letter.toUpperCase()));
+    return [
+        damage && damageType ? `${damage} ${damageType}` : "",
+        properties.length ? properties.join(", ") : ""
+    ].filter(Boolean).join("; ") || option.description || "";
+}
+
+function enrichWeaponChoiceOptions(context, choices) {
+    const proficiencyTokens = getCompiledWeaponProficiencyTokens(context);
+
+    for (const choice of toArray(choices)) {
+        if (choice.weaponChoice !== "dedicated-weapon") {
+            continue;
+        }
+
+        const legalOptions = toArray(choice.options)
+            .filter(isDedicatedWeaponLegalOption)
+            .map((option) => ({
+                ...option,
+                description: describeWeaponOption(option),
+                recordId: option.recordId || option.value || option.id || "",
+                catalogKind: option.catalogKind || "items"
+            }));
+        const proficientOptions = legalOptions.filter((option) => matchesWeaponProficiency(option, proficiencyTokens));
+        choice.options = proficientOptions.length ? proficientOptions : legalOptions;
+    }
+}
+
+async function enrichSpellChoiceOptions(context, choices) {
+    await Promise.all(toArray(choices).map(async (choice) => {
+        if (!choice.spellChoice) {
+            return;
+        }
+
+        choice.options = await getSpellOptionsForChoice(context, choice.spellChoiceDefinition || {
+            filter: choice.filter,
+            choose: choice.filter,
+            mode: choice.mode,
+            count: choice.count
+        });
+    }));
 }
 
 function getClassContextText(context) {
@@ -239,6 +695,7 @@ function createChoiceFromDefinition(feature, definition, index) {
     return {
         id: definition.id || definition.choiceId || `${featureId}:choice:${index}`,
         type: CLASS_OPTION_TYPE,
+        choiceType: definition.type || CLASS_OPTION_TYPE,
         featureId: definition.featureId || featureId,
         featureName: definition.featureName || featureName,
         label: definition.label || featureName,
@@ -247,6 +704,11 @@ function createChoiceFromDefinition(feature, definition, index) {
         options,
         sourceName: definition.sourceName || featureName,
         source: definition.source || getCatalogSource(feature),
+        catalogKind: definition.catalogKind || "",
+        weaponChoice: definition.weaponChoice || "",
+        requiresWeaponProficiency: Boolean(definition.requiresWeaponProficiency),
+        requiresOptionalFeature: Boolean(definition.requiresOptionalFeature || (feature?.optional && definition.type !== CLASS_OPTION_TYPE)),
+        optionalFeatureId: definition.optionalFeatureId || (feature?.optional ? featureId : ""),
         selected: []
     };
 }
@@ -282,15 +744,20 @@ async function buildClassOptionStructure(context) {
     if (!cache.has(cacheKey)) {
         const structurePromise = Promise.resolve()
             .then(async () => {
-                const features = await loadLevelFeatureRecords(context);
+                const { classLevel, classRecord, subclassRecord, features } = await loadLevelFeatureContext(context);
                 const fallbackFeatures = getOptionalFeatureFallbacks(context, features);
                 const allFeatures = [
                     ...features,
                     ...fallbackFeatures
                 ];
+                const levelEntry = getLevelEntry(context);
                 return {
                     features: cloneValue(allFeatures),
-                    choices: cloneValue(buildChoicesFromFeatures(allFeatures))
+                    choices: cloneValue([
+                        ...buildChoicesFromFeatures(allFeatures),
+                        ...buildSpellChoicesFromRecords([classRecord, subclassRecord], classLevel, levelEntry)
+                    ]),
+                    optionalFeatures: cloneValue(collectOptionalFeaturesForLevel(classRecord, classLevel, allFeatures))
                 };
             })
             .catch((error) => {
@@ -324,22 +791,56 @@ function hydrateSelections(choices, selections) {
     }
 }
 
+function getOptionalFeatureSelectionKeys(dto, levelIndex) {
+    const keys = new Set();
+    for (const choice of toArray(getValue(dto, `levels.${levelIndex}.choices`, []))) {
+        if (choice?.type !== CLASS_OPTION_TYPE || !choice.optionalFeature) {
+            continue;
+        }
+
+        [choice.featureId, choice.featureName, choice.value, choice.choiceId]
+            .map((token) => String(token || "").toLowerCase())
+            .filter(Boolean)
+            .forEach((token) => keys.add(token));
+        for (const value of toArray(choice.values)) {
+            [value?.id, value?.value, value?.label]
+                .map((token) => String(token || "").toLowerCase())
+                .filter(Boolean)
+                .forEach((token) => keys.add(token));
+        }
+    }
+    return keys;
+}
+
+function hydrateOptionalFeatureSelections(optionalFeatures, selectionKeys) {
+    for (const feature of toArray(optionalFeatures)) {
+        const tokens = [feature.id, feature.ref, feature.name, optionalFeatureChoiceId(feature)]
+            .map((token) => String(token || "").toLowerCase())
+            .filter(Boolean);
+        feature.selected = tokens.some((token) => selectionKeys.has(token));
+    }
+}
+
 export async function buildClassOptionModel(context, options = {}) {
     const { enrich = true } = options;
-    const { features, choices } = await buildClassOptionStructure(context);
+    const { features, choices, optionalFeatures } = await buildClassOptionStructure(context);
     if (enrich) {
         await enrichOptionalFeatureOptions(context, choices);
+        await enrichSpellChoiceOptions(context, choices);
+        enrichWeaponChoiceOptions(context, choices);
     }
-    const selections = getClassOptionSelections(context.dto, getLevelIndex(context));
+    const levelIndex = getLevelIndex(context);
+    const selections = getClassOptionSelections(context.dto, levelIndex);
     hydrateSelections(choices, selections);
-    return { features, choices, selections };
+    hydrateOptionalFeatureSelections(optionalFeatures, getOptionalFeatureSelectionKeys(context.dto, levelIndex));
+    return { features, choices, optionalFeatures: toArray(optionalFeatures), selections };
 }
 
 export async function hasClassOptionChoices(context) {
     try {
         const model = await buildClassOptionModel(context, { enrich: false });
-        return model.choices.some((choice) => choice.options.length && choice.count > 0)
-            || getOptionalClassFeatureReviews(model.features).length > 0;
+        return model.choices.some((choice) => (choice.options.length || choice.spellChoice || choice.spellGroupChoice) && choice.count > 0)
+            || model.optionalFeatures.length > 0;
     } catch (error) {
         console.warn("Class option visibility check failed:", error);
         return true;
@@ -356,7 +857,11 @@ function createClassOptionSelection(choice) {
             source: option.source || "",
             page: option.page || null,
             recordId: option.recordId || "",
-            description: option.description || ""
+            description: option.description || "",
+            name: option.name || option.label || option.value || "",
+            level: option.level ?? null,
+            mode: option.mode || choice.mode || "",
+            spellGrants: toArray(option.spellGrants).map(cloneValue)
         }));
 
     return {
@@ -367,9 +872,42 @@ function createClassOptionSelection(choice) {
         label: choice.label,
         sourceName: choice.sourceName,
         source: choice.source,
+        choiceType: choice.choiceType || "",
+        catalogKind: choice.catalogKind || "",
+        spellChoice: Boolean(choice.spellChoice),
+        spellGroupChoice: Boolean(choice.spellGroupChoice),
+        filter: choice.filter || "",
+        mode: choice.mode || "",
+        weaponChoice: choice.weaponChoice || "",
+        requiresOptionalFeature: Boolean(choice.requiresOptionalFeature),
+        optionalFeatureId: choice.optionalFeatureId || "",
         count: choice.count,
         value: selectedOptions[0]?.value || "",
         values: selectedOptions
+    };
+}
+
+function createOptionalFeatureSelection(feature) {
+    const id = feature.id || feature.ref || "";
+    return {
+        type: CLASS_OPTION_TYPE,
+        choiceId: optionalFeatureChoiceId(feature),
+        optionalFeature: true,
+        featureId: id,
+        featureName: feature.name,
+        label: feature.name,
+        sourceName: feature.name,
+        source: feature.source || "",
+        count: 1,
+        value: id || feature.name,
+        values: [{
+            value: id || feature.name,
+            id,
+            label: feature.name,
+            source: feature.source || "",
+            recordId: id,
+            rulesEntries: feature.rulesEntries || null
+        }]
     };
 }
 
@@ -377,35 +915,81 @@ function isChoiceComplete(choice) {
     return choice.selected.length >= choice.count;
 }
 
+function featureTokens(feature) {
+    return [feature?.id, feature?.ref, feature?.name, optionalFeatureChoiceId(feature)]
+        .map((token) => normalizeSearchText(token))
+        .filter(Boolean);
+}
+
+function isChoiceActive(choice, model) {
+    if (!choice?.requiresOptionalFeature) {
+        return true;
+    }
+
+    const wanted = [choice.optionalFeatureId, choice.featureId, choice.featureName]
+        .map((token) => normalizeSearchText(token))
+        .filter(Boolean);
+    if (!wanted.length) {
+        return true;
+    }
+
+    return toArray(model?.optionalFeatures).some((feature) => (
+        feature.selected
+        && featureTokens(feature).some((token) => wanted.includes(token))
+    ));
+}
+
+function getActiveChoices(model) {
+    return toArray(model?.choices).filter((choice) => isChoiceActive(choice, model));
+}
+
 function getMissingChoices(model) {
-    return model.choices
+    return getActiveChoices(model)
         .filter((choice) => choice.options.length && !isChoiceComplete(choice))
         .map((choice) => choice.label);
 }
 
 function buildPersistedChoices(context, model) {
     const levelIndex = getLevelIndex(context);
-    const modelChoiceIds = new Set(model.choices.map((choice) => choice.id));
+    const managedChoiceIds = new Set([
+        ...model.choices.map((choice) => choice.id),
+        ...toArray(model.optionalFeatures).map(optionalFeatureChoiceId)
+    ]);
     const existingChoices = toArray(getValue(context.dto, `levels.${levelIndex}.choices`, []))
-        .filter((choice) => choice?.type !== CLASS_OPTION_TYPE || !modelChoiceIds.has(choice.choiceId));
+        .filter((choice) => choice?.type !== CLASS_OPTION_TYPE || !managedChoiceIds.has(choice.choiceId));
 
     return [
         ...existingChoices,
-        ...model.choices
+        ...getActiveChoices(model)
             .filter(isChoiceComplete)
-            .map(createClassOptionSelection)
+            .map(createClassOptionSelection),
+        ...toArray(model.optionalFeatures)
+            .filter((feature) => feature.selected)
+            .map(createOptionalFeatureSelection)
     ];
 }
 
 export function buildClassOptionStatus(dto, characterLevel, context = {}) {
     const levelIndex = Math.max(toNumber(characterLevel, 1) - 1, 0);
-    const selections = toArray(getValue(dto, `levels.${levelIndex}.choices`, []))
-        .filter((choice) => choice?.type === CLASS_OPTION_TYPE)
+    const classOptionSelections = toArray(getValue(dto, `levels.${levelIndex}.choices`, []))
+        .filter((choice) => choice?.type === CLASS_OPTION_TYPE);
+    const choiceFeatureIds = new Set(classOptionSelections
+        .filter((choice) => !choice.optionalFeature)
+        .flatMap((choice) => [choice.featureId, choice.optionalFeatureId])
+        .map((token) => normalizeSearchText(token))
+        .filter(Boolean));
+    const selections = classOptionSelections
         .map((choice) => {
+            if (choice.optionalFeature && choiceFeatureIds.has(normalizeSearchText(choice.featureId))) {
+                return "";
+            }
             const values = toArray(choice.values)
                 .map((value) => getOptionLabel(value))
                 .filter(Boolean)
                 .join(", ");
+            if (choice.optionalFeature) {
+                return choice.label || choice.featureName || values;
+            }
             return values ? `${choice.label || choice.featureName}: ${values}` : "";
         })
         .filter(Boolean);
@@ -517,34 +1101,53 @@ function renderChoice(choice, onChange) {
     return section;
 }
 
-function renderOptionalFeatureReview(feature) {
+function renderOptionalFeatureToggle(feature, onChange) {
     const section = createElement("section", "level-editor__choice-section level-editor__class-option-section");
     const title = createElement("h4", "level-editor__choice-section-title");
-    title.appendChild(createElement("span", "", getCatalogDisplayName(feature, feature?.name || "Optional Class Feature")));
+    title.appendChild(createElement("span", "", feature.name || "Optional Class Feature"));
     title.appendChild(createElement("span", "level-editor__choice-group-count", "Optional"));
     section.appendChild(title);
 
-    const rules = feature?.entries
-        || feature?.raw?.entries
-        || feature?._fullEntries
-        || feature?.description
-        || feature?.summary
-        || "";
+    const card = createElement("label", "level-editor__class-option-card");
+    card.dataset.optionalFeature = feature.id || feature.name;
+    if (feature.selected) {
+        card.classList.add("level-editor__class-option-card--selected");
+    }
 
-    if (rules) {
-        const description = createElement("div", "level-editor__class-option-card-description");
-        appendRulesEntry(description, rules, {
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.checked = Boolean(feature.selected);
+    input.addEventListener("change", () => {
+        feature.selected = input.checked;
+        card.classList.toggle("level-editor__class-option-card--selected", input.checked);
+        onChange();
+    });
+
+    const body = createElement("div", "level-editor__class-option-card-body");
+    const heading = createElement("div", "level-editor__class-option-card-heading");
+    heading.appendChild(createElement("span", "level-editor__class-option-card-title", feature.name));
+    if (feature.source) {
+        heading.appendChild(createElement("span", "level-editor__class-option-card-source", feature.source));
+    }
+
+    const description = createElement("div", "level-editor__class-option-card-description");
+    if (feature.rulesEntries) {
+        appendRulesEntry(description, feature.rulesEntries, {
             text: "level-editor__class-option-card-description-text",
             list: "level-editor__class-option-card-description-list",
             table: "level-editor__race-table",
             section: "level-editor__class-option-card-description-section",
             title: "level-editor__class-option-card-description-title"
         });
-        section.appendChild(description);
     } else {
-        section.appendChild(createDescription("Review this optional class feature for this level."));
+        description.appendChild(createElement("span", "level-editor__class-option-card-description-text", "Optional class feature — enable to add it to your sheet."));
     }
 
+    body.appendChild(heading);
+    body.appendChild(description);
+    card.appendChild(input);
+    card.appendChild(body);
+    section.appendChild(card);
     return section;
 }
 
@@ -558,6 +1161,7 @@ export function buildClassOptionContent(context) {
     const applyButton = document.createElement("button");
     let model = null;
     let initialSelections = {};
+    let initialOptionalSelections = {};
 
     resetButton.type = "button";
     resetButton.className = "level-editor__button";
@@ -582,35 +1186,41 @@ export function buildClassOptionContent(context) {
 
         const missing = getMissingChoices(model);
         applyButton.disabled = missing.length > 0;
-        status.textContent = missing.length
-            ? `Missing choices: ${missing.join(", ")}.`
-            : `${model.choices.length} class option${model.choices.length === 1 ? "" : "s"} selected.`;
+        if (missing.length) {
+            status.textContent = `Missing choices: ${missing.join(", ")}.`;
+            return;
+        }
+
+        const optionalFeatures = toArray(model.optionalFeatures);
+        const optionalSelected = optionalFeatures.filter((feature) => feature.selected).length;
+        const activeChoices = getActiveChoices(model);
+        const parts = [];
+        if (activeChoices.length) {
+            parts.push(`${activeChoices.length} class option${activeChoices.length === 1 ? "" : "s"} selected`);
+        }
+        if (optionalFeatures.length) {
+            parts.push(`${optionalSelected}/${optionalFeatures.length} optional feature${optionalFeatures.length === 1 ? "" : "s"} enabled`);
+        }
+        status.textContent = parts.length ? `${parts.join(" | ")}.` : "No class options required.";
     }
 
     function renderControls() {
         controls.replaceChildren();
-        if (!model?.choices?.length) {
-            const optionalReviews = getOptionalClassFeatureReviews(model?.features);
-            if (optionalReviews.length) {
-                for (const feature of optionalReviews) {
-                    controls.appendChild(renderOptionalFeatureReview(feature));
-                }
-                applyButton.disabled = false;
-                status.textContent = `${optionalReviews.length} optional class feature${optionalReviews.length === 1 ? "" : "s"} available.`;
-                return;
-            }
+        const optionalFeatures = toArray(model?.optionalFeatures);
+        const activeChoices = getActiveChoices(model);
 
+        if (!activeChoices.length && !optionalFeatures.length) {
             controls.appendChild(createDescription("No class options are required for this level."));
             applyButton.disabled = false;
             status.textContent = "No class options required.";
             return;
         }
 
-        for (const choice of model.choices) {
-            controls.appendChild(renderChoice(choice, updateStatus));
+        for (const feature of optionalFeatures) {
+            controls.appendChild(renderOptionalFeatureToggle(feature, renderControls));
         }
-        for (const feature of getOptionalClassFeatureReviews(model.features)) {
-            controls.appendChild(renderOptionalFeatureReview(feature));
+        for (const choice of activeChoices) {
+            controls.appendChild(renderChoice(choice, updateStatus));
         }
         updateStatus();
     }
@@ -621,6 +1231,9 @@ export function buildClassOptionContent(context) {
         }
         for (const choice of model.choices) {
             choice.selected = toArray(initialSelections[choice.id]).slice(0, choice.count);
+        }
+        for (const feature of toArray(model.optionalFeatures)) {
+            feature.selected = Boolean(initialOptionalSelections[optionalFeatureChoiceId(feature)]);
         }
         renderControls();
     });
@@ -643,6 +1256,9 @@ export function buildClassOptionContent(context) {
         .then((nextModel) => {
             model = nextModel;
             initialSelections = Object.fromEntries(model.choices.map((choice) => [choice.id, choice.selected.slice()]));
+            initialOptionalSelections = Object.fromEntries(
+                toArray(model.optionalFeatures).map((feature) => [optionalFeatureChoiceId(feature), Boolean(feature.selected)])
+            );
             renderControls();
         })
         .catch((error) => {

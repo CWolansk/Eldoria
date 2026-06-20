@@ -41,7 +41,12 @@ and generated specific variants.
   - any index column ⇒ exact-match filter, e.g. `?rarity=rare`, `?level=3&school=evocation`,
     `?ritual=true`, `?source=PHB` (pushed to the Table query).
   - `q` ⇒ case-insensitive name/source substring filter (applied in the function).
+    Lightweight unfiltered item searches can use the optional item search index table before
+    falling back to the catalog scan.
   - `limit` ⇒ cap the number of rows returned.
+  - `skip` or `offset` ⇒ skip this many matching rows before returning results.
+  - Paged responses include `skip`, `limit`, `hasMore`, and `nextSkip` when `limit` or
+    `skip` is supplied.
   - `full=true` ⇒ return full normalized JSON entities instead of lightweight index rows.
 - `GET /api/catalog/{kind}/odata` — OData-style full-object list endpoint. Query params:
   - `$filter` ⇒ Table Storage/OData filter over indexed columns, e.g.
@@ -80,6 +85,43 @@ Table Storage filters only support equality/comparison (no substring), so struct
 filters are evaluated by the table and free-text `q` is evaluated in-process. `kind` accepts
 aliases (e.g. `item`, `classFeatures`, `magic-variant`).
 
+### Optional item search index
+
+The API can accelerate lightweight `GET /api/catalog/items?q=...&limit=...` searches with a
+separate Table Storage suffix/prefix index. The index lives outside the main catalog table, so
+it can be seeded, ignored, or deleted without touching catalog rows.
+
+Behavior:
+
+- Enabled by default when the index table has a current manifest.
+- Set `ELDORIA_ITEM_SEARCH_INDEX=false` to force rollback to the existing catalog scan.
+- Uses `ELDORIA_CATALOG_SEARCH_TABLE` when set; otherwise defaults to `<ELDORIA_CATALOG_TABLE>search`.
+- Only handles lightweight, unfiltered item searches. `full=true`, structured filters, too-short
+  searches, stale/missing index data, and index errors fall back to the current scan path.
+- The index preserves substring-style item-name matching by indexing suffixes of normalized item
+  name/source tokens, so searches like `sword` still find `Longsword`, `Shortsword`, and
+  `Greatsword`.
+
+Seed only the search index:
+
+```powershell
+cd docs/api
+npm run seed:catalog:item-search -- --dry-run
+npm run seed:catalog:item-search
+```
+
+Rebuild from scratch:
+
+```powershell
+npm run seed:catalog:item-search -- --purge-search-index
+```
+
+Optional cleanup after rollback:
+
+```powershell
+npm run seed:catalog:item-search -- --clear-search-index
+```
+
 ## Local Setup
 
 ```powershell
@@ -89,6 +131,7 @@ npm install
 npm run seed -- --dry-run          # v2 placeholder character/player blobs
 npm run seed:reset-players         # purge old sheet/builder blobs for manifest players, then seed empty v2 sheets
 npm run seed:catalog -- --dry-run  # rules catalogs into Table Storage
+npm run seed:catalog:item-search -- --dry-run  # optional item search index only
 npm start
 ```
 
@@ -101,6 +144,10 @@ to an Azure Storage connection string.
 - `ELDORIA_STORAGE_ACCOUNT`: Storage account name. Used with managed identity when no connection string is set.
 - `ELDORIA_CHARACTER_CONTAINER`: Blob container name. Defaults to `eldoria-character-data`.
 - `ELDORIA_CATALOG_TABLE`: Rules catalog table name. Defaults to `eldoriacatalog`.
+- `ELDORIA_CATALOG_SEARCH_TABLE`: Optional item search index table name. Defaults to
+  `<ELDORIA_CATALOG_TABLE>search`.
+- `ELDORIA_ITEM_SEARCH_INDEX`: Set to `false`, `0`, `no`, `off`, or `disabled` to bypass the
+  item search index and use the existing catalog scan path.
 - `ELDORIA_BLOB_PREFIX`: Optional prefix for all API blobs. Use only when the seed script uses `--prefix`.
 - `ELDORIA_CREATE_CONTAINER` / `ELDORIA_CREATE_TABLE`: Set to `false` to skip create-if-not-exists for the container/table.
 - `ELDORIA_ALLOWED_ORIGINS`: Comma-separated CORS allowlist. Defaults to `*`. Deploy scripts

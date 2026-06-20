@@ -8,6 +8,7 @@ const {
   listManifest,
   upsertEntity
 } = require("./tableStore");
+const { searchItemsByIndex } = require("./itemSearchStore");
 const model = require("./catalogModel");
 const { httpError, json, withErrors } = require("./http");
 
@@ -16,6 +17,8 @@ const { httpError, json, withErrors } = require("./http");
 const RESERVED_PARAMS = new Set([
   "q",
   "limit",
+  "skip",
+  "offset",
   "kind",
   "full",
   "upsert",
@@ -30,6 +33,7 @@ const RESERVED_PARAMS = new Set([
 ]);
 
 const DEFAULT_MAX_CATALOG_BODY_BYTES = 2 * 1024 * 1024;
+const MAX_CATALOG_SKIP = 250000;
 const MAX_ODATA_TOP = 1000;
 const MAX_ODATA_SKIP = 250000;
 const MAX_ODATA_SELECT_FIELDS = 100;
@@ -69,6 +73,43 @@ function getFilters(searchParams) {
 function getLimit(searchParams) {
   const raw = Number(searchParams.get("limit"));
   return Number.isFinite(raw) && raw > 0 ? Math.floor(raw) : 0;
+}
+
+function getSkip(searchParams) {
+  const raw = Number(searchParams.get("skip") || searchParams.get("offset"));
+  if (!Number.isFinite(raw) || raw <= 0) {
+    return 0;
+  }
+  const skip = Math.floor(raw);
+  if (skip > MAX_CATALOG_SKIP) {
+    throw httpError(400, "skip is too large.", {
+      max: MAX_CATALOG_SKIP
+    });
+  }
+  return skip;
+}
+
+function createPagedCatalogResponse(kind, items, { limit = 0, skip = 0 } = {}) {
+  const pageLimit = Number(limit) > 0 ? Math.floor(Number(limit)) : 0;
+  const pageSkip = Number(skip) > 0 ? Math.floor(Number(skip)) : 0;
+  const hasMore = pageLimit > 0 && items.length > pageLimit;
+  const pageItems = hasMore ? items.slice(0, pageLimit) : items;
+  const response = {
+    kind,
+    count: pageItems.length,
+    items: pageItems
+  };
+
+  if (pageSkip || pageLimit) {
+    response.skip = pageSkip;
+    response.limit = pageLimit;
+    response.hasMore = hasMore;
+    if (hasMore) {
+      response.nextSkip = pageSkip + pageItems.length;
+    }
+  }
+
+  return response;
 }
 
 function getODataLimit(searchParams) {
@@ -122,6 +163,23 @@ function getUpsert(searchParams) {
 
 function getBooleanParam(searchParams, name) {
   return /^(1|true|yes)$/iu.test(String(searchParams.get(name) || ""));
+}
+
+function hasStructuredFilters(filters) {
+  return Object.values(filters || {}).some((value) => value !== undefined && value !== null && value !== "");
+}
+
+function logSearchIndexFallback(context, result) {
+  if (!result || result.reason !== "error") {
+    return;
+  }
+
+  const message = `Item search index failed; falling back to catalog scan. ${result.error?.message || ""}`.trim();
+  if (context?.log?.warn) {
+    context.log.warn(message);
+  } else if (typeof context?.log === "function") {
+    context.log(message);
+  }
 }
 
 function normalizeODataPath(path) {
@@ -421,17 +479,28 @@ async function catalogListHandler(request, context) {
 
     const kind = getKind(request);
     const searchParams = getSearchParams(request);
-    const list = getFull(searchParams) ? listCatalogFull : listCatalog;
+    const full = getFull(searchParams);
+    const q = searchParams.get("q") || "";
+    const filters = getFilters(searchParams);
+    const limit = getLimit(searchParams);
+    const skip = getSkip(searchParams);
+    const pageLimit = limit ? limit + 1 : 0;
+    if (!full && kind === "items" && q && !hasStructuredFilters(filters)) {
+      const indexed = await searchItemsByIndex(q, { limit: pageLimit, skip });
+      if (indexed.used) {
+        return json(request, 200, createPagedCatalogResponse(kind, indexed.items, { limit, skip }));
+      }
+      logSearchIndexFallback(context, indexed);
+    }
+
+    const list = full ? listCatalogFull : listCatalog;
     const items = await list(kind, {
-      filters: getFilters(searchParams),
-      q: searchParams.get("q") || "",
-      limit: getLimit(searchParams)
+      filters,
+      q,
+      limit: pageLimit,
+      skip
     });
-    return json(request, 200, {
-      kind,
-      count: items.length,
-      items
-    });
+    return json(request, 200, createPagedCatalogResponse(kind, items, { limit, skip }));
   });
 }
 

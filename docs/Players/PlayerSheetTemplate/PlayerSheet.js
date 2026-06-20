@@ -16,7 +16,10 @@ import {
     applyResolvedReferencesToDto,
     resolvePlayerSheetReferences
 } from "./ReferenceResolver.js";
+import { normalizeCacheKeyPart, writeCachedJson } from "../web-cache.js";
 const DEFAULT_API_BASE_URL = "https://fn-eldoria-ahakafekhxczebhn.eastus-01.azurewebsites.net/api";
+const PLAYER_CHARACTER_CACHE_TTL_MS = 10 * 60 * 1000;
+const PLAYER_CHARACTER_CACHE_MAX_BYTES = 750 * 1024;
 
 function getApiBaseUrl() {
   if (typeof window === "undefined") {
@@ -25,6 +28,27 @@ function getApiBaseUrl() {
 
   const params = new URLSearchParams(window.location.search);
   return params.get("apiBaseUrl") || DEFAULT_API_BASE_URL;
+}
+
+function getBooleanQueryFlag(...names) {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  return names.some((name) => {
+    const value = params.get(name);
+    return value === "1" || value === "true" || value === "yes" || value === "on";
+  });
+}
+
+function shouldShowStructuredOptionCoverage() {
+  return getBooleanQueryFlag(
+    "structuredOptions",
+    "showStructuredOptions",
+    "debugStructuredOptions",
+    "showStructuredOptionCoverage"
+  );
 }
 
 const api = new EldoriaApiClient({
@@ -53,6 +77,21 @@ const TAB_BUILDERS = {
     Feats: BuildPlayerSheetFeatsTab,
     Reference: BuildPlayerSheetReferenceTab
 };
+
+function getPlayerCharacterCacheKey(characterId) {
+    return `player-sheet:character:${normalizeCacheKeyPart(characterId)}`;
+}
+
+function rememberPlayerCharacterDto(characterId, dto) {
+    if (!characterId || !dto) {
+        return;
+    }
+
+    writeCachedJson(getPlayerCharacterCacheKey(characterId), dto, {
+        maxStorageBytes: PLAYER_CHARACTER_CACHE_MAX_BYTES,
+        ttlMs: PLAYER_CHARACTER_CACHE_TTL_MS
+    });
+}
 
 /**
  * 
@@ -199,6 +238,7 @@ async function flushPendingSave() {
             id: characterId
         });
 
+        rememberPlayerCharacterDto(characterId, persistedDto || strictDto);
         lastSavedFingerprint = fingerprint || createSaveFingerprint(persistedDto);
         setSaveStatus("saved", "Saved");
     } catch (error) {
@@ -290,7 +330,8 @@ async function renderCurrentPlayerSheet() {
     compiled: currentCharacterSheet,
     references: currentReferenceResolution,
     onChange: applyPlayerSheetDto,
-    api
+    api,
+    showStructuredOptionCoverage: shouldShowStructuredOptionCoverage()
     });
   await window.setTab(currentTabName);
 }
@@ -301,6 +342,7 @@ async function bootPlayersPage() {
 
     try {
         const loadedDto = await api.getCharacterSheet(CharId);
+        rememberPlayerCharacterDto(CharId, loadedDto);
         await applyPlayerSheetDto(loadedDto, {
             persist: false
         });

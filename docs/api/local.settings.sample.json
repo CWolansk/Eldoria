@@ -6,6 +6,8 @@
     "ELDORIA_STORAGE_CONNECTION_STRING": "UseDevelopmentStorage=true",
     "ELDORIA_CHARACTER_CONTAINER": "eldoria-character-data",
     "ELDORIA_CATALOG_TABLE": "eldoriacatalog",
+    "ELDORIA_CATALOG_SEARCH_TABLE": "eldoriacatalogsearch",
+    "ELDORIA_ITEM_SEARCH_INDEX": "true",
     "ELDORIA_ALLOWED_ORIGINS": "*"
   }
 }

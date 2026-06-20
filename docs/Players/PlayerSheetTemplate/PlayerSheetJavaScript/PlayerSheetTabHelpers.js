@@ -7,6 +7,7 @@ import {
     getCatalogCache,
     getCatalogDisplayName,
     getCatalogSource,
+    formatRulesText,
     normalizeSearchText,
     toArray,
     toNumber,
@@ -45,6 +46,8 @@ const ITEM_PROPERTY_LABELS = {
     V: "Versatile",
     "2H": "Two-Handed"
 };
+
+const ITEM_RULES_PREVIEW_LIMIT = 250;
 
 function cloneValue(value) {
     if (value == null) {
@@ -495,23 +498,83 @@ function applyItemRuleTokens(value, record) {
     return value;
 }
 
-function appendFirstRulesSummary(card, record) {
-    const entries = toArray(record?.entries).length ? record.entries : toArray(record?._fullEntries);
-    const firstEntry = entries.find((entry) => typeof entry === "string" || entry?.entries || entry?.items || entry?.wrapped);
-    if (!firstEntry) {
-        return;
-    }
+function getItemRulesEntry(record) {
+    const entries = toArray(record?.entries).length ? toArray(record.entries) : toArray(record?._fullEntries);
+    const ruleEntries = entries
+        .filter((entry) => typeof entry === "string" || entry?.entries || entry?.items || entry?.wrapped || entry?.type || entry?.name)
+        .map((entry) => applyItemRuleTokens(entry?.wrapped || entry, record));
 
-    const detail = createElement("details", "player-sheet-item-card__rules");
-    detail.appendChild(createElement("summary", "player-sheet-item-card__rules-summary", "Rules"));
-    appendRulesEntry(detail, applyItemRuleTokens(firstEntry?.wrapped || firstEntry, record), {
+    return ruleEntries.length ? ruleEntries : null;
+}
+
+function createRulesClassNames() {
+    return {
         text: "player-sheet-item-card__rules-text",
         list: "player-sheet-item-card__rules-list",
         table: "player-sheet-item-card__rules-table",
         section: "player-sheet-item-card__rules-section",
         title: "player-sheet-item-card__rules-title"
-    });
-    card.appendChild(detail);
+    };
+}
+
+function createRulesPreviewText(rulesEntry, limit = ITEM_RULES_PREVIEW_LIMIT) {
+    const fullText = formatRulesText(flattenRulesText(rulesEntry));
+    if (!fullText) {
+        return {
+            text: "",
+            truncated: false
+        };
+    }
+
+    if (fullText.length <= limit) {
+        return {
+            text: fullText,
+            truncated: false
+        };
+    }
+
+    return {
+        text: `${fullText.slice(0, limit).trimEnd()}...`,
+        truncated: true
+    };
+}
+
+function appendItemRules(container, record, options = {}) {
+    const rulesEntry = getItemRulesEntry(record);
+    if (!rulesEntry) {
+        return;
+    }
+
+    const preview = createRulesPreviewText(rulesEntry, options.previewLimit ?? ITEM_RULES_PREVIEW_LIMIT);
+    if (!preview.text) {
+        return;
+    }
+
+    const rules = createElement("div", "player-sheet-item-card__rules");
+    if (options.compact) {
+        rules.classList.add("player-sheet-item-card__rules--compact");
+    }
+
+    if (!preview.truncated) {
+        if (options.compact) {
+            rules.appendChild(createElement("p", "player-sheet-item-card__rules-preview", preview.text));
+            container.appendChild(rules);
+            return;
+        }
+
+        rules.classList.add("player-sheet-item-card__rules--inline");
+        appendRulesEntry(rules, rulesEntry, createRulesClassNames());
+        container.appendChild(rules);
+        return;
+    }
+
+    rules.appendChild(createElement("p", "player-sheet-item-card__rules-preview", preview.text));
+
+    const detail = createElement("details", "player-sheet-item-card__rules-details");
+    detail.appendChild(createElement("summary", "player-sheet-item-card__rules-summary", "Show full rules"));
+    appendRulesEntry(detail, rulesEntry, createRulesClassNames());
+    rules.appendChild(detail);
+    container.appendChild(rules);
 }
 
 export function createItemCard(item, record = getItemRecord(item), options = {}) {
@@ -546,7 +609,7 @@ export function createItemCard(item, record = getItemRecord(item), options = {})
     }
 
     if (options.showRules !== false) {
-        appendFirstRulesSummary(card, record);
+        appendItemRules(card, record);
     }
 
     return card;
@@ -633,7 +696,10 @@ export function createItemListItem(item, record = getItemRecord(item), options =
 
     if (options.showRules !== false) {
         const rules = createElement("div", "player-sheet-item-row__rules");
-        appendFirstRulesSummary(rules, record);
+        appendItemRules(rules, record, {
+            compact: true,
+            previewLimit: ITEM_RULES_PREVIEW_LIMIT
+        });
         if (rules.children.length) {
             identity.appendChild(rules);
         }

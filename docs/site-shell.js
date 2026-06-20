@@ -131,7 +131,7 @@
 
   shell.navItems = [
     { key: "world", label: "World", href: "tools/location-search/location-reference.html" },
-    { key: "players", label: "Players", href: "players.html" },
+    { key: "players", label: "Players", href: "Players/players.html" },
     { key: "storylines", label: "Storylines", href: "index.html#storylines" },
     { key: "npcs", label: "NPCs", href: "tools/npc-search/npc-reference.html" },
     { key: "locations", label: "Locations", href: "tools/location-search/location-reference.html" },

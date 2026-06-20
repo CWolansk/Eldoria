@@ -4,9 +4,9 @@
 
 (function () {
     const DEFAULT_CATALOG_BASE_PATHS = [
-        'docs/character-sheets/v1/data',
-        'character-sheets/v1/data',
-        '../character-sheets/v1/data'
+        'docs/data',
+        'data',
+        '../data'
     ];
 
     const DEFAULT_CSV_PATHS = {

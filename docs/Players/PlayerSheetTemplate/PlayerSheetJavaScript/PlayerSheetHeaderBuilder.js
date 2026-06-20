@@ -48,14 +48,81 @@ function formatList(values, empty = "none") {
     return list.length ? list.join(", ") : empty;
 }
 
-function formatDefenseSummary(playerSheetObject = {}) {
+function createDefenseChip(label, values, tone = "") {
+    const chip = document.createElement("span");
+    chip.className = ["player-sheet-defense-chip", tone ? `player-sheet-defense-chip--${tone}` : ""]
+        .filter(Boolean)
+        .join(" ");
+
+    const chipLabel = document.createElement("span");
+    chipLabel.className = "player-sheet-defense-chip__label";
+    chipLabel.textContent = label;
+
+    const chipValue = document.createElement("span");
+    chipValue.className = "player-sheet-defense-chip__value";
+    chipValue.textContent = formatList(values);
+
+    chip.appendChild(chipLabel);
+    chip.appendChild(chipValue);
+    return chip;
+}
+
+function renderDefenseChips(headerHTML, playerSheetObject = {}) {
+    const element = headerHTML.querySelector(".Defenses");
+    if (!element) {
+        return;
+    }
+
     const defenses = playerSheetObject.defenses || {};
-    return [
-        ["Resist", formatList(defenses.damageResistances)],
-        ["Immune", formatList(defenses.damageImmunities)],
-        ["Vuln", formatList(defenses.damageVulnerabilities)],
-        ["Cond Imm", formatList(defenses.conditionImmunities)]
-    ].map(([label, value]) => `${label} ${value}`).join(" | ");
+    const title = document.createElement("span");
+    title.className = "player-sheet-defense-summary__title";
+    title.textContent = "Defenses";
+
+    const chipList = document.createElement("span");
+    chipList.className = "player-sheet-defense-chip-list";
+    chipList.appendChild(createDefenseChip("Resist", defenses.damageResistances, "resist"));
+    chipList.appendChild(createDefenseChip("Immune", defenses.damageImmunities, "immune"));
+    chipList.appendChild(createDefenseChip("Vuln", defenses.damageVulnerabilities, "vulnerable"));
+    chipList.appendChild(createDefenseChip("Cond Imm", defenses.conditionImmunities, "condition"));
+
+    element.replaceChildren(title, chipList);
+}
+
+function renderPortrait(playerSheetObject = {}) {
+    const containerRoot = document.querySelector("#GlobalCharacterSheetPortrait");
+
+    if (!containerRoot) {
+        return;
+    }
+
+    let portraitContainer = containerRoot.querySelector(".Portrait");
+
+    if (!portraitContainer) {
+        portraitContainer = document.createElement("div");
+        portraitContainer.className = "Portrait";
+        portraitContainer.hidden = true;
+        containerRoot.insertBefore(portraitContainer, containerRoot.firstChild);
+    }
+
+    const portraitUrl = GetJsonPathValues(playerSheetObject, "identity.portraitUrl");
+
+    if (!portraitUrl) {
+        portraitContainer.hidden = true;
+        portraitContainer.replaceChildren();
+        return;
+    }
+
+    let portraitImage = portraitContainer.querySelector("img");
+
+    if (!portraitImage) {
+        portraitImage = document.createElement("img");
+        portraitImage.className = "player-sheet-portrait__image";
+        portraitContainer.replaceChildren(portraitImage);
+    }
+
+    portraitImage.src = portraitUrl;
+    portraitImage.alt = `${GetJsonPathValues(playerSheetObject, "identity.name") || "Character"} portrait`;
+    portraitContainer.hidden = false;
 }
 
 function buildExperienceHint(playerSheetObject) {
@@ -131,6 +198,7 @@ export function BuildPlayerSheetHeader(playerSheetObject, options = {}) {
     const primaryClass = getPrimaryClass(playerSheetObject);
     const proficiencyBonus = Number(GetJsonPathValues(playerSheetObject, "proficiencyBonus")) || 0;
 
+    renderPortrait(playerSheetObject);
     setHeaderText(headerHTML, "Level", "Level : " + (GetJsonPathValues(playerSheetObject, "level") || ""));
     renderExperienceControl(headerHTML, playerSheetObject, options);
     setHeaderText(headerHTML, "Name", GetJsonPathValues(playerSheetObject, "identity.name") || "");
@@ -160,5 +228,5 @@ export function BuildPlayerSheetHeader(playerSheetObject, options = {}) {
     setHeaderText(headerHTML, "DeathFailures", "Death Failures : " + (GetJsonPathValues(playerSheetObject, "deathSaves.failures") || 0));
     setHeaderText(headerHTML, "Conditions", "Conditions : " + formatList(playerSheetObject.notes?.conditions));
     setHeaderText(headerHTML, "Exhaustion", "Exhaustion : " + (GetJsonPathValues(playerSheetObject, "notes.exhaustion") || 0));
-    setHeaderText(headerHTML, "Defenses", "Defenses : " + formatDefenseSummary(playerSheetObject));
+    renderDefenseChips(headerHTML, playerSheetObject);
 }

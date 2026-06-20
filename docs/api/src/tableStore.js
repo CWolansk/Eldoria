@@ -6,9 +6,9 @@
 // "UseDevelopmentStorage=true") when present, otherwise managed identity via
 // DefaultAzureCredential against ELDORIA_STORAGE_ACCOUNT.
 
-const { TableClient, odata } = require("@azure/data-tables");
-const { DefaultAzureCredential } = require("@azure/identity");
+const { odata } = require("@azure/data-tables");
 const model = require("./catalogModel");
+const { cleanEnv, createEnsuredTableClient } = require("./tableClient");
 
 const DEFAULT_TABLE = "eldoriacatalog";
 const MAX_BATCH_COUNT = 100;          // Table transaction hard limit.
@@ -16,63 +16,13 @@ const MAX_BATCH_BYTES = 3_500_000;    // Stay under the 4 MB transaction payload
 
 let tableClientPromise;
 
-function cleanEnv(name) {
-  return String(process.env[name] || "").trim();
-}
-
 function getTableName() {
   return cleanEnv("ELDORIA_CATALOG_TABLE") || DEFAULT_TABLE;
 }
 
-function isLocalConnection(connectionString) {
-  return /UseDevelopmentStorage=true/iu.test(connectionString)
-    || /127\.0\.0\.1|localhost/iu.test(connectionString);
-}
-
-function createTableClient(tableName) {
-  const connectionString = cleanEnv("ELDORIA_STORAGE_CONNECTION_STRING")
-    || cleanEnv("AzureWebJobsStorage");
-
-  if (connectionString) {
-    return TableClient.fromConnectionString(connectionString, tableName, {
-      allowInsecureConnection: isLocalConnection(connectionString)
-    });
-  }
-
-  const storageAccount = cleanEnv("ELDORIA_STORAGE_ACCOUNT") || cleanEnv("STORAGE_ACCOUNT");
-  if (!storageAccount) {
-    throw new Error(
-      "Missing storage configuration. Set ELDORIA_STORAGE_CONNECTION_STRING or ELDORIA_STORAGE_ACCOUNT."
-    );
-  }
-
-  return new TableClient(
-    `https://${storageAccount}.table.core.windows.net`,
-    tableName,
-    new DefaultAzureCredential()
-  );
-}
-
-async function ensureTable(client) {
-  if (cleanEnv("ELDORIA_CREATE_TABLE").toLowerCase() === "false") {
-    return;
-  }
-  try {
-    await client.createTable();
-  } catch (error) {
-    if (error.statusCode !== 409) {
-      throw error;
-    }
-  }
-}
-
 async function getTableClient() {
   if (!tableClientPromise) {
-    tableClientPromise = (async () => {
-      const client = createTableClient(getTableName());
-      await ensureTable(client);
-      return client;
-    })();
+    tableClientPromise = createEnsuredTableClient(getTableName());
   }
   return tableClientPromise;
 }
@@ -86,14 +36,21 @@ async function listCatalog(kind, options = {}) {
   const filter = model.buildFilter(canonicalKind, options.filters);
   const select = model.selectColumns(canonicalKind);
   const query = model.normalizeText(options.q);
+  const skip = Number(options.skip) > 0 ? Math.floor(Number(options.skip)) : 0;
   const limit = Number(options.limit) > 0 ? Number(options.limit) : 0;
 
   const rows = [];
+  let matched = 0;
   const entities = client.listEntities({ queryOptions: { filter, select } });
   for await (const entity of entities) {
     if (query && !model.matchesText(entity, query)) {
       continue;
     }
+    if (matched < skip) {
+      matched += 1;
+      continue;
+    }
+    matched += 1;
     rows.push(model.toPublicRow(entity));
     if (limit && rows.length >= limit) {
       break;
@@ -109,14 +66,21 @@ async function listCatalogFull(kind, options = {}) {
   const client = await getTableClient();
   const filter = model.buildFilter(canonicalKind, options.filters);
   const query = model.normalizeText(options.q);
+  const skip = Number(options.skip) > 0 ? Math.floor(Number(options.skip)) : 0;
   const limit = Number(options.limit) > 0 ? Number(options.limit) : 0;
 
   const rows = [];
+  let matched = 0;
   const entities = client.listEntities({ queryOptions: { filter } });
   for await (const entity of entities) {
     if (query && !model.matchesText(entity, query)) {
       continue;
     }
+    if (matched < skip) {
+      matched += 1;
+      continue;
+    }
+    matched += 1;
     rows.push(model.fromTableEntity(entity));
     if (limit && rows.length >= limit) {
       break;

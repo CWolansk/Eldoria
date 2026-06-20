@@ -9,6 +9,7 @@ param(
   [string] $StorageAccountName = $env:ELDORIA_STORAGE_ACCOUNT,
   [string] $ContainerName = $(if ($env:ELDORIA_CHARACTER_CONTAINER) { $env:ELDORIA_CHARACTER_CONTAINER } else { "eldoria-character-data" }),
   [string] $CatalogTable = $(if ($env:ELDORIA_CATALOG_TABLE) { $env:ELDORIA_CATALOG_TABLE } else { "eldoriacatalog" }),
+  [string] $CatalogSearchTable = $env:ELDORIA_CATALOG_SEARCH_TABLE,
   [string] $BlobPrefix = $env:ELDORIA_BLOB_PREFIX,
   [string] $AllowedOrigins = $(if ($env:ELDORIA_ALLOWED_ORIGINS) { $env:ELDORIA_ALLOWED_ORIGINS } else { "*" }),
   [string] $Subscription = "",
@@ -117,6 +118,10 @@ $settings = @(
   "ELDORIA_CATALOG_TABLE=$CatalogTable",
   "ELDORIA_ALLOWED_ORIGINS=$AllowedOrigins"
 )
+
+if ($CatalogSearchTable) {
+  $settings += "ELDORIA_CATALOG_SEARCH_TABLE=$CatalogSearchTable"
+}
 
 if ($StorageConnectionString) {
   $settings += "ELDORIA_STORAGE_CONNECTION_STRING=$StorageConnectionString"

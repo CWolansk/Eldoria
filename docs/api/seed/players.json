@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "player-sheet-v2-manifest",
+  "characters": [
+    {
+      "id": "char-claire-001",
+      "playerName": "Claire",
+      "characterName": "Claire",
+      "portraitUrl": "/assets/portraits/claire.png",
+      "status": "active"
+    },
+    {
+      "id": "char-grum-ironjaw-001",
+      "playerName": "JP",
+      "characterName": "Grum 'Grog Guzzler' Ironjaw",
+      "portraitUrl": "/assets/portraits/jp.png",
+      "status": "active"
+    },
+    {
+      "id": "char-julie-001",
+      "playerName": "Julie",
+      "characterName": "Julie",
+      "portraitUrl": "/assets/portraits/julie.png",
+      "status": "active"
+    },
+    {
+      "id": "char-austin-001",
+      "playerName": "Justin",
+      "characterName": "Austin",
+      "portraitUrl": "/assets/portraits/justin.png",
+      "status": "active"
+    },
+    {
+      "id": "char-liz-001",
+      "playerName": "Liz",
+      "characterName": "Liz",
+      "portraitUrl": "/assets/portraits/liz.png",
+      "status": "active"
+    },
+    {
+      "id": "char-zazpoh-the-matyr-001",
+      "playerName": "Randi",
+      "characterName": "Zazpoh The Martyr",
+      "portraitUrl": "/assets/portraits/randi.png",
+      "status": "active"
+    },
+    {
+      "id": "char-vanessa-001",
+      "playerName": "Vanessa",
+      "characterName": "Vanessa",
+      "portraitUrl": "/assets/portraits/vanessa.png",
+      "status": "active"
+    }
+  ]
+}

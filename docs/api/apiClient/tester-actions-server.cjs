@@ -98,6 +98,7 @@ function buildDeployCommand(body) {
     addArg(args, "-StorageAccountName", body.storageAccountName);
     addArg(args, "-ContainerName", body.containerName);
     addArg(args, "-CatalogTable", body.catalogTable);
+    addArg(args, "-CatalogSearchTable", body.catalogSearchTable);
     addArg(args, "-BlobPrefix", body.blobPrefix);
     addArg(args, "-AllowedOrigins", body.allowedOrigins);
     addArg(args, "-Subscription", body.subscription);
@@ -114,6 +115,7 @@ function buildDeployCommand(body) {
   addArg(args, "--storage-account", body.storageAccountName);
   addArg(args, "--container", body.containerName);
   addArg(args, "--catalog-table", body.catalogTable);
+  addArg(args, "--catalog-search-table", body.catalogSearchTable);
   addArg(args, "--blob-prefix", body.blobPrefix);
   addArg(args, "--allowed-origins", body.allowedOrigins);
   addArg(args, "--subscription", body.subscription);
@@ -127,6 +129,10 @@ function buildCatalogSeedCommand(body) {
   addSwitch(args, "--dry-run", body.dryRun);
   addSwitch(args, "--purge", body.purge);
   addSwitch(args, "--skip-manifest", body.skipManifest);
+  addSwitch(args, "--search-index", body.searchIndex);
+  addSwitch(args, "--search-index-only", body.searchIndexOnly);
+  addSwitch(args, "--purge-search-index", body.purgeSearchIndex);
+  addSwitch(args, "--clear-search-index", body.clearSearchIndex);
   addArg(args, "--only", body.only);
   addArg(args, "--data-dir", body.dataDir);
   return {
@@ -159,6 +165,7 @@ function buildStorageEnv(body) {
   if (body.storageConnectionString) env.ELDORIA_STORAGE_CONNECTION_STRING = body.storageConnectionString;
   if (body.storageAccountName) env.ELDORIA_STORAGE_ACCOUNT = body.storageAccountName;
   if (body.catalogTable) env.ELDORIA_CATALOG_TABLE = body.catalogTable;
+  if (body.catalogSearchTable) env.ELDORIA_CATALOG_SEARCH_TABLE = body.catalogSearchTable;
   if (body.containerName) env.ELDORIA_CHARACTER_CONTAINER = body.containerName;
   if (body.blobPrefix) env.ELDORIA_BLOB_PREFIX = body.blobPrefix;
   return env;

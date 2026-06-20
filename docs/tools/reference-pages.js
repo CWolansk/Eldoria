@@ -5,12 +5,111 @@
 (function (global) {
   var features = global.EldoriaFeatureSource = global.EldoriaFeatureSource || {};
 
+  function unique(values) {
+    var seen = new Set();
+    return values.filter(function (value) {
+      if (!value || seen.has(value)) {
+        return false;
+      }
+      seen.add(value);
+      return true;
+    });
+  }
+
+  function relativeToCurrentPage(path) {
+    return new URL(path, window.location.href).href;
+  }
+
+  function loadScriptFromCandidates(paths, globalName) {
+    if (global[globalName]) {
+      return Promise.resolve(global[globalName]);
+    }
+
+    return new Promise(function (resolve, reject) {
+      var errors = [];
+
+      function tryNext(index) {
+        if (global[globalName]) {
+          resolve(global[globalName]);
+          return;
+        }
+
+        if (index >= paths.length) {
+          reject(new Error("Unable to load " + globalName + ": " + errors.join("; ")));
+          return;
+        }
+
+        var script = document.createElement("script");
+        script.src = paths[index];
+        script.onload = function () {
+          if (global[globalName]) {
+            resolve(global[globalName]);
+            return;
+          }
+          errors.push(paths[index] + ": global not found");
+          tryNext(index + 1);
+        };
+        script.onerror = function () {
+          errors.push(paths[index] + ": load failed");
+          tryNext(index + 1);
+        };
+        document.head.appendChild(script);
+      }
+
+      tryNext(0);
+    });
+  }
+
+  async function ensureSiteConfig() {
+    if (global.ELDORIA_SITE_CONFIG || global.ELDORIA_API_BASE_URL) {
+      return global.ELDORIA_SITE_CONFIG || {};
+    }
+
+    if (!features._referenceSiteConfigPromise) {
+      features._referenceSiteConfigPromise = loadScriptFromCandidates([
+        "../../site-assets/site-config.js",
+        "../site-assets/site-config.js",
+        "site-assets/site-config.js",
+        "/site-assets/site-config.js"
+      ], "ELDORIA_SITE_CONFIG").catch(function () {
+        return {};
+      });
+    }
+
+    return features._referenceSiteConfigPromise;
+  }
+
+  function apiBaseUrl() {
+    return global.ELDORIA_API_BASE_URL || global.ELDORIA_SITE_CONFIG?.cloudApiBase || "/api";
+  }
+
+  async function importApiClientModule() {
+    var paths = unique([
+      global.ELDORIA_API_CLIENT_PATH,
+      relativeToCurrentPage("../../api/apiClient/index.js"),
+      relativeToCurrentPage("../api/apiClient/index.js"),
+      "/api/apiClient/index.js"
+    ]);
+    var errors = [];
+
+    for (var index = 0; index < paths.length; index += 1) {
+      try {
+        return await import(paths[index]);
+      } catch (error) {
+        errors.push(paths[index] + ": " + error.message);
+      }
+    }
+
+    throw new Error("Unable to import Eldoria API client: " + errors.join("; "));
+  }
+
   async function createApiClient() {
     if (!features._referencePagesApiClientPromise) {
       features._referencePagesApiClientPromise = (async function () {
-        var module = await import(global.ELDORIA_API_CLIENT_PATH || "../api/apiClient/index.js");
+        await ensureSiteConfig();
+        var module = await importApiClientModule();
         return module.createEldoriaApiClient({
-          baseUrl: global.ELDORIA_API_BASE_URL || "/api",
+          baseUrl: apiBaseUrl(),
           functionKey: global.ELDORIA_API_FUNCTION_KEY || ""
         });
       }());
@@ -207,12 +306,111 @@
 (function (global) {
   var features = global.EldoriaFeatureSource = global.EldoriaFeatureSource || {};
 
+  function unique(values) {
+    var seen = new Set();
+    return values.filter(function (value) {
+      if (!value || seen.has(value)) {
+        return false;
+      }
+      seen.add(value);
+      return true;
+    });
+  }
+
+  function relativeToCurrentPage(path) {
+    return new URL(path, window.location.href).href;
+  }
+
+  function loadScriptFromCandidates(paths, globalName) {
+    if (global[globalName]) {
+      return Promise.resolve(global[globalName]);
+    }
+
+    return new Promise(function (resolve, reject) {
+      var errors = [];
+
+      function tryNext(index) {
+        if (global[globalName]) {
+          resolve(global[globalName]);
+          return;
+        }
+
+        if (index >= paths.length) {
+          reject(new Error("Unable to load " + globalName + ": " + errors.join("; ")));
+          return;
+        }
+
+        var script = document.createElement("script");
+        script.src = paths[index];
+        script.onload = function () {
+          if (global[globalName]) {
+            resolve(global[globalName]);
+            return;
+          }
+          errors.push(paths[index] + ": global not found");
+          tryNext(index + 1);
+        };
+        script.onerror = function () {
+          errors.push(paths[index] + ": load failed");
+          tryNext(index + 1);
+        };
+        document.head.appendChild(script);
+      }
+
+      tryNext(0);
+    });
+  }
+
+  async function ensureSiteConfig() {
+    if (global.ELDORIA_SITE_CONFIG || global.ELDORIA_API_BASE_URL) {
+      return global.ELDORIA_SITE_CONFIG || {};
+    }
+
+    if (!features._referenceSiteConfigPromise) {
+      features._referenceSiteConfigPromise = loadScriptFromCandidates([
+        "../../site-assets/site-config.js",
+        "../site-assets/site-config.js",
+        "site-assets/site-config.js",
+        "/site-assets/site-config.js"
+      ], "ELDORIA_SITE_CONFIG").catch(function () {
+        return {};
+      });
+    }
+
+    return features._referenceSiteConfigPromise;
+  }
+
+  function apiBaseUrl() {
+    return global.ELDORIA_API_BASE_URL || global.ELDORIA_SITE_CONFIG?.cloudApiBase || "/api";
+  }
+
+  async function importApiClientModule() {
+    var paths = unique([
+      global.ELDORIA_API_CLIENT_PATH,
+      relativeToCurrentPage("../../api/apiClient/index.js"),
+      relativeToCurrentPage("../api/apiClient/index.js"),
+      "/api/apiClient/index.js"
+    ]);
+    var errors = [];
+
+    for (var index = 0; index < paths.length; index += 1) {
+      try {
+        return await import(paths[index]);
+      } catch (error) {
+        errors.push(paths[index] + ": " + error.message);
+      }
+    }
+
+    throw new Error("Unable to import Eldoria API client: " + errors.join("; "));
+  }
+
   async function createApiClient() {
     if (!features._referencePagesApiClientPromise) {
       features._referencePagesApiClientPromise = (async function () {
-        var module = await import(global.ELDORIA_API_CLIENT_PATH || "../api/apiClient/index.js");
+        await ensureSiteConfig();
+        var module = await importApiClientModule();
         return module.createEldoriaApiClient({
-          baseUrl: global.ELDORIA_API_BASE_URL || "/api",
+          baseUrl: apiBaseUrl(),
           functionKey: global.ELDORIA_API_FUNCTION_KEY || ""
         });
       }());

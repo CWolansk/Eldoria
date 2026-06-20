@@ -7,10 +7,12 @@
   "scripts": {
     "start": "func start",
     "check": "node tools/check-syntax.js",
+    "test:item-search-index": "node tools/test-item-search-index.js",
     "seed": "node seed/seedBlobStorage.js",
     "seed:characters": "node seed/seedBlobStorage.js",
     "seed:reset-players": "node seed/seedBlobStorage.js --purge-character-documents",
     "seed:catalog": "node seed/seedTableStorage.js",
+    "seed:catalog:item-search": "node seed/seedTableStorage.js --search-index-only",
     "deploy": "powershell -ExecutionPolicy Bypass -File apiDeploy/deploy.ps1",
     "buddy:actions": "node apiClient/tester-actions-server.cjs"
   },

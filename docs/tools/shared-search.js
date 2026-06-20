@@ -91,6 +91,39 @@
 (function (global) {
   var features = global.EldoriaFeatureSource = global.EldoriaFeatureSource || {};
 
+  function unique(values) {
+    var seen = new Set();
+    return values.filter(function (value) {
+      if (!value || seen.has(value)) {
+        return false;
+      }
+      seen.add(value);
+      return true;
+    });
+  }
+
+  function relativeToCurrentPage(path) {
+    return new URL(path, window.location.href).href;
+  }
+
+  function apiClientCandidates(config) {
+    return unique([
+      config.apiClientPath,
+      global.ELDORIA_API_CLIENT_PATH,
+      relativeToCurrentPage("../../api/apiClient/index.js"),
+      relativeToCurrentPage("../api/apiClient/index.js"),
+      relativeToCurrentPage("api/apiClient/index.js"),
+      "/api/apiClient/index.js"
+    ].filter(Boolean));
+  }
+
+  function apiBaseUrl(config) {
+    return config.apiBaseUrl
+      || global.ELDORIA_API_BASE_URL
+      || global.ELDORIA_SITE_CONFIG?.cloudApiBase
+      || "/api";
+  }
+
   function loadScriptFromCandidates(paths, globalName) {
     if (global[globalName]) {
       return Promise.resolve(global[globalName]);
@@ -140,6 +173,7 @@
       features._rulesCatalogWidgetDataPromise = loadScriptFromCandidates([
         "../../assets/rules-catalog-widget-data.js",
         "../assets/rules-catalog-widget-data.js",
+        "assets/rules-catalog-widget-data.js",
         "/assets/rules-catalog-widget-data.js"
       ], "RulesCatalogWidgetData");
     }
@@ -147,18 +181,31 @@
     return features._rulesCatalogWidgetDataPromise;
   };
 
+  features.ensureEldoriaSiteConfig = async function ensureEldoriaSiteConfig() {
+    if (global.ELDORIA_SITE_CONFIG || global.ELDORIA_API_BASE_URL) {
+      return global.ELDORIA_SITE_CONFIG || {};
+    }
+
+    if (!features._eldoriaSiteConfigPromise) {
+      features._eldoriaSiteConfigPromise = loadScriptFromCandidates([
+        "../../site-assets/site-config.js",
+        "../site-assets/site-config.js",
+        "site-assets/site-config.js",
+        "/site-assets/site-config.js"
+      ], "ELDORIA_SITE_CONFIG").catch(function () {
+        return {};
+      });
+    }
+
+    return features._eldoriaSiteConfigPromise;
+  };
+
   async function importApiClientModule(config) {
     if (features._eldoriaApiClientModulePromise) {
       return features._eldoriaApiClientModulePromise;
     }
 
-    var paths = [
-      config.apiClientPath,
-      global.ELDORIA_API_CLIENT_PATH,
-      "../../api/apiClient/index.js",
-      "../api/apiClient/index.js",
-      "/api/apiClient/index.js"
-    ].filter(Boolean);
+    var paths = apiClientCandidates(config);
 
     features._eldoriaApiClientModulePromise = (async function () {
       var errors = [];
@@ -176,9 +223,10 @@
   }
 
   async function createApiClient(config) {
+    await features.ensureEldoriaSiteConfig();
     var module = await importApiClientModule(config);
     return module.createEldoriaApiClient({
-      baseUrl: config.apiBaseUrl || global.ELDORIA_API_BASE_URL || "/api",
+      baseUrl: apiBaseUrl(config),
       functionKey: config.apiFunctionKey || global.ELDORIA_API_FUNCTION_KEY || ""
     });
   }
@@ -198,11 +246,20 @@
     return [kind];
   }
 
-  features.loadRulesRows = async function loadRulesRows(config) {
+  features.loadRulesRows = async function loadRulesRows(config, queryText) {
     var kind = config.dataKind || config.itemLabel;
     var RulesCatalogWidgetData = await features.ensureRulesCatalogWidgetData();
     var api = await createApiClient(config);
     var catalogs = {};
+
+    if (config.remoteSearch) {
+      var query = String(queryText || config.initialQuery || "").trim();
+      var response = query
+        ? await api.searchCatalog(kind, query, { limit: config.remoteLimit || 200 })
+        : await api.searchCatalog(kind, config.initialQuery || "a", { limit: config.remoteLimit || 200 });
+      var apiRows = Array.isArray(response.items) ? response.items : [];
+      return typeof config.mapApiRow === "function" ? apiRows.map(config.mapApiRow) : apiRows;
+    }
 
     for (var index = 0; index < catalogKindsForRows(kind).length; index += 1) {
       var catalogKind = catalogKindsForRows(kind)[index];
@@ -305,6 +362,10 @@
       app.state.query = app.inputNode.value;
       window.clearTimeout(pendingRender);
       pendingRender = window.setTimeout(function () {
+        if (app.config.remoteSearch) {
+          app.reloadRows();
+          return;
+        }
         app.render();
       }, 100);
     });
@@ -313,6 +374,10 @@
       app.state.query = "";
       app.inputNode.value = "";
       app.inputNode.focus();
+      if (app.config.remoteSearch) {
+        app.reloadRows();
+        return;
+      }
       app.render();
     });
 
@@ -582,7 +647,14 @@
   };
 
   RulesSearchApp.prototype.loadRows = async function loadRows() {
-    return features.loadRulesRows(this.config);
+    return features.loadRulesRows(this.config, this.state.query);
+  };
+
+  RulesSearchApp.prototype.clearFilters = function clearFilters() {
+    var app = this;
+    this.config.filters.forEach(function (filter) {
+      app.state.filters[filter.key] = new Set();
+    });
   };
 
   RulesSearchApp.prototype.sortFilterValues = function sortFilterValues(values, filter) {
@@ -618,6 +690,7 @@
       });
     });
 
+    this.filterOptions = {};
     this.config.filters.forEach(function (filter) {
       var values = helpers.dedupe(app.rows.flatMap(function (row) {
         return row._filterValues[filter.key] || [];
@@ -680,13 +753,14 @@
   };
 
   RulesSearchApp.prototype.clearAll = function clearAll() {
-    var app = this;
     this.state.query = "";
     this.state.sort = this.config.sorts[0].key;
-    this.config.filters.forEach(function (filter) {
-      app.state.filters[filter.key] = new Set();
-    });
+    this.clearFilters();
     this.applyStateToControls();
+    if (this.config.remoteSearch) {
+      this.reloadRows();
+      return;
+    }
     this.render();
   };
 
@@ -790,9 +864,43 @@
     }).join("");
   };
 
+  RulesSearchApp.prototype.reloadRows = async function reloadRows() {
+    this._loadRequestId = (this._loadRequestId || 0) + 1;
+    var requestId = this._loadRequestId;
+    this.countNode.textContent = "Loading " + this.config.itemLabel + " data...";
+    this.resultsNode.innerHTML = "";
+
+    try {
+      var rows = await this.loadRows();
+      if (requestId !== this._loadRequestId) {
+        return;
+      }
+      this.rows = rows;
+      this.prepareRows();
+      this.clearFilters();
+      this.buildFilterControls();
+      this.applyStateToControls();
+      this.render();
+    } catch (error) {
+      if (requestId !== this._loadRequestId) {
+        return;
+      }
+      console.error("Error loading " + this.config.title + ":", error);
+      this.resultsNode.innerHTML = '<div class="rules-search-empty">Unable to load ' + escapeHtml(this.config.itemLabel) + " data.</div>";
+      this.countNode.textContent = "Data failed to load.";
+    }
+  };
+
   RulesSearchApp.prototype.init = async function init() {
     this.renderShell();
     this.cacheNodes();
+
+    var params = new URLSearchParams(window.location.search);
+    this.state.query = params.get("q") || "";
+    var requestedSort = params.get("sort");
+    if (this.config.sorts.some(function (sort) { return sort.key === requestedSort; })) {
+      this.state.sort = requestedSort;
+    }
 
     try {
       this.rows = await this.loadRows();

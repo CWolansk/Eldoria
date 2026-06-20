@@ -82,7 +82,7 @@ export const LANGUAGE_CHOICE_OPTIONS = DEFAULT_LANGUAGE_NAMES.map((language) => 
     label: language
 }));
 
-export const TOOL_CHOICE_OPTIONS = [
+export const ARTISAN_TOOL_CHOICE_OPTIONS = [
     "Alchemist's Supplies",
     "Brewer's Supplies",
     "Calligrapher's Supplies",
@@ -90,26 +90,50 @@ export const TOOL_CHOICE_OPTIONS = [
     "Cartographer's Tools",
     "Cobbler's Tools",
     "Cook's Utensils",
-    "Disguise Kit",
-    "Forgery Kit",
-    "Gaming Set",
     "Glassblower's Tools",
-    "Herbalism Kit",
     "Jeweler's Tools",
     "Leatherworker's Tools",
     "Mason's Tools",
-    "Musical Instrument",
-    "Navigator's Tools",
     "Painter's Supplies",
-    "Poisoner's Kit",
     "Potter's Tools",
     "Smith's Tools",
-    "Thieves' Tools",
     "Tinker's Tools",
-    "Vehicle (Land)",
-    "Vehicle (Water)",
     "Weaver's Tools",
     "Woodcarver's Tools"
+].map((tool) => ({
+    value: tool,
+    label: tool
+}));
+
+export const MUSICAL_INSTRUMENT_CHOICE_OPTIONS = [
+    "Bagpipes",
+    "Drum",
+    "Dulcimer",
+    "Flute",
+    "Lute",
+    "Lyre",
+    "Horn",
+    "Pan Flute",
+    "Shawm",
+    "Viol"
+].map((tool) => ({
+    value: tool,
+    label: tool
+}));
+
+export const TOOL_CHOICE_OPTIONS = [
+    ...ARTISAN_TOOL_CHOICE_OPTIONS.map((option) => option.value),
+    ...MUSICAL_INSTRUMENT_CHOICE_OPTIONS.map((option) => option.value),
+    "Disguise Kit",
+    "Forgery Kit",
+    "Gaming Set",
+    "Herbalism Kit",
+    "Musical Instrument",
+    "Navigator's Tools",
+    "Poisoner's Kit",
+    "Thieves' Tools",
+    "Vehicle (Land)",
+    "Vehicle (Water)"
 ].map((tool) => ({
     value: tool,
     label: tool
@@ -423,6 +447,15 @@ function createModelGroup(entity, rawGroup, index, config, context) {
     };
 }
 
+function getFixedGrantChoiceGroups(rawFixedValue, config) {
+    if (typeof config.expandFixedChoice !== "function") {
+        return [];
+    }
+
+    return toArray(config.expandFixedChoice(rawFixedValue))
+        .filter((choice) => choice && typeof choice === "object");
+}
+
 function createModelGroupFromDefinition(entity, choice, index, config, context) {
     if (!shouldIncludeEntityChoice(entity, choice, config, context)) {
         return null;
@@ -505,12 +538,25 @@ function hydrateGroupSelections(groups, fixedMap, existingValues, persistedGroup
 export function buildStartingChoiceModel(records, config, existingValues = [], persistedGroups = {}, context = null) {
     const fixedMap = new Map();
     const groups = [];
+    let fixedChoiceIndex = 0;
 
     for (const entity of toArray(records)) {
         const sourceName = getCatalogDisplayName(entity, "");
         const group = getGrantGroup(entity, config.grantKey);
 
         for (const fixed of toArray(group?.fixed)) {
+            const fixedChoiceGroups = getFixedGrantChoiceGroups(fixed, config);
+            if (fixedChoiceGroups.length) {
+                for (const fixedChoiceGroup of fixedChoiceGroups) {
+                    const choiceGroup = createModelGroup(entity, fixedChoiceGroup, `fixed-${fixedChoiceIndex}`, config, context);
+                    fixedChoiceIndex += 1;
+                    if (choiceGroup?.count > 0) {
+                        groups.push(choiceGroup);
+                    }
+                }
+                continue;
+            }
+
             addValue(fixedMap, fixed, config, sourceName);
         }
 

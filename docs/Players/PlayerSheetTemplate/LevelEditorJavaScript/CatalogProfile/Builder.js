@@ -22,6 +22,33 @@ import {
     getSubclassProfile
 } from "./Features.js";
 
+function normalizeFeatureName(value) {
+    return String(value || "")
+        .replace(/^feature:\s*/iu, "")
+        .replace(/\s+/gu, " ")
+        .trim()
+        .toLowerCase();
+}
+
+function getBackgroundFeatureRules(catalogRecord) {
+    const featureName = normalizeFeatureName(catalogRecord?.feature);
+    const entries = toArray(catalogRecord?.entries || catalogRecord?.raw?.entries)
+        .filter((entry) => entry && typeof entry === "object");
+    const featureEntries = entries.filter((entry) => {
+        const entryName = normalizeFeatureName(entry.name);
+        return Boolean(entry?.data?.isFeature)
+            || /^feature:/iu.test(String(entry.name || ""))
+            || (featureName && entryName === featureName);
+    });
+
+    if (!featureEntries.length) {
+        return null;
+    }
+
+    return featureEntries.find((entry) => normalizeFeatureName(entry.name) === featureName)
+        || (featureEntries.length === 1 ? featureEntries[0] : null);
+}
+
 export function buildCatalogProfile(catalogRecord, profileOptions = {}) {
     // Normalize one catalog record into the shape the editor can store and summarize.
     if (!catalogRecord || typeof catalogRecord !== "object") {
@@ -45,7 +72,8 @@ export function buildCatalogProfile(catalogRecord, profileOptions = {}) {
         spells: getSpellProfile(catalogRecord),
         prerequisites: toArray(catalogRecord?.prerequisite).map(deepClone),
         background: {
-            feature: catalogRecord?.feature || ""
+            feature: catalogRecord?.feature || "",
+            featureRules: deepClone(getBackgroundFeatureRules(catalogRecord))
         },
         class: getClassProfile(catalogRecord),
         subclass: getSubclassProfile(catalogRecord),

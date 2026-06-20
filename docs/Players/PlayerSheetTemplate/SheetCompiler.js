@@ -56,6 +56,46 @@ const SUBCLASS_FEATURE_FALLBACKS = {
     ]
 };
 
+const CLASS_SPELLCASTING_FALLBACKS = {
+    ranger: {
+        ability: "wis",
+        casterProgression: "1/2",
+        startLevel: 2,
+        preparedSpells: "",
+        progression: {
+            cantripProgression: [],
+            spellsKnownProgression: [0, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11],
+            classTableGroups: [
+                {
+                    title: "Spell Slots per Spell Level",
+                    rowsSpellProgression: [
+                        [0, 0, 0, 0, 0],
+                        [2, 0, 0, 0, 0],
+                        [3, 0, 0, 0, 0],
+                        [3, 0, 0, 0, 0],
+                        [4, 2, 0, 0, 0],
+                        [4, 2, 0, 0, 0],
+                        [4, 3, 0, 0, 0],
+                        [4, 3, 0, 0, 0],
+                        [4, 3, 2, 0, 0],
+                        [4, 3, 2, 0, 0],
+                        [4, 3, 3, 0, 0],
+                        [4, 3, 3, 0, 0],
+                        [4, 3, 3, 1, 0],
+                        [4, 3, 3, 1, 0],
+                        [4, 3, 3, 2, 0],
+                        [4, 3, 3, 2, 0],
+                        [4, 3, 3, 3, 1],
+                        [4, 3, 3, 3, 1],
+                        [4, 3, 3, 3, 2],
+                        [4, 3, 3, 3, 2]
+                    ]
+                }
+            ]
+        }
+    }
+};
+
 export const EXPERIENCE_LEVEL_THRESHOLDS = Object.freeze([
     0,
     300,
@@ -262,9 +302,10 @@ function getSubclassFallbackKey(classEntry = {}, subclassEntry = {}) {
 }
 
 function getClassSavingThrows(classEntry = {}) {
+    const entry = classEntry || {};
     return [
-        ...toArray(classEntry.savingThrows),
-        ...getClassFallbackProficiencies(classEntry, "savingThrows")
+        ...toArray(entry.savingThrows),
+        ...getClassFallbackProficiencies(entry, "savingThrows")
     ];
 }
 
@@ -328,7 +369,7 @@ function getAbilityModifier(score) {
     return Math.floor((toNumber(score, 10) - 10) / 2);
 }
 
-function makeProficiencyEntries(values, grantedBy) {
+function makeProficiencyEntries(values, grantedBy, formatter = null) {
     function cleanName(value) {
         const text = String(value || "").trim().replace(/'S\b/gu, "'s");
         if (text === text.toLowerCase()) {
@@ -340,11 +381,16 @@ function makeProficiencyEntries(values, grantedBy) {
         return text;
     }
 
+    const formatName = (value) => {
+        const name = formatter ? formatter(value) : cleanName(value);
+        return cleanName(name);
+    };
+
     return toArray(values)
         .map((value) => {
             if (typeof value === "string") {
                 return {
-                    name: cleanName(value),
+                    name: formatName(value),
                     grantedBy,
                     multiclass: false
                 };
@@ -352,12 +398,29 @@ function makeProficiencyEntries(values, grantedBy) {
 
             return {
                 ...deepClone(value),
-                name: cleanName(value?.name || value?.id || value?.key),
+                name: formatName(value?.name || value?.id || value?.key),
                 grantedBy: value?.grantedBy || grantedBy,
                 multiclass: Boolean(value?.multiclass)
             };
         })
         .filter((entry) => entry.name);
+}
+
+function formatWeaponProficiencyName(value) {
+    const key = normalizeSearchText(value);
+    if (key === "simple") {
+        return "Simple Weapons";
+    }
+    if (key === "martial") {
+        return "Martial Weapons";
+    }
+    return value;
+}
+
+function isChoicePlaceholderProficiency(value) {
+    const text = normalizeSearchText(value?.name || value?.value || value);
+    return /\b(?:any|choice)\b/iu.test(text)
+        && /\b(?:tool|weapon|armor|language|skill|instrument)\b/iu.test(text);
 }
 
 function uniqueProficiencyValues(values) {
@@ -468,6 +531,15 @@ function getRaceSelections(dto) {
 
 function getRaceSelectionList(dto) {
     return Object.values(getRaceSelections(dto)).filter(Boolean);
+}
+
+function getBackgroundSelections(dto) {
+    const selections = dto?.baseChoices?.backgroundChoices?.selections;
+    return selections && typeof selections === "object" ? selections : {};
+}
+
+function getBackgroundSelectionList(dto) {
+    return Object.values(getBackgroundSelections(dto)).filter(Boolean);
 }
 
 function getRaceProfile(dto) {
@@ -603,7 +675,7 @@ function compileAbilityScores(dto) {
     }
 
     const savingThrows = new Set(dto.baseChoices.startingProficiencies.savingThrows || []);
-    getClassSavingThrows(dto.levels?.[0]?.class)
+    getClassSavingThrows(dto.levels?.[0]?.class || null)
         .map(normalizeSaveAbility)
         .filter(Boolean)
         .forEach((save) => savingThrows.add(save));
@@ -667,7 +739,8 @@ function compileProficiencies(dto) {
 
     function fixedClassProficiencies(key) {
         const fixed = toArray(firstClass?.startingProficiencies?.[key]?.fixed);
-        return fixed.length ? fixed : getClassFallbackProficiencies(firstClass, key);
+        const values = fixed.length ? fixed : getClassFallbackProficiencies(firstClass, key);
+        return values.filter((value) => !isChoicePlaceholderProficiency(value));
     }
 
     function fixedRaceProficiencies(key) {
@@ -684,7 +757,7 @@ function compileProficiencies(dto) {
 
     return {
         armor: makeProficiencyEntries(mergeProficiencies("armor"), "baseChoices"),
-        weapons: makeProficiencyEntries(mergeProficiencies("weapons"), "baseChoices"),
+        weapons: makeProficiencyEntries(mergeProficiencies("weapons"), "baseChoices", formatWeaponProficiencyName),
         tools: makeProficiencyEntries(mergeProficiencies("tools"), "baseChoices"),
         languages: makeProficiencyEntries(mergeProficiencies("languages"), "baseChoices"),
         savingThrows: [...new Set([
@@ -780,10 +853,512 @@ function compileFeatSpells(dto, abilityScores, proficiencyBonus) {
     };
 }
 
+function getClassSpellcastingFallbackKey(classEntry = {}) {
+    const entry = classEntry || {};
+    const text = normalizeSearchText([
+        entry.id,
+        entry.name,
+        entry.ref,
+        entry.options?.catalogId,
+        entry.options?.ref,
+        entry.options?.sourceId,
+        entry.options?.displayName
+    ].filter(Boolean).join(" "));
+
+    if (/\branger\b|class[:/-]ranger|class-ranger/u.test(text)) {
+        return "ranger";
+    }
+
+    return "";
+}
+
+function getClassSpellcastingMeta(classEntry = {}) {
+    const entry = classEntry || {};
+    const fallback = CLASS_SPELLCASTING_FALLBACKS[getClassSpellcastingFallbackKey(entry)] || null;
+    const directSpellcasting = entry.spellcasting
+        || entry.profile?.spellcasting
+        || entry.profile?.class?.spellcasting
+        || null;
+    const directProgression = entry.progression
+        || entry.profile?.progression
+        || entry.profile?.class?.progression
+        || null;
+    const ability = normalizeAbilityKey(directSpellcasting?.ability || fallback?.ability);
+
+    if (!ability) {
+        return null;
+    }
+
+    return {
+        ability,
+        casterProgression: directSpellcasting?.casterProgression || fallback?.casterProgression || "",
+        preparedSpells: directSpellcasting?.preparedSpells ?? fallback?.preparedSpells ?? "",
+        startLevel: toNumber(directSpellcasting?.startLevel ?? directSpellcasting?.level ?? fallback?.startLevel, 0),
+        progression: directProgression || fallback?.progression || {}
+    };
+}
+
+function getProgressionValue(progression = [], classLevel = 1) {
+    const values = toArray(progression);
+    const index = Math.max(toNumber(classLevel, 1), 1) - 1;
+    return toNumber(values[Math.min(index, values.length - 1)], 0);
+}
+
+function getSpellSlotProgressionRows(progression = {}) {
+    const directRows = toArray(progression.rowsSpellProgression);
+    if (directRows.length) {
+        return directRows;
+    }
+
+    const group = toArray(progression.classTableGroups)
+        .find((entry) => toArray(entry?.rowsSpellProgression).length);
+    return toArray(group?.rowsSpellProgression);
+}
+
+function getClassSpellSlotRow(meta = {}, classLevel = 1) {
+    const source = meta || {};
+    const rows = getSpellSlotProgressionRows(source.progression || {});
+    if (!rows.length) {
+        return [];
+    }
+
+    const index = Math.max(toNumber(classLevel, 1), 1) - 1;
+    return toArray(rows[Math.min(index, rows.length - 1)]).map((value) => toNumber(value, 0));
+}
+
+function formatResourceRulesText(value) {
+    return String(value || "")
+        .replace(/[{]@[^}]+[}]/gu, (match) => {
+            const content = match.slice(2, -1);
+            const withoutTag = content.replace(/^[a-zA-Z]+ ?/u, "");
+            return withoutTag.split("|")[0].trim();
+        })
+        .replace(/\s+/gu, " ")
+        .trim();
+}
+
+function formatClassResourceLabel(value) {
+    return formatResourceRulesText(value);
+}
+
+function shouldExcludeClassResourceLabel(value) {
+    const label = normalizeSearchText(formatClassResourceLabel(value));
+    if (!label) {
+        return true;
+    }
+
+    return /cantrips?\s+known|spells?\s+known|spell\s+slots?|slot\s+level|\|spells?\||\blevel=\d+\b/u.test(label);
+}
+
+function formatSignedClassResourceBonus(value) {
+    const number = toNumber(value, 0);
+    return number >= 0 ? `+${number}` : String(number);
+}
+
+function formatDiceResourceValue(value) {
+    const rolls = toArray(value?.toRoll)
+        .map((roll) => {
+            const number = toNumber(roll?.number, 0);
+            const faces = toNumber(roll?.faces, 0);
+            return number && faces ? `${number}d${faces}` : "";
+        })
+        .filter(Boolean);
+    return rolls.join(" + ");
+}
+
+function formatClassResourceValue(value) {
+    if (value == null) {
+        return "";
+    }
+
+    if (typeof value === "number") {
+        return String(value);
+    }
+
+    if (typeof value === "string" || typeof value === "boolean") {
+        return formatResourceRulesText(value);
+    }
+
+    if (Array.isArray(value)) {
+        return value.map(formatClassResourceValue).filter(Boolean).join(", ");
+    }
+
+    if (typeof value === "object") {
+        if (value.type === "dice") {
+            return formatDiceResourceValue(value);
+        }
+        if (value.type === "bonus") {
+            return formatSignedClassResourceBonus(value.value);
+        }
+        if (value.type === "bonusSpeed") {
+            const speed = toNumber(value.value, 0);
+            return speed > 0 ? `+${speed} ft.` : "0 ft.";
+        }
+
+        const direct = value.label || value.name || value.entry || value.value;
+        if (direct != null && direct !== value) {
+            return formatClassResourceValue(direct);
+        }
+
+        return formatResourceRulesText(JSON.stringify(value));
+    }
+
+    return "";
+}
+
+function getClassProgression(classEntry = {}) {
+    return classEntry?.progression
+        || classEntry?.profile?.class?.progression
+        || classEntry?.profile?.progression
+        || classEntry?.raw?.progression
+        || {};
+}
+
+function getClassResourceTableGroups(classEntry = {}) {
+    const progressionGroups = toArray(getClassProgression(classEntry).classTableGroups);
+    if (progressionGroups.length) {
+        return progressionGroups;
+    }
+
+    return [
+        ...toArray(classEntry?.classTableGroups),
+        ...toArray(classEntry?.profile?.class?.classTableGroups),
+        ...toArray(classEntry?.raw?.classTableGroups)
+    ];
+}
+
+function createClassResourceTable(tableGroup = {}, classLevel = 1) {
+    const rows = toArray(tableGroup.rows);
+    const sourceLabels = toArray(tableGroup.colLabels);
+    if (!rows.length || !sourceLabels.length) {
+        return null;
+    }
+
+    const columns = sourceLabels
+        .map((label, index) => ({
+            index,
+            label: formatClassResourceLabel(label)
+        }))
+        .filter((column) => column.label && !shouldExcludeClassResourceLabel(column.label));
+
+    if (!columns.length) {
+        return null;
+    }
+
+    const tableRows = rows
+        .map((row, rowIndex) => {
+            const sourceRow = toArray(row);
+            const values = columns
+                .map((column) => ({
+                    label: column.label,
+                    value: formatClassResourceValue(sourceRow[column.index])
+                }))
+                .filter((entry) => entry.value !== "");
+
+            return {
+                level: rowIndex + 1,
+                current: rowIndex + 1 === classLevel,
+                values
+            };
+        })
+        .filter((row) => row.values.length);
+
+    if (!tableRows.length) {
+        return null;
+    }
+
+    return {
+        title: formatResourceRulesText(tableGroup.title || "Class Progression"),
+        columns: columns.map((column) => column.label),
+        rows: tableRows
+    };
+}
+
+function compileClassResources(dto, characterLevel = MAX_CHARACTER_LEVEL) {
+    const groups = [];
+    const groupByClass = new Map();
+
+    for (const level of getCompiledLevelEntries(dto, characterLevel)) {
+        if (!level.class) {
+            continue;
+        }
+
+        const key = identityKey(level.class) || `class-${groups.length + 1}`;
+        const classLevel = toNumber(level.class.classLevel, level.effectiveClassLevel) || level.effectiveClassLevel || 1;
+        if (!groupByClass.has(key)) {
+            const group = {
+                id: level.class.id || "",
+                className: identityName(level.class, "Class"),
+                source: level.class.source || "",
+                classLevel,
+                classEntry: level.class
+            };
+            groupByClass.set(key, group);
+            groups.push(group);
+            continue;
+        }
+
+        const group = groupByClass.get(key);
+        group.classLevel = Math.max(group.classLevel, classLevel);
+        group.classEntry = level.class;
+    }
+
+    return groups
+        .map((group) => {
+            const tables = getClassResourceTableGroups(group.classEntry)
+                .map((tableGroup) => createClassResourceTable(tableGroup, group.classLevel))
+                .filter(Boolean);
+            const currentValues = tables.flatMap((table) => {
+                const row = table.rows.find((entry) => entry.current)
+                    || table.rows.find((entry) => entry.level === group.classLevel)
+                    || null;
+                return toArray(row?.values);
+            });
+
+            if (!tables.length || !currentValues.length) {
+                return null;
+            }
+
+            return {
+                id: group.id,
+                className: group.className,
+                source: group.source,
+                classLevel: group.classLevel,
+                currentValues,
+                tables
+            };
+        })
+        .filter(Boolean);
+}
+
+function inferSpellcastingStartLevel(meta = {}) {
+    if (toNumber(meta.startLevel, 0) > 0) {
+        return toNumber(meta.startLevel, 1);
+    }
+
+    const progression = meta.progression || {};
+    const known = toArray(progression.spellsKnownProgression);
+    const cantrips = toArray(progression.cantripProgression);
+    const slotRows = getSpellSlotProgressionRows(progression);
+    const maxLength = Math.max(known.length, cantrips.length, slotRows.length);
+
+    for (let index = 0; index < maxLength; index += 1) {
+        const hasKnown = toNumber(known[index], 0) > 0;
+        const hasCantrips = toNumber(cantrips[index], 0) > 0;
+        const hasSlots = toArray(slotRows[index]).some((value) => toNumber(value, 0) > 0);
+        if (hasKnown || hasCantrips || hasSlots) {
+            return index + 1;
+        }
+    }
+
+    return meta.ability ? 1 : MAX_CHARACTER_LEVEL + 1;
+}
+
+function getClassLevelForGroup(group = {}) {
+    return Math.max(0, ...toArray(group.levels).map((level) => toNumber(level?.level, 0)));
+}
+
+function createSpellcastingBlock({
+    dto,
+    abilityScores,
+    proficiencyBonus,
+    group,
+    meta,
+    abilityOverride = "",
+    preparationStyle = "",
+    includeDtoSpells = true,
+    requireStartLevel = true
+}) {
+    if (!meta && !abilityOverride) {
+        return null;
+    }
+
+    const classLevel = getClassLevelForGroup(group);
+    if (requireStartLevel && classLevel < inferSpellcastingStartLevel(meta)) {
+        return null;
+    }
+
+    const ability = normalizeAbilityKey(abilityOverride || meta?.ability);
+    if (!ability) {
+        return null;
+    }
+
+    const abilityModifier = abilityScores[ability]?.modifier || 0;
+    const knownCount = getProgressionValue(meta?.progression?.spellsKnownProgression, classLevel);
+    const cantripCount = getProgressionValue(meta?.progression?.cantripProgression, classLevel);
+    const preparedSpells = includeDtoSpells ? toArray(dto.spells.prepared) : [];
+    const knownSpells = includeDtoSpells ? toArray(dto.spells.known) : [];
+    const cantrips = includeDtoSpells ? toArray(dto.spells.cantrips) : [];
+
+    return {
+        ability,
+        preparationStyle: preparationStyle || (meta?.preparedSpells ? "prepared" : "known"),
+        casterProgression: meta?.casterProgression || "",
+        spellPool: {
+            type: preparationStyle === "dto" ? "dto" : "class",
+            entries: []
+        },
+        preparedSpells,
+        cantrips,
+        knownSpells,
+        innateSpells: [],
+        alwaysPrepared: includeDtoSpells ? toArray(dto.spells.alwaysPrepared) : [],
+        spellAttackBonus: abilityModifier + proficiencyBonus,
+        spellSaveDc: 8 + abilityModifier + proficiencyBonus,
+        preparedFormula: meta?.preparedSpells || "",
+        preparedCount: preparedSpells.length,
+        spellsKnown: knownCount || knownSpells.length,
+        cantripsKnown: cantripCount || cantrips.length,
+        slotProgression: getClassSpellSlotRow(meta, classLevel)
+    };
+}
+
+function getClassLevelMap(levels) {
+    const classLevelMap = new Map();
+    for (const level of toArray(levels)) {
+        if (!level?.class) {
+            continue;
+        }
+
+        const key = identityKey(level.class) || `class-${classLevelMap.size + 1}`;
+        const nextClassLevel = (classLevelMap.get(key) || 0) + 1;
+        classLevelMap.set(key, nextClassLevel);
+    }
+    return classLevelMap;
+}
+
+function getPrimarySpellcastingAbility(dto) {
+    const explicitAbility = normalizeAbilityKey(dto.spells.spellcastingAbility);
+    if (explicitAbility) {
+        return explicitAbility;
+    }
+
+    for (const level of toArray(dto.levels)) {
+        const ability = normalizeAbilityKey(getClassSpellcastingMeta(level?.class)?.ability);
+        if (ability) {
+            return ability;
+        }
+    }
+
+    return "";
+}
+
+function createClassChoiceSpellEntry(value = {}, choice = {}, level = {}) {
+    const name = value.name || value.label || value.value || "";
+    if (!name) {
+        return null;
+    }
+
+    return {
+        ...deepClone(value),
+        name,
+        ref: value.ref || value.recordId || value.value || "",
+        source: value.source || choice.source || "",
+        level: toNumber(value.level, 0),
+        mode: value.mode || choice.mode || "known",
+        sourceFeature: choice.label || choice.featureName || "Class Option",
+        sourceClass: level.class?.name || ""
+    };
+}
+
+function createClassGroupSpellEntry(spellGrant = {}, choice = {}, level = {}) {
+    const name = spellGrant.name || spellGrant.label || spellGrant.value || "";
+    if (!name) {
+        return null;
+    }
+
+    return {
+        ...deepClone(spellGrant),
+        name,
+        ref: spellGrant.ref || spellGrant.id || "",
+        source: spellGrant.source || choice.source || "",
+        level: toNumber(spellGrant.level, 0),
+        mode: spellGrant.mode || "prepared",
+        sourceFeature: choice.label || choice.featureName || "Class Option",
+        sourceClass: level.class?.name || ""
+    };
+}
+
+function addSpellByMode(groups, spell) {
+    if (!spell) {
+        return;
+    }
+
+    if (toNumber(spell.level, 0) === 0) {
+        addUniqueSpell(groups.cantrips, spell);
+        return;
+    }
+
+    if (spell.mode === "innate") {
+        addUniqueSpell(groups.innate, spell);
+        return;
+    }
+
+    if (spell.mode === "prepared") {
+        addUniqueSpell(groups.alwaysPrepared, spell);
+        return;
+    }
+
+    addUniqueSpell(groups.known, spell);
+}
+
+function compileClassChoiceSpells(dto, abilityScores, proficiencyBonus, characterLevel = MAX_CHARACTER_LEVEL) {
+    const activeLevels = getCompiledLevelEntries(dto, characterLevel);
+    const classLevelMap = getClassLevelMap(activeLevels);
+    const groups = {
+        cantrips: [],
+        known: [],
+        alwaysPrepared: [],
+        innate: []
+    };
+
+    for (const level of activeLevels) {
+        if (!level.class) {
+            continue;
+        }
+
+        const classKey = identityKey(level.class);
+        const currentClassLevel = classLevelMap.get(classKey) || toNumber(level.class.classLevel, level.effectiveClassLevel);
+        for (const choice of toArray(level.choices).filter((entry) => entry?.type === "class-option")) {
+            if (choice.spellChoice || choice.choiceType === "spell") {
+                for (const value of toArray(choice.values)) {
+                    addSpellByMode(groups, createClassChoiceSpellEntry(value, choice, level));
+                }
+                continue;
+            }
+
+            if (choice.spellGroupChoice || choice.choiceType === "spell-group") {
+                for (const value of toArray(choice.values)) {
+                    for (const spellGrant of toArray(value?.spellGrants)) {
+                        const unlockAtLevel = toNumber(spellGrant.unlockAtLevel, 0);
+                        if (unlockAtLevel && currentClassLevel < unlockAtLevel) {
+                            continue;
+                        }
+                        addSpellByMode(groups, createClassGroupSpellEntry(spellGrant, choice, level));
+                    }
+                }
+            }
+        }
+    }
+
+    const ability = getPrimarySpellcastingAbility(dto);
+    const abilityModifier = ability ? abilityScores[ability]?.modifier || 0 : 0;
+    return {
+        ability,
+        spellAttackBonus: ability ? abilityModifier + proficiencyBonus : null,
+        spellSaveDc: ability ? 8 + abilityModifier + proficiencyBonus : null,
+        cantrips: groups.cantrips,
+        known: groups.known,
+        alwaysPrepared: groups.alwaysPrepared,
+        innate: groups.innate
+    };
+}
+
 function compileClasses(dto, abilityScores, proficiencyBonus, characterLevel = MAX_CHARACTER_LEVEL) {
     const groups = [];
     const groupByClass = new Map();
     const classLevelCounts = new Map();
+    const spellcastingMetaByClass = new Map();
     const spellcastingAbility = normalizeAbilityKey(dto.spells.spellcastingAbility);
 
     for (const level of getCompiledLevelEntries(dto, characterLevel)) {
@@ -815,6 +1390,13 @@ function compileClasses(dto, abilityScores, proficiencyBonus, characterLevel = M
             groups.push(group);
         }
 
+        if (!spellcastingMetaByClass.has(key)) {
+            const meta = getClassSpellcastingMeta(level.class);
+            if (meta) {
+                spellcastingMetaByClass.set(key, meta);
+            }
+        }
+
         const group = groupByClass.get(key);
         if (!group.sub && level.subclass?.name) {
             group.sub = level.subclass.name;
@@ -840,26 +1422,29 @@ function compileClasses(dto, abilityScores, proficiencyBonus, characterLevel = M
     }
 
     if (spellcastingAbility && groups.length) {
-        const abilityModifier = abilityScores[spellcastingAbility]?.modifier || 0;
-        groups[0].spellcasting = {
-            ability: spellcastingAbility,
+        const [primaryKey] = groupByClass.keys();
+        groups[0].spellcasting = createSpellcastingBlock({
+            dto,
+            abilityScores,
+            proficiencyBonus,
+            group: groups[0],
+            meta: spellcastingMetaByClass.get(primaryKey) || null,
+            abilityOverride: spellcastingAbility,
             preparationStyle: "dto",
-            spellPool: {
-                type: "dto",
-                entries: []
-            },
-            preparedSpells: toArray(dto.spells.prepared),
-            cantrips: toArray(dto.spells.cantrips),
-            knownSpells: toArray(dto.spells.known),
-            innateSpells: [],
-            alwaysPrepared: toArray(dto.spells.alwaysPrepared),
-            spellAttackBonus: abilityModifier + proficiencyBonus,
-            spellSaveDc: 8 + abilityModifier + proficiencyBonus,
-            preparedFormula: "",
-            preparedCount: toArray(dto.spells.prepared).length,
-            spellsKnown: toArray(dto.spells.known).length,
-            cantripsKnown: toArray(dto.spells.cantrips).length
-        };
+            includeDtoSpells: true,
+            requireStartLevel: false
+        });
+    } else {
+        for (const [key, group] of groupByClass.entries()) {
+            group.spellcasting = createSpellcastingBlock({
+                dto,
+                abilityScores,
+                proficiencyBonus,
+                group,
+                meta: spellcastingMetaByClass.get(key) || null,
+                includeDtoSpells: group.isPrimary
+            });
+        }
     }
 
     return groups;
@@ -983,9 +1568,71 @@ function createCompiledFeature(feature, level, category, sourceFallback, prefixe
     };
 }
 
+function isOptionalFeatureRecord(feature) {
+    return typeof feature === "object" && feature !== null && feature.optional === true;
+}
+
+function featureOptInTokens(entry) {
+    if (!entry) {
+        return [];
+    }
+
+    if (typeof entry === "string") {
+        return [entry.toLowerCase()];
+    }
+
+    return [
+        entry.name,
+        entry.label,
+        entry.featureName,
+        entry.id,
+        entry.ref,
+        entry.catalogId,
+        getCanonicalCatalogId(entry, ["class-feature:", "subclass-feature:"])
+    ].map((token) => String(token || "").toLowerCase()).filter(Boolean);
+}
+
+// Optional class/subclass features (e.g. Tasha's "Dedicated Weapon", "Ki-Fueled
+// Attack") live inline in the catalog's classFeatures list with optional:true.
+// They are only "gained" when the character explicitly opts in, which the level
+// editor records into that level's stored features/choices. Collect those tokens
+// so the automatic-feature pass can tell a chosen optional from an unchosen one.
+function collectOptInKeysFromLevels(levels) {
+    const keys = new Set();
+
+    for (const level of toArray(levels)) {
+        for (const feature of toArray(level?.features)) {
+            featureOptInTokens(feature).forEach((token) => keys.add(token));
+        }
+
+        for (const choice of toArray(level?.choices)) {
+            featureOptInTokens(choice).forEach((token) => keys.add(token));
+            for (const value of toArray(choice?.values)) {
+                featureOptInTokens(value).forEach((token) => keys.add(token));
+            }
+        }
+    }
+
+    return keys;
+}
+
+function isFeatureOptedIn(feature, optInKeys) {
+    if (!optInKeys || optInKeys.size === 0) {
+        return false;
+    }
+
+    return featureOptInTokens(feature).some((token) => optInKeys.has(token));
+}
+
+function includeAutomaticFeature(feature, optInKeys) {
+    return !isOptionalFeatureRecord(feature) || isFeatureOptedIn(feature, optInKeys);
+}
+
 function getAutomaticClassFeaturesForLevel(level, classLevel) {
+    const optInKeys = collectOptInKeysFromLevels([level]);
     return getClassFeatureRecords(level.class)
         .filter((feature) => getFeatureLevel(feature) === classLevel)
+        .filter((feature) => includeAutomaticFeature(feature, optInKeys))
         .map((feature) => createCompiledFeature(
             feature,
             level,
@@ -1001,8 +1648,10 @@ function getAutomaticSubclassFeaturesForLevel(level, classLevel) {
         return [];
     }
 
+    const optInKeys = collectOptInKeysFromLevels([level]);
     return getSubclassFeatureRecords(level.class, level.subclass)
         .filter((feature) => getFeatureLevel(feature) === classLevel)
+        .filter((feature) => includeAutomaticFeature(feature, optInKeys))
         .map((feature) => createCompiledFeature(
             feature,
             level,
@@ -1011,6 +1660,44 @@ function getAutomaticSubclassFeaturesForLevel(level, classLevel) {
             ["subclass-feature:"]
         ))
         .filter(Boolean);
+}
+
+function normalizeBackgroundFeatureName(value) {
+    return normalizeSearchText(String(value || "")
+        .replace(/^feature:\s*/iu, "")
+        .replace(/\s+/gu, " ")
+        .trim());
+}
+
+function findBackgroundFeatureRules(background = {}) {
+    const directRules = background.rulesEntries
+        || background.featureRules
+        || background.profile?.background?.featureRules
+        || background.profile?.background?.featureEntries
+        || null;
+    if (directRules) {
+        return directRules;
+    }
+
+    const featureName = normalizeBackgroundFeatureName(background.feature);
+    const entries = [
+        ...toArray(background.entries),
+        ...toArray(background.raw?.entries),
+        ...toArray(background.profile?.background?.entries)
+    ].filter((entry) => entry && typeof entry === "object");
+    const featureEntries = entries.filter((entry) => {
+        const entryName = normalizeBackgroundFeatureName(entry.name);
+        return Boolean(entry?.data?.isFeature)
+            || /^feature:/iu.test(String(entry.name || ""))
+            || (featureName && entryName === featureName);
+    });
+
+    if (!featureEntries.length) {
+        return null;
+    }
+
+    return featureEntries.find((entry) => normalizeBackgroundFeatureName(entry.name) === featureName)
+        || (featureEntries.length === 1 ? featureEntries[0] : null);
 }
 
 function featureOutputKey(feature) {
@@ -1041,10 +1728,28 @@ function compileFeatures(dto, characterLevel = MAX_CHARACTER_LEVEL) {
     }
 
     if (dto.baseChoices.background?.feature) {
+        const background = dto.baseChoices.background;
         addFeature({
-            id: "background-feature",
-            name: dto.baseChoices.background.feature,
-            source: dto.baseChoices.background.id || dto.baseChoices.background.name || "background",
+            id: background.id || "background-feature",
+            catalogId: background.options?.catalogId || background.id || "",
+            name: background.feature,
+            source: background.source || background.id || background.name || "background",
+            category: "Background Feature",
+            level: 1,
+            rulesEntries: findBackgroundFeatureRules(background)
+        });
+    }
+
+    for (const selection of getBackgroundSelectionList(dto)) {
+        const valueLabel = getSelectionLabel(selection);
+        if (!valueLabel) {
+            continue;
+        }
+
+        addFeature({
+            id: selection.choiceId || `background-${selection.type || "choice"}`,
+            name: `${selection.label || "Background Option"}: ${valueLabel}`,
+            source: selection.sourceName || dto.baseChoices.background?.name || "background",
             category: "Background Feature"
         });
     }
@@ -1063,7 +1768,12 @@ function compileFeatures(dto, characterLevel = MAX_CHARACTER_LEVEL) {
                 ));
             }
 
-            for (const choice of toArray(level.choices).filter((entry) => entry?.type === "class-option")) {
+            for (const choice of toArray(level.choices).filter((entry) => entry?.type === "class-option" && !entry?.optionalFeature)) {
+                // Optional-feature opt-ins (entry.optionalFeature) are recorded as
+                // class-option choices too, but they describe a single toggled feature
+                // rather than a "choose from a list" selection. They are surfaced
+                // cleanly by the automatic class-feature pass (which now honors opt-in),
+                // so skip them here to avoid a redundant "Feature: Feature" entry.
                 const valueLabel = toArray(choice.values)
                     .map((value) => value?.label || value?.name || value?.value)
                     .filter(Boolean)
@@ -1137,10 +1847,12 @@ function getFeatureLevel(feature) {
 
 function compileSubclassFeatures(dto, characterLevel = MAX_CHARACTER_LEVEL) {
     const classLevelCounts = getClassLevelCounts(dto);
+    const levelEntries = getCompiledLevelEntries(dto, characterLevel);
+    const optInKeys = collectOptInKeysFromLevels(levelEntries);
     const features = [];
     const seen = new Set();
 
-    for (const level of getCompiledLevelEntries(dto, characterLevel)) {
+    for (const level of levelEntries) {
         const subclass = level.subclass;
         if (!subclass) {
             continue;
@@ -1155,6 +1867,10 @@ function compileSubclassFeatures(dto, characterLevel = MAX_CHARACTER_LEVEL) {
         for (const feature of getSubclassFeatureRecords(level.class, subclass)) {
             const name = getFeatureName(feature);
             if (!name) {
+                continue;
+            }
+
+            if (!includeAutomaticFeature(feature, optInKeys)) {
                 continue;
             }
 
@@ -1196,6 +1912,16 @@ function compileRaceFeatureChoices(dto) {
         label: selection.label || "",
         value: getSelectionLabel(selection),
         source: selection.sourceName || dto.baseChoices.race?.name || "race"
+    }));
+}
+
+function compileBackgroundFeatureChoices(dto) {
+    return getBackgroundSelectionList(dto).map((selection) => ({
+        id: selection.choiceId || "",
+        type: selection.type || "",
+        label: selection.label || "",
+        value: getSelectionLabel(selection),
+        source: selection.sourceName || dto.baseChoices.background?.name || "background"
     }));
 }
 
@@ -1279,15 +2005,52 @@ function compileRaceFeatures(dto, characterLevel) {
     return features;
 }
 
-function compileSpellSlots(dto) {
+function hasRecordedSpellSlots(slots = {}) {
+    const byLevel = slots.byLevel || slots;
+    return Object.values(byLevel).some((slot) => {
+        if (slot && typeof slot === "object") {
+            return toNumber(slot.max, 0) > 0 || toNumber(slot.expended, 0) > 0;
+        }
+
+        return toNumber(slot, 0) > 0;
+    });
+}
+
+function createSpellSlotsFromProgression(row = []) {
+    const byLevel = {};
+
+    toArray(row).forEach((max, index) => {
+        const value = toNumber(max, 0);
+        if (value > 0) {
+            byLevel[String(index + 1)] = {
+                max: value,
+                expended: 0
+            };
+        }
+    });
+
+    return { byLevel };
+}
+
+function compileSpellSlots(dto, classes = []) {
     const slots = dto.spells.spellSlots || {};
-    if (slots.byLevel) {
+    if (slots.byLevel && hasRecordedSpellSlots(slots)) {
         return deepClone(slots);
     }
 
-    return {
-        byLevel: deepClone(slots)
-    };
+    if (!slots.byLevel && hasRecordedSpellSlots(slots)) {
+        return {
+            byLevel: deepClone(slots)
+        };
+    }
+
+    const spellcaster = toArray(classes)
+        .find((entry) => toArray(entry?.spellcasting?.slotProgression).some((value) => toNumber(value, 0) > 0));
+    if (spellcaster) {
+        return createSpellSlotsFromProgression(spellcaster.spellcasting.slotProgression);
+    }
+
+    return { byLevel: {} };
 }
 
 function getWeaponPropertyValues(record = {}) {
@@ -1854,8 +2617,69 @@ function getArmorDexModifier(category, dexModifier) {
     return dexModifier;
 }
 
-function compileEquipmentAc(dto, dexModifier) {
-    const unarmored = 10 + dexModifier;
+function isMonkClassEntry(classEntry = {}) {
+    const entry = classEntry || {};
+    const text = normalizeSearchText([
+        entry.id,
+        entry.name,
+        entry.ref,
+        entry.options?.catalogId,
+        entry.options?.ref,
+        entry.options?.sourceId,
+        entry.options?.displayName
+    ].filter(Boolean).join(" "));
+
+    return /\bmonk\b|class[:/-]monk|class-monk/u.test(text);
+}
+
+function getMonkLevel(dto, characterLevel = MAX_CHARACTER_LEVEL) {
+    return getCompiledLevelEntries(dto, characterLevel)
+        .filter((level) => isMonkClassEntry(level.class))
+        .length;
+}
+
+function getMonkUnarmoredMovementBonus(monkLevel) {
+    if (monkLevel >= 18) {
+        return 30;
+    }
+    if (monkLevel >= 14) {
+        return 25;
+    }
+    if (monkLevel >= 10) {
+        return 20;
+    }
+    if (monkLevel >= 6) {
+        return 15;
+    }
+    return monkLevel >= 2 ? 10 : 0;
+}
+
+function getEquippedArmorState(dto) {
+    const equippedItems = toArray(dto.inventory.items).filter((entry) => entry?.equipped);
+    return equippedItems.reduce((state, item) => {
+        const record = getItemRecord(item);
+        if (isShieldItem(record)) {
+            state.hasShield = true;
+        } else if (isArmorItem(record)) {
+            state.hasArmor = true;
+        }
+
+        return state;
+    }, {
+        hasArmor: false,
+        hasShield: false
+    });
+}
+
+function compileEquipmentAc(dto, abilityScores, characterLevel = MAX_CHARACTER_LEVEL) {
+    const dexModifier = abilityScores.dex.modifier;
+    const wisModifier = abilityScores.wis.modifier;
+    const monkLevel = getMonkLevel(dto, characterLevel);
+    const armorState = getEquippedArmorState(dto);
+    const monkUnarmored = monkLevel >= 1 && !armorState.hasArmor && !armorState.hasShield
+        ? 10 + dexModifier + wisModifier
+        : null;
+    const unarmored = Math.max(10 + dexModifier, monkUnarmored ?? Number.NEGATIVE_INFINITY);
     const armorCandidates = [];
     const shieldCandidates = [];
 
@@ -1896,15 +2720,16 @@ function compileEquipmentAc(dto, dexModifier) {
 
     return {
         unarmored,
+        unarmoredSource: monkUnarmored === unarmored ? "Monk Unarmored Defense" : "Unarmored",
+        monkUnarmored,
         armor,
         shield,
         value: (armor?.value ?? unarmored) + (shield?.bonus ?? 0)
     };
 }
 
-function compileAc(dto, abilityScores) {
-    const dexModifier = abilityScores.dex.modifier;
-    const equipment = compileEquipmentAc(dto, dexModifier);
+function compileAc(dto, abilityScores, characterLevel = MAX_CHARACTER_LEVEL) {
+    const equipment = compileEquipmentAc(dto, abilityScores, characterLevel);
     const manualBase = toNumber(dto.combatState.ac, equipment.unarmored);
     const base = Math.max(manualBase, equipment.value);
     const modifiers = compileRaceAcModifiers(dto);
@@ -1917,12 +2742,25 @@ function compileAc(dto, abilityScores) {
     };
 }
 
-function compileSpeed(dto) {
+function compileSpeed(dto, characterLevel = MAX_CHARACTER_LEVEL) {
     const base = toNumber(dto.baseChoices.race?.speed, 30);
+    const armorState = getEquippedArmorState(dto);
+    const monkMovementBonus = !armorState.hasArmor && !armorState.hasShield
+        ? getMonkUnarmoredMovementBonus(getMonkLevel(dto, characterLevel))
+        : 0;
+    const walk = base + monkMovementBonus;
     const modes = {
-        walk: base
+        walk
     };
     const modifiers = [];
+
+    if (monkMovementBonus) {
+        modifiers.push({
+            source: "class-monk",
+            label: "Unarmored Movement",
+            value: monkMovementBonus
+        });
+    }
 
     // Movement modes granted by the race (fly/swim/climb/burrow). A "walk"
     // sentinel means the mode equals the walking speed.
@@ -1930,7 +2768,7 @@ function compileSpeed(dto) {
         if (mode === "walk") {
             continue;
         }
-        const resolved = value === "walk" ? base : toNumber(value, 0);
+        const resolved = value === "walk" ? walk : toNumber(value, 0);
         if (resolved > 0) {
             modes[mode] = resolved;
         }
@@ -1939,10 +2777,10 @@ function compileSpeed(dto) {
     for (const selection of getRaceSelectionList(dto)) {
         const text = normalizeSearchText(getSelectionLabel(selection));
         if (/nimble climber/iu.test(text)) {
-            modes.climb = base;
+            modes.climb = walk;
         }
         if (/underwater adaptation/iu.test(text)) {
-            modes.swim = base;
+            modes.swim = walk;
         }
         if (/swiftstride/iu.test(text)) {
             modifiers.push({
@@ -1956,7 +2794,7 @@ function compileSpeed(dto) {
     return {
         base,
         modifiers,
-        value: base,
+        value: walk,
         modes
     };
 }
@@ -2020,7 +2858,8 @@ function createDisplayIndex() {
         raceFeatures: "features",
         backgroundFeatures: "features",
         featFeatures: "features",
-        itemFeatures: "features"
+        itemFeatures: "features",
+        classResources: "reference"
     };
 
     const sections = {};
@@ -2052,6 +2891,7 @@ export class SheetCompiler {
         const dexModifier = abilities.dex.modifier;
         const racialSpells = compileRacialSpells(dto, abilities, proficiencyBonus);
         const featSpells = compileFeatSpells(dto, abilities, proficiencyBonus);
+        const classChoiceSpells = compileClassChoiceSpells(dto, abilities, proficiencyBonus, level);
         const experience = toNumber(sourceDto.identity?.experience, 0);
         const nextLevelExperience = getNextLevelExperience(level);
 
@@ -2080,18 +2920,20 @@ export class SheetCompiler {
                 temp: toNumber(dto.combatState.tempHp, 0)
             },
             ac: {
-                ...compileAc(dto, abilities)
+                ...compileAc(dto, abilities, level)
             },
-            speed: compileSpeed(dto),
+            speed: compileSpeed(dto, level),
             hitDice: compileHitDice(classes),
             deathSaves: deepClone(dto.combatState.deathSaves),
             abilities,
             skills: compileSkills(dto),
             proficiencies: compileProficiencies(dto),
             classes,
-            spellSlots: compileSpellSlots(dto),
+            classResources: compileClassResources(dto, level),
+            spellSlots: compileSpellSlots(dto, classes),
             racialSpells,
             featSpells,
+            classChoiceSpells,
             defenses: compileDefenses(dto),
             senses: compileSenses(dto),
             resources: deepClone(dto.resources),
@@ -2102,7 +2944,10 @@ export class SheetCompiler {
                 ...compileFeatures(dto, level),
                 ...compileRaceFeatures(dto, level)
             ],
-            featureChoices: compileRaceFeatureChoices(dto),
+            featureChoices: [
+                ...compileRaceFeatureChoices(dto),
+                ...compileBackgroundFeatureChoices(dto)
+            ],
             builderOverrides: [],
             notes: {
                 ...deepClone(dto.notes),

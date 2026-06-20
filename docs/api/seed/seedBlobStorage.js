@@ -15,8 +15,8 @@ const DOCS_ROOT = path.resolve(API_ROOT, "..");
 const DEFAULT_CONTAINER = "eldoria-character-data";
 
 const DEFAULTS = {
-  charactersDir: path.join(DOCS_ROOT, "character-sheets/v1/characters"),
-  playersManifest: path.join(DOCS_ROOT, "character-sheets/v1/players.json")
+  charactersDir: path.join(API_ROOT, "seed/characters"),
+  playersManifest: path.join(API_ROOT, "seed/players.json")
 };
 
 function readEnv(name) {
@@ -177,7 +177,7 @@ function normalizePlayersManifest(manifest = {}) {
       .map((character) => ({
         id: String(character?.id || "").trim(),
         playerName: String(character?.playerName || "").trim(),
-        characterName: "",
+        characterName: String(character?.characterName || "").trim(),
         portraitUrl: String(character?.portraitUrl || "").trim(),
         characterUrl: `characters/${String(character?.id || "").trim()}`,
         status: String(character?.status || "active").trim() || "active"

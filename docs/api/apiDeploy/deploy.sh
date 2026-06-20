@@ -6,6 +6,7 @@ function_app=""
 storage_account="${ELDORIA_STORAGE_ACCOUNT:-}"
 container_name="${ELDORIA_CHARACTER_CONTAINER:-eldoria-character-data}"
 catalog_table="${ELDORIA_CATALOG_TABLE:-eldoriacatalog}"
+catalog_search_table="${ELDORIA_CATALOG_SEARCH_TABLE:-}"
 blob_prefix="${ELDORIA_BLOB_PREFIX:-}"
 allowed_origins="${ELDORIA_ALLOWED_ORIGINS:-*}"
 subscription=""
@@ -27,6 +28,7 @@ Auth:
 Options:
   --container <name>
   --catalog-table <name>
+  --catalog-search-table <name>
   --blob-prefix <path>
   --allowed-origins <origins>
   --subscription <id-or-name>
@@ -41,6 +43,7 @@ while [[ $# -gt 0 ]]; do
     --storage-account) storage_account="$2"; shift 2 ;;
     --container) container_name="$2"; shift 2 ;;
     --catalog-table) catalog_table="$2"; shift 2 ;;
+    --catalog-search-table) catalog_search_table="$2"; shift 2 ;;
     --blob-prefix) blob_prefix="$2"; shift 2 ;;
     --allowed-origins) allowed_origins="$2"; shift 2 ;;
     --subscription) subscription="$2"; shift 2 ;;
@@ -144,6 +147,10 @@ settings=(
   "ELDORIA_CATALOG_TABLE=$catalog_table"
   "ELDORIA_ALLOWED_ORIGINS=$allowed_origins"
 )
+
+if [[ -n "$catalog_search_table" ]]; then
+  settings+=("ELDORIA_CATALOG_SEARCH_TABLE=$catalog_search_table")
+fi
 
 if [[ -n "$storage_connection_string" ]]; then
   settings+=("ELDORIA_STORAGE_CONNECTION_STRING=$storage_connection_string")

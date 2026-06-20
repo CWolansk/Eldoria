@@ -155,6 +155,84 @@
   .field.check label { margin: 0; color: var(--text); }
   .field .hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
   .field.invalid input, .field.invalid textarea, .field.invalid select { border-color: var(--red); }
+  .catalog-form {
+    display: grid;
+    gap: 12px;
+    max-width: 980px;
+  }
+  .catalog-form-note {
+    color: var(--muted);
+    font-size: 12px;
+    margin: -2px 0 2px;
+  }
+  .catalog-form-section {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--panel);
+    padding: 12px;
+  }
+  .catalog-form-section h3 {
+    margin: 0 0 10px;
+    color: var(--text);
+    font-size: 13px;
+  }
+  .catalog-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 10px 12px;
+  }
+  .catalog-form-field {
+    display: grid;
+    gap: 5px;
+    min-width: 0;
+  }
+  .catalog-form-field--wide {
+    grid-column: 1 / -1;
+  }
+  .catalog-form-field label {
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .catalog-form-field input,
+  .catalog-form-field select,
+  .catalog-form-field textarea {
+    width: 100%;
+    min-width: 0;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  .catalog-form-field input,
+  .catalog-form-field textarea {
+    font-family: var(--mono);
+  }
+  .catalog-form-field textarea {
+    min-height: 86px;
+    resize: vertical;
+  }
+  .catalog-form-field input[type=checkbox] {
+    width: auto;
+    justify-self: start;
+  }
+  .catalog-form-field .hint {
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .catalog-form-preview {
+    margin: 0;
+    max-height: 240px;
+    overflow: auto;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #0b0d10;
+    color: var(--text);
+    padding: 10px;
+    font: 12px/1.45 var(--mono);
+    white-space: pre;
+  }
 
   .actions { display: flex; gap: 10px; align-items: center; margin: 18px 0; max-width: 760px; }
   .kbd { font: 11px var(--mono); color: var(--muted); }
@@ -320,7 +398,7 @@ try {
 /* ----------------------------------------------------------------------- */
 const CATALOG_KINDS = [
   "items", "spells", "races", "backgrounds", "feats", "classes", "subclasses",
-  "class-features", "subclass-features", "magic-variants", "eldoria-items"
+  "class-features", "subclass-features", "optional-features", "magic-variants", "eldoria-items"
 ];
 const PUBLIC_KINDS = ["locations", "npcs"];
 const SAMPLE_CATALOG_ENTITY = `{
@@ -334,6 +412,257 @@ const SAMPLE_CATALOG_PATCH = `{
   "rarity": "rare",
   "entries": ["Updated from API Buddy."]
 }`;
+
+const RARITY_OPTIONS = ["", "none", "common", "uncommon", "rare", "very rare", "legendary", "artifact", "varies"];
+const DAMAGE_TYPE_OPTIONS = ["", "A", "B", "C", "F", "O", "L", "N", "P", "I", "Y", "R", "S", "T"];
+
+const COMMON_CATALOG_FIELDS = [
+  { key: "id", label: "Explicit id", type: "text", wide: true, hint: "Optional. If blank, the API generates an id from name/source." },
+  { key: "name", label: "Name", type: "text", requiredCreate: true },
+  { key: "source", label: "Source", type: "text", requiredCreate: true, default: "Eldoria" },
+  { key: "page", label: "Page", type: "number" }
+];
+
+const RULES_FIELD = { key: "entries", label: "Rules / entries", type: "list", wide: true, hint: "One paragraph or entry per line." };
+
+const ITEM_FORM_SCHEMA = {
+  title: "Item fields",
+  sections: [
+    {
+      title: "Identity",
+      fields: COMMON_CATALOG_FIELDS
+    },
+    {
+      title: "Item summary",
+      fields: [
+        { key: "type", label: "Type", type: "text", placeholder: "weapon, armor, wondrous item, G" },
+        { key: "rarity", label: "Rarity", type: "select", options: RARITY_OPTIONS },
+        { key: "_category", label: "Category", type: "text", placeholder: "Basic, Magic, Adventuring Gear" },
+        { key: "value", label: "Value in cp", type: "number" },
+        { key: "valueLabel", label: "Value label", type: "text", placeholder: "500 gp" },
+        { key: "weight", label: "Weight", type: "number" },
+        { key: "reqAttune", label: "Requires attunement", type: "checkbox" },
+        { key: "wondrous", label: "Wondrous item", type: "checkbox" }
+      ]
+    },
+    {
+      title: "Weapon / armor",
+      fields: [
+        { key: "weapon", label: "Weapon", type: "checkbox" },
+        { key: "weaponCategory", label: "Weapon category", type: "select", options: ["", "simple", "martial", "firearm", "improvised"] },
+        { key: "dmg1", label: "Damage", type: "text", placeholder: "1d8" },
+        { key: "dmgType", label: "Damage type", type: "select", options: DAMAGE_TYPE_OPTIONS },
+        { key: "property", label: "Properties", type: "list", hint: "One property code/name per line." },
+        { key: "range", label: "Range", type: "text", placeholder: "20/60" },
+        { key: "armor", label: "Armor", type: "checkbox" },
+        { key: "ac", label: "AC / AC bonus", type: "number" },
+        { key: "bonusWeapon", label: "Weapon bonus", type: "number" },
+        { key: "bonusAc", label: "AC bonus", type: "number" },
+        { key: "baseItem", label: "Base item", type: "text", placeholder: "longsword|phb" }
+      ]
+    },
+    {
+      title: "Rules",
+      fields: [RULES_FIELD]
+    }
+  ]
+};
+
+const CATALOG_FORM_SCHEMAS = {
+  items: ITEM_FORM_SCHEMA,
+  "eldoria-items": {
+    title: "Eldoria item fields",
+    sections: [
+      { title: "Identity", fields: COMMON_CATALOG_FIELDS },
+      {
+        title: "Index details",
+        fields: [
+          { key: "rarity", label: "Rarity", type: "select", options: RARITY_OPTIONS },
+          { key: "path", label: "Vault path", type: "text", wide: true },
+          { key: "ref", label: "Reference id/path", type: "text", wide: true },
+          RULES_FIELD
+        ]
+      }
+    ]
+  },
+  spells: {
+    title: "Spell fields",
+    sections: [
+      { title: "Identity", fields: COMMON_CATALOG_FIELDS },
+      {
+        title: "Spell summary",
+        fields: [
+          { key: "level", label: "Level", type: "number" },
+          { key: "school", label: "School object", type: "json", placeholder: '{ "code": "E", "name": "Enchantment" }' },
+          { key: "ritual", label: "Ritual", type: "checkbox" },
+          { key: "concentration", label: "Concentration", type: "checkbox" },
+          { key: "time", label: "Casting time JSON", type: "json", wide: true, placeholder: '[{ "number": 1, "unit": "action" }]' },
+          { key: "range", label: "Range JSON", type: "json", wide: true, placeholder: '{ "type": "point", "distance": { "type": "feet", "amount": 60 } }' },
+          { key: "duration", label: "Duration JSON", type: "json", wide: true, placeholder: '[{ "type": "instant" }]' },
+          { key: "components", label: "Components JSON", type: "json", wide: true, placeholder: '{ "v": true, "s": true }' },
+          { key: "damageInflict", label: "Damage types", type: "list" },
+          { key: "savingThrow", label: "Saving throws", type: "list" },
+          RULES_FIELD
+        ]
+      }
+    ]
+  },
+  races: {
+    title: "Race fields",
+    sections: [
+      { title: "Identity", fields: COMMON_CATALOG_FIELDS },
+      {
+        title: "Race summary",
+        fields: [
+          { key: "size", label: "Sizes", type: "list", placeholder: "M" },
+          { key: "speed", label: "Walk speed", type: "number", placeholder: "30" },
+          { key: "ability", label: "Ability JSON", type: "json", wide: true, placeholder: '[{ "str": 1 }]' },
+          { key: "resist", label: "Damage resistances", type: "list" },
+          { key: "immune", label: "Damage immunities", type: "list" },
+          { key: "conditionImmune", label: "Condition immunities", type: "list" },
+          { key: "traitTags", label: "Trait tags", type: "list" },
+          RULES_FIELD
+        ]
+      }
+    ]
+  },
+  backgrounds: {
+    title: "Background fields",
+    sections: [
+      { title: "Identity", fields: COMMON_CATALOG_FIELDS },
+      {
+        title: "Background summary",
+        fields: [
+          { key: "feature", label: "Feature", type: "text" },
+          { key: "grants", label: "Structured grants JSON", type: "json", wide: true, placeholder: '{ "skills": { "fixed": ["Survival"] } }' },
+          { key: "startingEquipment", label: "Starting equipment JSON", type: "json", wide: true },
+          RULES_FIELD
+        ]
+      }
+    ]
+  },
+  feats: {
+    title: "Feat fields",
+    sections: [
+      { title: "Identity", fields: COMMON_CATALOG_FIELDS },
+      {
+        title: "Feat summary",
+        fields: [
+          { key: "prerequisite", label: "Prerequisite JSON", type: "json", wide: true, placeholder: '[{ "level": 4 }]' },
+          { key: "hasChoices", label: "Has structured choices", type: "checkbox" },
+          { key: "choices", label: "Choices JSON", type: "json", wide: true },
+          RULES_FIELD
+        ]
+      }
+    ]
+  },
+  classes: {
+    title: "Class fields",
+    sections: [
+      { title: "Identity", fields: COMMON_CATALOG_FIELDS },
+      {
+        title: "Class summary",
+        fields: [
+          { key: "hitDie", label: "Hit die JSON", type: "json", placeholder: '{ "number": 1, "faces": 8, "formula": "1d8" }' },
+          { key: "savingThrows", label: "Saving throws", type: "list", placeholder: "wis\ncha" },
+          { key: "subclassTitle", label: "Subclass title", type: "text", placeholder: "Divine Domain" },
+          { key: "subclassUnlockLevel", label: "Subclass unlock level", type: "number" },
+          { key: "spellcasting", label: "Spellcasting JSON", type: "json", wide: true, placeholder: '{ "ability": "wis", "casterProgression": "full" }' },
+          { key: "startingProficiencies", label: "Starting proficiencies JSON", type: "json", wide: true },
+          RULES_FIELD
+        ]
+      }
+    ]
+  },
+  subclasses: {
+    title: "Subclass fields",
+    sections: [
+      { title: "Identity", fields: COMMON_CATALOG_FIELDS },
+      {
+        title: "Subclass summary",
+        fields: [
+          { key: "className", label: "Class name", type: "text" },
+          { key: "classSource", label: "Class source", type: "text", placeholder: "PHB" },
+          { key: "classId", label: "Class id", type: "text", placeholder: "class:cleric:phb" },
+          { key: "shortName", label: "Short name", type: "text" },
+          { key: "unlockAtClassLevel", label: "Unlock level", type: "number" },
+          RULES_FIELD
+        ]
+      }
+    ]
+  },
+  "class-features": {
+    title: "Class feature fields",
+    sections: [
+      { title: "Identity", fields: COMMON_CATALOG_FIELDS },
+      {
+        title: "Feature summary",
+        fields: [
+          { key: "className", label: "Class name", type: "text" },
+          { key: "classSource", label: "Class source", type: "text", placeholder: "PHB" },
+          { key: "level", label: "Class level", type: "number" },
+          { key: "optional", label: "Optional", type: "checkbox" },
+          RULES_FIELD
+        ]
+      }
+    ]
+  },
+  "subclass-features": {
+    title: "Subclass feature fields",
+    sections: [
+      { title: "Identity", fields: COMMON_CATALOG_FIELDS },
+      {
+        title: "Feature summary",
+        fields: [
+          { key: "className", label: "Class name", type: "text" },
+          { key: "classSource", label: "Class source", type: "text", placeholder: "PHB" },
+          { key: "subclassShortName", label: "Subclass short name", type: "text" },
+          { key: "subclassSource", label: "Subclass source", type: "text" },
+          { key: "level", label: "Class level", type: "number" },
+          { key: "optional", label: "Optional", type: "checkbox" },
+          RULES_FIELD
+        ]
+      }
+    ]
+  },
+  "optional-features": {
+    title: "Optional feature fields",
+    sections: [
+      { title: "Identity", fields: COMMON_CATALOG_FIELDS },
+      {
+        title: "Optional feature summary",
+        fields: [
+          { key: "featureType", label: "Feature types", type: "list", placeholder: "EI" },
+          { key: "prerequisite", label: "Prerequisite JSON", type: "json", wide: true },
+          RULES_FIELD
+        ]
+      }
+    ]
+  },
+  "magic-variants": {
+    title: "Magic variant fields",
+    sections: [
+      { title: "Identity", fields: COMMON_CATALOG_FIELDS },
+      {
+        title: "Variant summary",
+        fields: [
+          { key: "type", label: "Type JSON", type: "json", placeholder: '{ "name": "Weapon" }' },
+          { key: "inherits", label: "Inherits JSON", type: "json", wide: true, placeholder: '{ "rarity": "rare", "entries": [] }' },
+          { key: "ammo", label: "Ammunition", type: "checkbox" },
+          RULES_FIELD
+        ]
+      }
+    ]
+  }
+};
+
+const GENERIC_CATALOG_FORM_SCHEMA = {
+  title: "Catalog entity fields",
+  sections: [
+    { title: "Identity", fields: COMMON_CATALOG_FIELDS },
+    { title: "Rules", fields: [RULES_FIELD] }
+  ]
+};
 
 /* ----------------------------------------------------------------------- */
 /* Operation catalog — each maps to a real client method                   */
@@ -400,6 +729,7 @@ const OPERATIONS = [
       { name: "kind", type: "select", label: "Kind", options: CATALOG_KINDS, required: true },
       { name: "q", type: "text", label: "Search (q)", placeholder: "free text, e.g. moonblade" },
       { name: "limit", type: "number", label: "Limit", placeholder: "0 = no limit" },
+      { name: "skip", type: "number", label: "Skip / offset", placeholder: "0" },
       { name: "full", type: "checkbox", label: "Include full documents (full=true)" },
       { name: "filters", type: "keyvalue", label: "Structured filters",
         hint: "One key=value per line. e.g. level=3 or rarity=rare" }
@@ -407,6 +737,7 @@ const OPERATIONS = [
     run: (c, v) => {
       const query = { ...(v.filters || {}) };
       if (v.limit != null && !Number.isNaN(v.limit)) query.limit = v.limit;
+      if (v.skip != null && !Number.isNaN(v.skip)) query.skip = v.skip;
       if (v.q) query.q = v.q;
       return v.full ? c.listCatalogFull(v.kind, query) : c.listCatalog(v.kind, query);
     }
@@ -453,7 +784,7 @@ const OPERATIONS = [
     params: [
       { name: "kind", type: "select", label: "Kind", options: CATALOG_KINDS, required: true },
       { name: "upsert", type: "checkbox", label: "Upsert if the entity already exists (?upsert=true)" },
-      { name: "entity", type: "json", label: "Entity JSON", required: true, tall: true, placeholder: SAMPLE_CATALOG_ENTITY }
+      { name: "entity", type: "catalogForm", label: "Entity form", mode: "create", kindParam: "kind", required: true }
     ],
     run: (c, v) => v.upsert
       ? c.upsertCatalogEntity(v.kind, v.entity)
@@ -465,9 +796,29 @@ const OPERATIONS = [
     params: [
       { name: "kind", type: "select", label: "Kind", options: CATALOG_KINDS, required: true },
       { name: "id", type: "text", label: "Entity id", required: true, placeholder: "spell-fireball" },
-      { name: "patch", type: "json", label: "Patch JSON", required: true, tall: true, placeholder: SAMPLE_CATALOG_PATCH }
+      { name: "patch", type: "catalogForm", label: "Patch form", mode: "patch", kindParam: "kind", required: true }
     ],
     run: (c, v) => c.patchCatalogEntity(v.kind, v.id, v.patch)
+  },
+  {
+    id: "createItemEntity", group: "Catalog", verb: "POST", label: "Create item (form)",
+    path: "POST /catalog/items", desc: "Create an item with item-specific fields. Enable upsert to replace an existing id.",
+    params: [
+      { name: "upsert", type: "checkbox", label: "Upsert if the item already exists (?upsert=true)" },
+      { name: "entity", type: "catalogForm", label: "Item form", mode: "create", fixedKind: "items", itemOnly: true, required: true }
+    ],
+    run: (c, v) => v.upsert
+      ? c.upsertCatalogEntity("items", v.entity)
+      : c.createCatalogEntity("items", v.entity)
+  },
+  {
+    id: "patchItemEntity", group: "Catalog", verb: "PATCH", label: "Patch item (form)",
+    path: "PATCH /catalog/items/{id}", desc: "Patch an item with item-specific fields and return the updated object.",
+    params: [
+      { name: "id", type: "text", label: "Item id", required: true, placeholder: "item:longsword:phb" },
+      { name: "patch", type: "catalogForm", label: "Item patch form", mode: "patch", fixedKind: "items", itemOnly: true, required: true }
+    ],
+    run: (c, v) => c.patchCatalogEntity("items", v.id, v.patch)
   },
 
   {
@@ -494,6 +845,7 @@ const OPERATIONS = [
       { name: "subscription", type: "text", label: "Azure subscription", placeholder: "optional id or name" },
       { name: "containerName", type: "text", label: "Character blob container", placeholder: "eldoria-character-data" },
       { name: "catalogTable", type: "text", label: "Catalog table", placeholder: "eldoriacatalog" },
+      { name: "catalogSearchTable", type: "text", label: "Catalog search table", placeholder: "eldoriacatalogsearch" },
       { name: "blobPrefix", type: "text", label: "Blob prefix", placeholder: "optional" },
       { name: "allowedOrigins", type: "text", label: "Allowed origins", placeholder: "*" },
       { name: "assignStorageRole", type: "checkbox", label: "Assign storage roles to the Function App identity" }
@@ -507,11 +859,16 @@ const OPERATIONS = [
       { name: "storageConnectionString", type: "text", label: "Storage connection string", placeholder: "optional if using managed identity" },
       { name: "storageAccountName", type: "text", label: "Storage account name", placeholder: "optional for managed identity" },
       { name: "catalogTable", type: "text", label: "Catalog table", placeholder: "eldoriacatalog" },
+      { name: "catalogSearchTable", type: "text", label: "Catalog search table", placeholder: "eldoriacatalogsearch" },
       { name: "only", type: "text", label: "Only these catalog kinds", placeholder: "items,spells" },
       { name: "dataDir", type: "text", label: "Data directory", placeholder: "optional; defaults to docs/data" },
       { name: "dryRun", type: "checkbox", label: "Dry run only", default: true },
       { name: "purge", type: "checkbox", label: "Purge stale rows before seeding" },
-      { name: "skipManifest", type: "checkbox", label: "Skip manifest update" }
+      { name: "skipManifest", type: "checkbox", label: "Skip manifest update" },
+      { name: "searchIndex", type: "checkbox", label: "Also build item search index" },
+      { name: "searchIndexOnly", type: "checkbox", label: "Build only item search index" },
+      { name: "purgeSearchIndex", type: "checkbox", label: "Purge item search index before seeding" },
+      { name: "clearSearchIndex", type: "checkbox", label: "Clear item search index and exit" }
     ],
     run: (_c, v) => runLocalAction("seed/catalog", compactObject(v))
   },
@@ -820,11 +1177,338 @@ function renderInfoSections(sections) {
   return grid;
 }
 
+function catalogFormStateKey(op, p) {
+  return LS.val(op.id, `${p.name}:form`);
+}
+
+function readCatalogFormState(op, p) {
+  const raw = localStorage.getItem(catalogFormStateKey(op, p)) ||
+    localStorage.getItem(LS.val(op.id, p.name));
+  if (!raw) return {};
+  try {
+    const parsed = JSON.parse(raw);
+    return isPlainObject(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function getCatalogKindForForm(p) {
+  if (p.fixedKind) return p.fixedKind;
+  const kindParam = p.kindParam || "kind";
+  const kindEl = document.getElementById(`f_${kindParam}`);
+  return kindEl?.value || "items";
+}
+
+function getCatalogFormSchema(kind, p) {
+  if (p.itemOnly || kind === "items") return ITEM_FORM_SCHEMA;
+  return CATALOG_FORM_SCHEMAS[kind] || GENERIC_CATALOG_FORM_SCHEMA;
+}
+
+function renderCatalogFormField(op, p) {
+  const wrap = document.createElement("div");
+  wrap.className = "field";
+  wrap.dataset.param = p.name;
+
+  const label = document.createElement("label");
+  label.innerHTML = escapeHtmlText(p.label) + (p.required ? ` <span class="req">*</span>` : "");
+  wrap.appendChild(label);
+
+  const host = document.createElement("div");
+  host.id = `f_${p.name}`;
+  host.className = "catalog-form";
+  wrap.appendChild(host);
+
+  renderCatalogFormContents(host, op, p, readCatalogFormState(op, p));
+
+  if (!p.fixedKind) {
+    const kindEl = document.getElementById(`f_${p.kindParam || "kind"}`);
+    kindEl?.addEventListener("change", () => {
+      const currentState = getCatalogFormState(host);
+      renderCatalogFormContents(host, op, p, currentState);
+    });
+  }
+
+  return wrap;
+}
+
+function renderCatalogFormContents(host, op, p, state = {}) {
+  host.innerHTML = "";
+  const kind = getCatalogKindForForm(p);
+  const schema = getCatalogFormSchema(kind, p);
+  host.dataset.kind = kind;
+
+  const note = document.createElement("div");
+  note.className = "catalog-form-note";
+  note.textContent = p.mode === "patch"
+    ? `${schema.title} for ${kind}. Blank fields are unchanged; use delete paths to send merge-patch nulls.`
+    : `${schema.title} for ${kind}. Blank fields are omitted; name and source are required by the API.`;
+  host.appendChild(note);
+
+  for (const section of schema.sections) {
+    const sectionEl = document.createElement("section");
+    sectionEl.className = "catalog-form-section";
+
+    const title = document.createElement("h3");
+    title.textContent = section.title;
+    sectionEl.appendChild(title);
+
+    const grid = document.createElement("div");
+    grid.className = "catalog-form-grid";
+    for (const field of section.fields) {
+      grid.appendChild(renderCatalogFormInput(field, state[field.key], p.mode));
+    }
+    sectionEl.appendChild(grid);
+    host.appendChild(sectionEl);
+  }
+
+  const advanced = document.createElement("section");
+  advanced.className = "catalog-form-section";
+  const title = document.createElement("h3");
+  title.textContent = "Advanced JSON";
+  advanced.appendChild(title);
+
+  const grid = document.createElement("div");
+  grid.className = "catalog-form-grid";
+  grid.appendChild(renderCatalogAdvancedTextarea({
+    label: "Additional JSON",
+    attr: "catalogExtraJson",
+    saved: state.__extraJson,
+    placeholder: p.mode === "patch" ? SAMPLE_CATALOG_PATCH : SAMPLE_CATALOG_ENTITY,
+    hint: "Merged into the generated body. Use this for fields that are not in the form yet."
+  }));
+
+  if (p.mode === "patch") {
+    grid.appendChild(renderCatalogAdvancedTextarea({
+      label: "Fields to delete",
+      attr: "catalogNullPaths",
+      saved: state.__nullPaths,
+      placeholder: "entries\nrarity\ninherits.rarity",
+      hint: "One dot path per line. Each path is sent as null for JSON merge patch."
+    }));
+  }
+
+  const previewWrap = document.createElement("div");
+  previewWrap.className = "catalog-form-field catalog-form-field--wide";
+  const previewLabel = document.createElement("label");
+  previewLabel.textContent = "Generated request body";
+  const preview = document.createElement("pre");
+  preview.className = "catalog-form-preview";
+  preview.dataset.catalogPreview = "true";
+  previewWrap.append(previewLabel, preview);
+  grid.appendChild(previewWrap);
+
+  advanced.appendChild(grid);
+  host.appendChild(advanced);
+
+  const refreshPreview = () => updateCatalogPreview(host, p);
+  host.oninput = refreshPreview;
+  host.onchange = refreshPreview;
+  updateCatalogPreview(host, p);
+}
+
+function renderCatalogFormInput(field, savedValue, mode) {
+  const wrap = document.createElement("div");
+  wrap.className = "catalog-form-field" + (field.wide ? " catalog-form-field--wide" : "");
+
+  const label = document.createElement("label");
+  label.textContent = field.label + (mode === "create" && field.requiredCreate ? " *" : "");
+  wrap.appendChild(label);
+
+  const type = field.type || "text";
+  let input;
+  if (type === "select") {
+    input = document.createElement("select");
+    const options = field.options || [];
+    const normalized = options.includes("") ? options : ["", ...options];
+    for (const opt of normalized) {
+      const option = document.createElement("option");
+      option.value = opt;
+      option.textContent = opt || "(blank)";
+      input.appendChild(option);
+    }
+    input.value = savedValue ?? (mode === "create" && field.default != null ? field.default : "");
+  } else if (type === "json" || type === "list") {
+    input = document.createElement("textarea");
+    input.placeholder = field.placeholder || (type === "json" ? '{ "key": "value" }' : "one value per line");
+    if (savedValue != null) {
+      input.value = Array.isArray(savedValue)
+        ? savedValue.join("\n")
+        : (isPlainObject(savedValue) ? JSON.stringify(savedValue, null, 2) : String(savedValue));
+    }
+  } else if (type === "checkbox") {
+    input = document.createElement("input");
+    input.type = "checkbox";
+    input.checked = savedValue == null
+      ? Boolean(mode === "create" && field.default)
+      : savedValue === true || savedValue === "true";
+  } else {
+    input = document.createElement("input");
+    input.type = type === "number" ? "number" : "text";
+    if (field.placeholder) input.placeholder = field.placeholder;
+    const value = savedValue ?? (mode === "create" && field.default != null ? field.default : "");
+    if (value !== "") input.value = String(value);
+  }
+
+  input.dataset.catalogField = field.key;
+  input.dataset.catalogType = type;
+  wrap.appendChild(input);
+
+  if (field.hint) {
+    const hint = document.createElement("div");
+    hint.className = "hint";
+    hint.textContent = field.hint;
+    wrap.appendChild(hint);
+  }
+  return wrap;
+}
+
+function renderCatalogAdvancedTextarea({ label, attr, saved, placeholder, hint }) {
+  const wrap = document.createElement("div");
+  wrap.className = "catalog-form-field catalog-form-field--wide";
+  const labelEl = document.createElement("label");
+  labelEl.textContent = label;
+  const input = document.createElement("textarea");
+  input.dataset[attr] = "true";
+  input.placeholder = placeholder || "";
+  if (saved) input.value = saved;
+  wrap.append(labelEl, input);
+  if (hint) {
+    const hintEl = document.createElement("div");
+    hintEl.className = "hint";
+    hintEl.textContent = hint;
+    wrap.appendChild(hintEl);
+  }
+  return wrap;
+}
+
+function getCatalogFormState(host) {
+  const state = {};
+  for (const input of host.querySelectorAll("[data-catalog-field]")) {
+    const key = input.dataset.catalogField;
+    if (input.type === "checkbox") state[key] = input.checked;
+    else state[key] = input.value;
+  }
+  state.__extraJson = host.querySelector("[data-catalog-extra-json]")?.value || "";
+  state.__nullPaths = host.querySelector("[data-catalog-null-paths]")?.value || "";
+  return state;
+}
+
+function collectCatalogFormValue(op, p, wrap) {
+  const host = wrap.querySelector(".catalog-form");
+  const state = getCatalogFormState(host);
+  localStorage.setItem(catalogFormStateKey(op, p), JSON.stringify(state));
+  const body = buildCatalogPayloadFromHost(host, p, { validate: true });
+  localStorage.setItem(LS.val(op.id, p.name), JSON.stringify(body, null, 2));
+  return body;
+}
+
+function updateCatalogPreview(host, p) {
+  const preview = host.querySelector("[data-catalog-preview]");
+  if (!preview) return;
+  try {
+    const body = buildCatalogPayloadFromHost(host, p, { validate: false });
+    preview.textContent = JSON.stringify(body, null, 2);
+  } catch (error) {
+    preview.textContent = `Cannot build JSON: ${error.message}`;
+  }
+}
+
+function buildCatalogPayloadFromHost(host, p, { validate }) {
+  const body = {};
+  for (const input of host.querySelectorAll("[data-catalog-field]")) {
+    const parsed = parseCatalogFormInput(input);
+    if (parsed.skip) continue;
+    body[input.dataset.catalogField] = parsed.value;
+  }
+
+  const extraRaw = host.querySelector("[data-catalog-extra-json]")?.value.trim() || "";
+  if (extraRaw) {
+    const extra = JSON.parse(extraRaw);
+    if (!isPlainObject(extra)) throw new Error("Additional JSON must be an object.");
+    mergeCatalogObjects(body, extra);
+  }
+
+  if (p.mode === "patch") {
+    const nullRaw = host.querySelector("[data-catalog-null-paths]")?.value || "";
+    for (const line of nullRaw.split("\n")) {
+      const path = line.trim();
+      if (path) setCatalogPath(body, path, null);
+    }
+  }
+
+  if (validate) {
+    if (p.mode === "create") {
+      if (!String(body.name || "").trim()) throw new Error("Name is required for catalog POST.");
+      if (!String(body.source || "").trim()) throw new Error("Source is required for catalog POST.");
+    }
+    if (p.mode === "patch" && Object.keys(body).length === 0) {
+      throw new Error("Patch form must include at least one changed field.");
+    }
+  }
+
+  return body;
+}
+
+function parseCatalogFormInput(input) {
+  const type = input.dataset.catalogType || "text";
+  if (type === "checkbox") {
+    return input.checked ? { value: true } : { skip: true };
+  }
+
+  const raw = input.value.trim();
+  if (raw === "") return { skip: true };
+
+  if (type === "number") {
+    const value = Number(raw);
+    if (Number.isNaN(value)) throw new Error(`${input.dataset.catalogField} must be a number.`);
+    return { value };
+  }
+
+  if (type === "list") {
+    return { value: raw.split("\n").map((line) => line.trim()).filter(Boolean) };
+  }
+
+  if (type === "json") {
+    return { value: JSON.parse(raw) };
+  }
+
+  return { value: raw };
+}
+
+function setCatalogPath(target, path, value) {
+  const parts = path.split(".").map((part) => part.trim()).filter(Boolean);
+  if (!parts.length) return;
+  let cursor = target;
+  for (const part of parts.slice(0, -1)) {
+    if (!isPlainObject(cursor[part])) cursor[part] = {};
+    cursor = cursor[part];
+  }
+  cursor[parts.at(-1)] = value;
+}
+
+function mergeCatalogObjects(target, source) {
+  for (const [key, value] of Object.entries(source)) {
+    if (isPlainObject(value) && isPlainObject(target[key])) {
+      mergeCatalogObjects(target[key], value);
+    } else {
+      target[key] = value;
+    }
+  }
+  return target;
+}
+
+function isPlainObject(value) {
+  return value != null && typeof value === "object" && !Array.isArray(value);
+}
+
 function renderField(op, p) {
   const wrap = document.createElement("div");
   wrap.className = "field" + (p.type === "checkbox" ? " check" : "");
   wrap.dataset.param = p.name;
   const saved = localStorage.getItem(LS.val(op.id, p.name));
+
+  if (p.type === "catalogForm") return renderCatalogFormField(op, p);
 
   if (p.type === "checkbox") {
     const input = document.createElement("input");
@@ -880,8 +1564,20 @@ function collectValues(op) {
   for (const p of op.params) {
     const wrap = main.querySelector(`.field[data-param="${p.name}"]`);
     wrap.classList.remove("invalid");
-    const el = document.getElementById(`f_${p.name}`);
     let value;
+
+    if (p.type === "catalogForm") {
+      try {
+        value = collectCatalogFormValue(op, p, wrap);
+      } catch (e) {
+        wrap.classList.add("invalid");
+        firstError ||= `${p.label}: ${e.message}`;
+      }
+      values[p.name] = value;
+      continue;
+    }
+
+    const el = document.getElementById(`f_${p.name}`);
 
     if (p.type === "checkbox") {
       value = el.checked;

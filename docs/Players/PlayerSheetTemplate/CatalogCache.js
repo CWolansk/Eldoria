@@ -1,4 +1,15 @@
 import { getCatalogODataItems } from "../../api/apiClient/index.js";
+import { clearCachedJson, loadCachedJson, normalizeCacheKeyPart } from "../web-cache.js";
+
+const CATALOG_CACHE_NAMESPACE = "eldoria-catalog-cache";
+const CATALOG_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+const CATALOG_CACHE_MAX_STORAGE_BYTES = 1024 * 1024;
+const sharedCatalogState = {
+    byId: new Map(),
+    byNameSource: new Map(),
+    searchResults: new Map(),
+    pending: new Map()
+};
 
 function normalizeKind(kind) {
     return String(kind || "").trim().toLowerCase();
@@ -89,6 +100,18 @@ function isCanonicalCatalogId(kind, id) {
     return true;
 }
 
+function getApiCacheScope(api) {
+    return normalizeCacheKeyPart(api?.baseUrl || "default-api") || "default-api";
+}
+
+function deleteMapEntriesByPrefix(map, prefix) {
+    for (const key of [...map.keys()]) {
+        if (key.startsWith(prefix)) {
+            map.delete(key);
+        }
+    }
+}
+
 export class CatalogCache {
     constructor(api) {
         if (!api) {
@@ -96,29 +119,40 @@ export class CatalogCache {
         }
 
         this.api = api;
-        this.byId = new Map();
-        this.byNameSource = new Map();
-        this.searchResults = new Map();
-        this.pending = new Map();
+        this.scope = getApiCacheScope(api);
+        this.byId = sharedCatalogState.byId;
+        this.byNameSource = sharedCatalogState.byNameSource;
+        this.searchResults = sharedCatalogState.searchResults;
+        this.pending = sharedCatalogState.pending;
+    }
+
+    static clearShared() {
+        sharedCatalogState.byId.clear();
+        sharedCatalogState.byNameSource.clear();
+        sharedCatalogState.searchResults.clear();
+        sharedCatalogState.pending.clear();
+        clearCachedJson("catalog:", { namespace: CATALOG_CACHE_NAMESPACE });
     }
 
     clear() {
-        this.byId.clear();
-        this.byNameSource.clear();
-        this.searchResults.clear();
-        this.pending.clear();
+        const prefix = `${this.scope}::`;
+        deleteMapEntriesByPrefix(this.byId, prefix);
+        deleteMapEntriesByPrefix(this.byNameSource, prefix);
+        deleteMapEntriesByPrefix(this.searchResults, prefix);
+        deleteMapEntriesByPrefix(this.pending, prefix);
+        clearCachedJson(`catalog:${prefix}`, { namespace: CATALOG_CACHE_NAMESPACE });
     }
 
     keyById(kind, id) {
-        return `${normalizeKind(kind)}::id::${normalizeText(id)}`;
+        return `${this.scope}::${normalizeKind(kind)}::id::${normalizeText(id)}`;
     }
 
     keyByNameSource(kind, name, source = "") {
-        return `${normalizeKind(kind)}::name::${normalizeText(name)}::source::${normalizeText(source)}`;
+        return `${this.scope}::${normalizeKind(kind)}::name::${normalizeText(name)}::source::${normalizeText(source)}`;
     }
 
     keyBySearch(kind, query = "", options = {}) {
-        return `${normalizeKind(kind)}::search::${normalizeText(query)}::${JSON.stringify(options || {})}`;
+        return `${this.scope}::${normalizeKind(kind)}::search::${normalizeText(query)}::${JSON.stringify(options || {})}`;
     }
 
     async loadCached(cache, cacheKey, loader, options = {}) {
@@ -130,19 +164,31 @@ export class CatalogCache {
             return this.pending.get(cacheKey);
         }
 
-        const request = Promise.resolve()
-            .then(loader)
+        const request = loadCachedJson(
+            `catalog:${cacheKey}`,
+            () => Promise.resolve()
+                .then(loader)
+                .catch((error) => {
+                    if (isNotFoundError(error)) {
+                        return options.missValue ?? null;
+                    }
+
+                    throw error;
+                }),
+            {
+                maxStorageBytes: options.maxStorageBytes || CATALOG_CACHE_MAX_STORAGE_BYTES,
+                namespace: CATALOG_CACHE_NAMESPACE,
+                refresh: options.refresh,
+                staleOnError: true,
+                ttlMs: options.ttlMs || CATALOG_CACHE_TTL_MS
+            }
+        )
+            .then((result) => result.value)
             .then((value) => {
                 cache.set(cacheKey, value);
                 return value;
             })
             .catch((error) => {
-                if (isNotFoundError(error)) {
-                    const missValue = options.missValue ?? null;
-                    cache.set(cacheKey, missValue);
-                    return missValue;
-                }
-
                 throw error;
             })
             .finally(() => {
@@ -207,7 +253,7 @@ export class CatalogCache {
 
     async getByName(kind, name, source = "", options = {}) {
         const cacheKey = this.keyByNameSource(kind, name, source);
-        return this.loadCached(this.byNameSource, cacheKey, async () => {
+        const entity = await this.loadCached(this.byNameSource, cacheKey, async () => {
             const matches = await this.search(kind, name, {
                 ...options,
                 source,
@@ -224,6 +270,7 @@ export class CatalogCache {
 
             return entity ? this.remember(kind, entity) : null;
         }, options);
+        return entity ? this.remember(kind, entity) : null;
     }
 
     async getByIdentity(identity, options = {}) {
@@ -248,7 +295,7 @@ export class CatalogCache {
         const { refresh = false, full = true, odata = false, ...queryOptions } = options;
         const cacheKey = this.keyBySearch(kind, query, { full, odata, ...queryOptions });
 
-        return this.loadCached(this.searchResults, cacheKey, async () => {
+        const records = await this.loadCached(this.searchResults, cacheKey, async () => {
             let response;
             if (odata) {
                 response = query
@@ -264,11 +311,13 @@ export class CatalogCache {
                     : await this.api.listCatalog(kind, queryOptions);
             }
 
-            return this.rememberMany(kind, response);
+            return listItems(response);
         }, {
             refresh,
             missValue: []
         });
+
+        return this.rememberMany(kind, records);
     }
 
     searchForPicker(kind, query = "", options = {}) {

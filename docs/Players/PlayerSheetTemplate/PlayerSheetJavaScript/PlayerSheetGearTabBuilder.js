@@ -77,7 +77,46 @@ function getSearchableItemId(item) {
     return id && id.includes(":") ? id : "";
 }
 
-function buildItemSearchModal(context = {}) {
+function getPagedSearchState(response, skip, items) {
+    const nextSkip = Number(response?.nextSkip);
+    const hasExplicitPaging = response && typeof response === "object"
+        && ("hasMore" in response || "nextSkip" in response);
+    const hasMore = Boolean(response?.hasMore)
+        || (Number.isFinite(nextSkip) && nextSkip > skip);
+
+    return {
+        hasMore: hasExplicitPaging && hasMore,
+        nextSkip: hasMore && Number.isFinite(nextSkip) ? nextSkip : skip + items.length
+    };
+}
+
+async function searchCatalogItemPage(api, query, skip = 0) {
+    if (api && typeof api.searchCatalog === "function") {
+        const response = await api.searchCatalog("items", query, {
+            full: false,
+            limit: ITEM_SEARCH_LIMIT,
+            skip
+        });
+        const items = listCatalogItems(response);
+        return {
+            items,
+            ...getPagedSearchState(response, skip, items)
+        };
+    }
+
+    const items = await getCatalogCache(api).searchForPicker("items", query, {
+        full: false,
+        limit: ITEM_SEARCH_LIMIT,
+        skip
+    });
+    return {
+        items: listCatalogItems(items),
+        hasMore: false,
+        nextSkip: skip + listCatalogItems(items).length
+    };
+}
+
+export function buildItemSearchModal(context = {}) {
     const dialog = document.createElement("dialog");
     dialog.className = "modal player-sheet__modal player-sheet__modal--item-search";
     dialog.setAttribute("aria-label", "Add Item");
@@ -135,6 +174,17 @@ function buildItemSearchModal(context = {}) {
     main.appendChild(detail);
     picker.appendChild(main);
 
+    const pager = createElement("div", "player-sheet-catalog-picker__pager");
+    const loadMoreButton = document.createElement("button");
+    loadMoreButton.type = "button";
+    loadMoreButton.className = "player-sheet-button";
+    loadMoreButton.textContent = "Load More";
+    loadMoreButton.hidden = true;
+    loadMoreButton.disabled = true;
+    loadMoreButton.dataset.itemSearchLoadMore = "true";
+    pager.appendChild(loadMoreButton);
+    picker.appendChild(pager);
+
     const footer = createElement("div", "player-sheet-catalog-picker__footer");
     const addButton = document.createElement("button");
     addButton.type = "button";
@@ -149,10 +199,36 @@ function buildItemSearchModal(context = {}) {
     let selectedItem = null;
     let searchToken = 0;
     let searchTimer = null;
+    let activeQuery = "";
+    let loadedCount = 0;
+    let nextSkip = 0;
+    let hasMore = false;
+    let loadingPage = false;
     const itemDetailsById = new Map();
 
     function setStatus(message) {
         status.textContent = message;
+    }
+
+    function updatePager() {
+        const shouldShow = hasMore || loadingPage;
+        loadMoreButton.hidden = !shouldShow;
+        loadMoreButton.disabled = loadingPage || !hasMore;
+        loadMoreButton.textContent = loadingPage ? "Loading..." : "Load More";
+    }
+
+    function setSearchIdleState(message = "Search for an item.") {
+        clearElement(results);
+        detail.replaceChildren(createElement("p", "player-sheet-empty-state", "Select an item to preview it."));
+        selectedItem = null;
+        addButton.disabled = true;
+        activeQuery = "";
+        loadedCount = 0;
+        nextSkip = 0;
+        hasMore = false;
+        loadingPage = false;
+        updatePager();
+        setStatus(message);
     }
 
     async function getFullItemRecord(item) {
@@ -176,8 +252,17 @@ function buildItemSearchModal(context = {}) {
             resultButton.classList.toggle("player-sheet-catalog-result--selected", resultButton === button);
         });
 
-        detail.replaceChildren(createElement("p", "player-sheet-empty-state", "Loading item details..."));
-        addButton.disabled = true;
+        if (!item) {
+            detail.replaceChildren(createElement("p", "player-sheet-empty-state", "Select an item to preview it."));
+            addButton.disabled = true;
+            return;
+        }
+
+        detail.replaceChildren(createItemCard(item, item, {
+            badge: "Catalog",
+            rows: ["Type", "Rarity", "Damage", "Versatile", "AC", "Value", "Weight", "Attunement"]
+        }));
+        addButton.disabled = typeof context.onChange !== "function";
 
         try {
             const fullItem = await getFullItemRecord(item);
@@ -198,21 +283,19 @@ function buildItemSearchModal(context = {}) {
 
             console.warn("Item detail lookup failed:", error);
             selectedItem = item;
-            detail.replaceChildren(createItemCard(item, item, {
-                badge: "Catalog",
-                rows: ["Type", "Rarity", "Damage", "Versatile", "AC", "Value", "Weight", "Attunement"]
-            }));
             addButton.disabled = !selectedItem || typeof context.onChange !== "function";
         }
     }
 
-    function renderResults(items) {
-        clearElement(results);
-        detail.replaceChildren(createElement("p", "player-sheet-empty-state", "Select an item to preview it."));
-        selectedItem = null;
-        addButton.disabled = true;
+    function appendResults(items, { append = false } = {}) {
+        if (!append) {
+            clearElement(results);
+            detail.replaceChildren(createElement("p", "player-sheet-empty-state", "Select an item to preview it."));
+            selectedItem = null;
+            addButton.disabled = true;
+        }
 
-        if (!items.length) {
+        if (!items.length && !append) {
             results.appendChild(createElement("p", "player-sheet-empty-state", "No items found."));
             return;
         }
@@ -221,20 +304,16 @@ function buildItemSearchModal(context = {}) {
             results.appendChild(buildItemResultButton(item, setSelectedItem));
         }
 
-        const firstButton = results.querySelector(".player-sheet-catalog-result");
-        if (firstButton) {
+        const firstButton = !append ? results.querySelector(".player-sheet-catalog-result") : null;
+        if (firstButton && items.length) {
             setSelectedItem(items[0], firstButton);
         }
     }
 
-    async function runSearch() {
+    async function loadSearchPage({ append = false } = {}) {
         const query = searchInput.value.trim();
         if (query.length < 2) {
-            clearElement(results);
-            detail.replaceChildren(createElement("p", "player-sheet-empty-state", "Select an item to preview it."));
-            selectedItem = null;
-            addButton.disabled = true;
-            setStatus(query ? "Type at least 2 characters." : "Search for an item.");
+            setSearchIdleState(query ? "Type at least 2 characters." : "Search for an item.");
             return;
         }
 
@@ -243,22 +322,41 @@ function buildItemSearchModal(context = {}) {
             return;
         }
 
+        if (append && (loadingPage || !hasMore || query !== activeQuery)) {
+            return;
+        }
+
         const token = searchToken + 1;
         searchToken = token;
-        setStatus("Searching items...");
-        results.replaceChildren(createElement("p", "player-sheet-empty-state", "Searching..."));
+        loadingPage = true;
+        updatePager();
+        if (!append) {
+            activeQuery = query;
+            loadedCount = 0;
+            nextSkip = 0;
+            hasMore = false;
+            setStatus("Searching items...");
+            results.replaceChildren(createElement("p", "player-sheet-empty-state", "Searching..."));
+            detail.replaceChildren(createElement("p", "player-sheet-empty-state", "Select an item to preview it."));
+            selectedItem = null;
+            addButton.disabled = true;
+        } else {
+            setStatus(`Loading more items for "${query}"...`);
+        }
 
         try {
-            const response = typeof context.api.searchCatalog === "function"
-                ? await context.api.searchCatalog("items", query, { limit: ITEM_SEARCH_LIMIT })
-                : await context.api.searchCatalogFull("items", query, { limit: ITEM_SEARCH_LIMIT });
+            const page = await searchCatalogItemPage(context.api, query, append ? nextSkip : 0);
             if (token !== searchToken) {
                 return;
             }
 
-            const items = listCatalogItems(response);
-            renderResults(items);
-            setStatus(`${items.length} item${items.length === 1 ? "" : "s"} found.`);
+            appendResults(page.items, { append });
+            loadedCount = append ? loadedCount + page.items.length : page.items.length;
+            nextSkip = page.nextSkip;
+            hasMore = page.hasMore;
+            setStatus(hasMore
+                ? `${loadedCount} items shown. Scroll or load more for additional matches.`
+                : `${loadedCount} item${loadedCount === 1 ? "" : "s"} shown.`);
         } catch (error) {
             if (token !== searchToken) {
                 return;
@@ -269,6 +367,30 @@ function buildItemSearchModal(context = {}) {
             selectedItem = null;
             addButton.disabled = true;
             setStatus("Item search failed.");
+        } finally {
+            if (token === searchToken) {
+                loadingPage = false;
+                updatePager();
+            }
+        }
+    }
+
+    function runSearch() {
+        return loadSearchPage({ append: false });
+    }
+
+    function loadMoreResults() {
+        return loadSearchPage({ append: true });
+    }
+
+    function maybeLoadMoreFromScroll() {
+        if (!hasMore || loadingPage) {
+            return;
+        }
+
+        const remaining = results.scrollHeight - results.scrollTop - results.clientHeight;
+        if (remaining <= 64) {
+            void loadMoreResults();
         }
     }
 
@@ -302,6 +424,10 @@ function buildItemSearchModal(context = {}) {
             void runSearch();
         }
     });
+    loadMoreButton.addEventListener("click", () => {
+        void loadMoreResults();
+    });
+    results.addEventListener("scroll", maybeLoadMoreFromScroll);
 
     addButton.addEventListener("click", async () => {
         if (!selectedItem || typeof context.onChange !== "function") {

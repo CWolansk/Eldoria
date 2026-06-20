@@ -1,8 +1,6 @@
 import {
     appendEmptyState,
     appendPillList,
-    createCardGrid,
-    createDefinitionList,
     createSection,
     createTabShell
 } from "./PlayerSheetTabHelpers.js";
@@ -63,25 +61,46 @@ const CATALOG_ID_KIND_PREFIXES = [
 ];
 
 function createFeatureCard(feature) {
-    const card = document.createElement("article");
-    card.className = "player-sheet-info-card";
+    const item = document.createElement("li");
+    item.className = "player-sheet-feature-list__item";
+    item.dataset.featureCategory = getFeatureGroupTitle(feature);
+    item.dataset.featureSearch = getFeatureSearchText(feature);
+
+    const details = document.createElement("details");
+    details.className = "player-sheet-feature-list__details player-sheet-feature-card";
+
+    const summary = document.createElement("summary");
+    summary.className = "player-sheet-feature-list__summary player-sheet-feature-card__summary";
+
+    const chevron = document.createElement("span");
+    chevron.className = "player-sheet-feature-list__chevron";
+    chevron.setAttribute("aria-hidden", "true");
+    chevron.textContent = "▸";
+    summary.appendChild(chevron);
+
+    const summaryContent = createElement("div", "player-sheet-feature-card__summary-content");
     const title = document.createElement("h4");
-    title.className = "player-sheet-info-card__title";
+    title.className = "player-sheet-feature-list__title";
     title.textContent = feature.name || "Feature";
-    card.appendChild(title);
+    summaryContent.appendChild(title);
 
-    const rows = [
-        ["Source", feature.source],
-        ["Level", feature.level != null ? feature.level : ""],
-        ["Type", feature.category]
-    ].filter(([, value]) => value != null && String(value).trim());
-    if (rows.length) {
-        card.appendChild(createDefinitionList(rows));
+    const meta = document.createElement("div");
+    meta.className = "player-sheet-feature-list__meta";
+    for (const [label, value] of getFeatureMetaRows(feature)) {
+        if (value != null && String(value).trim()) {
+            meta.appendChild(createElement("span", "player-sheet-feature-list__meta-item", `${label}: ${value}`));
+        }
     }
+    if (meta.children.length) {
+        summaryContent.appendChild(meta);
+    }
+    summary.appendChild(summaryContent);
 
-    card.appendChild(createFeatureRulesDropdown(feature));
+    details.appendChild(summary);
+    details.appendChild(createFeatureRulesBody(feature));
+    item.appendChild(details);
 
-    return card;
+    return item;
 }
 
 function normalizeCatalogId(value) {
@@ -178,6 +197,63 @@ function getFeatureRules(feature) {
     return getFeatureRuleEntries(feature) || NO_RULES_TEXT;
 }
 
+function stripMarkup(value) {
+    return String(value || "").replace(/<[^>]*>/gu, " ");
+}
+
+function flattenFeatureText(value, depth = 0) {
+    if (value == null || depth > 4) {
+        return "";
+    }
+
+    if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
+        return stripMarkup(value);
+    }
+
+    if (Array.isArray(value)) {
+        return value
+            .map((entry) => flattenFeatureText(entry, depth + 1))
+            .filter(Boolean)
+            .join(" ");
+    }
+
+    if (typeof value === "object") {
+        return Object.entries(value)
+            .filter(([key]) => !String(key).startsWith("_") || ["_fullEntries", "_typeListText"].includes(key))
+            .map(([, entry]) => flattenFeatureText(entry, depth + 1))
+            .filter(Boolean)
+            .join(" ");
+    }
+
+    return "";
+}
+
+function getFeatureMetaRows(feature) {
+    return [
+        ["Source", feature?.source],
+        ["Level", feature?.level != null ? feature.level : ""],
+        ["Type", feature?.category]
+    ];
+}
+
+function getFeatureGroupTitle(feature) {
+    const category = feature?.category || "";
+    return CATEGORY_GROUPS.find((group) => group.categories.has(category))?.title || "Other Features";
+}
+
+function getFeatureSearchText(feature) {
+    return normalizeSearchText([
+        feature?.name,
+        feature?.category,
+        feature?.source,
+        feature?.level,
+        getFeatureGroupTitle(feature),
+        getFeatureChoiceLabel(feature),
+        getFeatureCatalogId(feature),
+        flattenFeatureText(getFeatureRules(feature))
+    ].filter((value) => value != null && String(value).trim()).join(" "));
+}
+
 function getRecordRules(record) {
     return record?.entries
         || record?.raw?.entries
@@ -187,9 +263,55 @@ function getRecordRules(record) {
         || null;
 }
 
+function normalizeBackgroundFeatureName(value) {
+    return normalizeSearchText(String(value || "")
+        .replace(/^feature:\s*/iu, "")
+        .replace(/\s+/gu, " ")
+        .trim());
+}
+
+function findBackgroundFeatureEntry(backgroundIdentity = {}, backgroundRecord = {}) {
+    const featureName = normalizeBackgroundFeatureName(backgroundIdentity.feature || backgroundRecord.feature);
+    const entries = toArray(backgroundRecord.entries || backgroundRecord.raw?.entries)
+        .filter((entry) => entry && typeof entry === "object");
+    const featureEntries = entries.filter((entry) => {
+        const entryName = normalizeBackgroundFeatureName(entry.name);
+        return Boolean(entry?.data?.isFeature)
+            || /^feature:/iu.test(String(entry.name || ""))
+            || (featureName && entryName === featureName);
+    });
+
+    if (!featureEntries.length) {
+        return null;
+    }
+
+    return featureEntries.find((entry) => normalizeBackgroundFeatureName(entry.name) === featureName)
+        || (featureEntries.length === 1 ? featureEntries[0] : null);
+}
+
+function getBackgroundFeatureRecord(backgroundIdentity, backgroundRecord) {
+    const featureEntry = findBackgroundFeatureEntry(backgroundIdentity, backgroundRecord);
+    if (!featureEntry) {
+        return null;
+    }
+
+    const backgroundId = normalizeCatalogId(backgroundRecord.id || backgroundIdentity?.id || "");
+    return {
+        kind: "background-feature",
+        id: backgroundId ? `${backgroundId}:feature` : "background-feature",
+        name: backgroundIdentity?.feature || backgroundRecord.feature || String(featureEntry.name || "").replace(/^feature:\s*/iu, ""),
+        source: getCatalogSource(backgroundRecord) || backgroundIdentity?.source || backgroundId || "",
+        entries: featureEntry
+    };
+}
+
 function getRecordCategory(record) {
     const id = normalizeCatalogId(record?.id || record?.refId || record?.sourceId || record?.ref);
     const kind = normalizeSearchText([record?.kind, getCatalogKindForId(id), id].filter(Boolean).join(" "));
+    if (kind.includes("background-feature")) {
+        return "Background Feature";
+    }
+
     if (kind.includes("subclass-feature")) {
         return "Subclass Feature";
     }
@@ -387,6 +509,11 @@ async function loadDtoFeatureRecords(context, catalog) {
     const records = [];
     const classLevelCounts = getClassLevelCounts(dto);
 
+    for (const backgroundId of getCanonicalIdsForKind(dto.baseChoices?.background, "backgrounds")) {
+        const backgroundRecord = await getCatalogEntityByCanonicalId(catalog, "backgrounds", backgroundId);
+        appendRecord(records, getBackgroundFeatureRecord(dto.baseChoices?.background, backgroundRecord));
+    }
+
     for (const level of toArray(dto.levels)) {
         const classLevel = getLevelClassLevel(level);
         const currentClassLevel = getCurrentClassLevel(level, classLevelCounts);
@@ -556,14 +683,14 @@ export async function hydrateFeatureRules(features, context = {}) {
     }));
 }
 
-function createFeatureRulesDropdown(feature) {
-    const detail = createElement("details", "player-sheet-item-card__rules player-sheet-feature-card__rules");
-    detail.appendChild(createElement("summary", "player-sheet-item-card__rules-summary", "Rules"));
-
+function createFeatureRulesBody(feature) {
+    const body = createElement("div", "player-sheet-feature-card__body");
+    const detail = createElement("div", "player-sheet-item-card__rules player-sheet-feature-card__rules");
     const rules = getFeatureRules(feature);
     if (typeof rules === "string") {
         detail.appendChild(createElement("p", "player-sheet-item-card__rules-text", rules));
-        return detail;
+        body.appendChild(detail);
+        return body;
     }
 
     appendRulesEntry(detail, rules, {
@@ -574,23 +701,146 @@ function createFeatureRulesDropdown(feature) {
         title: "player-sheet-item-card__rules-title"
     });
 
-    return detail;
+    body.appendChild(detail);
+    return body;
 }
 
 function appendFeatureGroup(shell, title, features) {
     const section = createSection(title);
+    section.classList.add("player-sheet-feature-group");
+    section.dataset.featureGroup = title;
     if (!features.length) {
         appendEmptyState(section, "None.");
         shell.appendChild(section);
         return;
     }
 
-    const grid = createCardGrid();
+    const list = document.createElement("ul");
+    list.className = "player-sheet-feature-list";
     for (const feature of features) {
-        grid.appendChild(createFeatureCard(feature));
+        list.appendChild(createFeatureCard(feature));
     }
-    section.appendChild(grid);
+    section.appendChild(list);
     shell.appendChild(section);
+}
+
+function createFeatureFilterField(labelText, control) {
+    const label = createElement("label", "player-sheet-feature-filter__field");
+    label.appendChild(createElement("span", "player-sheet-feature-filter__label", labelText));
+    label.appendChild(control);
+    return label;
+}
+
+function getFilterCategoryOptions(features) {
+    const present = new Set(features.map(getFeatureGroupTitle));
+    return [
+        {
+            value: "all",
+            label: "All Categories"
+        },
+        ...CATEGORY_GROUPS
+            .filter((group) => present.has(group.title))
+            .map((group) => ({
+                value: group.title,
+                label: group.title
+            })),
+        ...(present.has("Other Features")
+            ? [{
+                value: "Other Features",
+                label: "Other Features"
+            }]
+            : [])
+    ];
+}
+
+function createFeatureFilterControls(shell, features) {
+    const container = createElement("section", "player-sheet-feature-filter");
+    const controls = createElement("div", "player-sheet-feature-filter__controls");
+
+    const search = document.createElement("input");
+    search.type = "search";
+    search.className = "player-sheet-input player-sheet-feature-filter__input";
+    search.placeholder = "Search feats and features";
+    search.setAttribute("aria-label", "Search feats and features");
+
+    const category = document.createElement("select");
+    category.className = "player-sheet-select player-sheet-feature-filter__select";
+    category.setAttribute("aria-label", "Filter feat category");
+    for (const option of getFilterCategoryOptions(features)) {
+        const optionElement = document.createElement("option");
+        optionElement.value = option.value;
+        optionElement.textContent = option.label;
+        category.appendChild(optionElement);
+    }
+
+    const clearButton = document.createElement("button");
+    clearButton.type = "button";
+    clearButton.className = "player-sheet-button player-sheet-button--small player-sheet-feature-filter__clear";
+    clearButton.textContent = "Clear";
+
+    controls.appendChild(createFeatureFilterField("Search", search));
+    controls.appendChild(createFeatureFilterField("Category", category));
+    controls.appendChild(clearButton);
+    container.appendChild(controls);
+
+    const status = createElement("p", "player-sheet-feature-filter__status");
+    status.dataset.featureFilterStatus = "true";
+    status.setAttribute("aria-live", "polite");
+    container.appendChild(status);
+
+    const empty = createElement("p", "player-sheet-empty-state player-sheet-feature-filter__empty", "No matching feats or features.");
+    empty.dataset.featureFilterEmptyState = "true";
+    empty.hidden = true;
+    container.appendChild(empty);
+
+    const update = () => applyFeatureFilter(shell);
+    search.addEventListener("input", update);
+    category.addEventListener("change", update);
+    clearButton.addEventListener("click", () => {
+        search.value = "";
+        category.value = "all";
+        update();
+        search.focus();
+    });
+
+    return container;
+}
+
+function applyFeatureFilter(shell) {
+    const search = shell.querySelector(".player-sheet-feature-filter__input");
+    const category = shell.querySelector(".player-sheet-feature-filter__select");
+    const query = normalizeSearchText(search?.value || "");
+    const selectedCategory = category?.value || "all";
+    const rows = Array.from(shell.querySelectorAll(".player-sheet-feature-list__item"));
+
+    let visibleCount = 0;
+    for (const row of rows) {
+        const matchesQuery = !query || String(row.dataset.featureSearch || "").includes(query);
+        const matchesCategory = selectedCategory === "all" || row.dataset.featureCategory === selectedCategory;
+        const visible = matchesQuery && matchesCategory;
+        row.hidden = !visible;
+        if (visible) {
+            visibleCount += 1;
+        }
+    }
+
+    for (const section of Array.from(shell.querySelectorAll(".player-sheet-feature-group"))) {
+        const sectionRows = Array.from(section.querySelectorAll(".player-sheet-feature-list__item"));
+        if (!sectionRows.length) {
+            continue;
+        }
+        section.hidden = !sectionRows.some((row) => !row.hidden);
+    }
+
+    const status = shell.querySelector("[data-feature-filter-status]");
+    if (status) {
+        status.textContent = `Showing ${visibleCount} of ${rows.length} feats and features.`;
+    }
+
+    const empty = shell.querySelector("[data-feature-filter-empty-state]");
+    if (empty) {
+        empty.hidden = rows.length === 0 || visibleCount > 0;
+    }
 }
 
 export async function BuildPlayerSheetFeatsTab(playerSheetObject, context = {}) {
@@ -603,6 +853,10 @@ export async function BuildPlayerSheetFeatsTab(playerSheetObject, context = {}) 
         return;
     }
 
+    if (features.length > 1) {
+        shell.appendChild(createFeatureFilterControls(shell, features));
+    }
+
     for (const group of CATEGORY_GROUPS) {
         const groupedFeatures = features.filter((feature, index) => {
             const matches = group.categories.has(feature?.category || "");
@@ -611,7 +865,9 @@ export async function BuildPlayerSheetFeatsTab(playerSheetObject, context = {}) 
             }
             return matches;
         });
-        appendFeatureGroup(shell, group.title, groupedFeatures);
+        if (groupedFeatures.length) {
+            appendFeatureGroup(shell, group.title, groupedFeatures);
+        }
     }
 
     const otherFeatures = features.filter((_feature, index) => !used.has(index));
@@ -625,4 +881,6 @@ export async function BuildPlayerSheetFeatsTab(playerSheetObject, context = {}) 
         appendPillList(section, featureChoices.map((choice) => [choice.label, choice.value].filter(Boolean).join(": ")));
         shell.appendChild(section);
     }
+
+    applyFeatureFilter(shell);
 }

@@ -5,26 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player Sheets | Eldoria Player Wiki</title>
-    <script src="../../site-shell.js"></script>
+    <script src="../site-shell.js"></script>
     <script type="module" src="players.js"></script>
-    <link rel="stylesheet" href="../../css/tokens.css">
-    <link rel="stylesheet" href="../../css/base.css">
-    <link rel="stylesheet" href="../../css/components.css">
-    <link rel="stylesheet" href="../../css/utilities.css">
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/utilities.css">
     <link rel="stylesheet" href="players.css">
 </head>
 <body class="hub-page">
     <div class="site-shell">
-        <div id="site-nav" data-base-path="../../" data-current="players"></div>
-        <main class="container">
-            <section class="section player-sheet-roster-page">
-                <header>
-                    <div>
+        <div id="site-nav" data-base-path="../" data-current="players"></div>
+        <main class="container player-roster-container">
+            <section class="section player-sheet-page player-sheet-roster-page" aria-labelledby="player-roster-title">
+                <header class="player-roster-hero">
+                    <div class="player-roster-hero__copy">
                         <p class="section-kicker">Player Sheets</p>
-                        <h1>Player Character Sheets</h1>
+                        <h1 id="player-roster-title">Player Character Sheets</h1>
+                        <p class="player-roster-hero__summary">Open your player sheet for quick stats, level editing, gear, spells, and rules references.</p>
                     </div>
                 </header>
-                <div id="player-sheet-list"></div>
+                <div id="player-sheet-list" class="player-roster-grid" aria-live="polite"></div>
             </section>
         </main>
     </div>

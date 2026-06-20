@@ -22,7 +22,7 @@ npm run seed:reset-players   # delete each manifest player's old sheet/builder b
 
 Default source file:
 
-- `../character-sheets/v1/players.json`
+- `players.json`
 
 Use `node seed/seedBlobStorage.js --use-character-files --characters-dir <path>` only when
 you intentionally want to upload existing v2 PlayerSheetDTO files instead of blank
@@ -43,3 +43,20 @@ npm run seed:catalog -- --purge            # delete stale rows per kind first
 ```
 
 Run `node seed/seedTableStorage.js --help` for the full option list and available kinds.
+
+## Item search index → Table Storage
+
+The optional item search index accelerates lightweight item searches without rewriting the
+main catalog table. It writes suffix/prefix rows to `ELDORIA_CATALOG_SEARCH_TABLE`, defaulting
+to `<ELDORIA_CATALOG_TABLE>search`.
+
+```powershell
+npm run seed:catalog:item-search -- --dry-run
+npm run seed:catalog:item-search
+npm run seed:catalog:item-search -- --purge-search-index
+npm run seed:catalog:item-search -- --clear-search-index
+```
+
+Rollback is config-only: set `ELDORIA_ITEM_SEARCH_INDEX=false` on the API and it will ignore
+the search index and use the original catalog scan path. `--clear-search-index` is optional
+cleanup for the separate search table.

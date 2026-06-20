@@ -45,11 +45,35 @@
       </details>';
   }
 
+  function yesNo(value) {
+    return value ? "Yes" : "No";
+  }
+
+  function mapItemApiRow(row) {
+    return {
+      Name: row.name || "",
+      Source: row.source || "",
+      Rarity: titleCase(row.rarity || "none"),
+      Type: row.type || row.category || "Item",
+      Attunement: yesNo(row.attunement),
+      Damage: row.damageType || "",
+      Properties: Array.isArray(row.properties) ? row.properties.join(", ") : (row.properties || ""),
+      Mastery: row.mastery || "",
+      Weight: row.weight == null ? "" : String(row.weight),
+      Value: row.valueLabel || (row.value == null ? "" : String(row.value)),
+      Text: row.text || row.entriesText || ""
+    };
+  }
+
   features.rulesSearchConfigs = features.rulesSearchConfigs || {};
   features.rulesSearchConfigs.items = {
     title: "Item Search",
     itemLabel: "item",
     dataKind: "items",
+    remoteSearch: true,
+    remoteLimit: 200,
+    initialQuery: "a",
+    mapApiRow: mapItemApiRow,
     placeholder: "Search items...",
     searchFields: ["Name", "Source", "Rarity", "Type", "Attunement", "Damage", "Properties", "Mastery", "Weight", "Value", "Text"],
     render: renderItem,

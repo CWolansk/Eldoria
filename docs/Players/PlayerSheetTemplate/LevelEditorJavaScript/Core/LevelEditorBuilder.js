@@ -9,6 +9,11 @@ import {
     createElement
 } from "../../PlayerSheetHtmlHelper.js";
 import { buildAbilityScoreContent } from "../Character/LevelEditorAbilityScoreBuilder.js";
+import {
+    buildBackgroundChoiceContent,
+    buildBackgroundChoiceStatus,
+    hasBackgroundChoiceOptions
+} from "../Background/LevelEditorBackgroundChoiceBuilder.js";
 import { buildAsiContent } from "../Character/LevelEditorAsiBuilder.js";
 import { buildBackgroundContent } from "../Background/LevelEditorBackgroundBuilder.js";
 import { resolveCatalogEntity } from "../Catalog/LevelEditorCatalogChoiceResolver.js";
@@ -196,8 +201,15 @@ function addUniqueFormatted(target, values, formatter = formatDisplayName) {
     }
 }
 
+function isChoicePlaceholderProficiency(value) {
+    const text = String(value?.name || value?.value || value || "").toLowerCase();
+    return /\b(?:any|choice)\b/iu.test(text)
+        && /\b(?:tool|weapon|armor|language|skill|instrument)\b/iu.test(text);
+}
+
 function getClassFixedProficiencies(classRecord, key) {
-    return toArray(getValue(classRecord, `startingProficiencies.${key}.fixed`, []));
+    return toArray(getValue(classRecord, `startingProficiencies.${key}.fixed`, []))
+        .filter((value) => !isChoicePlaceholderProficiency(value));
 }
 
 function buildLevelOneProficiencySummary(playerSheetObject, classRecord) {
@@ -585,6 +597,10 @@ function createStructuredCoverageContent(scope, context) {
 }
 
 function renderStructuredOptionCoverageRow(bodyId, scope, context) {
+    if (context?.showStructuredOptionCoverage !== true) {
+        return;
+    }
+
     const coverage = getOptionCoverageForScope(context.compiled?.optionCoverage, scope);
     if (!coverage.total && !coverage.missingMappings.length) {
         return;
@@ -679,6 +695,21 @@ function buildLevelEditor(playerSheetObject, context) {
         });
         body.appendChild(raceOptionsRow);
         hideRowWhenNoChoices(raceOptionsRow, context, hasRaceChoiceOptions);
+
+        const backgroundOptionsRow = createElement("div");
+        backgroundOptionsRow.id = "level-editor-level-1-background-options";
+        buildModalHtml(backgroundOptionsRow, {
+            type: "background-options",
+            label: "Background Options",
+            status: buildBackgroundChoiceStatus(dto),
+            modalId: "level-editor-level-1-background-options-modal",
+            characterLevel: context.characterLevel,
+            description: "Set required options granted by the selected background.",
+            lazyContent: true,
+            buildContent: () => buildBackgroundChoiceContent(context)
+        });
+        body.appendChild(backgroundOptionsRow);
+        hideRowWhenNoChoices(backgroundOptionsRow, context, hasBackgroundChoiceOptions);
 
         const skillRow = createElement("div");
         skillRow.id = "level-editor-level-1-skills";
@@ -951,105 +982,6 @@ function formatMixedProficiencyValue(entry) {
     return value;
 }
 
-const DEBUG_BUTTON_ID = "level-editor-debug-button";
-const DEBUG_MODAL_ID = "level-editor-debug-modal";
-
-function safeStringify(value) {
-    try {
-        return JSON.stringify(value, null, 2);
-    } catch (error) {
-        return `Unable to serialize value: ${error?.message || error}`;
-    }
-}
-
-function buildDebugSection(title, value) {
-    const section = createElement("section", "level-editor__debug-section");
-
-    const heading = createElement("div", "level-editor__debug-heading");
-    heading.appendChild(createElement("h4", "level-editor__debug-title", title));
-
-    const serialized = safeStringify(value);
-
-    const copyButton = document.createElement("button");
-    copyButton.type = "button";
-    copyButton.className = "level-editor__button level-editor__button--copy";
-    copyButton.textContent = "Copy JSON";
-    copyButton.addEventListener("click", () => {
-        navigator.clipboard?.writeText?.(serialized);
-    });
-    heading.appendChild(copyButton);
-    section.appendChild(heading);
-
-    const pre = createElement("pre", "level-editor__debug-json");
-    pre.textContent = serialized;
-    pre.style.maxHeight = "40vh";
-    pre.style.overflow = "auto";
-    pre.style.whiteSpace = "pre-wrap";
-    pre.style.wordBreak = "break-word";
-    pre.style.fontSize = "0.75rem";
-    section.appendChild(pre);
-
-    return section;
-}
-
-function buildDebugScreen(context) {
-    document.querySelector(`#${DEBUG_BUTTON_ID}`)?.remove();
-    document.querySelector(`#${DEBUG_MODAL_ID}`)?.remove();
-
-    const title = document.querySelector("#level-editor-title");
-    const host = title?.parentElement || document.querySelector("#sidebar-level-editor");
-    if (!host) {
-        return;
-    }
-
-    const button = document.createElement("button");
-    button.type = "button";
-    button.id = DEBUG_BUTTON_ID;
-    button.className = "level-editor__button level-editor__button--debug";
-    button.textContent = "Debug State";
-
-    const dialog = document.createElement("dialog");
-    dialog.id = DEBUG_MODAL_ID;
-    dialog.className = "modal level-editor__modal level-editor__modal--debug";
-    dialog.setAttribute("aria-label", "Debug State");
-
-    const dialogContent = createElement("div", "modal-content level-editor__modal-content");
-
-    const modalHeader = createElement("div", "level-editor__modal-header");
-    modalHeader.appendChild(createElement("h3", "level-editor__modal-title", "Debug State"));
-
-    const closeButton = document.createElement("button");
-    closeButton.type = "button";
-    closeButton.className = "close level-editor__close";
-    closeButton.textContent = "X";
-    closeButton.setAttribute("aria-label", "Close Debug State");
-    closeButton.addEventListener("click", () => dialog.close());
-    modalHeader.appendChild(closeButton);
-    dialogContent.appendChild(modalHeader);
-
-    const body = createElement("div", "level-editor__modal-body level-editor__debug-body");
-    body.appendChild(buildDebugSection("Compiled Player Sheet", context.compiled));
-    body.appendChild(buildDebugSection("Player Sheet DTO", context.dto));
-    dialogContent.appendChild(body);
-
-    dialog.appendChild(dialogContent);
-
-    button.addEventListener("click", () => {
-        console.log("[Level Editor Debug] Compiled player sheet:", context.compiled);
-        console.log("[Level Editor Debug] Player sheet DTO:", context.dto);
-        if (typeof dialog.showModal === "function") {
-            dialog.showModal();
-        }
-    });
-
-    if (title && title.nextSibling) {
-        host.insertBefore(button, title.nextSibling);
-    } else {
-        host.appendChild(button);
-    }
-    host.appendChild(dialog);
-}
-
 function isResolvedProfileSource(record, identity) {
     return Boolean(
         record
@@ -1190,6 +1122,7 @@ export function bootLevelEditor(context) {
 
     const progression = buildLevelProgression(compiled, dto);
     const editorContext = {
+        ...context,
         dto,
         compiled,
         onChange,
@@ -1197,7 +1130,6 @@ export function bootLevelEditor(context) {
     };
 
     buildBaseEditor(editorContext);
-    buildDebugScreen(editorContext);
 
     for (let level = 1; level <= MAX_CHARACTER_LEVEL; level += 1) {
         buildLevelEditor(compiled, {
