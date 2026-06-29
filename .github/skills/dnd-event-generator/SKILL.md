@@ -26,17 +26,11 @@ At minimum: a **name or description** of what happened. Everything else can be i
 
 ## Shared Conventions
 
-This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that file for tag formatting, linking rules, brevity standards, read-aloud formatting, batch creation order, and conversion guidance.
+This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for file conventions, frontmatter, tags, dataview blocks, the 10-second scan / brevity rule, read-aloud blockquotes, search-before-create, status folders, and old-format conversion. Only the event-specific details are below.
 
 ## Before You Create
 
-Always **search the vault first**:
-1. Search `Private/2. Session Journals/` for existing session logs — don't duplicate
-2. Search `*/Events/` directories for existing world events
-3. Check that NPCs, locations, and groups mentioned in the event have files to link to
-4. Look at existing session journals (Session 1, Session 2) to match format conventions
-
-If the user asks about an **existing event**, search and present what the vault already has rather than generating new content.
+Search `Private/2. Session Journals/` and `*/Events/` for existing session logs and world events before creating, and match existing session journal format (Session 1, Session 2).
 
 ## File Naming
 
@@ -119,8 +113,6 @@ SORT file.name ASC
 ```
 ```
 
-Use `FROM [[]]` exactly as shown — existing vault files may still show `FROM [[#this.file.name]]` which is outdated. Do not copy from old files.
-
 ## Public Note (Player Version)
 
 ```markdown
@@ -152,30 +144,23 @@ SORT file.name ASC
 
 ## Writing Guidelines
 
-### Brevity
-- **10-second scan rule.** Events are records, not stories. Bullets over prose. Facts over flavor.
+### Event-Specific Brevity
+- Events are records, not stories. Facts over flavor.
 - Summary sections: 3-5 bullets max. Each bullet is one beat.
 - Consequences: 2-4 bullets max. What changed, not how it felt.
-- Use fragments. "Guard captain arrested" not "The guard captain was placed under arrest by the city watch."
 
 ### General
 - Link generously — events are the connective tissue between NPCs, locations, and groups.
 - The private note captures DM truth (what actually happened and why). The public note captures player truth (what the party saw and knows).
-- Match existing session journal conventions in the vault. Existing sessions use `fc-date`, `fc-end`, `fc-category` frontmatter and date tags.
-- Public notes only link to public files. Private notes can link to anything.
 - Don't duplicate session journals — if this is a full session log, place it in `Private/2. Session Journals/`. If it's a specific in-world event referenced by sessions, it goes in the World directory.
 
 ## Converting Existing Events
 
-Some existing session journals or event notes use older formats. When converting:
+Convert old files per CONVENTIONS.md §11. Event-specific mapping:
 
-1. **Read the existing file** before changing anything
-2. **Map old metadata to YAML frontmatter** — `fc-date`, `fc-category`, region, location
-3. **Preserve all wiki-links** — NPC mentions, location references, group references
-4. **Condense prose recaps** into bullet-point summaries
-5. **Split DM-only info** into Consequences/Secrets sections
-6. **Create public version** with only player-known information
-7. **For batch conversions** — list files first, confirm with user, convert one at a time
+- Map old metadata to YAML frontmatter — `fc-date`, `fc-category`, region, location.
+- Condense prose recaps into bullet-point summaries.
+- Split DM-only info into Consequences/Secrets sections.
 
 ## Impact Discovery
 
@@ -198,5 +183,3 @@ When creating an event, check if it needs supporting content:
 - Are there NPCs mentioned that don't have files? Ask if you should create them.
 - Are there locations mentioned that don't have files? Ask if you should create them.
 - Did the event involve a group or faction? Does that group have a file? If not, ask.
-
-**Always check for mentioned entities and ask the DM before creating them.**

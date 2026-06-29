@@ -35,17 +35,11 @@ At minimum: a **triggering event** and what **changed** because of it. Look for:
 
 ## Shared Conventions
 
-This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that file for tag formatting, linking rules, brevity standards, plugin syntax, and batch creation order.
+This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for file conventions, frontmatter, tags, dataview blocks, the 10-second scan / brevity rule, read-aloud blockquotes, search-before-create, status folders, and old-format conversion. Only the consequence-specific details are below.
 
 ## Before You Create
 
-Always **search the vault first**:
-1. Search `Private/2. Reference/Events/Consequences/` for existing consequence files — don't duplicate
-2. Find the triggering event or quest file to link to
-3. Check that affected NPCs, factions, and locations have files
-4. Look at existing consequence files to match format conventions
-
-If the user asks about an **existing consequence**, search and present what the vault already has rather than generating new content.
+Search `Private/2. Reference/Events/Consequences/` for existing consequence files before creating, and find the triggering event or quest file to link to.
 
 ## File Paths
 
@@ -57,7 +51,7 @@ Private/2. Reference/Events/Consequences/Resolved/{Consequence Name}.md
 Private/2. Reference/Events/Consequences/Ideas/{Consequence Name}.md
 ```
 
-When changing a consequence's status (e.g., Idea → Active), move the file to the matching subfolder so the folder structure stays in sync with YAML status.
+Move the file to the matching status subfolder so the folder stays in sync with the YAML `status` field (see CONVENTIONS.md §10).
 
 Consequences are **DM-only** — they do not get a public counterpart. If the players can see the effects, those go in the relevant NPC, location, or event public files instead.
 
@@ -125,9 +119,7 @@ SORT file.name ASC
 
 ## Writing Guidelines
 
-### Brevity
-- **10-second scan rule.** The DM should scan the consequence at a glance.
-- Use fragments and short bullets. No prose.
+### Consequence-Specific Brevity
 - Impact section: 2-5 bullets. Each describes one concrete change.
 - The trigger should be 1-2 sentences with a link, not a recap of the whole session.
 
@@ -152,14 +144,11 @@ Focus on **what changed**, not what happened. "Guard captain now hostile to part
 
 ## Converting Existing Consequences
 
-Some existing consequence files have minimal YAML and freeform content. When converting:
+Convert old files per CONVENTIONS.md §11. Consequence-specific mapping:
 
-1. **Read the existing file** before changing anything
-2. **Add missing frontmatter fields** — most already have `fc-date`, `fc-category`; add `type`, `name`, `status`, `severity`, `trigger`, `affected_entities`, `tags`
-3. **Restructure content** into Trigger, Impact, and Current Status sections
-4. **Preserve all wiki-links** — triggering event links, NPC references, session links
-5. **Don't invent content** — if the file is a stub, add the structure but keep content minimal
-6. **For batch conversions** — list files first, confirm with user, convert one at a time
+- Add missing frontmatter fields — most already have `fc-date`, `fc-category`; add `type`, `name`, `status`, `severity`, `trigger`, `affected_entities`, `tags`.
+- Restructure content into Trigger, Impact, and Current Status sections.
+- Don't invent content — if the file is a stub, add the structure but keep content minimal.
 
 ## Cascading Creation
 
@@ -169,5 +158,3 @@ When creating a consequence, check if it needs supporting content:
 - Does the consequence involve a faction or group without a file? Ask if you should create one using the **dnd-group-generator** skill.
 - Does the consequence escalate into a specific encounter? Ask if you should prep it using the **dnd-encounter-builder** skill.
 - Does the consequence affect a location that should be updated? Note the location file that needs editing.
-
-**Always check for mentioned entities and ask the DM before creating them.**

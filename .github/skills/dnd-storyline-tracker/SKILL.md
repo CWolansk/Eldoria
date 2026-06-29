@@ -42,7 +42,7 @@ If the user is vague ("what storylines do we have?"), run a broad audit — scan
 
 ## Shared Conventions
 
-This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for tag formatting, linking rules, and brevity standards.
+This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for file conventions, frontmatter, tags, dataview blocks, brevity, read-aloud formatting, search-before-create, and delegating creation to other skills.
 
 This skill produces analysis in chat first. After presenting results, it can **save storyline notes** as paired private/public files. For entity creation suggested by the audit (new quests, NPCs, events, etc.), delegate to the appropriate skill:
 - Storyline notes → this skill (see "Creating Storyline Notes" below)

@@ -25,15 +25,11 @@ At minimum: a **name** and a **general concept** (frozen wastes, volcanic archip
 
 ## Shared Conventions
 
-This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that file for tag formatting, linking rules, brevity standards, read-aloud formatting, batch creation order, and conversion guidance.
+This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for paired private/public files, frontmatter, tags, dataview blocks, the 10-second scan / brevity rule, read-aloud blockquotes, search-before-create, batch creation order, and old-format conversion. Only the region-specific details are below.
 
 ## Before You Create
 
-Always **search the vault first**:
-1. List `Private/1. World Almanac/World/` to see all existing regions — avoid duplicates
-2. Check if the proposed region name conflicts with or overlaps an existing one
-3. Look at existing region files to match tone and structure
-4. If the region already exists, **do not create a duplicate** — offer to review or update the existing files instead. If the user wants to see what you'd generate, show a preview in chat without creating files.
+Search the vault first (CONVENTIONS.md §7) — specifically list `Private/1. World Almanac/World/` (each top-level folder is a region) and check the proposed name doesn't conflict with or overlap an existing region.
 
 ## File Paths
 
@@ -119,30 +115,17 @@ SORT file.name ASC
 
 ## Writing Guidelines
 
-### Brevity
-- **10-second scan rule.** Regions are broad strokes — set tone and context, don't detail every village.
+- Regions are broad strokes — set tone and context, don't detail every village.
 - History: 3-4 bullets max. Key events only.
 - Settlements and Factions: bullet lists with one-line descriptions.
-- Use fragments. No prose paragraphs.
-
-### Read-Aloud Text
-The Overview section can double as read-aloud text when the party enters a new region. Use `>` blockquote formatting.
-
-### General
 - Settlements, NPCs, and groups within the region should have their own files.
-- If the user mentions settlements or factions that don't exist yet, ask if you should create them.
-- Public notes only link to public files. Private notes can link to anything.
 
 ## Converting Existing Regions
 
-Some existing regions may use older formats or lack YAML frontmatter. When converting:
-
-1. **Read both private and public files** before changing anything
-2. **Map old metadata to YAML frontmatter** — region name, tags
-3. **Preserve all wiki-links** — settlement links, faction links, location references
-4. **Condense prose descriptions** into scannable bullets
-5. **Rewrite public file** as standalone cartographer's reference
-6. **For batch conversions** — list files first, confirm with user, convert one at a time
+Convert old `::` files per CONVENTIONS.md §11. Region-specific field mapping:
+- Old metadata → `name` and `tags` in YAML frontmatter
+- Condense prose descriptions into scannable bullets
+- Rewrite the public file as a standalone cartographer's reference
 
 ## Cascading Creation
 
@@ -150,7 +133,3 @@ When creating a region, check if it needs supporting content:
 - Does it have settlements that need files? Ask if you should create them using the **dnd-settlement-generator** skill.
 - Does it have factions or organizations? Ask if you should create them using the **dnd-group-generator** skill.
 - Does it have notable locations (ruins, forests, landmarks)? Ask if you should create them using the **dnd-location-generator** skill.
-
-Don't silently create supporting content — always confirm with the user first.
-
-**Reminder:** After generating a region file, always check this section and ask the DM about any settlements, factions, or locations mentioned in the file that don't have their own files yet.

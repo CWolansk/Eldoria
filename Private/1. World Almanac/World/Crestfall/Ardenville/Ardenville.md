@@ -28,13 +28,15 @@ tags:
 - [[Mira Softstep]] – halfling innkeeper of the Netted Nymph, purveyor of gossip and stew.
 - [[Gregor Woods]] – captain of the lake guard, ever watchful for smugglers and monsters.
 - [[Edda Netsong]] – dwarf guildmistress of the Fisherman’s Guild, stubborn as barnacles.
+- [[Richard Vane]] – Ardenville Merchants Guildmaster, polished sponsor and competitive bully.
+- [[Me'Shelle Jones]] – Richard's sailor consigliere and race tactician.
 
 ## Current Events
 On the **15th day of the fall season**, Ardenville hosts the **Lake Arden Boat Race**. Sponsored by [[Alistair Goldman]] and the Merchants Guild, the competition offers gold and the seized prize vessel *The Tipping Tankard*. Locals whisper that the guildmaster’s motives reach beyond celebration—especially after his recent clashes with certain adventurers.
 
 
 ## Guilds & Politics
-- **Merchants Guild.** Warehouses dominate the main pier, and guildmaster [[Alistair Goldman]] presses for higher docking fees while controlling the cliffside port feeding Highreach.
+- **Merchants Guild.** Warehouses dominate the main pier. [[Alistair Goldman]] sponsors from Highreach while [[Richard Vane]] acts as Ardenville guildmaster and [[Me'Shelle Jones]] handles dockside pressure and race tactics.
 - **Fisherman’s Guild.** Led by [[Edda Netsong]], local crews band together to protect their haul and traditions.
 - **Adventurers Guild Outpost.** A modest chapter posts jobs in the Netted Nymph and escorts boats through monster‑haunted shallows.
 Smiles hide simmering tensions: the Merchants Guild covets control, the Fisherman’s Guild resists, and adventurers often mediate disputes—especially over who may clear the kelp beds or secure the storm‑ruined warehouse. Kellen Redshore still holds Grumm Grog Guzzler’s impounded ship as collateral for unpaid fees, a reminder of the guild’s reach.

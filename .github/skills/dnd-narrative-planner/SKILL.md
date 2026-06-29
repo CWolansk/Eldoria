@@ -39,7 +39,7 @@ If the DM is vague ("do something cool for Julie"), ask:
 
 ## Shared Conventions
 
-This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for tag formatting, linking rules, and brevity standards.
+This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for file conventions, frontmatter, tags, dataview blocks, brevity, read-aloud formatting, search-before-create, and delegating creation to other skills.
 
 ## How This Works
 

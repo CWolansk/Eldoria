@@ -26,16 +26,11 @@ At minimum: a **name** and a **region**. Everything else can be invented. Look f
 
 ## Shared Conventions
 
-This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that file for tag formatting, linking rules, brevity standards, read-aloud formatting, batch creation order, and conversion guidance.
+This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for paired private/public files, frontmatter, tags, dataview blocks, the 10-second scan / brevity rule, read-aloud blockquotes, search-before-create, batch creation order, and old-format conversion. Only the settlement-specific details are below.
 
 ## Before You Create
 
-Always **search the vault first**:
-1. Search `Private/1. World Almanac/World/` to discover existing regions (each top-level folder is a region)
-2. Search within the target region for existing settlements — avoid duplicates
-3. Look at neighboring settlement files to match tone and detail level
-4. Check if related NPCs, shops, or groups already exist
-5. If the settlement already exists, **do not create a duplicate** — offer to review or update the existing files instead. If the user wants to see what you'd generate, show a preview in chat without creating files.
+Search the vault first (CONVENTIONS.md §7) — specifically check the target region folder under `Private/1. World Almanac/World/` for existing settlements.
 
 ## File Paths
 
@@ -136,31 +131,17 @@ SORT file.name ASC
 
 ## Writing Guidelines
 
-### Brevity
-- **10-second scan rule.** A DM mid-session should get what they need from any section at a glance.
-- Use fragments and short bullets. No prose paragraphs.
 - Section limits: 2-4 bullets or 1-3 sentences per section. If it's longer, trim it.
 - Don't catalog — curate. List what's interesting, not everything.
-
-### Read-Aloud Text
-The Overview/Description in the private note doubles as read-aloud text. Use `>` blockquote formatting so the DM can instantly spot it.
-
-### General
 - Settlements exist to give NPCs a home and the party a place to visit — don't over-describe.
 - NPCs and shops mentioned should link to their own files; if those files don't exist yet, **ask the user** if you should create them.
-- Public notes only link to public files. Private notes can link to anything.
-- Match existing tag conventions (PascalCase region/city names, no `#` in YAML).
 
 ## Converting Existing Settlements
 
-Some existing settlements use older templates with `::` metadata, prose-heavy descriptions, or inline metadata instead of YAML frontmatter. When converting:
-
-1. **Read both private and public files** before changing anything
-2. **Map old fields to YAML frontmatter** — population, government, settlement type, region
-3. **Preserve all wiki-links** — NPC links, shop links, location references
-4. **Trim descriptions to fragments** — condense prose paragraphs into scannable bullets
-5. **Rewrite public file** as standalone gazetteer entry
-6. **For batch conversions** — list files first, confirm with user, convert one at a time
+Convert old `::` files per CONVENTIONS.md §11. Settlement-specific field mapping:
+- Old metadata → `population`, `government`, `settlement_type`, `region` in YAML frontmatter
+- Trim descriptions to fragments — condense prose paragraphs into scannable bullets
+- Rewrite the public file as a standalone gazetteer entry
 
 ## Cascading Creation
 
@@ -169,7 +150,3 @@ When creating a settlement, check if it needs supporting content:
 - Does it have shops or taverns? Ask if you should create those.
 - Does it belong to a region that doesn't exist yet? Ask if you should create the region.
 - Does it have guilds or organizations? Ask if you should create those.
-
-Don't silently create supporting content — always confirm with the user first.
-
-**Reminder:** After generating a settlement file, always check this section and ask the DM about any NPCs, shops, or groups mentioned in the file that don't have their own files yet.

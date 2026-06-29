@@ -24,15 +24,11 @@ At minimum: a **name** (or concept) and rough **location**. Everything else can 
 
 ## Shared Conventions
 
-This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that file for tag formatting, linking rules, brevity standards, read-aloud formatting, batch creation order, and conversion guidance.
+This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for paired private/public files, frontmatter, tags, dataview blocks, the 10-second scan / brevity rule, read-aloud blockquotes, search-before-create, batch creation order, and old-format conversion. Only the location-specific details are below.
 
 ## Before You Create
 
-Always **search the vault first**:
-1. Search `Private/1. World Almanac/World/{Region}/` for existing locations — avoid duplicates
-2. Check if the region and nearby settlement exist
-3. Look at existing location files (Blackwood Forest, Lake Arden) to match tone and structure
-4. If the location already exists, **do not create a duplicate** — offer to review or update the existing files instead. If the user wants to see what you'd generate, show a preview in chat without creating files.
+Search the vault first (CONVENTIONS.md §7) — specifically check `Private/1. World Almanac/World/{Region}/` for existing locations (e.g., Blackwood Forest, Lake Arden).
 
 ## File Paths
 
@@ -132,31 +128,17 @@ SORT file.name ASC
 
 ## Writing Guidelines
 
-### Brevity
-- **10-second scan rule.** The DM should be able to scan the entire location file at a glance mid-session.
-- Use fragments and short bullets. No prose paragraphs.
 - Key Features: 3-5 bullets max. What's notable, not what's obvious.
 - Hazards: 2-4 bullets. What's dangerous, with enough info to run an encounter.
-
-### Read-Aloud Text
-The Description section doubles as read-aloud text. Use `>` blockquote formatting so the DM can instantly spot what to say when the party arrives. Keep it to 2-3 lines.
-
-### General
 - Focus on what's *actionable* — what can the party interact with, fight, or investigate?
 - Don't map out every room of a dungeon. Provide the concept, atmosphere, and key encounters. Detail comes at the table.
-- Public notes only link to public files. Private notes can link to anything.
 
 ## Converting Existing Locations
 
-Some existing locations use older templates with `::` metadata or prose-heavy descriptions. When converting:
-
-1. **Read both private and public files** before changing anything
-2. **Map old fields to YAML frontmatter** — location type, travel difficulty, region
-3. **Preserve all wiki-links** — NPC references, settlement links, faction references
-4. **Condense prose descriptions** into 2-3 sentence blockquote read-alouds
-5. **Trim feature/hazard lists** to notable items only
-6. **Rewrite public file** as standalone note
-7. **For batch conversions** — list files first, confirm with user, convert one at a time
+Convert old `::` files per CONVENTIONS.md §11. Location-specific field mapping:
+- Old metadata → `location_type`, `travel_difficulty`, `region` in YAML frontmatter
+- Condense prose descriptions into 2-3 sentence blockquote read-alouds
+- Trim feature/hazard lists to notable items only
 
 ## Cascading Creation
 
@@ -164,5 +146,3 @@ When creating a location, check if it needs supporting content:
 - Are there creatures or NPCs living here? Ask if you should create NPC files.
 - Is there a faction or group that controls this place? Ask if the group needs a file.
 - Is the region it's in documented? If not, ask.
-
-**Reminder:** After generating a location file, always check this section and ask the DM about any NPCs, creatures, or groups mentioned that don't have their own files yet.

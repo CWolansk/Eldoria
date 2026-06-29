@@ -12,6 +12,12 @@ first prize is the Tipping Tankard, a small boat that was seized and impounded b
 
 Race is sponsored by [[Alistair Goldman]] and the merchants guild 
 
+## Merchants Guild Rival Crew
+- [[Richard Vane]] -- Ardenville guildmaster, polished sponsor and public face
+- [[Me'Shelle Jones]] -- Richard's right hand and sailing tactician
+- [[Cutlass]], [[Saber]], [[Caber]] -- lookalike background sailors poached from [[Salty Pete]]
+- [[Fran Stronkinthearm]] -- huge dwarf bruiser, rival powerhouse foil to Julie
+
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

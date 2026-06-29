@@ -34,7 +34,7 @@ If the user specifies a focus area, **only propose items in that category**. Don
 
 ## Shared Conventions
 
-This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that file for tag formatting, linking rules, brevity standards, and batch creation order.
+This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for file conventions, frontmatter, tags, dataview blocks, brevity, read-aloud formatting, search-before-create, and delegating creation to other skills.
 
 It also delegates file creation to existing skills. Before creating any files, read the relevant skill:
 - Timeline events → `dnd-event-generator`

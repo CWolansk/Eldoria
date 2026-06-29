@@ -27,7 +27,7 @@ The vault is a live DM tool used mid-session. A stale reference — like a settl
 
 ## Shared Conventions
 
-This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for tag formatting, linking rules, and vault structure. Key paths:
+This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for file conventions, frontmatter, tags, dataview blocks, brevity, read-aloud formatting, search-before-create, and delegating creation to other skills. Key paths this audit checks:
 
 | Content | Private Path | Public Path |
 |---|---|---|

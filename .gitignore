@@ -11,6 +11,8 @@ docs/site-assets/site-config.local.js
 docs/.codex-sheet-feedback/
 docs/test-results/
 dm-tools/data/jarvis-index.json
+dm-tools/data/dm-screen-state.local.json
+dm-tools/dm-screen.config.json
 site-src/_removed-from-deploy/
 
 # === Node ===

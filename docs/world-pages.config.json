@@ -1,0 +1,20 @@
+{
+  "_notes": [
+    "mode=blacklist exports everything except blacklist entries.",
+    "mode=whitelist exports only whitelist entries. Use this for places the players have visited.",
+    "Entries can be Public/World wiki paths, generated HTML paths, page names, tags, regions, or locations.",
+    "Blacklisted pages always lose, and hidden map markers route to Unknown.md."
+  ],
+  "unknownPage": "Unknown.md",
+  "visibility": {
+    "mode": "blacklist",
+    "whitelist": [],
+    "blacklist": []
+  },
+  "worldMap": {
+    "update": true,
+    "htmlPath": "tools/world-map.html",
+    "hiddenMarkerName": "Unknown",
+    "hiddenMarkerDescription": "You have not visited or learned about this place yet."
+  }
+}

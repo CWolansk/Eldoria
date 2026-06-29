@@ -25,15 +25,12 @@ At minimum: a **name** (or concept). Everything else can be invented. Look for:
 
 ## Shared Conventions
 
-This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that file for tag formatting, linking rules, brevity standards, read-aloud formatting, batch creation order, and conversion guidance.
+This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for paired private/public files, frontmatter, tags, dataview blocks, the 10-second scan / brevity rule, read-aloud blockquotes, search-before-create, batch creation order, and old-format conversion. Only the group-specific details are below.
 
 ## Before You Create
 
-Always **search the vault first**:
-1. Search `Private/1. World Almanac/World/Groups/` and `Public/World/Groups/` for existing groups — avoid duplicates
-2. Check if the proposed leader and members already have NPC files
-3. Check if the headquarters settlement/location exists
-4. Look at existing group files (Foundation, Fisherman's Guild, Adventurers Guild) to match tone5. If the group already exists, **do not create a duplicate** — offer to review or update the existing files instead. If the user wants to see what you’d generate, show a preview in chat without creating files.
+Search the vault first (CONVENTIONS.md §7) — specifically check `Private/1. World Almanac/World/Groups/` and `Public/World/Groups/` for existing groups (e.g., Foundation, Fisherman's Guild, Adventurers Guild).
+
 ## File Paths
 
 All groups go in the world-level Groups folder, regardless of where they're headquartered:
@@ -136,29 +133,19 @@ SORT file.name ASC
 
 ## Writing Guidelines
 
-### Brevity
-- **10-second scan rule.** The DM should scan the entire group file at a glance mid-session.
-- Use fragments and short bullets. No prose paragraphs.
 - Goals: 2-4 bullets max. What they want, not their philosophy.
 - Structure: Don't over-detail ranks. "Leader > Lieutenants > Members" with a few names is plenty.
 - Relations: One bullet per ally/rival/enemy.
-
-### General
 - Groups should feel alive — they want things and they conflict with other groups.
 - Leaders and notable members should be real NPCs — if they don't have files yet, **ask the user** if you should create them using the NPC generator skill.
-- Public notes only link to public files. Private notes can link to anything.
 - Mottos and catchphrases are great flavor — add them if they fit the group's personality.
 
 ## Converting Existing Organizations
 
-Some existing organizations use older templates with `::` metadata or prose-heavy descriptions. When converting:
-
-1. **Read both private and public files** before changing anything
-2. **Map old fields to YAML frontmatter** — org type, headquarters, leader, influence, region
-3. **Preserve all wiki-links** — member NPC links, headquarters links, ally/rival/enemy references
-4. **Condense prose descriptions** into short bullet-point sections
-5. **Rewrite public file** as standalone note with only publicly known information
-6. **For batch conversions** — list files first, confirm with user, convert one at a time
+Convert old `::` files per CONVENTIONS.md §11. Organization-specific field mapping:
+- Old metadata → `org_type`, `headquarters`, `leader`, `influence`, `region` in YAML frontmatter
+- Condense prose descriptions into short bullet-point sections
+- Rewrite the public file as a standalone note with only publicly known information
 
 ## Cascading Creation
 
@@ -166,5 +153,3 @@ When creating a group, check if it needs supporting content:
 - Do the leaders and notable members have NPC files? If not, ask.
 - Does the headquarters location have a file? If not, ask.
 - Is the group based in a settlement? Does that settlement have a file? If not, ask.
-
-**Reminder:** After generating a group file, always check this section and ask the DM about any NPCs or locations mentioned that don’t have their own files yet.

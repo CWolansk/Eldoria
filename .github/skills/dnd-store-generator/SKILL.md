@@ -25,16 +25,11 @@ At minimum: a **name** (or concept) and a **location**. Everything else can be i
 
 ## Shared Conventions
 
-This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that file for tag formatting, linking rules, brevity standards, read-aloud formatting, batch creation order, and conversion guidance.
+This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for paired private/public files, frontmatter, tags, dataview blocks, the 10-second scan / brevity rule, read-aloud blockquotes, search-before-create, batch creation order, and old-format conversion. Only the store-specific details are below.
 
 ## Before You Create
 
-Always **search the vault first**:
-1. Search `Private/1. World Almanac/World/` to discover existing regions
-2. Search within the target settlement folder for existing stores — avoid duplicates (e.g., don't create a second blacksmith if one exists)
-3. Check if the proposed proprietor already has an NPC file
-4. Look at neighboring store files to match tone and detail level
-5. If the store already exists, **do not create a duplicate** — offer to review or update the existing files instead. If the user wants to see what you'd generate, show a preview in chat without creating files.
+Search the vault first (CONVENTIONS.md §7) — specifically check the target settlement folder for existing stores (e.g., don't create a second blacksmith if one exists) and check whether the proposed proprietor already has an NPC file.
 
 ## File Paths
 
@@ -132,31 +127,16 @@ SORT file.name ASC
 
 ## Writing Guidelines
 
-### Brevity
-- **10-second scan rule.** The DM should be able to scan the entire store file in 10 seconds mid-session.
-- Use fragments and short bullets. No prose paragraphs.
 - Inventory lists should highlight what's special, not catalog everything. "Standard adventuring gear plus..." is fine.
 - Section limits: 2-5 inventory bullets, 1-2 sentences for descriptions.
-
-### Read-Aloud Text
-The Description section doubles as read-aloud text. Use `>` blockquote formatting so the DM can instantly spot what to say when the party walks in.
-
-### General
 - The proprietor should be a real NPC — if they don't have a file yet, **ask the user** if you should create one using the NPC generator skill.
-- Public notes only link to public files. Private notes can link to anything.
-- Match existing store conventions in the vault (check the settlement folder for neighboring stores as reference).
 
 ## Converting Existing Stores
 
-Some existing stores use older templates with `::` metadata or prose-heavy descriptions. When converting:
-
-1. **Read both private and public files** before changing anything
-2. **Map old fields to YAML frontmatter** — store type, proprietor, location, region
-3. **Preserve all wiki-links** — proprietor links, location references, inventory items that link to other pages
-4. **Condense prose descriptions** into 2-3 sentence blockquote read-alouds
-5. **Trim inventory lists** to notable/unique items only
-6. **Rewrite public file** as standalone note
-7. **For batch conversions** — list files first, confirm with user, convert one at a time
+Convert old `::` files per CONVENTIONS.md §11. Store-specific field mapping:
+- Old metadata → `store_type`, `proprietor`, `location`, `region` in YAML frontmatter
+- Condense prose descriptions into 2-3 sentence blockquote read-alouds
+- Trim inventory lists to notable/unique items only
 
 ## Cascading Creation
 
@@ -164,5 +144,3 @@ When creating a store, check if it needs supporting content:
 - Does the proprietor have an NPC file? If not, ask if you should create one.
 - Is the proprietor part of a guild or group? If that group doesn't exist, ask.
 - Does the settlement the store is in have a file? If not, ask.
-
-**Reminder:** After generating a store file, always check this section and ask the DM about any NPCs or groups mentioned that don't have their own files yet.

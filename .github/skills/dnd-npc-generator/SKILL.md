@@ -30,18 +30,11 @@ If the user gives you just a name and location, invent the rest. If they give yo
 
 ## Shared Conventions
 
-This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that file for tag formatting, linking rules, brevity standards, read-aloud formatting, batch creation order, and conversion guidance.
+This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for paired private/public files, frontmatter, tags, dataview blocks, the 10-second scan / brevity rule, read-aloud blockquotes, search-before-create, batch creation order, and old-format conversion. Only the NPC-specific details are below.
 
 ## Before You Create
 
-Always **search the vault first**:
-1. Search `Private/1. World Almanac/World/` to discover existing regions (each top-level folder is a region)
-2. Search within the target region folder for existing settlements
-3. Search `*/NPCs/` within the settlement to check if the NPC already exists
-4. Look at neighboring NPC files to match tone and detail level
-5. If the NPC already exists, **do not create a duplicate** — offer to review or update the existing files instead. If the user wants to see what you’d generate, show a preview in chat without creating files.
-
-This prevents duplicates and catches opportunities to link to existing content.
+Search the vault first (CONVENTIONS.md §7) — specifically check `*/NPCs/` within the target settlement.
 
 ## File Paths
 
@@ -159,9 +152,6 @@ SORT file.name ASC
 
 These guidelines are about producing NPCs that actually work at a D&D table, not just NPCs that read well on paper.
 
-### Keep It Light
-Brevity is the rule. Use sentence fragments, short bullets, and single-line entries. No prose paragraphs — the DM should be able to scan the entire NPC in 10 seconds during a session. If a section has more than 3 bullets or 2 sentences, it's too long. Ideals and Flaws are a word or short phrase, not a full sentence.
-
 ### Make Them Playable
 Every NPC needs at least one thing that makes them **fun to roleplay**: a distinctive voice, a nervous habit, an opinion they won't shut up about. The Quirk field exists for this — use it well. "Speaks in a monotone" is fine. "Always refers to herself in the third person when nervous" is better.
 
@@ -170,20 +160,6 @@ The Secrets & Motivations section is what separates a background character from 
 
 ### Plot Hooks Should Be Open-Ended
 Don't write quest scripts. Write threads the DM can pull. "Has been noticing strange noises from the cellar at night" is a hook. "Will ask the party to investigate the cellar where they'll find a hidden passage to the underdark" is a railroad. Leave room for the DM to decide what's actually down there.
-
-### Public Notes Stay Clean
-The public note must never leak DM secrets. If the NPC is secretly a spy, the public note just says they're a merchant. If they're plotting against the king, the public note says they're a loyal citizen. Write as if a player is reading this — because they are.
-
-### Links Follow Obsidian Conventions
-- Use `[[wiki links]]` with display text: `[[Path/To/File|Display Name]]`
-- **Public notes only link to other public notes** under `Public/World/...`
-- **Private notes can link to anything** — other private NPCs, public notes, factions, locations
-- Tag format in frontmatter uses the location/region naming without `#` (tags in YAML don't need the hash)
-
-### Naming Conventions
-- Filenames match the NPC's full name exactly: `Aldric Brightwater.md`
-- Tags in YAML frontmatter should be PascalCase or match existing tags (e.g., `Highreach`, `Ardenville`, `NPC`)
-- Check the existing tag conventions in the vault and match them
 
 ## When Generating Multiple NPCs
 
@@ -199,40 +175,15 @@ If the user asks to flesh out or modify an existing NPC, read their current file
 
 ## Converting Existing NPCs to the New Template
 
-Many existing NPCs use an older `::` metadata format. When asked to convert one or more NPCs, follow this process:
+Convert old `::` files per CONVENTIONS.md §11. NPC-specific field mapping:
+- `Location ::` → `location` and `region` in YAML frontmatter, plus tags
+- `Profession ::` → `profession` in frontmatter
+- `Description ::` → `## Description` (trim to fragments if it's too long)
+- `Alive? ::` → `status` in frontmatter (`Alive` or `Dead`)
+- `Notes ::` — split into the appropriate sections: public-safe info goes to Description or Relationships, DM secrets go to `## Secrets & Motivations`, plot threads go to `## Plot Hooks`
+- Existing `[[wiki links]]` to locations, workplaces, and events must be preserved in the `## Links` section — never drop these during conversion
 
-### What the old format looks like
-```
-Location :: #HighReach #SturdyMugg
-Profession :: #Barkeep
-Description :: Towering, barrel-chested man...
-Alive? :: Yes
-Notes :: Barkeep at the [[Sturdy Mugg]] ^ee5257
-
-# Public Notes
-[[Public/World/.../NPC Name|NPC Name]]
-```
-
-Some older files may also have loose tags, inline links, or freeform text instead of structured fields.
-
-### Conversion steps
-
-1. **Read both private and public files** for the NPC before changing anything.
-2. **Extract all existing content** — map old fields to new template sections:
-   - `Location ::` → `location` and `region` in YAML frontmatter, plus tags
-   - `Profession ::` → `profession` in frontmatter
-   - `Description ::` → `## Description` (trim to fragments if it's too long)
-   - `Alive? ::` → `status` in frontmatter (`Alive` or `Dead`)
-   - `Notes ::` — split into the appropriate sections: public-safe info goes to Description or Relationships, DM secrets go to `## Secrets & Motivations`, plot threads go to `## Plot Hooks`
-   - Any `^blockid` reference can be dropped — the new public files are standalone, not embeds
-   - Existing `[[wiki links]]` to locations, workplaces, and events must be preserved in the `## Links` section — never drop these during conversion
-3. **Invent only what's missing.** If there's no personality info, create Ideal/Bond/Flaw/Quirk. If there are no secrets, invent a small one that fits. But don't fabricate details that contradict what the DM already wrote.
-4. **Rewrite the public file** as a standalone note (not an embed). Pull only public-safe content from the private file into the Appearance, What We Know, and First Impressions sections.
-5. **Preserve the `# Public Notes` link and dataview query** at the bottom of the private file.
-
-### Batch conversion
-
-If the user asks to convert all NPCs in a location (e.g., "convert all Highreach NPCs"), list the files first and confirm with the user before proceeding. Convert them one at a time, showing the user each result. This avoids silent mistakes on NPCs the DM has specific intentions for.
+If there's no personality info, create Ideal/Bond/Flaw/Quirk; if there are no secrets, invent a small one that fits.
 
 ## Cascading Creation
 
@@ -241,5 +192,3 @@ When creating an NPC, check if they need supporting content that doesn't exist y
 - Is the NPC part of a guild, faction, or organization? If that group doesn't have a file, ask if you should create one using the **dnd-group-generator** skill.
 - Is the NPC's settlement documented? If not, ask if you should create it using the **dnd-settlement-generator** skill.
 - Is the NPC's region documented? If not, ask if you should create it using the **dnd-region-generator** skill.
-
-**Reminder:** After generating an NPC file, always check this section and ask the DM about any stores, groups, or locations mentioned that don’t have their own files yet.

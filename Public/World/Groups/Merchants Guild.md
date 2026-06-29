@@ -19,6 +19,8 @@ Powerful and well-connected. Membership is practically required for serious comm
 ## Known Members
 - [[Public/World/Crestfall/Highreach/NPCs/Alistair Goldman|Alistair Goldman]] — Guildmaster
 - [[Public/World/Crestfall/Highreach/NPCs/Evelyn Marroway|Evelyn Marroway]] — Receptionist
+- [[Public/World/Crestfall/Ardenville/NPCs/Richard Vane|Richard Vane]] — Ardenville chapter guildmaster
+- [[Public/World/Crestfall/Ardenville/NPCs/Me'Shelle Jones|Me'Shelle Jones]] — Ardenville chapter sailor consigliere
 
 ## Services
 - Merchant licensing and trade permits

@@ -35,16 +35,11 @@ At minimum: a **quest concept** or **name**. Everything else can be invented. Lo
 
 ## Shared Conventions
 
-This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that file for tag formatting, linking rules, brevity standards, plugin syntax, and batch creation order.
+This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for file conventions, frontmatter, tags, dataview blocks, the 10-second scan / brevity rule, read-aloud blockquotes, search-before-create, status folders, and old-format conversion. Only the quest-specific details are below.
 
 ## Before You Create
 
-Always **search the vault first**:
-1. Search `Private/2. Reference/Events/Quests/` for existing quests — don't duplicate
-2. Check that the quest giver NPC and location have files to link to
-3. Look at existing quest files (completed and active) to match format conventions
-
-If the user asks about an **existing quest**, search and present what the vault already has rather than generating new content. After presenting the existing file, offer to update, expand, re-level, or link it to new content — don't just stop at "it already exists."
+Search `Private/2. Reference/Events/Quests/` for existing quests before creating, and check that the quest giver NPC and location have files to link to. When updating an existing quest, offer to expand, re-level, or link it to new content.
 
 ## File Paths
 
@@ -135,9 +130,7 @@ The following sections are **optional** — only include if the user specifies:
 
 ## Writing Guidelines
 
-### Brevity
-- **10-second scan rule.** The DM should scan the entire quest at a glance mid-session.
-- Use fragments and short bullets. No prose paragraphs.
+### Quest-Specific Brevity
 - Objectives: 2-5 bullets. Each is one clear task.
 - Outcomes: 2-3 bullets per path. What changes, not how it feels.
 
@@ -179,15 +172,12 @@ Match the vault's existing rank system:
 
 ## Converting Existing Quests
 
-Many existing quests have ad-hoc YAML frontmatter and inconsistent section structure. When converting:
+Convert old files per CONVENTIONS.md §11. Quest-specific mapping:
 
-1. **Read the existing file** before changing anything
-2. **Map existing frontmatter** — most already have `fc-date`, `fc-end`, `fc-category`, `status`, `level`
-3. **Add missing fields** — `type: Quest`, `name`, `location`, `region`, `quest_giver`, `reward`, `tags`
-4. **Restructure sections** to match the template above — preserve all existing content
-5. **Preserve all wiki-links** — NPC mentions, location references, event references
-6. **Don't trim gameplay detail** — existing quests often have DCs, mechanics, and investigation branches that should be kept as-is
-7. **For batch conversions** — list files first, confirm with user, convert one at a time
+- Map existing frontmatter — most already have `fc-date`, `fc-end`, `fc-category`, `status`, `level`.
+- Add missing fields — `type: Quest`, `name`, `location`, `region`, `quest_giver`, `reward`, `tags`.
+- Restructure sections to match the template above — preserve all existing content.
+- Don't trim gameplay detail — existing quests often have DCs, mechanics, and investigation branches that should be kept as-is.
 
 ## Cascading Creation
 
@@ -197,5 +187,3 @@ When creating a quest, check if it needs supporting content:
 - Is the quest tied to a guild or faction? Does that group have a file? If not, ask if you should create one using the **dnd-group-generator** skill.
 - Does the quest have consequences if failed? Ask if you should create a consequence file using the **dnd-consequence-generator** skill.
 - Does the quest involve a specific encounter? Ask if you should prep it using the **dnd-encounter-builder** skill.
-
-**Always check for mentioned entities and ask the DM before creating them.**

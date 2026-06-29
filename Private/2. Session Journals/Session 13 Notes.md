@@ -25,16 +25,15 @@ Travel to ardenville
 	- [[Ardenville Adventurers Guild]] 
 	- [[Public/World/Crestfall/Ardenville/Fishermans Guild|Fishermans Guild]] 
 	- [[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Salty Pete|Salty Pete]]  is at any of the above areas drowning his sorrows about how the merchants guild has poached his crew from him and if he can just find some true blue salt n spit sailors to run his boat for him he could win the race and show everyone that he is still the best captain in Ardvenville. 
-		- Salty Pete is accompanied by dancin pete, a short man that is dressed like salty pete with a sign around his neck that says "will dance for money". 
-			- Salty pete explains that he doesn't know who dancin pete is, just that he always follows him around and is "bad luck made flesh" as he throws a piece of bread at him. 
+		- Salty Pete is accompanied by [[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Dancin Pete|Dancin Pete]], a short man that is dressed like Salty Pete with a sign around his neck that says "will dance for money". 
+			- Salty Pete explains that he doesn't know who Dancin Pete is, just that he always follows him around and is "bad luck made flesh" as he throws a piece of bread at him. 
 		- Who was salty petes previous crew? 
-			- Mara Kells Former first mate and front line fighter 
-			- Brother Aiden Brinesong ships healer 
-			- Barefoot Kesh fist fighter 
-			- Edris Gullwatch ranged harpoon fighter
-			- Tavrix Lume map reader and arcane learned 
-			- Nessa Tidewillow read and could control the currents for the ship 
-			- Pippa Vale, ship singer 
+			- [[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Cutlass|Cutlass]] background sailor, flashy boarding blade guy
+			- [[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Saber|Saber]] background sailor, self-declared refined one
+			- [[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Caber|Caber]] background sailor, heavy-line brute
+			- [[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Fran Stronkinthearm|Fran Stronkinthearm]] huge dwarf ringer, foil to Julie
+			- [[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Richard Vane|Richard Vane]] is the Merchants Guild boss behind the poaching
+			- [[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Me'Shelle Jones|Me'Shelle Jones]] handled the crew pressure and race tactics
 	- the boat race rules 
 		- Its an out and back for all of the ships. All of the ships race and are mostly at the same speed until they get out of the view of the shore. After that all of the crews start to board other ships and attempt to slow them down or outright sink the ships. As well as fighting off sea monsters that may show up during the race. 
 - Deliver the exterminators guild package
@@ -52,4 +51,4 @@ Travel to ardenville
 	- When they get to the exterminators guild they need to ask for [[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Pip Whiskerwind|Pip Whiskerwind]] who is in charge of the guild in ardvenville. 
 		- When she receives the package she looks at it inspects the seal, writes something down and gives them their money no matter what. 
 			- If they swapped packages she says that they will no longer need their services. 
-			- If they didn't swap the packages she says that they should come see her before they leave town for their next job. 
+			- If they didn't swap the packages she says that they should come see her before they leave town for their next job.

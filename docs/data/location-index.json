@@ -157,10 +157,16 @@
   "IronpeakMountains": {
     "basePath": "../world/ironpeak-mountains/",
     "locations": {
-      "Ironpeak Mountains": {
+      "ForgePeak": {
         "file": "forgepeak.html",
         "href": "../world/ironpeak-mountains/forgepeak/forgepeak.html",
-        "subLocations": []
+        "subLocations": [
+          {
+            "name": "The Adamant Anvil",
+            "file": "the-adamant-anvil.html",
+            "href": "../world/ironpeak-mountains/forgepeak/the-adamant-anvil.html"
+          }
+        ]
       },
       "Gemstone Hollow": {
         "file": "gemstone-hollow.html",
@@ -192,16 +198,6 @@
         "href": "../world/orcish-wastes/orc-capitol/orc-capitol.html",
         "subLocations": []
       },
-      "Orc Town B": {
-        "file": "orc-city-b.html",
-        "href": "../world/orcish-wastes/orc-town-b/orc-city-b.html",
-        "subLocations": []
-      },
-      "Orc Town C": {
-        "file": "orc-city-c.html",
-        "href": "../world/orcish-wastes/orc-town-c/orc-city-c.html",
-        "subLocations": []
-      },
       "Red Dune Desert": {
         "file": "red-dune-desert.html",
         "href": "../world/orcish-wastes/red-dune-desert/red-dune-desert.html",
@@ -227,10 +223,16 @@
   "SilverleafLands": {
     "basePath": "../world/silverleaf-lands/",
     "locations": {
-      "Silverleaf Lands": {
+      "FrostGlade": {
         "file": "frostglade.html",
         "href": "../world/silverleaf-lands/frostglade/frostglade.html",
-        "subLocations": []
+        "subLocations": [
+          {
+            "name": "The Whispering Weave",
+            "file": "the-whispering-weave.html",
+            "href": "../world/silverleaf-lands/frostglade/the-whispering-weave.html"
+          }
+        ]
       },
       "Moonshade": {
         "file": "moonshade.html",

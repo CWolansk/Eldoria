@@ -35,17 +35,11 @@ At minimum: a **holiday name** or **concept** (e.g., "a dwarven forging festival
 
 ## Shared Conventions
 
-This skill follows the rules in [CONVENTIONS.md](../CONVENTIONS.md). Read that file for tag formatting, linking rules, brevity standards, plugin syntax, and batch creation order.
+This skill follows [CONVENTIONS.md](../CONVENTIONS.md) for file conventions, frontmatter, tags, dataview blocks, the 10-second scan / brevity rule, read-aloud blockquotes, search-before-create, status folders, and old-format conversion. Only the holiday-specific details are below.
 
 ## Before You Create
 
-Always **search the vault first**:
-1. Search `Private/2. Reference/Events/World Events/Holidays/` for existing holidays — don't duplicate
-2. Check if the race/culture folder exists (Dwarven Holidays, Elven Holidays, Human Holidays, Orc Holidays)
-3. Look at existing holiday files to match format conventions
-4. Check for related NPCs, locations, or groups to link to
-
-If the user asks about an **existing holiday**, search and present what the vault already has rather than generating new content. After presenting the existing file, offer to update, expand, or add sections the user might want.
+Search `Private/2. Reference/Events/World Events/Holidays/` for existing holidays before creating, and check whether the relevant race/culture folder exists (Dwarven Holidays, Elven Holidays, Human Holidays, Orc Holidays).
 
 ## File Paths
 
@@ -106,8 +100,7 @@ SORT file.name ASC
 
 ## Writing Guidelines
 
-### Brevity
-- **10-second scan rule.** The DM should glance at the holiday and know what's happening.
+### Holiday-Specific Brevity
 - Overview: 2-4 sentences max. What, who, why.
 - Traditions: 3-5 bullets. Each is one activity or ritual.
 - Adventure Hooks are **opt-in only** — don't invent them unless the user asks.
@@ -133,14 +126,11 @@ SORT file.name ASC
 
 ## Converting Existing Holidays
 
-Some existing holidays have inconsistent YAML frontmatter. When converting:
+Convert old files per CONVENTIONS.md §11. Holiday-specific mapping:
 
-1. **Read the existing file** before changing anything
-2. **Add missing frontmatter fields** — some already have `fc-date` and `fc-category`; add `type: Holiday`, `name`, `culture`, `region`, `recurrence`, `tags`
-3. **Restructure content** into Overview and Traditions sections
-4. **Preserve the dataview block** — all files should end with the "Mentioned In" query
-5. **Don't add unwanted sections** — if the existing file has no adventure hooks, don't invent them
-6. **For batch conversions** — list files first, confirm with user, convert one at a time
+- Add missing frontmatter fields — some already have `fc-date` and `fc-category`; add `type: Holiday`, `name`, `culture`, `region`, `recurrence`, `tags`.
+- Restructure content into Overview and Traditions sections.
+- Don't add unwanted sections — if the existing file has no adventure hooks, don't invent them.
 
 ## Cascading Creation
 
@@ -149,5 +139,3 @@ When creating a holiday, check if it references supporting content:
 - Does the holiday name-drop a deity or cultural figure that could be an NPC? Ask if you should create them using the **dnd-npc-generator** skill.
 - Could the holiday serve as the backdrop for an encounter? Ask if you should prep one using the **dnd-encounter-builder** skill.
 - Does the holiday tie into a faction or guild's activities? Note the **dnd-group-generator** skill.
-
-**Always check for mentioned entities and ask the DM before creating them.**
