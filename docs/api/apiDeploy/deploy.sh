@@ -7,6 +7,8 @@ storage_account="${ELDORIA_STORAGE_ACCOUNT:-}"
 container_name="${ELDORIA_CHARACTER_CONTAINER:-eldoria-character-data}"
 catalog_table="${ELDORIA_CATALOG_TABLE:-eldoriacatalog}"
 catalog_search_table="${ELDORIA_CATALOG_SEARCH_TABLE:-}"
+catalog_search_v2_table="${ELDORIA_CATALOG_SEARCH_V2_TABLE:-}"
+item_search_v2="${ELDORIA_ITEM_SEARCH_V2:-false}"
 blob_prefix="${ELDORIA_BLOB_PREFIX:-}"
 allowed_origins="${ELDORIA_ALLOWED_ORIGINS:-*}"
 subscription=""
@@ -145,11 +147,17 @@ rm -f "$zip_path"
 settings=(
   "ELDORIA_CHARACTER_CONTAINER=$container_name"
   "ELDORIA_CATALOG_TABLE=$catalog_table"
+  "ELDORIA_CREATE_TABLE=false"
+  "ELDORIA_ITEM_SEARCH_V2=$item_search_v2"
   "ELDORIA_ALLOWED_ORIGINS=$allowed_origins"
 )
 
 if [[ -n "$catalog_search_table" ]]; then
   settings+=("ELDORIA_CATALOG_SEARCH_TABLE=$catalog_search_table")
+fi
+
+if [[ -n "$catalog_search_v2_table" ]]; then
+  settings+=("ELDORIA_CATALOG_SEARCH_V2_TABLE=$catalog_search_v2_table")
 fi
 
 if [[ -n "$storage_connection_string" ]]; then

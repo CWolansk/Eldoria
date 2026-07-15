@@ -27,13 +27,35 @@ function getCorsOrigin(request) {
   return allowedOrigins[0];
 }
 
+function getCacheControl(request) {
+  if (request.method !== "GET") {
+    return "no-store";
+  }
+
+  let pathname = "";
+  try {
+    pathname = new URL(request.url).pathname.toLowerCase();
+  } catch (_error) {
+    pathname = String(request.url || "").toLowerCase();
+  }
+
+  if (/(?:^|\/)catalog(?:\/|$)/u.test(pathname)) {
+    return "public, max-age=3600, stale-while-revalidate=86400";
+  }
+  if (/(?:^|\/)players\/?$/u.test(pathname)) {
+    return "public, max-age=60, stale-while-revalidate=600";
+  }
+
+  return "no-store";
+}
+
 function headers(request, extra = {}) {
   return {
     "Access-Control-Allow-Origin": getCorsOrigin(request),
     "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "content-type, authorization, x-functions-key",
     "Access-Control-Max-Age": "86400",
-    "Cache-Control": "no-store",
+    "Cache-Control": getCacheControl(request),
     ...extra
   };
 }

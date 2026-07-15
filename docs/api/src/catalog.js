@@ -9,6 +9,7 @@ const {
   upsertEntity
 } = require("./tableStore");
 const { searchItemsByIndex } = require("./itemSearchStore");
+const { searchItemsV2 } = require("./itemSearchV2Store");
 const model = require("./catalogModel");
 const { httpError, json, withErrors } = require("./http");
 
@@ -29,7 +30,10 @@ const RESERVED_PARAMS = new Set([
   "$orderby",
   "$select",
   "$expand",
-  "$count"
+  "$count",
+  "sort",
+  "cursor",
+  "facets"
 ]);
 
 const DEFAULT_MAX_CATALOG_BODY_BYTES = 2 * 1024 * 1024;
@@ -66,6 +70,19 @@ function getFilters(searchParams) {
     if (!RESERVED_PARAMS.has(key)) {
       filters[key] = value;
     }
+  }
+  return filters;
+}
+
+const ITEM_FILTER_FIELDS = ["source", "rarity", "type", "attunement", "damage", "properties", "mastery"];
+
+function getItemFilters(searchParams) {
+  const filters = {};
+  for (const field of ITEM_FILTER_FIELDS) {
+    const values = searchParams.getAll(field)
+      .map((value) => String(value || "").trim())
+      .filter(Boolean);
+    if (values.length) filters[field] = values;
   }
   return filters;
 }
@@ -109,6 +126,23 @@ function createPagedCatalogResponse(kind, items, { limit = 0, skip = 0 } = {}) {
     }
   }
 
+  return response;
+}
+
+function createItemSearchV2Response(kind, result) {
+  const response = {
+    kind,
+    count: result.items.length,
+    items: result.items,
+    totalCount: result.totalCount,
+    skip: result.skip,
+    limit: result.limit,
+    hasMore: result.hasMore,
+    searchVersion: result.version
+  };
+  if (result.nextSkip !== undefined) response.nextSkip = result.nextSkip;
+  if (result.nextCursor) response.nextCursor = result.nextCursor;
+  if (result.facets) response.facets = result.facets;
   return response;
 }
 
@@ -484,7 +518,30 @@ async function catalogListHandler(request, context) {
     const filters = getFilters(searchParams);
     const limit = getLimit(searchParams);
     const skip = getSkip(searchParams);
+    const cursor = String(searchParams.get("cursor") || "").trim();
+    if (cursor && skip) {
+      throw httpError(400, "cursor and skip cannot be used together.");
+    }
     const pageLimit = limit ? limit + 1 : 0;
+    if (!full && kind === "items") {
+      const searchStartedAt = Date.now();
+      const v2 = await searchItemsV2({
+        q,
+        filters: getItemFilters(searchParams),
+        sort: String(searchParams.get("sort") || "").trim().toLowerCase(),
+        cursor,
+        skip,
+        limit: limit || 50,
+        includeFacets: getBooleanParam(searchParams, "facets")
+      });
+      if (v2.used) {
+        if (typeof context?.log === "function") {
+          context.log(`item-search-v2 durationMs=${Date.now() - searchStartedAt} count=${v2.items.length} totalCount=${v2.totalCount} hasMore=${v2.hasMore}`);
+        }
+        return json(request, 200, createItemSearchV2Response(kind, v2));
+      }
+      logSearchIndexFallback(context, v2);
+    }
     if (!full && kind === "items" && q && !hasStructuredFilters(filters)) {
       const indexed = await searchItemsByIndex(q, { limit: pageLimit, skip });
       if (indexed.used) {

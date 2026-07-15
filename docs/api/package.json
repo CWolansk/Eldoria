@@ -7,7 +7,10 @@
   "scripts": {
     "start": "func start",
     "check": "node tools/check-syntax.js",
-    "test:item-search-index": "node tools/test-item-search-index.js",
+    "test:resilience": "node tools/test-api-resilience.mjs",
+    "migrate:player-portraits": "node tools/migrate-player-portraits.mjs",
+    "test:item-search-index": "node tools/test-item-search-index.js && node tools/test-item-search-v2-index.js && node tools/test-item-search-client.mjs && node tools/test-homebrew-items.js",
+    "prepare:item-catalog": "node tools/prepare-item-catalog.js",
     "seed": "node seed/seedBlobStorage.js",
     "seed:characters": "node seed/seedBlobStorage.js",
     "seed:reset-players": "node seed/seedBlobStorage.js --purge-character-documents",

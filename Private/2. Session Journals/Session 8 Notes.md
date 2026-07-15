@@ -18,7 +18,7 @@ fc-category: Sessions
 	- A light thief blew up in her face but she grabbed the mantle and his money and the party ran away again. 
 		- They are scared of light thief retribution
 - Party went into [[Room 12 Level 3]] and destroyed the gelatinous Cube 
-	- [[Private Claire notes]] takes [[Warhammer of Warning]] from [[Oren Hammerfist]] corpse 
+	- [[Claire]] takes [[Warhammer of Warning]] from [[Oren Hammerfist]] corpse 
 	- [[Liz]] takes [[Oren Hammerfist]]s acid eaten Bracers and Breastplate 
 	- [[JP Player Sheet]] took [[Oren Hammerfist]] Money
 - Party went back to mossy safe room [[Room 10 Level 3]] set up their fortress and long rested. 

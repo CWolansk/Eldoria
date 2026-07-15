@@ -1,7 +1,57 @@
 const DEFAULT_BASE_URL = "/api";
+const DEFAULT_REQUEST_TIMEOUT_MS = 10_000;
+const DEFAULT_GET_RETRIES = 1;
+const DEFAULT_RETRY_DELAY_MS = 200;
 
 function normalizeBaseUrl(value) {
   return String(value || DEFAULT_BASE_URL).replace(/\/+$/u, "");
+}
+
+function normalizeNonNegativeNumber(value, fallback) {
+  const number = Number(value);
+  return Number.isFinite(number) && number >= 0 ? number : fallback;
+}
+
+function wait(ms) {
+  return ms > 0 ? new Promise((resolve) => setTimeout(resolve, ms)) : Promise.resolve();
+}
+
+function createRequestSignal(externalSignal, timeoutMs) {
+  if (externalSignal) {
+    return { cleanup() {}, signal: externalSignal, timedOut: () => false };
+  }
+  if (typeof AbortController === "undefined") {
+    return { cleanup() {}, signal: undefined, timedOut: () => false };
+  }
+
+  const controller = new AbortController();
+  let didTimeout = false;
+
+  const timer = timeoutMs > 0
+    ? setTimeout(() => {
+        didTimeout = true;
+        controller.abort(new Error(`Request timed out after ${timeoutMs} ms.`));
+      }, timeoutMs)
+    : null;
+
+  return {
+    signal: controller.signal,
+    timedOut: () => didTimeout,
+    cleanup() {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    }
+  };
+}
+
+function isRetryableRequestError(error, timedOut) {
+  if (timedOut || error instanceof TypeError) {
+    return true;
+  }
+
+  return error instanceof EldoriaApiError
+    && [408, 425, 429, 500, 502, 503, 504].includes(error.status);
 }
 
 function trimSlashes(value) {
@@ -17,7 +67,9 @@ function joinUrl(baseUrl, path) {
 function appendQuery(url, query = {}) {
   const params = new URLSearchParams();
   for (const [key, value] of Object.entries(query)) {
-    if (value != null && value !== "") {
+    if (Array.isArray(value)) {
+      value.filter((entry) => entry != null && entry !== "").forEach((entry) => params.append(key, String(entry)));
+    } else if (value != null && value !== "") {
       params.set(key, String(value));
     }
   }
@@ -258,6 +310,9 @@ export class EldoriaApiClient {
     this.baseUrl = normalizeBaseUrl(config.baseUrl);
     this.fetch = config.fetch || globalThis.fetch?.bind(globalThis);
     this.functionKey = String(config.functionKey || "").trim();
+    this.requestTimeoutMs = normalizeNonNegativeNumber(config.requestTimeoutMs, DEFAULT_REQUEST_TIMEOUT_MS);
+    this.getRetries = Math.floor(normalizeNonNegativeNumber(config.getRetries, DEFAULT_GET_RETRIES));
+    this.retryDelayMs = normalizeNonNegativeNumber(config.retryDelayMs, DEFAULT_RETRY_DELAY_MS);
     this.defaultHeaders = {
       ...(config.defaultHeaders || {})
     };
@@ -297,20 +352,46 @@ export class EldoriaApiClient {
         : JSON.stringify(options.body, null, 2);
     }
 
-    const response = await this.fetch(url, init);
-    const body = await parseResponseBody(response);
+    const timeoutMs = normalizeNonNegativeNumber(options.timeoutMs, this.requestTimeoutMs);
+    const retries = method === "GET"
+      ? Math.floor(normalizeNonNegativeNumber(options.retries, this.getRetries))
+      : 0;
 
-    if (!response.ok) {
-      const message = body?.error || body?.message || `${response.status} ${response.statusText}`;
-      throw new EldoriaApiError(message, {
-        status: response.status,
-        method,
-        url,
-        body
-      });
+    for (let attempt = 0; attempt <= retries; attempt += 1) {
+      const requestSignal = createRequestSignal(options.signal, timeoutMs);
+      try {
+        const response = await this.fetch(url, {
+          ...init,
+          signal: requestSignal.signal
+        });
+        const body = await parseResponseBody(response);
+
+        if (!response.ok) {
+          const message = body?.error || body?.message || `${response.status} ${response.statusText}`;
+          throw new EldoriaApiError(message, {
+            status: response.status,
+            method,
+            url,
+            body
+          });
+        }
+
+        return body;
+      } catch (error) {
+        const externalAbort = Boolean(options.signal?.aborted);
+        const canRetry = !externalAbort
+          && attempt < retries
+          && isRetryableRequestError(error, requestSignal.timedOut());
+        if (!canRetry) {
+          throw error;
+        }
+        await wait(this.retryDelayMs * (attempt + 1));
+      } finally {
+        requestSignal.cleanup();
+      }
     }
 
-    return body;
+    throw new EldoriaApiError("Request failed.", { method, url });
   }
 
   health() {
@@ -346,6 +427,13 @@ export class EldoriaApiClient {
 
   searchCatalog(kind, q, query = {}) {
     return this.listCatalog(kind, { ...query, q });
+  }
+
+  searchItems(q = "", query = {}, options = {}) {
+    return this.request("catalog/items", {
+      query: { ...query, ...(q ? { q } : {}) },
+      signal: options.signal
+    });
   }
 
   searchCatalogFull(kind, q, query = {}) {

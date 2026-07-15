@@ -501,25 +501,45 @@ function hideRowWhenNoChoices(row, context, hasChoices) {
     }
 
     row.hidden = true;
-    void hasChoices(context)
-        .then((available) => {
-            if (!row.isConnected) {
-                return;
-            }
+    let started = false;
+    const resolveVisibility = () => {
+        if (started || !row.isConnected) {
+            return;
+        }
+        started = true;
 
-            if (!available) {
-                row.remove();
-                return;
-            }
+        void hasChoices(context)
+            .then((available) => {
+                if (!row.isConnected) {
+                    return;
+                }
 
-            row.hidden = false;
-        })
-        .catch((error) => {
-            console.warn("Level editor choice visibility check failed:", error);
-            if (row.isConnected) {
+                if (!available) {
+                    row.remove();
+                    return;
+                }
+
                 row.hidden = false;
-            }
-        });
+            })
+            .catch((error) => {
+                console.warn("Level editor choice visibility check failed:", error);
+                if (row.isConnected) {
+                    row.hidden = false;
+                }
+            });
+    };
+
+    const section = row.closest("details");
+    if (!section || section.open) {
+        resolveVisibility();
+        return;
+    }
+
+    section.addEventListener("toggle", () => {
+        if (section.open) {
+            resolveVisibility();
+        }
+    }, { once: true });
 }
 
 function buildBaseEditor(context) {

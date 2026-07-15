@@ -13,6 +13,20 @@ const sheet = await api.getCharacterSheet("char-austin-001");
 await api.saveCharacterSheet(sheet.id, sheet);
 ```
 
+GET requests time out after 10 seconds and retry one transient network or retryable HTTP failure.
+Both values are configurable, and write requests are never retried automatically:
+
+```js
+const api = new EldoriaApiClient({
+  baseUrl: "https://<function-app>.azurewebsites.net/api",
+  requestTimeoutMs: 8000,
+  getRetries: 1,
+  retryDelayMs: 200
+});
+```
+
+Passing `signal` on a request leaves cancellation fully under the caller's control.
+
 `saveCharacterSheet` uses `POST` with a `text/plain` JSON body by default. That keeps browser
 saves from triggering an Azure `OPTIONS` preflight when the sheet is edited from localhost.
 Pass `{ method: "PUT", simpleCors: false }` as the third argument only when you specifically
@@ -24,6 +38,12 @@ Rules catalog helpers:
 const spellIndex = await api.listCatalog("spells", { limit: 20 });
 const fullSpells = await api.listCatalogFull("spells");
 const matches = await api.searchCatalogFull("items", "moonblade");
+const itemPage = await api.searchItems("sword", {
+  limit: 25,
+  sort: "relevance",
+  rarity: ["rare", "uncommon"],
+  facets: true
+});
 const rareItems = await api.listCatalogOData("items", {
   "$filter": "rarity eq 'rare' and source eq 'DMG'",
   "$orderby": "name asc",

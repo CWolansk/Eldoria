@@ -7,6 +7,8 @@
     "ELDORIA_CHARACTER_CONTAINER": "eldoria-character-data",
     "ELDORIA_CATALOG_TABLE": "eldoriacatalog",
     "ELDORIA_CATALOG_SEARCH_TABLE": "eldoriacatalogsearch",
+    "ELDORIA_CATALOG_SEARCH_V2_TABLE": "eldoriacatalogsearchv2",
+    "ELDORIA_ITEM_SEARCH_V2": "false",
     "ELDORIA_ITEM_SEARCH_INDEX": "true",
     "ELDORIA_ALLOWED_ORIGINS": "*"
   }

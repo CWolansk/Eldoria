@@ -231,6 +231,8 @@
     });
   }
 
+  features.createRulesApiClient = createApiClient;
+
   function catalogFieldName(kind) {
     if (kind === "item-properties") return "itemProperties";
     if (kind === "magic-variants") return "magicVariants";
@@ -246,19 +248,37 @@
     return [kind];
   }
 
-  features.loadRulesRows = async function loadRulesRows(config, queryText) {
+  features.loadRulesRows = async function loadRulesRows(config, stateOrQuery, options) {
     var kind = config.dataKind || config.itemLabel;
+    var state = stateOrQuery && typeof stateOrQuery === "object" ? stateOrQuery : { query: stateOrQuery };
     var RulesCatalogWidgetData = await features.ensureRulesCatalogWidgetData();
     var api = await createApiClient(config);
     var catalogs = {};
 
     if (config.remoteSearch) {
-      var query = String(queryText || config.initialQuery || "").trim();
-      var response = query
-        ? await api.searchCatalog(kind, query, { limit: config.remoteLimit || 200 })
-        : await api.searchCatalog(kind, config.initialQuery || "a", { limit: config.remoteLimit || 200 });
+      var query = String(state.query || "").trim();
+      if (config.serverDriven && query && query.length < (config.minimumQueryLength || 2)) {
+        return { rows: [], response: { tooShort: true, minimumQueryLength: config.minimumQueryLength || 2 } };
+      }
+      var queryOptions = { limit: config.remoteLimit || 200 };
+      if (config.serverDriven) {
+        queryOptions.sort = state.sort || "name";
+        queryOptions.facets = true;
+        if (options?.cursor) queryOptions.cursor = options.cursor;
+        else if (Number(options?.skip) > 0) queryOptions.skip = Number(options.skip);
+        (config.filters || []).forEach(function (filter) {
+          var values = Array.from(state.filters?.[filter.key] || []);
+          if (values.length) queryOptions[filter.key] = values;
+        });
+      }
+      var response = typeof api.searchItems === "function" && kind === "items"
+        ? await api.searchItems(query, queryOptions, { signal: options?.signal })
+        : query
+          ? await api.searchCatalog(kind, query, queryOptions)
+          : await api.searchCatalog(kind, config.initialQuery || "a", queryOptions);
       var apiRows = Array.isArray(response.items) ? response.items : [];
-      return typeof config.mapApiRow === "function" ? apiRows.map(config.mapApiRow) : apiRows;
+      var rows = typeof config.mapApiRow === "function" ? apiRows.map(config.mapApiRow) : apiRows;
+      return config.serverDriven ? { rows: rows, response: response } : rows;
     }
 
     for (var index = 0; index < catalogKindsForRows(kind).length; index += 1) {
@@ -291,7 +311,8 @@
       query: "",
       sort: config.sorts[0].key,
       filters: {},
-      filtersOpen: false
+      filtersOpen: false,
+      cursor: ""
     };
   };
 }(window));
@@ -345,6 +366,7 @@
           <main class="rules-results-panel">\
             <div class="rules-result-count">Loading ' + escapeHtml(config.itemLabel) + ' data...</div>\
             <div class="rules-results"></div>\
+            <button class="button button-secondary rules-load-more" type="button" hidden>Load More</button>\
           </main>\
         </div>\
       </section>';
@@ -367,7 +389,7 @@
           return;
         }
         app.render();
-      }, 100);
+      }, app.config.remoteDebounceMs || 100);
     });
 
     app.clearSearchNode.addEventListener("click", function () {
@@ -383,6 +405,10 @@
 
     app.sortNode.addEventListener("change", function () {
       app.state.sort = app.sortNode.value;
+      if (app.config.serverDriven) {
+        app.reloadRows();
+        return;
+      }
       app.render();
     });
 
@@ -409,6 +435,10 @@
         app.state.filters[key].delete(input.value);
       }
 
+      if (app.config.serverDriven) {
+        app.reloadRows();
+        return;
+      }
       app.render();
     });
 
@@ -417,6 +447,17 @@
         app.clearAll();
       });
     });
+
+    app.loadMoreNode.addEventListener("click", function () {
+      app.loadMore();
+    });
+
+    app.resultsNode.addEventListener("toggle", function (event) {
+      var details = event.target.closest?.("details[data-catalog-id]");
+      if (details?.open && app.config.loadDetail && !details.dataset.detailLoaded) {
+        app.loadDetail(details);
+      }
+    }, true);
 
     app.activeNode.addEventListener("click", function (event) {
       var button = event.target.closest("[data-chip-type]");
@@ -442,6 +483,10 @@
         }
       }
 
+      if (app.config.serverDriven) {
+        app.reloadRows();
+        return;
+      }
       app.render();
     });
   };
@@ -577,7 +622,7 @@
   features.activeRulesValueLabel = function activeRulesValueLabel(key, value) {
     if (key === "concentration") return value === "Yes" ? "Concentration" : "No concentration";
     if (key === "ritual") return value === "Yes" ? "Ritual" : "Not ritual";
-    if (key === "attunement") return value === "Required" ? "Attunement required" : "No attunement";
+    if (key === "attunement") return normalizeLower(value) === "required" ? "Attunement required" : "No attunement";
     return value;
   };
 
@@ -627,6 +672,10 @@
     this.rows = [];
     this.filterOptions = {};
     this.state = features.createRulesSearchState(config);
+    this._hasMore = false;
+    this._nextCursor = "";
+    this._totalCount = 0;
+    this._facetCounts = {};
   }
 
   RulesSearchApp.prototype.renderShell = function renderShell() {
@@ -643,11 +692,12 @@
     this.filterGroupsNode = this.root.querySelector(".rules-filter-groups");
     this.resultsNode = this.root.querySelector(".rules-results");
     this.countNode = this.root.querySelector(".rules-result-count");
+    this.loadMoreNode = this.root.querySelector(".rules-load-more");
     this.clearAllNodes = this.root.querySelectorAll(".rules-clear-all, .rules-clear-all-sidebar");
   };
 
-  RulesSearchApp.prototype.loadRows = async function loadRows() {
-    return features.loadRulesRows(this.config, this.state.query);
+  RulesSearchApp.prototype.loadRows = async function loadRows(options) {
+    return features.loadRulesRows(this.config, this.state, options || {});
   };
 
   RulesSearchApp.prototype.clearFilters = function clearFilters() {
@@ -690,12 +740,26 @@
       });
     });
 
-    this.filterOptions = {};
     this.config.filters.forEach(function (filter) {
       var values = helpers.dedupe(app.rows.flatMap(function (row) {
         return row._filterValues[filter.key] || [];
       }));
-      app.filterOptions[filter.key] = app.sortFilterValues(values, filter);
+      var existing = app.config.serverDriven ? (app.filterOptions[filter.key] || []) : [];
+      var selected = Array.from(app.state.filters[filter.key] || []);
+      app.filterOptions[filter.key] = app.sortFilterValues(helpers.dedupe(existing.concat(values, selected)), filter);
+    });
+  };
+
+  RulesSearchApp.prototype.applyServerFacets = function applyServerFacets(facets) {
+    var app = this;
+    this._facetCounts = {};
+    this.config.filters.forEach(function (filter) {
+      var entries = Array.isArray(facets?.[filter.key]) ? facets[filter.key] : [];
+      var existing = app.filterOptions[filter.key] || [];
+      var selected = Array.from(app.state.filters[filter.key] || []);
+      var available = entries.map(function (entry) { return entry.value; });
+      app.filterOptions[filter.key] = app.sortFilterValues(helpers.dedupe(existing.concat(available, selected)), filter);
+      app._facetCounts[filter.key] = new Map(entries.map(function (entry) { return [entry.value, Number(entry.count || 0)]; }));
     });
   };
 
@@ -707,10 +771,12 @@
       var body = options.length
         ? options.map(function (value, index) {
           var id = app.uid + "-" + filter.key + "-" + index;
+          var count = app._facetCounts?.[filter.key]?.get(value);
+          var countLabel = Number.isFinite(count) ? ' <span class="rules-filter-count">(' + count.toLocaleString() + ")</span>" : "";
           return '\
             <label class="rules-filter-option" for="' + escapeHtml(id) + '">\
               <input id="' + escapeHtml(id) + '" type="checkbox" value="' + escapeHtml(value) + '" data-filter-key="' + escapeHtml(filter.key) + '">\
-              <span>' + escapeHtml(features.activeRulesValueLabel(filter.key, value)) + "</span>\
+              <span>' + escapeHtml(features.activeRulesValueLabel(filter.key, value)) + countLabel + "</span>\
             </label>";
         }).join("")
         : '<p class="rules-filter-empty">No values found.</p>';
@@ -842,20 +908,33 @@
     window.history.replaceState(null, "", nextUrl);
   };
 
+  RulesSearchApp.prototype.updateLoadMoreLabel = function updateLoadMoreLabel() {
+    var remaining = Math.max(0, this._totalCount - this.rows.length);
+    var batchSize = Math.min(Number(this.config.remoteLimit || 100), remaining);
+    this.loadMoreNode.textContent = batchSize > 0 ? "Load " + batchSize.toLocaleString() + " more" : "Load More";
+  };
+
   RulesSearchApp.prototype.render = function render() {
     var app = this;
-    var rows = this.sortedRows(this.rows.filter(function (row) {
+    var rows = this.config.serverDriven ? this.rows : this.sortedRows(this.rows.filter(function (row) {
       return app.matchesQuery(row) && app.matchesFilters(row);
     }));
 
-    this.countNode.textContent = rows.length.toLocaleString() + " " + this.config.itemLabel + (rows.length === 1 ? "" : "s") + " found";
+    this.countNode.textContent = this.config.serverDriven && this._totalCount > rows.length
+      ? "Showing " + rows.length.toLocaleString() + " of " + this._totalCount.toLocaleString() + " " + this.config.itemLabel + "s"
+      : rows.length.toLocaleString() + " " + this.config.itemLabel + (rows.length === 1 ? "" : "s") + " found";
     this.clearSearchNode.hidden = !this.state.query;
     this.sortNode.value = this.state.sort;
     this.renderActiveFilters();
     this.writeUrlState();
+    this.loadMoreNode.hidden = !this.config.serverDriven || !this._hasMore;
+    this.loadMoreNode.disabled = false;
+    this.updateLoadMoreLabel();
 
     if (!rows.length) {
-      this.resultsNode.innerHTML = '<div class="rules-search-empty">No results found.</div>';
+      this.resultsNode.innerHTML = this._tooShort
+        ? '<div class="rules-search-empty">Type at least ' + Number(this.config.minimumQueryLength || 2) + ' characters.</div>'
+        : '<div class="rules-search-empty">No results found.</div>';
       return;
     }
 
@@ -864,30 +943,102 @@
     }).join("");
   };
 
+  RulesSearchApp.prototype.applyLoadResult = function applyLoadResult(result, append) {
+    if (!this.config.serverDriven) {
+      this.rows = result;
+      this.prepareRows();
+      this.clearFilters();
+      return;
+    }
+    var response = result?.response || {};
+    var nextRows = result?.rows || [];
+    this.rows = append ? this.rows.concat(nextRows.filter(function (row) {
+      return !this.rows.some(function (existing) { return existing.Id && existing.Id === row.Id; });
+    }, this)) : nextRows;
+    this._tooShort = Boolean(response.tooShort);
+    this._hasMore = Boolean(response.hasMore);
+    this._nextCursor = String(response.nextCursor || "");
+    this._nextSkip = Number(response.nextSkip || 0);
+    this._totalCount = Number(response.totalCount ?? this.rows.length);
+    if (response.facets && typeof response.facets === "object") {
+      this.applyServerFacets(response.facets);
+    } else {
+      this.prepareRows();
+      this._facetCounts = {};
+      this.config.filters.forEach(function (filter) {
+        var counts = new Map();
+        this.rows.forEach(function (row) {
+          (row._filterValues?.[filter.key] || []).forEach(function (value) {
+            counts.set(value, (counts.get(value) || 0) + 1);
+          });
+        });
+        this._facetCounts[filter.key] = counts;
+      }, this);
+    }
+  };
+
   RulesSearchApp.prototype.reloadRows = async function reloadRows() {
     this._loadRequestId = (this._loadRequestId || 0) + 1;
     var requestId = this._loadRequestId;
+    this._abortController?.abort();
+    this._abortController = typeof AbortController === "function" ? new AbortController() : null;
+    this._nextCursor = "";
+    this._hasMore = false;
     this.countNode.textContent = "Loading " + this.config.itemLabel + " data...";
     this.resultsNode.innerHTML = "";
+    this.loadMoreNode.hidden = true;
 
     try {
-      var rows = await this.loadRows();
+      var result = await this.loadRows({ signal: this._abortController?.signal });
       if (requestId !== this._loadRequestId) {
         return;
       }
-      this.rows = rows;
-      this.prepareRows();
-      this.clearFilters();
+      this.applyLoadResult(result, false);
       this.buildFilterControls();
       this.applyStateToControls();
       this.render();
     } catch (error) {
+      if (error?.name === "AbortError") return;
       if (requestId !== this._loadRequestId) {
         return;
       }
       console.error("Error loading " + this.config.title + ":", error);
       this.resultsNode.innerHTML = '<div class="rules-search-empty">Unable to load ' + escapeHtml(this.config.itemLabel) + " data.</div>";
       this.countNode.textContent = "Data failed to load.";
+    }
+  };
+
+  RulesSearchApp.prototype.loadMore = async function loadMore() {
+    if (!this.config.serverDriven || !this._hasMore || (!this._nextCursor && !this._nextSkip)) return;
+    this.loadMoreNode.disabled = true;
+    this.loadMoreNode.textContent = "Loading...";
+    try {
+      var result = await this.loadRows(this._nextCursor ? { cursor: this._nextCursor } : { skip: this._nextSkip });
+      this.applyLoadResult(result, true);
+      this.buildFilterControls();
+      this.applyStateToControls();
+      this.render();
+    } catch (error) {
+      console.error("Error loading more " + this.config.title + ":", error);
+      this.countNode.textContent = "Unable to load more results.";
+    } finally {
+      this.updateLoadMoreLabel();
+      this.loadMoreNode.disabled = false;
+    }
+  };
+
+  RulesSearchApp.prototype.loadDetail = async function loadDetail(details) {
+    details.dataset.detailLoaded = "loading";
+    try {
+      var raw = await this.config.loadDetail(details.dataset.catalogId);
+      var row = this.config.mapApiRow(raw);
+      var replacement = document.createRange().createContextualFragment(this.config.render(row)).firstElementChild;
+      replacement.open = true;
+      replacement.dataset.detailLoaded = "true";
+      details.replaceWith(replacement);
+    } catch (error) {
+      details.dataset.detailLoaded = "error";
+      console.warn("Unable to load item details:", error);
     }
   };
 
@@ -901,12 +1052,17 @@
     if (this.config.sorts.some(function (sort) { return sort.key === requestedSort; })) {
       this.state.sort = requestedSort;
     }
+    if (this.config.serverDriven) {
+      this.config.filters.forEach(function (filter) {
+        this.state.filters[filter.key] = new Set(params.getAll(filter.key));
+      }, this);
+    }
 
     try {
-      this.rows = await this.loadRows();
-      this.prepareRows();
+      var result = await this.loadRows();
+      this.applyLoadResult(result, false);
       this.buildFilterControls();
-      this.readUrlState();
+      if (!this.config.serverDriven) this.readUrlState();
       this.applyStateToControls();
       features.bindRulesSearchEvents(this);
       this.render();

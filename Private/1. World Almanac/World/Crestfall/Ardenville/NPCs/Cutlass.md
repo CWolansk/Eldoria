@@ -15,8 +15,6 @@ tags:
 
 ![[Public/World/Crestfall/Ardenville/NPCs/Cutlass]]
 
-![[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Portraits/Cutlass.png]]
-
 ## Personality
 - **Ideal:** Flash
 - **Bond:** Looking like the most important sailor on the deck

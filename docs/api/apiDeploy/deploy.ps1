@@ -10,6 +10,8 @@ param(
   [string] $ContainerName = $(if ($env:ELDORIA_CHARACTER_CONTAINER) { $env:ELDORIA_CHARACTER_CONTAINER } else { "eldoria-character-data" }),
   [string] $CatalogTable = $(if ($env:ELDORIA_CATALOG_TABLE) { $env:ELDORIA_CATALOG_TABLE } else { "eldoriacatalog" }),
   [string] $CatalogSearchTable = $env:ELDORIA_CATALOG_SEARCH_TABLE,
+  [string] $CatalogSearchV2Table = $env:ELDORIA_CATALOG_SEARCH_V2_TABLE,
+  [string] $ItemSearchV2 = $(if ($env:ELDORIA_ITEM_SEARCH_V2) { $env:ELDORIA_ITEM_SEARCH_V2 } else { "false" }),
   [string] $BlobPrefix = $env:ELDORIA_BLOB_PREFIX,
   [string] $AllowedOrigins = $(if ($env:ELDORIA_ALLOWED_ORIGINS) { $env:ELDORIA_ALLOWED_ORIGINS } else { "*" }),
   [string] $Subscription = "",
@@ -116,11 +118,17 @@ Compress-Archive -Path (Join-Path $stageRoot "*") -DestinationPath $zipPath -For
 $settings = @(
   "ELDORIA_CHARACTER_CONTAINER=$ContainerName",
   "ELDORIA_CATALOG_TABLE=$CatalogTable",
+  "ELDORIA_CREATE_TABLE=false",
+  "ELDORIA_ITEM_SEARCH_V2=$ItemSearchV2",
   "ELDORIA_ALLOWED_ORIGINS=$AllowedOrigins"
 )
 
 if ($CatalogSearchTable) {
   $settings += "ELDORIA_CATALOG_SEARCH_TABLE=$CatalogSearchTable"
+}
+
+if ($CatalogSearchV2Table) {
+  $settings += "ELDORIA_CATALOG_SEARCH_V2_TABLE=$CatalogSearchV2Table"
 }
 
 if ($StorageConnectionString) {

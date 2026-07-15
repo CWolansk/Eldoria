@@ -17,7 +17,7 @@ import {
     applyResolvedReferencesToDto,
     resolvePlayerSheetReferences
 } from "./ReferenceResolver.js";
-import { normalizeCacheKeyPart, writeCachedJson } from "../web-cache.js";
+import { normalizeCacheKeyPart, readCachedJson, writeCachedJson } from "../web-cache.js";
 const DEFAULT_API_BASE_URL = "https://fn-eldoria-ahakafekhxczebhn.eastus-01.azurewebsites.net/api";
 const PLAYER_CHARACTER_CACHE_TTL_MS = 10 * 60 * 1000;
 const PLAYER_CHARACTER_CACHE_MAX_BYTES = 750 * 1024;
@@ -90,6 +90,17 @@ function rememberPlayerCharacterDto(characterId, dto) {
     }
 
     writeCachedJson(getPlayerCharacterCacheKey(characterId), dto, {
+        maxStorageBytes: PLAYER_CHARACTER_CACHE_MAX_BYTES,
+        ttlMs: PLAYER_CHARACTER_CACHE_TTL_MS
+    });
+}
+
+function readPlayerCharacterDto(characterId) {
+    if (!characterId) {
+        return null;
+    }
+
+    return readCachedJson(getPlayerCharacterCacheKey(characterId), {
         maxStorageBytes: PLAYER_CHARACTER_CACHE_MAX_BYTES,
         ttlMs: PLAYER_CHARACTER_CACHE_TTL_MS
     });
@@ -285,20 +296,26 @@ function hasUnsavedPlayerSheetChanges() {
 
 async function applyPlayerSheetDto(nextDto, options = {}) {
   const shouldPersist = options.persist !== false;
+  const shouldResolveReferences = options.resolveReferences !== false;
 
   currentPlayerSheetDto = PlayerSheetDtoHelper.toSaveDto(normalizeDtoForCurrentCharacter(nextDto));
 
-  try {
-    currentReferenceResolution = await resolvePlayerSheetReferences(currentPlayerSheetDto, api);
-    currentRuntimePlayerSheetDto = applyResolvedReferencesToDto(currentPlayerSheetDto, currentReferenceResolution);
-  } catch (error) {
-    console.warn("Reference resolution failed; rendering from strict DTO only:", error);
-    currentReferenceResolution = {
-        ok: false,
-        failures: [{ message: error?.message || String(error) }],
-        byPath: {}
-    };
+  if (!shouldResolveReferences) {
+    currentReferenceResolution = null;
     currentRuntimePlayerSheetDto = currentPlayerSheetDto;
+  } else {
+    try {
+      currentReferenceResolution = await resolvePlayerSheetReferences(currentPlayerSheetDto, api);
+      currentRuntimePlayerSheetDto = applyResolvedReferencesToDto(currentPlayerSheetDto, currentReferenceResolution);
+    } catch (error) {
+      console.warn("Reference resolution failed; rendering from strict DTO only:", error);
+      currentReferenceResolution = {
+          ok: false,
+          failures: [{ message: error?.message || String(error) }],
+          byPath: {}
+      };
+      currentRuntimePlayerSheetDto = currentPlayerSheetDto;
+    }
   }
 
   currentCharacterSheet = SheetCompiler.compile(currentPlayerSheetDto, {
@@ -309,6 +326,25 @@ async function applyPlayerSheetDto(nextDto, options = {}) {
 
   if (shouldPersist) {
     schedulePlayerSheetSave(PlayerSheetDtoHelper.toSaveDto(currentPlayerSheetDto), options);
+  }
+}
+
+async function hydratePlayerSheetReferences(dtoSnapshot) {
+  const strictSnapshot = PlayerSheetDtoHelper.toSaveDto(dtoSnapshot);
+  const snapshotFingerprint = createSaveFingerprint(strictSnapshot);
+
+  try {
+    const references = await resolvePlayerSheetReferences(strictSnapshot, api);
+    if (snapshotFingerprint !== createSaveFingerprint(currentPlayerSheetDto)) {
+      return;
+    }
+
+    currentReferenceResolution = references;
+    currentRuntimePlayerSheetDto = applyResolvedReferencesToDto(currentPlayerSheetDto, references);
+    currentCharacterSheet = SheetCompiler.compile(currentPlayerSheetDto, { references });
+    await renderCurrentPlayerSheet();
+  } catch (error) {
+    console.warn("Background reference resolution failed; keeping the rendered strict DTO:", error);
   }
 }
 
@@ -341,18 +377,38 @@ async function renderCurrentPlayerSheet() {
 async function bootPlayersPage() {
 
     const CharId = getRequestedPlayerId();
+    if (!CharId) {
+        setSaveStatus("failed", "Unable to load character sheet: missing character id.");
+        return;
+    }
+
+    const cached = readPlayerCharacterDto(CharId);
+    if (cached?.value) {
+        await applyPlayerSheetDto(cached.value, {
+            persist: false,
+            resolveReferences: false
+        });
+        lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
+        setSaveStatus("refreshing", "Loaded cached sheet. Refreshing...");
+    }
 
     try {
         const loadedDto = await api.getCharacterSheet(CharId);
         rememberPlayerCharacterDto(CharId, loadedDto);
         await applyPlayerSheetDto(loadedDto, {
-            persist: false
+            persist: false,
+            resolveReferences: false
         });
         lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
         setSaveStatus("saved", "Saved");
+        void hydratePlayerSheetReferences(currentPlayerSheetDto);
     } catch (error) {
         console.error("Failed to boot player sheet:", error);
-        setSaveStatus("failed", "Unable to load character sheet.");
+        if (cached?.value) {
+            setSaveStatus("offline", "Showing cached sheet. Refresh failed.");
+        } else {
+            setSaveStatus("failed", "Unable to load character sheet.");
+        }
     }
 }
 //Render players in character sheet page 

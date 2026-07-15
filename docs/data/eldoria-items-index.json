@@ -7,77 +7,56 @@
     "manifest": "site-src/public-rules-manifest.json"
   },
   "counts": {
-    "items": 17
+    "items": 31
   },
   "items": [
     {
-      "ref": "item-prospecting-compass.json",
-      "path": "eldoria-items/item-prospecting-compass.json",
-      "name": "Prospecting Compass",
-      "source": "Eldoria",
-      "rarity": "common"
-    },
-    {
-      "ref": "item-lightning-rod.json",
-      "path": "eldoria-items/item-lightning-rod.json",
-      "name": "Lightning Rod",
-      "source": "Eldoria",
-      "rarity": "rare"
-    },
-    {
-      "ref": "item-e-tier-adventurer-s-guild-badge.json",
-      "path": "eldoria-items/item-e-tier-adventurer-s-guild-badge.json",
-      "name": "E-tier Adventurer's Guild Badge",
-      "source": "Eldoria",
-      "rarity": "common"
-    },
-    {
-      "ref": "item-amulet-of-divine-retribution.json",
-      "path": "eldoria-items/item-amulet-of-divine-retribution.json",
-      "name": "Amulet of Divine Retribution",
-      "source": "Eldoria",
-      "rarity": "rare"
-    },
-    {
-      "ref": "item-griffon-key-loop.json",
-      "path": "eldoria-items/item-griffon-key-loop.json",
-      "name": "Griffon Key Loop",
-      "source": "Eldoria",
-      "rarity": "common"
-    },
-    {
-      "ref": "item-silverleaf-brooch.json",
-      "path": "eldoria-items/item-silverleaf-brooch.json",
-      "name": "Silverleaf Brooch",
-      "source": "Eldoria",
-      "rarity": "common"
-    },
-    {
-      "ref": "item-gauntlets-of-whirling-strikes.json",
-      "path": "eldoria-items/item-gauntlets-of-whirling-strikes.json",
-      "name": "Gauntlets of Whirling Strikes",
-      "source": "Eldoria",
-      "rarity": "rare"
-    },
-    {
-      "ref": "item-fabulist-gem.json",
-      "path": "eldoria-items/item-fabulist-gem.json",
-      "name": "Fabulist Gem",
+      "ref": "item-1-repeating-crossbow.json",
+      "path": "eldoria-items/item-1-repeating-crossbow.json",
+      "name": "+1 Repeating Crossbow",
       "source": "Eldoria",
       "rarity": "uncommon"
     },
     {
-      "ref": "item-commoners-veneer.json",
-      "path": "eldoria-items/item-commoners-veneer.json",
-      "name": "Commoners Veneer",
+      "ref": "item-adamantium-ingot.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Adamantium Ingot",
       "source": "Eldoria",
       "rarity": "common"
     },
     {
-      "ref": "item-adamantium-ingot.json",
-      "path": "eldoria-items/item-adamantium-ingot.json",
-      "name": "Adamantium Ingot",
-      "source": "Eldoria",
+      "ref": "item-aetherstone-compass.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Aetherstone Compass",
+      "source": "CAL",
+      "rarity": "artifact"
+    },
+    {
+      "ref": "item-amulet-of-divine-retribution.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Amulet of Divine Retribution",
+      "source": "Homebrew",
+      "rarity": "rare"
+    },
+    {
+      "ref": "item-bracer-of-piercing-arrows.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Bracer of Piercing Arrows",
+      "source": "Homebrew",
+      "rarity": "rare"
+    },
+    {
+      "ref": "item-celestial-shield.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Celestial Shield",
+      "source": "Homebrew",
+      "rarity": "artifact"
+    },
+    {
+      "ref": "item-commoners-veneer.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Commoners Veneer",
+      "source": "Homebrew",
       "rarity": "common"
     },
     {
@@ -88,10 +67,87 @@
       "rarity": "rare"
     },
     {
-      "ref": "item-sigil-of-thunderous-might.json",
-      "path": "eldoria-items/item-sigil-of-thunderous-might.json",
-      "name": "Sigil of Thunderous Might",
+      "ref": "item-crystal-of-true-sight.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Crystal of True Sight",
+      "source": "Homebrew",
+      "rarity": "artifact"
+    },
+    {
+      "ref": "item-e-tier-adventurer-s-guild-badge.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "E-tier Adventurer's Guild Badge",
       "source": "Eldoria",
+      "rarity": "common"
+    },
+    {
+      "ref": "item-fabulist-gem.json",
+      "path": "eldoria-items/item-fabulist-gem.json",
+      "name": "Fabulist Gem",
+      "source": "Eldoria",
+      "rarity": "uncommon"
+    },
+    {
+      "ref": "item-gauntlets-of-whirling-strikes.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Gauntlets of Whirling Strikes",
+      "source": "Homebrew",
+      "rarity": "rare"
+    },
+    {
+      "ref": "item-griffon-key-loop.json",
+      "path": "eldoria-items/item-griffon-key-loop.json",
+      "name": "Griffon Key Loop",
+      "source": "Eldoria",
+      "rarity": "common"
+    },
+    {
+      "ref": "item-lightning-rod.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Lightning Rod",
+      "source": "Homebrew",
+      "rarity": "rare"
+    },
+    {
+      "ref": "item-medallion-of-harmonious-resonance.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Medallion of Harmonious Resonance",
+      "source": "Homebrew",
+      "rarity": "rare"
+    },
+    {
+      "ref": "item-obsidian-blade.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Obsidian Blade",
+      "source": "Homebrew",
+      "rarity": "artifact"
+    },
+    {
+      "ref": "item-prospecting-compass.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Prospecting Compass",
+      "source": "Eldoria",
+      "rarity": "rare"
+    },
+    {
+      "ref": "item-requiping-ring.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Requiping Ring",
+      "source": "Homebrew",
+      "rarity": "rare"
+    },
+    {
+      "ref": "item-ring-of-the-grand-wizard.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Ring of the grand wizard",
+      "source": "Homebrew",
+      "rarity": "rare"
+    },
+    {
+      "ref": "item-robe-of-elemental-radiance.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Robe of Elemental Radiance",
+      "source": "Homebrew",
       "rarity": "rare"
     },
     {
@@ -102,31 +158,73 @@
       "rarity": "common"
     },
     {
-      "ref": "item-1-repeating-crossbow.json",
-      "path": "eldoria-items/item-1-repeating-crossbow.json",
-      "name": "+1 Repeating Crossbow",
+      "ref": "item-scroll-of-the-vanquisher-s-amulet.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Scroll of the Vanquisher's Amulet",
+      "source": "Homebrew",
+      "rarity": "artifact"
+    },
+    {
+      "ref": "item-seal-of-holy-vengeance.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Seal of Holy Vengeance",
+      "source": "Homebrew",
+      "rarity": "rare"
+    },
+    {
+      "ref": "item-seekers-eye.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Seekers Eye",
+      "source": "Homebrew",
+      "rarity": "artifact"
+    },
+    {
+      "ref": "item-shadowstride-boots.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Shadowstride Boots",
+      "source": "Homebrew",
+      "rarity": "artifact"
+    },
+    {
+      "ref": "item-sigil-of-thunderous-might.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Sigil of Thunderous Might",
+      "source": "Homebrew",
+      "rarity": "rare"
+    },
+    {
+      "ref": "item-silverleaf-brooch.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Silverleaf Brooch",
       "source": "Eldoria",
-      "rarity": "uncommon"
+      "rarity": "common"
     },
     {
       "ref": "item-talisman-of-elemental-fury.json",
-      "path": "eldoria-items/item-talisman-of-elemental-fury.json",
+      "path": "eldoria-homebrew-items.csv",
       "name": "Talisman of Elemental Fury",
-      "source": "Eldoria",
+      "source": "Homebrew",
       "rarity": "rare"
+    },
+    {
+      "ref": "item-tempest-lantern.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Tempest Lantern",
+      "source": "Homebrew",
+      "rarity": "artifact"
     },
     {
       "ref": "item-the-aegis-codex.json",
-      "path": "eldoria-items/item-the-aegis-codex.json",
+      "path": "eldoria-homebrew-items.csv",
       "name": "The Aegis Codex",
-      "source": "Eldoria",
+      "source": "Homebrew",
       "rarity": "rare"
     },
     {
-      "ref": "item-bracer-of-piercing-arrows.json",
-      "path": "eldoria-items/item-bracer-of-piercing-arrows.json",
-      "name": "Bracer of Piercing Arrows",
-      "source": "Eldoria",
+      "ref": "item-veil-of-shadows.json",
+      "path": "eldoria-homebrew-items.csv",
+      "name": "Veil of Shadows",
+      "source": "Homebrew",
       "rarity": "rare"
     }
   ]

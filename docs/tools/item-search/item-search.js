@@ -14,7 +14,7 @@
   var renderDetails = helpers.renderDetails;
 
   function attunementValues(row) {
-    return [normalize(row.Attunement) ? "Required" : "Not required"];
+    return [/^(yes|required|true)$/iu.test(normalize(row.Attunement)) ? "Required" : "Not required"];
   }
 
   function damageValues(row) {
@@ -32,7 +32,7 @@
 
   function renderItem(row) {
     return '\
-      <details class="item-card">\
+      <details class="item-card" data-catalog-id="' + escapeHtml(row.Id || "") + '">\
         <summary class="item-name">\
           <span>' + escapeHtml(row.Name) + '</span>\
           <span class="rules-card-badges"><span class="rarity ' + rarityClass(row.Rarity) + '">' + escapeHtml(row.Rarity || "Common") + '</span></span>\
@@ -49,20 +49,34 @@
     return value ? "Yes" : "No";
   }
 
+  function entriesText(value) {
+    if (value == null) return "";
+    if (typeof value === "string" || typeof value === "number") return String(value);
+    if (Array.isArray(value)) return value.map(entriesText).filter(Boolean).join(" ");
+    if (typeof value === "object") return entriesText(value.entries || value.items || value.entry || value.name || "");
+    return "";
+  }
+
   function mapItemApiRow(row) {
     return {
+      Id: row.id || row.itemId || "",
       Name: row.name || "",
       Source: row.source || "",
       Rarity: titleCase(row.rarity || "none"),
       Type: row.type || row.category || "Item",
-      Attunement: yesNo(row.attunement),
-      Damage: row.damageType || "",
-      Properties: Array.isArray(row.properties) ? row.properties.join(", ") : (row.properties || ""),
+      Attunement: row.attunementRequirement || row._attunement || yesNo(row.attunement),
+      Damage: row.damage || row.damageType || "",
+      Properties: Array.isArray(row.properties) ? row.properties.join(", ") : String(row.properties || "").replace(/\s*\|\s*/gu, ", "),
       Mastery: row.mastery || "",
       Weight: row.weight == null ? "" : String(row.weight),
       Value: row.valueLabel || (row.value == null ? "" : String(row.value)),
-      Text: row.text || row.entriesText || ""
+      Text: row.text || row.entriesText || entriesText(row.entries)
     };
+  }
+
+  async function loadItemDetail(id) {
+    var api = await features.createRulesApiClient(features.rulesSearchConfigs.items);
+    return api.getCatalogEntity("items", id);
   }
 
   features.rulesSearchConfigs = features.rulesSearchConfigs || {};
@@ -71,9 +85,12 @@
     itemLabel: "item",
     dataKind: "items",
     remoteSearch: true,
-    remoteLimit: 200,
-    initialQuery: "a",
+    serverDriven: true,
+    remoteLimit: 100,
+    remoteDebounceMs: 250,
+    minimumQueryLength: 2,
     mapApiRow: mapItemApiRow,
+    loadDetail: loadItemDetail,
     placeholder: "Search items...",
     searchFields: ["Name", "Source", "Rarity", "Type", "Attunement", "Damage", "Properties", "Mastery", "Weight", "Value", "Text"],
     render: renderItem,

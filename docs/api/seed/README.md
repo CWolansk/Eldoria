@@ -1,5 +1,14 @@
 # Seeding
 
+## Player portrait migration
+
+Portrait URLs are migrated separately so an image-only update cannot replace existing character sheets with placeholders. The command is a dry run unless `--apply` is supplied, and apply mode refuses to write until every deployed portrait URL returns an image.
+
+```powershell
+npm run migrate:player-portraits
+npm run migrate:player-portraits -- --apply
+```
+
 Two seeders share the same storage configuration
 (`ELDORIA_STORAGE_CONNECTION_STRING`, or `ELDORIA_STORAGE_ACCOUNT` for managed identity).
 
@@ -46,9 +55,9 @@ Run `node seed/seedTableStorage.js --help` for the full option list and availabl
 
 ## Item search index → Table Storage
 
-The optional item search index accelerates lightweight item searches without rewriting the
-main catalog table. It writes suffix/prefix rows to `ELDORIA_CATALOG_SEARCH_TABLE`, defaulting
-to `<ELDORIA_CATALOG_TABLE>search`.
+The v2 item search index accelerates substring search, browse, facets, and sorting without
+rewriting the main catalog or legacy search table. It writes compact rows to
+`ELDORIA_CATALOG_SEARCH_V2_TABLE`, defaulting to `<ELDORIA_CATALOG_TABLE>searchv2`.
 
 ```powershell
 npm run seed:catalog:item-search -- --dry-run
@@ -57,6 +66,6 @@ npm run seed:catalog:item-search -- --purge-search-index
 npm run seed:catalog:item-search -- --clear-search-index
 ```
 
-Rollback is config-only: set `ELDORIA_ITEM_SEARCH_INDEX=false` on the API and it will ignore
-the search index and use the original catalog scan path. `--clear-search-index` is optional
-cleanup for the separate search table.
+After seeding, set `ELDORIA_ITEM_SEARCH_V2=true` on the API. Rollback is config-only: set it
+back to `false` to return to the legacy search path. `--clear-search-index` is optional cleanup
+for the separate v2 table.

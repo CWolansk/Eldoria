@@ -3,7 +3,7 @@ type: NPC
 name: Me'Shelle Jones
 location: Ardenville
 region: Crestfall
-profession: Sailor Consigliere
+profession: First Mate
 race: Human
 status: Alive
 tags:
@@ -12,10 +12,17 @@ tags:
   - Ardenville
   - MerchantsGuild
 ---
+**Wants:** Whatever his boss wants 
+**Fears:**   
+**Will offer:** 
+**Will not do:** 
+**Secret:** 
+**Starting attitude:** Hostile
+**Leverage:** 
+**Pressure point:** 
+**Tell:** Flexes his Pecs whenever he is nervous 
 
 ![[Public/World/Crestfall/Ardenville/NPCs/Me'Shelle Jones]]
-
-![[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Portraits/Me'Shelle Jones.png]]
 
 ## Personality
 - **Ideal:** Loyalty

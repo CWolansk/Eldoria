@@ -20,19 +20,19 @@
   "counts": {
     "catalogs": {
       "items": {
-        "items": 14389,
+        "items": 12620,
         "baseItems": 240,
-        "itemGroups": 177,
-        "genericVariants": 280,
-        "specificVariants": 10487,
+        "itemGroups": 167,
+        "genericVariants": 243,
+        "specificVariants": 9188,
         "mundaneItems": 1212,
-        "magicItems": 13177,
+        "magicItems": 11408,
         "noDisplayItems": 0,
-        "sources": 86,
-        "pricedItems": 14389
+        "sources": 85,
+        "pricedItems": 12620
       },
       "eldoriaItems": {
-        "items": 17
+        "items": 31
       },
       "magicVariants": {
         "magicVariants": 53,
@@ -78,16 +78,16 @@
       "schemaVersion": 1,
       "path": "items-page-full-normalized.json",
       "counts": {
-        "items": 14389,
+        "items": 12620,
         "baseItems": 240,
-        "itemGroups": 177,
-        "genericVariants": 280,
-        "specificVariants": 10487,
+        "itemGroups": 167,
+        "genericVariants": 243,
+        "specificVariants": 9188,
         "mundaneItems": 1212,
-        "magicItems": 13177,
+        "magicItems": 11408,
         "noDisplayItems": 0,
-        "sources": 86,
-        "pricedItems": 14389
+        "sources": 85,
+        "pricedItems": 12620
       }
     },
     {
@@ -96,7 +96,7 @@
       "schemaVersion": 1,
       "path": "eldoria-items-index.json",
       "counts": {
-        "items": 17
+        "items": 31
       }
     },
     {

@@ -114,7 +114,7 @@ Don Gnocianno offers the party 50 gold pieces for what he describes as a simple 
 **Opportunity**: Use merchant connections to gather intelligence about package contents or Ardenville criminal activity  
 **Mechanics**: Investigation or Persuasion checks with merchant contacts; "I Know a Guy" opportunity
 
-### [[Private Claire notes]]
+### [[Claire]]
 **Opportunity**: Divine senses detect moral ambiguity; tempest powers useful if combat erupts  
 **Mechanics**: Divine Sense to detect evil intentions; weather magic for dramatic effect
 
@@ -247,4 +247,4 @@ This encounter deliberately avoids a clear "right" answer. The party must decide
 
 ---
 
-*Related Files*: [[Exterminators Guild]], [[Private/2. Reference/NPCs/All NPCS/Don Gnocianno]], [[JP Player Sheet]], [[Justin]], [[Private Claire notes]], [[Julie]], [[Liz]], [[Randi]]
+*Related Files*: [[Exterminators Guild]], [[Private/2. Reference/NPCs/All NPCS/Don Gnocianno]], [[JP Player Sheet]], [[Justin]], [[Claire]], [[Julie]], [[Liz]], [[Randi]]

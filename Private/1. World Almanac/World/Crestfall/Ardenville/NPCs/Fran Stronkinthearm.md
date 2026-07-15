@@ -15,7 +15,7 @@ tags:
 
 ![[Public/World/Crestfall/Ardenville/NPCs/Fran Stronkinthearm]]
 
-![[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Portraits/Fran Stronkinthearm.png]]
+
 
 ## Personality
 - **Ideal:** Strength

@@ -43,7 +43,7 @@ Founded three centuries ago by refugees fleeing the Border Wars, Hillcrest has g
   - **[[JP Player Sheet]]**: Initially cautious due to racial prejudice but quickly recognizes competence
   - **[[Justin]]**: Views as potential ally due to merchant experience
   - **[[Julie]]**: Eager for her archaeological expertise on historical blights
-  - **[[Private Claire notes]]**: Hopeful her divine magic might provide solutions
+  - **[[Claire]]**: Hopeful her divine magic might provide solutions
 
 ### [[Eliza Brightwine]] - Merchants Guild Representative
 - **Personality**: Ambitious and efficiency-focused, genuinely believes modernization will save the village
@@ -65,7 +65,7 @@ Founded three centuries ago by refugees fleeing the Border Wars, Hillcrest has g
 - **Attitude toward Party**:
   - **[[JP Player Sheet]]**: Suspicious initially but respects honest labor and physical strength
   - **[[Julie]]**: Values her interest in preserving old knowledge
-  - **[[Private Claire notes]]**: Uncomfortable with divine magic but desperate enough to accept help
+  - **[[Claire]]**: Uncomfortable with divine magic but desperate enough to accept help
 
 ### [[Guard Captain Roderick Stone]]
 - **Personality**: Duty-bound and observant, caught between protecting village and investigating potential sabotage
@@ -87,7 +87,7 @@ Founded three centuries ago by refugees fleeing the Border Wars, Hillcrest has g
 - **Attitude toward Party**:
   - **[[Liz]]**: Recognizes elven bloodline and appreciates perfectionist approach
   - **[[JP Player Sheet]]**: One of the few villagers who judges purely on character
-  - **[[Private Claire notes]]**: Interested in magical wine-making techniques
+  - **[[Claire]]**: Interested in magical wine-making techniques
 
 ### [[Lysander Thornfield]] - Mysterious Stranger
 - **Personality**: Charming and well-informed, claims to be a traveling wine merchant but asks too many questions about local history
@@ -143,7 +143,7 @@ A virulent magical blight has infected 40% of Hillcrest's vineyards since the 6t
 ### Party Character Integration
 - **[[Julie]]**: Historical research reveals previous blight occurred during Border Wars; ancient protective wards may still exist
 - **[[Liz]]**: Perfect pitch allows her to detect magical resonances in affected vines; elven longevity provides perspective on agricultural cycles
-- **[[Private Claire notes]]**: Divine magic can purify corrupted soil; weather control helps contain spread
+- **[[Claire]]**: Divine magic can purify corrupted soil; weather control helps contain spread
 - **[[JP Player Sheet]]**: Physical prowess needed for vineyard work; faces initial suspicion but can prove worth through dedicated labor
 - **[[Justin]]**: Merchant contacts reveal unusual alchemical purchases by suspected saboteurs; cart useful for transporting supplies
 - **[[Vanessa]]**: Military tactics applicable to protecting uninfected areas; direct action against threats
@@ -341,7 +341,7 @@ The local guild chapter maintains carefully neutral ground while serving both lo
 - **[[Liliana Moonleaf]]**: Magic shop owner with mysterious knowledge of vineyard enchantments
 
 ### "I Know a Guy" Connections
-- Former sailors who became vineyard workers (for [[JP Player Sheet]] and [[Private Claire notes]])
+- Former sailors who became vineyard workers (for [[JP Player Sheet]] and [[Claire]])
 - Traveling merchants with regional knowledge (for [[Justin]])
 - Archaeological contacts studying Border War sites (for [[Julie]])
 - Elven cultural advisors on agricultural magic (for [[Liz]])

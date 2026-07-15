@@ -13,13 +13,28 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
 const model = require("../src/catalogModel");
-const searchIndex = require("../src/itemSearchIndex");
-const itemSearchStore = require("../src/itemSearchStore");
+const { parseHomebrewItemsCsv } = require("../src/homebrewItems");
+const searchIndex = require("../src/itemSearchV2Index");
+const itemSearchStore = require("../src/itemSearchV2Store");
 const tableStore = require("../src/tableStore");
 
 const API_ROOT = path.resolve(__dirname, "..");
 const DOCS_ROOT = path.resolve(API_ROOT, "..");
 const DEFAULT_DATA_DIR = path.join(DOCS_ROOT, "data");
+const PROMOTED_ELDORIA_ITEM_REFS = new Set([
+  "item-prospecting-compass.json",
+  "item-lightning-rod.json",
+  "item-e-tier-adventurer-s-guild-badge.json",
+  "item-amulet-of-divine-retribution.json",
+  "item-silverleaf-brooch.json",
+  "item-gauntlets-of-whirling-strikes.json",
+  "item-commoners-veneer.json",
+  "item-adamantium-ingot.json",
+  "item-sigil-of-thunderous-might.json",
+  "item-talisman-of-elemental-fury.json",
+  "item-the-aegis-codex.json",
+  "item-bracer-of-piercing-arrows.json"
+]);
 
 function parseArgs(argv) {
   const options = {
@@ -92,7 +107,7 @@ Storage configuration (same as the blob seeder):
   ELDORIA_STORAGE_CONNECTION_STRING   Connection string (incl. UseDevelopmentStorage=true), or
   ELDORIA_STORAGE_ACCOUNT             Storage account name for managed-identity auth.
   ELDORIA_CATALOG_TABLE               Table name (default: eldoriacatalog).
-  ELDORIA_CATALOG_SEARCH_TABLE        Search table name (default: <catalog table>search).
+  ELDORIA_CATALOG_SEARCH_V2_TABLE     Search table name (default: <catalog table>searchv2).
 
 Available kinds:
   ${model.listKinds().join(", ")}
@@ -100,38 +115,39 @@ Available kinds:
 }
 
 function shouldBuildSearchIndex(options, def) {
-  return options.searchIndex && def.kind === searchIndex.ITEM_SEARCH_INDEX_KIND;
+  return options.searchIndex && def.kind === "items";
 }
 
 async function writeSearchIndex(rawArray, options, generatedAt) {
-  const built = searchIndex.buildItemSearchEntities(rawArray);
+  const built = searchIndex.buildItemSearchV2Entities(rawArray);
   if (options.dryRun) {
     console.log(`  item-search-index ${String(built.entities.length).padStart(5)} row(s) [planned]`);
-    console.log(`  item-search-table ${itemSearchStore.getItemSearchTableName()}`);
+    console.log(`  item-search-table ${itemSearchStore.getTableName()}`);
     return built.entities.length;
   }
 
   if (options.purgeSearchIndex) {
-    const removed = await itemSearchStore.clearItemSearchIndex();
+    const removed = await itemSearchStore.clearIndex();
     if (removed) {
       console.log(`  item-search-index purged ${removed} existing row(s)`);
     }
   }
 
-  const written = await itemSearchStore.upsertItemSearchEntities(built.entities, {
+  const written = await itemSearchStore.upsertEntities(built.entities, {
     onBatch: (complete, total) => {
       if (complete === total || complete % 10000 === 0) {
         console.log(`  item-search-index ${String(complete).padStart(6)} / ${String(total).padStart(6)} row(s)`);
       }
     }
   });
-  await itemSearchStore.writeItemSearchManifest({
+  await itemSearchStore.writeManifest({
     itemCount: built.indexedItems,
     rowCount: written,
+    facets: built.facets,
     generatedAt
   });
   console.log(`  item-search-index ${String(written).padStart(5)} row(s) upserted`);
-  console.log(`  item-search-table ${itemSearchStore.getItemSearchTableName()}`);
+  console.log(`  item-search-table ${itemSearchStore.getTableName()}`);
   return written;
 }
 
@@ -155,6 +171,27 @@ async function readCatalogArray(dataDir, def) {
     return null;
   }
   return arr;
+}
+
+async function addPromotedEldoriaItems(dataDir, def, rawArray) {
+  if (def.kind !== "items") return rawArray;
+  let homebrewItems = [];
+  try {
+    homebrewItems = parseHomebrewItemsCsv(await fs.readFile(path.join(dataDir, "eldoria-homebrew-items.csv"), "utf8"));
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+  const fullRefs = new Set(homebrewItems.map((item) => String(item.ref || "").toLowerCase()));
+  const eldoriaDef = model.CATALOGS.find((entry) => entry.kind === "eldoria-items");
+  const eldoriaItems = eldoriaDef ? await readCatalogArray(dataDir, eldoriaDef) : null;
+  const promoted = (eldoriaItems || [])
+    .filter((item) => PROMOTED_ELDORIA_ITEM_REFS.has(String(item.ref || "").trim().toLowerCase()))
+    .filter((item) => !fullRefs.has(String(item.ref || "").trim().toLowerCase()))
+    .map((item) => ({ ...item, type: item.type || "Item" }));
+  const availableRefs = new Set([...fullRefs, ...promoted.map((item) => String(item.ref || "").toLowerCase())]);
+  const missing = [...PROMOTED_ELDORIA_ITEM_REFS].filter((ref) => !availableRefs.has(ref));
+  if (missing.length) throw new Error(`Missing promoted Eldoria item record(s): ${missing.join(", ")}`);
+  return rawArray.concat(promoted, homebrewItems);
 }
 
 // Build entities for one kind, de-duplicating by RowKey (a transaction batch
@@ -199,14 +236,14 @@ async function main() {
   console.log(`Data:  ${options.dataDir}\n`);
 
   if (options.clearSearchIndex) {
-    console.log(`Search table: ${itemSearchStore.getItemSearchTableName()}`);
+    console.log(`Search table: ${itemSearchStore.getTableName()}`);
     if (options.dryRun) {
       console.log("  item-search-index clear [planned]");
       console.log("\nSeed complete. Search index clear planned.");
       return;
     }
 
-    const removed = await itemSearchStore.clearItemSearchIndex({
+    const removed = await itemSearchStore.clearIndex({
       onBatch: (complete, total) => {
         if (complete === total || complete % 10000 === 0) {
           console.log(`  item-search-index ${String(complete).padStart(6)} / ${String(total).padStart(6)} row(s) deleted`);
@@ -223,10 +260,11 @@ async function main() {
   let totalSearchRows = 0;
 
   for (const def of catalogs) {
-    const rawArray = await readCatalogArray(options.dataDir, def);
+    let rawArray = await readCatalogArray(options.dataDir, def);
     if (!rawArray) {
       continue;
     }
+    rawArray = await addPromotedEldoriaItems(options.dataDir, def, rawArray);
 
     const entities = options.searchIndexOnly ? [] : buildEntities(def, rawArray);
 

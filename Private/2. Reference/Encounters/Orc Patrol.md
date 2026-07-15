@@ -40,7 +40,7 @@ tags:
 
 | Initiative | Character/Monster | AC | HP | Notes |
 |------------|-------------------|----|----|-------|
-| `INPUT[number():memory^initClaire]` | [[Private Claire notes]] | - | - | `INPUT[text():memory^notesClaire]` |
+| `INPUT[number():memory^initClaire]` | [[Claire]] | - | - | `INPUT[text():memory^notesClaire]` |
 | `INPUT[number():memory^initJP]` | [[JP Player Sheet]] | - | - | `INPUT[text():memory^notesJP]` |
 | `INPUT[number():memory^initJulie]` | [[Julie]] | - | - | `INPUT[text():memory^notesJulie]` |
 | `INPUT[number():memory^initJustin]` | [[Justin]] | - | - | `INPUT[text():memory^notesJustin]` |

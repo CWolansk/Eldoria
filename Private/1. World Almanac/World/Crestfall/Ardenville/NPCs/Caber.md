@@ -15,7 +15,6 @@ tags:
 
 ![[Public/World/Crestfall/Ardenville/NPCs/Caber]]
 
-![[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Portraits/Caber.png]]
 
 ## Personality
 - **Ideal:** Momentum

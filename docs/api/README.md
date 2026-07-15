@@ -45,6 +45,10 @@ and generated specific variants.
     falling back to the catalog scan.
   - `limit` ⇒ cap the number of rows returned.
   - `skip` or `offset` ⇒ skip this many matching rows before returning results.
+  - `cursor` ⇒ opaque v2 continuation cursor; do not combine with nonzero `skip`.
+  - item `sort` ⇒ `relevance`, `name`, `rarity`, `type`, or `source`.
+  - repeated item facet params ⇒ OR within one facet and AND across facets.
+  - item `facets=true` ⇒ return complete facet values/counts for the filtered result set.
   - Paged responses include `skip`, `limit`, `hasMore`, and `nextSkip` when `limit` or
     `skip` is supplied.
   - `full=true` ⇒ return full normalized JSON entities instead of lightweight index rows.
@@ -85,22 +89,19 @@ Table Storage filters only support equality/comparison (no substring), so struct
 filters are evaluated by the table and free-text `q` is evaluated in-process. `kind` accepts
 aliases (e.g. `item`, `classFeatures`, `magic-variant`).
 
-### Optional item search index
+### Versioned item search index
 
-The API can accelerate lightweight `GET /api/catalog/items?q=...&limit=...` searches with a
-separate Table Storage suffix/prefix index. The index lives outside the main catalog table, so
-it can be seeded, ignored, or deleted without touching catalog rows.
+The API can accelerate lightweight item search and browse requests with a compact v2 Table
+Storage index. The side-by-side index contains substring postings, ordered browse rows, and
+facet rows without any full-document chunks.
 
 Behavior:
 
-- Enabled by default when the index table has a current manifest.
-- Set `ELDORIA_ITEM_SEARCH_INDEX=false` to force rollback to the existing catalog scan.
-- Uses `ELDORIA_CATALOG_SEARCH_TABLE` when set; otherwise defaults to `<ELDORIA_CATALOG_TABLE>search`.
-- Only handles lightweight, unfiltered item searches. `full=true`, structured filters, too-short
-  searches, stale/missing index data, and index errors fall back to the current scan path.
-- The index preserves substring-style item-name matching by indexing suffixes of normalized item
-  name/source tokens, so searches like `sword` still find `Longsword`, `Shortsword`, and
-  `Greatsword`.
+- Enable with `ELDORIA_ITEM_SEARCH_V2=true` after the v2 manifest is seeded and validated.
+- Uses `ELDORIA_CATALOG_SEARCH_V2_TABLE`, defaulting to `<ELDORIA_CATALOG_TABLE>searchv2`.
+- Supports two-character substring queries, empty-query browse, server-side facets and sorting,
+  cursor paging, and the legacy `skip`/`nextSkip` response contract.
+- Missing, stale, disabled, or errored v2 indexes fall back to the existing v1/search behavior.
 
 Seed only the search index:
 
@@ -146,6 +147,9 @@ to an Azure Storage connection string.
 - `ELDORIA_CATALOG_TABLE`: Rules catalog table name. Defaults to `eldoriacatalog`.
 - `ELDORIA_CATALOG_SEARCH_TABLE`: Optional item search index table name. Defaults to
   `<ELDORIA_CATALOG_TABLE>search`.
+- `ELDORIA_CATALOG_SEARCH_V2_TABLE`: Compact v2 item search table. Defaults to
+  `<ELDORIA_CATALOG_TABLE>searchv2`.
+- `ELDORIA_ITEM_SEARCH_V2`: Set to `true` after seeding to prefer v2 item search and browse.
 - `ELDORIA_ITEM_SEARCH_INDEX`: Set to `false`, `0`, `no`, `off`, or `disabled` to bypass the
   item search index and use the existing catalog scan path.
 - `ELDORIA_BLOB_PREFIX`: Optional prefix for all API blobs. Use only when the seed script uses `--prefix`.

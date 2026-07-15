@@ -1,5 +1,7 @@
 import { ABILITIES, GetJsonPathValues, formatModifier, getAbilityModifier } from "../JsonHelpers.js";
 
+const DEPLOYED_PORTRAIT_BASE_URL = "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/docs/Assets/images";
+
 const HEADER_ABILITY_CLASSES = {
     str: { scoreClass: "STR", saveClass: "STRSave" },
     dex: { scoreClass: "Dex", saveClass: "DEXSave" },
@@ -104,7 +106,11 @@ function renderPortrait(playerSheetObject = {}) {
         containerRoot.insertBefore(portraitContainer, containerRoot.firstChild);
     }
 
-    const portraitUrl = GetJsonPathValues(playerSheetObject, "identity.portraitUrl");
+    const rawPortraitUrl = GetJsonPathValues(playerSheetObject, "identity.portraitUrl");
+    const legacyPortraitMatch = /\/Public\/Players\/([^/?#]+)\.png(?:[?#].*)?$/iu.exec(rawPortraitUrl || "");
+    const portraitUrl = legacyPortraitMatch
+        ? `${DEPLOYED_PORTRAIT_BASE_URL}/${legacyPortraitMatch[1]}.png`
+        : rawPortraitUrl;
 
     if (!portraitUrl) {
         portraitContainer.hidden = true;
@@ -122,6 +128,11 @@ function renderPortrait(playerSheetObject = {}) {
 
     portraitImage.src = portraitUrl;
     portraitImage.alt = `${GetJsonPathValues(playerSheetObject, "identity.name") || "Character"} portrait`;
+    portraitImage.decoding = "async";
+    portraitImage.onerror = () => {
+        portraitContainer.hidden = true;
+        portraitContainer.replaceChildren();
+    };
     portraitContainer.hidden = false;
 }
 

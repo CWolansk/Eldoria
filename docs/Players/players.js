@@ -9,6 +9,7 @@ const PLAYER_ROSTER_CACHE_TTL_MS = 10 * 60 * 1000;
 const PLAYER_CHARACTER_CACHE_TTL_MS = 10 * 60 * 1000;
 const PLAYER_CHARACTER_MISS_CACHE_TTL_MS = 60 * 1000;
 const PLAYER_CACHE_MAX_BYTES = 750 * 1024;
+const DEPLOYED_PORTRAIT_BASE_URL = "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/docs/Assets/images";
 
 function normalizeText(value, fallback = "Unknown") {
   const text = String(value || "").trim();
@@ -62,6 +63,10 @@ function normalizePortraitUrl(value) {
   const url = String(value || "").trim();
   if (!url) {
     return "";
+  }
+  const legacyPortraitMatch = /\/Public\/Players\/([^/?#]+)\.png(?:[?#].*)?$/iu.exec(url);
+  if (legacyPortraitMatch) {
+    return `${DEPLOYED_PORTRAIT_BASE_URL}/${legacyPortraitMatch[1]}.png`;
   }
   if (/^(?:[a-z][a-z0-9+.-]*:|data:)/iu.test(url)) {
     return url;
@@ -138,17 +143,12 @@ async function loadPlayersManifest() {
   }
 }
 
-async function loadCharacterSummary(player) {
-  const characterId = readText(player?.id);
-  if (!characterId || getExplicitCharacterName(player)) {
-    return player;
-  }
-
+async function loadCharacterSheet(characterId) {
   const recentMiss = readCachedJson(getPlayerCharacterMissCacheKey(characterId), {
     ttlMs: PLAYER_CHARACTER_MISS_CACHE_TTL_MS
   });
   if (recentMiss) {
-    return player;
+    return null;
   }
 
   try {
@@ -161,7 +161,25 @@ async function loadCharacterSummary(player) {
         ttlMs: PLAYER_CHARACTER_CACHE_TTL_MS
       }
     );
-    const sheet = result.value;
+    return result.value;
+  } catch (error) {
+    writeCachedJson(getPlayerCharacterMissCacheKey(characterId), true, {
+      maxStorageBytes: 1000,
+      ttlMs: PLAYER_CHARACTER_MISS_CACHE_TTL_MS
+    });
+    console.warn(`Unable to load character sheet for ${characterId}.`, error);
+    return null;
+  }
+}
+
+async function loadCharacterSummary(player) {
+  const characterId = readText(player?.id);
+  if (!characterId || getExplicitCharacterName(player)) {
+    return player;
+  }
+
+  const sheet = await loadCharacterSheet(characterId);
+  if (sheet) {
     return {
       ...player,
       characterName: getCharacterName(sheet),
@@ -172,19 +190,9 @@ async function loadCharacterSummary(player) {
         ...(sheet?.identity || {})
       }
     };
-  } catch (error) {
-    writeCachedJson(getPlayerCharacterMissCacheKey(characterId), true, {
-      maxStorageBytes: 1000,
-      ttlMs: PLAYER_CHARACTER_MISS_CACHE_TTL_MS
-    });
-    console.warn(`Unable to load character summary for ${characterId}.`, error);
-    return player;
   }
-}
 
-async function enrichPlayers(players) {
-  const results = await Promise.allSettled(players.map(loadCharacterSummary));
-  return results.map((result, index) => result.status === "fulfilled" ? result.value : players[index]);
+  return player;
 }
 
 function buildPlayerCard(player) {
@@ -198,6 +206,13 @@ function buildPlayerCard(player) {
   link.className = "player-card player-roster-card";
   link.href = `PlayerSheetTemplate/PlayerSheet.html?id=${encodeURIComponent(characterId)}`;
   link.setAttribute("aria-label", `Open ${characterName} character sheet`);
+  const prefetchCharacter = () => {
+    if (characterId) {
+      void loadCharacterSheet(characterId);
+    }
+  };
+  link.addEventListener("pointerenter", prefetchCharacter, { once: true });
+  link.addEventListener("focus", prefetchCharacter, { once: true });
 
   const portrait = document.createElement("div");
   portrait.className = "player-card__portrait";
@@ -207,6 +222,13 @@ function buildPlayerCard(player) {
     image.src = portraitUrl;
     image.alt = "";
     image.loading = "lazy";
+    image.decoding = "async";
+    image.addEventListener("error", () => {
+      const initials = document.createElement("span");
+      initials.className = "player-card__initials";
+      initials.textContent = getInitials(characterName);
+      portrait.replaceChildren(initials);
+    }, { once: true });
     portrait.append(image);
   } else {
     const initials = document.createElement("span");
@@ -238,6 +260,31 @@ function buildPlayerCard(player) {
   return link;
 }
 
+function replacePlayerCard(container, characterId, player) {
+  const selector = `[data-character-id="${CSS.escape(characterId)}"]`;
+  const existing = container.querySelector(selector);
+  if (!existing) {
+    return;
+  }
+
+  const replacement = buildPlayerCard(player);
+  replacement.dataset.characterId = characterId;
+  existing.replaceWith(replacement);
+}
+
+function enrichPlayerCards(container, players) {
+  players.forEach((player) => {
+    const characterId = readText(player?.id);
+    if (!characterId || getExplicitCharacterName(player)) {
+      return;
+    }
+
+    void loadCharacterSummary(player)
+      .then((enrichedPlayer) => replacePlayerCard(container, characterId, enrichedPlayer))
+      .catch((error) => console.warn(`Unable to enrich player card for ${characterId}.`, error));
+  });
+}
+
 async function bootPlayersPage() {
   const container = document.querySelector("#player-sheet-list");
   if (!container) {
@@ -252,7 +299,7 @@ async function bootPlayersPage() {
 
   try {
     const result = await loadPlayersManifest();
-    const players = await enrichPlayers(Array.isArray(result.manifest?.characters) ? result.manifest.characters : []);
+    const players = Array.isArray(result.manifest?.characters) ? result.manifest.characters : [];
     const sortedPlayers = [...players].sort((left, right) =>
       getPlayerName(left).localeCompare(getPlayerName(right), undefined, { sensitivity: "base" })
     );
@@ -269,7 +316,13 @@ async function bootPlayersPage() {
       return;
     }
 
-    container.append(...sortedPlayers.map(buildPlayerCard));
+    const cards = sortedPlayers.map((player) => {
+      const card = buildPlayerCard(player);
+      card.dataset.characterId = readText(player?.id);
+      return card;
+    });
+    container.append(...cards);
+    enrichPlayerCards(container, sortedPlayers);
   } catch (error) {
     console.error("Unable to render players page.", error);
     setText("[data-player-count]", "0");

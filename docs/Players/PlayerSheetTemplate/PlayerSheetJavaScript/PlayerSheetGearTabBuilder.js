@@ -86,11 +86,20 @@ function getPagedSearchState(response, skip, items) {
 
     return {
         hasMore: hasExplicitPaging && hasMore,
-        nextSkip: hasMore && Number.isFinite(nextSkip) ? nextSkip : skip + items.length
+        nextSkip: hasMore && Number.isFinite(nextSkip) ? nextSkip : skip + items.length,
+        nextCursor: hasMore ? String(response?.nextCursor || "") : ""
     };
 }
 
-async function searchCatalogItemPage(api, query, skip = 0) {
+async function searchCatalogItemPage(api, query, { skip = 0, cursor = "", signal } = {}) {
+    if (api && typeof api.searchItems === "function") {
+        const response = await api.searchItems(query, {
+            limit: ITEM_SEARCH_LIMIT,
+            ...(cursor ? { cursor } : { skip })
+        }, { signal });
+        const items = listCatalogItems(response);
+        return { items, ...getPagedSearchState(response, skip, items) };
+    }
     if (api && typeof api.searchCatalog === "function") {
         const response = await api.searchCatalog("items", query, {
             full: false,
@@ -202,8 +211,10 @@ export function buildItemSearchModal(context = {}) {
     let activeQuery = "";
     let loadedCount = 0;
     let nextSkip = 0;
+    let nextCursor = "";
     let hasMore = false;
     let loadingPage = false;
+    let searchAbortController = null;
     const itemDetailsById = new Map();
 
     function setStatus(message) {
@@ -225,6 +236,7 @@ export function buildItemSearchModal(context = {}) {
         activeQuery = "";
         loadedCount = 0;
         nextSkip = 0;
+        nextCursor = "";
         hasMore = false;
         loadingPage = false;
         updatePager();
@@ -328,12 +340,17 @@ export function buildItemSearchModal(context = {}) {
 
         const token = searchToken + 1;
         searchToken = token;
+        if (!append) {
+            searchAbortController?.abort();
+            searchAbortController = typeof AbortController === "function" ? new AbortController() : null;
+        }
         loadingPage = true;
         updatePager();
         if (!append) {
             activeQuery = query;
             loadedCount = 0;
             nextSkip = 0;
+            nextCursor = "";
             hasMore = false;
             setStatus("Searching items...");
             results.replaceChildren(createElement("p", "player-sheet-empty-state", "Searching..."));
@@ -345,7 +362,11 @@ export function buildItemSearchModal(context = {}) {
         }
 
         try {
-            const page = await searchCatalogItemPage(context.api, query, append ? nextSkip : 0);
+            const page = await searchCatalogItemPage(context.api, query, {
+                skip: append ? nextSkip : 0,
+                cursor: append ? nextCursor : "",
+                signal: searchAbortController?.signal
+            });
             if (token !== searchToken) {
                 return;
             }
@@ -353,11 +374,15 @@ export function buildItemSearchModal(context = {}) {
             appendResults(page.items, { append });
             loadedCount = append ? loadedCount + page.items.length : page.items.length;
             nextSkip = page.nextSkip;
+            nextCursor = page.nextCursor;
             hasMore = page.hasMore;
             setStatus(hasMore
                 ? `${loadedCount} items shown. Scroll or load more for additional matches.`
                 : `${loadedCount} item${loadedCount === 1 ? "" : "s"} shown.`);
         } catch (error) {
+            if (error?.name === "AbortError") {
+                return;
+            }
             if (token !== searchToken) {
                 return;
             }

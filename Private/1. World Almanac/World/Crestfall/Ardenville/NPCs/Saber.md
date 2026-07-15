@@ -15,8 +15,6 @@ tags:
 
 ![[Public/World/Crestfall/Ardenville/NPCs/Saber]]
 
-![[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Portraits/Saber.png]]
-
 ## Personality
 - **Ideal:** Precision
 - **Bond:** Proving he is the refined one

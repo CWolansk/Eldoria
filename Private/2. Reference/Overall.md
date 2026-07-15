@@ -1,5 +1,7 @@
 # Eldoria Campaign: The Artifact Wars
 
+> DM operating note: [[Private/2. Reference/Adventures/Eldoria Campaign Spiral|Eldoria Campaign Spiral]]
+
 ## Players & Characters
 
 - **Julie** - Human Fighter, Archaeologist - Loves to hit things, scholarly interests in ancient sites

@@ -5,49 +5,49 @@
       "id": "char-claire-001",
       "playerName": "Claire",
       "characterName": "Claire",
-      "portraitUrl": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/Public/Players/ClaireDnD.png",
+      "portraitUrl": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/docs/Assets/images/ClaireDnD.png",
       "status": "active"
     },
     {
       "id": "char-grum-ironjaw-001",
       "playerName": "JP",
       "characterName": "Grum 'Grog Guzzler' Ironjaw",
-      "portraitUrl": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/Public/Players/JPDnd.png",
+      "portraitUrl": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/docs/Assets/images/JPDnd.png",
       "status": "active"
     },
     {
       "id": "char-julie-001",
       "playerName": "Julie",
       "characterName": "Julie",
-      "portraitUrl": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/Public/Players/JulieDnd.png",
+      "portraitUrl": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/docs/Assets/images/JulieDnd.png",
       "status": "active"
     },
     {
       "id": "char-austin-001",
       "playerName": "Justin",
       "characterName": "Austin",
-      "portraitUrl": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/Public/Players/JustinDnD.png",
+      "portraitUrl": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/docs/Assets/images/JustinDnD.png",
       "status": "active"
     },
     {
       "id": "char-liz-001",
       "playerName": "Liz",
       "characterName": "Liz",
-      "portraitUrl": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/Public/Players/LizDnD.png",
+      "portraitUrl": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/docs/Assets/images/LizDnD.png",
       "status": "active"
     },
     {
       "id": "char-zazpoh-the-matyr-001",
       "playerName": "Randi",
       "characterName": "Zazpoh The Martyr",
-      "portraitUrl": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/Public/Players/RandiDnD.png",
+      "portraitUrl": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/docs/Assets/images/RandiDnD.png",
       "status": "active"
     },
     {
       "id": "char-vanessa-001",
       "playerName": "Vanessa",
       "characterName": "Vanessa",
-      "portraitUrl": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/Public/Players/VanessaDnD.png",
+      "portraitUrl": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/docs/Assets/images/VanessaDnD.png",
       "status": "active"
     }
   ]

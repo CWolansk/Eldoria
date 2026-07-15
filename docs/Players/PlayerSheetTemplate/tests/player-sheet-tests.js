@@ -2246,6 +2246,44 @@ const tests = [
     assertEqual(searchCalls[0].options.limit, 25, "first page limit");
     assertEqual(searchCalls[1].options.skip, 25, "second page skip");
     assertEqual(searchCalls[1].options.limit, 25, "second page limit");
+  }],
+  ["item search prefers cursor paging when available", async () => {
+    const calls = [];
+    const catalogItems = Array.from({ length: 27 }, (_, index) => ({
+      id: `item:cursor-sword-${index + 1}:homebrew`,
+      kind: "items",
+      name: `Cursor Sword ${index + 1}`,
+      source: "Homebrew",
+      type: "weapon"
+    }));
+    const api = {
+      async searchItems(query, options = {}) {
+        calls.push({ query, options });
+        const start = options.cursor === "page-2" ? 25 : 0;
+        const items = catalogItems.slice(start, start + 25);
+        return {
+          items,
+          count: items.length,
+          hasMore: start + items.length < catalogItems.length,
+          nextSkip: start + items.length,
+          nextCursor: start === 0 ? "page-2" : undefined
+        };
+      },
+      async getCatalogEntity(kind, id) {
+        return { id, kind, name: "Cursor Sword", source: "Homebrew", weapon: true };
+      }
+    };
+    const modal = buildItemSearchModal({ api, dto: createDto(), async onChange() {} });
+    fixture.replaceChildren(modal);
+    const input = modal.querySelector(".player-sheet-input[type='search']");
+    input.value = "sword";
+    modal.querySelector(".player-sheet-catalog-picker__controls .player-sheet-button").click();
+    await waitForCondition(() => modal.querySelectorAll(".player-sheet-catalog-result").length === 25, "cursor first page should render");
+    modal.querySelector("[data-item-search-load-more='true']").click();
+    await waitForCondition(() => modal.querySelectorAll(".player-sheet-catalog-result").length === 27, "cursor second page should append");
+    assertEqual(calls.length, 2, "cursor API should be called twice");
+    assertEqual(calls[0].options.skip, 0, "first cursor request uses initial skip");
+    assertEqual(calls[1].options.cursor, "page-2", "second request uses returned cursor");
   }]
 ];
 
