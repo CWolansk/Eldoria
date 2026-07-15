@@ -1022,3 +1022,75 @@
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 560px) {
+    .level-editor__modal,
+    .level-editor__modal--ability-scores,
+    .level-editor__modal--asi,
+    .level-editor__modal--skills,
+    .level-editor__modal--languages,
+    .level-editor__modal--tools,
+    .level-editor__modal--weapons,
+    .level-editor__modal--mixed-proficiencies,
+    .level-editor__modal--race-options,
+    .level-editor__modal--class-options,
+    .level-editor__modal--race,
+    .level-editor__modal--background,
+    .level-editor__modal--class,
+    .level-editor__modal--subclass,
+    .level-editor__modal--feat {
+        width: calc(100vw - 1rem);
+        max-width: calc(100vw - 1rem);
+        height: calc(100dvh - 1rem);
+        max-height: calc(100dvh - 1rem);
+    }
+
+    .level-editor__modal-content {
+        max-height: 100%;
+    }
+
+    .level-editor__modal-header {
+        align-items: flex-start;
+    }
+
+    .level-editor__close,
+    .level-editor__button,
+    .level-editor__ability-stepper-button,
+    .level-editor__input,
+    .level-editor__select {
+        min-height: 2.75rem;
+    }
+
+    .level-editor__close,
+    .level-editor__ability-stepper-button {
+        min-width: 2.75rem;
+    }
+
+    .level-editor__checkbox,
+    .level-editor__choice-checkbox,
+    .level-editor__class-option-card,
+    .level-editor__race-result,
+    .level-editor__catalog-result {
+        min-height: 2.75rem;
+    }
+
+    .level-editor__race-picker-footer,
+    .level-editor__catalog-picker-footer,
+    .level-editor__choice-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .level-editor__race-picker-footer .level-editor__button,
+    .level-editor__catalog-picker-footer .level-editor__button,
+    .level-editor__choice-actions .level-editor__button {
+        width: 100%;
+    }
+
+    .level-editor__race-detail,
+    .level-editor__catalog-detail,
+    .level-editor__catalog-extra-controls,
+    .level-editor__ability-card {
+        padding: var(--sp-2);
+    }
+}

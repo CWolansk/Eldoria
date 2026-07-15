@@ -2223,6 +2223,7 @@
 
   .player-sheet-page > header h1 {
     font-size: 1.35rem;
+    overflow-wrap: anywhere;
   }
 
   .player-sheet-page,
@@ -2252,7 +2253,17 @@
   }
 
   #TabRowList button {
-    flex: 1 1 6.5rem;
+    flex: 0 0 auto;
+    min-height: 2.75rem;
+    white-space: nowrap;
+  }
+
+  #TabRowList {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
   }
 
   .levelEditor {
@@ -2289,8 +2300,45 @@
 
   .level-editor__button {
     justify-self: start;
-    min-width: 2.5rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
     padding-inline: 0.5rem;
+  }
+
+  .levelEditor summary,
+  .player-sheet-button,
+  .player-sheet-feature-list__summary,
+  .player-sheet-item-card__rules-summary {
+    min-height: 2.75rem;
+  }
+
+  .player-sheet-tab__header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .player-sheet-tab__header .player-sheet-button {
+    width: 100%;
+  }
+
+  .player-sheet-card-grid,
+  .player-sheet-card-grid--gear,
+  .player-sheet-card-grid--compact,
+  .player-sheet-card-grid--feats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .player-sheet-item-row__summary,
+  .player-sheet-feature-list__summary {
+    min-width: 0;
+  }
+
+  .player-sheet-item-row__title-line {
+    align-items: start;
+  }
+
+  .player-sheet-header__xp-input {
+    min-height: 2.75rem;
   }
 
   .player-sheet-skill-row {

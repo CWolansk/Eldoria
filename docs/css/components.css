@@ -2848,6 +2848,10 @@
 }
 
 @media (max-width: 620px) {
+  .site-nav {
+    position: static;
+  }
+
   .site-nav-inner,
   .section-header,
   .card-title-row,
@@ -2857,20 +2861,24 @@
   }
 
   .nav-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     width: 100%;
   }
 
   .nav-link {
-    flex: 1 1 auto;
+    width: 100%;
+    min-height: 2.75rem;
     text-align: center;
   }
 
   .nav-menu {
-    flex: 1 1 auto;
+    width: 100%;
   }
 
   .nav-menu-summary {
     width: 100%;
+    min-height: 2.75rem;
   }
 
   .nav-menu-panel {
@@ -2878,6 +2886,27 @@
     min-width: 100%;
     margin-top: var(--sp-2);
     box-shadow: none;
+  }
+
+  .nav-menu-link {
+    display: flex;
+    min-height: 2.75rem;
+    align-items: center;
+    white-space: normal;
+  }
+
+  .breadcrumbs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    white-space: nowrap;
+  }
+
+  .hero h1,
+  .tool-page h1,
+  .section-header h1 {
+    font-size: clamp(1.75rem, 9vw, 2.5rem);
+    overflow-wrap: anywhere;
   }
 
   .card-grid,
@@ -2892,9 +2921,57 @@
     flex: 1 1 10rem;
   }
 
+  .button,
+  .icon-button,
+  .input,
+  .select,
+  .search-clear,
+  .rules-search-clear,
+  .tab {
+    min-height: 2.75rem;
+  }
+
+  .icon-button,
+  .search-clear,
+  .rules-search-clear {
+    min-width: 2.75rem;
+  }
+
+  .tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
+  }
+
+  .tab {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
   .site-page .container {
     width: min(100% - 1rem, var(--max-page));
     padding-block: var(--sp-5);
+  }
+
+  .hero-panel,
+  .card,
+  .reference-page .region-section,
+  .reference-page .location-card,
+  .rules-filter-sidebar,
+  .dialog-body,
+  .dialog-header,
+  .dialog-footer {
+    padding: var(--sp-3);
+  }
+
+  .reference-page .location-grid,
+  .reference-page .npc-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .reference-page .npc-list {
+    padding: var(--sp-2);
   }
 
   .players-page .topbar,
@@ -2923,6 +3000,58 @@
   .rules-filter-toggle,
   .rules-sort-field {
     width: 100%;
+  }
+
+  .rules-active-row {
+    flex-direction: column;
+  }
+
+  .rules-active-filters {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding-bottom: var(--sp-1);
+  }
+
+  .rules-active-chip {
+    flex: 0 0 auto;
+    min-height: 2.75rem;
+  }
+
+  .rules-filter-option {
+    min-height: 2.75rem;
+    align-items: center;
+    padding-block: var(--sp-2);
+  }
+
+  .rules-filter-option input {
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0;
+  }
+
+  .rules-result-count,
+  .rules-search-empty {
+    padding: var(--sp-3);
+  }
+
+  .rules-card-badges {
+    justify-content: flex-start;
+  }
+
+  .item-card summary,
+  .spell-card summary {
+    min-height: 2.75rem;
+  }
+
+  .data-table-wrap {
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dialog {
+    max-height: calc(100dvh - 1rem);
   }
 
   .character-row {
