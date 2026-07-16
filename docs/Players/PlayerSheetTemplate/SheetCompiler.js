@@ -1382,7 +1382,10 @@ function createSpellcastingBlock({
         preparedCount: preparedCapacity ?? preparedSpells.length,
         selectedPreparedCount: preparedSpells.length,
         spellsKnown: Math.max(wizardSpellbookMinimum, knownCount || knownSpells.length),
+        selectedKnownCount: knownSpells.length,
+        knownLabel: wizardSpellbookMinimum ? "Spellbook" : "Known",
         cantripsKnown: cantripCount || cantrips.length,
+        selectedCantripCount: cantrips.length,
         slotProgression: getClassSpellSlotRow(meta, classLevel)
     };
 }
@@ -1479,6 +1482,12 @@ function addSpellByMode(groups, spell) {
 function compileClassChoiceSpells(dto, abilityScores, proficiencyBonus, characterLevel = MAX_CHARACTER_LEVEL) {
     const activeLevels = getCompiledLevelEntries(dto, characterLevel);
     const classLevelMap = getClassLevelMap(activeLevels);
+    const selectedSpellGroups = new Set(activeLevels
+        .flatMap((level) => toArray(level?.choices))
+        .filter((choice) => choice?.type === "class-option" && (choice.spellGroupChoice || choice.choiceType === "spell-group"))
+        .flatMap((choice) => [choice.value, ...toArray(choice.values).flatMap((value) => [value?.value, value?.name, value?.label])])
+        .map(normalizeSearchText)
+        .filter(Boolean));
     const groups = {
         cantrips: [],
         known: [],
@@ -1499,6 +1508,13 @@ function compileClassChoiceSpells(dto, abilityScores, proficiencyBonus, characte
             ...toArray(level.subclass?.profile?.features?.expanded).flatMap((feature) => toArray(feature?.grants?.spells))
         ].filter((spell) => spell && typeof spell === "object" && (spell.name || spell.label));
         for (const spellGrant of automaticSpellGrants) {
+            if (normalizeSearchText(spellGrant.type) === "choice") {
+                continue;
+            }
+            const spellGroup = normalizeSearchText(spellGrant.group);
+            if (spellGroup && !selectedSpellGroups.has(spellGroup)) {
+                continue;
+            }
             const unlockAtLevel = toNumber(spellGrant.unlockAtLevel, 0);
             if (unlockAtLevel && currentClassLevel < unlockAtLevel) {
                 continue;

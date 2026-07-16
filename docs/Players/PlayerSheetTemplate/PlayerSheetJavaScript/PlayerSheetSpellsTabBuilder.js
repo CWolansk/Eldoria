@@ -123,9 +123,9 @@ function getSpellName(spell, fallback = "Unknown Spell") {
 }
 
 function getSpellSource(spell, record = spell) {
-    return spell?.source
+    return getCatalogSource(record)
+        || spell?.source
         || spell?.catalog?.source
-        || getCatalogSource(record)
         || "";
 }
 
@@ -415,8 +415,12 @@ function getSpellTagTexts(entry, record = {}) {
 
 function getSpellDetailRows(entry, record = {}) {
     const spellcasting = entry.spellcasting || {};
+    const castAtLevel = toNumber(entry.spell?.castAtLevel, 0);
+    const recharge = String(entry.spell?.recharge || "").trim();
     return [
         ["Level", formatSpellLevel(getSpellRecordLevel(record, entry.fallbackLevel))],
+        ["Cast at", castAtLevel > 0 ? formatSpellLevel(castAtLevel) : ""],
+        ["Recharge", recharge ? titleCase(recharge) : ""],
         ["Source", getSpellSource(entry.spell, record)],
         ["School", getSpellSchool(record)],
         ["Casting", formatSpellTime(record)],
@@ -557,7 +561,7 @@ export function createSpellListItem(entry, record = entry.record || entry.spell,
 
     summary.appendChild(identity);
 
-    const wantedRows = options.rows || ["Casting", "Range", "Save", "Attack", "Damage", "Duration"];
+    const wantedRows = options.rows || ["Cast at", "Recharge", "Casting", "Range", "Save", "Attack", "Damage", "Duration"];
     const detailMetrics = getSpellDetailRows(entry, record)
         .filter(([label]) => wantedRows.includes(label))
         .map(([label, value]) => ({ label, value }));
@@ -584,7 +588,7 @@ export function createSpellListItem(entry, record = entry.record || entry.spell,
 }
 
 async function resolveSpellRecord(spell, api, fallbackLevel = 1) {
-    if (spell && typeof spell === "object" && (spell.entries || spell.raw?.entries || spell.level != null)) {
+    if (spell && typeof spell === "object" && getSpellRulesEntry(spell)) {
         return spell;
     }
 
@@ -607,7 +611,9 @@ async function resolveSpellRecord(spell, api, fallbackLevel = 1) {
 
         const name = getSpellName(spell, "");
         if (name) {
-            const byName = await catalog.getByName("spells", name, getSpellSource(spell));
+            const source = getSpellSource(spell);
+            const byName = await catalog.getByName("spells", name, source)
+                || (source ? await catalog.getByName("spells", name) : null);
             if (byName) {
                 return byName;
             }
@@ -1189,9 +1195,15 @@ function createSpellcastingSummaryCard(title, spellcasting = {}) {
         ["Ability", spellcasting.ability ? String(spellcasting.ability).toUpperCase() : ""],
         ["Attack", spellcasting.spellAttackBonus != null ? `${toNumber(spellcasting.spellAttackBonus, 0) >= 0 ? "+" : ""}${toNumber(spellcasting.spellAttackBonus, 0)}` : ""],
         ["Save DC", spellcasting.spellSaveDc],
-        ["Known", spellcasting.spellsKnown],
-        ["Cantrips", spellcasting.cantripsKnown],
-        ["Prepared", spellcasting.preparedFormula || spellcasting.preparedCount]
+        [spellcasting.knownLabel || "Known", toNumber(spellcasting.spellsKnown, 0) > 0
+            ? `${toNumber(spellcasting.selectedKnownCount, 0)} / ${toNumber(spellcasting.spellsKnown, 0)}`
+            : ""],
+        ["Cantrips", toNumber(spellcasting.cantripsKnown, 0) > 0
+            ? `${toNumber(spellcasting.selectedCantripCount, 0)} / ${toNumber(spellcasting.cantripsKnown, 0)}`
+            : ""],
+        ["Prepared", toNumber(spellcasting.preparedCount, 0) > 0
+            ? `${toNumber(spellcasting.selectedPreparedCount, 0)} / ${toNumber(spellcasting.preparedCount, 0)}`
+            : ""]
     ].filter(([, value]) => value != null && String(value).trim());
 
     if (rows.length) {
