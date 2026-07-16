@@ -144,6 +144,7 @@ export function buildItemSearchModal(context = {}) {
     content.appendChild(header);
 
     const picker = createElement("div", "player-sheet-catalog-picker");
+    picker.dataset.mobileView = "results";
     const controls = createElement("div", "player-sheet-catalog-picker__controls");
     const searchInput = document.createElement("input");
     searchInput.className = "player-sheet-input";
@@ -216,6 +217,29 @@ export function buildItemSearchModal(context = {}) {
     let loadingPage = false;
     let searchAbortController = null;
     const itemDetailsById = new Map();
+    let selectedResultButton = null;
+
+    const backButton = document.createElement("button");
+    backButton.type = "button";
+    backButton.className = "player-sheet-button player-sheet-catalog-picker__back";
+    backButton.textContent = "Back to results";
+    backButton.addEventListener("click", () => {
+        picker.dataset.mobileView = "results";
+        selectedResultButton?.focus({ preventScroll: true });
+    });
+
+    function renderSelectedItem(item) {
+        detail.replaceChildren(backButton, createItemCard(item, item, {
+            badge: "Catalog",
+            rows: ["Type", "Rarity", "Damage", "Versatile", "AC", "Value", "Weight", "Attunement"]
+        }));
+
+        if (typeof window !== "undefined" && window.matchMedia?.("(max-width: 800px)").matches) {
+            detail.querySelectorAll(".player-sheet-item-card__rules-details").forEach((rules) => {
+                rules.open = true;
+            });
+        }
+    }
 
     function setStatus(message) {
         status.textContent = message;
@@ -257,9 +281,10 @@ export function buildItemSearchModal(context = {}) {
         return itemDetailsById.get(catalogId);
     }
 
-    async function setSelectedItem(item, button = null) {
+    async function setSelectedItem(item, button = null, options = {}) {
         const token = searchToken;
         selectedItem = item;
+        selectedResultButton = button;
         results.querySelectorAll(".player-sheet-catalog-result").forEach((resultButton) => {
             resultButton.classList.toggle("player-sheet-catalog-result--selected", resultButton === button);
         });
@@ -270,10 +295,11 @@ export function buildItemSearchModal(context = {}) {
             return;
         }
 
-        detail.replaceChildren(createItemCard(item, item, {
-            badge: "Catalog",
-            rows: ["Type", "Rarity", "Damage", "Versatile", "AC", "Value", "Weight", "Attunement"]
-        }));
+        renderSelectedItem(item);
+        if (options.revealDetail !== false) {
+            picker.dataset.mobileView = "detail";
+            detail.scrollTop = 0;
+        }
         addButton.disabled = typeof context.onChange !== "function";
 
         try {
@@ -283,10 +309,10 @@ export function buildItemSearchModal(context = {}) {
             }
 
             selectedItem = fullItem;
-            detail.replaceChildren(createItemCard(fullItem, fullItem, {
-                badge: "Catalog",
-                rows: ["Type", "Rarity", "Damage", "Versatile", "AC", "Value", "Weight", "Attunement"]
-            }));
+            renderSelectedItem(fullItem);
+            if (options.revealDetail !== false) {
+                detail.scrollTop = 0;
+            }
             addButton.disabled = !selectedItem || typeof context.onChange !== "function";
         } catch (error) {
             if (token !== searchToken) {
@@ -318,7 +344,7 @@ export function buildItemSearchModal(context = {}) {
 
         const firstButton = !append ? results.querySelector(".player-sheet-catalog-result") : null;
         if (firstButton && items.length) {
-            setSelectedItem(items[0], firstButton);
+            setSelectedItem(items[0], firstButton, { revealDetail: false });
         }
     }
 

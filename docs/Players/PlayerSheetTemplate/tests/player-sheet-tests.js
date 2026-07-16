@@ -2193,6 +2193,17 @@ const tests = [
     searchButton.click();
     await waitForCondition(() => modal.textContent.includes("1 spell shown"), "spell search should render result");
 
+    const picker = modal.querySelector(".player-sheet-catalog-picker");
+    const resultButton = modal.querySelector(".player-sheet-catalog-result");
+    assertEqual(picker.dataset.mobileView, "results", "spell search should keep mobile users on results after searching");
+    resultButton.click();
+    assertEqual(picker.dataset.mobileView, "detail", "selecting a spell should open its mobile detail view");
+    const backButton = modal.querySelector(".player-sheet-catalog-picker__back");
+    assert(backButton, "spell detail should provide a back-to-results action");
+    backButton.click();
+    assertEqual(picker.dataset.mobileView, "results", "spell detail back action should restore results");
+    resultButton.click();
+
     const listSelect = modal.querySelector(".player-sheet-select");
     listSelect.value = "prepared";
     const addButton = modal.querySelector(".player-sheet-catalog-picker__footer .player-sheet-button");
@@ -2254,6 +2265,15 @@ const tests = [
 
     assert(modal.textContent.includes("Longsword"), "backend search should show first page item names");
     assertEqual(modal.querySelectorAll(".player-sheet-catalog-result").length, 25, "first page result count");
+    const picker = modal.querySelector(".player-sheet-catalog-picker");
+    const firstResult = modal.querySelector(".player-sheet-catalog-result");
+    assertEqual(picker.dataset.mobileView, "results", "item search should keep mobile users on results after searching");
+    firstResult.click();
+    assertEqual(picker.dataset.mobileView, "detail", "selecting an item should open its mobile detail view");
+    const backButton = modal.querySelector(".player-sheet-catalog-picker__back");
+    assert(backButton, "item detail should provide a back-to-results action");
+    backButton.click();
+    assertEqual(picker.dataset.mobileView, "results", "item detail back action should restore results");
     const loadMore = modal.querySelector("[data-item-search-load-more='true']");
     assert(loadMore && !loadMore.hidden, "load more should be visible when backend reports more results");
     loadMore.click();
