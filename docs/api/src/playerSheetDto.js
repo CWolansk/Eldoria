@@ -264,7 +264,8 @@ function normalizeInventory(value = {}) {
       quantity: toNumber(item?.quantity, 1),
       equipped: Boolean(item?.equipped),
       attuned: Boolean(item?.attuned),
-      catalog: normalizeIdentityRef(item?.catalog, "items")
+      catalog: normalizeIdentityRef(item?.catalog, "items"),
+      containedSpell: normalizeIdentityRef(item?.containedSpell || item?.spell, "spells")
     }))
   };
 }

@@ -10,7 +10,10 @@ import {
   BuildPlayerSheetFeatsTab,
   hydrateFeatureRules
 } from "../PlayerSheetJavaScript/PlayerSheetFeatsTabBuilder.js";
-import { buildItemSearchModal } from "../PlayerSheetJavaScript/PlayerSheetGearTabBuilder.js";
+import {
+  BuildPlayerSheetGearTab,
+  buildItemSearchModal
+} from "../PlayerSheetJavaScript/PlayerSheetGearTabBuilder.js";
 import { BuildPlayerSheetHeader } from "../PlayerSheetJavaScript/PlayerSheetHeaderBuilder.js";
 import { BuildPlayerSheetSidebar } from "../PlayerSheetJavaScript/PlayerSheetSidebarBuilder.js";
 import {
@@ -2789,6 +2792,77 @@ const tests = [
     assertEqual(calls.length, 1, "legacy homebrew item should fetch its full catalog record");
     assertEqual(calls[0].kind, "items", "homebrew detail catalog kind");
     assertEqual(calls[0].id, homebrewId, "homebrew detail should preserve the legacy catalog ID");
+  }],
+  ["gear supports removal and API-backed spell scroll assignment", async () => {
+    const dto = createDto();
+    dto.inventory.items = [{
+      name: "Spell Scroll (3rd Level)",
+      source: "DMG",
+      quantity: 1,
+      equipped: false,
+      attuned: false,
+      catalog: {
+        id: "item:spell-scroll-3rd-level:dmg",
+        name: "Spell Scroll (3rd Level)",
+        source: "DMG",
+        kind: "items"
+      },
+      snapshot: {
+        id: "item:spell-scroll-3rd-level:dmg",
+        name: "Spell Scroll (3rd Level)",
+        source: "DMG",
+        type: "scroll"
+      }
+    }];
+    const compiled = SheetCompiler.compile(dto);
+    const api = {
+      async searchCatalog(kind, query) {
+        assertEqual(kind, "spells", "scroll chooser should search the spell API catalog");
+        return query.toLowerCase().includes("fire") ? {
+          items: [{
+            id: "spell:fireball:phb",
+            name: "Fireball",
+            source: "PHB",
+            level: 3,
+            school: "Evocation"
+          }]
+        } : { items: [] };
+      },
+      async getCatalogEntity() {
+        return null;
+      }
+    };
+    let patchedDto = null;
+    fixture.innerHTML = `<div id="TabContent"></div>`;
+    await BuildPlayerSheetGearTab(compiled, {
+      api,
+      dto,
+      async onChange(nextDto) {
+        patchedDto = nextDto;
+      }
+    });
+
+    const tab = fixture.querySelector("#TabContent");
+    const setSpell = tab.querySelector("[data-scroll-spell='0']");
+    assert(setSpell, "spell scroll should have a set-spell action");
+    setSpell.click();
+    const scrollModal = tab.querySelector(".player-sheet__modal--spell-scroll");
+    const searchInput = scrollModal.querySelector("input[type='search']");
+    searchInput.value = "fire";
+    scrollModal.querySelector(".player-sheet-catalog-picker__controls .player-sheet-button").click();
+    await waitForCondition(() => scrollModal.textContent.includes("Fireball"), "spell API result should render");
+    scrollModal.querySelector(".player-sheet-catalog-result").click();
+    scrollModal.querySelector(".player-sheet-catalog-picker__footer .player-sheet-button--primary").click();
+    await waitForCondition(() => patchedDto?.inventory?.items?.[0]?.containedSpell?.name === "Fireball", "scroll spell should patch inventory DTO");
+    assertEqual(patchedDto.inventory.items[0].containedSpell.id, "spell:fireball:phb", "scroll should store canonical spell ID");
+    assertEqual(PlayerSheetDtoHelper.toSaveDto(patchedDto).inventory.items[0].containedSpell.name, "Fireball", "scroll spell should survive strict save DTO conversion");
+
+    patchedDto = null;
+    const remove = tab.querySelector("[data-gear-remove='0']");
+    assert(remove, "gear row should have a remove action");
+    remove.click();
+    await waitForCondition(() => patchedDto != null, "remove gear should patch DTO");
+    assertEqual(patchedDto.inventory.items.length, 0, "remove gear should delete the inventory entry");
   }]
 ];
 

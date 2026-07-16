@@ -436,7 +436,7 @@ async function resolveInventoryCatalogRecord(item, api) {
     const identity = item?.catalog;
     const catalogId = identity?.options?.catalogId || identity?.catalogId || identity?.id || "";
     try {
-        if (catalogId && String(catalogId).includes(":")) {
+        if (catalogId) {
             const catalogRecord = await catalog.getById("items", catalogId);
             if (catalogRecord) {
                 return catalogRecord;

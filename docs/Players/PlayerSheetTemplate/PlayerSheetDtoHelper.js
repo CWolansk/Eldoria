@@ -428,6 +428,7 @@ function normalizeInventory(value = {}) {
             equipped: Boolean(item?.equipped),
             attuned: Boolean(item?.attuned),
             catalog: normalizeIdentityRef(item?.catalog, "items"),
+            containedSpell: normalizeIdentityRef(item?.containedSpell || item?.spell, "spells"),
             snapshot: isPlainObject(item?.snapshot) ? deepClone(item.snapshot) : null
         }))
     };
@@ -534,7 +535,8 @@ export function toSavePlayerSheetDto(input = {}, options = {}) {
                 quantity: toNumber(item?.quantity, 1),
                 equipped: Boolean(item?.equipped),
                 attuned: Boolean(item?.attuned),
-                catalog: normalizeSaveIdentityRef(item?.catalog, "items")
+                catalog: normalizeSaveIdentityRef(item?.catalog, "items"),
+                containedSpell: normalizeSaveIdentityRef(item?.containedSpell, "spells")
             }))
         },
         spells: stripForbiddenRuntimeFields(normalizeSpells(source.spells)),
