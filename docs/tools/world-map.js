@@ -117,7 +117,11 @@
       var y = marker.position[0] * height;
       var x = marker.position[1] * width;
 
-      var leafletMarker = L.marker([y, x]).addTo(map);
+      var leafletMarker = L.marker([y, x], {
+        alt: marker.name,
+        keyboard: true,
+        title: marker.name
+      }).addTo(map);
       var container = document.createElement("div");
 
       var heading = document.createElement("h3");
@@ -142,6 +146,15 @@
 // app/features/world-map/create-leaflet-map.js
 (function (global) {
   var features = global.EldoriaFeatureSource = global.EldoriaFeatureSource || {};
+
+  function renderMapStatus(mapElement, message, kind) {
+    var status = document.createElement("div");
+    status.className = "map-status map-status--" + kind;
+    status.setAttribute("role", kind === "error" ? "alert" : "status");
+    status.textContent = message;
+    mapElement.appendChild(status);
+    return status;
+  }
 
   function updateCoordinateOutput(outputId, latitude, longitude, height, width) {
     var output = document.getElementById(outputId);
@@ -177,6 +190,9 @@
       maxZoom: 2
     });
 
+    var mapElement = document.getElementById(config.rootId);
+    var loadingStatus = renderMapStatus(mapElement, "Loading world map…", "loading");
+
     var image = new Image();
     image.src = config.imagePath;
     image.onload = function () {
@@ -188,9 +204,15 @@
       map.fitBounds(bounds);
       features.renderWorldMapMarkers(map, config.markers, height, width);
       bindCoordinateDisplay(map, config, height, width);
+      loadingStatus.remove();
     };
 
-  document.getElementById('map').style.backgroundColor = "rgb(17, 22, 27)";
+    image.onerror = function () {
+      loadingStatus.remove();
+      renderMapStatus(mapElement, "The world map image could not be loaded. Please refresh and try again.", "error");
+    };
+
+    mapElement.style.backgroundColor = "rgb(17, 22, 27)";
 
     return true;
   };

@@ -14,18 +14,19 @@
     <link rel="stylesheet" href="../css/components.css">
     <link rel="stylesheet" href="../css/utilities.css">
 </head>
-<body classs="site-page">
-    <div id="site-nav" data-base-path="../" data-current="tools/world-map "></div>
 <body class="map-page">
-    <div id="map" data-world-map-root data-map-config-id="world-map-config" data-coords-output-id="coords-output"></div>
-    <div id="coordinate-display">
-        <h4>Coordinates</h4>
-        <div class="coords" id="coords-output">Hover over map</div>
-    </div>
+    <div id="site-nav" data-base-path="../" data-current="tools/world-map"></div>
+    <main class="map-stage" aria-label="Interactive map of Eldoria">
+        <div id="map" data-world-map-root data-map-config-id="world-map-config" data-coords-output-id="coords-output"></div>
+        <div id="coordinate-display">
+            <h4>Coordinates</h4>
+            <div class="coords" id="coords-output">Hover over map</div>
+        </div>
+    </main>
 
     <script id="world-map-config" type="application/json">
         {
-            "imagePath": "../assets/images/eldoria-map.jpg",
+            "imagePath": "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/docs/Assets/images/eldoria-map.jpg",
             "markers": [
                 {
                     "name": "Highreach",
@@ -294,7 +295,6 @@
             ]
         }
     </script>
-</body>
 </body>
 
 </html>
