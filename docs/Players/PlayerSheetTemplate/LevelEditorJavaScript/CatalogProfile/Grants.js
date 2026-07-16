@@ -77,12 +77,20 @@ export function getAbilityProfile(catalogRecord) {
 }
 
 function getSpellBlocks(catalogRecord) {
-    // Gather structured spell grants from every normalized field the catalog provides.
-    return [
-        ...toArray(catalogRecord?.grants?.spells),
-        ...toArray(catalogRecord?.additionalSpells),
-        ...toArray(catalogRecord?.raw?.additionalSpells)
-    ].filter(Boolean).map(deepClone);
+    // Prefer the normalized catalog grants. Raw additionalSpells contains named
+    // group containers (for example, Circle of the Land terrain names) that are
+    // choice definitions, not spells, and must not be compiled as grants too.
+    const normalized = toArray(catalogRecord?.grants?.spells).filter(Boolean);
+    if (normalized.length) {
+        return normalized.map(deepClone);
+    }
+
+    const additional = toArray(catalogRecord?.additionalSpells).filter(Boolean);
+    if (additional.length) {
+        return additional.map(deepClone);
+    }
+
+    return toArray(catalogRecord?.raw?.additionalSpells).filter(Boolean).map(deepClone);
 }
 
 function hasSpellAbilityChoice(spellGrantValue) {

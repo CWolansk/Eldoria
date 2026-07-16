@@ -38,6 +38,7 @@ import {
 import {
   getDefinedChoices
 } from "../LevelEditorJavaScript/CatalogProfile/Choices.js";
+import { getSpellProfile } from "../LevelEditorJavaScript/CatalogProfile/Grants.js";
 import { getLinkedFeatureRefs } from "../LevelEditorJavaScript/Catalog/LevelEditorCatalogChoiceResolver.js";
 import { buildRaceProfile } from "../LevelEditorJavaScript/Race/LevelEditorRaceProfile.js";
 import {
@@ -1269,6 +1270,14 @@ function createFakeApi() {
         level: 2,
         school: { code: "C", name: "conjuration" },
         entries: ["Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space that you can see."]
+      },
+      "spell:create-or-destroy-water:phb": {
+        id: "spell:create-or-destroy-water:phb",
+        name: "Create or Destroy Water",
+        source: "PHB",
+        level: 1,
+        school: { code: "T", name: "transmutation" },
+        entries: ["You either create or destroy water."]
       }
     }
   };
@@ -1285,10 +1294,13 @@ function createFakeApi() {
       }
       return record;
     },
-    async searchCatalogFull(kind, query) {
-      calls.push({ kind, query });
+    async searchCatalogFull(kind, query, options = {}) {
+      calls.push({ kind, query, options });
       return {
-        items: Object.values(records[kind] || {}).filter((record) => record.name === query)
+        items: Object.values(records[kind] || {}).filter((record) => (
+          record.name === query
+          && (!options.source || record.source === options.source)
+        ))
       };
     },
     async listCatalogFull(kind) {
@@ -1877,6 +1889,32 @@ const tests = [
     assertIncludes(compiled.classChoiceSpells.known.map((spell) => spell.name), "Fireball", "compiled class choice known spells");
     CatalogCache.clearShared();
   }],
+  ["College of Lore level five does not compile Additional Magical Secrets", () => {
+    const dto = createLoreBardDto();
+    dto.identity.experience = 6500;
+    dto.levels = dto.levels.slice(0, 5);
+    dto.levels[2].subclass.profile = {
+      features: {
+        additionalSpells: [{
+          type: "choice",
+          mode: "known",
+          choose: "level=0;1;2;3",
+          count: 2,
+          unlockAtLevel: 6,
+          group: "Additional Magical Secrets"
+        }]
+      }
+    };
+
+    const compiled = SheetCompiler.compile(dto);
+    const names = [
+      ...compiled.classChoiceSpells.cantrips,
+      ...compiled.classChoiceSpells.known,
+      ...compiled.classChoiceSpells.alwaysPrepared,
+      ...compiled.classChoiceSpells.innate
+    ].map((spell) => spell.name);
+    assert(!names.includes("Additional Magical Secrets"), "level five Lore Bard must not render the level six choice as a spell");
+  }],
   ["class options surface Circle of the Land terrain and bonus cantrip choices", async () => {
     CatalogCache.clearShared();
     const dto = createLandDruidDto();
@@ -1944,6 +1982,89 @@ const tests = [
     assert(tabText.includes("Druidcraft"), "spells tab should render the selected Land cantrip");
     assert(tabText.includes("Hold Person"), "spells tab should render selected Land always-prepared spells");
     assert(tabText.includes("Class Feature"), "spells tab should label class feature spells");
+    CatalogCache.clearShared();
+  }],
+  ["normalized spell grants exclude raw Circle of the Land group labels", () => {
+    const profile = getSpellProfile({
+      grants: {
+        spells: [
+          { type: "choice", group: "Arctic", choose: "level=0|class=Druid", count: 1 },
+          { type: "spell", group: "Arctic", name: "Hold Person", level: 2 }
+        ]
+      },
+      raw: {
+        additionalSpells: [
+          { name: "Arctic", known: { 1: ["level=0|class=Druid"] } },
+          { name: "Coast", known: { 1: ["level=0|class=Druid"] } }
+        ]
+      }
+    });
+
+    const names = [...profile.granted, ...profile.choices].map((grant) => grant.name).filter(Boolean);
+    assertIncludes(names, "Hold Person", "normalized spell grant should remain available");
+    assert(!names.includes("Arctic"), "raw Arctic group label must not become a spell");
+    assert(!names.includes("Coast"), "raw Coast group label must not become a spell");
+  }],
+  ["unselected Circle of the Land terrain grants no terrain spells", () => {
+    const dto = createLandDruidDto();
+    dto.levels[1].subclass.profile = {
+      features: {
+        additionalSpells: [
+          { type: "choice", mode: "known", group: "Arctic", choose: "level=0|class=Druid", count: 1 },
+          { type: "choice", mode: "known", group: "Coast", choose: "level=0|class=Druid", count: 1 },
+          { type: "spell", mode: "prepared", group: "Arctic", name: "Hold Person", level: 2, unlockAtLevel: 3 },
+          { type: "spell", mode: "prepared", group: "Coast", name: "Mirror Image", level: 2, unlockAtLevel: 3 }
+        ]
+      }
+    };
+
+    const compiled = SheetCompiler.compile(dto);
+    const renderedNames = [
+      ...compiled.classChoiceSpells.cantrips,
+      ...compiled.classChoiceSpells.known,
+      ...compiled.classChoiceSpells.alwaysPrepared,
+      ...compiled.classChoiceSpells.innate
+    ].map((spell) => spell.name);
+    assertEqual(renderedNames.length, 0, "no Land choice should compile no grouped spell grants");
+  }],
+  ["spells tab hydrates shallow spell grants before rendering rules", async () => {
+    CatalogCache.clearShared();
+    const dto = createRangerDto();
+    dto.spells.known = ["Hunter's Mark"];
+    const compiled = SheetCompiler.compile(dto);
+    compiled.classChoiceSpells.known = [{
+      id: "spell:hunters-mark:phb",
+      name: "Hunter's Mark",
+      source: "PHB",
+      level: 1
+    }];
+
+    fixture.innerHTML = `<div id="TabContent"></div>`;
+    await BuildPlayerSheetSpellsTab(compiled, { api: createFakeApi(), dto });
+    const text = fixture.querySelector("#TabContent").textContent;
+    assert(text.includes("mystically mark it as your quarry"), "shallow grant should hydrate its catalog description");
+    CatalogCache.clearShared();
+  }],
+  ["racial spell grants show canonical level plus cast level and recharge", async () => {
+    CatalogCache.clearShared();
+    const dto = createRangerDto();
+    const compiled = SheetCompiler.compile(dto);
+    compiled.racialSpells.alwaysPrepared = [{
+      id: "spell:create-or-destroy-water:phb",
+      name: "Create or Destroy Water",
+      source: "EEPC",
+      level: 2,
+      castAtLevel: 2,
+      recharge: "long rest"
+    }];
+
+    fixture.innerHTML = `<div id="TabContent"></div>`;
+    await BuildPlayerSheetSpellsTab(compiled, { api: createFakeApi(), dto });
+    const text = fixture.querySelector("#TabContent").textContent;
+    assert(text.includes("PHB"), "resolved catalog source should replace the grant source");
+    assert(text.includes("Cast at:2nd level"), "racial spell should show its casting level");
+    assert(text.includes("Recharge:Long Rest"), "racial spell should show its recharge cadence");
+    assert(text.includes("create or destroy water"), "racial spell should show canonical rules");
     CatalogCache.clearShared();
   }],
   ["feats tab renders mandatory monk features and hides unchosen optional features", async () => {
@@ -2229,6 +2350,7 @@ const tests = [
     assertEqual(spellcasting.spellAttackBonus, 5, "ranger spell attack bonus");
     assertEqual(spellcasting.spellSaveDc, 13, "ranger spell save DC");
     assertEqual(spellcasting.spellsKnown, 4, "level 5 ranger spells known");
+    assertEqual(spellcasting.selectedKnownCount, 0, "ranger should track recorded spells separately from capacity");
     assertEqual(compiled.spellSlots.byLevel["1"].max, 4, "level 5 ranger 1st-level slots");
     assertEqual(compiled.spellSlots.byLevel["2"].max, 2, "level 5 ranger 2nd-level slots");
   }],
@@ -2273,6 +2395,7 @@ const tests = [
     assert(text.includes("2 / 2"), "2nd-level slot availability should render");
     assert(text.includes("Sacred Flame"), "cantrip should render");
     assert(text.includes("Hunter's Mark"), "known spell should render");
+    assert(text.includes("Known1 / 4"), "summary should distinguish selected Ranger spells from capacity");
     assert(text.includes("DEX DC 13"), "saving throw and save DC should render in compact metrics");
     assert(text.includes("2d8 radiant damage"), "scaled cantrip damage should render in compact metrics");
     assert(tab.querySelector(".player-sheet-item-card__rules-details"), "long spell rules should be expandable");
