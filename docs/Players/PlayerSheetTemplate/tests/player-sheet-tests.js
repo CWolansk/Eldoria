@@ -1551,6 +1551,45 @@ const tests = [
     assertEqual(shielded.speed.value, 30, "shield should block monk unarmored movement");
     assert(!shielded.speed.modifiers.some((modifier) => modifier.label === "Unarmored Movement"), "shielded monk should not record movement bonus");
   }],
+  ["conditions apply deterministic rules and expose reminders", () => {
+    const dto = createDto();
+    dto.combatState.currentHp = 12;
+    dto.combatState.conditions = ["Restrained", "Petrified", "Poisoned"];
+    dto.combatState.exhaustion = 4;
+    const compiled = SheetCompiler.compile(dto);
+
+    assertEqual(compiled.speed.value, 0, "restrained or petrified should set walking speed to zero");
+    assertEqual(compiled.hp.base, 12, "condition processing should retain base maximum HP");
+    assertEqual(compiled.hp.max, 6, "exhaustion level four should halve maximum HP");
+    assertEqual(compiled.hp.current, 6, "current HP display should clamp to the exhausted maximum");
+    assertEqual(compiled.conditionEffects.actions.blocked, true, "petrified should block actions");
+    assertEqual(compiled.conditionEffects.rolls.attacks.mode, "disadvantage", "restrained and exhaustion should impose attack disadvantage");
+    assertEqual(compiled.abilities.str.savingThrow.autoFail, true, "petrified should automatically fail Strength saves");
+    assertEqual(compiled.abilities.dex.savingThrow.autoFail, true, "petrified should automatically fail Dexterity saves");
+    assertEqual(compiled.skills.athletics.rollMode, "disadvantage", "poisoned and exhaustion should impose ability-check disadvantage");
+    assert(compiled.defenses.damageResistances.includes("all damage (petrified)"), "petrified should add resistance to all damage");
+    assert(compiled.conditionEffects.active.some((rule) => rule.name === "Restrained" && rule.rules.length), "compiled conditions should include readable rules");
+
+    const immuneDto = createDto();
+    immuneDto.combatState.conditions = ["Poisoned"];
+    const immune = SheetCompiler.compile(immuneDto);
+    assertEqual(immune.conditionEffects.active.length, 0, "condition immunity should suppress the active effect");
+    assertEqual(immune.conditionEffects.suppressed[0].suppressedReason, "Immune to Poisoned", "suppressed condition should explain the immunity");
+    assertEqual(immune.conditionEffects.rolls.attacks.mode, "normal", "suppressed poisoned condition should not change attack rolls");
+  }],
+  ["condition rules render on the player sheet header", () => {
+    fixture.innerHTML = `<div id="GlobalCharacterSheetInformationHeader"><div class="Conditions"></div><div class="Exhaustion"></div><div class="Speed"></div><div class="STRSave"></div><div class="DEXSave"></div></div>`;
+    const dto = createDto();
+    dto.combatState.conditions = ["Stunned"];
+    const compiled = SheetCompiler.compile(dto);
+    BuildPlayerSheetHeader(compiled);
+    const panel = fixture.querySelector("#player-sheet-condition-effects");
+    assert(panel, "active condition rules panel should render");
+    assert(panel.textContent.includes("Stunned"), "condition panel should name the active condition");
+    assert(panel.textContent.includes("Automatically fails Strength and Dexterity saving throws"), "condition panel should include readable rule text");
+    assert(fixture.querySelector(".STRSave").textContent.includes("AUTO FAIL"), "header should mark automatic save failures");
+    assert(fixture.querySelector(".Speed").textContent.includes("0 ft"), "header should show condition-adjusted speed");
+  }],
   ["compiler surfaces class resource progression tables", () => {
     const monk = SheetCompiler.compile(createMonkLevelFiveDto()).classResources
       .find((resource) => resource.className === "Monk");

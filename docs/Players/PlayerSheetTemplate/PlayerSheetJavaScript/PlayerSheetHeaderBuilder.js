@@ -90,6 +90,75 @@ function renderDefenseChips(headerHTML, playerSheetObject = {}) {
     element.replaceChildren(title, chipList);
 }
 
+function createConditionRuleCard(rule, tone = "") {
+    const details = document.createElement("details");
+    details.className = ["player-sheet-condition-rule", tone ? `player-sheet-condition-rule--${tone}` : ""]
+        .filter(Boolean).join(" ");
+    const summary = document.createElement("summary");
+    const name = document.createElement("strong");
+    name.textContent = rule.name;
+    const description = document.createElement("span");
+    description.textContent = rule.suppressedReason || rule.summary || "";
+    summary.append(name, description);
+    details.appendChild(summary);
+    const list = document.createElement("ul");
+    for (const text of rule.rules || []) {
+        const item = document.createElement("li");
+        item.textContent = text;
+        list.appendChild(item);
+    }
+    details.appendChild(list);
+    return details;
+}
+
+function getAutomaticEffectLabels(effects = {}) {
+    const labels = [];
+    if (effects.actions?.dead) labels.push("Dead at exhaustion 6");
+    else if (effects.actions?.blocked) labels.push("Actions and reactions unavailable");
+    if (effects.actions?.concentrationEnds) labels.push("Concentration ends");
+    if (effects.movement?.zero) labels.push("All movement speeds set to 0");
+    else if (effects.movement?.multiplier === 0.5) labels.push("All movement speeds halved");
+    if (effects.hitPoints?.maxMultiplier === 0.5) labels.push("Maximum HP halved");
+    if (effects.rolls?.attacks?.mode !== "normal") labels.push(`Attack rolls: ${effects.rolls.attacks.mode}`);
+    if (effects.rolls?.abilityChecks?.mode !== "normal") labels.push(`Ability checks: ${effects.rolls.abilityChecks.mode}`);
+    if (effects.rolls?.savingThrows?.mode !== "normal") labels.push(`Saving throws: ${effects.rolls.savingThrows.mode}`);
+    if (effects.rolls?.savingThrows?.autoFail?.length) labels.push("STR and DEX saves automatically fail");
+    if (effects.rolls?.incomingAttacks?.mode !== "normal") labels.push(`Incoming attacks: ${effects.rolls.incomingAttacks.mode}`);
+    if (effects.defenses?.resistanceAll) labels.push("Resistance to all damage");
+    return labels;
+}
+
+function renderConditionEffects(headerHTML, playerSheetObject = {}) {
+    const existing = document.querySelector("#player-sheet-condition-effects");
+    existing?.remove();
+    const effects = playerSheetObject.conditionEffects || {};
+    const rules = [
+        ...(effects.active || []),
+        ...(effects.exhaustion ? [effects.exhaustion] : []),
+        ...(effects.suppressed || [])
+    ];
+    if (!rules.length) return;
+
+    const panel = document.createElement("section");
+    panel.id = "player-sheet-condition-effects";
+    panel.className = "player-sheet-condition-effects";
+    const heading = document.createElement("div");
+    heading.className = "player-sheet-condition-effects__heading";
+    const title = document.createElement("h3");
+    title.textContent = "Active condition rules";
+    const automatic = document.createElement("p");
+    automatic.textContent = getAutomaticEffectLabels(effects).join(" · ") || "Rules reminder only; no deterministic stat change.";
+    heading.append(title, automatic);
+    panel.appendChild(heading);
+    const grid = document.createElement("div");
+    grid.className = "player-sheet-condition-effects__grid";
+    for (const rule of effects.active || []) grid.appendChild(createConditionRuleCard(rule));
+    if (effects.exhaustion) grid.appendChild(createConditionRuleCard(effects.exhaustion, "exhaustion"));
+    for (const rule of effects.suppressed || []) grid.appendChild(createConditionRuleCard(rule, "suppressed"));
+    panel.appendChild(grid);
+    headerHTML.insertAdjacentElement("afterend", panel);
+}
+
 function renderPortrait(playerSheetObject = {}) {
     const containerRoot = document.querySelector("#GlobalCharacterSheetPortrait");
 
@@ -239,9 +308,12 @@ export function BuildPlayerSheetHeader(playerSheetObject, options = {}) {
         const modifier = getAbilityModifier(score);
         const proficient = GetJsonPathValues(playerSheetObject, "abilities." + ability.key + ".savingThrow.proficient") === true;
         const saveBonus = modifier + (proficient ? proficiencyBonus : 0);
+        const autoFail = GetJsonPathValues(playerSheetObject, "abilities." + ability.key + ".savingThrow.autoFail") === true;
+        const rollMode = GetJsonPathValues(playerSheetObject, "abilities." + ability.key + ".savingThrow.rollMode");
+        const saveEffect = autoFail ? "AUTO FAIL" : rollMode && rollMode !== "normal" ? String(rollMode).toUpperCase() : "";
 
         setHeaderText(headerHTML, headerClasses.scoreClass, ability.label + " : " + score + " (" + formatModifier(modifier) + ")");
-        setHeaderText(headerHTML, headerClasses.saveClass, ability.label + " Save : " + formatModifier(saveBonus));
+        setHeaderText(headerHTML, headerClasses.saveClass, ability.label + " Save : " + formatModifier(saveBonus) + (saveEffect ? ` (${saveEffect})` : ""));
     }
 
     setHeaderText(headerHTML, "AC", "AC : " + (GetJsonPathValues(playerSheetObject, "ac.value") || ""));
@@ -253,4 +325,5 @@ export function BuildPlayerSheetHeader(playerSheetObject, options = {}) {
     setHeaderText(headerHTML, "Conditions", "Conditions : " + formatList(playerSheetObject.notes?.conditions));
     setHeaderText(headerHTML, "Exhaustion", "Exhaustion : " + (GetJsonPathValues(playerSheetObject, "notes.exhaustion") || 0));
     renderDefenseChips(headerHTML, playerSheetObject);
+    renderConditionEffects(headerHTML, playerSheetObject);
 }

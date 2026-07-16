@@ -1,4 +1,5 @@
 import { EldoriaApiClient } from "../../api/apiClient/index.js";
+import { compileConditionEffects } from "../../Players/PlayerSheetTemplate/ConditionRules.js";
 
 const state = { api: null, characters: [], grantCharacterId: "", grantItems: new Map(), editorItems: new Map() };
 const elements = {};
@@ -76,6 +77,22 @@ function conditionMarkup(character) {
   return character.conditions.map((condition) => `<span class="dm-condition">${escapeHtml(condition)}<button type="button" aria-label="Remove ${escapeHtml(condition)}" data-remove-condition="${escapeHtml(condition)}">×</button></span>`).join("");
 }
 
+function conditionRuleMarkup(rule, tone = "") {
+  return `<details class="dm-condition-rule${tone ? ` dm-condition-rule--${tone}` : ""}"><summary><strong>${escapeHtml(rule.name)}</strong><span>${escapeHtml(rule.suppressedReason || rule.summary || "")}</span></summary><ul>${(rule.rules || []).map((text) => `<li>${escapeHtml(text)}</li>`).join("")}</ul></details>`;
+}
+
+function conditionEffectsMarkup(character) {
+  const effects = compileConditionEffects(character.conditions, character.exhaustion, {
+    conditionImmunities: character.defenses?.conditionImmunities || []
+  });
+  const rules = [
+    ...(effects.active || []).map((rule) => conditionRuleMarkup(rule)),
+    ...(effects.exhaustion ? [conditionRuleMarkup(effects.exhaustion, "exhaustion")] : []),
+    ...(effects.suppressed || []).map((rule) => conditionRuleMarkup(rule, "suppressed"))
+  ];
+  return rules.length ? `<div class="dm-condition-rules"><p>Rules and automatic sheet effects</p>${rules.join("")}</div>` : "";
+}
+
 function characterCard(character) {
   const classes = character.classes.length ? character.classes.join(" / ") : "Class not set";
   const portrait = character.portraitUrl ? `<img class="dm-character-card__portrait" src="${escapeHtml(character.portraitUrl)}" alt="">` : '<div class="dm-character-card__portrait"></div>';
@@ -84,6 +101,7 @@ function characterCard(character) {
     <div class="dm-metrics"><div class="dm-metric"><strong>${character.ac}</strong><span>AC</span></div><div class="dm-metric"><strong>${character.hp.current}/${character.hp.max}</strong><span>HP</span></div><div class="dm-metric"><strong>${character.hp.temp}</strong><span>Temp HP</span></div><div class="dm-metric"><strong>${character.deathSaves.successes}/${character.deathSaves.failures}</strong><span>Death S/F</span></div></div>
     <div class="dm-hp-bar" style="--hp-percent:${hpPercent(character)}%"><span></span></div>
     <div class="dm-condition-row">${conditionMarkup(character)}</div>
+    ${conditionEffectsMarkup(character)}
     <div class="dm-quick-actions"><input class="input" type="number" min="1" value="1" data-action-amount aria-label="HP amount"><button class="button button-danger" type="button" data-dm-action="damage">Damage</button><button class="button" type="button" data-dm-action="heal">Heal</button><button class="button button-secondary" type="button" data-dm-action="temp-hp">Temp HP</button></div>
     <div class="dm-secondary-actions"><input class="input" data-condition-select list="standard-condition-options" placeholder="Add condition…" aria-label="Condition"><button class="button button-secondary" type="button" data-dm-action="add-condition">Apply</button><button class="button button-secondary" type="button" data-open-give-item>Give item</button></div>
     <details><summary>More controls</summary><div class="dm-more-controls"><label>Exhaustion<select class="select" data-exhaustion>${[0,1,2,3,4,5,6].map((value) => `<option${value === character.exhaustion ? " selected" : ""}>${value}</option>`).join("")}</select></label><label>Death successes<input class="input" data-death-successes type="number" min="0" max="3" value="${character.deathSaves.successes}"></label><label>Death failures<input class="input" data-death-failures type="number" min="0" max="3" value="${character.deathSaves.failures}"></label><button class="button button-secondary" type="button" data-dm-action="set-death-saves">Save death saves</button></div></details>

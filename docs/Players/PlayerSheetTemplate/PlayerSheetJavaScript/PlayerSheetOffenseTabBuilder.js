@@ -59,6 +59,7 @@ function getDamageOptions(attack, record) {
 
 function getActionMetrics(action = {}) {
     return [
+        action.unavailable ? ["Condition", "Unavailable"] : action.rollMode && action.rollMode !== "normal" ? ["Roll", action.rollMode] : null,
         action.attackBonus != null ? ["Hit", `${action.attackBonus >= 0 ? "+" : ""}${action.attackBonus}`] : null,
         action.saveDc != null ? ["Save", `${String(action.saveAbility || "").toUpperCase()} DC ${action.saveDc}`] : null,
         action.damage ? ["Damage", formatDamageOption(action.damage, action.damageType)] : null,
@@ -81,6 +82,11 @@ function createActionRow(action = {}) {
 
 function getAttackMetrics(attack, record) {
     const metrics = [];
+    if (attack?.unavailable) {
+        metrics.push({ label: "Condition", value: "Unavailable" });
+    } else if (attack?.rollMode && attack.rollMode !== "normal") {
+        metrics.push({ label: "Roll", value: attack.rollMode });
+    }
     if (attack?.attackBonus != null) {
         metrics.push({
             label: "Hit",
@@ -101,6 +107,14 @@ function getAttackMetrics(attack, record) {
 
 export async function BuildPlayerSheetOffenseTab(playerSheetObject, context = {}) {
     const shell = createTabShell("Offense");
+    if (playerSheetObject?.conditionEffects?.actions?.blocked) {
+        const warning = document.createElement("p");
+        warning.className = "player-sheet-condition-action-warning";
+        warning.textContent = playerSheetObject.conditionEffects.actions.dead
+            ? "Actions are unavailable: exhaustion level 6 is fatal."
+            : "Actions and reactions are unavailable while this condition remains active.";
+        shell.appendChild(warning);
+    }
     const list = createItemList();
     const resolvedItems = await resolveInventoryItems(playerSheetObject, context.api);
     const offensiveItems = resolvedItems.filter((entry) => entry.offensive);

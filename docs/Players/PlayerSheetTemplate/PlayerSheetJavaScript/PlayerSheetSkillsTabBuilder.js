@@ -112,6 +112,7 @@ function appendSkillCards(shell, playerSheetObject) {
         card.appendChild(heading);
         card.appendChild(createDefinitionList([
             ["Bonus", formatModifier(bonus)],
+            ...(detail.rollMode && detail.rollMode !== "normal" ? [["Roll", detail.rollMode]] : []),
             ["Ability", ABILITY_LABELS[skill.ability]],
             ["Training", detail.expertise ? "Expertise" : "Proficient"],
             ["Source", detail.source || "Character"]
@@ -130,7 +131,13 @@ function appendSkillCards(shell, playerSheetObject) {
 
 function appendSavingThrows(shell, playerSheetObject) {
     const values = (playerSheetObject?.proficiencies?.savingThrows || [])
-        .map((ability) => ABILITY_LABELS[String(ability || "").toLowerCase()] || String(ability || "").toUpperCase())
+        .map((ability) => {
+            const key = String(ability || "").toLowerCase();
+            const detail = playerSheetObject?.abilities?.[key]?.savingThrow || {};
+            const effect = detail.autoFail ? "auto fail" : detail.rollMode && detail.rollMode !== "normal" ? detail.rollMode : "";
+            const label = ABILITY_LABELS[key] || String(ability || "").toUpperCase();
+            return effect ? `${label} (${effect})` : label;
+        })
         .filter(Boolean);
     const section = createSection("Saving Throw Proficiencies");
     if (!values.length) {
