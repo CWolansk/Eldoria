@@ -156,7 +156,7 @@ function renderConditionEffects(headerHTML, playerSheetObject = {}) {
     if (effects.exhaustion) grid.appendChild(createConditionRuleCard(effects.exhaustion, "exhaustion"));
     for (const rule of effects.suppressed || []) grid.appendChild(createConditionRuleCard(rule, "suppressed"));
     panel.appendChild(grid);
-    headerHTML.insertAdjacentElement("afterend", panel);
+    headerHTML.appendChild(panel);
 }
 
 function renderPortrait(playerSheetObject = {}) {

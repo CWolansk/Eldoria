@@ -3500,9 +3500,15 @@
 
 @media (max-width: 560px) {
   .playerSheet {
-    grid-template-columns: 5.25rem minmax(0, 1fr);
+    grid-template-areas:
+      "portrait"
+      "header"
+      "content"
+      "menu";
+    grid-template-columns: minmax(0, 1fr);
   }
 
+  .playerSheetPortrait,
   .playerSheetPortrait .Portrait {
     max-width: 5.25rem;
   }

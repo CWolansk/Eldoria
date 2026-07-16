@@ -1585,6 +1585,7 @@ const tests = [
     BuildPlayerSheetHeader(compiled);
     const panel = fixture.querySelector("#player-sheet-condition-effects");
     assert(panel, "active condition rules panel should render");
+    assertEqual(panel.parentElement, fixture.querySelector("#GlobalCharacterSheetInformationHeader"), "condition panel should stay inside the header layout");
     assert(panel.textContent.includes("Stunned"), "condition panel should name the active condition");
     assert(panel.textContent.includes("Automatically fails Strength and Dexterity saving throws"), "condition panel should include readable rule text");
     assert(fixture.querySelector(".STRSave").textContent.includes("AUTO FAIL"), "header should mark automatic save failures");
