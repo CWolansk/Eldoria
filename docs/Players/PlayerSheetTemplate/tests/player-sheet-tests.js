@@ -1586,10 +1586,17 @@ const tests = [
     const panel = fixture.querySelector("#player-sheet-condition-effects");
     assert(panel, "active condition rules panel should render");
     assertEqual(panel.parentElement, fixture.querySelector("#GlobalCharacterSheetInformationHeader"), "condition panel should stay inside the header layout");
+    assertEqual(panel.querySelector("h3")?.textContent, "Active conditions", "condition panel should use the concise heading");
     assert(panel.textContent.includes("Stunned"), "condition panel should name the active condition");
     assert(panel.textContent.includes("Automatically fails Strength and Dexterity saving throws"), "condition panel should include readable rule text");
     assert(fixture.querySelector(".STRSave").textContent.includes("AUTO FAIL"), "header should mark automatic save failures");
     assert(fixture.querySelector(".Speed").textContent.includes("0 ft"), "header should show condition-adjusted speed");
+
+    dto.combatState.conditions = ["Charmed"];
+    BuildPlayerSheetHeader(SheetCompiler.compile(dto));
+    const reminderOnlyPanel = fixture.querySelector("#player-sheet-condition-effects");
+    assertEqual(reminderOnlyPanel.querySelector("h3")?.textContent, "Active conditions", "reminder-only conditions should keep the concise heading");
+    assertEqual(reminderOnlyPanel.querySelector(".player-sheet-condition-effects__heading p"), null, "reminder-only conditions should not render a no-stat-change subheader");
   }],
   ["compiler surfaces class resource progression tables", () => {
     const monk = SheetCompiler.compile(createMonkLevelFiveDto()).classResources
