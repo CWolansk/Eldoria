@@ -134,13 +134,25 @@ const corrections = {
         value: "Colossus Slayer|Ranger||Hunter||3",
         label: "Colossus Slayer",
         source: "PHB",
-        recordId: "subclass-feature:ranger-hunter-colossus-slayer-3:phb"
+        recordId: "subclass-feature:ranger-hunter-colossus-slayer-3:phb",
+        catalogKind: "subclass-features",
+        refType: "subclassFeature",
+        subclassFeature: "Colossus Slayer|Ranger||Hunter||3"
       }]
     };
     const levelThree = sheet.levels[2];
-    const choices = (levelThree.choices || []).some((choice) => choice.featureName === "Hunter's Prey")
+    const choices = ((levelThree.choices || []).some((choice) => choice.featureName === "Hunter's Prey")
       ? levelThree.choices
-      : [...(levelThree.choices || []), hunterChoice];
+      : [...(levelThree.choices || []), hunterChoice])
+      .map((choice) => choice.featureName !== "Hunter's Prey" ? choice : {
+        ...choice,
+        values: (choice.values || []).map((option) => ({
+          ...option,
+          catalogKind: option.catalogKind || "subclass-features",
+          refType: option.refType || "subclassFeature",
+          subclassFeature: option.subclassFeature || option.value
+        }))
+      });
     return {
       ...sheet,
       baseChoices: {
@@ -166,10 +178,21 @@ const corrections = {
           item("base-item:shortsword:phb", "Shortsword", "PHB"),
           item("generated-item:1-longbow:dmg:longbow-phb", "+1 Longbow", "DMG", { equipped: true }),
           item("item-bracer-of-piercing-arrows", "Bracer of Piercing Arrows", "Homebrew", { equipped: true, attuned: true }),
-          item("item-hat-of-vermin:xge", "Hat of Vermin", "XGE"),
+          item("item:hat-of-vermin:xge", "Hat of Vermin", "XGE"),
           item("item-prospecting-compass", "Prospecting Compass", "Eldoria"),
           item("base-item:leather-armor:phb", "Leather Armor", "PHB", { equipped: true })
-        ])
+        ]).map((entry) => String(entry.name || "").toLowerCase() !== "hat of vermin" ? entry : {
+          ...entry,
+          source: "XGE",
+          catalog: {
+            ...entry.catalog,
+            id: "item:hat-of-vermin:xge",
+            name: "Hat of Vermin",
+            source: "XGE",
+            kind: "items",
+            options: { ...entry.catalog?.options, catalogId: "item:hat-of-vermin:xge" }
+          }
+        })
       },
       spells: { ...sheet.spells, known: ["Cure Wounds", "Ensnaring Strike", "Zephyr Strike"] }
     };
@@ -245,8 +268,10 @@ function validateCorrection(characterId, sheet) {
   } else if (characterId === "char-austin-001") {
     requireValue(sheet.combatState.maxHp === 38 && sheet.combatState.currentHp === 38 && sheet.combatState.ac === 15, "Austin: HP/AC restoration failed.");
     requireValue(sheet.levels[2].choices?.some((choice) => choice.value === "Colossus Slayer|Ranger||Hunter||3"), "Austin: Colossus Slayer is missing.");
+    requireValue(sheet.levels[2].choices?.some((choice) => choice.values?.some((option) => option.recordId === "subclass-feature:ranger-hunter-colossus-slayer-3:phb" && option.catalogKind === "subclass-features")), "Austin: Colossus Slayer catalog metadata is missing.");
     requireValue(["Cure Wounds", "Ensnaring Strike", "Zephyr Strike"].every((name) => sheet.spells.known?.includes(name)), "Austin: documented ranger spells are missing.");
     requireValue(hasNamedItem(sheet, "+1 Longbow") && hasNamedItem(sheet, "Bracer of Piercing Arrows"), "Austin: documented ranged equipment is missing.");
+    requireValue(sheet.inventory.items?.some((entry) => entry.name === "Hat of Vermin" && entry.catalog?.id === "item:hat-of-vermin:xge"), "Austin: Hat of Vermin catalog ID is not canonical.");
   } else if (characterId === "char-liz-001") {
     requireValue(sheet.baseChoices.startingProficiencies.skills?.length === 9, "Liz: expected nine legal level-five skill proficiencies.");
     requireValue(sheet.levels[3].AbilityScoreIncrease?.join(",") === "cha,cha", "Liz: level-four Charisma ASI changed unexpectedly.");

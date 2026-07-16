@@ -6,7 +6,10 @@ import {
 import { SheetCompiler } from "../SheetCompiler.js";
 import { createStructuredOptionCoverage } from "../StructuredOptionCoverage.js";
 import { BuildPlayerSheetDefenseTab } from "../PlayerSheetJavaScript/PlayerSheetDefenseTabBuilder.js";
-import { BuildPlayerSheetFeatsTab } from "../PlayerSheetJavaScript/PlayerSheetFeatsTabBuilder.js";
+import {
+  BuildPlayerSheetFeatsTab,
+  hydrateFeatureRules
+} from "../PlayerSheetJavaScript/PlayerSheetFeatsTabBuilder.js";
 import { buildItemSearchModal } from "../PlayerSheetJavaScript/PlayerSheetGearTabBuilder.js";
 import { BuildPlayerSheetHeader } from "../PlayerSheetJavaScript/PlayerSheetHeaderBuilder.js";
 import { BuildPlayerSheetSidebar } from "../PlayerSheetJavaScript/PlayerSheetSidebarBuilder.js";
@@ -1764,6 +1767,10 @@ const tests = [
       choice.featureName === "Hunter's Prey"
       && choice.value === "Colossus Slayer|Ranger||Hunter||3"
     )), "DTO should store the selected Hunter's Prey option");
+    const storedHunterChoice = patchedDto.levels[2].choices.find((choice) => choice.featureName === "Hunter's Prey");
+    assertEqual(storedHunterChoice.values[0].catalogKind, "subclass-features", "Hunter option should retain its catalog kind");
+    assertEqual(storedHunterChoice.values[0].refType, "subclassFeature", "Hunter option should retain its reference type");
+    assertEqual(storedHunterChoice.values[0].subclassFeature, "Colossus Slayer|Ranger||Hunter||3", "Hunter option should retain its subclass feature reference");
     CatalogCache.clearShared();
   }],
   ["background options surface Hermit Life of Seclusion", async () => {
@@ -1949,6 +1956,51 @@ const tests = [
     assert(tabText.includes("Stunning Strike"), "feats tab should show Stunning Strike.");
     assert(!tabText.includes("Focused Aim"), "feats tab should not show unchosen Focused Aim.");
     assert(!tabText.includes("Ki-Fueled Attack"), "feats tab should not show unchosen Ki-Fueled Attack.");
+  }],
+  ["saved subclass class-options hydrate without probing optional features", async () => {
+    CatalogCache.clearShared();
+    const calls = [];
+    const api = {
+      baseUrl: "https://example.test/api",
+      async getCatalogEntity(kind, id) {
+        calls.push({ kind, id });
+        if (kind === "subclass-features" && id === "subclass-feature:ranger-hunter-colossus-slayer-3:phb") {
+          return {
+            id,
+            kind: "subclassFeature",
+            name: "Colossus Slayer",
+            source: "PHB",
+            level: 3,
+            entries: ["Once on each of your turns, deal an extra 1d8 damage to a wounded target."]
+          };
+        }
+        return null;
+      }
+    };
+    const dto = createRangerDto();
+    dto.levels[2].choices = [{
+      type: "class-option",
+      featureName: "Hunter's Prey",
+      label: "Hunter's Prey",
+      value: "Colossus Slayer|Ranger||Hunter||3",
+      values: [{
+        value: "Colossus Slayer|Ranger||Hunter||3",
+        label: "Colossus Slayer",
+        source: "PHB",
+        recordId: "subclass-feature:ranger-hunter-colossus-slayer-3:phb"
+      }]
+    }];
+    const [hydrated] = await hydrateFeatureRules([{
+      id: "subclass-feature:ranger-hunter-colossus-slayer-3:phb",
+      catalogId: "subclass-feature:ranger-hunter-colossus-slayer-3:phb",
+      name: "Hunter's Prey: Colossus Slayer",
+      source: "PHB",
+      category: "Class Feature",
+      level: 3
+    }], { api, dto });
+    assert(JSON.stringify(hydrated.rulesEntries).includes("extra 1d8 damage"), "Colossus Slayer rules should hydrate from subclass features");
+    assert(!calls.some((call) => call.kind === "optional-features"), "saved subclass choices must not query optional features");
+    CatalogCache.clearShared();
   }],
   ["level 5 PHB green Dragonborn compiles and renders its breath weapon", async () => {
     const dto = createDto();
