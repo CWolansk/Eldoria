@@ -3515,9 +3515,25 @@
     padding: 0.3rem 0.34rem;
   }
 
-  .playerSheetHeader .DefenseState,
+  .playerSheetHeader .DefenseState {
+    display: grid;
+    border-color: color-mix(in srgb, var(--sheet-amber) 28%, var(--sheet-line));
+  }
+
   .playerSheetHeader .SavingThrows {
-    display: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .player-sheet-defense-chip-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .player-sheet-defense-chip {
+    align-items: flex-start;
+    border-radius: 0.5rem;
+    line-height: 1.2;
   }
 
   .player-sheet-tab,
