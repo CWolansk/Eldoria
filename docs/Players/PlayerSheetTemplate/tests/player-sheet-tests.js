@@ -2815,6 +2815,8 @@ const tests = [
       }
     }];
     const compiled = SheetCompiler.compile(dto);
+    const spellDescription = "A bright streak blossoms into an explosion of flame.";
+    const catalogEntityCalls = [];
     const api = {
       async searchCatalog(kind, query) {
         assertEqual(kind, "spells", "scroll chooser should search the spell API catalog");
@@ -2828,7 +2830,18 @@ const tests = [
           }]
         } : { items: [] };
       },
-      async getCatalogEntity() {
+      async getCatalogEntity(kind, id) {
+        catalogEntityCalls.push({ kind, id });
+        if (kind === "spells" && id === "spell:fireball:phb") {
+          return {
+            id,
+            name: "Fireball",
+            source: "PHB",
+            level: 3,
+            school: "Evocation",
+            entries: [spellDescription]
+          };
+        }
         return null;
       }
     };
@@ -2856,6 +2869,17 @@ const tests = [
     await waitForCondition(() => patchedDto?.inventory?.items?.[0]?.containedSpell?.name === "Fireball", "scroll spell should patch inventory DTO");
     assertEqual(patchedDto.inventory.items[0].containedSpell.id, "spell:fireball:phb", "scroll should store canonical spell ID");
     assertEqual(PlayerSheetDtoHelper.toSaveDto(patchedDto).inventory.items[0].containedSpell.name, "Fireball", "scroll spell should survive strict save DTO conversion");
+
+    fixture.innerHTML = `<div id="TabContent"></div>`;
+    await BuildPlayerSheetGearTab(SheetCompiler.compile(patchedDto), {
+      api,
+      dto: patchedDto,
+      async onChange(nextDto) {
+        patchedDto = nextDto;
+      }
+    });
+    assert(fixture.querySelector(".player-sheet-scroll-spell-description")?.textContent.includes(spellDescription), "scroll gear row should show the contained spell description");
+    assert(catalogEntityCalls.some((call) => call.kind === "spells" && call.id === "spell:fireball:phb"), "scroll description should hydrate from the spell API entity");
 
     patchedDto = null;
     const remove = tab.querySelector("[data-gear-remove='0']");

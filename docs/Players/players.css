@@ -2731,6 +2731,12 @@
   color: var(--sheet-teal, #7dd3c7);
 }
 
+.player-sheet-scroll-spell-description {
+  margin-top: 0.38rem;
+  border-top: 1px solid rgb(148 163 184 / 16%);
+  padding-top: 0.34rem;
+}
+
 .player-sheet__modal--spell-scroll .player-sheet-catalog-picker {
   grid-template-rows: auto auto minmax(0, 1fr) auto;
 }

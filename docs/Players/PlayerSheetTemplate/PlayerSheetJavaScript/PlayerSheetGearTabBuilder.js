@@ -16,6 +16,10 @@ import {
     getCatalogCache,
     toNumber
 } from "../LevelEditorJavaScript/Core/LevelEditorShared.js";
+import {
+    createSpellRulesPreview,
+    resolveSpellRecord
+} from "./PlayerSheetSpellsTabBuilder.js";
 
 const ITEM_SEARCH_LIMIT = 25;
 const ITEM_SEARCH_DEBOUNCE_MS = 250;
@@ -821,6 +825,11 @@ export async function BuildPlayerSheetGearTab(playerSheetObject, context = {}) {
     appendCurrency(shell, playerSheetObject?.inventory?.currency || {}, context);
 
     const resolvedItems = await resolveInventoryItems(playerSheetObject, context.api);
+    const containedSpellRecords = new Map(await Promise.all(resolvedItems.map(async ({ item, inventoryIndex }) => {
+        const spell = getContainedSpell(item);
+        if (!spell) return [inventoryIndex, null];
+        return [inventoryIndex, await resolveSpellRecord(spell, context.api)];
+    })));
     const section = createSection("Items");
     if (!resolvedItems.length) {
         appendEmptyState(section, "No gear recorded.");
@@ -836,11 +845,16 @@ export async function BuildPlayerSheetGearTab(playerSheetObject, context = {}) {
             actions.push(createSpellScrollButton(item, inventoryIndex, scrollSpellModal, context));
         }
         actions.push(createRemoveGearButton(item, inventoryIndex, context));
-        list.appendChild(createItemListItem(item, record, {
+        const itemRow = createItemListItem(item, record, {
             actions,
             metrics: scrollSpell?.name ? [["Spell", scrollSpell.name]] : [],
             rows: ["Damage", "Versatile", "AC", "Value", "Weight", "Attunement"]
-        }));
+        });
+        if (scrollSpell) {
+            const spellRules = createSpellRulesPreview(containedSpellRecords.get(inventoryIndex));
+            if (spellRules) itemRow.appendChild(spellRules);
+        }
+        list.appendChild(itemRow);
     }
     section.appendChild(list);
     shell.appendChild(section);
