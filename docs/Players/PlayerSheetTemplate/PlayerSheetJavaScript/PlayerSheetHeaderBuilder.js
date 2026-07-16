@@ -145,10 +145,14 @@ function renderConditionEffects(headerHTML, playerSheetObject = {}) {
     const heading = document.createElement("div");
     heading.className = "player-sheet-condition-effects__heading";
     const title = document.createElement("h3");
-    title.textContent = "Active condition rules";
-    const automatic = document.createElement("p");
-    automatic.textContent = getAutomaticEffectLabels(effects).join(" · ") || "Rules reminder only; no deterministic stat change.";
-    heading.append(title, automatic);
+    title.textContent = "Active conditions";
+    heading.appendChild(title);
+    const automaticEffects = getAutomaticEffectLabels(effects);
+    if (automaticEffects.length) {
+        const automatic = document.createElement("p");
+        automatic.textContent = automaticEffects.join(" · ");
+        heading.appendChild(automatic);
+    }
     panel.appendChild(heading);
     const grid = document.createElement("div");
     grid.className = "player-sheet-condition-effects__grid";
