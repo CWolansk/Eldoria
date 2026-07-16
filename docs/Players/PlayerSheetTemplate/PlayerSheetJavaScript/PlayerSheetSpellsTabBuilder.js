@@ -327,6 +327,15 @@ function appendSpellRules(container, record, options = {}) {
     container.appendChild(rules);
 }
 
+export function createSpellRulesPreview(record, options = {}) {
+    const container = createElement("div", "player-sheet-item-row__rules player-sheet-scroll-spell-description");
+    appendSpellRules(container, record, {
+        compact: true,
+        previewLimit: options.previewLimit ?? SPELL_RULES_PREVIEW_LIMIT
+    });
+    return container.children.length ? container : null;
+}
+
 function getSpellDamageTypes(record = {}) {
     return uniqueByText([
         ...toArray(record.damageInflict),
@@ -587,7 +596,7 @@ export function createSpellListItem(entry, record = entry.record || entry.spell,
     return row;
 }
 
-async function resolveSpellRecord(spell, api, fallbackLevel = 1) {
+export async function resolveSpellRecord(spell, api, fallbackLevel = 1) {
     if (spell && typeof spell === "object" && getSpellRulesEntry(spell)) {
         return spell;
     }
@@ -602,7 +611,7 @@ async function resolveSpellRecord(spell, api, fallbackLevel = 1) {
     const catalog = getCatalogCache(api);
     const catalogId = getSpellCatalogId(spell);
     try {
-        if (catalogId && catalogId.includes(":")) {
+        if (catalogId) {
             const byId = await catalog.getById("spells", catalogId);
             if (byId) {
                 return byId;
