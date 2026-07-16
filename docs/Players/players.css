@@ -3062,3 +3062,228 @@
     line-height: 1.5;
   }
 }
+
+/* Compact player-sheet workspace on phones and small tablets. */
+.level-editor__mobile-toggle,
+.player-sheet-sidebar__mobile-toggle {
+  display: none;
+}
+
+.player-sheet-sidebar__content {
+  display: contents;
+}
+
+@media (max-width: 800px) {
+  .player-sheet-page > header {
+    display: none;
+  }
+
+  .player-sheet-container,
+  .playerSheet {
+    gap: 0.5rem;
+  }
+
+  .levelEditor {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.2rem 0.55rem;
+    padding: 0.45rem 0.55rem;
+  }
+
+  .levelEditor > h2 {
+    display: none;
+  }
+
+  .level-editor__mobile-toggle,
+  .player-sheet-sidebar__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    min-height: 2.75rem;
+    border: 0;
+    background: transparent;
+    color: var(--sheet-text);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 900;
+    padding: 0.25rem 0.15rem;
+    text-align: left;
+  }
+
+  .level-editor__mobile-toggle {
+    grid-column: 1 / -1;
+  }
+
+  .level-editor__mobile-toggle-action,
+  .player-sheet-sidebar__mobile-toggle-action {
+    color: var(--sheet-accent);
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .level-editor__save-status {
+    grid-column: 1 / -1;
+    margin: -0.35rem 0 0.25rem 0.15rem;
+    font-size: 0.68rem;
+  }
+
+  .levelEditor:not([data-mobile-open="true"]) .level-editor__list {
+    display: none;
+  }
+
+  .levelEditor[data-mobile-open="true"] .level-editor__list {
+    grid-column: 1 / -1;
+  }
+
+  .playerSheet {
+    grid-template-areas:
+      "portrait header"
+      "content content"
+      "menu menu";
+    grid-template-columns: 6rem minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .playerSheetPortrait .Portrait {
+    width: 100%;
+    max-width: 6rem;
+    border-radius: 0.65rem;
+    padding: 0.2rem;
+  }
+
+  .player-sheet-portrait__image {
+    border-radius: 0.45rem;
+  }
+
+  .playerSheetHeader {
+    padding: 0.45rem;
+  }
+
+  .playerSheetHeader .CharacterHeaderContainer,
+  .playerSheetHeader .ClassArea,
+  .playerSheetHeader .HP,
+  .playerSheetHeader .Area3,
+  .playerSheetHeader .DefenseState,
+  .playerSheetHeader .HeaderInfo,
+  .playerSheetHeader .FooterInfo,
+  .playerSheetHeader .CombatHeader {
+    gap: 0.3rem;
+  }
+
+  .playerSheetHeader .HeaderInfo,
+  .playerSheetHeader .FooterInfo,
+  .playerSheetHeader .CombatHeader {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .playerSheetHeader .Name,
+  .playerSheetHeader .ClassArea,
+  .playerSheetHeader .AbilityScoresSummary,
+  .playerSheetHeader .DefenseState,
+  .playerSheetHeader .SavingThrows {
+    grid-column: 1 / -1;
+  }
+
+  .playerSheetHeader .Name {
+    order: -2;
+  }
+
+  .playerSheetHeader .ClassArea {
+    order: -1;
+  }
+
+  .playerSheetHeader .AbilityScoresSummary {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.2rem;
+    padding: 0.25rem;
+  }
+
+  .playerSheetHeader .HeaderInfo > div,
+  .playerSheetHeader .FooterInfo > div,
+  .playerSheetHeader .CombatHeader > div,
+  .playerSheetHeader .AbilityScoresSummary > div {
+    min-height: 2.1rem;
+    font-size: 0.74rem;
+    padding: 0.34rem 0.4rem;
+  }
+
+  .playerSheetHeader .Name {
+    font-size: 0.95rem;
+  }
+
+  .playerSheetHeader .SavingThrows {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.2rem 0.35rem;
+  }
+
+  #TabRowList {
+    position: sticky;
+    top: 0.35rem;
+    z-index: 12;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding: 0.28rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #TabRowList::-webkit-scrollbar {
+    display: none;
+  }
+
+  #TabRowList button {
+    min-height: 2.5rem;
+    padding-inline: 0.72rem;
+    white-space: nowrap;
+  }
+
+  .playerSheetSideBar {
+    display: block;
+    padding: 0.35rem 0.55rem;
+  }
+
+  .playerSheetSideBar:not([data-mobile-open="true"]) .player-sheet-sidebar__content {
+    display: none;
+  }
+
+  .playerSheetSideBar[data-mobile-open="true"] .player-sheet-sidebar__content {
+    display: grid;
+    gap: var(--sp-2);
+    padding: 0.25rem 0 0.3rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .playerSheet {
+    grid-template-columns: 5.25rem minmax(0, 1fr);
+  }
+
+  .playerSheetPortrait .Portrait {
+    max-width: 5.25rem;
+  }
+
+  .playerSheetHeader .HeaderInfo > div,
+  .playerSheetHeader .FooterInfo > div,
+  .playerSheetHeader .CombatHeader > div,
+  .playerSheetHeader .AbilityScoresSummary > div {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.34rem;
+  }
+
+  .playerSheetHeader .DefenseState,
+  .playerSheetHeader .SavingThrows {
+    display: none;
+  }
+
+  .player-sheet-tab,
+  .player-sheet-section,
+  .playerSheetTabsContainer {
+    gap: 0.5rem;
+  }
+}

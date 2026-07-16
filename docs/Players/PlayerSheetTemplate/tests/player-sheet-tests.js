@@ -9,6 +9,7 @@ import { BuildPlayerSheetDefenseTab } from "../PlayerSheetJavaScript/PlayerSheet
 import { BuildPlayerSheetFeatsTab } from "../PlayerSheetJavaScript/PlayerSheetFeatsTabBuilder.js";
 import { buildItemSearchModal } from "../PlayerSheetJavaScript/PlayerSheetGearTabBuilder.js";
 import { BuildPlayerSheetHeader } from "../PlayerSheetJavaScript/PlayerSheetHeaderBuilder.js";
+import { BuildPlayerSheetSidebar } from "../PlayerSheetJavaScript/PlayerSheetSidebarBuilder.js";
 import {
   BuildPlayerSheetNotesTab,
   sanitizeNotesHtml
@@ -1390,6 +1391,24 @@ const tests = [
     assertIncludes(compiled.defenses.damageVulnerabilities, "radiant", "manual vulnerability should compile");
     assertIncludes(compiled.defenses.conditionImmunities, "poisoned", "manual condition immunity should compile");
     assertIncludes(compiled.defenses.damageImmunities, "poison", "item immunity should compile");
+  }],
+  ["mobile skills panel toggles without losing sidebar content", () => {
+    const compiled = SheetCompiler.compile(createDto());
+    fixture.innerHTML = '<div id="GlobalCharacterSheetSidebar"></div>';
+    BuildPlayerSheetSidebar(compiled);
+
+    const sidebar = fixture.querySelector("#GlobalCharacterSheetSidebar");
+    const toggle = sidebar.querySelector(".player-sheet-sidebar__mobile-toggle");
+    assert(toggle, "mobile skills toggle should render");
+    assertEqual(toggle.getAttribute("aria-expanded"), "false", "skills panel should start collapsed on mobile");
+    assert(sidebar.textContent.includes("Acrobatics"), "collapsed panel should retain the skill content");
+
+    toggle.click();
+    assertEqual(sidebar.dataset.mobileOpen, "true", "skills panel should open after a toggle click");
+    assertEqual(toggle.getAttribute("aria-expanded"), "true", "skills toggle should expose its open state");
+
+    BuildPlayerSheetSidebar(compiled);
+    assertEqual(sidebar.dataset.mobileOpen, "true", "skills panel should stay open after a sheet rerender");
   }],
   ["notes DTO preserves rich text and plain text", () => {
     const dto = PlayerSheetDtoHelper.normalize({

@@ -92,30 +92,59 @@ export function BuildPlayerSheetSidebar(playerSheetObject) {
   }
 
   const proficiencyBonus = Number(GetJsonPathValues(playerSheetObject, "proficiencyBonus")) || 0;
+  const wasMobileOpen = sidebarHTML.dataset.mobileOpen === "true";
+  const content = document.createElement("div");
+  content.className = "player-sheet-sidebar__content";
+  content.id = "player-sheet-sidebar-content";
 
-  sidebarHTML.replaceChildren(createSidebarHeading("Skills"));
+  const toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "player-sheet-sidebar__mobile-toggle";
+  toggle.setAttribute("aria-controls", content.id);
+
+  const toggleLabel = document.createElement("span");
+  toggleLabel.textContent = "Skills & Senses";
+  const toggleAction = document.createElement("span");
+  toggleAction.className = "player-sheet-sidebar__mobile-toggle-action";
+  toggleAction.setAttribute("aria-hidden", "true");
+  toggle.appendChild(toggleLabel);
+  toggle.appendChild(toggleAction);
+
+  const setMobileOpen = (isOpen) => {
+    sidebarHTML.dataset.mobileOpen = isOpen ? "true" : "false";
+    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    toggleAction.textContent = isOpen ? "Hide" : "Show";
+  };
+  toggle.addEventListener("click", () => {
+    setMobileOpen(sidebarHTML.dataset.mobileOpen !== "true");
+  });
+  setMobileOpen(wasMobileOpen);
+
+  content.appendChild(createSidebarHeading("Skills"));
   for (const skill of SKILLS) {
-    appendSkillRow(sidebarHTML, playerSheetObject, skill, proficiencyBonus);
+    appendSkillRow(content, playerSheetObject, skill, proficiencyBonus);
   }
 
   const wisModifier = getAbilityModifier(GetJsonPathValues(playerSheetObject, "abilities.wis.score"));
   const perceptionProficient = GetJsonPathValues(playerSheetObject, "skills.perception.proficient") === true;
   const passivePerception = 10 + wisModifier + (perceptionProficient ? proficiencyBonus : 0);
-  sidebarHTML.appendChild(createSidebarHeading("Senses"));
-  appendMetricRow(sidebarHTML, "Passive Perception", passivePerception);
+  content.appendChild(createSidebarHeading("Senses"));
+  appendMetricRow(content, "Passive Perception", passivePerception);
 
   const darkvision = Number(GetJsonPathValues(playerSheetObject, "senses.darkvision")) || 0;
   if (darkvision > 0) {
-    appendMetricRow(sidebarHTML, "Darkvision", `${darkvision} ft`);
+    appendMetricRow(content, "Darkvision", `${darkvision} ft`);
   }
 
   const speedModes = GetJsonPathValues(playerSheetObject, "speed.modes") || {};
   const movementEntries = Object.entries(speedModes)
     .filter(([mode]) => mode !== "walk");
   if (movementEntries.length) {
-    sidebarHTML.appendChild(createSidebarHeading("Movement"));
+    content.appendChild(createSidebarHeading("Movement"));
     for (const [mode, value] of movementEntries) {
-      appendMetricRow(sidebarHTML, `${mode.charAt(0).toUpperCase()}${mode.slice(1)}`, `${value} ft`);
+      appendMetricRow(content, `${mode.charAt(0).toUpperCase()}${mode.slice(1)}`, `${value} ft`);
     }
   }
+
+  sidebarHTML.replaceChildren(toggle, content);
 }

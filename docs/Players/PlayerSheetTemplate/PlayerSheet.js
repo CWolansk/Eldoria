@@ -329,6 +329,29 @@ async function applyPlayerSheetDto(nextDto, options = {}) {
   }
 }
 
+function setupMobileLevelEditorToggle() {
+    const editor = document.querySelector("#sidebar-level-editor");
+    const toggle = document.querySelector("#level-editor-mobile-toggle");
+    if (!editor || !toggle || toggle.dataset.mobileToggleBound === "true") {
+        return;
+    }
+
+    const action = toggle.querySelector(".level-editor__mobile-toggle-action");
+    const setOpen = (isOpen) => {
+        editor.dataset.mobileOpen = isOpen ? "true" : "false";
+        toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        if (action) {
+            action.textContent = isOpen ? "Hide" : "Show";
+        }
+    };
+
+    toggle.dataset.mobileToggleBound = "true";
+    toggle.addEventListener("click", () => {
+        setOpen(editor.dataset.mobileOpen !== "true");
+    });
+    setOpen(false);
+}
+
 async function hydratePlayerSheetReferences(dtoSnapshot) {
   const strictSnapshot = PlayerSheetDtoHelper.toSaveDto(dtoSnapshot);
   const snapshotFingerprint = createSaveFingerprint(strictSnapshot);
@@ -375,6 +398,8 @@ async function renderCurrentPlayerSheet() {
 }
 
 async function bootPlayersPage() {
+
+    setupMobileLevelEditorToggle();
 
     const CharId = getRequestedPlayerId();
     if (!CharId) {
