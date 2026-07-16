@@ -641,6 +641,28 @@ async function resolveSelectedClassOptionRecord(feature, context) {
         return persistedRecord;
     }
 
+    const selectedRecordId = normalizeCatalogId(selectedOption.recordId || selectedOption.catalogId || selectedOption.id || "");
+    const featureRecordId = getFeatureCatalogIds(feature)[0] || "";
+    const selectedCatalogKind = selectedOption.catalogKind
+        || getCatalogKindForId(selectedRecordId)
+        || getCatalogKindForId(featureRecordId);
+    if (["class-features", "subclass-features"].includes(selectedCatalogKind)) {
+        const resolvedRecordId = getCatalogKindForId(selectedRecordId) === selectedCatalogKind
+            ? selectedRecordId
+            : featureRecordId;
+        return resolveCatalogFeatureEntity(context, {
+            ...selectedOption,
+            id: resolvedRecordId,
+            refId: resolvedRecordId,
+            ref: selectedOption.classFeature || selectedOption.subclassFeature || selectedOption.value || "",
+            name: selectedOption.name || selectedOption.label || getFeatureChoiceLabel(feature)
+        }, {
+            allowNameLookup: true,
+            fallbackIdentity: false,
+            featureKinds: [selectedCatalogKind]
+        });
+    }
+
     const choice = {
         options: [{
             ...selectedOption,
