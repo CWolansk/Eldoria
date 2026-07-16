@@ -133,7 +133,8 @@
     { key: "players", label: "Players", href: "Players/players.html" },
     { key: "npcs", label: "NPCs", href: "tools/npc-search/npc-reference.html" },
     { key: "locations", label: "Locations", href: "tools/location-search/location-reference.html" },
-    { key: "map", label: "Map", href: "tools/world-map.html" }
+    { key: "map", label: "Map", href: "tools/world-map.html" },
+    { key: "dm", label: "DM Screen", href: "tools/dm-screen/dm-screen.html" }
   ];
 
   shell.navMenus = [
@@ -179,6 +180,7 @@
     if (file === "npc-reference.html") return "npcs";
     if (file === "location-reference.html") return "locations";
     if (file === "world-map.html") return "map";
+    if (file === "dm-screen.html") return "dm";
     if (path.includes("/tools/")) return "rules";
     return "";
   };
@@ -186,7 +188,7 @@
   shell.normalizeCurrentSection = function normalizeCurrentSection(section) {
     var value = String(section || "");
     if (value === "tools") return "rules";
-    if (value === "references" || value === "dm") return "";
+    if (value === "references") return "";
     return value;
   };
 }(window));
@@ -454,4 +456,3 @@
 
   scheduleBoot();
 }(window));
-

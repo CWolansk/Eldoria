@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eldoria DM Screen</title>
+  <script src="../../site-shell.js"></script>
+  <script src="../../site-assets/site-config.js"></script>
+  <script type="module" src="./dm-screen.js"></script>
+  <link rel="stylesheet" href="../../css/tokens.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="../../css/utilities.css">
+  <link rel="stylesheet" href="./dm-screen.css">
+</head>
+<body class="site-page dm-screen-page">
+  <div id="site-nav" data-base-path="../../" data-current="dm"></div>
+  <main class="container dm-screen">
+    <header class="dm-hero">
+      <div>
+        <p class="section-kicker">Dungeon Master</p>
+        <h1>Eldoria DM Screen</h1>
+        <p>Run the party, maintain custom items, and reach campaign references without leaving one screen.</p>
+      </div>
+      <div class="dm-connection-status"><span id="dm-access-status" role="status">Loading party data…</span><button class="button button-secondary" id="dm-reconnect" type="button">Reconnect</button></div>
+    </header>
+
+    <nav class="dm-tabs" role="tablist" aria-label="DM screen sections">
+      <button class="dm-tab" id="party-tab" type="button" role="tab" aria-selected="true" aria-controls="party-panel" data-tab="party">Party Control</button>
+      <button class="dm-tab" id="items-tab" type="button" role="tab" aria-selected="false" aria-controls="items-panel" data-tab="items">Item Workshop</button>
+      <button class="dm-tab" id="reference-tab" type="button" role="tab" aria-selected="false" aria-controls="reference-panel" data-tab="reference">Session Reference</button>
+    </nav>
+
+    <section class="dm-panel" id="party-panel" role="tabpanel" aria-labelledby="party-tab">
+      <header class="dm-panel__header">
+        <div>
+          <h2>Party Control</h2>
+          <p>Apply common table changes without opening seven individual sheets.</p>
+        </div>
+        <button class="button button-secondary" id="refresh-party" type="button">Refresh party</button>
+      </header>
+      <div class="dm-party-summary" id="party-summary"></div>
+      <div class="dm-character-grid" id="character-grid">
+        <p class="dm-empty">Loading the party…</p>
+      </div>
+    </section>
+
+    <section class="dm-panel" id="items-panel" role="tabpanel" aria-labelledby="items-tab" hidden>
+      <header class="dm-panel__header">
+        <div>
+          <h2>Item Workshop</h2>
+          <p>Create Eldoria items or load an existing catalog entry and patch it in place.</p>
+        </div>
+        <button class="button button-secondary" id="new-item" type="button">New item</button>
+      </header>
+      <div class="dm-item-layout">
+        <aside class="dm-item-browser">
+          <label for="item-editor-search">Find an item to edit</label>
+          <input class="input" id="item-editor-search" type="search" placeholder="Search by item name…">
+          <div class="dm-item-results" id="item-editor-results">
+            <p class="dm-empty">Type at least two characters.</p>
+          </div>
+        </aside>
+        <form class="dm-item-form" id="item-form">
+          <input id="item-id" type="hidden">
+          <div class="dm-form-grid">
+            <label>Name<input class="input" id="item-name" required></label>
+            <label>Source<input class="input" id="item-source" value="Eldoria" required></label>
+            <label>Rarity
+              <select class="select" id="item-rarity">
+                <option value="none">None</option><option>common</option><option>uncommon</option><option>rare</option>
+                <option>very rare</option><option>legendary</option><option>artifact</option>
+              </select>
+            </label>
+            <label>Type<input class="input" id="item-type" placeholder="wondrous item"></label>
+            <label>Attunement requirement<input class="input" id="item-attunement" placeholder="Requires attunement…"></label>
+            <label>Value label<input class="input" id="item-value" placeholder="500 gp"></label>
+            <label>Weight<input class="input" id="item-weight" placeholder="1 lb."></label>
+            <label>Damage<input class="input" id="item-damage" placeholder="1d6 lightning"></label>
+            <label>Properties<input class="input" id="item-properties" placeholder="Thrown, Finesse"></label>
+            <label>Mastery<input class="input" id="item-mastery"></label>
+          </div>
+          <label>Description<textarea class="textarea" id="item-description" rows="10"></textarea></label>
+          <div class="dm-form-actions">
+            <button class="button" type="submit">Save item</button>
+            <a class="button button-secondary" href="../item-search/item-search.html">Open public item search</a>
+          </div>
+          <p class="dm-form-status" id="item-form-status" role="status">Create a new item or select one from search.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="dm-panel" id="reference-panel" role="tabpanel" aria-labelledby="reference-tab" hidden>
+      <header class="dm-panel__header">
+        <div>
+          <h2>Session Reference</h2>
+          <p>Party defenses and campaign links for adjudicating encounters and exploration quickly.</p>
+        </div>
+      </header>
+      <div class="dm-reference-grid">
+        <section class="dm-reference-card">
+          <h3>Party defenses & languages</h3>
+          <p class="muted">Use this when choosing damage types, planning social scenes, or checking who understands an NPC.</p>
+          <div class="dm-reference-party" id="reference-party"><p class="dm-empty">Load the party to populate this reference.</p></div>
+        </section>
+        <section class="dm-reference-card">
+          <h3>Eldoria quick links</h3>
+          <p class="muted">Jump directly to the campaign information most often needed during play.</p>
+          <div class="dm-link-grid">
+            <a href="../world-map.html"><strong>World Map</strong><span>Travel, routes, and locations</span></a>
+            <a href="../npc-search/npc-reference.html"><strong>NPC Reference</strong><span>Find a named character quickly</span></a>
+            <a href="../location-search/location-reference.html"><strong>Location Reference</strong><span>Settlements and notable places</span></a>
+            <a href="../world/index.html"><strong>World Index</strong><span>Browse Eldoria by region</span></a>
+            <a href="../spell-search/spell-search.html"><strong>Spell Search</strong><span>Adjudicate spell rules</span></a>
+            <a href="../../5etools/dmscreen.html"><strong>5etools Screen</strong><span>Initiative and generic rules panels</span></a>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="dm-dialog" id="give-item-dialog">
+    <form method="dialog" class="dm-dialog__header"><h2>Give item</h2><button class="icon-button button-secondary" value="cancel" aria-label="Close">×</button></form>
+    <div class="dm-dialog__body">
+      <p id="give-item-character"></p>
+      <label for="give-item-search">Search item catalog</label>
+      <input class="input" id="give-item-search" type="search" placeholder="Type at least two characters…">
+      <div class="dm-item-results" id="give-item-results"></div>
+    </div>
+  </dialog>
+  <datalist id="standard-condition-options">
+    <option value="Blinded"><option value="Charmed"><option value="Deafened"><option value="Frightened">
+    <option value="Grappled"><option value="Incapacitated"><option value="Invisible"><option value="Paralyzed">
+    <option value="Petrified"><option value="Poisoned"><option value="Prone"><option value="Restrained">
+    <option value="Stunned"><option value="Unconscious">
+  </datalist>
+  <div class="notification" id="dm-notification" role="status" hidden></div>
+</body>
+</html>
