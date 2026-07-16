@@ -2323,6 +2323,47 @@ const tests = [
     assertEqual(calls.length, 2, "cursor API should be called twice");
     assertEqual(calls[0].options.skip, 0, "first cursor request uses initial skip");
     assertEqual(calls[1].options.cursor, "page-2", "second request uses returned cursor");
+  }],
+  ["item search hydrates legacy homebrew IDs for descriptions", async () => {
+    const calls = [];
+    const homebrewId = "item-sigil-of-thunderous-might";
+    const api = {
+      async searchItems() {
+        return {
+          items: [{
+            id: homebrewId,
+            kind: "items",
+            name: "Sigil of Thunderous Might",
+            source: "Homebrew",
+            type: "wondrous item"
+          }],
+          count: 1,
+          hasMore: false
+        };
+      },
+      async getCatalogEntity(kind, id) {
+        calls.push({ kind, id });
+        return {
+          id,
+          kind,
+          name: "Sigil of Thunderous Might",
+          source: "Homebrew",
+          type: "wondrous item",
+          entries: ["A heavy iron sigil.", "Crushing Strike deals additional thunder damage."]
+        };
+      }
+    };
+    const modal = buildItemSearchModal({ api, dto: createDto(), async onChange() {} });
+    fixture.replaceChildren(modal);
+    const input = modal.querySelector(".player-sheet-input[type='search']");
+    input.value = "sigil";
+    modal.querySelector(".player-sheet-catalog-picker__controls .player-sheet-button").click();
+    await waitForCondition(() => modal.querySelector(".player-sheet-catalog-result"), "homebrew search result should render");
+    modal.querySelector(".player-sheet-catalog-result").click();
+    await waitForCondition(() => modal.textContent.includes("Crushing Strike deals additional thunder damage."), "homebrew description should hydrate");
+    assertEqual(calls.length, 1, "legacy homebrew item should fetch its full catalog record");
+    assertEqual(calls[0].kind, "items", "homebrew detail catalog kind");
+    assertEqual(calls[0].id, homebrewId, "homebrew detail should preserve the legacy catalog ID");
   }]
 ];
 

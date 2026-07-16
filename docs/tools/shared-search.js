@@ -251,7 +251,6 @@
   features.loadRulesRows = async function loadRulesRows(config, stateOrQuery, options) {
     var kind = config.dataKind || config.itemLabel;
     var state = stateOrQuery && typeof stateOrQuery === "object" ? stateOrQuery : { query: stateOrQuery };
-    var RulesCatalogWidgetData = await features.ensureRulesCatalogWidgetData();
     var api = await createApiClient(config);
     var catalogs = {};
 
@@ -294,6 +293,10 @@
       }
     }
 
+    // Remote/API-backed search pages already receive display-ready rows and
+    // should not depend on the legacy local-catalog adapter. Load that adapter
+    // only for the older full-catalog path that still converts local exports.
+    var RulesCatalogWidgetData = await features.ensureRulesCatalogWidgetData();
     var rows = RulesCatalogWidgetData.getDefault().catalogsToRows(kind, catalogs);
     if (!Array.isArray(rows) || !rows.length) {
       throw new Error("No " + kind + " rows returned by the API.");

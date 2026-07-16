@@ -83,12 +83,15 @@ function isCanonicalCatalogId(kind, id) {
         return false;
     }
 
+    if (normalizedKind === "items") {
+        return text.includes(":") || /^item-[a-z0-9][a-z0-9-]*$/iu.test(text);
+    }
+
     if ([
         "backgrounds",
         "classes",
         "class-features",
         "feats",
-        "items",
         "optional-features",
         "spells",
         "subclasses",

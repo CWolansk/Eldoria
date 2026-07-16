@@ -74,7 +74,15 @@ function clearElement(element) {
 
 function getSearchableItemId(item) {
     const id = getCatalogItemId(item);
-    return id && id.includes(":") ? id : "";
+    if (!id) {
+        return "";
+    }
+
+    // Most normalized catalog IDs contain colons, but promoted Eldoria
+    // homebrew records retain their legacy `item-name` refs. Those IDs are
+    // still canonical API entity IDs and must be hydrated before rendering;
+    // search results only contain the compact summary and omit rules text.
+    return id.includes(":") || /^item-[a-z0-9][a-z0-9-]*$/iu.test(id) ? id : "";
 }
 
 function getPagedSearchState(response, skip, items) {
