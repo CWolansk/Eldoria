@@ -3220,6 +3220,46 @@
     padding: 0.4rem;
   }
 
+  .player-sheet__modal--item-search .player-sheet-catalog-picker__detail .player-sheet-item-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .player-sheet__modal--item-search .player-sheet-item-card__header {
+    order: 0;
+  }
+
+  .player-sheet__modal--item-search .player-sheet-pill-list {
+    order: 1;
+  }
+
+  .player-sheet__modal--item-search .player-sheet-item-card__rules {
+    order: 2;
+    margin-top: 0.25rem;
+    border-top: 1px solid var(--sheet-line);
+    padding-top: 0.6rem;
+  }
+
+  .player-sheet__modal--item-search .player-sheet-item-card__rules::before {
+    content: "Description";
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--sheet-text);
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .player-sheet__modal--item-search .player-sheet-item-card__rules:has(.player-sheet-item-card__rules-details[open]) > .player-sheet-item-card__rules-preview,
+  .player-sheet__modal--item-search .player-sheet-item-card__rules-details[open] > .player-sheet-item-card__rules-summary {
+    display: none;
+  }
+
+  .player-sheet__modal--item-search .player-sheet-definition-list {
+    order: 3;
+    margin-top: 0.65rem;
+  }
+
   .player-sheet-catalog-picker__detail .player-sheet-item-card__rules-preview,
   .player-sheet-catalog-picker__detail .player-sheet-item-card__rules-text,
   .player-sheet-catalog-picker__detail .player-sheet-item-card__rules-list {
