@@ -14,6 +14,18 @@ and the read-only rules catalogs from `docs/data` (Table Storage).
 - `PUT /api/characters/{id}`
 - `DELETE /api/characters/{id}`
 
+Character saves use `lastModified` plus Blob ETags to reject stale whole-sheet writes with
+`409 Conflict` instead of silently overwriting a newer DM or player change.
+
+## DM dashboard endpoints
+
+- `GET /api/dm/party` — one compact summary response for every active character.
+- `POST /api/dm/characters/{id}/actions` — targeted damage, healing, temporary HP,
+  condition, exhaustion, death-save, currency, and inventory actions.
+
+DM dashboard and catalog mutation routes are intentionally open, matching the rest of the
+campaign website API.
+
 Character sheet reads and writes normalize to `schemaVersion: "player-sheet-v2"`.
 Legacy builder documents are no longer accepted by the API.
 Browser clients should prefer the API client's default `POST` save path, which sends the JSON

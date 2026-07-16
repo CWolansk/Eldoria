@@ -118,6 +118,11 @@ async function streamToString(stream) {
 }
 
 async function readJsonBlob(blobName) {
+  const result = await readJsonBlobWithMetadata(blobName);
+  return result?.document || null;
+}
+
+async function readJsonBlobWithMetadata(blobName) {
   const containerClient = await getContainerClient();
   const blobClient = containerClient.getBlobClient(blobName);
 
@@ -126,7 +131,11 @@ async function readJsonBlob(blobName) {
     const text = response.readableStreamBody
       ? await streamToString(response.readableStreamBody)
       : "";
-    return JSON.parse(text);
+    return {
+      document: JSON.parse(text),
+      etag: response.etag || null,
+      lastModified: response.lastModified ? response.lastModified.toISOString() : null
+    };
   } catch (error) {
     if (isBlobNotFound(error)) {
       return null;
@@ -159,7 +168,7 @@ function getDocumentDisplayName(id, document) {
   return sanitizeMetadataValue(candidates.find(Boolean), id);
 }
 
-async function writeJsonBlob(blobName, document, metadata = {}) {
+async function writeJsonBlob(blobName, document, metadata = {}, options = {}) {
   const containerClient = await getContainerClient();
   const blockBlobClient = containerClient.getBlockBlobClient(blobName);
   const body = `${JSON.stringify(document, null, 2)}\n`;
@@ -172,7 +181,8 @@ async function writeJsonBlob(blobName, document, metadata = {}) {
       Object.entries(metadata)
         .filter(([, value]) => value != null && String(value).trim())
         .map(([key, value]) => [key.toLowerCase(), sanitizeMetadataValue(value)])
-    )
+    ),
+    ...(options.ifMatch ? { conditions: { ifMatch: options.ifMatch } } : {})
   });
 
   return document;
@@ -187,7 +197,11 @@ async function readCharacterSheet(id) {
   return readJsonBlob(getDocumentBlobName(id));
 }
 
-async function writeCharacterSheet(id, document) {
+async function readCharacterSheetWithMetadata(id) {
+  return readJsonBlobWithMetadata(getDocumentBlobName(id));
+}
+
+async function writeCharacterSheet(id, document, options = {}) {
   const normalizedId = normalizeDocumentId(id);
   const stored = {
     ...document,
@@ -199,7 +213,7 @@ async function writeCharacterSheet(id, document) {
     characterId: normalizedId,
     name: getDocumentDisplayName(normalizedId, stored),
     updatedAt: new Date().toISOString()
-  });
+  }, options);
 }
 
 async function deleteCharacterSheet(id) {
@@ -267,6 +281,7 @@ module.exports = {
   listCharacters,
   normalizeDocumentId,
   readCharacterSheet,
+  readCharacterSheetWithMetadata,
   readPlayersManifest,
   writeCharacterSheet,
   writePlayersManifest,

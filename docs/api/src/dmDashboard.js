@@ -1,0 +1,212 @@
+"use strict";
+
+const {
+  readCharacterSheetWithMetadata,
+  readPlayersManifest,
+  writeCharacterSheet
+} = require("./blobStore");
+const { httpError, json, withErrors } = require("./http");
+const { normalizePlayerSheetDto } = require("./playerSheetDto");
+
+const MAX_ACTION_AMOUNT = 1_000_000;
+const CURRENCY_KEYS = new Set(["cp", "sp", "ep", "gp", "pp"]);
+
+function text(value) {
+  return String(value || "").trim();
+}
+
+function number(value, fallback = 0) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function integer(value, fallback = 0) {
+  return Math.trunc(number(value, fallback));
+}
+
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
+async function readRequestJson(request) {
+  let body;
+  try {
+    body = JSON.parse(await request.text());
+  } catch (_error) {
+    throw httpError(400, "Request body must be valid JSON.");
+  }
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    throw httpError(400, "Request body must be a JSON object.");
+  }
+  return body;
+}
+
+function getActiveLevels(sheet) {
+  const levels = Array.isArray(sheet?.levels) ? sheet.levels : [];
+  let activeCount = 0;
+  levels.forEach((level, index) => {
+    if (level?.class || number(level?.hp, 0) > 0) activeCount = index + 1;
+  });
+  return levels.slice(0, activeCount);
+}
+
+function unique(values) {
+  return [...new Set(values.map(text).filter(Boolean))];
+}
+
+function summarizeCharacter(sheet, manifestEntry = {}) {
+  const activeLevels = getActiveLevels(sheet);
+  const maxHp = activeLevels.reduce((total, level) => total + Math.max(0, integer(level?.hp, 0)), 0);
+  const combat = sheet?.combatState || {};
+  const inventory = sheet?.inventory || {};
+  const currency = inventory.currency || {};
+  return {
+    id: text(sheet?.id || manifestEntry.id),
+    lastModified: text(sheet?.lastModified),
+    name: text(sheet?.identity?.name || manifestEntry.characterName || manifestEntry.id),
+    playerName: text(sheet?.identity?.playerName || manifestEntry.playerName),
+    portraitUrl: text(sheet?.identity?.portraitUrl || manifestEntry.portraitUrl),
+    level: activeLevels.length,
+    classes: unique(activeLevels.map((level) => level?.class?.name)),
+    ac: integer(combat.ac, 10),
+    hp: {
+      current: Math.max(0, integer(combat.currentHp, 0)),
+      max: maxHp,
+      temp: Math.max(0, integer(combat.tempHp, 0))
+    },
+    conditions: unique(Array.isArray(combat.conditions) ? combat.conditions : []),
+    exhaustion: clamp(integer(combat.exhaustion, 0), 0, 6),
+    deathSaves: {
+      successes: clamp(integer(combat.deathSaves?.successes, 0), 0, 3),
+      failures: clamp(integer(combat.deathSaves?.failures, 0), 0, 3)
+    },
+    defenses: combat.defenses || {},
+    languages: unique(sheet?.baseChoices?.startingProficiencies?.languages || []),
+    currency: Object.fromEntries([...CURRENCY_KEYS].map((key) => [key, Math.max(0, integer(currency[key], 0))])),
+    items: (Array.isArray(inventory.items) ? inventory.items : []).map((item, index) => ({
+      index,
+      name: text(item?.name),
+      source: text(item?.source),
+      quantity: Math.max(0, integer(item?.quantity, 1)),
+      equipped: Boolean(item?.equipped),
+      attuned: Boolean(item?.attuned),
+      catalog: item?.catalog || null
+    }))
+  };
+}
+
+function positiveAmount(value, label = "Amount") {
+  const amount = integer(value, 0);
+  if (amount <= 0 || amount > MAX_ACTION_AMOUNT) {
+    throw httpError(400, `${label} must be between 1 and ${MAX_ACTION_AMOUNT}.`);
+  }
+  return amount;
+}
+
+function applyDmAction(sheet, action = {}) {
+  const next = JSON.parse(JSON.stringify(sheet || {}));
+  next.combatState = next.combatState || {};
+  next.combatState.deathSaves = next.combatState.deathSaves || { successes: 0, failures: 0 };
+  next.combatState.conditions = Array.isArray(next.combatState.conditions) ? next.combatState.conditions : [];
+  next.inventory = next.inventory || { currency: {}, items: [] };
+  next.inventory.currency = next.inventory.currency || {};
+  next.inventory.items = Array.isArray(next.inventory.items) ? next.inventory.items : [];
+
+  const type = text(action.type).toLowerCase();
+  const maxHp = getActiveLevels(next).reduce((total, level) => total + Math.max(0, integer(level?.hp, 0)), 0);
+  if (type === "damage") {
+    let remaining = positiveAmount(action.amount, "Damage");
+    const temp = Math.max(0, integer(next.combatState.tempHp, 0));
+    const absorbed = Math.min(temp, remaining);
+    next.combatState.tempHp = temp - absorbed;
+    remaining -= absorbed;
+    next.combatState.currentHp = Math.max(0, integer(next.combatState.currentHp, 0) - remaining);
+  } else if (type === "heal") {
+    const healed = integer(next.combatState.currentHp, 0) + positiveAmount(action.amount, "Healing");
+    next.combatState.currentHp = maxHp > 0 ? Math.min(maxHp, healed) : healed;
+  } else if (type === "temp-hp") {
+    next.combatState.tempHp = positiveAmount(action.amount, "Temporary HP");
+  } else if (type === "add-condition") {
+    const condition = text(action.condition).slice(0, 80);
+    if (!condition) throw httpError(400, "Condition is required.");
+    if (!next.combatState.conditions.some((entry) => text(entry).toLowerCase() === condition.toLowerCase())) {
+      next.combatState.conditions.push(condition);
+    }
+  } else if (type === "remove-condition") {
+    const condition = text(action.condition).toLowerCase();
+    next.combatState.conditions = next.combatState.conditions.filter((entry) => text(entry).toLowerCase() !== condition);
+  } else if (type === "set-exhaustion") {
+    next.combatState.exhaustion = clamp(integer(action.value, 0), 0, 6);
+  } else if (type === "set-death-saves") {
+    next.combatState.deathSaves = {
+      successes: clamp(integer(action.successes, 0), 0, 3),
+      failures: clamp(integer(action.failures, 0), 0, 3)
+    };
+  } else if (type === "adjust-currency") {
+    const currency = text(action.currency).toLowerCase();
+    if (!CURRENCY_KEYS.has(currency)) throw httpError(400, "Currency must be cp, sp, ep, gp, or pp.");
+    const delta = integer(action.amount, 0);
+    if (!delta || Math.abs(delta) > MAX_ACTION_AMOUNT) throw httpError(400, "Currency adjustment is invalid.");
+    next.inventory.currency[currency] = Math.max(0, integer(next.inventory.currency[currency], 0) + delta);
+  } else if (type === "give-item") {
+    const name = text(action.item?.name).slice(0, 200);
+    const source = text(action.item?.source).slice(0, 80);
+    const quantity = positiveAmount(action.quantity || 1, "Quantity");
+    if (!name) throw httpError(400, "Item name is required.");
+    const catalog = action.item?.catalog && typeof action.item.catalog === "object" ? action.item.catalog : null;
+    const catalogId = text(catalog?.id);
+    const existing = next.inventory.items.find((item) => {
+      const itemCatalogId = text(item?.catalog?.id);
+      return catalogId ? itemCatalogId === catalogId : text(item?.name).toLowerCase() === name.toLowerCase() && text(item?.source).toLowerCase() === source.toLowerCase();
+    });
+    if (existing) existing.quantity = Math.max(0, integer(existing.quantity, 1)) + quantity;
+    else next.inventory.items.push({ name, source, quantity, equipped: false, attuned: false, catalog });
+  } else if (type === "remove-item") {
+    const index = integer(action.index, -1);
+    if (index < 0 || index >= next.inventory.items.length) throw httpError(400, "Inventory item index is invalid.");
+    next.inventory.items.splice(index, 1);
+  } else {
+    throw httpError(400, "Unsupported DM action.", { type });
+  }
+  return next;
+}
+
+async function dmPartyHandler(request, context) {
+  return withErrors(request, context, async () => {
+    const manifest = await readPlayersManifest();
+    const entries = Array.isArray(manifest?.characters) ? manifest.characters.filter((entry) => entry?.status !== "inactive") : [];
+    const characters = (await Promise.all(entries.map(async (entry) => {
+      const stored = await readCharacterSheetWithMetadata(entry.id);
+      return stored?.document ? summarizeCharacter(normalizePlayerSheetDto(stored.document, { id: entry.id }), entry) : null;
+    }))).filter(Boolean);
+    return json(request, 200, { count: characters.length, characters });
+  });
+}
+
+async function dmCharacterActionHandler(request, context) {
+  return withErrors(request, context, async () => {
+    const id = text(request.params?.id);
+    const current = await readCharacterSheetWithMetadata(id);
+    if (!current) return json(request, 404, { error: "Character sheet not found." });
+    const action = await readRequestJson(request);
+    const timestamp = new Date().toISOString();
+    const updated = normalizePlayerSheetDto(applyDmAction(current.document, action), { id, lastModified: timestamp });
+    updated.lastModified = timestamp;
+    try {
+      const stored = await writeCharacterSheet(id, updated, { ifMatch: current.etag });
+      return json(request, 200, { character: summarizeCharacter(stored) });
+    } catch (error) {
+      if (error?.statusCode === 412 || error?.code === "ConditionNotMet") {
+        throw httpError(409, "Character changed while the action was applied. Refresh and try again.", { id });
+      }
+      throw error;
+    }
+  });
+}
+
+module.exports = {
+  applyDmAction,
+  dmCharacterActionHandler,
+  dmPartyHandler,
+  summarizeCharacter
+};
