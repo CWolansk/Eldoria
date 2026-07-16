@@ -14,6 +14,7 @@ import {
   BuildPlayerSheetNotesTab,
   sanitizeNotesHtml
 } from "../PlayerSheetJavaScript/PlayerSheetNotesTabBuilder.js";
+import { BuildPlayerSheetOffenseTab } from "../PlayerSheetJavaScript/PlayerSheetOffenseTabBuilder.js";
 import { BuildPlayerSheetReferenceTab } from "../PlayerSheetJavaScript/PlayerSheetReferenceTabBuilder.js";
 import {
   BuildPlayerSheetSpellsTab,
@@ -34,6 +35,8 @@ import {
 import {
   getDefinedChoices
 } from "../LevelEditorJavaScript/CatalogProfile/Choices.js";
+import { getLinkedFeatureRefs } from "../LevelEditorJavaScript/Catalog/LevelEditorCatalogChoiceResolver.js";
+import { buildRaceProfile } from "../LevelEditorJavaScript/Race/LevelEditorRaceProfile.js";
 import {
   bootLevelEditor
 } from "../LevelEditorJavaScript/Core/LevelEditorBuilder.js";
@@ -1381,6 +1384,35 @@ const tests = [
     assertEqual(choices[0].options.length, 3, "Hunter's Prey should expose all three options");
     assertIncludes(choices[0].options.map((option) => option.label), "Colossus Slayer", "referenced option label");
   }],
+  ["nested subclass feature references resolve to exact catalog identities", () => {
+    const refs = getLinkedFeatureRefs({
+      name: "School of Divination",
+      source: "PHB",
+      entries: [
+        { type: "refSubclassFeature", subclassFeature: "Divination Savant|Wizard||Divination||2" },
+        { type: "refSubclassFeature", subclassFeature: "Portent|Wizard||Divination||2" }
+      ]
+    });
+    assertIncludes(refs.map((ref) => ref.id), "subclass-feature:wizard-divination-divination-savant-2:phb", "Divination Savant catalog ID");
+    assertIncludes(refs.map((ref) => ref.id), "subclass-feature:wizard-divination-portent-2:phb", "Portent catalog ID");
+  }],
+  ["race profiles accept object-shaped abilities, speeds, and additional spells", () => {
+    const profile = buildRaceProfile({
+      id: "genasi-water-eepc",
+      name: "Genasi (Water)",
+      source: "EEPC",
+      ability: { con: 2, wis: 1 },
+      speed: { walk: 30, swim: 30 },
+      additionalSpells: {
+        innate: { 3: { daily: { 1: ["create or destroy water#2"] } } },
+        ability: "con",
+        known: { 1: ["shape water|xge#c"] }
+      }
+    });
+    assertEqual(profile.abilities.auto.length, 2, "object-shaped racial ability bonuses");
+    assertEqual(profile.speeds.swim, 30, "object-shaped racial speed");
+    assertEqual(profile.spellcasting.granted.length, 1, "object-shaped racial spell block");
+  }],
   ["compiler owns defenses and table facts once", () => {
     const compiled = SheetCompiler.compile(createDto());
     assertEqual(compiled.displayIndex.facts.damageResistances, "header", "resistance display owner");
@@ -1918,6 +1950,222 @@ const tests = [
     assert(!tabText.includes("Focused Aim"), "feats tab should not show unchosen Focused Aim.");
     assert(!tabText.includes("Ki-Fueled Attack"), "feats tab should not show unchosen Ki-Fueled Attack.");
   }],
+  ["level 5 PHB green Dragonborn compiles and renders its breath weapon", async () => {
+    const dto = createDto();
+    dto.identity.experience = 6500;
+    dto.baseChoices.raceChoices = {
+      selections: {
+        ancestry: {
+          type: "draconic-ancestry",
+          choiceId: "race-draconic-ancestry",
+          label: "Draconic Ancestry",
+          sourceName: "Dragonborn",
+          values: [{ value: "Green", label: "Green", damageType: "poison", breathWeapon: "15 ft. cone" }]
+        }
+      }
+    };
+    dto.baseChoices.abilityScores.con = 16;
+    dto.levels = [1, 2, 3, 4, 5].map((classLevel) => ({
+      characterLevel: classLevel,
+      class: { ...dto.levels[0].class, classLevel },
+      hp: 7,
+      choices: []
+    }));
+
+    const compiled = SheetCompiler.compile(dto);
+    const breath = compiled.racialActions.find((action) => action.name === "Green Breath Weapon");
+    assert(breath, "green Dragonborn breath weapon should compile as an action");
+    assertEqual(breath.saveDc, 14, "breath weapon save DC");
+    assertEqual(breath.damage, "2d6 poison", "level 5 PHB breath weapon damage");
+    assertEqual(breath.area, "15 ft. cone", "green breath weapon area");
+    assertIncludes(compiled.defenses.damageResistances, "poison", "green ancestry poison resistance");
+    const ancestry = compiled.features.find((feature) => feature.name.includes("Draconic Ancestry: Green"));
+    assert(ancestry?.description.includes("Breath Weapon"), "Draconic Ancestry notes should explain the attack");
+    assert(compiled.resources.some((resource) => resource.name === "Green Breath Weapon"), "breath uses should compile as a tracked resource");
+
+    fixture.innerHTML = `<div id="TabContent"></div>`;
+    await BuildPlayerSheetOffenseTab(compiled);
+    const text = fixture.querySelector("#TabContent").textContent;
+    assert(text.includes("Green Breath Weapon"), "offense tab should render the racial action");
+    assert(text.includes("2d6 poison"), "offense tab should render breath damage");
+    assert(!text.includes("2d6 poison poison"), "offense tab should not duplicate the damage type");
+    assert(text.includes("DC 14"), "offense tab should render breath save DC");
+  }],
+  ["level 5 monk weapon and unarmed damage include the ability modifier", () => {
+    const dto = createMonkLevelFiveDto();
+    dto.inventory.items = [{
+      name: "Quarterstaff",
+      quantity: 1,
+      equipped: true,
+      snapshot: {
+        name: "Quarterstaff",
+        weapon: true,
+        weaponCategory: "simple melee",
+        property: ["V"],
+        dmg1: "1d6",
+        dmg2: "1d8",
+        dmgType: "B"
+      }
+    }];
+    const compiled = SheetCompiler.compile(dto);
+    const staff = compiled.attacks.find((attack) => attack.name === "Quarterstaff");
+    const unarmed = compiled.attacks.find((attack) => attack.name === "Unarmed Strike");
+    assertEqual(staff.ability, "dex", "monk quarterstaff should use the better DEX modifier");
+    assertEqual(staff.attackBonus, 5, "monk quarterstaff attack bonus");
+    assertEqual(staff.damage, "1d6 +2", "quarterstaff damage should include DEX");
+    assertEqual(staff.damageVersatile, "1d8 +2", "versatile damage should include DEX");
+    assertEqual(unarmed.damage, "1d6 +2", "level 5 Martial Arts damage should include DEX");
+    assert(compiled.resources.some((resource) => resource.name === "Ki Points" && resource.max === 5), "level 5 monk should track 5 Ki points");
+  }],
+  ["ranged weapon metadata and Archery apply to generated magic bows", () => {
+    const dto = createRangerDto();
+    dto.identity.experience = 6500;
+    dto.baseChoices.abilityScores.dex = 17;
+    dto.baseChoices.race.profile = {
+      abilities: {
+        auto: ["str", "dex", "con", "int", "wis", "cha"].map((ability) => ({ ability, amount: 1 }))
+      }
+    };
+    dto.levels = [1, 2, 3, 4, 5].map((classLevel) => ({
+      characterLevel: classLevel,
+      class: { ...dto.levels[0].class, classLevel },
+      hp: 8,
+      choices: classLevel === 2 ? [{
+        type: "class-option",
+        featureName: "Fighting Style",
+        value: "Archery",
+        values: [{ value: "Archery", label: "Archery" }]
+      }] : []
+    }));
+    dto.inventory.items = [{
+      name: "+1 Longbow",
+      equipped: true,
+      snapshot: {
+        name: "+1 Longbow",
+        type: "R",
+        weaponCategory: "martial",
+        property: ["A", "H", "2H"],
+        range: "150/600",
+        dmg1: "1d8",
+        dmgType: "P",
+        bonusWeapon: "+1",
+        weapon: true
+      }
+    }];
+    const attack = SheetCompiler.compile(dto).attacks.find((entry) => entry.name === "+1 Longbow");
+    assertEqual(attack.ability, "dex", "longbow should use Dexterity");
+    assertEqual(attack.attackBonus, 10, "+1 longbow should include DEX, proficiency, magic bonus, and Archery");
+    assertEqual(attack.damage, "1d8 +5", "+1 longbow damage should include DEX and magic bonus");
+  }],
+  ["prepared spell formulas resolve to a number", () => {
+    const dto = createLandDruidDto();
+    const spellcasting = {
+      ability: "wis",
+      startLevel: 1,
+      casterProgression: "full",
+      preparedSpells: "wis+level",
+      progression: {
+        cantripProgression: [2, 2, 2, 3, 3],
+        rowsSpellProgression: [[2], [3], [4, 2], [4, 3], [4, 3, 2]]
+      }
+    };
+    const druidClass = dto.levels.find((level) => level.class)?.class;
+    dto.levels = dto.levels.map((level) => ({
+      ...level,
+      class: { ...druidClass, classLevel: level.characterLevel, profile: { spellcasting } }
+    }));
+    const compiled = SheetCompiler.compile(dto);
+    assertEqual(compiled.classes[0].spellcasting.preparedCount, 8, "level 5 WIS 16 druid preparation capacity");
+    assertEqual(compiled.classes[0].spellcasting.preparedFormula, "8", "prepared formula should not leak a template expression");
+    assert(compiled.resources.some((resource) => resource.name === "Wild Shape" && resource.max === 2), "druid should track Wild Shape uses");
+  }],
+  ["fixed background and nested feature grants compile into proficiencies", () => {
+    const dto = createDto();
+    dto.baseChoices.background.profile = {
+      proficiencies: {
+        skills: { fixed: ["Athletics"] },
+        tools: { fixed: ["Vehicles (Land)"] }
+      },
+      features: {
+        expanded: [{ grants: { languages: { fixed: ["Goblin"] } } }]
+      }
+    };
+    dto.levels[0].subclass = {
+      id: "subclass:fighter-test:homebrew",
+      name: "Test Archetype",
+      source: "Homebrew",
+      profile: { features: { expanded: [{ grants: { skills: { fixed: ["Performance"] } } }] } }
+    };
+    const compiled = SheetCompiler.compile(dto);
+    assert(compiled.skills.athletics.proficient, "background fixed skill should compile");
+    assert(compiled.skills.performance.proficient, "nested subclass feature skill should compile");
+    assertIncludes(compiled.proficiencies.tools.map((entry) => entry.name), "Vehicles (Land)", "background fixed tool");
+    assertIncludes(compiled.proficiencies.languages.map((entry) => entry.name), "Goblin", "nested feature language");
+  }],
+  ["Aarakocra Talons and Divination resources compile at level 5", () => {
+    const dto = createLandDruidDto();
+    dto.baseChoices.race = {
+      id: "race:aarakocra:eepc",
+      name: "Aarakocra",
+      source: "EEPC",
+      options: { displayName: "Aarakocra" },
+      profile: { speeds: { walk: 25, fly: 50 } }
+    };
+    dto.baseChoices.abilityScores.str = 10;
+    dto.baseChoices.abilityScores.int = 19;
+    dto.levels = dto.levels.map((level) => ({
+      ...level,
+      class: {
+        id: "class:wizard:phb",
+        name: "Wizard",
+        source: "PHB",
+        classLevel: level.characterLevel,
+        hitDie: 6,
+        savingThrows: ["int", "wis"],
+        spellcasting: {
+          ability: "int",
+          startLevel: 1,
+          casterProgression: "full",
+          preparedSpells: "<$level$> + <$int_mod$>",
+          progression: { cantripProgression: [3, 3, 3, 4, 4], rowsSpellProgression: [[2], [3], [4, 2], [4, 3], [4, 3, 2]] }
+        },
+        profile: {
+          spellcasting: {
+            ability: "int",
+            startLevel: 1,
+            casterProgression: "full",
+            preparedSpells: "<$level$> + <$int_mod$>",
+            progression: { cantripProgression: [3, 3, 3, 4, 4], rowsSpellProgression: [[2], [3], [4, 2], [4, 3], [4, 3, 2]] }
+          }
+        }
+      },
+      subclass: level.characterLevel === 2 ? { id: "subclass:wizard-divination:phb", name: "School of Divination", source: "PHB" } : null
+    }));
+    const compiled = SheetCompiler.compile(dto);
+    const talons = compiled.racialActions.find((action) => action.name === "Talons");
+    assert(talons, "Aarakocra should have a Talons action");
+    assertEqual(talons.attackBonus, 3, "Talons attack bonus");
+    assertEqual(talons.damage, "1d4", "Talons damage with STR 10");
+    assertEqual(compiled.speed.modes.fly, 50, "Aarakocra flight speed");
+    assert(compiled.resources.some((resource) => resource.name === "Portent Dice" && resource.max === 2), "Divination wizard should track two Portent dice");
+    assertEqual(compiled.classes[0].spellcasting.spellsKnown, 14, "level 5 wizard spellbook minimum");
+    assertEqual(compiled.classes[0].spellcasting.preparedCount, 9, "level 5 INT 19 wizard prepared capacity");
+  }],
+  ["unattuned item defenses remain inactive", () => {
+    const dto = createDto();
+    dto.combatState.defenses.damageImmunities = [];
+    dto.inventory.items = [{
+      name: "Dormant Talisman",
+      equipped: true,
+      attuned: false,
+      snapshot: { name: "Dormant Talisman", reqAttune: true, _fRes: ["lightning"] }
+    }];
+    const dormant = SheetCompiler.compile(dto);
+    assert(!dormant.defenses.damageResistances.includes("lightning"), "unattuned talisman resistance should not apply");
+    dto.inventory.items[0].attuned = true;
+    const active = SheetCompiler.compile(dto);
+    assertIncludes(active.defenses.damageResistances, "lightning", "attuned talisman resistance should apply");
+  }],
   ["compiler applies ranger spellcasting from class progression", () => {
     const levelOne = SheetCompiler.compile(createRangerDto(0));
     assertEqual(levelOne.classes[0].spellcasting, null, "level 1 ranger should not have 2014 PHB spellcasting");
@@ -2067,6 +2315,7 @@ const tests = [
       <div id="TabContent"></div>
     `;
     const compiled = SheetCompiler.compile(createDto());
+    compiled.speed.modes.fly = 50;
     BuildPlayerSheetHeader(compiled);
     await BuildPlayerSheetDefenseTab(compiled);
     const headerText = fixture.querySelector("#GlobalCharacterSheetInformationHeader").textContent;
@@ -2075,6 +2324,7 @@ const tests = [
     assert(headerText.includes("poison"), "immunity should be visible in the header");
     assert(headerText.includes("radiant"), "vulnerability should be visible in the header");
     assert(headerText.includes("poisoned"), "condition immunity should be visible in the header");
+    assert(headerText.includes("Speed : 30 ft / fly 50 ft"), "header should show non-walking movement modes");
     assert(tabText.includes("Test Shield"), "defensive gear should be visible in the defense tab");
     assert(!tabText.includes("cold"), "resistance state should not be repeated in the defense tab");
     assert(!tabText.includes("Test Blade"), "offensive-only gear should not be shown in the defense tab");

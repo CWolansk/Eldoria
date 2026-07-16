@@ -397,6 +397,7 @@ function normalizeCombatState(value = {}) {
 
     return {
         ac: toNumber(source.ac, 10),
+        maxHp: toNumber(source.maxHp, 0),
         currentHp: toNumber(source.currentHp, 0),
         tempHp: toNumber(source.tempHp, 0),
         deathSaves: {

@@ -48,8 +48,15 @@ function appendSkillRow(sidebarHTML, playerSheetObject, skill, proficiencyBonus)
   const score = Number(GetJsonPathValues(playerSheetObject, `abilities.${skill.ability}.score`)) || 0;
   const proficient = GetJsonPathValues(playerSheetObject, `skills.${skill.key}.proficient`) === true;
   const expertise = GetJsonPathValues(playerSheetObject, `skills.${skill.key}.expertise`) === true;
-  const proficiencyMultiplier = expertise ? 2 : (proficient ? 1 : 0);
-  const bonus = getAbilityModifier(score) + (proficiencyMultiplier * proficiencyBonus);
+  const halfProficiency = GetJsonPathValues(playerSheetObject, `skills.${skill.key}.halfProficiency`) === true;
+  const proficiencyModifier = expertise
+    ? 2 * proficiencyBonus
+    : proficient
+      ? proficiencyBonus
+      : halfProficiency
+        ? Math.floor(proficiencyBonus / 2)
+        : 0;
+  const bonus = getAbilityModifier(score) + proficiencyModifier;
   const row = document.createElement("div");
   row.className = "player-sheet-skill-row";
   if (proficient) {
@@ -73,8 +80,8 @@ function appendSkillRow(sidebarHTML, playerSheetObject, skill, proficiencyBonus)
 
   const training = document.createElement("span");
   training.className = "player-sheet-skill-row__training";
-  training.textContent = expertise ? "E" : (proficient ? "P" : "");
-  training.title = expertise ? "Expertise" : (proficient ? "Proficient" : "Untrained");
+  training.textContent = expertise ? "E" : (proficient ? "P" : (halfProficiency ? "J" : ""));
+  training.title = expertise ? "Expertise" : (proficient ? "Proficient" : (halfProficiency ? "Jack of All Trades" : "Untrained"));
   training.setAttribute("aria-label", training.title);
 
   row.appendChild(name);
@@ -127,7 +134,15 @@ export function BuildPlayerSheetSidebar(playerSheetObject) {
 
   const wisModifier = getAbilityModifier(GetJsonPathValues(playerSheetObject, "abilities.wis.score"));
   const perceptionProficient = GetJsonPathValues(playerSheetObject, "skills.perception.proficient") === true;
-  const passivePerception = 10 + wisModifier + (perceptionProficient ? proficiencyBonus : 0);
+  const perceptionExpertise = GetJsonPathValues(playerSheetObject, "skills.perception.expertise") === true;
+  const perceptionHalfProficiency = GetJsonPathValues(playerSheetObject, "skills.perception.halfProficiency") === true;
+  const passivePerception = 10 + wisModifier + (perceptionExpertise
+    ? 2 * proficiencyBonus
+    : perceptionProficient
+      ? proficiencyBonus
+      : perceptionHalfProficiency
+        ? Math.floor(proficiencyBonus / 2)
+        : 0);
   content.appendChild(createSidebarHeading("Senses"));
   appendMetricRow(content, "Passive Perception", passivePerception);
 

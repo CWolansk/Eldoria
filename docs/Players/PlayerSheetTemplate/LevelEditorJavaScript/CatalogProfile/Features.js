@@ -27,7 +27,9 @@ export function getFeatureProfile(catalogRecord, linkedFeatureRecords) {
             source: getCatalogSource(featureRecord),
             kind: normalizeKind(featureRecord?.kind),
             level: featureRecord?.level != null ? toNumber(featureRecord.level, 0) : undefined,
-            choices: getDefinedChoices(featureRecord)
+            choices: getDefinedChoices(featureRecord),
+            grants: deepClone(featureRecord?.grants || {}),
+            rulesEntries: deepClone(featureRecord?.entries || featureRecord?.raw?.entries || null)
         }))
     };
 }

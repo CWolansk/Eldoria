@@ -28,6 +28,13 @@ const SKILLS = [
 ];
 
 const CLASS_PROFICIENCY_FALLBACKS = {
+    druid: {
+        savingThrows: ["int", "wis"],
+        armor: ["Light Armor", "Medium Armor", "Shields"],
+        weapons: ["Club", "Dagger", "Dart", "Javelin", "Mace", "Quarterstaff", "Scimitar", "Sickle", "Sling", "Spear"],
+        tools: ["Herbalism Kit"],
+        languages: []
+    },
     fighter: {
         savingThrows: ["str", "con"],
         armor: ["Light Armor", "Medium Armor", "Heavy Armor", "Shields"],
@@ -255,6 +262,9 @@ function getClassFallbackKey(classEntry = {}) {
         entry.options?.catalogId
     ].filter(Boolean).join(" "));
 
+    if (/\bdruid\b/u.test(text) || /class-druid/u.test(text)) {
+        return "druid";
+    }
     if (/\bfighter\b/u.test(text) || /class-fighter/u.test(text)) {
         return "fighter";
     }
@@ -419,7 +429,8 @@ function formatWeaponProficiencyName(value) {
 
 function isChoicePlaceholderProficiency(value) {
     const text = normalizeSearchText(value?.name || value?.value || value);
-    return /\b(?:any|choice)\b/iu.test(text)
+    return text === "other"
+        || /\b(?:any|choice)\b/iu.test(text)
         && /\b(?:tool|weapon|armor|language|skill|instrument)\b/iu.test(text);
 }
 
@@ -545,6 +556,63 @@ function getBackgroundSelectionList(dto) {
 function getRaceProfile(dto) {
     const profile = dto?.baseChoices?.race?.profile;
     return profile && typeof profile === "object" ? profile : null;
+}
+
+function getFixedProfileGrantValues(identity, key) {
+    if (!identity || typeof identity !== "object") {
+        return [];
+    }
+
+    const profile = identity.profile || {};
+    const direct = toArray(profile.proficiencies?.[key]?.fixed);
+    const expanded = toArray(profile.features?.expanded).flatMap((feature) => {
+        const grant = feature?.grants?.[key];
+        return toArray(grant?.fixed ?? grant);
+    });
+    return [...direct, ...expanded].filter(Boolean);
+}
+
+function getFixedProficiencyGrants(dto, key) {
+    return [
+        ...getFixedProfileGrantValues(dto?.baseChoices?.race, key),
+        ...getFixedProfileGrantValues(dto?.baseChoices?.subrace, key),
+        ...getFixedProfileGrantValues(dto?.baseChoices?.background, key),
+        ...toArray(dto?.levels).flatMap((level) => [
+            ...getFixedProfileGrantValues(level?.class, key),
+            ...getFixedProfileGrantValues(level?.subclass, key),
+            ...getFixedProfileGrantValues(level?.feat, key)
+        ])
+    ];
+}
+
+function getFeatAbilityIncreases(dto) {
+    return toArray(dto?.levels).flatMap((level) => {
+        const feat = level?.feat;
+        if (!feat) {
+            return [];
+        }
+
+        const profileIncreases = toArray(feat.profile?.abilities?.fixed);
+        const expandedIncreases = toArray(feat.profile?.features?.expanded)
+            .flatMap((feature) => toArray(feature?.grants?.ability));
+        return [...profileIncreases, ...expandedIncreases].flatMap((increase) => {
+            if (!increase || typeof increase !== "object") {
+                return [];
+            }
+            const directAbility = normalizeAbilityKey(increase.ability);
+            if (directAbility) {
+                const amount = toNumber(increase.amount, 0);
+                return amount ? [{ ability: directAbility, amount }] : [];
+            }
+            return Object.entries(increase)
+                .filter(([ability]) => ABILITY_KEYS.includes(normalizeAbilityKey(ability)))
+                .map(([ability, amount]) => ({
+                    ability: normalizeAbilityKey(ability),
+                    amount: toNumber(amount, 0)
+                }))
+                .filter((entry) => entry.ability && entry.amount);
+        });
+    });
 }
 
 function getRaceSelectionValue(dto, choiceIdOrValueKey) {
@@ -674,6 +742,10 @@ function compileAbilityScores(dto) {
         }
     }
 
+    for (const increase of getFeatAbilityIncreases(dto)) {
+        scores[increase.ability] = toNumber(scores[increase.ability], 10) + increase.amount;
+    }
+
     const savingThrows = new Set(dto.baseChoices.startingProficiencies.savingThrows || []);
     getClassSavingThrows(dto.levels?.[0]?.class || null)
         .map(normalizeSaveAbility)
@@ -719,12 +791,24 @@ function compileSkills(dto) {
         }
     }
 
+
+    for (const granted of getFixedProficiencyGrants(dto, "skills").map(normalizeSkillKey)) {
+        const key = skillKeyByNormalized.get(granted);
+        if (key) {
+            proficientSkills.add(key);
+        }
+    }
+
     const skills = {};
+    const hasJackOfAllTrades = toArray(dto.levels)
+        .filter((level) => normalizeSearchText(level?.class?.name) === "bard")
+        .length >= 2;
 
     for (const skill of SKILLS) {
         skills[skill.key] = {
             proficient: proficientSkills.has(skill.key),
             expertise: false,
+            halfProficiency: hasJackOfAllTrades && !proficientSkills.has(skill.key),
             source: proficientSkills.has(skill.key) ? "baseChoices" : ""
         };
     }
@@ -739,7 +823,7 @@ function compileProficiencies(dto) {
 
     function fixedClassProficiencies(key) {
         const fixed = toArray(firstClass?.startingProficiencies?.[key]?.fixed);
-        const values = fixed.length ? fixed : getClassFallbackProficiencies(firstClass, key);
+        const values = [...fixed, ...getClassFallbackProficiencies(firstClass, key)];
         return values.filter((value) => !isChoicePlaceholderProficiency(value));
     }
 
@@ -751,6 +835,7 @@ function compileProficiencies(dto) {
         return uniqueProficiencyValues([
             ...fixedClassProficiencies(key),
             ...fixedRaceProficiencies(key),
+            ...getFixedProficiencyGrants(dto, key),
             ...toArray(starting[key])
         ].filter(Boolean));
     }
@@ -1158,6 +1243,90 @@ function getClassLevelForGroup(group = {}) {
     return Math.max(0, ...toArray(group.levels).map((level) => toNumber(level?.level, 0)));
 }
 
+function compileTrackedResources(dto, abilityScores, proficiencyBonus, characterLevel) {
+    const resources = toArray(dto.resources).map(deepClone);
+    const byKey = new Map(resources.map((resource) => [
+        normalizeSearchText(resource?.id || resource?.name),
+        resource
+    ]));
+    const activeLevels = getCompiledLevelEntries(dto, characterLevel);
+    const classLevels = new Map();
+    for (const level of activeLevels) {
+        const name = identityName(level.class, "");
+        if (name) {
+            classLevels.set(name, (classLevels.get(name) || 0) + 1);
+        }
+    }
+
+    function add(id, name, max, recharge, source, description = "") {
+        const key = normalizeSearchText(id || name);
+        if (!key || byKey.has(key) || toNumber(max, 0) <= 0) {
+            return;
+        }
+        const resource = { id, name, current: max, max, recharge, source, description, derived: true };
+        byKey.set(key, resource);
+        resources.push(resource);
+    }
+
+    const monkLevel = classLevels.get("Monk") || 0;
+    if (monkLevel >= 2) add("class-ki", "Ki Points", monkLevel, "short or long rest", "Monk");
+    const druidLevel = classLevels.get("Druid") || 0;
+    if (druidLevel >= 2) add("class-wild-shape", "Wild Shape", 2, "short or long rest", "Druid");
+    const clericLevel = classLevels.get("Cleric") || 0;
+    if (clericLevel >= 2) add("class-channel-divinity", "Channel Divinity", clericLevel >= 18 ? 3 : clericLevel >= 6 ? 2 : 1, "short or long rest", "Cleric");
+    const fighterLevel = classLevels.get("Fighter") || 0;
+    if (fighterLevel >= 1) add("class-second-wind", "Second Wind", 1, "short or long rest", "Fighter");
+    if (fighterLevel >= 2) add("class-action-surge", "Action Surge", fighterLevel >= 17 ? 2 : 1, "short or long rest", "Fighter");
+    const bardLevel = classLevels.get("Bard") || 0;
+    if (bardLevel >= 1) add("class-bardic-inspiration", "Bardic Inspiration", Math.max(1, abilityScores.cha?.modifier || 0), bardLevel >= 5 ? "short or long rest" : "long rest", "Bard");
+    const wizardLevel = classLevels.get("Wizard") || 0;
+    if (wizardLevel >= 1) add("class-arcane-recovery", "Arcane Recovery", 1, "long rest", "Wizard");
+    if (wizardLevel >= 2 && activeLevels.some((level) => /divination/iu.test(level?.subclass?.name || ""))) {
+        add("subclass-portent", "Portent Dice", wizardLevel >= 14 ? 3 : 2, "long rest", "School of Divination");
+    }
+
+    for (const level of activeLevels) {
+        if (/^lucky$/iu.test(level?.feat?.name || "")) {
+            add("feat-lucky", "Luck Points", 3, "long rest", "Lucky");
+        }
+    }
+    for (const action of compileRaceActions(dto, abilityScores, proficiencyBonus, characterLevel)) {
+        const match = String(action.uses || "").match(/^\d+/u);
+        if (match) {
+            add(`race-${action.id}`, action.name, toNumber(match[0], 1), action.uses.replace(/^\d+\s+per\s+/iu, ""), action.source, action.summary);
+        }
+    }
+
+    return resources;
+}
+
+function evaluatePreparedSpellFormula(formula, classLevel, abilityScores) {
+    const source = String(formula || "").trim();
+    if (!source) {
+        return null;
+    }
+
+    const expression = source
+        .replace(/<\$([a-z]+)(?:_level|_mod)?\$>/giu, (match, token) => {
+            if (/_level\$>/iu.test(match) || token.toLowerCase() === "level") {
+                return String(classLevel);
+            }
+            const ability = normalizeAbilityKey(token);
+            return ability ? String(abilityScores[ability]?.modifier || 0) : "0";
+        })
+        .replace(/\blevel\b/giu, String(classLevel))
+        .replace(/\b(str|dex|con|int|wis|cha)(?:_mod)?\b/giu, (match, token) => {
+            const ability = normalizeAbilityKey(token);
+            return String(abilityScores[ability]?.modifier || 0);
+        });
+    if (!/^[\d\s+\-]+$/u.test(expression)) {
+        return null;
+    }
+
+    const parts = expression.match(/[+-]?\s*\d+/gu) || [];
+    return Math.max(0, parts.reduce((total, part) => total + toNumber(part.replace(/\s+/gu, ""), 0), 0));
+}
+
 function createSpellcastingBlock({
     dto,
     abilityScores,
@@ -1189,6 +1358,10 @@ function createSpellcastingBlock({
     const preparedSpells = includeDtoSpells ? toArray(dto.spells.prepared) : [];
     const knownSpells = includeDtoSpells ? toArray(dto.spells.known) : [];
     const cantrips = includeDtoSpells ? toArray(dto.spells.cantrips) : [];
+    const preparedCapacity = evaluatePreparedSpellFormula(meta?.preparedSpells, classLevel, abilityScores);
+    const wizardSpellbookMinimum = normalizeSearchText(group?.main) === "wizard"
+        ? 6 + (Math.max(classLevel, 1) - 1) * 2
+        : 0;
 
     return {
         ability,
@@ -1205,9 +1378,10 @@ function createSpellcastingBlock({
         alwaysPrepared: includeDtoSpells ? toArray(dto.spells.alwaysPrepared) : [],
         spellAttackBonus: abilityModifier + proficiencyBonus,
         spellSaveDc: 8 + abilityModifier + proficiencyBonus,
-        preparedFormula: meta?.preparedSpells || "",
-        preparedCount: preparedSpells.length,
-        spellsKnown: knownCount || knownSpells.length,
+        preparedFormula: preparedCapacity != null ? String(preparedCapacity) : meta?.preparedSpells || "",
+        preparedCount: preparedCapacity ?? preparedSpells.length,
+        selectedPreparedCount: preparedSpells.length,
+        spellsKnown: Math.max(wizardSpellbookMinimum, knownCount || knownSpells.length),
         cantripsKnown: cantripCount || cantrips.length,
         slotProgression: getClassSpellSlotRow(meta, classLevel)
     };
@@ -1319,6 +1493,20 @@ function compileClassChoiceSpells(dto, abilityScores, proficiencyBonus, characte
 
         const classKey = identityKey(level.class);
         const currentClassLevel = classLevelMap.get(classKey) || toNumber(level.class.classLevel, level.effectiveClassLevel);
+        const automaticSpellGrants = [
+            ...toArray(level.subclass?.profile?.spells?.granted),
+            ...toArray(level.class?.profile?.features?.expanded).flatMap((feature) => toArray(feature?.grants?.spells)),
+            ...toArray(level.subclass?.profile?.features?.expanded).flatMap((feature) => toArray(feature?.grants?.spells))
+        ].filter((spell) => spell && typeof spell === "object" && (spell.name || spell.label));
+        for (const spellGrant of automaticSpellGrants) {
+            const unlockAtLevel = toNumber(spellGrant.unlockAtLevel, 0);
+            if (unlockAtLevel && currentClassLevel < unlockAtLevel) {
+                continue;
+            }
+            addSpellByMode(groups, createClassGroupSpellEntry(spellGrant, {
+                label: level.subclass?.name || level.class?.name || "Class Feature"
+            }, level));
+        }
         for (const choice of toArray(level.choices).filter((entry) => entry?.type === "class-option")) {
             if (choice.spellChoice || choice.choiceType === "spell") {
                 for (const value of toArray(choice.values)) {
@@ -1522,6 +1710,7 @@ function getClassFeatureRecords(classEntry = {}) {
     const entry = classEntry || {};
     const profileFeatures = [
         ...toArray(entry.profile?.features?.classFeatures),
+        ...toArray(entry.profile?.features?.expanded),
         ...toArray(entry.features?.classFeatures),
         ...toArray(entry.classFeatures),
         ...toArray(entry.raw?.classFeatures)
@@ -1535,6 +1724,7 @@ function getSubclassFeatureRecords(classEntry = {}, subclassEntry = {}) {
     const subclass = subclassEntry || {};
     const profileFeatures = [
         ...toArray(subclass.profile?.features?.subclassFeatures),
+        ...toArray(subclass.profile?.features?.expanded),
         ...toArray(subclass.features?.subclassFeatures),
         ...toArray(subclass.subclassFeatures),
         ...toArray(subclass.raw?.subclassFeatures)
@@ -1782,14 +1972,17 @@ function compileFeatures(dto, characterLevel = MAX_CHARACTER_LEVEL) {
                     continue;
                 }
 
-                const catalogId = getCanonicalCatalogId(choice, ["class-feature:", "subclass-feature:"]);
+                const selectedValue = toArray(choice.values)[0] || {};
+                const catalogId = getCanonicalCatalogId(selectedValue, ["class-feature:", "subclass-feature:"])
+                    || getCanonicalCatalogId(choice, ["class-feature:", "subclass-feature:"]);
                 addFeature({
                     id: choice.choiceId || "",
                     catalogId,
                     name: `${choice.label || choice.featureName || "Class Option"}: ${valueLabel}`,
-                    source: choice.featureId || level.class.id || level.class.name || "class",
+                    source: selectedValue.source || choice.featureId || level.class.id || level.class.name || "class",
                     category: "Class Feature",
-                    level: level.characterLevel
+                    level: level.characterLevel,
+                    rulesEntries: selectedValue.rulesEntries || selectedValue.entries || null
                 });
             }
 
@@ -1925,10 +2118,10 @@ function compileBackgroundFeatureChoices(dto) {
     }));
 }
 
-function compileRaceFeatures(dto, characterLevel) {
+function compileRaceFeatures(dto, characterLevel, abilityScores, proficiencyBonus) {
     const features = [];
 
-    function addFeature(id, name, source, description = "", category = "Race Feature") {
+    function addFeature(id, name, source, description = "", category = "Race Feature", rulesEntries = null) {
         if (!name) {
             return;
         }
@@ -1942,11 +2135,25 @@ function compileRaceFeatures(dto, characterLevel) {
             name,
             source,
             description,
-            category
+            category,
+            rulesEntries
         });
     }
 
     const raceProfile = getRaceProfile(dto);
+    for (const [index, entry] of toArray(raceProfile?.rulesEntries).entries()) {
+        if (!entry || typeof entry !== "object" || !entry.name) {
+            continue;
+        }
+        addFeature(
+            `race-trait-${index + 1}`,
+            String(entry.name).replace(/^feature:\s*/iu, ""),
+            dto.baseChoices.race?.name || "race",
+            "",
+            "Race Feature",
+            entry
+        );
+    }
     for (const grant of toArray(raceProfile?.feats?.granted)) {
         addFeature(
             grant?.id || grant?.ref || String(grant),
@@ -1978,11 +2185,23 @@ function compileRaceFeatures(dto, characterLevel) {
         }
 
         if (selection.type === "draconic-ancestry") {
-            addFeature(id, `${selection.label || "Draconic Ancestry"}: ${valueLabel}`, source);
+            const option = getSelectionOptions(selection)[0] || {};
+            const damageType = option.damageType || "";
+            const saveAbility = getDragonBreathSave(selection, option);
+            const saveDc = 8 + (abilityScores?.con?.modifier || 0) + proficiencyBonus;
+            const area = getDragonBreathArea(dto, selection, option);
+            const damageDice = getDragonBreathDice(dto, selection, characterLevel);
+            const uses = isFtdDragonbornSelection(dto, selection)
+                ? `${proficiencyBonus} per long rest`
+                : "1 per short or long rest";
+            const description = [
+                damageType ? `${titleCase(damageType)} damage resistance.` : "",
+                `Breath Weapon: ${area ? `${area}; ` : ""}${formatAbilityLabel(saveAbility)} save DC ${saveDc}; ${[damageDice, damageType].filter(Boolean).join(" ")} damage; ${uses}.`
+            ].filter(Boolean).join(" ");
+            addFeature(id, `${selection.label || "Draconic Ancestry"}: ${valueLabel}`, source, description);
 
             if (isFtdDragonbornSelection(dto, selection) && characterLevel >= 5) {
                 const family = getDragonbornFamily(dto, selection);
-                const damageType = getSelectionOptions(selection)[0]?.damageType || "";
                 if (family === "chromatic") {
                     addFeature("race-chromatic-warding", "Chromatic Warding", source, damageType ? `Gain immunity to ${damageType} damage for 1 minute once per long rest.` : "");
                 } else if (family === "gem") {
@@ -2140,29 +2359,92 @@ function isWeaponInventoryItem(item = {}) {
     );
 }
 
-function compileAttacks(dto, abilityScores, proficiencyBonus) {
-    return toArray(dto.inventory.items)
+function hasClass(dto, className) {
+    const expected = normalizeSearchText(className);
+    return toArray(dto?.levels).some((level) => normalizeSearchText(level?.class?.name) === expected);
+}
+
+function hasRecordedChoice(dto, pattern) {
+    return toArray(dto?.levels).some((level) => toArray(level?.choices).some((choice) => pattern.test([
+        choice?.value,
+        choice?.label,
+        choice?.featureName,
+        ...toArray(choice?.values).flatMap((value) => [value?.value, value?.label, value?.name])
+    ].filter(Boolean).join(" "))));
+}
+
+function isMonkWeaponRecord(record = {}) {
+    const properties = getWeaponPropertyValues(record).map((value) => value.toUpperCase());
+    const category = normalizeSearchText(record.weaponCategory || record.weapon?.category || record.type);
+    const name = normalizeSearchText(record.name || record._displayName || "");
+    const ranged = category.includes("ranged");
+    const heavy = properties.includes("H") || properties.includes("HEAVY");
+    const twoHanded = properties.includes("2H") || properties.includes("TWO-HANDED");
+    return name.includes("shortsword") || (category.includes("simple") && !ranged && !heavy && !twoHanded);
+}
+
+function isRangedWeaponRecord(record = {}) {
+    const properties = getWeaponPropertyValues(record).map((value) => value.toUpperCase());
+    const categoryText = normalizeSearchText([
+        record.weaponCategory,
+        record.weapon?.category,
+        record.type,
+        record._subTypeHtml,
+        ...toArray(record._typeListText)
+    ].filter(Boolean).join(" "));
+    return record.bow === true
+        || Boolean(record.ammoType || record.range || record._fRangeNormal)
+        || properties.includes("A")
+        || properties.includes("AMMUNITION")
+        || /\branged\b/iu.test(categoryText)
+        || normalizeSearchText(record.type) === "r";
+}
+
+function compileAttacks(dto, abilityScores, proficiencyBonus, characterLevel = MAX_CHARACTER_LEVEL) {
+    const monk = hasClass(dto, "Monk");
+    const attacks = toArray(dto.inventory.items)
         .filter(isWeaponInventoryItem)
         .map((item) => {
             const record = item.snapshot || {};
             const properties = getWeaponPropertyValues(record).map((value) => value.toUpperCase());
             const finesse = properties.includes("F") || properties.includes("FINESSE");
-            const ranged = String(record.weaponCategory || record.weapon?.category || record.type || "").toLowerCase().includes("ranged");
-            const ability = ranged || (finesse && abilityScores.dex.modifier > abilityScores.str.modifier) ? "dex" : "str";
+            const ranged = isRangedWeaponRecord(record);
+            const monkWeapon = monk && isMonkWeaponRecord({ ...record, name: item.name });
+            const ability = ranged || ((finesse || monkWeapon) && abilityScores.dex.modifier > abilityScores.str.modifier) ? "dex" : "str";
             const modifier = abilityScores[ability].modifier;
             const attackBonus = getWeaponAttackBonus(record);
             const damageBonus = getWeaponDamageBonus(record);
+            const totalDamageBonus = modifier + damageBonus;
+            const fightingStyleBonus = ranged && hasRecordedChoice(dto, /\barchery\b/iu) ? 2 : 0;
 
             return {
                 name: item.name,
                 ability,
-                attackBonus: modifier + proficiencyBonus + attackBonus,
-                damage: formatWeaponDamageDice(getWeaponDamageDice(record), damageBonus),
+                attackBonus: modifier + proficiencyBonus + attackBonus + fightingStyleBonus,
+                damage: formatWeaponDamageDice(getWeaponDamageDice(record), totalDamageBonus),
+                damageVersatile: formatWeaponDamageDice(getWeaponDamageDice(record, "versatile"), totalDamageBonus),
                 damageType: getWeaponDamageType(record),
                 weaponBonus: attackBonus,
                 damageBonus
             };
         });
+
+    if (monk) {
+        const monkLevel = getMonkLevel(dto, characterLevel);
+        const martialArtsDie = monkLevel >= 17 ? "1d10" : monkLevel >= 11 ? "1d8" : monkLevel >= 5 ? "1d6" : "1d4";
+        const ability = abilityScores.dex.modifier > abilityScores.str.modifier ? "dex" : "str";
+        const modifier = abilityScores[ability].modifier;
+        attacks.push({
+            name: "Unarmed Strike",
+            ability,
+            attackBonus: modifier + proficiencyBonus,
+            damage: formatWeaponDamageDice(martialArtsDie, modifier),
+            damageType: "bludgeoning",
+            summary: "Martial Arts; one additional unarmed strike as a bonus action after attacking with an unarmed strike or monk weapon."
+        });
+    }
+
+    return attacks;
 }
 
 function compileHitDice(classes) {
@@ -2222,6 +2504,28 @@ function addItemDefenses(targets, item = {}) {
     toArray(record?._fCondImm).forEach((value) => addUnique(targets.conditionImmunities, value));
 }
 
+function itemRequiresAttunement(item = {}) {
+    const record = item.snapshot || {};
+    const requirement = item.requiresAttunement
+        ?? item.reqAttune
+        ?? record.requiresAttunement
+        ?? record.reqAttune
+        ?? record.attunement
+        ?? record._attunement;
+    if (requirement === true) {
+        return true;
+    }
+
+    const text = normalizeSearchText(requirement);
+    return Boolean(text && !/^(?:false|no|none)$/u.test(text));
+}
+
+function hasActiveItemEffects(item = {}) {
+    return itemRequiresAttunement(item)
+        ? Boolean(item.attuned)
+        : Boolean(item.equipped);
+}
+
 function compileDefenses(dto) {
     const targets = {
         damageResistances: new Set(),
@@ -2267,7 +2571,7 @@ function compileDefenses(dto) {
         }
     }
 
-    for (const item of toArray(dto.inventory?.items)) {
+    for (const item of toArray(dto.inventory?.items).filter(hasActiveItemEffects)) {
         addItemDefenses(targets, item);
     }
 
@@ -2395,11 +2699,36 @@ function compileRaceActions(dto, abilityScores, proficiencyBonus, characterLevel
         }
     }
 
+    const raceText = normalizeSearchText([
+        dto.baseChoices.race?.id,
+        dto.baseChoices.race?.name,
+        dto.baseChoices.race?.options?.displayName
+    ].filter(Boolean).join(" "));
+    if (/aarakocra/iu.test(raceText)) {
+        const modifier = abilityScores.str?.modifier || 0;
+        actions.push({
+            id: "race-aarakocra-talons",
+            name: "Talons",
+            source: dto.baseChoices.race?.name || "Aarakocra",
+            type: "racial",
+            ability: "str",
+            attackBonus: modifier + proficiencyBonus,
+            damage: formatWeaponDamageDice("1d4", modifier),
+            damageType: "slashing",
+            summary: "Your talons are natural weapons, which you can use to make unarmed strikes."
+        });
+    }
+
     return actions;
 }
 
 function compileRacialSpells(dto, abilityScores, proficiencyBonus) {
-    const ability = normalizeAbilityKey(getRaceSelectionValue(dto, "spellAbility") || getRaceSelectionValue(dto, "race-spellcasting-ability"));
+    const profileSpellBlocks = toArray(getRaceProfile(dto)?.spellcasting?.granted);
+    const ability = normalizeAbilityKey(
+        getRaceSelectionValue(dto, "spellAbility")
+        || getRaceSelectionValue(dto, "race-spellcasting-ability")
+        || profileSpellBlocks.map((block) => block?.ability).find((value) => normalizeAbilityKey(value))
+    );
     const cantrips = [];
     const known = [];
     const innate = [];
@@ -2413,6 +2742,64 @@ function compileRacialSpells(dto, abilityScores, proficiencyBonus) {
             mode: "racial"
         };
     }
+
+    function createProfileSpellEntry(token, mode, recharge = "") {
+        const raw = String(token || "").trim();
+        if (!raw) {
+            return null;
+        }
+        const [identity, castMarker = ""] = raw.split("#", 2);
+        const [rawName, rawSource = ""] = identity.split("|", 2);
+        const level = castMarker.toLowerCase() === "c" ? 0 : Math.max(toNumber(castMarker, mode === "known" ? 0 : 1), 0);
+        const spellName = String(rawName || "")
+            .split(/\s+/u)
+            .map((word, index) => {
+                const titled = titleCase(word);
+                return index > 0 && /^(?:A|An|And|At|For|From|In|Of|On|Or|The|To|With|Without)$/u.test(titled)
+                    ? titled.toLowerCase()
+                    : titled;
+            })
+            .join(" ");
+        return {
+            name: spellName,
+            ref: identity,
+            source: rawSource ? rawSource.toUpperCase() : dto.baseChoices.race?.source || "",
+            level,
+            castAtLevel: castMarker && castMarker.toLowerCase() !== "c" ? toNumber(castMarker, level) : undefined,
+            mode,
+            recharge
+        };
+    }
+
+    function collectProfileSpells(value, mode = "known", unlockAtLevel = 1, recharge = "") {
+        if (typeof value === "string") {
+            if (getLevelFromExperience(dto.identity?.experience) >= unlockAtLevel) {
+                const entry = createProfileSpellEntry(value, mode, recharge);
+                if (entry) {
+                    addUniqueSpell(entry.level === 0 ? cantrips : mode === "innate" ? innate : known, entry);
+                }
+            }
+            return;
+        }
+        if (Array.isArray(value)) {
+            value.forEach((entry) => collectProfileSpells(entry, mode, unlockAtLevel, recharge));
+            return;
+        }
+        if (!value || typeof value !== "object") {
+            return;
+        }
+        for (const [key, nested] of Object.entries(value)) {
+            if (key === "ability") {
+                continue;
+            }
+            const numericUnlock = /^\d+$/u.test(key) ? toNumber(key, unlockAtLevel) : unlockAtLevel;
+            const nextMode = key === "innate" || key === "daily" || key === "rest" ? "innate" : key === "known" ? "known" : mode;
+            const nextRecharge = key === "daily" ? "long rest" : key === "rest" ? "short rest" : recharge;
+            collectProfileSpells(nested, nextMode, numericUnlock, nextRecharge);
+        }
+    }
+
+    profileSpellBlocks.forEach((block) => collectProfileSpells(block));
 
     for (const selection of getRaceSelectionList(dto)) {
         if (selection.type === "cantrip") {
@@ -2807,6 +3194,7 @@ function compileIdentity(dto) {
         ...deepClone(dto.identity),
         race: {
             ...deepClone(dto.baseChoices.race || {}),
+            name: dto.baseChoices.race?.options?.displayName || dto.baseChoices.race?.name || "",
             subrace: dto.baseChoices.subrace?.name || dto.baseChoices.race?.subrace || "",
             size: selectedSize || dto.baseChoices.race?.size || profile?.size?.fixed || "",
             creatureType: toArray(creatureType.types),
@@ -2888,7 +3276,8 @@ export class SheetCompiler {
         const proficiencyBonus = compileProficiencyBonus(level);
         const abilities = compileAbilityScores(dto);
         const classes = compileClasses(dto, abilities, proficiencyBonus, level);
-        const maxHp = dto.levels.reduce((total, levelEntry) => total + toNumber(levelEntry.hp, 0), 0);
+        const recordedMaxHp = toNumber(dto.combatState.maxHp, 0);
+        const maxHp = recordedMaxHp || dto.levels.reduce((total, levelEntry) => total + toNumber(levelEntry.hp, 0), 0);
         const dexModifier = abilities.dex.modifier;
         const racialSpells = compileRacialSpells(dto, abilities, proficiencyBonus);
         const featSpells = compileFeatSpells(dto, abilities, proficiencyBonus);
@@ -2937,13 +3326,13 @@ export class SheetCompiler {
             classChoiceSpells,
             defenses: compileDefenses(dto),
             senses: compileSenses(dto),
-            resources: deepClone(dto.resources),
+            resources: compileTrackedResources(dto, abilities, proficiencyBonus, level),
             inventory: compileInventory(dto),
-            attacks: compileAttacks(dto, abilities, proficiencyBonus),
+            attacks: compileAttacks(dto, abilities, proficiencyBonus, level),
             racialActions: compileRaceActions(dto, abilities, proficiencyBonus, level),
             features: [
                 ...compileFeatures(dto, level),
-                ...compileRaceFeatures(dto, level)
+                ...compileRaceFeatures(dto, level, abilities, proficiencyBonus)
             ],
             featureChoices: [
                 ...compileRaceFeatureChoices(dto),

@@ -40,6 +40,10 @@ function getProficiencyProfile(record) {
     for (const key of ["skills", "tools", "weapons", "armor", "languages"]) {
         profile[key] = normalizeGrantGroup(getStructuredGrantGroup(record, key));
     }
+    if (/aarakocra/iu.test(String(record?.name || ""))) {
+        profile.languages.fixed = profile.languages.fixed
+            .map((language) => String(language).toLowerCase() === "other" ? "Aarakocra" : language);
+    }
     return profile;
 }
 
@@ -167,10 +171,16 @@ function hasSpellAbilityChoice(value) {
 }
 
 function getSpellcastingProfile(record) {
+    const asSpellBlocks = (value) => {
+        if (Array.isArray(value)) {
+            return value;
+        }
+        return value && typeof value === "object" ? [value] : [];
+    };
     const spellBlocks = [
-        ...toArray(record?.additionalSpells),
-        ...toArray(record?.raw?.additionalSpells)
-    ];
+        ...asSpellBlocks(record?.additionalSpells),
+        ...asSpellBlocks(record?.raw?.additionalSpells)
+    ].filter(Boolean);
 
     const abilityChoice = spellBlocks.some((spell) => {
         if (hasSpellAbilityChoice(spell)) {
@@ -186,7 +196,10 @@ function getSpellcastingProfile(record) {
         return found;
     });
 
-    return { abilityChoice };
+    return {
+        abilityChoice,
+        granted: spellBlocks
+    };
 }
 
 function getAbilityProfile(record) {
@@ -215,7 +228,11 @@ export function buildRaceProfile(record, parentRace = null) {
         speeds: getSpeedProfile(record, parentRace),
         size: getSizeProfile(record, parentRace),
         creatureType: getCreatureTypeProfile(record, parentRace),
-        spellcasting: getSpellcastingProfile(record)
+        spellcasting: getSpellcastingProfile(record),
+        rulesEntries: [
+            ...toArray(parentRace?.entries || parentRace?.raw?.entries),
+            ...toArray(record?.entries || record?.raw?.entries)
+        ]
     };
 }
 
