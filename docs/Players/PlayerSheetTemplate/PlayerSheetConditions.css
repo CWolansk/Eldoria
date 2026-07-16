@@ -1,0 +1,91 @@
+.player-sheet-condition-effects {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--sheet-amber, #fbbf24) 38%, var(--sheet-line, #334155));
+  border-left: 4px solid var(--sheet-amber, #fbbf24);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--sheet-amber, #fbbf24) 6%, var(--sheet-panel, #121b25));
+  padding: 0.65rem;
+}
+
+.player-sheet-condition-effects__heading {
+  display: grid;
+  gap: 0.18rem;
+}
+
+.player-sheet-condition-effects__heading h3,
+.player-sheet-condition-effects__heading p {
+  margin: 0;
+}
+
+.player-sheet-condition-effects__heading h3 {
+  color: var(--sheet-text, #e5edf5);
+  font-size: 0.92rem;
+}
+
+.player-sheet-condition-effects__heading p {
+  color: var(--sheet-muted, #9aabba);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.player-sheet-condition-effects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.38rem;
+}
+
+.player-sheet-condition-rule {
+  min-width: 0;
+  border: 1px solid var(--sheet-line, #334155);
+  border-radius: 6px;
+  background: var(--sheet-panel-soft, #17212d);
+  padding: 0.42rem 0.5rem;
+}
+
+.player-sheet-condition-rule summary {
+  display: grid;
+  gap: 0.12rem;
+  color: var(--sheet-text, #e5edf5);
+  cursor: pointer;
+}
+
+.player-sheet-condition-rule summary span,
+.player-sheet-condition-rule li {
+  color: var(--sheet-muted, #9aabba);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.player-sheet-condition-rule ul {
+  margin: 0.45rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.player-sheet-condition-rule--suppressed {
+  opacity: 0.72;
+  border-style: dashed;
+}
+
+.player-sheet-condition-action-warning {
+  margin: 0;
+  border: 1px solid color-mix(in srgb, var(--sheet-red, #f87171) 48%, var(--sheet-line, #334155));
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--sheet-red, #f87171) 8%, var(--sheet-panel, #121b25));
+  color: var(--sheet-red, #f87171);
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.55rem 0.65rem;
+}
+
+@media (max-width: 720px) {
+  .player-sheet-condition-effects {
+    margin-top: 0.45rem;
+    padding: 0.5rem;
+  }
+
+  .player-sheet-condition-effects__grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -30,6 +30,13 @@
 .dm-condition-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); min-height: 2rem; }
 .dm-condition { display: inline-flex; align-items: center; gap: var(--sp-1); border: 1px solid var(--warning); border-radius: var(--radius-round); background: var(--warning-soft); color: var(--warning); padding: .2rem var(--sp-2); font-size: var(--fs-300); }
 .dm-condition button { border: 0; background: transparent; color: inherit; cursor: pointer; font-weight: 900; }
+.dm-condition-rules { display: grid; gap: var(--sp-2); border: 1px solid color-mix(in srgb, var(--warning) 35%, var(--line)); border-radius: var(--radius-2); background: color-mix(in srgb, var(--warning) 5%, var(--panel-soft)); padding: var(--sp-2); }
+.dm-condition-rules > p { margin: 0; color: var(--muted); font-size: var(--fs-100); font-weight: 850; text-transform: uppercase; }
+.dm-condition-rule { border-top: 0 !important; padding-top: 0 !important; }
+.dm-condition-rule summary { display: grid; gap: var(--sp-1); min-height: 0 !important; color: var(--warning) !important; }
+.dm-condition-rule summary span, .dm-condition-rule li { color: var(--muted); font-size: var(--fs-300); font-weight: 500; line-height: 1.35; }
+.dm-condition-rule ul { margin: var(--sp-2) 0 0; padding-left: 1.15rem; }
+.dm-condition-rule--suppressed { opacity: .72; }
 .dm-quick-actions, .dm-secondary-actions { display: grid; grid-template-columns: minmax(5rem, 1fr) repeat(3, auto); gap: var(--sp-2); }
 .dm-quick-actions input { min-width: 0; }
 .dm-secondary-actions { grid-template-columns: minmax(0, 1fr) auto auto; }

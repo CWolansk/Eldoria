@@ -5,6 +5,7 @@ import {
 } from "./PlayerSheetDtoHelper.js";
 import { applyResolvedReferencesToDto } from "./ReferenceResolver.js";
 import { createStructuredOptionCoverage } from "./StructuredOptionCoverage.js";
+import { compileConditionEffects } from "./ConditionRules.js";
 
 const SKILLS = [
     { key: "acrobatics", label: "Acrobatics", ability: "dex" },
@@ -3145,7 +3146,7 @@ function compileAc(dto, abilityScores, characterLevel = MAX_CHARACTER_LEVEL) {
     };
 }
 
-function compileSpeed(dto, characterLevel = MAX_CHARACTER_LEVEL) {
+function compileSpeed(dto, characterLevel = MAX_CHARACTER_LEVEL, conditionEffects = null) {
     const base = toNumber(dto.baseChoices.race?.speed, 30);
     const armorState = getEquippedArmorState(dto);
     const monkMovementBonus = !armorState.hasArmor && !armorState.hasShield
@@ -3194,11 +3195,50 @@ function compileSpeed(dto, characterLevel = MAX_CHARACTER_LEVEL) {
         }
     }
 
+    const movement = conditionEffects?.movement || {};
+    const multiplier = movement.zero ? 0 : toNumber(movement.multiplier, 1);
+    if (movement.zero) {
+        modifiers.push({ source: "condition", label: "Condition: speed becomes 0", value: -walk });
+    } else if (multiplier !== 1) {
+        modifiers.push({ source: "exhaustion", label: "Exhaustion: speed halved", value: `×${multiplier}` });
+    }
+    const effectiveModes = Object.fromEntries(Object.entries(modes)
+        .map(([mode, value]) => [mode, movement.zero ? 0 : toNumber(value, 0) * multiplier]));
+
     return {
         base,
         modifiers,
-        value: walk,
-        modes
+        value: effectiveModes.walk,
+        modes: effectiveModes
+    };
+}
+
+function applyConditionRollEffects(abilities, skills, effects) {
+    const autoFail = new Set(effects?.rolls?.savingThrows?.autoFail || []);
+    for (const [ability, detail] of Object.entries(abilities)) {
+        detail.savingThrow.rollMode = ability === "dex"
+            ? effects?.rolls?.savingThrows?.dexMode || "normal"
+            : effects?.rolls?.savingThrows?.mode || "normal";
+        detail.savingThrow.autoFail = autoFail.has(ability);
+    }
+    for (const detail of Object.values(skills)) {
+        detail.rollMode = effects?.rolls?.abilityChecks?.mode || "normal";
+    }
+}
+
+function applyConditionAttackEffects(entries, effects) {
+    return entries.map((entry) => ({
+        ...entry,
+        rollMode: effects?.rolls?.attacks?.mode || "normal",
+        unavailable: Boolean(effects?.actions?.blocked)
+    }));
+}
+
+function applyConditionDefenseEffects(defenses, effects) {
+    if (!effects?.defenses?.resistanceAll) return defenses;
+    return {
+        ...defenses,
+        damageResistances: [...new Set([...toArray(defenses.damageResistances), "all damage (petrified)"])]
     };
 }
 
@@ -3235,6 +3275,7 @@ function createDisplayIndex() {
         speed: "stat-strip",
         deathSaves: "header",
         conditions: "header",
+        conditionEffects: "header",
         exhaustion: "header",
         damageResistances: "header",
         damageImmunities: "header",
@@ -3291,9 +3332,16 @@ export class SheetCompiler {
         const dto = createActiveLevelDto(sourceDto, level);
         const proficiencyBonus = compileProficiencyBonus(level);
         const abilities = compileAbilityScores(dto);
+        const skills = compileSkills(dto);
         const classes = compileClasses(dto, abilities, proficiencyBonus, level);
         const recordedMaxHp = toNumber(dto.combatState.maxHp, 0);
-        const maxHp = recordedMaxHp || dto.levels.reduce((total, levelEntry) => total + toNumber(levelEntry.hp, 0), 0);
+        const baseMaxHp = recordedMaxHp || dto.levels.reduce((total, levelEntry) => total + toNumber(levelEntry.hp, 0), 0);
+        const baseDefenses = compileDefenses(dto);
+        const conditionEffects = compileConditionEffects(dto.combatState.conditions, dto.combatState.exhaustion, {
+            conditionImmunities: baseDefenses.conditionImmunities
+        });
+        applyConditionRollEffects(abilities, skills, conditionEffects);
+        const maxHp = Math.max(0, Math.floor(baseMaxHp * conditionEffects.hitPoints.maxMultiplier));
         const dexModifier = abilities.dex.modifier;
         const racialSpells = compileRacialSpells(dto, abilities, proficiencyBonus);
         const featSpells = compileFeatSpells(dto, abilities, proficiencyBonus);
@@ -3319,20 +3367,22 @@ export class SheetCompiler {
             proficiencyBonus,
             initiative: dexModifier,
             hp: {
-                base: maxHp,
-                modifiers: [],
+                base: baseMaxHp,
+                modifiers: conditionEffects.hitPoints.maxMultiplier !== 1
+                    ? [{ source: "exhaustion", label: "Exhaustion: hit point maximum halved", value: maxHp - baseMaxHp }]
+                    : [],
                 max: maxHp,
-                current: toNumber(dto.combatState.currentHp, maxHp),
+                current: Math.min(toNumber(dto.combatState.currentHp, maxHp), maxHp),
                 temp: toNumber(dto.combatState.tempHp, 0)
             },
             ac: {
                 ...compileAc(dto, abilities, level)
             },
-            speed: compileSpeed(dto, level),
+            speed: compileSpeed(dto, level, conditionEffects),
             hitDice: compileHitDice(classes),
             deathSaves: deepClone(dto.combatState.deathSaves),
             abilities,
-            skills: compileSkills(dto),
+            skills,
             proficiencies: compileProficiencies(dto),
             classes,
             classResources: compileClassResources(dto, level),
@@ -3340,12 +3390,13 @@ export class SheetCompiler {
             racialSpells,
             featSpells,
             classChoiceSpells,
-            defenses: compileDefenses(dto),
+            defenses: applyConditionDefenseEffects(baseDefenses, conditionEffects),
             senses: compileSenses(dto),
             resources: compileTrackedResources(dto, abilities, proficiencyBonus, level),
             inventory: compileInventory(dto),
-            attacks: compileAttacks(dto, abilities, proficiencyBonus, level),
-            racialActions: compileRaceActions(dto, abilities, proficiencyBonus, level),
+            attacks: applyConditionAttackEffects(compileAttacks(dto, abilities, proficiencyBonus, level), conditionEffects),
+            racialActions: applyConditionAttackEffects(compileRaceActions(dto, abilities, proficiencyBonus, level), conditionEffects),
+            conditionEffects,
             features: [
                 ...compileFeatures(dto, level),
                 ...compileRaceFeatures(dto, level, abilities, proficiencyBonus)

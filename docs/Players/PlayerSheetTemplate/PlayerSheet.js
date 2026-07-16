@@ -21,6 +21,7 @@ import { normalizeCacheKeyPart, readCachedJson, writeCachedJson } from "../web-c
 const DEFAULT_API_BASE_URL = "https://fn-eldoria-ahakafekhxczebhn.eastus-01.azurewebsites.net/api";
 const PLAYER_CHARACTER_CACHE_TTL_MS = 10 * 60 * 1000;
 const PLAYER_CHARACTER_CACHE_MAX_BYTES = 750 * 1024;
+const REMOTE_REFRESH_INTERVAL_MS = 15 * 1000;
 
 function getApiBaseUrl() {
   if (typeof window === "undefined") {
@@ -65,6 +66,8 @@ let saveTimer = null;
 let saveInFlight = false;
 let pendingSaveDto = null;
 let lastSavedFingerprint = "";
+let remoteRefreshInFlight = false;
+let remoteRefreshTimer = null;
 
 const SAVE_DEBOUNCE_MS = 700;
 
@@ -399,6 +402,34 @@ async function renderCurrentPlayerSheet() {
   await window.setTab(currentTabName);
 }
 
+async function refreshPlayerSheetFromApi() {
+  const characterId = getRequestedPlayerId();
+  if (!characterId || remoteRefreshInFlight || hasUnsavedPlayerSheetChanges() || document.hidden) return;
+  remoteRefreshInFlight = true;
+  try {
+    const loadedDto = await api.getCharacterSheet(characterId);
+    const strictDto = PlayerSheetDtoHelper.toSaveDto(loadedDto, { id: characterId });
+    const fingerprint = createSaveFingerprint(strictDto);
+    if (!fingerprint || fingerprint === createSaveFingerprint(currentPlayerSheetDto)) return;
+    rememberPlayerCharacterDto(characterId, strictDto);
+    await applyPlayerSheetDto(strictDto, { persist: false });
+    lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
+    setSaveStatus("saved", "Updated by DM");
+  } catch (error) {
+    console.warn("Unable to refresh DM combat changes:", error);
+  } finally {
+    remoteRefreshInFlight = false;
+  }
+}
+
+function startRemoteRefresh() {
+  if (remoteRefreshTimer) return;
+  remoteRefreshTimer = setInterval(() => void refreshPlayerSheetFromApi(), REMOTE_REFRESH_INTERVAL_MS);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) void refreshPlayerSheetFromApi();
+  });
+}
+
 async function bootPlayersPage() {
 
     setupMobileLevelEditorToggle();
@@ -429,6 +460,7 @@ async function bootPlayersPage() {
         lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
         setSaveStatus("refreshing", "Loading rules...");
         void hydratePlayerSheetReferences(currentPlayerSheetDto);
+        startRemoteRefresh();
     } catch (error) {
         console.error("Failed to boot player sheet:", error);
         if (cached?.value) {
