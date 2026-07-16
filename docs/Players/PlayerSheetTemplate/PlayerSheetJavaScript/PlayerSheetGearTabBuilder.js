@@ -19,6 +19,7 @@ import {
 
 const ITEM_SEARCH_LIMIT = 25;
 const ITEM_SEARCH_DEBOUNCE_MS = 250;
+const SPELL_SCROLL_SEARCH_LIMIT = 25;
 const CURRENCY_KEYS = ["pp", "gp", "ep", "sp", "cp"];
 
 function listCatalogItems(response) {
@@ -83,6 +84,246 @@ function getSearchableItemId(item) {
     // still canonical API entity IDs and must be hydrated before rendering;
     // search results only contain the compact summary and omit rules text.
     return id.includes(":") || /^item-[a-z0-9][a-z0-9-]*$/iu.test(id) ? id : "";
+}
+
+function getContainedSpell(item = {}) {
+    return item?.containedSpell || item?.spell || null;
+}
+
+function isSpellScroll(item, record = {}) {
+    const text = [
+        item?.name,
+        item?.catalog?.name,
+        record?.name,
+        record?.type,
+        record?._typeHtml,
+        ...(Array.isArray(record?._typeListText) ? record._typeListText : [])
+    ].filter(Boolean).join(" ").toLowerCase();
+    return /\bspell\s+scroll\b/u.test(text);
+}
+
+function createRemoveGearButton(item, inventoryIndex, context = {}) {
+    if (!Number.isInteger(inventoryIndex) || typeof context.onChange !== "function") {
+        return null;
+    }
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "player-sheet-button player-sheet-button--small player-sheet-gear-remove";
+    button.textContent = "Remove";
+    button.dataset.gearRemove = String(inventoryIndex);
+    button.setAttribute("aria-label", `Remove ${item?.name || "item"} from gear`);
+    button.addEventListener("click", async () => {
+        button.disabled = true;
+        try {
+            const currentItems = PlayerSheetDtoHelper.getValue(context.dto, "inventory.items", []);
+            const nextItems = currentItems.filter((_, index) => index !== inventoryIndex);
+            const nextDto = PlayerSheetDtoHelper.patch(context.dto, "inventory.items", nextItems);
+            await context.onChange(nextDto);
+        } catch (error) {
+            console.error("Failed to remove gear:", error);
+            button.disabled = false;
+        }
+    });
+    return button;
+}
+
+function toSpellIdentity(spell = {}) {
+    const id = String(spell.id || spell.refId || spell.sourceId || spell.ref || "").trim().replace(/\.json$/iu, "");
+    return {
+        ...(id ? { id } : {}),
+        name: String(spell.name || spell.label || "").trim(),
+        source: String(spell.source || "").trim(),
+        kind: "spells"
+    };
+}
+
+function spellResultMeta(spell = {}) {
+    const level = Number(spell.level);
+    return [
+        spell.source,
+        Number.isFinite(level) ? (level === 0 ? "Cantrip" : `Level ${level}`) : "",
+        spell.school?.name || spell.school
+    ].filter(Boolean).join(" | ");
+}
+
+function buildSpellScrollAssignmentModal(context = {}) {
+    const dialog = document.createElement("dialog");
+    dialog.className = "modal player-sheet__modal player-sheet__modal--spell-scroll";
+    dialog.setAttribute("aria-label", "Set Spell Scroll Spell");
+
+    const content = createElement("div", "modal-content player-sheet__modal-content");
+    const header = createElement("div", "player-sheet__modal-header");
+    const title = createElement("h3", "player-sheet__modal-title", "Set Scroll Spell");
+    const closeButton = document.createElement("button");
+    closeButton.type = "button";
+    closeButton.className = "close player-sheet__modal-close";
+    closeButton.textContent = "X";
+    closeButton.setAttribute("aria-label", "Close Set Scroll Spell");
+    closeButton.addEventListener("click", () => dialog.close());
+    header.append(title, closeButton);
+    content.appendChild(header);
+
+    const picker = createElement("div", "player-sheet-catalog-picker");
+    picker.dataset.mobileView = "results";
+    const controls = createElement("div", "player-sheet-catalog-picker__controls");
+    const searchInput = document.createElement("input");
+    searchInput.type = "search";
+    searchInput.className = "player-sheet-input";
+    searchInput.placeholder = "Spell name";
+    const searchButton = document.createElement("button");
+    searchButton.type = "button";
+    searchButton.className = "player-sheet-button";
+    searchButton.textContent = "Search";
+    controls.append(createModalField("Search spells", searchInput), searchButton);
+    picker.appendChild(controls);
+
+    const status = createElement("p", "player-sheet-catalog-picker__status", "Search for the spell contained in this scroll.");
+    picker.appendChild(status);
+    const main = createElement("div", "player-sheet-catalog-picker__main");
+    const results = createElement("div", "player-sheet-catalog-picker__results");
+    const detail = createElement("div", "player-sheet-catalog-picker__detail");
+    main.append(results, detail);
+    picker.appendChild(main);
+
+    const backButton = document.createElement("button");
+    backButton.type = "button";
+    backButton.className = "player-sheet-button player-sheet-catalog-picker__back";
+    backButton.textContent = "Back to results";
+    backButton.addEventListener("click", () => {
+        picker.dataset.mobileView = "results";
+        searchInput.focus({ preventScroll: true });
+    });
+
+    const footer = createElement("div", "player-sheet-catalog-picker__footer");
+    const clearButton = document.createElement("button");
+    clearButton.type = "button";
+    clearButton.className = "player-sheet-button player-sheet-scroll-spell-clear";
+    clearButton.textContent = "Clear Spell";
+    const saveButton = document.createElement("button");
+    saveButton.type = "button";
+    saveButton.className = "player-sheet-button player-sheet-button--primary";
+    saveButton.textContent = "Save Spell";
+    footer.append(clearButton, saveButton);
+    picker.appendChild(footer);
+    content.appendChild(picker);
+    dialog.appendChild(content);
+
+    let inventoryIndex = -1;
+    let selectedSpell = null;
+    let searchToken = 0;
+
+    function renderSelection(spell) {
+        detail.replaceChildren(backButton);
+        if (!spell) {
+            detail.appendChild(createElement("p", "player-sheet-empty-state", "Select a spell from the results."));
+            saveButton.disabled = true;
+            return;
+        }
+        const card = createElement("article", "player-sheet-info-card player-sheet-scroll-spell-card");
+        card.appendChild(createElement("h4", "player-sheet-info-card__title", spell.name || "Unknown Spell"));
+        const meta = spellResultMeta(spell);
+        if (meta) card.appendChild(createElement("p", "player-sheet-info-card__description", meta));
+        detail.appendChild(card);
+        saveButton.disabled = typeof context.onChange !== "function";
+    }
+
+    async function runSearch() {
+        const query = searchInput.value.trim();
+        if (query.length < 2) {
+            status.textContent = query ? "Type at least 2 characters." : "Search for the spell contained in this scroll.";
+            results.replaceChildren();
+            return;
+        }
+        if (!context.api || typeof context.api.searchCatalog !== "function") {
+            status.textContent = "Spell catalog API is unavailable.";
+            return;
+        }
+
+        const token = ++searchToken;
+        status.textContent = "Searching spells...";
+        results.replaceChildren(createElement("p", "player-sheet-empty-state", "Searching..."));
+        try {
+            const response = await context.api.searchCatalog("spells", query, { limit: SPELL_SCROLL_SEARCH_LIMIT });
+            if (token !== searchToken) return;
+            const spells = listCatalogItems(response);
+            results.replaceChildren();
+            if (!spells.length) {
+                results.appendChild(createElement("p", "player-sheet-empty-state", "No spells found."));
+            }
+            for (const spell of spells) {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.className = "player-sheet-catalog-result";
+                button.appendChild(createElement("span", "player-sheet-catalog-result__name", spell.name || "Unknown Spell"));
+                button.appendChild(createElement("span", "player-sheet-catalog-result__meta", spellResultMeta(spell)));
+                button.addEventListener("click", () => {
+                    selectedSpell = toSpellIdentity(spell);
+                    renderSelection({ ...spell, ...selectedSpell });
+                    picker.dataset.mobileView = "detail";
+                    detail.scrollTop = 0;
+                });
+                results.appendChild(button);
+            }
+            status.textContent = `${spells.length} spell${spells.length === 1 ? "" : "s"} shown.`;
+        } catch (error) {
+            console.error("Spell scroll search failed:", error);
+            results.replaceChildren(createElement("p", "player-sheet-empty-state", "Spell search failed."));
+            status.textContent = "Spell search failed.";
+        }
+    }
+
+    async function saveSelection(spell) {
+        if (!Number.isInteger(inventoryIndex) || typeof context.onChange !== "function") return;
+        const currentItems = PlayerSheetDtoHelper.getValue(context.dto, "inventory.items", []);
+        const nextItems = currentItems.map((entry, index) => index === inventoryIndex
+            ? { ...entry, containedSpell: spell }
+            : entry);
+        const nextDto = PlayerSheetDtoHelper.patch(context.dto, "inventory.items", nextItems);
+        await context.onChange(nextDto);
+        dialog.close();
+    }
+
+    searchButton.addEventListener("click", () => void runSearch());
+    searchInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            void runSearch();
+        }
+    });
+    saveButton.addEventListener("click", () => void saveSelection(selectedSpell));
+    clearButton.addEventListener("click", () => void saveSelection(null));
+
+    return {
+        dialog,
+        open(item, index) {
+            inventoryIndex = index;
+            selectedSpell = getContainedSpell(item);
+            title.textContent = `Set Spell: ${item?.name || "Spell Scroll"}`;
+            searchInput.value = selectedSpell?.name || "";
+            results.replaceChildren();
+            picker.dataset.mobileView = selectedSpell ? "detail" : "results";
+            renderSelection(selectedSpell);
+            clearButton.hidden = !selectedSpell;
+            status.textContent = selectedSpell
+                ? `Currently set to ${selectedSpell.name}. Search to change it.`
+                : "Search for the spell contained in this scroll.";
+            if (typeof dialog.showModal === "function") dialog.showModal();
+        }
+    };
+}
+
+function createSpellScrollButton(item, inventoryIndex, scrollModal, context = {}) {
+    if (!Number.isInteger(inventoryIndex) || typeof context.onChange !== "function") return null;
+    const spell = getContainedSpell(item);
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "player-sheet-button player-sheet-button--small player-sheet-scroll-spell";
+    button.textContent = spell ? "Change Spell" : "Set Spell";
+    button.dataset.scrollSpell = String(inventoryIndex);
+    button.setAttribute("aria-label", `${spell ? "Change" : "Set"} spell for ${item?.name || "spell scroll"}`);
+    button.addEventListener("click", () => scrollModal.open(item, inventoryIndex));
+    return button;
 }
 
 function getPagedSearchState(response, skip, items) {
@@ -574,6 +815,8 @@ export async function BuildPlayerSheetGearTab(playerSheetObject, context = {}) {
         }
     });
     shell.appendChild(modal);
+    const scrollSpellModal = buildSpellScrollAssignmentModal(context);
+    shell.appendChild(scrollSpellModal.dialog);
 
     appendCurrency(shell, playerSheetObject?.inventory?.currency || {}, context);
 
@@ -587,8 +830,15 @@ export async function BuildPlayerSheetGearTab(playerSheetObject, context = {}) {
 
     const list = createItemList();
     for (const { item, record, inventoryIndex } of resolvedItems) {
+        const scrollSpell = getContainedSpell(item);
+        const actions = [createEquipToggle(item, inventoryIndex, context)];
+        if (isSpellScroll(item, record)) {
+            actions.push(createSpellScrollButton(item, inventoryIndex, scrollSpellModal, context));
+        }
+        actions.push(createRemoveGearButton(item, inventoryIndex, context));
         list.appendChild(createItemListItem(item, record, {
-            actions: [createEquipToggle(item, inventoryIndex, context)],
+            actions,
+            metrics: scrollSpell?.name ? [["Spell", scrollSpell.name]] : [],
             rows: ["Damage", "Versatile", "AC", "Value", "Weight", "Attunement"]
         }));
     }
