@@ -3,6 +3,7 @@ import {
     createEquipToggle,
     createItemList,
     createItemListItem,
+    createSection,
     createTabShell,
     formatDamageDiceWithBonus,
     getDamageTypeLabel,
@@ -26,10 +27,10 @@ function formatDamageOption(dice, type) {
         return "";
     }
 
-    return [
-        dice,
-        getDamageTypeLabel(type)
-    ].filter(Boolean).join(" ");
+    const typeLabel = getDamageTypeLabel(type);
+    const includesType = typeLabel
+        && String(dice).toLowerCase().includes(String(typeLabel).toLowerCase());
+    return [dice, includesType ? "" : typeLabel].filter(Boolean).join(" ");
 }
 
 function getDamageOptions(attack, record) {
@@ -48,9 +49,34 @@ function getDamageOptions(attack, record) {
 
     const damageType = attack?.damageType || getItemDamageType(record);
     addOption(formatDamageOption(attack?.damage, damageType));
-    addOption(formatDamageOption(formatDamageDiceWithBonus(getItemDamageDice(record), record), damageType));
-    addOption(formatDamageOption(formatDamageDiceWithBonus(getItemDamageDice(record, "versatile"), record), damageType));
+    addOption(formatDamageOption(attack?.damageVersatile, damageType));
+    if (!attack) {
+        addOption(formatDamageOption(formatDamageDiceWithBonus(getItemDamageDice(record), record), damageType));
+        addOption(formatDamageOption(formatDamageDiceWithBonus(getItemDamageDice(record, "versatile"), record), damageType));
+    }
     return options.join(" / ");
+}
+
+function getActionMetrics(action = {}) {
+    return [
+        action.attackBonus != null ? ["Hit", `${action.attackBonus >= 0 ? "+" : ""}${action.attackBonus}`] : null,
+        action.saveDc != null ? ["Save", `${String(action.saveAbility || "").toUpperCase()} DC ${action.saveDc}`] : null,
+        action.damage ? ["Damage", formatDamageOption(action.damage, action.damageType)] : null,
+        action.area ? ["Area", action.area] : null,
+        action.uses ? ["Uses", action.uses] : null
+    ].filter(Boolean);
+}
+
+function createActionRow(action = {}) {
+    return createItemListItem({
+        name: action.name || "Action",
+        source: action.source || ""
+    }, {
+        entries: action.summary ? [action.summary] : []
+    }, {
+        showMeta: true,
+        metrics: getActionMetrics(action)
+    });
 }
 
 function getAttackMetrics(attack, record) {
@@ -78,18 +104,33 @@ export async function BuildPlayerSheetOffenseTab(playerSheetObject, context = {}
     const list = createItemList();
     const resolvedItems = await resolveInventoryItems(playerSheetObject, context.api);
     const offensiveItems = resolvedItems.filter((entry) => entry.offensive);
+    const offensiveItemNames = new Set(offensiveItems.map(({ item }) => String(item?.name || "").trim().toLowerCase()));
+    const standaloneAttacks = (playerSheetObject?.attacks || [])
+        .filter((attack) => !offensiveItemNames.has(String(attack?.name || "").trim().toLowerCase()));
+    const actions = [...standaloneAttacks, ...(playerSheetObject?.racialActions || [])];
 
-    if (!offensiveItems.length) {
-        appendEmptyState(shell, "No offensive gear recorded.");
+    if (!offensiveItems.length && !actions.length) {
+        appendEmptyState(shell, "No attacks, actions, or offensive gear recorded.");
         return;
     }
 
-    for (const { item, record, inventoryIndex } of offensiveItems) {
-        list.appendChild(createItemListItem(item, record, {
-            actions: [createEquipToggle(item, inventoryIndex, context)],
-            metrics: getAttackMetrics(getAttackForItem(playerSheetObject, item), record)
-        }));
+    if (actions.length) {
+        const actionSection = createSection("Actions");
+        const actionList = createItemList();
+        actions.forEach((action) => actionList.appendChild(createActionRow(action)));
+        actionSection.appendChild(actionList);
+        shell.appendChild(actionSection);
     }
 
-    shell.appendChild(list);
+    if (offensiveItems.length) {
+        const gearSection = createSection("Weapons & Offensive Gear");
+        for (const { item, record, inventoryIndex } of offensiveItems) {
+            list.appendChild(createItemListItem(item, record, {
+                actions: [createEquipToggle(item, inventoryIndex, context)],
+                metrics: getAttackMetrics(getAttackForItem(playerSheetObject, item), record)
+            }));
+        }
+        gearSection.appendChild(list);
+        shell.appendChild(gearSection);
+    }
 }

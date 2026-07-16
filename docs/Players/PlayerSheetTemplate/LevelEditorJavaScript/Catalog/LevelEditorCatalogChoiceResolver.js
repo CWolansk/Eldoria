@@ -244,6 +244,68 @@ export function getLinkedFeatureRefs(entity, options = {}) {
         }
     }
 
+    function catalogSlug(value) {
+        return String(value || "")
+            .normalize("NFKD")
+            .replace(/[\u0300-\u036f]/gu, "")
+            .replace(/['’]/gu, "")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/gu, "-")
+            .replace(/^-+|-+$/gu, "");
+    }
+
+    function createNestedRefIdentity(type, rawRef) {
+        const parts = String(rawRef || "").split("|");
+        const name = parts[0] || "";
+        const className = parts[1] || "";
+        if (!name || !className) {
+            return null;
+        }
+
+        if (type === "refSubclassFeature") {
+            const subclassName = parts[3] || "";
+            const source = parts[4] || entity?.source || parts[2] || "PHB";
+            const level = parts[5] || "";
+            const id = subclassName && level
+                ? `subclass-feature:${catalogSlug(className)}-${catalogSlug(subclassName)}-${catalogSlug(name)}-${level}:${catalogSlug(source)}`
+                : "";
+            return { id, name, ref: rawRef, source, kind: "subclass-feature" };
+        }
+
+        const source = parts[2] || entity?.source || "PHB";
+        const level = parts[3] || "";
+        const id = level
+            ? `class-feature:${catalogSlug(className)}-${catalogSlug(name)}-${level}:${catalogSlug(source)}`
+            : "";
+        return { id, name, ref: rawRef, source, kind: "class-feature" };
+    }
+
+    function collectNestedRefs(value) {
+        if (Array.isArray(value)) {
+            value.forEach(collectNestedRefs);
+            return;
+        }
+        if (!value || typeof value !== "object") {
+            return;
+        }
+        if (["refClassFeature", "refSubclassFeature"].includes(value.type)) {
+            const rawRef = value.type === "refSubclassFeature" ? value.subclassFeature : value.classFeature;
+            const identity = createNestedRefIdentity(value.type, rawRef);
+            if (identity) refs.push(identity);
+            return;
+        }
+        for (const [key, nested] of Object.entries(value)) {
+            if (["refClassFeature", "refSubclassFeature"].includes(key) && typeof nested === "string") {
+                const identity = createNestedRefIdentity(key, nested);
+                if (identity) refs.push(identity);
+                continue;
+            }
+            collectNestedRefs(nested);
+        }
+    }
+    collectNestedRefs(entity?.entries);
+    collectNestedRefs(entity?.raw?.entries);
+
     return refs.filter(Boolean);
 }
 
@@ -266,6 +328,7 @@ export async function expandCatalogRecords(context, rootRecords, options = {}) {
             const feature = await resolveCatalogFeatureEntity(context, ref, {
                 fallbackIdentity: false,
                 featureKinds: options.featureKinds,
+                allowNameLookup: true,
                 limit: options.limit || 30
             });
             const before = records.length;
@@ -292,9 +355,15 @@ function cloneChoice(choice) {
 }
 
 function getRawStructuredEntries(entity, fieldName) {
+    const asEntries = (value) => {
+        if (Array.isArray(value)) {
+            return value;
+        }
+        return value && typeof value === "object" ? [value] : [];
+    };
     return [
-        ...toArray(entity?.[fieldName]),
-        ...toArray(entity?.raw?.[fieldName])
+        ...asEntries(entity?.[fieldName]),
+        ...asEntries(entity?.raw?.[fieldName])
     ];
 }
 

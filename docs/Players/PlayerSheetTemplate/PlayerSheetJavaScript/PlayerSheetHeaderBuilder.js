@@ -147,6 +147,19 @@ function buildExperienceHint(playerSheetObject) {
     return `${formatNumber(progression.experienceToNextLevel)} to level ${progression.nextLevel}`;
 }
 
+function formatSpeed(playerSheetObject) {
+    const speed = playerSheetObject?.speed || {};
+    const walk = Number(speed.modes?.walk ?? speed.value) || 0;
+    const modes = [`${walk} ft`];
+    for (const [mode, value] of Object.entries(speed.modes || {})) {
+        const amount = Number(value) || 0;
+        if (mode !== "walk" && amount > 0) {
+            modes.push(`${mode} ${amount} ft`);
+        }
+    }
+    return modes.join(" / ");
+}
+
 function renderExperienceControl(headerHTML, playerSheetObject, options = {}) {
     const element = headerHTML.querySelector(".XP");
     if (!element) {
@@ -218,7 +231,7 @@ export function BuildPlayerSheetHeader(playerSheetObject, options = {}) {
     setHeaderText(headerHTML, "Proficiency", "Prof : +" + proficiencyBonus);
 
     setHeaderText(headerHTML, "Size", "Size : " + (GetJsonPathValues(playerSheetObject, "identity.race.size") || ""));
-    setHeaderText(headerHTML, "Speed", "Speed : " + (GetJsonPathValues(playerSheetObject, "speed.value") || "") + " ft");
+    setHeaderText(headerHTML, "Speed", "Speed : " + formatSpeed(playerSheetObject));
 
     for(const ability of ABILITIES) {
         const headerClasses = HEADER_ABILITY_CLASSES[ability.key];

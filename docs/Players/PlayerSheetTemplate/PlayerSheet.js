@@ -366,8 +366,10 @@ async function hydratePlayerSheetReferences(dtoSnapshot) {
     currentRuntimePlayerSheetDto = applyResolvedReferencesToDto(currentPlayerSheetDto, references);
     currentCharacterSheet = SheetCompiler.compile(currentPlayerSheetDto, { references });
     await renderCurrentPlayerSheet();
+    setSaveStatus("saved", "Saved");
   } catch (error) {
     console.warn("Background reference resolution failed; keeping the rendered strict DTO:", error);
+    setSaveStatus("partial", "Saved; some rules could not be loaded.");
   }
 }
 
@@ -425,7 +427,7 @@ async function bootPlayersPage() {
             resolveReferences: false
         });
         lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
-        setSaveStatus("saved", "Saved");
+        setSaveStatus("refreshing", "Loading rules...");
         void hydratePlayerSheetReferences(currentPlayerSheetDto);
     } catch (error) {
         console.error("Failed to boot player sheet:", error);

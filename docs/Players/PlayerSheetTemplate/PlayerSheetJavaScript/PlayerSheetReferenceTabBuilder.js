@@ -23,12 +23,36 @@ export function BuildPlayerSheetReferenceTab(PlayerSheetObj) {
     ]));
     shell.appendChild(characterSection);
 
+    appendTrackedResources(shell, PlayerSheetObj.resources || []);
     appendClassResources(shell, PlayerSheetObj.classResources || []);
 
     const sourceSection = createSection("Allowed Sources");
     const sources = GetJsonPathValues(PlayerSheetObj, "sourcePolicy.allowedSources") || [];
     sourceSection.appendChild(createElement("p", "player-sheet-reference__sources", sources.length ? sources.join(", ") : "None"));
     shell.appendChild(sourceSection);
+}
+
+function appendTrackedResources(shell, resources) {
+    if (!resources.length) {
+        return;
+    }
+    const section = createSection("Tracked Resources");
+    const list = createElement("div", "player-sheet-class-resource-list");
+    for (const resource of resources) {
+        const card = createElement("article", "player-sheet-info-card player-sheet-class-resource");
+        card.appendChild(createElement("h4", "player-sheet-info-card__title", resource.name || "Resource"));
+        card.appendChild(createDefinitionList([
+            ["Available", `${resource.current ?? resource.max ?? 0} / ${resource.max ?? resource.current ?? 0}`],
+            ["Recharge", resource.recharge || "Unspecified"],
+            ["Source", resource.source || ""]
+        ].filter(([, value]) => value !== "")));
+        if (resource.description) {
+            card.appendChild(createElement("p", "player-sheet-info-card__description", resource.description));
+        }
+        list.appendChild(card);
+    }
+    section.appendChild(list);
+    shell.appendChild(section);
 }
 
 function appendClassResources(shell, resources) {

@@ -18,6 +18,7 @@ import {
     buildSubclassProfile
 } from "./LevelEditorJavaScript/CatalogProfile/Builder.js";
 import { buildRaceProfile } from "./LevelEditorJavaScript/Race/LevelEditorRaceProfile.js";
+import { expandCatalogRecords } from "./LevelEditorJavaScript/Catalog/LevelEditorCatalogChoiceResolver.js";
 
 function clone(value) {
     if (value == null) {
@@ -143,7 +144,7 @@ function hydrateBackground(identity, record) {
     });
 }
 
-function hydrateClass(identity, record) {
+function hydrateClass(identity, record, linkedRecords = []) {
     if (!record) {
         return identity;
     }
@@ -152,11 +153,11 @@ function hydrateClass(identity, record) {
     return mergeIdentity(identity, createClassDto(record, classLevel), {
         classFeatures: clone(record.classFeatures || record.raw?.classFeatures || []),
         featureRefs: clone(record.featureRefs || record.features || []),
-        profile: buildClassProfile(record)
+        profile: buildClassProfile(record, { linkedRecords })
     });
 }
 
-function hydrateSubclass(identity, record) {
+function hydrateSubclass(identity, record, linkedRecords = []) {
     if (!record) {
         return identity;
     }
@@ -164,7 +165,7 @@ function hydrateSubclass(identity, record) {
     return mergeIdentity(identity, createSubclassDto(record), {
         subclassFeatures: clone(record.subclassFeatures || record.raw?.subclassFeatures || []),
         featureRefs: clone(record.featureRefs || record.features || []),
-        profile: buildSubclassProfile(record)
+        profile: buildSubclassProfile(record, { linkedRecords })
     });
 }
 
@@ -248,6 +249,13 @@ export async function resolvePlayerSheetReferences(dtoInput, api) {
             const record = await resolveIdentity(catalog, target.kind, identity);
             if (record) {
                 byPath[target.path] = record;
+                if (target.kind === "classes" || target.kind === "subclasses") {
+                    const expanded = await expandCatalogRecords({ api }, [record], {
+                        includeLinkedFeatures: true,
+                        recursive: true
+                    });
+                    byPath[`${target.path}.__linked`] = expanded.slice(1);
+                }
             }
         } catch (error) {
             failures.push({
@@ -285,7 +293,11 @@ export function applyResolvedReferencesToDto(dtoInput, references = {}) {
 
         const identity = getPath(runtimeDto, target.path);
         if (typeof target.hydrate === "function") {
-            setPath(runtimeDto, target.path, target.hydrate(identity, record));
+            setPath(runtimeDto, target.path, target.hydrate(
+                identity,
+                record,
+                recordsByPath[`${target.path}.__linked`] || []
+            ));
         }
     }
 

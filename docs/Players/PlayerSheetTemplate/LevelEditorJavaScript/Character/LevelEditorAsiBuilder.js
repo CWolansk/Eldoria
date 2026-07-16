@@ -164,11 +164,14 @@ export function buildAsiContent(context) {
             return;
         }
 
-        const nextDto = PlayerSheetDtoHelper.patch(
+        let nextDto = PlayerSheetDtoHelper.patch(
             context.dto,
             `levels.${levelIndex}.AbilityScoreIncrease`,
             expandIncreases(increases)
         );
+        if (getAllocatedTotal() > 0) {
+            nextDto = PlayerSheetDtoHelper.patch(nextDto, `levels.${levelIndex}.feat`, null);
+        }
         context.onChange(nextDto);
         applyButton.closest("dialog")?.close();
     });

@@ -1037,7 +1037,8 @@ export function buildFeatContent(editorContext) {
             // Store the feat identity, profile, and any required feat-specific choices.
             const featDto = createFeatDto(featRecord, extraFeatChoices);
             featDto.profile = buildFeatProfile(featRecord);
-            return PlayerSheetDtoHelper.patch(characterDto, `levels.${levelIndex}.feat`, featDto);
+            const withFeat = PlayerSheetDtoHelper.patch(characterDto, `levels.${levelIndex}.feat`, featDto);
+            return PlayerSheetDtoHelper.patch(withFeat, `levels.${levelIndex}.AbilityScoreIncrease`, []);
         }
     });
 }
