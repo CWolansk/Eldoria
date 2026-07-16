@@ -5,6 +5,7 @@ const {
   listCharacters,
   normalizeDocumentId,
   readCharacterSheet,
+  readCharacterSheetWithMetadata,
   readPlayersManifest,
   writeCharacterSheet,
   writePlayersManifest
@@ -114,13 +115,31 @@ async function saveCharacterSheetHandler(request, context) {
   return withErrors(request, context, async () => {
     const id = getId(request);
     const body = await readRequestJson(request);
+    const current = await readCharacterSheetWithMetadata(id);
+    const expectedLastModified = String(body.lastModified || "").trim();
+    const currentLastModified = String(current?.document?.lastModified || "").trim();
+    if (current && expectedLastModified && currentLastModified && expectedLastModified !== currentLastModified) {
+      throw httpError(409, "Character sheet changed since it was loaded. Refresh before saving again.", {
+        id,
+        expectedLastModified,
+        currentLastModified
+      });
+    }
     const timestamp = new Date().toISOString();
     const dto = normalizePlayerSheetDto(body, {
       id,
       lastModified: timestamp
     });
     dto.lastModified = timestamp;
-    const stored = await writeCharacterSheet(id, dto);
+    let stored;
+    try {
+      stored = await writeCharacterSheet(id, dto, { ifMatch: current?.etag });
+    } catch (error) {
+      if (error?.statusCode === 412 || error?.code === "ConditionNotMet") {
+        throw httpError(409, "Character sheet changed while it was being saved. Refresh and try again.", { id });
+      }
+      throw error;
+    }
     return json(request, 200, stored);
   });
 }

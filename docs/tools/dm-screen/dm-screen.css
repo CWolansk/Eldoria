@@ -1,0 +1,66 @@
+.dm-screen { width: min(92rem, calc(100vw - 2rem)); padding-block: var(--sp-5) var(--sp-8); }
+.dm-screen, .dm-panel, .dm-character-card, .dm-item-form, .dm-reference-card { display: grid; gap: var(--sp-4); }
+.dm-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(19rem, 28rem); gap: var(--sp-5); align-items: center; border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: var(--radius-3); background: var(--panel); padding: var(--sp-5); }
+.dm-hero > div { display: grid; gap: var(--sp-2); }
+.dm-hero p { color: var(--muted); }
+.dm-item-browser > label, .dm-item-form label, .dm-dialog__body > label { color: var(--muted); font-size: var(--fs-100); font-weight: 850; text-transform: uppercase; }
+.dm-connection-status { display: flex; align-items: center; justify-content: flex-end; gap: var(--sp-3); }
+#dm-access-status, .dm-form-status { color: var(--muted); font-size: var(--fs-300); }
+.dm-tabs { display: flex; gap: var(--sp-2); overflow-x: auto; border-bottom: 1px solid var(--line); padding-top: var(--sp-4); }
+.dm-tab { flex: 0 0 auto; min-height: 2.75rem; border: 0; border-bottom: 3px solid transparent; background: transparent; color: var(--muted); cursor: pointer; font-weight: 850; padding: var(--sp-3); }
+.dm-tab[aria-selected="true"] { border-bottom-color: var(--accent); color: var(--ink); }
+.dm-panel { padding-top: var(--sp-2); }
+.dm-panel__header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--sp-3); }
+.dm-panel__header p { color: var(--muted); }
+.dm-party-summary { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.dm-summary-chip { border: 1px solid var(--line); border-radius: var(--radius-round); background: var(--panel); padding: var(--sp-2) var(--sp-3); font-size: var(--fs-300); }
+.dm-character-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr)); gap: var(--sp-4); }
+.dm-character-card { min-width: 0; border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--radius-3); background: var(--panel); box-shadow: var(--shadow-1); padding: var(--sp-4); }
+.dm-character-card__header { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr) auto; align-items: center; gap: var(--sp-3); }
+.dm-character-card__portrait { width: 3.5rem; height: 3.5rem; border-radius: 50%; object-fit: cover; background: var(--panel-soft); }
+.dm-character-card__identity { min-width: 0; }
+.dm-character-card__identity h3 { overflow-wrap: anywhere; }
+.dm-character-card__identity p { color: var(--muted); font-size: var(--fs-300); }
+.dm-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-2); }
+.dm-metric { border: 1px solid var(--line-soft); border-radius: var(--radius-2); background: var(--panel-soft); padding: var(--sp-2); text-align: center; }
+.dm-metric strong, .dm-metric span { display: block; }
+.dm-metric span { color: var(--muted); font-size: var(--fs-100); text-transform: uppercase; }
+.dm-hp-bar { height: .55rem; overflow: hidden; border-radius: var(--radius-round); background: var(--panel-soft); }
+.dm-hp-bar span { display: block; width: var(--hp-percent); height: 100%; background: var(--success); }
+.dm-condition-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); min-height: 2rem; }
+.dm-condition { display: inline-flex; align-items: center; gap: var(--sp-1); border: 1px solid var(--warning); border-radius: var(--radius-round); background: var(--warning-soft); color: var(--warning); padding: .2rem var(--sp-2); font-size: var(--fs-300); }
+.dm-condition button { border: 0; background: transparent; color: inherit; cursor: pointer; font-weight: 900; }
+.dm-quick-actions, .dm-secondary-actions { display: grid; grid-template-columns: minmax(5rem, 1fr) repeat(3, auto); gap: var(--sp-2); }
+.dm-quick-actions input { min-width: 0; }
+.dm-secondary-actions { grid-template-columns: minmax(0, 1fr) auto auto; }
+.dm-secondary-actions select { min-width: 0; }
+.dm-character-card details { border-top: 1px solid var(--line-soft); padding-top: var(--sp-2); }
+.dm-character-card summary { min-height: 2.5rem; color: var(--accent); cursor: pointer; font-weight: 800; }
+.dm-more-controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: var(--sp-2); align-items: end; }
+.dm-more-controls label { display: grid; gap: var(--sp-1); color: var(--muted); font-size: var(--fs-100); font-weight: 800; text-transform: uppercase; }
+.dm-card-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-2); color: var(--muted); font-size: var(--fs-300); }
+.dm-card-footer button { border: 0; background: transparent; color: var(--accent); cursor: pointer; font-weight: 800; }
+.dm-empty { color: var(--muted); padding: var(--sp-4); text-align: center; }
+.dm-item-layout { display: grid; grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr); gap: var(--sp-4); align-items: start; }
+.dm-item-browser, .dm-item-form, .dm-reference-card { border: 1px solid var(--line); border-radius: var(--radius-3); background: var(--panel); padding: var(--sp-4); }
+.dm-item-browser { display: grid; gap: var(--sp-3); position: sticky; top: calc(var(--header-height) + var(--sp-3)); }
+.dm-item-results { display: grid; gap: var(--sp-2); max-height: 34rem; overflow: auto; }
+.dm-item-result { display: grid; gap: var(--sp-1); width: 100%; border: 1px solid var(--line-soft); border-radius: var(--radius-2); background: var(--bg); color: var(--ink); cursor: pointer; padding: var(--sp-3); text-align: left; }
+.dm-item-result:hover { border-color: var(--accent); }
+.dm-item-result span { color: var(--muted); font-size: var(--fs-300); }
+.dm-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-3); }
+.dm-item-form label { display: grid; gap: var(--sp-1); }
+.dm-form-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.dm-reference-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(18rem, .75fr); gap: var(--sp-4); align-items: start; }
+.dm-reference-party { display: grid; gap: var(--sp-2); }
+.dm-reference-row { display: grid; grid-template-columns: minmax(8rem, .7fr) repeat(3, minmax(0, 1fr)); gap: var(--sp-2); border-top: 1px solid var(--line-soft); padding-top: var(--sp-2); font-size: var(--fs-300); }
+.dm-reference-row span { overflow-wrap: anywhere; }
+.dm-link-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-2); }
+.dm-link-grid a { display: grid; gap: var(--sp-1); border: 1px solid var(--line-soft); border-radius: var(--radius-2); background: var(--bg); padding: var(--sp-3); text-decoration: none; }
+.dm-link-grid span { color: var(--muted); font-size: var(--fs-300); }
+.dm-dialog { width: min(38rem, calc(100vw - 1rem)); max-height: calc(100dvh - 1rem); border: 1px solid var(--line); border-radius: var(--radius-3); background: var(--panel); color: var(--ink); padding: 0; }
+.dm-dialog::backdrop { background: rgb(0 0 0 / 65%); }
+.dm-dialog__header { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); border-bottom: 1px solid var(--line); padding: var(--sp-3); }
+.dm-dialog__body { display: grid; gap: var(--sp-3); padding: var(--sp-4); }
+@media (max-width: 800px) { .dm-hero, .dm-item-layout, .dm-reference-grid { grid-template-columns: 1fr; } .dm-item-browser { position: static; } }
+@media (max-width: 620px) { .dm-screen { width: min(100% - 1rem, 92rem); } .dm-hero, .dm-character-card, .dm-item-browser, .dm-item-form, .dm-reference-card { padding: var(--sp-3); } .dm-connection-status, .dm-panel__header { align-items: stretch; flex-direction: column; } .dm-character-grid, .dm-form-grid, .dm-link-grid { grid-template-columns: 1fr; } .dm-character-card__header { grid-template-columns: 3rem minmax(0, 1fr); } .dm-character-card__portrait { width: 3rem; height: 3rem; } .dm-character-card__header > .button { grid-column: 1 / -1; } .dm-metrics { grid-template-columns: repeat(2, 1fr); } .dm-quick-actions { grid-template-columns: 1fr 1fr; } .dm-quick-actions input { grid-column: 1 / -1; } .dm-secondary-actions, .dm-reference-row, .dm-more-controls { grid-template-columns: 1fr; } .dm-quick-actions .button, .dm-secondary-actions .button, .dm-more-controls .button { min-height: 2.75rem; } }

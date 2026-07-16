@@ -413,6 +413,17 @@ export class EldoriaApiClient {
     return this.request("characters");
   }
 
+  getDmParty() {
+    return this.request("dm/party");
+  }
+
+  applyDmCharacterAction(id, action) {
+    return this.request(`dm/characters/${encodeURIComponent(normalizeDocumentId(id))}/actions`, {
+      method: "POST",
+      body: action
+    });
+  }
+
   getCatalogManifest() {
     return this.request("catalog");
   }

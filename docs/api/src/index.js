@@ -14,6 +14,7 @@ const {
   catalogEntityHandler
 } = require("./catalog");
 const { publicIndexHandler } = require("./publicIndexes");
+const { dmCharacterActionHandler, dmPartyHandler } = require("./dmDashboard");
 
 app.http("health", {
   methods: ["GET", "OPTIONS"],
@@ -41,6 +42,20 @@ app.http("characterSheet", {
   authLevel: "anonymous",
   route: "characters/{id}",
   handler: characterSheetHandler
+});
+
+app.http("dmParty", {
+  methods: ["GET", "OPTIONS"],
+  authLevel: "anonymous",
+  route: "dm/party",
+  handler: dmPartyHandler
+});
+
+app.http("dmCharacterAction", {
+  methods: ["POST", "OPTIONS"],
+  authLevel: "anonymous",
+  route: "dm/characters/{id}/actions",
+  handler: dmCharacterActionHandler
 });
 
 app.http("catalogManifest", {
