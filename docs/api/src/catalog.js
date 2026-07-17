@@ -9,7 +9,7 @@ const {
   upsertEntity
 } = require("./tableStore");
 const { searchItemsByIndex } = require("./itemSearchStore");
-const { searchItemsV2 } = require("./itemSearchV2Store");
+const { searchItemsV2, syncItem: syncItemSearchV2 } = require("./itemSearchV2Store");
 const model = require("./catalogModel");
 const { httpError, json, withErrors } = require("./http");
 
@@ -214,6 +214,20 @@ function logSearchIndexFallback(context, result) {
   } else if (typeof context?.log === "function") {
     context.log(message);
   }
+}
+
+async function syncCatalogItemSearch(kind, stored, previous, context) {
+  if (kind !== "items") return null;
+  const result = await syncItemSearchV2(stored.entity, {
+    id: stored.id,
+    previous
+  });
+  if (result.reason === "error") {
+    const message = `Catalog item saved, but item search synchronization failed. ${result.error?.message || ""}`.trim();
+    if (context?.log?.warn) context.log.warn(message);
+    else if (typeof context?.log === "function") context.log(message);
+  }
+  return result;
 }
 
 function normalizeODataPath(path) {
@@ -500,10 +514,13 @@ async function catalogListHandler(request, context) {
       }
 
       const stored = await upsertEntity(kind, body, { entityId: entity.entityId });
+      const searchSync = await syncCatalogItemSearch(kind, stored, existing, context);
       return json(request, existing ? 200 : 201, {
         kind,
         id: stored.id,
-        entity: stored.entity
+        entity: stored.entity,
+        searchIndexed: Boolean(searchSync?.used),
+        searchIndexReason: searchSync?.used ? undefined : searchSync?.reason
       });
     }
 
@@ -642,10 +659,13 @@ async function catalogEntityHandler(request, context) {
       const merged = applyJsonMergePatch(entity, patch);
       validateCatalogDocument(merged);
       const stored = await upsertEntity(kind, merged, { entityId: id });
+      const searchSync = await syncCatalogItemSearch(kind, stored, entity, context);
       return json(request, 200, {
         kind,
         id: stored.id,
-        entity: stored.entity
+        entity: stored.entity,
+        searchIndexed: Boolean(searchSync?.used),
+        searchIndexReason: searchSync?.used ? undefined : searchSync?.reason
       });
     }
 

@@ -8,6 +8,7 @@ const DEFAULT_CATALOG_TABLE = "eldoriacatalog";
 const MAX_BATCH_COUNT = 100;
 const MAX_CANDIDATES = 25000;
 const STATUS_TTL_MS = 30000;
+const INCREMENTAL_ORDINAL = 99_999_999;
 let clientPromise;
 let statusCache;
 
@@ -314,6 +315,106 @@ async function writeManifest(data) {
   return entity;
 }
 
+function entityKey(entity) {
+  return `${entity.partitionKey}\u0000${entity.rowKey}`;
+}
+
+function updateManifestFacets(manifestFacets, previousFacets, nextFacets, previousIndexed) {
+  const output = {};
+  for (const field of index.FACET_FIELDS) {
+    const counts = new Map();
+    for (const entry of manifestFacets?.[field] || []) {
+      const key = index.normalize(entry.value);
+      if (key) counts.set(key, { value: entry.value, count: Number(entry.count || 0) });
+    }
+    if (previousIndexed) {
+      for (const entry of previousFacets?.[field] || []) {
+        const key = index.normalize(entry.value);
+        const current = counts.get(key) || { value: entry.value, count: 0 };
+        current.count -= Number(entry.count || 0);
+        counts.set(key, current);
+      }
+    }
+    for (const entry of nextFacets?.[field] || []) {
+      const key = index.normalize(entry.value);
+      const current = counts.get(key) || { value: entry.value, count: 0 };
+      current.value = current.value || entry.value;
+      current.count += Number(entry.count || 0);
+      counts.set(key, current);
+    }
+    output[field] = [...counts.values()]
+      .filter((entry) => entry.count > 0)
+      .sort((left, right) => left.value.localeCompare(right.value));
+  }
+  return output;
+}
+
+function updateManifestData(manifest, previousFacets, nextFacets, { previousIndexed, previousRowCount, nextRowCount } = {}) {
+  return {
+    itemCount: Math.max(0, Number(manifest?.itemCount || 0) + (previousIndexed ? 0 : 1)),
+    rowCount: Math.max(0, Number(manifest?.rowCount || 0) - Number(previousRowCount || 0) + Number(nextRowCount || 0)),
+    facets: updateManifestFacets(manifest?.facets, previousFacets, nextFacets, previousIndexed),
+    generatedAt: new Date().toISOString(),
+    ready: true
+  };
+}
+
+async function readIndexedItemRows(partitionKeys, itemId) {
+  const partitions = [...new Set(partitionKeys)].filter(Boolean);
+  const rows = [];
+  const concurrency = 10;
+  for (let offset = 0; offset < partitions.length; offset += concurrency) {
+    const batch = partitions.slice(offset, offset + concurrency);
+    const results = await Promise.all(batch.map((partitionKey) => readQuery({
+      filter: odata`PartitionKey eq ${partitionKey} and itemId eq ${itemId}`,
+      select: ["partitionKey", "rowKey", "itemId"]
+    })));
+    rows.push(...results.flat());
+  }
+  return rows;
+}
+
+async function syncItem(raw, { id, previous } = {}) {
+  try {
+    const status = await getStatus({ refresh: true });
+    if (!status.ready) return { used: false, reason: status.reason, status };
+
+    const itemId = String(id || raw?.id || "").trim();
+    const nextRaw = itemId ? { ...raw, id: itemId } : raw;
+    const next = index.buildItemSearchV2Entities([nextRaw], { ordinalOffset: INCREMENTAL_ORDINAL });
+    if (next.indexedItems !== 1) return { used: false, reason: "invalid-item" };
+
+    const previousRaw = previous && itemId ? { ...previous, id: itemId } : previous;
+    const before = previousRaw
+      ? index.buildItemSearchV2Entities([previousRaw], { ordinalOffset: INCREMENTAL_ORDINAL })
+      : { entities: [], facets: {} };
+    const partitions = [...before.entities, ...next.entities].map((entity) => entity.partitionKey);
+    const indexedRows = await readIndexedItemRows(partitions, next.entities[0].itemId);
+    const indexedKeys = new Set(indexedRows.map(entityKey));
+    const nextKeys = new Set(next.entities.map(entityKey));
+
+    await upsertEntities(next.entities);
+    const staleRows = indexedRows.filter((entity) => !nextKeys.has(entityKey(entity)));
+    if (staleRows.length) await submitTransactions(staleRows, "delete");
+
+    const manifest = updateManifestData(status.manifest, before.facets, next.facets, {
+      previousIndexed: indexedKeys.size > 0,
+      previousRowCount: indexedKeys.size,
+      nextRowCount: nextKeys.size
+    });
+    await writeManifest(manifest);
+    return {
+      used: true,
+      version: index.ITEM_SEARCH_V2_VERSION,
+      itemId: next.entities[0].itemId,
+      insertedRows: [...nextKeys].filter((key) => !indexedKeys.has(key)).length,
+      deletedRows: staleRows.length
+    };
+  } catch (error) {
+    return { used: false, reason: "error", error };
+  }
+}
+
 async function clearIndex({ onBatch } = {}) {
   const rows = await readQuery({ select: ["partitionKey", "rowKey"] }, Number.MAX_SAFE_INTEGER);
   const owned = rows.filter((row) => row.partitionKey === index.ITEM_SEARCH_V2_MANIFEST_PARTITION || String(row.partitionKey).startsWith(`${index.ITEM_SEARCH_V2_PREFIX}:`));
@@ -328,7 +429,18 @@ module.exports = {
   getTableName,
   isEnabled,
   searchItemsV2,
+  syncItem,
   upsertEntities,
   writeManifest,
-  _test: { buildFacets, decodeCursor, encodeCursor, matchesFilters, normalizeFilters, sortRows }
+  _test: {
+    buildFacets,
+    decodeCursor,
+    encodeCursor,
+    entityKey,
+    matchesFilters,
+    normalizeFilters,
+    sortRows,
+    updateManifestData,
+    updateManifestFacets
+  }
 };

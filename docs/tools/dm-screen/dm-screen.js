@@ -260,7 +260,9 @@ async function saveItem(event) {
     const id = elements.itemId.value;
     const response = id ? await state.api.patchCatalogEntity("items", id, document) : await state.api.createCatalogEntity("items", document);
     populateItemForm({ ...response.entity, id: response.id });
-    elements.itemStatus.textContent = `Saved ${response.entity.name}. Catalog changes are live; the optimized public search index updates on its next catalog index refresh.`;
+    elements.itemStatus.textContent = response.searchIndexed
+      ? `Saved ${response.entity.name}. It is available in Item Search now.`
+      : `Saved ${response.entity.name}, but Item Search could not be updated immediately. Try again or contact the site administrator.`;
     showNotice(`${response.entity.name} saved.`);
   } catch (error) {
     elements.itemStatus.textContent = error.message || "Unable to save item.";

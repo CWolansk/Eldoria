@@ -178,13 +178,15 @@ function facetRow(summary, field, value) {
   };
 }
 
-function buildItemSearchV2Entities(rawItems = []) {
+function buildItemSearchV2Entities(rawItems = [], { ordinalOffset = 0 } = {}) {
   const entities = [];
   const facets = Object.fromEntries(FACET_FIELDS.map((field) => [field, new Map()]));
   const seenItems = new Set();
   let indexedItems = 0;
+  const firstOrdinal = Math.max(0, Number(ordinalOffset) || 0);
 
-  rawItems.forEach((raw, ordinal) => {
+  rawItems.forEach((raw, itemIndex) => {
+    const ordinal = firstOrdinal + itemIndex;
     const summary = compactSummary(raw, ordinal);
     if (!summary.itemId || !summary.name || seenItems.has(summary.itemId)) return;
     seenItems.add(summary.itemId);
