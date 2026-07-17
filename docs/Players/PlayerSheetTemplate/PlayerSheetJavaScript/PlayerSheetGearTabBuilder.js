@@ -206,7 +206,6 @@ function getGearPreferenceKey(context = {}) {
 function readGearPreferences(context = {}) {
     const defaults = {
         sort: "ready",
-        compact: true,
         collapsedGroups: [...DEFAULT_COLLAPSED_GEAR_GROUPS]
     };
     if (typeof window === "undefined" || !window.localStorage) return defaults;
@@ -216,7 +215,6 @@ function readGearPreferences(context = {}) {
         const validGroups = new Set(GEAR_GROUPS.map((option) => option.key));
         return {
             sort: validSorts.has(stored?.sort) ? stored.sort : defaults.sort,
-            compact: typeof stored?.compact === "boolean" ? stored.compact : defaults.compact,
             collapsedGroups: Array.isArray(stored?.collapsedGroups)
                 ? stored.collapsedGroups.filter((group) => validGroups.has(group))
                 : defaults.collapsedGroups
@@ -231,7 +229,6 @@ function writeGearPreferences(context, state) {
     try {
         window.localStorage.setItem(getGearPreferenceKey(context), JSON.stringify({
             sort: state.sort,
-            compact: state.compact,
             collapsedGroups: [...state.collapsedGroups]
         }));
     } catch (_error) {
@@ -1016,30 +1013,6 @@ function appendCurrency(shell, currency = {}, context = {}) {
     shell.appendChild(section);
 }
 
-function createGearDetailsToggle(itemName) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "player-sheet-button player-sheet-button--small player-sheet-gear-details-toggle";
-    button.textContent = "Details";
-    button.setAttribute("aria-label", `Show details for ${itemName}`);
-    button.setAttribute("aria-expanded", "false");
-    let row = null;
-    button.addEventListener("click", () => {
-        if (!row) return;
-        const expanded = !row.classList.contains("player-sheet-item-row--expanded");
-        row.classList.toggle("player-sheet-item-row--expanded", expanded);
-        button.textContent = expanded ? "Hide" : "Details";
-        button.setAttribute("aria-expanded", String(expanded));
-        button.setAttribute("aria-label", `${expanded ? "Hide" : "Show"} details for ${itemName}`);
-    });
-    return {
-        button,
-        bind(itemRow) {
-            row = itemRow;
-        }
-    };
-}
-
 function createGearControls(entries, state, onRender) {
     const root = createElement("div", "player-sheet-gear-controls");
     const primary = createElement("div", "player-sheet-gear-controls__primary");
@@ -1062,14 +1035,6 @@ function createGearControls(entries, state, onRender) {
         sortSelect.appendChild(element);
     }
     primary.appendChild(createModalField("Sort", sortSelect));
-
-    const compactLabel = createElement("label", "player-sheet-gear-compact-toggle");
-    const compactInput = document.createElement("input");
-    compactInput.type = "checkbox";
-    compactInput.checked = state.compact;
-    compactInput.setAttribute("aria-label", "Use compact gear rows");
-    compactLabel.append(compactInput, createElement("span", "", "Compact view"));
-    primary.appendChild(compactLabel);
     root.appendChild(primary);
 
     const filters = createElement("div", "player-sheet-gear-filters");
@@ -1111,11 +1076,6 @@ function createGearControls(entries, state, onRender) {
         writeGearPreferences(state.context, state);
         onRender();
     });
-    compactInput.addEventListener("change", () => {
-        state.compact = compactInput.checked;
-        writeGearPreferences(state.context, state);
-        onRender();
-    });
 
     return { root, status };
 }
@@ -1132,19 +1092,15 @@ function createGearRow(entry, state, scrollSpellModal, containedSpellRecords) {
     if (isSpellScroll(item, record)) {
         actions.push(createSpellScrollButton(item, inventoryIndex, scrollSpellModal, state.context));
     }
-    const detailsToggle = state.compact ? createGearDetailsToggle(entry.name) : null;
-    if (detailsToggle) actions.push(detailsToggle.button);
     actions.push(createRemoveGearButton(item, inventoryIndex, state.context));
 
     const itemRow = createItemListItem(item, record, {
         actions,
-        showMeta: !state.compact,
         metrics: scrollSpell?.name ? [["Spell", scrollSpell.name]] : [],
         rows: ["Damage", "Versatile", "AC", "Value", "Weight", "Attunement"]
     });
     itemRow.dataset.inventoryIndex = String(inventoryIndex);
     itemRow.dataset.gearGroup = entry.group;
-    detailsToggle?.bind(itemRow);
     if (scrollSpell) {
         const spellRules = createSpellRulesPreview(containedSpellRecords.get(inventoryIndex));
         if (spellRules) itemRow.appendChild(spellRules);
@@ -1179,7 +1135,6 @@ function renderGearGroups(results, entries, state, controls, scrollSpellModal, c
 
         const list = createItemList();
         list.classList.add("player-sheet-gear-list");
-        list.classList.toggle("player-sheet-gear-list--compact", state.compact);
         for (const entry of groupEntries) {
             list.appendChild(createGearRow(entry, state, scrollSpellModal, containedSpellRecords));
         }
@@ -1233,7 +1188,6 @@ export async function BuildPlayerSheetGearTab(playerSheetObject, context = {}) {
         query: "",
         filter: "all",
         sort: preferences.sort,
-        compact: preferences.compact,
         collapsedGroups: new Set(preferences.collapsedGroups)
     };
     const results = createElement("div", "player-sheet-gear-groups");

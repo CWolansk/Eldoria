@@ -2835,10 +2835,8 @@ const tests = [
       }, "expanded gear group should persist locally");
       assertEqual(changeCount, 0, "collapsing gear groups should not save the character");
 
-      const detailsToggle = tab.querySelector(".player-sheet-gear-details-toggle");
-      detailsToggle.click();
-      assertEqual(detailsToggle.getAttribute("aria-expanded"), "true", "compact row details should expand on demand");
-      assert(detailsToggle.closest(".player-sheet-item-row")?.classList.contains("player-sheet-item-row--expanded"), "expanded compact row should be marked");
+      assert(!tab.querySelector(".player-sheet-gear-details-toggle"), "gear should use the shared item row without a separate Details action");
+      assert(tab.querySelector(".player-sheet-item-row__rules"), "shared gear rows should show item rules directly");
 
       tab.querySelector("[data-gear-filter='equipped']").click();
       assertEqual(tab.querySelectorAll(".player-sheet-item-row").length, 1, "equipped filter should show one row");
@@ -2857,12 +2855,8 @@ const tests = [
       const sort = tab.querySelector("[aria-label='Sort gear']");
       sort.value = "value";
       sort.dispatchEvent(new Event("change", { bubbles: true }));
-      const compact = tab.querySelector("[aria-label='Use compact gear rows']");
-      compact.checked = false;
-      compact.dispatchEvent(new Event("change", { bubbles: true }));
       const stored = JSON.parse(window.localStorage.getItem(preferenceKey));
       assertEqual(stored.sort, "value", "gear sort preference should persist locally");
-      assertEqual(stored.compact, false, "gear density preference should persist locally");
       assertEqual(changeCount, 0, "view preferences should not save the character");
     } finally {
       window.localStorage.removeItem(preferenceKey);

@@ -3,7 +3,7 @@ import { BuildPlayerSheetHeader } from "./PlayerSheetJavaScript/PlayerSheetHeade
 import { BuildPlayerSheetSidebar } from "./PlayerSheetJavaScript/PlayerSheetSidebarBuilder.js";
 import { BuildPlayerSheetOffenseTab } from "./PlayerSheetJavaScript/PlayerSheetOffenseTabBuilder.js";
 import { BuildPlayerSheetDefenseTab } from "./PlayerSheetJavaScript/PlayerSheetDefenseTabBuilder.js";
-import { BuildPlayerSheetGearTab } from "./PlayerSheetJavaScript/PlayerSheetGearTabBuilder.js?v=20260717-gear-organizer-1";
+import { BuildPlayerSheetGearTab } from "./PlayerSheetJavaScript/PlayerSheetGearTabBuilder.js?v=20260717-gear-organizer-2";
 import { BuildPlayerSheetSkillsTab } from "./PlayerSheetJavaScript/PlayerSheetSkillsTabBuilder.js";
 import { BuildPlayerSheetSpellsTab } from "./PlayerSheetJavaScript/PlayerSheetSpellsTabBuilder.js";
 import { BuildPlayerSheetPetsTab } from "./PlayerSheetJavaScript/PlayerSheetPetsTabBuilder.js";
