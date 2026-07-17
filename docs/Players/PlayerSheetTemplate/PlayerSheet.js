@@ -324,7 +324,8 @@ async function flushPendingSave() {
         lastSavedFingerprint = createSaveFingerprint(persistedDto);
         await applyPlayerSheetDto(rebasedCurrent.value, {
             persist: false,
-            resolveReferences: false
+            resolveReferences: false,
+            preserveReferences: true
         });
         setSaveStatus("saved", "Saved");
     } catch (error) {
@@ -370,12 +371,20 @@ function hasUnsavedPlayerSheetChanges() {
 async function applyPlayerSheetDto(nextDto, options = {}) {
   const shouldPersist = options.persist !== false;
   const shouldResolveReferences = options.resolveReferences !== false;
+  const shouldPreserveReferences = options.preserveReferences === true;
 
   currentPlayerSheetDto = PlayerSheetDtoHelper.toSaveDto(normalizeDtoForCurrentCharacter(nextDto));
 
   if (!shouldResolveReferences) {
-    currentReferenceResolution = null;
-    currentRuntimePlayerSheetDto = currentPlayerSheetDto;
+    if (shouldPreserveReferences && currentReferenceResolution) {
+      currentRuntimePlayerSheetDto = applyResolvedReferencesToDto(
+        currentPlayerSheetDto,
+        currentReferenceResolution
+      );
+    } else {
+      currentReferenceResolution = null;
+      currentRuntimePlayerSheetDto = currentPlayerSheetDto;
+    }
   } else {
     try {
       currentReferenceResolution = await resolvePlayerSheetReferences(currentPlayerSheetDto, api);

@@ -6,6 +6,7 @@ import {
     normalizeSearchText,
     toArray
 } from "../Core/LevelEditorShared.js";
+import { getEffectiveRaceChoiceSelections } from "../../PlayerSheetDtoHelper.js";
 import {
     expandCatalogRecords,
     getStructuredChoiceDefinitions
@@ -220,6 +221,29 @@ export function getRaceChoiceSelections(raceChoices = {}) {
     return selections && typeof selections === "object" ? selections : {};
 }
 
+export function sanitizeRaceChoiceSelections(choices = [], selections = {}) {
+    const sourceSelections = selections && typeof selections === "object" ? selections : {};
+    const selectionsByChoiceId = new Map(
+        Object.values(sourceSelections)
+            .filter((selection) => selection && typeof selection === "object")
+            .map((selection) => [String(selection.choiceId || "").trim(), selection])
+            .filter(([choiceId]) => choiceId)
+    );
+    const output = {};
+
+    for (const choice of toArray(choices)) {
+        const selection = sourceSelections[choice.id] || selectionsByChoiceId.get(choice.id);
+        if (!selection || (selection.type && selection.type !== choice.type)) {
+            continue;
+        }
+
+        output[choice.id] = JSON.parse(JSON.stringify(selection));
+        output[choice.id].choiceId = choice.id;
+    }
+
+    return output;
+}
+
 export function getRaceChoiceSelection(raceChoices, choiceId) {
     return getRaceChoiceSelections(raceChoices)[choiceId] || null;
 }
@@ -319,7 +343,10 @@ export async function buildRaceChoiceModel(context) {
     return {
         records,
         choices,
-        selections: getRaceChoiceSelections(raceChoices)
+        selections: sanitizeRaceChoiceSelections(
+            choices,
+            getEffectiveRaceChoiceSelections(context.dto)
+        )
     };
 }
 

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Phased Plan Writer"
-  short_description: "Write agent-agnostic phased plans"
-  default_prompt: "Use $phased-plan-writer to draft an agent-agnostic phased plan."

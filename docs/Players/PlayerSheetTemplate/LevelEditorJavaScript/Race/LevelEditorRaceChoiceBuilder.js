@@ -1,4 +1,7 @@
-import { PlayerSheetDtoHelper } from "../../PlayerSheetDtoHelper.js";
+import {
+    getEffectiveRaceChoiceSelections,
+    PlayerSheetDtoHelper
+} from "../../PlayerSheetDtoHelper.js";
 import {
     createDescription,
     createElement,
@@ -11,6 +14,7 @@ import {
     getRaceChoiceSelection,
     getRaceChoiceValue,
     RACE_CHOICE_SELECTION_PATH,
+    sanitizeRaceChoiceSelections,
     summarizeRaceChoices
 } from "./LevelEditorRaceChoiceModel.js";
 import {
@@ -359,12 +363,27 @@ function isChoiceComplete(choice, selection) {
     }
 
     if (choice.type === "racial-asi") {
+        const allowedAbilities = new Set(toArray(choice.options).map((option) => option.value));
         if (toArray(choice.patterns).length) {
             const pattern = toArray(choice.patterns).find((entry) => entry.value === selection.pattern) || toArray(choice.patterns)[0];
-            return toArray(pattern?.groups).every((group) => toArray(selection.groupValues?.[group.id]).length >= (Number(group.count) || 1));
+            const selectedAbilities = [];
+            const groupsComplete = toArray(pattern?.groups).every((group) => {
+                const values = toArray(selection.groupValues?.[group.id]);
+                selectedAbilities.push(...values);
+                return values.length === (Number(group.count) || 1)
+                    && new Set(values).size === values.length
+                    && values.every((value) => allowedAbilities.has(value));
+            });
+            return groupsComplete && (
+                !pattern?.distinct || new Set(selectedAbilities).size === selectedAbilities.length
+            );
         }
 
-        return toArray(selection.abilityIncreases).length >= (Number(choice.count) || 1);
+        const abilities = toArray(selection.abilityIncreases).map((increase) => increase?.ability).filter(Boolean);
+        const requiredCount = Number(choice.count) || 1;
+        return abilities.length === requiredCount
+            && new Set(abilities).size === requiredCount
+            && abilities.every((ability) => allowedAbilities.has(ability));
     }
 
     if (choice.control === "checkbox") {
@@ -382,7 +401,7 @@ function validateRequiredChoices(model, selections) {
 }
 
 export function buildRaceOptionStatus(dto) {
-    return summarizeRaceChoices(PlayerSheetDtoHelper.getValue(dto, "baseChoices.raceChoices", {})) || "Review";
+    return summarizeRaceChoices({ selections: getEffectiveRaceChoiceSelections(dto) }) || "Review";
 }
 
 export function buildRaceChoiceContent(context) {
@@ -463,6 +482,7 @@ export function buildRaceChoiceContent(context) {
         }
 
         removeHiddenSelections(model, selections);
+        selections = sanitizeRaceChoiceSelections(model.choices, selections);
         const missing = validateRequiredChoices(model, selections);
         if (missing.length) {
             updateStatus();

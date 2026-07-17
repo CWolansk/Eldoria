@@ -1,4 +1,7 @@
-import { PlayerSheetDtoHelper } from "../PlayerSheetDtoHelper.js";
+import {
+  getEffectiveRaceChoiceSelections,
+  PlayerSheetDtoHelper
+} from "../PlayerSheetDtoHelper.js";
 import {
   applyResolvedReferencesToDto,
   resolvePlayerSheetReferences
@@ -44,6 +47,7 @@ import {
 import { getSpellProfile } from "../LevelEditorJavaScript/CatalogProfile/Grants.js";
 import { getLinkedFeatureRefs } from "../LevelEditorJavaScript/Catalog/LevelEditorCatalogChoiceResolver.js";
 import { buildRaceProfile } from "../LevelEditorJavaScript/Race/LevelEditorRaceProfile.js";
+import { buildRaceChoiceContent } from "../LevelEditorJavaScript/Race/LevelEditorRaceChoiceBuilder.js";
 import {
   bootLevelEditor
 } from "../LevelEditorJavaScript/Core/LevelEditorBuilder.js";
@@ -1155,7 +1159,8 @@ function createFakeApi() {
         weapon: true,
         dmg1: "1d8",
         dmgType: "S",
-        _fImm: ["poison"]
+        _fImm: ["poison"],
+        entries: ["A catalog-backed blade description."]
       },
       "item:test-shield:homebrew": {
         id: "item:test-shield:homebrew",
@@ -1350,6 +1355,98 @@ const tests = [
     assert(runtimeDto.inventory.items[0].snapshot, "runtime item snapshot should be hydrated");
     assert(api.calls.some((call) => call.kind === "classes"), "class reference should be fetched");
     assert(!PlayerSheetDtoHelper.toSaveDto(runtimeDto).inventory.items[0].snapshot, "hydrated snapshot should still be stripped on save");
+
+    const hpEditedDto = PlayerSheetDtoHelper.patch(runtimeDto, "levels.0.hp", 14);
+    const savedResponseDto = PlayerSheetDtoHelper.toSaveDto(hpEditedDto);
+    const compiledAfterSave = SheetCompiler.compile(savedResponseDto, { references });
+    assert(compiledAfterSave.attacks.some((attack) => attack.name === "Test Blade"), "saved rerender should retain catalog-backed offense");
+    assert(
+      compiledAfterSave.inventory.carried[0].snapshot.entries.includes("A catalog-backed blade description."),
+      "saved rerender should retain hydrated gear rules"
+    );
+  }],
+  ["Variant Human keeps only the active two-ability racial ASI", async () => {
+    CatalogCache.clearShared();
+    const raceRecord = {
+      id: "human-variant-phb",
+      name: "Human (Variant)",
+      source: "PHB",
+      kind: "races",
+      size: ["M"],
+      speed: 30,
+      ability: [{
+        choose: {
+          from: ["str", "dex", "con", "int", "wis", "cha"],
+          count: 2
+        }
+      }]
+    };
+    const currentChoiceId = "human-variant-phb:raw-ability:0";
+    const staleChoiceId = "Human (Variant):raw-ability:0";
+    const makeSelection = (choiceId, abilities) => ({
+      choiceId,
+      type: "racial-asi",
+      label: "Ability Score Increase",
+      valueKey: "ability",
+      sourceName: "Human (Variant)",
+      source: "PHB",
+      value: "default",
+      pattern: "",
+      groupValues: { default: abilities },
+      abilityIncreases: abilities.map((ability) => ({ ability, amount: 1, groupId: "default" }))
+    });
+    const dto = createDto();
+    dto.baseChoices.race = {
+      id: "human-variant-phb",
+      name: "Human",
+      source: "PHB",
+      kind: "races",
+      profile: buildRaceProfile(raceRecord)
+    };
+    dto.baseChoices.raceChoices = {
+      selections: {
+        [staleChoiceId]: makeSelection(staleChoiceId, ["str", "con"]),
+        [currentChoiceId]: makeSelection(currentChoiceId, ["str", "cha"])
+      }
+    };
+
+    assertEqual(Object.keys(getEffectiveRaceChoiceSelections(dto)).length, 1, "effective racial choices should drop the stale catalog ID");
+    const compiled = SheetCompiler.compile(dto);
+    assertEqual(compiled.abilities.str.score, dto.baseChoices.abilityScores.str + 1, "Strength should receive one racial increase");
+    assertEqual(compiled.abilities.con.score, dto.baseChoices.abilityScores.con, "stale Constitution increase should not compile");
+    assertEqual(compiled.abilities.cha.score, dto.baseChoices.abilityScores.cha + 1, "Charisma should receive one racial increase");
+    assertEqual(Object.keys(PlayerSheetDtoHelper.toSaveDto(dto).baseChoices.raceChoices.selections).length, 1, "save DTO should prune stale racial ASI entries");
+
+    const api = {
+      baseUrl: "test://variant-human",
+      async getCatalogEntity(kind, id) {
+        return kind === "races" && id === raceRecord.id ? raceRecord : null;
+      }
+    };
+    let patchedDto = null;
+    fixture.replaceChildren(buildRaceChoiceContent({
+      dto,
+      api,
+      onChange(nextDto) {
+        patchedDto = nextDto;
+      }
+    }));
+    await waitForCondition(
+      () => fixture.querySelectorAll(".level-editor__race-option-section input[type='checkbox']").length === 6,
+      "Variant Human ability choices should render"
+    );
+
+    const checkboxes = [...fixture.querySelectorAll(".level-editor__race-option-section input[type='checkbox']")];
+    assertEqual(checkboxes.filter((checkbox) => checkbox.checked).length, 2, "Variant Human should have exactly two selected abilities");
+    assert(checkboxes.filter((checkbox) => !checkbox.checked).every((checkbox) => checkbox.disabled), "a third ability should be disabled at the selection limit");
+    assert(fixture.querySelector(".level-editor__choice-status").textContent.includes("1 race option selected"), "stale race option should not be counted");
+
+    fixture.querySelector(".level-editor__button--primary").click();
+    await waitForCondition(() => patchedDto != null, "race choices should apply");
+    const savedSelections = patchedDto.baseChoices.raceChoices.selections;
+    assertEqual(Object.keys(savedSelections).length, 1, "Apply should persist one racial ASI choice");
+    assertEqual(new Set(savedSelections[currentChoiceId].abilityIncreases.map((increase) => increase.ability)).size, 2, "the two racial increases must target distinct abilities");
+    CatalogCache.clearShared();
   }],
   ["catalog cache reuses lookups across instances", async () => {
     CatalogCache.clearShared();

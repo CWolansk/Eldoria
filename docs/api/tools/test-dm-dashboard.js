@@ -1,14 +1,14 @@
 "use strict";
 
 const assert = require("node:assert/strict");
-const { applyDmAction, summarizeCharacter } = require("../src/dmDashboard");
+const { applyDmAction, loadCatalogRecords, summarizeCharacter } = require("../src/dmDashboard");
 
 function sheet() {
   return {
     schemaVersion: "player-sheet-v2",
     id: "char-test-001",
     lastModified: "2026-01-01T00:00:00.000Z",
-    identity: { name: "Test Hero", playerName: "DM" },
+    identity: { name: "Test Hero", playerName: "DM", experience: 8000 },
     baseChoices: { startingProficiencies: { languages: ["Common", "Dwarvish"] } },
     levels: [
       { characterLevel: 1, class: { name: "Fighter" }, hp: 12 },
@@ -23,7 +23,15 @@ function sheet() {
       deathSaves: { successes: 0, failures: 0 },
       defenses: { damageResistances: ["cold"] }
     },
-    inventory: { currency: { gp: 10 }, items: [] }
+    inventory: {
+      currency: { gp: 10 },
+      items: [{
+        name: "Ward",
+        equipped: true,
+        attuned: false,
+        catalog: { id: "item-ward", kind: "items" }
+      }]
+    }
   };
 }
 
@@ -55,12 +63,34 @@ value = applyDmAction(value, {
   item: { name: "Lightning Rod", source: "Homebrew", catalog: { id: "lightning-rod_homebrew" } },
   quantity: 1
 });
-assert.equal(value.inventory.items.length, 1);
-assert.equal(value.inventory.items[0].quantity, 3);
+assert.equal(value.inventory.items.length, 2);
+assert.equal(value.inventory.items.find((item) => item.name === "Lightning Rod").quantity, 3);
 
-const summary = summarizeCharacter(value);
-assert.equal(summary.level, 2);
+const summary = summarizeCharacter(value, {}, [{
+  resist: ["poison"],
+  _fImm: ["fire"],
+  _fCondImm: ["charmed"],
+  _fVuln: ["cold"],
+  languageProficiencies: [{ common: true, primordial: true }]
+}]);
+assert.equal(summary.level, 5);
 assert.equal(summary.hp.max, 20);
-assert.deepEqual(summary.languages, ["Common", "Dwarvish"]);
+assert.deepEqual(summary.languages, ["Common", "Dwarvish", "Primordial"]);
+assert.deepEqual(summary.defenses.damageResistances, ["cold", "poison"]);
+assert.deepEqual(summary.defenses.damageImmunities, ["fire"]);
+assert.deepEqual(summary.defenses.conditionImmunities, ["charmed"]);
+assert.deepEqual(summary.defenses.damageVulnerabilities, ["cold"]);
 
-console.log("DM dashboard action tests passed.");
+void (async () => {
+  const records = await loadCatalogRecords(sheet(), async (kind, id) => ({
+    kind,
+    id,
+    reqAttune: kind === "items",
+    _fRes: ["poison"]
+  }));
+  assert.equal(records.some((record) => record.kind === "items"), false, "Unattuned items must not grant defenses");
+  console.log("DM dashboard action tests passed.");
+})().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});

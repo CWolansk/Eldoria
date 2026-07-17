@@ -125,7 +125,7 @@ function renderReferenceParty() {
     elements.referenceParty.innerHTML = '<p class="dm-empty">Load the party to populate this reference.</p>';
     return;
   }
-  elements.referenceParty.innerHTML = state.characters.map((character) => `<div class="dm-reference-row"><strong>${escapeHtml(character.name)}</strong><span><b>Resist:</b> ${escapeHtml(defenseText(character, "damageResistances"))}</span><span><b>Immune:</b> ${escapeHtml(defenseText(character, "damageImmunities"))}</span><span><b>Languages:</b> ${escapeHtml(character.languages.join(", ") || "—")}</span></div>`).join("");
+  elements.referenceParty.innerHTML = state.characters.map((character) => `<div class="dm-reference-row"><strong>${escapeHtml(character.name)}</strong><span><b>Resist:</b> ${escapeHtml(defenseText(character, "damageResistances"))}</span><span><b>Damage immune:</b> ${escapeHtml(defenseText(character, "damageImmunities"))}</span><span><b>Condition immune:</b> ${escapeHtml(defenseText(character, "conditionImmunities"))}</span><span><b>Vulnerable:</b> ${escapeHtml(defenseText(character, "damageVulnerabilities"))}</span><span><b>Languages:</b> ${escapeHtml((character.languages || []).join(", ") || "—")}</span></div>`).join("");
 }
 
 async function loadParty() {

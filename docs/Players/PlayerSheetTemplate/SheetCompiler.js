@@ -1,5 +1,6 @@
 import {
     ABILITY_KEYS,
+    getEffectiveRaceChoiceSelections,
     MAX_CHARACTER_LEVEL,
     PlayerSheetDtoHelper
 } from "./PlayerSheetDtoHelper.js";
@@ -537,8 +538,7 @@ function compileProficiencyBonus(characterLevel) {
 }
 
 function getRaceSelections(dto) {
-    const selections = dto?.baseChoices?.raceChoices?.selections;
-    return selections && typeof selections === "object" ? selections : {};
+    return getEffectiveRaceChoiceSelections(dto);
 }
 
 function getRaceSelectionList(dto) {

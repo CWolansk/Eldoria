@@ -7,9 +7,14 @@ const {
 } = require("./blobStore");
 const { httpError, json, withErrors } = require("./http");
 const { normalizePlayerSheetDto } = require("./playerSheetDto");
+const { getEntity } = require("./tableStore");
 
 const MAX_ACTION_AMOUNT = 1_000_000;
 const CURRENCY_KEYS = new Set(["cp", "sp", "ep", "gp", "pp"]);
+const EXPERIENCE_LEVEL_THRESHOLDS = [
+  0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000,
+  85000, 100000, 120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000
+];
 
 function text(value) {
   return String(value || "").trim();
@@ -50,23 +55,168 @@ function getActiveLevels(sheet) {
   return levels.slice(0, activeCount);
 }
 
+function getCharacterLevel(sheet) {
+  const experience = Math.max(0, integer(sheet?.identity?.experience, 0));
+  let level = 1;
+  EXPERIENCE_LEVEL_THRESHOLDS.forEach((threshold, index) => {
+    if (experience >= threshold) level = index + 1;
+  });
+  return level;
+}
+
 function unique(values) {
   return [...new Set(values.map(text).filter(Boolean))];
 }
 
-function summarizeCharacter(sheet, manifestEntry = {}) {
+function titleCase(value) {
+  return text(value).replace(/(^|[\s-])([a-z])/gu, (_match, prefix, letter) => `${prefix}${letter.toUpperCase()}`);
+}
+
+function ruleValues(value) {
+  if (Array.isArray(value)) return value.flatMap(ruleValues);
+  if (typeof value === "string") return [value];
+  if (!value || typeof value !== "object") return [];
+  if (Array.isArray(value.fixed)) return ruleValues(value.fixed);
+  if (typeof value.name === "string") return [value.name];
+  return [];
+}
+
+function addRuleValues(target, ...values) {
+  ruleValues(values).forEach((value) => {
+    const normalized = text(value);
+    if (normalized) target.add(normalized.toLowerCase());
+  });
+}
+
+function addDefenseSource(targets, source = {}) {
+  if (!source || typeof source !== "object") return;
+  const defenses = source.defenses && typeof source.defenses === "object" ? source.defenses : source;
+  addRuleValues(targets.damageResistances, defenses.damageResistances, defenses.resistances, defenses.resist, defenses._fRes);
+  addRuleValues(targets.damageImmunities, defenses.damageImmunities, defenses.immunities, defenses.immune, defenses._fImm);
+  addRuleValues(targets.damageVulnerabilities, defenses.damageVulnerabilities, defenses.vulnerabilities, defenses.vulnerable, defenses._fVuln);
+  addRuleValues(targets.conditionImmunities, defenses.conditionImmunities, defenses.conditionImmune, defenses._fCondImm);
+}
+
+function addLanguage(target, value) {
+  const language = text(value);
+  if (!language || /^(?:any|any standard|choose|other)$/iu.test(language)) return;
+  target.set(language.toLowerCase(), titleCase(language));
+}
+
+function addLanguageSource(target, source = {}) {
+  if (!source || typeof source !== "object") return;
+  ruleValues([
+    source.languages,
+    source._fLangs,
+    source.proficiencies?.languages,
+    source.profile?.proficiencies?.languages
+  ]).forEach((value) => addLanguage(target, value));
+  for (const group of Array.isArray(source.languageProficiencies) ? source.languageProficiencies : []) {
+    for (const [language, granted] of Object.entries(group || {})) {
+      if (granted === true) addLanguage(target, language);
+    }
+  }
+}
+
+function summarizeReferences(sheet, catalogRecords = []) {
+  const targets = {
+    damageResistances: new Set(),
+    damageImmunities: new Set(),
+    damageVulnerabilities: new Set(),
+    conditionImmunities: new Set()
+  };
+  const languages = new Map();
+  unique(sheet?.baseChoices?.startingProficiencies?.languages || []).forEach((value) => addLanguage(languages, value));
+  const sources = [
+    sheet?.combatState,
+    sheet?.combatState?.defenses,
+    sheet?.baseChoices?.race,
+    sheet?.baseChoices?.subrace,
+    sheet?.baseChoices?.background,
+    ...catalogRecords
+  ];
+  for (const source of sources) {
+    addDefenseSource(targets, source);
+    addDefenseSource(targets, source?.profile);
+    addDefenseSource(targets, source?.grants?.defenses);
+    addLanguageSource(languages, source);
+    addLanguageSource(languages, source?.grants);
+  }
+  for (const level of Array.isArray(sheet?.levels) ? sheet.levels : []) {
+    for (const choice of Array.isArray(level?.choices) ? level.choices : []) {
+      addDefenseSource(targets, choice?.grants?.defenses || choice?.defenses);
+      addLanguageSource(languages, choice?.grants || choice);
+    }
+  }
+  return {
+    defenses: Object.fromEntries(Object.entries(targets).map(([key, values]) => [key, [...values]])),
+    languages: [...languages.values()]
+  };
+}
+
+function identityCatalogId(identity) {
+  return text(identity?.options?.catalogId || identity?.catalogId || identity?.id).replace(/\.json$/iu, "");
+}
+
+function collectCatalogReferences(sheet) {
+  const references = [
+    { kind: "races", identity: sheet?.baseChoices?.race },
+    { kind: "subraces", identity: sheet?.baseChoices?.subrace },
+    { kind: "backgrounds", identity: sheet?.baseChoices?.background }
+  ];
+  const currentLevel = getCharacterLevel(sheet);
+  (Array.isArray(sheet?.levels) ? sheet.levels.slice(0, currentLevel) : []).forEach((level) => {
+    references.push(
+      { kind: "classes", identity: level?.class },
+      { kind: "subclasses", identity: level?.subclass },
+      { kind: "feats", identity: level?.feat }
+    );
+  });
+  (Array.isArray(sheet?.inventory?.items) ? sheet.inventory.items : [])
+    .filter((item) => item?.equipped || item?.attuned)
+    .forEach((item) => references.push({ kind: "items", identity: item?.catalog, item }));
+  return references
+    .map(({ kind, identity, item }) => ({
+      kind: text(identity?.kind || kind).toLowerCase(),
+      id: identityCatalogId(identity),
+      item
+    }))
+    .filter(({ id }) => Boolean(id));
+}
+
+async function loadCatalogRecords(sheet, loader = getEntity) {
+  const cache = new Map();
+  return (await Promise.all(collectCatalogReferences(sheet).map(async ({ kind, id, item }) => {
+    const key = `${kind}:${id}`;
+    if (!cache.has(key)) cache.set(key, Promise.resolve(loader(kind, id)).catch(() => null));
+    const record = await cache.get(key);
+    if (!record) return null;
+    if (kind !== "items") return record;
+    const requiresAttunement = Boolean(record.reqAttune || record.requiresAttunement || record.attunementRequirement);
+    if (requiresAttunement ? !item?.attuned : !item?.equipped) return null;
+    return record;
+  }))).filter(Boolean);
+}
+
+async function summarizeCharacterWithCatalog(sheet, manifestEntry = {}, loader = getEntity) {
+  return summarizeCharacter(sheet, manifestEntry, await loadCatalogRecords(sheet, loader));
+}
+
+function summarizeCharacter(sheet, manifestEntry = {}, catalogRecords = []) {
   const activeLevels = getActiveLevels(sheet);
-  const maxHp = activeLevels.reduce((total, level) => total + Math.max(0, integer(level?.hp, 0)), 0);
   const combat = sheet?.combatState || {};
+  const maxHp = Math.max(0, integer(combat.maxHp, 0))
+    || activeLevels.reduce((total, level) => total + Math.max(0, integer(level?.hp, 0)), 0);
   const inventory = sheet?.inventory || {};
   const currency = inventory.currency || {};
+  const references = summarizeReferences(sheet, catalogRecords);
   return {
     id: text(sheet?.id || manifestEntry.id),
     lastModified: text(sheet?.lastModified),
     name: text(sheet?.identity?.name || manifestEntry.characterName || manifestEntry.id),
     playerName: text(sheet?.identity?.playerName || manifestEntry.playerName),
     portraitUrl: text(sheet?.identity?.portraitUrl || manifestEntry.portraitUrl),
-    level: activeLevels.length,
+    level: getCharacterLevel(sheet),
     classes: unique(activeLevels.map((level) => level?.class?.name)),
     ac: integer(combat.ac, 10),
     hp: {
@@ -80,8 +230,8 @@ function summarizeCharacter(sheet, manifestEntry = {}) {
       successes: clamp(integer(combat.deathSaves?.successes, 0), 0, 3),
       failures: clamp(integer(combat.deathSaves?.failures, 0), 0, 3)
     },
-    defenses: combat.defenses || {},
-    languages: unique(sheet?.baseChoices?.startingProficiencies?.languages || []),
+    defenses: references.defenses,
+    languages: references.languages,
     currency: Object.fromEntries([...CURRENCY_KEYS].map((key) => [key, Math.max(0, integer(currency[key], 0))])),
     items: (Array.isArray(inventory.items) ? inventory.items : []).map((item, index) => ({
       index,
@@ -175,9 +325,17 @@ async function dmPartyHandler(request, context) {
   return withErrors(request, context, async () => {
     const manifest = await readPlayersManifest();
     const entries = Array.isArray(manifest?.characters) ? manifest.characters.filter((entry) => entry?.status !== "inactive") : [];
+    const catalogCache = new Map();
+    const loadCatalogEntity = (kind, id) => {
+      const key = `${kind}:${id}`;
+      if (!catalogCache.has(key)) catalogCache.set(key, getEntity(kind, id));
+      return catalogCache.get(key);
+    };
     const characters = (await Promise.all(entries.map(async (entry) => {
       const stored = await readCharacterSheetWithMetadata(entry.id);
-      return stored?.document ? summarizeCharacter(normalizePlayerSheetDto(stored.document, { id: entry.id }), entry) : null;
+      return stored?.document
+        ? summarizeCharacterWithCatalog(normalizePlayerSheetDto(stored.document, { id: entry.id }), entry, loadCatalogEntity)
+        : null;
     }))).filter(Boolean);
     return json(request, 200, { count: characters.length, characters });
   });
@@ -194,7 +352,7 @@ async function dmCharacterActionHandler(request, context) {
     updated.lastModified = timestamp;
     try {
       const stored = await writeCharacterSheet(id, updated, { ifMatch: current.etag });
-      return json(request, 200, { character: summarizeCharacter(stored) });
+      return json(request, 200, { character: await summarizeCharacterWithCatalog(stored) });
     } catch (error) {
       if (error?.statusCode === 412 || error?.code === "ConditionNotMet") {
         throw httpError(409, "Character changed while the action was applied. Refresh and try again.", { id });
@@ -208,5 +366,7 @@ module.exports = {
   applyDmAction,
   dmCharacterActionHandler,
   dmPartyHandler,
-  summarizeCharacter
+  loadCatalogRecords,
+  summarizeCharacter,
+  summarizeCharacterWithCatalog
 };

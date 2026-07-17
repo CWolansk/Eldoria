@@ -106,13 +106,54 @@ function normalizeSaveIdentityRef(value, kind = "") {
     return output;
 }
 
+export function getEffectiveRaceChoiceSelections(input = {}) {
+    const baseChoices = isPlainObject(input?.baseChoices) ? input.baseChoices : input;
+    const selections = isPlainObject(baseChoices?.raceChoices?.selections)
+        ? baseChoices.raceChoices.selections
+        : {};
+    const activeRacialAsiChoice = baseChoices?.race?.profile?.abilities?.choice;
+    const activeRacialAsiChoiceId = normalizeString(
+        activeRacialAsiChoice?.id || activeRacialAsiChoice?.choiceId
+    );
+    const output = {};
+
+    for (const [key, selection] of Object.entries(selections)) {
+        const isRacialAsi = selection?.type === "racial-asi";
+        const selectionChoiceId = normalizeString(selection?.choiceId || key);
+        if (
+            isRacialAsi
+            && activeRacialAsiChoiceId
+            && key !== activeRacialAsiChoiceId
+            && selectionChoiceId !== activeRacialAsiChoiceId
+        ) {
+            continue;
+        }
+
+        output[key] = deepClone(selection);
+    }
+
+    return output;
+}
+
+function normalizeSaveRaceChoices(baseChoices = {}) {
+    const raceChoices = isPlainObject(baseChoices.raceChoices)
+        ? deepClone(baseChoices.raceChoices)
+        : {};
+
+    if (isPlainObject(raceChoices.selections)) {
+        raceChoices.selections = getEffectiveRaceChoiceSelections(baseChoices);
+    }
+
+    return stripForbiddenRuntimeFields(raceChoices);
+}
+
 function normalizeSaveBaseChoices(value = {}) {
     const source = isPlainObject(value) ? value : {};
 
     return {
         race: normalizeSaveIdentityRef(source.race, "races"),
         subrace: normalizeSaveIdentityRef(source.subrace, "subraces"),
-        raceChoices: isPlainObject(source.raceChoices) ? stripForbiddenRuntimeFields(source.raceChoices) : {},
+        raceChoices: normalizeSaveRaceChoices(source),
         background: normalizeSaveIdentityRef(source.background, "backgrounds"),
         backgroundChoices: isPlainObject(source.backgroundChoices) ? stripForbiddenRuntimeFields(source.backgroundChoices) : {},
         abilityScores: normalizeAbilityScores(source.abilityScores),
