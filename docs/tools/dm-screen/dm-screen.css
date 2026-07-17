@@ -14,13 +14,32 @@
 .dm-panel__header p { color: var(--muted); }
 .dm-party-summary { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 .dm-summary-chip { border: 1px solid var(--line); border-radius: var(--radius-round); background: var(--panel); padding: var(--sp-2) var(--sp-3); font-size: var(--fs-300); }
-.dm-character-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr)); gap: var(--sp-4); }
+.dm-character-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr)); gap: var(--sp-4); }
 .dm-character-card { min-width: 0; border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--radius-3); background: var(--panel); box-shadow: var(--shadow-1); padding: var(--sp-4); }
-.dm-character-card__header { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr) auto; align-items: center; gap: var(--sp-3); }
-.dm-character-card__portrait { width: 3.5rem; height: 3.5rem; border-radius: 50%; object-fit: cover; background: var(--panel-soft); }
-.dm-character-card__identity { min-width: 0; }
-.dm-character-card__identity h3 { overflow-wrap: anywhere; }
-.dm-character-card__identity p { color: var(--muted); font-size: var(--fs-300); }
+.dm-character-card__header {
+  display: grid;
+  grid-template:
+    "portrait identity" auto
+    "portrait action" auto
+    / 5rem minmax(0, 1fr);
+  align-items: start;
+  column-gap: var(--sp-3);
+  row-gap: var(--sp-2);
+}
+.dm-character-card__portrait {
+  grid-area: portrait;
+  width: 5rem;
+  height: 5rem;
+  border: 2px solid color-mix(in srgb, var(--accent) 58%, var(--line));
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--panel-soft);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent), var(--shadow-1);
+}
+.dm-character-card__identity { grid-area: identity; min-width: 0; align-self: center; }
+.dm-character-card__identity h3 { overflow-wrap: anywhere; line-height: 1.1; }
+.dm-character-card__identity p { margin-top: var(--sp-1); color: var(--muted); font-size: var(--fs-300); line-height: 1.35; }
+.dm-character-card__header > .button { grid-area: action; justify-self: start; min-height: 2.25rem; padding-block: var(--sp-2); }
 .dm-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-2); }
 .dm-metric { border: 1px solid var(--line-soft); border-radius: var(--radius-2); background: var(--panel-soft); padding: var(--sp-2); text-align: center; }
 .dm-metric strong, .dm-metric span { display: block; }
@@ -70,4 +89,4 @@
 .dm-dialog__header { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); border-bottom: 1px solid var(--line); padding: var(--sp-3); }
 .dm-dialog__body { display: grid; gap: var(--sp-3); padding: var(--sp-4); }
 @media (max-width: 800px) { .dm-hero, .dm-item-layout, .dm-reference-grid { grid-template-columns: 1fr; } .dm-item-browser { position: static; } }
-@media (max-width: 620px) { .dm-screen { width: min(100% - 1rem, 92rem); } .dm-hero, .dm-character-card, .dm-item-browser, .dm-item-form, .dm-reference-card { padding: var(--sp-3); } .dm-connection-status, .dm-panel__header { align-items: stretch; flex-direction: column; } .dm-character-grid, .dm-form-grid, .dm-link-grid { grid-template-columns: 1fr; } .dm-character-card__header { grid-template-columns: 3rem minmax(0, 1fr); } .dm-character-card__portrait { width: 3rem; height: 3rem; } .dm-character-card__header > .button { grid-column: 1 / -1; } .dm-metrics { grid-template-columns: repeat(2, 1fr); } .dm-quick-actions { grid-template-columns: 1fr 1fr; } .dm-quick-actions input { grid-column: 1 / -1; } .dm-secondary-actions, .dm-reference-row, .dm-more-controls { grid-template-columns: 1fr; } .dm-quick-actions .button, .dm-secondary-actions .button, .dm-more-controls .button { min-height: 2.75rem; } }
+@media (max-width: 620px) { .dm-screen { width: min(100% - 1rem, 92rem); } .dm-hero, .dm-character-card, .dm-item-browser, .dm-item-form, .dm-reference-card { padding: var(--sp-3); } .dm-connection-status, .dm-panel__header { align-items: stretch; flex-direction: column; } .dm-character-grid, .dm-form-grid, .dm-link-grid { grid-template-columns: 1fr; } .dm-character-card__header { grid-template-columns: 4.5rem minmax(0, 1fr); } .dm-character-card__portrait { width: 4.5rem; height: 4.5rem; } .dm-character-card__header > .button { justify-self: start; } .dm-metrics { grid-template-columns: repeat(2, 1fr); } .dm-quick-actions { grid-template-columns: 1fr 1fr; } .dm-quick-actions input { grid-column: 1 / -1; } .dm-secondary-actions, .dm-reference-row, .dm-more-controls { grid-template-columns: 1fr; } .dm-quick-actions .button, .dm-secondary-actions .button, .dm-more-controls .button { min-height: 2.75rem; } }
