@@ -274,7 +274,7 @@
         ? await api.searchItems(query, queryOptions, { signal: options?.signal })
         : query
           ? await api.searchCatalog(kind, query, queryOptions)
-          : await api.searchCatalog(kind, config.initialQuery || "a", queryOptions);
+          : await api.listCatalog(kind, queryOptions);
       var apiRows = Array.isArray(response.items) ? response.items : [];
       var rows = typeof config.mapApiRow === "function" ? apiRows.map(config.mapApiRow) : apiRows;
       return config.serverDriven ? { rows: rows, response: response } : rows;
@@ -590,6 +590,27 @@
       .map(function (pair) { return pair[1]; });
   }
 
+  function entriesText(value) {
+    if (value == null) return "";
+    if (typeof value === "string" || typeof value === "number") {
+      return String(value)
+        .replace(/\{@\w+\s+([^}]+)\}/gu, function (_match, content) {
+          return String(content).split("|")[0];
+        })
+        .replace(/\s+/gu, " ")
+        .trim();
+    }
+    if (Array.isArray(value)) {
+      return value.map(entriesText).filter(Boolean).join(" ");
+    }
+    if (typeof value === "object") {
+      var name = entriesText(value.name || value.label || "");
+      var body = entriesText(value.entry || value.entries || value.items || value.rows || "");
+      return [name, body].filter(Boolean).join(": ");
+    }
+    return "";
+  }
+
   function compareText(field) {
     return function (left, right) {
       return normalize(left[field]).localeCompare(normalize(right[field]));
@@ -644,6 +665,7 @@
     sourceValues: sourceValues,
     yesNo: yesNo,
     abilityValues: abilityValues,
+    entriesText: entriesText,
     compareText: compareText,
     orderCompare: orderCompare,
     detailRow: detailRow,
@@ -950,7 +972,6 @@
     if (!this.config.serverDriven) {
       this.rows = result;
       this.prepareRows();
-      this.clearFilters();
       return;
     }
     var response = result?.response || {};
@@ -1041,7 +1062,7 @@
       details.replaceWith(replacement);
     } catch (error) {
       details.dataset.detailLoaded = "error";
-      console.warn("Unable to load item details:", error);
+      console.warn("Unable to load " + this.config.itemLabel + " details:", error);
     }
   };
 

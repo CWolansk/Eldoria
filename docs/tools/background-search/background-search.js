@@ -8,6 +8,48 @@
   var escapeRegex = helpers.escapeRegex;
   var compareText = helpers.compareText;
   var renderDetails = helpers.renderDetails;
+  var entriesText = helpers.entriesText;
+
+  function listValues(value) {
+    return String(value || "").split(/[|,;]/u).map(function (entry) {
+      return entry.trim().replace(/\b\w/gu, function (letter) { return letter.toUpperCase(); });
+    }).filter(Boolean);
+  }
+
+  function grantValues(row, kind) {
+    var grant = row.grants?.[kind] || {};
+    var fixed = Array.isArray(grant.fixed) ? grant.fixed : [];
+    var choices = Array.isArray(grant.choices) ? grant.choices.map(function (choice) {
+      return choice.count ? "Choice of " + choice.count : "Choice";
+    }) : [];
+    return fixed.concat(choices).join(", ");
+  }
+
+  function mapBackgroundApiRow(row) {
+    var skills = row.skills || grantValues(row, "skills");
+    var tools = grantValues(row, "tools");
+    var languages = grantValues(row, "languages");
+    var summary = [
+      skills ? "Skill Proficiencies: " + listValues(skills).join(", ") : "",
+      tools ? "Tool Proficiencies: " + tools : "",
+      languages ? "Languages: " + languages : "",
+      row.feature ? "Feature: " + row.feature : ""
+    ].filter(Boolean).join(". ");
+    return {
+      Id: row.id || "",
+      Name: row.name || "",
+      Source: row.source || "",
+      Skills: listValues(skills).join(", "),
+      Tools: tools,
+      Languages: languages,
+      Description: entriesText(row.entries || row.raw?.entries) || summary
+    };
+  }
+
+  async function loadBackgroundDetail(id) {
+    var api = await features.createRulesApiClient(features.rulesSearchConfigs.backgrounds);
+    return api.getCatalogEntity("backgrounds", id);
+  }
 
   function extractSegment(text, label, nextLabels) {
     var start = new RegExp("\\b" + label + "\\s*:", "i").exec(text);
@@ -24,6 +66,7 @@
   }
 
   function backgroundSkillValues(row) {
+    if (row.Skills) return listValues(row.Skills);
     var segment = extractSegment(row.Description || "", "Skill Proficiencies", [
       "Tool Proficiencies",
       "Languages",
@@ -35,6 +78,7 @@
   }
 
   function backgroundToolValues(row) {
+    if (row.Tools) return listValues(row.Tools);
     var segment = extractSegment(row.Description || "", "Tool Proficiencies", [
       "Languages",
       "Equipment",
@@ -45,6 +89,7 @@
   }
 
   function backgroundLanguageValues(row) {
+    if (row.Languages) return listValues(row.Languages);
     var segment = extractSegment(row.Description || "", "Languages", [
       "Tool Proficiencies",
       "Equipment",
@@ -60,7 +105,7 @@
 
   function renderBackground(row) {
     return '\
-      <details class="background-card">\
+      <details class="background-card" data-catalog-id="' + escapeHtml(row.Id || "") + '">\
         <summary class="background-name">\
           <span>' + escapeHtml(row.Name) + '</span>\
           <span class="rules-card-badges">' + (row.Source ? '<span class="background-source">' + escapeHtml(row.Source) + "</span>" : "") + '</span>\
@@ -77,14 +122,17 @@
     title: "Background Search",
     itemLabel: "background",
     dataKind: "backgrounds",
+    remoteSearch: true,
+    remoteLimit: 1000,
+    remoteDebounceMs: 250,
+    mapApiRow: mapBackgroundApiRow,
+    loadDetail: loadBackgroundDetail,
     placeholder: "Search backgrounds...",
     searchFields: ["Name", "Source", "Description"],
     render: renderBackground,
     filters: [
       { key: "source", label: "Source", values: helpers.sourceValues },
-      { key: "skills", label: "Skills", values: backgroundSkillValues },
-      { key: "tools", label: "Tools", values: backgroundToolValues },
-      { key: "languages", label: "Languages", values: backgroundLanguageValues }
+      { key: "skills", label: "Skills", values: backgroundSkillValues }
     ],
     sorts: [
       { key: "name", label: "Name A-Z", compare: compareText("Name") },
