@@ -435,9 +435,18 @@ async function resolveInventoryCatalogRecord(item, api) {
     const catalog = getCatalogCache(api);
     const identity = item?.catalog;
     const catalogId = identity?.options?.catalogId || identity?.catalogId || identity?.id || "";
+    const catalogName = identity?.name || item?.name || "";
+    const catalogSource = identity?.source || item?.source || "";
     try {
         if (catalogId) {
             const catalogRecord = await catalog.getById("items", catalogId);
+            if (catalogRecord) {
+                return catalogRecord;
+            }
+        }
+
+        if (catalogName) {
+            const catalogRecord = await catalog.getByName("items", catalogName, catalogSource, { limit: 30 });
             if (catalogRecord) {
                 return catalogRecord;
             }

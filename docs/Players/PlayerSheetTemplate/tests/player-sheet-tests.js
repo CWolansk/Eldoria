@@ -54,7 +54,8 @@ import {
 import { CatalogCache } from "../CatalogCache.js";
 import {
   createEquipToggle,
-  createItemListItem
+  createItemListItem,
+  resolveInventoryItems
 } from "../PlayerSheetJavaScript/PlayerSheetTabHelpers.js";
 
 const results = document.querySelector("#test-results");
@@ -1364,6 +1365,38 @@ const tests = [
       compiledAfterSave.inventory.carried[0].snapshot.entries.includes("A catalog-backed blade description."),
       "saved rerender should retain hydrated gear rules"
     );
+  }],
+  ["name-only inventory references recover offense and gear rules", async () => {
+    CatalogCache.clearShared();
+    const api = createFakeApi();
+    const resolved = await resolveInventoryItems({
+      inventory: {
+        carried: [{
+          name: "Test Blade",
+          source: "Homebrew",
+          quantity: 1,
+          equipped: true,
+          catalog: {
+            id: "",
+            name: "Test Blade",
+            source: "Homebrew",
+            kind: "items"
+          }
+        }]
+      }
+    }, api);
+
+    assertEqual(resolved.length, 1, "name-only inventory item should resolve");
+    assert(resolved[0].offensive, "name-resolved weapon should remain offensive");
+    assert(
+      resolved[0].record.entries.includes("A catalog-backed blade description."),
+      "name-resolved item should retain its gear rules"
+    );
+    assert(
+      api.calls.some((call) => call.kind === "items" && call.query === "Test Blade"),
+      "blank catalog ID should fall back to an item name lookup"
+    );
+    CatalogCache.clearShared();
   }],
   ["Variant Human keeps only the active two-ability racial ASI", async () => {
     CatalogCache.clearShared();
