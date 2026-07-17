@@ -9,7 +9,26 @@ function sheet() {
     id: "char-test-001",
     lastModified: "2026-01-01T00:00:00.000Z",
     identity: { name: "Test Hero", playerName: "DM", experience: 8000 },
-    baseChoices: { startingProficiencies: { languages: ["Common", "Dwarvish"] } },
+    baseChoices: {
+      race: { id: "dragonborn-phb", name: "Dragonborn", source: "PHB" },
+      raceChoices: {
+        selections: {
+          "dragonborn-phb:draconic-ancestry:0": {
+            type: "draconic-ancestry",
+            values: [{ label: "Green - Poison", damageType: "poison" }]
+          }
+        }
+      },
+      backgroundChoices: {
+        selections: {
+          "background:language": {
+            type: "language",
+            values: [{ value: "Celestial", label: "Celestial" }]
+          }
+        }
+      },
+      startingProficiencies: { languages: ["Common", "Dwarvish"] }
+    },
     levels: [
       { characterLevel: 1, class: { name: "Fighter" }, hp: 12 },
       { characterLevel: 2, class: { name: "Fighter" }, hp: 8 }
@@ -75,7 +94,7 @@ const summary = summarizeCharacter(value, {}, [{
 }]);
 assert.equal(summary.level, 5);
 assert.equal(summary.hp.max, 20);
-assert.deepEqual(summary.languages, ["Common", "Dwarvish", "Primordial"]);
+assert.deepEqual(summary.languages, ["Common", "Dwarvish", "Primordial", "Celestial"]);
 assert.deepEqual(summary.defenses.damageResistances, ["cold", "poison"]);
 assert.deepEqual(summary.defenses.damageImmunities, ["fire"]);
 assert.deepEqual(summary.defenses.conditionImmunities, ["charmed"]);

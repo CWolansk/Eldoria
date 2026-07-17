@@ -118,6 +118,74 @@ function addLanguageSource(target, source = {}) {
   }
 }
 
+function storedChoiceSelections(value = {}) {
+  if (!value || typeof value !== "object") return [];
+  const selections = value.selections && typeof value.selections === "object"
+    ? value.selections
+    : value;
+  return Object.values(selections).filter((selection) => selection && typeof selection === "object");
+}
+
+function choiceOptions(selection = {}) {
+  const values = Array.isArray(selection.values) ? selection.values : [];
+  if (values.length) return values;
+  return selection.value == null || selection.value === "" ? [] : [selection.value];
+}
+
+function isLanguageChoice(selection = {}) {
+  return /language/iu.test([
+    selection.type,
+    selection.valueKey,
+    selection.label
+  ].map(text).filter(Boolean).join(" "));
+}
+
+function isEgwDragonbornChoice(sheet, selection = {}) {
+  return /\begw\b|draconblood|ravenite/iu.test([
+    sheet?.baseChoices?.race?.id,
+    sheet?.baseChoices?.race?.name,
+    sheet?.baseChoices?.race?.subrace,
+    sheet?.baseChoices?.race?.source,
+    sheet?.baseChoices?.race?.options?.displayName,
+    selection.choiceId,
+    selection.label,
+    selection.sourceName,
+    selection.source
+  ].map(text).filter(Boolean).join(" "));
+}
+
+function addChoiceReferences(targets, languages, sheet, selection = {}) {
+  addDefenseSource(targets, selection);
+  addDefenseSource(targets, selection.grants);
+  addLanguageSource(languages, selection);
+  addLanguageSource(languages, selection.grants);
+
+  const options = choiceOptions(selection);
+  for (const option of options) {
+    if (option && typeof option === "object") {
+      addDefenseSource(targets, option);
+      addDefenseSource(targets, option.grants);
+      addLanguageSource(languages, option);
+      addLanguageSource(languages, option.grants);
+    }
+  }
+
+  if (isLanguageChoice(selection)) {
+    options.forEach((option) => addLanguage(
+      languages,
+      typeof option === "object" ? option.label || option.name || option.value : option
+    ));
+  }
+
+  if (selection.type === "draconic-ancestry" && !isEgwDragonbornChoice(sheet, selection)) {
+    options.forEach((option) => {
+      if (option && typeof option === "object") {
+        addRuleValues(targets.damageResistances, option.damageType);
+      }
+    });
+  }
+}
+
 function summarizeReferences(sheet, catalogRecords = []) {
   const targets = {
     damageResistances: new Set(),
@@ -142,10 +210,18 @@ function summarizeReferences(sheet, catalogRecords = []) {
     addLanguageSource(languages, source);
     addLanguageSource(languages, source?.grants);
   }
+  for (const choiceState of [
+    sheet?.baseChoices?.raceChoices,
+    sheet?.baseChoices?.backgroundChoices,
+    sheet?.baseChoices?.proficiencyChoices
+  ]) {
+    for (const selection of storedChoiceSelections(choiceState)) {
+      addChoiceReferences(targets, languages, sheet, selection);
+    }
+  }
   for (const level of Array.isArray(sheet?.levels) ? sheet.levels : []) {
     for (const choice of Array.isArray(level?.choices) ? level.choices : []) {
-      addDefenseSource(targets, choice?.grants?.defenses || choice?.defenses);
-      addLanguageSource(languages, choice?.grants || choice);
+      addChoiceReferences(targets, languages, sheet, choice);
     }
   }
   return {
