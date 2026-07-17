@@ -1111,7 +1111,7 @@ async function ensureCatalogProfiles(context) {
     }
 
     if (changed) {
-        context.onChange(PlayerSheetDtoHelper.touch(nextDto));
+        context.onChange(nextDto);
     }
 }
 

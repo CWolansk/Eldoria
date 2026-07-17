@@ -12,6 +12,7 @@ import { BuildPlayerSheetNotesTab } from "./PlayerSheetJavaScript/PlayerSheetNot
 import { BuildPlayerSheetReferenceTab } from "./PlayerSheetJavaScript/PlayerSheetReferenceTabBuilder.js";
 import { bootLevelEditor } from "./LevelEditorJavaScript/Core/LevelEditorBuilder.js";
 import { PlayerSheetDtoHelper } from "./PlayerSheetDtoHelper.js";
+import { mergePlayerSheetChanges } from "./PlayerSheetConflictResolver.js";
 import { SheetCompiler } from "./SheetCompiler.js";
 import {
     applyResolvedReferencesToDto,
@@ -66,6 +67,7 @@ let saveTimer = null;
 let saveInFlight = false;
 let pendingSaveDto = null;
 let lastSavedFingerprint = "";
+let lastSyncedPlayerSheetDto = null;
 let remoteRefreshInFlight = false;
 let remoteRefreshTimer = null;
 
@@ -154,10 +156,65 @@ function getRequestedPlayerId() {
 
 function createSaveFingerprint(dto) {
     try {
-        return JSON.stringify(dto || null);
+        if (!dto) return JSON.stringify(null);
+        const comparable = { ...dto };
+        delete comparable.lastModified;
+        return JSON.stringify(comparable);
     } catch (_error) {
         return "";
     }
+}
+
+function rememberServerSnapshot(characterId, dto) {
+    if (!dto) return null;
+    const strictDto = PlayerSheetDtoHelper.toSaveDto(dto, { id: characterId });
+    lastSyncedPlayerSheetDto = strictDto;
+    rememberPlayerCharacterDto(characterId, strictDto);
+    return strictDto;
+}
+
+function isConflictError(error) {
+    return Number(error?.status) === 409;
+}
+
+function createVersionedSaveDto(dto, characterId, baseDto = lastSyncedPlayerSheetDto) {
+    const strictDto = PlayerSheetDtoHelper.toSaveDto(dto, { id: characterId });
+    return {
+        ...strictDto,
+        id: characterId,
+        lastModified: String(baseDto?.lastModified || strictDto.lastModified || "")
+    };
+}
+
+async function saveWithConflictReconciliation(characterId, localDto) {
+    let baseDto = lastSyncedPlayerSheetDto;
+    let dtoToSave = localDto;
+
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+        try {
+            return await api.saveCharacterSheet(
+                characterId,
+                createVersionedSaveDto(dtoToSave, characterId, baseDto)
+            );
+        } catch (error) {
+            if (!isConflictError(error) || attempt === 2) throw error;
+
+            setSaveStatus("reconciling", "Applying changes from the DM screen...");
+            const remoteDto = PlayerSheetDtoHelper.toSaveDto(
+                await api.getCharacterSheet(characterId),
+                { id: characterId }
+            );
+            const merged = mergePlayerSheetChanges(baseDto, dtoToSave, remoteDto);
+            if (merged.conflicts.length) {
+                console.info("Concurrent player-sheet fields resolved in favor of the latest player edit:", merged.conflicts);
+            }
+
+            baseDto = remoteDto;
+            dtoToSave = PlayerSheetDtoHelper.toSaveDto(merged.value, { id: characterId });
+        }
+    }
+
+    throw new Error("Unable to reconcile player sheet changes.");
 }
 
 function updateActiveTabButton(tabName) {
@@ -246,16 +303,29 @@ async function flushPendingSave() {
     setSaveStatus("saving", "Saving...");
 
     try {
-        const strictDto = PlayerSheetDtoHelper.toSaveDto(dtoToSave, {
-            id: characterId
-        });
-        const persistedDto = await api.saveCharacterSheet(characterId, {
-            ...strictDto,
-            id: characterId
-        });
+        const persistedDto = PlayerSheetDtoHelper.toSaveDto(
+            await saveWithConflictReconciliation(characterId, dtoToSave),
+            { id: characterId }
+        );
+        const rebasedCurrent = mergePlayerSheetChanges(dtoToSave, currentPlayerSheetDto, persistedDto);
+        if (rebasedCurrent.conflicts.length) {
+            console.info("Newer player edits retained while applying the saved response:", rebasedCurrent.conflicts);
+        }
 
-        rememberPlayerCharacterDto(characterId, persistedDto || strictDto);
-        lastSavedFingerprint = fingerprint || createSaveFingerprint(persistedDto);
+        if (pendingSaveDto) {
+            const rebasedPending = mergePlayerSheetChanges(dtoToSave, pendingSaveDto, persistedDto);
+            if (rebasedPending.conflicts.length) {
+                console.info("Pending player edits retained while applying the saved response:", rebasedPending.conflicts);
+            }
+            pendingSaveDto = PlayerSheetDtoHelper.toSaveDto(rebasedPending.value, { id: characterId });
+        }
+
+        rememberServerSnapshot(characterId, persistedDto);
+        lastSavedFingerprint = createSaveFingerprint(persistedDto);
+        await applyPlayerSheetDto(rebasedCurrent.value, {
+            persist: false,
+            resolveReferences: false
+        });
         setSaveStatus("saved", "Saved");
     } catch (error) {
         console.error("Failed to save player sheet DTO:", error);
@@ -409,9 +479,9 @@ async function refreshPlayerSheetFromApi() {
   try {
     const loadedDto = await api.getCharacterSheet(characterId);
     const strictDto = PlayerSheetDtoHelper.toSaveDto(loadedDto, { id: characterId });
+    rememberServerSnapshot(characterId, strictDto);
     const fingerprint = createSaveFingerprint(strictDto);
     if (!fingerprint || fingerprint === createSaveFingerprint(currentPlayerSheetDto)) return;
-    rememberPlayerCharacterDto(characterId, strictDto);
     await applyPlayerSheetDto(strictDto, { persist: false });
     lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
     setSaveStatus("saved", "Updated by DM");
@@ -442,6 +512,7 @@ async function bootPlayersPage() {
 
     const cached = readPlayerCharacterDto(CharId);
     if (cached?.value) {
+        rememberServerSnapshot(CharId, cached.value);
         await applyPlayerSheetDto(cached.value, {
             persist: false,
             resolveReferences: false
@@ -452,7 +523,7 @@ async function bootPlayersPage() {
 
     try {
         const loadedDto = await api.getCharacterSheet(CharId);
-        rememberPlayerCharacterDto(CharId, loadedDto);
+        rememberServerSnapshot(CharId, loadedDto);
         await applyPlayerSheetDto(loadedDto, {
             persist: false,
             resolveReferences: false

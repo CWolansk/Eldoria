@@ -602,9 +602,9 @@ export function patchPlayerSheetDto(dto, path, value, options = {}) {
     setNestedValue(next, path, value);
 
     const normalized = normalizePlayerSheetDto(next, options);
-    return options.touch === false
-        ? normalized
-        : touchPlayerSheetDto(normalized, options.lastModified || nowIso());
+    return options.touch === true
+        ? touchPlayerSheetDto(normalized, options.lastModified || nowIso())
+        : normalized;
 }
 
 export class PlayerSheetDtoHelper {
