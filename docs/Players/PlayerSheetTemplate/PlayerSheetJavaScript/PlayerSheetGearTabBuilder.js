@@ -5,6 +5,8 @@ import {
     createEquipToggle,
     createInventoryItemFromCatalog,
     getCatalogItemId,
+    getItemDetailRows,
+    getItemDisplayName,
     createItemCard,
     createItemList,
     createItemListItem,
@@ -25,6 +27,217 @@ const ITEM_SEARCH_LIMIT = 25;
 const ITEM_SEARCH_DEBOUNCE_MS = 250;
 const SPELL_SCROLL_SEARCH_LIMIT = 25;
 const CURRENCY_KEYS = ["pp", "gp", "ep", "sp", "cp"];
+const GEAR_PREFERENCE_PREFIX = "eldoria:player-sheet:gear-view:";
+const GEAR_FILTERS = [
+    { key: "all", label: "All" },
+    { key: "equipped", label: "Equipped" },
+    { key: "attuned", label: "Attuned" },
+    { key: "weapons", label: "Weapons" },
+    { key: "armor", label: "Armor" },
+    { key: "consumables", label: "Consumables" },
+    { key: "magic", label: "Magic" },
+    { key: "adventuring", label: "Adventuring" }
+];
+const GEAR_SORTS = [
+    { key: "ready", label: "Ready first" },
+    { key: "name", label: "Name A-Z" },
+    { key: "type", label: "Type" },
+    { key: "rarity", label: "Rarity (high-low)" },
+    { key: "weight", label: "Weight (high-low)" },
+    { key: "value", label: "Value (high-low)" }
+];
+const GEAR_GROUPS = [
+    { key: "ready", label: "Ready / Equipped" },
+    { key: "consumables", label: "Consumables" },
+    { key: "arms", label: "Weapons & Armor" },
+    { key: "magic", label: "Magic & Utility" },
+    { key: "adventuring", label: "Adventuring Gear" }
+];
+const GEAR_RARITY_ORDER = ["none", "common", "uncommon", "rare", "very rare", "legendary", "artifact"];
+const DEFAULT_COLLAPSED_GEAR_GROUPS = ["adventuring"];
+
+function normalizeGearText(value) {
+    return String(value || "")
+        .normalize("NFKD")
+        .replace(/[\u0300-\u036f]/gu, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/gu, " ")
+        .trim();
+}
+
+function gearFieldText(value, depth = 0) {
+    if (value == null || depth > 2) return "";
+    if (["string", "number", "boolean"].includes(typeof value)) return String(value);
+    if (Array.isArray(value)) return value.map((entry) => gearFieldText(entry, depth + 1)).filter(Boolean).join(" ");
+    if (typeof value === "object") {
+        return gearFieldText(value.name || value.full || value.label || value.type || value.code || value.abbreviation || "", depth + 1);
+    }
+    return "";
+}
+
+function getGearDetail(item, record, label) {
+    return getItemDetailRows(item, record).find(([rowLabel]) => rowLabel === label)?.[1] || "";
+}
+
+function parseGearWeight(value) {
+    const parsed = Number.parseFloat(String(value || "").replace(/,/gu, ""));
+    return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function parseGearValue(value) {
+    const match = String(value || "").replace(/,/gu, "").match(/(-?\d+(?:\.\d+)?)\s*(pp|gp|ep|sp|cp)\b/iu);
+    if (!match) return 0;
+    const multipliers = { pp: 1000, gp: 100, ep: 50, sp: 10, cp: 1 };
+    return Number(match[1]) * multipliers[match[2].toLowerCase()];
+}
+
+function isGearWeapon(record, typeText) {
+    return record?.isWeapon === true
+        || record?.weapon === true
+        || Boolean(record?.weaponCategory || record?.weapon?.category || record?.dmg1 || record?.dmg2 || record?.dmgType)
+        || /\bweapon\b|\bammunition\b|\bfirearm\b/u.test(typeText);
+}
+
+function isGearArmor(record, typeText) {
+    return record?.isArmor === true
+        || record?.armor === true
+        || (record?.armor && typeof record.armor === "object")
+        || record?.ac != null
+        || record?._fAc != null
+        || /\barmor\b|\bshield\b/u.test(typeText);
+}
+
+function isGearConsumable(name, typeText) {
+    return /\b(consumable|potion|scroll|poison|food|drink|ammunition)\b/u.test(`${name} ${typeText}`);
+}
+
+function isGearMagic(item, record, typeText, rarity, source) {
+    const attunement = record?.attunement || record?.attunementRequirement || record?.reqAttune || record?._attunement;
+    return Boolean(item?.attuned)
+        || record?.isMagic === true
+        || Boolean(attunement && !/^(false|no|none)$/iu.test(String(attunement)))
+        || Boolean(rarity && rarity !== "none")
+        || /\b(magic|wondrous|ring|rod|wand|staff|tattoo)\b/u.test(typeText)
+        || normalizeGearText(source) === "eldoria";
+}
+
+export function createGearViewEntry(resolved = {}) {
+    const item = resolved.item || {};
+    const record = resolved.record || item.snapshot || item;
+    const name = getItemDisplayName(item);
+    const source = item.source || item.catalog?.source || record?.source || "";
+    const type = gearFieldText(getGearDetail(item, record, "Type") || record?.category || record?._category);
+    const typeText = normalizeGearText(type);
+    const rarity = normalizeGearText(record?.rarity || "none") || "none";
+    const weapon = isGearWeapon(record, typeText);
+    const armor = isGearArmor(record, typeText);
+    const consumable = isGearConsumable(normalizeGearText(name), typeText);
+    const magic = isGearMagic(item, record, typeText, rarity, source);
+    const categories = new Set([
+        ...(item.equipped ? ["equipped"] : []),
+        ...(item.attuned ? ["attuned"] : []),
+        ...(weapon ? ["weapons"] : []),
+        ...(armor ? ["armor"] : []),
+        ...(consumable ? ["consumables"] : []),
+        ...(magic ? ["magic"] : [])
+    ]);
+    const group = item.equipped
+        ? "ready"
+        : consumable
+            ? "consumables"
+            : weapon || armor
+                ? "arms"
+                : magic
+                    ? "magic"
+                    : "adventuring";
+    if (group === "adventuring") categories.add("adventuring");
+
+    return {
+        ...resolved,
+        item,
+        record,
+        name,
+        source,
+        type,
+        typeText,
+        rarity,
+        rarityRank: Math.max(0, GEAR_RARITY_ORDER.indexOf(rarity)),
+        weight: parseGearWeight(getGearDetail(item, record, "Weight")),
+        value: parseGearValue(getGearDetail(item, record, "Value")),
+        categories,
+        group,
+        searchText: normalizeGearText([name, source, type, rarity, [...categories].join(" ")].join(" "))
+    };
+}
+
+function compareGearText(left, right) {
+    return String(left || "").localeCompare(String(right || ""), undefined, { numeric: true, sensitivity: "base" });
+}
+
+export function sortGearViewEntries(entries, sort = "ready") {
+    return [...entries].sort((left, right) => {
+        if (sort === "ready") {
+            const equipped = Number(Boolean(right.item?.equipped)) - Number(Boolean(left.item?.equipped));
+            if (equipped) return equipped;
+            const attuned = Number(Boolean(right.item?.attuned)) - Number(Boolean(left.item?.attuned));
+            if (attuned) return attuned;
+        } else if (sort === "type") {
+            const type = compareGearText(left.type, right.type);
+            if (type) return type;
+        } else if (sort === "rarity") {
+            const rarity = right.rarityRank - left.rarityRank;
+            if (rarity) return rarity;
+        } else if (sort === "weight") {
+            const weight = right.weight - left.weight;
+            if (weight) return weight;
+        } else if (sort === "value") {
+            const value = right.value - left.value;
+            if (value) return value;
+        }
+        return compareGearText(left.name, right.name) || left.inventoryIndex - right.inventoryIndex;
+    });
+}
+
+function getGearPreferenceKey(context = {}) {
+    const characterId = String(context.dto?.id || "default").trim() || "default";
+    return `${GEAR_PREFERENCE_PREFIX}${characterId}`;
+}
+
+function readGearPreferences(context = {}) {
+    const defaults = {
+        sort: "ready",
+        compact: true,
+        collapsedGroups: [...DEFAULT_COLLAPSED_GEAR_GROUPS]
+    };
+    if (typeof window === "undefined" || !window.localStorage) return defaults;
+    try {
+        const stored = JSON.parse(window.localStorage.getItem(getGearPreferenceKey(context)) || "null");
+        const validSorts = new Set(GEAR_SORTS.map((option) => option.key));
+        const validGroups = new Set(GEAR_GROUPS.map((option) => option.key));
+        return {
+            sort: validSorts.has(stored?.sort) ? stored.sort : defaults.sort,
+            compact: typeof stored?.compact === "boolean" ? stored.compact : defaults.compact,
+            collapsedGroups: Array.isArray(stored?.collapsedGroups)
+                ? stored.collapsedGroups.filter((group) => validGroups.has(group))
+                : defaults.collapsedGroups
+        };
+    } catch (_error) {
+        return defaults;
+    }
+}
+
+function writeGearPreferences(context, state) {
+    if (typeof window === "undefined" || !window.localStorage) return;
+    try {
+        window.localStorage.setItem(getGearPreferenceKey(context), JSON.stringify({
+            sort: state.sort,
+            compact: state.compact,
+            collapsedGroups: [...state.collapsedGroups]
+        }));
+    } catch (_error) {
+        // View preferences should never interfere with rendering the character sheet.
+    }
+}
 
 function listCatalogItems(response) {
     if (Array.isArray(response)) {
@@ -803,6 +1016,183 @@ function appendCurrency(shell, currency = {}, context = {}) {
     shell.appendChild(section);
 }
 
+function createGearDetailsToggle(itemName) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "player-sheet-button player-sheet-button--small player-sheet-gear-details-toggle";
+    button.textContent = "Details";
+    button.setAttribute("aria-label", `Show details for ${itemName}`);
+    button.setAttribute("aria-expanded", "false");
+    let row = null;
+    button.addEventListener("click", () => {
+        if (!row) return;
+        const expanded = !row.classList.contains("player-sheet-item-row--expanded");
+        row.classList.toggle("player-sheet-item-row--expanded", expanded);
+        button.textContent = expanded ? "Hide" : "Details";
+        button.setAttribute("aria-expanded", String(expanded));
+        button.setAttribute("aria-label", `${expanded ? "Hide" : "Show"} details for ${itemName}`);
+    });
+    return {
+        button,
+        bind(itemRow) {
+            row = itemRow;
+        }
+    };
+}
+
+function createGearControls(entries, state, onRender) {
+    const root = createElement("div", "player-sheet-gear-controls");
+    const primary = createElement("div", "player-sheet-gear-controls__primary");
+
+    const searchInput = document.createElement("input");
+    searchInput.type = "search";
+    searchInput.className = "player-sheet-input player-sheet-gear-controls__search";
+    searchInput.placeholder = "Item name or type";
+    searchInput.setAttribute("aria-label", "Search gear");
+    primary.appendChild(createModalField("Search gear", searchInput));
+
+    const sortSelect = document.createElement("select");
+    sortSelect.className = "player-sheet-select player-sheet-gear-controls__sort";
+    sortSelect.setAttribute("aria-label", "Sort gear");
+    for (const option of GEAR_SORTS) {
+        const element = document.createElement("option");
+        element.value = option.key;
+        element.textContent = option.label;
+        element.selected = state.sort === option.key;
+        sortSelect.appendChild(element);
+    }
+    primary.appendChild(createModalField("Sort", sortSelect));
+
+    const compactLabel = createElement("label", "player-sheet-gear-compact-toggle");
+    const compactInput = document.createElement("input");
+    compactInput.type = "checkbox";
+    compactInput.checked = state.compact;
+    compactInput.setAttribute("aria-label", "Use compact gear rows");
+    compactLabel.append(compactInput, createElement("span", "", "Compact view"));
+    primary.appendChild(compactLabel);
+    root.appendChild(primary);
+
+    const filters = createElement("div", "player-sheet-gear-filters");
+    filters.setAttribute("aria-label", "Filter gear");
+    const filterCounts = new Map(GEAR_FILTERS.map(({ key }) => [
+        key,
+        key === "all" ? entries.length : entries.filter((entry) => entry.categories.has(key)).length
+    ]));
+    const filterButtons = new Map();
+    for (const option of GEAR_FILTERS) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "player-sheet-gear-filter";
+        button.dataset.gearFilter = option.key;
+        button.setAttribute("aria-pressed", String(state.filter === option.key));
+        button.textContent = `${option.label} ${filterCounts.get(option.key)}`;
+        button.addEventListener("click", () => {
+            state.filter = option.key;
+            for (const [key, filterButton] of filterButtons) {
+                filterButton.setAttribute("aria-pressed", String(key === state.filter));
+            }
+            onRender();
+        });
+        filters.appendChild(button);
+        filterButtons.set(option.key, button);
+    }
+    root.appendChild(filters);
+
+    const status = createElement("p", "player-sheet-gear-controls__status");
+    status.setAttribute("aria-live", "polite");
+    root.appendChild(status);
+
+    searchInput.addEventListener("input", () => {
+        state.query = normalizeGearText(searchInput.value);
+        onRender();
+    });
+    sortSelect.addEventListener("change", () => {
+        state.sort = sortSelect.value;
+        writeGearPreferences(state.context, state);
+        onRender();
+    });
+    compactInput.addEventListener("change", () => {
+        state.compact = compactInput.checked;
+        writeGearPreferences(state.context, state);
+        onRender();
+    });
+
+    return { root, status };
+}
+
+function gearEntryMatches(entry, state) {
+    const matchesFilter = state.filter === "all" || entry.categories.has(state.filter);
+    return matchesFilter && (!state.query || entry.searchText.includes(state.query));
+}
+
+function createGearRow(entry, state, scrollSpellModal, containedSpellRecords) {
+    const { item, record, inventoryIndex } = entry;
+    const scrollSpell = getContainedSpell(item);
+    const actions = [createEquipToggle(item, inventoryIndex, state.context)];
+    if (isSpellScroll(item, record)) {
+        actions.push(createSpellScrollButton(item, inventoryIndex, scrollSpellModal, state.context));
+    }
+    const detailsToggle = state.compact ? createGearDetailsToggle(entry.name) : null;
+    if (detailsToggle) actions.push(detailsToggle.button);
+    actions.push(createRemoveGearButton(item, inventoryIndex, state.context));
+
+    const itemRow = createItemListItem(item, record, {
+        actions,
+        showMeta: !state.compact,
+        metrics: scrollSpell?.name ? [["Spell", scrollSpell.name]] : [],
+        rows: ["Damage", "Versatile", "AC", "Value", "Weight", "Attunement"]
+    });
+    itemRow.dataset.inventoryIndex = String(inventoryIndex);
+    itemRow.dataset.gearGroup = entry.group;
+    detailsToggle?.bind(itemRow);
+    if (scrollSpell) {
+        const spellRules = createSpellRulesPreview(containedSpellRecords.get(inventoryIndex));
+        if (spellRules) itemRow.appendChild(spellRules);
+    }
+    return itemRow;
+}
+
+function renderGearGroups(results, entries, state, controls, scrollSpellModal, containedSpellRecords) {
+    results.replaceChildren();
+    const visible = sortGearViewEntries(entries.filter((entry) => gearEntryMatches(entry, state)), state.sort);
+    controls.status.textContent = `${visible.length} of ${entries.length} item${entries.length === 1 ? "" : "s"} shown`;
+    if (!visible.length) {
+        appendEmptyState(results, "No gear matches the current search and filter.");
+        return;
+    }
+
+    const narrowed = Boolean(state.query) || state.filter !== "all";
+    for (const group of GEAR_GROUPS) {
+        const groupEntries = visible.filter((entry) => entry.group === group.key);
+        if (!groupEntries.length) continue;
+
+        const details = createElement("details", "player-sheet-gear-group");
+        details.dataset.gearGroup = group.key;
+        details.open = narrowed || !state.collapsedGroups.has(group.key);
+        const summary = createElement("summary", "player-sheet-gear-group__summary");
+        summary.append(
+            createElement("span", "player-sheet-gear-group__chevron", "›"),
+            createElement("span", "player-sheet-gear-group__title", group.label),
+            createElement("span", "player-sheet-gear-group__count", String(groupEntries.length))
+        );
+        details.appendChild(summary);
+
+        const list = createItemList();
+        list.classList.add("player-sheet-gear-list");
+        list.classList.toggle("player-sheet-gear-list--compact", state.compact);
+        for (const entry of groupEntries) {
+            list.appendChild(createGearRow(entry, state, scrollSpellModal, containedSpellRecords));
+        }
+        details.appendChild(list);
+        details.addEventListener("toggle", () => {
+            if (details.open) state.collapsedGroups.delete(group.key);
+            else state.collapsedGroups.add(group.key);
+            writeGearPreferences(state.context, state);
+        });
+        results.appendChild(details);
+    }
+}
+
 export async function BuildPlayerSheetGearTab(playerSheetObject, context = {}) {
     const shell = createTabShell("Gear");
     const header = shell.querySelector(".player-sheet-tab__header");
@@ -836,26 +1226,22 @@ export async function BuildPlayerSheetGearTab(playerSheetObject, context = {}) {
         shell.appendChild(section);
         return;
     }
-
-    const list = createItemList();
-    for (const { item, record, inventoryIndex } of resolvedItems) {
-        const scrollSpell = getContainedSpell(item);
-        const actions = [createEquipToggle(item, inventoryIndex, context)];
-        if (isSpellScroll(item, record)) {
-            actions.push(createSpellScrollButton(item, inventoryIndex, scrollSpellModal, context));
-        }
-        actions.push(createRemoveGearButton(item, inventoryIndex, context));
-        const itemRow = createItemListItem(item, record, {
-            actions,
-            metrics: scrollSpell?.name ? [["Spell", scrollSpell.name]] : [],
-            rows: ["Damage", "Versatile", "AC", "Value", "Weight", "Attunement"]
-        });
-        if (scrollSpell) {
-            const spellRules = createSpellRulesPreview(containedSpellRecords.get(inventoryIndex));
-            if (spellRules) itemRow.appendChild(spellRules);
-        }
-        list.appendChild(itemRow);
-    }
-    section.appendChild(list);
+    const entries = resolvedItems.map(createGearViewEntry);
+    const preferences = readGearPreferences(context);
+    const state = {
+        context,
+        query: "",
+        filter: "all",
+        sort: preferences.sort,
+        compact: preferences.compact,
+        collapsedGroups: new Set(preferences.collapsedGroups)
+    };
+    const results = createElement("div", "player-sheet-gear-groups");
+    let controls;
+    controls = createGearControls(entries, state, () => {
+        renderGearGroups(results, entries, state, controls, scrollSpellModal, containedSpellRecords);
+    });
+    section.append(controls.root, results);
+    renderGearGroups(results, entries, state, controls, scrollSpellModal, containedSpellRecords);
     shell.appendChild(section);
 }

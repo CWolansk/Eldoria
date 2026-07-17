@@ -2774,6 +2774,100 @@ const tests = [
     assert(preview.textContent.length <= 253, "long rules preview should cap at 250 characters plus ellipsis");
     assert(details.textContent.includes("The full wording"), "expanded rules should retain the full text");
   }],
+  ["gear organizer filters and sorts without changing inventory data", async () => {
+    const preferenceKey = "eldoria:player-sheet:gear-view:char-test-001";
+    window.localStorage.removeItem(preferenceKey);
+    try {
+      const dto = createDto();
+      dto.inventory.items = [
+        {
+          name: "Readied Blade",
+          quantity: 1,
+          equipped: true,
+          attuned: true,
+          snapshot: { name: "Readied Blade", source: "Homebrew", type: "weapon", weapon: true, rarity: "rare", weight: 4, valueLabel: "500 gp", entries: ["A dependable magic blade."] }
+        },
+        {
+          name: "Chain Mail",
+          quantity: 1,
+          equipped: false,
+          snapshot: { name: "Chain Mail", source: "PHB", type: "heavy armor", armor: true, rarity: "none", weight: 55, valueLabel: "75 gp" }
+        },
+        {
+          name: "Potion of Healing",
+          quantity: 2,
+          equipped: false,
+          snapshot: { name: "Potion of Healing", source: "DMG", type: "potion", rarity: "common", weight: 0.5, valueLabel: "50 gp", entries: ["Restores hit points."] }
+        },
+        {
+          name: "Whispering Charm",
+          quantity: 1,
+          equipped: false,
+          snapshot: { name: "Whispering Charm", source: "Eldoria", type: "wondrous item", rarity: "uncommon", valueLabel: "200 gp", entries: ["Carries a quiet message."] }
+        },
+        {
+          name: "Hempen Rope",
+          quantity: 1,
+          equipped: false,
+          snapshot: { name: "Hempen Rope", source: "PHB", type: "adventuring gear", rarity: "none", weight: 10, valueLabel: "1 gp" }
+        }
+      ];
+      let changeCount = 0;
+      fixture.innerHTML = `<div id="TabContent"></div>`;
+      await BuildPlayerSheetGearTab(SheetCompiler.compile(dto), {
+        dto,
+        async onChange() {
+          changeCount += 1;
+        }
+      });
+
+      const tab = fixture.querySelector("#TabContent");
+      assert(tab.querySelector(".player-sheet-gear-controls"), "gear organizer controls should render");
+      assert(tab.querySelector(".player-sheet-gear-controls__status")?.textContent.includes("5 of 5"), "gear status should report all entries");
+      assertEqual(tab.querySelectorAll(".player-sheet-item-row").length, 5, "all gear rows should render across groups");
+      assert(tab.querySelector("[data-gear-group='ready']")?.open, "ready gear should be expanded by default");
+      const adventuringGroup = tab.querySelector("details[data-gear-group='adventuring']");
+      assert(!adventuringGroup?.open, "adventuring gear should be collapsed by default");
+      adventuringGroup.querySelector("summary").click();
+      await waitForCondition(() => {
+        const preference = JSON.parse(window.localStorage.getItem(preferenceKey) || "null");
+        return preference && !preference.collapsedGroups.includes("adventuring");
+      }, "expanded gear group should persist locally");
+      assertEqual(changeCount, 0, "collapsing gear groups should not save the character");
+
+      const detailsToggle = tab.querySelector(".player-sheet-gear-details-toggle");
+      detailsToggle.click();
+      assertEqual(detailsToggle.getAttribute("aria-expanded"), "true", "compact row details should expand on demand");
+      assert(detailsToggle.closest(".player-sheet-item-row")?.classList.contains("player-sheet-item-row--expanded"), "expanded compact row should be marked");
+
+      tab.querySelector("[data-gear-filter='equipped']").click();
+      assertEqual(tab.querySelectorAll(".player-sheet-item-row").length, 1, "equipped filter should show one row");
+      assert(tab.querySelector(".player-sheet-gear-groups")?.textContent.includes("Readied Blade"), "equipped filter should retain the ready item");
+      assertEqual(changeCount, 0, "filtering gear should not save the character");
+
+      tab.querySelector("[data-gear-filter='all']").click();
+      const search = tab.querySelector("[aria-label='Search gear']");
+      search.value = "potion";
+      search.dispatchEvent(new Event("input", { bubbles: true }));
+      assertEqual(tab.querySelectorAll(".player-sheet-item-row").length, 1, "gear search should narrow rendered rows");
+      assert(tab.querySelector(".player-sheet-gear-groups")?.textContent.includes("Potion of Healing"), "gear search should match item names");
+
+      search.value = "";
+      search.dispatchEvent(new Event("input", { bubbles: true }));
+      const sort = tab.querySelector("[aria-label='Sort gear']");
+      sort.value = "value";
+      sort.dispatchEvent(new Event("change", { bubbles: true }));
+      const compact = tab.querySelector("[aria-label='Use compact gear rows']");
+      compact.checked = false;
+      compact.dispatchEvent(new Event("change", { bubbles: true }));
+      const stored = JSON.parse(window.localStorage.getItem(preferenceKey));
+      assertEqual(stored.sort, "value", "gear sort preference should persist locally");
+      assertEqual(stored.compact, false, "gear density preference should persist locally");
+      assertEqual(changeCount, 0, "view preferences should not save the character");
+    } finally {
+      window.localStorage.removeItem(preferenceKey);
+    }
+  }],
   ["spell search modal adds selected spell to the chosen list", async () => {
     CatalogCache.clearShared();
     const dto = createRangerDto();
