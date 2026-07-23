@@ -128,6 +128,9 @@ if [[ -f "$api_root/package-lock.json" ]]; then
   cp "$api_root/package-lock.json" "$stage_root/"
 fi
 cp -R "$api_root/src" "$stage_root/"
+mkdir -p "$stage_root/public-indexes"
+cp "$api_root/../data/location-index.json" "$stage_root/public-indexes/"
+cp "$api_root/../data/npc-index.json" "$stage_root/public-indexes/"
 
 (
   cd "$stage_root"
