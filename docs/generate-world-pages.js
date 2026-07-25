@@ -438,7 +438,19 @@ function pageVisibilityKeys(page) {
   return keys;
 }
 
+function isExactFileSelector(selector) {
+  const normalized = toPosix(selector).trim().replace(/^['"]|['"]$/g, "");
+  return !normalized.includes("*") && path.posix.extname(normalized) !== "";
+}
+
 function selectorMatchesPage(selector, page) {
+  if (isExactFileSelector(selector)) {
+    const exactSelector = normalizeWorldSelector(selector);
+    return [page.worldRel, page.publicRel, page.outputRel]
+      .map(normalizeWorldSelector)
+      .includes(exactSelector);
+  }
+
   const keys = pageVisibilityKeys(page);
   const compactKeys = page._compactVisibilityKeys || new Set();
 
@@ -1020,12 +1032,30 @@ function pageByWorldNoExt(worldMap, worldNoExt) {
   return worldMap.pagesByNoExt.get(String(worldNoExt || "").toLowerCase());
 }
 
-function buildBreadcrumbItems(page, worldMap) {
+function buildBreadcrumbItems(page, worldMap, visibility) {
   const parts = stripKnownExtension(toPosix(page.worldRel)).split("/").filter(Boolean);
   const crumbs = [
     { label: "Home", href: "index.html" },
     { label: "World", href: "tools/location-search/location-reference.html" }
   ];
+  const pushPageCrumb = (label, targetPage) => {
+    if (targetPage && visibility?.isHidden(targetPage)) {
+      const unknownCrumb = {
+        label: visibility.unknownPage.title,
+        href: visibility.unknownPage.outputRel
+      };
+      const lastCrumb = crumbs[crumbs.length - 1];
+      if (!lastCrumb || lastCrumb.href !== unknownCrumb.href) {
+        crumbs.push(unknownCrumb);
+      }
+      return;
+    }
+
+    crumbs.push({
+      label,
+      href: targetPage && targetPage.worldRel !== page.worldRel ? targetPage.outputRel : ""
+    });
+  };
 
   if (parts.length === 0) {
     crumbs.push({ label: page.title });
@@ -1036,18 +1066,12 @@ function buildBreadcrumbItems(page, worldMap) {
   const firstKey = first.toLowerCase();
   if (!SPECIAL_WORLD_FOLDERS.has(firstKey)) {
     const regionPage = pageByWorldNoExt(worldMap, `${first}/${first}`);
-    crumbs.push({
-      label: first,
-      href: regionPage && regionPage.worldRel !== page.worldRel ? regionPage.outputRel : ""
-    });
+    pushPageCrumb(first, regionPage);
 
     const settlement = parts[1];
     if (settlement && parts.length > 2) {
       const settlementPage = pageByWorldNoExt(worldMap, `${first}/${settlement}/${settlement}`);
-      crumbs.push({
-        label: settlement,
-        href: settlementPage && settlementPage.worldRel !== page.worldRel ? settlementPage.outputRel : ""
-      });
+      pushPageCrumb(settlement, settlementPage);
     }
 
     for (let i = 2; i < parts.length - 1; i += 1) {
@@ -1070,11 +1094,11 @@ function buildBreadcrumbItems(page, worldMap) {
   return crumbs;
 }
 
-function buildBreadcrumbJson(page, worldMap) {
-  return escapeAttribute(JSON.stringify(buildBreadcrumbItems(page, worldMap)));
+function buildBreadcrumbJson(page, worldMap, visibility) {
+  return escapeAttribute(JSON.stringify(buildBreadcrumbItems(page, worldMap, visibility)));
 }
 
-function buildPageHtml(page, bodyHtml, sidebarHtml, worldMap) {
+function buildPageHtml(page, bodyHtml, sidebarHtml, worldMap, visibility) {
   const assetPrefix = docsAssetPrefix(page.outputRel);
   const content = [
     `<section class="section generated-page generated-page-${escapeAttribute(page.typeSlug)}">`,
@@ -1109,7 +1133,7 @@ function buildPageHtml(page, bodyHtml, sidebarHtml, worldMap) {
     "</head>",
     "<body>",
     '  <div class="site-shell">',
-    `    <div id="site-nav" data-base-path="${escapeAttribute(assetPrefix)}" data-current="world" data-breadcrumbs="${buildBreadcrumbJson(page, worldMap)}"></div>`,
+    `    <div id="site-nav" data-base-path="${escapeAttribute(assetPrefix)}" data-current="world" data-breadcrumbs="${buildBreadcrumbJson(page, worldMap, visibility)}"></div>`,
     '    <main class="page-main page-wrap">',
     content,
     "    </main>",
@@ -1574,7 +1598,7 @@ function generate() {
     const wikiMarkdown = replaceWikiLinks(cleanBody, page, worldMap, diagnostics, visibility);
     const bodyHtml = renderMarkdown(wikiMarkdown) || "<p>No public notes yet.</p>";
     const sidebarHtml = buildSidebar(page, mentionsByWorldRel.get(page.worldRel) || []);
-    const html = buildPageHtml(page, bodyHtml, sidebarHtml, worldMap);
+    const html = buildPageHtml(page, bodyHtml, sidebarHtml, worldMap, visibility);
     generatedFiles.push(writeFileInDocs(page.outputRel, html));
   }
 
