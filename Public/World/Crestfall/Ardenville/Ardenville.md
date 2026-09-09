@@ -12,6 +12,10 @@ tags:
 ## Overview
 Ardenville is a lakeside port town on the northern shore of Lake Arden in Crestfall. A primary fishing and transport hub for the lake, and a secondary trade connection to Highreach.
 
+## Insignia 
+Two fishing rods crossed in an X with waves and a ship behind the rods. 
+When flown on a flag, it uses primarily yellow and blue colors with black outlines.
+
 ## Geography
 
 - Situated entirely along the **northern shoreline of Lake Arden**

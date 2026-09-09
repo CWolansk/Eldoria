@@ -5,6 +5,7 @@
 - [[Merchants Guildmaster Regional Boss]]
 - [[Mind-Switch Encounter Ideas]]
 - [[Heirloom Obsidian Blade]] 
+- [[Player Masters]]
 
 ## Rumors
 - All people from highreach have the plague from the rat infestation

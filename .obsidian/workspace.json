@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "166c007044d6a05e",
+        "id": "d1f0536a28b841b6",
         "type": "tabs",
         "children": [
           {
-            "id": "5e81dcc67987c186",
+            "id": "b2e91a483966553f",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Public/World/Unknown/NPCs/Günther the Magnificent.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Günther the Magnificent"
+              "title": "New tab"
             }
           }
         ]
@@ -238,11 +234,37 @@
       "calendarium:Open Calendarium": false
     }
   },
-  "active": "5e81dcc67987c186",
+  "active": "c449ead431ac9bb8",
   "lastOpenFiles": [
+    "output/dm-update-validation-2026-09-09.md",
+    "output/playwright/session-backup.json",
+    "output/playwright/dm-encounter-mobile.png",
+    "output/playwright/dm-encounter-desktop.png",
+    "output/playwright/dm-fixture-server.cjs",
+    "docs/api/tools/test-dm-handlers.cjs",
+    "docs/api/tools/test-dm-workspace.mjs",
+    "docs/api/tools/smoke-dm-deployment.mjs",
+    "output/sheet-runtime/Players/PlayerSheetTemplate/LevelEditorJavaScript/CatalogProfile/Shared.js",
+    "output/sheet-runtime/Players/PlayerSheetTemplate/LevelEditorJavaScript/CatalogProfile/Grants.js",
+    "output/sheet-runtime/Players/PlayerSheetTemplate/LevelEditorJavaScript/Race/LevelEditorRaceProfile.js",
+    "output/sheet-runtime/Players/PlayerSheetTemplate/LevelEditorJavaScript/CatalogProfile/Features.js",
+    "output/sheet-runtime/Players/PlayerSheetTemplate/LevelEditorJavaScript/Core/LevelEditorShared.js",
+    "output/deployed-site-review-2026-09-09.md",
+    "output/comics/sessions-01-02/prompts-v2.md",
+    "output/comics/sessions-01-02/prompts.md",
+    "Private/2. Session Journals/Session 14 Notes.md",
+    "output/comics/sessions-01-02/prompts-v3.md",
+    "bell-reference.jpg",
+    "Private/2. Session Journals/Session 13 Notes.md",
+    "Private/2. Session Journals/Session 12 notes.md",
+    "Public/World/Crestfall/Ardenville/Ardenville.md",
+    "Public/World/Crestfall/Ardenville/NPCs/Guard 2374.md",
+    "Public/World/Crestfall/Ardenville/NPCs/Corin Tidehammer.md",
+    "Public/World/Crestfall/Ardenville/NPCs/Cutlass.md",
+    "Public/World/Crestfall/Ardenville/NPCs/Caber.md",
+    "Public/World/Unknown/NPCs/Günther the Magnificent.md",
     "Public/World/Unknown.md",
     "Public/World/Crestfall/Crestfall.md",
-    "Public/World/Crestfall/Ardenville/NPCs/Caber.md",
     "Private/1. World Almanac/World/Crestfall/Ardenville/Lake Arden.md",
     "Private/1. World Almanac/World/Crestfall/Ardenville/Fishermans Guild.md",
     "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville Adventurers Guild.md",
@@ -253,38 +275,12 @@
     "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Mira Softstep.md",
     "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Me'Shelle Jones.md",
     "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Kellen Redshore.md",
-    "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Isolde Fairweather.md",
-    "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Gregor Woods.md",
-    "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Fran Stronkinthearm.md",
-    "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Edda Netsong.md",
-    "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Dancin Pete.md",
-    "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Cutlass.md",
-    "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Corin Tidehammer.md",
-    "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Caber.md",
-    "Private/1. The Party/Players/Claire.md",
     "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Portraits/Richard Vane.png",
-    "Private/1. The Party/Players/Player Controls.md",
-    "Private/2. Reference/Narratives/Julie's Cursed Sword.md",
-    "Private/1. The Party/Players/Julie.md",
-    "Private/0.Scratch Notes/Scratch Pad.md",
-    "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Portraits",
-    "Private/0.DM Screen/Systems",
-    "Private/2. Reference/Dungeons",
-    "dm-tools/data/dm-screen-state.local.json",
-    "dm-tools/tools/dm-screen/dm-screen.js",
-    "dm-tools/tools/dm-screen/dm-screen.css",
-    "dm-tools/tools/dm-screen/index.html",
-    "dm-tools/tools/dm-screen",
-    "dm-tools/dm-screen-server.js",
-    "dm-tools/dm-screen.config.example.json",
     "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Portraits/Saber.png",
     "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Portraits/Me'Shelle Jones.png",
     "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Portraits/Fran Stronkinthearm.png",
     "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Portraits/Cutlass.png",
     "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Portraits/Caber.png",
-    "Public/World/Images/NPC Portraits/Cutlass.png",
-    "Public/World/Images/NPC Portraits/Saber.png",
-    "Public/World/Images/NPC Portraits/Caber.png",
-    "Public/World/Images/NPC Portraits/Fran Stronkinthearm.png"
+    "Public/World/Images/NPC Portraits/Cutlass.png"
   ]
 }

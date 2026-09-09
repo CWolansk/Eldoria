@@ -4,6 +4,23 @@ fc-end: 0496-03-07
 fc-category: Sessions
 ---
 [[Session 12 notes]] 
+# Actually Happened 
+- Ooze fight 
+	- Randi figured out the doppelganger link
+	- Claire touched the liz doppelganger so that liz doppel can understand what the party is saying
+- Liz thinks that the Ooze facility is Jons actual fortress
+- Party then finishes travelling to [[Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville|Ardenville]] 
+	- As they are entering the city an ardenville guard tries to take Jps picture of Donks wife
+	- Guard gave his bade number as Guard 2374
+	- Party encounters a gnome standing outside of the Exterminators Guild entrance 
+		- The party refuses to swap packages with the Gnome 
+		- The gnome walks away nonchanlantly and jumps into a nearby sewer grate 
+	- Justin and others enter the Exterminators Guild 
+		- Justin Explains to [[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Pip Whiskerwind|Pip Whiskerwind]] that there was another gnome outside of the guild that attempted to swap packages 
+		- Pip sighs and then tells two other large musclebound gnomes after the other gnome 
+
+
+# Planning 
 Starting at the ooze doppelganger fight 
 
 Use gray Ooze statblocks with health pool shared by all of them. Ask each party member to attack and roll as their doppelgangers 
