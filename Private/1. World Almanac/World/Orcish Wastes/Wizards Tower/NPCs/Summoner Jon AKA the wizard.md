@@ -13,7 +13,7 @@ tags:
   - MainQuest
 ---
 
-![[Public/World/Orcish Wastes/Wizards Tower/NPCs/Summoner Jon AKA the wizard]]
+![[Public/World/Unknown/Summoner Jon AKA the wizard]]
 
 ## Description
 > Appears as a kindly bald old man in red and gold robes, but the illusion hides a lich: grey, cracked skin stretched over a skeletal frame with tattered robes. The last surviving wizard of the ancient Wizarding Wars.
@@ -47,7 +47,7 @@ tags:
 ---
 
 # Public Notes
-[[Public/World/Orcish Wastes/Wizards Tower/NPCs/Summoner Jon AKA the wizard|Summoner Jon AKA the wizard]]
+[[Public/World/Unknown/Summoner Jon AKA the wizard|Summoner Jon AKA the wizard]]
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"
