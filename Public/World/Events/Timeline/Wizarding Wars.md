@@ -11,7 +11,7 @@ tags:
 ---
 
 ## What We Know
-An ancient conflict among powerful wizards that devastated parts of Eldoria. The wars ended when [[Public/World/Events/Timeline/Diego seals Jons powers|Diego sealed the powers]] of the last surviving wizard — [[Public/World/Orcish Wastes/Wizards Tower/NPCs/Summoner Jon AKA the wizard|Summoner Jon]].
+An ancient conflict among powerful wizards that devastated parts of Eldoria. The wars ended when [[Public/World/Events/Timeline/Diego seals Jons powers|Diego sealed the powers]] of the last surviving wizard — [[Public/World/Unknown/Summoner Jon AKA the wizard|Summoner Jon]].
 
 ## Key Facts
 - Multiple wizards fought for supremacy across the land

@@ -81,14 +81,14 @@
       ]
     }
   },
-  "OrcishWastes": {
-    "Wizards Tower": {
-      "basePath": "../world/orcish-wastes/wizards-tower/npcs/",
+  "Unknown": {
+    "Unknown": {
+      "basePath": "../world/unknown/",
       "npcs": [
         {
           "name": "Summoner Jon AKA the wizard",
           "file": "summoner-jon-aka-the-wizard.html",
-          "href": "../world/orcish-wastes/wizards-tower/npcs/summoner-jon-aka-the-wizard.html"
+          "href": "../world/unknown/summoner-jon-aka-the-wizard.html"
         }
       ]
     }
