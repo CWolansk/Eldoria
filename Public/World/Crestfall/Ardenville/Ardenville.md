@@ -10,7 +10,13 @@ tags:
 ---
 ![[Ardenville.png]]
 ## Overview
-Ardenville is a lakeside port town on the northern shore of Lake Arden in Crestfall. A primary fishing and transport hub for the lake, and a secondary trade connection to Highreach.
+Ardenville is a lakeside port town on the northern shore of [[Public/World/Crestfall/Ardenville/Lake Arden|Lake Arden]] in Crestfall. A primary fishing and transport hub for the lake, and a secondary trade connection to Highreach.
+
+## The Party's Visit
+
+The party entered Ardenville and encountered [[Public/World/Crestfall/Ardenville/NPCs/Guard 2374|Guard 2374]], who tried to take JP's picture of Donk's wife during a search. The party caught him and he returned it.
+
+At the [[Public/World/Groups/Exterminators Guild|Exterminators Guild]], the party met [[Public/World/Crestfall/Ardenville/NPCs/Pip Whiskerwind|Pip Whiskerwind]].
 
 ## Insignia 
 Two fishing rods crossed in an X with waves and a ship behind the rods. 

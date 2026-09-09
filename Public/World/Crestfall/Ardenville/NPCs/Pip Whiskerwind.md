@@ -1,7 +1,7 @@
 ---
 type: NPC
 name: "Pip Whiskerwind"
-location: Highreach
+location: Ardenville
 region: Crestfall
 profession: "Master Exterminator"
 race: "Gnome"
@@ -9,7 +9,7 @@ status: Alive
 tags:
   - NPC
   - Crestfall
-  - Highreach
+  - Ardenville
 ---
 
 ## Appearance
@@ -23,6 +23,9 @@ Methodical and no-nonsense — she sizes you up before deciding if you're worth 
 
 ## Interactions
 
+The party met Pip at the [[Public/World/Groups/Exterminators Guild|Exterminators Guild]] in [[Public/World/Crestfall/Ardenville/Ardenville|Ardenville]].
+
+Justin told Pip about a gnome outside the guild who had tried to swap packages with the party. Pip sighed and sent two large, muscular gnomes after the stranger.
 
 ---
 

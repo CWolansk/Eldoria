@@ -1,6 +1,6 @@
 ---
 type: NPC
-name: Unkown
+name: Guard 2374
 location: Ardenville
 region: Crestfall
 profession: Town Guard
@@ -16,7 +16,7 @@ tags:
 Younger human guard around 30. Wears a blue cape with a yellow tunic and the Ardenville insignia on his belt signifying him as a town guard. He carries a standard issue wood club for dispensing justice.
 
 ## What We Know
-He attempted to steal from jp when searching him.
+His name is unknown; he identified himself by badge number 2374. He attempted to take JP's picture of Donk's wife while searching him, but the party caught him and he returned it.
 
 ## First Impressions
 Standard guard in Ardenville, he takes his job seriously. Although he may be susceptible to bribes or intimidation. 

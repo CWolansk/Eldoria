@@ -13,7 +13,7 @@ tags:
   - ExterminatorsGuild
 ---
 
-![[Public/World/Crestfall/Highreach/NPCs/Pip Whiskerwind]]
+![[Public/World/Crestfall/Ardenville/NPCs/Pip Whiskerwind]]
 
 ## Personality
 - **Ideal:** Tradition — the old ways work for a reason
@@ -50,7 +50,7 @@ Don Gnocianno's predecessor's daughter and current underboss. Expert in both alc
 ---
 
 # Public Notes
-[[Public/World/Crestfall/Highreach/NPCs/Pip Whiskerwind|Pip Whiskerwind]]
+[[Public/World/Crestfall/Ardenville/NPCs/Pip Whiskerwind|Pip Whiskerwind]]
 
 ```dataview
 TABLE WITHOUT ID file.link AS "Mentioned In"

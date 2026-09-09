@@ -55,7 +55,7 @@ Travel to ardenville
 		- Its an out and back for all of the ships. All of the ships race and are mostly at the same speed until they get out of the view of the shore. After that all of the crews start to board other ships and attempt to slow them down or outright sink the ships. As well as fighting off sea monsters that may show up during the race. 
 - Deliver the exterminators guild package
 	- [[Private/1. World Almanac/World/Groups/Exterminators Guild|Exterminators Guild]] 
-	- The party must deliver the package to [[Public/World/Crestfall/Highreach/NPCs/Pip Whiskerwind|Pip Whiskerwind]] for [[Public/World/Crestfall/Highreach/NPCs/Don Gnocianno|Don Gnocianno]] 
+	- The party must deliver the package to [[Public/World/Crestfall/Ardenville/NPCs/Pip Whiskerwind|Pip Whiskerwind]] for [[Public/World/Crestfall/Highreach/NPCs/Don Gnocianno|Don Gnocianno]]
 	- When they try to get into ardenville they are stopped by a guard asking to inspect their cargo and bags and to see some form of identification 
 	- when they get inside ardenville they get approached by a gnome wanting to swap packages 
 		- Have the party roll a perception check : They see a well dressed gnome leaning against a building watching them 

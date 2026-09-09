@@ -2,6 +2,17 @@
   "Crestfall": {
     "basePath": "../world/crestfall/",
     "locations": {
+      "Ardenville": {
+        "file": "ardenville.html",
+        "href": "../world/crestfall/ardenville/ardenville.html",
+        "subLocations": [
+          {
+            "name": "Lake Arden",
+            "file": "lake-arden.html",
+            "href": "../world/crestfall/ardenville/lake-arden.html"
+          }
+        ]
+      },
       "Highreach": {
         "file": "highreach.html",
         "href": "../world/crestfall/highreach/highreach.html",

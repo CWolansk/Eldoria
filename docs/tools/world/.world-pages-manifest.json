@@ -1,18 +1,22 @@
 {
-  "generatedAt": "2026-09-09T16:43:16.203Z",
+  "generatedAt": "2026-09-09T17:42:31.923Z",
   "generator": "docs/generate-world-pages.js",
   "sourceRoot": "Public/World",
   "outputRoot": "docs/tools/world",
-  "pageCount": 67,
-  "assetCount": 1,
+  "pageCount": 71,
+  "assetCount": 2,
   "unresolvedCount": 0,
   "visibility": {
     "mode": "whitelist",
-    "visiblePageCount": 67,
-    "hiddenPageCount": 152,
+    "visiblePageCount": 71,
+    "hiddenPageCount": 148,
     "unknownPage": "Unknown.md",
     "whitelist": [
       "Crestfall/Crestfall.md",
+      "Crestfall/Ardenville/Ardenville.md",
+      "Crestfall/Ardenville/Lake Arden.md",
+      "Crestfall/Ardenville/NPCs/Pip Whiskerwind.md",
+      "Crestfall/Ardenville/NPCs/Guard 2374.md",
       "Crestfall/Highreach/Highreach.md",
       "Crestfall/Highreach/Highreach Adventurers Guild.md",
       "Crestfall/Highreach/HighReach Merchants Guild.md",
@@ -78,11 +82,16 @@
       "Groups/Merchants Guild.md",
       "Groups/The Nightstalkers.md",
       "Items/Seekers Eye.md",
-      "Images/Highreach.png"
+      "Images/Highreach.png",
+      "Images/Ardenville.png"
     ],
     "blacklist": []
   },
   "files": [
+    "crestfall/ardenville/ardenville.html",
+    "crestfall/ardenville/lake-arden.html",
+    "crestfall/ardenville/npcs/guard-2374.html",
+    "crestfall/ardenville/npcs/pip-whiskerwind.html",
     "crestfall/crestfall.html",
     "crestfall/highreach/highreach-adventurers-guild.html",
     "crestfall/highreach/highreach-merchants-guild.html",
@@ -147,6 +156,7 @@
     "groups/foundation.html",
     "groups/merchants-guild.html",
     "groups/the-nightstalkers.html",
+    "images/ardenville.png",
     "images/highreach.png",
     "index.html",
     "items/seekers-eye.html",

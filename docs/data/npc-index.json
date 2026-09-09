@@ -79,6 +79,21 @@
           "href": "../world/crestfall/highreach/npcs/thoren-ironfist.html"
         }
       ]
+    },
+    "Ardenville": {
+      "basePath": "../world/crestfall/ardenville/npcs/",
+      "npcs": [
+        {
+          "name": "Guard 2374",
+          "file": "guard-2374.html",
+          "href": "../world/crestfall/ardenville/npcs/guard-2374.html"
+        },
+        {
+          "name": "Pip Whiskerwind",
+          "file": "pip-whiskerwind.html",
+          "href": "../world/crestfall/ardenville/npcs/pip-whiskerwind.html"
+        }
+      ]
     }
   },
   "Unknown": {
