@@ -20,6 +20,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
 
 function Require-Command {
   param([string] $Name)
@@ -68,6 +69,7 @@ function Sync-FunctionAppCors {
 
 Require-Command "az"
 Require-Command "npm"
+Require-Command "node"
 
 if (-not $StorageAccountName -and -not $StorageConnectionString) {
   throw "Set -StorageAccountName for managed identity auth, or -StorageConnectionString for connection-string auth."
@@ -83,6 +85,10 @@ $stageRoot = Join-Path $deployRoot "package"
 $zipPath = Join-Path $deployRoot "eldoria-character-api.zip"
 
 if (Test-Path $stageRoot) {
+  $resolvedStageRoot = (Resolve-Path -LiteralPath $stageRoot).Path
+  if ($resolvedStageRoot -ne [System.IO.Path]::GetFullPath((Join-Path $apiRoot ".deploy/package"))) {
+    throw "Unexpected deployment staging path: $resolvedStageRoot"
+  }
   Remove-Item -LiteralPath $stageRoot -Recurse -Force
 }
 New-Item -ItemType Directory -Path $stageRoot -Force | Out-Null
@@ -94,6 +100,8 @@ if (Test-Path (Join-Path $apiRoot "package-lock.json")) {
   Copy-Item -LiteralPath (Join-Path $apiRoot "package-lock.json") -Destination $stageRoot
 }
 Copy-Item -LiteralPath (Join-Path $apiRoot "src") -Destination $stageRoot -Recurse
+& node (Join-Path $apiRoot "tools/stage-sheet-runtime.js") (Join-Path $stageRoot "src/sheet-runtime")
+if ($LASTEXITCODE -ne 0) { throw "Sheet compiler packaging failed." }
 $publicIndexRoot = Join-Path $stageRoot "public-indexes"
 New-Item -ItemType Directory -Path $publicIndexRoot -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $apiRoot "..\data\location-index.json") -Destination $publicIndexRoot
@@ -106,6 +114,9 @@ try {
   } else {
     npm install --omit=dev
   }
+  if ($LASTEXITCODE -ne 0) { throw "API dependency installation failed." }
+  & node -e "require('./src/sheetRuntime').getSheetCompiler().then(({SheetCompiler}) => { if (typeof SheetCompiler.compile !== 'function') throw new Error('Sheet compiler missing'); }).catch(error => { console.error(error); process.exitCode = 1; });"
+  if ($LASTEXITCODE -ne 0) { throw "Packaged sheet compiler could not load." }
 } finally {
   Pop-Location
 }
@@ -145,6 +156,7 @@ az functionapp config appsettings set `
   --resource-group $ResourceGroupName `
   --name $FunctionAppName `
   --settings $settings | Out-Null
+if ($LASTEXITCODE -ne 0) { throw "API configuration update failed." }
 
 Sync-FunctionAppCors `
   -ResourceGroupName $ResourceGroupName `
@@ -183,5 +195,6 @@ az functionapp deployment source config-zip `
   --resource-group $ResourceGroupName `
   --name $FunctionAppName `
   --src $zipPath | Out-Null
+if ($LASTEXITCODE -ne 0) { throw "API deployment failed." }
 
 Write-Host "Deployed $zipPath to $FunctionAppName."

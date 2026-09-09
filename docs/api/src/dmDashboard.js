@@ -8,6 +8,7 @@ const {
 const { httpError, json, withErrors } = require("./http");
 const { normalizePlayerSheetDto } = require("./playerSheetDto");
 const { getEntity } = require("./tableStore");
+const { getSheetCompiler } = require("./sheetRuntime");
 
 const MAX_ACTION_AMOUNT = 1_000_000;
 const CURRENCY_KEYS = new Set(["cp", "sp", "ep", "gp", "pp"]);
@@ -36,8 +37,11 @@ function clamp(value, min, max) {
 async function readRequestJson(request) {
   let body;
   try {
-    body = JSON.parse(await request.text());
+    const raw = await request.text();
+    if (Buffer.byteLength(raw, "utf8") > 1024 * 1024) throw httpError(413, "Action is too large.");
+    body = JSON.parse(raw);
   } catch (_error) {
+    if (_error.statusCode === 413) throw _error;
     throw httpError(400, "Request body must be valid JSON.");
   }
   if (!body || typeof body !== "object" || Array.isArray(body)) {
@@ -47,7 +51,7 @@ async function readRequestJson(request) {
 }
 
 function getActiveLevels(sheet) {
-  const levels = Array.isArray(sheet?.levels) ? sheet.levels : [];
+  const levels = Array.isArray(sheet?.levels) ? sheet.levels.slice(0, getCharacterLevel(sheet)) : [];
   let activeCount = 0;
   levels.forEach((level, index) => {
     if (level?.class || number(level?.hp, 0) > 0) activeCount = index + 1;
@@ -275,14 +279,52 @@ async function loadCatalogRecords(sheet, loader = getEntity) {
 }
 
 async function summarizeCharacterWithCatalog(sheet, manifestEntry = {}, loader = getEntity) {
-  return summarizeCharacter(sheet, manifestEntry, await loadCatalogRecords(sheet, loader));
+  const underlyingLoader = loader;
+  const cache = new Map();
+  loader = (kind, id) => {
+    const key = `${kind}:${id}`;
+    if (!cache.has(key)) cache.set(key, Promise.resolve().then(() => underlyingLoader(kind, id)));
+    return cache.get(key);
+  };
+  const records = await loadCatalogRecords(sheet, loader);
+  const references = { byPath: {} };
+  const targets = [
+    ["baseChoices.race", "races", sheet.baseChoices?.race],
+    ["baseChoices.subrace", "subraces", sheet.baseChoices?.subrace],
+    ["baseChoices.background", "backgrounds", sheet.baseChoices?.background]
+  ];
+  (sheet.levels || []).slice(0, getCharacterLevel(sheet)).forEach((level, index) => {
+    for (const [field, kind] of [["class", "classes"], ["subclass", "subclasses"], ["feat", "feats"]]) targets.push([`levels.${index}.${field}`, kind, level[field]]);
+  });
+  (sheet.inventory?.items || []).forEach((item, index) => targets.push([`inventory.items.${index}.catalog`, "items", item.catalog]));
+  await Promise.all(targets.map(async ([path, kind, identity]) => {
+    const id = identityCatalogId(identity);
+    if (!id) return;
+    const record = await Promise.resolve().then(() => loader(kind, id)).catch(() => null);
+    if (record) references.byPath[path] = record;
+  }));
+  const { SheetCompiler } = await getSheetCompiler();
+  const compiled = SheetCompiler.compile(sheet, { references });
+  const summary = summarizeCharacter(sheet, manifestEntry, records);
+  return {
+    ...summary, ac: compiled.ac.value, initiative: compiled.initiative,
+    defenses: compiled.defenses,
+    passivePerception: compiled.passivePerception,
+    hp: { ...summary.hp, current: compiled.hp.current, max: compiled.hp.max, complete: compiled.hp.base > 0 },
+    concentration: compiled.conditionEffects.actions.concentrationEnds ? "" : summary.concentration
+  };
+}
+
+function maximumHp(sheet) {
+  const recorded = Math.max(0, integer(sheet?.combatState?.maxHp, 0));
+  const base = recorded || getActiveLevels(sheet).slice(0, getCharacterLevel(sheet)).reduce((sum, level) => sum + Math.max(0, integer(level.hp, 0)), 0);
+  return Math.floor(base * (integer(sheet?.combatState?.exhaustion) >= 4 ? 0.5 : 1));
 }
 
 function summarizeCharacter(sheet, manifestEntry = {}, catalogRecords = []) {
   const activeLevels = getActiveLevels(sheet);
   const combat = sheet?.combatState || {};
-  const maxHp = Math.max(0, integer(combat.maxHp, 0))
-    || activeLevels.reduce((total, level) => total + Math.max(0, integer(level?.hp, 0)), 0);
+  const maxHp = maximumHp(sheet);
   const inventory = sheet?.inventory || {};
   const currency = inventory.currency || {};
   const references = summarizeReferences(sheet, catalogRecords);
@@ -298,9 +340,11 @@ function summarizeCharacter(sheet, manifestEntry = {}, catalogRecords = []) {
     hp: {
       current: Math.max(0, integer(combat.currentHp, 0)),
       max: maxHp,
+      complete: maxHp > 0,
       temp: Math.max(0, integer(combat.tempHp, 0))
     },
     conditions: unique(Array.isArray(combat.conditions) ? combat.conditions : []),
+    concentration: text(combat.concentration),
     exhaustion: clamp(integer(combat.exhaustion, 0), 0, 6),
     deathSaves: {
       successes: clamp(integer(combat.deathSaves?.successes, 0), 0, 3),
@@ -323,13 +367,13 @@ function summarizeCharacter(sheet, manifestEntry = {}, catalogRecords = []) {
 
 function positiveAmount(value, label = "Amount") {
   const amount = integer(value, 0);
-  if (amount <= 0 || amount > MAX_ACTION_AMOUNT) {
+  if (!Number.isInteger(Number(value)) || amount <= 0 || amount > MAX_ACTION_AMOUNT) {
     throw httpError(400, `${label} must be between 1 and ${MAX_ACTION_AMOUNT}.`);
   }
   return amount;
 }
 
-function applyDmAction(sheet, action = {}) {
+function applyDmAction(sheet, action = {}, derived = {}) {
   const next = JSON.parse(JSON.stringify(sheet || {}));
   next.combatState = next.combatState || {};
   next.combatState.deathSaves = next.combatState.deathSaves || { successes: 0, failures: 0 };
@@ -339,7 +383,7 @@ function applyDmAction(sheet, action = {}) {
   next.inventory.items = Array.isArray(next.inventory.items) ? next.inventory.items : [];
 
   const type = text(action.type).toLowerCase();
-  const maxHp = getActiveLevels(next).reduce((total, level) => total + Math.max(0, integer(level?.hp, 0)), 0);
+  const maxHp = derived.hp?.max ?? maximumHp(next);
   if (type === "damage") {
     let remaining = positiveAmount(action.amount, "Damage");
     const temp = Math.max(0, integer(next.combatState.tempHp, 0));
@@ -348,8 +392,10 @@ function applyDmAction(sheet, action = {}) {
     remaining -= absorbed;
     next.combatState.currentHp = Math.max(0, integer(next.combatState.currentHp, 0) - remaining);
   } else if (type === "heal") {
+    if (maxHp <= 0) throw httpError(400, "Set this character's maximum HP before healing.");
     const healed = integer(next.combatState.currentHp, 0) + positiveAmount(action.amount, "Healing");
-    next.combatState.currentHp = maxHp > 0 ? Math.min(maxHp, healed) : healed;
+    next.combatState.currentHp = Math.max(integer(next.combatState.currentHp, 0), Math.min(maxHp, healed));
+    if (next.combatState.currentHp > 0) next.combatState.deathSaves = { successes: 0, failures: 0 };
   } else if (type === "temp-hp") {
     next.combatState.tempHp = positiveAmount(action.amount, "Temporary HP");
   } else if (type === "add-condition") {
@@ -363,6 +409,15 @@ function applyDmAction(sheet, action = {}) {
     next.combatState.conditions = next.combatState.conditions.filter((entry) => text(entry).toLowerCase() !== condition);
   } else if (type === "set-exhaustion") {
     next.combatState.exhaustion = clamp(integer(action.value, 0), 0, 6);
+  } else if (type === "set-concentration") {
+    next.combatState.concentration = text(action.value).slice(0, 120);
+  } else if (type === "set-max-hp") {
+    next.combatState.maxHp = positiveAmount(action.value, "Maximum HP");
+  } else if (type === "restore") {
+    if (!action.expectedLastModified) throw httpError(400, "Undo requires a character version.");
+    if (!action.previous?.combatState || typeof action.previous.combatState !== 'object' || Array.isArray(action.previous.combatState) || !action.previous?.inventory || typeof action.previous.inventory !== 'object' || Array.isArray(action.previous.inventory)) throw httpError(400, "Invalid undo snapshot.");
+    next.combatState = JSON.parse(JSON.stringify(action.previous.combatState));
+    next.inventory = JSON.parse(JSON.stringify(action.previous.inventory));
   } else if (type === "set-death-saves") {
     next.combatState.deathSaves = {
       successes: clamp(integer(action.successes, 0), 0, 3),
@@ -407,13 +462,16 @@ async function dmPartyHandler(request, context) {
       if (!catalogCache.has(key)) catalogCache.set(key, getEntity(kind, id));
       return catalogCache.get(key);
     };
-    const characters = (await Promise.all(entries.map(async (entry) => {
+    const results = await Promise.allSettled(entries.map(async (entry) => {
       const stored = await readCharacterSheetWithMetadata(entry.id);
       return stored?.document
         ? summarizeCharacterWithCatalog(normalizePlayerSheetDto(stored.document, { id: entry.id }), entry, loadCatalogEntity)
         : null;
-    }))).filter(Boolean);
-    return json(request, 200, { count: characters.length, characters });
+    }));
+    const characters = results.filter(result => result.status === "fulfilled" && result.value).map(result => result.value);
+    const unavailable = entries.filter((_entry, index) => results[index].status === "rejected" || !results[index].value).map(entry => entry.id);
+    if (entries.length && !characters.length) throw httpError(503, "Party sheets could not be loaded.");
+    return json(request, 200, { version: "2026-09-09", count: characters.length, characters, unavailable });
   });
 }
 
@@ -423,12 +481,24 @@ async function dmCharacterActionHandler(request, context) {
     const current = await readCharacterSheetWithMetadata(id);
     if (!current) return json(request, 404, { error: "Character sheet not found." });
     const action = await readRequestJson(request);
-    const timestamp = new Date().toISOString();
-    const updated = normalizePlayerSheetDto(applyDmAction(current.document, action), { id, lastModified: timestamp });
+    if (action.expectedLastModified && action.expectedLastModified !== current.document.lastModified) {
+      throw httpError(409, "This character has changed. Refresh before applying this action.");
+    }
+    const derived = await summarizeCharacterWithCatalog(current.document);
+    const timestamp = new Date(Math.max(Date.now(), (Date.parse(current.document.lastModified) || 0) + 1)).toISOString();
+    const effectiveSheet = structuredClone(current.document);
+    if (derived.hp.complete) effectiveSheet.combatState.currentHp = derived.hp.current;
+    const updated = normalizePlayerSheetDto(applyDmAction(effectiveSheet, action, derived), { id, lastModified: timestamp });
     updated.lastModified = timestamp;
+    const nextSummary = await summarizeCharacterWithCatalog(updated);
+    updated.combatState.concentration = nextSummary.concentration;
+    if (nextSummary.hp.complete) updated.combatState.currentHp = nextSummary.hp.current;
     try {
       const stored = await writeCharacterSheet(id, updated, { ifMatch: current.etag });
-      return json(request, 200, { character: await summarizeCharacterWithCatalog(stored) });
+      return json(request, 200, {
+        character: { ...nextSummary, lastModified: stored.lastModified },
+        undo: { expectedLastModified: stored.lastModified, previous: { combatState: current.document.combatState, inventory: current.document.inventory } }
+      });
     } catch (error) {
       if (error?.statusCode === 412 || error?.code === "ConditionNotMet") {
         throw httpError(409, "Character changed while the action was applied. Refresh and try again.", { id });

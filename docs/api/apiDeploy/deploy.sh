@@ -128,6 +128,7 @@ if [[ -f "$api_root/package-lock.json" ]]; then
   cp "$api_root/package-lock.json" "$stage_root/"
 fi
 cp -R "$api_root/src" "$stage_root/"
+node "$api_root/tools/stage-sheet-runtime.js" "$stage_root/src/sheet-runtime"
 mkdir -p "$stage_root/public-indexes"
 cp "$api_root/../data/location-index.json" "$stage_root/public-indexes/"
 cp "$api_root/../data/npc-index.json" "$stage_root/public-indexes/"

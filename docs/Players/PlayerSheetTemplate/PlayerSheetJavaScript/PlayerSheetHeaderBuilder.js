@@ -321,12 +321,12 @@ export function BuildPlayerSheetHeader(playerSheetObject, options = {}) {
     }
 
     setHeaderText(headerHTML, "AC", "AC : " + (GetJsonPathValues(playerSheetObject, "ac.value") || ""));
-    setHeaderText(headerHTML, "CombatHP", "HP : " + (GetJsonPathValues(playerSheetObject, "hp.current") || 0) + " / " + (GetJsonPathValues(playerSheetObject, "hp.max") || 0));
+    setHeaderText(headerHTML, "CombatHP", "HP : " + (GetJsonPathValues(playerSheetObject, "hp.current") || 0) + " / " + (playerSheetObject.hp?.complete === false ? "? (HP setup incomplete)" : (GetJsonPathValues(playerSheetObject, "hp.max") || 0)));
     setHeaderText(headerHTML, "TempHP", "Temp HP : " + (GetJsonPathValues(playerSheetObject, "hp.temp") || 0));
     setHeaderText(headerHTML, "Initiative", "Initiative : " + formatModifier(Number(GetJsonPathValues(playerSheetObject, "initiative")) || 0));
     setHeaderText(headerHTML, "DeathSaves", "Death Saves : " + (GetJsonPathValues(playerSheetObject, "deathSaves.successes") || 0));
     setHeaderText(headerHTML, "DeathFailures", "Death Failures : " + (GetJsonPathValues(playerSheetObject, "deathSaves.failures") || 0));
-    setHeaderText(headerHTML, "Conditions", "Conditions : " + formatList(playerSheetObject.notes?.conditions));
+    setHeaderText(headerHTML, "Conditions", "Conditions : " + formatList(playerSheetObject.notes?.conditions) + (playerSheetObject.concentration ? ` · Concentrating: ${playerSheetObject.concentration}` : ""));
     setHeaderText(headerHTML, "Exhaustion", "Exhaustion : " + (GetJsonPathValues(playerSheetObject, "notes.exhaustion") || 0));
     renderDefenseChips(headerHTML, playerSheetObject);
     renderConditionEffects(headerHTML, playerSheetObject);

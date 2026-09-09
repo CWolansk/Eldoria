@@ -63,6 +63,8 @@ async function healthHandler(request, context) {
   return withErrors(request, context, async () => json(request, 200, {
     status: "ok",
     service: "eldoria-character-api",
+    version: "2026-09-09",
+    capabilities: ["dm-party", "dm-actions-v2", "dm-undo", "item-catalog"],
     timestamp: new Date().toISOString()
   }));
 }

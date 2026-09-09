@@ -19,6 +19,36 @@ Character saves use `lastModified` plus Blob ETags to reject stale whole-sheet w
 
 ## DM dashboard endpoints
 
+### September 2026 DM workspace release
+
+Deploy the API **and** publish the updated `docs/` assets. GitHub Pages publication
+does not register Azure Functions. The deployment scripts now package the exact
+player-sheet compiler and its imports into `src/sheet-runtime`; do not omit that
+directory from a manually assembled API package. `/api/health` advertises the
+release version and `dm-actions-v2` / `dm-undo` capabilities.
+
+After deployment, verify that `/api/health` advertises the release capabilities
+and `/api/dm/party` returns all active characters.
+Existing HP values are not migrated or guessed: enter each character's
+confirmed base maximum in **Party Control → Manage → Set base max HP** (before
+exhaustion), or complete their level HP on the sheet. Unknown maximum HP is shown
+as `?`, preserving stored current HP and preventing healing until setup is complete.
+
+Actions accept `expectedLastModified` and return a version-bound undo snapshot.
+The UI sends this precondition and prevents overlapping actions per character.
+`restore` requires that version; a later player or DM update invalidates the undo.
+New actions include `set-max-hp`, `set-concentration`, and `restore`. ETags continue
+to protect the storage write. A partial party response contains `unavailable` IDs;
+an entirely unavailable party returns 503 instead of pretending to be empty.
+
+The encounter's initiative, NPC HP, effect timers, notes, and pinned references
+are stored **in the current browser**, separately from cloud character data.
+Export a session backup to transfer devices. Timers expire at the beginning of a
+new round; zero means no automatic expiry. Item drafts also survive reloads.
+Party action history is limited to the current page visit. References open in
+new tabs so the encounter stays available. The DM screen no longer links to the
+incomplete local 5etools bundle.
+
 - `GET /api/dm/party` — one compact summary response for every active character.
 - `POST /api/dm/characters/{id}/actions` — targeted damage, healing, temporary HP,
   condition, exhaustion, death-save, currency, and inventory actions.

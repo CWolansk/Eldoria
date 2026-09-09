@@ -3366,13 +3366,18 @@ export class SheetCompiler {
             },
             proficiencyBonus,
             initiative: dexModifier,
+            passivePerception: 10 + abilities.wis.modifier
+                + (skills.perception.expertise ? 2 * proficiencyBonus : skills.perception.proficient ? proficiencyBonus : skills.perception.halfProficiency ? Math.floor(proficiencyBonus / 2) : 0)
+                + (skills.perception.rollMode === "disadvantage" ? -5 : skills.perception.rollMode === "advantage" ? 5 : 0),
+            concentration: conditionEffects.actions.concentrationEnds ? "" : dto.combatState.concentration,
             hp: {
                 base: baseMaxHp,
+                complete: baseMaxHp > 0,
                 modifiers: conditionEffects.hitPoints.maxMultiplier !== 1
                     ? [{ source: "exhaustion", label: "Exhaustion: hit point maximum halved", value: maxHp - baseMaxHp }]
                     : [],
                 max: maxHp,
-                current: Math.min(toNumber(dto.combatState.currentHp, maxHp), maxHp),
+                current: baseMaxHp > 0 ? Math.min(toNumber(dto.combatState.currentHp, maxHp), maxHp) : toNumber(dto.combatState.currentHp, 0),
                 temp: toNumber(dto.combatState.tempHp, 0)
             },
             ac: {

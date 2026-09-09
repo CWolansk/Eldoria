@@ -17,6 +17,10 @@
     var sizes = Array.isArray(value) ? value : String(value || "").split(/[|,]/u);
     return sizes.map(function (size) {
       var normalized = String(size || "").trim().toUpperCase();
+      if (normalized === "T") return "Tiny";
+      if (normalized === "V") return "Varies";
+      if (normalized === "H") return "Huge";
+      if (normalized === "G") return "Gargantuan";
       if (normalized === "S") return "Small";
       if (normalized === "M") return "Medium";
       if (normalized === "L") return "Large";
@@ -83,7 +87,7 @@
       <details class="race-card" data-catalog-id="' + escapeHtml(row.Id || "") + '">\
         <summary class="race-name">\
           <span>' + escapeHtml(row.Name) + '</span>\
-          <span class="rules-card-badges"><span class="race-size">' + escapeHtml(row.Size || "Varies") + '</span></span>\
+          <span class="rules-card-badges"><span>' + escapeHtml(row.Source) + '</span><span class="race-size">' + escapeHtml(row.Size || "Varies") + '</span></span>\
         </summary>\
         <div class="race-details">\
           ' + renderDetails(row, [["Source", "Source"], ["Ability Scores", "Ability Scores"], ["Size", "Size"], ["Speed", "Speed"]]) + '\

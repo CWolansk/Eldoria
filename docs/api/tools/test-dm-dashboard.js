@@ -93,7 +93,7 @@ const summary = summarizeCharacter(value, {}, [{
   languageProficiencies: [{ common: true, primordial: true }]
 }]);
 assert.equal(summary.level, 5);
-assert.equal(summary.hp.max, 20);
+assert.equal(summary.hp.max, 10, "Exhaustion halves maximum HP on the DM summary too");
 assert.deepEqual(summary.languages, ["Common", "Dwarvish", "Primordial", "Celestial"]);
 assert.deepEqual(summary.defenses.damageResistances, ["cold", "poison"]);
 assert.deepEqual(summary.defenses.damageImmunities, ["fire"]);

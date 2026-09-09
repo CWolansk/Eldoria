@@ -445,6 +445,7 @@ function normalizeCombatState(value = {}) {
             successes: toNumber(source.deathSaves?.successes, 0),
             failures: toNumber(source.deathSaves?.failures, 0)
         },
+        concentration: String(source.concentration || "").slice(0, 120),
         conditions: normalizeStringList(source.conditions),
         exhaustion: toNumber(source.exhaustion, 0),
         defenses: normalizeCombatDefenses(source)

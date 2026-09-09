@@ -144,7 +144,7 @@ export function BuildPlayerSheetSidebar(playerSheetObject) {
         ? Math.floor(proficiencyBonus / 2)
         : 0);
   content.appendChild(createSidebarHeading("Senses"));
-  appendMetricRow(content, "Passive Perception", passivePerception);
+  appendMetricRow(content, "Passive Perception", playerSheetObject.passivePerception ?? passivePerception);
 
   const darkvision = Number(GetJsonPathValues(playerSheetObject, "senses.darkvision")) || 0;
   if (darkvision > 0) {

@@ -14,7 +14,8 @@
   var renderDetails = helpers.renderDetails;
 
   function attunementValues(row) {
-    return [/^(yes|required|true)$/iu.test(normalize(row.Attunement)) ? "Required" : "Not required"];
+    const value = normalize(row.Attunement);
+    return [value && !/^(no|none|false|not required|no attunement required)$/iu.test(value) ? "Required" : "Not required"];
   }
 
   function damageValues(row) {
@@ -58,19 +59,12 @@
   }
 
   function mapItemApiRow(row) {
+    const item = global.EldoriaItems.normalize(row);
     return {
-      Id: row.id || row.itemId || "",
-      Name: row.name || "",
-      Source: row.source || "",
-      Rarity: titleCase(row.rarity || "none"),
-      Type: row.type || row.category || "Item",
-      Attunement: row.attunementRequirement || row._attunement || yesNo(row.attunement),
-      Damage: row.damage || row.damageType || "",
-      Properties: Array.isArray(row.properties) ? row.properties.join(", ") : String(row.properties || "").replace(/\s*\|\s*/gu, ", "),
-      Mastery: row.mastery || "",
-      Weight: row.weight == null ? "" : String(row.weight),
-      Value: row.valueLabel || (row.value == null ? "" : String(row.value)),
-      Text: row.text || row.entriesText || entriesText(row.entries)
+      Id: item.id, Name: item.name, Source: item.source, Rarity: titleCase(item.rarity),
+      Type: item.type, Attunement: item.attunement || "No", Damage: item.damage,
+      Properties: item.properties.join(", "), Mastery: item.mastery,
+      Weight: String(item.weight), Value: item.valueLabel, Text: item.description
     };
   }
 
