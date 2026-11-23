@@ -1,0 +1,2517 @@
+{
+  "schema": "eldoria-world-seed-draft/1",
+  "status": "DRAFT FOR REVIEW. Not loaded by anything. Contains DM-only names; do not publish.",
+  "generatedBy": "docs/world-sim/tools/build-seed-draft.mjs",
+  "rules": [
+    "Every value has a source. Anything the notes do not state is null with missing: true and says what is needed.",
+    "No number or name here was invented or taken from the prototype's example data."
+  ],
+  "calendar": {
+    "monthNames": {
+      "value": [
+        "Spring",
+        "Summer",
+        "Fall",
+        "Winter"
+      ],
+      "source": "Living world proposal; timeline note names use months 01-04"
+    },
+    "daysPerMonth": {
+      "value": 50,
+      "source": "Timeline note Public/World/Events/Timeline/0496-02-50 Party Summoned to world.md (a day 50 exists)"
+    },
+    "latestTimelineNote": {
+      "value": "0496-03-07 Party Departs Highreach for Silverleaf Lands.md",
+      "source": "Public/World/Events/Timeline (last file by name)"
+    },
+    "today": {
+      "value": null,
+      "missing": true,
+      "need": "Today's in-world date"
+    }
+  },
+  "positionFormat": {
+    "value": "[fraction up from the bottom edge, fraction across from the left edge] of eldoria-map.jpg",
+    "source": "docs/tools/world-map.js renderWorldMapMarkers (Leaflet, y grows upward). Copied as stored, not converted.",
+    "caution": "The no-Leaflet fallback in the same file treats the first number as distance from the TOP, which disagrees. Confirm on the real map before use."
+  },
+  "region": {
+    "id": "crestfall",
+    "name": "Crestfall",
+    "source": "Private/1. World Almanac/World/Crestfall/Crestfall.md",
+    "border": {
+      "value": null,
+      "missing": true,
+      "need": "Where Crestfall ends and the Ironpeak Mountains begin (the map colours them the same)"
+    }
+  },
+  "settlements": [
+    {
+      "id": "highreach",
+      "name": "Highreach",
+      "region": {
+        "value": "Crestfall",
+        "source": "Private/1. World Almanac/World/Crestfall/Highreach/Highreach.md (front matter)"
+      },
+      "settlementType": {
+        "value": "City",
+        "source": "Private/1. World Almanac/World/Crestfall/Highreach/Highreach.md (front matter)"
+      },
+      "status": {
+        "value": "Active",
+        "source": "Private/1. World Almanac/World/Crestfall/Highreach/Highreach.md (front matter)"
+      },
+      "knownToPlayers": true,
+      "position": {
+        "value": [
+          0.729,
+          0.171
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": "Highreach the Capital of the Human Kingdom of Crestfall",
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "population": {
+        "value": 25000,
+        "source": "Private/1. World Almanac/World/Crestfall/Highreach/Highreach.md (front matter)",
+        "asWritten": "~25,000",
+        "approximate": true
+      },
+      "production": {
+        "value": null,
+        "missing": true,
+        "need": "What this place makes or grows, per good"
+      },
+      "consumption": {
+        "value": null,
+        "missing": true,
+        "need": "What this place uses, per good"
+      },
+      "detailLevel": {
+        "value": null,
+        "missing": true,
+        "need": "Full detail or sketched"
+      },
+      "cityMap": null,
+      "subLocations": [
+        {
+          "id": "highreach-merchants-guild",
+          "name": "HighReach Merchants Guild",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": true,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/HighReach Merchants Guild.md"
+        },
+        {
+          "id": "highreach-adventurers-guild",
+          "name": "Highreach Adventurers Guild",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": true,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/Highreach Adventurers Guild.md"
+        },
+        {
+          "id": "highreach-mines",
+          "name": "Highreach Mines",
+          "type": "Location",
+          "locationType": "Dungeon",
+          "knownToPlayers": true,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/Highreach Mines.md"
+        },
+        {
+          "id": "sturdy-mugg",
+          "name": "Sturdy Mugg",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": true,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/Sturdy Mugg.md"
+        },
+        {
+          "id": "target-by-tradewind",
+          "name": "Target by Tradewind",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": true,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/Target by Tradewind.md"
+        },
+        {
+          "id": "the-arcane-enclave",
+          "name": "The Arcane Enclave",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/The Arcane Enclave.md"
+        },
+        {
+          "id": "the-dragons-breath-forge",
+          "name": "The Dragons Breath Forge",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": true,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/The Dragons Breath Forge.md"
+        },
+        {
+          "id": "the-warren",
+          "name": "The Warren",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": true,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/The Warren.md"
+        }
+      ],
+      "npcs": [
+        {
+          "id": "aidan-reed",
+          "name": "Aidan Reed",
+          "town": "Highreach",
+          "profession": "Barkeep",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Aidan Reed.md"
+        },
+        {
+          "id": "alaric-emberfell",
+          "name": "Alaric Emberfell",
+          "town": "Highreach",
+          "profession": "Blacksmith",
+          "race": [],
+          "status": "Alive",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Alaric Emberfell.md"
+        },
+        {
+          "id": "alistair-goldman",
+          "name": "Alistair Goldman",
+          "town": "Highreach",
+          "profession": "Guildmaster",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Alistair Goldman.md"
+        },
+        {
+          "id": "alistair-grimwood",
+          "name": "Alistair Grimwood",
+          "town": "Highreach",
+          "profession": "Butler",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Alistair Grimwood.md"
+        },
+        {
+          "id": "alma-ironfist-nee-brightwater",
+          "name": "Alma Ironfist nee Brightwater",
+          "town": "Highreach",
+          "profession": "Adventurer",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Alma Ironfist nee Brightwater.md"
+        },
+        {
+          "id": "aric-stormblade",
+          "name": "Aric Stormblade",
+          "town": "Highreach",
+          "profession": "Fighter",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Aric Stormblade.md"
+        },
+        {
+          "id": "brenna-barkridge-nee-ironfoot",
+          "name": "Brenna Barkridge nee Ironfoot",
+          "town": "Highreach",
+          "profession": "Adventurer",
+          "race": "Dwarf",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Brenna Barkridge nee Ironfoot.md"
+        },
+        {
+          "id": "brix-ironwhistle",
+          "name": "Brix Ironwhistle",
+          "town": "Highreach",
+          "profession": "Captain of Security and Tunnel Maintenance, Exterminators Guild",
+          "race": "Dwarf",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Brix Ironwhistle.md"
+        },
+        {
+          "id": "brom-goldfang",
+          "name": "Brom Goldfang",
+          "town": "Highreach",
+          "profession": "Weapons Merchant",
+          "race": "Halfling",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Brom Goldfang.md"
+        },
+        {
+          "id": "celeste-stonetooth-nee-moonwhisper",
+          "name": "Celeste Stonetooth nee Moonwhisper",
+          "town": "Highreach",
+          "profession": "Adventurer",
+          "race": "Elf",
+          "status": "Alive",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Celeste Stonetooth nee Moonwhisper.md"
+        },
+        {
+          "id": "dame-isolde-swiftwind",
+          "name": "Dame Isolde Swiftwind",
+          "town": "Highreach",
+          "profession": "Diplomat, City Council",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Dame Isolde Swiftwind.md"
+        },
+        {
+          "id": "don-gnocianno",
+          "name": "Don Gnocianno",
+          "town": "Highreach",
+          "profession": "Guildmaster, Exterminators Guild",
+          "race": "Gnome",
+          "status": "Alive",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Don Gnocianno.md"
+        },
+        {
+          "id": "elder-rowan",
+          "name": "Elder Rowan",
+          "town": "Highreach",
+          "profession": "Community Elder",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Elder Rowan.md"
+        },
+        {
+          "id": "esmerelda-voss",
+          "name": "Esmerelda Voss",
+          "town": "Highreach",
+          "profession": "Retired Adventurer",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Esmerelda Voss.md"
+        },
+        {
+          "id": "evelyn-marroway",
+          "name": "Evelyn Marroway",
+          "town": "Highreach",
+          "profession": "Receptionist",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Evelyn Marroway.md"
+        },
+        {
+          "id": "father-eldon-lightbringer",
+          "name": "Father Eldon Lightbringer",
+          "town": "Highreach",
+          "profession": "High Priest",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Father Eldon Lightbringer.md"
+        },
+        {
+          "id": "felix-tradewind",
+          "name": "Felix Tradewind",
+          "town": "Highreach",
+          "profession": "Merchant",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Felix Tradewind.md"
+        },
+        {
+          "id": "fiona-hammerfist-nee-thistledown",
+          "name": "Fiona Hammerfist nee Thistledown",
+          "town": "Highreach",
+          "profession": "Patron",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Fiona Hammerfist nee Thistledown.md"
+        },
+        {
+          "id": "gareth-ironbrow",
+          "name": "Gareth Ironbrow",
+          "town": "Highreach",
+          "profession": "Enforcer",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Gareth Ironbrow.md"
+        },
+        {
+          "id": "garrick-ironbrow",
+          "name": "Garrick Ironbrow",
+          "town": "Highreach",
+          "profession": "Bodyguard",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Garrick Ironbrow.md"
+        },
+        {
+          "id": "ingrid-hightower",
+          "name": "Ingrid Hightower",
+          "town": "Highreach",
+          "profession": "Receptionist",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Ingrid Hightower.md"
+        },
+        {
+          "id": "jarek-ironfist",
+          "name": "Jarek IronFist",
+          "town": "Highreach",
+          "profession": "Merchant",
+          "race": "Human",
+          "status": "Dead",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Jarek IronFist.md"
+        },
+        {
+          "id": "jon-brightman",
+          "name": "Jon Brightman",
+          "town": "Highreach",
+          "profession": "Evocation Wizard",
+          "race": "Halfling",
+          "status": "Alive",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Jon Brightman.md"
+        },
+        {
+          "id": "kara-nightshade",
+          "name": "Kara Nightshade",
+          "town": "Highreach",
+          "profession": "Rogue",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Kara Nightshade.md"
+        },
+        {
+          "id": "kara-stonefoot",
+          "name": "Kara Stonefoot",
+          "town": "Highreach",
+          "profession": "Innkeeper",
+          "race": "Dwarf",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Kara Stonefoot.md"
+        },
+        {
+          "id": "king-alaric-stormhelm",
+          "name": "King Alaric Stormhelm",
+          "town": "Highreach",
+          "profession": "King of Highreach",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/King Alaric Stormhelm.md"
+        },
+        {
+          "id": "lady-elara-moonshadow",
+          "name": "Lady Elara Moonshadow",
+          "town": "Highreach",
+          "profession": "Court Advisor & Enchantress",
+          "race": "Half-Elf",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Lady Elara Moonshadow.md"
+        },
+        {
+          "id": "lady-millicent-goldleaf",
+          "name": "Lady Millicent Goldleaf",
+          "town": "Highreach",
+          "profession": "Royal Advocate",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Lady Millicent Goldleaf.md"
+        },
+        {
+          "id": "lord-cedric-brightblade",
+          "name": "Lord Cedric Brightblade",
+          "town": "Highreach",
+          "profession": "Lord Commander of the City Watch",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Lord Cedric Brightblade.md"
+        },
+        {
+          "id": "lord-frederick-goldman",
+          "name": "Lord Frederick Goldman",
+          "town": "Highreach",
+          "profession": "Noble",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Lord Frederick Goldman.md"
+        },
+        {
+          "id": "lyra-dawnbringer",
+          "name": "Lyra Dawnbringer",
+          "town": "Highreach",
+          "profession": "Cleric",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Lyra Dawnbringer.md"
+        },
+        {
+          "id": "nimble-nackfinger",
+          "name": "Nimble Nackfinger",
+          "town": "Highreach",
+          "profession": "Chief Scout, Exterminators Guild",
+          "race": "Gnome",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Nimble Nackfinger.md"
+        },
+        {
+          "id": "nyla-windrider",
+          "name": "Nyla Windrider",
+          "town": "Highreach",
+          "profession": "Ranger",
+          "race": "Elf",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Nyla Windrider.md"
+        },
+        {
+          "id": "oren-hammerfist",
+          "name": "Oren Hammerfist",
+          "town": "Highreach",
+          "profession": "Warrior",
+          "race": "Human",
+          "status": "Dead",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Oren Hammerfist.md"
+        },
+        {
+          "id": "pip-whiskerwind",
+          "name": "Pip Whiskerwind",
+          "town": "Highreach",
+          "profession": "Underboss / Poison Specialist",
+          "race": "Gnome",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Pip Whiskerwind.md"
+        },
+        {
+          "id": "professor-astrid-starcaller",
+          "name": "Professor Astrid Starcaller",
+          "town": "Highreach",
+          "profession": "Professor of Divination",
+          "race": "Tiefling",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Professor Astrid Starcaller.md"
+        },
+        {
+          "id": "professor-elara-nightveil",
+          "name": "Professor Elara Nightveil",
+          "town": "Highreach",
+          "profession": "Professor of Abjuration",
+          "race": "Elf",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Professor Elara Nightveil.md"
+        },
+        {
+          "id": "professor-galen-thornbrew",
+          "name": "Professor Galen Thornbrew",
+          "town": "Highreach",
+          "profession": "Professor of Transmutation",
+          "race": "Halfling",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Professor Galen Thornbrew.md"
+        },
+        {
+          "id": "professor-mordecai-runeweaver",
+          "name": "Professor Mordecai Runeweaver",
+          "town": "Highreach",
+          "profession": "Professor of Enchantment",
+          "race": "Half-Elf",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Professor Mordecai Runeweaver.md"
+        },
+        {
+          "id": "professor-seraphine-duskwillow",
+          "name": "Professor Seraphine Duskwillow",
+          "town": "Highreach",
+          "profession": "Professor of Necromancy",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Professor Seraphine Duskwillow.md"
+        },
+        {
+          "id": "professor-thaldris-flamehand",
+          "name": "Professor Thaldris Flamehand",
+          "town": "Highreach",
+          "profession": "Professor of Evocation",
+          "race": "Dwarf",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Professor Thaldris Flamehand.md"
+        },
+        {
+          "id": "ratcatcher-vex",
+          "name": "Ratcatcher Vex",
+          "town": "Highreach",
+          "profession": "Independent Pest Controller / Criminal",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Ratcatcher Vex.md"
+        },
+        {
+          "id": "rolf-stonetooth",
+          "name": "Rolf Stonetooth",
+          "town": "Highreach",
+          "profession": "Fighter",
+          "race": "Human",
+          "status": "Dead",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Rolf Stonetooth.md"
+        },
+        {
+          "id": "samantha-clerkson",
+          "name": "Samantha Clerkson",
+          "town": "Highreach",
+          "profession": "Receptionist",
+          "race": "Half-Elf",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Samantha Clerkson.md"
+        },
+        {
+          "id": "sir-gareth-strongshield",
+          "name": "Sir Gareth Strongshield",
+          "town": "Highreach",
+          "profession": "Captain of the King's Guard",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Sir Gareth Strongshield.md"
+        },
+        {
+          "id": "sir-tristan-oakheart",
+          "name": "Sir Tristan Oakheart",
+          "town": "Highreach",
+          "profession": "Knight, Order of the Green Mantle",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Sir Tristan Oakheart.md"
+        },
+        {
+          "id": "squeak-tinkerbottom",
+          "name": "Squeak Tinkerbottom",
+          "town": "Highreach",
+          "profession": "Enforcer / Criminal Artificer",
+          "race": "Gnome",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Squeak Tinkerbottom.md"
+        },
+        {
+          "id": "thaldrin-stormblade",
+          "name": "Thaldrin Stormblade",
+          "town": "Highreach",
+          "profession": "Guildmaster",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Thaldrin Stormblade.md"
+        },
+        {
+          "id": "thoren-ironfist",
+          "name": "Thoren Ironfist",
+          "town": "Highreach",
+          "profession": "Fighter",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Thoren Ironfist.md"
+        },
+        {
+          "id": "tomlin-barkridge",
+          "name": "Tomlin Barkridge",
+          "town": "Highreach",
+          "profession": "Archer",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Tomlin Barkridge.md"
+        },
+        {
+          "id": "beatrix-goldleaf",
+          "name": "Beatrix Goldleaf",
+          "town": "Highreach",
+          "knownToPlayers": false,
+          "note": "Only a player-facing page exists; no DM note with front matter.",
+          "source": "Public/World/Crestfall/Highreach/NPCs/Beatrix Goldleaf.md"
+        },
+        {
+          "id": "borin-stonefist",
+          "name": "Borin Stonefist",
+          "town": "Highreach",
+          "knownToPlayers": false,
+          "note": "Only a player-facing page exists; no DM note with front matter.",
+          "source": "Public/World/Crestfall/Highreach/NPCs/Borin Stonefist.md"
+        }
+      ]
+    },
+    {
+      "id": "ardenville",
+      "name": "Ardenville",
+      "region": {
+        "value": "Crestfall",
+        "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville.md (front matter)"
+      },
+      "settlementType": {
+        "value": "Town",
+        "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville.md (front matter)"
+      },
+      "status": {
+        "value": "Active",
+        "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville.md (front matter)"
+      },
+      "knownToPlayers": true,
+      "position": {
+        "value": [
+          0.79,
+          0.09
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": "Port town of Crestfall",
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "population": {
+        "value": 500,
+        "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville.md (front matter)",
+        "asWritten": "~500",
+        "approximate": true
+      },
+      "production": {
+        "value": null,
+        "missing": true,
+        "need": "What this place makes or grows, per good"
+      },
+      "consumption": {
+        "value": null,
+        "missing": true,
+        "need": "What this place uses, per good"
+      },
+      "detailLevel": {
+        "value": null,
+        "missing": true,
+        "need": "Full detail or sketched"
+      },
+      "cityMap": null,
+      "subLocations": [
+        {
+          "id": "ardenville-adventurers-guild",
+          "name": "Ardenville Adventurers Guild",
+          "type": null,
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville Adventurers Guild.md"
+        },
+        {
+          "id": "fishermans-guild",
+          "name": "Fisherman's Guild",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Fishermans Guild.md"
+        },
+        {
+          "id": "lake-arden",
+          "name": "Lake Arden",
+          "type": "Location",
+          "locationType": "Lake",
+          "knownToPlayers": true,
+          "hasMapMarker": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Lake Arden.md"
+        },
+        {
+          "id": "merchants-guild-warehouse",
+          "name": "Merchants Guild Warehouse",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Merchants Guild Warehouse.md"
+        },
+        {
+          "id": "steelshapers-forge",
+          "name": "Steelshaper's Forge",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Steelshapers Forge.md"
+        },
+        {
+          "id": "the-enchanted-trinket",
+          "name": "The Enchanted Trinket",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/The Enchanted Trinket.md"
+        },
+        {
+          "id": "the-netted-nymph",
+          "name": "The Netted Nymph",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/The Netted Nymph.md"
+        }
+      ],
+      "npcs": [
+        {
+          "id": "caber",
+          "name": "Caber",
+          "town": "Ardenville",
+          "profession": "Sailor",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Caber.md"
+        },
+        {
+          "id": "corin-tidehammer",
+          "name": "Corin Tidehammer",
+          "town": "Ardenville",
+          "profession": "Blacksmith",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Corin Tidehammer.md"
+        },
+        {
+          "id": "cutlass",
+          "name": "Cutlass",
+          "town": "Ardenville",
+          "profession": "Sailor",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Cutlass.md"
+        },
+        {
+          "id": "dancin-pete",
+          "name": "Dancin Pete",
+          "town": "Ardenville",
+          "profession": "Dockside Dancer",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Dancin Pete.md"
+        },
+        {
+          "id": "edda-netsong",
+          "name": "Edda Netsong",
+          "town": "Ardenville",
+          "profession": "Guildmistress",
+          "race": "Dwarf",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Edda Netsong.md"
+        },
+        {
+          "id": "fran-stronkinthearm",
+          "name": "Fran Stronkinthearm",
+          "town": "Ardenville",
+          "profession": "Sailor Bruiser",
+          "race": "Dwarf",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Fran Stronkinthearm.md"
+        },
+        {
+          "id": "gregor-woods",
+          "name": "Gregor Woods",
+          "town": "Ardenville",
+          "profession": "Guard Captain",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Gregor Woods.md"
+        },
+        {
+          "id": "isolde-fairweather",
+          "name": "Isolde Fairweather",
+          "town": "Ardenville",
+          "profession": "Mayor",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Isolde Fairweather.md"
+        },
+        {
+          "id": "kellen-redshore",
+          "name": "Kellen Redshore",
+          "town": "Ardenville",
+          "profession": "Harbormaster",
+          "race": "Half-Elf",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Kellen Redshore.md"
+        },
+        {
+          "id": "meshelle-jones",
+          "name": "Me'Shelle Jones",
+          "town": "Ardenville",
+          "profession": "First Mate",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Me'Shelle Jones.md"
+        },
+        {
+          "id": "mira-softstep",
+          "name": "Mira Softstep",
+          "town": "Ardenville",
+          "profession": "Innkeeper",
+          "race": "Halfling",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Mira Softstep.md"
+        },
+        {
+          "id": "richard-vane",
+          "name": "Richard Vane",
+          "town": "Ardenville",
+          "profession": "Merchants Guildmaster",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Richard Vane.md"
+        },
+        {
+          "id": "saber",
+          "name": "Saber",
+          "town": "Ardenville",
+          "profession": "Sailor",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Saber.md"
+        },
+        {
+          "id": "salty-pete",
+          "name": "Salty Pete",
+          "town": "Ardenville",
+          "profession": "Boat Captain",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Salty Pete.md"
+        },
+        {
+          "id": "guard-2374",
+          "name": "Guard 2374",
+          "town": "Ardenville",
+          "knownToPlayers": true,
+          "note": "Only a player-facing page exists; no DM note with front matter.",
+          "source": "Public/World/Crestfall/Ardenville/NPCs/Guard 2374.md"
+        },
+        {
+          "id": "pip-whiskerwind",
+          "name": "Pip Whiskerwind",
+          "town": "Ardenville",
+          "knownToPlayers": true,
+          "note": "Only a player-facing page exists; no DM note with front matter.",
+          "source": "Public/World/Crestfall/Ardenville/NPCs/Pip Whiskerwind.md"
+        }
+      ]
+    },
+    {
+      "id": "fairfield",
+      "name": "Fairfield",
+      "region": {
+        "value": "Crestfall",
+        "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Fairfield.md (front matter)"
+      },
+      "settlementType": {
+        "value": "Town",
+        "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Fairfield.md (front matter)"
+      },
+      "status": {
+        "value": "Active",
+        "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Fairfield.md (front matter)"
+      },
+      "knownToPlayers": false,
+      "position": {
+        "value": [
+          0.78,
+          0.337
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": "Bustling trade center of Crestfall",
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "population": {
+        "value": 3500,
+        "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Fairfield.md (front matter)",
+        "asWritten": "3500",
+        "approximate": false
+      },
+      "production": {
+        "value": null,
+        "missing": true,
+        "need": "What this place makes or grows, per good"
+      },
+      "consumption": {
+        "value": null,
+        "missing": true,
+        "need": "What this place uses, per good"
+      },
+      "detailLevel": {
+        "value": null,
+        "missing": true,
+        "need": "Full detail or sketched"
+      },
+      "cityMap": null,
+      "subLocations": [
+        {
+          "id": "forgefires-armaments",
+          "name": "Forgefires Armaments",
+          "type": null,
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Forgefires Armaments.md"
+        },
+        {
+          "id": "starspells-wonders",
+          "name": "Starspells Wonders",
+          "type": null,
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Starspells Wonders.md"
+        }
+      ],
+      "npcs": [
+        {
+          "id": "bram-copperkettle",
+          "name": "Bram Copperkettle",
+          "town": "Fairfield",
+          "profession": "Traveling Peddler",
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Fairfield/NPCs/Bram Copperkettle.md"
+        },
+        {
+          "id": "meredith-caravan-friend",
+          "name": "Meredith Caravan-Friend",
+          "town": "Fairfield",
+          "profession": null,
+          "race": null,
+          "status": null,
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Fairfield/NPCs/Meredith Caravan-Friend.md"
+        },
+        {
+          "id": "valeris-shadowmere",
+          "name": "Valeris Shadowmere",
+          "town": "Fairfield",
+          "profession": null,
+          "race": null,
+          "status": null,
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Fairfield/NPCs/Valeris Shadowmere.md"
+        }
+      ]
+    },
+    {
+      "id": "hillcrest",
+      "name": "Hillcrest",
+      "region": {
+        "value": "Crestfall",
+        "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/Hillcrest.md (front matter)"
+      },
+      "settlementType": {
+        "value": "Village",
+        "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/Hillcrest.md (front matter)"
+      },
+      "status": {
+        "value": "Active",
+        "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/Hillcrest.md (front matter)"
+      },
+      "knownToPlayers": false,
+      "position": {
+        "value": [
+          0.623,
+          0.159
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": "Wine capitol of Crestfall",
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "population": {
+        "value": 400,
+        "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/Hillcrest.md (front matter)",
+        "asWritten": "400",
+        "approximate": false
+      },
+      "production": {
+        "value": null,
+        "missing": true,
+        "need": "What this place makes or grows, per good"
+      },
+      "consumption": {
+        "value": null,
+        "missing": true,
+        "need": "What this place uses, per good"
+      },
+      "detailLevel": {
+        "value": null,
+        "missing": true,
+        "need": "Full detail or sketched"
+      },
+      "cityMap": null,
+      "subLocations": [
+        {
+          "id": "hammerstrikes-weapons",
+          "name": "Hammerstrikes Weapons",
+          "type": null,
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/Hammerstrikes Weapons.md"
+        },
+        {
+          "id": "nightwhispers-potions-and-scrolls",
+          "name": "Nightwhispers Potions and Scrolls",
+          "type": null,
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/Nightwhispers Potions and Scrolls.md"
+        }
+      ],
+      "npcs": [
+        {
+          "id": "benedict-vineward",
+          "name": "Benedict Vineward",
+          "town": "Hillcrest",
+          "profession": "Master Vintner",
+          "race": null,
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Benedict Vineward.md"
+        },
+        {
+          "id": "edwin-barleyman",
+          "name": "Edwin Barleyman",
+          "town": "Hillcrest",
+          "profession": "Tavern Owner",
+          "race": null,
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Edwin Barleyman.md"
+        },
+        {
+          "id": "eliza-brightwine",
+          "name": "Eliza Brightwine",
+          "town": "Hillcrest",
+          "profession": "Merchants Guild Representative",
+          "race": null,
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Eliza Brightwine.md"
+        },
+        {
+          "id": "guard-captain-roderick-stone",
+          "name": "Guard Captain Roderick Stone",
+          "town": "Hillcrest",
+          "profession": "Guard Captain",
+          "race": null,
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Guard Captain Roderick Stone.md"
+        },
+        {
+          "id": "jasper-ironforge",
+          "name": "Jasper Ironforge",
+          "town": "Hillcrest",
+          "profession": "Blacksmith",
+          "race": null,
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Jasper Ironforge.md"
+        },
+        {
+          "id": "liliana-moonleaf",
+          "name": "Liliana Moonleaf",
+          "town": "Hillcrest",
+          "profession": "Magic Shop Owner",
+          "race": null,
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Liliana Moonleaf.md"
+        },
+        {
+          "id": "lysander-thornfield",
+          "name": "Lysander Thornfield",
+          "town": "Hillcrest",
+          "profession": null,
+          "race": "Human",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Lysander Thornfield.md"
+        },
+        {
+          "id": "mayor-linden-hearthwood",
+          "name": "Mayor Linden Hearthwood",
+          "town": "Hillcrest",
+          "profession": "Mayor",
+          "race": null,
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Mayor Linden Hearthwood.md"
+        },
+        {
+          "id": "rowan-grapeheart",
+          "name": "Rowan Grapeheart",
+          "town": "Hillcrest",
+          "profession": "Guildmaster",
+          "race": null,
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Rowan Grapeheart.md"
+        },
+        {
+          "id": "seraphina-winecraft",
+          "name": "Seraphina Winecraft",
+          "town": "Hillcrest",
+          "profession": "Master Vintner",
+          "race": null,
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Seraphina Winecraft.md"
+        },
+        {
+          "id": "thom-willow",
+          "name": "Thom Willow",
+          "town": "Hillcrest",
+          "profession": "General Store Owner",
+          "race": null,
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Thom Willow.md"
+        }
+      ]
+    },
+    {
+      "id": "stonehaven",
+      "name": "Stonehaven",
+      "region": {
+        "value": "Crestfall",
+        "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Stonehaven.md (front matter)"
+      },
+      "settlementType": {
+        "value": "Village",
+        "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Stonehaven.md (front matter)"
+      },
+      "status": {
+        "value": "Active",
+        "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Stonehaven.md (front matter)"
+      },
+      "knownToPlayers": false,
+      "position": {
+        "value": [
+          0.597,
+          0.288
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population"
+      },
+      "production": {
+        "value": null,
+        "missing": true,
+        "need": "What this place makes or grows, per good"
+      },
+      "consumption": {
+        "value": null,
+        "missing": true,
+        "need": "What this place uses, per good"
+      },
+      "detailLevel": {
+        "value": null,
+        "missing": true,
+        "need": "Full detail or sketched"
+      },
+      "cityMap": null,
+      "subLocations": [
+        {
+          "id": "blackwood-forest",
+          "name": "Blackwood Forest",
+          "type": "Location",
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Blackwood Forest.md"
+        },
+        {
+          "id": "ironforge-smithy",
+          "name": "Ironforge Smithy",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Ironforge Smithy.md"
+        },
+        {
+          "id": "marlas-gear",
+          "name": "Marlas Gear",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Marlas Gear.md"
+        },
+        {
+          "id": "mystic-wares",
+          "name": "Mystic Wares",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Mystic Wares.md"
+        },
+        {
+          "id": "stonehaven-supplies",
+          "name": "Stonehaven Supplies",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Stonehaven Supplies.md"
+        },
+        {
+          "id": "stones-herbs",
+          "name": "Stones Herbs",
+          "type": "Store",
+          "locationType": null,
+          "knownToPlayers": false,
+          "hasMapMarker": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Stones Herbs.md"
+        }
+      ],
+      "npcs": [
+        {
+          "id": "astrid-ironfist",
+          "name": "Astrid Ironfist",
+          "town": "Stonehaven",
+          "profession": null,
+          "race": "Human",
+          "status": "Active",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Astrid Ironfist.md"
+        },
+        {
+          "id": "caelum-versewood",
+          "name": "Caelum Versewood",
+          "town": "Stonehaven",
+          "profession": "Warrior Poet",
+          "race": "Half-Elf",
+          "status": "Alive",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Caelum Versewood.md"
+        },
+        {
+          "id": "elias-thorn",
+          "name": "Elias Thorn",
+          "town": "Stonehaven",
+          "profession": null,
+          "race": "Human",
+          "status": "Active",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Elias Thorn.md"
+        },
+        {
+          "id": "erik-timber",
+          "name": "Erik Timber",
+          "town": "Stonehaven",
+          "profession": null,
+          "race": "Human",
+          "status": "Active",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Erik Timber.md"
+        },
+        {
+          "id": "gunnar-ironforge",
+          "name": "Gunnar Ironforge",
+          "town": "Stonehaven",
+          "profession": null,
+          "race": "Dwarf",
+          "status": "Active",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Gunnar Ironforge.md"
+        },
+        {
+          "id": "hilda-ravenshadow",
+          "name": "Hilda Ravenshadow",
+          "town": "Stonehaven",
+          "profession": null,
+          "race": "Human",
+          "status": "Active",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Hilda Ravenshadow.md"
+        },
+        {
+          "id": "ingrid-stoneheart",
+          "name": "Ingrid Stoneheart",
+          "town": "Stonehaven",
+          "profession": null,
+          "race": "Human",
+          "status": "Corrupted by Dark Pact",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Ingrid Stoneheart.md"
+        },
+        {
+          "id": "vera-shadowpeak",
+          "name": "Vera Shadowpeak",
+          "town": "Stonehaven",
+          "profession": null,
+          "race": "Half-Elf",
+          "status": "Active",
+          "knownToPlayers": false,
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Vera Shadowpeak.md"
+        }
+      ]
+    }
+  ],
+  "otherPlacesOnMap": [
+    {
+      "id": "lake-arden",
+      "name": "Lake Arden",
+      "region": {
+        "value": "Crestfall",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.776,
+          0.165
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": "Inland sea separating Ardenville and Highreach",
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": true
+    },
+    {
+      "id": "blackwood-forest",
+      "name": "Blackwood Forest",
+      "region": {
+        "value": "Crestfall",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.568,
+          0.382
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": true
+    },
+    {
+      "id": "starfall",
+      "name": "Starfall",
+      "region": {
+        "value": "Silverleaf Lands",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.813,
+          0.42
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    },
+    {
+      "id": "stardew",
+      "name": "Stardew",
+      "region": {
+        "value": "Silverleaf Lands",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.885,
+          0.391
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    },
+    {
+      "id": "frostglade",
+      "name": "Frostglade",
+      "region": {
+        "value": "Silverleaf Lands",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.845,
+          0.466
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    },
+    {
+      "id": "serenity-hollow",
+      "name": "Serenity Hollow",
+      "region": {
+        "value": "Silverleaf Lands",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.824,
+          0.527
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    },
+    {
+      "id": "moonshade",
+      "name": "Moonshade",
+      "region": {
+        "value": "Silverleaf Lands",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.898,
+          0.566
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    },
+    {
+      "id": "ironroot",
+      "name": "Ironroot",
+      "region": {
+        "value": "Ironpeak Mountains",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.708,
+          0.591
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    },
+    {
+      "id": "gemstone-hollow",
+      "name": "Gemstone Hollow",
+      "region": {
+        "value": "Ironpeak Mountains",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.525,
+          0.466
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    },
+    {
+      "id": "forgepeak",
+      "name": "Forgepeak",
+      "region": {
+        "value": "Ironpeak Mountains",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.423,
+          0.226
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    },
+    {
+      "id": "steamhammer",
+      "name": "Steamhammer",
+      "region": {
+        "value": "Ironpeak Mountains",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.351,
+          0.32
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    },
+    {
+      "id": "stoneforge",
+      "name": "Stoneforge",
+      "region": {
+        "value": "Ironpeak Mountains",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.271,
+          0.242
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    },
+    {
+      "id": "ironpeak-mountain",
+      "name": "Ironpeak Mountain",
+      "region": {
+        "value": "Ironpeak Mountains",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.391,
+          0.188
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    },
+    {
+      "id": "cannibal-camp",
+      "name": "Cannibal Camp",
+      "region": {
+        "value": "Ironpeak Mountains",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.752,
+          0.633
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    },
+    {
+      "id": "witchs-bog",
+      "name": "Witch's Bog",
+      "region": {
+        "value": "Orcish Wastes",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.439,
+          0.673
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    },
+    {
+      "id": "red-dune-desert",
+      "name": "Red Dune Desert",
+      "region": {
+        "value": "Orcish Wastes",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.235,
+          0.61
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    },
+    {
+      "id": "sand-dragon-valley",
+      "name": "Sand Dragon Valley",
+      "region": {
+        "value": "Orcish Wastes",
+        "source": "docs/tools/world-map.html (map config script), from the marker's page link"
+      },
+      "position": {
+        "value": [
+          0.43,
+          0.835
+        ],
+        "source": "docs/tools/world-map.html (map config script)"
+      },
+      "mapDescription": {
+        "value": null,
+        "missing": true,
+        "need": "One-line description (the map marker says ????)"
+      },
+      "population": {
+        "value": null,
+        "missing": true,
+        "need": "Population or rough size"
+      },
+      "detailLevel": {
+        "value": "sketched",
+        "source": "Proposal: everything outside Crestfall starts as a name only"
+      },
+      "alsoListedUnderTown": false
+    }
+  ],
+  "routes": [
+    {
+      "id": "highreach--fairfield",
+      "a": "highreach",
+      "b": "fairfield",
+      "travelDays": {
+        "value": null,
+        "missing": true,
+        "need": "Travel days for ordinary travellers and caravans. The note gives only a hard-ride figure."
+      },
+      "mode": {
+        "value": null,
+        "missing": true,
+        "need": "Road, river or other"
+      },
+      "notesSay": [
+        {
+          "quote": "The town's strategic location, just two days' hard ride west of Highreach and mere hours from the Silverleaf border, has made it an essential waystation for merchants, diplomats, and adventurers conducting business between the human and elven realms. Its fortified warehouses store goods worth more than some kingdom's annual treasuries, while its customs facilities process the constant flow of trad",
+          "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Fairfield.md:23"
+        }
+      ],
+      "openQuestion": "The note says Fairfield is WEST of Highreach. On the map Fairfield's marker is to the right (east) of Highreach's. Which is right?"
+    },
+    {
+      "id": "fairfield--starfall",
+      "a": "fairfield",
+      "b": "starfall",
+      "travelDays": {
+        "value": null,
+        "missing": true,
+        "need": "Travel days. The note says only 'mere hours from the Silverleaf border'."
+      },
+      "mode": {
+        "value": null,
+        "missing": true,
+        "need": "Road, river or other"
+      },
+      "notesSay": [
+        {
+          "quote": "Fairfield stands as the crown jewel of western Crestfall's commercial network, a thriving town of 3,500 souls positioned at the crucial junction where the Great Western Road meets the ancient Silverleaf Trade Route. Built on naturally elevated ground that provides commanding views of the surrounding countryside, Fairfield serves as the primary gateway between the human kingdom of Crestfall and the",
+          "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Fairfield.md:21"
+        },
+        {
+          "quote": "The town's strategic location, just two days' hard ride west of Highreach and mere hours from the Silverleaf border, has made it an essential waystation for merchants, diplomats, and adventurers conducting business between the human and elven realms. Its fortified warehouses store goods worth more than some kingdom's annual treasuries, while its customs facilities process the constant flow of trad",
+          "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Fairfield.md:23"
+        }
+      ]
+    },
+    {
+      "id": "ardenville--highreach",
+      "a": "ardenville",
+      "b": "highreach",
+      "travelDays": {
+        "value": null,
+        "missing": true,
+        "need": "Travel days across Lake Arden and up the cliff elevator"
+      },
+      "mode": {
+        "value": null,
+        "missing": true,
+        "need": "Boat plus the cargo elevator, or a road as well?"
+      },
+      "travelDifficulty": {
+        "value": "Moderate",
+        "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Lake Arden.md (front matter, Lake Arden)"
+      },
+      "notesSay": [
+        {
+          "quote": "> The smell of fish and brine hits you first. The port stretches along the shoreline — ships heading out or returning heavy with catch, creaking hulls, shouted orders. A thick mist hangs over the lake, growing denser the farther out you look. At the southern edge, a cargo elevator creaks up a towering cliff toward Highreach, chains echoing across the water.",
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville.md:17"
+        },
+        {
+          "quote": "- **Cliffside Port.** On the southern edge of Lake arden is a small warehouse where select goods are sent up to [[Public/World/Crestfall/Highreach/Highreach|Highreach]] via a manually operated elevator. This elevator is ran by the merchants guild and fisherman must pay a high price if they want to send their goods on the elevator.",
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville.md:22"
+        }
+      ]
+    },
+    {
+      "id": "highreach--hillcrest",
+      "a": "highreach",
+      "b": "hillcrest",
+      "travelDays": {
+        "value": null,
+        "missing": true,
+        "need": "Travel days. The note gives a direction only."
+      },
+      "mode": {
+        "value": null,
+        "missing": true,
+        "need": "Road, river or other"
+      },
+      "notesSay": [
+        {
+          "quote": "Nestled in the rolling hills southwest of [[Highreach]] along the ancient trade routes through [[Crestfall]]'s heartland, Hillcrest commands a strategic position in the kingdom's most fertile wine country. The village's terraced vineyards cascade down sun-blessed slopes, their orderly rows broken only by ancient stone walls and the occasional magical irrigation crystals that ensure optimal growing",
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/Hillcrest.md:18"
+        }
+      ]
+    },
+    {
+      "id": "stonehaven--(unknown)",
+      "a": "stonehaven",
+      "b": null,
+      "travelDays": {
+        "value": null,
+        "missing": true,
+        "need": "Which towns Stonehaven connects to, and the travel days"
+      },
+      "mode": {
+        "value": null,
+        "missing": true,
+        "need": "Road, river or other"
+      },
+      "notesSay": [
+        {
+          "quote": "Stonehaven clings to the southeastern edge of the vast [[Blackwood Forest]], a fortress-settlement where civilization makes its stand against the wild. Founded three generations ago by rangers and trappers seeking rich hunting grounds, the village has evolved into Crestfall's premier frontier outpost - a place where skilled woodsmen, determined guards, and wary merchants create an uneasy but funct",
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Stonehaven.md:15"
+        },
+        {
+          "quote": "- **The Sealed Gates Crisis.** Six weeks ago, new Mayor [[Ingrid Stoneheart]] ordered complete isolation, sealing the gates and cutting all contact with the outside world under mysterious circumstances detailed in [[The Sealed Gates of Stonehaven]].",
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Stonehaven.md:23"
+        }
+      ]
+    }
+  ],
+  "routesNote": "Only connections the notes mention are listed. The full list of roads and every travel time must come from you.",
+  "situationsInNotes": [
+    {
+      "place": "ardenville",
+      "about": "Lake Arden Boat Race",
+      "notesSay": [
+        {
+          "quote": "On the **15th day of the fall season**, Ardenville hosts the **Lake Arden Boat Race**. Sponsored by [[Alistair Goldman]] and the Merchants Guild, the competition offers gold and the seized prize vessel *The Tipping Tankard*. Locals whisper that the guildmaster’s motives reach beyond celebration—especially after his recent clashes with certain adventurers.",
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville.md:35"
+        }
+      ],
+      "countdown": {
+        "value": null,
+        "missing": true,
+        "need": "Whether this becomes a countdown, its size and how fast it moves"
+      }
+    },
+    {
+      "place": "hillcrest",
+      "about": "Vineyard blight",
+      "notesSay": [
+        {
+          "quote": "**The Current Crisis (6th day of Fall)**: A new blight appeared suddenly, more virulent and magically resistant than any previous outbreak, coinciding with reports of increased chaotic magical activity throughout the region following the evil wizard's acquisition of the [[Seekers Eye]] artifact.",
+          "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/Hillcrest.md:32"
+        }
+      ],
+      "countdown": {
+        "value": null,
+        "missing": true,
+        "need": "Whether this becomes a countdown, its size and how fast it moves"
+      }
+    },
+    {
+      "place": "stonehaven",
+      "about": "Sealed gates",
+      "notesSay": [
+        {
+          "quote": "- **The Sealed Gates Crisis.** Six weeks ago, new Mayor [[Ingrid Stoneheart]] ordered complete isolation, sealing the gates and cutting all contact with the outside world under mysterious circumstances detailed in [[The Sealed Gates of Stonehaven]].",
+          "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Stonehaven.md:23"
+        }
+      ],
+      "countdown": {
+        "value": null,
+        "missing": true,
+        "need": "Whether this becomes a countdown, its size and how fast it moves"
+      }
+    },
+    {
+      "place": "fairfield",
+      "about": "Diluted health potions",
+      "notesSay": [
+        {
+          "quote": "A crime family led by Valeris Shadowmere has been purchasing legitimate health potions, diluting them with alchemical extenders, and selling them at slightly reduced prices through street dealers. The diluted potions provide only 75% of normal healing but are difficult to detect without magical analysis.",
+          "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Fairfield.md:220"
+        }
+      ],
+      "countdown": {
+        "value": null,
+        "missing": true,
+        "need": "Whether this becomes a countdown, its size and how fast it moves"
+      }
+    },
+    {
+      "place": "fairfield",
+      "about": "Caravan attacks",
+      "notesSay": [
+        {
+          "quote": "**Description**: Hidden in a natural bowl surrounded by dense forest approximately eight miles northeast of Fairfield, the bandit camp occupies the ruins of an ancient watchtower. The partially collapsed stone structure provides defensible positions, while hidden cave entrances offer escape routes and storage for stolen goods. Camouflaged watch posts in the surrounding trees give early warning of ",
+          "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Fairfield.md:177"
+        }
+      ],
+      "countdown": {
+        "value": null,
+        "missing": true,
+        "need": "Whether this becomes a countdown, its size and how fast it moves"
+      }
+    },
+    {
+      "place": "highreach",
+      "about": "Duplirats and the mine collapse",
+      "notesSay": [
+        {
+          "quote": "- **The Artifact Wars.** Recent events revealed the lich Jon's manipulation — the Highreach Mines collapsed, releasing duplirats and sparking a citywide crisis",
+          "source": "Private/1. World Almanac/World/Crestfall/Crestfall.md:15"
+        }
+      ],
+      "countdown": {
+        "value": null,
+        "missing": true,
+        "need": "Whether this becomes a countdown, its size and how fast it moves"
+      }
+    },
+    {
+      "place": "crestfall",
+      "about": "War with the orc tribes",
+      "notesSay": [
+        {
+          "quote": "- **Orc Wars.** Currently at war with orc tribes from the Orcish Wastes, driving military tension across the kingdom",
+          "source": "Private/1. World Almanac/World/Crestfall/Crestfall.md:14"
+        }
+      ],
+      "countdown": {
+        "value": null,
+        "missing": true,
+        "need": "Whether this becomes a countdown, its size and how fast it moves"
+      }
+    }
+  ],
+  "goods": [
+    {
+      "id": "grain",
+      "name": "Grain",
+      "proposedBy": "Living world proposal (ten starting goods). Proposed list, not yet agreed.",
+      "catalogItems": [
+        {
+          "id": "item:wheat:phb",
+          "name": "Wheat",
+          "catalogSource": "PHB",
+          "type": "trade good",
+          "priceLabel": "1 cp",
+          "weight": 1,
+          "source": "API GET /catalog/items?limit=25&q=wheat"
+        },
+        {
+          "id": "item:flour:phb",
+          "name": "Flour",
+          "catalogSource": "PHB",
+          "type": "trade good",
+          "priceLabel": "2 cp",
+          "weight": 1,
+          "source": "API GET /catalog/items?limit=25&q=flour"
+        }
+      ],
+      "catalogGap": null,
+      "note": null,
+      "unit": {
+        "value": null,
+        "missing": true,
+        "need": "The unit a market trades in (sack, cask, ingot...)"
+      },
+      "basePrice": {
+        "value": null,
+        "missing": true,
+        "need": "Which catalog price, if any, is the base price for this good"
+      }
+    },
+    {
+      "id": "fish",
+      "name": "Fish",
+      "proposedBy": "Living world proposal (ten starting goods). Proposed list, not yet agreed.",
+      "catalogItems": [],
+      "catalogGap": "The catalog has no fish as a trade good (only fishing tackle and magic items).",
+      "note": null,
+      "unit": {
+        "value": null,
+        "missing": true,
+        "need": "The unit a market trades in (sack, cask, ingot...)"
+      },
+      "basePrice": {
+        "value": null,
+        "missing": true,
+        "need": "A base price; nothing in the catalog to take it from"
+      }
+    },
+    {
+      "id": "wine",
+      "name": "Wine",
+      "proposedBy": "Living world proposal (ten starting goods). Proposed list, not yet agreed.",
+      "catalogItems": [
+        {
+          "id": "item:common-wine-pitcher:phb",
+          "name": "Common Wine (pitcher)",
+          "catalogSource": "PHB",
+          "type": "food and drink",
+          "priceLabel": "2 sp",
+          "weight": null,
+          "source": "API GET /catalog/items?limit=25&q=common%20wine%20pitcher"
+        },
+        {
+          "id": "item:fine-wine-bottle:phb",
+          "name": "Fine Wine (bottle)",
+          "catalogSource": "PHB",
+          "type": "food and drink",
+          "priceLabel": "10 gp",
+          "weight": null,
+          "source": "API GET /catalog/items?limit=25&q=fine%20wine%20bottle"
+        }
+      ],
+      "catalogGap": null,
+      "note": null,
+      "unit": {
+        "value": null,
+        "missing": true,
+        "need": "The unit a market trades in (sack, cask, ingot...)"
+      },
+      "basePrice": {
+        "value": null,
+        "missing": true,
+        "need": "Which catalog price, if any, is the base price for this good"
+      }
+    },
+    {
+      "id": "ore",
+      "name": "Ore",
+      "proposedBy": "Living world proposal (ten starting goods). Proposed list, not yet agreed.",
+      "catalogItems": [
+        {
+          "id": "item:iron:phb",
+          "name": "Iron",
+          "catalogSource": "PHB",
+          "type": "trade good",
+          "priceLabel": "1 sp",
+          "weight": 1,
+          "source": "API GET /catalog/items?limit=25&q=iron"
+        },
+        {
+          "id": "item:copper:phb",
+          "name": "Copper",
+          "catalogSource": "PHB",
+          "type": "trade good",
+          "priceLabel": "5 sp",
+          "weight": 1,
+          "source": "API GET /catalog/items?limit=25&q=copper"
+        }
+      ],
+      "catalogGap": null,
+      "note": null,
+      "unit": {
+        "value": null,
+        "missing": true,
+        "need": "The unit a market trades in (sack, cask, ingot...)"
+      },
+      "basePrice": {
+        "value": null,
+        "missing": true,
+        "need": "Which catalog price, if any, is the base price for this good"
+      }
+    },
+    {
+      "id": "timber",
+      "name": "Timber",
+      "proposedBy": "Living world proposal (ten starting goods). Proposed list, not yet agreed.",
+      "catalogItems": [],
+      "catalogGap": "The catalog has no timber or lumber item.",
+      "note": null,
+      "unit": {
+        "value": null,
+        "missing": true,
+        "need": "The unit a market trades in (sack, cask, ingot...)"
+      },
+      "basePrice": {
+        "value": null,
+        "missing": true,
+        "need": "A base price; nothing in the catalog to take it from"
+      }
+    },
+    {
+      "id": "herbs",
+      "name": "Herbs",
+      "proposedBy": "Living world proposal (ten starting goods). Proposed list, not yet agreed.",
+      "catalogItems": [],
+      "catalogGap": "The catalog has no herb trade good (only the Herbalism Kit, a tool).",
+      "note": null,
+      "unit": {
+        "value": null,
+        "missing": true,
+        "need": "The unit a market trades in (sack, cask, ingot...)"
+      },
+      "basePrice": {
+        "value": null,
+        "missing": true,
+        "need": "A base price; nothing in the catalog to take it from"
+      }
+    },
+    {
+      "id": "healing-potions",
+      "name": "Healing potions",
+      "proposedBy": "Living world proposal (ten starting goods). Proposed list, not yet agreed.",
+      "catalogItems": [
+        {
+          "id": "item:potion-of-healing:dmg",
+          "name": "Potion of Healing",
+          "catalogSource": "DMG",
+          "type": "potion",
+          "priceLabel": "50 gp",
+          "weight": 0.5,
+          "source": "API GET /catalog/items?limit=25&q=potion%20of%20healing"
+        }
+      ],
+      "catalogGap": null,
+      "note": null,
+      "unit": {
+        "value": null,
+        "missing": true,
+        "need": "The unit a market trades in (sack, cask, ingot...)"
+      },
+      "basePrice": {
+        "value": null,
+        "missing": true,
+        "need": "Which catalog price, if any, is the base price for this good"
+      }
+    },
+    {
+      "id": "weapons",
+      "name": "Weapons",
+      "proposedBy": "Living world proposal (ten starting goods). Proposed list, not yet agreed.",
+      "catalogItems": [
+        {
+          "id": "base-item:longsword:phb",
+          "name": "Longsword",
+          "catalogSource": "PHB",
+          "type": "martial weapon | melee weapon",
+          "priceLabel": "15 gp",
+          "weight": 3,
+          "source": "API GET /catalog/items?limit=25&q=longsword"
+        }
+      ],
+      "catalogGap": null,
+      "note": "A category. One item is listed only as a reference price; which item stands for the category is your call.",
+      "unit": {
+        "value": null,
+        "missing": true,
+        "need": "The unit a market trades in (sack, cask, ingot...)"
+      },
+      "basePrice": {
+        "value": null,
+        "missing": true,
+        "need": "Which catalog price, if any, is the base price for this good"
+      }
+    },
+    {
+      "id": "cloth",
+      "name": "Cloth",
+      "proposedBy": "Living world proposal (ten starting goods). Proposed list, not yet agreed.",
+      "catalogItems": [
+        {
+          "id": "item:cotton-cloth-1-sq-yd:phb",
+          "name": "Cotton Cloth (1 sq. yd.)",
+          "catalogSource": "PHB",
+          "type": "trade good",
+          "priceLabel": "5 sp",
+          "weight": null,
+          "source": "API GET /catalog/items?limit=25&q=cotton%20cloth%201%20sq%20yd"
+        },
+        {
+          "id": "item:linen-1-sq-yd:phb",
+          "name": "Linen (1 sq. yd.)",
+          "catalogSource": "PHB",
+          "type": "trade good",
+          "priceLabel": "5 gp",
+          "weight": null,
+          "source": "API GET /catalog/items?limit=25&q=linen%201%20sq%20yd"
+        },
+        {
+          "id": "item:canvas-1-sq-yd:phb",
+          "name": "Canvas (1 sq. yd.)",
+          "catalogSource": "PHB",
+          "type": "trade good",
+          "priceLabel": "1 sp",
+          "weight": null,
+          "source": "API GET /catalog/items?limit=25&q=canvas%201%20sq%20yd"
+        }
+      ],
+      "catalogGap": null,
+      "note": null,
+      "unit": {
+        "value": null,
+        "missing": true,
+        "need": "The unit a market trades in (sack, cask, ingot...)"
+      },
+      "basePrice": {
+        "value": null,
+        "missing": true,
+        "need": "Which catalog price, if any, is the base price for this good"
+      }
+    },
+    {
+      "id": "luxuries",
+      "name": "Luxuries",
+      "proposedBy": "Living world proposal (ten starting goods). Proposed list, not yet agreed.",
+      "catalogItems": [
+        {
+          "id": "item:silk-1-sq-yd:phb",
+          "name": "Silk (1 sq. yd.)",
+          "catalogSource": "PHB",
+          "type": "trade good",
+          "priceLabel": "10 gp",
+          "weight": null,
+          "source": "API GET /catalog/items?limit=25&q=silk%201%20sq%20yd"
+        },
+        {
+          "id": "item:saffron:phb",
+          "name": "Saffron",
+          "catalogSource": "PHB",
+          "type": "trade good",
+          "priceLabel": "15 gp",
+          "weight": 1,
+          "source": "API GET /catalog/items?limit=25&q=saffron"
+        }
+      ],
+      "catalogGap": null,
+      "note": "A category. Two items are listed only as reference prices.",
+      "unit": {
+        "value": null,
+        "missing": true,
+        "need": "The unit a market trades in (sack, cask, ingot...)"
+      },
+      "basePrice": {
+        "value": null,
+        "missing": true,
+        "need": "Which catalog price, if any, is the base price for this good"
+      }
+    }
+  ],
+  "openQuestions": [
+    {
+      "id": "potion-base-price",
+      "question": "Which healing potion price is the base price?",
+      "catalog": {
+        "id": "item:potion-of-healing:dmg",
+        "name": "Potion of Healing",
+        "catalogSource": "DMG",
+        "type": "potion",
+        "priceLabel": "50 gp",
+        "weight": 0.5,
+        "source": "API GET /catalog/items?limit=25&q=potion%20of%20healing"
+      },
+      "notes": "The proposal says the Fairfield notes assume 30 gp. A search of Private and Public for '30 gp' near 'potion' or 'heal' found nothing; the Fairfield notes describe diluted potions sold 'at slightly reduced prices' without a figure. Please point to where 30 gp comes from, or confirm the figure.",
+      "resolved": false
+    },
+    {
+      "id": "fairfield-direction",
+      "question": "Is Fairfield west of Highreach (notes) or east of it (map marker)?",
+      "resolved": false
+    },
+    {
+      "id": "herb-job",
+      "question": "The declined herb-gathering job is not in the notes. Where was it offered, by whom, and on what date?",
+      "resolved": false
+    }
+  ],
+  "api": {
+    "base": "https://fn-eldoria-ahakafekhxczebhn.eastus-01.azurewebsites.net/api",
+    "usedOffline": false
+  }
+}
