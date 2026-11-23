@@ -132,13 +132,16 @@ test("rumours: each hop bends at most one attribute, the truth is kept, and the 
     for (const place of ["birch", "cedar", "dell"]) {
       const heard = state.heard[place];
       const told = state.heard[heard.from].version;
-      const changed = engine.RUMOUR_ATTRIBUTES.filter((attribute) => heard.version[attribute] !== told[attribute]);
+      // "what" bends by going vague: its words stay exactly as the DM wrote them.
+      const field = (version, attribute) => (attribute === "what" ? (version.vague === true ? "vague" : "clear") : version[attribute]);
+      const changed = engine.RUMOUR_ATTRIBUTES.filter((attribute) => field(heard.version, attribute) !== field(told, attribute));
       assert.ok(changed.length <= 1, `at most one attribute bends per hop (seed ${seed}, ${place}: ${changed})`);
+      assert.equal(heard.version.what, truth.what, "the DM's words for what happened are never rewritten");
       if (changed.length) {
         bends += 1;
         assert.equal(heard.bent.attribute, changed[0]);
-        assert.deepEqual(heard.bent.from, told[changed[0]]);
-        assert.deepEqual(heard.bent.to, heard.version[changed[0]]);
+        assert.deepEqual(heard.bent.from, field(told, changed[0]));
+        assert.deepEqual(heard.bent.to, field(heard.version, changed[0]));
       } else {
         assert.equal(heard.bent, null);
       }
@@ -458,7 +461,8 @@ test("scenario: one written event leads to a flattering rumour, an unwritten unf
   // The truth is kept beside each town's telling.
   assert.equal(rumourOf(world, heroes).truth, "written");
   assert.equal(rumourOf(world, plague).truth, "unwritten");
-  assert.equal(rumourOf(world, plague).trueText, "Folk from Alder carry a sickness in Alder. People blame them for it.");
+  assert.equal(rumourOf(world, plague).trueText, "Folk from Alder carry a sickness in Alder.", "only the DM's words; the tone is a tag");
+  assert.deepEqual(rumourOf(world, plague).tags, ["unflattering"]);
   // No sickness exists: the plague is only talk.
   assert.deepEqual(engine.describeSickness(world.now()), []);
   // Every consequence is a suggestion, and nothing was written by the simulation.

@@ -445,7 +445,7 @@ The outline is read straight from the record. It is not part of the daily tick a
 }
 ```
 
-- `size` is 1 (a small thing) to 5 (never seen before). `flatters` is `true`, `false` or `null`.
+- `size` is 1 (small) to 5 (unheard of); 2 is ordinary. `flatters` is `true`, `false` or `null`. Neither is ever turned into a sentence: see "Changed after Stage 4".
 - `"action": "end"` stops it spreading. `"action": "confirm"` with `eventId` marks it true, pointing at the written event.
 - `"action": "reveal"` with `"place"` and `"playersVisible": true | false` lets the players hear it in that one town, or takes that back. It can only be revealed where it has arrived.
 
@@ -595,3 +595,58 @@ Each good in the DM-only setup may carry a `covers` rule, so a player can be sho
 
 - People (NPCs). Places, goods and roads are sections G, L and N; every estimate in them is listed in `Private/0.DM Screen/World Sim/SEED-REVIEW.md`.
 - Anything in the character sheet data. Nothing here touches it.
+
+## Changed after Stage 4 at the DM's request, needs your OK
+
+Asked for on 2026-11-23: use real items from the catalog instead of generalised categories, and keep rumours to the words the DM wrote.
+
+### Z1. A good is a commodity or a modifier
+
+Each good in the setup may carry `"kind"`:
+
+- `"commodity"` (the default when `kind` is absent): a real thing sold by a real unit, such as a sack of grain. It has a price. Nothing about commodities changed.
+- `"modifier"`: a class of catalog items, such as ordinary weapons. It is never a thing with a price. It has no `unit`, it must have a `covers` rule (the setup is refused otherwise), and it is only ever shown as a percentage against each covered item's own list price.
+
+```json
+{ "id": "weapons", "kind": "modifier", "name": "Ordinary weapons",
+  "basePrice": { "value": 1500, "estimate": true, "basis": "<reference only>" },
+  "madeFrom": [{ "good": "ore", "perUnit": 10 }],
+  "covers": { "itemIds": [], "types": ["martial weapon", "simple weapon"], "reference": "<item id>" } }
+```
+
+A modifier's `basePrice` is the figure the economy tracks it against so that it has something to move. It is bookkeeping: no page shows it as a price. Snapshots are unchanged in shape; a modifier's market entry holds the same numbers as any other good's.
+
+In the Private setup, "Weapons" became the modifier "Ordinary weapons", and "Luxuries" (a category that covered only silk) became the real commodity "Silk", per square yard, at the catalog's 10 gp.
+
+### Z2. Public prices answer
+
+`GET world/public/prices` now returns, per good, one of two shapes:
+
+```json
+{ "good": "Grain", "kind": "commodity", "unit": "sack", "price": 100, "priceText": "1 gp",
+  "vsUsualPercent": 0, "ratio": 1, "covers": { "itemIds": ["<id>"], "types": [] } }
+```
+
+```json
+{ "good": "Ordinary weapons", "kind": "modifier", "ratio": 0.78,
+  "covers": { "itemIds": [], "types": ["martial weapon", "simple weapon"] } }
+```
+
+- `kind` is new on every entry.
+- A modifier has no `unit`, `price`, `priceText` or `vsUsualPercent`: there is no coin figure for it anywhere in the answer.
+- The empty answer is unchanged: `{ "place": null, "prices": [] }`.
+- Still nothing about stock, reasons, other towns, or the DM's `reference`, `estimate` and `basis`.
+
+Clients list only commodities, and apply `ratio` to a real item's own catalog price when `covers` matches it. An item nothing covers stays at its list price.
+
+### Z3. Rumours: no words are appended
+
+A telling is rendered as who, what and where only. The stock sentences about tone and size are gone, and a bend never adds words.
+
+- `what` is never rewritten. A tale going vague sets `"vague": true` on that town's version instead of appending to `what`.
+- A lost `who` is stored as `"someone"` (it was `"a stranger"`).
+- The DM's view gains `tags` on the rumour and on each town's telling (`"flattering"`, `"unflattering"`, `"small"`, `"big"`, `"enormous"`, `"unheard of"`, `"vague"`) and `bentLabel` on a hop that bent (`"who was lost"`, `"what got vague"`, `"place moved"`, `"grew in the telling"`, `"tone flipped"`).
+- For a `what` bend, the hop's `bent` is `{ "attribute": "what", "from": "clear", "to": "vague" }`.
+- Worlds saved before this change still read correctly: an old `what` ending in ", or something like it" and an old `who` of "a stranger" are shown without the filler.
+- `GET world/public/rumours` is unchanged in shape (`{ text }` per rumour); the text is now only the DM's words, and tags are never sent.
+

@@ -34,7 +34,24 @@ export function formatMoney(copper) {
   return `${trim(value)} cp`;
 }
 
-/** 0 -> "usual", 12 -> "+12%", -8 -> "-8%". */
+/**
+ * An item's price against its own list (catalog) price, in words:
+ * 0 -> "list price", 8 -> "8% above list", -22 -> "22% below list".
+ * Items are always worded this way; only commodities are compared with "usual".
+ */
+export function listPercentText(percent) {
+  const value = Math.round(Number(percent) || 0);
+  if (value === 0) return "list price";
+  return `${Math.abs(value)}% ${value > 0 ? "above" : "below"} list`;
+}
+
+/** The goods that are real things with a price of their own. Modifiers are left out. */
+export function commodityRows(answer) {
+  if (isEmptyAnswer(answer)) return [];
+  return answer.prices.filter((entry) => entry && entry.kind !== "modifier" && entry.priceText);
+}
+
+/** 0 -> "usual", 12 -> "+12%", -8 -> "-8%". For commodities, against the town's usual price. */
 export function percentText(percent) {
   const value = Math.round(Number(percent) || 0);
   if (value === 0) return "usual";
@@ -102,8 +119,20 @@ export function localPriceFor(answer, item = {}) {
     copper,
     priceText,
     percent,
-    percentText: percentText(percent),
+    percentText: listPercentText(percent),
     direction: percentDirection(percent),
-    line: `In ${town}: ${priceText} (${percentText(percent)})`
+    line: `In ${town}: ${priceText} (${listPercentText(percent)})`
   };
+}
+
+/**
+ * One catalog item as the town page's lookup shows it.
+ * Returns { listText, local } where listText is the item's own catalog price ("15 gp")
+ * or "" when the catalog gives none, and local is localPriceFor's answer or null.
+ * A price is never invented: no catalog price means no local price either.
+ */
+export function describeItemPrice(answer, item = {}) {
+  const catalog = parseCopper(item.value);
+  const listText = catalog != null && catalog > 0 ? formatMoney(catalog) : "";
+  return { listText, local: listText ? localPriceFor(answer, item) : null };
 }

@@ -237,6 +237,10 @@ function suggestionCard(event) {
   </div>`;
 }
 
+function followsText(entry) {
+  return [...(entry.covers?.types || []), ...((entry.covers?.itemIds || []).length ? [`${entry.covers.itemIds.length} by id`] : [])].join(", ") || "none";
+}
+
 // Exactly what the two open routes answer right now: what a player's page would show.
 function playersPreview() {
   const seen = ui.players;
@@ -249,13 +253,21 @@ function playersPreview() {
       ? `<p id="ws-players-empty">Players see only: <q>No news from town yet.</q></p>
          <p class="ws-meta">That is what they get until the world is started, the party is set in a town they know, and that town has prices or a rumour you have let them hear.</p>`
       : `<p id="ws-players-town">Players see <b>Word in ${esc(town)}</b>.</p>
+         <h3>Staples listed on their page</h3>
          <div class="ws-tablewrap"><table class="ws-table" id="ws-players-prices">
-           <thead><tr><th>Good</th><th class="ws-num">Price</th><th class="ws-num">Against usual</th><th>Items that follow it</th></tr></thead>
-           <tbody>${prices.map((entry) => `<tr><td>${esc(entry.good)} <span class="ws-meta">per ${esc(entry.unit)}</span></td>
+           <thead><tr><th>Staple</th><th class="ws-num">Price</th><th class="ws-num">Against usual</th><th>Items that follow it</th></tr></thead>
+           <tbody>${prices.filter((entry) => entry.kind !== "modifier").map((entry) => `<tr><td>${esc(entry.good)} <span class="ws-meta">per ${esc(entry.unit)}</span></td>
              <td class="ws-num">${esc(entry.priceText)}</td>
              <td class="ws-num">${entry.vsUsualPercent === 0 ? "usual" : `<span class="${entry.vsUsualPercent > 0 ? "ws-up" : "ws-down"}">${entry.vsUsualPercent > 0 ? "+" : "-"}${Math.abs(entry.vsUsualPercent)}%</span>`}</td>
-             <td class="ws-meta">${esc([...(entry.covers?.types || []), ...((entry.covers?.itemIds || []).length ? [`${entry.covers.itemIds.length} by id`] : [])].join(", ") || "none")}</td></tr>`).join("")
-             || `<tr><td colspan="4" class="ws-meta">No prices.</td></tr>`}</tbody></table></div>
+             <td class="ws-meta">${esc(followsText(entry))}</td></tr>`).join("")
+             || `<tr><td colspan="4" class="ws-meta">No staples.</td></tr>`}</tbody></table></div>
+         <h3>Applied to items they look up</h3>
+         ${prices.some((entry) => entry.kind === "modifier")
+           ? `<ul class="ws-plain" id="ws-players-modifiers">${prices.filter((entry) => entry.kind === "modifier").map((entry) => {
+               const percent = Math.round((Number(entry.ratio) - 1) * 100);
+               return `<li>${esc(entry.good)}: <b>${percent === 0 ? "at list price" : `${Math.abs(percent)}% ${percent > 0 ? "above" : "below"} list price`}</b> <span class="ws-meta">(${esc(followsText(entry))}). Players never see this line, only the items' prices.</span></li>`;
+             }).join("")}</ul>`
+           : `<p class="ws-meta">Nothing. Every item shows its list price.</p>`}
          <h3>Rumours they have heard here</h3>
          ${rumours.length ? `<ul class="ws-plain" id="ws-players-rumours">${rumours.map((entry) => `<li><q>${esc(entry.text)}</q></li>`).join("")}</ul>`
            : `<p class="ws-meta" id="ws-players-norumours">None. Reveal one from the Rumours tab when the party hears it.</p>`}`;

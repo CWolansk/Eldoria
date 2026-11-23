@@ -8,7 +8,7 @@ import { waitFor } from "./dom.mjs";
 const ANSWER = {
   place: { name: "Openton" },
   prices: [
-    { good: "Blades", unit: "blade", price: 1680, priceText: "16.8 gp", vsUsualPercent: 12, ratio: 1.12, covers: { itemIds: [], types: ["simple weapon", "martial weapon"] } },
+    { good: "Ordinary blades", kind: "modifier", ratio: 1.12, covers: { itemIds: [], types: ["simple weapon", "martial weapon"] } },
     { good: "Tonic", unit: "flask", price: 4600, priceText: "46 gp", vsUsualPercent: -8, ratio: 0.92, covers: { itemIds: ["item:tonic:test"], types: [] } }
   ]
 };
@@ -43,18 +43,18 @@ test("with the route absent (404), the sheet loads as before and shows catalog v
 
 test("a covered item's Value gains the local line; anything else keeps its catalog value", () => {
   setLocalPrices(ANSWER);
-  assert.equal(value(sword, swordRecord), "15 gp · In Openton: 16.8 gp (+12%)");
-  assert.equal(value({ name: "Tonic", catalog: { id: "item:tonic:test" } }, { rarity: "common", type: "P", valueLabel: "50 gp" }), "50 gp · In Openton: 46 gp (-8%)");
+  assert.equal(value(sword, swordRecord), "15 gp · In Openton: 16.8 gp (12% above list)");
+  assert.equal(value({ name: "Tonic", catalog: { id: "item:tonic:test" } }, { rarity: "common", type: "P", valueLabel: "50 gp" }), "50 gp · In Openton: 46 gp (8% below list)");
   assert.equal(value({ name: "+1 Longsword" }, { ...swordRecord, rarity: "uncommon", valueLabel: "315 gp" }), "315 gp", "a magic weapon is not covered by type");
   assert.equal(value({ name: "Lantern" }, { rarity: "none", _typeListText: ["adventuring gear"], valueLabel: "5 gp" }), "5 gp");
   assert.equal(value({ name: "Odd" }, { ...swordRecord, valueLabel: "" }), undefined, "no catalog value, no line");
-  assert.equal(getLocalPriceLine({ name: "Club" }, { weaponCategory: "simple", rarity: "none", value: 10 }), "In Openton: 1.1 sp (+12%)");
+  assert.equal(getLocalPriceLine({ name: "Club" }, { weaponCategory: "simple", rarity: "none", value: 10 }), "In Openton: 1.1 sp (12% above list)");
 });
 
 test("the Add Item picker's card shows the same line", () => {
   setLocalPrices(ANSWER);
   const card = createItemCard(sword, swordRecord);
-  assert.match(card.textContent, /In Openton: 16\.8 gp \(\+12%\)/u);
+  assert.match(card.textContent, /In Openton: 16\.8 gp \(12% above list\)/u);
   setLocalPrices(null);
   assert.doesNotMatch(createItemCard(sword, swordRecord).textContent, /In Openton/u);
 });
@@ -87,7 +87,7 @@ test("prices are asked for once per page load", async () => {
   primeLocalPrices(api, () => { ready += 1; });
   assert.equal(calls, 1);
   assert.equal(ready, 1);
-  assert.equal(getLocalPriceLine(sword, swordRecord), "In Openton: 16.8 gp (+12%)");
+  assert.equal(getLocalPriceLine(sword, swordRecord), "In Openton: 16.8 gp (12% above list)");
 });
 
 test("Gear rows show the line, and showing it saves nothing", async () => {
@@ -96,7 +96,7 @@ test("Gear rows show the line, and showing it saves nothing", async () => {
   dto.inventory.items = [{ name: "Longsword", quantity: 1, equipped: false, snapshot: swordRecord }];
   const saved = [];
   await BuildPlayerSheetGearTab(SheetCompiler.compile(dto), { api: first.fx.createFakeApi(), dto, onChange: async (next) => { saved.push(next); } });
-  assert.match(gearText(), /15 gp · In Openton: 16\.8 gp \(\+12%\)/u);
+  assert.match(gearText(), /15 gp · In Openton: 16\.8 gp \(12% above list\)/u);
   assert.equal(saved.length, 0);
   resetLocalPrices();
 });
@@ -116,7 +116,7 @@ test("with the route present, the whole page loads, shows the line, and still sa
     onRequest: (url, method) => requested.push(`${method} ${new URL(url).pathname}`)
   });
   await upToDate();
-  await waitFor(() => /In Openton: 16\.8 gp \(\+12%\)/u.test(gearText()), `the Gear tab should show the local price: ${gearText().slice(-400)}`, 400);
+  await waitFor(() => /In Openton: 16\.8 gp \(12% above list\)/u.test(gearText()), `the Gear tab should show the local price: ${gearText().slice(-400)}`, 400);
   restoreConsole();
   assert.equal(requested.filter((entry) => entry === "GET /api/world/public/prices").length, 1, "asked once");
   assert.equal(server.saves.length, 0, "showing a price never saves the sheet");

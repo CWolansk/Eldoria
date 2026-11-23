@@ -2835,7 +2835,7 @@
     },
     {
       "id": "weapons",
-      "name": "Weapons",
+      "name": "Ordinary weapons",
       "proposedBy": "Living world proposal (ten starting goods). Proposed list, not yet agreed.",
       "catalogItems": [
         {
@@ -2849,7 +2849,7 @@
         }
       ],
       "catalogGap": null,
-      "note": "A category. One item is listed only as a reference price; which item stands for the category is your call.",
+      "note": "Not a good with a price: a percentage applied to each weapon's own catalog price. The longsword is only the reference it is tracked against.",
       "unit": {
         "value": null,
         "missing": true,
@@ -2908,8 +2908,8 @@
       }
     },
     {
-      "id": "luxuries",
-      "name": "Luxuries",
+      "id": "silk",
+      "name": "Silk",
       "proposedBy": "Living world proposal (ten starting goods). Proposed list, not yet agreed.",
       "catalogItems": [
         {
@@ -2920,19 +2920,10 @@
           "priceLabel": "10 gp",
           "weight": null,
           "source": "API GET /catalog/items?limit=25&q=silk%201%20sq%20yd"
-        },
-        {
-          "id": "item:saffron:phb",
-          "name": "Saffron",
-          "catalogSource": "PHB",
-          "type": "trade good",
-          "priceLabel": "15 gp",
-          "weight": 1,
-          "source": "API GET /catalog/items?limit=25&q=saffron"
         }
       ],
       "catalogGap": null,
-      "note": "A category. Two items are listed only as reference prices.",
+      "note": null,
       "unit": {
         "value": null,
         "missing": true,

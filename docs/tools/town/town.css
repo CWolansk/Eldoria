@@ -161,3 +161,71 @@
   outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
+
+/* ---- Look up an item ---- */
+.town-search {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.town-search__label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.town-search input {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-2);
+  background: var(--panel);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.town-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-3);
+  background: var(--panel);
+}
+
+.town-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.2rem 1rem;
+  padding: 0.7rem 0.9rem;
+  min-width: 0;
+}
+
+.town-item + .town-item {
+  border-top: 1px solid var(--line-soft);
+}
+
+.town-item__name {
+  font-weight: 700;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.town-item__cost {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 0.2rem 0.6rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.town-item__list,
+.town-item__none {
+  color: var(--muted);
+  font-size: 0.9rem;
+}

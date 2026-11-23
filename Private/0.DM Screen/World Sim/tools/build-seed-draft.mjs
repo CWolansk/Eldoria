@@ -293,9 +293,9 @@ const GOODS = [
   { id: "timber", name: "Timber", catalogIds: [], search: "timber", gap: "The catalog has no timber or lumber item." },
   { id: "herbs", name: "Herbs", catalogIds: [], search: "herb", gap: "The catalog has no herb trade good (only the Herbalism Kit, a tool)." },
   { id: "healing-potions", name: "Healing potions", catalogIds: ["item:potion-of-healing:dmg"], search: "potion of healing" },
-  { id: "weapons", name: "Weapons", catalogIds: ["base-item:longsword:phb"], search: "longsword", note: "A category. One item is listed only as a reference price; which item stands for the category is your call." },
+  { id: "weapons", name: "Ordinary weapons", catalogIds: ["base-item:longsword:phb"], search: "longsword", note: "Not a good with a price: a percentage applied to each weapon's own catalog price. The longsword is only the reference it is tracked against." },
   { id: "cloth", name: "Cloth", catalogIds: ["item:cotton-cloth-1-sq-yd:phb", "item:linen-1-sq-yd:phb", "item:canvas-1-sq-yd:phb"], search: "cloth" },
-  { id: "luxuries", name: "Luxuries", catalogIds: ["item:silk-1-sq-yd:phb", "item:saffron:phb"], search: "silk", note: "A category. Two items are listed only as reference prices." }
+  { id: "silk", name: "Silk", catalogIds: ["item:silk-1-sq-yd:phb"], search: "silk" }
 ];
 
 async function lookupCatalogItem(apiBase, id) {
@@ -590,7 +590,10 @@ for (const good of estimates.goods) {
     basePrice = { value: good.price.estimateCopper, estimate: true, basis: good.price.basis };
   }
   marketGoods.push({
-    id: good.id, name: good.name, unit: good.unit, basePrice,
+    // "commodity": a real thing sold by a unit. "modifier": a class of catalog items,
+    // shown only as a percentage against each item's own list price, never in coin.
+    id: good.id, kind: good.kind === "modifier" ? "modifier" : "commodity", name: good.name,
+    ...(good.kind === "modifier" ? {} : { unit: good.unit }), basePrice,
     // Labels other subjects read. "medicine": a sickness makes a town use more of it.
     tags: good.tags || [],
     madeFrom: (good.madeFrom || []).map(({ good: input, perUnit }) => ({ good: input, perUnit })),
@@ -645,7 +648,7 @@ for (const town of towns) {
       make: { value: make, estimate: true, basis: makeBasis },
       use: { value: use, estimate: true, basis: useBasis }
     };
-    estimateRows.push(`| ${town.name} | ${good.name} | ${make} | ${makeBasis} | ${use} | ${good.unit} a day |`);
+    estimateRows.push(`| ${town.name} | ${good.name} | ${make} | ${makeBasis} | ${use} | ${good.kind === "modifier" ? "a day (tracked, never shown as a price)" : `${good.unit} a day`} |`);
   }
 }
 
@@ -685,7 +688,13 @@ const block = [
   "",
   "| Good | Unit | Base price | Estimate? | Based on |",
   "|---|---|---|---|---|",
-  ...marketGoods.map((good) => `| ${good.name} | ${good.unit} | ${money(good.basePrice.value)} | ${good.basePrice.estimate ? "estimate" : "catalog"} | ${good.basePrice.basis} |`),
+  ...marketGoods.filter((good) => good.kind !== "modifier").map((good) => `| ${good.name} | ${good.unit} | ${money(good.basePrice.value)} | ${good.basePrice.estimate ? "estimate" : "catalog"} | ${good.basePrice.basis} |`),
+  "",
+  "**Applied to items, never priced** (shown only as a percentage against each item's own list price)",
+  "",
+  "| Modifier | Applies to | Tracked against |",
+  "|---|---|---|",
+  ...marketGoods.filter((good) => good.kind === "modifier").map((good) => `| ${good.name} | ${good.covers?.basis || ""} | ${good.basePrice.basis} |`),
   "",
   "**Made from**",
   "",

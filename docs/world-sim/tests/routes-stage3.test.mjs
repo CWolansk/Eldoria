@@ -158,7 +158,8 @@ test("rumours: started only by the DM, about a written event or as unwritten tal
   const good = body(await start({ eventId: event.id, truth: "written", who: "the miller", what: "burned his own mill", size: 3, flatters: false }));
   assert.equal(good.rumours.length, 1);
   assert.deepEqual([good.rumours[0].origin, good.rumours[0].truth, good.rumours[0].version.where], ["secretville", "written", "secretville"], "it starts where the event happened");
-  assert.equal(good.rumours[0].trueText, "The miller burned his own mill in Secretville. It was a big thing. People blame them for it.");
+  assert.equal(good.rumours[0].trueText, "The miller burned his own mill in Secretville.");
+  assert.deepEqual(good.rumours[0].tags, ["unflattering", "big"], "size and tone are tags beside the telling");
 
   const talk = body(await start({ origin: "openton", who: "a ghost", what: "walks the walls" }));
   assert.equal(talk.rumours.find((rumour) => rumour.id === talk.rumourId).truth, "unwritten");
@@ -221,8 +222,9 @@ test("public rumours: only what the DM revealed, only in the party's known town,
   assert.deepEqual(Object.keys(shown.json), ["place", "rumours"]);
   assert.deepEqual(Object.keys(shown.json.rumours[0]), ["text"]);
   // The rumour's id feeds the seed, so which detail bent on the way differs from run to run.
-  // Any one bend is fine: who may become "a stranger", what may gain a hedge, the tone may flip.
-  assert.match(shown.json.rumours[0].text, /^(The miller of Secretville|A stranger) hoards grain(, or something like it)?\./, "the tale as told, with no place the players do not know");
+  // Any one bend is fine: the name may be lost ("someone"); everything else bends only as a tag.
+  assert.match(shown.json.rumours[0].text, /^(The miller of Secretville|Someone) hoards grain\.$/, "the tale as told: the DM's words and nothing appended");
+  assert.doesNotMatch(shown.body, /speak well|blame them|something like it|a stranger|flatter|vague|tag/iu, "no filler and no tags reach the players");
   assert.doesNotMatch(shown.body, /secretville|truth|heard|origin|bent|eventId|rumour-|unwritten/, "no ids, no truth, no spread");
   assert.doesNotMatch(shown.body.replace(/[Tt]he miller of Secretville/u, ""), /Secretville/, "the hidden town appears only in words the DM chose to reveal");
 

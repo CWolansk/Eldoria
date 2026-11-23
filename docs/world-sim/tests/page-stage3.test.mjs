@@ -312,7 +312,8 @@ test("Rumours: the DM starts one; each town's telling is shown beside the truth,
   await page.idle();
   let card = page.q("[data-rumour]");
   assert.match(card.textContent, /Truth not written/);
-  assert.equal(card.querySelector("[data-rumour-truth]").textContent, "A ghost walks the walls in Openton. People blame them for it.");
+  assert.equal(card.querySelector("[data-rumour-truth]").textContent, "A ghost walks the walls in Openton.", "only what the DM typed");
+  assert.deepEqual([...card.querySelectorAll("[data-rumour-tags] [data-rumour-tag]")].map((chip) => chip.textContent), ["unflattering"], "the tone is a tag, not a sentence");
   assert.deepEqual([...card.querySelectorAll("[data-heard]")].map((row) => row.dataset.heard), ["openton"]);
   assert.match(card.textContent, /Next: Secretville around Fall 9/);
   assert.ok(card.querySelector("[data-rumour-truth] [data-act='open-place'][data-id='openton']"), "the town in the tale is a link");

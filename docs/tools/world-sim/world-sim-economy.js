@@ -184,7 +184,7 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
         const then = place.goods.find((entry) => entry.good === good.id);
         const now = marketPlace(place.id)?.goods.find((entry) => entry.good === good.id);
         if (!then || !now) return "";
-        return `<tr><td>${esc(place.name)}</td><td class="ws-num">${esc(now.priceText)}</td><td class="ws-num">${esc(then.priceText)}</td><td class="ws-num">${versus(then.vsUsualPercent)}</td></tr>`;
+        return `<tr><td>${esc(place.name)}</td><td class="ws-num">${esc(isModifier(good) ? now.listText : now.priceText)}</td><td class="ws-num">${esc(isModifier(good) ? then.listText : then.priceText)}</td><td class="ws-num">${versus(then.vsUsualPercent)}</td></tr>`;
       }).join("");
       body = `<div class="ws-tablewrap"><table class="ws-table"><thead><tr><th>Town</th><th class="ws-num">Now</th><th class="ws-num">After ${result.days} days</th><th class="ws-num">vs usual then</th></tr></thead><tbody>${rows}</tbody></table></div>
         ${result.suggestions.length
@@ -201,6 +201,67 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
     </section>`;
   }
 
+  // A modifier is a class of catalog items (ordinary weapons), not a thing with a price.
+  // It is shown only as a percentage against list price, never in coin.
+  const isModifier = (good) => good?.kind === "modifier";
+
+  function coversText(good) {
+    const types = good.covers?.types || [];
+    const ids = good.covers?.itemIds || [];
+    return [types.length ? `every ordinary ${types.join(" or ")}` : "", ids.length ? `${ids.length} item${ids.length === 1 ? "" : "s"} listed by id` : ""]
+      .filter(Boolean).join(", and ") || "nothing yet";
+  }
+
+  function coversEditor(good) {
+    return `<details class="ws-setup" id="ws-covers"${ui.coversOpen ? " open" : ""}>
+        <summary>Which items follow this for players ${good.covers?.estimate ? estimateChip(true, "Which items follow this is a guess") : ""}</summary>
+        <div>
+          <p class="ws-meta">Players see an item's price here as its own list price moved by the same share as ${esc(good.name.toLowerCase())}. Items listed by id always follow it. Item types match only ordinary items: nothing uncommon or rarer. ${isModifier(good) ? "A modifier needs at least one of the two." : "Leave both empty and no item follows this good."}</p>
+          <div class="ws-fields">
+            <label>Item ids, one per line
+              <textarea id="ws-covers-ids" rows="4" spellcheck="false">${esc((good.covers?.itemIds || []).join("\n"))}</textarea></label>
+            <label>Item types, separated by commas
+              <input class="ws-input" id="ws-covers-types" type="text" value="${esc((good.covers?.types || []).join(", "))}" placeholder="for example: simple weapon, martial weapon"></label>
+            <label>${isModifier(good) ? "Tracked against (item id, for your reference)" : "Priced from (item id, for your reference)"}
+              <input class="ws-input" id="ws-covers-reference" type="text" value="${esc(good.covers?.reference || "")}"></label>
+          </div>
+          <button class="ws-btn ws-btn--small" type="button" data-act="save-covers" data-id="${esc(good.id)}">Save which items follow</button>
+        </div>
+      </details>`;
+  }
+
+  // The Markets view of a modifier: percentages only. No coin, no stock, no "stock lasts".
+  function modifierView(markets, good) {
+    const towns = markets.places.filter((place) => place.hasMarket && place.goods.some((entry) => entry.good === good.id));
+    return `<section id="ws-markets">
+      <h2>Markets</h2>
+      ${goodPicker(markets, good)}
+      <p class="ws-lede" id="ws-modifier-lede">${esc(good.name)} is not one thing with a price. It is a percentage applied to the list price of real items: ${esc(coversText(good))}. Each item keeps its own price from the item list.</p>
+      <div class="ws-tablewrap"><table class="ws-table" id="ws-modifier-table">
+        <thead><tr><th>Town</th><th>Against list price</th><th>Usually</th><th>Why</th></tr></thead>
+        <tbody>${towns.map((place) => {
+          const entry = place.goods.find((item) => item.good === good.id);
+          return `<tr data-market-place="${esc(place.id)}">
+            <td><button class="ws-link" type="button" data-act="open-place" data-id="${esc(place.id)}">${esc(place.name)}</button>${entry.makeEstimate || entry.useEstimate ? ` ${estimateChip(true, "How much this town makes or uses is a guess")}` : ""}</td>
+            <td><span class="${entry.listPercent > 0 ? "ws-up" : entry.listPercent < 0 ? "ws-down" : ""}" data-list-text>${esc(entry.listText)}</span></td>
+            <td class="ws-meta">${esc(entry.usualListText)}</td>
+            <td class="ws-whycell">${whyList(entry.why) || "—"}</td></tr>`;
+        }).join("") || `<tr><td colspan="4" class="ws-meta">No town has this yet.</td></tr>`}</tbody></table></div>
+      <p class="ws-meta">Players never see this row. They see it only on the items it applies to, in item search, on their sheets and in the town page's item lookup.</p>
+      ${coversEditor(good)}
+      <p class="ws-meta${ui.error ? " ws-error" : ""}" role="status">${esc(ui.error || ui.message)}</p>
+    </section>
+    ${whatIfPanel()}`;
+  }
+
+  function goodPicker(markets, good) {
+    const button = (entry) => `<button class="ws-btn ws-btn--small" type="button" aria-pressed="${entry.id === good.id}" data-act="good" data-id="${esc(entry.id)}">${esc(entry.name)}</button>`;
+    const commodities = markets.goods.filter((entry) => !isModifier(entry));
+    const modifiers = markets.goods.filter(isModifier);
+    return `<div class="ws-row" role="group" aria-label="Goods">${commodities.map(button).join("")}</div>
+      ${modifiers.length ? `<div class="ws-row" role="group" aria-label="Price modifiers" id="ws-modifier-picker"><span class="ws-meta">Applied to items:</span>${modifiers.map(button).join("")}</div>` : ""}`;
+  }
+
   function marketsView() {
     const markets = ui.markets;
     if (!markets) return `<section><h2>Markets</h2><p class="ws-meta">Loading…</p></section>`;
@@ -209,6 +270,9 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
         <p class="ws-lede">No markets are set up yet. Load the setup file made from your notes (Today, then Setup). It holds the goods, the roads, and a first guess at what each town makes and uses for you to correct.</p></section>`;
     }
     const good = goodOf(ui.good) || markets.goods[0];
+    if (isModifier(good)) {
+      return modifierView(markets, good);
+    }
     const towns = markets.places.filter((place) => place.hasMarket && place.goods.some((entry) => entry.good === good.id));
     const anyEstimate = good.basePriceEstimate || towns.some((place) => {
       const entry = place.goods.find((item) => item.good === good.id);
@@ -217,7 +281,7 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
     const madeFrom = good.madeFrom.map((input) => `${input.perUnit} ${esc(goodOf(input.good)?.unit || "unit")}s of ${esc((goodOf(input.good)?.name || input.good).toLowerCase())}`).join(" and ");
     return `<section id="ws-markets">
       <h2>Markets</h2>
-      <div class="ws-row" role="group" aria-label="Good">${markets.goods.map((entry) => `<button class="ws-btn ws-btn--small" type="button" aria-pressed="${entry.id === good.id}" data-act="good" data-id="${esc(entry.id)}">${esc(entry.name)}</button>`).join("")}</div>
+      ${goodPicker(markets, good)}
       <p class="ws-lede">${esc(good.name)}, per ${esc(good.unit)}. Base price ${esc(good.basePriceText)} ${estimateChip(good.basePriceEstimate)}.${madeFrom ? ` Made from ${madeFrom}.` : ""} "Usual" is what each town settles at with nothing unusual going on.</p>
       <div class="ws-tablewrap"><table class="ws-table" id="ws-market-table">
         <thead><tr><th>Town</th><th class="ws-num">Price</th><th class="ws-num">vs usual</th><th>14 days</th><th class="ws-num">Stock lasts</th><th>Why</th></tr></thead>
@@ -237,21 +301,7 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
           <input type="number" id="ws-base-price" min="0.01" step="any" value="${esc(good.basePrice)}"></label>
         <button class="ws-btn ws-btn--small" type="button" data-act="save-base-price" data-id="${esc(good.id)}">Save base price</button>
       </div>
-      <details class="ws-setup" id="ws-covers"${ui.coversOpen ? " open" : ""}>
-        <summary>Which items follow this price for players ${good.covers?.estimate ? estimateChip(true, "Which items follow this good is a guess") : ""}</summary>
-        <div>
-          <p class="ws-meta">Players see an item's local price as its catalog price moved by the same share as ${esc(good.name.toLowerCase())} here. Items listed by id always follow it. Item types match only ordinary items: nothing uncommon or rarer. Leave both empty and no item follows this good.</p>
-          <div class="ws-fields">
-            <label>Item ids, one per line
-              <textarea id="ws-covers-ids" rows="4" spellcheck="false">${esc((good.covers?.itemIds || []).join("\n"))}</textarea></label>
-            <label>Item types, separated by commas
-              <input class="ws-input" id="ws-covers-types" type="text" value="${esc((good.covers?.types || []).join(", "))}" placeholder="for example: simple weapon, martial weapon"></label>
-            <label>Priced from (item id, for your reference)
-              <input class="ws-input" id="ws-covers-reference" type="text" value="${esc(good.covers?.reference || "")}"></label>
-          </div>
-          <button class="ws-btn ws-btn--small" type="button" data-act="save-covers" data-id="${esc(good.id)}">Save which items follow</button>
-        </div>
-      </details>
+      ${coversEditor(good)}
       <p class="ws-meta${ui.error ? " ws-error" : ""}" role="status">${esc(ui.error || ui.message)}</p>
     </section>
     ${whatIfPanel()}`;
@@ -300,8 +350,10 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
 
     const prices = market?.hasMarket ? `<div><h3>Prices</h3><div class="ws-tablewrap"><table class="ws-table" id="ws-place-prices">
         <thead><tr><th>Good</th><th class="ws-num">Price</th><th class="ws-num">vs usual</th><th>14 days</th><th class="ws-num">Stock lasts</th></tr></thead>
-        <tbody>${market.goods.map((entry) => `<tr><td>${esc(goodOf(entry.good)?.name || entry.good)}</td><td class="ws-num">${esc(entry.priceText)}</td>
-          <td class="ws-num">${versus(entry.vsUsualPercent)}</td><td>${spark(entry)}</td><td class="ws-num">${entry.daysLeft == null ? "—" : `${entry.daysLeft} days`}</td></tr>`).join("")}</tbody></table></div></div>` : "";
+        <tbody>${market.goods.filter((entry) => entry.kind !== "modifier").map((entry) => `<tr><td>${esc(goodOf(entry.good)?.name || entry.good)}</td><td class="ws-num">${esc(entry.priceText)}</td>
+          <td class="ws-num">${versus(entry.vsUsualPercent)}</td><td>${spark(entry)}</td><td class="ws-num">${entry.daysLeft == null ? "—" : `${entry.daysLeft} days`}</td></tr>`).join("")}</tbody></table></div>
+        ${market.goods.some((entry) => entry.kind === "modifier") ? `<ul class="ws-plain" id="ws-place-modifiers">${market.goods.filter((entry) => entry.kind === "modifier").map((entry) =>
+          `<li>${esc(goodOf(entry.good)?.name || entry.good)}: <b>${esc(entry.listText)}</b> here <span class="ws-meta">(applied to items; usually ${esc(entry.usualListText)})</span></li>`).join("")}</ul>` : ""}</div>` : "";
 
     const makesAndUses = market?.hasMarket ? `<details class="ws-setup" id="ws-place-figures"><summary>What it makes and uses each day</summary><div>
         <p class="ws-meta">A figure you change stops being an estimate. Saving re-works what is usual; stock and prices carry on from where they are.</p>
@@ -310,7 +362,7 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
             const stored = ui.setup?.economy?.markets?.[id]?.[good.id] || {};
             const make = figure(stored.make ?? 0);
             const use = figure(stored.use ?? 0);
-            return `<tr><td>${esc(good.name)} <span class="ws-meta">${esc(good.unit)}s</span></td>
+            return `<tr><td>${esc(good.name)} <span class="ws-meta">${isModifier(good) ? "applied to items" : `${esc(good.unit)}s`}</span></td>
               <td><input type="number" min="0" step="any" data-figure="make" data-good="${esc(good.id)}" value="${esc(make.value ?? 0)}" aria-label="${esc(good.name)} made each day"> ${estimateChip(make.estimate, make.basis)}</td>
               <td><input type="number" min="0" step="any" data-figure="use" data-good="${esc(good.id)}" value="${esc(use.value ?? 0)}" aria-label="${esc(good.name)} used each day"> ${estimateChip(use.estimate, use.basis)}</td></tr>`;
           }).join("")}</tbody></table></div>

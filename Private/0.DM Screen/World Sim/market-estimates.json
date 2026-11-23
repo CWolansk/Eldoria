@@ -32,7 +32,8 @@
         ],
         "reference": "item:wheat:phb",
         "basis": "Wheat and flour are grain; nothing else"
-      }
+      },
+      "kind": "commodity"
     },
     {
       "id": "fish",
@@ -43,7 +44,8 @@
         "basis": "Not in the catalog. Guess: 2 cp a pound, a basket of 20 pounds"
       },
       "usePerThousandPeoplePerDay": 10,
-      "useBasis": "About a fifth of a pound of fish a head each day"
+      "useBasis": "About a fifth of a pound of fish a head each day",
+      "kind": "commodity"
     },
     {
       "id": "wine",
@@ -63,7 +65,8 @@
         ],
         "reference": "item:common-wine-pitcher:phb",
         "basis": "The two ordinary wines in the catalog"
-      }
+      },
+      "kind": "commodity"
     },
     {
       "id": "ore",
@@ -82,7 +85,8 @@
         ],
         "reference": "item:iron:phb",
         "basis": "Iron by the pound only"
-      }
+      },
+      "kind": "commodity"
     },
     {
       "id": "timber",
@@ -93,7 +97,8 @@
         "basis": "Not in the catalog. Guess: 5 gp a cartload"
       },
       "usePerThousandPeoplePerDay": 2,
-      "useBasis": "Two cartloads a day for every thousand people, for building and fuel"
+      "useBasis": "Two cartloads a day for every thousand people, for building and fuel",
+      "kind": "commodity"
     },
     {
       "id": "herbs",
@@ -104,7 +109,8 @@
         "basis": "Not in the catalog. Guess: 2 gp a bundle, so the herbs in a healing potion cost a fifth of its price"
       },
       "usePerThousandPeoplePerDay": 2,
-      "useBasis": "Remedies and cooking, apart from what potion makers need"
+      "useBasis": "Remedies and cooking, apart from what potion makers need",
+      "kind": "commodity"
     },
     {
       "id": "healing-potions",
@@ -137,17 +143,17 @@
         ],
         "reference": "item:potion-of-healing:dmg",
         "basis": "The four healing potions, listed by id; no other potion"
-      }
+      },
+      "kind": "commodity"
     },
     {
       "id": "weapons",
-      "name": "Weapons",
-      "unit": "weapon",
+      "name": "Ordinary weapons",
       "price": {
         "catalogItem": "base-item:longsword:phb",
         "times": 1,
         "estimate": true,
-        "basis": "A whole category. The catalog's longsword (15 gp) stands in for it; which item should is your call"
+        "basis": "Not a price anyone pays. The catalog's longsword (15 gp) is only the reference this percentage is tracked against; every weapon keeps its own catalog price"
       },
       "usePerThousandPeoplePerDay": 0.3,
       "useBasis": "Roughly one new weapon a year for every ten people",
@@ -164,8 +170,9 @@
           "martial weapon"
         ],
         "reference": "base-item:longsword:phb",
-        "basis": "Ordinary simple and martial weapons; magic weapons are left at their catalog price"
-      }
+        "basis": "Ordinary simple and martial weapons, each at its own catalog price; magic weapons and anything uncommon or rarer stay at list price"
+      },
+      "kind": "modifier"
     },
     {
       "id": "cloth",
@@ -186,27 +193,29 @@
         ],
         "reference": "item:cotton-cloth-1-sq-yd:phb",
         "basis": "Cotton, linen and canvas by the square yard"
-      }
+      },
+      "kind": "commodity"
     },
     {
-      "id": "luxuries",
-      "name": "Luxuries",
-      "unit": "piece",
+      "id": "silk",
+      "name": "Silk",
+      "unit": "square yard",
       "price": {
         "catalogItem": "item:silk-1-sq-yd:phb",
         "times": 1,
-        "estimate": true,
-        "basis": "A whole category. The catalog's silk (10 gp a square yard) stands in for it; which item should is your call"
+        "estimate": false,
+        "basis": "Catalog price of Silk (1 sq. yd.)"
       },
       "usePerThousandPeoplePerDay": 1,
-      "useBasis": "One piece a day for every thousand people",
+      "useBasis": "One square yard a day for every thousand people",
       "covers": {
         "itemIds": [
           "item:silk-1-sq-yd:phb"
         ],
         "reference": "item:silk-1-sq-yd:phb",
-        "basis": "Silk only, the item this good was priced from"
-      }
+        "basis": "Silk by the square yard, the item itself"
+      },
+      "kind": "commodity"
     }
   ],
   "makes": {
@@ -243,7 +252,7 @@
         "share": 0.39,
         "basis": "Weavers in the capital"
       },
-      "luxuries": {
+      "silk": {
         "share": 0.33,
         "basis": "Craftsmen serving the noble houses"
       }
@@ -291,9 +300,9 @@
         "share": 0.56,
         "basis": "The notes call it the bustling trade centre of Crestfall"
       },
-      "luxuries": {
+      "silk": {
         "share": 0.67,
-        "basis": "Stands in for goods arriving from the Silverleaf Lands next door, which are not simulated yet"
+        "basis": "Stands in for silk arriving from the Silverleaf Lands next door, which are not simulated yet"
       }
     },
     "hillcrest": {

@@ -226,7 +226,7 @@ test("public prices: the party's own known town, prices and percent only, and no
   assert.deepEqual(shown.place, { name: "Openton" });
   assert.deepEqual(shown.prices.map((entry) => entry.good), ["Bread", "Rope"]);
   for (const entry of shown.prices) {
-    assert.deepEqual(Object.keys(entry).sort(), ["covers", "good", "price", "priceText", "ratio", "unit", "vsUsualPercent"]);
+    assert.deepEqual(Object.keys(entry).sort(), ["covers", "good", "kind", "price", "priceText", "ratio", "unit", "vsUsualPercent"]);
   }
   assert.ok(shown.prices[0].vsUsualPercent > 0, "players see that bread is dearer");
 

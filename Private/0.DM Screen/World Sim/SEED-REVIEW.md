@@ -45,9 +45,9 @@
 | Timber | none | |
 | Herbs | none (only the Herbalism Kit, a tool) | |
 | Healing potions | Potion of Healing | 50 gp |
-| Weapons | Longsword, as one reference | 15 gp |
+| Ordinary weapons | not a priced good: a percentage applied to each weapon's own catalog price (tracked against the Longsword) | |
 | Cloth | Cotton Cloth, Linen, Canvas (per sq. yd.) | 5 sp, 5 gp, 1 sp |
-| Luxuries | Silk (per sq. yd.), Saffron | 10 gp, 15 gp |
+| Silk | Silk (per sq. yd.) | 10 gp |
 
 ## What you need to supply
 
@@ -56,7 +56,7 @@
 3. **Stonehaven's population**, and rough sizes for the 17 places outside the five towns when they come into range.
 4. **What each town makes and uses**, per good. The notes describe this in words (Hillcrest wine, Ardenville fish, Stonehaven game and timber, Fairfield trade) but give no quantities.
 5. **The goods list.** Confirm or change the ten. For each: the unit a market trades in, and which catalog price is its base price. Fish, timber and herbs have no catalog item, so they need a base price from you. The healing potion base price is settled: the catalog price, 50 gp.
-6. **Which item stands for "weapons" and for "luxuries"**, since both are categories.
+6. **No generalised categories are priced** (your call, 2026-11-23). "Weapons" is now a modifier: a percentage applied to each ordinary weapon's own catalog price, never shown as a price. "Luxuries" is gone; in its place is the real catalog item Silk, by the square yard. If you want other classes of items to move with a town (armour, adventuring gear, tools), say which and I will add a modifier for each; today everything else stays at list price.
 7. **Where Crestfall ends and the Ironpeak Mountains begin.** A suggested line is drawn for you to correct: open `docs/tools/world-sim/regions-preview.html`. The outlines are in `docs/world-sim/regions.draft.json`.
 8. **One-line descriptions** for Stonehaven and the 16 other map places whose marker says "????".
 9. **Which of the situations in your notes become countdowns.** The world starts with none. They are listed under "Candidates for countdowns" below; add the ones you want on the Countdowns tab of the DM page.
@@ -118,16 +118,21 @@ To correct them, either change a figure on the Living World page (open a place u
 | Timber | cartload | 5 gp | estimate | Not in the catalog. Guess: 5 gp a cartload |
 | Herbs | bundle | 2 gp | estimate | Not in the catalog. Guess: 2 gp a bundle, so the herbs in a healing potion cost a fifth of its price |
 | Healing potion | potion | 50 gp | catalog | Catalog: potion of healing, 50 gp (confirmed by the DM) |
-| Weapons | weapon | 15 gp | estimate | A whole category. The catalog's longsword (15 gp) stands in for it; which item should is your call |
 | Cloth | square yard | 5 sp | catalog | Catalog: cotton cloth, 5 sp a square yard |
-| Luxuries | piece | 10 gp | estimate | A whole category. The catalog's silk (10 gp a square yard) stands in for it; which item should is your call |
+| Silk | square yard | 10 gp | catalog | Catalog price of Silk (1 sq. yd.) |
+
+**Applied to items, never priced** (shown only as a percentage against each item's own list price)
+
+| Modifier | Applies to | Tracked against |
+|---|---|---|
+| Ordinary weapons | Ordinary simple and martial weapons, each at its own catalog price; magic weapons and anything uncommon or rarer stay at list price | Not a price anyone pays. The catalog's longsword (15 gp) is only the reference this percentage is tracked against; every weapon keeps its own catalog price |
 
 **Made from**
 
 | Good | Made from | Based on |
 |---|---|---|
 | Healing potion | 5 bundles of herbs | estimate: Guess: five bundles of herbs a potion |
-| Weapons | 10 pounds of iron | estimate: Guess: ten pounds of iron a weapon |
+| Ordinary weapons | 10 pounds of iron | estimate: Guess: ten pounds of iron a weapon |
 
 **Populations**
 
@@ -150,9 +155,9 @@ To correct them, either change a figure on the Living World page (open a place u
 | Highreach | Timber | 9.5 | Some woodland nearby | 50 | cartload a day |
 | Highreach | Herbs | 0 | Not known for making this | 50 | bundle a day |
 | Highreach | Healing potion | 8.91 | The capital has the temples and the Arcane Enclave | 12.5 | potion a day |
-| Highreach | Weapons | 6.95 | The notes name The Dragons Breath Forge | 7.5 | weapon a day |
+| Highreach | Ordinary weapons | 6.95 | The notes name The Dragons Breath Forge | 7.5 | a day (tracked, never shown as a price) |
 | Highreach | Cloth | 347.49 | Weavers in the capital | 750 | square yard a day |
-| Highreach | Luxuries | 9.8 | Craftsmen serving the noble houses | 25 | piece a day |
+| Highreach | Silk | 9.8 | Craftsmen serving the noble houses | 25 | square yard a day |
 | Ardenville | Grain | 15.59 | A few fields behind the port | 7.5 | sack a day |
 | Ardenville | Fish | 200.48 | The notes call it a port town on Lake Arden, with a Fishermans Guild | 5 | basket a day |
 | Ardenville | Wine | 0 | Not known for making this | 50 | pitcher a day |
@@ -160,9 +165,9 @@ To correct them, either change a figure on the Living World page (open a place u
 | Ardenville | Timber | 0 | Not known for making this | 1 | cartload a day |
 | Ardenville | Herbs | 0 | Not known for making this | 1 | bundle a day |
 | Ardenville | Healing potion | 0 | Not known for making this | 0.25 | potion a day |
-| Ardenville | Weapons | 0.98 | The notes name the Steelshapers Forge | 0.15 | weapon a day |
+| Ardenville | Ordinary weapons | 0.98 | The notes name the Steelshapers Forge | 0.15 | a day (tracked, never shown as a price) |
 | Ardenville | Cloth | 0 | Not known for making this | 15 | square yard a day |
-| Ardenville | Luxuries | 0 | Not known for making this | 0.5 | piece a day |
+| Ardenville | Silk | 0 | Not known for making this | 0.5 | square yard a day |
 | Fairfield | Grain | 300.71 | The name and the open country on the map; taken as Crestfall's main farmland | 52.5 | sack a day |
 | Fairfield | Fish | 7.43 | A little river fish | 35 | basket a day |
 | Fairfield | Wine | 386.1 | Some vineyards | 350 | pitcher a day |
@@ -170,9 +175,9 @@ To correct them, either change a figure on the Living World page (open a place u
 | Fairfield | Timber | 0 | Not known for making this | 7 | cartload a day |
 | Fairfield | Herbs | 33.41 | Herb gardens for its apothecaries | 7 | bundle a day |
 | Fairfield | Healing potion | 5.94 | The notes mention potions being sold here | 1.75 | potion a day |
-| Fairfield | Weapons | 0.98 | A trade town has smiths | 1.05 | weapon a day |
+| Fairfield | Ordinary weapons | 0.98 | A trade town has smiths | 1.05 | a day (tracked, never shown as a price) |
 | Fairfield | Cloth | 498.96 | The notes call it the bustling trade centre of Crestfall | 105 | square yard a day |
-| Fairfield | Luxuries | 19.9 | Stands in for goods arriving from the Silverleaf Lands next door, which are not simulated yet | 3.5 | piece a day |
+| Fairfield | Silk | 19.9 | Stands in for silk arriving from the Silverleaf Lands next door, which are not simulated yet | 3.5 | square yard a day |
 | Hillcrest | Grain | 20.05 | Hill farms | 6 | sack a day |
 | Hillcrest | Fish | 0 | Not known for making this | 4 | basket a day |
 | Hillcrest | Wine | 2405.7 | The notes call it the wine capital of Crestfall, supplying Highreach's noble houses | 40 | pitcher a day |
@@ -180,9 +185,9 @@ To correct them, either change a figure on the Living World page (open a place u
 | Hillcrest | Timber | 4.75 | Coopers and some woodland | 0.8 | cartload a day |
 | Hillcrest | Herbs | 29.4 | The notes mention a herbalist and herb gatherers here | 0.8 | bundle a day |
 | Hillcrest | Healing potion | 0 | Not known for making this | 0.2 | potion a day |
-| Hillcrest | Weapons | 0 | Not known for making this | 0.12 | weapon a day |
+| Hillcrest | Ordinary weapons | 0 | Not known for making this | 0.12 | a day (tracked, never shown as a price) |
 | Hillcrest | Cloth | 44.55 | Cottage weaving | 12 | square yard a day |
-| Hillcrest | Luxuries | 0 | Not known for making this | 0.4 | piece a day |
+| Hillcrest | Silk | 0 | Not known for making this | 0.4 | square yard a day |
 | Stonehaven | Grain | 11.14 | Small clearings | 4.5 | sack a day |
 | Stonehaven | Fish | 0 | Not known for making this | 3 | basket a day |
 | Stonehaven | Wine | 0 | Not known for making this | 30 | pitcher a day |
@@ -190,9 +195,9 @@ To correct them, either change a figure on the Living World page (open a place u
 | Stonehaven | Timber | 45.14 | The notes put it on the edge of Blackwood Forest | 0.6 | cartload a day |
 | Stonehaven | Herbs | 70.83 | Forest edge, founded by rangers and trappers | 0.6 | bundle a day |
 | Stonehaven | Healing potion | 0 | Not known for making this | 0.15 | potion a day |
-| Stonehaven | Weapons | 0 | Not known for making this | 0.09 | weapon a day |
+| Stonehaven | Ordinary weapons | 0 | Not known for making this | 0.09 | a day (tracked, never shown as a price) |
 | Stonehaven | Cloth | 0 | Not known for making this | 9 | square yard a day |
-| Stonehaven | Luxuries | 0 | Not known for making this | 0.3 | piece a day |
+| Stonehaven | Silk | 0 | Not known for making this | 0.3 | square yard a day |
 
 <!-- market-estimates:end -->
 
@@ -209,9 +214,9 @@ Players see an item's local price as its catalog price moved by the same share a
 | Timber | none | No timber in the catalog |
 | Herbs | none | Only the Herbalism Kit, which is a tool |
 | Healing potion | Potion of Healing, Greater, Superior and Supreme (by id) | The four healing potions; no other potion |
-| Weapons | Any ordinary simple or martial weapon (by type) | Magic weapons, and anything uncommon or rarer, stay at their catalog price |
+| Ordinary weapons (modifier) | Any ordinary simple or martial weapon (by type), each at its own catalog price | Magic weapons, and anything uncommon or rarer, stay at list price |
 | Cloth | Cotton Cloth, Linen, Canvas, each by the square yard (by id) | The plain cloths |
-| Luxuries | Silk by the square yard (by id) | The item this good was priced from |
+| Silk | Silk by the square yard (by id) | The item itself |
 
 Armor, adventuring gear, tools, food other than the above, and every magic item not listed are not covered by anything.
 

@@ -7,6 +7,10 @@
 // seeded roll), so every town may be telling a slightly different tale. The truth is
 // always kept beside each town's version, with what was bent and where.
 //
+// What a town says is only the DM's own words: who, what and where. Nothing is
+// appended to it. How big it is, whether it flatters and whether the tale has gone
+// vague are tags the DM sees beside the telling, never sentences.
+//
 // A rumour reaching a town is a running fact. Anything that follows from it (a town
 // growing wary of travellers) is only suggested, with its effect attached.
 // Players see none of it until the DM reveals a rumour in a town.
@@ -24,15 +28,37 @@ export const RUMOUR_DEFAULTS = Object.freeze({
   waryDays: 8
 });
 
-const SIZE_PHRASES = Object.freeze({
-  1: "It was a small thing.",
-  2: "",
-  3: "It was a big thing.",
-  4: "It was enormous.",
-  5: "Nothing like it has been seen before."
+// How big, as one plain word for a tag. 2 is ordinary and has no tag.
+const SIZE_WORDS = Object.freeze({ 1: "small", 3: "big", 4: "enormous", 5: "unheard of" });
+
+// What changed on a hop, as the DM reads it.
+export const RUMOUR_BEND_LABELS = Object.freeze({
+  who: "who was lost",
+  what: "what got vague",
+  where: "place moved",
+  size: "grew in the telling",
+  flatters: "tone flipped"
 });
 
-const VAGUE = ", or something like it";
+// Worlds saved before 2026-11-23 marked a vague tale by appending this to "what" and
+// a lost name as "a stranger". Both are still read, and no longer written.
+const LEGACY_VAGUE = ", or something like it";
+const LEGACY_LOST_WHO = "a stranger";
+const LOST_WHO = "someone";
+
+function isVague(version) {
+  return version?.vague === true || String(version?.what ?? "").endsWith(LEGACY_VAGUE);
+}
+
+function plainWhat(version) {
+  const what = String(version?.what ?? "");
+  return what.endsWith(LEGACY_VAGUE) ? what.slice(0, -LEGACY_VAGUE.length) : what;
+}
+
+function plainWho(version) {
+  const who = text(version?.who);
+  return !who || who.toLowerCase() === LEGACY_LOST_WHO ? LOST_WHO : who;
+}
 
 function fail(message) {
   return Object.assign(new TypeError(message), { statusCode: 400 });
@@ -50,7 +76,7 @@ function requireDay(day) {
 function normalizeVersion(input = {}) {
   const size = input.size == null || input.size === "" ? 2 : Number(input.size);
   if (!Number.isInteger(size) || size < 1 || size > 5) {
-    throw fail("How big is a whole number from 1 (a small thing) to 5 (never seen before).");
+    throw fail("How big is a whole number from 1 (small) to 5 (unheard of).");
   }
   const flatters = input.flatters === true || input.flatters === "true" ? true
     : input.flatters === false || input.flatters === "false" ? false : null;
@@ -158,38 +184,48 @@ function capital(value) {
   return words ? words.charAt(0).toUpperCase() + words.slice(1) : words;
 }
 
-/** One town's telling, as a sentence or two ready to read aloud. */
+/** One town's telling: who, what and where, in the DM's own words. Nothing is appended. */
 export function rumourText(version, state) {
   const where = version.where ? placeNameIn(state, version.where) : "";
-  // A tale gone vague says so at the end of the sentence, after the place.
-  const vague = String(version.what).endsWith(VAGUE);
-  const what = vague ? String(version.what).slice(0, -VAGUE.length) : version.what;
-  const parts = [`${capital(version.who || "someone")} ${what}${where ? ` in ${where}` : ""}${vague ? VAGUE : ""}.`];
-  if (SIZE_PHRASES[version.size]) parts.push(SIZE_PHRASES[version.size]);
-  if (version.flatters === true) parts.push("People speak well of them for it.");
-  if (version.flatters === false) parts.push("People blame them for it.");
-  return parts.join(" ");
+  return `${capital(plainWho(version))} ${plainWhat(version)}${where ? ` in ${where}` : ""}.`;
 }
 
-/** The ways one attribute can bend on a hop from `from`, or null if it cannot bend further. */
-function bendOf(attribute, version, from, state) {
+/** The parts of a telling that are not in its words, as short tags for the DM. */
+export function rumourTags(version) {
+  const tags = [];
+  if (version?.flatters === true) tags.push("flattering");
+  if (version?.flatters === false) tags.push("unflattering");
+  if (SIZE_WORDS[version?.size]) tags.push(SIZE_WORDS[version.size]);
+  if (isVague(version)) tags.push("vague");
+  return tags;
+}
+
+/**
+ * How one attribute bends on a hop from `from`: { from, to, apply(version) }, or null if
+ * it cannot bend further. A bend changes a field; it never adds words to the telling.
+ */
+function bendOf(attribute, version, from) {
   if (attribute === "who") {
-    // The teller no longer knows who it was. Singular, so the sentence still reads.
-    if (version.who === "a stranger") return null;
-    return "a stranger";
+    // The teller no longer knows who it was.
+    if (plainWho(version) === LOST_WHO) return null;
+    return { from: version.who, to: LOST_WHO, apply: (next) => { next.who = LOST_WHO; } };
   }
   if (attribute === "what") {
-    if (String(version.what).endsWith(VAGUE)) return null;
-    return `${version.what}${VAGUE}`;
+    // The tale goes vague: the words stay as the DM wrote them, and a tag says so.
+    if (isVague(version)) return null;
+    return { from: "clear", to: "vague", apply: (next) => { next.vague = true; } };
   }
   if (attribute === "where") {
-    return from && from !== version.where ? from : null;
+    if (!from || from === version.where) return null;
+    return { from: version.where, to: from, apply: (next) => { next.where = from; } };
   }
   if (attribute === "size") {
-    return version.size < 5 ? version.size + 1 : null;
+    if (!(version.size < 5)) return null;
+    return { from: version.size, to: version.size + 1, apply: (next) => { next.size = version.size + 1; } };
   }
   if (attribute === "flatters") {
-    return version.flatters == null ? null : !version.flatters;
+    if (version.flatters == null) return null;
+    return { from: version.flatters, to: !version.flatters, apply: (next) => { next.flatters = !version.flatters; } };
   }
   return null;
 }
@@ -227,6 +263,7 @@ export function describeRumours(state) {
       ended: item.ended,
       version: { ...item.version },
       trueText: rumourText(item.version, state),
+      tags: rumourTags(item.version),
       heard: Object.keys(item.heard).sort((a, b) => item.heard[a].day - item.heard[b].day || (a < b ? -1 : 1)).map((place) => {
         const heard = item.heard[place];
         return {
@@ -236,7 +273,9 @@ export function describeRumours(state) {
           from: heard.from,
           fromName: heard.from ? placeNameIn(state, heard.from) : null,
           bent: heard.bent,
+          bentLabel: heard.bent ? (RUMOUR_BEND_LABELS[heard.bent.attribute] || heard.bent.attribute) : null,
           text: rumourText(heard.version, state),
+          tags: rumourTags(heard.version),
           differs: JSON.stringify(heard.version) !== JSON.stringify(item.version),
           playersVisible: heard.playersVisible === true
         };
@@ -305,12 +344,12 @@ export const rumoursSystem = Object.freeze({
         let bent = null;
         const roll = ctx.rngFor(`${id}:${target}`);
         if (roll.chance(constants.bendChance)) {
-          const able = RUMOUR_ATTRIBUTES.filter((attribute) => bendOf(attribute, version, source, ctx.world) != null);
+          const able = RUMOUR_ATTRIBUTES.filter((attribute) => bendOf(attribute, version, source) != null);
           const attribute = roll.pick(able);
           if (attribute) {
-            const to = bendOf(attribute, version, source, ctx.world);
-            bent = { attribute, from: version[attribute], to };
-            version[attribute] = to;
+            const bend = bendOf(attribute, version, source);
+            bent = { attribute, from: bend.from, to: bend.to };
+            bend.apply(version);
           }
         }
         item.heard[target] = { day: ctx.day, from: source, bent, version, playersVisible: false };

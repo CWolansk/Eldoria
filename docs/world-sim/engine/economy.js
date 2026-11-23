@@ -169,7 +169,7 @@ export function normalizeEffect(input) {
 
 /**
  * The configuration: goods, roads and each full-detail town's market.
- *   goods:  [{ id, name, unit, basePrice, madeFrom: [{ good, perUnit }] }]
+ *   goods:  [{ id, kind?, name, unit, basePrice, madeFrom: [{ good, perUnit }], covers? }]
  *   routes: [{ id, a, b, travelDays, via? }]
  *   places: { <placeId>: { name, knownToPlayers, population, market: { <goodId>: { make, use } } } }
  * basePrice (copper), travelDays, population, make and use are figures: a number, or
@@ -199,6 +199,25 @@ function normalizeCovers(input, goodId) {
   return covers.itemIds.length || covers.types.length ? covers : null;
 }
 
+// Two kinds of good.
+//   commodity: a real thing sold by a real unit (a sack of grain). It has a price.
+//   modifier:  a whole class of catalog items (ordinary weapons). It is never shown as a
+//              thing with a price: only as a percentage against each item's own list
+//              price. The economy still tracks it against a reference price so that it
+//              has something to move, but that figure is never shown to anyone.
+export const GOOD_KIND = Object.freeze({ COMMODITY: "commodity", MODIFIER: "modifier" });
+
+export function isModifierGood(good) {
+  return good?.kind === GOOD_KIND.MODIFIER;
+}
+
+/** 0.78 -> "22% below list price"; 1.08 -> "8% above list price"; 1 -> "at list price". */
+export function listPriceText(ratio) {
+  const percent = Math.round((Number(ratio) - 1) * 100);
+  if (!Number.isFinite(percent) || percent === 0) return "at list price";
+  return `${Math.abs(percent)}% ${percent > 0 ? "above" : "below"} list price`;
+}
+
 export function normalizeEconomyConfig(input = {}) {
   const goods = [];
   const goodIds = new Set();
@@ -207,10 +226,16 @@ export function normalizeEconomyConfig(input = {}) {
     if (!id) throw fail("Each good needs an id.");
     if (goodIds.has(id)) throw fail(`Good "${id}" appears twice.`);
     goodIds.add(id);
+    const kind = good.kind == null || good.kind === "" ? GOOD_KIND.COMMODITY : text(good.kind);
+    if (kind !== GOOD_KIND.COMMODITY && kind !== GOOD_KIND.MODIFIER) {
+      throw fail(`Good "${id}": kind must be "commodity" or "modifier".`);
+    }
     goods.push({
       id,
+      kind,
       name: text(good.name) || id,
-      unit: text(good.unit) || "unit",
+      // A modifier is not sold by any unit.
+      unit: kind === GOOD_KIND.MODIFIER ? "" : (text(good.unit) || "unit"),
       basePrice: normalizeFigure(good.basePrice, `Base price of ${id}`, { min: 0.01 }),
       // Free labels the other subjects read, e.g. "medicine". No good is special by id.
       tags: Array.isArray(good.tags) ? [...new Set(good.tags.map(text).filter(Boolean))].sort() : [],
@@ -221,6 +246,9 @@ export function normalizeEconomyConfig(input = {}) {
     });
     const covers = normalizeCovers(good.covers, id);
     if (covers) goods[goods.length - 1].covers = covers;
+    if (kind === GOOD_KIND.MODIFIER && !covers) {
+      throw fail(`Good "${id}" is a modifier, so it must say which catalog items it applies to (covers).`);
+    }
   }
   for (const good of goods) {
     for (const input of good.madeFrom) {
@@ -726,7 +754,9 @@ export const economySystem = Object.freeze({
       const good = goodById(config, move.good);
       ctx.report({
         kind: "Price",
-        text: `${good.name} in ${nameOfPlace(config, move.place)} ${move.change > 0 ? "up" : "down"} ${Math.abs(Math.round(move.change * 100))}% to ${formatMoney(move.price)} since last mentioned.`,
+        text: isModifierGood(good)
+          ? `${good.name} in ${nameOfPlace(config, move.place)} now ${listPriceText(move.price / good.basePrice.value)}, ${move.change > 0 ? "up" : "down"} ${Math.abs(Math.round(move.change * 100))}% since last mentioned.`
+          : `${good.name} in ${nameOfPlace(config, move.place)} ${move.change > 0 ? "up" : "down"} ${Math.abs(Math.round(move.change * 100))}% to ${formatMoney(move.price)} since last mentioned.`,
         place: move.place,
         good: move.good,
         direction: move.change > 0 ? "up" : "down"
@@ -738,7 +768,9 @@ export const economySystem = Object.freeze({
       const days = shipment.arriveDay - shipment.departDay;
       ctx.report({
         kind: "Trade",
-        text: `More ${good.name.toLowerCase()} than usual left ${nameOfPlace(config, shipment.from)} for ${nameOfPlace(config, shipment.to)}: ${formatQuantity(shipment.quantity)} ${good.unit}${shipment.quantity === 1 ? "" : "s"}, ${days} day${days === 1 ? "" : "s"} on the road.`,
+        text: isModifierGood(good)
+          ? `More ${good.name.toLowerCase()} than usual left ${nameOfPlace(config, shipment.from)} for ${nameOfPlace(config, shipment.to)}, ${days} day${days === 1 ? "" : "s"} on the road.`
+          : `More ${good.name.toLowerCase()} than usual left ${nameOfPlace(config, shipment.from)} for ${nameOfPlace(config, shipment.to)}: ${formatQuantity(shipment.quantity)} ${good.unit}${shipment.quantity === 1 ? "" : "s"}, ${days} day${days === 1 ? "" : "s"} on the road.`,
         place: shipment.to,
         good: shipment.good
       });
@@ -829,8 +861,10 @@ export function describeEconomy(state) {
     configured: true,
     constants,
     goods: config.goods.map((good) => ({
-      id: good.id, name: good.name, unit: good.unit,
-      basePrice: good.basePrice.value, basePriceText: formatMoney(good.basePrice.value),
+      id: good.id, kind: good.kind || GOOD_KIND.COMMODITY, name: good.name, unit: good.unit,
+      basePrice: good.basePrice.value,
+      // A modifier's reference figure is bookkeeping, not a price anyone pays.
+      basePriceText: isModifierGood(good) ? "" : formatMoney(good.basePrice.value),
       basePriceEstimate: good.basePrice.estimate,
       tags: good.tags || [],
       madeFrom: good.madeFrom,
@@ -849,12 +883,18 @@ export function describeEconomy(state) {
           const entry = eco.markets[placeId][good.id];
           const market = place.market[good.id] || {};
           const use = nominalUse(config, placeId, good.id);
+          const modifier = isModifierGood(good);
           return {
             good: good.id,
+            kind: good.kind || GOOD_KIND.COMMODITY,
             price: entry.price,
-            priceText: formatMoney(entry.price),
+            // A modifier is read only as a percentage against list price, never in coin.
+            priceText: modifier ? "" : formatMoney(entry.price),
             usual: entry.usual,
-            usualText: formatMoney(entry.usual),
+            usualText: modifier ? "" : formatMoney(entry.usual),
+            listPercent: Math.round((entry.price / good.basePrice.value - 1) * 100),
+            listText: listPriceText(entry.price / good.basePrice.value),
+            usualListText: listPriceText(entry.usual / good.basePrice.value),
             vsUsualPercent: Math.round((entry.price / entry.usual - 1) * 100),
             stock: entry.stock,
             daysLeft: use > 0 ? Math.round(entry.stock / use) : null,
@@ -885,10 +925,12 @@ export function describeEconomy(state) {
 
 /**
  * What players may see: prices in one town, and only if that town is known to them.
- * Returns { place: { name } | null, prices: [{ good, unit, price, priceText, vsUsualPercent,
- * ratio, covers: { itemIds, types } }] }. ratio is this town's price over the good's base
- * price; covers says which catalog items follow the good, so a client can show an item's
- * local price as its catalog price times ratio.
+ * Returns { place: { name } | null, prices: [...] } where each entry is one of:
+ *   a commodity: { good, kind: "commodity", unit, price, priceText, vsUsualPercent, ratio, covers }
+ *   a modifier:  { good, kind: "modifier", ratio, covers }  (no unit and no price at all)
+ * ratio is this town's price over the good's base price; covers says which catalog items
+ * follow the good, so a client shows an item's local price as its own catalog price times
+ * ratio. A modifier exists only to be applied to real items like that.
  * No stock, no reasons, no other town. An unknown, hidden or market-less town gives
  * the same empty answer as a world that has not started.
  */
@@ -903,14 +945,20 @@ export function publicPrices(state, placeId) {
     place: { name: place.name },
     prices: eco.config.goods.filter((good) => eco.markets[placeId][good.id]).map((good) => {
       const entry = eco.markets[placeId][good.id];
+      const ratio = Math.round((entry.price / good.basePrice.value) * 10000) / 10000;
+      const covers = { itemIds: [...(good.covers?.itemIds || [])], types: [...(good.covers?.types || [])] };
+      if (isModifierGood(good)) {
+        return { good: good.name, kind: GOOD_KIND.MODIFIER, ratio, covers };
+      }
       return {
         good: good.name,
+        kind: GOOD_KIND.COMMODITY,
         unit: good.unit,
         price: Math.round(entry.price * 100) / 100,
         priceText: formatMoney(entry.price),
         vsUsualPercent: Math.round((entry.price / entry.usual - 1) * 100),
-        ratio: Math.round((entry.price / good.basePrice.value) * 10000) / 10000,
-        covers: { itemIds: [...(good.covers?.itemIds || [])], types: [...(good.covers?.types || [])] }
+        ratio,
+        covers
       };
     })
   };

@@ -8,8 +8,9 @@
 import { cityOutline, formatDay, formatDayShort } from "../../world-sim/engine/index.js";
 
 const ENTRY_LABEL = { district: "District", location: "Location", npc: "NPC" };
-const SIZE_LABELS = [[1, "A small thing"], [2, "Ordinary"], [3, "A big thing"], [4, "Enormous"], [5, "Never seen before"]];
-const ATTRIBUTE_LABEL = { who: "who", what: "what", where: "where", size: "how big", flatters: "the tone" };
+const SIZE_LABELS = [[1, "Small"], [2, "Ordinary"], [3, "Big"], [4, "Enormous"], [5, "Unheard of"]];
+// What is not in a telling's words is shown as small tags beside it, never as sentences.
+const tagChips = (tags) => (tags || []).map((tag) => `<span class="ws-chip ws-chip--plain" data-rumour-tag>${String(tag).replace(/[&<>"']/gu, "")}</span>`).join("");
 
 export function createStage3Views({ ui, esc, $, run, render, placeName, keepTyping }) {
   ui.overview = null;
@@ -273,14 +274,15 @@ export function createStage3Views({ ui, esc, $, run, render, placeName, keepTypi
       <div class="ws-row">${chip}${rumour.ended ? `<span class="ws-chip ws-chip--plain">No longer spreading</span>` : ""}
         <span class="ws-meta">Started in ${linked(rumour.originName)} on ${esc(formatDayShort(rumour.startDay))}</span></div>
       <p class="ws-text" data-rumour-truth>${linked(rumour.trueText)}</p>
+      ${rumour.tags?.length ? `<p class="ws-row" data-rumour-tags>${tagChips(rumour.tags)}</p>` : ""}
       <p class="ws-meta">${rumour.truth === "written" ? "That is what happened." : "That is what was first said. Whether it is true is yours to write."}</p>
       <div class="ws-tablewrap"><table class="ws-table">
         <thead><tr><th>Town</th><th>Heard</th><th>What they are saying</th><th>Bent on the way</th><th>Players</th></tr></thead>
         <tbody>${rumour.heard.map((heard) => `<tr data-heard="${esc(heard.place)}">
           <td>${linked(heard.name)}</td>
           <td style="white-space:nowrap">${esc(formatDayShort(heard.day))}</td>
-          <td class="ws-what${heard.differs ? " ws-bent" : ""}">${linked(heard.text)}</td>
-          <td class="ws-meta">${heard.bent ? `${esc(ATTRIBUTE_LABEL[heard.bent.attribute] || heard.bent.attribute)}, coming from ${esc(heard.fromName || "")}` : heard.differs ? "earlier on the road" : "told straight"}</td>
+          <td class="ws-what${heard.differs ? " ws-bent" : ""}">${linked(heard.text)}${heard.tags?.length ? ` <span data-heard-tags>${tagChips(heard.tags)}</span>` : ""}</td>
+          <td class="ws-meta" data-heard-bent>${heard.bent ? `${esc(heard.bentLabel || heard.bent.attribute)}, coming from ${esc(heard.fromName || "")}` : heard.differs ? "earlier on the road" : "told straight"}</td>
           <td><button class="ws-btn ws-btn--small" type="button" aria-pressed="${heard.playersVisible}" data-act="rumour-reveal" data-id="${esc(rumour.id)}" data-place="${esc(heard.place)}" data-show="${heard.playersVisible ? "false" : "true"}">${heard.playersVisible ? "Players have heard it" : "Not heard"}</button></td>
         </tr>`).join("")}</tbody></table></div>
       ${rumour.next.length ? `<p class="ws-meta"><b>Next:</b> ${rumour.next.map((next) => `${esc(next.name)} ${next.blocked ? "(road closed)" : `around ${esc(formatDayShort(next.day))}`}`).join(", ")}</p>` : ""}
