@@ -61,7 +61,17 @@ export function getPlayState(sheet = {}) {
         conditions: list(sheet.notes?.conditions),
         exhaustion: Math.min(6, Math.max(0, Number(sheet.notes?.exhaustion) || 0)),
         concentration: String(sheet.concentration || "").trim(),
-        inspiration: sheet.identity?.inspiration === true
+        inspiration: sheet.identity?.inspiration === true,
+        // Limited features worked out from the rules (Wild Shape, Second Wind, ...).
+        features: (Array.isArray(sheet.resources) ? sheet.resources : [])
+            .filter((resource) => resource?.derived && resource.id && Number(resource.max) > 0)
+            .map((resource) => ({
+                id: String(resource.id),
+                name: String(resource.name || resource.id),
+                max: Number(resource.max) || 0,
+                used: Math.min(Number(resource.max) || 0, Math.max(0, Number(resource.used) || 0)),
+                recharge: String(resource.recharge || "")
+            }))
     };
 }
 
@@ -71,6 +81,9 @@ export function getPlayState(sheet = {}) {
  * @param {(action: object) => Promise<void>} [options.onPlayAction] sends one action; when
  *   absent the strip is read-only.
  * @param {(value: boolean) => Promise<void>} [options.onInspirationChange]
+ * @param {(id: string, used: number) => Promise<void>} [options.onFeatureUseChange] saves how
+ *   many uses of a limited feature are spent
+ * @param {boolean} [options.allowRest] false hides the rest buttons
  */
 export function BuildPlayerSheetPlayStrip(sheet, options = {}) {
     const container = document.querySelector("#GlobalCharacterSheetInformationHeader .CharacterHeaderContainer");
@@ -340,6 +353,87 @@ export function BuildPlayerSheetPlayStrip(sheet, options = {}) {
         focus.appendChild(inspiration);
     }
     strip.appendChild(focus);
+
+    // ---- limited features ----
+    if (state.features.length) {
+        const features = el("div", "player-sheet-play__features");
+        features.dataset.playFeatures = "true";
+        const canSpend = typeof options.onFeatureUseChange === "function";
+        for (const feature of state.features) {
+            const row = el("div", "player-sheet-play__feature");
+            row.dataset.playFeature = feature.id;
+            const left = feature.max - feature.used;
+            const text = el("div", "player-sheet-play__feature-text");
+            text.append(
+                el("span", "player-sheet-play__feature-name", feature.name),
+                el("strong", "player-sheet-play__feature-count", `${left} / ${feature.max}`)
+            );
+            if (feature.recharge) {
+                text.appendChild(el("span", "player-sheet-play__feature-recharge", `back on a ${feature.recharge}`));
+            }
+            row.appendChild(text);
+            if (canSpend) {
+                const change = (nextUsed, control) => async () => {
+                    const controls = [...features.querySelectorAll("button")];
+                    controls.forEach((node) => { node.disabled = true; });
+                    message.hidden = true;
+                    try {
+                        await options.onFeatureUseChange(feature.id, nextUsed);
+                    } catch (error) {
+                        controls.forEach((node) => { node.disabled = false; });
+                        message.textContent = "That did not go through. Try again.";
+                        message.hidden = false;
+                    }
+                };
+                const use = button("Use", "", change(feature.used + 1), {
+                    "aria-label": `Use ${feature.name}`,
+                    "data-play-feature-use": feature.id
+                });
+                use.disabled = left <= 0;
+                const restore = button("Restore", "", change(feature.used - 1), {
+                    "aria-label": `Get one use of ${feature.name} back`,
+                    "data-play-feature-restore": feature.id
+                });
+                restore.disabled = feature.used <= 0;
+                row.append(use, restore);
+            }
+            features.appendChild(row);
+        }
+        strip.appendChild(features);
+    }
+
+    // ---- rest ----
+    if (canAct && options.allowRest !== false) {
+        const rest = el("div", "player-sheet-play__rest");
+        rest.dataset.playRest = "true";
+        const confirmBox = el("div", "player-sheet-play__rest-confirm");
+        confirmBox.hidden = true;
+        const describe = {
+            short: "Short rest: features that come back on a short rest are restored. Hit points do not change.",
+            long: "Long rest: hit points to full, temporary hit points and death saves cleared, all spell slots and features restored, exhaustion down by one."
+        };
+        const ask = (kind) => () => {
+            confirmBox.replaceChildren(
+                el("p", "player-sheet-play__hint", describe[kind]),
+                button(kind === "long" ? "Yes, take a long rest" : "Yes, take a short rest", "player-sheet-play__button--primary", () => {
+                    void send({ type: "rest", rest: kind });
+                }, { "data-play-rest-confirm": kind }),
+                button("Cancel", "", () => {
+                    confirmBox.hidden = true;
+                    confirmBox.replaceChildren();
+                }, { "data-play-rest-cancel": "true" })
+            );
+            confirmBox.hidden = false;
+        };
+        rest.append(
+            el("span", "player-sheet-play__label", "Rest"),
+            button("Short rest", "", ask("short"), { "data-play-rest": "short" }),
+            button("Long rest", "", ask("long"), { "data-play-rest": "long" }),
+            confirmBox
+        );
+        strip.appendChild(rest);
+    }
+
     strip.appendChild(message);
 
     if (previous) previous.replaceWith(strip);

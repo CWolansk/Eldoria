@@ -46,9 +46,18 @@ export async function bootSheetPage(options = {}) {
         throw new TypeError("Failed to fetch");
       }
       const action = JSON.parse(init.body);
+      if (action.type === "rest" && server.rejectRest) {
+        return respond(400, { error: "Unsupported DM action.", details: { type: "rest" } });
+      }
       server.actions.push(action);
       try {
-        const next = loadApplyDmAction()(server.dto, action, {});
+        // Like the API: a rest asks the sheet compiler which features come back.
+        const derived = {};
+        if (action.type === "rest") {
+          const { SheetCompiler } = await import("../../SheetCompiler.js");
+          derived.resources = SheetCompiler.compile(server.dto).resources;
+        }
+        const next = loadApplyDmAction()(server.dto, action, derived);
         server.version += 1;
         server.dto = { ...next, lastModified: `v${server.version}` };
       } catch (error) {

@@ -640,6 +640,22 @@ async function updateInspiration(inspired) {
   await applyPlayerSheetDto(PlayerSheetDtoHelper.patch(currentPlayerSheetDto, "identity.inspiration", Boolean(inspired)));
 }
 
+// How many uses of a limited feature are spent. Only { id, used } is stored, and an
+// entry is dropped again once nothing is spent.
+async function updateFeatureUse(id, used) {
+  if (!currentPlayerSheetDto || !id) {
+    return;
+  }
+
+  const key = String(id).trim().toLowerCase();
+  const nextUsed = Math.max(0, Math.floor(Number(used) || 0));
+  const kept = PlayerSheetDtoHelper.getValue(currentPlayerSheetDto, "resources", [])
+    .filter((entry) => String(entry?.id || "").trim().toLowerCase() !== key
+      || entry?.name != null || entry?.max != null || entry?.current != null);
+  const next = nextUsed > 0 ? [...kept, { id: String(id), used: nextUsed }] : kept;
+  await applyPlayerSheetDto(PlayerSheetDtoHelper.patch(currentPlayerSheetDto, "resources", next));
+}
+
 function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -701,6 +717,9 @@ async function applyPlayAction(action) {
     if (!hasUnsavedPlayerSheetChanges()) {
       setSaveStatus("failed", isBrowserOffline() ? "Offline. That change was not sent." : "That change was not sent.");
     }
+    if (!error.userMessage && action?.type === "rest" && Number(error?.status) === 400 && /unsupported/iu.test(String(error?.message || ""))) {
+      error.userMessage = "Resting is not available yet: the server has not been updated. Ask your DM.";
+    }
     if (!error.userMessage && Number(error?.status) >= 400 && Number(error?.status) < 500 && error?.message) {
       error.userMessage = error.message;
     }
@@ -727,7 +746,8 @@ async function renderCurrentPlayerSheet() {
   });
   BuildPlayerSheetPlayStrip(currentCharacterSheet, {
     onPlayAction: applyPlayAction,
-    onInspirationChange: updateInspiration
+    onInspirationChange: updateInspiration,
+    onFeatureUseChange: updateFeatureUse
   });
   BuildPlayerSheetSidebar(currentCharacterSheet);
   bootLevelEditor({

@@ -418,6 +418,40 @@ function applyDmAction(sheet, action = {}, derived = {}) {
     if (!action.previous?.combatState || typeof action.previous.combatState !== 'object' || Array.isArray(action.previous.combatState) || !action.previous?.inventory || typeof action.previous.inventory !== 'object' || Array.isArray(action.previous.inventory)) throw httpError(400, "Invalid undo snapshot.");
     next.combatState = JSON.parse(JSON.stringify(action.previous.combatState));
     next.inventory = JSON.parse(JSON.stringify(action.previous.inventory));
+  } else if (type === "rest") {
+    // A rest changes only what a rest changes, so it cannot undo anything else on the sheet.
+    const kind = text(action.rest).toLowerCase();
+    if (kind !== "short" && kind !== "long") throw httpError(400, "Rest must be short or long.");
+    const isUseRecord = (entry) => entry && typeof entry === "object" && entry.id
+      && entry.name == null && entry.max == null && entry.current == null;
+    const rechargeById = new Map((Array.isArray(derived.resources) ? derived.resources : [])
+      .map((resource) => [text(resource?.id).toLowerCase(), text(resource?.recharge).toLowerCase()]));
+    const comesBack = (entry) => {
+      if (kind === "long") return true;
+      const recharge = rechargeById.get(text(entry.id).toLowerCase());
+      return recharge != null && /\bshort\b/u.test(recharge);
+    };
+    next.resources = (Array.isArray(next.resources) ? next.resources : [])
+      .filter((entry) => !(isUseRecord(entry) && comesBack(entry)));
+
+    if (kind === "long") {
+      next.combatState.exhaustion = clamp(integer(next.combatState.exhaustion, 0) - 1, 0, 6);
+      const restedMax = maximumHp(next);
+      if (restedMax > 0) next.combatState.currentHp = restedMax;
+      next.combatState.tempHp = 0;
+      next.combatState.deathSaves = { successes: 0, failures: 0 };
+      const slots = next.spells?.spellSlots;
+      const byLevel = slots && typeof slots === "object" ? (slots.byLevel && typeof slots.byLevel === "object" ? slots.byLevel : null) : null;
+      if (byLevel) {
+        for (const key of Object.keys(byLevel)) {
+          const entry = byLevel[key];
+          if (entry && typeof entry === "object") {
+            if (entry.max == null) delete byLevel[key];
+            else entry.expended = 0;
+          }
+        }
+      }
+    }
   } else if (type === "set-death-saves") {
     next.combatState.deathSaves = {
       successes: clamp(integer(action.successes, 0), 0, 3),
@@ -485,6 +519,17 @@ async function dmCharacterActionHandler(request, context) {
       throw httpError(409, "This character has changed. Refresh before applying this action.");
     }
     const derived = await summarizeCharacterWithCatalog(current.document);
+    if (text(action.type).toLowerCase() === "rest") {
+      // Which features come back on a short rest is a rules question; ask the sheet compiler.
+      try {
+        const { SheetCompiler } = await getSheetCompiler();
+        derived.resources = SheetCompiler.compile(current.document).resources;
+      } catch (error) {
+        if (text(action.rest).toLowerCase() === "short") {
+          throw httpError(503, "The rules for a short rest could not be loaded. Try again.");
+        }
+      }
+    }
     const timestamp = new Date(Math.max(Date.now(), (Date.parse(current.document.lastModified) || 0) + 1)).toISOString();
     const effectiveSheet = structuredClone(current.document);
     if (derived.hp.complete) effectiveSheet.combatState.currentHp = derived.hp.current;

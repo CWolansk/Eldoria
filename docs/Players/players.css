@@ -4361,3 +4361,52 @@
   opacity: 0.6;
   cursor: default;
 }
+
+/* --- pass 2, item 2: limited features and rest --- */
+.player-sheet-play__features,
+.player-sheet-play__rest {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 1.25rem;
+  min-width: 0;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--sheet-line);
+}
+
+.player-sheet-play__feature {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.player-sheet-play__feature-text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.5rem;
+}
+
+.player-sheet-play__feature-name {
+  font-weight: 700;
+}
+
+.player-sheet-play__feature-count {
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.player-sheet-play__feature-recharge {
+  color: var(--sheet-muted);
+  font-size: 0.8125rem;
+}
+
+.player-sheet-play__rest-confirm {
+  display: flex;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}

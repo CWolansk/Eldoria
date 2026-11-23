@@ -1245,8 +1245,25 @@ function getClassLevelForGroup(group = {}) {
     return Math.max(0, ...toArray(group.levels).map((level) => toNumber(level?.level, 0)));
 }
 
+// A sheet stores only how many uses of a feature are spent: { id, used }.
+// What the feature is, how many uses it has and when they come back are worked out
+// from the rules here. An entry that carries its own name or maximum is a custom
+// resource and is shown as stored.
+function isResourceUseRecord(resource) {
+    return Boolean(resource && typeof resource === "object"
+        && resource.id
+        && resource.name == null
+        && resource.max == null
+        && resource.current == null);
+}
+
 function compileTrackedResources(dto, abilityScores, proficiencyBonus, characterLevel) {
-    const resources = toArray(dto.resources).map(deepClone);
+    const stored = toArray(dto.resources).map(deepClone);
+    const usedByKey = new Map(stored.filter(isResourceUseRecord).map((resource) => [
+        normalizeSearchText(resource.id),
+        Math.max(0, toNumber(resource.used, 0))
+    ]));
+    const resources = stored.filter((resource) => !isResourceUseRecord(resource));
     const byKey = new Map(resources.map((resource) => [
         normalizeSearchText(resource?.id || resource?.name),
         resource
@@ -1297,6 +1314,15 @@ function compileTrackedResources(dto, abilityScores, proficiencyBonus, character
         if (match) {
             add(`race-${action.id}`, action.name, toNumber(match[0], 1), action.uses.replace(/^\d+\s+per\s+/iu, ""), action.source, action.summary);
         }
+    }
+
+    for (const resource of resources) {
+        if (!resource.derived) {
+            continue;
+        }
+        const used = Math.min(toNumber(resource.max, 0), usedByKey.get(normalizeSearchText(resource.id)) || 0);
+        resource.used = used;
+        resource.current = toNumber(resource.max, 0) - used;
     }
 
     return resources;

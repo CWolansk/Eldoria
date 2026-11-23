@@ -108,6 +108,56 @@ void (async () => {
     _fRes: ["poison"]
   }));
   assert.equal(records.some((record) => record.kind === "items"), false, "Unattuned items must not grant defenses");
+
+  // ---- rest ----
+  const tired = sheet();
+  tired.combatState.currentHp = 3;
+  tired.combatState.tempHp = 5;
+  tired.combatState.exhaustion = 2;
+  tired.combatState.conditions = ["Poisoned"];
+  tired.combatState.deathSaves = { successes: 2, failures: 1 };
+  tired.resources = [
+    { id: "class-second-wind", used: 1 },
+    { id: "class-arcane-recovery", used: 1 },
+    { id: "custom-flask", name: "Flask", current: 1, max: 3 }
+  ];
+  tired.spells = { spellSlots: { byLevel: { "1": { expended: 2 }, "2": { max: 3, expended: 1 } } } };
+  const rules = { resources: [
+    { id: "class-second-wind", recharge: "short or long rest" },
+    { id: "class-arcane-recovery", recharge: "long rest" }
+  ] };
+  const before = JSON.stringify(tired);
+
+  const shortRest = applyDmAction(tired, { type: "rest", rest: "short" }, rules);
+  assert.equal(JSON.stringify(tired), before, "A rest must not change the sheet it was given");
+  assert.deepEqual(shortRest.resources.map((entry) => entry.id), ["class-arcane-recovery", "custom-flask"], "A short rest restores only short-rest features");
+  assert.equal(shortRest.combatState.currentHp, 3, "A short rest leaves hit points alone");
+  assert.equal(shortRest.combatState.exhaustion, 2, "A short rest leaves exhaustion alone");
+  assert.deepEqual(shortRest.spells.spellSlots.byLevel["1"], { expended: 2 }, "A short rest leaves spell slots alone");
+  assert.deepEqual(
+    applyDmAction(tired, { type: "rest", rest: "short" }, {}).resources.map((entry) => entry.id),
+    ["class-second-wind", "class-arcane-recovery", "custom-flask"],
+    "Without the rules, a short rest restores nothing rather than guessing"
+  );
+
+  const longRest = applyDmAction(tired, { type: "rest", rest: "long" }, rules);
+  assert.deepEqual(longRest.resources.map((entry) => entry.id), ["custom-flask"], "A long rest restores every tracked feature and keeps custom resources");
+  assert.equal(longRest.combatState.currentHp, 20, "A long rest restores hit points to the maximum (12 + 8)");
+  assert.equal(longRest.combatState.tempHp, 0, "A long rest clears temporary hit points");
+  assert.equal(longRest.combatState.exhaustion, 1, "A long rest lowers exhaustion by one");
+  assert.deepEqual(longRest.combatState.deathSaves, { successes: 0, failures: 0 });
+  assert.deepEqual(longRest.combatState.conditions, ["Poisoned"], "A rest does not remove conditions");
+  assert.deepEqual(longRest.spells.spellSlots.byLevel, { "2": { max: 3, expended: 0 } }, "Used slots are cleared; a recorded maximum is kept");
+  assert.deepEqual(longRest.inventory, tired.inventory, "A rest does not touch inventory");
+  assert.deepEqual(longRest.identity, tired.identity, "A rest does not touch identity");
+
+  const noMax = sheet();
+  noMax.levels = noMax.levels.map((level) => ({ ...level, hp: 0 }));
+  noMax.combatState.currentHp = 7;
+  assert.equal(applyDmAction(noMax, { type: "rest", rest: "long" }, rules).combatState.currentHp, 7, "With no maximum set, a long rest leaves hit points as they are");
+  assert.throws(() => applyDmAction(tired, { type: "rest", rest: "nap" }, rules), /short or long/);
+  assert.throws(() => applyDmAction(tired, { type: "rest" }, rules), /short or long/);
+
   console.log("DM dashboard action tests passed.");
 })().catch((error) => {
   console.error(error);
