@@ -229,7 +229,6 @@
 .ws-placeitem:hover, .ws-placeitem[aria-current="true"] { background: var(--panel-soft); }
 .ws-panel { display: grid; gap: 14px; min-width: 0; }
 .ws-panel h2 { margin: 0; }
-.ws-slot { padding: 14px; border: 2px dashed var(--line); border-radius: 8px; color: var(--muted); font-size: 0.93rem; text-align: center; }
 .ws-days { width: 5rem; }
 .ws-table input[type="number"], .ws-fields input[type="number"], .ws-row input[type="number"] {
   min-height: 38px;
@@ -240,4 +239,93 @@
   background: var(--bg);
   color: var(--ink);
   font: inherit;
+}
+
+/* ---------------- Stage 3: search, the city outline, rumours, the map ---------------- */
+.ws-searchrow { padding-block: 8px; }
+.ws-search--top { width: 100%; max-width: 26rem; min-width: 0; }
+.ws-searchresults { padding-block: 10px; border-bottom: 1px solid var(--line); background: var(--ws-surface); }
+
+.ws-city__district { border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; margin-top: 8px; }
+.ws-city__district > summary { cursor: pointer; font-weight: 700; min-height: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.ws-city__group { margin-top: 10px; }
+.ws-city__group h4, #ws-city h4 { margin: 0 0 4px; font-size: 0.95rem; }
+.ws-city__location { padding: 6px 0; border-bottom: 1px dashed var(--line); }
+.ws-city__people { margin: 4px 0 0 14px; }
+.ws-chip--shown { color: var(--success); background: var(--success-soft); }
+.ws-bent { font-style: italic; }
+.ws-crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; font-size: 0.98rem; min-height: 36px; }
+
+.ws-cols--map { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+/* A long option must not push the page wider than a phone. */
+.world-sim-page .ws-row select, .world-sim-page .ws-fields select { max-width: 100%; min-width: 0; }
+#ws-map, #ws-rumours, #ws-city { min-width: 0; }
+/* Sections are one-column grids; the column may shrink to the screen, whatever is inside. */
+.ws-main section, .ws-panel, .ws-card { grid-template-columns: minmax(0, 1fr); min-width: 0; }
+.ws-mapcol { display: grid; gap: 8px; min-width: 0; align-content: start; }
+.ws-mapbox {
+  position: relative;
+  aspect-ratio: 1;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--ws-sunk);
+  touch-action: none; /* the page handles drag and pinch on the map itself */
+  cursor: grab;
+  /* Colours drawn over the map image. The image is the same in both themes, so these are too. */
+  --map-ink: #17130c;
+  --map-halo: #fff8e1;
+  --map-road: #3b2a12;
+  --map-party: #0b5fa5;
+  --map-hot: #c22b17;
+  --map-warm: #d9861a;
+  --map-cool: #2f8a55;
+  --map-rumour: #7a2fb0;
+  --map-people: #1c7c8c;
+  --map-dim: rgb(10 14 12 / 50%);
+}
+.ws-map__inner { position: absolute; inset: 0; transform-origin: 0 0; }
+.ws-map__inner img, .ws-map__inner svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; user-select: none; -webkit-user-drag: none; }
+.ws-map__zoom { position: absolute; right: 8px; bottom: 8px; display: flex; gap: 6px; }
+.ws-map__region { fill: rgb(255 248 225 / 0%); stroke: var(--map-halo); stroke-dasharray: 10 7; cursor: pointer; }
+.ws-map__region:hover { fill: rgb(255 248 225 / 20%); }
+.ws-map__region--off { fill: var(--map-dim); stroke: none; }
+.ws-map__region--on { fill: rgb(255 248 225 / 0%); cursor: grab; }
+.ws-map__sub { fill: rgb(255 248 225 / 0%); stroke: var(--map-halo); stroke-dasharray: 6 5; cursor: pointer; }
+.ws-map__regionlabel, .ws-map__label { paint-order: stroke; pointer-events: none; font-weight: 700; }
+.ws-map__regionlabel { fill: var(--map-halo); stroke: var(--map-ink); text-anchor: middle; }
+.ws-map__label { fill: var(--map-ink); stroke: var(--map-halo); }
+.ws-map__road { stroke: var(--map-road); stroke-linecap: round; fill: none; pointer-events: none; }
+.ws-map__road--slowed { stroke: var(--map-warm); }
+.ws-map__road--closed { stroke: var(--map-hot); }
+.ws-map__place { cursor: pointer; }
+.ws-map__hit { fill: rgb(0 0 0 / 0%); }
+.ws-map__dot { fill: var(--map-halo); stroke: var(--map-ink); }
+.ws-map__place--hot .ws-map__dot { fill: var(--map-hot); }
+.ws-map__place--warm .ws-map__dot { fill: var(--map-warm); }
+.ws-map__place--cool .ws-map__dot { fill: var(--map-cool); }
+.ws-map__party { fill: none; stroke: var(--map-party); }
+.ws-map__rumour { fill: var(--map-rumour); fill-opacity: 0.28; stroke: var(--map-rumour); pointer-events: none; }
+.ws-map__sick { fill: none; stroke: var(--map-hot); stroke-dasharray: 4 3; pointer-events: none; }
+.ws-map__threat { fill: var(--map-hot); stroke: var(--map-halo); }
+.ws-map__moving { stroke: var(--map-halo); }
+.ws-map__moving--goods { fill: var(--map-road); }
+.ws-map__moving--people { fill: var(--map-people); }
+.ws-map__moving--traveller { fill: var(--map-rumour); }
+.ws-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; color: var(--muted); font-size: 0.85rem; }
+.ws-legend i { display: inline-block; width: 10px; height: 10px; margin-right: 5px; border-radius: 50%; vertical-align: baseline; }
+.ws-legend__party { border: 3px solid #0b5fa5; }
+.ws-legend__slowed { background: #d9861a; }
+.ws-legend__closed, .ws-legend__hot, .ws-legend__threat { background: #c22b17; }
+.ws-legend__sick { border: 2px dashed #c22b17; }
+.ws-legend__warm { background: #d9861a; }
+.ws-legend__cool { background: #2f8a55; }
+.ws-legend__goods { background: #3b2a12; }
+.ws-legend__people { background: #1c7c8c; }
+.ws-legend__traveller, .ws-legend__rumour { background: #7a2fb0; }
+
+@media (max-width: 820px) {
+  .ws-cols--map { grid-template-columns: minmax(0, 1fr); }
+  .ws-search--top { max-width: none; }
 }

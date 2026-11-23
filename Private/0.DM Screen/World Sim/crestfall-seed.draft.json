@@ -96,13 +96,14 @@
         "missing": true,
         "need": "Full detail or sketched"
       },
-      "cityMap": null,
       "subLocations": [
         {
           "id": "highreach-merchants-guild",
           "name": "HighReach Merchants Guild",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Guildhall",
+          "runBy": "Alistair Goldman",
+          "runByField": "proprietor",
           "knownToPlayers": true,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Highreach/HighReach Merchants Guild.md"
@@ -111,7 +112,9 @@
           "id": "highreach-adventurers-guild",
           "name": "Highreach Adventurers Guild",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Guildhall",
+          "runBy": "Thaldrin Stormblade",
+          "runByField": "proprietor",
           "knownToPlayers": true,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Highreach/Highreach Adventurers Guild.md"
@@ -121,6 +124,8 @@
           "name": "Highreach Mines",
           "type": "Location",
           "locationType": "Dungeon",
+          "runBy": null,
+          "runByField": null,
           "knownToPlayers": true,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Highreach/Highreach Mines.md"
@@ -129,7 +134,9 @@
           "id": "sturdy-mugg",
           "name": "Sturdy Mugg",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Inn",
+          "runBy": "Kara Stonefoot",
+          "runByField": "proprietor",
           "knownToPlayers": true,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Highreach/Sturdy Mugg.md"
@@ -138,7 +145,9 @@
           "id": "target-by-tradewind",
           "name": "Target by Tradewind",
           "type": "Store",
-          "locationType": null,
+          "locationType": "General Store",
+          "runBy": "Felix Tradewind",
+          "runByField": "proprietor",
           "knownToPlayers": true,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Highreach/Target by Tradewind.md"
@@ -147,7 +156,9 @@
           "id": "the-arcane-enclave",
           "name": "The Arcane Enclave",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Magic Shop",
+          "runBy": "Lady Elara Moonshadow",
+          "runByField": "proprietor",
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Highreach/The Arcane Enclave.md"
@@ -156,7 +167,9 @@
           "id": "the-dragons-breath-forge",
           "name": "The Dragons Breath Forge",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Smithy",
+          "runBy": "Alaric Emberfell",
+          "runByField": "proprietor",
           "knownToPlayers": true,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Highreach/The Dragons Breath Forge.md"
@@ -165,7 +178,9 @@
           "id": "the-warren",
           "name": "The Warren",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Guildhall",
+          "runBy": "Don Gnocianno",
+          "runByField": "proprietor",
           "knownToPlayers": true,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Highreach/The Warren.md"
@@ -728,13 +743,14 @@
         "missing": true,
         "need": "Full detail or sketched"
       },
-      "cityMap": null,
       "subLocations": [
         {
           "id": "ardenville-adventurers-guild",
           "name": "Ardenville Adventurers Guild",
           "type": null,
           "locationType": null,
+          "runBy": null,
+          "runByField": null,
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville Adventurers Guild.md"
@@ -743,7 +759,9 @@
           "id": "fishermans-guild",
           "name": "Fisherman's Guild",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Guild Hall",
+          "runBy": "Edda Netsong",
+          "runByField": "proprietor",
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Fishermans Guild.md"
@@ -753,6 +771,8 @@
           "name": "Lake Arden",
           "type": "Location",
           "locationType": "Lake",
+          "runBy": null,
+          "runByField": null,
           "knownToPlayers": true,
           "hasMapMarker": true,
           "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Lake Arden.md"
@@ -761,7 +781,9 @@
           "id": "merchants-guild-warehouse",
           "name": "Merchants Guild Warehouse",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Warehouse",
+          "runBy": "Kellen Redshore",
+          "runByField": "proprietor",
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Merchants Guild Warehouse.md"
@@ -770,7 +792,9 @@
           "id": "steelshapers-forge",
           "name": "Steelshaper's Forge",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Smithy",
+          "runBy": "Eldric Steelshaper",
+          "runByField": "proprietor",
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Steelshapers Forge.md"
@@ -779,7 +803,9 @@
           "id": "the-enchanted-trinket",
           "name": "The Enchanted Trinket",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Magic Shop",
+          "runBy": "Garrick Lightfinger",
+          "runByField": "proprietor",
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Ardenville/The Enchanted Trinket.md"
@@ -788,7 +814,9 @@
           "id": "the-netted-nymph",
           "name": "The Netted Nymph",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Inn",
+          "runBy": "Mira Softstep",
+          "runByField": "proprietor",
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Ardenville/The Netted Nymph.md"
@@ -1003,13 +1031,14 @@
         "missing": true,
         "need": "Full detail or sketched"
       },
-      "cityMap": null,
       "subLocations": [
         {
           "id": "forgefires-armaments",
           "name": "Forgefires Armaments",
           "type": null,
           "locationType": null,
+          "runBy": null,
+          "runByField": null,
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Forgefires Armaments.md"
@@ -1019,6 +1048,8 @@
           "name": "Starspells Wonders",
           "type": null,
           "locationType": null,
+          "runBy": null,
+          "runByField": null,
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Starspells Wonders.md"
@@ -1105,13 +1136,14 @@
         "missing": true,
         "need": "Full detail or sketched"
       },
-      "cityMap": null,
       "subLocations": [
         {
           "id": "hammerstrikes-weapons",
           "name": "Hammerstrikes Weapons",
           "type": null,
           "locationType": null,
+          "runBy": null,
+          "runByField": null,
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/Hammerstrikes Weapons.md"
@@ -1121,6 +1153,8 @@
           "name": "Nightwhispers Potions and Scrolls",
           "type": null,
           "locationType": null,
+          "runBy": null,
+          "runByField": null,
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/Nightwhispers Potions and Scrolls.md"
@@ -1287,13 +1321,14 @@
         "missing": true,
         "need": "Full detail or sketched"
       },
-      "cityMap": null,
       "subLocations": [
         {
           "id": "blackwood-forest",
           "name": "Blackwood Forest",
           "type": "Location",
           "locationType": null,
+          "runBy": null,
+          "runByField": null,
           "knownToPlayers": false,
           "hasMapMarker": true,
           "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Blackwood Forest.md"
@@ -1302,7 +1337,9 @@
           "id": "ironforge-smithy",
           "name": "Ironforge Smithy",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Blacksmith",
+          "runBy": "Gunnar Ironforge",
+          "runByField": "owner",
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Ironforge Smithy.md"
@@ -1311,7 +1348,9 @@
           "id": "marlas-gear",
           "name": "Marlas Gear",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Adventuring Supplies",
+          "runBy": "Marla Greenthumb",
+          "runByField": "owner",
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Marlas Gear.md"
@@ -1320,7 +1359,9 @@
           "id": "mystic-wares",
           "name": "Mystic Wares",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Magic Shop",
+          "runBy": "Hilda Ravenshadow",
+          "runByField": "owner",
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Mystic Wares.md"
@@ -1329,7 +1370,9 @@
           "id": "stonehaven-supplies",
           "name": "Stonehaven Supplies",
           "type": "Store",
-          "locationType": null,
+          "locationType": "General Store",
+          "runBy": "Erik Timber",
+          "runByField": "owner",
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Stonehaven Supplies.md"
@@ -1338,7 +1381,9 @@
           "id": "stones-herbs",
           "name": "Stones Herbs",
           "type": "Store",
-          "locationType": null,
+          "locationType": "Herbalist",
+          "runBy": "Darius Stone",
+          "runByField": "owner",
           "knownToPlayers": false,
           "hasMapMarker": false,
           "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Stones Herbs.md"

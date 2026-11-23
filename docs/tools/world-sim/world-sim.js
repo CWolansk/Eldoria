@@ -1,4 +1,5 @@
-// Living world: the DM's page (the ledger, and from Stage 2 markets and places).
+// Living world: the DM's page (the ledger; from Stage 2 markets and places; from
+// Stage 3 the map, rumours, people, travellers, sickness and the city outlines).
 //
 // This file holds no world data. Everything it shows is fetched with the DM key,
 // which is kept only in this browser. The same engine files the Azure Function
@@ -9,10 +10,12 @@ import {
   COUNTDOWN_MODE, COUNTDOWN_SIZES, DAYS_PER_MONTH, MONTHS, formatDay, formatDayShort, fromDay, parseDay
 } from "../../world-sim/engine/index.js";
 import { createEconomyViews } from "./world-sim-economy.js";
+import { createStage3Views } from "./world-sim-stage3.js";
+import { createMapView } from "./world-sim-map.js";
 
 const KEY_STORAGE = "eldoria:dm-key";
-const TABS = [["today", "Today"], ["places", "Places"], ["markets", "Markets"], ["countdowns", "Countdowns"], ["record", "Record"]];
-const noEffect = () => ({ kind: "note", good: "", road: "", days: "" });
+const TABS = [["today", "Today"], ["map", "Map"], ["places", "Places"], ["markets", "Markets"], ["rumours", "Rumours"], ["countdowns", "Countdowns"], ["record", "Record"]];
+const noEffect = () => ({ kind: "note", good: "", road: "", days: "", to: "", people: "", name: "" });
 const RECORD_FILTERS = [["all", "All"], ["written", "Written"], ["suggested", "Suggested"], ["rejected", "Rejected"]];
 
 const ui = {
@@ -31,7 +34,7 @@ const ui = {
   lastAdvance: null,
   busy: false,
   jot: { text: "", place: "", when: "", effect: noEffect() },
-  form: { label: "", mode: COUNTDOWN_MODE.CHANCE, size: 4, chanceInTen: 3, date: "", place: "", suggestionText: "", effect: noEffect() },
+  form: { label: "", mode: COUNTDOWN_MODE.CHANCE, size: 4, chanceInTen: 3, date: "", place: "", route: "", suggestionText: "", effect: noEffect() },
   // Stage 2: markets and places.
   setup: null,
   markets: null,
@@ -86,7 +89,7 @@ function readDate(text) {
 
 function placeName(id) {
   if (!id) return "";
-  return ui.places.find((place) => place.id === id)?.name || id;
+  return ui.places.find((place) => place.id === id)?.name || stage3.entryName(id) || id;
 }
 
 function placeOptions(selected) {
@@ -94,10 +97,11 @@ function placeOptions(selected) {
   for (const place of ui.places) {
     options.push(`<option value="${esc(place.id)}"${place.id === selected ? " selected" : ""}>${esc(place.name)}</option>`);
   }
-  return options.join("");
+  // Locations and people added to a town since the setup file was made.
+  return options.join("") + stage3.entryOptions(selected);
 }
 
-const economy = createEconomyViews({
+const shared = {
   ui,
   esc,
   $,
@@ -105,6 +109,14 @@ const economy = createEconomyViews({
   keepTyping: () => keepTyping(),
   run: (action, options) => run(action, options),
   render: () => render()
+};
+
+const stage3 = createStage3Views(shared);
+const economy = createEconomyViews({ ...shared, hooks: stage3 });
+const map = createMapView({
+  ...shared,
+  placePage: (id) => economy.placePage(id),
+  regionsUrl: new URL("../../world-sim/regions.draft.json", import.meta.url).href
 });
 
 /* ---------------- loading ---------------- */
@@ -170,6 +182,7 @@ async function unlock(key) {
   try {
     await Promise.all([loadWorld(), loadPlaces()]);
     await economy.loadMarkets();
+    await stage3.loadStage3();
   } catch (error) {
     ui.error = describeError(error);
   }
@@ -209,11 +222,11 @@ function suggestionCard(event) {
   const editing = ui.editId === event.id;
   return `<div class="ws-card ws-card--sugg" data-event="${esc(event.id)}">
     <div class="ws-row"><span class="ws-chip ws-chip--suggested">Suggested</span>
-      <span class="ws-meta">${esc(formatDayShort(event.day))}${event.place ? ` · ${esc(placeName(event.place))}` : ""}</span></div>
+      <span class="ws-meta">${esc(formatDayShort(event.day))}${event.place ? ` · ${stage3.linked(placeName(event.place))}` : ""}</span></div>
     <p class="ws-text">${editing
       ? `<input class="ws-input" style="width:100%" id="ws-edit-${esc(event.id)}" type="text" value="${esc(event.text)}" aria-label="Reword this event">`
-      : esc(event.text)}</p>
-    ${event.why ? `<p class="ws-meta"><b>Why:</b> ${esc(event.why)}</p>` : ""}
+      : stage3.linked(event.text)}</p>
+    ${event.why ? `<p class="ws-meta"><b>Why:</b> ${stage3.linked(event.why)}</p>` : ""}
     <p class="ws-meta" data-if-accept><b>If you accept:</b> ${esc(economy.describeEffect(event.effect))} Reject it and it never happened.</p>
     <div class="ws-row">${editing
       ? `<button class="ws-btn ws-btn--primary ws-btn--small" type="button" data-act="save-reword" data-id="${esc(event.id)}">Save and accept</button>
@@ -247,13 +260,13 @@ function todayView() {
   <section id="ws-moved">
     <h2>What moved ${many ? `since ${esc(formatDayShort(ui.lastAdvance.fromDay))}` : "overnight"}</h2>
     <p class="ws-lede">Running numbers that follow from what is written. They are not events.</p>
-    <ul class="ws-moves">${moved.map((line) => `<li><span class="ws-kind">${many ? `${esc(formatDayShort(line.day))} ` : ""}${esc(line.kind || "")}</span><span>${esc(line.text)}</span></li>`).join("")
+    <ul class="ws-moves">${moved.map((line) => `<li><span class="ws-kind">${many ? `${esc(formatDayShort(line.day))} ` : ""}${esc(line.kind || "")}</span><span>${stage3.linked(line.text)}</span></li>`).join("")
       || `<li><span class="ws-meta">Nothing moved enough to mention.</span></li>`}</ul>
   </section>
   <section id="ws-written">
     <h2>Written on ${esc(formatDayShort(world.day))}</h2>
-    ${world.writtenToday.map((event) => `<div class="ws-card"><p class="ws-text">${esc(event.text)}</p>
-      <p class="ws-meta">${event.place ? `${esc(placeName(event.place))} · ` : ""}${event.source === "dm" ? "written by you" : "suggested by the simulation, accepted by you"}${event.day !== world.day ? ` · dated ${esc(formatDayShort(event.day))}` : ""}</p></div>`).join("")
+    ${world.writtenToday.map((event) => `<div class="ws-card"><p class="ws-text">${stage3.linked(event.text)}</p>
+      <p class="ws-meta">${event.place ? `${stage3.linked(placeName(event.place))} · ` : ""}${event.source === "dm" ? "written by you" : "suggested by the simulation, accepted by you"}${event.day !== world.day ? ` · dated ${esc(formatDayShort(event.day))}` : ""}</p></div>`).join("")
       || `<p class="ws-meta">Nothing written yet today.</p>`}
   </section>
   <details class="ws-setup" id="ws-setup">
@@ -265,6 +278,9 @@ function todayView() {
         Load the setup file made from your notes (places, goods, roads, and a first guess at what each town makes and uses):</p>
       <div class="ws-row"><input id="ws-places-file" type="file" accept="application/json,.json" aria-label="Places file">
         <button class="ws-btn ws-btn--small" type="button" data-act="load-places">Load setup file</button></div>
+      <p>Districts, places and people in your towns, from your notes (${(ui.city?.entries || []).length} so far). Loading the file again adds only what is new; you can also add them one at a time on each town's page.</p>
+      <div class="ws-row"><input id="ws-city-file" type="file" accept="application/json,.json" aria-label="City file">
+        <button class="ws-btn ws-btn--small" type="button" data-act="city-import">Load city file</button></div>
       <div class="ws-row"><button class="ws-btn ws-btn--small" type="button" data-act="forget-key">Forget the DM key on this device</button></div>
     </div>
   </details>`;
@@ -283,11 +299,17 @@ function countdownCard(item) {
         <button class="ws-btn ws-btn--small" type="button" data-act="step" data-id="${esc(item.id)}" data-delta="1" aria-label="One step forward">+</button>`}</div>
        <p class="ws-meta">About ${Math.round(item.chance * 10)} in 10 chance of a step each day.</p>`;
   return `<div class="ws-card" data-countdown="${esc(item.id)}">
-    <div class="ws-row"><h3>${esc(item.label)}</h3>${state}${item.place ? `<span class="ws-meta">${esc(placeName(item.place))}</span>` : ""}</div>
+    <div class="ws-row"><h3>${esc(item.label)}</h3>${state}${item.place ? `<span class="ws-meta">${stage3.linked(placeName(item.place))}</span>` : ""}${
+      item.route ? `<span class="ws-meta" data-countdown-road>${esc(roadLabel(item.route))}</span>` : ""}</div>
     ${body}
     <p class="ws-meta"><b>When it comes due it suggests:</b> ${esc(item.suggestionText)}</p>
     ${item.done || item.waiting ? "" : `<div class="ws-row"><button class="ws-btn ws-btn--small ws-btn--quiet" type="button" data-act="finish" data-id="${esc(item.id)}">Close without an event</button></div>`}
   </div>`;
+}
+
+function roadLabel(routeId) {
+  const road = (ui.markets?.routes || []).find((entry) => entry.id === routeId);
+  return road ? `on the road between ${road.aName} and ${road.bName}` : "on a road";
 }
 
 function countdownsView() {
@@ -313,6 +335,8 @@ function countdownsView() {
         : `<label>Steps<select id="ws-cd-size" data-bind="form.size">${COUNTDOWN_SIZES.map((size) => `<option value="${size}"${Number(form.size) === size ? " selected" : ""}>${size}</option>`).join("")}</select></label>
            <label>Chance each day, in 10<input id="ws-cd-chance" type="number" min="1" max="10" step="1" data-bind="form.chanceInTen" value="${esc(form.chanceInTen)}"></label>`}
       <label>Where<select id="ws-cd-place" data-bind="form.place" data-rerender="true">${placeOptions(form.place)}</select></label>
+      ${(ui.markets?.routes || []).length ? `<label>Or on a road<select id="ws-cd-route" data-bind="form.route"><option value="">Not on a road</option>${
+        ui.markets.routes.map((road) => `<option value="${esc(road.id)}"${form.route === road.id ? " selected" : ""}>${esc(road.aName)} to ${esc(road.bName)}</option>`).join("")}</select></label>` : ""}
       ${economy.effectFields(form.effect, form.place, "form.effect")}
     </div>
     <label class="ws-meta">When it comes due, suggest this event
@@ -335,8 +359,9 @@ function recordView() {
       <tbody>${events.map((event) => `<tr data-event="${esc(event.id)}">
         <td style="white-space:nowrap">${esc(formatDayShort(event.day))}</td>
         <td>${chip(event)}</td>
-        <td class="ws-what">${esc(event.text)}</td>
-        <td>${esc(placeName(event.place))}</td>
+        <td class="ws-what">${stage3.linked(event.text)}${event.status === "written"
+          ? ` <button class="ws-btn ws-btn--small ws-btn--quiet" type="button" data-act="rumour-about" data-id="${esc(event.id)}">Start a rumour about this</button>` : ""}</td>
+        <td>${stage3.linked(placeName(event.place))}</td>
         <td class="ws-meta">${event.source === "dm" ? "You" : "Simulation"}</td>
         <td>${event.status === "written"
           ? `<button class="ws-btn ws-btn--small" type="button" aria-pressed="${event.playersVisible === true}" data-act="reveal" data-id="${esc(event.id)}" data-show="${event.playersVisible ? "false" : "true"}">${event.playersVisible ? "Shown to players" : "Hidden"}</button>`
@@ -354,6 +379,12 @@ function render() {
   const live = ui.unlocked && ui.world?.initialized;
   bar.hidden = !live;
   tabs.hidden = !live;
+  const results = $("#ws-search-results");
+  if (results) {
+    const found = live ? stage3.searchResults() : "";
+    results.innerHTML = found;
+    results.hidden = !found;
+  }
 
   if (!ui.unlocked) {
     view.innerHTML = lockView();
@@ -370,6 +401,15 @@ function render() {
     return;
   }
 
+  // The region outlines are a static file of the site; fetched the first time the map is opened.
+  if (ui.tab === "map" && !ui.map.regions && !ui.map.regionsLoading) {
+    ui.map.regionsLoading = true;
+    map.loadRegions().finally(() => {
+      ui.map.regionsLoading = false;
+      render();
+    });
+  }
+
   const world = ui.world;
   $("#ws-date").innerHTML = `${esc(world.dateText)}<span>Day ${world.dayOfMonth} of ${world.daysPerMonth || DAYS_PER_MONTH} in ${esc(world.month)}</span>`;
   $("#ws-advance").disabled = ui.busy;
@@ -380,7 +420,9 @@ function render() {
     : ui.tab === "record" ? recordView()
       : ui.tab === "markets" ? economy.marketsView()
         : ui.tab === "places" ? economy.placesView()
-          : todayView();
+          : ui.tab === "map" ? map.mapView()
+            : ui.tab === "rumours" ? stage3.rumoursView()
+              : todayView();
 }
 
 /* ---------------- actions ---------------- */
@@ -391,8 +433,9 @@ async function run(action, { message = "" } = {}) {
   ui.error = "";
   ui.message = "";
   try {
-    await action();
-    ui.message = message;
+    // An action may return its own message (a count, say); otherwise the fixed one is used.
+    const said = await action();
+    ui.message = typeof said === "string" ? said : message;
   } catch (error) {
     ui.error = describeError(error);
     if (error?.status === 401 || error?.status === 403) {
@@ -405,11 +448,14 @@ async function run(action, { message = "" } = {}) {
   } finally {
     ui.busy = false;
     const live = ui.unlocked && ui.world?.initialized;
-    if (live && (ui.tab === "record" || ui.tab === "places") && ui.events == null) {
+    if (live && ["record", "places", "rumours", "map"].includes(ui.tab) && ui.events == null) {
       try { await loadRecord(); } catch (_ignored) { ui.events = []; }
     }
     if (live && (ui.marketsStale || ui.markets == null)) {
       try { await economy.loadMarkets(); } catch (_ignored) { /* the next action tries again */ }
+    }
+    if (live && (ui.overviewStale || ui.overview == null || ui.city == null)) {
+      try { await stage3.loadStage3(); } catch (_ignored) { /* the next action tries again */ }
     }
     render();
   }
@@ -436,7 +482,7 @@ const actions = {
       render();
       return run(() => loadRecord());
     }
-    if ((ui.tab === "markets" || ui.tab === "places") && (ui.markets == null || (ui.tab === "places" && ui.events == null))) {
+    if (["markets", "places", "rumours", "map"].includes(ui.tab) && (ui.markets == null || (ui.tab !== "markets" && ui.events == null))) {
       render();
       return run(async () => {});
     }
@@ -449,6 +495,7 @@ const actions = {
     if (day == null) throw Object.assign(new Error('Write the first day like "Fall 7, 496".'), { status: 400 });
     ui.world = await ui.api.startWorld({ day });
     ui.marketsStale = true;
+    ui.overviewStale = true;
   }),
   advance: () => run(async () => {
     keepTyping();
@@ -457,6 +504,7 @@ const actions = {
     ui.lastAdvance = { ...ui.world.advanced, fromDay: from };
     ui.events = null;
     ui.marketsStale = true;
+    ui.overviewStale = true;
     ui.whatIf.result = null;
     ui.tab = "today";
   }),
@@ -467,6 +515,7 @@ const actions = {
     ui.lastAdvance = { ...ui.world.advanced, fromDay: from };
     ui.events = null;
     ui.marketsStale = true;
+    ui.overviewStale = true;
     ui.whatIf.result = null;
     ui.tab = "today";
   }),
@@ -484,6 +533,7 @@ const actions = {
     ui.world = result.world;
     ui.events = null;
     ui.marketsStale = Boolean(effect);
+    ui.overviewStale = true;
     ui.whatIf.result = null;
     ui.jot = { text: "", place: ui.jot.place, when: "", effect: noEffect() };
   }, { message: "Written. It is in the Record." }),
@@ -517,6 +567,7 @@ const actions = {
       label: form.label,
       mode: form.mode,
       place: form.place || null,
+      route: form.route || null,
       suggestionText: form.suggestionText,
       effect: economy.buildEffect(form.effect, form.place)
     };
@@ -529,7 +580,8 @@ const actions = {
       payload.chance = Math.min(10, Math.max(1, Number(form.chanceInTen) || 0)) / 10;
     }
     ui.world = (await ui.api.createWorldCountdown(payload)).world;
-    ui.form = { ...ui.form, label: "", date: "", suggestionText: "", effect: noEffect() };
+    ui.form = { ...ui.form, label: "", date: "", route: "", suggestionText: "", effect: noEffect() };
+    ui.overviewStale = true;
   }, { message: "Countdown added." }),
   filter(data) {
     ui.recordFilter = RECORD_FILTERS.some(([id]) => id === data.id) ? data.id : "all";
@@ -555,12 +607,19 @@ const actions = {
     ui.setup = saved;
     ui.placesLoaded = true;
     ui.marketsStale = true;
+    ui.overviewStale = true;
     if (ui.world?.initialized) ui.world = await ui.api.getWorld();
   }, { message: "Setup loaded." }),
+  "rumour-about"(data) {
+    ui.rumourForm = { ...ui.rumourForm, eventId: data.id, isTrue: true };
+    return actions.tab({ id: "rumours" });
+  },
   "forget-key"() {
     storeKey("");
     ui.api.setDmKey("");
     ui.unlocked = false;
+    ui.overview = null;
+    ui.city = null;
     ui.world = null;
     ui.events = null;
     ui.markets = null;
@@ -571,7 +630,7 @@ const actions = {
   }
 };
 
-Object.assign(actions, economy.actions);
+Object.assign(actions, economy.actions, stage3.actions, map.actions);
 
 function decide(id, decision) {
   return run(async () => {
@@ -580,6 +639,7 @@ function decide(id, decision) {
     ui.editId = null;
     ui.events = null;
     ui.marketsStale = true;
+    ui.overviewStale = true;
   });
 }
 
@@ -599,6 +659,7 @@ function bind() {
     if (key) unlock(key);
   });
   document.addEventListener("change", (event) => {
+    if (stage3.onChange(event)) return;
     const target = event.target.closest?.("[data-bind]");
     if (!target) return;
     const path = target.dataset.bind.split(".");
@@ -610,8 +671,9 @@ function bind() {
     }
   });
   document.addEventListener("input", (event) => {
-    economy.onInput(event);
+    if (!stage3.onInput(event)) economy.onInput(event);
   });
+  map.bindGestures();
   window.addEventListener("hashchange", () => {
     const wanted = window.location.hash.slice(1);
     if (ui.unlocked && wanted !== ui.tab && TABS.some(([id]) => id === wanted)) actions.tab({ id: wanted });

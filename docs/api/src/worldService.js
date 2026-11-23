@@ -13,6 +13,11 @@
 //   - Nothing here moves the party. The DM writes where the party is.
 //   - Players see prices only: one town (where the party is), only if they know
 //     that town, and never a reason, a stock level or another town.
+//   - Players hear a rumour only where the DM has revealed it, as that town tells it.
+//   - Nothing is seeded: no event, rumour, sickness or traveller exists until the DM
+//     writes it. A sickness never starts or spreads on its own.
+//   - Cities are an outline (districts, locations, NPCs) grown by appended rows.
+//     There are no city maps. Nothing is deleted; entries are retired.
 
 const crypto = require("node:crypto");
 
@@ -178,7 +183,7 @@ function createWorldService({ store, engine, now, newId } = {}) {
     }
     const effect = checkedEffect(world, input.effect, cleanText(input.text));
     if (effect && day !== world.day) {
-      throw fail(400, "An event that changes prices or roads starts today. Leave the date empty, or write it as a plain fact.");
+      throw fail(400, "An event that changes the numbers starts today. Leave the date empty, or write it as a plain fact.");
     }
     const event = engine.createWrittenEvent({
       id: `e-${pad7(day)}-${makeId()}`,
@@ -253,6 +258,7 @@ function createWorldService({ store, engine, now, newId } = {}) {
       dueDay: input.dueDay == null ? undefined : Number(input.dueDay),
       fill: input.fill == null ? 0 : Number(input.fill),
       place: cleanText(input.place) || null,
+      route: checkedRoad(world, input.route),
       id: `k-${pad7(world.day)}-${makeId()}`,
       countdownId: `c-${makeId()}`,
       day: world.day,
@@ -303,6 +309,7 @@ function createWorldService({ store, engine, now, newId } = {}) {
       row = engine.createCountdownStep({ ...base, delta: Number(input.delta) });
     } else if (action === engine.COUNTDOWN_ACTION.EDIT) {
       const changes = { ...(input.changes || {}) };
+      if (changes.route !== undefined) changes.route = checkedRoad(world, changes.route);
       if (changes.chance !== undefined) changes.chance = Number(changes.chance);
       if (changes.dueDay !== undefined) {
         changes.dueDay = Number(changes.dueDay);
@@ -386,12 +393,22 @@ function createWorldService({ store, engine, now, newId } = {}) {
     if (input == null) {
       return null;
     }
-    const effect = engine.normalizeEffect({ ...input, label: cleanText(input.label) || label || null });
-    const problem = engine.effectProblem(world.state, effect);
+    const effect = engine.normalizeWorldEffect({ ...input, label: cleanText(input.label) || label || null });
+    const problem = engine.worldEffectProblem(world.state, effect);
     if (problem) {
       throw fail(400, problem);
     }
     return effect;
+  }
+
+  // A threat may sit on a road. The road must be one in the setup.
+  function checkedRoad(world, value) {
+    const id = cleanText(value);
+    if (!id) return null;
+    if (!engine.listRoads(world.state).some((road) => road.id === id)) {
+      throw fail(400, "That road is not in the setup.");
+    }
+    return id;
   }
 
   /** The engine's configuration from the setup document, or null if it has no market setup. */
@@ -475,6 +492,311 @@ function createWorldService({ store, engine, now, newId } = {}) {
     return engine.publicPrices(state, state.party?.place ?? null);
   }
 
+  function checkedPosition(value, name) {
+    if (value == null) return null;
+    if (!Array.isArray(value) || value.length !== 2 || !value.every((part) => Number.isFinite(Number(part)) && Number(part) >= 0 && Number(part) <= 1)) {
+      throw fail(400, `The map position of ${name} must be two numbers from 0 to 1.`);
+    }
+    return [Number(value[0]), Number(value[1])];
+  }
+
+  /* ---------------- Stage 3: the city outline ---------------- */
+
+  const MAX_CITY_IMPORT = 600;
+
+  async function townIds() {
+    const stored = await store.readPlaces();
+    return new Set((stored?.document?.places || []).filter((place) => !place.parent).map((place) => place.id));
+  }
+
+  function describeCity(world) {
+    const folded = engine.foldCity(world.records);
+    return { day: world.day, entries: folded.entries, travellers: engine.describeTravellers(world.state) };
+  }
+
+  /** Every district, location and NPC, retired ones included, and who is travelling. */
+  async function getCity() {
+    return describeCity(await loadWorld());
+  }
+
+  // Pointers must stay inside the town and point at the right kind of thing.
+  function checkPointers(folded, entry) {
+    if (entry.district) {
+      const district = folded.byId.get(entry.district);
+      if (!district || district.type !== "district" || district.town !== entry.town || district.retired) {
+        throw fail(400, "That district is not in this town.");
+      }
+    }
+    if (entry.location) {
+      const location = folded.byId.get(entry.location);
+      if (!location || location.type !== "location" || location.town !== entry.town || location.retired) {
+        throw fail(400, "That location is not in this town.");
+      }
+    }
+  }
+
+  function freeEntryId(folded, wanted) {
+    let id = wanted;
+    for (let attempt = 2; folded.byId.has(id); attempt += 1) {
+      id = `${wanted}-${attempt}`;
+    }
+    return id;
+  }
+
+  /** Add a district, a location or an NPC to a town. Hidden from players unless said otherwise. */
+  async function addCityEntry(input = {}) {
+    const world = await loadWorld();
+    const folded = engine.foldCity(world.records);
+    const town = cleanText(input.town);
+    if (!(await townIds()).has(town)) {
+      throw fail(400, "That town is not in your list of places.");
+    }
+    const type = cleanText(input.type);
+    const slug = engine.slugify(input.name);
+    if (!slug) throw fail(400, "It needs a name.");
+    const wanted = type === "npc" ? `npc--${town}--${slug}` : type === "district" ? `${town}--district--${slug}` : `${town}--${slug}`;
+    const row = engine.createCityAdd({
+      id: `c-${pad7(world.day)}-${makeId()}`,
+      entryId: freeEntryId(folded, wanted),
+      day: world.day,
+      at: clock(),
+      entry: { ...input, town, source: null }
+    });
+    checkPointers(folded, row.entry);
+    await store.appendRecords(world.day, [row]);
+    return { entryId: row.entryId, ...(await getCity()) };
+  }
+
+  /** Rename, re-describe, move, mark as known to players, retire or restore. A new row each time. */
+  async function changeCityEntry(entryId, input = {}) {
+    const world = await loadWorld();
+    const folded = engine.foldCity(world.records);
+    const entry = folded.byId.get(cleanText(entryId));
+    if (!entry) {
+      throw fail(404, "That is not in your cities.");
+    }
+    const action = cleanText(input.action);
+    const base = { id: `c-${pad7(world.day)}-${makeId()}`, entryId: entry.id, day: world.day, at: clock() };
+    let row;
+    if (action === engine.CITY_ACTION.RETIRE || action === engine.CITY_ACTION.RESTORE) {
+      if ((action === engine.CITY_ACTION.RETIRE) === entry.retired) {
+        throw fail(409, entry.retired ? "That is already retired." : "That is not retired.");
+      }
+      row = engine.createCityRetire({ ...base, restore: action === engine.CITY_ACTION.RESTORE });
+    } else if (action === engine.CITY_ACTION.CHANGE) {
+      row = engine.createCityChange({ ...base, changes: input.changes });
+      if (row.changes.town !== undefined && !(await townIds()).has(row.changes.town)) {
+        throw fail(400, "That town is not in your list of places.");
+      }
+      const after = { ...entry, ...row.changes };
+      if (row.changes.town !== undefined && row.changes.town !== entry.town) {
+        // Moving town leaves the old district and location behind unless new ones are given.
+        if (row.changes.district === undefined) { row.changes.district = null; after.district = null; }
+        if (row.changes.location === undefined) { row.changes.location = null; after.location = null; }
+      }
+      if (after.type === "district") { after.district = null; after.location = null; }
+      if (after.type === "location") after.location = null;
+      checkPointers(folded, after);
+    } else {
+      throw fail(400, "action must be change, retire or restore.");
+    }
+    await store.appendRecords(world.day, [row]);
+    return getCity();
+  }
+
+  /**
+   * Add many entries at once, from the seed made from the notes. An entry whose id is
+   * already in the record is left alone, so loading the same file twice adds nothing.
+   */
+  async function importCity(input = {}) {
+    if (!Array.isArray(input.entries)) {
+      throw fail(400, "entries must be a list.");
+    }
+    if (input.entries.length > MAX_CITY_IMPORT) {
+      throw fail(413, `At most ${MAX_CITY_IMPORT} entries at a time.`);
+    }
+    const world = await loadWorld();
+    const folded = engine.foldCity(world.records);
+    const towns = await townIds();
+    const order = { district: 0, location: 1, npc: 2 };
+    const sorted = [...input.entries].sort((a, b) => (order[a?.type] ?? 9) - (order[b?.type] ?? 9));
+    const rows = [];
+    const known = new Map(folded.byId);
+    let skipped = 0;
+    for (const source of sorted) {
+      const entryId = cleanText(source?.id);
+      if (!entryId) throw fail(400, "Each entry needs an id.");
+      if (known.has(entryId)) {
+        skipped += 1;
+        continue;
+      }
+      if (!towns.has(cleanText(source.town))) {
+        throw fail(400, `"${cleanText(source.name)}" is in a town that is not in your list of places.`);
+      }
+      const row = engine.createCityAdd({ id: `c-${pad7(world.day)}-${makeId()}`, entryId, day: world.day, at: clock(), entry: source });
+      checkPointers({ byId: known }, row.entry);
+      known.set(entryId, { id: entryId, ...row.entry, retired: false });
+      rows.push(row);
+    }
+    if (rows.length) {
+      await store.appendRecords(world.day, rows);
+    }
+    return { added: rows.length, skipped, ...(await getCity()) };
+  }
+
+  /* ---------------- Stage 3: rumours ---------------- */
+
+  async function listRumours() {
+    const world = await loadWorld();
+    return { day: world.day, rumours: engine.describeRumours(world.state) };
+  }
+
+  function knownPlace(world, placeId) {
+    return Boolean(world.state.systems?.[engine.ECONOMY_SYSTEM_ID]?.config?.places?.[placeId]);
+  }
+
+  /**
+   * The DM starts a rumour: about a written event (true), or as talk whose truth is
+   * not written. It then travels by itself. Nothing is ever started by the simulation.
+   */
+  async function startRumour(input = {}) {
+    const world = await loadWorld();
+    const eventId = cleanText(input.eventId) || null;
+    let event = null;
+    if (eventId) {
+      event = world.folded.byId.get(eventId);
+      if (!event || event.status !== engine.EVENT_STATUS.WRITTEN) {
+        throw fail(400, "A rumour can only be about an event that is written.");
+      }
+    }
+    const origin = cleanText(input.origin) || event?.place || "";
+    if (!knownPlace(world, origin)) {
+      throw fail(400, origin
+        ? "A rumour starts in a town or place on the map that is in your setup."
+        : "Say where the rumour starts.");
+    }
+    const row = engine.createRumourStart({
+      ...input,
+      eventId,
+      origin,
+      truth: cleanText(input.truth) === engine.RUMOUR_TRUTH.WRITTEN ? engine.RUMOUR_TRUTH.WRITTEN : engine.RUMOUR_TRUTH.UNWRITTEN,
+      where: cleanText(input.where) || origin,
+      id: `r-${pad7(world.day)}-${makeId()}`,
+      rumourId: `rumour-${makeId()}`,
+      day: world.day,
+      at: clock()
+    });
+    await store.appendRecords(world.day, [row]);
+    return { rumourId: row.rumourId, ...(await listRumours()) };
+  }
+
+  /** End a rumour, mark it true (pointing at a written event), or reveal it to players in one town. */
+  async function rumourAction(rumourId, input = {}) {
+    const world = await loadWorld();
+    const id = cleanText(rumourId);
+    const item = world.state.systems?.[engine.RUMOUR_SYSTEM_ID]?.items?.[id];
+    if (!item) {
+      throw fail(404, "That rumour does not exist.");
+    }
+    const action = cleanText(input.action);
+    const base = { id: `r-${pad7(world.day)}-${makeId()}`, rumourId: id, day: world.day, at: clock() };
+    let row;
+    if (action === "end") {
+      if (item.ended) throw fail(409, "That rumour has already stopped spreading.");
+      row = engine.createRumourEnd(base);
+    } else if (action === "confirm") {
+      const event = world.folded.byId.get(cleanText(input.eventId));
+      if (!event || event.status !== engine.EVENT_STATUS.WRITTEN) {
+        throw fail(400, "Point at the written event that makes it true.");
+      }
+      row = engine.createRumourConfirm({ ...base, eventId: event.id });
+    } else if (action === "reveal") {
+      if (typeof input.playersVisible !== "boolean") {
+        throw fail(400, "playersVisible must be true or false.");
+      }
+      const place = cleanText(input.place);
+      if (!item.heard[place]) {
+        throw fail(409, "That rumour has not reached that town, so nobody there can tell it.");
+      }
+      row = engine.createRumourReveal({ ...base, place, playersVisible: input.playersVisible });
+    } else {
+      throw fail(400, "action must be end, confirm or reveal.");
+    }
+    await store.appendRecords(world.day, [row]);
+    return listRumours();
+  }
+
+  /* ---------------- Stage 3: travelling NPCs ---------------- */
+
+  /** Give an NPC from the city outline an itinerary. They then move along the roads by themselves. */
+  async function setItinerary(input = {}) {
+    const world = await loadWorld();
+    const npc = engine.foldCity(world.records).byId.get(cleanText(input.npcId));
+    if (!npc || npc.type !== "npc" || npc.retired) {
+      throw fail(400, "Pick an NPC from your cities.");
+    }
+    const stops = Array.isArray(input.stops) ? input.stops : [];
+    for (const stop of stops) {
+      if (!knownPlace(world, cleanText(stop?.place))) {
+        throw fail(400, "Every stop must be a town or place on the map that is in your setup.");
+      }
+    }
+    const row = engine.createItinerary({
+      id: `t-${pad7(world.day)}-${makeId()}`, npcId: npc.id, name: npc.name, day: world.day, at: clock(),
+      stops, loop: input.loop === true
+    });
+    await store.appendRecords(world.day, [row]);
+    return getCity();
+  }
+
+  async function clearItinerary(npcId) {
+    const world = await loadWorld();
+    const id = cleanText(npcId);
+    if (!world.state.systems?.[engine.TRAVELLER_SYSTEM_ID]?.items?.[id]) {
+      throw fail(404, "That NPC is not travelling.");
+    }
+    await store.appendRecords(world.day, [engine.createItineraryClear({ id: `t-${pad7(world.day)}-${makeId()}`, npcId: id, day: world.day, at: clock() })]);
+    return getCity();
+  }
+
+  /* ---------------- Stage 3: everything the Map and Rumours views need ---------------- */
+
+  async function getOverview() {
+    const world = await loadWorld();
+    const state = world.state;
+    return {
+      day: world.day,
+      party: state.party || null,
+      roads: engine.listRoads(state).map((road) => ({
+        ...road,
+        travel: Number.isFinite(road.travel) ? road.travel : null,
+        aName: engine.placeNameIn(state, road.a),
+        bName: engine.placeNameIn(state, road.b)
+      })),
+      rumours: engine.describeRumours(state),
+      people: engine.describePeople(state),
+      sickness: engine.describeSickness(state),
+      travellers: engine.describeTravellers(state),
+      threats: engine.listCountdowns(state).filter((item) => !item.done && (item.place || item.route))
+        .map((item) => ({ id: item.id, label: item.label, place: item.place ?? null, route: item.route ?? null, fill: item.fill, size: item.size, mode: item.mode, dueDay: item.dueDay, waiting: item.waiting }))
+    };
+  }
+
+  /**
+   * What players may hear: rumours the DM has revealed in the town the party is in, and
+   * only if the players know that town. Reads only. Every other case is the same empty answer.
+   */
+  async function getPublicRumours() {
+    const committed = await loadCommitted();
+    if (!committed) {
+      return engine.publicRumours(null, null);
+    }
+    const day = committed.pointer.day;
+    const records = (await store.listRecords({ fromDay: day, toDay: day })).map(stripRow);
+    const state = engine.applyRecords(committed.snapshot.state, engine.recordsForDay(records, day));
+    return engine.publicRumours(state, state.party?.place ?? null);
+  }
+
   async function getPlaces() {
     const stored = await store.readPlaces();
     return stored ? stored.document : { schema: PLACES_SCHEMA, places: [], loaded: false };
@@ -506,7 +828,9 @@ function createWorldService({ store, engine, now, newId } = {}) {
         knownToPlayers: place.knownToPlayers === true,
         // "full" places have a market; "sketched" ones are a name and a size; "landmark" is neither.
         detail: PLACE_DETAIL.includes(detail) ? detail : null,
-        population: place.population ?? null
+        population: place.population ?? null,
+        // Where it sits on the world map: [fraction up from the bottom, fraction across from the left].
+        position: checkedPosition(place.position, name)
       };
     });
     const document = { schema: PLACES_SCHEMA, updatedAt: clock(), loaded: true, places };
@@ -553,9 +877,10 @@ function createWorldService({ store, engine, now, newId } = {}) {
   }
 
   return {
-    advance, countdownAction, createCountdown, decide, endPressure, getMarkets, getPlaces,
-    getPublicPrices, getState, getWorld, jot, listCountdowns, listEvents, putPlaces,
-    setParty, setVisibility, startWorld
+    addCityEntry, advance, changeCityEntry, clearItinerary, countdownAction, createCountdown, decide,
+    endPressure, getCity, getMarkets, getOverview, getPlaces, getPublicPrices, getPublicRumours, getState,
+    getWorld, importCity, jot, listCountdowns, listEvents, listRumours, putPlaces, rumourAction,
+    setItinerary, setParty, setVisibility, startRumour, startWorld
   };
 }
 

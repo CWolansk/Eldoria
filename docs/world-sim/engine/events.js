@@ -19,8 +19,15 @@
 //   pressure   - the DM ends a pressure early.
 //   party      - the DM says where the party is. Nothing else ever moves the party.
 //
-// An event may now carry an `effect` (see normalizeEffect in economy.js): what it
-// does to the numbers. null means it is just a fact.
+// An event may now carry an `effect` (see effects.js): what it does to the numbers.
+// null means it is just a fact.
+//
+// Stage 3 adds three more kinds of row, also append-only and skipped by the event fold:
+//
+//   rumour     - the DM starts, ends, confirms or reveals a rumour (see rumours.js).
+//   traveller  - the DM gives an NPC an itinerary, or ends it (see travellers.js).
+//   city       - a district, location or NPC is added, changed, retired or restored
+//                (see cities.js).
 //
 // Only events whose folded status is "written" are canon.
 // These helpers are pure: ids and timestamps are supplied by the caller.
@@ -198,7 +205,8 @@ export function foldRecord(records) {
 
     // Rows read by other folds: countdowns, the economy setup, pressures ended early,
     // and where the party is.
-    if (["countdown", "economy", "pressure", "party"].includes(record?.recordType)) {
+    // Stage 3 adds rumours, travelling NPCs and the city outline.
+    if (["countdown", "economy", "pressure", "party", "rumour", "traveller", "city"].includes(record?.recordType)) {
       continue;
     }
 

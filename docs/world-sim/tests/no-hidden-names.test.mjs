@@ -86,7 +86,7 @@ test("no file in the public simulation folders names a hidden place or person", 
 
 test("the DM page ships no world data of its own", () => {
   const page = path.join(docsRoot, "tools", "world-sim");
-  for (const fileName of ["index.html", "world-sim.js", "world-sim-economy.js", "world-sim.css"]) {
+  for (const fileName of ["index.html", "world-sim.js", "world-sim-economy.js", "world-sim-stage3.js", "world-sim-map.js", "world-sim.css"]) {
     const text = fs.readFileSync(path.join(page, fileName), "utf8");
     assert.doesNotMatch(text, /Private\//u, `${fileName} points into Private/`);
     assert.doesNotMatch(text, /seed\.draft|places\.upload/u, `${fileName} refers to the DM-only seed files`);

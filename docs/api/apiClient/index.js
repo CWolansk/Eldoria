@@ -640,6 +640,51 @@ export class EldoriaApiClient {
     return this.request("world/public/prices");
   }
 
+  getWorldOverview() {
+    return this.request("world/overview");
+  }
+
+  getWorldCity() {
+    return this.request("world/city");
+  }
+
+  addWorldCityEntry(entry) {
+    return this.request("world/city", { method: "POST", body: entry });
+  }
+
+  importWorldCity(entries) {
+    return this.request("world/city/import", { method: "POST", body: { entries } });
+  }
+
+  changeWorldCityEntry(entryId, action) {
+    return this.request(`world/city/${encodeURIComponent(entryId)}/actions`, { method: "POST", body: action });
+  }
+
+  listWorldRumours() {
+    return this.request("world/rumours");
+  }
+
+  startWorldRumour(rumour) {
+    return this.request("world/rumours", { method: "POST", body: rumour });
+  }
+
+  changeWorldRumour(rumourId, action) {
+    return this.request(`world/rumours/${encodeURIComponent(rumourId)}/actions`, { method: "POST", body: action });
+  }
+
+  setWorldItinerary(itinerary) {
+    return this.request("world/travellers", { method: "POST", body: itinerary });
+  }
+
+  endWorldItinerary(npcId) {
+    return this.request(`world/travellers/${encodeURIComponent(npcId)}/end`, { method: "POST", body: {} });
+  }
+
+  // No DM key needed: rumours the DM has revealed in the party's town, as that town tells them.
+  getWorldPublicRumours() {
+    return this.request("world/public/rumours");
+  }
+
   saveWorldPlaces(document) {
     return this.request("world/places", { method: "PUT", body: document });
   }

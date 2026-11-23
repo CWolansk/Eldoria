@@ -246,5 +246,5 @@ test("public prices work even when the server has no DM key set, and refuse anyt
   assert.equal((await publicCall(world)).status, 200);
   const post = await world.handlers.worldPublicPrices(makeRequest("POST", "world/public/prices", { body: {} }), quietContext);
   assert.equal(post.status, 405);
-  assert.deepEqual(WORLD_PUBLIC_ROUTES.map((entry) => entry.handler), ["worldPublicPrices"]);
+  assert.deepEqual(WORLD_PUBLIC_ROUTES.map((entry) => entry.handler), ["worldPublicPrices", "worldPublicRumours"]);
 }));

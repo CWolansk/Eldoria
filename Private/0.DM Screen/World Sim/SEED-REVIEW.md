@@ -210,6 +210,60 @@ The world starts with no countdowns. These are the situations your notes already
 
 For each one you want, the Countdowns tab asks for a name, 4, 6 or 8 steps and a daily chance (or a fixed date), and the event to suggest when it comes due.
 
+## Cities: districts, places and people (no city maps)
+
+You said you do not want drawn or generated city maps. A town is now an outline you grow: districts, locations (shops, halls, inns, landmarks) and people, each addable, renamable, movable and retirable from the town's page. Nothing has to be complete.
+
+`city.upload.json` holds what your notes already say. Load it once from the Living World page (Today, Setup, Load city file). Loading it again adds only what is new, so you can rebuild it after editing your notes. Each entry is hidden from players unless its page is on the public whitelist in `docs/world-pages.config.json`.
+
+| Town | Districts | Places | People | People placed at a place |
+|---|---|---|---|---|
+| Ardenville | 0 | 7 | 16 | 3 |
+| Fairfield | 0 | 2 | 3 | 0 |
+| Highreach | 3 | 8 | 51 | 7 |
+| Hillcrest | 0 | 2 | 11 | 0 |
+| Stonehaven | 0 | 6 | 8 | 3 |
+| **All** | 3 | 25 | 89 | 13 |
+
+**How people were placed.** A person is put at a location only where that location's own note names them in its `proprietor` or `owner` field. Everyone else is "somewhere in town"; I did not guess.
+
+| Person | Town | Placed at | From |
+|---|---|---|---|
+| Alistair Goldman | Highreach | HighReach Merchants Guild | `Private/1. World Almanac/World/Crestfall/Highreach/HighReach Merchants Guild.md, proprietor` |
+| Thaldrin Stormblade | Highreach | Highreach Adventurers Guild | `Private/1. World Almanac/World/Crestfall/Highreach/Highreach Adventurers Guild.md, proprietor` |
+| Kara Stonefoot | Highreach | Sturdy Mugg | `Private/1. World Almanac/World/Crestfall/Highreach/Sturdy Mugg.md, proprietor` |
+| Felix Tradewind | Highreach | Target by Tradewind | `Private/1. World Almanac/World/Crestfall/Highreach/Target by Tradewind.md, proprietor` |
+| Lady Elara Moonshadow | Highreach | The Arcane Enclave | `Private/1. World Almanac/World/Crestfall/Highreach/The Arcane Enclave.md, proprietor` |
+| Alaric Emberfell | Highreach | The Dragons Breath Forge | `Private/1. World Almanac/World/Crestfall/Highreach/The Dragons Breath Forge.md, proprietor` |
+| Don Gnocianno | Highreach | The Warren | `Private/1. World Almanac/World/Crestfall/Highreach/The Warren.md, proprietor` |
+| Edda Netsong | Ardenville | Fisherman's Guild | `Private/1. World Almanac/World/Crestfall/Ardenville/Fishermans Guild.md, proprietor` |
+| Kellen Redshore | Ardenville | Merchants Guild Warehouse | `Private/1. World Almanac/World/Crestfall/Ardenville/Merchants Guild Warehouse.md, proprietor` |
+| Mira Softstep | Ardenville | The Netted Nymph | `Private/1. World Almanac/World/Crestfall/Ardenville/The Netted Nymph.md, proprietor` |
+| Gunnar Ironforge | Stonehaven | Ironforge Smithy | `Private/1. World Almanac/World/Crestfall/Stonehaven/Ironforge Smithy.md, owner` |
+| Hilda Ravenshadow | Stonehaven | Mystic Wares | `Private/1. World Almanac/World/Crestfall/Stonehaven/Mystic Wares.md, owner` |
+| Erik Timber | Stonehaven | Stonehaven Supplies | `Private/1. World Almanac/World/Crestfall/Stonehaven/Stonehaven Supplies.md, owner` |
+
+**Named as running a place, but with no NPC note of their own**, so they are not in the outline yet. Add them on the town's page if you want them:
+
+- Eldric Steelshaper, Steelshaper's Forge (Ardenville), from `Private/1. World Almanac/World/Crestfall/Ardenville/Steelshapers Forge.md`
+- Garrick Lightfinger, The Enchanted Trinket (Ardenville), from `Private/1. World Almanac/World/Crestfall/Ardenville/The Enchanted Trinket.md`
+- Marla Greenthumb, Marlas Gear (Stonehaven), from `Private/1. World Almanac/World/Crestfall/Stonehaven/Marlas Gear.md`
+- Darius Stone, Stones Herbs (Stonehaven), from `Private/1. World Almanac/World/Crestfall/Stonehaven/Stones Herbs.md`
+
+**Districts.** Only districts a note names are listed, and nothing is placed inside one, because no note says which place is in which district:
+
+- Merchant District (Highreach), from `Private/2. Reference/Events/Consequences/Resolved/Highreach Duplirat Invasion.md, line 142`
+- Noble District (Highreach), from `Private/1. World Almanac/World/Crestfall/Highreach/The Warren.md, line 37`
+- Palace District (Highreach), from `Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Lord Cedric Brightblade.md, line 30`
+
+**What you may want to add,** whenever it comes up at the table:
+
+- Which district each Highreach location is in (The Warren is described as well placed to watch the Noble District, which is not the same as being in it).
+- Districts for the other towns, if they have any.
+- Where the other 76 people are usually found.
+- Itineraries for anyone who travels (on their own page).
+
+
 ## Things that do not agree
 
 - **Fairfield's direction.** Settled: Fairfield is east of Highreach, as the map shows. The notes have been corrected.
@@ -230,3 +284,7 @@ It reads the notes and makes GET requests to the API for item prices. `--offline
 ## The places file for the DM page
 
 The same tool also writes `places.upload.json` beside this file: every town, place in a town and map place, with whether your players know it, plus the market setup above (goods, base prices, roads with travel days, and what each of the five towns makes and uses). On the Living World page, open Setup at the bottom of Today and load that file. It is stored in your storage account behind the DM key and is never put in `docs/`. Until it is loaded, the "where" box offers only places your players already know.
+
+Since Stage 3 the places file also carries each place's position on the world map (copied from the site's map markers), which the Map view needs, and marks healing potions as `medicine` (what a town uses more of while a sickness is real there). If you loaded an earlier version of the file, load it again.
+
+The tool writes a second file, `city.upload.json`: the districts, places and people described under "Cities" above. Load it from the same Setup section after the places file. Both stay behind the DM key and are never put in `docs/`.

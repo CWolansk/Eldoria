@@ -15,96 +15,265 @@
   "landmarkNamePattern": "(Mountain|Bog|Desert|Valley|Camp|Forest|Lake)",
   "goods": [
     {
-      "id": "grain", "name": "Grain", "unit": "sack",
-      "price": { "catalogItem": "item:wheat:phb", "times": 100, "basis": "Catalog: wheat is 1 cp a pound; a sack is taken as 100 pounds" },
-      "usePerThousandPeoplePerDay": 15, "useBasis": "About a pound and a half of grain a head each day"
+      "id": "grain",
+      "name": "Grain",
+      "unit": "sack",
+      "price": {
+        "catalogItem": "item:wheat:phb",
+        "times": 100,
+        "basis": "Catalog: wheat is 1 cp a pound; a sack is taken as 100 pounds"
+      },
+      "usePerThousandPeoplePerDay": 15,
+      "useBasis": "About a pound and a half of grain a head each day"
     },
     {
-      "id": "fish", "name": "Fish", "unit": "basket",
-      "price": { "estimateCopper": 40, "basis": "Not in the catalog. Guess: 2 cp a pound, a basket of 20 pounds" },
-      "usePerThousandPeoplePerDay": 10, "useBasis": "About a fifth of a pound of fish a head each day"
+      "id": "fish",
+      "name": "Fish",
+      "unit": "basket",
+      "price": {
+        "estimateCopper": 40,
+        "basis": "Not in the catalog. Guess: 2 cp a pound, a basket of 20 pounds"
+      },
+      "usePerThousandPeoplePerDay": 10,
+      "useBasis": "About a fifth of a pound of fish a head each day"
     },
     {
-      "id": "wine", "name": "Wine", "unit": "pitcher",
-      "price": { "catalogItem": "item:common-wine-pitcher:phb", "times": 1, "basis": "Catalog: common wine, 2 sp a pitcher" },
-      "usePerThousandPeoplePerDay": 100, "useBasis": "One pitcher for every ten people each day"
+      "id": "wine",
+      "name": "Wine",
+      "unit": "pitcher",
+      "price": {
+        "catalogItem": "item:common-wine-pitcher:phb",
+        "times": 1,
+        "basis": "Catalog: common wine, 2 sp a pitcher"
+      },
+      "usePerThousandPeoplePerDay": 100,
+      "useBasis": "One pitcher for every ten people each day"
     },
     {
-      "id": "ore", "name": "Iron", "unit": "pound",
-      "price": { "catalogItem": "item:iron:phb", "times": 1, "basis": "Catalog: iron, 1 sp a pound" },
-      "usePerThousandPeoplePerDay": 20, "useBasis": "Nails, tools and repairs: a fiftieth of a pound a head each day"
+      "id": "ore",
+      "name": "Iron",
+      "unit": "pound",
+      "price": {
+        "catalogItem": "item:iron:phb",
+        "times": 1,
+        "basis": "Catalog: iron, 1 sp a pound"
+      },
+      "usePerThousandPeoplePerDay": 20,
+      "useBasis": "Nails, tools and repairs: a fiftieth of a pound a head each day"
     },
     {
-      "id": "timber", "name": "Timber", "unit": "cartload",
-      "price": { "estimateCopper": 500, "basis": "Not in the catalog. Guess: 5 gp a cartload" },
-      "usePerThousandPeoplePerDay": 2, "useBasis": "Two cartloads a day for every thousand people, for building and fuel"
+      "id": "timber",
+      "name": "Timber",
+      "unit": "cartload",
+      "price": {
+        "estimateCopper": 500,
+        "basis": "Not in the catalog. Guess: 5 gp a cartload"
+      },
+      "usePerThousandPeoplePerDay": 2,
+      "useBasis": "Two cartloads a day for every thousand people, for building and fuel"
     },
     {
-      "id": "herbs", "name": "Herbs", "unit": "bundle",
-      "price": { "estimateCopper": 200, "basis": "Not in the catalog. Guess: 2 gp a bundle, so the herbs in a healing potion cost a fifth of its price" },
-      "usePerThousandPeoplePerDay": 2, "useBasis": "Remedies and cooking, apart from what potion makers need"
+      "id": "herbs",
+      "name": "Herbs",
+      "unit": "bundle",
+      "price": {
+        "estimateCopper": 200,
+        "basis": "Not in the catalog. Guess: 2 gp a bundle, so the herbs in a healing potion cost a fifth of its price"
+      },
+      "usePerThousandPeoplePerDay": 2,
+      "useBasis": "Remedies and cooking, apart from what potion makers need"
     },
     {
-      "id": "healing-potions", "name": "Healing potion", "unit": "potion",
-      "price": { "catalogItem": "item:potion-of-healing:dmg", "times": 1, "basis": "Catalog: potion of healing, 50 gp (confirmed by the DM)" },
-      "usePerThousandPeoplePerDay": 0.5, "useBasis": "One potion a day for every two thousand people",
-      "madeFrom": [{ "good": "herbs", "perUnit": 5, "basis": "Guess: five bundles of herbs a potion" }]
+      "id": "healing-potions",
+      "name": "Healing potion",
+      "unit": "potion",
+      "price": {
+        "catalogItem": "item:potion-of-healing:dmg",
+        "times": 1,
+        "basis": "Catalog: potion of healing, 50 gp (confirmed by the DM)"
+      },
+      "usePerThousandPeoplePerDay": 0.5,
+      "useBasis": "One potion a day for every two thousand people",
+      "madeFrom": [
+        {
+          "good": "herbs",
+          "perUnit": 5,
+          "basis": "Guess: five bundles of herbs a potion"
+        }
+      ],
+      "tags": [
+        "medicine"
+      ],
+      "tagsBasis": "Marks what a town uses more of while a sickness is real there. A guess: add \"medicine\" to herbs too if you want herbs to run short in a plague."
     },
     {
-      "id": "weapons", "name": "Weapons", "unit": "weapon",
-      "price": { "catalogItem": "base-item:longsword:phb", "times": 1, "estimate": true, "basis": "A whole category. The catalog's longsword (15 gp) stands in for it; which item should is your call" },
-      "usePerThousandPeoplePerDay": 0.3, "useBasis": "Roughly one new weapon a year for every ten people",
-      "madeFrom": [{ "good": "ore", "perUnit": 10, "basis": "Guess: ten pounds of iron a weapon" }]
+      "id": "weapons",
+      "name": "Weapons",
+      "unit": "weapon",
+      "price": {
+        "catalogItem": "base-item:longsword:phb",
+        "times": 1,
+        "estimate": true,
+        "basis": "A whole category. The catalog's longsword (15 gp) stands in for it; which item should is your call"
+      },
+      "usePerThousandPeoplePerDay": 0.3,
+      "useBasis": "Roughly one new weapon a year for every ten people",
+      "madeFrom": [
+        {
+          "good": "ore",
+          "perUnit": 10,
+          "basis": "Guess: ten pounds of iron a weapon"
+        }
+      ]
     },
     {
-      "id": "cloth", "name": "Cloth", "unit": "square yard",
-      "price": { "catalogItem": "item:cotton-cloth-1-sq-yd:phb", "times": 1, "basis": "Catalog: cotton cloth, 5 sp a square yard" },
-      "usePerThousandPeoplePerDay": 30, "useBasis": "About eleven square yards a head each year"
+      "id": "cloth",
+      "name": "Cloth",
+      "unit": "square yard",
+      "price": {
+        "catalogItem": "item:cotton-cloth-1-sq-yd:phb",
+        "times": 1,
+        "basis": "Catalog: cotton cloth, 5 sp a square yard"
+      },
+      "usePerThousandPeoplePerDay": 30,
+      "useBasis": "About eleven square yards a head each year"
     },
     {
-      "id": "luxuries", "name": "Luxuries", "unit": "piece",
-      "price": { "catalogItem": "item:silk-1-sq-yd:phb", "times": 1, "estimate": true, "basis": "A whole category. The catalog's silk (10 gp a square yard) stands in for it; which item should is your call" },
-      "usePerThousandPeoplePerDay": 1, "useBasis": "One piece a day for every thousand people"
+      "id": "luxuries",
+      "name": "Luxuries",
+      "unit": "piece",
+      "price": {
+        "catalogItem": "item:silk-1-sq-yd:phb",
+        "times": 1,
+        "estimate": true,
+        "basis": "A whole category. The catalog's silk (10 gp a square yard) stands in for it; which item should is your call"
+      },
+      "usePerThousandPeoplePerDay": 1,
+      "useBasis": "One piece a day for every thousand people"
     }
   ],
   "makes": {
     "highreach": {
-      "grain": { "share": 0.22, "basis": "Farmland around the capital feeds part of it" },
-      "fish": { "share": 0.3, "basis": "On the shore of Lake Arden" },
-      "wine": { "share": 0.06, "basis": "Some wine is made near the capital; most comes from elsewhere" },
-      "ore": { "share": 1, "basis": "The notes name the Highreach Mines; no other Crestfall town has a mine in the notes" },
-      "timber": { "share": 0.16, "basis": "Some woodland nearby" },
-      "healing-potions": { "share": 0.6, "basis": "The capital has the temples and the Arcane Enclave" },
-      "weapons": { "share": 0.78, "basis": "The notes name The Dragons Breath Forge" },
-      "cloth": { "share": 0.39, "basis": "Weavers in the capital" },
-      "luxuries": { "share": 0.33, "basis": "Craftsmen serving the noble houses" }
+      "grain": {
+        "share": 0.22,
+        "basis": "Farmland around the capital feeds part of it"
+      },
+      "fish": {
+        "share": 0.3,
+        "basis": "On the shore of Lake Arden"
+      },
+      "wine": {
+        "share": 0.06,
+        "basis": "Some wine is made near the capital; most comes from elsewhere"
+      },
+      "ore": {
+        "share": 1,
+        "basis": "The notes name the Highreach Mines; no other Crestfall town has a mine in the notes"
+      },
+      "timber": {
+        "share": 0.16,
+        "basis": "Some woodland nearby"
+      },
+      "healing-potions": {
+        "share": 0.6,
+        "basis": "The capital has the temples and the Arcane Enclave"
+      },
+      "weapons": {
+        "share": 0.78,
+        "basis": "The notes name The Dragons Breath Forge"
+      },
+      "cloth": {
+        "share": 0.39,
+        "basis": "Weavers in the capital"
+      },
+      "luxuries": {
+        "share": 0.33,
+        "basis": "Craftsmen serving the noble houses"
+      }
     },
     "ardenville": {
-      "grain": { "share": 0.035, "basis": "A few fields behind the port" },
-      "fish": { "share": 0.675, "basis": "The notes call it a port town on Lake Arden, with a Fishermans Guild" },
-      "weapons": { "share": 0.11, "basis": "The notes name the Steelshapers Forge" }
+      "grain": {
+        "share": 0.035,
+        "basis": "A few fields behind the port"
+      },
+      "fish": {
+        "share": 0.675,
+        "basis": "The notes call it a port town on Lake Arden, with a Fishermans Guild"
+      },
+      "weapons": {
+        "share": 0.11,
+        "basis": "The notes name the Steelshapers Forge"
+      }
     },
     "fairfield": {
-      "grain": { "share": 0.675, "basis": "The name and the open country on the map; taken as Crestfall's main farmland" },
-      "fish": { "share": 0.025, "basis": "A little river fish" },
-      "wine": { "share": 0.13, "basis": "Some vineyards" },
-      "herbs": { "share": 0.25, "basis": "Herb gardens for its apothecaries" },
-      "healing-potions": { "share": 0.4, "basis": "The notes mention potions being sold here" },
-      "weapons": { "share": 0.11, "basis": "A trade town has smiths" },
-      "cloth": { "share": 0.56, "basis": "The notes call it the bustling trade centre of Crestfall" },
-      "luxuries": { "share": 0.67, "basis": "Stands in for goods arriving from the Silverleaf Lands next door, which are not simulated yet" }
+      "grain": {
+        "share": 0.675,
+        "basis": "The name and the open country on the map; taken as Crestfall's main farmland"
+      },
+      "fish": {
+        "share": 0.025,
+        "basis": "A little river fish"
+      },
+      "wine": {
+        "share": 0.13,
+        "basis": "Some vineyards"
+      },
+      "herbs": {
+        "share": 0.25,
+        "basis": "Herb gardens for its apothecaries"
+      },
+      "healing-potions": {
+        "share": 0.4,
+        "basis": "The notes mention potions being sold here"
+      },
+      "weapons": {
+        "share": 0.11,
+        "basis": "A trade town has smiths"
+      },
+      "cloth": {
+        "share": 0.56,
+        "basis": "The notes call it the bustling trade centre of Crestfall"
+      },
+      "luxuries": {
+        "share": 0.67,
+        "basis": "Stands in for goods arriving from the Silverleaf Lands next door, which are not simulated yet"
+      }
     },
     "hillcrest": {
-      "grain": { "share": 0.045, "basis": "Hill farms" },
-      "wine": { "share": 0.81, "basis": "The notes call it the wine capital of Crestfall, supplying Highreach's noble houses" },
-      "timber": { "share": 0.08, "basis": "Coopers and some woodland" },
-      "herbs": { "share": 0.22, "basis": "The notes mention a herbalist and herb gatherers here" },
-      "cloth": { "share": 0.05, "basis": "Cottage weaving" }
+      "grain": {
+        "share": 0.045,
+        "basis": "Hill farms"
+      },
+      "wine": {
+        "share": 0.81,
+        "basis": "The notes call it the wine capital of Crestfall, supplying Highreach's noble houses"
+      },
+      "timber": {
+        "share": 0.08,
+        "basis": "Coopers and some woodland"
+      },
+      "herbs": {
+        "share": 0.22,
+        "basis": "The notes mention a herbalist and herb gatherers here"
+      },
+      "cloth": {
+        "share": 0.05,
+        "basis": "Cottage weaving"
+      }
     },
     "stonehaven": {
-      "grain": { "share": 0.025, "basis": "Small clearings" },
-      "timber": { "share": 0.76, "basis": "The notes put it on the edge of Blackwood Forest" },
-      "herbs": { "share": 0.53, "basis": "Forest edge, founded by rangers and trappers" }
+      "grain": {
+        "share": 0.025,
+        "basis": "Small clearings"
+      },
+      "timber": {
+        "share": 0.76,
+        "basis": "The notes put it on the edge of Blackwood Forest"
+      },
+      "herbs": {
+        "share": 0.53,
+        "basis": "Forest edge, founded by rangers and trappers"
+      }
     }
   }
 }

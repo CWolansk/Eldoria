@@ -88,6 +88,8 @@ export function createCountdown(input) {
     dueDay: mode === COUNTDOWN_MODE.DATE ? requireDay(input.dueDay, "The date") : null,
     fill: mode === COUNTDOWN_MODE.CHANCE ? clampFill(input.fill, size) : 0,
     place: input.place ?? null,
+    // A threat may sit on a road instead of (or as well as) a place.
+    route: text(input.route) || null,
     suggestionText: requireText(input.suggestionText, "What it suggests when it comes due"),
     // What the suggested event does to the numbers if the DM accepts it; null for a plain fact.
     effect: input.effect ?? null
@@ -131,6 +133,7 @@ export function createCountdownEdit(input) {
   if (source.chance !== undefined) changes.chance = normalizeChance(source.chance);
   if (source.dueDay !== undefined) changes.dueDay = requireDay(source.dueDay, "The date");
   if (source.place !== undefined) changes.place = source.place ?? null;
+  if (source.route !== undefined) changes.route = text(source.route) || null;
   if (source.suggestionText !== undefined) {
     changes.suggestionText = requireText(source.suggestionText, "What it suggests when it comes due");
   }
@@ -181,7 +184,7 @@ export function countdownSuggestion(item) {
       ? `The date for "${item.label}" has come.`
       : `The countdown "${item.label}" filled up.`,
     effect: item.effect ?? null,
-    tags: [countdownTag(item.id)]
+    tags: item.route ? [countdownTag(item.id), `route:${item.route}`] : [countdownTag(item.id)]
   };
 }
 
@@ -226,6 +229,7 @@ export function applyCountdownRecord(systemState, record) {
       const changes = record.changes || {};
       if (changes.label !== undefined) item.label = changes.label;
       if (changes.place !== undefined) item.place = changes.place;
+      if (changes.route !== undefined) item.route = changes.route;
       if (changes.suggestionText !== undefined) item.suggestionText = changes.suggestionText;
       if (changes.chance !== undefined && item.mode === COUNTDOWN_MODE.CHANCE) item.chance = changes.chance;
       if (changes.dueDay !== undefined && item.mode === COUNTDOWN_MODE.DATE) item.dueDay = changes.dueDay;

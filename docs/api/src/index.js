@@ -105,6 +105,8 @@ app.http("publicIndex", {
 // Living world (DM only): world, world/start, world/advance, world/events,
 // world/events/{id}/decision, world/events/{id}/visibility, world/countdowns,
 // world/countdowns/{id}/actions, world/places, world/markets, world/state,
-// world/party, world/pressures/{id}/end. One route needs no key and answers with
-// local prices only: world/public/prices.
+// world/party, world/pressures/{id}/end, world/overview, world/city, world/city/import,
+// world/city/{id}/actions, world/rumours, world/rumours/{id}/actions, world/travellers,
+// world/travellers/{id}/end. Two routes need no key: world/public/prices (local prices
+// only) and world/public/rumours (rumours the DM revealed in the party's town).
 registerWorldRoutes(app);

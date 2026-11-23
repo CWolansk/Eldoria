@@ -130,7 +130,10 @@ function buildTown(name) {
         id: slug(base),
         name: front.name || base,
         type: front.type || null,
-        locationType: front.location_type || front.shop_type || null,
+        locationType: front.location_type || front.store_type || front.shop_type || null,
+        // Who the note says runs it; used to place that person here in the city outline.
+        runBy: front.proprietor || front.owner || null,
+        runByField: front.proprietor ? "proprietor" : front.owner ? "owner" : null,
         knownToPlayers: isPublic(`Crestfall/${name}/${base}.md`),
         hasMapMarker: markerById.has(slug(front.name || base)),
         source: rel(entry)
@@ -185,7 +188,6 @@ function buildTown(name) {
     production: missing("What this place makes or grows, per good"),
     consumption: missing("What this place uses, per good"),
     detailLevel: missing("Full detail or sketched"),
-    cityMap: null,
     subLocations,
     npcs: [...npcs, ...publicOnlyNpcs]
   };
@@ -505,7 +507,8 @@ for (const town of towns) {
     kind: town.settlementType?.value || "Settlement",
     region: "Crestfall",
     parent: null,
-    knownToPlayers: isPublic(`Crestfall/${town.name}/${town.name}.md`)
+    knownToPlayers: isPublic(`Crestfall/${town.name}/${town.name}.md`),
+    position: town.position?.value ?? null
   });
   for (const sub of town.subLocations) {
     placeList.push({
@@ -526,7 +529,8 @@ for (const place of draft.otherPlacesOnMap) {
     kind: "On the map",
     region: place.region?.value || null,
     parent: null,
-    knownToPlayers: false
+    knownToPlayers: false,
+    position: place.position?.value ?? null
   });
 }
 // ---- Market setup (Stage 2) ----
@@ -585,7 +589,12 @@ for (const good of estimates.goods) {
   } else {
     basePrice = { value: good.price.estimateCopper, estimate: true, basis: good.price.basis };
   }
-  marketGoods.push({ id: good.id, name: good.name, unit: good.unit, basePrice, madeFrom: (good.madeFrom || []).map(({ good: input, perUnit }) => ({ good: input, perUnit })) });
+  marketGoods.push({
+    id: good.id, name: good.name, unit: good.unit, basePrice,
+    // Labels other subjects read. "medicine": a sickness makes a town use more of it.
+    tags: good.tags || [],
+    madeFrom: (good.madeFrom || []).map(({ good: input, perUnit }) => ({ good: input, perUnit }))
+  });
 }
 if (marketProblems.length) {
   throw new Error(`Market setup not written:\n  ${marketProblems.join("\n  ")}`);
@@ -699,6 +708,72 @@ if (fs.existsSync(reviewFile)) {
     console.warn(`${rel(reviewFile)} has no market-estimates markers; the table was not written.`);
   }
 }
+
+// ---- City outlines (Stage 3): districts, locations and people, with no city maps ----
+// Only what the notes say. A person is placed at a location only where the location's
+// own note names them as the one who runs it; everyone else is "somewhere in town".
+// A district is listed only where a note names one; nothing is placed in a district.
+const cityFile = path.join(repoRoot, "Private", "0.DM Screen", "World Sim", "city.upload.json");
+const NAMED_DISTRICTS = [
+  { town: "highreach", name: "Merchant District", file: "Private/2. Reference/Events/Consequences/Resolved/Highreach Duplirat Invasion.md", pattern: /Merchant District/u },
+  { town: "highreach", name: "Noble District", file: "Private/1. World Almanac/World/Crestfall/Highreach/The Warren.md", pattern: /Noble District/u },
+  { town: "highreach", name: "Palace District", file: "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Lord Cedric Brightblade.md", pattern: /palace district/iu }
+];
+const cityEntries = [];
+const cityNotes = { placedAtLocation: [], unplacedProprietors: [], districts: [] };
+for (const district of NAMED_DISTRICTS) {
+  const file = path.join(repoRoot, district.file);
+  if (!fs.existsSync(file)) continue;
+  const lines = fs.readFileSync(file, "utf8").split(/\r?\n/u);
+  const lineNumber = lines.findIndex((line) => district.pattern.test(line)) + 1;
+  if (!lineNumber) continue;
+  cityEntries.push({
+    id: `${district.town}--district--${slug(district.name)}`,
+    type: "district", town: district.town, name: district.name, kind: null,
+    note: null, playersKnow: false, source: `${district.file}, line ${lineNumber}`
+  });
+  cityNotes.districts.push({ town: district.town, name: district.name, source: `${district.file}, line ${lineNumber}` });
+}
+for (const town of towns) {
+  const npcByName = new Map(town.npcs.map((npc) => [String(npc.name).toLowerCase(), npc]));
+  const placedAt = new Map();
+  for (const sub of town.subLocations) {
+    const locationId = `${town.id}--${sub.id}`;
+    cityEntries.push({
+      id: locationId, type: "location", town: town.id, name: sub.name,
+      kind: sub.locationType || (sub.type && sub.type !== "Store" && sub.type !== "Location" ? sub.type : null),
+      note: null, playersKnow: sub.knownToPlayers === true, source: sub.source
+    });
+    if (sub.runBy) {
+      const npc = npcByName.get(String(sub.runBy).toLowerCase());
+      if (npc && !placedAt.has(npc.id)) {
+        placedAt.set(npc.id, { location: locationId, source: `${sub.source} (front matter: ${sub.runByField}: ${sub.runBy})` });
+        cityNotes.placedAtLocation.push({ npc: npc.name, town: town.name, location: sub.name, source: `${sub.source}, ${sub.runByField}` });
+      } else if (!npc) {
+        cityNotes.unplacedProprietors.push({ town: town.name, location: sub.name, named: sub.runBy, source: sub.source });
+      }
+    }
+  }
+  for (const npc of town.npcs) {
+    const placed = placedAt.get(npc.id);
+    const details = [npc.race, npc.status && npc.status !== "Alive" ? npc.status : null].filter(Boolean).join(", ");
+    cityEntries.push({
+      id: `npc--${town.id}--${npc.id}`, type: "npc", town: town.id, name: npc.name,
+      kind: npc.profession || null, note: details || null,
+      location: placed ? placed.location : null,
+      playersKnow: npc.knownToPlayers === true,
+      source: placed ? `${npc.source}; placed by ${placed.source}` : npc.source
+    });
+  }
+}
+fs.writeFileSync(cityFile, `${JSON.stringify({
+  schema: "eldoria-world-city/1",
+  note: "DM only. Load this from the Living World page (Setup, Load city file). Loading it again adds only what is new. There are no city maps: a town is districts, locations and people, and you add to it as you need.",
+  entries: cityEntries,
+  fromTheNotes: cityNotes
+}, null, 2)}\n`);
+const cityCount = (type) => cityEntries.filter((entry) => entry.type === type).length;
+console.log(`Wrote ${rel(cityFile)} (${cityCount("district")} districts, ${cityCount("location")} locations, ${cityCount("npc")} people; ${cityNotes.placedAtLocation.length} people placed at a location)`);
 
 const count = (list, test) => list.filter(test).length;
 console.log(`Wrote ${rel(outFile)}`);

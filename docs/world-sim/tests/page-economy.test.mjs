@@ -132,7 +132,7 @@ test("Markets: a good picker, a table with a sparkline and stock, and estimates 
   assert.match(page.text(), /Base price 10 gp estimate/, "an estimated base price is labelled");
 });
 
-test("Places: a searchable list by region, and a place page with an empty city map slot", async () => {
+test("Places: a searchable list by region, and a place page with a city outline and no map", async () => {
   const page = await openPage();
   await page.tab("places", "#ws-places");
   assert.deepEqual(page.all(".ws-placegroup h3").map((node) => node.textContent), ["Test Region", "Other Region"]);
@@ -148,9 +148,9 @@ test("Places: a searchable list by region, and a place page with an empty city m
   assert.match(panel.textContent, /known to players/);
   assert.equal(panel.querySelector("[data-detail]").textContent, "Full detail: prices tracked daily");
   assert.match(panel.textContent, /People 2,000/);
-  const slot = panel.querySelector("[data-city-map]");
-  assert.equal(slot.textContent, "City map goes here. None yet.");
-  assert.equal(slot.children.length, 0, "the slot is empty: no map, no controls");
+  assert.equal(panel.querySelector("[data-city-map]"), null, "there is no city map slot any more");
+  assert.doesNotMatch(panel.textContent, /city map/i);
+  assert.ok(panel.querySelector("#ws-city[data-city='openton']"), "the town has an outline of districts, places and people instead");
   assert.ok(panel.querySelector("#ws-place-prices"), "prices are listed");
   assert.match(panel.querySelector("#ws-place-roads").textContent, /Secretville/);
   assert.equal(panel.querySelector("#ws-place-roads input[data-road]").value, "2");
@@ -158,7 +158,7 @@ test("Places: a searchable list by region, and a place page with an empty city m
 
   page.click(".ws-placeitem[data-id='openton--inn']");
   await waitFor(() => page.q("#ws-place[data-place='openton--inn']"), "the shop page should open");
-  assert.equal(page.q("#ws-place [data-city-map]"), null, "a shop has no city map slot");
+  assert.equal(page.q("#ws-place #ws-city"), null, "a shop has no outline of its own");
   assert.equal(page.q("#ws-place [data-detail]").textContent, "Place in a town");
 
   page.click(".ws-placeitem[data-id='farplace']");

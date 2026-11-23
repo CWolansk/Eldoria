@@ -188,6 +188,8 @@ export function normalizeEconomyConfig(input = {}) {
       name: text(good.name) || id,
       unit: text(good.unit) || "unit",
       basePrice: normalizeFigure(good.basePrice, `Base price of ${id}`, { min: 0.01 }),
+      // Free labels the other subjects read, e.g. "medicine". No good is special by id.
+      tags: Array.isArray(good.tags) ? [...new Set(good.tags.map(text).filter(Boolean))].sort() : [],
       madeFrom: (good.madeFrom || []).map((input) => ({
         good: text(input?.good),
         perUnit: figureValue(input?.perUnit, 0)
@@ -307,7 +309,7 @@ export function targetPrice(basePrice, target, stock, constants = ECONOMY_DEFAUL
   return basePrice * clamp(Math.pow(ratio, constants.priceExponent), constants.minPriceFactor, constants.maxPriceFactor);
 }
 
-function activePressures(eco, day) {
+export function activePressures(eco, day) {
   return Object.values(eco.pressures).filter((pressure) => pressure.fromDay <= day
     && (pressure.untilDay == null || pressure.untilDay >= day));
 }
@@ -322,7 +324,7 @@ function multiplierFor(pressures, target, placeId, goodId) {
   return multiplier;
 }
 
-function routeMultiplier(pressures, routeId) {
+export function routeMultiplier(pressures, routeId) {
   let multiplier = 1;
   for (const pressure of pressures) {
     if (pressure.target === PRESSURE_TARGET.ROUTE && pressure.route === routeId) {
@@ -364,6 +366,8 @@ function stepEconomy(eco, day, out = {}) {
   const config = eco.config;
   if (!config) return;
   const constants = constantsOf(eco);
+  // Other subjects (people, sickness) may scale what a town uses of a good today.
+  const useFactor = typeof out.useFactor === "function" ? out.useFactor : () => 1;
   const eased = out.eased || (out.eased = []);
   const shipped = out.shipped || (out.shipped = []);
   const moves = out.moves || (out.moves = []);
@@ -420,6 +424,7 @@ function stepEconomy(eco, day, out = {}) {
       }
       entry.inputFactor = good.madeFrom.length ? inputFactor : 1;
       const wanted = figureValue(market[good.id]?.use)
+        * useFactor(placeId, good)
         * multiplierFor(pressures, PRESSURE_TARGET.USE, placeId, good.id)
         * Math.pow(entry.price / good.basePrice.value, -constants.demandElasticity);
       entry.stock = Math.max(0, entry.stock + make - Math.min(wanted, entry.stock + make));
@@ -616,6 +621,32 @@ export function applyEconomyRecord(eco, record) {
   return false;
 }
 
+/**
+ * How much of its usual use a town has today, from the other subjects' running numbers:
+ *   people   - head count against the population in the setup
+ *   sickness - extra use of any good carrying a tag the sickness names (e.g. "medicine")
+ * Both read yesterday's committed state, so the order systems run in cannot matter.
+ */
+export function createUseFactor(world) {
+  const config = world?.systems?.[ECONOMY_SYSTEM_ID]?.config;
+  const change = world?.systems?.people?.change || {};
+  const sickness = world?.systems?.sickness?.items || {};
+  return (placeId, good) => {
+    let factor = 1;
+    const usual = Math.round(figureValue(config?.places?.[placeId]?.population, 0));
+    const now = Math.max(0, usual + (change[placeId] || 0));
+    if (usual > 0) {
+      factor *= now / usual;
+    }
+    for (const item of Object.values(sickness)) {
+      if (item.place !== placeId || item.ended || !(item.sick > 0)) continue;
+      if (!(good.tags || []).includes(item.raisesUseOf)) continue;
+      if (now > 0) factor *= 1 + item.usePerSickShare * Math.min(1, item.sick / now);
+    }
+    return factor;
+  };
+}
+
 function nameOfPlace(config, id) {
   return config.places[id]?.name || id;
 }
@@ -634,7 +665,9 @@ export const economySystem = Object.freeze({
     if (!eco.config) return;
     const config = eco.config;
     const constants = constantsOf(eco);
-    const out = {};
+    // What people and sickness did up to yesterday scales today's use, the same way
+    // for every good: head count for all goods, and the sick for goods tagged for it.
+    const out = { useFactor: createUseFactor(ctx.world) };
     stepEconomy(eco, ctx.day, out);
 
     for (const pressure of out.eased) {
@@ -759,6 +792,7 @@ export function describeEconomy(state) {
       id: good.id, name: good.name, unit: good.unit,
       basePrice: good.basePrice.value, basePriceText: formatMoney(good.basePrice.value),
       basePriceEstimate: good.basePrice.estimate,
+      tags: good.tags || [],
       madeFrom: good.madeFrom
     })),
     places: Object.keys(config.places).sort().map((placeId) => {

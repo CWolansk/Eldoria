@@ -383,6 +383,159 @@ These are constants in the engine, listed here because they shape what you see:
 - The economy raises at most 2 suggestions a day and at most 1 per good. One held back today is raised on a following day.
 - Countdown suggestions are never capped.
 
+## New in Stage 3, needs your OK
+
+Stage 3 adds the city outline (no city maps), rumours, people moving, travelling NPCs, threats on roads and sickness. Everything is still append only. Nothing below exists unless you write it: the world starts with no rumour, no sickness, no traveller and no move.
+
+### Q. Cities are an outline, kept as rows (no maps)
+
+A town is districts, locations and people. Each change is a new `city` row; nothing is deleted, an entry is retired and can be brought back. Every entry is hidden from players until you say they know it.
+
+```json
+{
+  "recordType": "city",
+  "id": "c-0099306-ab12",
+  "action": "add",
+  "entryId": "<town>--<name>",
+  "day": 99306,
+  "at": "2026-11-23T19:04:11.000Z",
+  "entry": {
+    "type": "district | location | npc",
+    "town": "<place id of the town>",
+    "name": "<name>",
+    "kind": "<Inn, Smith...; for a person, what they do> | null",
+    "note": "<one line> | null",
+    "district": "<district entry id> | null",
+    "location": "<location entry id, people only> | null",
+    "playersKnow": false,
+    "source": "<where in your notes it came from> | null"
+  }
+}
+```
+
+Other actions on the same kind of row:
+
+- `"action": "change"` with `"changes": { "name"?, "kind"?, "note"?, "town"?, "district"?, "location"?, "playersKnow"? }`. This is rename, move, and "the players know this".
+- `"action": "retire"` and `"action": "restore"`.
+
+Entry ids: a location is `<town>--<name>` (the same ids your setup file already uses for places in a town), a person is `npc--<town>--<name>`, a district is `<town>--district--<name>`. A person at a location is in that location's district. A person with neither is "somewhere in town".
+
+The outline is read straight from the record. It is not part of the daily tick and is not in the day snapshot.
+
+### R. Rumours (new rows; running state in the snapshot)
+
+```json
+{
+  "recordType": "rumour",
+  "id": "r-0099306-ab12",
+  "action": "start",
+  "rumourId": "rumour-cd34",
+  "day": 99306,
+  "at": "...",
+  "rumour": {
+    "eventId": "<the written event it is about> | null",
+    "truth": "written | unwritten",
+    "origin": "<place id where it starts>",
+    "who": "<text>",
+    "what": "<text>",
+    "where": "<place id it is said to have happened in>",
+    "size": 2,
+    "flatters": true
+  }
+}
+```
+
+- `size` is 1 (a small thing) to 5 (never seen before). `flatters` is `true`, `false` or `null`.
+- `"action": "end"` stops it spreading. `"action": "confirm"` with `eventId` marks it true, pointing at the written event.
+- `"action": "reveal"` with `"place"` and `"playersVisible": true | false` lets the players hear it in that one town, or takes that back. It can only be revealed where it has arrived.
+
+Running state, `state.systems.rumours.items.<rumourId>`:
+
+```json
+{
+  "id": "rumour-cd34",
+  "eventId": null,
+  "truth": "unwritten",
+  "origin": "<place id>",
+  "startDay": 99306,
+  "version": { "who": "...", "what": "...", "where": "<place id>", "size": 2, "flatters": false },
+  "heard": {
+    "<place id>": {
+      "day": 99308,
+      "from": "<place id it came from> | null",
+      "bent": { "attribute": "who | what | where | size | flatters", "from": "...", "to": "..." },
+      "version": { "who": "...", "what": "...", "where": "...", "size": 3, "flatters": false },
+      "playersVisible": false
+    }
+  },
+  "wary": { "<place id>": 99308 },
+  "ended": false
+}
+```
+
+`version` at the top is the truth and never changes. Each town keeps its own telling; `bent` is `null` when it was passed on unchanged. At most one attribute bends per hop.
+
+### S. People moving (an effect on an event; running state in the snapshot)
+
+A new kind of `effect` on an event (written by you, or carried by a suggestion you accept):
+
+```json
+{ "type": "people-move", "from": "<place id>", "to": "<place id>", "people": 300, "days": 2, "label": "<text> | null" }
+```
+
+Running state, `state.systems.people`: `change` (how many each place has gained or lost, so a head count is always the setup figure plus this), `moves` (moves still under way), `onTheRoad` (groups travelling, with the day they arrive). Nobody is made or lost. No move is ever started by the simulation.
+
+### T. Sickness (effects on events; running state in the snapshot)
+
+```json
+{ "type": "sickness-start", "place": "<place id>", "name": "marsh fever", "label": null }
+{ "type": "sickness-end", "place": "<place id>", "label": null }
+```
+
+Running state, `state.systems.sickness.items.<place id>`: `{ place, name, startDay, cause, sick, recovered, peak, ended, endDay, endedBy, raisesUseOf: "medicine", usePerSickShare, suggestedTo }`. A sickness exists only after a written event (or an accepted suggestion) with `sickness-start`. Reaching another town is only ever a suggestion carrying its own `sickness-start`.
+
+Goods gain an optional `tags` list in the market setup (`"tags": ["medicine"]`). A sickness raises the use of goods with that tag; no good is special by its id.
+
+### U. Travelling NPCs (new rows; running state in the snapshot)
+
+```json
+{
+  "recordType": "traveller",
+  "id": "t-0099306-ab12",
+  "action": "set",
+  "npcId": "npc--<town>--<name>",
+  "name": "<their name, for the report>",
+  "day": 99306,
+  "at": "...",
+  "stops": [{ "place": "<place id>", "stay": 2 }, { "place": "<place id>", "stay": 1 }],
+  "loop": true
+}
+```
+
+`"action": "clear"` ends their travels. Running state, `state.systems.travellers.items.<npcId>`: `{ npcId, name, stops, loop, index, at, leaveDay, from, to, departDay, arriveDay, roads, held, done }`.
+
+### V. Threats on roads
+
+A countdown may carry `"route": "<road id>"` as well as, or in place of, `"place"`. Its suggestion is tagged `route:<road id>` and may carry a road pressure as its effect.
+
+### W. Map positions
+
+Each place in the setup document may carry `"position": [<fraction up from the bottom>, <fraction across from the left>]` on the world map image, the same convention the site's world map uses. The region outlines are not stored: they are the draft file `docs/world-sim/regions.draft.json`.
+
+### X. What players can read without a key: rumours you revealed
+
+`GET /api/world/public/rumours` answers with the rumours you have revealed in the town the party is in, as that town tells them, and only if the players know that town:
+
+```json
+{ "place": { "name": "<town>" }, "rumours": [{ "text": "<what that town is saying>" }] }
+```
+
+Never the truth, never where else it has spread, never a rumour you did not reveal there, no ids. A place in the tale that the players do not know is left out of the sentence. In every other case (world not started, no party set, a town the players do not know) the answer is exactly `{ "place": null, "rumours": [] }`.
+
+### Y. Caps
+
+Every subject (countdowns, goods, people, sickness, rumours, travellers) may add at most 6 lines to a day's report, with a closing line saying how many were held back. Rumours raise at most 2 suggestions a day; a sickness raises at most one "reaches another town" suggestion a day per place, and only once per neighbour.
+
 ## What is not stored here
 
 - People (NPCs). Places, goods and roads are sections G, L and N; every estimate in them is listed in `Private/0.DM Screen/World Sim/SEED-REVIEW.md`.

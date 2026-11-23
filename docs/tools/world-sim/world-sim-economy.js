@@ -29,7 +29,9 @@ function figure(raw) {
   return { value: raw ?? null, estimate: false, basis: "" };
 }
 
-export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping, $ }) {
+export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping, $, hooks }) {
+  // Stage 3 kinds of effect (people moving, sickness) are built and described by `hooks`.
+  const EXTRA = new Set((hooks?.EXTRA_EFFECT_KINDS || []).map(([id]) => id));
   const estimateChip = (isEstimate, basis = "") => (isEstimate
     ? `<span class="ws-chip ws-chip--estimate" title="${esc(basis || "A best guess for you to correct")}">estimate</span>`
     : "");
@@ -100,6 +102,7 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
   /** The effect a jot or countdown carries, from the picker. null means "just a fact". */
   function buildEffect(model, placeId) {
     if (!model || model.kind === "note" || !model.kind) return null;
+    if (EXTRA.has(model.kind)) return hooks.buildExtraEffect(model, placeId);
     const { good, road } = effectModel(model, placeId);
     const days = String(model.days ?? "").trim() === "" ? null : Number(model.days);
     if (model.kind === "close" || model.kind === "slow") {
@@ -115,6 +118,7 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
   /** In plain words, what an effect does. Used under the picker and on suggestion cards. */
   function describeEffect(effect) {
     if (!effect) return "It is written down as canon. No numbers change.";
+    if (effect.type !== "pressure") return hooks.describeExtraEffect(effect);
     const length = effect.days == null ? "until you end it" : `for ${effect.days} day${effect.days === 1 ? "" : "s"}`;
     if (effect.target === "route") {
       const route = (ui.markets?.routes || []).find((entry) => entry.id === effect.route);
@@ -137,7 +141,13 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
     const wantsGood = kind === "scarce" || kind === "flood";
     const wantsRoad = kind === "close" || kind === "slow";
     let note = "";
-    if (kind !== "note") {
+    if (EXTRA.has(kind)) {
+      try {
+        note = esc(hooks.describeExtraEffect(hooks.buildExtraEffect(model, placeId)));
+      } catch (error) {
+        note = esc(error.message);
+      }
+    } else if (kind !== "note") {
       if (!ui.markets?.configured) {
         note = "No markets are set up yet, so this can only be written as a plain fact. Load the setup file under Setup.";
       } else if (wantsGood && !goods.length) {
@@ -153,12 +163,13 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
       }
     }
     return `<label>What it does<select data-bind="${bind}.kind" data-rerender="true" data-effect-kind>${
-      EFFECT_KINDS.map(([id, label]) => `<option value="${id}"${kind === id ? " selected" : ""}>${label}</option>`).join("")}</select></label>
+      [...EFFECT_KINDS, ...(hooks?.EXTRA_EFFECT_KINDS || [])].map(([id, label]) => `<option value="${id}"${kind === id ? " selected" : ""}>${label}</option>`).join("")}</select></label>
+      ${EXTRA.has(kind) ? hooks.extraEffectFields(model, placeId, bind) : ""}
       ${wantsGood && goods.length ? `<label>Which good<select data-bind="${bind}.good" data-rerender="true" data-effect-good>${
         goods.map((entry) => `<option value="${esc(entry.good)}"${good?.good === entry.good ? " selected" : ""}>${esc(goodOf(entry.good)?.name || entry.good)}</option>`).join("")}</select></label>` : ""}
       ${wantsRoad && roads.length ? `<label>Road to<select data-bind="${bind}.road" data-rerender="true" data-effect-road>${
         roads.map((route) => `<option value="${esc(route.id)}"${road?.id === route.id ? " selected" : ""}>${esc(route.a === placeId ? route.bName : route.aName)}</option>`).join("")}</select></label>` : ""}
-      ${kind !== "note" ? `<label>For how many days<input type="number" min="1" max="2000" step="1" data-bind="${bind}.days" data-rerender="true" data-effect-days value="${esc(model.days ?? "")}" placeholder="until you end it"></label>` : ""}
+      ${kind !== "note" && !EXTRA.has(kind) ? `<label>For how many days<input type="number" min="1" max="2000" step="1" data-bind="${bind}.days" data-rerender="true" data-effect-days value="${esc(model.days ?? "")}" placeholder="until you end it"></label>` : ""}
       ${note ? `<p class="ws-meta ws-field--wide" data-effect-note>${note}</p>` : ""}`;
   }
 
@@ -258,6 +269,8 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
   }
 
   function placePage(id) {
+    // A location or person in a town has its own page (Stage 3).
+    if (hooks?.entryById(id)) return hooks.entryPage(id);
     const place = ui.places.find((entry) => entry.id === id);
     if (!place) return `<div class="ws-card"><p class="ws-lede">Pick a place to open it.</p></div>`;
     const market = marketPlace(id);
@@ -298,7 +311,6 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
         <p class="ws-meta">${esc(place.kind || "Place")}${place.region ? ` · ${esc(place.region)}` : ""}${partyHere ? " · the party is here" : ""}${place.knownToPlayers ? " · known to players" : " · hidden from players"}</p></div>
       <div class="ws-row"><span class="ws-chip ws-chip--plain" data-detail>${esc(detail)}</span>
         ${population.value != null ? `<span>People <b>${Number(population.value).toLocaleString("en-GB")}</b> ${estimateChip(population.estimate, population.basis)}</span>` : ""}</div>
-      ${isSettlement ? `<div class="ws-slot" data-city-map>City map goes here. None yet.</div>` : ""}
       ${prices}
       ${market?.why?.length ? `<div><h3>Why things are moving</h3><p>${whyList(market.why)}</p></div>` : ""}
       ${makesAndUses}
@@ -312,7 +324,8 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
       }).join("")}</ul>
         <div class="ws-row"><button class="ws-btn ws-btn--small" type="button" data-act="save-roads" data-id="${esc(id)}">Save travel days</button>
           <span class="ws-meta">Used for caravans and as a hint to you. They never move the party.</span></div></div>` : ""}
-      ${events.length ? `<div><h3>Written here</h3><ul class="ws-plain">${events.map((event) => `<li><span class="ws-meta">${esc(formatDayShort(event.day))}</span> ${esc(event.text)}</li>`).join("")}</ul></div>` : ""}
+      ${isSettlement && hooks ? hooks.cityBlock(id) : ""}
+      ${events.length ? `<div><h3>Written here</h3><ul class="ws-plain">${events.map((event) => `<li><span class="ws-meta">${esc(formatDayShort(event.day))}</span> ${hooks ? hooks.linked(event.text) : esc(event.text)}</li>`).join("")}</ul></div>` : ""}
       <div class="ws-row">
         <button class="ws-btn ws-btn--small" type="button" data-act="jot-here" data-id="${esc(id)}">Jot something here</button>
         ${partyHere
@@ -332,7 +345,7 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
       <div class="ws-cols">
         <div class="ws-placecol"><input class="ws-input ws-search" id="ws-place-query" type="search" placeholder="Search places" value="${esc(ui.placeQuery)}" aria-label="Search places">
           <div id="ws-place-list">${placeList()}</div></div>
-        ${placePage(ui.place)}
+        ${ui.entry && hooks?.entryById(ui.entry) ? hooks.entryPage(ui.entry) : placePage(ui.place)}
       </div>
     </section>`;
   }
@@ -347,6 +360,8 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
     "open-place"(data) {
       keepTyping();
       ui.place = data.id;
+      ui.entry = null;
+      ui.itinerary = null;
       ui.tab = "places";
       ui.error = "";
       ui.message = "";
@@ -446,7 +461,7 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
     return true;
   }
 
-  return { actions, buildEffect, describeEffect, effectFields, loadMarkets, marketsView, onInput, placesView };
+  return { actions, buildEffect, describeEffect, effectFields, loadMarkets, marketsView, onInput, placePage, placesView };
 }
 
 export { formatMoney };

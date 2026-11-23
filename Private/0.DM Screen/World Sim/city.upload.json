@@ -1,0 +1,1390 @@
+{
+  "schema": "eldoria-world-city/1",
+  "note": "DM only. Load this from the Living World page (Setup, Load city file). Loading it again adds only what is new. There are no city maps: a town is districts, locations and people, and you add to it as you need.",
+  "entries": [
+    {
+      "id": "highreach--district--merchant-district",
+      "type": "district",
+      "town": "highreach",
+      "name": "Merchant District",
+      "kind": null,
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/2. Reference/Events/Consequences/Resolved/Highreach Duplirat Invasion.md, line 142"
+    },
+    {
+      "id": "highreach--district--noble-district",
+      "type": "district",
+      "town": "highreach",
+      "name": "Noble District",
+      "kind": null,
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/The Warren.md, line 37"
+    },
+    {
+      "id": "highreach--district--palace-district",
+      "type": "district",
+      "town": "highreach",
+      "name": "Palace District",
+      "kind": null,
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Lord Cedric Brightblade.md, line 30"
+    },
+    {
+      "id": "highreach--highreach-merchants-guild",
+      "type": "location",
+      "town": "highreach",
+      "name": "HighReach Merchants Guild",
+      "kind": "Guildhall",
+      "note": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/HighReach Merchants Guild.md"
+    },
+    {
+      "id": "highreach--highreach-adventurers-guild",
+      "type": "location",
+      "town": "highreach",
+      "name": "Highreach Adventurers Guild",
+      "kind": "Guildhall",
+      "note": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/Highreach Adventurers Guild.md"
+    },
+    {
+      "id": "highreach--highreach-mines",
+      "type": "location",
+      "town": "highreach",
+      "name": "Highreach Mines",
+      "kind": "Dungeon",
+      "note": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/Highreach Mines.md"
+    },
+    {
+      "id": "highreach--sturdy-mugg",
+      "type": "location",
+      "town": "highreach",
+      "name": "Sturdy Mugg",
+      "kind": "Inn",
+      "note": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/Sturdy Mugg.md"
+    },
+    {
+      "id": "highreach--target-by-tradewind",
+      "type": "location",
+      "town": "highreach",
+      "name": "Target by Tradewind",
+      "kind": "General Store",
+      "note": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/Target by Tradewind.md"
+    },
+    {
+      "id": "highreach--the-arcane-enclave",
+      "type": "location",
+      "town": "highreach",
+      "name": "The Arcane Enclave",
+      "kind": "Magic Shop",
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/The Arcane Enclave.md"
+    },
+    {
+      "id": "highreach--the-dragons-breath-forge",
+      "type": "location",
+      "town": "highreach",
+      "name": "The Dragons Breath Forge",
+      "kind": "Smithy",
+      "note": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/The Dragons Breath Forge.md"
+    },
+    {
+      "id": "highreach--the-warren",
+      "type": "location",
+      "town": "highreach",
+      "name": "The Warren",
+      "kind": "Guildhall",
+      "note": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/The Warren.md"
+    },
+    {
+      "id": "npc--highreach--aidan-reed",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Aidan Reed",
+      "kind": "Barkeep",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Aidan Reed.md"
+    },
+    {
+      "id": "npc--highreach--alaric-emberfell",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Alaric Emberfell",
+      "kind": "Blacksmith",
+      "note": null,
+      "location": "highreach--the-dragons-breath-forge",
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Alaric Emberfell.md; placed by Private/1. World Almanac/World/Crestfall/Highreach/The Dragons Breath Forge.md (front matter: proprietor: Alaric Emberfell)"
+    },
+    {
+      "id": "npc--highreach--alistair-goldman",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Alistair Goldman",
+      "kind": "Guildmaster",
+      "note": "Human",
+      "location": "highreach--highreach-merchants-guild",
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Alistair Goldman.md; placed by Private/1. World Almanac/World/Crestfall/Highreach/HighReach Merchants Guild.md (front matter: proprietor: Alistair Goldman)"
+    },
+    {
+      "id": "npc--highreach--alistair-grimwood",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Alistair Grimwood",
+      "kind": "Butler",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Alistair Grimwood.md"
+    },
+    {
+      "id": "npc--highreach--alma-ironfist-nee-brightwater",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Alma Ironfist nee Brightwater",
+      "kind": "Adventurer",
+      "note": "Human",
+      "location": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Alma Ironfist nee Brightwater.md"
+    },
+    {
+      "id": "npc--highreach--aric-stormblade",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Aric Stormblade",
+      "kind": "Fighter",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Aric Stormblade.md"
+    },
+    {
+      "id": "npc--highreach--brenna-barkridge-nee-ironfoot",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Brenna Barkridge nee Ironfoot",
+      "kind": "Adventurer",
+      "note": "Dwarf",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Brenna Barkridge nee Ironfoot.md"
+    },
+    {
+      "id": "npc--highreach--brix-ironwhistle",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Brix Ironwhistle",
+      "kind": "Captain of Security and Tunnel Maintenance, Exterminators Guild",
+      "note": "Dwarf",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Brix Ironwhistle.md"
+    },
+    {
+      "id": "npc--highreach--brom-goldfang",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Brom Goldfang",
+      "kind": "Weapons Merchant",
+      "note": "Halfling",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Brom Goldfang.md"
+    },
+    {
+      "id": "npc--highreach--celeste-stonetooth-nee-moonwhisper",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Celeste Stonetooth nee Moonwhisper",
+      "kind": "Adventurer",
+      "note": "Elf",
+      "location": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Celeste Stonetooth nee Moonwhisper.md"
+    },
+    {
+      "id": "npc--highreach--dame-isolde-swiftwind",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Dame Isolde Swiftwind",
+      "kind": "Diplomat, City Council",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Dame Isolde Swiftwind.md"
+    },
+    {
+      "id": "npc--highreach--don-gnocianno",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Don Gnocianno",
+      "kind": "Guildmaster, Exterminators Guild",
+      "note": "Gnome",
+      "location": "highreach--the-warren",
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Don Gnocianno.md; placed by Private/1. World Almanac/World/Crestfall/Highreach/The Warren.md (front matter: proprietor: Don Gnocianno)"
+    },
+    {
+      "id": "npc--highreach--elder-rowan",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Elder Rowan",
+      "kind": "Community Elder",
+      "note": "Human",
+      "location": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Elder Rowan.md"
+    },
+    {
+      "id": "npc--highreach--esmerelda-voss",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Esmerelda Voss",
+      "kind": "Retired Adventurer",
+      "note": "Human",
+      "location": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Esmerelda Voss.md"
+    },
+    {
+      "id": "npc--highreach--evelyn-marroway",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Evelyn Marroway",
+      "kind": "Receptionist",
+      "note": "Human",
+      "location": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Evelyn Marroway.md"
+    },
+    {
+      "id": "npc--highreach--father-eldon-lightbringer",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Father Eldon Lightbringer",
+      "kind": "High Priest",
+      "note": "Human",
+      "location": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Father Eldon Lightbringer.md"
+    },
+    {
+      "id": "npc--highreach--felix-tradewind",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Felix Tradewind",
+      "kind": "Merchant",
+      "note": "Human",
+      "location": "highreach--target-by-tradewind",
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Felix Tradewind.md; placed by Private/1. World Almanac/World/Crestfall/Highreach/Target by Tradewind.md (front matter: proprietor: Felix Tradewind)"
+    },
+    {
+      "id": "npc--highreach--fiona-hammerfist-nee-thistledown",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Fiona Hammerfist nee Thistledown",
+      "kind": "Patron",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Fiona Hammerfist nee Thistledown.md"
+    },
+    {
+      "id": "npc--highreach--gareth-ironbrow",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Gareth Ironbrow",
+      "kind": "Enforcer",
+      "note": "Human",
+      "location": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Gareth Ironbrow.md"
+    },
+    {
+      "id": "npc--highreach--garrick-ironbrow",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Garrick Ironbrow",
+      "kind": "Bodyguard",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Garrick Ironbrow.md"
+    },
+    {
+      "id": "npc--highreach--ingrid-hightower",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Ingrid Hightower",
+      "kind": "Receptionist",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Ingrid Hightower.md"
+    },
+    {
+      "id": "npc--highreach--jarek-ironfist",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Jarek IronFist",
+      "kind": "Merchant",
+      "note": "Human, Dead",
+      "location": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Jarek IronFist.md"
+    },
+    {
+      "id": "npc--highreach--jon-brightman",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Jon Brightman",
+      "kind": "Evocation Wizard",
+      "note": "Halfling",
+      "location": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Jon Brightman.md"
+    },
+    {
+      "id": "npc--highreach--kara-nightshade",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Kara Nightshade",
+      "kind": "Rogue",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Kara Nightshade.md"
+    },
+    {
+      "id": "npc--highreach--kara-stonefoot",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Kara Stonefoot",
+      "kind": "Innkeeper",
+      "note": "Dwarf",
+      "location": "highreach--sturdy-mugg",
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Kara Stonefoot.md; placed by Private/1. World Almanac/World/Crestfall/Highreach/Sturdy Mugg.md (front matter: proprietor: Kara Stonefoot)"
+    },
+    {
+      "id": "npc--highreach--king-alaric-stormhelm",
+      "type": "npc",
+      "town": "highreach",
+      "name": "King Alaric Stormhelm",
+      "kind": "King of Highreach",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/King Alaric Stormhelm.md"
+    },
+    {
+      "id": "npc--highreach--lady-elara-moonshadow",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Lady Elara Moonshadow",
+      "kind": "Court Advisor & Enchantress",
+      "note": "Half-Elf",
+      "location": "highreach--the-arcane-enclave",
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Lady Elara Moonshadow.md; placed by Private/1. World Almanac/World/Crestfall/Highreach/The Arcane Enclave.md (front matter: proprietor: Lady Elara Moonshadow)"
+    },
+    {
+      "id": "npc--highreach--lady-millicent-goldleaf",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Lady Millicent Goldleaf",
+      "kind": "Royal Advocate",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Lady Millicent Goldleaf.md"
+    },
+    {
+      "id": "npc--highreach--lord-cedric-brightblade",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Lord Cedric Brightblade",
+      "kind": "Lord Commander of the City Watch",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Lord Cedric Brightblade.md"
+    },
+    {
+      "id": "npc--highreach--lord-frederick-goldman",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Lord Frederick Goldman",
+      "kind": "Noble",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Lord Frederick Goldman.md"
+    },
+    {
+      "id": "npc--highreach--lyra-dawnbringer",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Lyra Dawnbringer",
+      "kind": "Cleric",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Lyra Dawnbringer.md"
+    },
+    {
+      "id": "npc--highreach--nimble-nackfinger",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Nimble Nackfinger",
+      "kind": "Chief Scout, Exterminators Guild",
+      "note": "Gnome",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Nimble Nackfinger.md"
+    },
+    {
+      "id": "npc--highreach--nyla-windrider",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Nyla Windrider",
+      "kind": "Ranger",
+      "note": "Elf",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Nyla Windrider.md"
+    },
+    {
+      "id": "npc--highreach--oren-hammerfist",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Oren Hammerfist",
+      "kind": "Warrior",
+      "note": "Human, Dead",
+      "location": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Oren Hammerfist.md"
+    },
+    {
+      "id": "npc--highreach--professor-astrid-starcaller",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Professor Astrid Starcaller",
+      "kind": "Professor of Divination",
+      "note": "Tiefling",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Professor Astrid Starcaller.md"
+    },
+    {
+      "id": "npc--highreach--professor-elara-nightveil",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Professor Elara Nightveil",
+      "kind": "Professor of Abjuration",
+      "note": "Elf",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Professor Elara Nightveil.md"
+    },
+    {
+      "id": "npc--highreach--professor-galen-thornbrew",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Professor Galen Thornbrew",
+      "kind": "Professor of Transmutation",
+      "note": "Halfling",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Professor Galen Thornbrew.md"
+    },
+    {
+      "id": "npc--highreach--professor-mordecai-runeweaver",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Professor Mordecai Runeweaver",
+      "kind": "Professor of Enchantment",
+      "note": "Half-Elf",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Professor Mordecai Runeweaver.md"
+    },
+    {
+      "id": "npc--highreach--professor-seraphine-duskwillow",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Professor Seraphine Duskwillow",
+      "kind": "Professor of Necromancy",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Professor Seraphine Duskwillow.md"
+    },
+    {
+      "id": "npc--highreach--professor-thaldris-flamehand",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Professor Thaldris Flamehand",
+      "kind": "Professor of Evocation",
+      "note": "Dwarf",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Professor Thaldris Flamehand.md"
+    },
+    {
+      "id": "npc--highreach--ratcatcher-vex",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Ratcatcher Vex",
+      "kind": "Independent Pest Controller / Criminal",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Ratcatcher Vex.md"
+    },
+    {
+      "id": "npc--highreach--rolf-stonetooth",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Rolf Stonetooth",
+      "kind": "Fighter",
+      "note": "Human, Dead",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Rolf Stonetooth.md"
+    },
+    {
+      "id": "npc--highreach--samantha-clerkson",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Samantha Clerkson",
+      "kind": "Receptionist",
+      "note": "Half-Elf",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Samantha Clerkson.md"
+    },
+    {
+      "id": "npc--highreach--sir-gareth-strongshield",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Sir Gareth Strongshield",
+      "kind": "Captain of the King's Guard",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Sir Gareth Strongshield.md"
+    },
+    {
+      "id": "npc--highreach--sir-tristan-oakheart",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Sir Tristan Oakheart",
+      "kind": "Knight, Order of the Green Mantle",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Sir Tristan Oakheart.md"
+    },
+    {
+      "id": "npc--highreach--squeak-tinkerbottom",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Squeak Tinkerbottom",
+      "kind": "Enforcer / Criminal Artificer",
+      "note": "Gnome",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Squeak Tinkerbottom.md"
+    },
+    {
+      "id": "npc--highreach--thaldrin-stormblade",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Thaldrin Stormblade",
+      "kind": "Guildmaster",
+      "note": "Human",
+      "location": "highreach--highreach-adventurers-guild",
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Thaldrin Stormblade.md; placed by Private/1. World Almanac/World/Crestfall/Highreach/Highreach Adventurers Guild.md (front matter: proprietor: Thaldrin Stormblade)"
+    },
+    {
+      "id": "npc--highreach--thoren-ironfist",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Thoren Ironfist",
+      "kind": "Fighter",
+      "note": "Human",
+      "location": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Thoren Ironfist.md"
+    },
+    {
+      "id": "npc--highreach--tomlin-barkridge",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Tomlin Barkridge",
+      "kind": "Archer",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Tomlin Barkridge.md"
+    },
+    {
+      "id": "npc--highreach--beatrix-goldleaf",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Beatrix Goldleaf",
+      "kind": null,
+      "note": null,
+      "location": null,
+      "playersKnow": false,
+      "source": "Public/World/Crestfall/Highreach/NPCs/Beatrix Goldleaf.md"
+    },
+    {
+      "id": "npc--highreach--borin-stonefist",
+      "type": "npc",
+      "town": "highreach",
+      "name": "Borin Stonefist",
+      "kind": null,
+      "note": null,
+      "location": null,
+      "playersKnow": false,
+      "source": "Public/World/Crestfall/Highreach/NPCs/Borin Stonefist.md"
+    },
+    {
+      "id": "ardenville--ardenville-adventurers-guild",
+      "type": "location",
+      "town": "ardenville",
+      "name": "Ardenville Adventurers Guild",
+      "kind": null,
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Ardenville Adventurers Guild.md"
+    },
+    {
+      "id": "ardenville--fishermans-guild",
+      "type": "location",
+      "town": "ardenville",
+      "name": "Fisherman's Guild",
+      "kind": "Guild Hall",
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Fishermans Guild.md"
+    },
+    {
+      "id": "ardenville--lake-arden",
+      "type": "location",
+      "town": "ardenville",
+      "name": "Lake Arden",
+      "kind": "Lake",
+      "note": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Lake Arden.md"
+    },
+    {
+      "id": "ardenville--merchants-guild-warehouse",
+      "type": "location",
+      "town": "ardenville",
+      "name": "Merchants Guild Warehouse",
+      "kind": "Warehouse",
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Merchants Guild Warehouse.md"
+    },
+    {
+      "id": "ardenville--steelshapers-forge",
+      "type": "location",
+      "town": "ardenville",
+      "name": "Steelshaper's Forge",
+      "kind": "Smithy",
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Steelshapers Forge.md"
+    },
+    {
+      "id": "ardenville--the-enchanted-trinket",
+      "type": "location",
+      "town": "ardenville",
+      "name": "The Enchanted Trinket",
+      "kind": "Magic Shop",
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/The Enchanted Trinket.md"
+    },
+    {
+      "id": "ardenville--the-netted-nymph",
+      "type": "location",
+      "town": "ardenville",
+      "name": "The Netted Nymph",
+      "kind": "Inn",
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/The Netted Nymph.md"
+    },
+    {
+      "id": "npc--ardenville--caber",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Caber",
+      "kind": "Sailor",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Caber.md"
+    },
+    {
+      "id": "npc--ardenville--corin-tidehammer",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Corin Tidehammer",
+      "kind": "Blacksmith",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Corin Tidehammer.md"
+    },
+    {
+      "id": "npc--ardenville--cutlass",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Cutlass",
+      "kind": "Sailor",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Cutlass.md"
+    },
+    {
+      "id": "npc--ardenville--dancin-pete",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Dancin Pete",
+      "kind": "Dockside Dancer",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Dancin Pete.md"
+    },
+    {
+      "id": "npc--ardenville--edda-netsong",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Edda Netsong",
+      "kind": "Guildmistress",
+      "note": "Dwarf",
+      "location": "ardenville--fishermans-guild",
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Edda Netsong.md; placed by Private/1. World Almanac/World/Crestfall/Ardenville/Fishermans Guild.md (front matter: proprietor: Edda Netsong)"
+    },
+    {
+      "id": "npc--ardenville--fran-stronkinthearm",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Fran Stronkinthearm",
+      "kind": "Sailor Bruiser",
+      "note": "Dwarf",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Fran Stronkinthearm.md"
+    },
+    {
+      "id": "npc--ardenville--gregor-woods",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Gregor Woods",
+      "kind": "Guard Captain",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Gregor Woods.md"
+    },
+    {
+      "id": "npc--ardenville--isolde-fairweather",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Isolde Fairweather",
+      "kind": "Mayor",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Isolde Fairweather.md"
+    },
+    {
+      "id": "npc--ardenville--kellen-redshore",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Kellen Redshore",
+      "kind": "Harbormaster",
+      "note": "Half-Elf",
+      "location": "ardenville--merchants-guild-warehouse",
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Kellen Redshore.md; placed by Private/1. World Almanac/World/Crestfall/Ardenville/Merchants Guild Warehouse.md (front matter: proprietor: Kellen Redshore)"
+    },
+    {
+      "id": "npc--ardenville--meshelle-jones",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Me'Shelle Jones",
+      "kind": "First Mate",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Me'Shelle Jones.md"
+    },
+    {
+      "id": "npc--ardenville--mira-softstep",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Mira Softstep",
+      "kind": "Innkeeper",
+      "note": "Halfling",
+      "location": "ardenville--the-netted-nymph",
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Mira Softstep.md; placed by Private/1. World Almanac/World/Crestfall/Ardenville/The Netted Nymph.md (front matter: proprietor: Mira Softstep)"
+    },
+    {
+      "id": "npc--ardenville--pip-whiskerwind",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Pip Whiskerwind",
+      "kind": "Underboss / Poison Specialist",
+      "note": "Gnome",
+      "location": null,
+      "playersKnow": true,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Pip Whiskerwind.md"
+    },
+    {
+      "id": "npc--ardenville--richard-vane",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Richard Vane",
+      "kind": "Merchants Guildmaster",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Richard Vane.md"
+    },
+    {
+      "id": "npc--ardenville--saber",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Saber",
+      "kind": "Sailor",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Saber.md"
+    },
+    {
+      "id": "npc--ardenville--salty-pete",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Salty Pete",
+      "kind": "Boat Captain",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Salty Pete.md"
+    },
+    {
+      "id": "npc--ardenville--guard-2374",
+      "type": "npc",
+      "town": "ardenville",
+      "name": "Guard 2374",
+      "kind": null,
+      "note": null,
+      "location": null,
+      "playersKnow": true,
+      "source": "Public/World/Crestfall/Ardenville/NPCs/Guard 2374.md"
+    },
+    {
+      "id": "fairfield--forgefires-armaments",
+      "type": "location",
+      "town": "fairfield",
+      "name": "Forgefires Armaments",
+      "kind": null,
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Forgefires Armaments.md"
+    },
+    {
+      "id": "fairfield--starspells-wonders",
+      "type": "location",
+      "town": "fairfield",
+      "name": "Starspells Wonders",
+      "kind": null,
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Starspells Wonders.md"
+    },
+    {
+      "id": "npc--fairfield--bram-copperkettle",
+      "type": "npc",
+      "town": "fairfield",
+      "name": "Bram Copperkettle",
+      "kind": "Traveling Peddler",
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Fairfield/NPCs/Bram Copperkettle.md"
+    },
+    {
+      "id": "npc--fairfield--meredith-caravan-friend",
+      "type": "npc",
+      "town": "fairfield",
+      "name": "Meredith Caravan-Friend",
+      "kind": null,
+      "note": null,
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Fairfield/NPCs/Meredith Caravan-Friend.md"
+    },
+    {
+      "id": "npc--fairfield--valeris-shadowmere",
+      "type": "npc",
+      "town": "fairfield",
+      "name": "Valeris Shadowmere",
+      "kind": null,
+      "note": null,
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Fairfield/NPCs/Valeris Shadowmere.md"
+    },
+    {
+      "id": "hillcrest--hammerstrikes-weapons",
+      "type": "location",
+      "town": "hillcrest",
+      "name": "Hammerstrikes Weapons",
+      "kind": null,
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/Hammerstrikes Weapons.md"
+    },
+    {
+      "id": "hillcrest--nightwhispers-potions-and-scrolls",
+      "type": "location",
+      "town": "hillcrest",
+      "name": "Nightwhispers Potions and Scrolls",
+      "kind": null,
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/Nightwhispers Potions and Scrolls.md"
+    },
+    {
+      "id": "npc--hillcrest--benedict-vineward",
+      "type": "npc",
+      "town": "hillcrest",
+      "name": "Benedict Vineward",
+      "kind": "Master Vintner",
+      "note": null,
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Benedict Vineward.md"
+    },
+    {
+      "id": "npc--hillcrest--edwin-barleyman",
+      "type": "npc",
+      "town": "hillcrest",
+      "name": "Edwin Barleyman",
+      "kind": "Tavern Owner",
+      "note": null,
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Edwin Barleyman.md"
+    },
+    {
+      "id": "npc--hillcrest--eliza-brightwine",
+      "type": "npc",
+      "town": "hillcrest",
+      "name": "Eliza Brightwine",
+      "kind": "Merchants Guild Representative",
+      "note": null,
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Eliza Brightwine.md"
+    },
+    {
+      "id": "npc--hillcrest--guard-captain-roderick-stone",
+      "type": "npc",
+      "town": "hillcrest",
+      "name": "Guard Captain Roderick Stone",
+      "kind": "Guard Captain",
+      "note": null,
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Guard Captain Roderick Stone.md"
+    },
+    {
+      "id": "npc--hillcrest--jasper-ironforge",
+      "type": "npc",
+      "town": "hillcrest",
+      "name": "Jasper Ironforge",
+      "kind": "Blacksmith",
+      "note": null,
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Jasper Ironforge.md"
+    },
+    {
+      "id": "npc--hillcrest--liliana-moonleaf",
+      "type": "npc",
+      "town": "hillcrest",
+      "name": "Liliana Moonleaf",
+      "kind": "Magic Shop Owner",
+      "note": null,
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Liliana Moonleaf.md"
+    },
+    {
+      "id": "npc--hillcrest--lysander-thornfield",
+      "type": "npc",
+      "town": "hillcrest",
+      "name": "Lysander Thornfield",
+      "kind": null,
+      "note": "Human",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Lysander Thornfield.md"
+    },
+    {
+      "id": "npc--hillcrest--mayor-linden-hearthwood",
+      "type": "npc",
+      "town": "hillcrest",
+      "name": "Mayor Linden Hearthwood",
+      "kind": "Mayor",
+      "note": null,
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Mayor Linden Hearthwood.md"
+    },
+    {
+      "id": "npc--hillcrest--rowan-grapeheart",
+      "type": "npc",
+      "town": "hillcrest",
+      "name": "Rowan Grapeheart",
+      "kind": "Guildmaster",
+      "note": null,
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Rowan Grapeheart.md"
+    },
+    {
+      "id": "npc--hillcrest--seraphina-winecraft",
+      "type": "npc",
+      "town": "hillcrest",
+      "name": "Seraphina Winecraft",
+      "kind": "Master Vintner",
+      "note": null,
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Seraphina Winecraft.md"
+    },
+    {
+      "id": "npc--hillcrest--thom-willow",
+      "type": "npc",
+      "town": "hillcrest",
+      "name": "Thom Willow",
+      "kind": "General Store Owner",
+      "note": null,
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Hillcrest/NPCs/Thom Willow.md"
+    },
+    {
+      "id": "stonehaven--blackwood-forest",
+      "type": "location",
+      "town": "stonehaven",
+      "name": "Blackwood Forest",
+      "kind": null,
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Blackwood Forest.md"
+    },
+    {
+      "id": "stonehaven--ironforge-smithy",
+      "type": "location",
+      "town": "stonehaven",
+      "name": "Ironforge Smithy",
+      "kind": "Blacksmith",
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Ironforge Smithy.md"
+    },
+    {
+      "id": "stonehaven--marlas-gear",
+      "type": "location",
+      "town": "stonehaven",
+      "name": "Marlas Gear",
+      "kind": "Adventuring Supplies",
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Marlas Gear.md"
+    },
+    {
+      "id": "stonehaven--mystic-wares",
+      "type": "location",
+      "town": "stonehaven",
+      "name": "Mystic Wares",
+      "kind": "Magic Shop",
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Mystic Wares.md"
+    },
+    {
+      "id": "stonehaven--stonehaven-supplies",
+      "type": "location",
+      "town": "stonehaven",
+      "name": "Stonehaven Supplies",
+      "kind": "General Store",
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Stonehaven Supplies.md"
+    },
+    {
+      "id": "stonehaven--stones-herbs",
+      "type": "location",
+      "town": "stonehaven",
+      "name": "Stones Herbs",
+      "kind": "Herbalist",
+      "note": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Stones Herbs.md"
+    },
+    {
+      "id": "npc--stonehaven--astrid-ironfist",
+      "type": "npc",
+      "town": "stonehaven",
+      "name": "Astrid Ironfist",
+      "kind": null,
+      "note": "Human, Active",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Astrid Ironfist.md"
+    },
+    {
+      "id": "npc--stonehaven--caelum-versewood",
+      "type": "npc",
+      "town": "stonehaven",
+      "name": "Caelum Versewood",
+      "kind": "Warrior Poet",
+      "note": "Half-Elf",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Caelum Versewood.md"
+    },
+    {
+      "id": "npc--stonehaven--elias-thorn",
+      "type": "npc",
+      "town": "stonehaven",
+      "name": "Elias Thorn",
+      "kind": null,
+      "note": "Human, Active",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Elias Thorn.md"
+    },
+    {
+      "id": "npc--stonehaven--erik-timber",
+      "type": "npc",
+      "town": "stonehaven",
+      "name": "Erik Timber",
+      "kind": null,
+      "note": "Human, Active",
+      "location": "stonehaven--stonehaven-supplies",
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Erik Timber.md; placed by Private/1. World Almanac/World/Crestfall/Stonehaven/Stonehaven Supplies.md (front matter: owner: Erik Timber)"
+    },
+    {
+      "id": "npc--stonehaven--gunnar-ironforge",
+      "type": "npc",
+      "town": "stonehaven",
+      "name": "Gunnar Ironforge",
+      "kind": null,
+      "note": "Dwarf, Active",
+      "location": "stonehaven--ironforge-smithy",
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Gunnar Ironforge.md; placed by Private/1. World Almanac/World/Crestfall/Stonehaven/Ironforge Smithy.md (front matter: owner: Gunnar Ironforge)"
+    },
+    {
+      "id": "npc--stonehaven--hilda-ravenshadow",
+      "type": "npc",
+      "town": "stonehaven",
+      "name": "Hilda Ravenshadow",
+      "kind": null,
+      "note": "Human, Active",
+      "location": "stonehaven--mystic-wares",
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Hilda Ravenshadow.md; placed by Private/1. World Almanac/World/Crestfall/Stonehaven/Mystic Wares.md (front matter: owner: Hilda Ravenshadow)"
+    },
+    {
+      "id": "npc--stonehaven--ingrid-stoneheart",
+      "type": "npc",
+      "town": "stonehaven",
+      "name": "Ingrid Stoneheart",
+      "kind": null,
+      "note": "Human, Corrupted by Dark Pact",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Ingrid Stoneheart.md"
+    },
+    {
+      "id": "npc--stonehaven--vera-shadowpeak",
+      "type": "npc",
+      "town": "stonehaven",
+      "name": "Vera Shadowpeak",
+      "kind": null,
+      "note": "Half-Elf, Active",
+      "location": null,
+      "playersKnow": false,
+      "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/NPCs/Vera Shadowpeak.md"
+    }
+  ],
+  "fromTheNotes": {
+    "placedAtLocation": [
+      {
+        "npc": "Alistair Goldman",
+        "town": "Highreach",
+        "location": "HighReach Merchants Guild",
+        "source": "Private/1. World Almanac/World/Crestfall/Highreach/HighReach Merchants Guild.md, proprietor"
+      },
+      {
+        "npc": "Thaldrin Stormblade",
+        "town": "Highreach",
+        "location": "Highreach Adventurers Guild",
+        "source": "Private/1. World Almanac/World/Crestfall/Highreach/Highreach Adventurers Guild.md, proprietor"
+      },
+      {
+        "npc": "Kara Stonefoot",
+        "town": "Highreach",
+        "location": "Sturdy Mugg",
+        "source": "Private/1. World Almanac/World/Crestfall/Highreach/Sturdy Mugg.md, proprietor"
+      },
+      {
+        "npc": "Felix Tradewind",
+        "town": "Highreach",
+        "location": "Target by Tradewind",
+        "source": "Private/1. World Almanac/World/Crestfall/Highreach/Target by Tradewind.md, proprietor"
+      },
+      {
+        "npc": "Lady Elara Moonshadow",
+        "town": "Highreach",
+        "location": "The Arcane Enclave",
+        "source": "Private/1. World Almanac/World/Crestfall/Highreach/The Arcane Enclave.md, proprietor"
+      },
+      {
+        "npc": "Alaric Emberfell",
+        "town": "Highreach",
+        "location": "The Dragons Breath Forge",
+        "source": "Private/1. World Almanac/World/Crestfall/Highreach/The Dragons Breath Forge.md, proprietor"
+      },
+      {
+        "npc": "Don Gnocianno",
+        "town": "Highreach",
+        "location": "The Warren",
+        "source": "Private/1. World Almanac/World/Crestfall/Highreach/The Warren.md, proprietor"
+      },
+      {
+        "npc": "Edda Netsong",
+        "town": "Ardenville",
+        "location": "Fisherman's Guild",
+        "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Fishermans Guild.md, proprietor"
+      },
+      {
+        "npc": "Kellen Redshore",
+        "town": "Ardenville",
+        "location": "Merchants Guild Warehouse",
+        "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Merchants Guild Warehouse.md, proprietor"
+      },
+      {
+        "npc": "Mira Softstep",
+        "town": "Ardenville",
+        "location": "The Netted Nymph",
+        "source": "Private/1. World Almanac/World/Crestfall/Ardenville/The Netted Nymph.md, proprietor"
+      },
+      {
+        "npc": "Gunnar Ironforge",
+        "town": "Stonehaven",
+        "location": "Ironforge Smithy",
+        "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Ironforge Smithy.md, owner"
+      },
+      {
+        "npc": "Hilda Ravenshadow",
+        "town": "Stonehaven",
+        "location": "Mystic Wares",
+        "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Mystic Wares.md, owner"
+      },
+      {
+        "npc": "Erik Timber",
+        "town": "Stonehaven",
+        "location": "Stonehaven Supplies",
+        "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Stonehaven Supplies.md, owner"
+      }
+    ],
+    "unplacedProprietors": [
+      {
+        "town": "Ardenville",
+        "location": "Steelshaper's Forge",
+        "named": "Eldric Steelshaper",
+        "source": "Private/1. World Almanac/World/Crestfall/Ardenville/Steelshapers Forge.md"
+      },
+      {
+        "town": "Ardenville",
+        "location": "The Enchanted Trinket",
+        "named": "Garrick Lightfinger",
+        "source": "Private/1. World Almanac/World/Crestfall/Ardenville/The Enchanted Trinket.md"
+      },
+      {
+        "town": "Stonehaven",
+        "location": "Marlas Gear",
+        "named": "Marla Greenthumb",
+        "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Marlas Gear.md"
+      },
+      {
+        "town": "Stonehaven",
+        "location": "Stones Herbs",
+        "named": "Darius Stone",
+        "source": "Private/1. World Almanac/World/Crestfall/Stonehaven/Stones Herbs.md"
+      }
+    ],
+    "districts": [
+      {
+        "town": "highreach",
+        "name": "Merchant District",
+        "source": "Private/2. Reference/Events/Consequences/Resolved/Highreach Duplirat Invasion.md, line 142"
+      },
+      {
+        "town": "highreach",
+        "name": "Noble District",
+        "source": "Private/1. World Almanac/World/Crestfall/Highreach/The Warren.md, line 37"
+      },
+      {
+        "town": "highreach",
+        "name": "Palace District",
+        "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Lord Cedric Brightblade.md, line 30"
+      }
+    ]
+  }
+}

@@ -7,12 +7,12 @@
   <title>Living World | Eldoria DM</title>
   <script src="../../site-shell.js"></script>
   <script src="../../site-assets/site-config.js"></script>
-  <script type="module" src="./world-sim.js?v=20261123-stage2"></script>
+  <script type="module" src="./world-sim.js?v=20261123-stage3"></script>
   <link rel="stylesheet" href="../../css/tokens.css">
   <link rel="stylesheet" href="../../css/base.css">
   <link rel="stylesheet" href="../../css/components.css">
   <link rel="stylesheet" href="../../css/utilities.css">
-  <link rel="stylesheet" href="./world-sim.css?v=20261123-stage2">
+  <link rel="stylesheet" href="./world-sim.css?v=20261123-stage3">
 </head>
 <body class="site-page world-sim-page">
   <div id="site-nav" data-base-path="../../" data-current="dm"></div>
@@ -27,7 +27,11 @@
       <button class="ws-btn" id="ws-run" type="button" data-act="run">Run to next decision</button>
     </div>
   </div>
-  <nav class="ws-tabs" id="ws-tabs" aria-label="Sections" hidden><div class="ws-wrap ws-tabs__row" id="ws-tab-row"></div></nav>
+  <nav class="ws-tabs" id="ws-tabs" aria-label="Sections" hidden><div class="ws-wrap ws-tabs__row" id="ws-tab-row"></div>
+    <!-- Search sits under the tabs, not in the sticky bar, so the bar stays short on a phone. -->
+    <div class="ws-wrap ws-searchrow"><input class="ws-input ws-search ws-search--top" id="ws-search" type="search" placeholder="Search places, people, goods, rumours" aria-label="Search places, people, goods, rumours and countdowns"></div></nav>
+
+  <div class="ws-wrap ws-searchresults" id="ws-search-results" role="region" aria-label="Search results" hidden></div>
 
   <main class="ws-wrap ws-main" id="ws-view">
     <p class="ws-meta" id="ws-loading" role="status">Loading…</p>

@@ -9,7 +9,7 @@
 import { createRng, daySeed } from "./rng.js";
 import { createSuggestedEvent } from "./events.js";
 
-export const ENGINE_VERSION = "0.3.0";
+export const ENGINE_VERSION = "0.4.0";
 
 function clone(value) {
   return value === undefined ? undefined : structuredClone(value);

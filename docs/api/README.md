@@ -42,9 +42,9 @@ secret held in the Function App setting `ELDORIA_DM_KEY` and sent in the
 - `EldoriaApiClient` sends the key when created with `{ dmKey }` or after `setDmKey(key)`.
 - Tests: `npm run test:dm-key`.
 
-## Living world endpoints (DM only, plus one public prices route)
+## Living world endpoints (DM only, plus two public read routes)
 
-Every route here needs the DM key (see "DM lock"), except `GET /api/world/public/prices` at the end of the table.
+Every route here needs the DM key (see "DM lock"), except `GET /api/world/public/prices` and `GET /api/world/public/rumours` at the end of the table.
 The Function runs the same engine files as the browser (`docs/world-sim/engine`); the deploy
 scripts copy them into `src/world-runtime` with `tools/stage-world-runtime.js`.
 
@@ -65,10 +65,21 @@ scripts copy them into `src/world-runtime` with `tools/stage-world-runtime.js`.
 | `GET /api/world/state` | The current state, for a what-if run in the browser. Reading it saves nothing. |
 | `POST /api/world/party` | `{ "place": "<place id>" | null }`. The DM says where the party is. Nothing else ever moves the party. |
 | `POST /api/world/pressures/{id}/end` | Ends a pressure early. A new row. |
+| `GET /api/world/overview` | Everything the Map and Rumours views need: roads with their state, rumours (the truth beside each town's telling), head counts and moves, sickness, travelling NPCs, and threats (open countdowns tied to a place or a road). |
+| `GET /api/world/city`, `POST /api/world/city` | The city outline: every district, location and NPC (retired ones included) and who is travelling. `POST` adds one: `{ "type": "district" | "location" | "npc", "town", "name", "kind"?, "note"?, "district"?, "location"?, "playersKnow"? }`. There are no city maps. |
+| `POST /api/world/city/import` | `{ "entries": [{ "id", "type", "town", "name", ... }] }`. Adds the ones not already there; loading the same list twice adds nothing. |
+| `POST /api/world/city/{id}/actions` | `{ "action": "change", "changes": {...} }` (rename, move, "players know this"), `{ "action": "retire" }` or `{ "action": "restore" }`. Nothing is deleted. |
+| `GET /api/world/rumours`, `POST /api/world/rumours` | Rumours as they stand. `POST` starts one: `{ "eventId"?, "truth": "written" | "unwritten", "origin"?, "who", "what", "where"?, "size": 1..5, "flatters": true | false | null }`. Only the DM starts a rumour. |
+| `POST /api/world/rumours/{id}/actions` | `{ "action": "end" }`, `{ "action": "confirm", "eventId" }` or `{ "action": "reveal", "place", "playersVisible" }`. |
+| `POST /api/world/travellers` | Gives an NPC from the city outline an itinerary: `{ "npcId", "stops": [{ "place", "stay" }], "loop"? }`. |
+| `POST /api/world/travellers/{id}/end` | Ends that NPC's travels. |
 | `GET /api/world/public/prices` | **No key.** Prices in the town the party is in, only if the players know that town: `{ "place": { "name" } | null, "prices": [{ "good", "unit", "price", "priceText", "vsUsualPercent" }] }`. Never a reason, a stock level or another town; the same empty answer in every other case. |
+| `GET /api/world/public/rumours` | **No key.** Rumours the DM has revealed in the town the party is in, as that town tells them: `{ "place": { "name" } | null, "rumours": [{ "text" }] }`. Never the truth, never where else a rumour has spread; the same empty answer in every other case. |
 
 - Storage: events in the table `eldoriaworldevents` (override with `ELDORIA_WORLD_EVENT_TABLE`), one blob per committed day plus a pointer under `world/<world id>/` in the character container. The exact shapes are in `docs/world-sim/STORAGE-SHAPES.md`.
-- The record is append only: a decision, a reveal and every countdown change is a new row.
+- The record is append only: a decision, a reveal, every countdown change, every change to a city, a rumour or an itinerary is a new row.
+- An event's `effect` may also be `{ "type": "people-move", "from", "to", "people", "days" }`, `{ "type": "sickness-start", "place", "name" }` or `{ "type": "sickness-end", "place" }`. A sickness never starts or spreads unless the DM writes or accepts it.
+- A countdown may carry `"route": "<road id>"` to sit on a road.
 - Nothing is stored until `POST /api/world/start`.
 - The DM page is `docs/tools/world-sim/index.html`. It asks for the DM key once and keeps it in that browser.
 - To try the page with nothing deployed: `node docs/world-sim/tools/dev-server.mjs 8090 "<setup file>"` serves the site and the world routes from memory (DM key `dev`), and forgets everything when stopped.

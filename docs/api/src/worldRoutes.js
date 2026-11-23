@@ -1,8 +1,9 @@
 "use strict";
 
-// HTTP routes for the living world. Every route needs the DM key except the one
-// listed in WORLD_PUBLIC_ROUTES: local prices for players, which answers with
-// prices and nothing else (see publicPrices in the engine).
+// HTTP routes for the living world. Every route needs the DM key except the two
+// listed in WORLD_PUBLIC_ROUTES: local prices for players (prices and nothing else,
+// see publicPrices in the engine) and the rumours the DM has revealed in the party's
+// town (the telling and nothing else, see publicRumours).
 
 const { httpError, json, withErrors } = require("./http");
 const { requireDmKey } = require("./dmAuth");
@@ -79,6 +80,33 @@ function createWorldHandlers(getService = defaultService) {
 
   return {
     worldPublicPrices: publicRoute((service) => service.getPublicPrices()),
+    worldPublicRumours: publicRoute((service) => service.getPublicRumours()),
+    worldOverview: route({
+      GET: (service) => service.getOverview()
+    }),
+    worldCity: route({
+      GET: (service) => service.getCity(),
+      POST: async (service, request) => service.addCityEntry(await readBody(request))
+    }),
+    worldCityImport: route({
+      POST: async (service, request) => service.importCity(await readBody(request))
+    }),
+    worldCityEntry: route({
+      POST: async (service, request) => service.changeCityEntry(request.params?.id, await readBody(request))
+    }),
+    worldRumours: route({
+      GET: (service) => service.listRumours(),
+      POST: async (service, request) => service.startRumour(await readBody(request))
+    }),
+    worldRumourAction: route({
+      POST: async (service, request) => service.rumourAction(request.params?.id, await readBody(request))
+    }),
+    worldTravellers: route({
+      POST: async (service, request) => service.setItinerary(await readBody(request))
+    }),
+    worldTravellerEnd: route({
+      POST: (service, request) => service.clearItinerary(request.params?.id)
+    }),
     worldMarkets: route({
       GET: (service) => service.getMarkets()
     }),
@@ -157,12 +185,21 @@ const WORLD_ROUTES = Object.freeze([
   { name: "worldMarkets", route: "world/markets", methods: ["GET"], handler: "worldMarkets" },
   { name: "worldState", route: "world/state", methods: ["GET"], handler: "worldState" },
   { name: "worldParty", route: "world/party", methods: ["POST"], handler: "worldParty" },
-  { name: "worldPressureEnd", route: "world/pressures/{id}/end", methods: ["POST"], handler: "worldPressureEnd" }
+  { name: "worldPressureEnd", route: "world/pressures/{id}/end", methods: ["POST"], handler: "worldPressureEnd" },
+  { name: "worldOverview", route: "world/overview", methods: ["GET"], handler: "worldOverview" },
+  { name: "worldCity", route: "world/city", methods: ["GET", "POST"], handler: "worldCity" },
+  { name: "worldCityImport", route: "world/city/import", methods: ["POST"], handler: "worldCityImport" },
+  { name: "worldCityEntry", route: "world/city/{id}/actions", methods: ["POST"], handler: "worldCityEntry" },
+  { name: "worldRumours", route: "world/rumours", methods: ["GET", "POST"], handler: "worldRumours" },
+  { name: "worldRumourAction", route: "world/rumours/{id}/actions", methods: ["POST"], handler: "worldRumourAction" },
+  { name: "worldTravellers", route: "world/travellers", methods: ["POST"], handler: "worldTravellers" },
+  { name: "worldTravellerEnd", route: "world/travellers/{id}/end", methods: ["POST"], handler: "worldTravellerEnd" }
 ]);
 
 /** Routes that need no key. Keep this list short and every entry leak-tested. */
 const WORLD_PUBLIC_ROUTES = Object.freeze([
-  { name: "worldPublicPrices", route: "world/public/prices", methods: ["GET"], handler: "worldPublicPrices" }
+  { name: "worldPublicPrices", route: "world/public/prices", methods: ["GET"], handler: "worldPublicPrices" },
+  { name: "worldPublicRumours", route: "world/public/rumours", methods: ["GET"], handler: "worldPublicRumours" }
 ]);
 
 function registerWorldRoutes(app, handlers = createWorldHandlers()) {
