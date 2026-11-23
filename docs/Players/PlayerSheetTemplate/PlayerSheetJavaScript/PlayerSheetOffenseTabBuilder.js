@@ -18,8 +18,49 @@ function getAttackForItem(playerSheetObject, item) {
         return null;
     }
 
-    return (playerSheetObject?.attacks || [])
+    return [...(playerSheetObject?.attacks || []), ...(playerSheetObject?.unequippedAttacks || [])]
         .find((attack) => String(attack?.name || "").trim().toLowerCase() === name) || null;
+}
+
+function formatSigned(value) {
+    const number = Number(value) || 0;
+    return `${number >= 0 ? "+" : ""}${number}`;
+}
+
+// "+7 to hit · 1d8 +4 slashing": the answer to "what do I add?", shown before anything else.
+function formatAttackLine(source = {}, damageText = "") {
+    if (source.unavailable) {
+        return "Unavailable right now";
+    }
+
+    const parts = [];
+    if (source.attackBonus != null) {
+        parts.push(`${formatSigned(source.attackBonus)} to hit`);
+    }
+    if (source.saveDc != null) {
+        parts.push(`${String(source.saveAbility || "").toUpperCase()} save DC ${source.saveDc}`.trim());
+    }
+    if (damageText) {
+        parts.push(damageText);
+    }
+    if (source.rollMode && source.rollMode !== "normal") {
+        parts.push(`roll with ${source.rollMode}`);
+    }
+    return parts.join(" · ");
+}
+
+// How many attacks the Attack action gives, from the features the sheet already lists.
+function getAttacksPerAction(playerSheetObject = {}) {
+    const hasExtraAttack = (playerSheetObject.features || [])
+        .some((feature) => /^extra attack\b/iu.test(String(feature?.name || "").trim()));
+    if (!hasExtraAttack) {
+        return 1;
+    }
+
+    const fighterLevel = (playerSheetObject.classes || [])
+        .filter((entry) => /^fighter$/iu.test(String(entry?.name || "").trim()))
+        .reduce((total, entry) => total + (Number(entry?.level) || (Array.isArray(entry?.levels) ? entry.levels.length : 0)), 0);
+    return fighterLevel >= 20 ? 4 : fighterLevel >= 11 ? 3 : 2;
 }
 
 function formatDamageOption(dice, type) {
@@ -69,6 +110,7 @@ function getActionMetrics(action = {}) {
 }
 
 function createActionRow(action = {}) {
+    const metrics = getActionMetrics(action).filter(([label]) => !["Hit", "Save", "Damage", "Roll", "Condition"].includes(label));
     return createItemListItem({
         name: action.name || "Action",
         source: action.source || ""
@@ -76,7 +118,9 @@ function createActionRow(action = {}) {
         entries: action.summary ? [action.summary] : []
     }, {
         showMeta: true,
-        metrics: getActionMetrics(action)
+        lead: formatAttackLine(action, formatDamageOption(action.damage, action.damageType)),
+        rulesCollapsed: true,
+        metrics
     });
 }
 
@@ -128,6 +172,15 @@ export async function BuildPlayerSheetOffenseTab(playerSheetObject, context = {}
         return;
     }
 
+    const attacksPerAction = getAttacksPerAction(playerSheetObject);
+    if (attacksPerAction > 1) {
+        const note = document.createElement("p");
+        note.className = "player-sheet-offense-note";
+        note.dataset.extraAttack = String(attacksPerAction);
+        note.textContent = `Extra Attack: ${attacksPerAction} attacks when you take the Attack action.`;
+        shell.appendChild(note);
+    }
+
     if (actions.length) {
         const actionSection = createSection("Actions");
         const actionList = createItemList();
@@ -139,9 +192,13 @@ export async function BuildPlayerSheetOffenseTab(playerSheetObject, context = {}
     if (offensiveItems.length) {
         const gearSection = createSection("Weapons & Offensive Gear");
         for (const { item, record, inventoryIndex } of offensiveItems) {
+            const attack = getAttackForItem(playerSheetObject, item);
+            const lead = formatAttackLine(attack || {}, getDamageOptions(attack, record));
             list.appendChild(createItemListItem(item, record, {
                 actions: [createEquipToggle(item, inventoryIndex, context)],
-                metrics: getAttackMetrics(getAttackForItem(playerSheetObject, item), record)
+                lead: lead && !item?.equipped ? `${lead} · not equipped` : lead,
+                rulesCollapsed: true,
+                metrics: lead ? [] : getAttackMetrics(attack, record)
             }));
         }
         gearSection.appendChild(list);

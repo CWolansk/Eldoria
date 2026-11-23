@@ -549,6 +549,17 @@ function appendItemRules(container, record, options = {}) {
         return;
     }
 
+    // Folded away: only a "Rules" line until opened (used where the numbers come first).
+    if (options.collapsed) {
+        const folded = createElement("div", "player-sheet-item-card__rules player-sheet-item-card__rules--compact player-sheet-item-card__rules--folded");
+        const detail = createElement("details", "player-sheet-item-card__rules-details");
+        detail.appendChild(createElement("summary", "player-sheet-item-card__rules-summary", "Rules"));
+        appendRulesEntry(detail, rulesEntry, createRulesClassNames());
+        folded.appendChild(detail);
+        container.appendChild(folded);
+        return;
+    }
+
     const rules = createElement("div", "player-sheet-item-card__rules");
     if (options.compact) {
         rules.classList.add("player-sheet-item-card__rules--compact");
@@ -674,6 +685,13 @@ export function createItemListItem(item, record = getItemRecord(item), options =
 
     identity.appendChild(titleLine);
 
+    // The line a player reads first, e.g. "+7 to hit · 1d8 +4 slashing".
+    if (options.lead) {
+        const lead = createElement("p", "player-sheet-item-row__lead", String(options.lead));
+        lead.dataset.attackLine = "true";
+        identity.appendChild(lead);
+    }
+
     const meta = [
         getItemSource(item) || getCatalogSource(record),
         titleCase(record?.rarity || "")
@@ -697,6 +715,7 @@ export function createItemListItem(item, record = getItemRecord(item), options =
         const rules = createElement("div", "player-sheet-item-row__rules");
         appendItemRules(rules, record, {
             compact: true,
+            collapsed: options.rulesCollapsed === true,
             previewLimit: ITEM_RULES_PREVIEW_LIMIT
         });
         if (rules.children.length) {

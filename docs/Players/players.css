@@ -4310,3 +4310,25 @@
     flex: 1 1 auto;
   }
 }
+
+/* --- pass 2, item 6: the attack line comes first --- */
+.player-sheet-page .player-sheet-item-row__lead {
+  margin: 0.15rem 0 0.1rem;
+  color: var(--sheet-text);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.3;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.player-sheet-page .player-sheet-offense-note {
+  margin: 0;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--sheet-line-strong);
+  border-radius: 0.45rem;
+  background: var(--sheet-panel-2);
+  color: var(--sheet-text);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}

@@ -2363,18 +2363,19 @@ function formatWeaponDamageDice(dice, damageBonus) {
     return `${text} ${damageBonus >= 0 ? "+" : "-"}${Math.abs(damageBonus)}`;
 }
 
-function isWeaponInventoryItem(item = {}) {
+function isWeaponRecordItem(item = {}) {
     const record = item.snapshot || {};
     return Boolean(
-        item.equipped
-        && (
-            record.isWeapon === true
-            || record.weapon === true
-            || (record.weapon != null && typeof record.weapon === "object")
-            || record.weaponCategory
-            || getWeaponDamageDice(record)
-        )
+        record.isWeapon === true
+        || record.weapon === true
+        || (record.weapon != null && typeof record.weapon === "object")
+        || record.weaponCategory
+        || getWeaponDamageDice(record)
     );
+}
+
+function isWeaponInventoryItem(item = {}) {
+    return Boolean(item.equipped && isWeaponRecordItem(item));
 }
 
 function hasClass(dto, className) {
@@ -2410,18 +2411,30 @@ function isRangedWeaponRecord(record = {}) {
         record._subTypeHtml,
         ...toArray(record._typeListText)
     ].filter(Boolean).join(" "));
-    return record.bow === true
-        || Boolean(record.ammoType || record.range || record._fRangeNormal)
+    const rangedByKind = record.bow === true
+        || Boolean(record.ammoType)
         || properties.includes("A")
         || properties.includes("AMMUNITION")
         || /\branged\b/iu.test(categoryText)
         || normalizeSearchText(record.type) === "r";
+    if (rangedByKind) {
+        return true;
+    }
+
+    // A melee weapon with the Thrown property (handaxe, javelin, spear) has a range
+    // but is still a melee weapon: it uses Strength, or Dexterity only with Finesse.
+    const thrown = properties.includes("T") || properties.includes("THROWN");
+    return !thrown && Boolean(record.range || record._fRangeNormal);
 }
 
-function compileAttacks(dto, abilityScores, proficiencyBonus, characterLevel = MAX_CHARACTER_LEVEL) {
+// options.unequipped: the same numbers for weapons carried but not equipped, so the
+// sheet can still answer "what do I add?" for them. They are kept out of `attacks`.
+function compileAttacks(dto, abilityScores, proficiencyBonus, characterLevel = MAX_CHARACTER_LEVEL, options = {}) {
     const monk = hasClass(dto, "Monk");
     const attacks = toArray(dto.inventory.items)
-        .filter(isWeaponInventoryItem)
+        .filter(options.unequipped
+            ? (item) => !item?.equipped && isWeaponRecordItem(item)
+            : isWeaponInventoryItem)
         .map((item) => {
             const record = item.snapshot || {};
             const properties = getWeaponPropertyValues(record).map((value) => value.toUpperCase());
@@ -2447,7 +2460,7 @@ function compileAttacks(dto, abilityScores, proficiencyBonus, characterLevel = M
             };
         });
 
-    if (monk) {
+    if (monk && !options.unequipped) {
         const monkLevel = getMonkLevel(dto, characterLevel);
         const martialArtsDie = monkLevel >= 17 ? "1d10" : monkLevel >= 11 ? "1d8" : monkLevel >= 5 ? "1d6" : "1d4";
         const ability = abilityScores.dex.modifier > abilityScores.str.modifier ? "dex" : "str";
@@ -3401,6 +3414,7 @@ export class SheetCompiler {
             resources: compileTrackedResources(dto, abilities, proficiencyBonus, level),
             inventory: compileInventory(dto),
             attacks: applyConditionAttackEffects(compileAttacks(dto, abilities, proficiencyBonus, level), conditionEffects),
+            unequippedAttacks: applyConditionAttackEffects(compileAttacks(dto, abilities, proficiencyBonus, level, { unequipped: true }), conditionEffects),
             racialActions: applyConditionAttackEffects(compileRaceActions(dto, abilities, proficiencyBonus, level), conditionEffects),
             conditionEffects,
             features: [
