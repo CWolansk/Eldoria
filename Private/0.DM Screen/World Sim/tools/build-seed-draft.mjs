@@ -593,7 +593,10 @@ for (const good of estimates.goods) {
     id: good.id, name: good.name, unit: good.unit, basePrice,
     // Labels other subjects read. "medicine": a sickness makes a town use more of it.
     tags: good.tags || [],
-    madeFrom: (good.madeFrom || []).map(({ good: input, perUnit }) => ({ good: input, perUnit }))
+    madeFrom: (good.madeFrom || []).map(({ good: input, perUnit }) => ({ good: input, perUnit })),
+    // Which catalog items follow this good's price, for the players' local prices.
+    // A guess for the DM to correct; goods with none leave every item at its catalog price.
+    ...(good.covers ? { covers: { itemIds: good.covers.itemIds || [], types: good.covers.types || [], reference: good.covers.reference || "", estimate: true, basis: good.covers.basis || "" } } : {})
   });
 }
 if (marketProblems.length) {

@@ -237,6 +237,21 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
           <input type="number" id="ws-base-price" min="0.01" step="any" value="${esc(good.basePrice)}"></label>
         <button class="ws-btn ws-btn--small" type="button" data-act="save-base-price" data-id="${esc(good.id)}">Save base price</button>
       </div>
+      <details class="ws-setup" id="ws-covers"${ui.coversOpen ? " open" : ""}>
+        <summary>Which items follow this price for players ${good.covers?.estimate ? estimateChip(true, "Which items follow this good is a guess") : ""}</summary>
+        <div>
+          <p class="ws-meta">Players see an item's local price as its catalog price moved by the same share as ${esc(good.name.toLowerCase())} here. Items listed by id always follow it. Item types match only ordinary items: nothing uncommon or rarer. Leave both empty and no item follows this good.</p>
+          <div class="ws-fields">
+            <label>Item ids, one per line
+              <textarea id="ws-covers-ids" rows="4" spellcheck="false">${esc((good.covers?.itemIds || []).join("\n"))}</textarea></label>
+            <label>Item types, separated by commas
+              <input class="ws-input" id="ws-covers-types" type="text" value="${esc((good.covers?.types || []).join(", "))}" placeholder="for example: simple weapon, martial weapon"></label>
+            <label>Priced from (item id, for your reference)
+              <input class="ws-input" id="ws-covers-reference" type="text" value="${esc(good.covers?.reference || "")}"></label>
+          </div>
+          <button class="ws-btn ws-btn--small" type="button" data-act="save-covers" data-id="${esc(good.id)}">Save which items follow</button>
+        </div>
+      </details>
       <p class="ws-meta${ui.error ? " ws-error" : ""}" role="status">${esc(ui.error || ui.message)}</p>
     </section>
     ${whatIfPanel()}`;
@@ -392,6 +407,19 @@ export function createEconomyViews({ ui, esc, run, render, placeName, keepTyping
         if (good) good.basePrice = { value, estimate: false, basis: "Set by you" };
       });
     }, { message: "Base price saved." }),
+    "save-covers": (data) => run(async () => {
+      const lines = (value, separator) => String(value || "").split(separator).map((entry) => entry.trim()).filter(Boolean);
+      const itemIds = lines($("#ws-covers-ids")?.value, /\r?\n/u);
+      const types = lines($("#ws-covers-types")?.value, ",").map((entry) => entry.toLowerCase());
+      const reference = String($("#ws-covers-reference")?.value || "").trim();
+      ui.coversOpen = true;
+      await saveSetup((setup) => {
+        const good = setup.economy.goods.find((entry) => entry.id === data.id);
+        if (!good) return;
+        if (itemIds.length || types.length) good.covers = { itemIds, types, reference, estimate: false, basis: "Set by you" };
+        else delete good.covers;
+      });
+    }, { message: "Saved. Players' local prices follow it from now on." }),
     "save-figures": (data) => run(async () => {
       const inputs = [...document.querySelectorAll("#ws-place-figures [data-figure]")];
       await saveSetup((setup) => {

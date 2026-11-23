@@ -515,7 +515,17 @@
           "basis": "Catalog: wheat is 1 cp a pound; a sack is taken as 100 pounds"
         },
         "tags": [],
-        "madeFrom": []
+        "madeFrom": [],
+        "covers": {
+          "itemIds": [
+            "item:wheat:phb",
+            "item:flour:phb"
+          ],
+          "types": [],
+          "reference": "item:wheat:phb",
+          "estimate": true,
+          "basis": "Wheat and flour are grain; nothing else"
+        }
       },
       {
         "id": "fish",
@@ -539,7 +549,17 @@
           "basis": "Catalog: common wine, 2 sp a pitcher"
         },
         "tags": [],
-        "madeFrom": []
+        "madeFrom": [],
+        "covers": {
+          "itemIds": [
+            "item:common-wine-pitcher:phb",
+            "item:fine-wine-bottle:phb"
+          ],
+          "types": [],
+          "reference": "item:common-wine-pitcher:phb",
+          "estimate": true,
+          "basis": "The two ordinary wines in the catalog"
+        }
       },
       {
         "id": "ore",
@@ -551,7 +571,16 @@
           "basis": "Catalog: iron, 1 sp a pound"
         },
         "tags": [],
-        "madeFrom": []
+        "madeFrom": [],
+        "covers": {
+          "itemIds": [
+            "item:iron:phb"
+          ],
+          "types": [],
+          "reference": "item:iron:phb",
+          "estimate": true,
+          "basis": "Iron by the pound only"
+        }
       },
       {
         "id": "timber",
@@ -594,7 +623,19 @@
             "good": "herbs",
             "perUnit": 5
           }
-        ]
+        ],
+        "covers": {
+          "itemIds": [
+            "item:potion-of-healing:dmg",
+            "item:potion-of-greater-healing:dmg",
+            "item:potion-of-superior-healing:dmg",
+            "item:potion-of-supreme-healing:dmg"
+          ],
+          "types": [],
+          "reference": "item:potion-of-healing:dmg",
+          "estimate": true,
+          "basis": "The four healing potions, listed by id; no other potion"
+        }
       },
       {
         "id": "weapons",
@@ -611,7 +652,17 @@
             "good": "ore",
             "perUnit": 10
           }
-        ]
+        ],
+        "covers": {
+          "itemIds": [],
+          "types": [
+            "simple weapon",
+            "martial weapon"
+          ],
+          "reference": "base-item:longsword:phb",
+          "estimate": true,
+          "basis": "Ordinary simple and martial weapons; magic weapons are left at their catalog price"
+        }
       },
       {
         "id": "cloth",
@@ -623,7 +674,18 @@
           "basis": "Catalog: cotton cloth, 5 sp a square yard"
         },
         "tags": [],
-        "madeFrom": []
+        "madeFrom": [],
+        "covers": {
+          "itemIds": [
+            "item:cotton-cloth-1-sq-yd:phb",
+            "item:linen-1-sq-yd:phb",
+            "item:canvas-1-sq-yd:phb"
+          ],
+          "types": [],
+          "reference": "item:cotton-cloth-1-sq-yd:phb",
+          "estimate": true,
+          "basis": "Cotton, linen and canvas by the square yard"
+        }
       },
       {
         "id": "luxuries",
@@ -635,7 +697,16 @@
           "basis": "A whole category. The catalog's silk (10 gp a square yard) stands in for it; which item should is your call"
         },
         "tags": [],
-        "madeFrom": []
+        "madeFrom": [],
+        "covers": {
+          "itemIds": [
+            "item:silk-1-sq-yd:phb"
+          ],
+          "types": [],
+          "reference": "item:silk-1-sq-yd:phb",
+          "estimate": true,
+          "basis": "Silk only, the item this good was priced from"
+        }
       }
     ],
     "routes": [

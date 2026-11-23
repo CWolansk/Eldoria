@@ -354,7 +354,7 @@ test("players' prices: one known town, prices and percent only", () => {
   const shown = engine.publicPrices(state, "alpha");
   assert.deepEqual(Object.keys(shown), ["place", "prices"]);
   assert.deepEqual(shown.place, { name: "Alpha" });
-  assert.deepEqual(Object.keys(shown.prices[0]).sort(), ["good", "price", "priceText", "unit", "vsUsualPercent"]);
+  assert.deepEqual(Object.keys(shown.prices[0]).sort(), ["covers", "good", "price", "priceText", "ratio", "unit", "vsUsualPercent"]);
   const empty = { place: null, prices: [] };
   assert.deepEqual(engine.publicPrices(state, "beta"), empty, "a town the players do not know");
   assert.deepEqual(engine.publicPrices(state, "nowhere"), empty);

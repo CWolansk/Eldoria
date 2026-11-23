@@ -1,4 +1,5 @@
-// docs/ is the public site. Nothing under docs/world-sim or docs/tools/world-sim may
+// docs/ is the public site. Nothing under docs/world-sim, docs/tools/world-sim, the
+// players' town page (docs/tools/town) or item search may
 // name a place or person the players have not found. The hidden names are read from
 // the Private notes at test time, so this file does not contain them either.
 import test from "node:test";
@@ -10,7 +11,7 @@ import { fileURLToPath } from "node:url";
 const docsRoot = fileURLToPath(new URL("../../", import.meta.url));
 const repoRoot = path.resolve(docsRoot, "..");
 const crestfall = path.join(repoRoot, "Private", "1. World Almanac", "World", "Crestfall");
-const SCAN = [path.join(docsRoot, "world-sim"), path.join(docsRoot, "tools", "world-sim")];
+const SCAN = [path.join(docsRoot, "world-sim"), path.join(docsRoot, "tools", "world-sim"), path.join(docsRoot, "tools", "town"), path.join(docsRoot, "tools", "item-search")];
 const SKIP_DIRS = new Set(["node_modules"]);
 const SKIP_FILES = new Set(["package-lock.json"]);
 // Note titles that are ordinary words for a kind of note, not the name of anything in the world.

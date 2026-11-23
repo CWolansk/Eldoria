@@ -33,7 +33,7 @@
 
   function renderItem(row) {
     return '\
-      <details class="item-card" data-catalog-id="' + escapeHtml(row.Id || "") + '">\
+      <details class="item-card" data-catalog-id="' + escapeHtml(row.Id || "") + '" data-item-rarity="' + escapeHtml(row.Rarity || "") + '" data-item-type="' + escapeHtml(row.Type || "") + '" data-item-value="' + escapeHtml(row.Value || "") + '">\
         <summary class="item-name">\
           <span>' + escapeHtml(row.Name) + '</span>\
           <span class="rules-card-badges"><span class="rarity ' + rarityClass(row.Rarity) + '">' + escapeHtml(row.Rarity || "Common") + '</span></span>\
@@ -41,6 +41,7 @@
         <div class="item-details">\
           <div class="item-type">' + escapeHtml(row.Type || "Item") + '</div>\
           ' + renderDetails(row, [["Source", "Source"], ["Attunement", "Attunement"], ["Damage", "Damage"], ["Properties", "Properties"], ["Mastery", "Mastery"], ["Weight", "Weight"], ["Value", "Value"]]) + '\
+          <div class="item-local-price" hidden></div>\
           ' + (row.Text ? '<div class="item-text">' + escapeHtml(row.Text) + "</div>" : "") + '\
         </div>\
       </details>';

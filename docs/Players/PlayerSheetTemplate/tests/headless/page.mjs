@@ -86,6 +86,16 @@ export async function bootSheetPage(options = {}) {
       server.saves.push(saved);
       return respond(200, server.dto);
     }
+    // The open prices route of the living world. Absent (404) unless a test supplies an answer.
+    if (options.publicPrices && /\/world\/public\/prices$/u.test(url.pathname) && method === "GET") {
+      return respond(200, options.publicPrices);
+    }
+    // Catalog items a test supplies, by id; everything else in the catalog stays absent.
+    const itemMatch = /\/catalog\/items\/([^/]+)$/u.exec(url.pathname);
+    if (options.catalogItems && itemMatch && method === "GET") {
+      const record = options.catalogItems[decodeURIComponent(itemMatch[1])];
+      if (record) return respond(200, record);
+    }
     return respond(404, { error: "Not found in headless fake." });
   };
 

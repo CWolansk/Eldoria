@@ -175,6 +175,30 @@ export function normalizeEffect(input) {
  * basePrice (copper), travelDays, population, make and use are figures: a number, or
  * { value, estimate } so the page can show which ones are guesses.
  */
+// Which catalog items follow a good's price, so players can be shown what an item costs
+// where they are. Optional and DM-editable. Items listed by id always follow the good;
+// item types match only ordinary items (the clients enforce that, see
+// docs/tools/town/local-prices.js). Nothing here changes the economy itself.
+function normalizeCovers(input, goodId) {
+  if (input == null) return null;
+  if (typeof input !== "object" || Array.isArray(input)) throw fail(`Good "${goodId}": covers must be an object.`);
+  const list = (value, label, max, lowerCase) => {
+    if (value == null) return [];
+    if (!Array.isArray(value) || value.length > max) throw fail(`Good "${goodId}": covers.${label} must be a list of at most ${max}.`);
+    const cleaned = value.map((entry) => (lowerCase ? text(entry).toLowerCase() : text(entry))).filter(Boolean);
+    if (cleaned.some((entry) => entry.length > 200)) throw fail(`Good "${goodId}": a covers.${label} entry is too long.`);
+    return [...new Set(cleaned)].sort();
+  };
+  const covers = {
+    itemIds: list(input.itemIds, "itemIds", 200, false),
+    types: list(input.types, "types", 40, true),
+    reference: text(input.reference).slice(0, 200),
+    estimate: input.estimate === true,
+    basis: text(input.basis).slice(0, 300)
+  };
+  return covers.itemIds.length || covers.types.length ? covers : null;
+}
+
 export function normalizeEconomyConfig(input = {}) {
   const goods = [];
   const goodIds = new Set();
@@ -195,6 +219,8 @@ export function normalizeEconomyConfig(input = {}) {
         perUnit: figureValue(input?.perUnit, 0)
       }))
     });
+    const covers = normalizeCovers(good.covers, id);
+    if (covers) goods[goods.length - 1].covers = covers;
   }
   for (const good of goods) {
     for (const input of good.madeFrom) {
@@ -807,7 +833,8 @@ export function describeEconomy(state) {
       basePrice: good.basePrice.value, basePriceText: formatMoney(good.basePrice.value),
       basePriceEstimate: good.basePrice.estimate,
       tags: good.tags || [],
-      madeFrom: good.madeFrom
+      madeFrom: good.madeFrom,
+      covers: good.covers || null
     })),
     places: Object.keys(config.places).sort().map((placeId) => {
       const place = config.places[placeId];
@@ -858,7 +885,10 @@ export function describeEconomy(state) {
 
 /**
  * What players may see: prices in one town, and only if that town is known to them.
- * Returns { place: { name } | null, prices: [{ good, unit, price, priceText, vsUsualPercent }] }.
+ * Returns { place: { name } | null, prices: [{ good, unit, price, priceText, vsUsualPercent,
+ * ratio, covers: { itemIds, types } }] }. ratio is this town's price over the good's base
+ * price; covers says which catalog items follow the good, so a client can show an item's
+ * local price as its catalog price times ratio.
  * No stock, no reasons, no other town. An unknown, hidden or market-less town gives
  * the same empty answer as a world that has not started.
  */
@@ -878,7 +908,9 @@ export function publicPrices(state, placeId) {
         unit: good.unit,
         price: Math.round(entry.price * 100) / 100,
         priceText: formatMoney(entry.price),
-        vsUsualPercent: Math.round((entry.price / entry.usual - 1) * 100)
+        vsUsualPercent: Math.round((entry.price / entry.usual - 1) * 100),
+        ratio: Math.round((entry.price / good.basePrice.value) * 10000) / 10000,
+        covers: { itemIds: [...(good.covers?.itemIds || [])], types: [...(good.covers?.types || [])] }
       };
     })
   };

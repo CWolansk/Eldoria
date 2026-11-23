@@ -237,6 +237,40 @@ function suggestionCard(event) {
   </div>`;
 }
 
+// Exactly what the two open routes answer right now: what a player's page would show.
+function playersPreview() {
+  const seen = ui.players;
+  const town = seen?.prices?.place?.name || seen?.rumours?.place?.name || "";
+  const prices = town ? (seen?.prices?.prices || []) : [];
+  const rumours = town ? (seen?.rumours?.rumours || []) : [];
+  const body = !seen
+    ? `<p class="ws-meta">Not checked yet.</p>`
+    : !town || (!prices.length && !rumours.length)
+      ? `<p id="ws-players-empty">Players see only: <q>No news from town yet.</q></p>
+         <p class="ws-meta">That is what they get until the world is started, the party is set in a town they know, and that town has prices or a rumour you have let them hear.</p>`
+      : `<p id="ws-players-town">Players see <b>Word in ${esc(town)}</b>.</p>
+         <div class="ws-tablewrap"><table class="ws-table" id="ws-players-prices">
+           <thead><tr><th>Good</th><th class="ws-num">Price</th><th class="ws-num">Against usual</th><th>Items that follow it</th></tr></thead>
+           <tbody>${prices.map((entry) => `<tr><td>${esc(entry.good)} <span class="ws-meta">per ${esc(entry.unit)}</span></td>
+             <td class="ws-num">${esc(entry.priceText)}</td>
+             <td class="ws-num">${entry.vsUsualPercent === 0 ? "usual" : `<span class="${entry.vsUsualPercent > 0 ? "ws-up" : "ws-down"}">${entry.vsUsualPercent > 0 ? "+" : "-"}${Math.abs(entry.vsUsualPercent)}%</span>`}</td>
+             <td class="ws-meta">${esc([...(entry.covers?.types || []), ...((entry.covers?.itemIds || []).length ? [`${entry.covers.itemIds.length} by id`] : [])].join(", ") || "none")}</td></tr>`).join("")
+             || `<tr><td colspan="4" class="ws-meta">No prices.</td></tr>`}</tbody></table></div>
+         <h3>Rumours they have heard here</h3>
+         ${rumours.length ? `<ul class="ws-plain" id="ws-players-rumours">${rumours.map((entry) => `<li><q>${esc(entry.text)}</q></li>`).join("")}</ul>`
+           : `<p class="ws-meta" id="ws-players-norumours">None. Reveal one from the Rumours tab when the party hears it.</p>`}`;
+  return `<section class="ws-card" id="ws-players">
+    <h2>What players see</h2>
+    <p class="ws-lede">The answer of the two open routes right now, nothing more. Check it before a session.</p>
+    ${body}
+    <div class="ws-row">
+      <button class="ws-btn ws-btn--small" type="button" data-act="players-preview">${seen ? "Check again" : "Check now"}</button>
+      <a class="ws-btn ws-btn--small" href="#rumours">Reveal or hide rumours</a>
+      <a class="ws-btn ws-btn--small" href="../town/index.html">Open the players' page</a>
+    </div>
+  </section>`;
+}
+
 function todayView() {
   const world = ui.world;
   const moved = ui.lastAdvance?.report ?? world.report ?? [];
@@ -269,6 +303,7 @@ function todayView() {
       <p class="ws-meta">${event.place ? `${stage3.linked(placeName(event.place))} · ` : ""}${event.source === "dm" ? "written by you" : "suggested by the simulation, accepted by you"}${event.day !== world.day ? ` · dated ${esc(formatDayShort(event.day))}` : ""}</p></div>`).join("")
       || `<p class="ws-meta">Nothing written yet today.</p>`}
   </section>
+  ${playersPreview()}
   <details class="ws-setup" id="ws-setup">
     <summary>Setup</summary>
     <div>
@@ -631,6 +666,18 @@ const actions = {
 };
 
 Object.assign(actions, economy.actions, stage3.actions, map.actions);
+
+// No key is needed for these two routes; the answer is the same with or without one.
+actions["players-preview"] = async () => {
+  try {
+    const [prices, rumours] = await Promise.all([ui.api.getWorldPublicPrices(), ui.api.getWorldPublicRumours()]);
+    ui.players = { prices, rumours };
+    ui.error = "";
+  } catch (error) {
+    ui.error = error?.message || "Could not check what players see.";
+  }
+  render();
+};
 
 function decide(id, decision) {
   return run(async () => {

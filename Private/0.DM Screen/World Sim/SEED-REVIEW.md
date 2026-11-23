@@ -196,6 +196,25 @@ To correct them, either change a figure on the Living World page (open a place u
 
 <!-- market-estimates:end -->
 
+## Which items follow each good (for the players' local prices)
+
+Players see an item's local price as its catalog price moved by the same share as the good it follows, in the town the party is in. These rules are my guesses, kept deliberately narrow: when in doubt an item is not covered and shows only its catalog price. Edit them on the DM page under Markets, or in `market-estimates.json` (`covers`) and rebuild.
+
+| Good | Items that follow it | Why |
+|---|---|---|
+| Grain | Wheat, Flour (by id) | Wheat and flour are grain; nothing else |
+| Fish | none | No fish in the catalog |
+| Wine | Common Wine (pitcher), Fine Wine (bottle) (by id) | The two ordinary wines in the catalog |
+| Iron | Iron (by id) | Iron by the pound only |
+| Timber | none | No timber in the catalog |
+| Herbs | none | Only the Herbalism Kit, which is a tool |
+| Healing potion | Potion of Healing, Greater, Superior and Supreme (by id) | The four healing potions; no other potion |
+| Weapons | Any ordinary simple or martial weapon (by type) | Magic weapons, and anything uncommon or rarer, stay at their catalog price |
+| Cloth | Cotton Cloth, Linen, Canvas, each by the square yard (by id) | The plain cloths |
+| Luxuries | Silk by the square yard (by id) | The item this good was priced from |
+
+Armor, adventuring gear, tools, food other than the above, and every magic item not listed are not covered by anything.
+
 ## Candidates for countdowns
 
 The world starts with no countdowns. These are the situations your notes already describe; each is quoted with its source in the draft under `situationsInNotes`. None is added automatically.

@@ -538,6 +538,59 @@ Never the truth, never where else it has spread, never a rumour you did not reve
 
 Every subject (countdowns, goods, people, sickness, rumours, travellers) may add at most 6 lines to a day's report, with a closing line saying how many were held back. Rumours raise at most 2 suggestions a day; a sickness raises at most one "reaches another town" suggestion a day per place, and only once per neighbour.
 
+## New in Stage 4, needs your OK
+
+Stage 4 is the players' side: a page that shows what the party's town knows, and local prices beside items in item search and on the character sheets. It stores one new thing and widens one answer.
+
+### Z1. Which catalog items follow a good (in the setup document)
+
+Each good in the DM-only setup may carry a `covers` rule, so a player can be shown what an item costs where the party is:
+
+```json
+{
+  "id": "weapons",
+  "covers": {
+    "itemIds": ["<catalog item id>", "..."],
+    "types": ["simple weapon", "martial weapon"],
+    "reference": "<the catalog item this good was priced from>",
+    "estimate": true,
+    "basis": "<one line on why these items>"
+  }
+}
+```
+
+- An item listed in `itemIds` always follows the good.
+- An item whose type is in `types` follows the good only if it is ordinary: rarity none or common. Anything uncommon or rarer, or of unknown rarity, follows a good only when listed by id.
+- A good with no rule, or an item no rule matches, changes nothing: the item shows its catalog price only.
+- The rule changes only what players are shown. It has no effect on stock, prices or trade.
+- It is edited on the DM page under Markets ("Which items follow this price for players"). Saving it there marks it as yours, not an estimate.
+
+### Z2. The open prices answer gains two fields per good
+
+`GET /api/world/public/prices` (section O) now answers:
+
+```json
+{
+  "place": { "name": "<town>" },
+  "prices": [
+    {
+      "good": "Weapons", "unit": "weapon", "price": 1680, "priceText": "16.8 gp", "vsUsualPercent": 12,
+      "ratio": 1.12,
+      "covers": { "itemIds": [], "types": ["martial weapon", "simple weapon"] }
+    }
+  ]
+}
+```
+
+- `ratio` is this town's price for the good divided by the good's base price. An item's local price is its catalog price times `ratio`.
+- `covers` carries only the item ids and types from Z1. The `reference`, `estimate` and `basis` fields stay with the DM.
+- Nothing else is added: still no stock, no reasons, no other town, no events. The empty answer is unchanged: exactly `{ "place": null, "prices": [] }` when the world has not started, no party is set, or the party is somewhere the players do not know.
+
+### Z3. What the players' pages do with it
+
+- `docs/tools/town/` ("Word in town") reads the two open routes, sends no key and stores nothing in the browser. Whatever the reason for an empty answer, it says only "No news from town yet."
+- Item search and the character sheet ask the prices route once per page load, in the background. If there is no answer they show catalog prices exactly as before. Nothing about the town is saved with a character.
+
 ## What is not stored here
 
 - People (NPCs). Places, goods and roads are sections G, L and N; every estimate in them is listed in `Private/0.DM Screen/World Sim/SEED-REVIEW.md`.

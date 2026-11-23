@@ -3,6 +3,7 @@ import {
     createElement
 } from "../PlayerSheetHtmlHelper.js";
 import { PlayerSheetDtoHelper } from "../PlayerSheetDtoHelper.js";
+import { getLocalPriceLine } from "./PlayerSheetLocalPrices.js";
 import {
     flattenRulesText as flattenSharedRulesText,
     formatAttunementText,
@@ -325,7 +326,8 @@ export function getItemDetailRows(item, record = getItemRecord(item)) {
         ["Damage", damage],
         ["Versatile", versatileDamage],
         ["AC", ac != null ? String(ac) : ""],
-        ["Value", record?.valueLabel || record?._l_value || ""],
+        // The catalog value, then what it costs where the party is, when that is known.
+        ["Value", [record?.valueLabel || record?._l_value || "", (record?.valueLabel || record?._l_value) ? getLocalPriceLine(item, record) : ""].filter(Boolean).join(" · ")],
         ["Weight", weight != null ? `${weight} lb.` : ""],
         ["Attunement", formatAttunementText(record?.attunement || record?.reqAttune || record?._attunement || "")]
     ].filter(([, value]) => value != null && String(value).trim());

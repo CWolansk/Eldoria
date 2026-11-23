@@ -1,0 +1,163 @@
+/* Word in town: the players' page. Phone first; colours come from the site tokens,
+   so it follows the light and dark themes. */
+.town-wrap {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding-block: 1.25rem 3rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: 1.5rem;
+  color: var(--ink);
+}
+
+.town-header h1,
+.town-card h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.town-kicker {
+  margin: 0 0 0.25rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.town-section {
+  display: grid;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.town-section h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.town-card {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-3);
+  background: var(--panel);
+}
+
+.town-card p {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.town-meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.town-tablewrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-3);
+  background: var(--panel);
+}
+
+.town-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.town-table th,
+.town-table td {
+  padding: 0.7rem 0.8rem;
+  border-bottom: 1px solid var(--line-soft);
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.town-table tbody tr:last-child th,
+.town-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.town-table thead th {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.town-table tbody th {
+  font-weight: 700;
+}
+
+.town-num {
+  text-align: right !important;
+  white-space: nowrap;
+}
+
+.town-unit {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.town-versus {
+  color: var(--muted);
+}
+
+/* Same language as the DM's Markets view: dearer is red, cheaper is green. */
+.town-versus--up {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.town-versus--down {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.town-rumours {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.town-rumours li {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--blue);
+  border-radius: var(--radius-2);
+  background: var(--panel);
+  font-family: var(--ff-serif);
+  font-size: 1.1rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.town-button {
+  min-height: 2.75rem;
+  padding: 0.3rem 1.1rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-2);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.town-button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}

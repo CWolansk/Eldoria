@@ -24,7 +24,15 @@
         "basis": "Catalog: wheat is 1 cp a pound; a sack is taken as 100 pounds"
       },
       "usePerThousandPeoplePerDay": 15,
-      "useBasis": "About a pound and a half of grain a head each day"
+      "useBasis": "About a pound and a half of grain a head each day",
+      "covers": {
+        "itemIds": [
+          "item:wheat:phb",
+          "item:flour:phb"
+        ],
+        "reference": "item:wheat:phb",
+        "basis": "Wheat and flour are grain; nothing else"
+      }
     },
     {
       "id": "fish",
@@ -47,7 +55,15 @@
         "basis": "Catalog: common wine, 2 sp a pitcher"
       },
       "usePerThousandPeoplePerDay": 100,
-      "useBasis": "One pitcher for every ten people each day"
+      "useBasis": "One pitcher for every ten people each day",
+      "covers": {
+        "itemIds": [
+          "item:common-wine-pitcher:phb",
+          "item:fine-wine-bottle:phb"
+        ],
+        "reference": "item:common-wine-pitcher:phb",
+        "basis": "The two ordinary wines in the catalog"
+      }
     },
     {
       "id": "ore",
@@ -59,7 +75,14 @@
         "basis": "Catalog: iron, 1 sp a pound"
       },
       "usePerThousandPeoplePerDay": 20,
-      "useBasis": "Nails, tools and repairs: a fiftieth of a pound a head each day"
+      "useBasis": "Nails, tools and repairs: a fiftieth of a pound a head each day",
+      "covers": {
+        "itemIds": [
+          "item:iron:phb"
+        ],
+        "reference": "item:iron:phb",
+        "basis": "Iron by the pound only"
+      }
     },
     {
       "id": "timber",
@@ -104,7 +127,17 @@
       "tags": [
         "medicine"
       ],
-      "tagsBasis": "Marks what a town uses more of while a sickness is real there. A guess: add \"medicine\" to herbs too if you want herbs to run short in a plague."
+      "tagsBasis": "Marks what a town uses more of while a sickness is real there. A guess: add \"medicine\" to herbs too if you want herbs to run short in a plague.",
+      "covers": {
+        "itemIds": [
+          "item:potion-of-healing:dmg",
+          "item:potion-of-greater-healing:dmg",
+          "item:potion-of-superior-healing:dmg",
+          "item:potion-of-supreme-healing:dmg"
+        ],
+        "reference": "item:potion-of-healing:dmg",
+        "basis": "The four healing potions, listed by id; no other potion"
+      }
     },
     {
       "id": "weapons",
@@ -124,7 +157,15 @@
           "perUnit": 10,
           "basis": "Guess: ten pounds of iron a weapon"
         }
-      ]
+      ],
+      "covers": {
+        "types": [
+          "simple weapon",
+          "martial weapon"
+        ],
+        "reference": "base-item:longsword:phb",
+        "basis": "Ordinary simple and martial weapons; magic weapons are left at their catalog price"
+      }
     },
     {
       "id": "cloth",
@@ -136,7 +177,16 @@
         "basis": "Catalog: cotton cloth, 5 sp a square yard"
       },
       "usePerThousandPeoplePerDay": 30,
-      "useBasis": "About eleven square yards a head each year"
+      "useBasis": "About eleven square yards a head each year",
+      "covers": {
+        "itemIds": [
+          "item:cotton-cloth-1-sq-yd:phb",
+          "item:linen-1-sq-yd:phb",
+          "item:canvas-1-sq-yd:phb"
+        ],
+        "reference": "item:cotton-cloth-1-sq-yd:phb",
+        "basis": "Cotton, linen and canvas by the square yard"
+      }
     },
     {
       "id": "luxuries",
@@ -149,7 +199,14 @@
         "basis": "A whole category. The catalog's silk (10 gp a square yard) stands in for it; which item should is your call"
       },
       "usePerThousandPeoplePerDay": 1,
-      "useBasis": "One piece a day for every thousand people"
+      "useBasis": "One piece a day for every thousand people",
+      "covers": {
+        "itemIds": [
+          "item:silk-1-sq-yd:phb"
+        ],
+        "reference": "item:silk-1-sq-yd:phb",
+        "basis": "Silk only, the item this good was priced from"
+      }
     }
   ],
   "makes": {

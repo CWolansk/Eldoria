@@ -3,6 +3,7 @@ import { BuildPlayerSheetHeader } from "./PlayerSheetJavaScript/PlayerSheetHeade
 import { BuildPlayerSheetSidebar } from "./PlayerSheetJavaScript/PlayerSheetSidebarBuilder.js";
 import { BuildPlayerSheetPlayStrip } from "./PlayerSheetJavaScript/PlayerSheetPlayStrip.js";
 import { captureViewState, restoreViewState } from "./PlayerSheetJavaScript/PlayerSheetViewState.js";
+import { primeLocalPrices } from "./PlayerSheetJavaScript/PlayerSheetLocalPrices.js";
 import { BuildPlayerSheetOffenseTab } from "./PlayerSheetJavaScript/PlayerSheetOffenseTabBuilder.js";
 import { BuildPlayerSheetDefenseTab } from "./PlayerSheetJavaScript/PlayerSheetDefenseTabBuilder.js";
 import { BuildPlayerSheetGearTab } from "./PlayerSheetJavaScript/PlayerSheetGearTabBuilder.js?v=20260717-gear-organizer-2";
@@ -896,6 +897,13 @@ async function bootPlayersPage() {
 
     setupMobileLevelEditorToggle();
     ensureSheetModeSwitch();
+    // Local prices for the town the party is in: asked once, in the background. If they
+    // arrive while the Gear tab is showing and nothing is open on top of it, redraw it once.
+    primeLocalPrices(api, () => {
+        if (currentTabName === "Gear" && currentCharacterSheet && !document.querySelector("dialog[open]")) {
+            void window.setTab("Gear");
+        }
+    });
     applyTabVisibility();
     currentTabName = takePendingTab() || readRememberedTab() || currentTabName;
 
