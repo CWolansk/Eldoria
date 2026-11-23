@@ -310,6 +310,7 @@ export class EldoriaApiClient {
     this.baseUrl = normalizeBaseUrl(config.baseUrl);
     this.fetch = config.fetch || globalThis.fetch?.bind(globalThis);
     this.functionKey = String(config.functionKey || "").trim();
+    this.dmKey = String(config.dmKey || "").trim();
     this.requestTimeoutMs = normalizeNonNegativeNumber(config.requestTimeoutMs, DEFAULT_REQUEST_TIMEOUT_MS);
     this.getRetries = Math.floor(normalizeNonNegativeNumber(config.getRetries, DEFAULT_GET_RETRIES));
     this.retryDelayMs = normalizeNonNegativeNumber(config.retryDelayMs, DEFAULT_RETRY_DELAY_MS);
@@ -343,6 +344,11 @@ export class EldoriaApiClient {
 
     if (this.functionKey) {
       headers["x-functions-key"] = this.functionKey;
+    }
+
+    // Only DM tools hold this key; player pages never set it.
+    if (this.dmKey) {
+      headers["x-eldoria-dm-key"] = this.dmKey;
     }
 
     if (options.body !== undefined) {
@@ -511,6 +517,15 @@ export class EldoriaApiClient {
 
   getNpcIndex() {
     return this.getPublicIndex("npcs");
+  }
+
+  setDmKey(dmKey) {
+    this.dmKey = String(dmKey || "").trim();
+    return this;
+  }
+
+  checkDmKey() {
+    return this.request("/dm/session");
   }
 
   getCharacterSheet(id) {

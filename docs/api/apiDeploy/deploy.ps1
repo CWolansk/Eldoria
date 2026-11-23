@@ -16,6 +16,9 @@ param(
   [string] $AllowedOrigins = $(if ($env:ELDORIA_ALLOWED_ORIGINS) { $env:ELDORIA_ALLOWED_ORIGINS } else { "*" }),
   [string] $Subscription = "",
   [string] $StorageConnectionString = $env:ELDORIA_STORAGE_CONNECTION_STRING,
+  # Shared secret for DM-only routes. Pass it here or set $env:ELDORIA_DM_KEY.
+  # Left out, the app keeps whatever key it already has.
+  [string] $DmKey = $env:ELDORIA_DM_KEY,
   [switch] $AssignStorageRole
 )
 
@@ -150,6 +153,12 @@ if ($StorageConnectionString) {
 
 if ($BlobPrefix) {
   $settings += "ELDORIA_BLOB_PREFIX=$BlobPrefix"
+}
+
+if ($DmKey) {
+  $settings += "ELDORIA_DM_KEY=$DmKey"
+} else {
+  Write-Warning "No DM key given. DM-only routes stay locked for everyone unless ELDORIA_DM_KEY is already set on the Function App."
 }
 
 az functionapp config appsettings set `

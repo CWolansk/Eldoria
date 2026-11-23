@@ -13,6 +13,8 @@ blob_prefix="${ELDORIA_BLOB_PREFIX:-}"
 allowed_origins="${ELDORIA_ALLOWED_ORIGINS:-*}"
 subscription=""
 storage_connection_string="${ELDORIA_STORAGE_CONNECTION_STRING:-}"
+# Shared secret for DM-only routes. Left empty, the app keeps the key it already has.
+dm_key="${ELDORIA_DM_KEY:-}"
 assign_storage_role="false"
 
 usage() {
@@ -172,6 +174,12 @@ fi
 
 if [[ -n "$blob_prefix" ]]; then
   settings+=("ELDORIA_BLOB_PREFIX=$blob_prefix")
+fi
+
+if [[ -n "$dm_key" ]]; then
+  settings+=("ELDORIA_DM_KEY=$dm_key")
+else
+  echo "Warning: no DM key given. DM-only routes stay locked for everyone unless ELDORIA_DM_KEY is already set on the Function App." >&2
 fi
 
 az functionapp config appsettings set \

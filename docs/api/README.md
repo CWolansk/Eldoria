@@ -17,6 +17,30 @@ and the read-only rules catalogs from `docs/data` (Table Storage).
 Character saves use `lastModified` plus Blob ETags to reject stale whole-sheet writes with
 `409 Conflict` instead of silently overwriting a newer DM or player change.
 
+## DM lock
+
+Some routes change data that only the DM should change. They need the DM key, a shared
+secret held in the Function App setting `ELDORIA_DM_KEY` and sent in the
+`x-eldoria-dm-key` header. The key is never stored in the site's files.
+
+| Route | Needs the DM key |
+|---|---|
+| `GET /api/dm/session` | Yes. Returns `{ "ok": true }`; use it to check a key. |
+| `POST /api/catalog/{kind}`, `PATCH /api/catalog/{kind}/{id}` | Yes |
+| `PUT /api/players` | Yes |
+| `DELETE /api/characters/{id}` | Yes |
+| `GET`, `POST`, `PUT /api/characters/{id}` | No. Players read and save their own sheets. |
+| `POST /api/dm/characters/{id}/actions`, `GET /api/dm/party` | No, for now. |
+| Every other `GET` | No |
+
+- If `ELDORIA_DM_KEY` is not set, the locked routes refuse everyone (403).
+- A missing or wrong key gets 401.
+- `/api/health` reports `"dmLock": "set"` or `"not-set"`, never the key.
+- Set the key when deploying: `deploy.ps1 -DmKey "<your key>"`, or set
+  `$env:ELDORIA_DM_KEY` first. Deploying without one leaves the existing key in place.
+- `EldoriaApiClient` sends the key when created with `{ dmKey }` or after `setDmKey(key)`.
+- Tests: `npm run test:dm-key`.
+
 ## DM dashboard endpoints
 
 ### September 2026 DM workspace release
@@ -196,6 +220,7 @@ to an Azure Storage connection string.
   item search index and use the existing catalog scan path.
 - `ELDORIA_BLOB_PREFIX`: Optional prefix for all API blobs. Use only when the seed script uses `--prefix`.
 - `ELDORIA_CREATE_CONTAINER` / `ELDORIA_CREATE_TABLE`: Set to `false` to skip create-if-not-exists for the container/table.
+- `ELDORIA_DM_KEY`: Shared secret for the DM-only routes (see "DM lock"). Unset means those routes are closed.
 - `ELDORIA_ALLOWED_ORIGINS`: Comma-separated CORS allowlist. Defaults to `*`. Deploy scripts
   also sync these origins into the Azure Function App CORS config so browser preflights include
   `Access-Control-Allow-Origin`.

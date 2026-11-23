@@ -3,6 +3,7 @@
 const { app } = require("@azure/functions");
 const {
   characterSheetHandler,
+  dmSessionHandler,
   healthHandler,
   listCharactersHandler,
   playersManifestHandler
@@ -42,6 +43,13 @@ app.http("characterSheet", {
   authLevel: "anonymous",
   route: "characters/{id}",
   handler: characterSheetHandler
+});
+
+app.http("dmSession", {
+  methods: ["GET", "OPTIONS"],
+  authLevel: "anonymous",
+  route: "dm/session",
+  handler: dmSessionHandler
 });
 
 app.http("dmParty", {

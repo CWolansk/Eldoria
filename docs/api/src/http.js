@@ -53,7 +53,7 @@ function headers(request, extra = {}) {
   return {
     "Access-Control-Allow-Origin": getCorsOrigin(request),
     "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
-    "Access-Control-Allow-Headers": "content-type, authorization, x-functions-key",
+    "Access-Control-Allow-Headers": "content-type, authorization, x-functions-key, x-eldoria-dm-key",
     "Access-Control-Max-Age": "86400",
     "Cache-Control": getCacheControl(request),
     ...extra
