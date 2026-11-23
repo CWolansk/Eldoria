@@ -100,6 +100,9 @@ function rollMode(hasAdvantage, hasDisadvantage) {
     return hasAdvantage ? "advantage" : "disadvantage";
 }
 
+// The standard conditions, in the order a player picks from.
+export const CONDITION_NAMES = Object.values(CONDITION_DEFINITIONS).map((definition) => definition.name);
+
 export function getConditionRule(condition) {
     const name = String(condition || "").trim();
     return CONDITION_DEFINITIONS[normalizeName(name)] || {

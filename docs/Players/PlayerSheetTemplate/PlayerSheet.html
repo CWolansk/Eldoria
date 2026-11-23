@@ -1,4 +1,4 @@
-<!-- copied from site-src/public/index.html - do not edit -->
+<!-- Originally copied from site-src/public/index.html. That source is no longer in the repository, so this file is now edited directly. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player Sheet | Eldoria Player Wiki</title>
     <script src="../../site-shell.js"></script>
-    <script type="module" src="PlayerSheet.js?v=20260717-gear-organizer-2"></script>
+    <script>
+        // Tabs work from first paint: a tap before the sheet script has loaded is
+        // remembered and opened as soon as it has.
+        window.setTab = function (tabName) { window.__eldoriaPendingTab = tabName; };
+    </script>
+    <script type="module" src="PlayerSheet.js?v=20261123-pass1"></script>
     <link rel="stylesheet" href="../../css/tokens.css">
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/components.css">
     <link rel="stylesheet" href="../../css/utilities.css">
-    <link rel="stylesheet" href="../players.css?v=20260717-gear-organizer-2">
+    <link rel="stylesheet" href="../players.css?v=20261123-pass1">
     <link rel="stylesheet" href="./PlayerSheetConditions.css?v=20260716-mobile-status-2">
     <link rel="stylesheet" href="./LevelEditorJavaScript/LevelEditor.css">
 </head>
@@ -168,7 +173,7 @@
                             </li>
                         </ul>
                     </aside>
-                    <main class="playerSheet" id="player-sheet">
+                    <div class="playerSheet" id="player-sheet" role="region" aria-label="Character sheet">
                         <div class="playerSheetPortrait" id="GlobalCharacterSheetPortrait">
                             <div class="Portrait" hidden></div>
                         </div>
@@ -225,15 +230,15 @@
                         </div>
                         <div class="playerSheetTabsContainer" id="CharacterSheetTabArea">
                             <div id="TabRowList">
-                                <button data-tab="Offense" onclick="setTab('Offense')">Offense</button>
-                                <button data-tab="Defense" onclick="setTab('Defense')">Defense</button>
-                                <button data-tab="Gear" onclick="setTab('Gear')">Gear</button>
-                                <button data-tab="Skills" onclick="setTab('Skills')">Skills</button>
-                                <button data-tab="Spells" onclick="setTab('Spells')">Spells</button>
-                                <button data-tab="Pets" onclick="setTab('Pets')">Pets</button>
-                                <button data-tab="Feats" onclick="setTab('Feats')">Feats</button>
-                                <button data-tab="Notes" onclick="setTab('Notes')">Notes</button>
-                                <button data-tab="Reference" onclick="setTab('Reference')">Reference</button>
+                                <button type="button" data-tab="Offense" onclick="setTab('Offense')">Offense</button>
+                                <button type="button" data-tab="Defense" onclick="setTab('Defense')">Defense</button>
+                                <button type="button" data-tab="Gear" onclick="setTab('Gear')">Gear</button>
+                                <button type="button" data-tab="Skills" onclick="setTab('Skills')">Skills</button>
+                                <button type="button" data-tab="Spells" onclick="setTab('Spells')">Spells</button>
+                                <button type="button" data-tab="Pets" onclick="setTab('Pets')">Pets</button>
+                                <button type="button" data-tab="Feats" onclick="setTab('Feats')">Feats</button>
+                                <button type="button" data-tab="Notes" onclick="setTab('Notes')">Notes</button>
+                                <button type="button" data-tab="Reference" onclick="setTab('Reference')">Reference</button>
                             </div>
                             <div id="TabContent">
                                 <P>Loading...</P>
@@ -243,7 +248,7 @@
                             <p>Sidebar</p>
                         </div>
 
-                    </main>
+                    </div>
                     
                 </div>
             </section>

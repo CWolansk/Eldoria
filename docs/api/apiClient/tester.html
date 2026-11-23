@@ -355,6 +355,8 @@
     </div>
     <label>Function key</label>
     <input id="functionKey" type="password" placeholder="optional" autocomplete="off" />
+    <label for="dmKey">DM key</label>
+    <input id="dmKey" type="password" placeholder="for locked actions" autocomplete="off" />
     <label>Actions URL</label>
     <input id="actionsUrl" type="text" placeholder="http://127.0.0.1:8787" />
     <label>Actions key</label>
@@ -961,6 +963,7 @@ function buildClient() {
   return new EldoriaApiClient({
     baseUrl: baseUrlEl.value.trim() || "/api",
     functionKey: keyEl.value.trim(),
+    dmKey: (document.getElementById("dmKey")?.value || "").trim(),
     fetch: wrappedFetch
   });
 }

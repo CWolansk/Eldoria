@@ -1,0 +1,1536 @@
+{
+  "schema": "eldoria-world-places/2",
+  "note": "DM only. Load this from the Living World page (Setup). Every figure marked estimate is a guess for you to correct.",
+  "places": [
+    {
+      "id": "highreach",
+      "name": "Highreach",
+      "kind": "City",
+      "region": "Crestfall",
+      "parent": null,
+      "knownToPlayers": true,
+      "position": [
+        0.729,
+        0.171
+      ],
+      "detail": "full",
+      "population": {
+        "value": 25000,
+        "estimate": false,
+        "basis": "Stated in the notes for Highreach"
+      }
+    },
+    {
+      "id": "highreach--highreach-merchants-guild",
+      "name": "HighReach Merchants Guild (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": true
+    },
+    {
+      "id": "highreach--highreach-adventurers-guild",
+      "name": "Highreach Adventurers Guild (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": true
+    },
+    {
+      "id": "highreach--highreach-mines",
+      "name": "Highreach Mines (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": true
+    },
+    {
+      "id": "highreach--sturdy-mugg",
+      "name": "Sturdy Mugg (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": true
+    },
+    {
+      "id": "highreach--target-by-tradewind",
+      "name": "Target by Tradewind (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": true
+    },
+    {
+      "id": "highreach--the-arcane-enclave",
+      "name": "The Arcane Enclave (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": false
+    },
+    {
+      "id": "highreach--the-dragons-breath-forge",
+      "name": "The Dragons Breath Forge (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": true
+    },
+    {
+      "id": "highreach--the-warren",
+      "name": "The Warren (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": true
+    },
+    {
+      "id": "ardenville",
+      "name": "Ardenville",
+      "kind": "Town",
+      "region": "Crestfall",
+      "parent": null,
+      "knownToPlayers": true,
+      "position": [
+        0.79,
+        0.09
+      ],
+      "detail": "full",
+      "population": {
+        "value": 500,
+        "estimate": false,
+        "basis": "Stated in the notes for Ardenville"
+      }
+    },
+    {
+      "id": "ardenville--ardenville-adventurers-guild",
+      "name": "Ardenville Adventurers Guild (Ardenville)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "ardenville",
+      "knownToPlayers": false
+    },
+    {
+      "id": "ardenville--fishermans-guild",
+      "name": "Fisherman's Guild (Ardenville)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "ardenville",
+      "knownToPlayers": false
+    },
+    {
+      "id": "ardenville--lake-arden",
+      "name": "Lake Arden (Ardenville)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "ardenville",
+      "knownToPlayers": true
+    },
+    {
+      "id": "ardenville--merchants-guild-warehouse",
+      "name": "Merchants Guild Warehouse (Ardenville)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "ardenville",
+      "knownToPlayers": false
+    },
+    {
+      "id": "ardenville--steelshapers-forge",
+      "name": "Steelshaper's Forge (Ardenville)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "ardenville",
+      "knownToPlayers": false
+    },
+    {
+      "id": "ardenville--the-enchanted-trinket",
+      "name": "The Enchanted Trinket (Ardenville)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "ardenville",
+      "knownToPlayers": false
+    },
+    {
+      "id": "ardenville--the-netted-nymph",
+      "name": "The Netted Nymph (Ardenville)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "ardenville",
+      "knownToPlayers": false
+    },
+    {
+      "id": "fairfield",
+      "name": "Fairfield",
+      "kind": "Town",
+      "region": "Crestfall",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.78,
+        0.337
+      ],
+      "detail": "full",
+      "population": {
+        "value": 3500,
+        "estimate": false,
+        "basis": "Stated in the notes for Fairfield"
+      }
+    },
+    {
+      "id": "fairfield--forgefires-armaments",
+      "name": "Forgefires Armaments (Fairfield)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "fairfield",
+      "knownToPlayers": false
+    },
+    {
+      "id": "fairfield--starspells-wonders",
+      "name": "Starspells Wonders (Fairfield)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "fairfield",
+      "knownToPlayers": false
+    },
+    {
+      "id": "hillcrest",
+      "name": "Hillcrest",
+      "kind": "Village",
+      "region": "Crestfall",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.623,
+        0.159
+      ],
+      "detail": "full",
+      "population": {
+        "value": 400,
+        "estimate": false,
+        "basis": "Stated in the notes for Hillcrest"
+      }
+    },
+    {
+      "id": "hillcrest--hammerstrikes-weapons",
+      "name": "Hammerstrikes Weapons (Hillcrest)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "hillcrest",
+      "knownToPlayers": false
+    },
+    {
+      "id": "hillcrest--nightwhispers-potions-and-scrolls",
+      "name": "Nightwhispers Potions and Scrolls (Hillcrest)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "hillcrest",
+      "knownToPlayers": false
+    },
+    {
+      "id": "stonehaven",
+      "name": "Stonehaven",
+      "kind": "Village",
+      "region": "Crestfall",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.597,
+        0.288
+      ],
+      "detail": "full",
+      "population": {
+        "value": 300,
+        "estimate": true,
+        "basis": "Not in the notes. The notes call it a village and a fortress-settlement on the edge of Blackwood Forest; Hillcrest, the other village, has 400."
+      }
+    },
+    {
+      "id": "stonehaven--blackwood-forest",
+      "name": "Blackwood Forest (Stonehaven)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "stonehaven",
+      "knownToPlayers": false
+    },
+    {
+      "id": "stonehaven--ironforge-smithy",
+      "name": "Ironforge Smithy (Stonehaven)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "stonehaven",
+      "knownToPlayers": false
+    },
+    {
+      "id": "stonehaven--marlas-gear",
+      "name": "Marlas Gear (Stonehaven)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "stonehaven",
+      "knownToPlayers": false
+    },
+    {
+      "id": "stonehaven--mystic-wares",
+      "name": "Mystic Wares (Stonehaven)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "stonehaven",
+      "knownToPlayers": false
+    },
+    {
+      "id": "stonehaven--stonehaven-supplies",
+      "name": "Stonehaven Supplies (Stonehaven)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "stonehaven",
+      "knownToPlayers": false
+    },
+    {
+      "id": "stonehaven--stones-herbs",
+      "name": "Stones Herbs (Stonehaven)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "stonehaven",
+      "knownToPlayers": false
+    },
+    {
+      "id": "starfall",
+      "name": "Starfall",
+      "kind": "On the map",
+      "region": "Silverleaf Lands",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.813,
+        0.42
+      ],
+      "detail": "sketched",
+      "population": null
+    },
+    {
+      "id": "stardew",
+      "name": "Stardew",
+      "kind": "On the map",
+      "region": "Silverleaf Lands",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.885,
+        0.391
+      ],
+      "detail": "sketched",
+      "population": null
+    },
+    {
+      "id": "frostglade",
+      "name": "Frostglade",
+      "kind": "On the map",
+      "region": "Silverleaf Lands",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.845,
+        0.466
+      ],
+      "detail": "sketched",
+      "population": null
+    },
+    {
+      "id": "serenity-hollow",
+      "name": "Serenity Hollow",
+      "kind": "On the map",
+      "region": "Silverleaf Lands",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.824,
+        0.527
+      ],
+      "detail": "sketched",
+      "population": null
+    },
+    {
+      "id": "moonshade",
+      "name": "Moonshade",
+      "kind": "On the map",
+      "region": "Silverleaf Lands",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.898,
+        0.566
+      ],
+      "detail": "sketched",
+      "population": null
+    },
+    {
+      "id": "ironroot",
+      "name": "Ironroot",
+      "kind": "On the map",
+      "region": "Ironpeak Mountains",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.708,
+        0.591
+      ],
+      "detail": "sketched",
+      "population": null
+    },
+    {
+      "id": "gemstone-hollow",
+      "name": "Gemstone Hollow",
+      "kind": "On the map",
+      "region": "Ironpeak Mountains",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.525,
+        0.466
+      ],
+      "detail": "sketched",
+      "population": null
+    },
+    {
+      "id": "forgepeak",
+      "name": "Forgepeak",
+      "kind": "On the map",
+      "region": "Ironpeak Mountains",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.423,
+        0.226
+      ],
+      "detail": "sketched",
+      "population": null
+    },
+    {
+      "id": "steamhammer",
+      "name": "Steamhammer",
+      "kind": "On the map",
+      "region": "Ironpeak Mountains",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.351,
+        0.32
+      ],
+      "detail": "sketched",
+      "population": null
+    },
+    {
+      "id": "stoneforge",
+      "name": "Stoneforge",
+      "kind": "On the map",
+      "region": "Ironpeak Mountains",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.271,
+        0.242
+      ],
+      "detail": "sketched",
+      "population": null
+    },
+    {
+      "id": "ironpeak-mountain",
+      "name": "Ironpeak Mountain",
+      "kind": "On the map",
+      "region": "Ironpeak Mountains",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.391,
+        0.188
+      ],
+      "detail": "landmark",
+      "population": null
+    },
+    {
+      "id": "cannibal-camp",
+      "name": "Cannibal Camp",
+      "kind": "On the map",
+      "region": "Ironpeak Mountains",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.752,
+        0.633
+      ],
+      "detail": "landmark",
+      "population": null
+    },
+    {
+      "id": "witchs-bog",
+      "name": "Witch's Bog",
+      "kind": "On the map",
+      "region": "Orcish Wastes",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.439,
+        0.673
+      ],
+      "detail": "landmark",
+      "population": null
+    },
+    {
+      "id": "red-dune-desert",
+      "name": "Red Dune Desert",
+      "kind": "On the map",
+      "region": "Orcish Wastes",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.235,
+        0.61
+      ],
+      "detail": "landmark",
+      "population": null
+    },
+    {
+      "id": "sand-dragon-valley",
+      "name": "Sand Dragon Valley",
+      "kind": "On the map",
+      "region": "Orcish Wastes",
+      "parent": null,
+      "knownToPlayers": false,
+      "position": [
+        0.43,
+        0.835
+      ],
+      "detail": "landmark",
+      "population": null
+    }
+  ],
+  "economy": {
+    "goods": [
+      {
+        "id": "grain",
+        "kind": "commodity",
+        "name": "Grain",
+        "unit": "sack",
+        "basePrice": {
+          "value": 100,
+          "estimate": false,
+          "basis": "Catalog: wheat is 1 cp a pound; a sack is taken as 100 pounds"
+        },
+        "tags": [],
+        "madeFrom": [],
+        "covers": {
+          "itemIds": [
+            "item:wheat:phb",
+            "item:flour:phb"
+          ],
+          "types": [],
+          "reference": "item:wheat:phb",
+          "estimate": true,
+          "basis": "Wheat and flour are grain; nothing else"
+        }
+      },
+      {
+        "id": "fish",
+        "kind": "commodity",
+        "name": "Fish",
+        "unit": "basket",
+        "basePrice": {
+          "value": 40,
+          "estimate": true,
+          "basis": "Not in the catalog. Guess: 2 cp a pound, a basket of 20 pounds"
+        },
+        "tags": [],
+        "madeFrom": []
+      },
+      {
+        "id": "wine",
+        "kind": "commodity",
+        "name": "Wine",
+        "unit": "pitcher",
+        "basePrice": {
+          "value": 20,
+          "estimate": false,
+          "basis": "Catalog: common wine, 2 sp a pitcher"
+        },
+        "tags": [],
+        "madeFrom": [],
+        "covers": {
+          "itemIds": [
+            "item:common-wine-pitcher:phb",
+            "item:fine-wine-bottle:phb"
+          ],
+          "types": [],
+          "reference": "item:common-wine-pitcher:phb",
+          "estimate": true,
+          "basis": "The two ordinary wines in the catalog"
+        }
+      },
+      {
+        "id": "ore",
+        "kind": "commodity",
+        "name": "Iron",
+        "unit": "pound",
+        "basePrice": {
+          "value": 10,
+          "estimate": false,
+          "basis": "Catalog: iron, 1 sp a pound"
+        },
+        "tags": [],
+        "madeFrom": [],
+        "covers": {
+          "itemIds": [
+            "item:iron:phb"
+          ],
+          "types": [],
+          "reference": "item:iron:phb",
+          "estimate": true,
+          "basis": "Iron by the pound only"
+        }
+      },
+      {
+        "id": "timber",
+        "kind": "commodity",
+        "name": "Timber",
+        "unit": "cartload",
+        "basePrice": {
+          "value": 500,
+          "estimate": true,
+          "basis": "Not in the catalog. Guess: 5 gp a cartload"
+        },
+        "tags": [],
+        "madeFrom": []
+      },
+      {
+        "id": "herbs",
+        "kind": "commodity",
+        "name": "Herbs",
+        "unit": "bundle",
+        "basePrice": {
+          "value": 200,
+          "estimate": true,
+          "basis": "Not in the catalog. Guess: 2 gp a bundle, so the herbs in a healing potion cost a fifth of its price"
+        },
+        "tags": [],
+        "madeFrom": []
+      },
+      {
+        "id": "healing-potions",
+        "kind": "commodity",
+        "name": "Healing potion",
+        "unit": "potion",
+        "basePrice": {
+          "value": 5000,
+          "estimate": false,
+          "basis": "Catalog: potion of healing, 50 gp (confirmed by the DM)"
+        },
+        "tags": [
+          "medicine"
+        ],
+        "madeFrom": [
+          {
+            "good": "herbs",
+            "perUnit": 5
+          }
+        ],
+        "covers": {
+          "itemIds": [
+            "item:potion-of-healing:dmg",
+            "item:potion-of-greater-healing:dmg",
+            "item:potion-of-superior-healing:dmg",
+            "item:potion-of-supreme-healing:dmg"
+          ],
+          "types": [],
+          "reference": "item:potion-of-healing:dmg",
+          "estimate": true,
+          "basis": "The four healing potions, listed by id; no other potion"
+        }
+      },
+      {
+        "id": "weapons",
+        "kind": "modifier",
+        "name": "Ordinary weapons",
+        "basePrice": {
+          "value": 1500,
+          "estimate": true,
+          "basis": "Not a price anyone pays. The catalog's longsword (15 gp) is only the reference this percentage is tracked against; every weapon keeps its own catalog price"
+        },
+        "tags": [],
+        "madeFrom": [
+          {
+            "good": "ore",
+            "perUnit": 10
+          }
+        ],
+        "covers": {
+          "itemIds": [],
+          "types": [
+            "simple weapon",
+            "martial weapon"
+          ],
+          "reference": "base-item:longsword:phb",
+          "estimate": true,
+          "basis": "Ordinary simple and martial weapons, each at its own catalog price; magic weapons and anything uncommon or rarer stay at list price"
+        }
+      },
+      {
+        "id": "cloth",
+        "kind": "commodity",
+        "name": "Cloth",
+        "unit": "square yard",
+        "basePrice": {
+          "value": 50,
+          "estimate": false,
+          "basis": "Catalog: cotton cloth, 5 sp a square yard"
+        },
+        "tags": [],
+        "madeFrom": [],
+        "covers": {
+          "itemIds": [
+            "item:cotton-cloth-1-sq-yd:phb",
+            "item:linen-1-sq-yd:phb",
+            "item:canvas-1-sq-yd:phb"
+          ],
+          "types": [],
+          "reference": "item:cotton-cloth-1-sq-yd:phb",
+          "estimate": true,
+          "basis": "Cotton, linen and canvas by the square yard"
+        }
+      },
+      {
+        "id": "silk",
+        "kind": "commodity",
+        "name": "Silk",
+        "unit": "square yard",
+        "basePrice": {
+          "value": 1000,
+          "estimate": false,
+          "basis": "Catalog price of Silk (1 sq. yd.)"
+        },
+        "tags": [],
+        "madeFrom": [],
+        "covers": {
+          "itemIds": [
+            "item:silk-1-sq-yd:phb"
+          ],
+          "types": [],
+          "reference": "item:silk-1-sq-yd:phb",
+          "estimate": true,
+          "basis": "Silk by the square yard, the item itself"
+        }
+      }
+    ],
+    "routes": [
+      {
+        "id": "ardenville--highreach",
+        "a": "ardenville",
+        "b": "highreach",
+        "travelDays": {
+          "value": 1,
+          "estimate": false,
+          "basis": "The DM, 2026-11-23: about a day, going around Lake Arden"
+        },
+        "via": [
+          [
+            0.815,
+            0.105
+          ],
+          [
+            0.838,
+            0.135
+          ],
+          [
+            0.845,
+            0.172
+          ],
+          [
+            0.832,
+            0.205
+          ],
+          [
+            0.8,
+            0.225
+          ],
+          [
+            0.765,
+            0.226
+          ],
+          [
+            0.738,
+            0.206
+          ]
+        ]
+      },
+      {
+        "id": "highreach--hillcrest",
+        "a": "highreach",
+        "b": "hillcrest",
+        "travelDays": {
+          "value": 1,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "highreach--fairfield",
+        "a": "highreach",
+        "b": "fairfield",
+        "travelDays": {
+          "value": 1.5,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "hillcrest--stonehaven",
+        "a": "hillcrest",
+        "b": "stonehaven",
+        "travelDays": {
+          "value": 1,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "highreach--stonehaven",
+        "a": "highreach",
+        "b": "stonehaven",
+        "travelDays": {
+          "value": 1.5,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "fairfield--stonehaven",
+        "a": "fairfield",
+        "b": "stonehaven",
+        "travelDays": {
+          "value": 2.5,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "fairfield--starfall",
+        "a": "fairfield",
+        "b": "starfall",
+        "travelDays": {
+          "value": 0.5,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "starfall--frostglade",
+        "a": "starfall",
+        "b": "frostglade",
+        "travelDays": {
+          "value": 0.5,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "starfall--stardew",
+        "a": "starfall",
+        "b": "stardew",
+        "travelDays": {
+          "value": 1,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "frostglade--serenity-hollow",
+        "a": "frostglade",
+        "b": "serenity-hollow",
+        "travelDays": {
+          "value": 0.5,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "frostglade--moonshade",
+        "a": "frostglade",
+        "b": "moonshade",
+        "travelDays": {
+          "value": 1.5,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "fairfield--ironroot",
+        "a": "fairfield",
+        "b": "ironroot",
+        "travelDays": {
+          "value": 5.5,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "stonehaven--gemstone-hollow",
+        "a": "stonehaven",
+        "b": "gemstone-hollow",
+        "travelDays": {
+          "value": 2.5,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "gemstone-hollow--ironroot",
+        "a": "gemstone-hollow",
+        "b": "ironroot",
+        "travelDays": {
+          "value": 4.5,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "stonehaven--forgepeak",
+        "a": "stonehaven",
+        "b": "forgepeak",
+        "travelDays": {
+          "value": 3.5,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "forgepeak--steamhammer",
+        "a": "forgepeak",
+        "b": "steamhammer",
+        "travelDays": {
+          "value": 2.5,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      },
+      {
+        "id": "steamhammer--stoneforge",
+        "a": "steamhammer",
+        "b": "stoneforge",
+        "travelDays": {
+          "value": 2,
+          "estimate": true,
+          "basis": "Estimate from the map (see routeEstimatesMethod)"
+        }
+      }
+    ],
+    "markets": {
+      "highreach": {
+        "grain": {
+          "make": {
+            "value": 98.01,
+            "estimate": true,
+            "basis": "Farmland around the capital feeds part of it"
+          },
+          "use": {
+            "value": 375,
+            "estimate": true,
+            "basis": "About a pound and a half of grain a head each day; 25000 people"
+          }
+        },
+        "fish": {
+          "make": {
+            "value": 89.1,
+            "estimate": true,
+            "basis": "On the shore of Lake Arden"
+          },
+          "use": {
+            "value": 250,
+            "estimate": true,
+            "basis": "About a fifth of a pound of fish a head each day; 25000 people"
+          }
+        },
+        "wine": {
+          "make": {
+            "value": 178.2,
+            "estimate": true,
+            "basis": "Some wine is made near the capital; most comes from elsewhere"
+          },
+          "use": {
+            "value": 2500,
+            "estimate": true,
+            "basis": "One pitcher for every ten people each day; 25000 people"
+          }
+        },
+        "ore": {
+          "make": {
+            "value": 683.1,
+            "estimate": true,
+            "basis": "The notes name the Highreach Mines; no other Crestfall town has a mine in the notes"
+          },
+          "use": {
+            "value": 500,
+            "estimate": true,
+            "basis": "Nails, tools and repairs: a fiftieth of a pound a head each day; 25000 people"
+          }
+        },
+        "timber": {
+          "make": {
+            "value": 9.5,
+            "estimate": true,
+            "basis": "Some woodland nearby"
+          },
+          "use": {
+            "value": 50,
+            "estimate": true,
+            "basis": "Two cartloads a day for every thousand people, for building and fuel; 25000 people"
+          }
+        },
+        "herbs": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 50,
+            "estimate": true,
+            "basis": "Remedies and cooking, apart from what potion makers need; 25000 people"
+          }
+        },
+        "healing-potions": {
+          "make": {
+            "value": 8.91,
+            "estimate": true,
+            "basis": "The capital has the temples and the Arcane Enclave"
+          },
+          "use": {
+            "value": 12.5,
+            "estimate": true,
+            "basis": "One potion a day for every two thousand people; 25000 people"
+          }
+        },
+        "weapons": {
+          "make": {
+            "value": 6.95,
+            "estimate": true,
+            "basis": "The notes name The Dragons Breath Forge"
+          },
+          "use": {
+            "value": 7.5,
+            "estimate": true,
+            "basis": "Roughly one new weapon a year for every ten people; 25000 people"
+          }
+        },
+        "cloth": {
+          "make": {
+            "value": 347.49,
+            "estimate": true,
+            "basis": "Weavers in the capital"
+          },
+          "use": {
+            "value": 750,
+            "estimate": true,
+            "basis": "About eleven square yards a head each year; 25000 people"
+          }
+        },
+        "silk": {
+          "make": {
+            "value": 9.8,
+            "estimate": true,
+            "basis": "Craftsmen serving the noble houses"
+          },
+          "use": {
+            "value": 25,
+            "estimate": true,
+            "basis": "One square yard a day for every thousand people; 25000 people"
+          }
+        }
+      },
+      "ardenville": {
+        "grain": {
+          "make": {
+            "value": 15.59,
+            "estimate": true,
+            "basis": "A few fields behind the port"
+          },
+          "use": {
+            "value": 7.5,
+            "estimate": true,
+            "basis": "About a pound and a half of grain a head each day; 500 people"
+          }
+        },
+        "fish": {
+          "make": {
+            "value": 200.48,
+            "estimate": true,
+            "basis": "The notes call it a port town on Lake Arden, with a Fishermans Guild"
+          },
+          "use": {
+            "value": 5,
+            "estimate": true,
+            "basis": "About a fifth of a pound of fish a head each day; 500 people"
+          }
+        },
+        "wine": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 50,
+            "estimate": true,
+            "basis": "One pitcher for every ten people each day; 500 people"
+          }
+        },
+        "ore": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 10,
+            "estimate": true,
+            "basis": "Nails, tools and repairs: a fiftieth of a pound a head each day; 500 people"
+          }
+        },
+        "timber": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 1,
+            "estimate": true,
+            "basis": "Two cartloads a day for every thousand people, for building and fuel; 500 people"
+          }
+        },
+        "herbs": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 1,
+            "estimate": true,
+            "basis": "Remedies and cooking, apart from what potion makers need; 500 people"
+          }
+        },
+        "healing-potions": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 0.25,
+            "estimate": true,
+            "basis": "One potion a day for every two thousand people; 500 people"
+          }
+        },
+        "weapons": {
+          "make": {
+            "value": 0.98,
+            "estimate": true,
+            "basis": "The notes name the Steelshapers Forge"
+          },
+          "use": {
+            "value": 0.15,
+            "estimate": true,
+            "basis": "Roughly one new weapon a year for every ten people; 500 people"
+          }
+        },
+        "cloth": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 15,
+            "estimate": true,
+            "basis": "About eleven square yards a head each year; 500 people"
+          }
+        },
+        "silk": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 0.5,
+            "estimate": true,
+            "basis": "One square yard a day for every thousand people; 500 people"
+          }
+        }
+      },
+      "fairfield": {
+        "grain": {
+          "make": {
+            "value": 300.71,
+            "estimate": true,
+            "basis": "The name and the open country on the map; taken as Crestfall's main farmland"
+          },
+          "use": {
+            "value": 52.5,
+            "estimate": true,
+            "basis": "About a pound and a half of grain a head each day; 3500 people"
+          }
+        },
+        "fish": {
+          "make": {
+            "value": 7.43,
+            "estimate": true,
+            "basis": "A little river fish"
+          },
+          "use": {
+            "value": 35,
+            "estimate": true,
+            "basis": "About a fifth of a pound of fish a head each day; 3500 people"
+          }
+        },
+        "wine": {
+          "make": {
+            "value": 386.1,
+            "estimate": true,
+            "basis": "Some vineyards"
+          },
+          "use": {
+            "value": 350,
+            "estimate": true,
+            "basis": "One pitcher for every ten people each day; 3500 people"
+          }
+        },
+        "ore": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 70,
+            "estimate": true,
+            "basis": "Nails, tools and repairs: a fiftieth of a pound a head each day; 3500 people"
+          }
+        },
+        "timber": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 7,
+            "estimate": true,
+            "basis": "Two cartloads a day for every thousand people, for building and fuel; 3500 people"
+          }
+        },
+        "herbs": {
+          "make": {
+            "value": 33.41,
+            "estimate": true,
+            "basis": "Herb gardens for its apothecaries"
+          },
+          "use": {
+            "value": 7,
+            "estimate": true,
+            "basis": "Remedies and cooking, apart from what potion makers need; 3500 people"
+          }
+        },
+        "healing-potions": {
+          "make": {
+            "value": 5.94,
+            "estimate": true,
+            "basis": "The notes mention potions being sold here"
+          },
+          "use": {
+            "value": 1.75,
+            "estimate": true,
+            "basis": "One potion a day for every two thousand people; 3500 people"
+          }
+        },
+        "weapons": {
+          "make": {
+            "value": 0.98,
+            "estimate": true,
+            "basis": "A trade town has smiths"
+          },
+          "use": {
+            "value": 1.05,
+            "estimate": true,
+            "basis": "Roughly one new weapon a year for every ten people; 3500 people"
+          }
+        },
+        "cloth": {
+          "make": {
+            "value": 498.96,
+            "estimate": true,
+            "basis": "The notes call it the bustling trade centre of Crestfall"
+          },
+          "use": {
+            "value": 105,
+            "estimate": true,
+            "basis": "About eleven square yards a head each year; 3500 people"
+          }
+        },
+        "silk": {
+          "make": {
+            "value": 19.9,
+            "estimate": true,
+            "basis": "Stands in for silk arriving from the Silverleaf Lands next door, which are not simulated yet"
+          },
+          "use": {
+            "value": 3.5,
+            "estimate": true,
+            "basis": "One square yard a day for every thousand people; 3500 people"
+          }
+        }
+      },
+      "hillcrest": {
+        "grain": {
+          "make": {
+            "value": 20.05,
+            "estimate": true,
+            "basis": "Hill farms"
+          },
+          "use": {
+            "value": 6,
+            "estimate": true,
+            "basis": "About a pound and a half of grain a head each day; 400 people"
+          }
+        },
+        "fish": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 4,
+            "estimate": true,
+            "basis": "About a fifth of a pound of fish a head each day; 400 people"
+          }
+        },
+        "wine": {
+          "make": {
+            "value": 2405.7,
+            "estimate": true,
+            "basis": "The notes call it the wine capital of Crestfall, supplying Highreach's noble houses"
+          },
+          "use": {
+            "value": 40,
+            "estimate": true,
+            "basis": "One pitcher for every ten people each day; 400 people"
+          }
+        },
+        "ore": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 8,
+            "estimate": true,
+            "basis": "Nails, tools and repairs: a fiftieth of a pound a head each day; 400 people"
+          }
+        },
+        "timber": {
+          "make": {
+            "value": 4.75,
+            "estimate": true,
+            "basis": "Coopers and some woodland"
+          },
+          "use": {
+            "value": 0.8,
+            "estimate": true,
+            "basis": "Two cartloads a day for every thousand people, for building and fuel; 400 people"
+          }
+        },
+        "herbs": {
+          "make": {
+            "value": 29.4,
+            "estimate": true,
+            "basis": "The notes mention a herbalist and herb gatherers here"
+          },
+          "use": {
+            "value": 0.8,
+            "estimate": true,
+            "basis": "Remedies and cooking, apart from what potion makers need; 400 people"
+          }
+        },
+        "healing-potions": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 0.2,
+            "estimate": true,
+            "basis": "One potion a day for every two thousand people; 400 people"
+          }
+        },
+        "weapons": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 0.12,
+            "estimate": true,
+            "basis": "Roughly one new weapon a year for every ten people; 400 people"
+          }
+        },
+        "cloth": {
+          "make": {
+            "value": 44.55,
+            "estimate": true,
+            "basis": "Cottage weaving"
+          },
+          "use": {
+            "value": 12,
+            "estimate": true,
+            "basis": "About eleven square yards a head each year; 400 people"
+          }
+        },
+        "silk": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 0.4,
+            "estimate": true,
+            "basis": "One square yard a day for every thousand people; 400 people"
+          }
+        }
+      },
+      "stonehaven": {
+        "grain": {
+          "make": {
+            "value": 11.14,
+            "estimate": true,
+            "basis": "Small clearings"
+          },
+          "use": {
+            "value": 4.5,
+            "estimate": true,
+            "basis": "About a pound and a half of grain a head each day; 300 people"
+          }
+        },
+        "fish": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 3,
+            "estimate": true,
+            "basis": "About a fifth of a pound of fish a head each day; 300 people"
+          }
+        },
+        "wine": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 30,
+            "estimate": true,
+            "basis": "One pitcher for every ten people each day; 300 people"
+          }
+        },
+        "ore": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 6,
+            "estimate": true,
+            "basis": "Nails, tools and repairs: a fiftieth of a pound a head each day; 300 people"
+          }
+        },
+        "timber": {
+          "make": {
+            "value": 45.14,
+            "estimate": true,
+            "basis": "The notes put it on the edge of Blackwood Forest"
+          },
+          "use": {
+            "value": 0.6,
+            "estimate": true,
+            "basis": "Two cartloads a day for every thousand people, for building and fuel; 300 people"
+          }
+        },
+        "herbs": {
+          "make": {
+            "value": 70.83,
+            "estimate": true,
+            "basis": "Forest edge, founded by rangers and trappers"
+          },
+          "use": {
+            "value": 0.6,
+            "estimate": true,
+            "basis": "Remedies and cooking, apart from what potion makers need; 300 people"
+          }
+        },
+        "healing-potions": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 0.15,
+            "estimate": true,
+            "basis": "One potion a day for every two thousand people; 300 people"
+          }
+        },
+        "weapons": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 0.09,
+            "estimate": true,
+            "basis": "Roughly one new weapon a year for every ten people; 300 people"
+          }
+        },
+        "cloth": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 9,
+            "estimate": true,
+            "basis": "About eleven square yards a head each year; 300 people"
+          }
+        },
+        "silk": {
+          "make": {
+            "value": 0,
+            "estimate": true,
+            "basis": "Not known for making this"
+          },
+          "use": {
+            "value": 0.3,
+            "estimate": true,
+            "basis": "One square yard a day for every thousand people; 300 people"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { PlayerSheetDtoHelper } from "../PlayerSheetDtoHelper.js";
 import { createElement } from "../PlayerSheetHtmlHelper.js";
+import { getLatestDto, reinsertAt, showUndoToast } from "./PlayerSheetUndoToast.js";
 import {
     appendEmptyState,
     createEquipToggle,
@@ -12,7 +13,9 @@ import {
     createItemListItem,
     createSection,
     createTabShell,
-    resolveInventoryItems
+    resolveInventoryItems,
+    createAttuneToggle,
+    MAX_ATTUNED_ITEMS
 } from "./PlayerSheetTabHelpers.js";
 import {
     getCatalogCache,
@@ -323,7 +326,7 @@ function createRemoveGearButton(item, inventoryIndex, context = {}) {
 
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "player-sheet-button player-sheet-button--small player-sheet-gear-remove";
+    button.className = "player-sheet-button player-sheet-button--small player-sheet-gear-remove player-sheet-build-only";
     button.textContent = "Remove";
     button.dataset.gearRemove = String(inventoryIndex);
     button.setAttribute("aria-label", `Remove ${item?.name || "item"} from gear`);
@@ -331,9 +334,24 @@ function createRemoveGearButton(item, inventoryIndex, context = {}) {
         button.disabled = true;
         try {
             const currentItems = PlayerSheetDtoHelper.getValue(context.dto, "inventory.items", []);
+            const removedItem = currentItems[inventoryIndex];
             const nextItems = currentItems.filter((_, index) => index !== inventoryIndex);
             const nextDto = PlayerSheetDtoHelper.patch(context.dto, "inventory.items", nextItems);
             await context.onChange(nextDto);
+            if (removedItem !== undefined) {
+                showUndoToast({
+                    message: `Removed ${item?.name || removedItem?.name || "item"}.`,
+                    onUndo: async () => {
+                        const latestDto = getLatestDto(context, nextDto);
+                        const latestItems = PlayerSheetDtoHelper.getValue(latestDto, "inventory.items", []);
+                        await context.onChange(PlayerSheetDtoHelper.patch(
+                            latestDto,
+                            "inventory.items",
+                            reinsertAt(latestItems, inventoryIndex, removedItem)
+                        ));
+                    }
+                });
+            }
         } catch (error) {
             console.error("Failed to remove gear:", error);
             button.disabled = false;
@@ -494,8 +512,28 @@ function buildSpellScrollAssignmentModal(context = {}) {
             ? { ...entry, containedSpell: spell }
             : entry);
         const nextDto = PlayerSheetDtoHelper.patch(context.dto, "inventory.items", nextItems);
+        const clearedSpell = spell == null ? currentItems[inventoryIndex]?.containedSpell : null;
         await context.onChange(nextDto);
         dialog.close();
+        if (clearedSpell) {
+            showUndoToast({
+                message: `Cleared ${clearedSpell.name || "spell"} from the scroll.`,
+                onUndo: async () => {
+                    const latestDto = getLatestDto(context, nextDto);
+                    const latestItems = PlayerSheetDtoHelper.getValue(latestDto, "inventory.items", []);
+                    if (!latestItems[inventoryIndex] || latestItems[inventoryIndex].containedSpell) {
+                        return;
+                    }
+                    await context.onChange(PlayerSheetDtoHelper.patch(
+                        latestDto,
+                        "inventory.items",
+                        latestItems.map((entry, index) => index === inventoryIndex
+                            ? { ...entry, containedSpell: clearedSpell }
+                            : entry)
+                    ));
+                }
+            });
+        }
     }
 
     searchButton.addEventListener("click", () => void runSearch());
@@ -1088,7 +1126,10 @@ function gearEntryMatches(entry, state) {
 function createGearRow(entry, state, scrollSpellModal, containedSpellRecords) {
     const { item, record, inventoryIndex } = entry;
     const scrollSpell = getContainedSpell(item);
-    const actions = [createEquipToggle(item, inventoryIndex, state.context)];
+    const actions = [
+        createEquipToggle(item, inventoryIndex, state.context),
+        createAttuneToggle(item, record, inventoryIndex, state.context)
+    ];
     if (isSpellScroll(item, record)) {
         actions.push(createSpellScrollButton(item, inventoryIndex, scrollSpellModal, state.context));
     }
@@ -1111,7 +1152,9 @@ function createGearRow(entry, state, scrollSpellModal, containedSpellRecords) {
 function renderGearGroups(results, entries, state, controls, scrollSpellModal, containedSpellRecords) {
     results.replaceChildren();
     const visible = sortGearViewEntries(entries.filter((entry) => gearEntryMatches(entry, state)), state.sort);
-    controls.status.textContent = `${visible.length} of ${entries.length} item${entries.length === 1 ? "" : "s"} shown`;
+    const attunedCount = entries.filter((entry) => entry.item?.attuned).length;
+    controls.status.textContent = `${visible.length} of ${entries.length} item${entries.length === 1 ? "" : "s"} shown · Attuned ${attunedCount} of ${MAX_ATTUNED_ITEMS}`;
+    controls.status.dataset.attuned = String(attunedCount);
     if (!visible.length) {
         appendEmptyState(results, "No gear matches the current search and filter.");
         return;
@@ -1153,7 +1196,7 @@ export async function BuildPlayerSheetGearTab(playerSheetObject, context = {}) {
     const header = shell.querySelector(".player-sheet-tab__header");
     const addButton = document.createElement("button");
     addButton.type = "button";
-    addButton.className = "player-sheet-button player-sheet-button--primary";
+    addButton.className = "player-sheet-button player-sheet-button--primary player-sheet-build-only";
     addButton.textContent = "Add Item";
     header.appendChild(addButton);
 

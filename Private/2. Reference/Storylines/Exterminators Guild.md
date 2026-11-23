@@ -39,7 +39,7 @@ status: active
 - [[Private/2. Reference/Events/Quests/Active/Exterminators Guild Induction|Exterminators Guild Induction]]
 - [[Private/2. Reference/Encounters/Package Delivery to Ardenville|Package Delivery to Ardenville]]
 - [[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Don Gnocianno|Don Gnocianno]]
-- [[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Pip Whiskerwind|Pip Whiskerwind]]
+- [[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Pip Whiskerwind|Pip Whiskerwind]]
 - [[Private/2. Reference/Overall|Overall]]
 
 ---

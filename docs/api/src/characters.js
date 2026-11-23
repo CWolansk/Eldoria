@@ -11,6 +11,7 @@ const {
   writePlayersManifest
 } = require("./blobStore");
 const { httpError, json, noContent, withErrors } = require("./http");
+const { isDmLockConfigured, requireDmKey } = require("./dmAuth");
 const {
   normalizePlayerSheetDto
 } = require("./playerSheetDto");
@@ -64,9 +65,18 @@ async function healthHandler(request, context) {
     status: "ok",
     service: "eldoria-character-api",
     version: "2026-09-09",
-    capabilities: ["dm-party", "dm-actions-v2", "dm-undo", "item-catalog"],
+    capabilities: ["dm-party", "dm-actions-v2", "dm-undo", "item-catalog", "dm-lock"],
+    dmLock: isDmLockConfigured() ? "set" : "not-set",
     timestamp: new Date().toISOString()
   }));
+}
+
+// Lets a DM tool check its key without changing anything.
+async function dmSessionHandler(request, context) {
+  return withErrors(request, context, async () => {
+    requireDmKey(request);
+    return json(request, 200, { ok: true });
+  });
 }
 
 async function playersManifestHandler(request, context) {
@@ -82,6 +92,7 @@ async function playersManifestHandler(request, context) {
     }
 
     if (request.method === "PUT") {
+      requireDmKey(request);
       const manifest = await readRequestJson(request);
       return json(request, 200, await writePlayersManifest(manifest));
     }
@@ -148,6 +159,7 @@ async function saveCharacterSheetHandler(request, context) {
 
 async function deleteCharacterSheetHandler(request, context) {
   return withErrors(request, context, async () => {
+    requireDmKey(request);
     await deleteCharacterSheet(getId(request));
     return noContent(request);
   });
@@ -173,6 +185,7 @@ async function characterSheetHandler(request, context) {
 
 module.exports = {
   characterSheetHandler,
+  dmSessionHandler,
   healthHandler,
   listCharactersHandler,
   playersManifestHandler

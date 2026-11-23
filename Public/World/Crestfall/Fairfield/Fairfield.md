@@ -14,7 +14,7 @@ tags:
 
 ## Geography
 - Elevated ground with commanding views of the surrounding countryside
-- Two days' hard ride west of Highreach, hours from the Silverleaf border
+- Two days' hard ride east of Highreach, hours from the Silverleaf border
 - Major crossroads connecting human and elven trade networks
 
 ## Infrastructure

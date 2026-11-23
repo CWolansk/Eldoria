@@ -12,6 +12,7 @@ const { searchItemsByIndex } = require("./itemSearchStore");
 const { searchItemsV2, syncItem: syncItemSearchV2 } = require("./itemSearchV2Store");
 const model = require("./catalogModel");
 const { httpError, json, withErrors } = require("./http");
+const { requireDmKey } = require("./dmAuth");
 
 // Query params consumed by the endpoint itself; everything else is treated as a
 // structured equality filter against an index column (unknown columns ignored).
@@ -499,6 +500,7 @@ async function catalogManifestHandler(request, context) {
 async function catalogListHandler(request, context) {
   return withErrors(request, context, async () => {
     if (request.method === "POST") {
+      requireDmKey(request);
       const kind = getKind(request);
       const searchParams = getSearchParams(request);
       const body = await readRequestJson(request);
@@ -639,6 +641,10 @@ async function catalogODataListHandler(request, context) {
 
 async function catalogEntityHandler(request, context) {
   return withErrors(request, context, async () => {
+    // Checked before anything is read, so a locked request learns nothing.
+    if (request.method === "PATCH") {
+      requireDmKey(request);
+    }
     const kind = getKind(request);
     const id = getId(request);
     // Azure Functions can route /catalog/{kind}/odata to this generic entity

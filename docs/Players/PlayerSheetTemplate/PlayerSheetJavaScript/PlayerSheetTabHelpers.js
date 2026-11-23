@@ -3,6 +3,23 @@ import {
     createElement
 } from "../PlayerSheetHtmlHelper.js";
 import { PlayerSheetDtoHelper } from "../PlayerSheetDtoHelper.js";
+import { getLocalPriceLine } from "./PlayerSheetLocalPrices.js";
+import {
+    flattenRulesText as flattenSharedRulesText,
+    formatAttunementText,
+    toDisplayRulesText
+} from "../RulesText.js";
+
+const ITEM_PRIVATE_TEXT_KEYS = ["_typeListText", "_fProperties", "_fDamageDice", "_fBonus", "_fAc", "_fRes", "_fImm", "_fCondImm", "_fullEntries"];
+
+function stripHtml(value) {
+    return String(value || "").replace(/<[^>]*>/gu, " ");
+}
+
+// Search text: every value, as before.
+function flattenRulesText(value) {
+    return flattenSharedRulesText(value, { privateKeys: ITEM_PRIVATE_TEXT_KEYS, maxDepth: 4 });
+}
 import {
     getCatalogCache,
     getCatalogDisplayName,
@@ -119,7 +136,7 @@ export function formatQuantityTags(item) {
     if (item?.equipped) {
         tags.push("Equipped");
     }
-    if (item?.attuned || item?.attunement) {
+    if (item?.attuned) {
         tags.push("Attuned");
     }
     return tags;
@@ -166,33 +183,7 @@ export function getItemTagTexts(item, record = getItemRecord(item), options = {}
     ]);
 }
 
-function stripHtml(value) {
-    return String(value || "").replace(/<[^>]*>/gu, " ");
-}
 
-function flattenRulesText(value, depth = 0) {
-    if (value == null || depth > 4) {
-        return "";
-    }
-
-    if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
-        return stripHtml(value);
-    }
-
-    if (Array.isArray(value)) {
-        return value.map((entry) => flattenRulesText(entry, depth + 1)).filter(Boolean).join(" ");
-    }
-
-    if (typeof value === "object") {
-        return Object.entries(value)
-            .filter(([key]) => !key.startsWith("_") || ["_typeListText", "_fProperties", "_fDamageDice", "_fBonus", "_fAc", "_fRes", "_fImm", "_fCondImm", "_fullEntries"].includes(key))
-            .map(([, entry]) => flattenRulesText(entry, depth + 1))
-            .filter(Boolean)
-            .join(" ");
-    }
-
-    return "";
-}
 
 function getItemTypeText(record) {
     return [
@@ -335,9 +326,10 @@ export function getItemDetailRows(item, record = getItemRecord(item)) {
         ["Damage", damage],
         ["Versatile", versatileDamage],
         ["AC", ac != null ? String(ac) : ""],
-        ["Value", record?.valueLabel || record?._l_value || ""],
+        // The catalog value, then what it costs where the party is, when that is known.
+        ["Value", [record?.valueLabel || record?._l_value || "", (record?.valueLabel || record?._l_value) ? getLocalPriceLine(item, record) : ""].filter(Boolean).join(" · ")],
         ["Weight", weight != null ? `${weight} lb.` : ""],
-        ["Attunement", record?.attunement || record?.reqAttune || record?._attunement || ""]
+        ["Attunement", formatAttunementText(record?.attunement || record?.reqAttune || record?._attunement || "")]
     ].filter(([, value]) => value != null && String(value).trim());
 }
 
@@ -527,7 +519,7 @@ function createRulesClassNames() {
 }
 
 function createRulesPreviewText(rulesEntry, limit = ITEM_RULES_PREVIEW_LIMIT) {
-    const fullText = formatRulesText(flattenRulesText(rulesEntry));
+    const fullText = toDisplayRulesText(rulesEntry, { privateKeys: ITEM_PRIVATE_TEXT_KEYS, maxDepth: 4 });
     if (!fullText) {
         return {
             text: "",
@@ -556,6 +548,17 @@ function appendItemRules(container, record, options = {}) {
 
     const preview = createRulesPreviewText(rulesEntry, options.previewLimit ?? ITEM_RULES_PREVIEW_LIMIT);
     if (!preview.text) {
+        return;
+    }
+
+    // Folded away: only a "Rules" line until opened (used where the numbers come first).
+    if (options.collapsed) {
+        const folded = createElement("div", "player-sheet-item-card__rules player-sheet-item-card__rules--compact player-sheet-item-card__rules--folded");
+        const detail = createElement("details", "player-sheet-item-card__rules-details");
+        detail.appendChild(createElement("summary", "player-sheet-item-card__rules-summary", "Rules"));
+        appendRulesEntry(detail, rulesEntry, createRulesClassNames());
+        folded.appendChild(detail);
+        container.appendChild(folded);
         return;
     }
 
@@ -624,6 +627,61 @@ export function createItemCard(item, record = getItemRecord(item), options = {})
     return card;
 }
 
+export const MAX_ATTUNED_ITEMS = 3;
+
+export function itemRequiresAttunement(item = {}, record = getItemRecord(item)) {
+    const requirement = record?.reqAttune ?? record?.attunement ?? record?.attunementRequirement ?? record?._attunement ?? item?.attunement;
+    if (requirement === true) {
+        return true;
+    }
+    const text = String(requirement ?? "").trim();
+    return Boolean(text) && !/^(?:false|no|none)$/iu.test(text);
+}
+
+export function countAttunedItems(dto) {
+    return PlayerSheetDtoHelper.getValue(dto, "inventory.items", []).filter((entry) => entry?.attuned).length;
+}
+
+/**
+ * Attune / end attunement for one item. Shown for items that need attunement and for
+ * anything already attuned. Starting a fourth attunement is refused, with the reason.
+ */
+export function createAttuneToggle(item, record, inventoryIndex, context = {}) {
+    if (!item?.attuned && !itemRequiresAttunement(item, record)) {
+        return null;
+    }
+
+    const attuned = Boolean(item?.attuned);
+    const count = countAttunedItems(context.dto);
+    const full = !attuned && count >= MAX_ATTUNED_ITEMS;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `player-sheet-button player-sheet-button--small player-sheet-attune-toggle${attuned ? " player-sheet-attune-toggle--on" : ""}`;
+    button.textContent = attuned ? "Attuned" : full ? `Attune (${count} of ${MAX_ATTUNED_ITEMS} used)` : "Attune";
+    button.dataset.attune = String(inventoryIndex);
+    button.setAttribute("aria-pressed", attuned ? "true" : "false");
+    button.setAttribute("aria-label", attuned
+        ? `End attunement to ${getItemDisplayName(item)}`
+        : full
+            ? `Cannot attune to ${getItemDisplayName(item)}: already attuned to ${MAX_ATTUNED_ITEMS} items`
+            : `Attune to ${getItemDisplayName(item)}`);
+    button.disabled = full || !Number.isInteger(inventoryIndex) || typeof context.onChange !== "function";
+    button.addEventListener("click", async () => {
+        button.disabled = true;
+        try {
+            const currentItems = PlayerSheetDtoHelper.getValue(context.dto, "inventory.items", []);
+            const nextItems = currentItems.map((entry, index) => index === inventoryIndex
+                ? { ...entry, attuned: !attuned }
+                : entry);
+            await context.onChange(PlayerSheetDtoHelper.patch(context.dto, "inventory.items", nextItems));
+        } catch (error) {
+            console.error("Failed to update attunement:", error);
+            button.disabled = false;
+        }
+    });
+    return button;
+}
+
 export function createEquipToggle(item, inventoryIndex, context = {}) {
     const label = createElement("label", "player-sheet-equip-toggle");
     const input = document.createElement("input");
@@ -684,6 +742,13 @@ export function createItemListItem(item, record = getItemRecord(item), options =
 
     identity.appendChild(titleLine);
 
+    // The line a player reads first, e.g. "+7 to hit · 1d8 +4 slashing".
+    if (options.lead) {
+        const lead = createElement("p", "player-sheet-item-row__lead", String(options.lead));
+        lead.dataset.attackLine = "true";
+        identity.appendChild(lead);
+    }
+
     const meta = [
         getItemSource(item) || getCatalogSource(record),
         titleCase(record?.rarity || "")
@@ -707,6 +772,7 @@ export function createItemListItem(item, record = getItemRecord(item), options =
         const rules = createElement("div", "player-sheet-item-row__rules");
         appendItemRules(rules, record, {
             compact: true,
+            collapsed: options.rulesCollapsed === true,
             previewLimit: ITEM_RULES_PREVIEW_LIMIT
         });
         if (rules.children.length) {

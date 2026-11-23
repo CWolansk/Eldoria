@@ -3696,3 +3696,761 @@
     gap: 0.5rem;
   }
 }
+
+/* ==========================================================================
+   Sheet review, pass 1
+   Items 5 (undo message), 10 (save status), 11 (light theme),
+   12 (text size and tap targets), 19 (ability boxes overflow).
+   Kept in one block at the end so it wins over the earlier passes.
+   ========================================================================== */
+
+/* --- 19: ability boxes wrap instead of pushing the page sideways --- */
+@media (min-width: 801px) {
+  .playerSheetHeader .FooterInfo {
+    grid-template-columns: repeat(2, minmax(6rem, 1fr));
+  }
+
+  .playerSheetHeader .FooterInfo > .AbilityScoresSummary {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(auto-fit, minmax(5.25rem, 1fr));
+    min-width: 0;
+  }
+}
+
+.player-sheet-container,
+.playerSheet,
+.playerSheetHeader,
+.playerSheetTabsContainer {
+  min-width: 0;
+}
+
+/* --- 12: readable text --- */
+.player-sheet-page :is(
+  .player-sheet-item-row__meta,
+  .player-sheet-item-row__metric,
+  .player-sheet-item-card__meta,
+  .player-sheet-item-card__rules-preview,
+  .player-sheet-item-card__rules-text,
+  .player-sheet-item-card__rules-list,
+  .player-sheet-item-card__rules-summary,
+  .player-sheet-item-card__rules-table,
+  .player-sheet-definition-list,
+  .player-sheet-feature-card__definition-list,
+  .player-sheet-feature-list__meta-item,
+  .player-sheet-feature-filter__label,
+  .player-sheet-feature-filter__status,
+  .player-sheet-gear-filter,
+  .player-sheet-gear-controls__status,
+  .player-sheet-gear-group__count,
+  .player-sheet-spell-level-section__slots,
+  .player-sheet-spell-slot__label,
+  .player-sheet-spell-slot__level,
+  .player-sheet-skill-row__ability,
+  .player-sheet-class-resource__table,
+  .player-sheet-class-resource__current-label,
+  .player-sheet-defense-chip,
+  .player-sheet-field__label,
+  .player-sheet-notes__status,
+  .player-sheet-index-entry p,
+  .player-sheet-header__xp-label,
+  .player-sheet-header__xp-hint,
+  .player-sheet-button--small
+) {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.player-sheet-page .player-sheet-feature-card__definition-list dt,
+.player-sheet-page .player-sheet-class-resource__table thead th {
+  font-size: 0.8125rem;
+}
+
+.player-sheet-page :is(
+  .player-sheet-item-row__tag,
+  .player-sheet-item-card__badge,
+  .player-sheet-pill,
+  .player-sheet-skill-row__training
+) {
+  font-size: 0.75rem;
+}
+
+.player-sheet-page .playerSheetSideBar h3 {
+  font-size: 0.8125rem;
+}
+
+/* --- 12: tap targets --- */
+.player-sheet-page .player-sheet-button--small {
+  min-height: 2rem;
+  padding-inline: 0.7rem;
+}
+
+.player-sheet-page .player-sheet-equip-toggle {
+  min-height: 2rem;
+  padding: 0.2rem 0.65rem;
+  gap: 0.45rem;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.player-sheet-page .player-sheet-equip-toggle input[type="checkbox"] {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 800px), (pointer: coarse) {
+  .player-sheet-page :is(
+    .player-sheet-item-row__meta,
+    .player-sheet-item-row__metric,
+    .player-sheet-item-card__meta,
+    .player-sheet-item-card__rules-preview,
+    .player-sheet-item-card__rules-text,
+    .player-sheet-item-card__rules-list,
+    .player-sheet-item-card__rules-summary,
+    .player-sheet-definition-list,
+    .player-sheet-feature-card__definition-list,
+    .player-sheet-feature-list__meta-item,
+    .player-sheet-gear-filter,
+    .player-sheet-gear-controls__status,
+    .player-sheet-spell-level-section__slots,
+    .player-sheet-spell-slot__label,
+    .player-sheet-spell-slot__level,
+    .player-sheet-skill-row__ability,
+    .player-sheet-class-resource__table,
+    .player-sheet-defense-chip,
+    .player-sheet-field__label
+  ) {
+    font-size: 0.875rem;
+  }
+
+  .player-sheet-page :is(
+    .player-sheet-button,
+    .player-sheet-button--small,
+    .player-sheet-equip-toggle,
+    .player-sheet-gear-filter,
+    .player-sheet-notes__toolbar-button
+  ),
+  .player-sheet-page #TabRowList button {
+    min-height: 2.75rem;
+  }
+
+  .player-sheet-page .player-sheet-equip-toggle input[type="checkbox"] {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+
+  .player-sheet-page .player-sheet-item-card__rules-summary {
+    padding-block: 0.6rem;
+  }
+}
+
+/* --- 10: save status, in the page header --- */
+.player-sheet-page > header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+
+.player-sheet-page .player-sheet-save-status {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--sheet-line-strong);
+  border-radius: 999px;
+  background: var(--sheet-panel);
+  color: var(--sheet-muted);
+  font-size: 0.875rem;
+  line-height: 1.3;
+  min-width: 0;
+}
+
+.player-sheet-page .player-sheet-save-status::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.player-sheet-page .player-sheet-save-status:is([data-save-status="saved"], [data-save-status="synced"]) {
+  color: var(--sheet-green);
+}
+
+.player-sheet-page .player-sheet-save-status:is(
+  [data-save-status="pending"],
+  [data-save-status="saving"],
+  [data-save-status="reconciling"],
+  [data-save-status="refreshing"],
+  [data-save-status="partial"],
+  [data-save-status="offline"]
+) {
+  color: var(--sheet-amber);
+}
+
+.player-sheet-page .player-sheet-save-status:is([data-save-status="failed"], [data-save-status="unavailable"]) {
+  color: var(--sheet-red);
+  border-color: currentColor;
+  border-radius: 0.6rem;
+}
+
+.player-sheet-save-status__text {
+  color: var(--sheet-text);
+  min-width: 0;
+}
+
+.player-sheet-save-status__retry {
+  min-height: 2rem;
+  padding: 0.15rem 0.8rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* --- 5: the Removed / Undo message --- */
+.player-sheet-toast-region {
+  position: fixed;
+  left: 50%;
+  bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+  z-index: 60;
+  transform: translateX(-50%);
+  width: min(28rem, calc(100vw - 1.5rem));
+  pointer-events: none;
+}
+
+.player-sheet-toast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 0.6rem 0.6rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+  background: var(--ink);
+  color: var(--bg);
+  box-shadow: var(--shadow-2);
+  font-size: 0.95rem;
+  pointer-events: auto;
+}
+
+.player-sheet-toast__text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.player-sheet-toast__undo {
+  flex: 0 0 auto;
+  min-height: 2.75rem;
+  padding: 0.2rem 1rem;
+  border: 1px solid currentColor;
+  border-radius: 0.45rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* --- 11: light theme --- */
+.player-sheet-page {
+  --sheet-panel-strong: var(--sheet-panel-3);
+  --sheet-on-accent: #17100d;
+}
+
+:root[data-theme="light"] .player-sheet-page {
+  --sheet-bg: #eef2f7;
+  --sheet-bg-raised: #f6f8fb;
+  --sheet-panel: #ffffff;
+  --sheet-panel-2: #f3f6fa;
+  --sheet-panel-3: #e7edf5;
+  --sheet-line: rgb(23 32 51 / 15%);
+  --sheet-line-strong: rgb(23 32 51 / 30%);
+  --sheet-text: #172033;
+  --sheet-muted: #4c5868;
+  --sheet-faint: #677382;
+  --sheet-accent: #c2410c;
+  --sheet-accent-soft: rgb(194 65 12 / 11%);
+  --sheet-teal: #0f6f68;
+  --sheet-green: #14683f;
+  --sheet-amber: #8a5a06;
+  --sheet-red: #b3261e;
+  --sheet-shadow: 0 8px 20px rgb(15 23 42 / 10%);
+  --sheet-on-accent: #ffffff;
+}
+
+:root[data-theme="light"] .playerSheetHeader {
+  background: linear-gradient(180deg, #ffffff 0%, #f3f6fa 100%);
+}
+
+:root[data-theme="light"] .playerSheetHeader .AbilityScoresSummary {
+  background: var(--sheet-panel-3);
+}
+
+:root[data-theme="light"] .playerSheetHeader .AbilityScoresSummary > div,
+:root[data-theme="light"] .player-sheet-header__xp-input {
+  background: var(--sheet-panel);
+}
+
+:root[data-theme="light"] .playerSheetSideBar,
+:root[data-theme="light"] #TabRowList,
+:root[data-theme="light"] .player-sheet-item-row,
+:root[data-theme="light"] .player-sheet-item-row:nth-child(even),
+:root[data-theme="light"] .player-sheet-item-card,
+:root[data-theme="light"] .player-sheet-info-card {
+  background: var(--sheet-panel);
+}
+
+/* The character builder is designed dark throughout (panel and dialogs), so it keeps
+   its own dark palette in light theme and stays readable. */
+:root[data-theme="light"] .levelEditor {
+  --sheet-text: #f7fbff;
+  --sheet-muted: #aab7c6;
+  --sheet-faint: #778596;
+  --sheet-line: rgb(148 163 184 / 20%);
+  --sheet-line-strong: rgb(148 163 184 / 34%);
+  --sheet-panel: #141e29;
+  --sheet-panel-2: #192635;
+  --sheet-panel-3: #203044;
+  --sheet-accent: #ff6a3d;
+  --sheet-accent-soft: rgb(255 106 61 / 15%);
+  --sheet-teal: #7dd3c7;
+  --sheet-green: #9ae6b4;
+  --sheet-amber: #ffd166;
+  --sheet-red: #ff8a80;
+  color: var(--sheet-text);
+}
+
+:root[data-theme="light"] .player-sheet-item-row:hover {
+  background: var(--sheet-panel-2);
+}
+
+:root[data-theme="light"] .player-sheet-item-row,
+:root[data-theme="light"] .player-sheet-item-card,
+:root[data-theme="light"] .player-sheet-info-card {
+  box-shadow: 0 1px 2px rgb(15 23 42 / 8%);
+}
+
+:root[data-theme="light"] #TabRowList .player-sheet-tab-button--active,
+:root[data-theme="light"] .player-sheet-page .player-sheet-button--primary {
+  color: var(--sheet-on-accent);
+}
+
+:root[data-theme="light"] .player-sheet-page .player-sheet-equip-toggle {
+  color: var(--sheet-on-accent);
+}
+
+:root[data-theme="light"] .player-sheet-page .player-sheet-equip-toggle:has(input:not(:checked)) {
+  border-color: var(--sheet-line-strong);
+  background: var(--sheet-panel-2);
+  color: var(--sheet-text);
+}
+
+/* ==========================================================================
+   Sheet review, pass 2: the play strip (items 1, 3, 15)
+   Hit points and conditions first in the header, sized for thumbs.
+   ========================================================================== */
+.player-sheet-play {
+  display: grid;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 0.75rem;
+  border: 1px solid var(--sheet-line-strong);
+  border-radius: 0.6rem;
+  background: var(--sheet-panel-2);
+  color: var(--sheet-text);
+}
+
+.player-sheet-play__label {
+  color: var(--sheet-muted);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.player-sheet-play__hp {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+}
+
+.player-sheet-play__hp-value {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.player-sheet-play__hp-current {
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+.player-sheet-play__hp-max {
+  color: var(--sheet-muted);
+  font-size: 1.2rem;
+}
+
+.player-sheet-play__hp-temp {
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--sheet-teal);
+  border-radius: 999px;
+  color: var(--sheet-teal);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.player-sheet-play__hp-controls,
+.player-sheet-play__setup-form,
+.player-sheet-play__conditions,
+.player-sheet-play__exhaustion,
+.player-sheet-play__concentration,
+.player-sheet-play__status,
+.player-sheet-play__focus,
+.player-sheet-play__death,
+.player-sheet-play__pips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.player-sheet-play__status,
+.player-sheet-play__focus,
+.player-sheet-play__death {
+  gap: 0.6rem 1.25rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--sheet-line);
+}
+
+.player-sheet-play__button,
+.player-sheet-play__amount,
+.player-sheet-play__text,
+.player-sheet-play__select {
+  min-height: 2.75rem;
+  border: 1px solid var(--sheet-line-strong);
+  border-radius: 0.45rem;
+  background: var(--sheet-panel);
+  color: var(--sheet-text);
+  font: inherit;
+  font-size: 0.9375rem;
+}
+
+.player-sheet-play__button {
+  padding: 0.3rem 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.player-sheet-play__button:disabled,
+.player-sheet-play__amount:disabled,
+.player-sheet-play__select:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.player-sheet-play__amount {
+  width: 5.5rem;
+  padding: 0.3rem 0.5rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.player-sheet-play__text {
+  width: min(12rem, 100%);
+  padding: 0.3rem 0.6rem;
+}
+
+.player-sheet-play__select {
+  padding: 0.3rem 0.5rem;
+  max-width: 100%;
+}
+
+.player-sheet-play__button--damage {
+  border-color: var(--sheet-red);
+  color: var(--sheet-red);
+}
+
+.player-sheet-play__button--heal {
+  border-color: var(--sheet-green);
+  color: var(--sheet-green);
+}
+
+.player-sheet-play__button--temp-hp {
+  border-color: var(--sheet-teal);
+  color: var(--sheet-teal);
+}
+
+.player-sheet-play__button--primary,
+.player-sheet-play__toggle--on {
+  border-color: var(--sheet-accent);
+  background: var(--sheet-accent);
+  color: var(--sheet-on-accent);
+}
+
+.player-sheet-play__setup {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: start;
+  padding: 0.6rem;
+  border: 1px dashed var(--sheet-amber);
+  border-radius: 0.45rem;
+}
+
+.player-sheet-play__setup-text,
+.player-sheet-play__hint,
+.player-sheet-play__message {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.player-sheet-play__hint {
+  flex: 1 1 100%;
+  color: var(--sheet-muted);
+}
+
+.player-sheet-play__message {
+  color: var(--sheet-red);
+  font-weight: 700;
+}
+
+.player-sheet-play__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding-left: 0.7rem;
+  border: 1px solid var(--sheet-amber);
+  border-radius: 999px;
+  color: var(--sheet-text);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.player-sheet-play__chip-remove {
+  min-width: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--sheet-muted);
+  font-size: 1.2rem;
+}
+
+.player-sheet-play__none {
+  color: var(--sheet-muted);
+  font-size: 0.9375rem;
+}
+
+.player-sheet-play__step {
+  min-width: 2.75rem;
+  padding: 0;
+  font-size: 1.2rem;
+}
+
+.player-sheet-play__exhaustion-value {
+  min-width: 1.5rem;
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.player-sheet-play__pip {
+  width: 2.75rem;
+  min-width: 2.75rem;
+  padding: 0;
+  border-radius: 50%;
+  position: relative;
+}
+
+.player-sheet-play__pip::after {
+  content: "";
+  position: absolute;
+  inset: 0.7rem;
+  border: 2px solid var(--sheet-muted);
+  border-radius: 50%;
+}
+
+.player-sheet-play__pip--on::after {
+  border-color: var(--sheet-text);
+  background: var(--sheet-text);
+}
+
+@media (max-width: 800px) {
+  /* Item 3: on a phone the play strip comes first; the portrait and the
+     character builder follow the sheet instead of sitting above it. */
+  .player-sheet-page .playerSheet {
+    grid-template-areas:
+      "header"
+      "content"
+      "portrait"
+      "menu";
+  }
+
+  .player-sheet-page .player-sheet-container > .levelEditor {
+    order: 2;
+  }
+
+  .player-sheet-play__hp-controls {
+    flex: 1 1 100%;
+  }
+
+  .player-sheet-play__hp-controls .player-sheet-play__button {
+    flex: 1 1 auto;
+  }
+}
+
+/* --- pass 2, item 6: the attack line comes first --- */
+.player-sheet-page .player-sheet-item-row__lead {
+  margin: 0.15rem 0 0.1rem;
+  color: var(--sheet-text);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.3;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.player-sheet-page .player-sheet-offense-note {
+  margin: 0;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--sheet-line-strong);
+  border-radius: 0.45rem;
+  background: var(--sheet-panel-2);
+  color: var(--sheet-text);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+/* --- pass 2, items 2 and 14: spendable spell slots, casting line --- */
+.player-sheet-page .player-sheet-spell-slot__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+
+.player-sheet-page .player-sheet-spell-slot__button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.player-sheet-page .player-sheet-spell-row__casting {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+/* --- pass 2, item 16: attunement toggle --- */
+.player-sheet-page .player-sheet-attune-toggle--on {
+  border-color: var(--sheet-teal);
+  color: var(--sheet-teal);
+}
+
+.player-sheet-page .player-sheet-attune-toggle:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* --- pass 2, item 2: limited features and rest --- */
+.player-sheet-play__features,
+.player-sheet-play__rest {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 1.25rem;
+  min-width: 0;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--sheet-line);
+}
+
+.player-sheet-play__feature {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.player-sheet-play__feature-text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.5rem;
+}
+
+.player-sheet-play__feature-name {
+  font-weight: 700;
+}
+
+.player-sheet-play__feature-count {
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.player-sheet-play__feature-recharge {
+  color: var(--sheet-muted);
+  font-size: 0.8125rem;
+}
+
+.player-sheet-play__rest-confirm {
+  display: flex;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+/* ==========================================================================
+   Sheet review, pass 3: playing kept apart from building (item 4)
+   ========================================================================== */
+.player-sheet-mode-switch {
+  display: inline-flex;
+  border: 1px solid var(--sheet-line-strong);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--sheet-panel);
+}
+
+.player-sheet-mode-switch button {
+  min-height: 2.5rem;
+  padding: 0.2rem 1rem;
+  border: 0;
+  background: transparent;
+  color: var(--sheet-muted);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.player-sheet-mode-switch button[aria-pressed="true"] {
+  background: var(--sheet-accent);
+  color: var(--sheet-on-accent);
+}
+
+/* Play: the sheet takes the full width; adding and removing are put away. */
+.player-sheet-page[data-sheet-mode="play"] .player-sheet-container {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.player-sheet-page[data-sheet-mode="play"] .player-sheet-container > .levelEditor,
+.player-sheet-page[data-sheet-mode="play"] .player-sheet-build-only {
+  display: none;
+}
+
+@media (max-width: 800px), (pointer: coarse) {
+  .player-sheet-mode-switch button {
+    min-height: 2.75rem;
+  }
+}

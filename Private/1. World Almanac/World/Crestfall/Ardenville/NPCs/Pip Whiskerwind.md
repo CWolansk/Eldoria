@@ -1,7 +1,7 @@
 ---
 type: NPC
 name: "Pip Whiskerwind"
-location: Highreach
+location: Ardenville
 region: Crestfall
 profession: "Underboss / Poison Specialist"
 race: "Gnome"
@@ -9,7 +9,7 @@ status: Alive
 tags:
   - NPC
   - Crestfall
-  - Highreach
+  - Ardenville
   - ExterminatorsGuild
 ---
 

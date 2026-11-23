@@ -310,6 +310,7 @@ export class EldoriaApiClient {
     this.baseUrl = normalizeBaseUrl(config.baseUrl);
     this.fetch = config.fetch || globalThis.fetch?.bind(globalThis);
     this.functionKey = String(config.functionKey || "").trim();
+    this.dmKey = String(config.dmKey || "").trim();
     this.requestTimeoutMs = normalizeNonNegativeNumber(config.requestTimeoutMs, DEFAULT_REQUEST_TIMEOUT_MS);
     this.getRetries = Math.floor(normalizeNonNegativeNumber(config.getRetries, DEFAULT_GET_RETRIES));
     this.retryDelayMs = normalizeNonNegativeNumber(config.retryDelayMs, DEFAULT_RETRY_DELAY_MS);
@@ -343,6 +344,11 @@ export class EldoriaApiClient {
 
     if (this.functionKey) {
       headers["x-functions-key"] = this.functionKey;
+    }
+
+    // Only DM tools hold this key; player pages never set it.
+    if (this.dmKey) {
+      headers["x-eldoria-dm-key"] = this.dmKey;
     }
 
     if (options.body !== undefined) {
@@ -513,6 +519,15 @@ export class EldoriaApiClient {
     return this.getPublicIndex("npcs");
   }
 
+  setDmKey(dmKey) {
+    this.dmKey = String(dmKey || "").trim();
+    return this;
+  }
+
+  checkDmKey() {
+    return this.request("/dm/session");
+  }
+
   getCharacterSheet(id) {
     return this.request(this.#characterSheetPath(id));
   }
@@ -552,6 +567,126 @@ export class EldoriaApiClient {
     return this.request(this.#characterSheetPath(id), {
       method: "DELETE"
     });
+  }
+
+  /* ---- Living world (DM only; needs the DM key) ---- */
+
+  getWorld() {
+    return this.request("world");
+  }
+
+  startWorld(options = {}) {
+    return this.request("world/start", { method: "POST", body: options });
+  }
+
+  advanceWorld(options = {}) {
+    return this.request("world/advance", { method: "POST", body: options });
+  }
+
+  listWorldEvents(query = {}) {
+    return this.request("world/events", { query });
+  }
+
+  writeWorldEvent(event) {
+    return this.request("world/events", { method: "POST", body: event });
+  }
+
+  decideWorldEvent(eventId, decision) {
+    return this.request(`world/events/${encodeURIComponent(eventId)}/decision`, { method: "POST", body: decision });
+  }
+
+  setWorldEventVisibility(eventId, playersVisible) {
+    return this.request(`world/events/${encodeURIComponent(eventId)}/visibility`, {
+      method: "POST",
+      body: { playersVisible: playersVisible === true }
+    });
+  }
+
+  listWorldCountdowns() {
+    return this.request("world/countdowns");
+  }
+
+  createWorldCountdown(countdown) {
+    return this.request("world/countdowns", { method: "POST", body: countdown });
+  }
+
+  changeWorldCountdown(countdownId, action) {
+    return this.request(`world/countdowns/${encodeURIComponent(countdownId)}/actions`, { method: "POST", body: action });
+  }
+
+  getWorldPlaces() {
+    return this.request("world/places");
+  }
+
+  getWorldMarkets() {
+    return this.request("world/markets");
+  }
+
+  /** The current world state, for a what-if run in the browser. */
+  getWorldState() {
+    return this.request("world/state");
+  }
+
+  setWorldParty(place) {
+    return this.request("world/party", { method: "POST", body: { place: place || null } });
+  }
+
+  endWorldPressure(pressureId) {
+    return this.request(`world/pressures/${encodeURIComponent(pressureId)}/end`, { method: "POST", body: {} });
+  }
+
+  /** Needs no DM key: prices in the party's current town, if the players know it. */
+  getWorldPublicPrices() {
+    return this.request("world/public/prices");
+  }
+
+  getWorldOverview() {
+    return this.request("world/overview");
+  }
+
+  getWorldCity() {
+    return this.request("world/city");
+  }
+
+  addWorldCityEntry(entry) {
+    return this.request("world/city", { method: "POST", body: entry });
+  }
+
+  importWorldCity(entries) {
+    return this.request("world/city/import", { method: "POST", body: { entries } });
+  }
+
+  changeWorldCityEntry(entryId, action) {
+    return this.request(`world/city/${encodeURIComponent(entryId)}/actions`, { method: "POST", body: action });
+  }
+
+  listWorldRumours() {
+    return this.request("world/rumours");
+  }
+
+  startWorldRumour(rumour) {
+    return this.request("world/rumours", { method: "POST", body: rumour });
+  }
+
+  changeWorldRumour(rumourId, action) {
+    return this.request(`world/rumours/${encodeURIComponent(rumourId)}/actions`, { method: "POST", body: action });
+  }
+
+  setWorldItinerary(itinerary) {
+    return this.request("world/travellers", { method: "POST", body: itinerary });
+  }
+
+  endWorldItinerary(npcId) {
+    return this.request(`world/travellers/${encodeURIComponent(npcId)}/end`, { method: "POST", body: {} });
+  }
+
+  // No DM key needed: rumours the DM has revealed in the party's town, as that town tells them.
+  getWorldPublicRumours() {
+    return this.request("world/public/rumours");
+  }
+
+  saveWorldPlaces(document) {
+    return this.request("world/places", { method: "PUT", body: document });
   }
 
   getLoaderConfig() {

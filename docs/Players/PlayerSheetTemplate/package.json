@@ -1,4 +1,10 @@
 {
   "private": true,
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "jsdom": "^31.0.1"
+  },
+  "scripts": {
+    "test": "node --test --test-force-exit --test-timeout=60000 \"tests/headless/*.test.mjs\""
+  }
 }

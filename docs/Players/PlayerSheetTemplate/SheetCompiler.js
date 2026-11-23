@@ -7,6 +7,7 @@ import {
 import { applyResolvedReferencesToDto } from "./ReferenceResolver.js";
 import { createStructuredOptionCoverage } from "./StructuredOptionCoverage.js";
 import { compileConditionEffects } from "./ConditionRules.js";
+import { toDisplayRulesText } from "./RulesText.js";
 
 const SKILLS = [
     { key: "acrobatics", label: "Acrobatics", ability: "dex" },
@@ -1086,7 +1087,7 @@ function formatClassResourceValue(value) {
             return formatClassResourceValue(direct);
         }
 
-        return formatResourceRulesText(JSON.stringify(value));
+        return toDisplayRulesText(value);
     }
 
     return "";
@@ -1244,8 +1245,25 @@ function getClassLevelForGroup(group = {}) {
     return Math.max(0, ...toArray(group.levels).map((level) => toNumber(level?.level, 0)));
 }
 
+// A sheet stores only how many uses of a feature are spent: { id, used }.
+// What the feature is, how many uses it has and when they come back are worked out
+// from the rules here. An entry that carries its own name or maximum is a custom
+// resource and is shown as stored.
+function isResourceUseRecord(resource) {
+    return Boolean(resource && typeof resource === "object"
+        && resource.id
+        && resource.name == null
+        && resource.max == null
+        && resource.current == null);
+}
+
 function compileTrackedResources(dto, abilityScores, proficiencyBonus, characterLevel) {
-    const resources = toArray(dto.resources).map(deepClone);
+    const stored = toArray(dto.resources).map(deepClone);
+    const usedByKey = new Map(stored.filter(isResourceUseRecord).map((resource) => [
+        normalizeSearchText(resource.id),
+        Math.max(0, toNumber(resource.used, 0))
+    ]));
+    const resources = stored.filter((resource) => !isResourceUseRecord(resource));
     const byKey = new Map(resources.map((resource) => [
         normalizeSearchText(resource?.id || resource?.name),
         resource
@@ -1296,6 +1314,15 @@ function compileTrackedResources(dto, abilityScores, proficiencyBonus, character
         if (match) {
             add(`race-${action.id}`, action.name, toNumber(match[0], 1), action.uses.replace(/^\d+\s+per\s+/iu, ""), action.source, action.summary);
         }
+    }
+
+    for (const resource of resources) {
+        if (!resource.derived) {
+            continue;
+        }
+        const used = Math.min(toNumber(resource.max, 0), usedByKey.get(normalizeSearchText(resource.id)) || 0);
+        resource.used = used;
+        resource.current = toNumber(resource.max, 0) - used;
     }
 
     return resources;
@@ -2268,25 +2295,34 @@ function createSpellSlotsFromProgression(row = []) {
     return { byLevel };
 }
 
+// The number of slots comes from the class table unless the sheet records its own
+// maximum for a level; how many are used always comes from the sheet. Recording only
+// "expended" therefore never freezes the maximum at an old level.
 function compileSpellSlots(dto, classes = []) {
     const slots = dto.spells.spellSlots || {};
-    if (slots.byLevel && hasRecordedSpellSlots(slots)) {
-        return deepClone(slots);
-    }
-
-    if (!slots.byLevel && hasRecordedSpellSlots(slots)) {
-        return {
-            byLevel: deepClone(slots)
-        };
-    }
-
+    const recorded = slots.byLevel && typeof slots.byLevel === "object" ? slots.byLevel : (slots.byLevel ? {} : slots);
     const spellcaster = toArray(classes)
         .find((entry) => toArray(entry?.spellcasting?.slotProgression).some((value) => toNumber(value, 0) > 0));
-    if (spellcaster) {
-        return createSpellSlotsFromProgression(spellcaster.spellcasting.slotProgression);
+    const fromClass = spellcaster
+        ? createSpellSlotsFromProgression(spellcaster.spellcasting.slotProgression).byLevel
+        : {};
+
+    const byLevel = {};
+    for (let level = 1; level <= 9; level += 1) {
+        const key = String(level);
+        const entry = recorded?.[key];
+        const recordedMax = entry && typeof entry === "object" ? toNumber(entry.max, 0) : toNumber(entry, 0);
+        const expended = entry && typeof entry === "object" ? Math.max(0, toNumber(entry.expended, 0)) : 0;
+        const max = recordedMax > 0 ? recordedMax : toNumber(fromClass[key]?.max, 0);
+        if (max > 0 || expended > 0) {
+            byLevel[key] = {
+                max,
+                expended: max > 0 ? Math.min(expended, max) : expended
+            };
+        }
     }
 
-    return { byLevel: {} };
+    return { byLevel };
 }
 
 function getWeaponPropertyValues(record = {}) {
@@ -2362,18 +2398,19 @@ function formatWeaponDamageDice(dice, damageBonus) {
     return `${text} ${damageBonus >= 0 ? "+" : "-"}${Math.abs(damageBonus)}`;
 }
 
-function isWeaponInventoryItem(item = {}) {
+function isWeaponRecordItem(item = {}) {
     const record = item.snapshot || {};
     return Boolean(
-        item.equipped
-        && (
-            record.isWeapon === true
-            || record.weapon === true
-            || (record.weapon != null && typeof record.weapon === "object")
-            || record.weaponCategory
-            || getWeaponDamageDice(record)
-        )
+        record.isWeapon === true
+        || record.weapon === true
+        || (record.weapon != null && typeof record.weapon === "object")
+        || record.weaponCategory
+        || getWeaponDamageDice(record)
     );
+}
+
+function isWeaponInventoryItem(item = {}) {
+    return Boolean(item.equipped && isWeaponRecordItem(item));
 }
 
 function hasClass(dto, className) {
@@ -2409,18 +2446,30 @@ function isRangedWeaponRecord(record = {}) {
         record._subTypeHtml,
         ...toArray(record._typeListText)
     ].filter(Boolean).join(" "));
-    return record.bow === true
-        || Boolean(record.ammoType || record.range || record._fRangeNormal)
+    const rangedByKind = record.bow === true
+        || Boolean(record.ammoType)
         || properties.includes("A")
         || properties.includes("AMMUNITION")
         || /\branged\b/iu.test(categoryText)
         || normalizeSearchText(record.type) === "r";
+    if (rangedByKind) {
+        return true;
+    }
+
+    // A melee weapon with the Thrown property (handaxe, javelin, spear) has a range
+    // but is still a melee weapon: it uses Strength, or Dexterity only with Finesse.
+    const thrown = properties.includes("T") || properties.includes("THROWN");
+    return !thrown && Boolean(record.range || record._fRangeNormal);
 }
 
-function compileAttacks(dto, abilityScores, proficiencyBonus, characterLevel = MAX_CHARACTER_LEVEL) {
+// options.unequipped: the same numbers for weapons carried but not equipped, so the
+// sheet can still answer "what do I add?" for them. They are kept out of `attacks`.
+function compileAttacks(dto, abilityScores, proficiencyBonus, characterLevel = MAX_CHARACTER_LEVEL, options = {}) {
     const monk = hasClass(dto, "Monk");
     const attacks = toArray(dto.inventory.items)
-        .filter(isWeaponInventoryItem)
+        .filter(options.unequipped
+            ? (item) => !item?.equipped && isWeaponRecordItem(item)
+            : isWeaponInventoryItem)
         .map((item) => {
             const record = item.snapshot || {};
             const properties = getWeaponPropertyValues(record).map((value) => value.toUpperCase());
@@ -2446,7 +2495,7 @@ function compileAttacks(dto, abilityScores, proficiencyBonus, characterLevel = M
             };
         });
 
-    if (monk) {
+    if (monk && !options.unequipped) {
         const monkLevel = getMonkLevel(dto, characterLevel);
         const martialArtsDie = monkLevel >= 17 ? "1d10" : monkLevel >= 11 ? "1d8" : monkLevel >= 5 ? "1d6" : "1d4";
         const ability = abilityScores.dex.modifier > abilityScores.str.modifier ? "dex" : "str";
@@ -3400,6 +3449,7 @@ export class SheetCompiler {
             resources: compileTrackedResources(dto, abilities, proficiencyBonus, level),
             inventory: compileInventory(dto),
             attacks: applyConditionAttackEffects(compileAttacks(dto, abilities, proficiencyBonus, level), conditionEffects),
+            unequippedAttacks: applyConditionAttackEffects(compileAttacks(dto, abilities, proficiencyBonus, level, { unequipped: true }), conditionEffects),
             racialActions: applyConditionAttackEffects(compileRaceActions(dto, abilities, proficiencyBonus, level), conditionEffects),
             conditionEffects,
             features: [

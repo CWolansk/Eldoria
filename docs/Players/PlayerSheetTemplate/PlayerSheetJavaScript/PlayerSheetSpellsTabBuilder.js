@@ -1,4 +1,15 @@
 import { PlayerSheetDtoHelper } from "../PlayerSheetDtoHelper.js";
+import { getLatestDto, reinsertAt, showUndoToast } from "./PlayerSheetUndoToast.js";
+import {
+    flattenRulesText as flattenSharedRulesText,
+    isHealingSpell,
+    toDisplayRulesText
+} from "../RulesText.js";
+
+// Search text: every value, as before.
+function flattenRulesText(value) {
+    return flattenSharedRulesText(value, { privateKeys: ["_fullEntries"] });
+}
 import {
     appendRulesEntry,
     createElement
@@ -226,33 +237,7 @@ function formatSpellComponents(record = {}) {
     return parts.join(", ");
 }
 
-function stripHtml(value) {
-    return String(value || "").replace(/<[^>]*>/gu, " ");
-}
 
-function flattenRulesText(value, depth = 0) {
-    if (value == null || depth > 5) {
-        return "";
-    }
-
-    if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
-        return stripHtml(value);
-    }
-
-    if (Array.isArray(value)) {
-        return value.map((entry) => flattenRulesText(entry, depth + 1)).filter(Boolean).join(" ");
-    }
-
-    if (typeof value === "object") {
-        return Object.entries(value)
-            .filter(([key]) => !key.startsWith("_") || key === "_fullEntries")
-            .map(([, entry]) => flattenRulesText(entry, depth + 1))
-            .filter(Boolean)
-            .join(" ");
-    }
-
-    return "";
-}
 
 function getSpellRulesEntry(record = {}) {
     const entries = toArray(record.entries).length ? toArray(record.entries) : toArray(record.raw?.entries);
@@ -275,7 +260,7 @@ function createRulesClassNames() {
 }
 
 function createRulesPreviewText(rulesEntry, limit = SPELL_RULES_PREVIEW_LIMIT) {
-    const fullText = formatRulesText(flattenRulesText(rulesEntry));
+    const fullText = toDisplayRulesText(rulesEntry, { privateKeys: ["_fullEntries"] });
     if (!fullText) {
         return { text: "", truncated: false };
     }
@@ -438,7 +423,7 @@ function getSpellDetailRows(entry, record = {}) {
         ["Components", formatSpellComponents(record)],
         ["Save", getSavingThrowText(record, spellcasting)],
         ["Attack", getSpellAttackText(record, spellcasting)],
-        ["Damage", getSpellDamageText(record, entry.characterLevel)]
+        [isHealingSpell(record) ? "Healing" : "Damage", getSpellDamageText(record, entry.characterLevel)]
     ].filter(([, value]) => value != null && String(value).trim());
 }
 
@@ -504,7 +489,7 @@ function createRemoveSpellButton(entry, context = {}) {
 
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "player-sheet-button player-sheet-button--small player-sheet-spell-remove";
+    button.className = "player-sheet-button player-sheet-button--small player-sheet-spell-remove player-sheet-build-only";
     button.textContent = "Remove";
     button.dataset.spellRemove = `${entry.listKey}:${entry.index}`;
     button.setAttribute("aria-label", `Remove ${getSpellName(entry.spell)} from ${entry.sourceLabel}`);
@@ -512,9 +497,24 @@ function createRemoveSpellButton(entry, context = {}) {
         button.disabled = true;
         try {
             const currentValues = toArray(PlayerSheetDtoHelper.getValue(context.dto, `spells.${entry.listKey}`, []));
+            const removedSpell = currentValues[entry.index];
             const nextValues = currentValues.filter((_, index) => index !== entry.index);
             const nextDto = PlayerSheetDtoHelper.patch(context.dto, `spells.${entry.listKey}`, nextValues);
             await context.onChange(nextDto);
+            if (removedSpell !== undefined) {
+                showUndoToast({
+                    message: `Removed ${getSpellName(entry.spell)}.`,
+                    onUndo: async () => {
+                        const latestDto = getLatestDto(context, nextDto);
+                        const latestValues = toArray(PlayerSheetDtoHelper.getValue(latestDto, `spells.${entry.listKey}`, []));
+                        await context.onChange(PlayerSheetDtoHelper.patch(
+                            latestDto,
+                            `spells.${entry.listKey}`,
+                            reinsertAt(latestValues, entry.index, removedSpell)
+                        ));
+                    }
+                });
+            }
         } catch (error) {
             console.error("Failed to remove spell:", error);
             button.disabled = false;
@@ -540,6 +540,18 @@ export function createSpellListItem(entry, record = entry.record || entry.spell,
     }
 
     identity.appendChild(titleLine);
+
+    // What you need to cast it, before the description.
+    const castingLine = [
+        formatSpellTime(record),
+        formatSpellRange(record),
+        formatSpellDuration(record)
+    ].map((value) => String(value || "").trim()).filter(Boolean).join(" · ");
+    if (castingLine) {
+        const lead = createElement("p", "player-sheet-item-row__lead player-sheet-spell-row__casting", castingLine);
+        lead.dataset.castingLine = "true";
+        identity.appendChild(lead);
+    }
 
     const meta = [
         getSpellSource(entry.spell, record),
@@ -570,7 +582,7 @@ export function createSpellListItem(entry, record = entry.record || entry.spell,
 
     summary.appendChild(identity);
 
-    const wantedRows = options.rows || ["Cast at", "Recharge", "Casting", "Range", "Save", "Attack", "Damage", "Duration"];
+    const wantedRows = options.rows || ["Cast at", "Recharge", "Save", "Attack", "Damage", "Healing"];
     const detailMetrics = getSpellDetailRows(entry, record)
         .filter(([label]) => wantedRows.includes(label))
         .map(([label, value]) => ({ label, value }));
@@ -935,7 +947,7 @@ export function buildSpellSearchModal(context = {}, playerSheetObject = {}) {
             characterLevel: playerSheetObject.level || 1
         }, spell, {
             badge: "Catalog",
-            rows: ["Level", "School", "Casting", "Range", "Duration", "Components", "Save", "Attack", "Damage"]
+            rows: ["Level", "School", "Casting", "Range", "Duration", "Components", "Save", "Attack", "Damage", "Healing"]
         }));
 
         if (typeof window !== "undefined" && window.matchMedia?.("(max-width: 800px)").matches) {
@@ -1265,7 +1277,42 @@ function getSpellSlotByLevel(spellSlots = {}, level) {
     };
 }
 
-function appendSpellSlots(shell, spellSlots = {}) {
+// Mark a slot used or get one back. Only "expended" is written, in the sheet's existing
+// spells.spellSlots.byLevel shape; the maximum keeps coming from the class table.
+function createSlotChange(context, level, nextExpended) {
+    const current = PlayerSheetDtoHelper.getValue(context.dto, "spells.spellSlots", {}) || {};
+    const byLevel = current.byLevel && typeof current.byLevel === "object" ? { ...current.byLevel } : {};
+    const key = String(level);
+    const existing = byLevel[key];
+    const entry = existing && typeof existing === "object"
+        ? { ...existing }
+        : toNumber(existing, 0) > 0 ? { max: toNumber(existing, 0) } : {};
+    entry.expended = Math.max(0, nextExpended);
+    byLevel[key] = entry;
+    return PlayerSheetDtoHelper.patch(context.dto, "spells.spellSlots", { ...current, byLevel });
+}
+
+function createSlotButton(label, ariaLabel, datasetValue, disabled, onClick) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "player-sheet-button player-sheet-button--small player-sheet-spell-slot__button";
+    button.textContent = label;
+    button.setAttribute("aria-label", ariaLabel);
+    button.dataset.slotAction = datasetValue;
+    button.disabled = disabled;
+    button.addEventListener("click", async () => {
+        button.disabled = true;
+        try {
+            await onClick();
+        } catch (error) {
+            console.error("Failed to change spell slots:", error);
+            button.disabled = false;
+        }
+    });
+    return button;
+}
+
+function appendSpellSlots(shell, spellSlots = {}, context = {}) {
     const activeSlots = [];
     for (let level = 1; level <= 9; level += 1) {
         const slot = getSpellSlotByLevel(spellSlots, level);
@@ -1281,12 +1328,32 @@ function appendSpellSlots(shell, spellSlots = {}) {
         return;
     }
 
+    const canChange = typeof context.onChange === "function" && context.dto;
     const grid = createElement("div", "player-sheet-spell-slot-grid");
     for (const slot of activeSlots) {
         const tile = createElement("div", "player-sheet-spell-slot");
+        tile.dataset.slotLevel = String(slot.level);
         tile.appendChild(createElement("span", "player-sheet-spell-slot__level", ordinal(slot.level)));
         tile.appendChild(createElement("span", "player-sheet-spell-slot__value", `${slot.available} / ${slot.max}`));
         tile.appendChild(createElement("span", "player-sheet-spell-slot__label", "available"));
+        if (canChange) {
+            const controls = createElement("div", "player-sheet-spell-slot__controls");
+            controls.appendChild(createSlotButton(
+                "Use",
+                `Use a ${ordinal(slot.level)}-level slot`,
+                `use:${slot.level}`,
+                slot.available <= 0,
+                () => context.onChange(createSlotChange(context, slot.level, slot.expended + 1))
+            ));
+            controls.appendChild(createSlotButton(
+                "Restore",
+                `Get a ${ordinal(slot.level)}-level slot back`,
+                `restore:${slot.level}`,
+                slot.expended <= 0,
+                () => context.onChange(createSlotChange(context, slot.level, slot.expended - 1))
+            ));
+            tile.appendChild(controls);
+        }
         grid.appendChild(tile);
     }
     section.appendChild(grid);
@@ -1327,15 +1394,16 @@ async function appendSpellLevelLists(shell, playerSheetObject = {}, context = {}
     const section = createSection("Spell List");
     const entries = await resolveSpellEntries(playerSheetObject, context);
     const groups = groupSpellEntriesByLevel(entries);
+    let shownLevels = 0;
 
     for (const level of SPELL_LEVELS) {
         const levelSection = createSpellLevelSection(level, playerSheetObject.spellSlots || {});
         const spells = groups.get(level) || [];
         if (!spells.length) {
-            appendEmptyState(levelSection, "No spells recorded at this level.");
-            section.appendChild(levelSection);
+            // Levels with no spells are left out; the slot tiles above already show what can be cast.
             continue;
         }
+        shownLevels += 1;
 
         const list = createItemList();
         for (const entry of spells) {
@@ -1345,6 +1413,10 @@ async function appendSpellLevelLists(shell, playerSheetObject = {}, context = {}
         }
         levelSection.appendChild(list);
         section.appendChild(levelSection);
+    }
+
+    if (!shownLevels) {
+        appendEmptyState(section, "No spells recorded yet.");
     }
 
     shell.appendChild(section);
@@ -1358,6 +1430,7 @@ export async function BuildPlayerSheetSpellsTab(playerSheetObject, context = {})
     addButton.type = "button";
     addButton.className = "player-sheet-button player-sheet-button--primary";
     addButton.textContent = "Add Spell";
+    addButton.classList.add("player-sheet-build-only");
     header.appendChild(addButton);
 
     const modal = buildSpellSearchModal(context, playerSheetObject);
@@ -1369,6 +1442,6 @@ export async function BuildPlayerSheetSpellsTab(playerSheetObject, context = {})
     shell.appendChild(modal);
 
     appendSpellcastingSummary(shell, playerSheetObject);
-    appendSpellSlots(shell, playerSheetObject?.spellSlots || {});
+    appendSpellSlots(shell, playerSheetObject?.spellSlots || {}, context);
     await appendSpellLevelLists(shell, playerSheetObject, context);
 }

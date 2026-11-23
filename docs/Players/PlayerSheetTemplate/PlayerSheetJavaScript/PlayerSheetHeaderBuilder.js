@@ -1,3 +1,4 @@
+import { cleanRulesText } from "../RulesText.js";
 import { ABILITIES, GetJsonPathValues, formatModifier, getAbilityModifier } from "../JsonHelpers.js";
 
 const DEPLOYED_PORTRAIT_BASE_URL = "https://raw.githubusercontent.com/CWolansk/Eldoria/refs/heads/master/docs/Assets/images";
@@ -98,13 +99,13 @@ function createConditionRuleCard(rule, tone = "") {
     const name = document.createElement("strong");
     name.textContent = rule.name;
     const description = document.createElement("span");
-    description.textContent = rule.suppressedReason || rule.summary || "";
+    description.textContent = cleanRulesText(rule.suppressedReason || rule.summary || "");
     summary.append(name, description);
     details.appendChild(summary);
     const list = document.createElement("ul");
     for (const text of rule.rules || []) {
         const item = document.createElement("li");
-        item.textContent = text;
+        item.textContent = cleanRulesText(text);
         list.appendChild(item);
     }
     details.appendChild(list);

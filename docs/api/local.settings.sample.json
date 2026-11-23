@@ -10,6 +10,7 @@
     "ELDORIA_CATALOG_SEARCH_V2_TABLE": "eldoriacatalogsearchv2",
     "ELDORIA_ITEM_SEARCH_V2": "false",
     "ELDORIA_ITEM_SEARCH_INDEX": "true",
-    "ELDORIA_ALLOWED_ORIGINS": "*"
+    "ELDORIA_ALLOWED_ORIGINS": "*",
+    "ELDORIA_DM_KEY": ""
   }
 }

@@ -16,6 +16,9 @@ param(
   [string] $AllowedOrigins = $(if ($env:ELDORIA_ALLOWED_ORIGINS) { $env:ELDORIA_ALLOWED_ORIGINS } else { "*" }),
   [string] $Subscription = "",
   [string] $StorageConnectionString = $env:ELDORIA_STORAGE_CONNECTION_STRING,
+  # Shared secret for DM-only routes. Pass it here or set $env:ELDORIA_DM_KEY.
+  # Left out, the app keeps whatever key it already has.
+  [string] $DmKey = $env:ELDORIA_DM_KEY,
   [switch] $AssignStorageRole
 )
 
@@ -102,6 +105,8 @@ if (Test-Path (Join-Path $apiRoot "package-lock.json")) {
 Copy-Item -LiteralPath (Join-Path $apiRoot "src") -Destination $stageRoot -Recurse
 & node (Join-Path $apiRoot "tools/stage-sheet-runtime.js") (Join-Path $stageRoot "src/sheet-runtime")
 if ($LASTEXITCODE -ne 0) { throw "Sheet compiler packaging failed." }
+& node (Join-Path $apiRoot "tools/stage-world-runtime.js") (Join-Path $stageRoot "src/world-runtime")
+if ($LASTEXITCODE -ne 0) { throw "World engine packaging failed." }
 $publicIndexRoot = Join-Path $stageRoot "public-indexes"
 New-Item -ItemType Directory -Path $publicIndexRoot -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $apiRoot "..\data\location-index.json") -Destination $publicIndexRoot
@@ -150,6 +155,12 @@ if ($StorageConnectionString) {
 
 if ($BlobPrefix) {
   $settings += "ELDORIA_BLOB_PREFIX=$BlobPrefix"
+}
+
+if ($DmKey) {
+  $settings += "ELDORIA_DM_KEY=$DmKey"
+} else {
+  Write-Warning "No DM key given. DM-only routes stay locked for everyone unless ELDORIA_DM_KEY is already set on the Function App."
 }
 
 az functionapp config appsettings set `

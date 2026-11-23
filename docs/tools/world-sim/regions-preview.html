@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Region outlines (draft) | Eldoria</title>
+  <style>
+    :root { color-scheme: light dark; --ink: #17130c; --halo: #fff8e1; }
+    body { margin: 0; font: 16px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; background: #1b2420; color: #e4eae2; }
+    main { max-width: 1100px; margin: 0 auto; padding: 16px; display: grid; gap: 12px; }
+    h1 { font-size: 1.3rem; margin: 0; }
+    p { margin: 0; max-width: 75ch; }
+    .box { position: relative; aspect-ratio: 1; max-width: 100%; border: 1px solid #2f3b34; border-radius: 8px; overflow: hidden; background: #151c18; }
+    .box img, .box svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.9rem; }
+    .legend i { display: inline-block; width: 12px; height: 12px; margin-right: 6px; border-radius: 2px; vertical-align: baseline; }
+    .region { fill-opacity: 0.16; stroke-width: 4; stroke-dasharray: 14 9; }
+    .sub { fill-opacity: 0.12; stroke-width: 2.5; stroke-dasharray: 5 6; }
+    .line { fill: none; stroke: #ffffff; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+    .label { font: 700 30px Georgia, serif; fill: var(--halo); stroke: var(--ink); stroke-width: 6; paint-order: stroke; text-anchor: middle; }
+    .sublabel { font: 700 17px Georgia, serif; fill: var(--halo); stroke: var(--ink); stroke-width: 4; paint-order: stroke; text-anchor: middle; }
+    .mark { fill: var(--halo); stroke: var(--ink); stroke-width: 2.5; }
+    .marklabel { font: 700 15px system-ui, sans-serif; fill: var(--ink); stroke: var(--halo); stroke-width: 4; paint-order: stroke; }
+    #status { color: #e3b754; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Region outlines: draft for you to correct</h1>
+    <p>Suggested outlines drawn over the world map. Nothing uses them yet. The solid white line is the suggested
+      border between Crestfall and the Ironpeak Mountains, following the foot of the mountains. Tell me which
+      points to move, or which side a place should be on.</p>
+    <p id="status" role="status">Loading…</p>
+    <div class="legend" id="legend"></div>
+    <div class="box">
+      <img src="../../Assets/images/eldoria-map.jpg" alt="Map of Eldoria">
+      <svg viewBox="0 0 1000 1000" id="overlay" role="img" aria-label="Suggested region outlines"></svg>
+    </div>
+  </main>
+  <script type="module">
+    const COLOURS = { "crestfall": "#4aa3ff", "silverleaf-lands": "#7de3c0", "ironpeak-mountains": "#ffb347", "orcish-wastes": "#ff6b5e" };
+    const NS = "http://www.w3.org/2000/svg";
+    const svg = document.getElementById("overlay");
+    const status = document.getElementById("status");
+    // Positions are [up from bottom, across from left] fractions, as the map markers are.
+    const xy = ([up, across]) => [across * 1000, (1 - up) * 1000];
+    const points = (list) => list.map((p) => xy(p).map((n) => n.toFixed(1)).join(",")).join(" ");
+    const centre = (list) => {
+      const all = list.map(xy);
+      return [all.reduce((s, p) => s + p[0], 0) / all.length, all.reduce((s, p) => s + p[1], 0) / all.length];
+    };
+    function add(name, attrs, text) {
+      const node = document.createElementNS(NS, name);
+      for (const [key, value] of Object.entries(attrs)) node.setAttribute(key, value);
+      if (text != null) node.textContent = text;
+      svg.appendChild(node);
+      return node;
+    }
+
+    try {
+      const draft = await (await fetch("../../world-sim/regions.draft.json", { cache: "no-store" })).json();
+      const legend = document.getElementById("legend");
+      for (const region of draft.regions) {
+        const colour = COLOURS[region.id] || "#ffffff";
+        add("polygon", { class: "region", points: points(region.outline), fill: colour, stroke: colour });
+        for (const sub of region.subAreas || []) {
+          add("polygon", { class: "sub", points: points(sub.outline), fill: colour, stroke: "#fff8e1" });
+        }
+        const item = document.createElement("span");
+        const swatch = document.createElement("i");
+        swatch.style.background = colour;
+        item.append(swatch, region.name);
+        legend.appendChild(item);
+      }
+      for (const shared of Object.values(draft.sharedLines || {})) {
+        add("polyline", { class: "line", points: points(shared.line) });
+      }
+      for (const region of draft.regions) {
+        const [cx, cy] = centre(region.outline);
+        add("text", { class: "label", x: cx, y: cy }, region.name);
+        for (const sub of region.subAreas || []) {
+          const [sx, sy] = centre(sub.outline);
+          add("text", { class: "sublabel", x: sx, y: sy }, sub.name);
+        }
+      }
+
+      // Markers come from the public map page at run time. A place the players have not
+      // found is shown only by its number, never by name.
+      let shown = 0;
+      try {
+        const html = await (await fetch("../world-map.html", { cache: "no-store" })).text();
+        const config = JSON.parse(/<script[^>]*type="application\/json"[^>]*>([\s\S]*?)<\/script>/u.exec(html)[1]);
+        config.markers.forEach((marker, index) => {
+          if (!Array.isArray(marker.position)) return;
+          const [x, y] = xy(marker.position);
+          const known = marker.name && marker.name !== "Unknown";
+          add("circle", { class: "mark", cx: x, cy: y, r: 6 });
+          add("text", { class: "marklabel", x: x + 9, y: y - 8 }, known ? marker.name : `marker ${index + 1}`);
+          shown += 1;
+        });
+      } catch (error) {
+        console.warn("Markers could not be loaded:", error);
+      }
+      status.textContent = `${draft.regions.length} regions, ${shown} map markers. ${draft.status}`;
+    } catch (error) {
+      status.textContent = `Could not load the outlines: ${error.message}`;
+    }
+  </script>
+</body>
+</html>

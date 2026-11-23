@@ -37,10 +37,6 @@ import {
 } from "../CatalogProfile/Formatter.js";
 
 const ABILITY_KEYS = ["str", "dex", "con", "int", "wis", "cha"];
-const STATIC_SPELLS_URL = new URL("../../../../data/spells.json", import.meta.url).href;
-const STATIC_SPELL_SOURCE_LOOKUP_URL = new URL("../../../../5etools/data/generated/gendata-spell-source-lookup.json", import.meta.url).href;
-const spellRecordsByUrl = new Map();
-const spellSourceLookupByUrl = new Map();
 
 function asArray(valueOrArray) {
     // Normalize prerequisite values so downstream checks can iterate uniformly.
@@ -523,27 +519,10 @@ function getSpellLookupKey(value) {
     return String(value || "").trim().toLowerCase();
 }
 
-async function loadStaticSpellRecords(context = {}) {
-    if (Array.isArray(context.spellRecords)) {
-        return context.spellRecords;
-    }
-
-    if (typeof fetch !== "function") {
-        return [];
-    }
-
-    const url = context.spellDataUrl || STATIC_SPELLS_URL;
-    if (!spellRecordsByUrl.has(url)) {
-        spellRecordsByUrl.set(url, fetch(url)
-            .then((response) => response.ok ? response.json() : null)
-            .then((data) => toArray(data?.spells || data?.spell || data))
-            .catch((error) => {
-                console.warn("Spell fallback data failed to load:", error);
-                return [];
-            }));
-    }
-
-    return spellRecordsByUrl.get(url);
+// Catalog data comes from the API only. Records handed in by the caller are used
+// as given; there is no local file fallback.
+function getProvidedSpellRecords(context = {}) {
+    return Array.isArray(context.spellRecords) ? context.spellRecords : [];
 }
 
 async function loadSpellRecords(context = {}) {
@@ -559,30 +538,13 @@ async function loadSpellRecords(context = {}) {
         }
     }
 
-    return loadStaticSpellRecords(context);
+    return getProvidedSpellRecords(context);
 }
 
 async function loadSpellSourceLookup(context = {}) {
-    if (context.spellSourceLookup && typeof context.spellSourceLookup === "object") {
-        return context.spellSourceLookup;
-    }
-
-    if (typeof fetch !== "function") {
-        return {};
-    }
-
-    const url = context.spellSourceLookupUrl || STATIC_SPELL_SOURCE_LOOKUP_URL;
-    if (!spellSourceLookupByUrl.has(url)) {
-        spellSourceLookupByUrl.set(url, fetch(url)
-            .then((response) => response.ok ? response.json() : null)
-            .then((data) => data && typeof data === "object" ? data : {})
-            .catch((error) => {
-                console.warn("Spell source lookup failed to load:", error);
-                return {};
-            }));
-    }
-
-    return spellSourceLookupByUrl.get(url);
+    return context.spellSourceLookup && typeof context.spellSourceLookup === "object"
+        ? context.spellSourceLookup
+        : {};
 }
 
 function getSpellSourceLookupEntry(spellSourceLookup, spell) {

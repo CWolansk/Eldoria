@@ -2570,7 +2570,7 @@ const tests = [
     const text = tab.textContent;
     assert(text.includes("Cantrips"), "cantrip section should render");
     assert(text.includes("1st-Level Spells"), "1st-level section should render");
-    assert(text.includes("9th-Level Spells"), "9th-level section should render even when empty");
+    assert(!text.includes("9th-Level Spells"), "levels with no spells are hidden (sheet review item 14)");
     assert(text.includes("4 / 4"), "1st-level slot availability should render");
     assert(text.includes("2 / 2"), "2nd-level slot availability should render");
     assert(text.includes("Sacred Flame"), "cantrip should render");
@@ -3168,3 +3168,6 @@ for (const [name, test] of tests) {
 
 summary.textContent = `${passed}/${tests.length} browser tests passed.`;
 summary.dataset.status = passed === tests.length ? "pass" : "fail";
+
+// Shared with the headless node:test files (tests/headless/fixtures.mjs).
+export { createDto, createRangerDto, createFakeApi };

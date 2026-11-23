@@ -9,8 +9,6 @@ import {
 import { resolveCatalogEntity } from "./LevelEditorCatalogChoiceResolver.js";
 
 const OPTIONAL_FEATURE_KIND = "optional-features";
-const STATIC_OPTIONAL_FEATURES_URL = new URL("../../../../5etools/data/optionalfeatures.json", import.meta.url).href;
-const staticRecordsByUrl = new Map();
 const resolvedRecordsByKey = new Map();
 
 function parseOptionalFeatureRef(value) {
@@ -73,6 +71,8 @@ function buildStaticLookup(records) {
     return { exact, byName };
 }
 
+// Catalog data comes from the API only. Records handed in by the caller are used
+// as given; there is no local file fallback.
 async function loadStaticOptionalFeatureLookup(context = {}) {
     if (Array.isArray(context.optionalFeatureRecords)) {
         return buildStaticLookup(context.optionalFeatureRecords);
@@ -82,22 +82,7 @@ async function loadStaticOptionalFeatureLookup(context = {}) {
         return buildStaticLookup(context.optionalFeatures);
     }
 
-    if (typeof fetch !== "function") {
-        return buildStaticLookup([]);
-    }
-
-    const url = context.optionalFeatureDataUrl || STATIC_OPTIONAL_FEATURES_URL;
-    if (!staticRecordsByUrl.has(url)) {
-        staticRecordsByUrl.set(url, fetch(url)
-            .then((response) => response.ok ? response.json() : null)
-            .then((data) => buildStaticLookup(toArray(data?.optionalfeature)))
-            .catch((error) => {
-                console.warn("Optional feature fallback data failed to load:", error);
-                return buildStaticLookup([]);
-            }));
-    }
-
-    return staticRecordsByUrl.get(url);
+    return buildStaticLookup([]);
 }
 
 async function resolveOptionalFeatureFromCatalog(context, option) {
