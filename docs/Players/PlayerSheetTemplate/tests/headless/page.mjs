@@ -58,6 +58,12 @@ export async function bootSheetPage(options = {}) {
     }
     if (/\/characters\/[^/]+$/u.test(url.pathname)) {
       if (method === "GET") {
+        if (options.failCharacterGet) {
+          throw new TypeError("Failed to fetch");
+        }
+        if (options.characterGate) {
+          await options.characterGate;
+        }
         server.gets += 1;
         return respond(200, server.dto);
       }

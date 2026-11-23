@@ -1116,6 +1116,8 @@ async function ensureCatalogProfiles(context) {
 }
 
 let showAllLevelRows = false;
+// Builds the level rows that were skipped at load; set by bootLevelEditor.
+let buildHiddenLevelRows = null;
 
 // Only levels up to the next one are listed, so the editor is not fifteen empty rows.
 // "Show all levels" brings the rest back; nothing is removed.
@@ -1149,6 +1151,9 @@ function updateLevelRowVisibility(currentLevel) {
         toggle.className = "level-editor__button level-editor__show-all-levels";
         toggle.addEventListener("click", () => {
             showAllLevelRows = !showAllLevelRows;
+            if (showAllLevelRows) {
+                buildHiddenLevelRows?.();
+            }
             updateLevelRowVisibility(toNumber(toggle.dataset.currentLevel, 1));
         });
         // Kept inside the list so it folds away with the builder on phones.
@@ -1201,11 +1206,30 @@ export function bootLevelEditor(context) {
 
     buildBaseEditor(editorContext);
 
-    for (let level = 1; level <= MAX_CHARACTER_LEVEL; level += 1) {
+    // Levels beyond the next one are not listed, so they are not built and their
+    // class features are not fetched until "Show all levels" asks for them.
+    const lastShownLevel = Math.min(MAX_CHARACTER_LEVEL, Math.max(1, getCurrentLevel(compiled)) + 1);
+    const builtLevels = new Set();
+    const buildLevel = (level) => {
+        if (builtLevels.has(level)) {
+            return;
+        }
+        builtLevels.add(level);
         buildLevelEditor(compiled, {
             ...createLevelContext(compiled, progression, level),
             ...editorContext
         });
+    };
+    buildHiddenLevelRows = () => {
+        for (let level = 1; level <= MAX_CHARACTER_LEVEL; level += 1) {
+            buildLevel(level);
+        }
+    };
+
+    for (let level = 1; level <= MAX_CHARACTER_LEVEL; level += 1) {
+        if (showAllLevelRows || level <= lastShownLevel) {
+            buildLevel(level);
+        }
     }
 
     setCurrentLevelCard(compiled);

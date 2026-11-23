@@ -102,6 +102,51 @@ function rememberPlayerCharacterDto(characterId, dto) {
     });
 }
 
+// The rules looked up for a sheet (class, race, feats, items) are kept beside it, so the
+// next visit can show the fully worked-out sheet at once instead of wrong numbers
+// followed by a correction. This is the player's own last-loaded sheet, not catalog data.
+const PLAYER_REFERENCES_CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+const PLAYER_REFERENCES_CACHE_MAX_BYTES = 2 * 1024 * 1024;
+
+function getPlayerReferencesCacheKey(characterId) {
+    return `player-sheet:references:${normalizeCacheKeyPart(characterId)}`;
+}
+
+function rememberPlayerReferences(characterId, dto, references) {
+    if (!characterId || !dto || !references || references.ok === false) {
+        return;
+    }
+
+    try {
+        writeCachedJson(getPlayerReferencesCacheKey(characterId), {
+            fingerprint: createSaveFingerprint(PlayerSheetDtoHelper.toSaveDto(normalizeDtoForCurrentCharacter(dto))),
+            references
+        }, {
+            maxStorageBytes: PLAYER_REFERENCES_CACHE_MAX_BYTES,
+            ttlMs: PLAYER_REFERENCES_CACHE_TTL_MS
+        });
+    } catch (_error) {
+        // Too large or storage unavailable: the sheet simply waits for the rules next time.
+    }
+}
+
+function readPlayerReferences(characterId, dto) {
+    if (!characterId || !dto) {
+        return null;
+    }
+
+    try {
+        const cached = readCachedJson(getPlayerReferencesCacheKey(characterId), {
+            maxStorageBytes: PLAYER_REFERENCES_CACHE_MAX_BYTES,
+            ttlMs: PLAYER_REFERENCES_CACHE_TTL_MS
+        })?.value;
+        const fingerprint = createSaveFingerprint(PlayerSheetDtoHelper.toSaveDto(normalizeDtoForCurrentCharacter(dto)));
+        return cached?.references && cached.fingerprint === fingerprint ? cached.references : null;
+    } catch (_error) {
+        return null;
+    }
+}
+
 function readPlayerCharacterDto(characterId) {
     if (!characterId) {
         return null;
@@ -498,7 +543,10 @@ async function applyPlayerSheetDto(nextDto, options = {}) {
 
   currentPlayerSheetDto = PlayerSheetDtoHelper.toSaveDto(normalizeDtoForCurrentCharacter(nextDto));
 
-  if (!shouldResolveReferences) {
+  if (options.references) {
+    currentReferenceResolution = options.references;
+    currentRuntimePlayerSheetDto = applyResolvedReferencesToDto(currentPlayerSheetDto, currentReferenceResolution);
+  } else if (!shouldResolveReferences) {
     if (shouldPreserveReferences && currentReferenceResolution) {
       currentRuntimePlayerSheetDto = applyResolvedReferencesToDto(
         currentPlayerSheetDto,
@@ -512,6 +560,7 @@ async function applyPlayerSheetDto(nextDto, options = {}) {
     try {
       currentReferenceResolution = await resolvePlayerSheetReferences(currentPlayerSheetDto, api);
       currentRuntimePlayerSheetDto = applyResolvedReferencesToDto(currentPlayerSheetDto, currentReferenceResolution);
+      rememberPlayerReferences(getRequestedPlayerId(), currentPlayerSheetDto, currentReferenceResolution);
     } catch (error) {
       console.warn("Reference resolution failed; rendering from strict DTO only:", error);
       currentReferenceResolution = {
@@ -569,6 +618,7 @@ async function hydratePlayerSheetReferences(dtoSnapshot) {
 
     currentReferenceResolution = references;
     currentRuntimePlayerSheetDto = applyResolvedReferencesToDto(currentPlayerSheetDto, references);
+    rememberPlayerReferences(getRequestedPlayerId(), currentPlayerSheetDto, references);
     currentCharacterSheet = SheetCompiler.compile(currentPlayerSheetDto, { references });
     await renderCurrentPlayerSheet();
     if (!hasUnsavedPlayerSheetChanges()) {
@@ -732,32 +782,66 @@ async function bootPlayersPage() {
         return;
     }
 
+    // First paint. Numbers are only shown once the rules behind them are known:
+    // either from the last visit (kept beside the cached sheet) or after they load.
     const cached = readPlayerCharacterDto(CharId);
-    if (cached?.value) {
+    const cachedReferences = cached?.value ? readPlayerReferences(CharId, cached.value) : null;
+    if (cached?.value && cachedReferences) {
         rememberServerSnapshot(CharId, cached.value);
         await applyPlayerSheetDto(cached.value, {
             persist: false,
-            resolveReferences: false
+            references: cachedReferences
         });
         lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
         setSaveStatus("refreshing", "Showing your last loaded sheet. Checking for changes...");
+    } else {
+        setSaveStatus("loading", "Loading...");
     }
 
     try {
         const loadedDto = await api.getCharacterSheet(CharId);
+        const loadedStrictDto = PlayerSheetDtoHelper.toSaveDto(loadedDto, { id: CharId });
         rememberServerSnapshot(CharId, loadedDto);
-        await applyPlayerSheetDto(loadedDto, {
-            persist: false,
-            resolveReferences: false
-        });
-        lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
-        setSaveStatus("refreshing", "Loading rules...");
-        void hydratePlayerSheetReferences(currentPlayerSheetDto);
+        const unchanged = Boolean(currentPlayerSheetDto && currentReferenceResolution)
+            && createSaveFingerprint(PlayerSheetDtoHelper.toSaveDto(normalizeDtoForCurrentCharacter(loadedDto))) === createSaveFingerprint(currentPlayerSheetDto);
+        if (unchanged) {
+            // Same sheet as last time: keep what is on screen and refresh the rules quietly.
+            currentPlayerSheetDto = PlayerSheetDtoHelper.toSaveDto(normalizeDtoForCurrentCharacter(loadedDto));
+            lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
+            setSaveStatus("refreshing", "Loading rules...");
+            void hydratePlayerSheetReferences(currentPlayerSheetDto);
+        } else {
+            setSaveStatus("refreshing", "Loading rules...");
+            let references = null;
+            try {
+                references = await resolvePlayerSheetReferences(loadedStrictDto, api);
+            } catch (error) {
+                console.warn("Rules could not be loaded; showing the sheet without them:", error);
+            }
+            await applyPlayerSheetDto(loadedDto, references
+                ? { persist: false, references }
+                : { persist: false, resolveReferences: false });
+            lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
+            if (references) {
+                rememberPlayerReferences(CharId, currentPlayerSheetDto, references);
+                setSaveStatus("synced", "Up to date");
+            } else {
+                setSaveStatus("partial", "Up to date. Some rules could not be loaded.");
+            }
+        }
         startRemoteRefresh();
     } catch (error) {
         console.error("Failed to boot player sheet:", error);
         if (cached?.value) {
-            setSaveStatus("offline", "Could not reach the server. Showing your last loaded sheet.");
+            if (!currentPlayerSheetDto) {
+                // No rules were kept from last time; the saved sheet is still better than nothing.
+                rememberServerSnapshot(CharId, cached.value);
+                await applyPlayerSheetDto(cached.value, { persist: false, resolveReferences: false });
+                lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
+                setSaveStatus("offline", "Could not reach the server. Showing your last loaded sheet; some numbers may be incomplete.");
+            } else {
+                setSaveStatus("offline", "Could not reach the server. Showing your last loaded sheet.");
+            }
         } else {
             setSaveStatus("failed", "Unable to load character sheet.");
         }
