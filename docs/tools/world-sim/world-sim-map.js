@@ -110,6 +110,31 @@ export function createMapView({ ui, esc, $, render, placeName, placePage, region
     return [from[0] + (to[0] - from[0]) * share, from[1] + (to[1] - from[1]) * share];
   }
 
+  // The points a road is drawn through: its two ends, and any waypoints between them
+  // (a road that goes around a lake). Returned in the direction asked for.
+  function roadPath(from, to) {
+    const a = pointOf(from);
+    const b = pointOf(to);
+    if (!a || !b) return null;
+    const road = (ui.overview?.roads || []).find((entry) => (entry.a === from && entry.b === to) || (entry.a === to && entry.b === from));
+    const via = (road?.via || []).map(xy);
+    return [a, ...(road && road.a === to ? via.slice().reverse() : via), b];
+  }
+
+  // A point a share of the way along a path, measured by length.
+  function alongPath(path, share) {
+    const lengths = path.slice(1).map((point, index) => Math.hypot(point[0] - path[index][0], point[1] - path[index][1]));
+    const total = lengths.reduce((sum, length) => sum + length, 0);
+    let left = total * share;
+    for (let index = 0; index < lengths.length; index += 1) {
+      if (left <= lengths[index] || index === lengths.length - 1) {
+        return along(path[index], path[index + 1], lengths[index] ? Math.min(1, left / lengths[index]) : 0);
+      }
+      left -= lengths[index];
+    }
+    return path[0];
+  }
+
   function svgMarkup() {
     const map = ui.map;
     const k = 1 / map.view.scale; // keeps marks the same size on screen as the map zooms
@@ -139,20 +164,18 @@ export function createMapView({ ui, esc, $, render, placeName, placePage, region
 
     if (map.overlays.routes) {
       for (const road of overview.roads || []) {
-        const a = pointOf(road.a);
-        const b = pointOf(road.b);
-        if (!a || !b) continue;
-        out += `<line class="ws-map__road ws-map__road--${esc(road.status)}" x1="${a[0].toFixed(1)}" y1="${a[1].toFixed(1)}" x2="${b[0].toFixed(1)}" y2="${b[1].toFixed(1)}" stroke-width="${(road.status === "open" ? 2.5 : 4) * k}" stroke-dasharray="${road.status === "closed" ? `${3 * k} ${5 * k}` : `${9 * k} ${5 * k}`}" data-road="${esc(road.id)}"><title>${esc(road.aName)} to ${esc(road.bName)}: ${road.status}${road.travel ? `, ${road.travel} day${road.travel === 1 ? "" : "s"}` : ""}</title></line>`;
+        const path = roadPath(road.a, road.b);
+        if (!path) continue;
+        out += `<polyline class="ws-map__road ws-map__road--${esc(road.status)}" points="${path.map((point) => `${point[0].toFixed(1)},${point[1].toFixed(1)}`).join(" ")}" stroke-width="${(road.status === "open" ? 2.5 : 4) * k}" stroke-dasharray="${road.status === "closed" ? `${3 * k} ${5 * k}` : `${9 * k} ${5 * k}`}" data-road="${esc(road.id)}"><title>${esc(road.aName)} to ${esc(road.bName)}: ${road.status}${road.travel ? `, ${road.travel} day${road.travel === 1 ? "" : "s"}` : ""}</title></polyline>`;
       }
     }
 
     if (map.overlays.road) {
       const dot = (from, to, departDay, arriveDay, kind, title) => {
-        const a = pointOf(from);
-        const b = pointOf(to);
-        if (!a || !b) return "";
+        const path = roadPath(from, to);
+        if (!path) return "";
         const share = clamp((day - departDay) / Math.max(1, arriveDay - departDay), 0.08, 0.92);
-        const [x, y] = along(a, b, share);
+        const [x, y] = alongPath(path, share);
         return `<circle class="ws-map__moving ws-map__moving--${kind}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${5 * k}" stroke-width="${1.5 * k}" data-moving="${kind}"><title>${esc(title)}</title></circle>`;
       };
       for (const shipment of ui.markets?.shipments || []) {

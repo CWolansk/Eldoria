@@ -170,7 +170,7 @@ export function normalizeEffect(input) {
 /**
  * The configuration: goods, roads and each full-detail town's market.
  *   goods:  [{ id, name, unit, basePrice, madeFrom: [{ good, perUnit }] }]
- *   routes: [{ id, a, b, travelDays }]
+ *   routes: [{ id, a, b, travelDays, via? }]
  *   places: { <placeId>: { name, knownToPlayers, population, market: { <goodId>: { make, use } } } }
  * basePrice (copper), travelDays, population, make and use are figures: a number, or
  * { value, estimate } so the page can show which ones are guesses.
@@ -235,7 +235,21 @@ export function normalizeEconomyConfig(input = {}) {
     if (!id || !a || !b || a === b) throw fail("Each road needs an id and two different ends.");
     if (routeIds.has(id)) throw fail(`Road "${id}" appears twice.`);
     routeIds.add(id);
-    routes.push({ id, a, b, travelDays: normalizeFigure(route.travelDays, `Travel days of ${id}`, { min: 0.25 }) });
+    const entry = { id, a, b, travelDays: normalizeFigure(route.travelDays, `Travel days of ${id}`, { min: 0.25 }) };
+    // Optional waypoints so a road can be drawn around a lake or a mountain instead of
+    // straight through it. Same convention as a place's position: [up, across], 0 to 1,
+    // listed from end "a" to end "b". They change only how the road is drawn.
+    if (route?.via != null) {
+      if (!Array.isArray(route.via) || route.via.length > 24) throw fail(`Road "${id}": via must be a list of at most 24 points.`);
+      entry.via = route.via.map((point) => {
+        const ok = Array.isArray(point) && point.length === 2
+          && point.every((value) => typeof value === "number" && Number.isFinite(value) && value >= 0 && value <= 1);
+        if (!ok) throw fail(`Road "${id}": each via point is [up, across], both between 0 and 1.`);
+        return [point[0], point[1]];
+      });
+      if (!entry.via.length) delete entry.via;
+    }
+    routes.push(entry);
   }
   routes.sort((x, y) => (x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
 

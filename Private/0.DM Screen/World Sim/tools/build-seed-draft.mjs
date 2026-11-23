@@ -646,6 +646,12 @@ for (const town of towns) {
   }
 }
 
+// Waypoints for roads that must not be drawn straight. [up, across], from end a to end b.
+// The DM, 2026-11-23: Ardenville to Highreach goes around Lake Arden, not through it.
+const ROAD_WAYPOINTS = {
+  "ardenville--highreach": [[0.815, 0.105], [0.838, 0.135], [0.845, 0.172], [0.832, 0.205], [0.8, 0.225], [0.765, 0.226], [0.738, 0.206]]
+};
+
 const marketRoutes = (draft.routeEstimates || []).map((route) => ({
   id: route.id,
   a: route.a,
@@ -654,7 +660,8 @@ const marketRoutes = (draft.routeEstimates || []).map((route) => ({
     value: route.travelDays.value,
     estimate: route.travelDays.estimate === true,
     basis: route.travelDays.source
-  }
+  },
+  ...(ROAD_WAYPOINTS[route.id] ? { via: ROAD_WAYPOINTS[route.id] } : {})
 })).filter((route) => placeList.some((place) => place.id === route.a) && placeList.some((place) => place.id === route.b));
 
 const upload = {

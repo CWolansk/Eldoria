@@ -522,6 +522,8 @@ A countdown may carry `"route": "<road id>"` as well as, or in place of, `"place
 
 Each place in the setup document may carry `"position": [<fraction up from the bottom>, <fraction across from the left>]` on the world map image, the same convention the site's world map uses. The region outlines are not stored: they are the draft file `docs/world-sim/regions.draft.json`.
 
+A road in the setup may carry `"via": [[<up>, <across>], ...]`, waypoints in the same convention listed from end `a` to end `b`, so it is drawn around a lake or a range instead of straight through it. Waypoints change only how the road is drawn and where things on it appear; travel days stay whatever the DM set. (Added 2026-11-23 at the DM's request: the Ardenville to Highreach road goes around Lake Arden.)
+
 ### X. What players can read without a key: rumours you revealed
 
 `GET /api/world/public/rumours` answers with the rumours you have revealed in the town the party is in, as that town tells them, and only if the players know that town:

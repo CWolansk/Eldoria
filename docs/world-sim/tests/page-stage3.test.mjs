@@ -5,7 +5,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile, readdir } from "node:fs/promises";
 import { JSDOM } from "jsdom";
-import { DM_KEY, createApiFetch, makeWorld, testSetup } from "./helpers.mjs";
+import { DM_KEY, createApiFetch, engine, makeWorld, testSetup } from "./helpers.mjs";
 
 const html = await readFile(new URL("../../tools/world-sim/index.html", import.meta.url), "utf8");
 const GLOBALS = ["window", "document", "navigator", "localStorage", "HTMLElement", "Element", "Node", "Event", "CustomEvent", "location"];
@@ -528,4 +528,37 @@ test("a threat can be put on a road from the Countdowns form", async () => {
   await waitFor(() => page.q("[data-countdown-road]"), () => `the countdown should be added: ${page.text()}`);
   assert.equal(page.q("[data-countdown-road]").textContent, "on the road between Openton and Secretville");
   assert.deepEqual((await page.world.service.getOverview()).threats.map((threat) => threat.route), ["openton--secretville"]);
+});
+
+test("Map: a road with waypoints is drawn around, not straight through, and things on it follow the bend", async () => {
+  const setup = setupWithPositions();
+  // Openton is at [0.8, 0.2], Secretville at [0.6, 0.4]; the road detours through [0.9, 0.5].
+  setup.economy.routes[0].via = [[0.9, 0.5]];
+  const page = await openPage({ setup });
+  await page.tab("map", "#ws-map");
+  await waitFor(() => page.all(".ws-map__region").length === 2, "the map should load");
+
+  const road = page.all(".ws-map__road").find((line) => line.dataset.road === "openton--secretville");
+  assert.equal(road.tagName.toLowerCase(), "polyline");
+  const points = road.getAttribute("points").split(" ").map((pair) => pair.split(",").map(Number));
+  assert.equal(points.length, 3, "two ends and one waypoint");
+  // [up, across] becomes x = across * 1000, y = (1 - up) * 1000.
+  assert.deepEqual(points, [[200, 200], [500, 100], [400, 400]]);
+
+  const straight = page.all(".ws-map__road").find((line) => line.dataset.road === "secretville--farplace");
+  assert.equal(straight.getAttribute("points").split(" ").length, 2, "a road without waypoints is still a straight line");
+});
+
+test("a road's waypoints are checked when the setup is loaded", () => {
+  const good = testSetup().economy;
+  good.routes[0].via = [[0.9, 0.5], [0.7, 0.45]];
+  const config = engine.normalizeEconomyConfig(good);
+  assert.deepEqual(config.routes.find((route) => route.id === "openton--secretville").via, [[0.9, 0.5], [0.7, 0.45]]);
+  assert.equal("via" in config.routes.find((route) => route.id === "secretville--farplace"), false, "roads without waypoints are unchanged");
+
+  for (const bad of [[[1.2, 0.5]], [[0.5]], "around the lake", [[0.5, "0.5"]]]) {
+    const setup = testSetup().economy;
+    setup.routes[0].via = bad;
+    assert.throws(() => engine.normalizeEconomyConfig(setup), /via/u);
+  }
 });

@@ -26,6 +26,7 @@ export function listRoads(state, day = state?.day) {
       id: route.id,
       a: route.a,
       b: route.b,
+      via: Array.isArray(route.via) ? route.via.map((point) => [point[0], point[1]]) : [],
       days,
       flow,
       travel: flow <= 0 ? Infinity : Math.max(1, Math.ceil(days / flow)),
