@@ -84,7 +84,7 @@ export function buildHpContent(playerSheetObject, context) {
     input.value = String(savedHp || "");
 
     fragment.appendChild(createField(`Level ${context.characterLevel} HP Gained`, input));
-    fragment.appendChild(createDescription(`Use this for the level ${context.characterLevel} HP roll, average choice, or table value.`));
+    fragment.appendChild(createDescription(`Enter everything you gained at level ${context.characterLevel}: the roll, average or table value, with your Constitution bonus (${formatModifier(conModifier)}) and extras such as Tough already added in. The sheet adds these numbers up as they are.`));
     fragment.appendChild(buildHpActions(context, levelIndex, input, savedHp));
     return fragment;
 }

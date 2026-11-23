@@ -1,7 +1,18 @@
 // Boots the real page (PlayerSheet.html body + PlayerSheet.js) under jsdom against a
 // fetch-level fake of the API, so save, retry and refresh behaviour can be tested whole.
 import { readFile } from "node:fs/promises";
+import { createRequire } from "node:module";
 import { loadSheetFixtures } from "./fixtures.mjs";
+
+// The fake server applies play actions with the API's own code, so the tests exercise
+// the real rules. Needs `npm ci` in docs/api once.
+function loadApplyDmAction() {
+  try {
+    return createRequire(import.meta.url)("../../../../api/src/dmDashboard.js").applyDmAction;
+  } catch (error) {
+    throw new Error(`Play action tests need the API's dependencies. Run "npm ci" in docs/api first. (${error.message})`);
+  }
+}
 
 export async function bootSheetPage(options = {}) {
   const fx = await loadSheetFixtures(options);
@@ -13,6 +24,8 @@ export async function bootSheetPage(options = {}) {
   const server = {
     dto: structuredClone(options.dto || fx.createDto()),
     failSaves: false,
+    failActions: false,
+    actions: [],
     saves: [],
     gets: 0,
     version: 1
@@ -28,6 +41,21 @@ export async function bootSheetPage(options = {}) {
     const url = new URL(String(input?.url || input));
     const method = String(init.method || "GET").toUpperCase();
     options.onRequest?.(url.href, method);
+    if (/\/dm\/characters\/[^/]+\/actions$/u.test(url.pathname) && method === "POST") {
+      if (server.failActions) {
+        throw new TypeError("Failed to fetch");
+      }
+      const action = JSON.parse(init.body);
+      server.actions.push(action);
+      try {
+        const next = loadApplyDmAction()(server.dto, action, {});
+        server.version += 1;
+        server.dto = { ...next, lastModified: `v${server.version}` };
+      } catch (error) {
+        return respond(error.statusCode || 500, { error: error.message });
+      }
+      return respond(200, { character: { id: server.dto.id }, undo: null });
+    }
     if (/\/characters\/[^/]+$/u.test(url.pathname)) {
       if (method === "GET") {
         server.gets += 1;

@@ -4053,3 +4053,260 @@
   background: var(--sheet-panel-2);
   color: var(--sheet-text);
 }
+
+/* ==========================================================================
+   Sheet review, pass 2: the play strip (items 1, 3, 15)
+   Hit points and conditions first in the header, sized for thumbs.
+   ========================================================================== */
+.player-sheet-play {
+  display: grid;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 0.75rem;
+  border: 1px solid var(--sheet-line-strong);
+  border-radius: 0.6rem;
+  background: var(--sheet-panel-2);
+  color: var(--sheet-text);
+}
+
+.player-sheet-play__label {
+  color: var(--sheet-muted);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.player-sheet-play__hp {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+}
+
+.player-sheet-play__hp-value {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.player-sheet-play__hp-current {
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+.player-sheet-play__hp-max {
+  color: var(--sheet-muted);
+  font-size: 1.2rem;
+}
+
+.player-sheet-play__hp-temp {
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--sheet-teal);
+  border-radius: 999px;
+  color: var(--sheet-teal);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.player-sheet-play__hp-controls,
+.player-sheet-play__setup-form,
+.player-sheet-play__conditions,
+.player-sheet-play__exhaustion,
+.player-sheet-play__concentration,
+.player-sheet-play__status,
+.player-sheet-play__focus,
+.player-sheet-play__death,
+.player-sheet-play__pips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.player-sheet-play__status,
+.player-sheet-play__focus,
+.player-sheet-play__death {
+  gap: 0.6rem 1.25rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--sheet-line);
+}
+
+.player-sheet-play__button,
+.player-sheet-play__amount,
+.player-sheet-play__text,
+.player-sheet-play__select {
+  min-height: 2.75rem;
+  border: 1px solid var(--sheet-line-strong);
+  border-radius: 0.45rem;
+  background: var(--sheet-panel);
+  color: var(--sheet-text);
+  font: inherit;
+  font-size: 0.9375rem;
+}
+
+.player-sheet-play__button {
+  padding: 0.3rem 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.player-sheet-play__button:disabled,
+.player-sheet-play__amount:disabled,
+.player-sheet-play__select:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.player-sheet-play__amount {
+  width: 5.5rem;
+  padding: 0.3rem 0.5rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.player-sheet-play__text {
+  width: min(12rem, 100%);
+  padding: 0.3rem 0.6rem;
+}
+
+.player-sheet-play__select {
+  padding: 0.3rem 0.5rem;
+  max-width: 100%;
+}
+
+.player-sheet-play__button--damage {
+  border-color: var(--sheet-red);
+  color: var(--sheet-red);
+}
+
+.player-sheet-play__button--heal {
+  border-color: var(--sheet-green);
+  color: var(--sheet-green);
+}
+
+.player-sheet-play__button--temp-hp {
+  border-color: var(--sheet-teal);
+  color: var(--sheet-teal);
+}
+
+.player-sheet-play__button--primary,
+.player-sheet-play__toggle--on {
+  border-color: var(--sheet-accent);
+  background: var(--sheet-accent);
+  color: var(--sheet-on-accent);
+}
+
+.player-sheet-play__setup {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: start;
+  padding: 0.6rem;
+  border: 1px dashed var(--sheet-amber);
+  border-radius: 0.45rem;
+}
+
+.player-sheet-play__setup-text,
+.player-sheet-play__hint,
+.player-sheet-play__message {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.player-sheet-play__hint {
+  flex: 1 1 100%;
+  color: var(--sheet-muted);
+}
+
+.player-sheet-play__message {
+  color: var(--sheet-red);
+  font-weight: 700;
+}
+
+.player-sheet-play__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding-left: 0.7rem;
+  border: 1px solid var(--sheet-amber);
+  border-radius: 999px;
+  color: var(--sheet-text);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.player-sheet-play__chip-remove {
+  min-width: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--sheet-muted);
+  font-size: 1.2rem;
+}
+
+.player-sheet-play__none {
+  color: var(--sheet-muted);
+  font-size: 0.9375rem;
+}
+
+.player-sheet-play__step {
+  min-width: 2.75rem;
+  padding: 0;
+  font-size: 1.2rem;
+}
+
+.player-sheet-play__exhaustion-value {
+  min-width: 1.5rem;
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.player-sheet-play__pip {
+  width: 2.75rem;
+  min-width: 2.75rem;
+  padding: 0;
+  border-radius: 50%;
+  position: relative;
+}
+
+.player-sheet-play__pip::after {
+  content: "";
+  position: absolute;
+  inset: 0.7rem;
+  border: 2px solid var(--sheet-muted);
+  border-radius: 50%;
+}
+
+.player-sheet-play__pip--on::after {
+  border-color: var(--sheet-text);
+  background: var(--sheet-text);
+}
+
+@media (max-width: 800px) {
+  /* Item 3: on a phone the play strip comes first; the portrait and the
+     character builder follow the sheet instead of sitting above it. */
+  .player-sheet-page .playerSheet {
+    grid-template-areas:
+      "header"
+      "content"
+      "portrait"
+      "menu";
+  }
+
+  .player-sheet-page .player-sheet-container > .levelEditor {
+    order: 2;
+  }
+
+  .player-sheet-play__hp-controls {
+    flex: 1 1 100%;
+  }
+
+  .player-sheet-play__hp-controls .player-sheet-play__button {
+    flex: 1 1 auto;
+  }
+}

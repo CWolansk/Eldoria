@@ -1,6 +1,7 @@
 import { EldoriaApiClient } from "../../api/apiClient/index.js";
 import { BuildPlayerSheetHeader } from "./PlayerSheetJavaScript/PlayerSheetHeaderBuilder.js";
 import { BuildPlayerSheetSidebar } from "./PlayerSheetJavaScript/PlayerSheetSidebarBuilder.js";
+import { BuildPlayerSheetPlayStrip } from "./PlayerSheetJavaScript/PlayerSheetPlayStrip.js";
 import { BuildPlayerSheetOffenseTab } from "./PlayerSheetJavaScript/PlayerSheetOffenseTabBuilder.js";
 import { BuildPlayerSheetDefenseTab } from "./PlayerSheetJavaScript/PlayerSheetDefenseTabBuilder.js";
 import { BuildPlayerSheetGearTab } from "./PlayerSheetJavaScript/PlayerSheetGearTabBuilder.js?v=20260717-gear-organizer-2";
@@ -581,6 +582,84 @@ async function hydratePlayerSheetReferences(dtoSnapshot) {
   }
 }
 
+async function updateInspiration(inspired) {
+  if (!currentPlayerSheetDto) {
+    return;
+  }
+
+  await applyPlayerSheetDto(PlayerSheetDtoHelper.patch(currentPlayerSheetDto, "identity.inspiration", Boolean(inspired)));
+}
+
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Sheet edits still waiting to be saved go first, so the action lands on top of them.
+async function settlePendingSaves() {
+  for (let attempt = 0; attempt < 200; attempt += 1) {
+    if (failedSaveDto) {
+      throw Object.assign(new Error("Unsaved changes could not be saved."), {
+        userMessage: "Your last change has not been saved yet. Press Retry at the top, then try again."
+      });
+    }
+    // Covers an edit that is still being applied and has not been queued for saving yet.
+    if (!hasUnsavedPlayerSheetChanges()) {
+      return;
+    }
+    if (pendingSaveDto && !saveInFlight) {
+      if (saveTimer) {
+        clearTimeout(saveTimer);
+        saveTimer = null;
+      }
+      void flushPendingSave();
+    }
+    await wait(25);
+  }
+  throw new Error("Timed out waiting for the sheet to save.");
+}
+
+let playActionInFlight = false;
+
+// One play action ("take 7 damage", "add Poisoned"). It goes through the same route the
+// DM screen uses, which changes only that part of the stored sheet, so a DM change made
+// at the same moment is kept. The sheet is then re-read so both show the same numbers.
+async function applyPlayAction(action) {
+  const characterId = getRequestedPlayerId();
+  if (!characterId) {
+    throw Object.assign(new Error("Missing character id."), { userMessage: "This sheet has no character id, so it cannot be changed." });
+  }
+  if (playActionInFlight) {
+    return;
+  }
+
+  playActionInFlight = true;
+  try {
+    await settlePendingSaves();
+    setSaveStatus("saving", "Saving...");
+    await api.applyDmCharacterAction(characterId, action);
+    const strictDto = PlayerSheetDtoHelper.toSaveDto(await api.getCharacterSheet(characterId), { id: characterId });
+    rememberServerSnapshot(characterId, strictDto);
+    await applyPlayerSheetDto(strictDto, {
+      persist: false,
+      resolveReferences: false,
+      preserveReferences: true
+    });
+    lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
+    setSaveStatus("saved", "Saved");
+  } catch (error) {
+    console.error("Play action failed:", error);
+    if (!hasUnsavedPlayerSheetChanges()) {
+      setSaveStatus("failed", isBrowserOffline() ? "Offline. That change was not sent." : "That change was not sent.");
+    }
+    if (!error.userMessage && Number(error?.status) >= 400 && Number(error?.status) < 500 && error?.message) {
+      error.userMessage = error.message;
+    }
+    throw error;
+  } finally {
+    playActionInFlight = false;
+  }
+}
+
 async function updateExperience(experience) {
   if (!currentPlayerSheetDto) {
     return;
@@ -595,6 +674,10 @@ async function renderCurrentPlayerSheet() {
   applyTabVisibility();
   BuildPlayerSheetHeader(currentCharacterSheet, {
     onExperienceChange: updateExperience
+  });
+  BuildPlayerSheetPlayStrip(currentCharacterSheet, {
+    onPlayAction: applyPlayAction,
+    onInspirationChange: updateInspiration
   });
   BuildPlayerSheetSidebar(currentCharacterSheet);
   bootLevelEditor({
@@ -611,7 +694,7 @@ async function renderCurrentPlayerSheet() {
 
 async function refreshPlayerSheetFromApi() {
   const characterId = getRequestedPlayerId();
-  if (!characterId || remoteRefreshInFlight || hasUnsavedPlayerSheetChanges() || document.hidden) return;
+  if (!characterId || remoteRefreshInFlight || playActionInFlight || hasUnsavedPlayerSheetChanges() || document.hidden) return;
   remoteRefreshInFlight = true;
   try {
     const loadedDto = await api.getCharacterSheet(characterId);
