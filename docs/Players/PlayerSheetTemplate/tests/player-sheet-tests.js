@@ -2570,7 +2570,7 @@ const tests = [
     const text = tab.textContent;
     assert(text.includes("Cantrips"), "cantrip section should render");
     assert(text.includes("1st-Level Spells"), "1st-level section should render");
-    assert(text.includes("9th-Level Spells"), "9th-level section should render even when empty");
+    assert(!text.includes("9th-Level Spells"), "levels with no spells are hidden (sheet review item 14)");
     assert(text.includes("4 / 4"), "1st-level slot availability should render");
     assert(text.includes("2 / 2"), "2nd-level slot availability should render");
     assert(text.includes("Sacred Flame"), "cantrip should render");

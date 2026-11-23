@@ -13,7 +13,9 @@ import {
     createItemListItem,
     createSection,
     createTabShell,
-    resolveInventoryItems
+    resolveInventoryItems,
+    createAttuneToggle,
+    MAX_ATTUNED_ITEMS
 } from "./PlayerSheetTabHelpers.js";
 import {
     getCatalogCache,
@@ -1124,7 +1126,10 @@ function gearEntryMatches(entry, state) {
 function createGearRow(entry, state, scrollSpellModal, containedSpellRecords) {
     const { item, record, inventoryIndex } = entry;
     const scrollSpell = getContainedSpell(item);
-    const actions = [createEquipToggle(item, inventoryIndex, state.context)];
+    const actions = [
+        createEquipToggle(item, inventoryIndex, state.context),
+        createAttuneToggle(item, record, inventoryIndex, state.context)
+    ];
     if (isSpellScroll(item, record)) {
         actions.push(createSpellScrollButton(item, inventoryIndex, scrollSpellModal, state.context));
     }
@@ -1147,7 +1152,9 @@ function createGearRow(entry, state, scrollSpellModal, containedSpellRecords) {
 function renderGearGroups(results, entries, state, controls, scrollSpellModal, containedSpellRecords) {
     results.replaceChildren();
     const visible = sortGearViewEntries(entries.filter((entry) => gearEntryMatches(entry, state)), state.sort);
-    controls.status.textContent = `${visible.length} of ${entries.length} item${entries.length === 1 ? "" : "s"} shown`;
+    const attunedCount = entries.filter((entry) => entry.item?.attuned).length;
+    controls.status.textContent = `${visible.length} of ${entries.length} item${entries.length === 1 ? "" : "s"} shown · Attuned ${attunedCount} of ${MAX_ATTUNED_ITEMS}`;
+    controls.status.dataset.attuned = String(attunedCount);
     if (!visible.length) {
         appendEmptyState(results, "No gear matches the current search and filter.");
         return;

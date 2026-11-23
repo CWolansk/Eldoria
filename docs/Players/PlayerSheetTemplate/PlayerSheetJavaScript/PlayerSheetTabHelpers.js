@@ -135,7 +135,7 @@ export function formatQuantityTags(item) {
     if (item?.equipped) {
         tags.push("Equipped");
     }
-    if (item?.attuned || item?.attunement) {
+    if (item?.attuned) {
         tags.push("Attuned");
     }
     return tags;
@@ -623,6 +623,61 @@ export function createItemCard(item, record = getItemRecord(item), options = {})
     }
 
     return card;
+}
+
+export const MAX_ATTUNED_ITEMS = 3;
+
+export function itemRequiresAttunement(item = {}, record = getItemRecord(item)) {
+    const requirement = record?.reqAttune ?? record?.attunement ?? record?.attunementRequirement ?? record?._attunement ?? item?.attunement;
+    if (requirement === true) {
+        return true;
+    }
+    const text = String(requirement ?? "").trim();
+    return Boolean(text) && !/^(?:false|no|none)$/iu.test(text);
+}
+
+export function countAttunedItems(dto) {
+    return PlayerSheetDtoHelper.getValue(dto, "inventory.items", []).filter((entry) => entry?.attuned).length;
+}
+
+/**
+ * Attune / end attunement for one item. Shown for items that need attunement and for
+ * anything already attuned. Starting a fourth attunement is refused, with the reason.
+ */
+export function createAttuneToggle(item, record, inventoryIndex, context = {}) {
+    if (!item?.attuned && !itemRequiresAttunement(item, record)) {
+        return null;
+    }
+
+    const attuned = Boolean(item?.attuned);
+    const count = countAttunedItems(context.dto);
+    const full = !attuned && count >= MAX_ATTUNED_ITEMS;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `player-sheet-button player-sheet-button--small player-sheet-attune-toggle${attuned ? " player-sheet-attune-toggle--on" : ""}`;
+    button.textContent = attuned ? "Attuned" : full ? `Attune (${count} of ${MAX_ATTUNED_ITEMS} used)` : "Attune";
+    button.dataset.attune = String(inventoryIndex);
+    button.setAttribute("aria-pressed", attuned ? "true" : "false");
+    button.setAttribute("aria-label", attuned
+        ? `End attunement to ${getItemDisplayName(item)}`
+        : full
+            ? `Cannot attune to ${getItemDisplayName(item)}: already attuned to ${MAX_ATTUNED_ITEMS} items`
+            : `Attune to ${getItemDisplayName(item)}`);
+    button.disabled = full || !Number.isInteger(inventoryIndex) || typeof context.onChange !== "function";
+    button.addEventListener("click", async () => {
+        button.disabled = true;
+        try {
+            const currentItems = PlayerSheetDtoHelper.getValue(context.dto, "inventory.items", []);
+            const nextItems = currentItems.map((entry, index) => index === inventoryIndex
+                ? { ...entry, attuned: !attuned }
+                : entry);
+            await context.onChange(PlayerSheetDtoHelper.patch(context.dto, "inventory.items", nextItems));
+        } catch (error) {
+            console.error("Failed to update attunement:", error);
+            button.disabled = false;
+        }
+    });
+    return button;
 }
 
 export function createEquipToggle(item, inventoryIndex, context = {}) {

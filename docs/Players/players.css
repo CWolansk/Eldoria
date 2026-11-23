@@ -4332,3 +4332,32 @@
   font-size: 0.9375rem;
   font-weight: 700;
 }
+
+/* --- pass 2, items 2 and 14: spendable spell slots, casting line --- */
+.player-sheet-page .player-sheet-spell-slot__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+
+.player-sheet-page .player-sheet-spell-slot__button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.player-sheet-page .player-sheet-spell-row__casting {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+/* --- pass 2, item 16: attunement toggle --- */
+.player-sheet-page .player-sheet-attune-toggle--on {
+  border-color: var(--sheet-teal);
+  color: var(--sheet-teal);
+}
+
+.player-sheet-page .player-sheet-attune-toggle:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

@@ -2269,25 +2269,34 @@ function createSpellSlotsFromProgression(row = []) {
     return { byLevel };
 }
 
+// The number of slots comes from the class table unless the sheet records its own
+// maximum for a level; how many are used always comes from the sheet. Recording only
+// "expended" therefore never freezes the maximum at an old level.
 function compileSpellSlots(dto, classes = []) {
     const slots = dto.spells.spellSlots || {};
-    if (slots.byLevel && hasRecordedSpellSlots(slots)) {
-        return deepClone(slots);
-    }
-
-    if (!slots.byLevel && hasRecordedSpellSlots(slots)) {
-        return {
-            byLevel: deepClone(slots)
-        };
-    }
-
+    const recorded = slots.byLevel && typeof slots.byLevel === "object" ? slots.byLevel : (slots.byLevel ? {} : slots);
     const spellcaster = toArray(classes)
         .find((entry) => toArray(entry?.spellcasting?.slotProgression).some((value) => toNumber(value, 0) > 0));
-    if (spellcaster) {
-        return createSpellSlotsFromProgression(spellcaster.spellcasting.slotProgression);
+    const fromClass = spellcaster
+        ? createSpellSlotsFromProgression(spellcaster.spellcasting.slotProgression).byLevel
+        : {};
+
+    const byLevel = {};
+    for (let level = 1; level <= 9; level += 1) {
+        const key = String(level);
+        const entry = recorded?.[key];
+        const recordedMax = entry && typeof entry === "object" ? toNumber(entry.max, 0) : toNumber(entry, 0);
+        const expended = entry && typeof entry === "object" ? Math.max(0, toNumber(entry.expended, 0)) : 0;
+        const max = recordedMax > 0 ? recordedMax : toNumber(fromClass[key]?.max, 0);
+        if (max > 0 || expended > 0) {
+            byLevel[key] = {
+                max,
+                expended: max > 0 ? Math.min(expended, max) : expended
+            };
+        }
     }
 
-    return { byLevel: {} };
+    return { byLevel };
 }
 
 function getWeaponPropertyValues(record = {}) {

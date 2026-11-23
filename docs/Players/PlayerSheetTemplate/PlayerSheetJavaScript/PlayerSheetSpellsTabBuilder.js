@@ -541,6 +541,18 @@ export function createSpellListItem(entry, record = entry.record || entry.spell,
 
     identity.appendChild(titleLine);
 
+    // What you need to cast it, before the description.
+    const castingLine = [
+        formatSpellTime(record),
+        formatSpellRange(record),
+        formatSpellDuration(record)
+    ].map((value) => String(value || "").trim()).filter(Boolean).join(" · ");
+    if (castingLine) {
+        const lead = createElement("p", "player-sheet-item-row__lead player-sheet-spell-row__casting", castingLine);
+        lead.dataset.castingLine = "true";
+        identity.appendChild(lead);
+    }
+
     const meta = [
         getSpellSource(entry.spell, record),
         formatSpellLevel(getSpellRecordLevel(record, entry.fallbackLevel)),
@@ -570,7 +582,7 @@ export function createSpellListItem(entry, record = entry.record || entry.spell,
 
     summary.appendChild(identity);
 
-    const wantedRows = options.rows || ["Cast at", "Recharge", "Casting", "Range", "Save", "Attack", "Damage", "Healing", "Duration"];
+    const wantedRows = options.rows || ["Cast at", "Recharge", "Save", "Attack", "Damage", "Healing"];
     const detailMetrics = getSpellDetailRows(entry, record)
         .filter(([label]) => wantedRows.includes(label))
         .map(([label, value]) => ({ label, value }));
@@ -1265,7 +1277,42 @@ function getSpellSlotByLevel(spellSlots = {}, level) {
     };
 }
 
-function appendSpellSlots(shell, spellSlots = {}) {
+// Mark a slot used or get one back. Only "expended" is written, in the sheet's existing
+// spells.spellSlots.byLevel shape; the maximum keeps coming from the class table.
+function createSlotChange(context, level, nextExpended) {
+    const current = PlayerSheetDtoHelper.getValue(context.dto, "spells.spellSlots", {}) || {};
+    const byLevel = current.byLevel && typeof current.byLevel === "object" ? { ...current.byLevel } : {};
+    const key = String(level);
+    const existing = byLevel[key];
+    const entry = existing && typeof existing === "object"
+        ? { ...existing }
+        : toNumber(existing, 0) > 0 ? { max: toNumber(existing, 0) } : {};
+    entry.expended = Math.max(0, nextExpended);
+    byLevel[key] = entry;
+    return PlayerSheetDtoHelper.patch(context.dto, "spells.spellSlots", { ...current, byLevel });
+}
+
+function createSlotButton(label, ariaLabel, datasetValue, disabled, onClick) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "player-sheet-button player-sheet-button--small player-sheet-spell-slot__button";
+    button.textContent = label;
+    button.setAttribute("aria-label", ariaLabel);
+    button.dataset.slotAction = datasetValue;
+    button.disabled = disabled;
+    button.addEventListener("click", async () => {
+        button.disabled = true;
+        try {
+            await onClick();
+        } catch (error) {
+            console.error("Failed to change spell slots:", error);
+            button.disabled = false;
+        }
+    });
+    return button;
+}
+
+function appendSpellSlots(shell, spellSlots = {}, context = {}) {
     const activeSlots = [];
     for (let level = 1; level <= 9; level += 1) {
         const slot = getSpellSlotByLevel(spellSlots, level);
@@ -1281,12 +1328,32 @@ function appendSpellSlots(shell, spellSlots = {}) {
         return;
     }
 
+    const canChange = typeof context.onChange === "function" && context.dto;
     const grid = createElement("div", "player-sheet-spell-slot-grid");
     for (const slot of activeSlots) {
         const tile = createElement("div", "player-sheet-spell-slot");
+        tile.dataset.slotLevel = String(slot.level);
         tile.appendChild(createElement("span", "player-sheet-spell-slot__level", ordinal(slot.level)));
         tile.appendChild(createElement("span", "player-sheet-spell-slot__value", `${slot.available} / ${slot.max}`));
         tile.appendChild(createElement("span", "player-sheet-spell-slot__label", "available"));
+        if (canChange) {
+            const controls = createElement("div", "player-sheet-spell-slot__controls");
+            controls.appendChild(createSlotButton(
+                "Use",
+                `Use a ${ordinal(slot.level)}-level slot`,
+                `use:${slot.level}`,
+                slot.available <= 0,
+                () => context.onChange(createSlotChange(context, slot.level, slot.expended + 1))
+            ));
+            controls.appendChild(createSlotButton(
+                "Restore",
+                `Get a ${ordinal(slot.level)}-level slot back`,
+                `restore:${slot.level}`,
+                slot.expended <= 0,
+                () => context.onChange(createSlotChange(context, slot.level, slot.expended - 1))
+            ));
+            tile.appendChild(controls);
+        }
         grid.appendChild(tile);
     }
     section.appendChild(grid);
@@ -1327,15 +1394,16 @@ async function appendSpellLevelLists(shell, playerSheetObject = {}, context = {}
     const section = createSection("Spell List");
     const entries = await resolveSpellEntries(playerSheetObject, context);
     const groups = groupSpellEntriesByLevel(entries);
+    let shownLevels = 0;
 
     for (const level of SPELL_LEVELS) {
         const levelSection = createSpellLevelSection(level, playerSheetObject.spellSlots || {});
         const spells = groups.get(level) || [];
         if (!spells.length) {
-            appendEmptyState(levelSection, "No spells recorded at this level.");
-            section.appendChild(levelSection);
+            // Levels with no spells are left out; the slot tiles above already show what can be cast.
             continue;
         }
+        shownLevels += 1;
 
         const list = createItemList();
         for (const entry of spells) {
@@ -1345,6 +1413,10 @@ async function appendSpellLevelLists(shell, playerSheetObject = {}, context = {}
         }
         levelSection.appendChild(list);
         section.appendChild(levelSection);
+    }
+
+    if (!shownLevels) {
+        appendEmptyState(section, "No spells recorded yet.");
     }
 
     shell.appendChild(section);
@@ -1369,6 +1441,6 @@ export async function BuildPlayerSheetSpellsTab(playerSheetObject, context = {})
     shell.appendChild(modal);
 
     appendSpellcastingSummary(shell, playerSheetObject);
-    appendSpellSlots(shell, playerSheetObject?.spellSlots || {});
+    appendSpellSlots(shell, playerSheetObject?.spellSlots || {}, context);
     await appendSpellLevelLists(shell, playerSheetObject, context);
 }
