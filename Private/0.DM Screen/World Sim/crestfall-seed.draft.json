@@ -25,9 +25,11 @@
       "source": "Public/World/Events/Timeline (last file by name)"
     },
     "today": {
-      "value": null,
-      "missing": true,
-      "need": "Today's in-world date"
+      "value": {
+        "day": 99306,
+        "text": "Fall 7, 496"
+      },
+      "source": "The DM, 2026-11-23"
     }
   },
   "positionFormat": {
@@ -40,9 +42,9 @@
     "name": "Crestfall",
     "source": "Private/1. World Almanac/World/Crestfall/Crestfall.md",
     "border": {
-      "value": null,
-      "missing": true,
-      "need": "Where Crestfall ends and the Ironpeak Mountains begin (the map colours them the same)"
+      "value": "docs/world-sim/regions.draft.json",
+      "source": "Suggested outline for the DM to correct. The DM, 2026-11-23: the mountain range is Ironpeak (dwarven lands), so Crestfall is the lowlands up to the foot of the mountains.",
+      "estimate": true
     }
   },
   "settlements": [
@@ -2061,7 +2063,430 @@
       ]
     }
   ],
-  "routesNote": "Only connections the notes mention are listed. The full list of roads and every travel time must come from you.",
+  "routesNote": "What the notes say about connections, quoted. Travel-day guesses are in routeEstimates.",
+  "routeEstimates": [
+    {
+      "id": "ardenville--highreach",
+      "a": "ardenville",
+      "b": "highreach",
+      "travelDays": {
+        "value": 1,
+        "estimate": false,
+        "editable": true,
+        "source": "The DM, 2026-11-23: about a day, going around Lake Arden",
+        "derivation": {
+          "straightMapWidths": 0.101,
+          "pathFactor": 1.5,
+          "how": "around Lake Arden",
+          "terrain": "lowland",
+          "terrainFactor": 1,
+          "computedDays": 1
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "highreach--hillcrest",
+      "a": "highreach",
+      "b": "hillcrest",
+      "travelDays": {
+        "value": 1,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.107,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "lowland",
+          "terrainFactor": 1,
+          "computedDays": 1
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "highreach--fairfield",
+      "a": "highreach",
+      "b": "fairfield",
+      "travelDays": {
+        "value": 1.5,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.174,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "lowland",
+          "terrainFactor": 1,
+          "computedDays": 1.5
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "hillcrest--stonehaven",
+      "a": "hillcrest",
+      "b": "stonehaven",
+      "travelDays": {
+        "value": 1,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.132,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "lowland",
+          "terrainFactor": 1,
+          "computedDays": 1
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "highreach--stonehaven",
+      "a": "highreach",
+      "b": "stonehaven",
+      "travelDays": {
+        "value": 1.5,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.176,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "lowland",
+          "terrainFactor": 1,
+          "computedDays": 1.5
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "fairfield--stonehaven",
+      "a": "fairfield",
+      "b": "stonehaven",
+      "travelDays": {
+        "value": 2.5,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.189,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "forest or hills",
+          "terrainFactor": 1.5,
+          "computedDays": 2.5
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "fairfield--starfall",
+      "a": "fairfield",
+      "b": "starfall",
+      "travelDays": {
+        "value": 0.5,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.089,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "lowland",
+          "terrainFactor": 1,
+          "computedDays": 0.5
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "starfall--frostglade",
+      "a": "starfall",
+      "b": "frostglade",
+      "travelDays": {
+        "value": 0.5,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.056,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "lowland",
+          "terrainFactor": 1,
+          "computedDays": 0.5
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "starfall--stardew",
+      "a": "starfall",
+      "b": "stardew",
+      "travelDays": {
+        "value": 1,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.078,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "forest or hills",
+          "terrainFactor": 1.5,
+          "computedDays": 1
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "frostglade--serenity-hollow",
+      "a": "frostglade",
+      "b": "serenity-hollow",
+      "travelDays": {
+        "value": 0.5,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.065,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "lowland",
+          "terrainFactor": 1,
+          "computedDays": 0.5
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "frostglade--moonshade",
+      "a": "frostglade",
+      "b": "moonshade",
+      "travelDays": {
+        "value": 1.5,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.113,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "forest or hills",
+          "terrainFactor": 1.5,
+          "computedDays": 1.5
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "fairfield--ironroot",
+      "a": "fairfield",
+      "b": "ironroot",
+      "travelDays": {
+        "value": 5.5,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.264,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "mountains",
+          "terrainFactor": 2.5,
+          "computedDays": 5.5
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "stonehaven--gemstone-hollow",
+      "a": "stonehaven",
+      "b": "gemstone-hollow",
+      "travelDays": {
+        "value": 2.5,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.192,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "forest or hills",
+          "terrainFactor": 1.5,
+          "computedDays": 2.5
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "gemstone-hollow--ironroot",
+      "a": "gemstone-hollow",
+      "b": "ironroot",
+      "travelDays": {
+        "value": 4.5,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.222,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "mountains",
+          "terrainFactor": 2.5,
+          "computedDays": 4.5
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "stonehaven--forgepeak",
+      "a": "stonehaven",
+      "b": "forgepeak",
+      "travelDays": {
+        "value": 3.5,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.185,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "mountains",
+          "terrainFactor": 2.5,
+          "computedDays": 3.5
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "forgepeak--steamhammer",
+      "a": "forgepeak",
+      "b": "steamhammer",
+      "travelDays": {
+        "value": 2.5,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.118,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "mountains",
+          "terrainFactor": 2.5,
+          "computedDays": 2.5
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    },
+    {
+      "id": "steamhammer--stoneforge",
+      "a": "steamhammer",
+      "b": "stoneforge",
+      "travelDays": {
+        "value": 2,
+        "estimate": true,
+        "editable": true,
+        "source": "Estimate from the map (see routeEstimatesMethod)",
+        "derivation": {
+          "straightMapWidths": 0.112,
+          "pathFactor": 1.2,
+          "how": "roads wind, so 1.2 times the straight line",
+          "terrain": "mountains",
+          "terrainFactor": 2.5,
+          "computedDays": 2
+        }
+      },
+      "connection": {
+        "value": "assumed",
+        "estimate": true,
+        "source": "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist."
+      }
+    }
+  ],
+  "routeEstimatesMethod": {
+    "pace": "0.15 map widths of path per day",
+    "calibration": "The figure the DM gave: Highreach to Ardenville takes about a day, going around Lake Arden (straight line 0.101 map widths, about 1.5 times that around the lake).",
+    "path": "straight line x 1.2 unless a detour is stated",
+    "terrainFactors": {
+      "lowland": 1,
+      "forest or hills": 1.5,
+      "mountains": 2.5
+    },
+    "rounding": "nearest half day, never less than half a day",
+    "conflict": "The Fairfield note gives a hard ride of two days from Highreach. This method gives 1.5 days for ordinary travel on the same road, which is faster than a hard ride should be. One of the two needs changing; the estimate is left as computed so the conflict is visible.",
+    "partyRule": "These numbers never move the party. The DM decides how long the party travels. They are only the default for off-screen things (caravans, rumours) in later stages, and a hint shown to the DM."
+  },
   "situationsInNotes": [
     {
       "place": "ardenville",
@@ -2488,18 +2913,20 @@
         "weight": 0.5,
         "source": "API GET /catalog/items?limit=25&q=potion%20of%20healing"
       },
-      "notes": "The proposal says the Fairfield notes assume 30 gp. A search of Private and Public for '30 gp' near 'potion' or 'heal' found nothing; the Fairfield notes describe diluted potions sold 'at slightly reduced prices' without a figure. Please point to where 30 gp comes from, or confirm the figure.",
-      "resolved": false
+      "notes": "Settled by the DM, 2026-11-23: the catalog price (50 gp) is the base price.",
+      "resolved": true
     },
     {
       "id": "fairfield-direction",
       "question": "Is Fairfield west of Highreach (notes) or east of it (map marker)?",
-      "resolved": false
+      "notes": "Settled by the DM, 2026-11-23: east, as the map shows. The notes have been corrected.",
+      "resolved": true
     },
     {
       "id": "herb-job",
       "question": "The declined herb-gathering job is not in the notes. Where was it offered, by whom, and on what date?",
-      "resolved": false
+      "notes": "Settled by the DM, 2026-11-23: it did not happen at the table, so it is not canon and is left out.",
+      "resolved": true
     }
   ],
   "api": {

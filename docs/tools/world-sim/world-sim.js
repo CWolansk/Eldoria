@@ -1,0 +1,579 @@
+// Living world: the DM's page (Stage 1: the ledger).
+//
+// This file holds no world data. Everything it shows is fetched with the DM key,
+// which is kept only in this browser. The same engine files the Azure Function
+// runs are imported here for dates and names of things.
+
+import { EldoriaApiClient } from "../../api/apiClient/index.js";
+import {
+  COUNTDOWN_MODE, COUNTDOWN_SIZES, DAYS_PER_MONTH, MONTHS, formatDay, formatDayShort, fromDay, parseDay
+} from "../../world-sim/engine/index.js";
+
+const KEY_STORAGE = "eldoria:dm-key";
+const TABS = [["today", "Today"], ["countdowns", "Countdowns"], ["record", "Record"]];
+const RECORD_FILTERS = [["all", "All"], ["written", "Written"], ["suggested", "Suggested"], ["rejected", "Rejected"]];
+
+const ui = {
+  api: null,
+  unlocked: false,
+  lockMessage: "",
+  world: null,
+  places: [],
+  placesLoaded: false,
+  events: null,
+  tab: "today",
+  recordFilter: "all",
+  editId: null,
+  message: "",
+  error: "",
+  lastAdvance: null,
+  busy: false,
+  jot: { text: "", place: "", when: "" },
+  form: { label: "", mode: COUNTDOWN_MODE.CHANCE, size: 4, chanceInTen: 3, date: "", place: "", suggestionText: "" }
+};
+
+const $ = (selector) => document.querySelector(selector);
+const esc = (value) => String(value ?? "").replace(/[&<>"']/gu, (character) => (
+  { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]
+));
+
+function apiBase() {
+  return window.ELDORIA_API_BASE_URL || window.ELDORIA_SITE_CONFIG?.cloudApiBase || "/api";
+}
+
+function readStoredKey() {
+  try {
+    return window.localStorage.getItem(KEY_STORAGE) || "";
+  } catch (_error) {
+    return "";
+  }
+}
+
+function storeKey(key) {
+  try {
+    if (key) window.localStorage.setItem(KEY_STORAGE, key);
+    else window.localStorage.removeItem(KEY_STORAGE);
+  } catch (_error) {
+    // Storage can be unavailable; the key then lasts only for this visit.
+  }
+}
+
+function describeError(error) {
+  if (error?.status === 401) return "The DM key is not correct.";
+  if (error?.status === 403) return "The server has no DM key set yet. Set ELDORIA_DM_KEY when deploying the API.";
+  if (error?.status === 404) return error.message || "The world routes were not found. The API may need deploying.";
+  if (error?.status >= 400 && error?.status < 500) return error.message || "That did not work.";
+  return "Could not reach the server. Nothing was changed.";
+}
+
+/** "Fall 15, 496" or just "Fall 15" (this year). Null if it does not read as a date. */
+function readDate(text) {
+  const value = String(text || "").trim();
+  if (!value) return null;
+  const year = ui.world?.year ?? fromDay(ui.world?.day ?? 0).year;
+  return parseDay(value) ?? parseDay(`${value}, ${year}`);
+}
+
+function placeName(id) {
+  if (!id) return "";
+  return ui.places.find((place) => place.id === id)?.name || id;
+}
+
+function placeOptions(selected) {
+  const options = [`<option value=""${selected ? "" : " selected"}>No particular place</option>`];
+  for (const place of ui.places) {
+    options.push(`<option value="${esc(place.id)}"${place.id === selected ? " selected" : ""}>${esc(place.name)}</option>`);
+  }
+  return options.join("");
+}
+
+/* ---------------- loading ---------------- */
+
+async function loadPlaces() {
+  try {
+    const stored = await ui.api.getWorldPlaces();
+    if (Array.isArray(stored?.places) && stored.places.length) {
+      ui.places = stored.places;
+      ui.placesLoaded = true;
+      return;
+    }
+  } catch (error) {
+    console.warn("Places could not be loaded:", error);
+  }
+  // No DM list yet: offer what the site already shows players.
+  ui.placesLoaded = false;
+  try {
+    const index = await ui.api.request("public-index/locations");
+    const places = [];
+    for (const [region, entry] of Object.entries(index || {})) {
+      for (const [name, location] of Object.entries(entry?.locations || {})) {
+        const id = name.toLowerCase().replace(/[^a-z0-9]+/gu, "-").replace(/^-|-$/gu, "");
+        places.push({ id, name, region });
+        for (const sub of location?.subLocations || []) {
+          const subId = String(sub.name).toLowerCase().replace(/[^a-z0-9]+/gu, "-").replace(/^-|-$/gu, "");
+          places.push({ id: `${id}--${subId}`, name: `${sub.name} (${name})`, region });
+        }
+      }
+    }
+    ui.places = places;
+  } catch (_error) {
+    ui.places = [];
+  }
+}
+
+async function loadWorld() {
+  ui.world = await ui.api.getWorld();
+  ui.events = null;
+}
+
+async function loadRecord() {
+  const result = await ui.api.listWorldEvents({ status: "all" });
+  ui.events = result.events || [];
+}
+
+async function unlock(key) {
+  ui.api.setDmKey(key);
+  try {
+    await ui.api.checkDmKey();
+  } catch (error) {
+    ui.api.setDmKey("");
+    ui.unlocked = false;
+    ui.lockMessage = describeError(error);
+    if (error?.status === 401 || error?.status === 403) storeKey("");
+    render();
+    return false;
+  }
+  storeKey(key);
+  ui.unlocked = true;
+  ui.lockMessage = "";
+  try {
+    await Promise.all([loadWorld(), loadPlaces()]);
+  } catch (error) {
+    ui.error = describeError(error);
+  }
+  render();
+  return true;
+}
+
+/* ---------------- views ---------------- */
+
+function lockView() {
+  return `<section class="ws-card ws-card--lock">
+    <h2>DM key needed</h2>
+    <p class="ws-lede">This page shows the living world, including things your players have not found. Enter the DM key once; it is kept in this browser only.</p>
+    <form id="ws-lock-form" class="ws-row">
+      <label class="ws-field--wide"><span class="ws-meta">DM key</span><br>
+        <input class="ws-input" id="ws-key" type="password" autocomplete="off" required></label>
+      <button class="ws-btn ws-btn--primary" type="submit">Unlock</button>
+    </form>
+    <p class="ws-meta ws-error" id="ws-lock-message" role="alert">${esc(ui.lockMessage)}</p>
+  </section>`;
+}
+
+function startView() {
+  const world = ui.world || {};
+  return `<section class="ws-card">
+    <h2>Start the world</h2>
+    <p class="ws-lede">Nothing has been saved yet. Starting sets the first day and saves an empty world: no events and no countdowns. You write everything from there.</p>
+    <div class="ws-fields">
+      <label>First day<input class="ws-input" id="ws-start-date" type="text" value="${esc(world.suggestedStartDateText || "Fall 7, 496")}"></label>
+    </div>
+    <div class="ws-row"><button class="ws-btn ws-btn--primary" type="button" data-act="start">Start the world</button>
+      <span class="ws-meta ws-error" role="alert">${esc(ui.error)}</span></div>
+  </section>`;
+}
+
+function suggestionCard(event) {
+  const editing = ui.editId === event.id;
+  return `<div class="ws-card ws-card--sugg" data-event="${esc(event.id)}">
+    <div class="ws-row"><span class="ws-chip ws-chip--suggested">Suggested</span>
+      <span class="ws-meta">${esc(formatDayShort(event.day))}${event.place ? ` · ${esc(placeName(event.place))}` : ""}</span></div>
+    <p class="ws-text">${editing
+      ? `<input class="ws-input" style="width:100%" id="ws-edit-${esc(event.id)}" type="text" value="${esc(event.text)}" aria-label="Reword this event">`
+      : esc(event.text)}</p>
+    ${event.why ? `<p class="ws-meta"><b>Why:</b> ${esc(event.why)}</p>` : ""}
+    <p class="ws-meta"><b>If you accept:</b> it is written down as canon. Reject it and it never happened.</p>
+    <div class="ws-row">${editing
+      ? `<button class="ws-btn ws-btn--primary ws-btn--small" type="button" data-act="save-reword" data-id="${esc(event.id)}">Save and accept</button>
+         <button class="ws-btn ws-btn--small" type="button" data-act="cancel-reword">Cancel</button>`
+      : `<button class="ws-btn ws-btn--primary ws-btn--small" type="button" data-act="accept" data-id="${esc(event.id)}">Accept</button>
+         <button class="ws-btn ws-btn--small" type="button" data-act="reword" data-id="${esc(event.id)}">Reword</button>
+         <button class="ws-btn ws-btn--small" type="button" data-act="reject" data-id="${esc(event.id)}">Reject</button>`}</div>
+  </div>`;
+}
+
+function todayView() {
+  const world = ui.world;
+  const moved = ui.lastAdvance?.report ?? world.report ?? [];
+  const many = ui.lastAdvance && ui.lastAdvance.days > 1;
+  return `<section class="ws-card" id="ws-jot">
+    <h2>Jot something down</h2>
+    <textarea id="ws-jot-text" placeholder="What happened?" aria-label="What happened">${esc(ui.jot.text)}</textarea>
+    <div class="ws-fields">
+      <label>Where<select id="ws-jot-place" data-bind="jot.place">${placeOptions(ui.jot.place)}</select></label>
+      <label>When<input class="ws-input" id="ws-jot-when" type="text" data-bind="jot.when" value="${esc(ui.jot.when)}" placeholder="${esc(formatDay(world.day))} (today)"></label>
+    </div>
+    <div class="ws-row"><button class="ws-btn ws-btn--primary" type="button" data-act="jot">Write it down</button>
+      <span class="ws-meta${ui.error ? " ws-error" : ""}" id="ws-message" role="status">${esc(ui.error || ui.message || "Anything you write here is canon as soon as you save it. Players do not see it unless you show it to them.")}</span></div>
+  </section>
+  <section id="ws-pending">
+    <h2>Waiting for your call <span class="ws-meta">(${world.pending.length})</span></h2>
+    <p class="ws-lede">The simulation thinks these could happen. They are not true until you accept them.</p>
+    ${world.pending.map(suggestionCard).join("") || `<p class="ws-meta">Nothing is waiting. Advance a day to see what the world proposes next.</p>`}
+  </section>
+  <section id="ws-moved">
+    <h2>What moved ${many ? `since ${esc(formatDayShort(ui.lastAdvance.fromDay))}` : "overnight"}</h2>
+    <p class="ws-lede">Running numbers that follow from what is written. They are not events.</p>
+    <ul class="ws-moves">${moved.map((line) => `<li><span class="ws-kind">${many ? `${esc(formatDayShort(line.day))} ` : ""}${esc(line.kind || "")}</span><span>${esc(line.text)}</span></li>`).join("")
+      || `<li><span class="ws-meta">Nothing moved enough to mention.</span></li>`}</ul>
+  </section>
+  <section id="ws-written">
+    <h2>Written on ${esc(formatDayShort(world.day))}</h2>
+    ${world.writtenToday.map((event) => `<div class="ws-card"><p class="ws-text">${esc(event.text)}</p>
+      <p class="ws-meta">${event.place ? `${esc(placeName(event.place))} · ` : ""}${event.source === "dm" ? "written by you" : "suggested by the simulation, accepted by you"}${event.day !== world.day ? ` · dated ${esc(formatDayShort(event.day))}` : ""}</p></div>`).join("")
+      || `<p class="ws-meta">Nothing written yet today.</p>`}
+  </section>
+  <details class="ws-setup" id="ws-setup">
+    <summary>Setup</summary>
+    <div>
+      <p>${ui.placesLoaded
+        ? `${ui.places.length} places loaded from your DM list.`
+        : "No DM place list is loaded, so the Where box offers only places your players already know."}
+        Load the places file made from your notes to offer every place:</p>
+      <div class="ws-row"><input id="ws-places-file" type="file" accept="application/json,.json" aria-label="Places file">
+        <button class="ws-btn ws-btn--small" type="button" data-act="load-places">Load places file</button></div>
+      <div class="ws-row"><button class="ws-btn ws-btn--small" type="button" data-act="forget-key">Forget the DM key on this device</button></div>
+    </div>
+  </details>`;
+}
+
+function countdownCard(item) {
+  const world = ui.world;
+  const state = item.done
+    ? `<span class="ws-chip ws-chip--plain">Finished</span>`
+    : item.waiting ? `<span class="ws-chip ws-chip--suggested">Waiting for your call</span>` : "";
+  const body = item.mode === COUNTDOWN_MODE.DATE
+    ? `<p class="ws-meta">Fixed date: ${esc(formatDay(item.dueDay))}${item.dueDay > world.day ? ` (${item.dueDay - world.day} day${item.dueDay - world.day === 1 ? "" : "s"} away)` : ""}</p>`
+    : `<div class="ws-row"><div class="ws-clock" role="img" aria-label="${item.fill} of ${item.size}">${
+        Array.from({ length: item.size }, (_, index) => `<i class="${index < item.fill ? "is-on" : ""}"></i>`).join("")}</div>
+        ${item.done || item.waiting ? "" : `<button class="ws-btn ws-btn--small" type="button" data-act="step" data-id="${esc(item.id)}" data-delta="-1" aria-label="One step back">−</button>
+        <button class="ws-btn ws-btn--small" type="button" data-act="step" data-id="${esc(item.id)}" data-delta="1" aria-label="One step forward">+</button>`}</div>
+       <p class="ws-meta">About ${Math.round(item.chance * 10)} in 10 chance of a step each day.</p>`;
+  return `<div class="ws-card" data-countdown="${esc(item.id)}">
+    <div class="ws-row"><h3>${esc(item.label)}</h3>${state}${item.place ? `<span class="ws-meta">${esc(placeName(item.place))}</span>` : ""}</div>
+    ${body}
+    <p class="ws-meta"><b>When it comes due it suggests:</b> ${esc(item.suggestionText)}</p>
+    ${item.done || item.waiting ? "" : `<div class="ws-row"><button class="ws-btn ws-btn--small ws-btn--quiet" type="button" data-act="finish" data-id="${esc(item.id)}">Close without an event</button></div>`}
+  </div>`;
+}
+
+function countdownsView() {
+  const world = ui.world;
+  const open = world.countdowns.filter((item) => !item.done);
+  const done = world.countdowns.filter((item) => item.done);
+  const form = ui.form;
+  const dated = form.mode === COUNTDOWN_MODE.DATE;
+  return `<section id="ws-countdowns">
+    <h2>Countdowns</h2>
+    <p class="ws-lede">Things building up off screen. When one fills up, or its date comes, the simulation suggests the event and waits for you. You can nudge any of them by hand.</p>
+    ${open.map(countdownCard).join("") || `<p class="ws-meta">No countdowns yet. Add one below.</p>`}
+  </section>
+  <section class="ws-card" id="ws-new-countdown">
+    <h2>New countdown</h2>
+    <div class="ws-fields">
+      <label class="ws-field--wide">Name<input class="ws-input" id="ws-cd-label" type="text" data-bind="form.label" value="${esc(form.label)}"></label>
+      <label>How it moves<select id="ws-cd-mode" data-bind="form.mode" data-rerender="true">
+        <option value="${COUNTDOWN_MODE.CHANCE}"${dated ? "" : " selected"}>Rolls each day</option>
+        <option value="${COUNTDOWN_MODE.DATE}"${dated ? " selected" : ""}>Fixed date</option></select></label>
+      ${dated
+        ? `<label>Date<input class="ws-input" id="ws-cd-date" type="text" data-bind="form.date" value="${esc(form.date)}" placeholder="${esc(MONTHS[fromDay(world.day).monthIndex])} 15"></label>`
+        : `<label>Steps<select id="ws-cd-size" data-bind="form.size">${COUNTDOWN_SIZES.map((size) => `<option value="${size}"${Number(form.size) === size ? " selected" : ""}>${size}</option>`).join("")}</select></label>
+           <label>Chance each day, in 10<input id="ws-cd-chance" type="number" min="1" max="10" step="1" data-bind="form.chanceInTen" value="${esc(form.chanceInTen)}"></label>`}
+      <label>Where<select id="ws-cd-place" data-bind="form.place">${placeOptions(form.place)}</select></label>
+    </div>
+    <label class="ws-meta">When it comes due, suggest this event
+      <textarea id="ws-cd-suggestion" data-bind="form.suggestionText" aria-label="Event to suggest when it comes due">${esc(form.suggestionText)}</textarea></label>
+    <div class="ws-row"><button class="ws-btn ws-btn--primary" type="button" data-act="create-countdown">Add countdown</button>
+      <span class="ws-meta${ui.error ? " ws-error" : ""}" role="status">${esc(ui.error || ui.message)}</span></div>
+  </section>
+  ${done.length ? `<section id="ws-finished"><h2>Finished</h2>${done.map(countdownCard).join("")}</section>` : ""}`;
+}
+
+function recordView() {
+  const events = (ui.events || []).filter((event) => ui.recordFilter === "all" || event.status === ui.recordFilter);
+  const chip = (event) => `<span class="ws-chip ws-chip--${esc(event.status)}">${event.status === "written" ? "Written" : event.status === "suggested" ? "Suggested" : "Rejected"}</span>`;
+  return `<section id="ws-record">
+    <h2>Record</h2>
+    <p class="ws-lede">Everything written, proposed or turned down, newest first. Only written entries are canon. Players see an entry only if you show it to them.</p>
+    <div class="ws-row" role="group" aria-label="Show">${RECORD_FILTERS.map(([id, label]) => `<button class="ws-btn ws-btn--small" type="button" aria-pressed="${ui.recordFilter === id}" data-act="filter" data-id="${id}">${label}</button>`).join("")}</div>
+    ${ui.events == null ? `<p class="ws-meta">Loading…</p>` : `<div class="ws-tablewrap"><table class="ws-table">
+      <thead><tr><th>Day</th><th>Status</th><th>What</th><th>Where</th><th>From</th><th>Players</th></tr></thead>
+      <tbody>${events.map((event) => `<tr data-event="${esc(event.id)}">
+        <td style="white-space:nowrap">${esc(formatDayShort(event.day))}</td>
+        <td>${chip(event)}</td>
+        <td class="ws-what">${esc(event.text)}</td>
+        <td>${esc(placeName(event.place))}</td>
+        <td class="ws-meta">${event.source === "dm" ? "You" : "Simulation"}</td>
+        <td>${event.status === "written"
+          ? `<button class="ws-btn ws-btn--small" type="button" aria-pressed="${event.playersVisible === true}" data-act="reveal" data-id="${esc(event.id)}" data-show="${event.playersVisible ? "false" : "true"}">${event.playersVisible ? "Shown to players" : "Hidden"}</button>`
+          : `<span class="ws-meta">Hidden</span>`}</td></tr>`).join("")
+        || `<tr><td colspan="6" class="ws-meta">Nothing here yet.</td></tr>`}</tbody></table></div>`}
+  </section>`;
+}
+
+function render() {
+  const bar = $("#ws-bar");
+  const tabs = $("#ws-tabs");
+  const view = $("#ws-view");
+  if (!view) return;
+
+  const live = ui.unlocked && ui.world?.initialized;
+  bar.hidden = !live;
+  tabs.hidden = !live;
+
+  if (!ui.unlocked) {
+    view.innerHTML = lockView();
+    return;
+  }
+  if (!ui.world) {
+    view.innerHTML = `<p class="ws-meta ws-error" role="alert">${esc(ui.error || "The world could not be loaded.")}</p>
+      <div class="ws-row"><button class="ws-btn" type="button" data-act="reload">Try again</button>
+      <button class="ws-btn ws-btn--quiet" type="button" data-act="forget-key">Forget the DM key on this device</button></div>`;
+    return;
+  }
+  if (!ui.world.initialized) {
+    view.innerHTML = startView();
+    return;
+  }
+
+  const world = ui.world;
+  $("#ws-date").innerHTML = `${esc(world.dateText)}<span>Day ${world.dayOfMonth} of ${world.daysPerMonth || DAYS_PER_MONTH} in ${esc(world.month)}</span>`;
+  $("#ws-advance").disabled = ui.busy;
+  $("#ws-run").disabled = ui.busy;
+  $("#ws-tab-row").innerHTML = TABS.map(([id, label]) => `<a href="#${id}"${ui.tab === id ? ' aria-current="page"' : ""} data-act="tab" data-id="${id}">${label}${
+    id === "today" && world.pending.length ? `<span class="ws-count">${world.pending.length}</span>` : ""}</a>`).join("");
+  view.innerHTML = ui.tab === "countdowns" ? countdownsView() : ui.tab === "record" ? recordView() : todayView();
+}
+
+/* ---------------- actions ---------------- */
+
+async function run(action, { message = "" } = {}) {
+  if (ui.busy) return;
+  ui.busy = true;
+  ui.error = "";
+  ui.message = "";
+  try {
+    await action();
+    ui.message = message;
+  } catch (error) {
+    ui.error = describeError(error);
+    if (error?.status === 401 || error?.status === 403) {
+      ui.unlocked = false;
+      ui.lockMessage = ui.error;
+    } else if (error?.status === 409) {
+      // Someone else (or another tab) changed the world: show what is there now.
+      try { await loadWorld(); } catch (_ignored) { /* keep the first error */ }
+    }
+  } finally {
+    ui.busy = false;
+    if (ui.tab === "record" && ui.unlocked && ui.world?.initialized && ui.events == null) {
+      try { await loadRecord(); } catch (_ignored) { ui.events = []; }
+    }
+    render();
+  }
+}
+
+function keepTyping() {
+  const text = $("#ws-jot-text");
+  if (text) ui.jot.text = text.value;
+  const suggestion = $("#ws-cd-suggestion");
+  if (suggestion) ui.form.suggestionText = suggestion.value;
+  const label = $("#ws-cd-label");
+  if (label) ui.form.label = label.value;
+}
+
+const actions = {
+  tab(data) {
+    keepTyping();
+    ui.tab = TABS.some(([id]) => id === data.id) ? data.id : "today";
+    ui.error = "";
+    ui.message = "";
+    try { if (window.location.hash !== `#${ui.tab}`) window.location.hash = ui.tab; } catch (_error) { /* not needed */ }
+    if (ui.tab === "record") {
+      ui.events = null;
+      render();
+      return run(() => loadRecord());
+    }
+    render();
+    return undefined;
+  },
+  reload: () => run(async () => { await Promise.all([loadWorld(), loadPlaces()]); }),
+  start: () => run(async () => {
+    const day = readDate($("#ws-start-date")?.value);
+    if (day == null) throw Object.assign(new Error('Write the first day like "Fall 7, 496".'), { status: 400 });
+    ui.world = await ui.api.startWorld({ day });
+  }),
+  advance: () => run(async () => {
+    keepTyping();
+    const from = ui.world.day;
+    ui.world = await ui.api.advanceWorld({ days: 1, expectedEtag: ui.world.etag });
+    ui.lastAdvance = { ...ui.world.advanced, fromDay: from };
+    ui.events = null;
+    ui.tab = "today";
+  }),
+  run: () => run(async () => {
+    keepTyping();
+    const from = ui.world.day;
+    ui.world = await ui.api.advanceWorld({ untilDecision: true, expectedEtag: ui.world.etag });
+    ui.lastAdvance = { ...ui.world.advanced, fromDay: from };
+    ui.events = null;
+    ui.tab = "today";
+  }),
+  jot: () => run(async () => {
+    keepTyping();
+    const text = ui.jot.text.trim();
+    if (!text) throw Object.assign(new Error("Write what happened first."), { status: 400 });
+    let day;
+    if (ui.jot.when.trim()) {
+      day = readDate(ui.jot.when);
+      if (day == null) throw Object.assign(new Error('Write the date like "Fall 5, 496", or leave it empty for today.'), { status: 400 });
+    }
+    const result = await ui.api.writeWorldEvent({ text, place: ui.jot.place || null, day });
+    ui.world = result.world;
+    ui.events = null;
+    ui.jot = { text: "", place: ui.jot.place, when: "" };
+  }, { message: "Written. It is in the Record." }),
+  accept: (data) => decide(data.id, { decision: "accept" }),
+  reject: (data) => decide(data.id, { decision: "reject" }),
+  reword(data) {
+    keepTyping();
+    ui.editId = data.id;
+    render();
+    $(`#ws-edit-${CSS.escape(data.id)}`)?.focus();
+  },
+  "cancel-reword"() {
+    ui.editId = null;
+    render();
+  },
+  "save-reword"(data) {
+    const text = $(`#ws-edit-${CSS.escape(data.id)}`)?.value.trim() || "";
+    return decide(data.id, text ? { decision: "reword", text } : { decision: "accept" });
+  },
+  step: (data) => run(async () => {
+    ui.world = (await ui.api.changeWorldCountdown(data.id, { action: "step", delta: Number(data.delta) })).world;
+    ui.events = null;
+  }),
+  finish: (data) => run(async () => {
+    ui.world = (await ui.api.changeWorldCountdown(data.id, { action: "finish" })).world;
+  }),
+  "create-countdown": () => run(async () => {
+    keepTyping();
+    const form = ui.form;
+    const payload = {
+      label: form.label,
+      mode: form.mode,
+      place: form.place || null,
+      suggestionText: form.suggestionText
+    };
+    if (form.mode === COUNTDOWN_MODE.DATE) {
+      const day = readDate(form.date);
+      if (day == null) throw Object.assign(new Error('Write the date like "Fall 15, 496".'), { status: 400 });
+      payload.dueDay = day;
+    } else {
+      payload.size = Number(form.size);
+      payload.chance = Math.min(10, Math.max(1, Number(form.chanceInTen) || 0)) / 10;
+    }
+    ui.world = (await ui.api.createWorldCountdown(payload)).world;
+    ui.form = { ...ui.form, label: "", date: "", suggestionText: "" };
+  }, { message: "Countdown added." }),
+  filter(data) {
+    ui.recordFilter = RECORD_FILTERS.some(([id]) => id === data.id) ? data.id : "all";
+    render();
+  },
+  reveal: (data) => run(async () => {
+    const show = data.show === "true";
+    await ui.api.setWorldEventVisibility(data.id, show);
+    const event = (ui.events || []).find((entry) => entry.id === data.id);
+    if (event) event.playersVisible = show;
+  }),
+  "load-places": () => run(async () => {
+    const file = $("#ws-places-file")?.files?.[0];
+    if (!file) throw Object.assign(new Error("Choose the places file first."), { status: 400 });
+    let parsed;
+    try {
+      parsed = JSON.parse(await file.text());
+    } catch (_error) {
+      throw Object.assign(new Error("That file is not valid JSON."), { status: 400 });
+    }
+    const saved = await ui.api.saveWorldPlaces({ places: parsed.places });
+    ui.places = saved.places;
+    ui.placesLoaded = true;
+  }, { message: "Places loaded." }),
+  "forget-key"() {
+    storeKey("");
+    ui.api.setDmKey("");
+    ui.unlocked = false;
+    ui.world = null;
+    ui.events = null;
+    ui.lockMessage = "";
+    render();
+  }
+};
+
+function decide(id, decision) {
+  return run(async () => {
+    keepTyping();
+    ui.world = (await ui.api.decideWorldEvent(id, decision)).world;
+    ui.editId = null;
+    ui.events = null;
+  });
+}
+
+function bind() {
+  document.addEventListener("click", (event) => {
+    const target = event.target.closest?.("[data-act]");
+    if (!target) return;
+    const action = actions[target.dataset.act];
+    if (!action) return;
+    event.preventDefault();
+    action(target.dataset);
+  });
+  document.addEventListener("submit", (event) => {
+    if (event.target?.id !== "ws-lock-form") return;
+    event.preventDefault();
+    const key = $("#ws-key")?.value.trim() || "";
+    if (key) unlock(key);
+  });
+  document.addEventListener("change", (event) => {
+    const target = event.target.closest?.("[data-bind]");
+    if (!target) return;
+    const [group, field] = target.dataset.bind.split(".");
+    ui[group][field] = target.value;
+    if (target.dataset.rerender) {
+      keepTyping();
+      render();
+    }
+  });
+  window.addEventListener("hashchange", () => {
+    const wanted = window.location.hash.slice(1);
+    if (ui.unlocked && wanted !== ui.tab && TABS.some(([id]) => id === wanted)) actions.tab({ id: wanted });
+  });
+}
+
+async function boot() {
+  ui.api = new EldoriaApiClient({ baseUrl: apiBase() });
+  const wanted = window.location.hash.slice(1);
+  if (TABS.some(([id]) => id === wanted)) ui.tab = wanted;
+  bind();
+  const key = readStoredKey();
+  if (!key) {
+    render();
+    return;
+  }
+  const ok = await unlock(key);
+  if (ok && ui.tab === "record" && ui.world?.initialized) {
+    await run(() => loadRecord());
+  }
+}
+
+boot();

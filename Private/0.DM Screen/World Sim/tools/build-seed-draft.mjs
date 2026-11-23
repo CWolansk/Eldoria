@@ -5,7 +5,8 @@
 // It copies facts and their sources. It never fills a gap: anything the notes
 // do not state is written as null with "missing": true.
 //
-// Run from anywhere:  node docs/world-sim/tools/build-seed-draft.mjs
+// Run from anywhere:  node "Private/0.DM Screen/World Sim/tools/build-seed-draft.mjs"
+// This tool lives under Private/ because it names DM-only places.
 // Add --offline to skip the API (prices are then null and marked missing).
 
 import fs from "node:fs";
@@ -13,11 +14,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const docsRoot = path.resolve(here, "../..");
-const repoRoot = path.resolve(docsRoot, "..");
+const repoRoot = path.resolve(here, "../../../..");
+const docsRoot = path.join(repoRoot, "docs");
 const almanac = path.join(repoRoot, "Private", "1. World Almanac", "World");
 const publicWorld = path.join(repoRoot, "Public", "World");
 const outFile = path.join(repoRoot, "Private", "0.DM Screen", "World Sim", "crestfall-seed.draft.json");
+const placesFile = path.join(repoRoot, "Private", "0.DM Screen", "World Sim", "places.upload.json");
 const offline = process.argv.includes("--offline");
 
 const rel = (file) => path.relative(repoRoot, file).split(path.sep).join("/");
@@ -342,6 +344,76 @@ const towns = TOWNS.map(buildTown);
 const townIds = new Set(towns.map((town) => town.id));
 const subLocationIds = new Set(towns.flatMap((town) => town.subLocations.map((entry) => entry.id)));
 
+/* ---------- travel-day estimates from the map (the DM asked for a best guess) ---------- */
+// Method, so every number can be checked and changed:
+//   straight = straight-line distance between the two map markers, in map widths
+//   path     = straight x 1.2 (roads wind), or the stated detour
+//   days     = path x terrain / PACE, rounded to the nearest half day, never under half a day
+//   PACE     = 0.15 map widths of path per day. Calibrated on the one figure the DM gave:
+//              Highreach to Ardenville is about a day, going around Lake Arden
+//              (straight 0.101, around the lake about 1.5 times that).
+//   terrain  = 1 open lowland, 1.5 forest or hills, 2.5 mountains
+// These are defaults for off-screen things (caravans, rumours) and a hint for the DM.
+// They never move the party: the DM says how long the party travels.
+const PACE = 0.15;
+const TERRAIN = { lowland: 1, "forest or hills": 1.5, mountains: 2.5 };
+const ROUTE_GUESSES = [
+  ["ardenville", "highreach", "lowland", { detour: 1.5, how: "around Lake Arden", stated: 1 }],
+  ["highreach", "hillcrest", "lowland"],
+  ["highreach", "fairfield", "lowland"],
+  ["hillcrest", "stonehaven", "lowland"],
+  ["highreach", "stonehaven", "lowland"],
+  ["fairfield", "stonehaven", "forest or hills"],
+  ["fairfield", "starfall", "lowland"],
+  ["starfall", "frostglade", "lowland"],
+  ["starfall", "stardew", "forest or hills"],
+  ["frostglade", "serenity-hollow", "lowland"],
+  ["frostglade", "moonshade", "forest or hills"],
+  ["fairfield", "ironroot", "mountains"],
+  ["stonehaven", "gemstone-hollow", "forest or hills"],
+  ["gemstone-hollow", "ironroot", "mountains"],
+  ["stonehaven", "forgepeak", "mountains"],
+  ["forgepeak", "steamhammer", "mountains"],
+  ["steamhammer", "stoneforge", "mountains"]
+];
+
+function buildRouteEstimates() {
+  const round = (value) => Math.max(0.5, Math.round(value * 2) / 2);
+  return ROUTE_GUESSES.map(([a, b, terrain, extra = {}]) => {
+    const from = markerById.get(a);
+    const to = markerById.get(b);
+    if (!from?.position || !to?.position) {
+      return { id: `${a}--${b}`, a, b, travelDays: missing("One end is not on the map") };
+    }
+    const straight = Math.hypot(from.position[0] - to.position[0], from.position[1] - to.position[1]);
+    const detour = extra.detour || 1.2;
+    const computed = round(straight * detour * TERRAIN[terrain] / PACE);
+    const value = extra.stated ?? computed;
+    return {
+      id: `${a}--${b}`,
+      a,
+      b,
+      travelDays: {
+        value,
+        estimate: !extra.stated,
+        editable: true,
+        source: extra.stated
+          ? "The DM, 2026-11-23: about a day, going around Lake Arden"
+          : "Estimate from the map (see routeEstimatesMethod)",
+        derivation: {
+          straightMapWidths: Math.round(straight * 1000) / 1000,
+          pathFactor: detour,
+          how: extra.how || "roads wind, so 1.2 times the straight line",
+          terrain,
+          terrainFactor: TERRAIN[terrain],
+          computedDays: computed
+        }
+      },
+      connection: { value: "assumed", estimate: true, source: "Guessed from the map: nearest neighbours with no range or water between. The DM decides which roads exist." }
+    };
+  });
+}
+
 const timelineDir = path.join(publicWorld, "Events", "Timeline");
 const timeline = fs.existsSync(timelineDir)
   ? fs.readdirSync(timelineDir).filter((name) => /^\d{4}-\d{2}-\d{2} /u.test(name)).sort()
@@ -361,7 +433,7 @@ const draft = {
     latestTimelineNote: timeline.length
       ? found(timeline.at(-1), "Public/World/Events/Timeline (last file by name)")
       : missing("No timeline notes found"),
-    today: missing("Today's in-world date")
+    today: found({ day: 99306, text: "Fall 7, 496" }, "The DM, 2026-11-23")
   },
   positionFormat: found(
     "[fraction up from the bottom edge, fraction across from the left edge] of eldoria-map.jpg",
@@ -372,14 +444,28 @@ const draft = {
     id: "crestfall",
     name: "Crestfall",
     source: rel(path.join(almanac, "Crestfall", "Crestfall.md")),
-    border: missing("Where Crestfall ends and the Ironpeak Mountains begin (the map colours them the same)")
+    border: found(
+      "docs/world-sim/regions.draft.json",
+      "Suggested outline for the DM to correct. The DM, 2026-11-23: the mountain range is Ironpeak (dwarven lands), so Crestfall is the lowlands up to the foot of the mountains.",
+      { estimate: true }
+    )
   },
   settlements: towns,
   otherPlacesOnMap: markers
     .filter((marker) => !townIds.has(marker.id))
     .map((marker) => ({ ...buildOtherPlace(marker), alsoListedUnderTown: subLocationIds.has(marker.id) })),
   routes: buildRoutes(),
-  routesNote: "Only connections the notes mention are listed. The full list of roads and every travel time must come from you.",
+  routesNote: "What the notes say about connections, quoted. Travel-day guesses are in routeEstimates.",
+  routeEstimates: buildRouteEstimates(),
+  routeEstimatesMethod: {
+    pace: `${PACE} map widths of path per day`,
+    calibration: "The figure the DM gave: Highreach to Ardenville takes about a day, going around Lake Arden (straight line 0.101 map widths, about 1.5 times that around the lake).",
+    path: "straight line x 1.2 unless a detour is stated",
+    terrainFactors: TERRAIN,
+    rounding: "nearest half day, never less than half a day",
+    conflict: "The Fairfield note gives a hard ride of two days from Highreach. This method gives 1.5 days for ordinary travel on the same road, which is faster than a hard ride should be. One of the two needs changing; the estimate is left as computed so the conflict is visible.",
+    partyRule: "These numbers never move the party. The DM decides how long the party travels. They are only the default for off-screen things (caravans, rumours) in later stages, and a hint shown to the DM."
+  },
   situationsInNotes: buildSituations(),
   goods,
   openQuestions: [
@@ -387,18 +473,20 @@ const draft = {
       id: "potion-base-price",
       question: "Which healing potion price is the base price?",
       catalog: goods.find((good) => good.id === "healing-potions")?.catalogItems[0] || null,
-      notes: "The proposal says the Fairfield notes assume 30 gp. A search of Private and Public for '30 gp' near 'potion' or 'heal' found nothing; the Fairfield notes describe diluted potions sold 'at slightly reduced prices' without a figure. Please point to where 30 gp comes from, or confirm the figure.",
-      resolved: false
+      notes: "Settled by the DM, 2026-11-23: the catalog price (50 gp) is the base price.",
+      resolved: true
     },
     {
       id: "fairfield-direction",
       question: "Is Fairfield west of Highreach (notes) or east of it (map marker)?",
-      resolved: false
+      notes: "Settled by the DM, 2026-11-23: east, as the map shows. The notes have been corrected.",
+      resolved: true
     },
     {
       id: "herb-job",
       question: "The declined herb-gathering job is not in the notes. Where was it offered, by whom, and on what date?",
-      resolved: false
+      notes: "Settled by the DM, 2026-11-23: it did not happen at the table, so it is not canon and is left out.",
+      resolved: true
     }
   ],
   api: { base: apiBase || null, usedOffline: offline }
@@ -406,6 +494,43 @@ const draft = {
 
 fs.mkdirSync(path.dirname(outFile), { recursive: true });
 fs.writeFileSync(outFile, `${JSON.stringify(draft, null, 2)}\n`);
+
+// The DM-only list of places the world page offers in its "where" box. Upload it from
+// the world page ("Load places file"); it is stored in the storage account, never in docs/.
+const placeList = [];
+for (const town of towns) {
+  placeList.push({
+    id: town.id,
+    name: town.name,
+    kind: town.settlementType?.value || "Settlement",
+    region: "Crestfall",
+    parent: null,
+    knownToPlayers: isPublic(`Crestfall/${town.name}/${town.name}.md`)
+  });
+  for (const sub of town.subLocations) {
+    placeList.push({
+      id: `${town.id}--${sub.id}`,
+      name: `${sub.name} (${town.name})`,
+      kind: "Place in town",
+      region: "Crestfall",
+      parent: town.id,
+      knownToPlayers: (sub.knownToPlayers?.value ?? sub.knownToPlayers) === true
+    });
+  }
+}
+for (const place of draft.otherPlacesOnMap) {
+  if (placeList.some((entry) => entry.id === place.id || entry.id.endsWith(`--${place.id}`))) continue;
+  placeList.push({
+    id: place.id,
+    name: place.name,
+    kind: "On the map",
+    region: place.region?.value || null,
+    parent: null,
+    knownToPlayers: false
+  });
+}
+fs.writeFileSync(placesFile, `${JSON.stringify({ schema: "eldoria-world-places/1", places: placeList }, null, 2)}\n`);
+console.log(`Wrote ${rel(placesFile)} (${placeList.length} places)`);
 
 const count = (list, test) => list.filter(test).length;
 console.log(`Wrote ${rel(outFile)}`);

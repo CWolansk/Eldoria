@@ -113,7 +113,121 @@ Blob name: `world/eldoria/current.json`
 
 The pointer is the only blob that is ever replaced, and only with an ETag check. When two devices advance the same day, the first moves the pointer; the second is refused with a 409 and the message "Another device committed a day first. Reload and try again." The loser's snapshot blob is left behind unreferenced and does no harm.
 
+## New in Stage 1, needs your OK
+
+Everything above is as you approved it. Stage 1 adds the pieces below. All of them follow the same rule: rows are only ever added.
+
+### A. Every event starts hidden from players
+
+Events gain nothing in storage for this; "hidden" is simply the default. A written event is shown to players only after a reveal row (below). Suggested and rejected events can never be shown.
+
+### B. Reveal or hide for players (a new row in the record)
+
+```json
+{
+  "recordType": "visibility",
+  "id": "v-0099306-4c1f9a02b7",
+  "eventId": "e-0099306-a1",
+  "playersVisible": true,
+  "day": 99306,
+  "decidedAt": "2026-11-23T19:10:00.000Z"
+}
+```
+
+The latest row for an event wins, so hiding again is another row with `false`. Nothing shows this to players yet (there is no players' view in Stage 1); the flag is recorded now so later stages can use it.
+
+### C. Countdowns (new rows in the record)
+
+A countdown is never stored as one editable thing. Each change is a row, and the current countdown is worked out by reading them in order.
+
+Created:
+
+```json
+{
+  "recordType": "countdown",
+  "id": "k-0099306-0d2e7b91aa",
+  "countdownId": "c-7f3a1c55e0",
+  "action": "create",
+  "day": 99306,
+  "at": "2026-11-23T19:12:00.000Z",
+  "countdown": {
+    "label": "<your name for it>",
+    "size": 6,
+    "mode": "chance",
+    "chance": 0.3,
+    "dueDay": null,
+    "fill": 0,
+    "place": "<place id or null>",
+    "suggestionText": "<the event to suggest when it comes due>"
+  }
+}
+```
+
+- `size` is 4, 6 or 8.
+- `mode` is `chance` (a seeded roll each day, `chance` between 0 and 1) or `date` (`dueDay` is the day it comes due; `size` and `chance` are unused).
+
+Changed by hand, one row each:
+
+```json
+{ "recordType": "countdown", "id": "k-...", "countdownId": "c-7f3a1c55e0", "action": "step", "day": 99308, "at": "...", "delta": 1 }
+{ "recordType": "countdown", "id": "k-...", "countdownId": "c-7f3a1c55e0", "action": "edit", "day": 99308, "at": "...", "changes": { "label": "...", "chance": 0.5 } }
+{ "recordType": "countdown", "id": "k-...", "countdownId": "c-7f3a1c55e0", "action": "finish", "day": 99308, "at": "..." }
+```
+
+`delta` is 1 or -1. `changes` may hold `label`, `chance`, `dueDay`, `place`, `suggestionText`. `finish` closes it without an event.
+
+When a countdown fills up or its date comes, the simulation adds an ordinary suggested event (the shape you approved) tagged `countdown:<countdownId>`. Your decision row on that event is what finishes the countdown (accept or reword), or sends a rolling one back to half (reject).
+
+### D. Countdown running state in the day snapshot
+
+`state.systems.countdowns` in each snapshot now holds the worked-out countdowns, as a saved copy:
+
+```json
+"systems": {
+  "countdowns": {
+    "items": {
+      "c-7f3a1c55e0": {
+        "id": "c-7f3a1c55e0", "label": "...", "size": 6, "mode": "chance", "chance": 0.3,
+        "dueDay": null, "fill": 2, "place": null, "suggestionText": "...",
+        "createdDay": 99306, "waiting": false, "done": false, "suggestionId": null
+      }
+    }
+  }
+}
+```
+
+This can always be rebuilt from the record and the seed; a test does exactly that for every stored day.
+
+### E. Suggestions kept beside the snapshot
+
+Each day snapshot gains one field, `suggestions`: the suggested events that day's tick raised. They are also appended to the record. The copy in the snapshot exists so that if the connection drops between saving the day and appending them, they are put back the next time the world is read.
+
+### F. The `effect` field on events
+
+Still unused. In Stage 1 every event is stored with `"effect": null`. Countdowns do not need it: the link between a countdown and its event is the tag. A shape for `effect` will be proposed with the first subject that changes numbers (Stage 2).
+
+### G. The DM-only list of places (Blob, replaced as a whole)
+
+Blob name: `world/eldoria/places.json`. It is reference data for the "where" box on the DM page, not part of the record, and it is the one new blob that is overwritten when you load a newer list.
+
+```json
+{
+  "schema": "eldoria-world-places/1",
+  "updatedAt": "2026-11-23T19:20:00.000Z",
+  "loaded": true,
+  "places": [
+    { "id": "<place id>", "name": "<name>", "kind": "Town", "region": "Crestfall", "parent": null, "knownToPlayers": false }
+  ]
+}
+```
+
+It holds hidden names, so it lives only in the storage account behind the DM key, never in `docs/`. The file to load is built from your notes into `Private/0.DM Screen/World Sim/places.upload.json`.
+
+### H. The first day
+
+Nothing exists in storage until you press "Start the world". That writes one snapshot for Fall 7, 496 (day 99306) with a random seed, no events and no countdowns.
+
 ## What is not stored here
 
-- Places, routes, goods and people (the seed). That shape is still a draft: see `Private/0.DM Screen/World Sim/SEED-REVIEW.md`.
+- Routes, goods and people (the seed). The list of place names is section G above; the rest is still a draft: see `Private/0.DM Screen/World Sim/SEED-REVIEW.md`.
 - Anything in the character sheet data. Nothing here touches it.

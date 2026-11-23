@@ -9,7 +9,7 @@
 import { createRng, daySeed } from "./rng.js";
 import { createSuggestedEvent } from "./events.js";
 
-export const ENGINE_VERSION = "0.1.0";
+export const ENGINE_VERSION = "0.2.0";
 
 function clone(value) {
   return value === undefined ? undefined : structuredClone(value);
@@ -25,11 +25,14 @@ function clone(value) {
  * ctx = {
  *   day,            // the day being simulated (the new day)
  *   rng,            // seeded generator private to this system and day
+ *   rngFor(name),   // a further generator for one named thing inside the system,
+ *                   // so adding a second thing does not change the first one's rolls
  *   state,          // this system's own state; mutate it freely (it is a copy)
  *   world,          // read-only view of the whole state before this tick
  *   writtenEvents,  // canon events, read-only
  *   report(entry),  // add a running-number line: { kind, text, place?, ... }
- *   suggest(event)  // propose an event: { text, place?, why?, causedBy?, effect?, tags? }
+ *   suggest(event)  // propose an event: { text, place?, why?, causedBy?, effect?, tags? };
+ *                   // returns the suggested event record (with its id)
  * }
  * Systems run in id order so registration order cannot change the outcome.
  */
@@ -121,6 +124,9 @@ export function tick(state, writtenEvents = [], options = {}) {
     system.tick({
       day,
       rng: createRng(daySeed(worldSeed, day, system.id)),
+      rngFor(name) {
+        return createRng(daySeed(worldSeed, day, `${system.id}:${String(name)}`));
+      },
       state: systemState,
       world,
       writtenEvents: canon,
@@ -129,12 +135,14 @@ export function tick(state, writtenEvents = [], options = {}) {
       },
       suggest(event) {
         suggestionCount += 1;
-        suggestions.push(createSuggestedEvent({
+        const suggested = createSuggestedEvent({
           ...clone(event),
           id: `s-${day}-${system.id}-${suggestionCount}`,
           day,
           tags: [...(event.tags || []), `system:${system.id}`]
-        }));
+        });
+        suggestions.push(suggested);
+        return clone(suggested);
       }
     });
     next.systems[system.id] = systemState;

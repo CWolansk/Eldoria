@@ -55,13 +55,19 @@ function currentBlobName(worldId) {
   return `world/${worldId}/current.json`;
 }
 
+function placesBlobName(worldId) {
+  return `world/${worldId}/places.json`;
+}
+
 function toEntity(worldId, day, sequence, record, recordedAt) {
   return {
     partitionKey: worldId,
     rowKey: rowKeyFor(day, sequence),
     recordType: String(record.recordType || ""),
     recordId: String(record.id || ""),
-    eventId: record.recordType === "decision" ? String(record.eventId || "") : String(record.id || ""),
+    // What the row is about: the event for a decision or reveal, the countdown for
+    // a countdown change, otherwise the record itself.
+    eventId: String(record.eventId || record.countdownId || record.id || ""),
     day,
     recordedAt,
     payload: JSON.stringify(record)
@@ -172,7 +178,7 @@ function createWorldStore({ tableClient, blobClient, worldId = DEFAULT_WORLD_ID,
    * Fails with 409 if the pointer moved in the meantime (someone else
    * committed) or if the day is not after the current one.
    */
-  async function commitDay({ day, state, report = [], engineVersion = null, expectedEtag = null }) {
+  async function commitDay({ day, state, report = [], suggestions = [], engineVersion = null, expectedEtag = null }) {
     assertDay(day);
     if (!state || state.day !== day) {
       throw storeError(400, "The state being committed must carry the same day.");
@@ -208,7 +214,10 @@ function createWorldStore({ tableClient, blobClient, worldId = DEFAULT_WORLD_ID,
       engineVersion,
       previousSnapshotBlob: current ? current.pointer.snapshotBlob : null,
       state,
-      report
+      report,
+      // Kept beside the state so a suggestion can be put back in the record if the
+      // write that should have followed this commit was interrupted.
+      suggestions
     };
     await blobClient.write(blobName, snapshot, { ifNoneMatch: "*" });
 
@@ -237,7 +246,18 @@ function createWorldStore({ tableClient, blobClient, worldId = DEFAULT_WORLD_ID,
     }
   }
 
-  return { worldId, appendRecords, listRecords, readCurrent, readSnapshot, commitDay };
+  /** The DM-only list of places, or null if none has been loaded yet. */
+  async function readPlaces() {
+    const result = await blobClient.read(placesBlobName(worldId));
+    return result ? { document: result.document, etag: result.etag } : null;
+  }
+
+  /** Replaces the DM-only list of places. Not part of the record; it is reference data. */
+  async function writePlaces(document) {
+    return blobClient.write(placesBlobName(worldId), document);
+  }
+
+  return { worldId, appendRecords, listRecords, readCurrent, readSnapshot, commitDay, readPlaces, writePlaces };
 }
 
 /* ---------- adapters for the real Azure clients (not used by tests) ---------- */
@@ -321,6 +341,7 @@ module.exports = {
   createDefaultWorldStore,
   createWorldStore,
   currentBlobName,
+  placesBlobName,
   rowKeyFor,
   snapshotBlobName
 };

@@ -569,6 +569,59 @@ export class EldoriaApiClient {
     });
   }
 
+  /* ---- Living world (DM only; needs the DM key) ---- */
+
+  getWorld() {
+    return this.request("world");
+  }
+
+  startWorld(options = {}) {
+    return this.request("world/start", { method: "POST", body: options });
+  }
+
+  advanceWorld(options = {}) {
+    return this.request("world/advance", { method: "POST", body: options });
+  }
+
+  listWorldEvents(query = {}) {
+    return this.request("world/events", { query });
+  }
+
+  writeWorldEvent(event) {
+    return this.request("world/events", { method: "POST", body: event });
+  }
+
+  decideWorldEvent(eventId, decision) {
+    return this.request(`world/events/${encodeURIComponent(eventId)}/decision`, { method: "POST", body: decision });
+  }
+
+  setWorldEventVisibility(eventId, playersVisible) {
+    return this.request(`world/events/${encodeURIComponent(eventId)}/visibility`, {
+      method: "POST",
+      body: { playersVisible: playersVisible === true }
+    });
+  }
+
+  listWorldCountdowns() {
+    return this.request("world/countdowns");
+  }
+
+  createWorldCountdown(countdown) {
+    return this.request("world/countdowns", { method: "POST", body: countdown });
+  }
+
+  changeWorldCountdown(countdownId, action) {
+    return this.request(`world/countdowns/${encodeURIComponent(countdownId)}/actions`, { method: "POST", body: action });
+  }
+
+  getWorldPlaces() {
+    return this.request("world/places");
+  }
+
+  saveWorldPlaces(document) {
+    return this.request("world/places", { method: "PUT", body: document });
+  }
+
   getLoaderConfig() {
     return {
       characterBaseUrl: this.url("characters/{id}"),

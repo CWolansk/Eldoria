@@ -31,6 +31,7 @@ secret held in the Function App setting `ELDORIA_DM_KEY` and sent in the
 | `DELETE /api/characters/{id}` | Yes |
 | `GET`, `POST`, `PUT /api/characters/{id}` | No. Players read and save their own sheets. |
 | `POST /api/dm/characters/{id}/actions`, `GET /api/dm/party` | No, for now. |
+| Every `/api/world...` route | Yes |
 | Every other `GET` | No |
 
 - If `ELDORIA_DM_KEY` is not set, the locked routes refuse everyone (403).
@@ -40,6 +41,32 @@ secret held in the Function App setting `ELDORIA_DM_KEY` and sent in the
   `$env:ELDORIA_DM_KEY` first. Deploying without one leaves the existing key in place.
 - `EldoriaApiClient` sends the key when created with `{ dmKey }` or after `setDmKey(key)`.
 - Tests: `npm run test:dm-key`.
+
+## Living world endpoints (DM only)
+
+Every route here needs the DM key (see "DM lock"). There is no player-facing world route yet.
+The Function runs the same engine files as the browser (`docs/world-sim/engine`); the deploy
+scripts copy them into `src/world-runtime` with `tools/stage-world-runtime.js`.
+
+| Route | What it does |
+|---|---|
+| `GET /api/world` | Current day, countdowns, suggestions waiting, what was written today, the day's report, and the `etag` to send back when advancing. Before the world is started it returns `{ "initialized": false }` and writes nothing. |
+| `POST /api/world/start` | First commit. Body `{ "day"?, "worldSeed"? }`; defaults to Fall 7, 496 and a random seed. Only once. |
+| `POST /api/world/advance` | Body `{ "days": 1..30, "expectedEtag" }` or `{ "untilDecision": true, "expectedEtag" }` (stops when something waits for a decision, at most 7 days). 409 with "Reload and try again" if another device advanced first. |
+| `GET /api/world/events?fromDay=&toDay=&status=` | Events with their current status (`written`, `suggested`, `rejected`, or `all`). |
+| `POST /api/world/events` | The DM writes an event: `{ "text", "place"?, "day"?, "tags"? }`. Canon at once; `day` may be today or earlier. |
+| `POST /api/world/events/{id}/decision` | `{ "decision": "accept" | "reword" | "reject", "text"? }` on a suggested event. Recorded as a new row. |
+| `POST /api/world/events/{id}/visibility` | `{ "playersVisible": true | false }`. Every event is hidden from players until this says otherwise; written events only. |
+| `GET /api/world/countdowns` | Countdowns as they stand. |
+| `POST /api/world/countdowns` | `{ "label", "suggestionText", "place"?, "mode": "chance", "size": 4 | 6 | 8, "chance": 0..1 }` or `{ ..., "mode": "date", "dueDay" }`. |
+| `POST /api/world/countdowns/{id}/actions` | `{ "action": "step", "delta": 1 | -1 }`, `{ "action": "edit", "changes": {...} }` or `{ "action": "finish" }`. |
+| `GET /api/world/places`, `PUT /api/world/places` | The DM-only list of places for the "where" box. `PUT` replaces it: `{ "places": [{ "id", "name", "kind"?, "region"?, "parent"?, "knownToPlayers"? }] }`. |
+
+- Storage: events in the table `eldoriaworldevents` (override with `ELDORIA_WORLD_EVENT_TABLE`), one blob per committed day plus a pointer under `world/<world id>/` in the character container. The exact shapes are in `docs/world-sim/STORAGE-SHAPES.md`.
+- The record is append only: a decision, a reveal and every countdown change is a new row.
+- Nothing is stored until `POST /api/world/start`.
+- The DM page is `docs/tools/world-sim/index.html`. It asks for the DM key once and keeps it in that browser.
+- Tests: `npm run test:world` (engine, store, routes and the page under jsdom; needs `npm install` in `docs/world-sim` for jsdom).
 
 ## DM dashboard endpoints
 

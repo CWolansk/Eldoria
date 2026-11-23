@@ -2,6 +2,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test"
+    "test": "node --test --test-force-exit \"tests/*.test.mjs\""
+  },
+  "devDependencies": {
+    "jsdom": "^31.0.1"
   }
 }

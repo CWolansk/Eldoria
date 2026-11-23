@@ -1,0 +1,365 @@
+{
+  "schema": "eldoria-world-places/1",
+  "places": [
+    {
+      "id": "highreach",
+      "name": "Highreach",
+      "kind": "City",
+      "region": "Crestfall",
+      "parent": null,
+      "knownToPlayers": true
+    },
+    {
+      "id": "highreach--highreach-merchants-guild",
+      "name": "HighReach Merchants Guild (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": true
+    },
+    {
+      "id": "highreach--highreach-adventurers-guild",
+      "name": "Highreach Adventurers Guild (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": true
+    },
+    {
+      "id": "highreach--highreach-mines",
+      "name": "Highreach Mines (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": true
+    },
+    {
+      "id": "highreach--sturdy-mugg",
+      "name": "Sturdy Mugg (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": true
+    },
+    {
+      "id": "highreach--target-by-tradewind",
+      "name": "Target by Tradewind (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": true
+    },
+    {
+      "id": "highreach--the-arcane-enclave",
+      "name": "The Arcane Enclave (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": false
+    },
+    {
+      "id": "highreach--the-dragons-breath-forge",
+      "name": "The Dragons Breath Forge (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": true
+    },
+    {
+      "id": "highreach--the-warren",
+      "name": "The Warren (Highreach)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "highreach",
+      "knownToPlayers": true
+    },
+    {
+      "id": "ardenville",
+      "name": "Ardenville",
+      "kind": "Town",
+      "region": "Crestfall",
+      "parent": null,
+      "knownToPlayers": true
+    },
+    {
+      "id": "ardenville--ardenville-adventurers-guild",
+      "name": "Ardenville Adventurers Guild (Ardenville)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "ardenville",
+      "knownToPlayers": false
+    },
+    {
+      "id": "ardenville--fishermans-guild",
+      "name": "Fisherman's Guild (Ardenville)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "ardenville",
+      "knownToPlayers": false
+    },
+    {
+      "id": "ardenville--lake-arden",
+      "name": "Lake Arden (Ardenville)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "ardenville",
+      "knownToPlayers": true
+    },
+    {
+      "id": "ardenville--merchants-guild-warehouse",
+      "name": "Merchants Guild Warehouse (Ardenville)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "ardenville",
+      "knownToPlayers": false
+    },
+    {
+      "id": "ardenville--steelshapers-forge",
+      "name": "Steelshaper's Forge (Ardenville)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "ardenville",
+      "knownToPlayers": false
+    },
+    {
+      "id": "ardenville--the-enchanted-trinket",
+      "name": "The Enchanted Trinket (Ardenville)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "ardenville",
+      "knownToPlayers": false
+    },
+    {
+      "id": "ardenville--the-netted-nymph",
+      "name": "The Netted Nymph (Ardenville)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "ardenville",
+      "knownToPlayers": false
+    },
+    {
+      "id": "fairfield",
+      "name": "Fairfield",
+      "kind": "Town",
+      "region": "Crestfall",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "fairfield--forgefires-armaments",
+      "name": "Forgefires Armaments (Fairfield)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "fairfield",
+      "knownToPlayers": false
+    },
+    {
+      "id": "fairfield--starspells-wonders",
+      "name": "Starspells Wonders (Fairfield)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "fairfield",
+      "knownToPlayers": false
+    },
+    {
+      "id": "hillcrest",
+      "name": "Hillcrest",
+      "kind": "Village",
+      "region": "Crestfall",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "hillcrest--hammerstrikes-weapons",
+      "name": "Hammerstrikes Weapons (Hillcrest)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "hillcrest",
+      "knownToPlayers": false
+    },
+    {
+      "id": "hillcrest--nightwhispers-potions-and-scrolls",
+      "name": "Nightwhispers Potions and Scrolls (Hillcrest)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "hillcrest",
+      "knownToPlayers": false
+    },
+    {
+      "id": "stonehaven",
+      "name": "Stonehaven",
+      "kind": "Village",
+      "region": "Crestfall",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "stonehaven--blackwood-forest",
+      "name": "Blackwood Forest (Stonehaven)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "stonehaven",
+      "knownToPlayers": false
+    },
+    {
+      "id": "stonehaven--ironforge-smithy",
+      "name": "Ironforge Smithy (Stonehaven)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "stonehaven",
+      "knownToPlayers": false
+    },
+    {
+      "id": "stonehaven--marlas-gear",
+      "name": "Marlas Gear (Stonehaven)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "stonehaven",
+      "knownToPlayers": false
+    },
+    {
+      "id": "stonehaven--mystic-wares",
+      "name": "Mystic Wares (Stonehaven)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "stonehaven",
+      "knownToPlayers": false
+    },
+    {
+      "id": "stonehaven--stonehaven-supplies",
+      "name": "Stonehaven Supplies (Stonehaven)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "stonehaven",
+      "knownToPlayers": false
+    },
+    {
+      "id": "stonehaven--stones-herbs",
+      "name": "Stones Herbs (Stonehaven)",
+      "kind": "Place in town",
+      "region": "Crestfall",
+      "parent": "stonehaven",
+      "knownToPlayers": false
+    },
+    {
+      "id": "starfall",
+      "name": "Starfall",
+      "kind": "On the map",
+      "region": "Silverleaf Lands",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "stardew",
+      "name": "Stardew",
+      "kind": "On the map",
+      "region": "Silverleaf Lands",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "frostglade",
+      "name": "Frostglade",
+      "kind": "On the map",
+      "region": "Silverleaf Lands",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "serenity-hollow",
+      "name": "Serenity Hollow",
+      "kind": "On the map",
+      "region": "Silverleaf Lands",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "moonshade",
+      "name": "Moonshade",
+      "kind": "On the map",
+      "region": "Silverleaf Lands",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "ironroot",
+      "name": "Ironroot",
+      "kind": "On the map",
+      "region": "Ironpeak Mountains",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "gemstone-hollow",
+      "name": "Gemstone Hollow",
+      "kind": "On the map",
+      "region": "Ironpeak Mountains",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "forgepeak",
+      "name": "Forgepeak",
+      "kind": "On the map",
+      "region": "Ironpeak Mountains",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "steamhammer",
+      "name": "Steamhammer",
+      "kind": "On the map",
+      "region": "Ironpeak Mountains",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "stoneforge",
+      "name": "Stoneforge",
+      "kind": "On the map",
+      "region": "Ironpeak Mountains",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "ironpeak-mountain",
+      "name": "Ironpeak Mountain",
+      "kind": "On the map",
+      "region": "Ironpeak Mountains",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "cannibal-camp",
+      "name": "Cannibal Camp",
+      "kind": "On the map",
+      "region": "Ironpeak Mountains",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "witchs-bog",
+      "name": "Witch's Bog",
+      "kind": "On the map",
+      "region": "Orcish Wastes",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "red-dune-desert",
+      "name": "Red Dune Desert",
+      "kind": "On the map",
+      "region": "Orcish Wastes",
+      "parent": null,
+      "knownToPlayers": false
+    },
+    {
+      "id": "sand-dragon-valley",
+      "name": "Sand Dragon Valley",
+      "kind": "On the map",
+      "region": "Orcish Wastes",
+      "parent": null,
+      "knownToPlayers": false
+    }
+  ]
+}

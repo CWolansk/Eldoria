@@ -1,0 +1,184 @@
+/* Living world DM page. Phone first. Colours come from the site tokens (css/tokens.css),
+   so the page follows the site's light and dark themes. */
+.world-sim-page {
+  --ws-surface: var(--panel);
+  --ws-sunk: var(--panel-soft);
+  --ws-sugg: var(--info);
+  --ws-sugg-bg: var(--info-soft);
+  --ws-canon-bg: var(--success-soft);
+  --ws-warn-bg: var(--warning-soft);
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.ws-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+.ws-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--ws-surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.ws-bar__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding-block: 10px;
+}
+
+.ws-brand { font-weight: 700; font-size: 1.05rem; }
+.ws-brand small {
+  margin-left: 6px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ws-grow { flex: 1 1 0; min-width: 0; }
+
+.ws-date { font-weight: 700; font-size: 1.2rem; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.ws-date span { display: block; color: var(--muted); font-size: 0.82rem; font-weight: 400; }
+
+.ws-btn {
+  min-height: 44px;
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--ws-surface);
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+.ws-btn:hover { border-color: var(--accent); }
+.ws-btn:disabled { opacity: 0.55; cursor: progress; }
+.ws-btn--primary { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.ws-btn--small { min-height: 40px; padding: 4px 12px; font-size: 0.95rem; }
+.ws-btn--quiet { border-color: transparent; color: var(--muted); text-decoration: underline; }
+.ws-btn[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--bg); }
+
+.ws-tabs { background: var(--bg); border-bottom: 1px solid var(--line); }
+.ws-tabs__row { display: flex; gap: 2px; overflow-x: auto; }
+.ws-tabs a {
+  padding: 12px 14px;
+  border-bottom: 3px solid transparent;
+  color: var(--muted);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ws-tabs a[aria-current="page"] { border-bottom-color: var(--accent); color: var(--ink); }
+.ws-count {
+  margin-left: 6px;
+  padding: 0 7px;
+  border-radius: 10px;
+  background: var(--ws-sugg);
+  color: var(--bg-raised);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.ws-main { display: grid; gap: 22px; padding-block: 16px 56px; }
+.ws-main section { display: grid; gap: 10px; min-width: 0; }
+.ws-main h2 { margin: 0; font-size: 1.25rem; }
+.ws-main h3 { margin: 0; font-size: 1.05rem; }
+.ws-main p { margin: 0; }
+.ws-lede { max-width: 68ch; color: var(--muted); }
+.ws-meta { color: var(--muted); font-size: 0.92rem; }
+.ws-error { color: var(--danger); }
+
+.ws-card {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--ws-surface);
+}
+.ws-card--sugg { border-color: var(--ws-sugg); background: var(--ws-sugg-bg); }
+.ws-card--lock { max-width: 34rem; }
+.ws-text { font-size: 1.1rem; font-weight: 600; line-height: 1.3; overflow-wrap: anywhere; }
+
+.ws-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ws-fields { display: flex; flex-wrap: wrap; gap: 10px; }
+.ws-fields label { display: grid; gap: 3px; min-width: 0; color: var(--muted); font-size: 0.88rem; }
+.ws-field--wide { flex: 1 1 16rem; }
+
+.ws-input,
+.ws-main textarea,
+.ws-main select,
+.ws-main input[type="text"],
+.ws-main input[type="password"],
+.ws-main input[type="number"] {
+  min-height: 44px;
+  max-width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg-raised);
+  color: var(--ink);
+  font: inherit;
+}
+.ws-main textarea { width: 100%; min-height: 76px; resize: vertical; }
+.ws-main input[type="number"] { width: 6rem; }
+.ws-main :focus-visible, .ws-bar :focus-visible, .ws-tabs :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.ws-chip {
+  display: inline-block;
+  padding: 1px 9px;
+  border: 1px solid currentColor;
+  border-radius: 10px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.ws-chip--written { background: var(--ws-canon-bg); color: var(--success); }
+.ws-chip--suggested { color: var(--ws-sugg); }
+.ws-chip--rejected { color: var(--muted); text-decoration: line-through; }
+.ws-chip--plain { color: var(--muted); letter-spacing: 0; text-transform: none; font-weight: 500; }
+.ws-chip--shown { color: var(--warning); background: var(--ws-warn-bg); }
+
+.ws-moves { display: grid; margin: 0; padding: 0; list-style: none; }
+.ws-moves li { display: flex; gap: 10px; padding: 8px 2px; border-bottom: 1px dashed var(--line); }
+.ws-moves .ws-kind {
+  flex: 0 0 6.5rem;
+  padding-top: 2px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ws-clock { display: flex; gap: 4px; }
+.ws-clock i { width: 26px; height: 16px; border: 1px solid var(--muted); border-radius: 3px; }
+.ws-clock i.is-on { border-color: var(--accent); background: var(--accent); }
+
+.ws-tablewrap { overflow-x: auto; }
+.ws-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.ws-table th, .ws-table td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+.ws-table th { color: var(--muted); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.ws-table td.ws-what { min-width: 14rem; overflow-wrap: anywhere; }
+
+.ws-setup { color: var(--muted); font-size: 0.92rem; }
+.ws-setup summary { cursor: pointer; padding-block: 8px; }
+.ws-setup > div { display: grid; gap: 10px; padding-block: 6px; }
+
+@media (max-width: 640px) {
+  .ws-brand { flex: 1 1 100%; }
+  .ws-date { flex: 1 1 100%; }
+  .ws-bar .ws-btn { flex: 1 1 0; }
+  .ws-moves li { flex-direction: column; gap: 2px; }
+  .ws-moves .ws-kind { flex: none; }
+}

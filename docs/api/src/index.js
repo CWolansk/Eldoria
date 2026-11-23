@@ -16,6 +16,7 @@ const {
 } = require("./catalog");
 const { publicIndexHandler } = require("./publicIndexes");
 const { dmCharacterActionHandler, dmPartyHandler } = require("./dmDashboard");
+const { registerWorldRoutes } = require("./worldRoutes");
 
 app.http("health", {
   methods: ["GET", "OPTIONS"],
@@ -100,3 +101,8 @@ app.http("publicIndex", {
   route: "public-index/{kind}",
   handler: publicIndexHandler
 });
+
+// Living world (DM only): world, world/start, world/advance, world/events,
+// world/events/{id}/decision, world/events/{id}/visibility, world/countdowns,
+// world/countdowns/{id}/actions, world/places.
+registerWorldRoutes(app);

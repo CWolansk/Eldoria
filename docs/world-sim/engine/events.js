@@ -6,6 +6,13 @@
 //              A decision is a NEW row pointing at the event. Nothing is ever
 //              edited or deleted, so the history of every call stays readable.
 //
+// Stage 1 adds two more kinds of row, both also append-only:
+//
+//   visibility - the DM reveals an event to the players, or hides it again.
+//                Every event starts hidden. Only this row can change that.
+//   countdown  - a change to a countdown (see countdowns.js). The event fold
+//                skips these; the countdown fold reads them.
+//
 // Only events whose folded status is "written" are canon.
 // These helpers are pure: ids and timestamps are supplied by the caller.
 
@@ -55,6 +62,21 @@ function baseEvent(input, status, source) {
   };
 }
 
+/**
+ * The DM reveals an event to the players (playersVisible true) or hides it again.
+ * Nothing is visible to players unless a row like this says so.
+ */
+export function createVisibility(input) {
+  return {
+    recordType: "visibility",
+    id: requireText(input.id, "Visibility id"),
+    eventId: requireText(input.eventId, "Visibility eventId"),
+    playersVisible: input.playersVisible === true,
+    day: requireDay(input.day),
+    decidedAt: input.decidedAt ?? null
+  };
+}
+
 /** An event the DM wrote. Canon from the moment it is recorded. */
 export function createWrittenEvent(input) {
   return baseEvent(input, EVENT_STATUS.WRITTEN, EVENT_SOURCE.DM);
@@ -87,7 +109,8 @@ export function createDecision(input) {
  * Folds the append-only record, in order, into the current view.
  * Returns:
  *   events  - every event with its current status and text, in first-seen order.
- *             A reworded event keeps `originalText`.
+ *             A reworded event keeps `originalText`. `playersVisible` is false
+ *             unless the latest visibility row for the event says true.
  *   byId    - Map of the same objects by id.
  *   ignored - rows that could not be applied, each with a reason:
  *             "unknown-event"   decision points at an id that is not in the record
@@ -111,6 +134,7 @@ export function foldRecord(records) {
         ...record,
         tags: [...(record.tags || [])],
         originalText: record.text,
+        playersVisible: false,
         decidedBy: null,
         decidedOnDay: null
       };
@@ -139,6 +163,20 @@ export function foldRecord(records) {
       }
       view.decidedBy = record.id;
       view.decidedOnDay = record.day;
+      continue;
+    }
+
+    if (record?.recordType === "visibility") {
+      const view = byId.get(record.eventId);
+      if (!view) {
+        ignored.push({ record, reason: "unknown-event" });
+        continue;
+      }
+      view.playersVisible = record.playersVisible === true;
+      continue;
+    }
+
+    if (record?.recordType === "countdown") {
       continue;
     }
 

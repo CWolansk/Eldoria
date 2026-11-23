@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>Living World | Eldoria DM</title>
+  <script src="../../site-shell.js"></script>
+  <script src="../../site-assets/site-config.js"></script>
+  <script type="module" src="./world-sim.js?v=20261123-stage1"></script>
+  <link rel="stylesheet" href="../../css/tokens.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="../../css/utilities.css">
+  <link rel="stylesheet" href="./world-sim.css?v=20261123-stage1">
+</head>
+<body class="site-page world-sim-page">
+  <div id="site-nav" data-base-path="../../" data-current="dm"></div>
+
+  <!-- Nothing about the world is in this file. Everything shown here is fetched with the DM key. -->
+  <div class="ws-bar" id="ws-bar" role="region" aria-label="Date and day controls" hidden>
+    <div class="ws-wrap ws-bar__row">
+      <div class="ws-brand">Eldoria <small>living world</small></div>
+      <div class="ws-grow"></div>
+      <div class="ws-date" id="ws-date" aria-live="polite"></div>
+      <button class="ws-btn ws-btn--primary" id="ws-advance" type="button" data-act="advance">Advance a day</button>
+      <button class="ws-btn" id="ws-run" type="button" data-act="run">Run to next decision</button>
+    </div>
+  </div>
+  <nav class="ws-tabs" id="ws-tabs" aria-label="Sections" hidden><div class="ws-wrap ws-tabs__row" id="ws-tab-row"></div></nav>
+
+  <main class="ws-wrap ws-main" id="ws-view">
+    <p class="ws-meta" id="ws-loading" role="status">Loading…</p>
+  </main>
+</body>
+</html>

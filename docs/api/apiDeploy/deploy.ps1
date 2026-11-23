@@ -105,6 +105,8 @@ if (Test-Path (Join-Path $apiRoot "package-lock.json")) {
 Copy-Item -LiteralPath (Join-Path $apiRoot "src") -Destination $stageRoot -Recurse
 & node (Join-Path $apiRoot "tools/stage-sheet-runtime.js") (Join-Path $stageRoot "src/sheet-runtime")
 if ($LASTEXITCODE -ne 0) { throw "Sheet compiler packaging failed." }
+& node (Join-Path $apiRoot "tools/stage-world-runtime.js") (Join-Path $stageRoot "src/world-runtime")
+if ($LASTEXITCODE -ne 0) { throw "World engine packaging failed." }
 $publicIndexRoot = Join-Path $stageRoot "public-indexes"
 New-Item -ItemType Directory -Path $publicIndexRoot -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $apiRoot "..\data\location-index.json") -Destination $publicIndexRoot
