@@ -511,16 +511,6 @@
           "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Oren Hammerfist.md"
         },
         {
-          "id": "pip-whiskerwind",
-          "name": "Pip Whiskerwind",
-          "town": "Highreach",
-          "profession": "Underboss / Poison Specialist",
-          "race": "Gnome",
-          "status": "Alive",
-          "knownToPlayers": false,
-          "source": "Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Pip Whiskerwind.md"
-        },
-        {
           "id": "professor-astrid-starcaller",
           "name": "Professor Astrid Starcaller",
           "town": "Highreach",
@@ -914,6 +904,16 @@
           "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Mira Softstep.md"
         },
         {
+          "id": "pip-whiskerwind",
+          "name": "Pip Whiskerwind",
+          "town": "Ardenville",
+          "profession": "Underboss / Poison Specialist",
+          "race": "Gnome",
+          "status": "Alive",
+          "knownToPlayers": true,
+          "source": "Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Pip Whiskerwind.md"
+        },
+        {
           "id": "richard-vane",
           "name": "Richard Vane",
           "town": "Ardenville",
@@ -950,14 +950,6 @@
           "knownToPlayers": true,
           "note": "Only a player-facing page exists; no DM note with front matter.",
           "source": "Public/World/Crestfall/Ardenville/NPCs/Guard 2374.md"
-        },
-        {
-          "id": "pip-whiskerwind",
-          "name": "Pip Whiskerwind",
-          "town": "Ardenville",
-          "knownToPlayers": true,
-          "note": "Only a player-facing page exists; no DM note with front matter.",
-          "source": "Public/World/Crestfall/Ardenville/NPCs/Pip Whiskerwind.md"
         }
       ]
     },
@@ -1962,7 +1954,7 @@
       },
       "notesSay": [
         {
-          "quote": "The town's strategic location, just two days' hard ride west of Highreach and mere hours from the Silverleaf border, has made it an essential waystation for merchants, diplomats, and adventurers conducting business between the human and elven realms. Its fortified warehouses store goods worth more than some kingdom's annual treasuries, while its customs facilities process the constant flow of trad",
+          "quote": "The town's strategic location, just two days' hard ride east of Highreach and mere hours from the Silverleaf border, has made it an essential waystation for merchants, diplomats, and adventurers conducting business between the human and elven realms. Its fortified warehouses store goods worth more than some kingdom's annual treasuries, while its customs facilities process the constant flow of trad",
           "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Fairfield.md:23"
         }
       ],
@@ -1988,7 +1980,7 @@
           "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Fairfield.md:21"
         },
         {
-          "quote": "The town's strategic location, just two days' hard ride west of Highreach and mere hours from the Silverleaf border, has made it an essential waystation for merchants, diplomats, and adventurers conducting business between the human and elven realms. Its fortified warehouses store goods worth more than some kingdom's annual treasuries, while its customs facilities process the constant flow of trad",
+          "quote": "The town's strategic location, just two days' hard ride east of Highreach and mere hours from the Silverleaf border, has made it an essential waystation for merchants, diplomats, and adventurers conducting business between the human and elven realms. Its fortified warehouses store goods worth more than some kingdom's annual treasuries, while its customs facilities process the constant flow of trad",
           "source": "Private/1. World Almanac/World/Crestfall/Fairfield/Fairfield.md:23"
         }
       ]

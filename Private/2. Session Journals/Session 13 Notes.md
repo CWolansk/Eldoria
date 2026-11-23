@@ -16,7 +16,7 @@ fc-category: Sessions
 		- The party refuses to swap packages with the Gnome 
 		- The gnome walks away nonchanlantly and jumps into a nearby sewer grate 
 	- Justin and others enter the Exterminators Guild 
-		- Justin Explains to [[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Pip Whiskerwind|Pip Whiskerwind]] that there was another gnome outside of the guild that attempted to swap packages 
+		- Justin Explains to [[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Pip Whiskerwind|Pip Whiskerwind]] that there was another gnome outside of the guild that attempted to swap packages 
 		- Pip sighs and then tells two other large musclebound gnomes after the other gnome 
 
 
@@ -65,7 +65,7 @@ Travel to ardenville
 				- He pulls out a package that is almost identical with a different wax seal on it. 
 			- Lets go ahead and switch packages and you can be on your way. 
 			- "I'm not the one that is supposed to making this delivery, you guys need to make the delivery because Don Gnocianno gave you the package" 
-	- When they get to the exterminators guild they need to ask for [[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Pip Whiskerwind|Pip Whiskerwind]] who is in charge of the guild in ardvenville. 
+	- When they get to the exterminators guild they need to ask for [[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Pip Whiskerwind|Pip Whiskerwind]] who is in charge of the guild in ardvenville. 
 		- When she receives the package she looks at it inspects the seal, writes something down and gives them their money no matter what. 
 			- If they swapped packages she says that they will no longer need their services. 
 			- If they didn't swap the packages she says that they should come see her before they leave town for their next job.

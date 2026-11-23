@@ -26,7 +26,7 @@
 
 **Connections the notes mention (5).** Quoted word for word in the draft, with file and line:
 
-- Highreach to Fairfield: "two days' hard ride west of Highreach".
+- Highreach to Fairfield: "two days' hard ride east of Highreach".
 - Fairfield to Starfall: "mere hours from the Silverleaf border", Starfall "visible in the distance".
 - Ardenville to Highreach: across Lake Arden, then the Merchants Guild cargo elevator up the cliff. Lake Arden's travel difficulty is "Moderate".
 - Highreach to Hillcrest: Hillcrest is "southwest of Highreach". No distance.
@@ -63,10 +63,10 @@
 
 ## Things that do not agree
 
-- **Fairfield's direction.** The Fairfield note says it is west of Highreach. On the map its marker is to the right (east) of Highreach's.
+- **Fairfield's direction.** Settled: Fairfield is east of Highreach, as the map shows. The notes have been corrected.
 - **Healing potion price.** The catalog says 50 gp. The proposal says the Fairfield notes assume 30 gp, but a search of `Private` and `Public` for "30 gp" near "potion" or "heal" found nothing. The Fairfield notes say diluted potions are sold "at slightly reduced prices" with no figure. Where does 30 gp come from?
-- **The herb-gathering job.** It is not in the notes. Where was it offered, by whom, and when?
-- **Pip Whiskerwind.** The DM note is filed under Highreach (location Highreach); the player-facing page is under Ardenville. Both are in the draft.
+- **The herb-gathering job.** Settled: it did not happen at the table, so it is not canon and is left out until it does.
+- **Pip Whiskerwind.** Settled: Pip is in Ardenville. The DM note has been moved there.
 - **Status wording.** Highreach, Ardenville, Fairfield and Hillcrest NPCs use Alive or Dead. Stonehaven NPCs use Active, and one is "Corrupted by Dark Pact". Copied as written.
 - **Notes without front matter.** Ardenville Adventurers Guild, Forgefires Armaments, Starspells Wonders, Hammerstrikes Weapons and Nightwhispers Potions and Scrolls have no front matter, so they are listed by file name only.
 

@@ -210,6 +210,15 @@ function readRememberedTab() {
     }
 }
 
+// A tab tapped before this script loaded (see the inline script in PlayerSheet.html).
+function takePendingTab() {
+    const pending = typeof window !== "undefined" ? window.__eldoriaPendingTab : "";
+    if (typeof window !== "undefined") {
+        delete window.__eldoriaPendingTab;
+    }
+    return pending && TAB_BUILDERS[pending] && !HIDDEN_TABS.has(pending) ? pending : "";
+}
+
 function applyTabVisibility() {
     document.querySelectorAll("#TabRowList button").forEach((button) => {
         const name = button.dataset.tab || button.textContent.trim();
@@ -632,7 +641,7 @@ async function bootPlayersPage() {
 
     setupMobileLevelEditorToggle();
     applyTabVisibility();
-    currentTabName = readRememberedTab() || currentTabName;
+    currentTabName = takePendingTab() || readRememberedTab() || currentTabName;
 
     const CharId = getRequestedPlayerId();
     if (!CharId) {

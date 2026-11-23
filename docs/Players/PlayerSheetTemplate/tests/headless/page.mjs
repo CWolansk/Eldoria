@@ -27,6 +27,7 @@ export async function bootSheetPage(options = {}) {
   globalThis.fetch = async (input, init = {}) => {
     const url = new URL(String(input?.url || input));
     const method = String(init.method || "GET").toUpperCase();
+    options.onRequest?.(url.href, method);
     if (/\/characters\/[^/]+$/u.test(url.pathname)) {
       if (method === "GET") {
         server.gets += 1;
@@ -43,6 +44,10 @@ export async function bootSheetPage(options = {}) {
     }
     return respond(404, { error: "Not found in headless fake." });
   };
+
+  // Stand-in for the inline script in PlayerSheet.html (jsdom does not run page scripts here).
+  window.setTab = (tabName) => { window.__eldoriaPendingTab = tabName; };
+  options.beforeImport?.();
 
   const quiet = ["warn", "error", "info", "log"].map((name) => [name, console[name]]);
   for (const [name] of quiet) console[name] = () => {};

@@ -23,7 +23,7 @@ tags:
 
 ## Links
 [[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Don Gnocianno|Don Gnocianno]]
-[[Private/1. World Almanac/World/Crestfall/Highreach/NPCs/Pip Whiskerwind|Pip Whiskerwind]]
+[[Private/1. World Almanac/World/Crestfall/Ardenville/NPCs/Pip Whiskerwind|Pip Whiskerwind]]
 
 ## DM Notes
 Manages guild equipment while creating specialized tools for criminal operations. Enthusiastic about party members' abilities — calculates their criminal applications. Rising star in family hierarchy through innovative approaches.
