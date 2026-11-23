@@ -1,3 +1,4 @@
+import { cleanRulesText, flattenRulesText as flattenSharedRulesText } from "../RulesText.js";
 import {
     appendEmptyState,
     appendPillList,
@@ -197,36 +198,7 @@ function getFeatureRules(feature) {
     return getFeatureRuleEntries(feature) || NO_RULES_TEXT;
 }
 
-function stripMarkup(value) {
-    return String(value || "").replace(/<[^>]*>/gu, " ");
-}
 
-function flattenFeatureText(value, depth = 0) {
-    if (value == null || depth > 4) {
-        return "";
-    }
-
-    if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
-        return stripMarkup(value);
-    }
-
-    if (Array.isArray(value)) {
-        return value
-            .map((entry) => flattenFeatureText(entry, depth + 1))
-            .filter(Boolean)
-            .join(" ");
-    }
-
-    if (typeof value === "object") {
-        return Object.entries(value)
-            .filter(([key]) => !String(key).startsWith("_") || ["_fullEntries", "_typeListText"].includes(key))
-            .map(([, entry]) => flattenFeatureText(entry, depth + 1))
-            .filter(Boolean)
-            .join(" ");
-    }
-
-    return "";
-}
 
 function getFeatureMetaRows(feature) {
     return [
@@ -250,7 +222,7 @@ function getFeatureSearchText(feature) {
         getFeatureGroupTitle(feature),
         getFeatureChoiceLabel(feature),
         getFeatureCatalogId(feature),
-        flattenFeatureText(getFeatureRules(feature))
+        flattenSharedRulesText(getFeatureRules(feature), { privateKeys: ["_fullEntries", "_typeListText"], maxDepth: 4 })
     ].filter((value) => value != null && String(value).trim()).join(" "));
 }
 
@@ -710,7 +682,7 @@ function createFeatureRulesBody(feature) {
     const detail = createElement("div", "player-sheet-item-card__rules player-sheet-feature-card__rules");
     const rules = getFeatureRules(feature);
     if (typeof rules === "string") {
-        detail.appendChild(createElement("p", "player-sheet-item-card__rules-text", rules));
+        detail.appendChild(createElement("p", "player-sheet-item-card__rules-text", cleanRulesText(rules)));
         body.appendChild(detail);
         return body;
     }

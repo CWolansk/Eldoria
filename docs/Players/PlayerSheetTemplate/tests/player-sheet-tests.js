@@ -3168,3 +3168,6 @@ for (const [name, test] of tests) {
 
 summary.textContent = `${passed}/${tests.length} browser tests passed.`;
 summary.dataset.status = passed === tests.length ? "pass" : "fail";
+
+// Shared with the headless node:test files (tests/headless/fixtures.mjs).
+export { createDto, createRangerDto, createFakeApi };

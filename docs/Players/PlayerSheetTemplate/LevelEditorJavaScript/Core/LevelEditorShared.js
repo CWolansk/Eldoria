@@ -1,5 +1,6 @@
 import { formatModifier, getAbilityModifier } from "../../JsonHelpers.js";
 import { CatalogCache } from "../../CatalogCache.js";
+import { cleanRulesText } from "../../RulesText.js";
 
 export const MAX_CHARACTER_LEVEL = 20;
 export const ASI_LEVELS = new Set([4, 8, 12, 16, 19]);
@@ -447,14 +448,7 @@ export function getRaceWalkSpeed(selectedRace, parentRace = null) {
 }
 
 export function formatRulesText(value) {
-    return String(value || "")
-        .replace(/[{]@[^}]+[}]/gu, (match) => {
-            const content = match.slice(2, -1);
-            const withoutTag = content.replace(/^[a-zA-Z]+ ?/u, "");
-            return withoutTag.split("|")[0].trim();
-        })
-        .replace(/\s+/gu, " ")
-        .trim();
+    return cleanRulesText(value);
 }
 
 export function getFirstRulesText(value) {

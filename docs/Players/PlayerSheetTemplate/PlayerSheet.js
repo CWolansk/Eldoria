@@ -66,6 +66,7 @@ let currentTabName = 'Offense';
 let saveTimer = null;
 let saveInFlight = false;
 let pendingSaveDto = null;
+let failedSaveDto = null;
 let lastSavedFingerprint = "";
 let lastSyncedPlayerSheetDto = null;
 let remoteRefreshInFlight = false;
@@ -118,7 +119,11 @@ function readPlayerCharacterDto(characterId) {
  */
 export async function setTab(tabName)
 {
+    if (HIDDEN_TABS.has(tabName) || (TAB_BUILDERS[tabName] == null && tabName !== currentTabName)) {
+        tabName = DEFAULT_TAB_NAME;
+    }
     currentTabName = tabName;
+    rememberOpenTab(tabName);
     try {
         updateActiveTabButton(tabName);
         const builder = TAB_BUILDERS[tabName];
@@ -126,6 +131,7 @@ export async function setTab(tabName)
             await builder(currentCharacterSheet, {
                 api,
                 dto: currentPlayerSheetDto,
+                getDto: () => currentPlayerSheetDto,
                 onChange: applyPlayerSheetDto
             });
             return;
@@ -171,6 +177,50 @@ function rememberServerSnapshot(characterId, dto) {
     lastSyncedPlayerSheetDto = strictDto;
     rememberPlayerCharacterDto(characterId, strictDto);
     return strictDto;
+}
+
+const DEFAULT_TAB_NAME = "Offense";
+const BASE_DOCUMENT_TITLE = "Player Sheet | Eldoria Player Wiki";
+
+// The sheet stores no pet or companion data yet, so the Pets tab would be blank.
+const HIDDEN_TABS = new Set(["Pets"]);
+
+function getOpenTabStorageKey() {
+    const id = getRequestedPlayerId();
+    return id ? `eldoria:player-sheet:open-tab:${id}` : "";
+}
+
+// Which tab was open is a per-browser convenience, not sheet data.
+function rememberOpenTab(tabName) {
+    try {
+        const key = getOpenTabStorageKey();
+        if (key) window.localStorage.setItem(key, tabName);
+    } catch (_error) {
+        // Storage can be unavailable (private window); the sheet works without it.
+    }
+}
+
+function readRememberedTab() {
+    try {
+        const key = getOpenTabStorageKey();
+        const stored = key ? window.localStorage.getItem(key) : "";
+        return stored && TAB_BUILDERS[stored] && !HIDDEN_TABS.has(stored) ? stored : "";
+    } catch (_error) {
+        return "";
+    }
+}
+
+function applyTabVisibility() {
+    document.querySelectorAll("#TabRowList button").forEach((button) => {
+        const name = button.dataset.tab || button.textContent.trim();
+        button.hidden = HIDDEN_TABS.has(name);
+        if (!button.getAttribute("type")) button.setAttribute("type", "button");
+    });
+}
+
+function updateDocumentTitle() {
+    const name = String(currentPlayerSheetDto?.identity?.name || "").trim();
+    document.title = name ? `${name} | ${BASE_DOCUMENT_TITLE}` : BASE_DOCUMENT_TITLE;
 }
 
 function isConflictError(error) {
@@ -235,19 +285,30 @@ function ensureSaveStatusElement() {
         return status;
     }
 
+    // The status sits in the page header so it is visible while playing,
+    // not only when the level editor is open.
+    const pageHeader = document.querySelector(".player-sheet-page > header");
     const title = document.querySelector("#level-editor-title");
-    const host = title?.parentElement || document.querySelector("#sidebar-level-editor");
+    const host = pageHeader || title?.parentElement || document.querySelector("#sidebar-level-editor");
     if (!host) {
         return null;
     }
 
     status = document.createElement("p");
     status.id = "level-editor-save-status";
-    status.className = "level-editor__save-status";
+    status.className = "level-editor__save-status player-sheet-save-status";
+    status.setAttribute("role", "status");
     status.setAttribute("aria-live", "polite");
-    status.textContent = "Loaded";
+    status.dataset.saveStatus = "loading";
 
-    if (title?.nextSibling) {
+    const text = document.createElement("span");
+    text.className = "player-sheet-save-status__text";
+    text.textContent = "Loading...";
+    status.appendChild(text);
+
+    if (pageHeader) {
+        host.appendChild(status);
+    } else if (title?.nextSibling) {
         host.insertBefore(status, title.nextSibling);
     } else if (title) {
         host.appendChild(status);
@@ -258,14 +319,56 @@ function ensureSaveStatusElement() {
     return status;
 }
 
-function setSaveStatus(state, message) {
+function setSaveStatus(state, message, options = {}) {
     const status = ensureSaveStatusElement();
     if (!status) {
         return;
     }
 
     status.dataset.saveStatus = state;
-    status.textContent = message;
+    let text = status.querySelector(".player-sheet-save-status__text");
+    if (!text) {
+        text = document.createElement("span");
+        text.className = "player-sheet-save-status__text";
+        status.replaceChildren(text);
+    }
+    text.textContent = message;
+
+    let retry = status.querySelector(".player-sheet-save-status__retry");
+    if (options.retry) {
+        if (!retry) {
+            retry = document.createElement("button");
+            retry.type = "button";
+            retry.className = "player-sheet-save-status__retry";
+            retry.textContent = "Retry";
+            retry.addEventListener("click", () => retryFailedSave());
+            status.appendChild(retry);
+        }
+    } else if (retry) {
+        retry.remove();
+    }
+}
+
+function isBrowserOffline() {
+    return typeof navigator !== "undefined" && navigator.onLine === false;
+}
+
+// A failed save keeps its changes and is sent again from the Retry button
+// or when the browser reports the connection is back.
+function retryFailedSave() {
+    if (!failedSaveDto || saveInFlight) {
+        return;
+    }
+
+    if (!pendingSaveDto) {
+        pendingSaveDto = failedSaveDto;
+    }
+    failedSaveDto = null;
+    if (saveTimer) {
+        clearTimeout(saveTimer);
+        saveTimer = null;
+    }
+    void flushPendingSave();
 }
 
 function normalizeDtoForCurrentCharacter(nextDto) {
@@ -295,7 +398,7 @@ async function flushPendingSave() {
 
     const fingerprint = createSaveFingerprint(dtoToSave);
     if (fingerprint && fingerprint === lastSavedFingerprint) {
-        setSaveStatus("saved", "Saved");
+        setSaveStatus("synced", "Up to date");
         return;
     }
 
@@ -330,7 +433,16 @@ async function flushPendingSave() {
         setSaveStatus("saved", "Saved");
     } catch (error) {
         console.error("Failed to save player sheet DTO:", error);
-        setSaveStatus("failed", "Save failed. Local edits are still on this page.");
+        // Keep the newest unsaved sheet so it can be sent again.
+        failedSaveDto = pendingSaveDto || dtoToSave;
+        pendingSaveDto = null;
+        setSaveStatus(
+            "failed",
+            isBrowserOffline()
+                ? "Offline. Not saved yet. Your changes are kept on this page and will be sent when you reconnect."
+                : "Not saved. Your changes are kept on this page.",
+            { retry: true }
+        );
     } finally {
         saveInFlight = false;
         if (pendingSaveDto) {
@@ -345,6 +457,7 @@ async function flushPendingSave() {
 
 function schedulePlayerSheetSave(nextDto, options = {}) {
     pendingSaveDto = nextDto;
+    failedSaveDto = null;
     setSaveStatus("pending", "Unsaved changes");
 
     if (saveTimer) {
@@ -360,7 +473,7 @@ function schedulePlayerSheetSave(nextDto, options = {}) {
 }
 
 function hasUnsavedPlayerSheetChanges() {
-    if (pendingSaveDto || saveInFlight) {
+    if (pendingSaveDto || failedSaveDto || saveInFlight) {
         return true;
     }
 
@@ -448,10 +561,14 @@ async function hydratePlayerSheetReferences(dtoSnapshot) {
     currentRuntimePlayerSheetDto = applyResolvedReferencesToDto(currentPlayerSheetDto, references);
     currentCharacterSheet = SheetCompiler.compile(currentPlayerSheetDto, { references });
     await renderCurrentPlayerSheet();
-    setSaveStatus("saved", "Saved");
+    if (!hasUnsavedPlayerSheetChanges()) {
+      setSaveStatus("synced", "Up to date");
+    }
   } catch (error) {
     console.warn("Background reference resolution failed; keeping the rendered strict DTO:", error);
-    setSaveStatus("partial", "Saved; some rules could not be loaded.");
+    if (!hasUnsavedPlayerSheetChanges()) {
+      setSaveStatus("partial", "Up to date. Some rules could not be loaded.");
+    }
   }
 }
 
@@ -465,6 +582,8 @@ async function updateExperience(experience) {
 }
 
 async function renderCurrentPlayerSheet() {
+  updateDocumentTitle();
+  applyTabVisibility();
   BuildPlayerSheetHeader(currentCharacterSheet, {
     onExperienceChange: updateExperience
   });
@@ -493,7 +612,7 @@ async function refreshPlayerSheetFromApi() {
     if (!fingerprint || fingerprint === createSaveFingerprint(currentPlayerSheetDto)) return;
     await applyPlayerSheetDto(strictDto, { persist: false });
     lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
-    setSaveStatus("saved", "Updated by DM");
+    setSaveStatus("synced", "Updated by DM");
   } catch (error) {
     console.warn("Unable to refresh DM combat changes:", error);
   } finally {
@@ -512,6 +631,8 @@ function startRemoteRefresh() {
 async function bootPlayersPage() {
 
     setupMobileLevelEditorToggle();
+    applyTabVisibility();
+    currentTabName = readRememberedTab() || currentTabName;
 
     const CharId = getRequestedPlayerId();
     if (!CharId) {
@@ -527,7 +648,7 @@ async function bootPlayersPage() {
             resolveReferences: false
         });
         lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
-        setSaveStatus("refreshing", "Loaded cached sheet. Refreshing...");
+        setSaveStatus("refreshing", "Showing your last loaded sheet. Checking for changes...");
     }
 
     try {
@@ -544,7 +665,7 @@ async function bootPlayersPage() {
     } catch (error) {
         console.error("Failed to boot player sheet:", error);
         if (cached?.value) {
-            setSaveStatus("offline", "Showing cached sheet. Refresh failed.");
+            setSaveStatus("offline", "Could not reach the server. Showing your last loaded sheet.");
         } else {
             setSaveStatus("failed", "Unable to load character sheet.");
         }
@@ -574,6 +695,8 @@ if (typeof window !== "undefined") {
     window.setTab = setTab;
     window.ShowPopup = ShowPopup;
     window.ClosePopup = ClosePopup;
+
+    window.addEventListener("online", () => retryFailedSave());
 
     window.addEventListener("beforeunload", (event) => {
         if (!hasUnsavedPlayerSheetChanges()) {

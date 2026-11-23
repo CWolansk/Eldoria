@@ -1,4 +1,15 @@
 import { PlayerSheetDtoHelper } from "../PlayerSheetDtoHelper.js";
+import { getLatestDto, reinsertAt, showUndoToast } from "./PlayerSheetUndoToast.js";
+import {
+    flattenRulesText as flattenSharedRulesText,
+    isHealingSpell,
+    toDisplayRulesText
+} from "../RulesText.js";
+
+// Search text: every value, as before.
+function flattenRulesText(value) {
+    return flattenSharedRulesText(value, { privateKeys: ["_fullEntries"] });
+}
 import {
     appendRulesEntry,
     createElement
@@ -226,33 +237,7 @@ function formatSpellComponents(record = {}) {
     return parts.join(", ");
 }
 
-function stripHtml(value) {
-    return String(value || "").replace(/<[^>]*>/gu, " ");
-}
 
-function flattenRulesText(value, depth = 0) {
-    if (value == null || depth > 5) {
-        return "";
-    }
-
-    if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
-        return stripHtml(value);
-    }
-
-    if (Array.isArray(value)) {
-        return value.map((entry) => flattenRulesText(entry, depth + 1)).filter(Boolean).join(" ");
-    }
-
-    if (typeof value === "object") {
-        return Object.entries(value)
-            .filter(([key]) => !key.startsWith("_") || key === "_fullEntries")
-            .map(([, entry]) => flattenRulesText(entry, depth + 1))
-            .filter(Boolean)
-            .join(" ");
-    }
-
-    return "";
-}
 
 function getSpellRulesEntry(record = {}) {
     const entries = toArray(record.entries).length ? toArray(record.entries) : toArray(record.raw?.entries);
@@ -275,7 +260,7 @@ function createRulesClassNames() {
 }
 
 function createRulesPreviewText(rulesEntry, limit = SPELL_RULES_PREVIEW_LIMIT) {
-    const fullText = formatRulesText(flattenRulesText(rulesEntry));
+    const fullText = toDisplayRulesText(rulesEntry, { privateKeys: ["_fullEntries"] });
     if (!fullText) {
         return { text: "", truncated: false };
     }
@@ -438,7 +423,7 @@ function getSpellDetailRows(entry, record = {}) {
         ["Components", formatSpellComponents(record)],
         ["Save", getSavingThrowText(record, spellcasting)],
         ["Attack", getSpellAttackText(record, spellcasting)],
-        ["Damage", getSpellDamageText(record, entry.characterLevel)]
+        [isHealingSpell(record) ? "Healing" : "Damage", getSpellDamageText(record, entry.characterLevel)]
     ].filter(([, value]) => value != null && String(value).trim());
 }
 
@@ -512,9 +497,24 @@ function createRemoveSpellButton(entry, context = {}) {
         button.disabled = true;
         try {
             const currentValues = toArray(PlayerSheetDtoHelper.getValue(context.dto, `spells.${entry.listKey}`, []));
+            const removedSpell = currentValues[entry.index];
             const nextValues = currentValues.filter((_, index) => index !== entry.index);
             const nextDto = PlayerSheetDtoHelper.patch(context.dto, `spells.${entry.listKey}`, nextValues);
             await context.onChange(nextDto);
+            if (removedSpell !== undefined) {
+                showUndoToast({
+                    message: `Removed ${getSpellName(entry.spell)}.`,
+                    onUndo: async () => {
+                        const latestDto = getLatestDto(context, nextDto);
+                        const latestValues = toArray(PlayerSheetDtoHelper.getValue(latestDto, `spells.${entry.listKey}`, []));
+                        await context.onChange(PlayerSheetDtoHelper.patch(
+                            latestDto,
+                            `spells.${entry.listKey}`,
+                            reinsertAt(latestValues, entry.index, removedSpell)
+                        ));
+                    }
+                });
+            }
         } catch (error) {
             console.error("Failed to remove spell:", error);
             button.disabled = false;
@@ -570,7 +570,7 @@ export function createSpellListItem(entry, record = entry.record || entry.spell,
 
     summary.appendChild(identity);
 
-    const wantedRows = options.rows || ["Cast at", "Recharge", "Casting", "Range", "Save", "Attack", "Damage", "Duration"];
+    const wantedRows = options.rows || ["Cast at", "Recharge", "Casting", "Range", "Save", "Attack", "Damage", "Healing", "Duration"];
     const detailMetrics = getSpellDetailRows(entry, record)
         .filter(([label]) => wantedRows.includes(label))
         .map(([label, value]) => ({ label, value }));
@@ -935,7 +935,7 @@ export function buildSpellSearchModal(context = {}, playerSheetObject = {}) {
             characterLevel: playerSheetObject.level || 1
         }, spell, {
             badge: "Catalog",
-            rows: ["Level", "School", "Casting", "Range", "Duration", "Components", "Save", "Attack", "Damage"]
+            rows: ["Level", "School", "Casting", "Range", "Duration", "Components", "Save", "Attack", "Damage", "Healing"]
         }));
 
         if (typeof window !== "undefined" && window.matchMedia?.("(max-width: 800px)").matches) {

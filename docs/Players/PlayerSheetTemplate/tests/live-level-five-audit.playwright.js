@@ -60,7 +60,7 @@ async (page) => {
 
   for (const spec of specs) {
     await page.goto(`${baseUrl}${spec.id}`, { waitUntil: "domcontentloaded" });
-    await page.waitForFunction(() => document.querySelector(".level-editor__save-status")?.dataset.saveStatus === "saved", null, { timeout: 60000 });
+    await page.waitForFunction(() => ["saved", "synced"].includes(document.querySelector(".level-editor__save-status")?.dataset.saveStatus), null, { timeout: 60000 });
     const texts = { body: await page.locator("body").innerText() };
     const portrait = await page.locator("img.player-sheet-portrait__image").evaluate((image) => ({
       complete: image.complete,

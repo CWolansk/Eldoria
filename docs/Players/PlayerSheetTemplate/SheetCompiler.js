@@ -7,6 +7,7 @@ import {
 import { applyResolvedReferencesToDto } from "./ReferenceResolver.js";
 import { createStructuredOptionCoverage } from "./StructuredOptionCoverage.js";
 import { compileConditionEffects } from "./ConditionRules.js";
+import { toDisplayRulesText } from "./RulesText.js";
 
 const SKILLS = [
     { key: "acrobatics", label: "Acrobatics", ability: "dex" },
@@ -1086,7 +1087,7 @@ function formatClassResourceValue(value) {
             return formatClassResourceValue(direct);
         }
 
-        return formatResourceRulesText(JSON.stringify(value));
+        return toDisplayRulesText(value);
     }
 
     return "";

@@ -3,6 +3,7 @@ import {
     toArray,
     toNumber
 } from "./LevelEditorJavaScript/Core/LevelEditorShared.js";
+import { toDisplayRulesText } from "./RulesText.js";
 
 const DEFAULT_RULE_ENTRY_CLASSES = {
     text: "level-editor__race-entry-text",
@@ -243,7 +244,7 @@ export function appendRulesEntry(container, entry, classNames = DEFAULT_RULE_ENT
         for (const row of entry.rows) {
             const tr = document.createElement("tr");
             for (const cell of toArray(row)) {
-                const text = typeof cell === "string" ? cell : cell?.name || cell?.entry || JSON.stringify(cell);
+                const text = typeof cell === "string" ? cell : toDisplayRulesText(cell);
                 tr.appendChild(createElement("td", "", formatRulesText(text)));
             }
             tbody.appendChild(tr);
@@ -268,7 +269,10 @@ export function appendRulesEntry(container, entry, classNames = DEFAULT_RULE_ENT
         return;
     }
 
-    container.appendChild(createElement("p", classes.text, formatRulesText(JSON.stringify(entry))));
+    const fallbackText = toDisplayRulesText(entry);
+    if (fallbackText) {
+        container.appendChild(createElement("p", classes.text, fallbackText));
+    }
 }
 
 export function buildModalHtml(containerObj, config) {

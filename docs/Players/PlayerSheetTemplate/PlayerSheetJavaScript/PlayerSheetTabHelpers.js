@@ -4,6 +4,22 @@ import {
 } from "../PlayerSheetHtmlHelper.js";
 import { PlayerSheetDtoHelper } from "../PlayerSheetDtoHelper.js";
 import {
+    flattenRulesText as flattenSharedRulesText,
+    formatAttunementText,
+    toDisplayRulesText
+} from "../RulesText.js";
+
+const ITEM_PRIVATE_TEXT_KEYS = ["_typeListText", "_fProperties", "_fDamageDice", "_fBonus", "_fAc", "_fRes", "_fImm", "_fCondImm", "_fullEntries"];
+
+function stripHtml(value) {
+    return String(value || "").replace(/<[^>]*>/gu, " ");
+}
+
+// Search text: every value, as before.
+function flattenRulesText(value) {
+    return flattenSharedRulesText(value, { privateKeys: ITEM_PRIVATE_TEXT_KEYS, maxDepth: 4 });
+}
+import {
     getCatalogCache,
     getCatalogDisplayName,
     getCatalogSource,
@@ -166,33 +182,7 @@ export function getItemTagTexts(item, record = getItemRecord(item), options = {}
     ]);
 }
 
-function stripHtml(value) {
-    return String(value || "").replace(/<[^>]*>/gu, " ");
-}
 
-function flattenRulesText(value, depth = 0) {
-    if (value == null || depth > 4) {
-        return "";
-    }
-
-    if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
-        return stripHtml(value);
-    }
-
-    if (Array.isArray(value)) {
-        return value.map((entry) => flattenRulesText(entry, depth + 1)).filter(Boolean).join(" ");
-    }
-
-    if (typeof value === "object") {
-        return Object.entries(value)
-            .filter(([key]) => !key.startsWith("_") || ["_typeListText", "_fProperties", "_fDamageDice", "_fBonus", "_fAc", "_fRes", "_fImm", "_fCondImm", "_fullEntries"].includes(key))
-            .map(([, entry]) => flattenRulesText(entry, depth + 1))
-            .filter(Boolean)
-            .join(" ");
-    }
-
-    return "";
-}
 
 function getItemTypeText(record) {
     return [
@@ -337,7 +327,7 @@ export function getItemDetailRows(item, record = getItemRecord(item)) {
         ["AC", ac != null ? String(ac) : ""],
         ["Value", record?.valueLabel || record?._l_value || ""],
         ["Weight", weight != null ? `${weight} lb.` : ""],
-        ["Attunement", record?.attunement || record?.reqAttune || record?._attunement || ""]
+        ["Attunement", formatAttunementText(record?.attunement || record?.reqAttune || record?._attunement || "")]
     ].filter(([, value]) => value != null && String(value).trim());
 }
 
@@ -527,7 +517,7 @@ function createRulesClassNames() {
 }
 
 function createRulesPreviewText(rulesEntry, limit = ITEM_RULES_PREVIEW_LIMIT) {
-    const fullText = formatRulesText(flattenRulesText(rulesEntry));
+    const fullText = toDisplayRulesText(rulesEntry, { privateKeys: ITEM_PRIVATE_TEXT_KEYS, maxDepth: 4 });
     if (!fullText) {
         return {
             text: "",

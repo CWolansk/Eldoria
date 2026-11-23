@@ -1,5 +1,6 @@
 import { PlayerSheetDtoHelper } from "../PlayerSheetDtoHelper.js";
 import { createElement } from "../PlayerSheetHtmlHelper.js";
+import { getLatestDto, reinsertAt, showUndoToast } from "./PlayerSheetUndoToast.js";
 import {
     appendEmptyState,
     createEquipToggle,
@@ -331,9 +332,24 @@ function createRemoveGearButton(item, inventoryIndex, context = {}) {
         button.disabled = true;
         try {
             const currentItems = PlayerSheetDtoHelper.getValue(context.dto, "inventory.items", []);
+            const removedItem = currentItems[inventoryIndex];
             const nextItems = currentItems.filter((_, index) => index !== inventoryIndex);
             const nextDto = PlayerSheetDtoHelper.patch(context.dto, "inventory.items", nextItems);
             await context.onChange(nextDto);
+            if (removedItem !== undefined) {
+                showUndoToast({
+                    message: `Removed ${item?.name || removedItem?.name || "item"}.`,
+                    onUndo: async () => {
+                        const latestDto = getLatestDto(context, nextDto);
+                        const latestItems = PlayerSheetDtoHelper.getValue(latestDto, "inventory.items", []);
+                        await context.onChange(PlayerSheetDtoHelper.patch(
+                            latestDto,
+                            "inventory.items",
+                            reinsertAt(latestItems, inventoryIndex, removedItem)
+                        ));
+                    }
+                });
+            }
         } catch (error) {
             console.error("Failed to remove gear:", error);
             button.disabled = false;
@@ -494,8 +510,28 @@ function buildSpellScrollAssignmentModal(context = {}) {
             ? { ...entry, containedSpell: spell }
             : entry);
         const nextDto = PlayerSheetDtoHelper.patch(context.dto, "inventory.items", nextItems);
+        const clearedSpell = spell == null ? currentItems[inventoryIndex]?.containedSpell : null;
         await context.onChange(nextDto);
         dialog.close();
+        if (clearedSpell) {
+            showUndoToast({
+                message: `Cleared ${clearedSpell.name || "spell"} from the scroll.`,
+                onUndo: async () => {
+                    const latestDto = getLatestDto(context, nextDto);
+                    const latestItems = PlayerSheetDtoHelper.getValue(latestDto, "inventory.items", []);
+                    if (!latestItems[inventoryIndex] || latestItems[inventoryIndex].containedSpell) {
+                        return;
+                    }
+                    await context.onChange(PlayerSheetDtoHelper.patch(
+                        latestDto,
+                        "inventory.items",
+                        latestItems.map((entry, index) => index === inventoryIndex
+                            ? { ...entry, containedSpell: clearedSpell }
+                            : entry)
+                    ));
+                }
+            });
+        }
     }
 
     searchButton.addEventListener("click", () => void runSearch());

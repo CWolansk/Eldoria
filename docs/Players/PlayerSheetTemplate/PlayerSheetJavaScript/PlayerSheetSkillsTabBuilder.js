@@ -1,3 +1,4 @@
+import { formatSourceLabel } from "../RulesText.js";
 import { formatModifier, getAbilityModifier } from "../JsonHelpers.js";
 import {
     appendEmptyState,
@@ -115,7 +116,7 @@ function appendSkillCards(shell, playerSheetObject) {
             ...(detail.rollMode && detail.rollMode !== "normal" ? [["Roll", detail.rollMode]] : []),
             ["Ability", ABILITY_LABELS[skill.ability]],
             ["Training", detail.expertise ? "Expertise" : "Proficient"],
-            ["Source", detail.source || "Character"]
+            ["Source", formatSourceLabel(detail.source, "Character")]
         ]));
         grid.appendChild(card);
     }
