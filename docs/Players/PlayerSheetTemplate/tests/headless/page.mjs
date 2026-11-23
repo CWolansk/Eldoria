@@ -25,6 +25,7 @@ export async function bootSheetPage(options = {}) {
     dto: structuredClone(options.dto || fx.createDto()),
     failSaves: false,
     failActions: false,
+    failGets: Boolean(options.failCharacterGet),
     actions: [],
     saves: [],
     gets: 0,
@@ -67,7 +68,7 @@ export async function bootSheetPage(options = {}) {
     }
     if (/\/characters\/[^/]+$/u.test(url.pathname)) {
       if (method === "GET") {
-        if (options.failCharacterGet) {
+        if (server.failGets) {
           throw new TypeError("Failed to fetch");
         }
         if (options.characterGate) {

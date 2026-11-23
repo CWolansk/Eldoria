@@ -489,7 +489,7 @@ function createRemoveSpellButton(entry, context = {}) {
 
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "player-sheet-button player-sheet-button--small player-sheet-spell-remove";
+    button.className = "player-sheet-button player-sheet-button--small player-sheet-spell-remove player-sheet-build-only";
     button.textContent = "Remove";
     button.dataset.spellRemove = `${entry.listKey}:${entry.index}`;
     button.setAttribute("aria-label", `Remove ${getSpellName(entry.spell)} from ${entry.sourceLabel}`);
@@ -1430,6 +1430,7 @@ export async function BuildPlayerSheetSpellsTab(playerSheetObject, context = {})
     addButton.type = "button";
     addButton.className = "player-sheet-button player-sheet-button--primary";
     addButton.textContent = "Add Spell";
+    addButton.classList.add("player-sheet-build-only");
     header.appendChild(addButton);
 
     const modal = buildSpellSearchModal(context, playerSheetObject);

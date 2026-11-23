@@ -2,6 +2,7 @@ import { EldoriaApiClient } from "../../api/apiClient/index.js";
 import { BuildPlayerSheetHeader } from "./PlayerSheetJavaScript/PlayerSheetHeaderBuilder.js";
 import { BuildPlayerSheetSidebar } from "./PlayerSheetJavaScript/PlayerSheetSidebarBuilder.js";
 import { BuildPlayerSheetPlayStrip } from "./PlayerSheetJavaScript/PlayerSheetPlayStrip.js";
+import { captureViewState, restoreViewState } from "./PlayerSheetJavaScript/PlayerSheetViewState.js";
 import { BuildPlayerSheetOffenseTab } from "./PlayerSheetJavaScript/PlayerSheetOffenseTabBuilder.js";
 import { BuildPlayerSheetDefenseTab } from "./PlayerSheetJavaScript/PlayerSheetDefenseTabBuilder.js";
 import { BuildPlayerSheetGearTab } from "./PlayerSheetJavaScript/PlayerSheetGearTabBuilder.js?v=20260717-gear-organizer-2";
@@ -168,6 +169,7 @@ export async function setTab(tabName)
     if (HIDDEN_TABS.has(tabName) || (TAB_BUILDERS[tabName] == null && tabName !== currentTabName)) {
         tabName = DEFAULT_TAB_NAME;
     }
+    const viewState = tabName === lastRenderedTabName ? captureViewState(document.querySelector("#TabContent")) : null;
     currentTabName = tabName;
     rememberOpenTab(tabName);
     try {
@@ -180,6 +182,8 @@ export async function setTab(tabName)
                 getDto: () => currentPlayerSheetDto,
                 onChange: applyPlayerSheetDto
             });
+            lastRenderedTabName = tabName;
+            restoreViewState(document.querySelector("#TabContent"), viewState);
             return;
         }
 
@@ -264,6 +268,70 @@ function takePendingTab() {
     }
     return pending && TAB_BUILDERS[pending] && !HIDDEN_TABS.has(pending) ? pending : "";
 }
+
+// ---- Play / Build ----
+// Play is for the table: the sheet takes the full width and the controls that add or
+// remove things are put away. Build brings back the character builder and those controls.
+// Which one is showing is a per-browser convenience, not sheet data.
+const SHEET_MODES = ["play", "build"];
+const SHEET_MODE_STORAGE_KEY = "eldoria:player-sheet:mode";
+let currentSheetMode = "play";
+
+function readRememberedSheetMode() {
+    try {
+        const stored = window.localStorage.getItem(SHEET_MODE_STORAGE_KEY);
+        return SHEET_MODES.includes(stored) ? stored : "";
+    } catch (_error) {
+        return "";
+    }
+}
+
+function setSheetMode(mode, options = {}) {
+    currentSheetMode = SHEET_MODES.includes(mode) ? mode : "play";
+    const page = document.querySelector(".player-sheet-page");
+    if (page) {
+        page.dataset.sheetMode = currentSheetMode;
+    }
+    document.querySelectorAll("#player-sheet-mode-switch button").forEach((button) => {
+        button.setAttribute("aria-pressed", button.dataset.sheetMode === currentSheetMode ? "true" : "false");
+    });
+    if (options.remember !== false) {
+        try {
+            window.localStorage.setItem(SHEET_MODE_STORAGE_KEY, currentSheetMode);
+        } catch (_error) {
+            // Storage can be unavailable; the switch still works for this visit.
+        }
+    }
+}
+
+function ensureSheetModeSwitch() {
+    const pageHeader = document.querySelector(".player-sheet-page > header");
+    if (!pageHeader || document.querySelector("#player-sheet-mode-switch")) {
+        return;
+    }
+
+    const group = document.createElement("div");
+    group.id = "player-sheet-mode-switch";
+    group.className = "player-sheet-mode-switch";
+    group.setAttribute("role", "group");
+    group.setAttribute("aria-label", "Sheet mode");
+    for (const [mode, label, hint] of [
+        ["play", "Play", "For the table: the sheet only"],
+        ["build", "Build", "Level up, and add or remove gear and spells"]
+    ]) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.dataset.sheetMode = mode;
+        button.textContent = label;
+        button.title = hint;
+        button.addEventListener("click", () => setSheetMode(mode));
+        group.appendChild(button);
+    }
+    pageHeader.appendChild(group);
+    setSheetMode(readRememberedSheetMode() || currentSheetMode, { remember: false });
+}
+
+let lastRenderedTabName = "";
 
 function applyTabVisibility() {
     document.querySelectorAll("#TabRowList button").forEach((button) => {
@@ -782,6 +850,40 @@ async function refreshPlayerSheetFromApi() {
   }
 }
 
+// The sheet could not be loaded (no connection). When the browser reports it is back,
+// load it again without the player having to reload the page or lose anything unsaved.
+let reconnectWatchActive = false;
+
+function watchForReconnect(characterId) {
+  if (reconnectWatchActive || typeof window === "undefined") return;
+  reconnectWatchActive = true;
+
+  const tryAgain = async () => {
+    if (hasUnsavedPlayerSheetChanges()) {
+      // A kept change goes first (the save retry handles it); the next reconnect or poll catches up.
+      return;
+    }
+    try {
+      setSaveStatus("refreshing", "Back online. Checking for changes...");
+      const loadedDto = await api.getCharacterSheet(characterId);
+      rememberServerSnapshot(characterId, loadedDto);
+      await applyPlayerSheetDto(loadedDto, { persist: false });
+      lastSavedFingerprint = createSaveFingerprint(currentPlayerSheetDto);
+      setSaveStatus("synced", "Up to date");
+      window.removeEventListener("online", tryAgain);
+      reconnectWatchActive = false;
+      startRemoteRefresh();
+    } catch (error) {
+      console.warn("Still unable to load the sheet:", error);
+      setSaveStatus("offline", currentPlayerSheetDto
+        ? "Could not reach the server. Showing your last loaded sheet."
+        : "Unable to load character sheet.");
+    }
+  };
+
+  window.addEventListener("online", tryAgain);
+}
+
 function startRemoteRefresh() {
   if (remoteRefreshTimer) return;
   remoteRefreshTimer = setInterval(() => void refreshPlayerSheetFromApi(), REMOTE_REFRESH_INTERVAL_MS);
@@ -793,6 +895,7 @@ function startRemoteRefresh() {
 async function bootPlayersPage() {
 
     setupMobileLevelEditorToggle();
+    ensureSheetModeSwitch();
     applyTabVisibility();
     currentTabName = takePendingTab() || readRememberedTab() || currentTabName;
 
@@ -852,6 +955,7 @@ async function bootPlayersPage() {
         startRemoteRefresh();
     } catch (error) {
         console.error("Failed to boot player sheet:", error);
+        watchForReconnect(CharId);
         if (cached?.value) {
             if (!currentPlayerSheetDto) {
                 // No rules were kept from last time; the saved sheet is still better than nothing.

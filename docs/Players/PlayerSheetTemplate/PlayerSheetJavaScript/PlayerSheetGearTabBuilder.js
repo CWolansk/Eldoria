@@ -326,7 +326,7 @@ function createRemoveGearButton(item, inventoryIndex, context = {}) {
 
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "player-sheet-button player-sheet-button--small player-sheet-gear-remove";
+    button.className = "player-sheet-button player-sheet-button--small player-sheet-gear-remove player-sheet-build-only";
     button.textContent = "Remove";
     button.dataset.gearRemove = String(inventoryIndex);
     button.setAttribute("aria-label", `Remove ${item?.name || "item"} from gear`);
@@ -1196,7 +1196,7 @@ export async function BuildPlayerSheetGearTab(playerSheetObject, context = {}) {
     const header = shell.querySelector(".player-sheet-tab__header");
     const addButton = document.createElement("button");
     addButton.type = "button";
-    addButton.className = "player-sheet-button player-sheet-button--primary";
+    addButton.className = "player-sheet-button player-sheet-button--primary player-sheet-build-only";
     addButton.textContent = "Add Item";
     header.appendChild(addButton);
 

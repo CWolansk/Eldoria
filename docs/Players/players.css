@@ -4410,3 +4410,47 @@
   align-items: center;
   gap: 0.45rem;
 }
+
+/* ==========================================================================
+   Sheet review, pass 3: playing kept apart from building (item 4)
+   ========================================================================== */
+.player-sheet-mode-switch {
+  display: inline-flex;
+  border: 1px solid var(--sheet-line-strong);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--sheet-panel);
+}
+
+.player-sheet-mode-switch button {
+  min-height: 2.5rem;
+  padding: 0.2rem 1rem;
+  border: 0;
+  background: transparent;
+  color: var(--sheet-muted);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.player-sheet-mode-switch button[aria-pressed="true"] {
+  background: var(--sheet-accent);
+  color: var(--sheet-on-accent);
+}
+
+/* Play: the sheet takes the full width; adding and removing are put away. */
+.player-sheet-page[data-sheet-mode="play"] .player-sheet-container {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.player-sheet-page[data-sheet-mode="play"] .player-sheet-container > .levelEditor,
+.player-sheet-page[data-sheet-mode="play"] .player-sheet-build-only {
+  display: none;
+}
+
+@media (max-width: 800px), (pointer: coarse) {
+  .player-sheet-mode-switch button {
+    min-height: 2.75rem;
+  }
+}
