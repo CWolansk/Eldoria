@@ -204,7 +204,7 @@ Each day snapshot gains one field, `suggestions`: the suggested events that day'
 
 ### F. The `effect` field on events
 
-Still unused. In Stage 1 every event is stored with `"effect": null`. Countdowns do not need it: the link between a countdown and its event is the tag. A shape for `effect` will be proposed with the first subject that changes numbers (Stage 2).
+Still unused in Stage 1 (Stage 2 defines it; see section I). In Stage 1 every event is stored with `"effect": null`. Countdowns do not need it: the link between a countdown and its event is the tag. A shape for `effect` will be proposed with the first subject that changes numbers (Stage 2).
 
 ### G. The DM-only list of places (Blob, replaced as a whole)
 
@@ -227,7 +227,163 @@ It holds hidden names, so it lives only in the storage account behind the DM key
 
 Nothing exists in storage until you press "Start the world". That writes one snapshot for Fall 7, 496 (day 99306) with a random seed, no events and no countdowns.
 
+## New in Stage 2, needs your OK
+
+Stage 2 adds markets. As before, the record is append only and the running state can always be rebuilt from the record and the seed. Nothing below is in real storage until you deploy and load the setup.
+
+### I. What an event does: the `effect` field
+
+Until now every event had `"effect": null`. An event may now carry one effect, which becomes a **pressure**: the only thing that shocks the economy. `null` still means "just a fact".
+
+On what a town makes or uses of a good:
+
+```json
+"effect": { "type": "pressure", "target": "make", "place": "<place id>", "good": "<good id>", "multiplier": 0.3, "days": 10, "label": "<the event text>" }
+```
+
+On a road:
+
+```json
+"effect": { "type": "pressure", "target": "route", "route": "<road id>", "multiplier": 0, "days": null, "label": "<the event text>" }
+```
+
+- `target` is `make`, `use` or `route`.
+- `multiplier` scales what is made or used (0.3 = about a third). For a road, 0 closes it and a value below 1 slows it: fewer caravans, and they take longer.
+- `days` is how long it lasts. `null` means until you end it.
+- A written event that carries an effect starts its pressure the next day and is named as its cause. The effect on a suggested event does nothing unless you accept it.
+- An event with an effect must be dated today. A plain fact may still be dated in the past.
+
+A countdown may carry the same `effect` inside its `countdown` object; it is copied onto the event it suggests.
+
+### J. Ending a pressure early (a new row)
+
+```json
+{ "recordType": "pressure", "id": "x-0099310-1f0c", "action": "end", "pressureId": "p-e-0099306-a1", "day": 99310, "at": "2026-11-23T20:00:00.000Z" }
+```
+
+The pressure stops weighing on the numbers after that day. The event that caused it is untouched.
+
+### K. Where the party is (a new row)
+
+```json
+{ "recordType": "party", "id": "y-0099306-77aa", "day": 99306, "place": "<place id or null>", "at": "2026-11-23T20:01:00.000Z" }
+```
+
+Only this row moves the party, and only you can write it. No rule in the simulation ever does. `null` means "not set / on the road". In the day snapshot it appears as `state.party = { "place": "...", "sinceDay": 99306 }`.
+
+### L. The market setup (a new row each time you load or change it)
+
+```json
+{
+  "recordType": "economy",
+  "id": "m-0099306-3b9d",
+  "action": "configure",
+  "day": 99306,
+  "at": "2026-11-23T20:02:00.000Z",
+  "config": {
+    "goods": [
+      { "id": "<good id>", "name": "<name>", "unit": "<unit>", "basePrice": { "value": 5000, "estimate": false }, "madeFrom": [{ "good": "<other good id>", "perUnit": 5 }] }
+    ],
+    "routes": [
+      { "id": "<a>--<b>", "a": "<place id>", "b": "<place id>", "travelDays": { "value": 1.5, "estimate": true } }
+    ],
+    "places": {
+      "<place id>": {
+        "name": "<name>",
+        "knownToPlayers": false,
+        "population": { "value": 3500, "estimate": false },
+        "market": { "<good id>": { "make": { "value": 300, "estimate": true }, "use": { "value": 52.5, "estimate": true } } }
+      }
+    },
+    "constants": {}
+  }
+}
+```
+
+- Prices are in copper pieces (5000 = 50 gp).
+- `estimate: true` marks a figure that is a guess; the page labels it. A figure you change on the page is saved with `estimate: false`.
+- Only places with full detail have a `market`; sketched places appear with an empty one so roads to them can be named.
+- The whole setup is one row (about 10,000 characters for Crestfall; a row can hold 30,000, and the store refuses a larger one with a clear message). The sentences saying where each guess came from are not in the row; they stay in the DM-only setup document (N).
+- Loading a changed setup keeps the stock and prices of every town and only works out "usual" again.
+
+### M. The running state of the economy in the day snapshot
+
+`state.systems.economy` in each snapshot, a saved copy that the record can rebuild:
+
+```json
+"economy": {
+  "config": { "...": "the setup above" },
+  "markets": { "<place id>": { "<good id>": { "stock": 1575, "price": 91.2, "usual": 90.4, "history": [90.1, 90.8, 91.2], "reported": 90.4, "highDays": 0, "lowDays": 0, "flag": null, "inputFactor": 1 } } },
+  "shipments": [{ "id": "sh-99307-12", "good": "<good id>", "from": "<place id>", "to": "<place id>", "route": "<road id>", "quantity": 233.1, "departDay": 99307, "arriveDay": 99309 }],
+  "pressures": { "p-<event id>": { "id": "p-<event id>", "target": "make", "place": "<place id>", "good": "<good id>", "route": null, "multiplier": 0.3, "fromDay": 99307, "untilDay": 99316, "cause": "<event id>", "label": "<the event text>" } },
+  "pendingEffects": { "<suggested event id>": { "effect": { "...": "as in I" }, "text": "<its text>" } },
+  "flows": { "<road id>|<good id>|<from place id>": 228.4 },
+  "shipmentSeq": 12
+}
+```
+
+- `history` keeps the last 30 daily prices (the page draws 14).
+- `usual` is what the price settles at with no pressures, worked out when the setup is loaded.
+- `flows` is what each road has lately carried, so only unusual trade is reported.
+- With markets for five towns and ten goods, a day snapshot is about 60,000 characters.
+
+These numbers become canon when you commit a day, as you decided. They are never suggestions. The story suggestions the simulation makes about them ("X is running short in Y") are ordinary suggested events with `"effect": null`, tagged `economy:shortage` or `economy:glut` and `good:<good id>`.
+
+### N. The DM-only setup document (the places blob grows)
+
+The blob `world/eldoria/places.json` (section G) becomes schema `eldoria-world-places/2`. Each place gains two fields, and the document gains an `economy` section. It is still replaced as a whole when you load or edit it, still DM-only, and still not part of the record: the part the simulation uses is copied into the record as row L.
+
+```json
+{
+  "schema": "eldoria-world-places/2",
+  "updatedAt": "2026-11-23T20:02:00.000Z",
+  "loaded": true,
+  "places": [
+    { "id": "<place id>", "name": "<name>", "kind": "Town", "region": "Crestfall", "parent": null, "knownToPlayers": false,
+      "detail": "full", "population": { "value": 3500, "estimate": false, "basis": "Stated in the notes" } }
+  ],
+  "economy": {
+    "goods": [{ "id": "...", "name": "...", "unit": "...", "basePrice": { "value": 40, "estimate": true, "basis": "Not in the catalog. Guess: ..." }, "madeFrom": [] }],
+    "routes": [{ "id": "<a>--<b>", "a": "...", "b": "...", "travelDays": { "value": 1.5, "estimate": true, "basis": "Estimate from the map" } }],
+    "markets": { "<place id>": { "<good id>": { "make": { "value": 300, "estimate": true, "basis": "..." }, "use": { "value": 52.5, "estimate": true, "basis": "..." } } } },
+    "constants": {}
+  }
+}
+```
+
+- `detail` is `full` (has a market), `sketched` (a name and a size, no market) or `landmark`.
+- `basis` is the sentence saying where a figure came from. It is kept here only.
+
+### O. What players can read without a key: local prices
+
+One route needs no DM key: `GET /api/world/public/prices`. It answers for the town the party is in, and only if that town is marked known to players and has a market. This is its whole answer:
+
+```json
+{
+  "place": { "name": "<the name of the town>" },
+  "prices": [
+    { "good": "Healing potion", "unit": "potion", "price": 5210.33, "priceText": "52.1 gp", "vsUsualPercent": 4 }
+  ]
+}
+```
+
+- `price` is in copper pieces; `vsUsualPercent` is against the usual price in that town.
+- No reason, no stock, no other town, no event, no date, and no hidden name.
+- In every other case (world not started, party not placed, party somewhere hidden, a place with no market) it answers exactly `{ "place": null, "prices": [] }`, so the answer does not reveal which case it is.
+- Reading it never writes anything. A test checks the answer for leaks.
+- No players' page uses it yet.
+
+### P. Caps that keep any one subject or good from filling the day
+
+These are constants in the engine, listed here because they shape what you see:
+
+- Each subject (countdowns, economy) may add at most 6 lines to the report for a day; a closing line says how many were left out.
+- The economy reports at most 4 price lines a day and at most 1 per good, each only when a price has moved 5% since it was last mentioned.
+- Trade is reported only when a road carries half as much again as it lately has; at most 2 lines a day.
+- The economy raises at most 2 suggestions a day and at most 1 per good. One held back today is raised on a following day.
+- Countdown suggestions are never capped.
+
 ## What is not stored here
 
-- Routes, goods and people (the seed). The list of place names is section G above; the rest is still a draft: see `Private/0.DM Screen/World Sim/SEED-REVIEW.md`.
+- People (NPCs). Places, goods and roads are sections G, L and N; every estimate in them is listed in `Private/0.DM Screen/World Sim/SEED-REVIEW.md`.
 - Anything in the character sheet data. Nothing here touches it.

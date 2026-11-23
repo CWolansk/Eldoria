@@ -1,7 +1,8 @@
 "use strict";
 
-// HTTP routes for the living world. Every route needs the DM key; there is no
-// player-facing world route in this stage.
+// HTTP routes for the living world. Every route needs the DM key except the one
+// listed in WORLD_PUBLIC_ROUTES: local prices for players, which answers with
+// prices and nothing else (see publicPrices in the engine).
 
 const { httpError, json, withErrors } = require("./http");
 const { requireDmKey } = require("./dmAuth");
@@ -65,7 +66,31 @@ function createWorldHandlers(getService = defaultService) {
     });
   }
 
+  // The one route players may call. No key, read only, and it never says why.
+  function publicRoute(action) {
+    return (request, context) => withErrors(request, context, async () => {
+      if (request.method !== "GET") {
+        throw httpError(405, "Method not allowed.");
+      }
+      const service = await getService();
+      return json(request, 200, await action(service, request));
+    });
+  }
+
   return {
+    worldPublicPrices: publicRoute((service) => service.getPublicPrices()),
+    worldMarkets: route({
+      GET: (service) => service.getMarkets()
+    }),
+    worldState: route({
+      GET: (service) => service.getState()
+    }),
+    worldParty: route({
+      POST: async (service, request) => service.setParty(await readBody(request))
+    }),
+    worldPressureEnd: route({
+      POST: (service, request) => service.endPressure(request.params?.id)
+    }),
     world: route({
       GET: (service) => service.getWorld()
     }),
@@ -128,11 +153,20 @@ const WORLD_ROUTES = Object.freeze([
   { name: "worldEventVisibility", route: "world/events/{id}/visibility", methods: ["POST"], handler: "worldEventVisibility" },
   { name: "worldCountdowns", route: "world/countdowns", methods: ["GET", "POST"], handler: "worldCountdowns" },
   { name: "worldCountdownAction", route: "world/countdowns/{id}/actions", methods: ["POST"], handler: "worldCountdownAction" },
-  { name: "worldPlaces", route: "world/places", methods: ["GET", "PUT"], handler: "worldPlaces" }
+  { name: "worldPlaces", route: "world/places", methods: ["GET", "PUT"], handler: "worldPlaces" },
+  { name: "worldMarkets", route: "world/markets", methods: ["GET"], handler: "worldMarkets" },
+  { name: "worldState", route: "world/state", methods: ["GET"], handler: "worldState" },
+  { name: "worldParty", route: "world/party", methods: ["POST"], handler: "worldParty" },
+  { name: "worldPressureEnd", route: "world/pressures/{id}/end", methods: ["POST"], handler: "worldPressureEnd" }
+]);
+
+/** Routes that need no key. Keep this list short and every entry leak-tested. */
+const WORLD_PUBLIC_ROUTES = Object.freeze([
+  { name: "worldPublicPrices", route: "world/public/prices", methods: ["GET"], handler: "worldPublicPrices" }
 ]);
 
 function registerWorldRoutes(app, handlers = createWorldHandlers()) {
-  for (const entry of WORLD_ROUTES) {
+  for (const entry of [...WORLD_ROUTES, ...WORLD_PUBLIC_ROUTES]) {
     app.http(entry.name, {
       methods: [...entry.methods, "OPTIONS"],
       authLevel: "anonymous",
@@ -142,4 +176,4 @@ function registerWorldRoutes(app, handlers = createWorldHandlers()) {
   }
 }
 
-module.exports = { WORLD_ROUTES, createWorldHandlers, registerWorldRoutes };
+module.exports = { WORLD_PUBLIC_ROUTES, WORLD_ROUTES, createWorldHandlers, registerWorldRoutes };

@@ -47,6 +47,8 @@ function parseRowKey(rowKey) {
   return { day: Number(day), sequence: Number(sequence) };
 }
 
+const MAX_RECORD_CHARACTERS = 30000;
+
 function snapshotBlobName(worldId, day, commitId) {
   return `world/${worldId}/days/${pad(day, DAY_DIGITS)}-${commitId}.json`;
 }
@@ -131,6 +133,10 @@ function createWorldStore({ tableClient, blobClient, worldId = DEFAULT_WORLD_ID,
     for (const record of list) {
       if (!record || !record.recordType || !record.id) {
         throw storeError(400, "Each record needs a recordType and an id.");
+      }
+      // A table row's text column holds about 32,000 characters. Refuse before writing.
+      if (JSON.stringify(record).length > MAX_RECORD_CHARACTERS) {
+        throw storeError(413, "That is too much to record in one row. Split it, or shorten it.");
       }
       let attempt = 0;
       for (;;) {

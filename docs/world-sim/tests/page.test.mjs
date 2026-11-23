@@ -123,7 +123,7 @@ test("the right key is kept in this browser only and opens the world", async () 
   await waitFor(() => page.q("#ws-jot"), "today view");
   assert.equal(page.q("#ws-bar").hidden, false);
   assert.match(page.q("#ws-date").textContent, /Fall 7, 496.*Day 7 of 50 in Fall/s);
-  assert.deepEqual(page.all("#ws-tab-row a").map((tab) => tab.textContent), ["Today", "Countdowns", "Record"], "no dead tabs");
+  assert.deepEqual(page.all("#ws-tab-row a").map((tab) => tab.textContent), ["Today", "Places", "Markets", "Countdowns", "Record"], "no dead tabs");
   assert.match(page.text(), /Nothing is waiting/);
   assert.match(page.text(), /Nothing written yet today/);
 });

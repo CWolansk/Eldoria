@@ -529,8 +529,176 @@ for (const place of draft.otherPlacesOnMap) {
     knownToPlayers: false
   });
 }
-fs.writeFileSync(placesFile, `${JSON.stringify({ schema: "eldoria-world-places/1", places: placeList }, null, 2)}\n`);
-console.log(`Wrote ${rel(placesFile)} (${placeList.length} places)`);
+// ---- Market setup (Stage 2) ----
+// What each town makes and uses is NOT in the notes. It comes from market-estimates.json,
+// a file of best guesses for the DM to correct, and every figure taken from it is marked
+// "estimate" with a line saying what it is based on. Base prices come from the catalog
+// where the catalog has the item; the rest are estimates too.
+const estimatesFile = path.join(repoRoot, "Private", "0.DM Screen", "World Sim", "market-estimates.json");
+const reviewFile = path.join(repoRoot, "Private", "0.DM Screen", "World Sim", "SEED-REVIEW.md");
+const estimates = JSON.parse(fs.readFileSync(estimatesFile, "utf8"));
+const round = (value, places = 2) => Math.round(value * 10 ** places) / 10 ** places;
+const COIN = { cp: 1, sp: 10, ep: 50, gp: 100, pp: 1000 };
+
+function copperFromLabel(label) {
+  const match = /^([\d.,]+)\s*(cp|sp|ep|gp|pp)$/iu.exec(String(label || "").trim());
+  return match ? Number(match[1].replace(/,/gu, "")) * COIN[match[2].toLowerCase()] : null;
+}
+
+function catalogCopper(goodId, itemId) {
+  const item = (draft.goods.find((good) => good.id === goodId)?.catalogItems || []).find((entry) => entry.id === itemId);
+  return item ? copperFromLabel(item.priceLabel) : null;
+}
+
+const landmark = new RegExp(estimates.landmarkNamePattern, "u");
+const marketTownIds = towns.map((town) => town.id);
+const marketPopulation = {};
+for (const town of towns) {
+  const stated = town.population?.value ?? null;
+  const guess = estimates.populationEstimates?.[town.id];
+  marketPopulation[town.id] = stated != null
+    ? { value: stated, estimate: false, basis: `Stated in the notes for ${town.name}` }
+    : guess ? { value: guess.value, estimate: true, basis: guess.basis } : null;
+}
+for (const place of placeList) {
+  if (place.parent) continue;
+  if (marketTownIds.includes(place.id)) {
+    place.detail = "full";
+    place.population = marketPopulation[place.id];
+  } else {
+    place.detail = landmark.test(place.name) ? "landmark" : "sketched";
+    place.population = null;
+  }
+}
+
+const marketGoods = [];
+const marketProblems = [];
+for (const good of estimates.goods) {
+  let basePrice;
+  if (good.price.catalogItem) {
+    const copper = catalogCopper(good.id, good.price.catalogItem);
+    if (copper == null) {
+      marketProblems.push(`${good.id}: the catalog price for ${good.price.catalogItem} could not be read (run without --offline)`);
+      continue;
+    }
+    basePrice = { value: round(copper * (good.price.times || 1)), estimate: good.price.estimate === true, basis: good.price.basis };
+  } else {
+    basePrice = { value: good.price.estimateCopper, estimate: true, basis: good.price.basis };
+  }
+  marketGoods.push({ id: good.id, name: good.name, unit: good.unit, basePrice, madeFrom: (good.madeFrom || []).map(({ good: input, perUnit }) => ({ good: input, perUnit })) });
+}
+if (marketProblems.length) {
+  throw new Error(`Market setup not written:\n  ${marketProblems.join("\n  ")}`);
+}
+
+// What each town uses: the same per head everywhere.
+const directUse = {};
+for (const town of towns) {
+  directUse[town.id] = {};
+  for (const good of estimates.goods) {
+    directUse[town.id][good.id] = round((marketPopulation[town.id]?.value || 0) / 1000 * good.usePerThousandPeoplePerDay, 2);
+  }
+}
+// What each town makes: its share of everything the five towns need, makers' inputs included.
+// Goods that are inputs are worked out after the goods made from them.
+const made = Object.fromEntries(marketTownIds.map((id) => [id, {}]));
+const order = [...estimates.goods].sort((a, b) => Number(Boolean(b.madeFrom)) - Number(Boolean(a.madeFrom)));
+for (const good of order) {
+  let need = marketTownIds.reduce((sum, id) => sum + directUse[id][good.id], 0);
+  for (const other of estimates.goods) {
+    for (const input of other.madeFrom || []) {
+      if (input.good === good.id) {
+        need += marketTownIds.reduce((sum, id) => sum + (made[id][other.id] || 0) * input.perUnit, 0);
+      }
+    }
+  }
+  const shares = marketTownIds.map((id) => estimates.makes?.[id]?.[good.id]?.share || 0);
+  const totalShare = shares.reduce((sum, share) => sum + share, 0);
+  if (Math.abs(totalShare - 1) > 0.001) {
+    throw new Error(`market-estimates.json: the shares for ${good.id} add up to ${totalShare}, not 1.`);
+  }
+  marketTownIds.forEach((id, index) => { made[id][good.id] = round(need * shares[index], 2); });
+}
+
+const markets = {};
+const estimateRows = [];
+for (const town of towns) {
+  markets[town.id] = {};
+  for (const good of estimates.goods) {
+    const make = made[town.id][good.id] || 0;
+    const use = directUse[town.id][good.id] || 0;
+    const makeBasis = estimates.makes?.[town.id]?.[good.id]?.basis || "Not known for making this";
+    const useBasis = `${good.useBasis}; ${marketPopulation[town.id]?.value ?? "?"} people`;
+    markets[town.id][good.id] = {
+      make: { value: make, estimate: true, basis: makeBasis },
+      use: { value: use, estimate: true, basis: useBasis }
+    };
+    estimateRows.push(`| ${town.name} | ${good.name} | ${make} | ${makeBasis} | ${use} | ${good.unit} a day |`);
+  }
+}
+
+const marketRoutes = (draft.routeEstimates || []).map((route) => ({
+  id: route.id,
+  a: route.a,
+  b: route.b,
+  travelDays: {
+    value: route.travelDays.value,
+    estimate: route.travelDays.estimate === true,
+    basis: route.travelDays.source
+  }
+})).filter((route) => placeList.some((place) => place.id === route.a) && placeList.some((place) => place.id === route.b));
+
+const upload = {
+  schema: "eldoria-world-places/2",
+  note: "DM only. Load this from the Living World page (Setup). Every figure marked estimate is a guess for you to correct.",
+  places: placeList,
+  economy: { goods: marketGoods, routes: marketRoutes, markets }
+};
+fs.writeFileSync(placesFile, `${JSON.stringify(upload, null, 2)}\n`);
+console.log(`Wrote ${rel(placesFile)} (${placeList.length} places, ${marketGoods.length} goods, ${marketRoutes.length} roads, ${estimateRows.length} make/use estimates)`);
+
+// The one table of every estimate, kept in SEED-REVIEW.md between two markers.
+const money = (copper) => (copper >= 100 ? `${round(copper / 100, 1)} gp` : copper >= 10 ? `${round(copper / 10, 1)} sp` : `${copper} cp`);
+const block = [
+  "<!-- market-estimates:start (written by tools/build-seed-draft.mjs; edit market-estimates.json, not this table) -->",
+  "",
+  "**Base prices**",
+  "",
+  "| Good | Unit | Base price | Estimate? | Based on |",
+  "|---|---|---|---|---|",
+  ...marketGoods.map((good) => `| ${good.name} | ${good.unit} | ${money(good.basePrice.value)} | ${good.basePrice.estimate ? "estimate" : "catalog"} | ${good.basePrice.basis} |`),
+  "",
+  "**Made from**",
+  "",
+  "| Good | Made from | Based on |",
+  "|---|---|---|",
+  ...estimates.goods.flatMap((good) => (good.madeFrom || []).map((input) => `| ${good.name} | ${input.perUnit} ${estimates.goods.find((entry) => entry.id === input.good).unit}s of ${estimates.goods.find((entry) => entry.id === input.good).name.toLowerCase()} | estimate: ${input.basis} |`)),
+  "",
+  "**Populations**",
+  "",
+  "| Town | People | Estimate? | Based on |",
+  "|---|---|---|---|",
+  ...towns.map((town) => `| ${town.name} | ${marketPopulation[town.id]?.value ?? "?"} | ${marketPopulation[town.id]?.estimate ? "estimate" : "from the notes"} | ${marketPopulation[town.id]?.basis || ""} |`),
+  "",
+  "**What each town makes and uses, per day (every figure is an estimate)**",
+  "",
+  "| Town | Good | Makes | Why it makes that much | Uses | Unit |",
+  "|---|---|---|---|---|---|",
+  ...estimateRows,
+  "",
+  "<!-- market-estimates:end -->"
+].join("\n");
+if (fs.existsSync(reviewFile)) {
+  const review = fs.readFileSync(reviewFile, "utf8");
+  const start = review.indexOf("<!-- market-estimates:start");
+  const end = review.indexOf("<!-- market-estimates:end -->");
+  if (start >= 0 && end > start) {
+    fs.writeFileSync(reviewFile, `${review.slice(0, start)}${block}${review.slice(end + "<!-- market-estimates:end -->".length)}`);
+    console.log(`Updated the estimates table in ${rel(reviewFile)}`);
+  } else {
+    console.warn(`${rel(reviewFile)} has no market-estimates markers; the table was not written.`);
+  }
+}
 
 const count = (list, test) => list.filter(test).length;
 console.log(`Wrote ${rel(outFile)}`);

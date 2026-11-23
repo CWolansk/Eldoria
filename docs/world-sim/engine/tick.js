@@ -9,7 +9,7 @@
 import { createRng, daySeed } from "./rng.js";
 import { createSuggestedEvent } from "./events.js";
 
-export const ENGINE_VERSION = "0.2.0";
+export const ENGINE_VERSION = "0.3.0";
 
 function clone(value) {
   return value === undefined ? undefined : structuredClone(value);
@@ -94,6 +94,7 @@ function deepFreeze(value) {
  *   writtenEvents    - canon events (folded, status "written")
  *   options.seed     - overrides state.worldSeed (for what-if runs)
  *   options.registry - subject systems; none by default
+ *   options.reportLinesPerSystem - most report lines one subject may add in a day
  * Returns { state, report, suggestions }:
  *   state        - the new state (a fresh object; the input is untouched)
  *   report       - running-number lines for the day, each tagged with its system
@@ -116,11 +117,15 @@ export function tick(state, writtenEvents = [], options = {}) {
 
   const report = [];
   const suggestions = [];
+  // No subject may fill the day report: each gets at most this many lines, and a
+  // final line says how many were left out.
+  const reportCap = Number.isInteger(options.reportLinesPerSystem) ? options.reportLinesPerSystem : Infinity;
 
   for (const system of registry.list()) {
     const systemState = next.systems[system.id]
       ?? (typeof system.init === "function" ? clone(system.init(world)) ?? {} : {});
     let suggestionCount = 0;
+    let reportCount = 0;
     system.tick({
       day,
       rng: createRng(daySeed(worldSeed, day, system.id)),
@@ -131,7 +136,10 @@ export function tick(state, writtenEvents = [], options = {}) {
       world,
       writtenEvents: canon,
       report(entry) {
-        report.push({ ...clone(entry), day, system: system.id });
+        reportCount += 1;
+        if (reportCount <= reportCap) {
+          report.push({ ...clone(entry), day, system: system.id });
+        }
       },
       suggest(event) {
         suggestionCount += 1;
@@ -146,6 +154,13 @@ export function tick(state, writtenEvents = [], options = {}) {
       }
     });
     next.systems[system.id] = systemState;
+    if (reportCount > reportCap) {
+      const left = reportCount - reportCap;
+      report.push({
+        kind: "More", day, system: system.id, heldBack: left,
+        text: `${left} more ${system.id} line${left === 1 ? " was" : "s were"} left out today.`
+      });
+    }
   }
 
   return { state: next, report, suggestions };

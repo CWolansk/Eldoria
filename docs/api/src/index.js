@@ -104,5 +104,7 @@ app.http("publicIndex", {
 
 // Living world (DM only): world, world/start, world/advance, world/events,
 // world/events/{id}/decision, world/events/{id}/visibility, world/countdowns,
-// world/countdowns/{id}/actions, world/places.
+// world/countdowns/{id}/actions, world/places, world/markets, world/state,
+// world/party, world/pressures/{id}/end. One route needs no key and answers with
+// local prices only: world/public/prices.
 registerWorldRoutes(app);

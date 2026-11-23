@@ -618,6 +618,28 @@ export class EldoriaApiClient {
     return this.request("world/places");
   }
 
+  getWorldMarkets() {
+    return this.request("world/markets");
+  }
+
+  /** The current world state, for a what-if run in the browser. */
+  getWorldState() {
+    return this.request("world/state");
+  }
+
+  setWorldParty(place) {
+    return this.request("world/party", { method: "POST", body: { place: place || null } });
+  }
+
+  endWorldPressure(pressureId) {
+    return this.request(`world/pressures/${encodeURIComponent(pressureId)}/end`, { method: "POST", body: {} });
+  }
+
+  /** Needs no DM key: prices in the party's current town, if the players know it. */
+  getWorldPublicPrices() {
+    return this.request("world/public/prices");
+  }
+
   saveWorldPlaces(document) {
     return this.request("world/places", { method: "PUT", body: document });
   }

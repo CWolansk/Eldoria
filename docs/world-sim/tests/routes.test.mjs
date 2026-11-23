@@ -3,7 +3,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 import {
-  DM_KEY, WORLD_ROUTES, engine, makeRequest, makeWorld, quietContext, withDmKey
+  DM_KEY, WORLD_PUBLIC_ROUTES, WORLD_ROUTES, engine, makeRequest, makeWorld, quietContext, withDmKey
 } from "./helpers.mjs";
 
 const require = createRequire(import.meta.url);
@@ -57,11 +57,13 @@ test("with no key set on the server, every world route is closed (403)", withDmK
   assert.equal(world.blobs.blobs.size, 0);
 }));
 
-test("every registered world route is one of the DM-locked handlers", () => {
+test("every registered world route is DM-locked, except the one public prices route", () => {
   const registered = [];
   const { registerWorldRoutes } = require("../../api/src/worldRoutes.js");
   registerWorldRoutes({ http: (name, options) => registered.push({ name, ...options }) }, makeWorld().handlers);
-  assert.equal(registered.length, WORLD_ROUTES.length);
+  assert.equal(registered.length, WORLD_ROUTES.length + WORLD_PUBLIC_ROUTES.length);
+  assert.deepEqual(WORLD_PUBLIC_ROUTES.map((entry) => [entry.route, entry.methods]), [["world/public/prices", ["GET"]]]);
+  assert.ok(!WORLD_ROUTES.some((entry) => WORLD_PUBLIC_ROUTES.some((open) => open.handler === entry.handler)));
   for (const entry of registered) {
     assert.match(entry.route, /^world(\/|$)/);
     assert.ok(entry.methods.includes("OPTIONS"), "browsers can preflight it");

@@ -99,6 +99,103 @@ Which places are joined by a road is also a guess (nearest neighbours with no ra
 
 **One conflict to settle.** Your Fairfield note gives a hard ride of two days from Highreach. The method above gives a day and a half for ordinary travel on that road, which is faster than a hard ride should be. Either the note is generous or the pace above is too quick; if the note is right, every estimate should grow by about half as much again.
 
+## Markets: every estimate in one place
+
+Your notes do not say what any town makes or uses, so the market setup is built from best guesses. **Every figure below marked estimate is mine, not yours, and none of it is canon.** They are sized so that a town's use follows its population and the five Crestfall towns together make about what they use (trade with places outside Crestfall is not simulated yet).
+
+To correct them, either change a figure on the Living World page (open a place under Places; estimates are labelled there and a figure you change stops being an estimate), or edit `market-estimates.json` beside this file and rebuild, then load `places.upload.json` again.
+
+<!-- market-estimates:start (written by tools/build-seed-draft.mjs; edit market-estimates.json, not this table) -->
+
+**Base prices**
+
+| Good | Unit | Base price | Estimate? | Based on |
+|---|---|---|---|---|
+| Grain | sack | 1 gp | catalog | Catalog: wheat is 1 cp a pound; a sack is taken as 100 pounds |
+| Fish | basket | 4 sp | estimate | Not in the catalog. Guess: 2 cp a pound, a basket of 20 pounds |
+| Wine | pitcher | 2 sp | catalog | Catalog: common wine, 2 sp a pitcher |
+| Iron | pound | 1 sp | catalog | Catalog: iron, 1 sp a pound |
+| Timber | cartload | 5 gp | estimate | Not in the catalog. Guess: 5 gp a cartload |
+| Herbs | bundle | 2 gp | estimate | Not in the catalog. Guess: 2 gp a bundle, so the herbs in a healing potion cost a fifth of its price |
+| Healing potion | potion | 50 gp | catalog | Catalog: potion of healing, 50 gp (confirmed by the DM) |
+| Weapons | weapon | 15 gp | estimate | A whole category. The catalog's longsword (15 gp) stands in for it; which item should is your call |
+| Cloth | square yard | 5 sp | catalog | Catalog: cotton cloth, 5 sp a square yard |
+| Luxuries | piece | 10 gp | estimate | A whole category. The catalog's silk (10 gp a square yard) stands in for it; which item should is your call |
+
+**Made from**
+
+| Good | Made from | Based on |
+|---|---|---|
+| Healing potion | 5 bundles of herbs | estimate: Guess: five bundles of herbs a potion |
+| Weapons | 10 pounds of iron | estimate: Guess: ten pounds of iron a weapon |
+
+**Populations**
+
+| Town | People | Estimate? | Based on |
+|---|---|---|---|
+| Highreach | 25000 | from the notes | Stated in the notes for Highreach |
+| Ardenville | 500 | from the notes | Stated in the notes for Ardenville |
+| Fairfield | 3500 | from the notes | Stated in the notes for Fairfield |
+| Hillcrest | 400 | from the notes | Stated in the notes for Hillcrest |
+| Stonehaven | 300 | estimate | Not in the notes. The notes call it a village and a fortress-settlement on the edge of Blackwood Forest; Hillcrest, the other village, has 400. |
+
+**What each town makes and uses, per day (every figure is an estimate)**
+
+| Town | Good | Makes | Why it makes that much | Uses | Unit |
+|---|---|---|---|---|---|
+| Highreach | Grain | 98.01 | Farmland around the capital feeds part of it | 375 | sack a day |
+| Highreach | Fish | 89.1 | On the shore of Lake Arden | 250 | basket a day |
+| Highreach | Wine | 178.2 | Some wine is made near the capital; most comes from elsewhere | 2500 | pitcher a day |
+| Highreach | Iron | 683.1 | The notes name the Highreach Mines; no other Crestfall town has a mine in the notes | 500 | pound a day |
+| Highreach | Timber | 9.5 | Some woodland nearby | 50 | cartload a day |
+| Highreach | Herbs | 0 | Not known for making this | 50 | bundle a day |
+| Highreach | Healing potion | 8.91 | The capital has the temples and the Arcane Enclave | 12.5 | potion a day |
+| Highreach | Weapons | 6.95 | The notes name The Dragons Breath Forge | 7.5 | weapon a day |
+| Highreach | Cloth | 347.49 | Weavers in the capital | 750 | square yard a day |
+| Highreach | Luxuries | 9.8 | Craftsmen serving the noble houses | 25 | piece a day |
+| Ardenville | Grain | 15.59 | A few fields behind the port | 7.5 | sack a day |
+| Ardenville | Fish | 200.48 | The notes call it a port town on Lake Arden, with a Fishermans Guild | 5 | basket a day |
+| Ardenville | Wine | 0 | Not known for making this | 50 | pitcher a day |
+| Ardenville | Iron | 0 | Not known for making this | 10 | pound a day |
+| Ardenville | Timber | 0 | Not known for making this | 1 | cartload a day |
+| Ardenville | Herbs | 0 | Not known for making this | 1 | bundle a day |
+| Ardenville | Healing potion | 0 | Not known for making this | 0.25 | potion a day |
+| Ardenville | Weapons | 0.98 | The notes name the Steelshapers Forge | 0.15 | weapon a day |
+| Ardenville | Cloth | 0 | Not known for making this | 15 | square yard a day |
+| Ardenville | Luxuries | 0 | Not known for making this | 0.5 | piece a day |
+| Fairfield | Grain | 300.71 | The name and the open country on the map; taken as Crestfall's main farmland | 52.5 | sack a day |
+| Fairfield | Fish | 7.43 | A little river fish | 35 | basket a day |
+| Fairfield | Wine | 386.1 | Some vineyards | 350 | pitcher a day |
+| Fairfield | Iron | 0 | Not known for making this | 70 | pound a day |
+| Fairfield | Timber | 0 | Not known for making this | 7 | cartload a day |
+| Fairfield | Herbs | 33.41 | Herb gardens for its apothecaries | 7 | bundle a day |
+| Fairfield | Healing potion | 5.94 | The notes mention potions being sold here | 1.75 | potion a day |
+| Fairfield | Weapons | 0.98 | A trade town has smiths | 1.05 | weapon a day |
+| Fairfield | Cloth | 498.96 | The notes call it the bustling trade centre of Crestfall | 105 | square yard a day |
+| Fairfield | Luxuries | 19.9 | Stands in for goods arriving from the Silverleaf Lands next door, which are not simulated yet | 3.5 | piece a day |
+| Hillcrest | Grain | 20.05 | Hill farms | 6 | sack a day |
+| Hillcrest | Fish | 0 | Not known for making this | 4 | basket a day |
+| Hillcrest | Wine | 2405.7 | The notes call it the wine capital of Crestfall, supplying Highreach's noble houses | 40 | pitcher a day |
+| Hillcrest | Iron | 0 | Not known for making this | 8 | pound a day |
+| Hillcrest | Timber | 4.75 | Coopers and some woodland | 0.8 | cartload a day |
+| Hillcrest | Herbs | 29.4 | The notes mention a herbalist and herb gatherers here | 0.8 | bundle a day |
+| Hillcrest | Healing potion | 0 | Not known for making this | 0.2 | potion a day |
+| Hillcrest | Weapons | 0 | Not known for making this | 0.12 | weapon a day |
+| Hillcrest | Cloth | 44.55 | Cottage weaving | 12 | square yard a day |
+| Hillcrest | Luxuries | 0 | Not known for making this | 0.4 | piece a day |
+| Stonehaven | Grain | 11.14 | Small clearings | 4.5 | sack a day |
+| Stonehaven | Fish | 0 | Not known for making this | 3 | basket a day |
+| Stonehaven | Wine | 0 | Not known for making this | 30 | pitcher a day |
+| Stonehaven | Iron | 0 | Not known for making this | 6 | pound a day |
+| Stonehaven | Timber | 45.14 | The notes put it on the edge of Blackwood Forest | 0.6 | cartload a day |
+| Stonehaven | Herbs | 70.83 | Forest edge, founded by rangers and trappers | 0.6 | bundle a day |
+| Stonehaven | Healing potion | 0 | Not known for making this | 0.15 | potion a day |
+| Stonehaven | Weapons | 0 | Not known for making this | 0.09 | weapon a day |
+| Stonehaven | Cloth | 0 | Not known for making this | 9 | square yard a day |
+| Stonehaven | Luxuries | 0 | Not known for making this | 0.3 | piece a day |
+
+<!-- market-estimates:end -->
+
 ## Candidates for countdowns
 
 The world starts with no countdowns. These are the situations your notes already describe; each is quoted with its source in the draft under `situationsInNotes`. None is added automatically.
@@ -132,4 +229,4 @@ It reads the notes and makes GET requests to the API for item prices. `--offline
 
 ## The places file for the DM page
 
-The same tool also writes `places.upload.json` beside this file: every town, place in a town and map place, with whether your players know it. On the Living World page, open Setup at the bottom of Today and load that file. It is stored in your storage account behind the DM key and is never put in `docs/`. Until it is loaded, the "where" box offers only places your players already know.
+The same tool also writes `places.upload.json` beside this file: every town, place in a town and map place, with whether your players know it, plus the market setup above (goods, base prices, roads with travel days, and what each of the five towns makes and uses). On the Living World page, open Setup at the bottom of Today and load that file. It is stored in your storage account behind the DM key and is never put in `docs/`. Until it is loaded, the "where" box offers only places your players already know.

@@ -88,7 +88,9 @@ export function createCountdown(input) {
     dueDay: mode === COUNTDOWN_MODE.DATE ? requireDay(input.dueDay, "The date") : null,
     fill: mode === COUNTDOWN_MODE.CHANCE ? clampFill(input.fill, size) : 0,
     place: input.place ?? null,
-    suggestionText: requireText(input.suggestionText, "What it suggests when it comes due")
+    suggestionText: requireText(input.suggestionText, "What it suggests when it comes due"),
+    // What the suggested event does to the numbers if the DM accepts it; null for a plain fact.
+    effect: input.effect ?? null
   };
   if (mode === COUNTDOWN_MODE.DATE && countdown.dueDay <= day) {
     throw fail("The date must be after today.");
@@ -178,6 +180,7 @@ export function countdownSuggestion(item) {
     why: item.mode === COUNTDOWN_MODE.DATE
       ? `The date for "${item.label}" has come.`
       : `The countdown "${item.label}" filled up.`,
+    effect: item.effect ?? null,
     tags: [countdownTag(item.id)]
   };
 }

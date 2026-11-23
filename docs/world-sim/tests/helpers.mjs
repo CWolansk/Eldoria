@@ -6,11 +6,11 @@ import * as engine from "../engine/index.js";
 const require = createRequire(import.meta.url);
 const { createWorldStore } = require("../../api/src/worldStore.js");
 const { createWorldService } = require("../../api/src/worldService.js");
-const { createWorldHandlers, WORLD_ROUTES } = require("../../api/src/worldRoutes.js");
+const { createWorldHandlers, WORLD_ROUTES, WORLD_PUBLIC_ROUTES } = require("../../api/src/worldRoutes.js");
 const { dmSessionHandler } = require("../../api/src/characters.js");
 
 export const DM_KEY = "test-dm-key-not-a-real-secret";
-export { engine, WORLD_ROUTES };
+export { engine, WORLD_ROUTES, WORLD_PUBLIC_ROUTES };
 
 export function fakeTable() {
   const rows = new Map();
@@ -96,7 +96,7 @@ export const quietContext = { error() {}, log() {} };
 
 function matchRoute(pathname) {
   const parts = pathname.split("/").filter(Boolean);
-  for (const entry of WORLD_ROUTES) {
+  for (const entry of [...WORLD_ROUTES, ...WORLD_PUBLIC_ROUTES]) {
     const pattern = entry.route.split("/");
     if (pattern.length !== parts.length) continue;
     const params = {};
@@ -165,6 +165,33 @@ export function withDmKey(value, run) {
     } finally {
       if (before === undefined) delete process.env.ELDORIA_DM_KEY;
       else process.env.ELDORIA_DM_KEY = before;
+    }
+  };
+}
+
+/** A made-up setup for tests: two market towns (one hidden), a sketched village and a shop. */
+export function testSetup() {
+  return {
+    places: [
+      { id: "openton", name: "Openton", kind: "Town", region: "Test Region", knownToPlayers: true, detail: "full", population: { value: 2000 } },
+      { id: "secretville", name: "Secretville", kind: "Town", region: "Test Region", knownToPlayers: false, detail: "full", population: { value: 1000, estimate: true, basis: "a guess" } },
+      { id: "farplace", name: "Farplace", kind: "Village", region: "Other Region", knownToPlayers: false, detail: "sketched", population: null },
+      { id: "openton--inn", name: "The Inn (Openton)", kind: "Place in town", region: "Test Region", parent: "openton", knownToPlayers: true }
+    ],
+    economy: {
+      goods: [
+        { id: "bread", name: "Bread", unit: "loaf", basePrice: { value: 100 } },
+        { id: "rope", name: "Rope", unit: "coil", basePrice: { value: 1000, estimate: true, basis: "no catalog item" } }
+      ],
+      routes: [
+        { id: "openton--secretville", a: "openton", b: "secretville", travelDays: { value: 2, estimate: true, basis: "map" } },
+        { id: "secretville--farplace", a: "secretville", b: "farplace", travelDays: 3 }
+      ],
+      markets: {
+        openton: { bread: { make: { value: 30, estimate: true, basis: "farmland" }, use: 20 }, rope: { make: 0, use: 4 } },
+        secretville: { bread: { make: 0, use: 10 }, rope: { make: { value: 6, estimate: true }, use: 2 } },
+        farplace: { bread: { make: 5, use: 5 } }
+      }
     }
   };
 }

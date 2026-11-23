@@ -12,6 +12,9 @@ import { foldRecord, EVENT_STATUS } from "./events.js";
 import {
   COUNTDOWN_SYSTEM_ID, applyCountdownRecord, countdownsSystem, emptyCountdownState
 } from "./countdowns.js";
+import {
+  ECONOMY_SYSTEM_ID, applyEconomyRecord, economySystem, emptyEconomyState
+} from "./economy.js";
 
 /** The first in-world day of the simulation: Fall 7, 496. */
 export const WORLD_START_DAY = 99306;
@@ -20,9 +23,16 @@ export const WORLD_START_DAY = 99306;
 export const MAX_ADVANCE_DAYS = 30;
 export const MAX_RUN_TO_DECISION_DAYS = 7;
 
-/** The subject systems that exist in Stage 1. Later stages register more here. */
+/**
+ * Most lines one subject may add to a day's report. Countdowns and the economy get
+ * the same allowance, so neither crowds the other out; a closing line says how many
+ * were left out.
+ */
+export const REPORT_LINES_PER_SUBJECT = 6;
+
+/** The subject systems that exist so far. Later stages register more here. */
 export function createLedgerRegistry() {
-  return createRegistry([countdownsSystem]);
+  return createRegistry([countdownsSystem, economySystem]);
 }
 
 /** The world on its first day: no events, no countdowns. */
@@ -33,15 +43,21 @@ export function createStartState({ day = WORLD_START_DAY, worldSeed } = {}) {
 /**
  * Applies rows to a state and returns the new state; the input is untouched.
  * Rows are applied in the order given. Only rows that change running state
- * matter here (countdown rows, countdown suggestions, decisions on them);
- * everything else passes through.
+ * matter here (countdown rows, the market setup, pressures, events that carry an
+ * effect, decisions, and where the party is); everything else passes through.
  */
 export function applyRecords(state, records = []) {
   const next = structuredClone(state);
   next.systems = next.systems || {};
   const countdowns = next.systems[COUNTDOWN_SYSTEM_ID] || (next.systems[COUNTDOWN_SYSTEM_ID] = emptyCountdownState());
+  const economy = next.systems[ECONOMY_SYSTEM_ID] || (next.systems[ECONOMY_SYSTEM_ID] = emptyEconomyState());
   for (const record of records) {
     applyCountdownRecord(countdowns, record);
+    applyEconomyRecord(economy, record);
+    if (record?.recordType === "party") {
+      // Only the DM's own row moves the party. No system ever writes this.
+      next.party = { place: record.place ?? null, sinceDay: record.day };
+    }
   }
   return next;
 }
@@ -59,7 +75,11 @@ export function recordsForDay(records, day) {
 export function advanceDay(state, records = [], options = {}) {
   const current = applyRecords(state, recordsForDay(records, state.day));
   const canon = foldRecord(records).events.filter((event) => event.status === EVENT_STATUS.WRITTEN);
-  return tick(current, canon, { registry: createLedgerRegistry(), ...options });
+  return tick(current, canon, {
+    registry: createLedgerRegistry(),
+    reportLinesPerSystem: REPORT_LINES_PER_SUBJECT,
+    ...options
+  });
 }
 
 /**

@@ -13,6 +13,15 @@
 //   countdown  - a change to a countdown (see countdowns.js). The event fold
 //                skips these; the countdown fold reads them.
 //
+// Stage 2 adds three more, also append-only and also skipped by the event fold:
+//
+//   economy    - the DM loads or changes the market setup (see economy.js).
+//   pressure   - the DM ends a pressure early.
+//   party      - the DM says where the party is. Nothing else ever moves the party.
+//
+// An event may now carry an `effect` (see normalizeEffect in economy.js): what it
+// does to the numbers. null means it is just a fact.
+//
 // Only events whose folded status is "written" are canon.
 // These helpers are pure: ids and timestamps are supplied by the caller.
 
@@ -74,6 +83,17 @@ export function createVisibility(input) {
     playersVisible: input.playersVisible === true,
     day: requireDay(input.day),
     decidedAt: input.decidedAt ?? null
+  };
+}
+
+/** The DM says where the party is. `place` may be null for "on the road / not set". */
+export function createPartyMove(input) {
+  return {
+    recordType: "party",
+    id: requireText(input.id, "Record id"),
+    day: requireDay(input.day),
+    place: input.place == null || String(input.place).trim() === "" ? null : String(input.place).trim(),
+    at: input.at ?? null
   };
 }
 
@@ -176,7 +196,9 @@ export function foldRecord(records) {
       continue;
     }
 
-    if (record?.recordType === "countdown") {
+    // Rows read by other folds: countdowns, the economy setup, pressures ended early,
+    // and where the party is.
+    if (["countdown", "economy", "pressure", "party"].includes(record?.recordType)) {
       continue;
     }
 

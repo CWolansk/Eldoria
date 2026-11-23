@@ -11,10 +11,13 @@
 //   - Running numbers become canon when a day is committed (advance).
 //   - Players see nothing unless the DM reveals it (visibility rows).
 //   - Nothing here moves the party. The DM writes where the party is.
+//   - Players see prices only: one town (where the party is), only if they know
+//     that town, and never a reason, a stock level or another town.
 
 const crypto = require("node:crypto");
 
-const PLACES_SCHEMA = "eldoria-world-places/1";
+const PLACES_SCHEMA = "eldoria-world-places/2";
+const PLACE_DETAIL = Object.freeze(["full", "sketched", "landmark"]);
 
 function fail(statusCode, message, details = {}) {
   return Object.assign(new Error(message), { statusCode, details });
@@ -107,6 +110,8 @@ function createWorldService({ store, engine, now, newId } = {}) {
       writtenToday: folded.events.filter((event) => event.status === engine.EVENT_STATUS.WRITTEN
         && (event.day === day || event.decidedOnDay === day)),
       report: committed.snapshot.report || [],
+      party: state.party || null,
+      marketsConfigured: Boolean(state.systems?.[engine.ECONOMY_SYSTEM_ID]?.config),
       ...extra
     };
   }
@@ -135,6 +140,11 @@ function createWorldService({ store, engine, now, newId } = {}) {
     const worldSeed = cleanText(input.worldSeed) || crypto.randomBytes(8).toString("hex");
     const state = engine.createStartState({ day, worldSeed });
     await store.commitDay({ day, state, report: [], suggestions: [], engineVersion: engine.ENGINE_VERSION, expectedEtag: null });
+    const stored = await store.readPlaces();
+    const config = stored ? economyConfigFrom(stored.document) : null;
+    if (config) {
+      await store.appendRecords(day, [engine.createEconomyConfigure({ id: `m-${pad7(day)}-${makeId()}`, day, at: clock(), config })]);
+    }
     return getWorld();
   }
 
@@ -166,13 +176,17 @@ function createWorldService({ store, engine, now, newId } = {}) {
     if (day > world.day) {
       throw fail(400, "An event cannot be dated after today. Use a dated countdown for something still to come.");
     }
+    const effect = checkedEffect(world, input.effect, cleanText(input.text));
+    if (effect && day !== world.day) {
+      throw fail(400, "An event that changes prices or roads starts today. Leave the date empty, or write it as a plain fact.");
+    }
     const event = engine.createWrittenEvent({
       id: `e-${pad7(day)}-${makeId()}`,
       day,
       text: input.text,
       place: cleanText(input.place) || null,
       tags: Array.isArray(input.tags) ? input.tags.map(cleanText).filter(Boolean) : [],
-      effect: null,
+      effect,
       createdAt: clock()
     });
     await store.appendRecords(day, [event]);
@@ -233,6 +247,7 @@ function createWorldService({ store, engine, now, newId } = {}) {
     const world = await loadWorld();
     const row = engine.createCountdown({
       ...input,
+      effect: checkedEffect(world, input.effect, cleanText(input.suggestionText)),
       size: input.size == null ? undefined : Number(input.size),
       chance: input.chance == null ? undefined : Number(input.chance),
       dueDay: input.dueDay == null ? undefined : Number(input.dueDay),
@@ -365,6 +380,101 @@ function createWorldService({ store, engine, now, newId } = {}) {
     return describe(world, { advanced: { fromDay, toDay: world.day, days: daysAdvanced, report } });
   }
 
+  // An effect is checked against the world as it is: the place must have a market,
+  // the road must exist. null means the event is just a fact.
+  function checkedEffect(world, input, label) {
+    if (input == null) {
+      return null;
+    }
+    const effect = engine.normalizeEffect({ ...input, label: cleanText(input.label) || label || null });
+    const problem = engine.effectProblem(world.state, effect);
+    if (problem) {
+      throw fail(400, problem);
+    }
+    return effect;
+  }
+
+  /** The engine's configuration from the setup document, or null if it has no market setup. */
+  function economyConfigFrom(document) {
+    const economy = document?.economy;
+    if (!economy || !Array.isArray(economy.goods) || !economy.goods.length) {
+      return null;
+    }
+    const places = {};
+    for (const place of document.places || []) {
+      if (place.parent) continue; // shops and districts are not markets of their own
+      places[place.id] = {
+        name: place.name,
+        knownToPlayers: place.knownToPlayers === true,
+        population: place.population ?? null,
+        // Only full-detail places have a market. Sketched ones keep their name and roads.
+        market: place.detail === "full" ? economy.markets?.[place.id] || {} : {}
+      };
+    }
+    return engine.normalizeEconomyConfig({
+      goods: economy.goods,
+      routes: economy.routes || [],
+      places,
+      constants: economy.constants || {}
+    });
+  }
+
+  /** Everything the DM's Markets and Places views need. */
+  async function getMarkets() {
+    const world = await loadWorld();
+    return { day: world.day, party: world.state.party || null, ...engine.describeEconomy(world.state) };
+  }
+
+  /** The current state, for a what-if run in the browser. Nothing is saved by reading it. */
+  async function getState() {
+    const world = await loadWorld();
+    return { day: world.day, state: world.state };
+  }
+
+  /** The DM says where the party is. Nothing else ever moves the party. */
+  async function setParty(input = {}) {
+    const world = await loadWorld();
+    const place = cleanText(input.place) || null;
+    if (place) {
+      const stored = await store.readPlaces();
+      const known = (stored?.document?.places || []).some((entry) => entry.id === place);
+      if (!known) {
+        throw fail(400, "That place is not in your list of places.");
+      }
+    }
+    const row = engine.createPartyMove({ id: `y-${pad7(world.day)}-${makeId()}`, day: world.day, place, at: clock() });
+    await store.appendRecords(world.day, [row]);
+    return { world: await getWorld() };
+  }
+
+  /** End a pressure early. A new row; the pressure stops weighing on the numbers after today. */
+  async function endPressure(pressureId) {
+    const world = await loadWorld();
+    const id = cleanText(pressureId);
+    if (!world.state.systems?.[engine.ECONOMY_SYSTEM_ID]?.pressures?.[id]) {
+      throw fail(404, "That is not weighing on anything now.");
+    }
+    await store.appendRecords(world.day, [engine.createPressureEnd({
+      id: `x-${pad7(world.day)}-${makeId()}`, pressureId: id, day: world.day, at: clock()
+    })]);
+    return getMarkets();
+  }
+
+  /**
+   * What players may see: prices in the town the party is in, and only if the players
+   * know that town. Reads only; never writes. Every other case gives the same empty answer.
+   */
+  async function getPublicPrices() {
+    const committed = await loadCommitted();
+    if (!committed) {
+      return engine.publicPrices(null, null);
+    }
+    const day = committed.pointer.day;
+    const records = (await store.listRecords({ fromDay: day, toDay: day })).map(stripRow);
+    const state = engine.applyRecords(committed.snapshot.state, engine.recordsForDay(records, day));
+    return engine.publicPrices(state, state.party?.place ?? null);
+  }
+
   async function getPlaces() {
     const stored = await store.readPlaces();
     return stored ? stored.document : { schema: PLACES_SCHEMA, places: [], loaded: false };
@@ -386,23 +496,66 @@ function createWorldService({ store, engine, now, newId } = {}) {
         throw fail(400, `Place id "${id}" appears twice.`);
       }
       seen.add(id);
+      const detail = cleanText(place.detail).toLowerCase();
       return {
         id,
         name,
         kind: cleanText(place.kind) || null,
         region: cleanText(place.region) || null,
         parent: cleanText(place.parent) || null,
-        knownToPlayers: place.knownToPlayers === true
+        knownToPlayers: place.knownToPlayers === true,
+        // "full" places have a market; "sketched" ones are a name and a size; "landmark" is neither.
+        detail: PLACE_DETAIL.includes(detail) ? detail : null,
+        population: place.population ?? null
       };
     });
     const document = { schema: PLACES_SCHEMA, updatedAt: clock(), loaded: true, places };
+
+    // The market setup (goods, roads, what each full-detail town makes and uses) rides
+    // in the same document. It is validated by the engine before anything is saved.
+    let config = null;
+    if (input.economy != null) {
+      document.economy = {
+        goods: input.economy.goods || [],
+        routes: input.economy.routes || [],
+        markets: input.economy.markets || {},
+        constants: input.economy.constants || {}
+      };
+      for (const placeId of Object.keys(document.economy.markets)) {
+        if (!seen.has(placeId)) {
+          throw fail(400, `The market setup lists "${placeId}", which is not in the places.`);
+        }
+      }
+      for (const route of document.economy.routes) {
+        if (!seen.has(cleanText(route?.a)) || !seen.has(cleanText(route?.b))) {
+          throw fail(400, `Road "${cleanText(route?.id)}" joins a place that is not in the places.`);
+        }
+      }
+      // Validated by the engine here; the document itself keeps the figures as given,
+      // including the sentence saying where each estimate came from.
+      config = economyConfigFrom(document);
+    }
+
     await store.writePlaces(document);
+
+    // Once the world is running, a new setup takes effect through the record, like
+    // everything else: one appended row holding the whole configuration.
+    if (config && await store.readCurrent()) {
+      const world = await loadWorld();
+      const current = world.state.systems?.[engine.ECONOMY_SYSTEM_ID]?.config;
+      if (JSON.stringify(current) !== JSON.stringify(config)) {
+        await store.appendRecords(world.day, [engine.createEconomyConfigure({
+          id: `m-${pad7(world.day)}-${makeId()}`, day: world.day, at: clock(), config
+        })]);
+      }
+    }
     return document;
   }
 
   return {
-    advance, countdownAction, createCountdown, decide, getPlaces, getWorld, jot,
-    listCountdowns, listEvents, putPlaces, setVisibility, startWorld
+    advance, countdownAction, createCountdown, decide, endPressure, getMarkets, getPlaces,
+    getPublicPrices, getState, getWorld, jot, listCountdowns, listEvents, putPlaces,
+    setParty, setVisibility, startWorld
   };
 }
 
